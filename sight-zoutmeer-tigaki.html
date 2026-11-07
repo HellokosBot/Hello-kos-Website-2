@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Zoutmeer & flamingo’s (Tigaki) – Hello Kos</title>
+  <style>
+    :root {
+      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
+      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
+      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
+      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text); -webkit-font-smoothing: antialiased;
+      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
+      background: var(--bg); min-height: 100vh; line-height: 1.55;
+    }
+    .app-header {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px 16px; background: var(--bg-header);
+      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+    }
+    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
+    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
+    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
+    .logo-text span { color: var(--gold-dark); font-style: italic; }
+    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
+    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
+    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
+    .lang-menu.open { display: block; }
+    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
+    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
+    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
+    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+    .content { padding: 18px 16px 0; }
+    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
+    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
+    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
+    .btn-audio { background: var(--petrol); color: #fff; }
+    .btn-audio.playing { background: var(--petrol-dark); }
+    .btn-stop { background: #3A4545; color: #fff; display: none; }
+    .btn-stop.show { display: flex; }
+    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
+    .btn-apple { background: #111; color: #fff; }
+    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
+    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
+    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
+    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
+    .card p:last-child { margin-bottom: 0; }
+    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
+    .tip strong { color: var(--gold); }
+    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+    .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
+    .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
+    .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
+    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
+    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
+    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
+    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
+    .footer a { color: var(--petrol); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="bezienswaardigheden.html" class="back-btn">← Terug</a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🔅</div>
+      <div class="logo-text">Hello <span>Kos</span></div>
+    </a>
+    <div class="lang-wrap">
+      <button type="button" class="lang-btn" id="langBtn">
+        <span id="flag">🇳🇱</span> <span id="code">NL</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="hero-wrap">
+      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/schermopname_12-3-2026_03240_kos-gr-standard.jpg" alt="Zoutmeer & flamingo’s (Tigaki)" loading="eager">
+      <div class="hero-caption" data-i18n="heroCap">Zoutmeer & flamingo’s (Tigaki)</div>
+    </div>
+
+    <div class="content">
+      <h1 data-i18n="title">Zoutmeer & flamingo’s (Tigaki)</h1>
+      <p class="lead" data-i18n="lead">Oude zoutpannen bij Tigaki – witte zoutlaag in de zomer, flamingo’s (vaak wit) en beschermd natuurgebied. Let op: geen ijsbaan voor auto’s.</p>
+
+      <div class="badges">
+        <span class="badge" data-i18n="badgeTigaki">Tigaki</span>
+        <span class="badge" data-i18n="badgeNature">Natuur</span>
+        <span class="badge" data-i18n="badgeFree">Gratis</span>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
+        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
+        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Tigaki%20salt%20lake%20flamingos%20Kos" target="_blank" rel="noopener">📍 Google Maps</a>
+        <a class="btn btn-apple" href="https://maps.apple.com/?q=Tigaki%20salt%20lake%20flamingos%20Kos" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      <p class="status" id="ttsStatus"></p>
+
+      <div id="readText">
+        <div class="card">
+          <h2 data-i18n="h2salt">Zoutpannen van Tigaki</h2>
+          <p data-i18n="p1">De zoutmeren liggen bij Tigaki. Eeuwenlang won men hier zeezout: zeewater in bassins, zon verdampte het water. Tussen 1944 en 1987 zo’n 900–3500 ton per jaar; in 1989 gestopt. Oude gebouwen en pompen staan er nog. Nu beschermd natuurgebied.</p>
+        </div>
+
+        <div class="facts">
+          <div class="fact">
+            <span class="n" data-i18n="factFlamingos">Flamingo’s</span>
+            <span class="l" data-i18n="factWhite">vaak wit (geen garnalen)</span>
+          </div>
+          <div class="fact">
+            <span class="n" data-i18n="factSummer">Zomer</span>
+            <span class="l" data-i18n="factSalt">witte zoutlaag</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2flamingos">Flamingo’s en dieren</h2>
+          <p data-i18n="p2">Je kunt flamingo’s, waterschildpadden en waterslangen spotten. De flamingo’s zijn hier vaak wit, niet roze – er zijn geen garnalen die het roze pigment leveren.</p>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2summer">Zomer: “ijsbaan”</h2>
+          <p data-i18n="p3">In de zomer droogt het meer op; er blijft een dikke witte zoutlaag achter, alsof het bevroren is. Let op: het is niet stevig genoeg voor auto’s. Elk jaar raken voertuigen vast in de modder onder de zoutlaag.</p>
+        </div>
+
+        <div class="gallery">
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/schermopname_12-3-2026_03240_kos-gr-standard.jpg" alt="" loading="lazy">
+            <span data-i18n="g1">Zoutmeer</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/yxnzzxrzl2ltywdlcy9wywdlcy9uyxr1cmfsx2jlyxv0es9hbglrzxmvrepjxzaxmjktrw5oyw5jzwquanbn-high.jpg" alt="" loading="lazy">
+            <span data-i18n="g2">Zoutmeer</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/zoutpannen-alikes6-high.jpg" alt="" loading="lazy">
+            <span data-i18n="g3">Zoutmeer</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/schermopname_12-3-2026_03240_kos-gr-high.jpg" alt="" loading="lazy">
+            <span data-i18n="g4">Zoutmeer</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2visit">Bezoeken</h2>
+          <p data-i18n="p4">Bij Tigaki. Gratis wandelen of fietsen; blijf van de zoutkorst af met de auto.</p>
+          <div class="tip" data-i18n="tip">Tip: in het voorjaar (rond maart–mei) is er meer water en meer kans op vogels. ’s Zomers is de witte laag spectaculair – alleen te voet of per fiets.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div>Hello Kos</div>
+    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
+  </footer>
+
+<script>
+(function(){
+  var I18N = {
+    nl: {
+      title: "Zoutmeer & flamingo’s (Tigaki)",
+      lead: "Oude zoutpannen bij Tigaki – witte zoutlaag in de zomer, flamingo’s (vaak wit) en beschermd natuurgebied. Let op: geen ijsbaan voor auto’s.",
+      heroCap: "Zoutmeer & flamingo’s (Tigaki)",
+      badgeTigaki: "Tigaki", badgeNature: "Natuur", badgeFree: "Gratis",
+      btnPlay: "🔊 Voorlezen",
+      h2salt: "Zoutpannen van Tigaki",
+      p1: "De zoutmeren liggen bij Tigaki. Eeuwenlang won men hier zeezout: zeewater in bassins, zon verdampte het water. Tussen 1944 en 1987 zo’n 900–3500 ton per jaar; in 1989 gestopt. Oude gebouwen en pompen staan er nog. Nu beschermd natuurgebied.",
+      factFlamingos: "Flamingo’s", factWhite: "vaak wit (geen garnalen)", factSummer: "Zomer", factSalt: "witte zoutlaag",
+      h2flamingos: "Flamingo’s en dieren",
+      p2: "Je kunt flamingo’s, waterschildpadden en waterslangen spotten. De flamingo’s zijn hier vaak wit, niet roze – er zijn geen garnalen die het roze pigment leveren.",
+      h2summer: "Zomer: “ijsbaan”",
+      p3: "In de zomer droogt het meer op; er blijft een dikke witte zoutlaag achter, alsof het bevroren is. Let op: het is niet stevig genoeg voor auto’s. Elk jaar raken voertuigen vast in de modder onder de zoutlaag.",
+      g1: "Zoutmeer", g2: "Zoutmeer", g3: "Zoutmeer", g4: "Zoutmeer",
+      h2visit: "Bezoeken",
+      p4: "Bij Tigaki. Gratis wandelen of fietsen; blijf van de zoutkorst af met de auto.",
+      tip: "Tip: in het voorjaar (rond maart–mei) is er meer water en meer kans op vogels. ’s Zomers is de witte laag spectaculair – alleen te voet of per fiets."
+    },
+    en: {
+      title: "Salt lake & flamingos (Tigaki)",
+      lead: "Old salt pans near Tigaki – white salt layer in summer, flamingos (often white) and protected nature area. Note: not an ice rink for cars.",
+      heroCap: "Salt lake & flamingos (Tigaki)",
+      badgeTigaki: "Tigaki", badgeNature: "Nature", badgeFree: "Free",
+      btnPlay: "🔊 Read aloud",
+      h2salt: "Salt pans of Tigaki",
+      p1: "The salt lakes are near Tigaki. For centuries sea salt was harvested here: seawater in basins, the sun evaporated the water. Between 1944 and 1987 about 900–3500 tons per year; stopped in 1989. Old buildings and pumps are still there. Now a protected nature area.",
+      factFlamingos: "Flamingos", factWhite: "often white (no shrimp)", factSummer: "Summer", factSalt: "white salt layer",
+      h2flamingos: "Flamingos and animals",
+      p2: "You can spot flamingos, water turtles and water snakes. The flamingos here are often white, not pink – there are no shrimp that provide the pink pigment.",
+      h2summer: "Summer: “ice rink”",
+      p3: "In summer the lake dries up; a thick white salt layer remains, as if frozen. Note: it is not strong enough for cars. Every year vehicles get stuck in the mud under the salt layer.",
+      g1: "Salt lake", g2: "Salt lake", g3: "Salt lake", g4: "Salt lake",
+      h2visit: "Visiting",
+      p4: "Near Tigaki. Free walking or cycling; stay off the salt crust with the car.",
+      tip: "Tip: in spring (around March–May) there is more water and more chance of birds. In summer the white layer is spectacular – only on foot or by bike."
+    },
+    de: {
+      title: "Salzsee & Flamingos (Tigaki)",
+      lead: "Alte Salzpfannen bei Tigaki – weiße Salzschicht im Sommer, Flamingos (oft weiß) und geschütztes Naturschutzgebiet. Hinweis: keine Eisbahn für Autos.",
+      heroCap: "Salzsee & Flamingos (Tigaki)",
+      badgeTigaki: "Tigaki", badgeNature: "Natur", badgeFree: "Kostenlos",
+      btnPlay: "🔊 Vorlesen",
+      h2salt: "Salzpfannen von Tigaki",
+      p1: "Die Salzseen liegen bei Tigaki. Jahrhunderte lang gewann man hier Meersalz: Meerwasser in Becken, die Sonne verdunstete das Wasser. Zwischen 1944 und 1987 etwa 900–3500 Tonnen pro Jahr; 1989 eingestellt. Alte Gebäude und Pumpen stehen noch. Jetzt geschütztes Naturschutzgebiet.",
+      factFlamingos: "Flamingos", factWhite: "oft weiß (keine Garnelen)", factSummer: "Sommer", factSalt: "weiße Salzschicht",
+      h2flamingos: "Flamingos und Tiere",
+      p2: "Du kannst Flamingos, Wasserschildkröten und Wasserschlangen sehen. Die Flamingos sind hier oft weiß, nicht rosa – es gibt keine Garnelen, die das rosa Pigment liefern.",
+      h2summer: "Sommer: „Eisbahn“",
+      p3: "Im Sommer trocknet der See aus; eine dicke weiße Salzschicht bleibt zurück, als wäre sie gefroren. Hinweis: sie ist nicht fest genug für Autos. Jedes Jahr bleiben Fahrzeuge im Schlamm unter der Salzschicht stecken.",
+      g1: "Salzsee", g2: "Salzsee", g3: "Salzsee", g4: "Salzsee",
+      h2visit: "Besuchen",
+      p4: "Bei Tigaki. Kostenloses Wandern oder Radfahren; bleib mit dem Auto von der Salzkruste weg.",
+      tip: "Tipp: im Frühjahr (ca. März–Mai) gibt es mehr Wasser und mehr Chance auf Vögel. Im Sommer ist die weiße Schicht spektakulär – nur zu Fuß oder mit dem Fahrrad."
+    },
+    it: {
+      title: "Lago salato & fenicotteri (Tigaki)",
+      lead: "Vecchie saline vicino a Tigaki – strato di sale bianco in estate, fenicotteri (spesso bianchi) e area naturale protetta. Attenzione: non è una pista di ghiaccio per auto.",
+      heroCap: "Lago salato & fenicotteri (Tigaki)",
+      badgeTigaki: "Tigaki", badgeNature: "Natura", badgeFree: "Gratis",
+      btnPlay: "🔊 Leggi ad alta voce",
+      h2salt: "Saline di Tigaki",
+      p1: "I laghi salati si trovano vicino a Tigaki. Per secoli si estraeva qui sale marino: acqua di mare in bacini, il sole faceva evaporare l’acqua. Tra il 1944 e il 1987 circa 900–3500 tonnellate all’anno; interrotto nel 1989. Vecchi edifici e pompe ci sono ancora. Ora area naturale protetta.",
+      factFlamingos: "Fenicotteri", factWhite: "spesso bianchi (niente gamberi)", factSummer: "Estate", factSalt: "strato di sale bianco",
+      h2flamingos: "Fenicotteri e animali",
+      p2: "Puoi avvistare fenicotteri, tartarughe d’acqua e serpenti d’acqua. I fenicotteri qui sono spesso bianchi, non rosa – non ci sono gamberi che forniscono il pigmento rosa.",
+      h2summer: "Estate: “pista di ghiaccio”",
+      p3: "In estate il lago si secca; rimane uno spesso strato di sale bianco, come se fosse ghiacciato. Attenzione: non è abbastanza solido per le auto. Ogni anno i veicoli rimangono bloccati nel fango sotto lo strato di sale.",
+      g1: "Lago salato", g2: "Lago salato", g3: "Lago salato", g4: "Lago salato",
+      h2visit: "Visitare",
+      p4: "Vicino a Tigaki. Camminata o bici gratuite; stai lontano dalla crosta di sale con l’auto.",
+      tip: "Consiglio: in primavera (intorno a marzo–maggio) c’è più acqua e più possibilità di uccelli. In estate lo strato bianco è spettacolare – solo a piedi o in bici."
+    },
+    tr: {
+      title: "Tuz gölü & flamingolar (Tigaki)",
+      lead: "Tigaki yakınlarında eski tuz tavaları – yazın beyaz tuz tabakası, flamingolar (genellikle beyaz) ve korunan doğa alanı. Dikkat: arabalar için buz pisti değil.",
+      heroCap: "Tuz gölü & flamingolar (Tigaki)",
+      badgeTigaki: "Tigaki", badgeNature: "Doğa", badgeFree: "Ücretsiz",
+      btnPlay: "🔊 Sesli oku",
+      h2salt: "Tigaki tuz tavaları",
+      p1: "Tuz gölleri Tigaki yakınlarındadır. Yüzyıllarca burada deniz tuzu çıkarılırdı: havuzlarda deniz suyu, güneş suyu buharlaştırırdı. 1944-1987 arasında yılda yaklaşık 900–3500 ton; 1989’da durduruldu. Eski binalar ve pompalar hâlâ duruyor. Şimdi korunan doğa alanı.",
+      factFlamingos: "Flamingolar", factWhite: "genellikle beyaz (karides yok)", factSummer: "Yaz", factSalt: "beyaz tuz tabakası",
+      h2flamingos: "Flamingolar ve hayvanlar",
+      p2: "Flamingolar, su kaplumbağaları ve su yılanları görebilirsiniz. Buradaki flamingolar genellikle beyazdır, pembe değil – pembe pigmenti sağlayan karides yoktur.",
+      h2summer: "Yaz: “buz pisti”",
+      p3: "Yazın göl kurur; kalın beyaz bir tuz tabakası kalır, sanki donmuş gibi. Dikkat: arabalar için yeterince sağlam değildir. Her yıl araçlar tuz tabakasının altındaki çamura saplanır.",
+      g1: "Tuz gölü", g2: "Tuz gölü", g3: "Tuz gölü", g4: "Tuz gölü",
+      h2visit: "Ziyaret",
+      p4: "Tigaki yakınlarında. Ücretsiz yürüyüş veya bisiklet; arabayla tuz kabuğundan uzak durun.",
+      tip: "İpucu: ilkbaharda (Mart–Mayıs civarı) daha fazla su ve kuş şansı vardır. Yazın beyaz tabaka muhteşemdir – sadece yaya veya bisikletle."
+    },
+    es: {
+      title: "Lago salado & flamencos (Tigaki)",
+      lead: "Antiguas salinas cerca de Tigaki – capa blanca de sal en verano, flamencos (a menudo blancos) y zona natural protegida. Atención: no es una pista de hielo para coches.",
+      heroCap: "Lago salado & flamencos (Tigaki)",
+      badgeTigaki: "Tigaki", badgeNature: "Naturaleza", badgeFree: "Gratis",
+      btnPlay: "🔊 Leer en voz alta",
+      h2salt: "Salinas de Tigaki",
+      p1: "Los lagos salados están cerca de Tigaki. Durante siglos se extrajo sal marina aquí: agua de mar en balsas, el sol evaporaba el agua. Entre 1944 y 1987 unas 900–3500 toneladas al año; se detuvo en 1989. Los edificios y bombas antiguas siguen allí. Ahora zona natural protegida.",
+      factFlamingos: "Flamencos", factWhite: "a menudo blancos (sin gambas)", factSummer: "Verano", factSalt: "capa blanca de sal",
+      h2flamingos: "Flamencos y animales",
+      p2: "Puedes ver flamencos, tortugas de agua y serpientes de agua. Los flamencos aquí suelen ser blancos, no rosados – no hay gambas que aporten el pigmento rosa.",
+      h2summer: "Verano: “pista de hielo”",
+      p3: "En verano el lago se seca; queda una gruesa capa blanca de sal, como si estuviera congelado. Atención: no es lo bastante sólido para coches. Cada año los vehículos se quedan atascados en el barro bajo la capa de sal.",
+      g1: "Lago salado", g2: "Lago salado", g3: "Lago salado", g4: "Lago salado",
+      h2visit: "Visitar",
+      p4: "Cerca de Tigaki. Caminar o ir en bici gratis; no te subas a la corteza de sal con el coche.",
+      tip: "Consejo: en primavera (alrededor de marzo–mayo) hay más agua y más posibilidades de aves. En verano la capa blanca es espectacular – solo a pie o en bici."
+    }
+  };
+
+  function setLang(l) {
+    if (!I18N[l]) l = 'nl';
+    localStorage.setItem('hk-lang', l);
+    document.documentElement.lang = l;
+    var d = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (d[k]) el.textContent = d[k];
+    });
+    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if (opt) {
+      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
+      document.getElementById('code').textContent = l.toUpperCase();
+    }
+    document.querySelectorAll('.lang-option').forEach(function(o){
+      o.classList.toggle('active', o.getAttribute('data-lang') === l);
+    });
+    closeMenu();
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  function openMenu(){ langMenu.classList.add('open'); }
+  function closeMenu(){ langMenu.classList.remove('open'); }
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    langMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.addEventListener('click', function(){ closeMenu(); });
+  document.querySelectorAll('.lang-option').forEach(function(btn){
+    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
+  });
+
+  var saved = localStorage.getItem('hk-lang') || 'nl';
+  setLang(saved);
+
+  /* TTS */
+  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
+  function getLang(){
+    var l = localStorage.getItem('hk-lang') || 'nl';
+    return LANG_VOICE[l] ? l : 'nl';
+  }
+  function pickVoice(code){
+    var voices = speechSynthesis.getVoices() || [];
+    var prefix = code.slice(0,2).toLowerCase();
+    return voices.find(function(v){ return v.lang === code; })
+      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
+      || null;
+  }
+  var btnPlay = document.getElementById('btnPlay');
+  var btnStop = document.getElementById('btnStop');
+  var status = document.getElementById('ttsStatus');
+  function setStatus(t){ if(status) status.textContent = t; }
+  function play(){
+    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
+    speechSynthesis.cancel();
+    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
+    var l = getLang();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = LANG_VOICE[l];
+    u.rate = 0.92;
+    var v = pickVoice(LANG_VOICE[l]);
+    if(v) u.voice = v;
+    u.onstart = function(){
+      btnPlay.classList.add('playing');
+      btnStop.classList.add('show');
+      setStatus('Voorlezen… ('+l.toUpperCase()+')');
+    };
+    u.onend = u.onerror = function(){
+      btnPlay.classList.remove('playing');
+      btnStop.classList.remove('show');
+      setStatus('');
+    };
+    if(!speechSynthesis.getVoices().length){
+      speechSynthesis.onvoiceschanged = function(){
+        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
+        speechSynthesis.speak(u);
+      };
+      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
+    } else {
+      speechSynthesis.speak(u);
+    }
+  }
+  function stop(){
+    if(window.speechSynthesis) speechSynthesis.cancel();
+    btnPlay.classList.remove('playing');
+    btnStop.classList.remove('show');
+    setStatus('Gestopt.');
+  }
+  btnPlay.addEventListener('click', play);
+  btnStop.addEventListener('click', stop);
+  if(window.speechSynthesis){
+    speechSynthesis.getVoices();
+    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  }
+})();
+</script>
+</body>
+</html>
