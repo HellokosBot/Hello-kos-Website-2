@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Kasteel van Palio Pyli – Hello Kos</title>
+  <style>
+    :root {
+      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
+      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
+      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
+      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text); -webkit-font-smoothing: antialiased;
+      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
+      background: var(--bg); min-height: 100vh; line-height: 1.55;
+    }
+    .app-header {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px 16px; background: var(--bg-header);
+      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+    }
+    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
+    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
+    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
+    .logo-text span { color: var(--gold-dark); font-style: italic; }
+    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
+    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
+    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
+    .lang-menu.open { display: block; }
+    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
+    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
+    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
+    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+    .content { padding: 18px 16px 0; }
+    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
+    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
+    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
+    .btn-audio { background: var(--petrol); color: #fff; }
+    .btn-audio.playing { background: var(--petrol-dark); }
+    .btn-stop { background: #3A4545; color: #fff; display: none; }
+    .btn-stop.show { display: flex; }
+    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
+    .btn-apple { background: #111; color: #fff; }
+    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
+    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
+    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
+    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
+    .card p:last-child { margin-bottom: 0; }
+    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
+    .tip strong { color: var(--gold); }
+    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
+    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
+    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
+    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
+    .footer a { color: var(--petrol); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="bezienswaardigheden.html" class="back-btn">← Terug</a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🔅</div>
+      <div class="logo-text">Hello <span>Kos</span></div>
+    </a>
+    <div class="lang-wrap">
+      <button type="button" class="lang-btn" id="langBtn">
+        <span id="flag">🇳🇱</span> <span id="code">NL</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="hero-wrap">
+      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/schermopname_12-3-2026_0841_kos-gr-standard.jpg" alt="Kasteel van Palio Pyli" loading="eager">
+      <div class="hero-caption" data-i18n="heroCap">Kasteel van Palio Pyli</div>
+    </div>
+
+    <div class="content">
+      <h1 data-i18n="title">Kasteel van Palio Pyli</h1>
+      <p class="lead" data-i18n="lead">Middeleeuws fort boven het spookdorp – Johannieters en later Ottomanen; nog deels overeind.</p>
+
+      <div class="badges">
+        <span class="badge" data-i18n="badgeFort">Fort</span>
+        <span class="badge" data-i18n="badgePalio">Palio Pyli</span>
+        <span class="badge" data-i18n="badgeFree">Gratis</span>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
+        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
+        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Palio%20Pyli%20Castle%20Kos" target="_blank" rel="noopener">📍 Google Maps</a>
+        <a class="btn btn-apple" href="https://maps.apple.com/?q=Palio%20Pyli%20Castle%20Kos" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      <p class="status" id="ttsStatus"></p>
+
+      <div id="readText">
+        <div class="card">
+          <h2 data-i18n="h2fort">Fort boven het dorp</h2>
+          <p data-i18n="p1">Het kasteel van Palio Pyli ligt boven het verlaten dorp. Rond 1315 namen de Ridders van Sint-Jan (Johannieters) het over en versterkten muren en torens. Vanaf 1523 boden de Ottomanen er bescherming.</p>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2now">Nu</h2>
+          <p data-i18n="p2">De natuur nam de huizen van het dorp over; het kasteel staat er nog deels. Uitzicht over de omgeving.</p>
+        </div>
+
+        <div class="gallery">
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/schermopname_12-3-2026_0841_kos-gr-standard.jpg" alt="" loading="lazy">
+            <span data-i18n="g1">Kasteel</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/castle-of-paleo-pyli-kos-greece_kos4all_002-1-high.jpg" alt="" loading="lazy">
+            <span data-i18n="g2">Kasteel</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/schermopname_12-3-2026_0841_kos-gr-high-5362p1.jpg" alt="" loading="lazy">
+            <span data-i18n="g3">Kasteel</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/schermopname_12-3-2026_0923_kos-gr-high.jpg" alt="" loading="lazy">
+            <span data-i18n="g4">Kasteel</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2visit">Bezoeken</h2>
+          <p data-i18n="p3">Gratis. Klim is de moeite waard voor het uitzicht.</p>
+          <div class="tip" data-i18n="tip">Tip: neem water mee; er is weinig schaduw op de muren.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div>Hello Kos</div>
+    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
+  </footer>
+
+<script>
+(function(){
+  var I18N = {
+    nl: {
+      title: "Kasteel van Palio Pyli",
+      lead: "Middeleeuws fort boven het spookdorp – Johannieters en later Ottomanen; nog deels overeind.",
+      heroCap: "Kasteel van Palio Pyli",
+      badgeFort: "Fort", badgePalio: "Palio Pyli", badgeFree: "Gratis",
+      btnPlay: "🔊 Voorlezen",
+      h2fort: "Fort boven het dorp",
+      p1: "Het kasteel van Palio Pyli ligt boven het verlaten dorp. Rond 1315 namen de Ridders van Sint-Jan (Johannieters) het over en versterkten muren en torens. Vanaf 1523 boden de Ottomanen er bescherming.",
+      h2now: "Nu",
+      p2: "De natuur nam de huizen van het dorp over; het kasteel staat er nog deels. Uitzicht over de omgeving.",
+      g1: "Kasteel", g2: "Kasteel", g3: "Kasteel", g4: "Kasteel",
+      h2visit: "Bezoeken",
+      p3: "Gratis. Klim is de moeite waard voor het uitzicht.",
+      tip: "Tip: neem water mee; er is weinig schaduw op de muren."
+    },
+    en: {
+      title: "Castle of Palio Pyli",
+      lead: "Medieval fort above the ghost village – Knights of St John and later Ottomans; still partly standing.",
+      heroCap: "Castle of Palio Pyli",
+      badgeFort: "Fort", badgePalio: "Palio Pyli", badgeFree: "Free",
+      btnPlay: "🔊 Read aloud",
+      h2fort: "Fort above the village",
+      p1: "The castle of Palio Pyli lies above the abandoned village. Around 1315 the Knights of St John took it over and strengthened the walls and towers. From 1523 the Ottomans provided protection there.",
+      h2now: "Now",
+      p2: "Nature took over the houses of the village; the castle still stands partly. Views over the surroundings.",
+      g1: "Castle", g2: "Castle", g3: "Castle", g4: "Castle",
+      h2visit: "Visiting",
+      p3: "Free. The climb is worth it for the view.",
+      tip: "Tip: bring water; there is little shade on the walls."
+    },
+    de: {
+      title: "Schloss von Palio Pyli",
+      lead: "Mittelalterliche Festung über dem Geisterdorf – Johanniter und später Osmanen; noch teilweise erhalten.",
+      heroCap: "Schloss von Palio Pyli",
+      badgeFort: "Fort", badgePalio: "Palio Pyli", badgeFree: "Kostenlos",
+      btnPlay: "🔊 Vorlesen",
+      h2fort: "Fort über dem Dorf",
+      p1: "Das Schloss von Palio Pyli liegt über dem verlassenen Dorf. Um 1315 übernahmen die Ritter des Heiligen Johannes (Johanniter) es und verstärkten Mauern und Türme. Ab 1523 boten die Osmanen dort Schutz.",
+      h2now: "Jetzt",
+      p2: "Die Natur hat die Häuser des Dorfes übernommen; das Schloss steht noch teilweise. Aussicht über die Umgebung.",
+      g1: "Schloss", g2: "Schloss", g3: "Schloss", g4: "Schloss",
+      h2visit: "Besuchen",
+      p3: "Kostenlos. Der Aufstieg lohnt sich für die Aussicht.",
+      tip: "Tipp: nimm Wasser mit; es gibt wenig Schatten an den Mauern."
+    },
+    it: {
+      title: "Castello di Palio Pyli",
+      lead: "Fortezza medievale sopra il villaggio fantasma – Cavalieri di San Giovanni e poi Ottomani; ancora in parte in piedi.",
+      heroCap: "Castello di Palio Pyli",
+      badgeFort: "Fortezza", badgePalio: "Palio Pyli", badgeFree: "Gratis",
+      btnPlay: "🔊 Leggi ad alta voce",
+      h2fort: "Fortezza sopra il villaggio",
+      p1: "Il castello di Palio Pyli si trova sopra il villaggio abbandonato. Intorno al 1315 i Cavalieri di San Giovanni lo presero e rafforzarono mura e torri. Dal 1523 gli Ottomani vi offrirono protezione.",
+      h2now: "Ora",
+      p2: "La natura ha preso le case del villaggio; il castello è ancora in parte in piedi. Vista sui dintorni.",
+      g1: "Castello", g2: "Castello", g3: "Castello", g4: "Castello",
+      h2visit: "Visitare",
+      p3: "Gratis. La salita vale la pena per la vista.",
+      tip: "Consiglio: porta acqua; c’è poca ombra sulle mura."
+    },
+    tr: {
+      title: "Palio Pyli Kalesi",
+      lead: "Hayalet köyün üzerindeki ortaçağ kalesi – St. John Şövalyeleri ve sonra Osmanlılar; hâlâ kısmen ayakta.",
+      heroCap: "Palio Pyli Kalesi",
+      badgeFort: "Kale", badgePalio: "Palio Pyli", badgeFree: "Ücretsiz",
+      btnPlay: "🔊 Sesli oku",
+      h2fort: "Köyün üzerindeki kale",
+      p1: "Palio Pyli Kalesi terk edilmiş köyün üzerinde yer alır. 1315 civarında St. John Şövalyeleri (Johannitler) ele geçirdi ve surları ile kuleleri güçlendirdi. 1523’ten itibaren Osmanlılar orada koruma sağladı.",
+      h2now: "Şimdi",
+      p2: "Doğa köyün evlerini ele geçirdi; kale hâlâ kısmen ayakta. Çevreye manzara.",
+      g1: "Kale", g2: "Kale", g3: "Kale", g4: "Kale",
+      h2visit: "Ziyaret",
+      p3: "Ücretsiz. Manzara için tırmanışa değer.",
+      tip: "İpucu: su getirin; surlarda gölge azdır."
+    },
+    es: {
+      title: "Castillo de Palio Pyli",
+      lead: "Fortaleza medieval sobre el pueblo fantasma – Caballeros de San Juan y luego otomanos; aún parcialmente en pie.",
+      heroCap: "Castillo de Palio Pyli",
+      badgeFort: "Fuerte", badgePalio: "Palio Pyli", badgeFree: "Gratis",
+      btnPlay: "🔊 Leer en voz alta",
+      h2fort: "Fuerte sobre el pueblo",
+      p1: "El castillo de Palio Pyli se encuentra sobre el pueblo abandonado. Alrededor de 1315 los Caballeros de San Juan lo tomaron y reforzaron murallas y torres. Desde 1523 los otomanos ofrecieron protección allí.",
+      h2now: "Ahora",
+      p2: "La naturaleza se apoderó de las casas del pueblo; el castillo sigue parcialmente en pie. Vistas sobre los alrededores.",
+      g1: "Castillo", g2: "Castillo", g3: "Castillo", g4: "Castillo",
+      h2visit: "Visitar",
+      p3: "Gratis. La subida merece la pena por la vista.",
+      tip: "Consejo: lleva agua; hay poca sombra en las murallas."
+    }
+  };
+
+  function setLang(l) {
+    if (!I18N[l]) l = 'nl';
+    localStorage.setItem('hk-lang', l);
+    document.documentElement.lang = l;
+    var d = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (d[k]) el.textContent = d[k];
+    });
+    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if (opt) {
+      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
+      document.getElementById('code').textContent = l.toUpperCase();
+    }
+    document.querySelectorAll('.lang-option').forEach(function(o){
+      o.classList.toggle('active', o.getAttribute('data-lang') === l);
+    });
+    closeMenu();
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  function openMenu(){ langMenu.classList.add('open'); }
+  function closeMenu(){ langMenu.classList.remove('open'); }
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    langMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.addEventListener('click', function(){ closeMenu(); });
+  document.querySelectorAll('.lang-option').forEach(function(btn){
+    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
+  });
+
+  var saved = localStorage.getItem('hk-lang') || 'nl';
+  setLang(saved);
+
+  /* TTS */
+  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
+  function getLang(){
+    var l = localStorage.getItem('hk-lang') || 'nl';
+    return LANG_VOICE[l] ? l : 'nl';
+  }
+  function pickVoice(code){
+    var voices = speechSynthesis.getVoices() || [];
+    var prefix = code.slice(0,2).toLowerCase();
+    return voices.find(function(v){ return v.lang === code; })
+      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
+      || null;
+  }
+  var btnPlay = document.getElementById('btnPlay');
+  var btnStop = document.getElementById('btnStop');
+  var status = document.getElementById('ttsStatus');
+  function setStatus(t){ if(status) status.textContent = t; }
+  function play(){
+    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
+    speechSynthesis.cancel();
+    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
+    var l = getLang();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = LANG_VOICE[l];
+    u.rate = 0.92;
+    var v = pickVoice(LANG_VOICE[l]);
+    if(v) u.voice = v;
+    u.onstart = function(){
+      btnPlay.classList.add('playing');
+      btnStop.classList.add('show');
+      setStatus('Voorlezen… ('+l.toUpperCase()+')');
+    };
+    u.onend = u.onerror = function(){
+      btnPlay.classList.remove('playing');
+      btnStop.classList.remove('show');
+      setStatus('');
+    };
+    if(!speechSynthesis.getVoices().length){
+      speechSynthesis.onvoiceschanged = function(){
+        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
+        speechSynthesis.speak(u);
+      };
+      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
+    } else {
+      speechSynthesis.speak(u);
+    }
+  }
+  function stop(){
+    if(window.speechSynthesis) speechSynthesis.cancel();
+    btnPlay.classList.remove('playing');
+    btnStop.classList.remove('show');
+    setStatus('Gestopt.');
+  }
+  btnPlay.addEventListener('click', play);
+  btnStop.addEventListener('click', stop);
+  if(window.speechSynthesis){
+    speechSynthesis.getVoices();
+    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  }
+})();
+</script>
+</body>
+</html>
