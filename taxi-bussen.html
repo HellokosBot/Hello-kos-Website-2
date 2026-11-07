@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
   <meta name="theme-color" content="#0D1F1F">
-  <title>Taxi, bussen &amp; transfers – Hello Kos</title>
+  <title>Bussen op Kos – Hello Kos</title>
   <style>
     :root {
       --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
       --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
-      --text: #E8EDE8; --text-soft: #A0B0A0;
+      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
       --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
       --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
@@ -59,28 +59,53 @@
       font: inherit; text-align: left; cursor: pointer;
     }
     .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
-    .main { max-width: 480px; margin: 0 auto; padding: 16px 12px 32px; }
-    h1 { font-size: 1.2rem; font-weight: 700; color: var(--text); text-align: center; margin-bottom: 6px; }
+    .main { max-width: 480px; margin: 0 auto; padding: 16px 14px 32px; }
+    h1 { font-size: 1.2rem; font-weight: 700; color: var(--text); text-align: center; margin-bottom: 4px; }
     .sub { text-align: center; font-size: 0.88rem; color: var(--text-soft); margin-bottom: 16px; }
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    @media (min-width: 400px) {
-      .grid { grid-template-columns: 1fr 1fr 1fr; }
+    .tool {
+      background: var(--bg-card); border-radius: 16px; padding: 16px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25); margin-bottom: 16px;
+      border: 1px solid var(--border);
     }
-    .card {
-      position: relative; aspect-ratio: 1; border-radius: 14px; overflow: hidden;
-      text-decoration: none; color: white;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.35); border: 1px solid var(--border);
+    .tool label {
+      display: block; font-size: 0.8rem; font-weight: 600; color: var(--petrol);
+      margin: 10px 0 4px;
     }
-    .card img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .card-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.25) 50%, transparent 100%);
-      display: flex; align-items: flex-end; justify-content: center;
-      padding: 12px 8px;
+    .tool label:first-child { margin-top: 0; }
+    .tool select {
+      width: 100%; padding: 12px 14px; border: 1.5px solid var(--border);
+      border-radius: 12px; font-size: 0.95rem; background: #1a2525; color: var(--text);
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%233A9A9A' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center;
     }
-    .card-title {
-      font-size: 0.82rem; font-weight: 650; text-align: center;
-      line-height: 1.25; text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+    .result {
+      display: none; margin-top: 14px; padding: 16px; border-radius: 14px;
+      background: #1a2525; border: 1px solid var(--border);
+    }
+    .result.show { display: block; }
+    .result h3 { font-size: 1.05rem; color: var(--petrol); margin-bottom: 10px; }
+    .result .price {
+      font-size: 1.35rem; font-weight: 700; color: var(--gold); margin-bottom: 12px;
+    }
+    .box {
+      background: #1e2e2e; border-radius: 10px; padding: 12px; margin: 8px 0;
+      font-size: 0.86rem; line-height: 1.5; color: var(--text);
+    }
+    .box strong { display: block; color: var(--petrol); margin-bottom: 4px; font-size: 0.8rem; }
+    .times-box {
+      background: #1a2a3a; border-radius: 10px; padding: 12px; margin: 8px 0;
+      font-size: 0.84rem; line-height: 1.55; color: #a0c8e0; white-space: pre-line; font-weight: 600;
+    }
+    .result a {
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; margin-right: 8px;
+      padding: 10px 14px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 0.85rem;
+    }
+    .result .btn-map { background: var(--bg-card); color: var(--petrol); border: 1px solid var(--border); }
+    .note {
+      background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 10px;
+      padding: 12px 14px; margin: 14px 0; font-size: 0.84rem; line-height: 1.5;
+      color: var(--text); border: 1px solid rgba(224, 176, 64, 0.25);
     }
     .footer {
       margin-top: 24px; padding: 18px; text-align: center;
@@ -93,7 +118,7 @@
 </head>
 <body>
   <header class="app-header">
-    <a href="index.html" class="back-btn">← Terug</a>
+    <a href="taxi-bussen.html" class="back-btn">← Terug</a>
     <a href="index.html" class="logo">
       <div class="logo-icon">🔅</div>
       <div class="logo-text">Hello <span>Kos</span></div>
@@ -114,42 +139,103 @@
   </header>
 
   <main class="main">
-    <h1 data-i18n="title">Taxi, bussen &amp; transfers</h1>
-    <p class="sub" data-i18n="sub">Prijzen, reserveren &amp; openbaar vervoer</p>
+    <h1 data-i18n="title">🚌 Bus zoeken</h1>
+    <p class="sub" data-i18n="sub">Kies je halte of hotel · daarna zie je de tijden</p>
 
-    <div class="grid">
-      <a class="card" href="taxi-prijzen.html">
-        <img src="taxi-prijzen.jpg" alt="Taxi prijzen" onerror="this.src='https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=400&h=400&fit=crop&q=80'">
-        <div class="card-overlay"><span class="card-title" data-i18n="taxiPrijzen">Taxi prijzen &amp; meter</span></div>
-      </a>
-      <a class="card" href="openbaarvervoer.html">
-        <img src="openbaarvervoer.jpg" alt="Openbaar vervoer" onerror="this.src='https://images.unsplash.com/photo-1544620341-1adc2ba0b83f?w=400&h=400&fit=crop&q=80'">
-        <div class="card-overlay"><span class="card-title" data-i18n="openbaar">Openbaar vervoer</span></div>
-      </a>
-      <a class="card" href="transfer.html">
-        <img src="transfer.jpg" alt="Transfer" onerror="this.src='https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=400&h=400&fit=crop&q=80'">
-        <div class="card-overlay"><span class="card-title" data-i18n="transfer">Transfer (vliegveld e.d.)</span></div>
-      </a>
-      <a class="card" href="#">
-        <img src="uber.jpg" alt="Uber" onerror="this.src='https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=400&h=400&fit=crop&q=80'">
-        <div class="card-overlay"><span class="card-title">Uber</span></div>
-      </a>
-      <a class="card" href="#">
-        <img src="water-taxi.jpg" alt="Water taxi" onerror="this.src='https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=400&fit=crop&q=80'">
-        <div class="card-overlay"><span class="card-title" data-i18n="waterTaxi">Water taxi</span></div>
-      </a>
-      <a class="card" href="#">
-        <img src="rolstoel.jpg" alt="Rolstoel" onerror="this.src='https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&h=400&fit=crop&q=80'">
-        <div class="card-overlay"><span class="card-title" data-i18n="rolstoel">Rolstoelvervoer</span></div>
-      </a>
-      <a class="card" href="#">
-        <img src="touringcar.jpg" alt="Touringcar" onerror="this.src='https://images.unsplash.com/photo-1544620341-1adc2ba0b83f?w=400&h=400&fit=crop&q=80'">
-        <div class="card-overlay"><span class="card-title" data-i18n="touringcar">Touringcar</span></div>
-      </a>
-      <a class="card" href="taxi-standplaatsen.html">
-        <img src="taxi-standplaatsen.jpg" alt="Standplaatsen" onerror="this.src='https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=400&h=400&fit=crop&q=80'">
-        <div class="card-overlay"><span class="card-title" data-i18n="standplaatsen">Taxi standplaatsen</span></div>
-      </a>
+    <div class="tool">
+      <label for="from" data-i18n="fromLabel">Van</label>
+      <select id="from">
+        <option value="">Kies vertrek…</option>
+        <optgroup label="Kos-stad">
+          <option value="kos">Kos-stad (centrum / haven)</option>
+        </optgroup>
+        <optgroup label="Psalidi / Agios Fokas – hotels">
+          <option value="kipriotis_panorama">Kipriotis Panorama Hotel &amp; Suites</option>
+          <option value="kipriotis_aqualand">Kipriotis Aqualand Hotel</option>
+          <option value="ramira">Ramira Beach Hotel</option>
+          <option value="kipriotis_village">Kipriotis Village Resort</option>
+          <option value="grecotel">Grecotel Kos Imperial</option>
+          <option value="oceanis">Oceanis Beach Hotel &amp; Spa</option>
+          <option value="blue_lagoon_ocean">Blue Lagoon Ocean</option>
+          <option value="koia">Koia All-Suite Wellbeing</option>
+          <option value="dimitra">Dimitra Beach Hotel &amp; Suites</option>
+          <option value="michelangelo">Michelangelo Resort &amp; Spa</option>
+          <option value="therma">Therma Hot Springs</option>
+        </optgroup>
+        <optgroup label="Lambi – hotels">
+          <option value="lambi_beach">Lambi Beach</option>
+          <option value="atlantis">Atlantis Hotel</option>
+          <option value="pelagos">Pelagos Suites Hotel</option>
+          <option value="aeolos">Aeolos Beach Hotel</option>
+          <option value="cosmopolitan">Cosmopolitan Hotel</option>
+          <option value="aqua_blu">Aqua Blu Boutique Hotel</option>
+          <option value="blue_lagoon_city">Blue Lagoon City Area</option>
+          <option value="white_olive">White Olive Marine Aquapark</option>
+        </optgroup>
+        <optgroup label="Overig">
+          <option value="asklepion">Asklepion</option>
+          <option value="platani">Platani</option>
+          <option value="airport">Vliegveld</option>
+          <option value="tigaki">Tigaki</option>
+          <option value="marmari">Marmari</option>
+          <option value="mastichari">Mastichari</option>
+          <option value="kardamena">Kardamena</option>
+          <option value="kefalos">Kefalos</option>
+          <option value="zia">Zia</option>
+        </optgroup>
+      </select>
+      <label for="to" data-i18n="toLabel">Naar</label>
+      <select id="to">
+        <option value="">Kies bestemming…</option>
+        <optgroup label="Kos-stad">
+          <option value="kos">Kos-stad (centrum / haven)</option>
+        </optgroup>
+        <optgroup label="Psalidi / Agios Fokas – hotels">
+          <option value="kipriotis_panorama">Kipriotis Panorama Hotel &amp; Suites</option>
+          <option value="kipriotis_aqualand">Kipriotis Aqualand Hotel</option>
+          <option value="ramira">Ramira Beach Hotel</option>
+          <option value="kipriotis_village">Kipriotis Village Resort</option>
+          <option value="grecotel">Grecotel Kos Imperial</option>
+          <option value="oceanis">Oceanis Beach Hotel &amp; Spa</option>
+          <option value="blue_lagoon_ocean">Blue Lagoon Ocean</option>
+          <option value="koia">Koia All-Suite Wellbeing</option>
+          <option value="dimitra">Dimitra Beach Hotel &amp; Suites</option>
+          <option value="michelangelo">Michelangelo Resort &amp; Spa</option>
+          <option value="therma">Therma Hot Springs</option>
+        </optgroup>
+        <optgroup label="Lambi – hotels">
+          <option value="lambi_beach">Lambi Beach</option>
+          <option value="atlantis">Atlantis Hotel</option>
+          <option value="pelagos">Pelagos Suites Hotel</option>
+          <option value="aeolos">Aeolos Beach Hotel</option>
+          <option value="cosmopolitan">Cosmopolitan Hotel</option>
+          <option value="aqua_blu">Aqua Blu Boutique Hotel</option>
+          <option value="blue_lagoon_city">Blue Lagoon City Area</option>
+          <option value="white_olive">White Olive Marine Aquapark</option>
+        </optgroup>
+        <optgroup label="Overig">
+          <option value="asklepion">Asklepion</option>
+          <option value="platani">Platani</option>
+          <option value="airport">Vliegveld</option>
+          <option value="tigaki">Tigaki</option>
+          <option value="marmari">Marmari</option>
+          <option value="mastichari">Mastichari</option>
+          <option value="kardamena">Kardamena</option>
+          <option value="kefalos">Kefalos</option>
+          <option value="zia">Zia</option>
+        </optgroup>
+      </select>
+      <div class="result" id="result">
+        <h3 id="title"></h3>
+        <div class="price" id="price"></div>
+        <div class="box" id="boardBox"></div>
+        <div class="times-box" id="timesLine"></div>
+        <div id="actions"></div>
+      </div>
+    </div>
+
+    <div class="note" data-i18n="note">
+      Ticket koop je <strong>in de bus</strong> (contant). Tijden zie je pas nadat je Van en Naar hebt gekozen.
     </div>
   </main>
 
@@ -161,12 +247,12 @@
 <script>
 (function(){
   var I18N = {
-    nl: { title: "Taxi, bussen & transfers", sub: "Prijzen, reserveren & openbaar vervoer", taxiPrijzen: "Taxi prijzen & meter", openbaar: "Openbaar vervoer", transfer: "Transfer (vliegveld e.d.)", waterTaxi: "Water taxi", rolstoel: "Rolstoelvervoer", touringcar: "Touringcar", standplaatsen: "Taxi standplaatsen" },
-    en: { title: "Taxi, buses & transfers", sub: "Prices, booking & public transport", taxiPrijzen: "Taxi prices & meter", openbaar: "Public transport", transfer: "Transfer (airport etc.)", waterTaxi: "Water taxi", rolstoel: "Wheelchair transport", touringcar: "Coach / touring bus", standplaatsen: "Taxi ranks" },
-    de: { title: "Taxi, Busse & Transfers", sub: "Preise, Buchung & öffentlicher Verkehr", taxiPrijzen: "Taxi-Preise & Taxameter", openbaar: "Öffentlicher Verkehr", transfer: "Transfer (Flughafen usw.)", waterTaxi: "Wassertaxi", rolstoel: "Rollstuhltransport", touringcar: "Reisebus", standplaatsen: "Taxistände" },
-    it: { title: "Taxi, autobus e transfer", sub: "Prezzi, prenotazioni e trasporti pubblici", taxiPrijzen: "Prezzi taxi e tassametro", openbaar: "Trasporto pubblico", transfer: "Transfer (aeroporto ecc.)", waterTaxi: "Taxi d'acqua", rolstoel: "Trasporto disabili", touringcar: "Pullman", standplaatsen: "Posteggi taxi" },
-    tr: { title: "Taksi, otobüs ve transfer", sub: "Fiyatlar, rezervasyon ve toplu taşıma", taxiPrijzen: "Taksi fiyatları ve taksimetre", openbaar: "Toplu taşıma", transfer: "Transfer (havaalanı vb.)", waterTaxi: "Su taksisi", rolstoel: "Tekerlekli sandalye taşıması", touringcar: "Tur otobüsü", standplaatsen: "Taksi durakları" },
-    es: { title: "Taxi, autobuses y transfers", sub: "Precios, reservas y transporte público", taxiPrijzen: "Precios taxi y taxímetro", openbaar: "Transporte público", transfer: "Transfer (aeropuerto etc.)", waterTaxi: "Taxi acuático", rolstoel: "Transporte para silla de ruedas", touringcar: "Autocar / bus turístico", standplaatsen: "Paradas de taxi" }
+    nl: { title: "🚌 Bus zoeken", sub: "Kies je halte of hotel · daarna zie je de tijden", fromLabel: "Van", toLabel: "Naar", note: "Ticket koop je in de bus (contant). Tijden zie je pas nadat je Van en Naar hebt gekozen." },
+    en: { title: "🚌 Find a bus", sub: "Choose stop or hotel · then see the times", fromLabel: "From", toLabel: "To", note: "Buy your ticket on the bus (cash). Times appear after you choose From and To." },
+    de: { title: "🚌 Bus suchen", sub: "Haltestelle oder Hotel wählen · dann siehst du die Zeiten", fromLabel: "Von", toLabel: "Nach", note: "Ticket kaufst du im Bus (bar). Zeiten erscheinen, nachdem du Von und Nach gewählt hast." },
+    it: { title: "🚌 Cerca bus", sub: "Scegli fermata o hotel · poi vedi gli orari", fromLabel: "Da", toLabel: "A", note: "Compri il biglietto sull’autobus (contanti). Gli orari appaiono dopo aver scelto Da e A." },
+    tr: { title: "🚌 Otobüs bul", sub: "Durak veya otel seç · sonra saatleri gör", fromLabel: "Nereden", toLabel: "Nereye", note: "Bileti otobüste alırsın (nakit). Saatler Nereden ve Nereye seçtikten sonra görünür." },
+    es: { title: "🚌 Buscar autobús", sub: "Elige parada u hotel · luego ves los horarios", fromLabel: "Desde", toLabel: "Hasta", note: "Compras el billete en el autobús (efectivo). Los horarios aparecen después de elegir Desde y Hasta." }
   };
 
   function setLang(l) {
@@ -176,7 +262,7 @@
     var d = I18N[l];
     document.querySelectorAll('[data-i18n]').forEach(function(el){
       var k = el.getAttribute('data-i18n');
-      if (d[k]) el.textContent = d[k];
+      if (d[k]) el.innerHTML = d[k];
     });
     var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
     if (opt) {
@@ -204,6 +290,247 @@
 
   var saved = localStorage.getItem('hk-lang') || 'nl';
   setLang(saved);
+
+  /* ===== BUS LOGIC (unchanged) ===== */
+  var PSALIDI = ['kipriotis_panorama','kipriotis_aqualand','ramira','kipriotis_village','grecotel','oceanis','blue_lagoon_ocean','koia','dimitra','michelangelo','therma'];
+  var LAMBI = ['lambi_beach','atlantis','pelagos','aeolos','cosmopolitan','aqua_blu','blue_lagoon_city','white_olive'];
+  var ASK = ['asklepion','platani'];
+  var ISLAND = ['airport','tigaki','marmari','mastichari','kardamena','kefalos','zia'];
+
+  var LABELS = {
+    kos: 'Kos-stad (centrum / haven)',
+    kipriotis_panorama: 'Kipriotis Panorama Hotel & Suites',
+    kipriotis_aqualand: 'Kipriotis Aqualand Hotel',
+    ramira: 'Ramira Beach Hotel',
+    kipriotis_village: 'Kipriotis Village Resort',
+    grecotel: 'Grecotel Kos Imperial',
+    oceanis: 'Oceanis Beach Hotel & Spa',
+    blue_lagoon_ocean: 'Blue Lagoon Ocean',
+    koia: 'Koia All-Suite Wellbeing',
+    dimitra: 'Dimitra Beach Hotel & Suites',
+    michelangelo: 'Michelangelo Resort & Spa',
+    therma: 'Therma Hot Springs',
+    lambi_beach: 'Lambi Beach',
+    atlantis: 'Atlantis Hotel',
+    pelagos: 'Pelagos Suites Hotel',
+    aeolos: 'Aeolos Beach Hotel',
+    cosmopolitan: 'Cosmopolitan Hotel',
+    aqua_blu: 'Aqua Blu Boutique Hotel',
+    blue_lagoon_city: 'Blue Lagoon City Area',
+    white_olive: 'White Olive Marine Aquapark',
+    asklepion: 'Asklepion',
+    platani: 'Platani',
+    airport: 'Vliegveld',
+    tigaki: 'Tigaki',
+    marmari: 'Marmari',
+    mastichari: 'Mastichari',
+    kardamena: 'Kardamena',
+    kefalos: 'Kefalos',
+    zia: 'Zia'
+  };
+
+  var TIMES = {
+    psalidi_out: '06:45 · 07:20 · 08:00 · 09:45 · 10:00* · 10:45* · 11:00 · 11:30* · 11:40 · 12:15* · 12:20 · 13:00* · 13:45* · 14:30* · 15:00 · 15:15* · 15:45 · 16:30 · 17:15 · 18:30 · 19:15 · 20:00 · 20:45\n* = rijdt ook naar Therma Hot Springs',
+    psalidi_back: '07:00 · 07:35 · 08:15 · 10:00 · 10:20† · 11:05† · 11:15 · 11:50† · 11:55 · 12:35† · 13:20† · 14:05† · 14:50† · 15:15 · 15:35† · 16:00 · 17:30 · 18:45 · 19:30 · 20:15 · 21:00\n† = vanuit Therma',
+    therma_out: '10:00 · 10:45 · 11:30 · 12:15 · 13:00 · 13:45 · 14:30 · 15:15',
+    therma_back: '10:20 · 11:05 · 11:50 · 12:35 · 13:20 · 14:05 · 14:50 · 15:35',
+    lambi_out: '08:00 · 08:45 · 09:45 · 10:45 · 11:45 · 12:30 · 13:00 · 13:45 · 15:15 · 16:00 · 16:45 · 17:30 · 18:45 · 19:15 · 20:00 · 20:45',
+    lambi_back: '08:15 · 09:00 · 10:00 · 11:00 · 12:00 · 12:45 · 13:15 · 15:00 · 15:45 · 16:30 · 17:15 · 19:00 · 19:45 · 20:30',
+    ask_out: '08:45 · 10:20 · 14:30 · 16:10',
+    ask_back: '08:50 · 10:40 · 14:40 · 16:20',
+    airport_from_kos: 'Ma–za ca.: 08:20 · 10:00 · 13:00 · 14:30 · 16:30 · 21:00\nZo minder',
+    airport_to_kos: 'Ma–za ca.: 08:00 · 10:00 · 11:40 · 15:30 · 17:40 · 18:30\nZo o.a.: 08:30 · 11:40 · 16:00',
+    island: 'Hoogseizoen meerdere ritten per dag – check actuele tijden bij de halte of ktel-kos.gr'
+  };
+
+  var PRICES = {
+    psalidi: 'ca. € 1,50–2',
+    lambi: 'ca. € 1,50–2',
+    ask: 'ca. € 1,50–2',
+    airport: '€ 4,00',
+    tigaki: '€ 2,50',
+    marmari: '€ 2,50',
+    zia: '€ 2,50',
+    mastichari: '€ 4,00',
+    kardamena: '€ 4,20',
+    kefalos: '€ 5,50',
+    airport_short: '€ 2,50–3,20'
+  };
+
+  function group(id) {
+    if (id === 'kos') return 'kos';
+    if (PSALIDI.indexOf(id) >= 0) return 'psalidi';
+    if (LAMBI.indexOf(id) >= 0) return 'lambi';
+    if (ASK.indexOf(id) >= 0) return 'ask';
+    if (ISLAND.indexOf(id) >= 0) return 'island';
+    return null;
+  }
+
+  function solve(a, b) {
+    var ga = group(a), gb = group(b);
+    if (!ga || !gb) return null;
+    if (a === b) return { err: 'same' };
+
+    if (a === 'kos' && gb === 'psalidi') {
+      var times = (b === 'therma') ? TIMES.therma_out : TIMES.psalidi_out;
+      return {
+        name: LABELS.kos + ' → ' + LABELS[b],
+        price: PRICES.psalidi,
+        board: 'Opstap: Kos-stad (centrum / haven)',
+        times: times,
+        map: b === 'therma' ? 'https://maps.google.com/maps?q=Embros+Therma+Kos' : 'https://maps.app.goo.gl/QPzGk2noUqVrDW7v8'
+      };
+    }
+    if (ga === 'psalidi' && b === 'kos') {
+      var times = (a === 'therma') ? TIMES.therma_back : TIMES.psalidi_back;
+      return {
+        name: LABELS[a] + ' → Kos-stad',
+        price: PRICES.psalidi,
+        board: 'Opstap: halte bij ' + LABELS[a],
+        times: times,
+        map: 'https://maps.app.goo.gl/QPzGk2noUqVrDW7v8'
+      };
+    }
+    if (ga === 'psalidi' && gb === 'psalidi') {
+      return {
+        name: LABELS[a] + ' → ' + LABELS[b],
+        price: PRICES.psalidi,
+        board: 'Opstap: halte bij ' + LABELS[a] + '\nUitstap: halte bij ' + LABELS[b],
+        times: 'Zelfde buslijn (Psalidi / Agios Fokas).\nRichting Agios Fokas / Therma:\n' + TIMES.psalidi_out + '\n\nRichting Kos-stad:\n' + TIMES.psalidi_back,
+        map: 'https://maps.app.goo.gl/QPzGk2noUqVrDW7v8'
+      };
+    }
+
+    if (a === 'kos' && gb === 'lambi') {
+      return {
+        name: LABELS.kos + ' → ' + LABELS[b],
+        price: PRICES.lambi,
+        board: 'Opstap: Kos-stad (centrum / haven)',
+        times: TIMES.lambi_out,
+        map: 'https://maps.app.goo.gl/oSjy5CMC2NC1bZi19'
+      };
+    }
+    if (ga === 'lambi' && b === 'kos') {
+      return {
+        name: LABELS[a] + ' → Kos-stad',
+        price: PRICES.lambi,
+        board: 'Opstap: halte bij ' + LABELS[a],
+        times: TIMES.lambi_back,
+        map: 'https://maps.app.goo.gl/oSjy5CMC2NC1bZi19'
+      };
+    }
+    if (ga === 'lambi' && gb === 'lambi') {
+      return {
+        name: LABELS[a] + ' → ' + LABELS[b],
+        price: PRICES.lambi,
+        board: 'Opstap: halte bij ' + LABELS[a] + '\nUitstap: halte bij ' + LABELS[b],
+        times: 'Zelfde buslijn (Lambi).\nRichting Aquapark:\n' + TIMES.lambi_out + '\n\nRichting Kos-stad:\n' + TIMES.lambi_back,
+        map: 'https://maps.app.goo.gl/oSjy5CMC2NC1bZi19'
+      };
+    }
+
+    if (a === 'kos' && gb === 'ask') {
+      return {
+        name: LABELS.kos + ' → ' + LABELS[b],
+        price: PRICES.ask,
+        board: 'Opstap: Kos-stad (centrum / haven)',
+        times: TIMES.ask_out,
+        map: 'https://maps.app.goo.gl/oSjy5CMC2NC1bZi19'
+      };
+    }
+    if (ga === 'ask' && b === 'kos') {
+      return {
+        name: LABELS[a] + ' → Kos-stad',
+        price: PRICES.ask,
+        board: 'Opstap: halte bij ' + LABELS[a],
+        times: TIMES.ask_back,
+        map: 'https://maps.app.goo.gl/oSjy5CMC2NC1bZi19'
+      };
+    }
+    if (ga === 'ask' && gb === 'ask') {
+      return {
+        name: LABELS[a] + ' → ' + LABELS[b],
+        price: PRICES.ask,
+        board: 'Opstap: halte bij ' + LABELS[a],
+        times: 'Zelfde buslijn.\nVanaf Kos-stad: ' + TIMES.ask_out + '\nTerug: ' + TIMES.ask_back,
+        map: 'https://maps.app.goo.gl/oSjy5CMC2NC1bZi19'
+      };
+    }
+
+    if (a === 'kos' && b === 'airport') {
+      return { name: 'Kos-stad → Vliegveld', price: PRICES.airport, board: 'Opstap: Kos-stad (centrum)', times: TIMES.airport_from_kos, map: 'https://maps.google.com/maps?q=Kleopatras+7,+Kos+853+00,+Greece' };
+    }
+    if (a === 'airport' && b === 'kos') {
+      return { name: 'Vliegveld → Kos-stad', price: PRICES.airport, board: 'Opstap: vliegveld (halte bij aankomsthal)', times: TIMES.airport_to_kos, map: 'https://maps.google.com/maps?q=Kos+Airport+bus+stop+Greece' };
+    }
+    if (a === 'kos' && gb === 'island' && b !== 'airport') {
+      var prices = { tigaki: PRICES.tigaki, marmari: PRICES.marmari, zia: PRICES.zia, mastichari: PRICES.mastichari, kardamena: PRICES.kardamena, kefalos: PRICES.kefalos };
+      return {
+        name: 'Kos-stad → ' + LABELS[b],
+        price: prices[b] || 'zie halte',
+        board: 'Opstap: Kos-stad (centrum)',
+        times: TIMES.island,
+        map: 'https://maps.google.com/maps?q=Kleopatras+7,+Kos+853+00,+Greece'
+      };
+    }
+    if (ga === 'island' && b === 'kos' && a !== 'airport') {
+      return {
+        name: LABELS[a] + ' → Kos-stad',
+        price: PRICES[a] || 'zie halte',
+        board: 'Opstap: bushalte ' + LABELS[a],
+        times: TIMES.island,
+        map: 'https://maps.google.com/maps?q=' + encodeURIComponent(LABELS[a] + ' bus stop Kos')
+      };
+    }
+    if (a === 'airport' && (b === 'mastichari' || b === 'kardamena' || b === 'kefalos')) {
+      return {
+        name: 'Vliegveld → ' + LABELS[b],
+        price: PRICES.airport_short,
+        board: 'Opstap: vliegveld (halte bij aankomsthal)',
+        times: TIMES.island,
+        map: 'https://maps.google.com/maps?q=Kos+Airport+bus+stop+Greece'
+      };
+    }
+    if ((a === 'mastichari' || a === 'kardamena' || a === 'kefalos') && b === 'airport') {
+      return {
+        name: LABELS[a] + ' → Vliegveld',
+        price: PRICES.airport_short,
+        board: 'Opstap: bushalte ' + LABELS[a],
+        times: TIMES.island,
+        map: 'https://maps.google.com/maps?q=' + encodeURIComponent(LABELS[a] + ' bus stop Kos')
+      };
+    }
+    return null;
+  }
+
+  var fromEl = document.getElementById('from');
+  var toEl = document.getElementById('to');
+  var result = document.getElementById('result');
+
+  function go() {
+    var a = fromEl.value, b = toEl.value;
+    if (!a || !b) { result.classList.remove('show'); return; }
+    var r = solve(a, b);
+    if (!r || r.err === 'same') {
+      result.classList.add('show');
+      document.getElementById('title').textContent = r && r.err === 'same' ? 'Kies twee verschillende plaatsen' : 'Geen directe bus gevonden';
+      document.getElementById('price').textContent = '';
+      document.getElementById('boardBox').innerHTML = r && r.err === 'same' ? '' : '<strong>Tip</strong>Vaak via Kos-stad reizen (overstappen), of taxi / transfer.';
+      document.getElementById('timesLine').textContent = '';
+      document.getElementById('actions').innerHTML = (!r || r.err === 'same') ? '' : '<a class="btn-map" href="transfer.html">🚐 Transfer</a>';
+      return;
+    }
+    result.classList.add('show');
+    document.getElementById('title').textContent = r.name;
+    document.getElementById('price').textContent = r.price;
+    document.getElementById('boardBox').innerHTML = '<strong>Opstap / uitstap</strong><span style="white-space:pre-line">' + r.board + '</span>';
+    document.getElementById('timesLine').textContent = 'Vertrektijden:\n' + r.times;
+    document.getElementById('actions').innerHTML = r.map
+      ? '<a class="btn-map" href="' + r.map + '" target="_blank" rel="noopener">📍 Op kaart</a>'
+      : '';
+  }
+  fromEl.addEventListener('change', go);
+  toEl.addEventListener('change', go);
 })();
 </script>
 </body>
