@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Odeon – Hello Kos</title>
+  <style>
+    :root {
+      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
+      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
+      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
+      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text); -webkit-font-smoothing: antialiased;
+      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
+      background: var(--bg); min-height: 100vh; line-height: 1.55;
+    }
+    .app-header {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px 16px; background: var(--bg-header);
+      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+    }
+    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
+    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
+    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
+    .logo-text span { color: var(--gold-dark); font-style: italic; }
+    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
+    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
+    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
+    .lang-menu.open { display: block; }
+    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
+    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
+    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
+    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+    .content { padding: 18px 16px 0; }
+    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
+    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
+    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
+    .btn-audio { background: var(--petrol); color: #fff; }
+    .btn-audio.playing { background: var(--petrol-dark); }
+    .btn-stop { background: #3A4545; color: #fff; display: none; }
+    .btn-stop.show { display: flex; }
+    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
+    .btn-apple { background: #111; color: #fff; }
+    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
+    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
+    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
+    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
+    .card p:last-child { margin-bottom: 0; }
+    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
+    .tip strong { color: var(--gold); }
+    .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
+    .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
+    .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
+    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+    .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
+    .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
+    .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
+    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
+    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
+    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
+    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
+    .footer a { color: var(--petrol); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="bezienswaardigheden.html" class="back-btn">← Terug</a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🔅</div>
+      <div class="logo-text">Hello <span>Kos</span></div>
+    </a>
+    <div class="lang-wrap">
+      <button type="button" class="lang-btn" id="langBtn">
+        <span id="flag">🇳🇱</span> <span id="code">NL</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="hero-wrap">
+      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-29-high.jpg" alt="Odeon" loading="eager">
+      <div class="hero-caption" data-i18n="heroCap">Odeon</div>
+    </div>
+
+    <div class="content">
+      <h1 data-i18n="title">Odeon</h1>
+      <p class="lead" data-i18n="lead">Romeins overdekt theater (± 200 n.Chr.) voor ± 750 toeschouwers – marmeren zitplaatsen en nog steeds sterke akoestiek.</p>
+
+      <div class="badges">
+        <span class="badge" data-i18n="badgeFree">Gratis</span>
+        <span class="badge">Kos-stad</span>
+        <span class="badge" data-i18n="badgeRoman">Romeins</span>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
+        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
+        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Roman%20Odeon%20Kos%20Town" target="_blank" rel="noopener">📍 Google Maps</a>
+        <a class="btn btn-apple" href="https://maps.apple.com/?q=Roman%20Odeon%20Kos%20Town" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      <p class="status" id="ttsStatus"></p>
+
+      <div id="readText">
+        <div class="card">
+          <h2 data-i18n="h2roman">Romeins overdekt theater</h2>
+          <p data-i18n="p1">Het Odeon werd gebouwd rond 200 n.Chr., in de Romeinse periode. Kos was welvarend dankzij het Asklepios-heiligdom. Het verving waarschijnlijk een ouder bouleuterion (raadzaal). Na de aardbeving van 142 n.Chr. financierde keizer Antoninus Pius het herstel.</p>
+        </div>
+
+        <div class="facts">
+          <div class="fact">
+            <span class="n">± 750</span>
+            <span class="l" data-i18n="factSpectators">toeschouwers</span>
+          </div>
+          <div class="fact">
+            <span class="n">14 rijen</span>
+            <span class="l" data-i18n="factRows">halve cirkel</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2compact">Compact en overdekt</h2>
+          <p data-i18n="p2">Anders dan grote openluchttheaters was dit een compact, overdekt gebouw – ideaal voor muziek, poëzie en zang het hele jaar door. Ongeveer 12 meter hoog, met vier stevige muren. De cavea (zitplaatsen) vormt een halve cirkel met 14 rijen: de eerste negen van wit marmer (elite), de hogere van eenvoudiger steen.</p>
+        </div>
+
+        <div class="photo-block">
+          <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-27-high.jpg" alt="Odeon" loading="lazy">
+          <div class="cap" data-i18n="cap1">Marmeren zitplaatsen</div>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2excavation">Opgraving en akoestiek</h2>
+          <p data-i18n="p3">Opgegraven vanaf 1929 door Luciano Laurenzi (Italiaanse periode), later gerestaureerd door Griekse archeologen (1994–1999). Je kunt door de oude gangen lopen; de akoestiek is nog steeds opvallend goed.</p>
+          <p data-i18n="p4">Toegang gratis; check lokaal de exacte openingstijden.</p>
+        </div>
+
+        <div class="gallery">
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-25-high.jpg" alt="Odeon" loading="lazy">
+            <span data-i18n="g1">Theater</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-28-high.jpg" alt="Detail" loading="lazy">
+            <span data-i18n="g2">Detail</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2visit">Bezoeken</h2>
+          <p data-i18n="p5">In Kos-stad. Gratis bezichtigen.</p>
+          <div class="tip" data-i18n="tip">Tip: test de akoestiek – fluister of klap in je handen vanuit de cavea.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div>Hello Kos</div>
+    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
+  </footer>
+
+<script>
+(function(){
+  var I18N = {
+    nl: {
+      title: "Odeon",
+      lead: "Romeins overdekt theater (± 200 n.Chr.) voor ± 750 toeschouwers – marmeren zitplaatsen en nog steeds sterke akoestiek.",
+      heroCap: "Odeon",
+      badgeFree: "Gratis", badgeRoman: "Romeins",
+      btnPlay: "🔊 Voorlezen",
+      h2roman: "Romeins overdekt theater",
+      p1: "Het Odeon werd gebouwd rond 200 n.Chr., in de Romeinse periode. Kos was welvarend dankzij het Asklepios-heiligdom. Het verving waarschijnlijk een ouder bouleuterion (raadzaal). Na de aardbeving van 142 n.Chr. financierde keizer Antoninus Pius het herstel.",
+      factSpectators: "toeschouwers", factRows: "halve cirkel",
+      h2compact: "Compact en overdekt",
+      p2: "Anders dan grote openluchttheaters was dit een compact, overdekt gebouw – ideaal voor muziek, poëzie en zang het hele jaar door. Ongeveer 12 meter hoog, met vier stevige muren. De cavea (zitplaatsen) vormt een halve cirkel met 14 rijen: de eerste negen van wit marmer (elite), de hogere van eenvoudiger steen.",
+      cap1: "Marmeren zitplaatsen",
+      h2excavation: "Opgraving en akoestiek",
+      p3: "Opgegraven vanaf 1929 door Luciano Laurenzi (Italiaanse periode), later gerestaureerd door Griekse archeologen (1994–1999). Je kunt door de oude gangen lopen; de akoestiek is nog steeds opvallend goed.",
+      p4: "Toegang gratis; check lokaal de exacte openingstijden.",
+      g1: "Theater", g2: "Detail",
+      h2visit: "Bezoeken",
+      p5: "In Kos-stad. Gratis bezichtigen.",
+      tip: "Tip: test de akoestiek – fluister of klap in je handen vanuit de cavea."
+    },
+    en: {
+      title: "Odeon",
+      lead: "Roman covered theatre (± 200 AD) for about 750 spectators – marble seats and still excellent acoustics.",
+      heroCap: "Odeon",
+      badgeFree: "Free", badgeRoman: "Roman",
+      btnPlay: "🔊 Read aloud",
+      h2roman: "Roman covered theatre",
+      p1: "The Odeon was built around 200 AD, during the Roman period. Kos was prosperous thanks to the Asklepios sanctuary. It probably replaced an older bouleuterion (council hall). After the earthquake of 142 AD, Emperor Antoninus Pius financed the restoration.",
+      factSpectators: "spectators", factRows: "semicircle",
+      h2compact: "Compact and covered",
+      p2: "Unlike large open-air theatres, this was a compact, covered building – ideal for music, poetry and singing all year round. About 12 metres high, with four solid walls. The cavea (seating) forms a semicircle with 14 rows: the first nine of white marble (elite), the higher ones of simpler stone.",
+      cap1: "Marble seats",
+      h2excavation: "Excavation and acoustics",
+      p3: "Excavated from 1929 by Luciano Laurenzi (Italian period), later restored by Greek archaeologists (1994–1999). You can walk through the old corridors; the acoustics are still remarkably good.",
+      p4: "Admission free; check locally for exact opening times.",
+      g1: "Theatre", g2: "Detail",
+      h2visit: "Visiting",
+      p5: "In Kos Town. Free to visit.",
+      tip: "Tip: test the acoustics – whisper or clap your hands from the cavea."
+    },
+    de: {
+      title: "Odeon",
+      lead: "Römisches überdachtes Theater (± 200 n. Chr.) für ca. 750 Zuschauer – Marmorsitze und immer noch starke Akustik.",
+      heroCap: "Odeon",
+      badgeFree: "Kostenlos", badgeRoman: "Römisch",
+      btnPlay: "🔊 Vorlesen",
+      h2roman: "Römisches überdachtes Theater",
+      p1: "Das Odeon wurde um 200 n. Chr. in der römischen Zeit erbaut. Kos war dank des Asklepios-Heiligtums wohlhabend. Es ersetzte wahrscheinlich ein älteres Bouleuterion (Rathaus). Nach dem Erdbeben von 142 n. Chr. finanzierte Kaiser Antoninus Pius die Wiederherstellung.",
+      factSpectators: "Zuschauer", factRows: "Halbkreis",
+      h2compact: "Kompakt und überdacht",
+      p2: "Im Gegensatz zu großen Freilufttheatern war dies ein kompaktes, überdachtes Gebäude – ideal für Musik, Poesie und Gesang das ganze Jahr über. Etwa 12 Meter hoch, mit vier massiven Mauern. Die Cavea (Sitzplätze) bildet einen Halbkreis mit 14 Reihen: die ersten neun aus weißem Marmor (Elite), die höheren aus einfacherem Stein.",
+      cap1: "Marmorsitze",
+      h2excavation: "Ausgrabung und Akustik",
+      p3: "Ab 1929 von Luciano Laurenzi (italienische Periode) ausgegraben, später von griechischen Archäologen restauriert (1994–1999). Man kann durch die alten Gänge gehen; die Akustik ist immer noch bemerkenswert gut.",
+      p4: "Eintritt kostenlos; lokale Öffnungszeiten prüfen.",
+      g1: "Theater", g2: "Detail",
+      h2visit: "Besuchen",
+      p5: "In Kos-Stadt. Kostenlos zu besichtigen.",
+      tip: "Tipp: teste die Akustik – flüstere oder klatsche aus der Cavea."
+    },
+    it: {
+      title: "Odeon",
+      lead: "Teatro coperto romano (± 200 d.C.) per circa 750 spettatori – sedili in marmo e acustica ancora eccellente.",
+      heroCap: "Odeon",
+      badgeFree: "Gratis", badgeRoman: "Romano",
+      btnPlay: "🔊 Leggi ad alta voce",
+      h2roman: "Teatro coperto romano",
+      p1: "L’Odeon fu costruito intorno al 200 d.C., in epoca romana. Kos era prospera grazie al santuario di Asclepio. Probabilmente sostituì un più antico bouleuterion (sala del consiglio). Dopo il terremoto del 142 d.C. l’imperatore Antonino Pio finanziò il restauro.",
+      factSpectators: "spettatori", factRows: "semicerchio",
+      h2compact: "Compatto e coperto",
+      p2: "A differenza dei grandi teatri all’aperto, questo era un edificio compatto e coperto – ideale per musica, poesia e canto tutto l’anno. Alto circa 12 metri, con quattro muri solidi. La cavea (posti a sedere) forma un semicerchio con 14 file: le prime nove in marmo bianco (élite), quelle superiori in pietra più semplice.",
+      cap1: "Sedili in marmo",
+      h2excavation: "Scavi e acustica",
+      p3: "Scavato a partire dal 1929 da Luciano Laurenzi (periodo italiano), poi restaurato da archeologi greci (1994–1999). Si può camminare attraverso i vecchi corridoi; l’acustica è ancora notevolmente buona.",
+      p4: "Ingresso gratuito; controllare gli orari esatti in loco.",
+      g1: "Teatro", g2: "Dettaglio",
+      h2visit: "Visitare",
+      p5: "A Kos città. Visita gratuita.",
+      tip: "Consiglio: prova l’acustica – sussurra o batti le mani dalla cavea."
+    },
+    tr: {
+      title: "Odeon",
+      lead: "Roma kapalı tiyatrosu (± MS 200) yaklaşık 750 seyirci için – mermer koltuklar ve hâlâ güçlü akustik.",
+      heroCap: "Odeon",
+      badgeFree: "Ücretsiz", badgeRoman: "Roma",
+      btnPlay: "🔊 Sesli oku",
+      h2roman: "Roma kapalı tiyatrosu",
+      p1: "Odeon MS 200 civarında Roma döneminde inşa edildi. Kos, Asklepios tapınağı sayesinde zengindi. Muhtemelen daha eski bir bouleuterion’un (meclis salonu) yerine geçti. MS 142 depreminden sonra İmparator Antoninus Pius restorasyonu finanse etti.",
+      factSpectators: "seyirci", factRows: "yarım daire",
+      h2compact: "Kompakt ve kapalı",
+      p2: "Büyük açık hava tiyatrolarından farklı olarak bu kompakt, kapalı bir binaydı – yıl boyunca müzik, şiir ve şarkı için ideal. Yaklaşık 12 metre yüksekliğinde, dört sağlam duvarlı. Cavea (oturma yerleri) 14 sıralı yarım daire oluşturur: ilk dokuz sıra beyaz mermer (elit), üsttekiler daha basit taş.",
+      cap1: "Mermer oturma yerleri",
+      h2excavation: "Kazı ve akustik",
+      p3: "1929’dan itibaren Luciano Laurenzi (İtalyan dönemi) tarafından kazıldı, daha sonra Yunan arkeologlar tarafından restore edildi (1994–1999). Eski koridorlarda yürüyebilirsiniz; akustik hâlâ oldukça iyi.",
+      p4: "Giriş ücretsiz; kesin açılış saatlerini yerinde kontrol edin.",
+      g1: "Tiyatro", g2: "Detay",
+      h2visit: "Ziyaret",
+      p5: "Kos şehrinde. Ücretsiz gezilebilir.",
+      tip: "İpucu: akustığı test et – cavea’dan fısılda veya el çırp."
+    },
+    es: {
+      title: "Odeón",
+      lead: "Teatro cubierto romano (± 200 d.C.) para unos 750 espectadores – asientos de mármol y acústica todavía excelente.",
+      heroCap: "Odeón",
+      badgeFree: "Gratis", badgeRoman: "Romano",
+      btnPlay: "🔊 Leer en voz alta",
+      h2roman: "Teatro cubierto romano",
+      p1: "El Odeón se construyó alrededor del 200 d.C., en época romana. Kos era próspera gracias al santuario de Asclepio. Probablemente sustituyó a un bouleuterion más antiguo (sala del consejo). Tras el terremoto del 142 d.C., el emperador Antonino Pío financió la restauración.",
+      factSpectators: "espectadores", factRows: "semicírculo",
+      h2compact: "Compacto y cubierto",
+      p2: "A diferencia de los grandes teatros al aire libre, este era un edificio compacto y cubierto – ideal para música, poesía y canto durante todo el año. Aproximadamente 12 metros de altura, con cuatro muros sólidos. La cavea (asientos) forma un semicírculo con 14 filas: las primeras nueve de mármol blanco (élite), las superiores de piedra más sencilla.",
+      cap1: "Asientos de mármol",
+      h2excavation: "Excavación y acústica",
+      p3: "Excavado a partir de 1929 por Luciano Laurenzi (periodo italiano), luego restaurado por arqueólogos griegos (1994–1999). Se puede caminar por los antiguos pasillos; la acústica sigue siendo notablemente buena.",
+      p4: "Entrada gratuita; comprueba los horarios exactos en el lugar.",
+      g1: "Teatro", g2: "Detalle",
+      h2visit: "Visitar",
+      p5: "En Kos ciudad. Visita gratuita.",
+      tip: "Consejo: prueba la acústica – susurra o aplaude desde la cavea."
+    }
+  };
+
+  function setLang(l) {
+    if (!I18N[l]) l = 'nl';
+    localStorage.setItem('hk-lang', l);
+    document.documentElement.lang = l;
+    var d = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (d[k]) el.textContent = d[k];
+    });
+    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if (opt) {
+      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
+      document.getElementById('code').textContent = l.toUpperCase();
+    }
+    document.querySelectorAll('.lang-option').forEach(function(o){
+      o.classList.toggle('active', o.getAttribute('data-lang') === l);
+    });
+    closeMenu();
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  function openMenu(){ langMenu.classList.add('open'); }
+  function closeMenu(){ langMenu.classList.remove('open'); }
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    langMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.addEventListener('click', function(){ closeMenu(); });
+  document.querySelectorAll('.lang-option').forEach(function(btn){
+    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
+  });
+
+  var saved = localStorage.getItem('hk-lang') || 'nl';
+  setLang(saved);
+
+  /* TTS */
+  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
+  function getLang(){
+    var l = localStorage.getItem('hk-lang') || 'nl';
+    return LANG_VOICE[l] ? l : 'nl';
+  }
+  function pickVoice(code){
+    var voices = speechSynthesis.getVoices() || [];
+    var prefix = code.slice(0,2).toLowerCase();
+    return voices.find(function(v){ return v.lang === code; })
+      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
+      || null;
+  }
+  var btnPlay = document.getElementById('btnPlay');
+  var btnStop = document.getElementById('btnStop');
+  var status = document.getElementById('ttsStatus');
+  function setStatus(t){ if(status) status.textContent = t; }
+  function play(){
+    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
+    speechSynthesis.cancel();
+    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
+    var l = getLang();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = LANG_VOICE[l];
+    u.rate = 0.92;
+    var v = pickVoice(LANG_VOICE[l]);
+    if(v) u.voice = v;
+    u.onstart = function(){
+      btnPlay.classList.add('playing');
+      btnStop.classList.add('show');
+      setStatus('Voorlezen… ('+l.toUpperCase()+')');
+    };
+    u.onend = u.onerror = function(){
+      btnPlay.classList.remove('playing');
+      btnStop.classList.remove('show');
+      setStatus('');
+    };
+    if(!speechSynthesis.getVoices().length){
+      speechSynthesis.onvoiceschanged = function(){
+        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
+        speechSynthesis.speak(u);
+      };
+      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
+    } else {
+      speechSynthesis.speak(u);
+    }
+  }
+  function stop(){
+    if(window.speechSynthesis) speechSynthesis.cancel();
+    btnPlay.classList.remove('playing');
+    btnStop.classList.remove('show');
+    setStatus('Gestopt.');
+  }
+  btnPlay.addEventListener('click', play);
+  btnStop.addEventListener('click', stop);
+  if(window.speechSynthesis){
+    speechSynthesis.getVoices();
+    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  }
+})();
+</script>
+</body>
+</html>
+Sla dit op als sight-odeon.html. Alle tekst is vertaald en de voorleesknop leest de gekozen taal.
+
