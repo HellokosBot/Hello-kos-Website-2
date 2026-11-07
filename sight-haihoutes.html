@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Haihoutes – Hello Kos</title>
+  <style>
+    :root {
+      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
+      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
+      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
+      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text); -webkit-font-smoothing: antialiased;
+      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
+      background: var(--bg); min-height: 100vh; line-height: 1.55;
+    }
+    .app-header {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px 16px; background: var(--bg-header);
+      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+    }
+    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
+    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
+    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
+    .logo-text span { color: var(--gold-dark); font-style: italic; }
+    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
+    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
+    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
+    .lang-menu.open { display: block; }
+    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
+    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
+    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
+    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+    .content { padding: 18px 16px 0; }
+    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
+    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
+    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
+    .btn-audio { background: var(--petrol); color: #fff; }
+    .btn-audio.playing { background: var(--petrol-dark); }
+    .btn-stop { background: #3A4545; color: #fff; display: none; }
+    .btn-stop.show { display: flex; }
+    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
+    .btn-apple { background: #111; color: #fff; }
+    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
+    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
+    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
+    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
+    .card p:last-child { margin-bottom: 0; }
+    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
+    .tip strong { color: var(--gold); }
+    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+    .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
+    .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
+    .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
+    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
+    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
+    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
+    .video-block { margin: 0 0 14px; border-radius: 14px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 10px rgba(0,0,0,0.25); border: 1px solid var(--border); }
+    .video-wrap { position: relative; width: 100%; padding-bottom: 56.25%; background: #111; }
+    .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
+    .footer a { color: var(--petrol); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="bezienswaardigheden.html" class="back-btn">← Terug</a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🔅</div>
+      <div class="logo-text">Hello <span>Kos</span></div>
+    </a>
+    <div class="lang-wrap">
+      <button type="button" class="lang-btn" id="langBtn">
+        <span id="flag">🇳🇱</span> <span id="code">NL</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="hero-wrap">
+      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/yxnzzxrzl2ltywdlcy9wywdlcy9zzxr0bgvtzw50cy9oywlob3v0zxmvr01txzmxmtr4ywl4b3v0zxmuanbn-standard.jpg" alt="Haihoutes" loading="eager">
+      <div class="hero-caption" data-i18n="heroCap">Haihoutes</div>
+    </div>
+
+    <div class="content">
+      <h1 data-i18n="title">Haihoutes</h1>
+      <p class="lead" data-i18n="lead">Voormalig bergdorp (± 1780) – eerste school van Kos, schuilplaats in WO II, nu weer levend met kafeneio en sfeer van een openluchtmuseum.</p>
+
+      <div class="badges">
+        <span class="badge" data-i18n="badgeVillage">Bergdorp</span>
+        <span class="badge" data-i18n="badgeKafeneio">Kafeneio</span>
+        <span class="badge" data-i18n="badgeFree">Gratis</span>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
+        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
+        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Haihoutes%20village%20Kos" target="_blank" rel="noopener">📍 Google Maps</a>
+        <a class="btn btn-apple" href="https://maps.apple.com/?q=Haihoutes%20village%20Kos" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      <p class="status" id="ttsStatus"></p>
+
+      <div id="readText">
+        <div class="card">
+          <h2 data-i18n="h2history">Bergdorp met geschiedenis</h2>
+          <p data-i18n="p1">Haihoutes is een klein, voormalig bergdorp. Rond 1780 vestigden zich hier de eerste bewoners, onder wie een Armeense familie Haihoudes.</p>
+        </div>
+
+        <div class="facts">
+          <div class="fact">
+            <span class="n">± 1780</span>
+            <span class="l" data-i18n="factFirst">eerste bewoners</span>
+          </div>
+          <div class="fact">
+            <span class="n" data-i18n="factSchool">1e school</span>
+            <span class="l" data-i18n="factIsland">van heel Kos</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2school">Eerste school van Kos</h2>
+          <p data-i18n="p2">De allereerste school van het eiland begon hier, in de kerk van Agios Dimitrios (nog steeds op de berg). Toen zo’n 40 tot 50 leerlingen.</p>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2ww2">WO II en leegloop</h2>
+          <p data-i18n="p3">Tijdens de Tweede Wereldoorlog vonden veel mensen uit Kos-stad hier een schuilplaats. In de jaren 1960–1970 vertrokken de laatste inwoners; het dorp werd een spookdorp.</p>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2alive">Weer tot leven</h2>
+          <p data-i18n="p4">Sinds enkele jaren is Haihoutes weer levend: een traditioneel kafeneio, smalle paadjes, oude stenen huizen en overal groen – bijna als een openluchtmuseum.</p>
+        </div>
+
+        <div class="gallery">
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/yxnzzxrzl2ltywdlcy9wywdlcy9zzxr0bgvtzw50cy9oywlob3v0zxmvr01txzmxmtr4ywl4b3v0zxmuanbn-standard.jpg" alt="" loading="lazy">
+            <span data-i18n="g1">Haihoutes</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/img_4818-copy-1-high.jpg" alt="" loading="lazy">
+            <span data-i18n="g2">Haihoutes</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/img_7467-copy-1200x800-high.jpg" alt="" loading="lazy">
+            <span data-i18n="g3">Haihoutes</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/478381882_1155163309647655_3293115944635874693_n-high.jpg" alt="" loading="lazy">
+            <span data-i18n="g4">Haihoutes</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2visit">Bezoeken</h2>
+          <p data-i18n="p5">Gratis. Ideaal voor rust en sfeer.</p>
+          <div class="tip" data-i18n="tip">Tip: drink iets in het kafeneio en geniet van de stilte – het voelt als een filmset.</div>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2video">Video</h2>
+        </div>
+        <div class="video-block">
+          <div class="video-wrap">
+            <iframe src="https://www.youtube-nocookie.com/embed/BYJLJ-Ur8hM?rel=0&modestbranding=1" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div>Hello Kos</div>
+    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
+  </footer>
+
+<script>
+(function(){
+  var I18N = {
+    nl: {
+      title: "Haihoutes",
+      lead: "Voormalig bergdorp (± 1780) – eerste school van Kos, schuilplaats in WO II, nu weer levend met kafeneio en sfeer van een openluchtmuseum.",
+      heroCap: "Haihoutes",
+      badgeVillage: "Bergdorp", badgeKafeneio: "Kafeneio", badgeFree: "Gratis",
+      btnPlay: "🔊 Voorlezen",
+      h2history: "Bergdorp met geschiedenis",
+      p1: "Haihoutes is een klein, voormalig bergdorp. Rond 1780 vestigden zich hier de eerste bewoners, onder wie een Armeense familie Haihoudes.",
+      factFirst: "eerste bewoners", factSchool: "1e school", factIsland: "van heel Kos",
+      h2school: "Eerste school van Kos",
+      p2: "De allereerste school van het eiland begon hier, in de kerk van Agios Dimitrios (nog steeds op de berg). Toen zo’n 40 tot 50 leerlingen.",
+      h2ww2: "WO II en leegloop",
+      p3: "Tijdens de Tweede Wereldoorlog vonden veel mensen uit Kos-stad hier een schuilplaats. In de jaren 1960–1970 vertrokken de laatste inwoners; het dorp werd een spookdorp.",
+      h2alive: "Weer tot leven",
+      p4: "Sinds enkele jaren is Haihoutes weer levend: een traditioneel kafeneio, smalle paadjes, oude stenen huizen en overal groen – bijna als een openluchtmuseum.",
+      g1: "Haihoutes", g2: "Haihoutes", g3: "Haihoutes", g4: "Haihoutes",
+      h2visit: "Bezoeken",
+      p5: "Gratis. Ideaal voor rust en sfeer.",
+      tip: "Tip: drink iets in het kafeneio en geniet van de stilte – het voelt als een filmset.",
+      h2video: "Video"
+    },
+    en: {
+      title: "Haihoutes",
+      lead: "Former mountain village (± 1780) – first school of Kos, shelter in WWII, now alive again with kafeneio and the atmosphere of an open-air museum.",
+      heroCap: "Haihoutes",
+      badgeVillage: "Mountain village", badgeKafeneio: "Kafeneio", badgeFree: "Free",
+      btnPlay: "🔊 Read aloud",
+      h2history: "Mountain village with history",
+      p1: "Haihoutes is a small, former mountain village. Around 1780 the first residents settled here, including an Armenian family Haihoudes.",
+      factFirst: "first residents", factSchool: "1st school", factIsland: "of all Kos",
+      h2school: "First school of Kos",
+      p2: "The very first school of the island started here, in the church of Agios Dimitrios (still on the mountain). Then about 40 to 50 pupils.",
+      h2ww2: "WWII and depopulation",
+      p3: "During the Second World War many people from Kos town found shelter here. In the 1960s–1970s the last inhabitants left; the village became a ghost village.",
+      h2alive: "Alive again",
+      p4: "For several years Haihoutes has been alive again: a traditional kafeneio, narrow paths, old stone houses and greenery everywhere – almost like an open-air museum.",
+      g1: "Haihoutes", g2: "Haihoutes", g3: "Haihoutes", g4: "Haihoutes",
+      h2visit: "Visiting",
+      p5: "Free. Ideal for peace and atmosphere.",
+      tip: "Tip: have a drink in the kafeneio and enjoy the silence – it feels like a film set.",
+      h2video: "Video"
+    },
+    de: {
+      title: "Haihoutes",
+      lead: "Ehemaliges Bergdorf (± 1780) – erste Schule von Kos, Zufluchtsort im Zweiten Weltkrieg, jetzt wieder lebendig mit Kafeneio und Atmosphäre eines Freilichtmuseums.",
+      heroCap: "Haihoutes",
+      badgeVillage: "Bergdorf", badgeKafeneio: "Kafeneio", badgeFree: "Kostenlos",
+      btnPlay: "🔊 Vorlesen",
+      h2history: "Bergdorf mit Geschichte",
+      p1: "Haihoutes ist ein kleines, ehemaliges Bergdorf. Um 1780 siedelten sich hier die ersten Bewohner an, darunter eine armenische Familie Haihoudes.",
+      factFirst: "erste Bewohner", factSchool: "1. Schule", factIsland: "von ganz Kos",
+      h2school: "Erste Schule von Kos",
+      p2: "Die allererste Schule der Insel begann hier, in der Kirche von Agios Dimitrios (noch immer auf dem Berg). Damals etwa 40 bis 50 Schüler.",
+      h2ww2: "Zweiter Weltkrieg und Entvölkerung",
+      p3: "Während des Zweiten Weltkriegs fanden viele Menschen aus Kos-Stadt hier Schutz. In den 1960er–1970er Jahren zogen die letzten Bewohner weg; das Dorf wurde zum Geisterdorf.",
+      h2alive: "Wieder lebendig",
+      p4: "Seit einigen Jahren ist Haihoutes wieder lebendig: ein traditionelles Kafeneio, enge Pfade, alte Steinhäuser und überall Grün – fast wie ein Freilichtmuseum.",
+      g1: "Haihoutes", g2: "Haihoutes", g3: "Haihoutes", g4: "Haihoutes",
+      h2visit: "Besuchen",
+      p5: "Kostenlos. Ideal für Ruhe und Atmosphäre.",
+      tip: "Tipp: trink etwas im Kafeneio und genieße die Stille – es fühlt sich an wie ein Filmset.",
+      h2video: "Video"
+    },
+    it: {
+      title: "Haihoutes",
+      lead: "Ex villaggio di montagna (± 1780) – prima scuola di Kos, rifugio nella Seconda guerra mondiale, ora di nuovo vivo con kafeneio e atmosfera di museo all’aperto.",
+      heroCap: "Haihoutes",
+      badgeVillage: "Villaggio di montagna", badgeKafeneio: "Kafeneio", badgeFree: "Gratis",
+      btnPlay: "🔊 Leggi ad alta voce",
+      h2history: "Villaggio di montagna con storia",
+      p1: "Haihoutes è un piccolo ex villaggio di montagna. Intorno al 1780 si stabilirono qui i primi abitanti, tra cui una famiglia armena Haihoudes.",
+      factFirst: "primi abitanti", factSchool: "1ª scuola", factIsland: "di tutta Kos",
+      h2school: "Prima scuola di Kos",
+      p2: "La primissima scuola dell’isola iniziò qui, nella chiesa di Agios Dimitrios (ancora sulla montagna). Allora circa 40-50 alunni.",
+      h2ww2: "Seconda guerra mondiale e spopolamento",
+      p3: "Durante la Seconda guerra mondiale molte persone da Kos città trovarono rifugio qui. Negli anni ’60-’70 gli ultimi abitanti se ne andarono; il villaggio divenne un villaggio fantasma.",
+      h2alive: "Di nuovo vivo",
+      p4: "Da alcuni anni Haihoutes è di nuovo vivo: un kafeneio tradizionale, sentieri stretti, vecchie case in pietra e verde ovunque – quasi come un museo all’aperto.",
+      g1: "Haihoutes", g2: "Haihoutes", g3: "Haihoutes", g4: "Haihoutes",
+      h2visit: "Visitare",
+      p5: "Gratis. Ideale per pace e atmosfera.",
+      tip: "Consiglio: bevi qualcosa nel kafeneio e goditi il silenzio – sembra un set cinematografico.",
+      h2video: "Video"
+    },
+    tr: {
+      title: "Haihoutes",
+      lead: "Eski dağ köyü (± 1780) – Kos’un ilk okulu, II. Dünya Savaşı’nda sığınak, şimdi kafeneio ve açık hava müzesi atmosferiyle yeniden canlı.",
+      heroCap: "Haihoutes",
+      badgeVillage: "Dağ köyü", badgeKafeneio: "Kafeneio", badgeFree: "Ücretsiz",
+      btnPlay: "🔊 Sesli oku",
+      h2history: "Tarihli dağ köyü",
+      p1: "Haihoutes küçük, eski bir dağ köyüdür. 1780 civarında ilk sakinler buraya yerleşti, aralarında Ermeni Haihoudes ailesi de vardı.",
+      factFirst: "ilk sakinler", factSchool: "1. okul", factIsland: "tüm Kos’un",
+      h2school: "Kos’un ilk okulu",
+      p2: "Adanın ilk okulu burada, Agios Dimitrios kilisesinde (hâlâ dağda) başladı. O zaman yaklaşık 40-50 öğrenci vardı.",
+      h2ww2: "II. Dünya Savaşı ve boşalma",
+      p3: "İkinci Dünya Savaşı sırasında Kos kentinden birçok kişi burada sığınak buldu. 1960-1970’lerde son sakinler ayrıldı; köy hayalet köy oldu.",
+      h2alive: "Yeniden canlı",
+      p4: "Birkaç yıldır Haihoutes yeniden canlı: geleneksel bir kafeneio, dar yollar, eski taş evler ve her yerde yeşillik – neredeyse açık hava müzesi gibi.",
+      g1: "Haihoutes", g2: "Haihoutes", g3: "Haihoutes", g4: "Haihoutes",
+      h2visit: "Ziyaret",
+      p5: "Ücretsiz. Huzur ve atmosfer için ideal.",
+      tip: "İpucu: kafeneio’da bir şey için ve sessizliğin tadını çıkarın – film seti gibi hissettirir.",
+      h2video: "Video"
+    },
+    es: {
+      title: "Haihoutes",
+      lead: "Antiguo pueblo de montaña (± 1780) – primera escuela de Kos, refugio en la Segunda Guerra Mundial, ahora vivo de nuevo con kafeneio y ambiente de museo al aire libre.",
+      heroCap: "Haihoutes",
+      badgeVillage: "Pueblo de montaña", badgeKafeneio: "Kafeneio", badgeFree: "Gratis",
+      btnPlay: "🔊 Leer en voz alta",
+      h2history: "Pueblo de montaña con historia",
+      p1: "Haihoutes es un pequeño antiguo pueblo de montaña. Alrededor de 1780 se establecieron aquí los primeros habitantes, entre ellos una familia armenia Haihoudes.",
+      factFirst: "primeros habitantes", factSchool: "1ª escuela", factIsland: "de toda Kos",
+      h2school: "Primera escuela de Kos",
+      p2: "La primera escuela de la isla empezó aquí, en la iglesia de Agios Dimitrios (aún en la montaña). Entonces unos 40 a 50 alumnos.",
+      h2ww2: "Segunda Guerra Mundial y despoblación",
+      p3: "Durante la Segunda Guerra Mundial muchas personas de la ciudad de Kos encontraron refugio aquí. En los años 1960-1970 los últimos habitantes se marcharon; el pueblo se convirtió en un pueblo fantasma.",
+      h2alive: "Vivo de nuevo",
+      p4: "Desde hace varios años Haihoutes está vivo de nuevo: un kafeneio tradicional, senderos estrechos, viejas casas de piedra y verdor por todas partes – casi como un museo al aire libre.",
+      g1: "Haihoutes", g2: "Haihoutes", g3: "Haihoutes", g4: "Haihoutes",
+      h2visit: "Visitar",
+      p5: "Gratis. Ideal para paz y ambiente.",
+      tip: "Consejo: toma algo en el kafeneio y disfruta del silencio – se siente como un plató de cine.",
+      h2video: "Vídeo"
+    }
+  };
+
+  function setLang(l) {
+    if (!I18N[l]) l = 'nl';
+    localStorage.setItem('hk-lang', l);
+    document.documentElement.lang = l;
+    var d = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (d[k]) el.textContent = d[k];
+    });
+    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if (opt) {
+      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
+      document.getElementById('code').textContent = l.toUpperCase();
+    }
+    document.querySelectorAll('.lang-option').forEach(function(o){
+      o.classList.toggle('active', o.getAttribute('data-lang') === l);
+    });
+    closeMenu();
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  function openMenu(){ langMenu.classList.add('open'); }
+  function closeMenu(){ langMenu.classList.remove('open'); }
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    langMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.addEventListener('click', function(){ closeMenu(); });
+  document.querySelectorAll('.lang-option').forEach(function(btn){
+    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
+  });
+
+  var saved = localStorage.getItem('hk-lang') || 'nl';
+  setLang(saved);
+
+  /* TTS */
+  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
+  function getLang(){
+    var l = localStorage.getItem('hk-lang') || 'nl';
+    return LANG_VOICE[l] ? l : 'nl';
+  }
+  function pickVoice(code){
+    var voices = speechSynthesis.getVoices() || [];
+    var prefix = code.slice(0,2).toLowerCase();
+    return voices.find(function(v){ return v.lang === code; })
+      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
+      || null;
+  }
+  var btnPlay = document.getElementById('btnPlay');
+  var btnStop = document.getElementById('btnStop');
+  var status = document.getElementById('ttsStatus');
+  function setStatus(t){ if(status) status.textContent = t; }
+  function play(){
+    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
+    speechSynthesis.cancel();
+    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
+    var l = getLang();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = LANG_VOICE[l];
+    u.rate = 0.92;
+    var v = pickVoice(LANG_VOICE[l]);
+    if(v) u.voice = v;
+    u.onstart = function(){
+      btnPlay.classList.add('playing');
+      btnStop.classList.add('show');
+      setStatus('Voorlezen… ('+l.toUpperCase()+')');
+    };
+    u.onend = u.onerror = function(){
+      btnPlay.classList.remove('playing');
+      btnStop.classList.remove('show');
+      setStatus('');
+    };
+    if(!speechSynthesis.getVoices().length){
+      speechSynthesis.onvoiceschanged = function(){
+        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
+        speechSynthesis.speak(u);
+      };
+      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
+    } else {
+      speechSynthesis.speak(u);
+    }
+  }
+  function stop(){
+    if(window.speechSynthesis) speechSynthesis.cancel();
+    btnPlay.classList.remove('playing');
+    btnStop.classList.remove('show');
+    setStatus('Gestopt.');
+  }
+  btnPlay.addEventListener('click', play);
+  btnStop.addEventListener('click', stop);
+  if(window.speechSynthesis){
+    speechSynthesis.getVoices();
+    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  }
+})();
+</script>
+</body>
+</html>
