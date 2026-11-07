@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0a0c0c">
+<title>Licence & speeds – Hello Kos</title>
+<style>
+:root{--bg:#0a0c0c;--bg-elevated:#141818;--bg-card:#1a1f1f;--border:rgba(255,255,255,0.08);--text:#e8e8e8;--text-soft:#a0a8a8;--petrol:#3d9a9a;--gold:#e0b84a;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);line-height:1.5}
+.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:12px 14px;background:rgba(10,12,12,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-btns{display:flex;gap:6px}
+.nav-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);text-decoration:none;font-size:1.15rem}
+.logo{justify-self:center;display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo-icon{font-size:22px}
+.logo-text{font-size:1.1rem;font-weight:700;color:var(--gold);font-family:Georgia,serif}
+.logo-text span{color:#f0c85a;font-style:italic}
+.lang-wrap{justify-self:end;position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-soft)}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:8px;min-width:160px;z-index:50}
+.lang-menu.open{display:block}
+.lang-option{display:block;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;color:var(--text)}
+.lang-option.active{background:rgba(61,154,154,.15);color:var(--petrol)}
+.overlay{display:none;position:fixed;inset:0;z-index:40}
+.overlay.open{display:block}
+.main{max-width:480px;margin:0 auto;padding:16px 14px 48px}
+.page-head{text-align:center;margin-bottom:14px}
+.page-head h1{font-size:1.35rem;font-weight:800}
+.page-head .intro{color:var(--text-soft);font-size:.92rem;margin-top:6px}
+.panel{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:14px}
+.panel h2{font-size:1rem;color:var(--gold);margin:14px 16px 10px;font-weight:800}
+.sec-photo{height:120px;overflow:hidden;background:linear-gradient(135deg,#1a2a2a,#0d1515)}
+.sec-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.sec-photo.hide{display:none}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 16px 16px}
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th,td{padding:11px 8px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+th{color:var(--petrol);font-weight:700;font-size:.72rem;text-transform:uppercase;letter-spacing:.03em}
+td.code{color:var(--gold);font-weight:800;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+.footer{text-align:center;padding:20px 16px;background:var(--bg-elevated);border-top:1px solid var(--border)}
+.footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
+.footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="verkeersregels.html" title="Back">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+<div data-lang-block="nl" style="display:none">
+  <header class="page-head">
+    <h1>Rijbewijs & snelheden</h1>
+    <p class="intro">Welk rijbewijs je nodig hebt, de maximumsnelheden, en wanneer een helm verplicht is.</p>
+  </header>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-rijbewijs.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Welk rijbewijs voor welk voertuig</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Rijbewijs</th><th>Voertuigen</th></tr></thead>
+      <tbody><tr><td class="code">AM</td><td>50cc scooters / brommers (≤45 km/u). Rijbewijs B bevat ook AM.</td></tr><tr><td class="code">A1</td><td>125cc scooters & lichte motoren (tot 11 kW).</td></tr><tr><td class="code">A2</td><td>Middelzware motoren (tot 35 kW, ongeveer 300–500cc).</td></tr><tr><td class="code">A</td><td>Alle motoren (onbeperkt vermogen).</td></tr><tr><td class="code">B</td><td>Auto + 50cc scooters + lichte quad / brommobiel.</td></tr></tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-snelheid.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Maximumsnelheid per voertuig</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Voertuig</th><th>Binnen kom</th><th>Buiten kom</th><th>Rijbewijs</th></tr></thead>
+      <tbody><tr><td>🚗 Auto</td><td>50 km/u</td><td>50 km/u</td><td class="code">B</td></tr><tr><td>🛵 Scooter / motor ≤125cc</td><td>50 km/u</td><td>50 km/u</td><td class="code">A1 / AM</td></tr><tr><td>🏍️ Motor >125cc</td><td>50 km/u</td><td>50 km/u</td><td class="code">A2</td></tr><tr><td>🛴 Elektrische step</td><td>25 km/u</td><td>25 km/u</td><td class="code">—</td></tr></tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-helm.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Helm</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Voertuig</th><th>Helm</th></tr></thead>
+      <tbody><tr><td>🛴 Elektrische step</td><td class="code">Verplicht</td></tr><tr><td>🚲 E-bike / fiets (trapondersteuning tot 25 km/u)</td><td class="code">Niet verplicht</td></tr></tbody>
+    </table></div>
+  </section>
+</div><div data-lang-block="en" style="display:none">
+  <header class="page-head">
+    <h1>Licence & speed limits</h1>
+    <p class="intro">Which licence you need, the speed limits, and when a helmet is required.</p>
+  </header>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-rijbewijs.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Which licence for which vehicle</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Licence</th><th>Vehicles</th></tr></thead>
+      <tbody><tr><td class="code">AM</td><td>50cc scooters / mopeds (≤45 km/h). Category B also includes AM.</td></tr><tr><td class="code">A1</td><td>125cc scooters & light motorcycles (up to 11 kW).</td></tr><tr><td class="code">A2</td><td>Medium motorcycles (up to 35 kW, about 300–500cc).</td></tr><tr><td class="code">A</td><td>All motorcycles (unlimited power).</td></tr><tr><td class="code">B</td><td>Car + 50cc scooters + light quad / microcar.</td></tr></tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-snelheid.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Speed limit per vehicle</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Vehicle</th><th>In town</th><th>Outside</th><th>Licence</th></tr></thead>
+      <tbody><tr><td>🚗 Car</td><td>50 km/h</td><td>50 km/h</td><td class="code">B</td></tr><tr><td>🛵 Scooter / motorcycle ≤125cc</td><td>50 km/h</td><td>50 km/h</td><td class="code">A1 / AM</td></tr><tr><td>🏍️ Motorcycle >125cc</td><td>50 km/h</td><td>50 km/h</td><td class="code">A2</td></tr><tr><td>🛴 Electric scooter</td><td>25 km/h</td><td>25 km/h</td><td class="code">—</td></tr></tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-helm.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Helmet</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Vehicle</th><th>Helmet</th></tr></thead>
+      <tbody><tr><td>🛴 Electric scooter (kick scooter)</td><td class="code">Required</td></tr><tr><td>🚲 E-bike / bicycle (pedal assist up to 25 km/h)</td><td class="code">Not required</td></tr></tbody>
+    </table></div>
+  </section>
+</div><div data-lang-block="de" style="display:none">
+  <header class="page-head">
+    <h1>Führerschein & Tempo</h1>
+    <p class="intro">Welchen Führerschein du brauchst, die Tempolimits und wann ein Helm Pflicht ist.</p>
+  </header>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-rijbewijs.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Welcher Führerschein für welches Fahrzeug</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Schein</th><th>Fahrzeuge</th></tr></thead>
+      <tbody><tr><td class="code">AM</td><td>50cc Roller / Mopeds (≤45 km/h). Klasse B enthält auch AM.</td></tr><tr><td class="code">A1</td><td>125cc Roller & leichte Motorräder (bis 11 kW).</td></tr><tr><td class="code">A2</td><td>Mittelschwere Motorräder (bis 35 kW, ca. 300–500cc).</td></tr><tr><td class="code">A</td><td>Alle Motorräder (unbegrenzte Leistung).</td></tr><tr><td class="code">B</td><td>Auto + 50cc Roller + leichter Quad / Kleinstwagen.</td></tr></tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-snelheid.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Höchstgeschwindigkeit pro Fahrzeug</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Fahrzeug</th><th>Ort</th><th>Außerorts</th><th>Schein</th></tr></thead>
+      <tbody><tr><td>🚗 Auto</td><td>50 km/h</td><td>50 km/h</td><td class="code">B</td></tr><tr><td>🛵 Roller / Motorrad ≤125cc</td><td>50 km/h</td><td>50 km/h</td><td class="code">A1 / AM</td></tr><tr><td>🏍️ Motorrad >125cc</td><td>50 km/h</td><td>50 km/h</td><td class="code">A2</td></tr><tr><td>🛴 E-Scooter</td><td>25 km/h</td><td>25 km/h</td><td class="code">—</td></tr></tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-helm.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Helm</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Fahrzeug</th><th>Helm</th></tr></thead>
+      <tbody><tr><td>🛴 E-Scooter (Tretroller)</td><td class="code">Pflicht</td></tr><tr><td>🚲 E-Bike / Fahrrad (Unterstützung bis 25 km/h)</td><td class="code">Keine Pflicht</td></tr></tbody>
+    </table></div>
+  </section>
+</div><div data-lang-block="it" style="display:none">
+  <header class="page-head">
+    <h1>Patente e limiti</h1>
+    <p class="intro">Quale patente ti serve, i limiti di velocità e quando il casco è obbligatorio.</p>
+  </header>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-rijbewijs.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Quale patente per quale veicolo</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Patente</th><th>Veicoli</th></tr></thead>
+      <tbody><tr><td class="code">AM</td><td>Scooter / ciclomotori 50cc (≤45 km/h). La B include anche AM.</td></tr><tr><td class="code">A1</td><td>Scooter 125cc e moto leggere (fino a 11 kW).</td></tr><tr><td class="code">A2</td><td>Moto medie (fino a 35 kW, circa 300–500cc).</td></tr><tr><td class="code">A</td><td>Tutte le moto (potenza illimitata).</td></tr><tr><td class="code">B</td><td>Auto + scooter 50cc + quad leggero / microcar.</td></tr></tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-snelheid.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Limite di velocità per veicolo</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Veicolo</th><th>In paese</th><th>Fuori</th><th>Patente</th></tr></thead>
+      <tbody><tr><td>🚗 Auto</td><td>50 km/h</td><td>50 km/h</td><td class="code">B</td></tr><tr><td>🛵 Scooter / moto ≤125cc</td><td>50 km/h</td><td>50 km/h</td><td class="code">A1 / AM</td></tr><tr><td>🏍️ Moto >125cc</td><td>50 km/h</td><td>50 km/h</td><td class="code">A2</td></tr><tr><td>🛴 Monopattino elettrico</td><td>25 km/h</td><td>25 km/h</td><td class="code">—</td></tr></tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-helm.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Casco</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Veicolo</th><th>Casco</th></tr></thead>
+      <tbody><tr><td>🛴 Monopattino elettrico</td><td class="code">Obbligatorio</td></tr><tr><td>🚲 E-bike / bici (assistenza fino a 25 km/h)</td><td class="code">Non obbligatorio</td></tr></tbody>
+    </table></div>
+  </section>
+</div><div data-lang-block="tr" style="display:none">
+  <header class="page-head">
+    <h1>Ehliyet ve hız</h1>
+    <p class="intro">Hangi ehliyet gerekir, hız limitleri ve kask ne zaman zorunlu.</p>
+  </header>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-rijbewijs.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Hangi araç için hangi ehliyet</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Ehliyet</th><th>Araçlar</th></tr></thead>
+      <tbody><tr><td class="code">AM</td><td>50cc scooter / moped (≤45 km/s). B sınıfı AM’yi de kapsar.</td></tr><tr><td class="code">A1</td><td>125cc scooter ve hafif motosikletler (11 kW’a kadar).</td></tr><tr><td class="code">A2</td><td>Orta motosikletler (35 kW’a kadar, yaklaşık 300–500cc).</td></tr><tr><td class="code">A</td><td>Tüm motosikletler (sınırsız güç).</td></tr><tr><td class="code">B</td><td>Araba + 50cc scooter + hafif quad / mikro araç.</td></tr></tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-snelheid.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Araç başına hız limiti</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Araç</th><th>Şehir içi</th><th>Şehir dışı</th><th>Ehliyet</th></tr></thead>
+      <tbody><tr><td>🚗 Araba</td><td>50 km/s</td><td>50 km/s</td><td class="code">B</td></tr><tr><td>🛵 Scooter / motor ≤125cc</td><td>50 km/s</td><td>50 km/s</td><td class="code">A1 / AM</td></tr><tr><td>🏍️ Motosiklet >125cc</td><td>50 km/s</td><td>50 km/s</td><td class="code">A2</td></tr><tr><td>🛴 Elektrikli scooter</td><td>25 km/s</td><td>25 km/s</td><td class="code">—</td></tr></tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-helm.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Kask</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Araç</th><th>Kask</th></tr></thead>
+      <tbody><tr><td>🛴 Elektrikli scooter (kaykay tipi)</td><td class="code">Zorunlu</td></tr><tr><td>🚲 E-bike / bisiklet (destek 25 km/s’ye kadar)</td><td class="code">Zorunlu değil</td></tr></tbody>
+    </table></div>
+  </section>
+</div><div data-lang-block="es" style="display:none">
+  <header class="page-head">
+    <h1>Carnet y límites</h1>
+    <p class="intro">Qué carnet necesitas, los límites de velocidad y cuándo el casco es obligatorio.</p>
+  </header>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-rijbewijs.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Qué carnet para qué vehículo</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Carnet</th><th>Vehículos</th></tr></thead>
+      <tbody><tr><td class="code">AM</td><td>Scooters / ciclomotores 50cc (≤45 km/h). El B también incluye AM.</td></tr><tr><td class="code">A1</td><td>Scooters 125cc y motos ligeras (hasta 11 kW).</td></tr><tr><td class="code">A2</td><td>Motos medias (hasta 35 kW, unos 300–500cc).</td></tr><tr><td class="code">A</td><td>Todas las motos (potencia ilimitada).</td></tr><tr><td class="code">B</td><td>Coche + scooters 50cc + quad ligero / microcoche.</td></tr></tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-snelheid.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Límite de velocidad por vehículo</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Vehículo</th><th>Ciudad</th><th>Fuera</th><th>Carnet</th></tr></thead>
+      <tbody><tr><td>🚗 Coche</td><td>50 km/h</td><td>50 km/h</td><td class="code">B</td></tr><tr><td>🛵 Scooter / moto ≤125cc</td><td>50 km/h</td><td>50 km/h</td><td class="code">A1 / AM</td></tr><tr><td>🏍️ Moto >125cc</td><td>50 km/h</td><td>50 km/h</td><td class="code">A2</td></tr><tr><td>🛴 Patinete eléctrico</td><td>25 km/h</td><td>25 km/h</td><td class="code">—</td></tr></tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-helm.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Casco</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Vehículo</th><th>Casco</th></tr></thead>
+      <tbody><tr><td>🛴 Patinete eléctrico</td><td class="code">Obligatorio</td></tr><tr><td>🚲 E-bike / bici (asistencia hasta 25 km/h)</td><td class="code">No obligatorio</td></tr></tbody>
+    </table></div>
+  </section>
+</div>
+</main>
+<footer class="footer">
+  <div class="footer-logo">🔅 Hello Kos</div>
+  <p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a></p>
+</footer>
+<script>
+(function(){
+  var lang=localStorage.getItem('hk-lang')||'en';
+  var supported=['nl','de','en','it','tr','es'];
+  function setLang(l){
+    if(supported.indexOf(l)<0)l='en';
+    lang=l;localStorage.setItem('hk-lang',l);
+    document.querySelectorAll('[data-lang-block]').forEach(function(el){
+      el.style.display = (el.getAttribute('data-lang-block')===l) ? 'block' : 'none';
+    });
+    var opt=document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if(opt){document.getElementById('flag').textContent=opt.getAttribute('data-flag');document.getElementById('code').textContent=l.toUpperCase()}
+    document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===l)});
+    document.documentElement.lang=l;closeMenu();
+  }
+  var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu'),overlay=document.getElementById('overlay');
+  function openMenu(){langMenu.classList.add('open');overlay.classList.add('open')}
+  function closeMenu(){langMenu.classList.remove('open');overlay.classList.remove('open')}
+  langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.contains('open')?closeMenu():openMenu()});
+  overlay.addEventListener('click',closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'))})});
+  setLang(lang);
+})();
+</script>
+</body>
+</html>

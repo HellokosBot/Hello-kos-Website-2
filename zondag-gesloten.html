@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0a0c0c">
+<title>Everything closed on Sunday? – Hello Kos</title>
+<style>
+:root{--bg:#0a0c0c;--bg-elevated:#141818;--bg-card:#1a1f1f;--border:rgba(255,255,255,0.08);--text:#e8e8e8;--text-soft:#a0a8a8;--petrol:#3d9a9a;--gold:#e0b84a;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);line-height:1.5}
+.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:12px 14px;background:rgba(10,12,12,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-btns{display:flex;gap:6px}
+.nav-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);text-decoration:none;font-size:1.15rem}
+.nav-btn:active{transform:scale(.94)}
+.logo{justify-self:center;display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo-icon{font-size:22px}
+.logo-text{font-size:1.1rem;font-weight:700;color:var(--gold);font-family:Georgia,serif}
+.logo-text span{color:#f0c85a;font-style:italic}
+.lang-wrap{justify-self:end;position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-soft)}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:8px;min-width:160px;z-index:50}
+.lang-menu.open{display:block}
+.lang-option{display:block;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;color:var(--text)}
+.lang-option.active{background:rgba(61,154,154,.15);color:var(--petrol)}
+.overlay{display:none;position:fixed;inset:0;z-index:40}.overlay.open{display:block}
+.main{max-width:480px;margin:0 auto;padding:16px 14px 48px}
+.page-head{text-align:center;margin-bottom:14px}
+.page-head h1{font-size:1.25rem;font-weight:800}
+.page-head .intro{color:var(--text-soft);font-size:.92rem;margin-top:6px}
+.tip-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:16px;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.tip-photo{height:140px;overflow:hidden;background:linear-gradient(135deg,#1a2a2a,#0d1515)}
+.tip-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.tip-photo.no-img{height:0}
+.tip-body{padding:16px 16px 18px;position:relative}
+.tip-icon{position:absolute;top:-22px;right:14px;width:40px;height:40px;border-radius:12px;background:var(--bg-elevated);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.tip-body h2{font-size:1.05rem;font-weight:800;color:var(--gold);margin-bottom:8px;padding-right:36px}
+.tip-body p{font-size:.92rem;color:var(--text-soft);line-height:1.55;margin-bottom:10px}
+.tip-body p:last-child{margin-bottom:0}
+.tip-body strong{color:var(--text)}
+.note{background:rgba(61,154,154,.12);border:1px solid rgba(61,154,154,.3);border-radius:12px;padding:12px 14px;margin-top:10px;font-size:.9rem;color:#b8e0e0;line-height:1.5}
+.footer{text-align:center;padding:20px 16px;background:var(--bg-elevated);border-top:1px solid var(--border)}
+.footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
+.footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html">🏠</a>
+    <a class="nav-btn" href="fabels.html">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+
+<div data-lang-block="nl" style="display:none">
+  <header class="page-head"><h1>🛒 Zondag alles gesloten?</h1><p class="intro">Nee – in toeristische zones kun je gewoon shoppen en eten.</p></header>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-zondag-winkels.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🛍️</div>
+      <h2>Winkels op zondag</h2>
+      <p>Veel toeristen denken dat alle winkels op zondag gesloten zijn. Dat is <strong>niet zo</strong>.</p>
+      <p>Alleen “reguliere” winkels (elektronica, witgoed, non-toeristisch) zijn dicht. In het centrum en toeristische gebieden zijn de meeste souvenirshops, kledingwinkels en vakantiewinkels <strong>gewoon open</strong>.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-zondag-tavernes.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🍽️</div>
+      <h2>Tavernes op zondag</h2>
+      <p>Restaurants en tavernes zijn op zondag grotendeels open. Het is vaak wat rustiger omdat veel mensen denken dat alles dicht is.</p>
+      <p>Personeel mag maximaal zes dagen per week werken; kleinere winkels kiezen soms zondag of maandag als rustdag. Toeristische winkels blijven meestal open.</p>
+      <div class="note">Wil je op zondag shoppen of uit eten? Dat kan prima in de toeristische zones van Kos.</div>
+    </div>
+  </article>
+</div>
+
+<div data-lang-block="en" style="display:none">
+  <header class="page-head"><h1>🛒 Everything closed on Sunday?</h1><p class="intro">No – in tourist areas you can still shop and eat out.</p></header>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-zondag-winkels.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🛍️</div>
+      <h2>Shops on Sunday</h2>
+      <p>Many tourists think all shops are closed on Sunday. That’s <strong>not true</strong>.</p>
+      <p>Only “regular” shops (electronics, white goods, non-tourist) are closed. In the centre and tourist areas most souvenir shops, clothing stores and holiday shops are <strong>open as usual</strong>.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-zondag-tavernes.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🍽️</div>
+      <h2>Tavernas on Sunday</h2>
+      <p>Restaurants and tavernas are largely open on Sunday. It’s often a bit quieter because many people assume everything is shut.</p>
+      <p>Staff may work a maximum of six days a week; smaller shops sometimes take Sunday or Monday as their rest day. Tourist shops usually stay open.</p>
+      <div class="note">Want to shop or eat out on Sunday? That’s fine in the tourist zones of Kos.</div>
+    </div>
+  </article>
+</div>
+
+<div data-lang-block="de" style="display:none">
+  <header class="page-head"><h1>🛒 Sonntags alles zu?</h1><p class="intro">Nein – in Touristengebieten kannst du shoppen und essen gehen.</p></header>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-zondag-winkels.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🛍️</div><h2>Geschäfte am Sonntag</h2>
+  <p>Viele Touristen denken, alle Läden seien sonntags geschlossen. Das stimmt <strong>nicht</strong>.</p>
+  <p>Nur „normale“ Geschäfte (Elektronik, Haushaltsgeräte, nicht touristisch) sind zu. Im Zentrum und in Touristenorten sind die meisten Souvenir-, Mode- und Urlaubsläden <strong>ganz normal offen</strong>.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-zondag-tavernes.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🍽️</div><h2>Tavernen am Sonntag</h2>
+  <p>Restaurants und Tavernen haben sonntags größtenteils geöffnet. Oft ist es ruhiger, weil viele denken, alles sei zu.</p>
+  <p>Personal darf maximal sechs Tage pro Woche arbeiten; kleinere Läden nehmen manchmal Sonntag oder Montag als Ruhetag. Touristenläden bleiben meist offen.</p>
+  <div class="note">Sonntags shoppen oder essen gehen? In den Touristenzonen von Kos kein Problem.</div></div></article>
+</div>
+
+<div data-lang-block="it" style="display:none">
+  <header class="page-head"><h1>🛒 Domenica tutto chiuso?</h1><p class="intro">No – nelle zone turistiche puoi fare shopping e mangiare fuori.</p></header>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-zondag-winkels.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🛍️</div><h2>Negozi di domenica</h2>
+  <p>Molti turisti pensano che tutti i negozi siano chiusi la domenica. <strong>Non è così</strong>.</p>
+  <p>Solo i negozi “normali” (elettronica, elettrodomestici, non turistici) sono chiusi. In centro e nelle zone turistiche la maggior parte di souvenir, abbigliamento e negozi per vacanzieri è <strong>aperta normalmente</strong>.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-zondag-tavernes.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🍽️</div><h2>Taverne di domenica</h2>
+  <p>Ristoranti e taverne sono in gran parte aperti la domenica. Spesso è più tranquillo perché molti pensano che tutto sia chiuso.</p>
+  <p>Il personale può lavorare al massimo sei giorni a settimana; i negozi più piccoli a volte scelgono domenica o lunedì come giorno di riposo. I negozi turistici restano di solito aperti.</p>
+  <div class="note">Vuoi fare shopping o mangiare fuori di domenica? Nelle zone turistiche di Kos si può benissimo.</div></div></article>
+</div>
+
+<div data-lang-block="tr" style="display:none">
+  <header class="page-head"><h1>🛒 Pazar her yer kapalı mı?</h1><p class="intro">Hayır – turistik bölgelerde alışveriş ve yemek mümkün.</p></header>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-zondag-winkels.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🛍️</div><h2>Pazar günü dükkanlar</h2>
+  <p>Birçok turist pazar günü tüm dükkanların kapalı olduğunu sanır. Bu <strong>doğru değil</strong>.</p>
+  <p>Sadece “normal” dükkanlar (elektronik, beyaz eşya, turistik olmayan) kapalıdır. Merkez ve turistik bölgelerde çoğu hediyelik, giyim ve tatil dükkanı <strong>açıktır</strong>.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-zondag-tavernes.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🍽️</div><h2>Pazar günü tavernalar</h2>
+  <p>Restoran ve tavernalar pazar günü büyük ölçüde açıktır. Herkes kapalı sanınca genelde daha sakin olur.</p>
+  <p>Personel haftada en fazla altı gün çalışabilir; küçük dükkanlar bazen pazar veya pazartesiyi tatil günü seçer. Turistik dükkanlar genelde açık kalır.</p>
+  <div class="note">Pazar alışveriş veya yemek ister misiniz? Kos’un turistik bölgelerinde sorun değil.</div></div></article>
+</div>
+
+<div data-lang-block="es" style="display:none">
+  <header class="page-head"><h1>🛒 ¿Domingo todo cerrado?</h1><p class="intro">No – en zonas turísticas puedes comprar y comer fuera.</p></header>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-zondag-winkels.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🛍️</div><h2>Tiendas el domingo</h2>
+  <p>Muchos turistas creen que todas las tiendas cierran el domingo. <strong>No es así</strong>.</p>
+  <p>Solo las tiendas “normales” (electrónica, electrodomésticos, no turísticas) están cerradas. En el centro y zonas turísticas la mayoría de souvenirs, ropa y tiendas de vacaciones están <strong>abiertas con normalidad</strong>.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-zondag-tavernes.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🍽️</div><h2>Tabernas el domingo</h2>
+  <p>Restaurantes y tabernas están en gran parte abiertos el domingo. Suele estar más tranquilo porque mucha gente cree que todo está cerrado.</p>
+  <p>El personal puede trabajar como máximo seis días a la semana; las tiendas pequeñas a veces eligen domingo o lunes como día de descanso. Las tiendas turísticas suelen seguir abiertas.</p>
+  <div class="note">¿Quieres comprar o comer fuera el domingo? En las zonas turísticas de Kos se puede sin problema.</div></div></article>
+</div>
+
+</main>
+<footer class="footer">
+  <div class="footer-logo">🔅 Hello Kos</div>
+  <p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a></p>
+</footer>
+<script>
+(function(){
+  var lang=localStorage.getItem('hk-lang')||'en';
+  var supported=['nl','de','en','it','tr','es'];
+  function setLang(l){
+    if(supported.indexOf(l)<0)l='en';
+    lang=l;localStorage.setItem('hk-lang',l);
+    document.querySelectorAll('[data-lang-block]').forEach(function(el){
+      el.style.display=(el.getAttribute('data-lang-block')===l)?'block':'none';
+    });
+    var opt=document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if(opt){document.getElementById('flag').textContent=opt.getAttribute('data-flag');document.getElementById('code').textContent=l.toUpperCase()}
+    document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===l)});
+    document.documentElement.lang=l;closeMenu();
+  }
+  var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu'),overlay=document.getElementById('overlay');
+  function openMenu(){langMenu.classList.add('open');overlay.classList.add('open')}
+  function closeMenu(){langMenu.classList.remove('open');overlay.classList.remove('open')}
+  langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.contains('open')?closeMenu():openMenu()});
+  overlay.addEventListener('click',closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'))})});
+  setLang(lang);
+})();
+</script>
+</body>
+</html>

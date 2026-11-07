@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0a0c0c">
+<title>Scorpions – Hello Kos</title>
+<style>
+:root{--bg:#0a0c0c;--bg-elevated:#141818;--bg-card:#1a1f1f;--border:rgba(255,255,255,0.08);--text:#e8e8e8;--text-soft:#a0a8a8;--petrol:#3d9a9a;--gold:#e0b84a;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);line-height:1.5}
+.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:12px 14px;background:rgba(10,12,12,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-btns{display:flex;gap:6px}
+.nav-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);text-decoration:none;font-size:1.15rem}
+.nav-btn:active{transform:scale(.94)}
+.logo{justify-self:center;display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo-icon{font-size:22px}
+.logo-text{font-size:1.1rem;font-weight:700;color:var(--gold);font-family:Georgia,serif}
+.logo-text span{color:#f0c85a;font-style:italic}
+.lang-wrap{justify-self:end;position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-soft)}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:8px;min-width:160px;z-index:50}
+.lang-menu.open{display:block}
+.lang-option{display:block;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;color:var(--text)}
+.lang-option.active{background:rgba(61,154,154,.15);color:var(--petrol)}
+.overlay{display:none;position:fixed;inset:0;z-index:40}.overlay.open{display:block}
+.main{max-width:480px;margin:0 auto;padding:16px 14px 48px}
+.page-head{text-align:center;margin-bottom:14px}
+.page-head h1{font-size:1.35rem;font-weight:800}
+.page-head .intro{color:var(--text-soft);font-size:.92rem;margin-top:6px}
+.tip-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:16px;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.tip-photo{height:150px;overflow:hidden;background:linear-gradient(135deg,#1a2a2a,#0d1515)}
+.tip-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.tip-photo.no-img{height:0}
+.tip-body{padding:16px 16px 18px;position:relative}
+.tip-icon{position:absolute;top:-22px;right:14px;width:40px;height:40px;border-radius:12px;background:var(--bg-elevated);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.tip-body h2{font-size:1.05rem;font-weight:800;color:var(--gold);margin-bottom:8px;padding-right:36px}
+.tip-body p{font-size:.92rem;color:var(--text-soft);line-height:1.55;margin-bottom:10px}
+.tip-body p:last-child{margin-bottom:0}
+.tip-body strong{color:var(--text)}
+.note{background:rgba(61,154,154,.12);border:1px solid rgba(61,154,154,.3);border-radius:12px;padding:12px 14px;margin-top:10px;font-size:.9rem;color:#b8e0e0;line-height:1.5}
+.footer{text-align:center;padding:20px 16px;background:var(--bg-elevated);border-top:1px solid var(--border)}
+.footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
+.footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html">🏠</a>
+    <a class="nav-btn" href="gevaarlijke-dieren.html">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+
+<div data-lang-block="nl" style="display:none">
+  <header class="page-head">
+    <h1>🦂 Schorpioenen</h1>
+    <p class="intro">Op Kos: klein, schuw en zelden een probleem.</p>
+  </header>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-schorpioenen-intro.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🪨</div>
+      <h2>Schorpioenen op Kos</h2>
+      <p>Schorpioenen komen vooral voor in drogere, steenachtige gebieden en heuvels. Ze zijn relatief klein (meestal < 10 cm) en bruin of geelachtig van kleur.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-schorpioenen-jagen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🌙</div>
+      <h2>Jagen op insecten</h2>
+      <p>Overdag verstoppen ze zich onder stenen of in donkere hoekjes. ’s Nachts jagen ze op spinnen, insecten en krekels. Hun gifstekel gebruiken ze vooral ter verdediging.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-schorpioenen-steek.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">💉</div>
+      <h2>De steek</h2>
+      <p>De steek is pijnlijk (vergelijkbaar met een sterke wespensteek), maar voor gezonde volwassenen vrijwel nooit gevaarlijk. Kinderen, ouderen en mensen met een allergie kunnen een sterkere reactie krijgen.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-schorpioenen-maatregelen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">✅</div>
+      <h2>Maatregelen</h2>
+      <div class="note">
+        Schud altijd je schoenen en kleding uit voordat je ze aantrekt.<br>
+        Bij een steek: spoel met water en zeep, koel de plek, neem eventueel een pijnstiller. Bij ernstige klachten naar dokter of apotheek.
+      </div>
+    </div>
+  </article>
+</div>
+
+<div data-lang-block="en" style="display:none">
+  <header class="page-head">
+    <h1>🦂 Scorpions</h1>
+    <p class="intro">On Kos: small, shy and rarely a problem.</p>
+  </header>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-schorpioenen-intro.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🪨</div>
+      <h2>Scorpions on Kos</h2>
+      <p>Scorpions are mainly found in drier, rocky areas and hills. They are relatively small (usually under 10 cm) and brown or yellowish in colour.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-schorpioenen-jagen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🌙</div>
+      <h2>Hunting insects</h2>
+      <p>During the day they hide under stones or in dark corners. At night they hunt spiders, insects and crickets. Their stinger is mainly used for defence.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-schorpioenen-steek.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">💉</div>
+      <h2>The sting</h2>
+      <p>The sting is painful (similar to a strong wasp sting) but almost never dangerous for healthy adults. Children, older people and those with allergies may react more strongly.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-schorpioenen-maatregelen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">✅</div>
+      <h2>What to do</h2>
+      <div class="note">
+        Always shake out shoes and clothes before putting them on.<br>
+        If stung: rinse with water and soap, cool the area, take a painkiller if needed. See a doctor or pharmacy if symptoms are severe.
+      </div>
+    </div>
+  </article>
+</div>
+
+<div data-lang-block="de" style="display:none">
+  <header class="page-head"><h1>🦂 Skorpione</h1><p class="intro">Auf Kos: klein, scheu und selten ein Problem.</p></header>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-schorpioenen-intro.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🪨</div><h2>Skorpione auf Kos</h2>
+  <p>Vor allem in trockenen, steinigen Gebieten. Relativ klein (meist unter 10 cm), braun oder gelblich.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-schorpioenen-jagen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🌙</div><h2>Jagd auf Insekten</h2>
+  <p>Tagsüber verstecken sie sich unter Steinen. Nachts jagen sie Spinnen und Insekten. Der Giftstachel dient vor allem der Verteidigung.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-schorpioenen-steek.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">💉</div><h2>Der Stich</h2>
+  <p>Schmerzhaft (wie ein starker Wespenstich), für gesunde Erwachsene fast nie gefährlich.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-schorpioenen-maatregelen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">✅</div><h2>Maßnahmen</h2>
+  <div class="note">Schuhe und Kleidung immer ausschütteln. Bei Stich: mit Wasser und Seife spülen, kühlen, ggf. Schmerzmittel. Bei starken Beschwerden Arzt oder Apotheke.</div></div></article>
+</div>
+
+<div data-lang-block="it" style="display:none">
+  <header class="page-head"><h1>🦂 Scorpioni</h1><p class="intro">A Kos: piccoli, timidi e raramente un problema.</p></header>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-schorpioenen-intro.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🪨</div><h2>Scorpioni a Kos</h2>
+  <p>Soprattutto in zone asciutte e rocciose. Relativamente piccoli (di solito sotto i 10 cm).</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-schorpioenen-maatregelen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">✅</div><h2>Cosa fare</h2>
+  <div class="note">Scuoti sempre scarpe e vestiti. In caso di puntura: acqua e sapone, raffredda, eventuale analgesico. Se i sintomi sono gravi, medico o farmacia.</div></div></article>
+</div>
+
+<div data-lang-block="tr" style="display:none">
+  <header class="page-head"><h1>🦂 Akrepler</h1><p class="intro">Kos’ta: küçük, ürkek ve nadiren sorun.</p></header>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-schorpioenen-intro.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🪨</div><h2>Kos’ta akrepler</h2>
+  <p>Daha çok kuru, taşlık bölgelerde. Genellikle 10 cm’den küçük.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-schorpioenen-maatregelen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">✅</div><h2>Ne yapmalı</h2>
+  <div class="note">Ayakkabı ve kıyafetleri her zaman silkeleyin. Sokulursanız: su ve sabun, soğutun, gerekirse ağrı kesici.</div></div></article>
+</div>
+
+<div data-lang-block="es" style="display:none">
+  <header class="page-head"><h1>🦂 Escorpiones</h1><p class="intro">En Kos: pequeños, tímidos y rara vez un problema.</p></header>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-schorpioenen-intro.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🪨</div><h2>Escorpiones en Kos</h2>
+  <p>Sobre todo en zonas secas y rocosas. Relativamente pequeños (normalmente menos de 10 cm).</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-schorpioenen-maatregelen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">✅</div><h2>Qué hacer</h2>
+  <div class="note">Sacude siempre zapatos y ropa. Si te pican: agua y jabón, enfría, analgésico si hace falta.</div></div></article>
+</div>
+
+</main>
+<footer class="footer">
+  <div class="footer-logo">🔅 Hello Kos</div>
+  <p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a></p>
+</footer>
+<script>
+(function(){
+  var lang=localStorage.getItem('hk-lang')||'en';
+  var supported=['nl','de','en','it','tr','es'];
+  function setLang(l){
+    if(supported.indexOf(l)<0)l='en';
+    lang=l;localStorage.setItem('hk-lang',l);
+    document.querySelectorAll('[data-lang-block]').forEach(function(el){
+      el.style.display=(el.getAttribute('data-lang-block')===l)?'block':'none';
+    });
+    var opt=document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if(opt){document.getElementById('flag').textContent=opt.getAttribute('data-flag');document.getElementById('code').textContent=l.toUpperCase()}
+    document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===l)});
+    document.documentElement.lang=l;closeMenu();
+  }
+  var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu'),overlay=document.getElementById('overlay');
+  function openMenu(){langMenu.classList.add('open');overlay.classList.add('open')}
+  function closeMenu(){langMenu.classList.remove('open');overlay.classList.remove('open')}
+  langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.contains('open')?closeMenu():openMenu()});
+  overlay.addEventListener('click',closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'))})});
+  setLang(lang);
+})();
+</script>
+</body>
+</html>

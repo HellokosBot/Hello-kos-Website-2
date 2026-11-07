@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0a0c0c">
+<title>Sunset Zia – Hello Kos</title>
+<style>
+:root{--bg:#0a0c0c;--bg-elevated:#141818;--bg-card:#1a1f1f;--border:rgba(255,255,255,0.08);--text:#e8e8e8;--text-soft:#a0a8a8;--petrol:#3d9a9a;--gold:#e0b84a;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);line-height:1.5;min-height:100vh;background-image:linear-gradient(180deg,#0a0c0c 0%,#1a1520 35%,#2a1a18 55%,#0a0c0c 100%)}
+.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:12px 14px;background:rgba(10,12,12,.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-btns{display:flex;gap:6px}
+.nav-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);text-decoration:none;font-size:1.15rem}
+.nav-btn:active{transform:scale(.94)}
+.logo{justify-self:center;display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo-icon{font-size:22px}
+.logo-text{font-size:1.1rem;font-weight:700;color:var(--gold);font-family:Georgia,serif}
+.logo-text span{color:#f0c85a;font-style:italic}
+.lang-wrap{justify-self:end;position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-soft)}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:8px;min-width:160px;z-index:50}
+.lang-menu.open{display:block}
+.lang-option{display:block;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;color:var(--text)}
+.lang-option.active{background:rgba(61,154,154,.15);color:var(--petrol)}
+.overlay{display:none;position:fixed;inset:0;z-index:40}.overlay.open{display:block}
+.main{max-width:480px;margin:0 auto;padding:16px 14px 48px}
+.page-head{text-align:center;margin-bottom:14px}
+.page-head h1{font-size:1.25rem;font-weight:800}
+.page-head .intro{color:var(--text-soft);font-size:.92rem;margin-top:6px}
+.fmt-toggle{display:flex;justify-content:center;gap:0;margin:0 auto 14px;max-width:240px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:3px}
+.fmt-btn{flex:1;border:none;background:transparent;color:var(--text-soft);font-family:inherit;font-size:.82rem;font-weight:700;padding:8px 12px;border-radius:999px;cursor:pointer}
+.fmt-btn.active{background:rgba(61,154,154,.25);color:var(--petrol)}
+.top-photo{width:100%;height:150px;border-radius:16px;overflow:hidden;margin-bottom:14px;background:linear-gradient(135deg,#3a2818,#1a1210);border:1px solid var(--border)}
+.top-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.top-photo.no-img{height:0;border:none;margin:0}
+.box{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:18px 16px;margin-bottom:14px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.box-title{font-size:.78rem;color:var(--text-soft);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.big-time{font-size:2.3rem;font-weight:800;color:var(--gold);margin:4px 0 10px;font-variant-numeric:tabular-nums}
+.countdown{font-size:1.35rem;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums}
+.countdown span{opacity:.65;font-size:.8rem;font-weight:500;margin:0 2px}
+.status{margin-top:8px;font-size:.88rem;color:var(--petrol);font-weight:600}
+.same-note{background:rgba(61,154,154,.12);border:1px solid rgba(61,154,154,.3);border-radius:12px;padding:12px 14px;margin-bottom:14px;font-size:.88rem;color:#b8e0e0;line-height:1.5;text-align:center}
+.explain{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:16px;margin-top:4px}
+.explain h2{font-size:1rem;color:var(--gold);margin-bottom:8px}
+.explain p{font-size:.9rem;color:var(--text-soft);line-height:1.55;margin-bottom:8px}
+.explain p:last-child{margin-bottom:0}
+.explain strong{color:var(--text)}
+.footer{text-align:center;padding:20px 16px;background:var(--bg-elevated);border-top:1px solid var(--border);margin-top:24px}
+.footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
+.footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html">🏠</a>
+    <a class="nav-btn" href="wist-je-dat.html">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+
+<div class="fmt-toggle" id="fmtToggle">
+  <button type="button" class="fmt-btn active" data-fmt="24">24h · 19:42</button>
+  <button type="button" class="fmt-btn" data-fmt="12">AM/PM · 7:42 PM</button>
+</div>
+
+<div data-lang-block="nl" style="display:none">
+  <header class="page-head"><h1>🌅 Zonsondergang Zia</h1><p class="intro">Live countdown – geldt voor heel Kos</p></header>
+  <div class="top-photo"><img src="wjd-zonsondergang.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="same-note">Zia en Kos-stad: <strong>dezelfde tijd</strong>. Het eiland is klein – het verschil is minder dan een minuut.</div>
+  <div class="box">
+    <div class="box-title">Zonsondergang (zon raakt horizon)</div>
+    <div class="big-time" id="sunsetTime-nl">—:—</div>
+    <div class="box-title">Nog tot zonsondergang</div>
+    <div class="countdown" id="countSunset-nl">—</div>
+    <div class="status" id="statusSunset-nl"></div>
+  </div>
+  <div class="box">
+    <div class="box-title">Echt donker (einde schemering)</div>
+    <div class="big-time" id="darkTime-nl">—:—</div>
+    <div class="box-title">Nog tot het donker is</div>
+    <div class="countdown" id="countDark-nl">—</div>
+    <div class="status" id="statusDark-nl"></div>
+  </div>
+  <div class="explain">
+    <h2>Wat is het verschil?</h2>
+    <p><strong>Zonsondergang</strong> = het moment dat de zon de horizon raakt. Dan is het nog licht (oranje/roze lucht).</p>
+    <p><strong>Echt donker</strong> = einde van de burgerlijke schemering, ongeveer <strong>25–30 minuten later</strong>.</p>
+    <p>Voor de zonsondergang in <strong>Zia</strong>: kom vóór de zonsondergang-tijd – en geniet daarna nog een half uurtje van de kleuren.</p>
+  </div>
+</div>
+
+<div data-lang-block="en" style="display:none">
+  <header class="page-head"><h1>🌅 Sunset Zia</h1><p class="intro">Live countdown – same for all of Kos</p></header>
+  <div class="top-photo"><img src="wjd-zonsondergang.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="same-note">Zia and Kos town: <strong>the same time</strong>. The island is small – the difference is under a minute.</div>
+  <div class="box">
+    <div class="box-title">Sunset (sun touches horizon)</div>
+    <div class="big-time" id="sunsetTime-en">—:—</div>
+    <div class="box-title">Time until sunset</div>
+    <div class="countdown" id="countSunset-en">—</div>
+    <div class="status" id="statusSunset-en"></div>
+  </div>
+  <div class="box">
+    <div class="box-title">Fully dark (end of twilight)</div>
+    <div class="big-time" id="darkTime-en">—:—</div>
+    <div class="box-title">Time until dark</div>
+    <div class="countdown" id="countDark-en">—</div>
+    <div class="status" id="statusDark-en"></div>
+  </div>
+  <div class="explain">
+    <h2>What’s the difference?</h2>
+    <p><strong>Sunset</strong> = the moment the sun touches the horizon. It’s still light.</p>
+    <p><strong>Fully dark</strong> = end of civil twilight, about <strong>25–30 minutes later</strong>.</p>
+    <p>For sunset in <strong>Zia</strong>: arrive before sunset time – then enjoy another half hour of colours.</p>
+  </div>
+</div>
+
+<div data-lang-block="de" style="display:none">
+  <header class="page-head"><h1>🌅 Sonnenuntergang Zia</h1><p class="intro">Live-Countdown – gilt für ganz Kos</p></header>
+  <div class="top-photo"><img src="wjd-zonsondergang.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="same-note">Zia und Kos-Stadt: <strong>gleiche Zeit</strong>.</div>
+  <div class="box">
+    <div class="box-title">Sonnenuntergang</div>
+    <div class="big-time" id="sunsetTime-de">—:—</div>
+    <div class="box-title">Noch bis Sonnenuntergang</div>
+    <div class="countdown" id="countSunset-de">—</div>
+    <div class="status" id="statusSunset-de"></div>
+  </div>
+  <div class="box">
+    <div class="box-title">Wirklich dunkel</div>
+    <div class="big-time" id="darkTime-de">—:—</div>
+    <div class="box-title">Noch bis es dunkel ist</div>
+    <div class="countdown" id="countDark-de">—</div>
+    <div class="status" id="statusDark-de"></div>
+  </div>
+  <div class="explain">
+    <h2>Was ist der Unterschied?</h2>
+    <p><strong>Sonnenuntergang</strong> = Sonne berührt den Horizont.</p>
+    <p><strong>Wirklich dunkel</strong> = Ende der bürgerlichen Dämmerung, ca. <strong>25–30 Minuten später</strong>.</p>
+  </div>
+</div>
+
+<div data-lang-block="it" style="display:none">
+  <header class="page-head"><h1>🌅 Tramonto Zia</h1><p class="intro">Countdown live – uguale per tutto Kos</p></header>
+  <div class="top-photo"><img src="wjd-zonsondergang.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="same-note">Zia e Kos città: <strong>stesso orario</strong>.</div>
+  <div class="box">
+    <div class="box-title">Tramonto</div>
+    <div class="big-time" id="sunsetTime-it">—:—</div>
+    <div class="box-title">Manca al tramonto</div>
+    <div class="countdown" id="countSunset-it">—</div>
+    <div class="status" id="statusSunset-it"></div>
+  </div>
+  <div class="box">
+    <div class="box-title">Buio completo</div>
+    <div class="big-time" id="darkTime-it">—:—</div>
+    <div class="box-title">Manca al buio</div>
+    <div class="countdown" id="countDark-it">—</div>
+    <div class="status" id="statusDark-it"></div>
+  </div>
+  <div class="explain">
+    <h2>Qual è la differenza?</h2>
+    <p><strong>Tramonto</strong> = il sole tocca l’orizzonte.</p>
+    <p><strong>Buio completo</strong> = fine del crepuscolo civile, circa <strong>25–30 minuti dopo</strong>.</p>
+  </div>
+</div>
+
+<div data-lang-block="tr" style="display:none">
+  <header class="page-head"><h1>🌅 Gün batımı Zia</h1><p class="intro">Canlı geri sayım – tüm Kos için aynı</p></header>
+  <div class="top-photo"><img src="wjd-zonsondergang.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="same-note">Zia ve Kos şehir: <strong>aynı saat</strong>.</div>
+  <div class="box">
+    <div class="box-title">Gün batımı</div>
+    <div class="big-time" id="sunsetTime-tr">—:—</div>
+    <div class="box-title">Gün batımına kalan</div>
+    <div class="countdown" id="countSunset-tr">—</div>
+    <div class="status" id="statusSunset-tr"></div>
+  </div>
+  <div class="box">
+    <div class="box-title">Tam karanlık</div>
+    <div class="big-time" id="darkTime-tr">—:—</div>
+    <div class="box-title">Karanlığa kalan</div>
+    <div class="countdown" id="countDark-tr">—</div>
+    <div class="status" id="statusDark-tr"></div>
+  </div>
+  <div class="explain">
+    <h2>Fark nedir?</h2>
+    <p><strong>Gün batımı</strong> = güneş ufka değer.</p>
+    <p><strong>Tam karanlık</strong> = alacakaranlık sonu, yaklaşık <strong>25–30 dakika sonra</strong>.</p>
+  </div>
+</div>
+
+<div data-lang-block="es" style="display:none">
+  <header class="page-head"><h1>🌅 Atardecer Zia</h1><p class="intro">Cuenta atrás en vivo – igual en todo Kos</p></header>
+  <div class="top-photo"><img src="wjd-zonsondergang.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="same-note">Zia y Kos ciudad: <strong>la misma hora</strong>.</div>
+  <div class="box">
+    <div class="box-title">Atardecer</div>
+    <div class="big-time" id="sunsetTime-es">—:—</div>
+    <div class="box-title">Falta para el atardecer</div>
+    <div class="countdown" id="countSunset-es">—</div>
+    <div class="status" id="statusSunset-es"></div>
+  </div>
+  <div class="box">
+    <div class="box-title">Oscuridad total</div>
+    <div class="big-time" id="darkTime-es">—:—</div>
+    <div class="box-title">Falta para la oscuridad</div>
+    <div class="countdown" id="countDark-es">—</div>
+    <div class="status" id="statusDark-es"></div>
+  </div>
+  <div class="explain">
+    <h2>¿Cuál es la diferencia?</h2>
+    <p><strong>Atardecer</strong> = el sol toca el horizonte.</p>
+    <p><strong>Oscuridad total</strong> = fin del crepúsculo civil, unos <strong>25–30 minutos después</strong>.</p>
+  </div>
+</div>
+
+</main>
+<footer class="footer">
+  <div class="footer-logo">🔅 Hello Kos</div>
+  <p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a></p>
+</footer>
+<script>
+(function(){
+  function toRad(d){return d*Math.PI/180}
+  function toDeg(r){return r*180/Math.PI}
+  function pad(n){return n<10?'0'+n:''+n}
+
+  var timeFmt=localStorage.getItem('hk-timefmt')||'24';
+  function formatClock(h,m){
+    if(timeFmt==='12'){
+      var ap=h>=12?'PM':'AM';
+      var h12=h%12;if(h12===0)h12=12;
+      return h12+':'+pad(m)+' '+ap;
+    }
+    return pad(h)+':'+pad(m);
+  }
+  function setFmt(f){
+    timeFmt=f;localStorage.setItem('hk-timefmt',f);
+    document.querySelectorAll('.fmt-btn').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-fmt')===f)});
+    update();
+  }
+
+  function getSunTimes(date){
+    var lat=36.72,lon=27.14;
+    var y=date.getFullYear(),m=date.getMonth()+1,d=date.getDate();
+    if(m<=2){y--;m+=12}
+    var A=Math.floor(y/100);
+    var B=2-A+Math.floor(A/4);
+    var jd=Math.floor(365.25*(y+4716))+Math.floor(30.6001*(m+1))+d+B-1524.5;
+    var n=jd-2451545.0;
+    var L=(280.460+0.9856474*n)%360;if(L<0)L+=360;
+    var g=toRad((357.528+0.9856003*n)%360);
+    var lambda=toRad(L+1.915*Math.sin(g)+0.020*Math.sin(2*g));
+    var epsilon=toRad(23.439-0.0000004*n);
+    var delta=Math.asin(Math.sin(epsilon)*Math.sin(lambda));
+    var latR=toRad(lat);
+    var cosHa=(Math.sin(toRad(-0.83))-Math.sin(latR)*Math.sin(delta))/(Math.cos(latR)*Math.cos(delta));
+    cosHa=Math.max(-1,Math.min(1,cosHa));
+    var ha=Math.acos(cosHa);
+    var cosHaCiv=(Math.sin(toRad(-6))-Math.sin(latR)*Math.sin(delta))/(Math.cos(latR)*Math.cos(delta));
+    cosHaCiv=Math.max(-1,Math.min(1,cosHaCiv));
+    var haCiv=Math.acos(cosHaCiv);
+    var eotMin=9.87*Math.sin(2*toRad(L))-7.53*Math.cos(toRad(L))-1.5*Math.sin(toRad(L));
+    var utcSunset=12-lon/15-eotMin/60+toDeg(ha)/15;
+    var utcDark=12-lon/15-eotMin/60+toDeg(haCiv)/15;
+    function toLocal(utcH){
+      var base=new Date(Date.UTC(date.getFullYear(),date.getMonth(),date.getDate(),Math.floor(utcH),Math.round((utcH%1)*60)));
+      var parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Athens',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(base);
+      var h=parseInt(parts.find(function(p){return p.type==='hour'}).value,10);
+      var m=parseInt(parts.find(function(p){return p.type==='minute'}).value,10);
+      return {h:h,m:m};
+    }
+    return {sunset:toLocal(utcSunset),dark:toLocal(utcDark)};
+  }
+
+  function formatCountdown(diffMs,lang){
+    if(diffMs<=0)return null;
+    var totalSec=Math.floor(diffMs/1000);
+    var h=Math.floor(totalSec/3600);
+    var m=Math.floor((totalSec%3600)/60);
+    var s=totalSec%60;
+    var u={nl:['u','m','s'],en:['h','m','s'],de:['Std','Min','Sek'],it:['h','m','s'],tr:['sa','dk','sn'],es:['h','m','s']};
+    var L=u[lang]||u.en;
+    return pad(h)+'<span>'+L[0]+'</span> '+pad(m)+'<span>'+L[1]+'</span> '+pad(s)+'<span>'+L[2]+'</span>';
+  }
+
+  var txt={
+    nl:{sunUp:'Zon is nog boven de horizon',sunDown:'Zon is onder',twilight:'Nu begint de schemering',stillLight:'Nog licht / schemering',dark:'Het is donker',bye:'Tot morgen in Zia 🌅'},
+    en:{sunUp:'Sun is still above the horizon',sunDown:'Sun has set',twilight:'Twilight has started',stillLight:'Still light / twilight',dark:'It is dark',bye:'See you tomorrow in Zia 🌅'},
+    de:{sunUp:'Sonne noch über dem Horizont',sunDown:'Sonne ist unter',twilight:'Dämmerung hat begonnen',stillLight:'Noch hell / Dämmerung',dark:'Es ist dunkel',bye:'Bis morgen in Zia 🌅'},
+    it:{sunUp:'Il sole è ancora sopra',sunDown:'Il sole è tramontato',twilight:'Inizia il crepuscolo',stillLight:'Ancora luce / crepuscolo',dark:'È buio',bye:'A domani a Zia 🌅'},
+    tr:{sunUp:'Güneş hâlâ ufukta',sunDown:'Güneş battı',twilight:'Alacakaranlık başladı',stillLight:'Hâlâ aydınlık',dark:'Karanlık',bye:'Yarın Zia’da 🌅'},
+    es:{sunUp:'El sol sigue sobre el horizonte',sunDown:'El sol se ha puesto',twilight:'Empieza el crepúsculo',stillLight:'Aún hay luz',dark:'Está oscuro',bye:'Hasta mañana en Zia 🌅'}
+  };
+
+  function update(){
+    var langs=['nl','en','de','it','tr','es'];
+    var now=new Date();
+    var athensParts=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Athens',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).formatToParts(now);
+    function gp(type){return athensParts.find(function(p){return p.type===type}).value}
+    var athens=new Date(parseInt(gp('year'),10),parseInt(gp('month'),10)-1,parseInt(gp('day'),10),parseInt(gp('hour'),10),parseInt(gp('minute'),10),parseInt(gp('second'),10));
+    var times=getSunTimes(athens);
+
+    langs.forEach(function(lang){
+      var st=document.getElementById('sunsetTime-'+lang);
+      var dt=document.getElementById('darkTime-'+lang);
+      if(!st)return;
+      st.textContent=formatClock(times.sunset.h,times.sunset.m);
+      dt.textContent=formatClock(times.dark.h,times.dark.m);
+
+      var sunsetDate=new Date(athens);sunsetDate.setHours(times.sunset.h,times.sunset.m,0,0);
+      var darkDate=new Date(athens);darkDate.setHours(times.dark.h,times.dark.m,0,0);
+      var t=txt[lang]||txt.en;
+
+      var cs=formatCountdown(sunsetDate-athens,lang);
+      var cd=formatCountdown(darkDate-athens,lang);
+      var elCS=document.getElementById('countSunset-'+lang);
+      var elSS=document.getElementById('statusSunset-'+lang);
+      var elCD=document.getElementById('countDark-'+lang);
+      var elSD=document.getElementById('statusDark-'+lang);
+
+      if(cs){elCS.innerHTML=cs;elSS.textContent=t.sunUp}
+      else{elCS.textContent=t.sunDown;elSS.textContent=t.twilight}
+      if(cd){elCD.innerHTML=cd;elSD.textContent=t.stillLight}
+      else{elCD.textContent=t.dark;elSD.textContent=t.bye}
+    });
+  }
+
+  var lang=localStorage.getItem('hk-lang')||'en';
+  var supported=['nl','de','en','it','tr','es'];
+  function setLang(l){
+    if(supported.indexOf(l)<0)l='en';
+    lang=l;localStorage.setItem('hk-lang',l);
+    document.querySelectorAll('[data-lang-block]').forEach(function(el){
+      el.style.display=(el.getAttribute('data-lang-block')===l)?'block':'none';
+    });
+    var opt=document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if(opt){document.getElementById('flag').textContent=opt.getAttribute('data-flag');document.getElementById('code').textContent=l.toUpperCase()}
+    document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===l)});
+    document.documentElement.lang=l;closeMenu();
+  }
+  var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu'),overlay=document.getElementById('overlay');
+  function openMenu(){langMenu.classList.add('open');overlay.classList.add('open')}
+  function closeMenu(){langMenu.classList.remove('open');overlay.classList.remove('open')}
+  langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.contains('open')?closeMenu():openMenu()});
+  overlay.addEventListener('click',closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'))})});
+  document.querySelectorAll('.fmt-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){setFmt(btn.getAttribute('data-fmt'))});
+  });
+  document.querySelectorAll('.fmt-btn').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-fmt')===timeFmt)});
+  setLang(lang);
+  update();
+  setInterval(update,1000);
+})();
+</script>
+</body>
+</html>

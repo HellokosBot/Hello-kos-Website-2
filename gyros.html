@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0a0c0c">
+<title>Gyros & Pita – Hello Kos</title>
+<style>
+:root{--bg:#0a0c0c;--bg-elevated:#141818;--bg-card:#1a1f1f;--border:rgba(255,255,255,0.08);--text:#e8e8e8;--text-soft:#a0a8a8;--petrol:#3d9a9a;--gold:#e0b84a;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);line-height:1.5}
+.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:12px 14px;background:rgba(10,12,12,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-btns{display:flex;gap:6px}
+.nav-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);text-decoration:none;font-size:1.15rem;transition:transform .12s ease}
+.nav-btn:active{transform:scale(.94)}
+.logo{justify-self:center;display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo-icon{font-size:22px}
+.logo-text{font-size:1.1rem;font-weight:700;color:var(--gold);font-family:Georgia,serif}
+.logo-text span{color:#f0c85a;font-style:italic}
+.lang-wrap{justify-self:end;position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-soft);transition:transform .12s ease}
+.lang-btn:active{transform:scale(.96)}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:8px;min-width:160px;z-index:50}
+.lang-menu.open{display:block}
+.lang-option{display:block;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;color:var(--text)}
+.lang-option.active{background:rgba(61,154,154,.15);color:var(--petrol)}
+.overlay{display:none;position:fixed;inset:0;z-index:40}.overlay.open{display:block}
+.main{max-width:480px;margin:0 auto;padding:16px 14px 48px}
+.page-head{text-align:center;margin-bottom:16px}
+.page-head h1{font-size:1.35rem;font-weight:800}
+.page-head .intro{color:var(--text-soft);font-size:.92rem;margin-top:6px}
+.hero-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:16px;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.hero-card img{width:100%;height:160px;object-fit:cover;display:block}
+.hero-card .body{padding:14px 16px}
+.hero-card p{font-size:.92rem;color:var(--text-soft);line-height:1.55}
+.hero-card strong{color:var(--text)}
+.region{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:14px 16px;margin-bottom:12px;border-left:5px solid #e67e22}
+.region.kos{border-left-color:var(--petrol);background:linear-gradient(90deg,rgba(61,154,154,.12),var(--bg-card))}
+.region h2{font-size:1.05rem;color:var(--gold);margin-bottom:6px;font-weight:800}
+.region .tag{display:inline-block;background:rgba(230,126,34,.2);color:#f0a060;font-size:.72rem;font-weight:700;padding:3px 8px;border-radius:6px;margin-bottom:8px}
+.region.kos .tag{background:rgba(61,154,154,.25);color:#7ecfcf}
+.ingredients{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.ing{background:rgba(255,255,255,.08);border-radius:20px;padding:5px 10px;font-size:.8rem;font-weight:500;color:var(--text)}
+.ing.yes{background:rgba(76,175,80,.25);color:#a5d6a7}
+.ing.no{background:rgba(244,67,54,.2);color:#ef9a9a;text-decoration:line-through;opacity:.85}
+.note-r{font-size:.82rem;color:var(--text-soft);margin-top:6px;font-style:italic}
+.tip-banner{background:rgba(224,184,74,.12);border:1px solid rgba(224,184,74,.3);border-radius:12px;padding:12px 14px;margin:16px 0;font-size:.9rem;line-height:1.5;color:#e8d5a0}
+.tip-banner strong{color:var(--gold)}
+.footer{text-align:center;padding:20px 16px;background:var(--bg-elevated);border-top:1px solid var(--border)}
+.footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
+.footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html">🏠</a>
+    <a class="nav-btn" href="wist-je-dat.html">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+
+<div data-lang-block="nl" style="display:none">
+  <header class="page-head">
+    <h1>🥙 Gyros & Pita</h1>
+    <p class="intro">Welke regio = welke ingrediënten?</p>
+  </header>
+  <div class="hero-card">
+    <img src="wjd-gyros-hero.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+    <div class="body">
+      <p>Gyros als maaltijd of snelle pita – op Kos (en de omliggende eilanden) zit er overal een eigen twist in. Zo herken je waar je pita “vandaan” komt.</p>
+      <p style="margin-top:10px">Lam wordt op Kos zelden gebruikt; traditioneel kiest men voor <strong>varken of kip</strong>. Naast gyros kun je in je pita ook souvlaki, kebab of bifteki kiezen. Soms wordt tzatziki vervangen door een saus van ketchup, mosterd en mayonaise.</p>
+    </div>
+  </div>
+  <div class="tip-banner"><strong>Op Kos:</strong> Probeer eens <em>varkensgyros</em> i.p.v. alleen kip – dat is de authentieke keuze. Het vlees is (goed bereid) verrassend mals en niet vet.</div>
+
+  <div class="region kos">
+    <span class="tag">★ KOS – hier ben je</span>
+    <h2>Kos streetfood pita</h2>
+    <div class="ingredients">
+      <span class="ing yes">Pita</span>
+      <span class="ing yes">Varkensgyros</span>
+      <span class="ing yes">Tomaat</span>
+      <span class="ing yes">Rode ui</span>
+      <span class="ing yes">Tzatziki</span>
+      <span class="ing yes">Friet in de pita</span>
+    </div>
+    <p class="note-r">Vaak dunnere pita, soms citroen over het vlees. Traditioneel = varken (niet alleen kip!).</p>
+  </div>
+
+  <div class="region">
+    <span class="tag">Kalymnos</span>
+    <h2>Kalymnos</h2>
+    <div class="ingredients">
+      <span class="ing yes">Pita</span>
+      <span class="ing yes">Varken of kip</span>
+      <span class="ing yes">Tomaat + ui</span>
+      <span class="ing yes">Lichte yoghurt</span>
+      <span class="ing no">Geen friet</span>
+    </div>
+    <p class="note-r">Eenvoudiger, bijna “kaal”, sterk gekruid vlees.</p>
+  </div>
+
+  <div class="region">
+    <span class="tag">Leros</span>
+    <h2>Leros</h2>
+    <div class="ingredients">
+      <span class="ing yes">Pita + vlees</span>
+      <span class="ing yes">Tomaat + ui</span>
+      <span class="ing yes">Kruidenyoghurt (oregano/dille)</span>
+      <span class="ing no">Geen friet</span>
+    </div>
+    <p class="note-r">Saus is kruidig, niet zwaar van knoflook.</p>
+  </div>
+
+  <div class="region">
+    <span class="tag">Nisyros</span>
+    <h2>Nisyros</h2>
+    <div class="ingredients">
+      <span class="ing yes">Pita + vlees</span>
+      <span class="ing yes">Tomaat + ui</span>
+      <span class="ing no">Meestal geen saus</span>
+      <span class="ing no">Geen friet</span>
+    </div>
+    <p class="note-r">Extreem minimalistisch – soms alleen vlees + ui.</p>
+  </div>
+
+  <div class="region">
+    <span class="tag">Symi</span>
+    <h2>Symi</h2>
+    <div class="ingredients">
+      <span class="ing yes">Pita + vlees</span>
+      <span class="ing yes">Tomaat + ui</span>
+      <span class="ing yes">Lichte yoghurt of niets</span>
+      <span class="ing no">Geen friet</span>
+    </div>
+    <p class="note-r">Klein formaat, weinig vet, “droog” streetfood.</p>
+  </div>
+
+  <div class="region">
+    <span class="tag">Patmos</span>
+    <h2>Patmos</h2>
+    <div class="ingredients">
+      <span class="ing yes">Pita + vlees</span>
+      <span class="ing yes">Tomaat + ui</span>
+      <span class="ing yes">Mosterd- of yoghurtsaus</span>
+      <span class="ing no">Geen friet</span>
+    </div>
+    <p class="note-r">Minder tzatziki, saus vaak milder/zoeter.</p>
+  </div>
+
+  <div class="region">
+    <span class="tag">Rhodes</span>
+    <h2>Rhodos</h2>
+    <div class="ingredients">
+      <span class="ing yes">Pita + vlees</span>
+      <span class="ing yes">Tomaat + ui + witte kool</span>
+      <span class="ing yes">Saus</span>
+      <span class="ing yes">Friet in de pita</span>
+    </div>
+  </div>
+
+  <div class="region">
+    <span class="tag">Vasteland</span>
+    <h2>Thessaloniki / Noord-Griekenland</h2>
+    <div class="ingredients">
+      <span class="ing yes">Pita + gyros</span>
+      <span class="ing yes">Tomaat + ui</span>
+      <span class="ing yes">Friet in de pita</span>
+      <span class="ing yes">Ketchup + mosterd</span>
+    </div>
+    <p class="note-r">Typisch: ketchup/mosterd i.p.v. (of naast) tzatziki.</p>
+  </div>
+</div>
+
+<div data-lang-block="en" style="display:none">
+  <header class="page-head">
+    <h1>🥙 Gyros & Pita</h1>
+    <p class="intro">Which region = which ingredients?</p>
+  </header>
+  <div class="hero-card">
+    <img src="wjd-gyros-hero.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+    <div class="body">
+      <p>Gyros as a meal or a quick pita – on Kos (and the surrounding islands) each place has its own twist. That’s how you can tell where your pita “comes from”.</p>
+      <p style="margin-top:10px">Lamb is rarely used on Kos; traditionally people choose <strong>pork or chicken</strong>. Besides gyros you can also fill your pita with souvlaki, kebab or bifteki. Sometimes tzatziki is replaced by a mix of ketchup, mustard and mayonnaise.</p>
+    </div>
+  </div>
+  <div class="tip-banner"><strong>On Kos:</strong> Try <em>pork gyros</em> instead of only chicken – that’s the authentic choice. When well prepared the meat is surprisingly tender and not greasy.</div>
+
+  <div class="region kos">
+    <span class="tag">★ KOS – you’re here</span>
+    <h2>Kos streetfood pita</h2>
+    <div class="ingredients">
+      <span class="ing yes">Pita</span>
+      <span class="ing yes">Pork gyros</span>
+      <span class="ing yes">Tomato</span>
+      <span class="ing yes">Red onion</span>
+      <span class="ing yes">Tzatziki</span>
+      <span class="ing yes">Fries in the pita</span>
+    </div>
+    <p class="note-r">Often thinner pita, sometimes lemon over the meat. Traditional = pork (not only chicken!).</p>
+  </div>
+
+  <div class="region">
+    <span class="tag">Kalymnos</span>
+    <h2>Kalymnos</h2>
+    <div class="ingredients">
+      <span class="ing yes">Pita</span>
+      <span class="ing yes">Pork or chicken</span>
+      <span class="ing yes">Tomato + onion</span>
+      <span class="ing yes">Light yoghurt</span>
+      <span class="ing no">No fries</span>
+    </div>
+    <p class="note-r">Simpler, almost “plain”, strongly seasoned meat.</p>
+  </div>
+
+  <div class="region">
+    <span class="tag">Leros</span>
+    <h2>Leros</h2>
+    <div class="ingredients">
+      <span class="ing yes">Pita + meat</span>
+      <span class="ing yes">Tomato + onion</span>
+      <span class="ing yes">Herb yoghurt (oregano/dill)</span>
+      <span class="ing no">No fries</span>
+    </div>
+    <p class="note-r">Sauce is herby, not heavy on garlic.</p>
+  </div>
+
+  <div class="region">
+    <span class="tag">Nisyros</span>
+    <h2>Nisyros</h2>
+    <div class="ingredients">
+      <span class="ing yes">Pita + meat</span>
+      <span class="ing yes">Tomato + onion</span>
+      <span class="ing no">Usually no sauce</span>
+      <span class="ing no">No fries</span>
+    </div>
+    <p class="note-r">Extremely minimal – sometimes only meat + onion.</p>
+  </div>
+
+  <div class="region">
+    <span class="tag">Symi</span>
+    <h2>Symi</h2>
+    <div class="ingredients">
+      <span class="ing yes">Pita + meat</span>
+      <span class="ing yes">Tomato + onion</span>
+      <span class="ing yes">Light yoghurt or nothing</span>
+      <span class="ing no">No fries</span>
+    </div>
+    <p class="note-r">Small size, little fat, “dry” street food.</p>
+  </div>
+
+  <div class="region">
+    <span class="tag">Patmos</span>
+    <h2>Patmos</h2>
+    <div class="ingredients">
+      <span class="ing yes">Pita + meat</span>
+      <span class="ing yes">Tomato + onion</span>
+      <span class="ing yes">Mustard or yoghurt sauce</span>
+      <span class="ing no">No fries</span>
+    </div>
+    <p class="note-r">Less tzatziki, sauce often milder/sweeter.</p>
+  </div>
+
+  <div class="region">
+    <span class="tag">Rhodes</span>
+    <h2>Rhodes</h2>
+    <div class="ingredients">
+      <span class="ing yes">Pita + meat</span>
+      <span class="ing yes">Tomato + onion + white cabbage</span>
+      <span class="ing yes">Sauce</span>
+      <span class="ing yes">Fries in the pita</span>
+    </div>
+  </div>
+
+  <div class="region">
+    <span class="tag">Mainland</span>
+    <h2>Thessaloniki / Northern Greece</h2>
+    <div class="ingredients">
+      <span class="ing yes">Pita + gyros</span>
+      <span class="ing yes">Tomato + onion</span>
+      <span class="ing yes">Fries in the pita</span>
+      <span class="ing yes">Ketchup + mustard</span>
+    </div>
+    <p class="note-r">Typical: ketchup/mustard instead of (or next to) tzatziki.</p>
+  </div>
+</div>
+
+<div data-lang-block="de" style="display:none">
+  <header class="page-head">
+    <h1>🥙 Gyros & Pita</h1>
+    <p class="intro">Welche Region = welche Zutaten?</p>
+  </header>
+  <div class="hero-card">
+    <img src="wjd-gyros-hero.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+    <div class="body">
+      <p>Gyros als Mahlzeit oder schnelle Pita – auf Kos (und den umliegenden Inseln) hat jeder Ort seinen eigenen Twist.</p>
+      <p style="margin-top:10px">Lamm wird auf Kos selten verwendet; traditionell wählt man <strong>Schwein oder Huhn</strong>.</p>
+    </div>
+  </div>
+  <div class="tip-banner"><strong>Auf Kos:</strong> Probier einmal <em>Schweinsgyros</em> statt nur Huhn – das ist die authentische Wahl.</div>
+  <div class="region kos">
+    <span class="tag">★ KOS – hier bist du</span>
+    <h2>Kos Streetfood-Pita</h2>
+    <div class="ingredients">
+      <span class="ing yes">Pita</span>
+      <span class="ing yes">Schweinsgyros</span>
+      <span class="ing yes">Tomate</span>
+      <span class="ing yes">Rote Zwiebel</span>
+      <span class="ing yes">Tzatziki</span>
+      <span class="ing yes">Pommes in der Pita</span>
+    </div>
+    <p class="note-r">Oft dünnere Pita, manchmal Zitrone über dem Fleisch. Traditionell = Schwein!</p>
+  </div>
+  <div class="region"><span class="tag">Kalymnos</span><h2>Kalymnos</h2>
+    <div class="ingredients"><span class="ing yes">Pita</span><span class="ing yes">Schwein oder Huhn</span><span class="ing yes">Tomate + Zwiebel</span><span class="ing yes">Leichter Joghurt</span><span class="ing no">Keine Pommes</span></div>
+    <p class="note-r">Einfacher, fast „kahl“, stark gewürztes Fleisch.</p>
+  </div>
+  <div class="region"><span class="tag">Leros</span><h2>Leros</h2>
+    <div class="ingredients"><span class="ing yes">Pita + Fleisch</span><span class="ing yes">Tomate + Zwiebel</span><span class="ing yes">Kräuterjoghurt</span><span class="ing no">Keine Pommes</span></div>
+  </div>
+  <div class="region"><span class="tag">Nisyros</span><h2>Nisyros</h2>
+    <div class="ingredients"><span class="ing yes">Pita + Fleisch</span><span class="ing yes">Tomate + Zwiebel</span><span class="ing no">Meist keine Sauce</span><span class="ing no">Keine Pommes</span></div>
+  </div>
+  <div class="region"><span class="tag">Rhodes</span><h2>Rhodos</h2>
+    <div class="ingredients"><span class="ing yes">Pita + Fleisch</span><span class="ing yes">Tomate + Zwiebel + Weißkohl</span><span class="ing yes">Sauce</span><span class="ing yes">Pommes in der Pita</span></div>
+  </div>
+  <div class="region"><span class="tag">Festland</span><h2>Thessaloniki / Nordgriechenland</h2>
+    <div class="ingredients"><span class="ing yes">Pita + Gyros</span><span class="ing yes">Tomate + Zwiebel</span><span class="ing yes">Pommes</span><span class="ing yes">Ketchup + Senf</span></div>
+  </div>
+</div>
+
+<div data-lang-block="it" style="display:none">
+  <header class="page-head">
+    <h1>🥙 Gyros & Pita</h1>
+    <p class="intro">Quale regione = quali ingredienti?</p>
+  </header>
+  <div class="hero-card">
+    <img src="wjd-gyros-hero.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+    <div class="body">
+      <p>Gyros come pasto o pita veloce – su Kos (e le isole vicine) ogni posto ha il suo tocco.</p>
+      <p style="margin-top:10px">L’agnello su Kos si usa raramente; tradizionalmente si sceglie <strong>maiale o pollo</strong>.</p>
+    </div>
+  </div>
+  <div class="tip-banner"><strong>Su Kos:</strong> Prova il <em>gyros di maiale</em> invece del solo pollo – è la scelta autentica.</div>
+  <div class="region kos">
+    <span class="tag">★ KOS – sei qui</span>
+    <h2>Kos streetfood pita</h2>
+    <div class="ingredients">
+      <span class="ing yes">Pita</span>
+      <span class="ing yes">Gyros di maiale</span>
+      <span class="ing yes">Pomodoro</span>
+      <span class="ing yes">Cipolla rossa</span>
+      <span class="ing yes">Tzatziki</span>
+      <span class="ing yes">Patatine nella pita</span>
+    </div>
+  </div>
+  <div class="region"><span class="tag">Kalymnos</span><h2>Kalymnos</h2>
+    <div class="ingredients"><span class="ing yes">Pita</span><span class="ing yes">Maiale o pollo</span><span class="ing yes">Pomodoro + cipolla</span><span class="ing yes">Yogurt leggero</span><span class="ing no">Niente patatine</span></div>
+  </div>
+  <div class="region"><span class="tag">Rhodes</span><h2>Rodi</h2>
+    <div class="ingredients"><span class="ing yes">Pita + carne</span><span class="ing yes">Pomodoro + cipolla + cavolo</span><span class="ing yes">Salsa</span><span class="ing yes">Patatine nella pita</span></div>
+  </div>
+  <div class="region"><span class="tag">Terraferma</span><h2>Salonicco / Nord Grecia</h2>
+    <div class="ingredients"><span class="ing yes">Pita + gyros</span><span class="ing yes">Pomodoro + cipolla</span><span class="ing yes">Patatine</span><span class="ing yes">Ketchup + senape</span></div>
+  </div>
+</div>
+
+<div data-lang-block="tr" style="display:none">
+  <header class="page-head">
+    <h1>🥙 Gyros & Pita</h1>
+    <p class="intro">Hangi bölge = hangi malzemeler?</p>
+  </header>
+  <div class="hero-card">
+    <img src="wjd-gyros-hero.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+    <div class="body">
+      <p>Gyros yemek veya hızlı pita – Kos’ta (ve çevre adalarda) her yerin kendi dokunuşu var.</p>
+      <p style="margin-top:10px">Kos’ta kuzu nadiren kullanılır; geleneksel olarak <strong>domuz veya tavuk</strong> seçilir.</p>
+    </div>
+  </div>
+  <div class="tip-banner"><strong>Kos’ta:</strong> Sadece tavuk yerine <em>domuz gyros</em> deneyin – otantik seçim odur.</div>
+  <div class="region kos">
+    <span class="tag">★ KOS – buradasınız</span>
+    <h2>Kos streetfood pita</h2>
+    <div class="ingredients">
+      <span class="ing yes">Pita</span>
+      <span class="ing yes">Domuz gyros</span>
+      <span class="ing yes">Domates</span>
+      <span class="ing yes">Kırmızı soğan</span>
+      <span class="ing yes">Tzatziki</span>
+      <span class="ing yes">Pita içinde patates</span>
+    </div>
+  </div>
+  <div class="region"><span class="tag">Kalymnos</span><h2>Kalymnos</h2>
+    <div class="ingredients"><span class="ing yes">Pita</span><span class="ing yes">Domuz veya tavuk</span><span class="ing yes">Domates + soğan</span><span class="ing yes">Hafif yoğurt</span><span class="ing no">Patates yok</span></div>
+  </div>
+  <div class="region"><span class="tag">Rhodes</span><h2>Rodos</h2>
+    <div class="ingredients"><span class="ing yes">Pita + et</span><span class="ing yes">Domates + soğan + lahana</span><span class="ing yes">Sos</span><span class="ing yes">Pita içinde patates</span></div>
+  </div>
+  <div class="region"><span class="tag">Kara</span><h2>Selanik / Kuzey Yunanistan</h2>
+    <div class="ingredients"><span class="ing yes">Pita + gyros</span><span class="ing yes">Domates + soğan</span><span class="ing yes">Patates</span><span class="ing yes">Ketçap + hardal</span></div>
+  </div>
+</div>
+
+<div data-lang-block="es" style="display:none">
+  <header class="page-head">
+    <h1>🥙 Gyros & Pita</h1>
+    <p class="intro">¿Qué región = qué ingredientes?</p>
+  </header>
+  <div class="hero-card">
+    <img src="wjd-gyros-hero.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+    <div class="body">
+      <p>Gyros como comida o pita rápida – en Kos (y las islas cercanas) cada lugar tiene su toque.</p>
+      <p style="margin-top:10px">El cordero en Kos se usa poco; tradicionalmente se elige <strong>cerdo o pollo</strong>.</p>
+    </div>
+  </div>
+  <div class="tip-banner"><strong>En Kos:</strong> Prueba el <em>gyros de cerdo</em> en lugar de solo pollo – es la opción auténtica.</div>
+  <div class="region kos">
+    <span class="tag">★ KOS – estás aquí</span>
+    <h2>Kos streetfood pita</h2>
+    <div class="ingredients">
+      <span class="ing yes">Pita</span>
+      <span class="ing yes">Gyros de cerdo</span>
+      <span class="ing yes">Tomate</span>
+      <span class="ing yes">Cebolla roja</span>
+      <span class="ing yes">Tzatziki</span>
+      <span class="ing yes">Patatas en la pita</span>
+    </div>
+  </div>
+  <div class="region"><span class="tag">Kalymnos</span><h2>Kalymnos</h2>
+    <div class="ingredients"><span class="ing yes">Pita</span><span class="ing yes">Cerdo o pollo</span><span class="ing yes">Tomate + cebolla</span><span class="ing yes">Yogur ligero</span><span class="ing no">Sin patatas</span></div>
+  </div>
+  <div class="region"><span class="tag">Rhodes</span><h2>Rodas</h2>
+    <div class="ingredients"><span class="ing yes">Pita + carne</span><span class="ing yes">Tomate + cebolla + col</span><span class="ing yes">Salsa</span><span class="ing yes">Patatas en la pita</span></div>
+  </div>
+  <div class="region"><span class="tag">Continente</span><h2>Salónica / Norte de Grecia</h2>
+    <div class="ingredients"><span class="ing yes">Pita + gyros</span><span class="ing yes">Tomate + cebolla</span><span class="ing yes">Patatas</span><span class="ing yes">Ketchup + mostaza</span></div>
+  </div>
+</div>
+
+</main>
+<footer class="footer">
+  <div class="footer-logo">🔅 Hello Kos</div>
+  <p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a></p>
+</footer>
+<script>
+(function(){
+  var lang=localStorage.getItem('hk-lang')||'en';
+  var supported=['nl','de','en','it','tr','es'];
+  function setLang(l){
+    if(supported.indexOf(l)<0)l='en';
+    lang=l;localStorage.setItem('hk-lang',l);
+    document.querySelectorAll('[data-lang-block]').forEach(function(el){
+      el.style.display=(el.getAttribute('data-lang-block')===l)?'block':'none';
+    });
+    var opt=document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if(opt){document.getElementById('flag').textContent=opt.getAttribute('data-flag');document.getElementById('code').textContent=l.toUpperCase()}
+    document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===l)});
+    document.documentElement.lang=l;closeMenu();
+  }
+  var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu'),overlay=document.getElementById('overlay');
+  function openMenu(){langMenu.classList.add('open');overlay.classList.add('open')}
+  function closeMenu(){langMenu.classList.remove('open');overlay.classList.remove('open')}
+  langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.contains('open')?closeMenu():openMenu()});
+  overlay.addEventListener('click',closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'))})});
+  setLang(lang);
+})();
+</script>
+</body>
+</html>

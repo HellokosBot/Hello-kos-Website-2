@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0a0c0c">
+<title>If you don't pay – Hello Kos</title>
+<style>
+:root{--bg:#0a0c0c;--bg-elevated:#141818;--bg-card:#1a1f1f;--border:rgba(255,255,255,0.08);--text:#e8e8e8;--text-soft:#a0a8a8;--petrol:#3d9a9a;--gold:#e0b84a;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);line-height:1.5}
+.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:12px 14px;background:rgba(10,12,12,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-btns{display:flex;gap:6px}
+.nav-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);text-decoration:none;font-size:1.15rem}
+.logo{justify-self:center;display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo-icon{font-size:22px}
+.logo-text{font-size:1.1rem;font-weight:700;color:var(--gold);font-family:Georgia,serif}
+.logo-text span{color:#f0c85a;font-style:italic}
+.lang-wrap{justify-self:end;position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-soft)}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:8px;min-width:160px;z-index:50}
+.lang-menu.open{display:block}
+.lang-option{display:block;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;color:var(--text)}
+.lang-option.active{background:rgba(61,154,154,.15);color:var(--petrol)}
+.overlay{display:none;position:fixed;inset:0;z-index:40}
+.overlay.open{display:block}
+.main{max-width:480px;margin:0 auto;padding:16px 14px 48px}
+.page-head{text-align:center;margin-bottom:18px}
+.page-head h1{font-size:1.4rem;font-weight:800;letter-spacing:-.02em}
+.page-head .intro{color:var(--text-soft);font-size:.92rem;margin-top:6px}
+.tips{display:flex;flex-direction:column;gap:16px}
+.tip-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.tip-photo{height:140px;background:linear-gradient(135deg,#1a2a2a,#0d1515);overflow:hidden}
+.tip-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.tip-photo.no-img{height:0}
+.tip-body{padding:16px 16px 18px;position:relative}
+.tip-icon{position:absolute;top:-22px;right:14px;width:40px;height:40px;border-radius:12px;background:var(--bg-elevated);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.tip-body h2{font-size:1.05rem;font-weight:800;color:var(--gold);margin-bottom:8px;padding-right:36px}
+.tip-body p{font-size:.92rem;color:var(--text-soft);line-height:1.55;margin-bottom:10px}
+.tip-body p:last-child{margin-bottom:0}
+.tip-body strong{color:var(--text)}
+.alert{background:rgba(224,122,74,.12);border:1px solid rgba(224,122,74,.35);border-radius:14px;padding:14px 16px;margin-bottom:16px;font-size:.9rem;color:#f0c8b0;line-height:1.5}
+.alert strong{color:#ffd4b8}
+.map-link{display:inline-flex;align-items:center;gap:8px;margin-top:10px;padding:10px 14px;background:rgba(61,154,154,.15);border:1px solid rgba(61,154,154,.35);border-radius:12px;color:var(--petrol);text-decoration:none;font-weight:600;font-size:.9rem}
+.footer{text-align:center;padding:20px 16px;background:var(--bg-elevated);border-top:1px solid var(--border)}
+.footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
+.footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="verkeersregels.html" title="Back">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+
+<div data-lang-block="nl" style="display:none">
+  <header class="page-head">
+    <h1>Gevolgen niet betalen</h1>
+    <p class="intro">Wat er gebeurt als je een boete niet op tijd betaalt.</p>
+  </header>
+  <div class="alert"><strong>Belangrijk!</strong> Eerder gold: bij betaling binnen 10 dagen werd het boetebedrag met 50% verlaagd. Dit is <strong>niet langer van toepassing</strong>.</div>
+  <div class="tips">
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-foto-gevolgen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">📮</div>
+        <h2>Binnen 10 dagen betalen</h2>
+        <p>Een boete moet binnen <strong>10 dagen</strong> na uitschrijving worden betaald. Dat kan bij het <strong>postkantoor op Kos</strong>.</p>
+        <a class="map-link" href="https://maps.app.goo.gl/7Ady6yJTRreeDx769" target="_blank" rel="noopener">📍 Locatie postkantoor</a>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-foto-gevolgen-eu.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🇪🇺</div>
+        <h2>EU- en niet-EU-burgers</h2>
+        <p>Als u dit nalaat en gewoon naar huis vliegt, zal Griekenland automatisch een procedure starten zodra de betalingstermijn is overschreden.</p>
+        <p>Onbetaalde boetes kunnen later worden opgevolgd via grensoverschrijdende EU-mechanismen, die de mogelijkheid bieden om openstaande boetes met verhoogde kosten in heel de EU te incasseren. Tevens blijft u geregistreerd in Griekenland, en bij een volgend bezoek kan de boete alsnog worden opgeëist.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-foto-gevolgen-uk.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🇬🇧</div>
+        <h2>Uitzondering VK</h2>
+        <p>Sinds Brexit valt het Verenigd Koninkrijk niet meer onder het EU-verkeersboetensysteem. Griekenland kan niet automatisch via het EU-systeem boetes innen bij mensen in het VK.</p>
+        <p>UK-bewoners hoeven niet bang te zijn dat Griekenland via het EU-systeem direct kan innen, maar de boete blijft staan en kan later juridische of administratieve gevolgen hebben als men Griekenland weer bezoekt of zich ooit in de EU vestigt.</p>
+      </div>
+    </article>
+  </div>
+</div>
+
+<div data-lang-block="en" style="display:none">
+  <header class="page-head">
+    <h1>If you don't pay</h1>
+    <p class="intro">What happens if you don't pay a fine on time.</p>
+  </header>
+  <div class="alert"><strong>Important!</strong> Previously, paying within 10 days reduced the fine by 50%. This <strong>no longer applies</strong>.</div>
+  <div class="tips">
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-foto-gevolgen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">📮</div>
+        <h2>Pay within 10 days</h2>
+        <p>A fine must be paid within <strong>10 days</strong> of being issued. You can do this at the <strong>post office on Kos</strong>.</p>
+        <a class="map-link" href="https://maps.app.goo.gl/7Ady6yJTRreeDx769" target="_blank" rel="noopener">📍 Post office location</a>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-foto-gevolgen-eu.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🇪🇺</div>
+        <h2>EU and non-EU citizens</h2>
+        <p>If you leave without paying, Greece will automatically start a procedure once the payment deadline has passed.</p>
+        <p>Unpaid fines can later be followed up via cross-border EU mechanisms, allowing collection across the EU with extra costs. You also remain registered in Greece, and on a later visit the fine can still be claimed.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-foto-gevolgen-uk.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🇬🇧</div>
+        <h2>UK exception</h2>
+        <p>Since Brexit, the UK is no longer under the EU traffic fine system. Greece cannot automatically collect via the EU system from people in the UK.</p>
+        <p>UK residents need not fear direct EU collection, but the fine remains and can later have legal or administrative consequences if you return to Greece or settle in the EU.</p>
+      </div>
+    </article>
+  </div>
+</div>
+
+<div data-lang-block="de" style="display:none">
+  <header class="page-head">
+    <h1>Bei Nichtzahlung</h1>
+    <p class="intro">Was passiert, wenn Sie ein Bußgeld nicht rechtzeitig zahlen.</p>
+  </header>
+  <div class="alert"><strong>Wichtig!</strong> Früher galt: Zahlung innerhalb von 10 Tagen reduzierte das Bußgeld um 50%. Das gilt <strong>nicht mehr</strong>.</div>
+  <div class="tips">
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-foto-gevolgen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">📮</div>
+        <h2>Innerhalb von 10 Tagen zahlen</h2>
+        <p>Ein Bußgeld muss innerhalb von <strong>10 Tagen</strong> nach Ausstellung bezahlt werden — im <strong>Postamt auf Kos</strong>.</p>
+        <a class="map-link" href="https://maps.app.goo.gl/7Ady6yJTRreeDx769" target="_blank" rel="noopener">📍 Postamt</a>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-foto-gevolgen-eu.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🇪🇺</div>
+        <h2>EU- und Nicht-EU-Bürger</h2>
+        <p>Wenn Sie ohne Zahlung nach Hause fliegen, startet Griechenland automatisch ein Verfahren nach Ablauf der Frist.</p>
+        <p>Unbezahlte Bußgelder können später über EU-Mechanismen mit erhöhten Kosten in der gesamten EU eingezogen werden. Bei einem späteren Besuch kann das Bußgeld weiterhin eingefordert werden.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-foto-gevolgen-uk.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🇬🇧</div>
+        <h2>Ausnahme UK</h2>
+        <p>Seit dem Brexit fällt das Vereinigte Königreich nicht mehr unter das EU-Bußgeldsystem. Griechenland kann nicht automatisch über das EU-System bei UK-Bewohnern eintreiben.</p>
+        <p>Das Bußgeld bleibt aber bestehen und kann später Folgen haben, wenn man Griechenland erneut besucht oder sich in der EU niederlässt.</p>
+      </div>
+    </article>
+  </div>
+</div>
+
+<div data-lang-block="it" style="display:none">
+  <header class="page-head">
+    <h1>Se non paghi</h1>
+    <p class="intro">Cosa succede se non paghi una multa in tempo.</p>
+  </header>
+  <div class="alert"><strong>Importante!</strong> Prima, pagando entro 10 giorni la multa si riduceva del 50%. Questo <strong>non vale più</strong>.</div>
+  <div class="tips">
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-foto-gevolgen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">📮</div>
+        <h2>Paga entro 10 giorni</h2>
+        <p>La multa va pagata entro <strong>10 giorni</strong> dall’emissione, all’<strong>ufficio postale di Kos</strong>.</p>
+        <a class="map-link" href="https://maps.app.goo.gl/7Ady6yJTRreeDx769" target="_blank" rel="noopener">📍 Ufficio postale</a>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-foto-gevolgen-eu.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🇪🇺</div>
+        <h2>Cittadini UE e non UE</h2>
+        <p>Se parti senza pagare, la Grecia avvia automaticamente una procedura dopo la scadenza.</p>
+        <p>Le multe non pagate possono essere recuperate in UE con costi aggiuntivi. Resta registrato in Grecia e in un viaggio successivo la multa può ancora essere richiesta.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-foto-gevolgen-uk.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🇬🇧</div>
+        <h2>Eccezione UK</h2>
+        <p>Dopo la Brexit il Regno Unito non rientra più nel sistema UE delle multe. La Grecia non può riscuotere automaticamente via UE nel Regno Unito.</p>
+        <p>La multa resta e può avere conseguenze se torni in Grecia o ti stabilisci nell’UE.</p>
+      </div>
+    </article>
+  </div>
+</div>
+
+<div data-lang-block="tr" style="display:none">
+  <header class="page-head">
+    <h1>Ödemezseniz</h1>
+    <p class="intro">Cezayı zamanında ödemezseniz ne olur.</p>
+  </header>
+  <div class="alert"><strong>Önemli!</strong> Eskiden 10 gün içinde ödemede ceza %50 indirimliydi. Bu <strong>artık geçerli değil</strong>.</div>
+  <div class="tips">
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-foto-gevolgen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">📮</div>
+        <h2>10 gün içinde ödeyin</h2>
+        <p>Ceza, düzenlenmesinden itibaren <strong>10 gün</strong> içinde <strong>Kos postanesinde</strong> ödenmelidir.</p>
+        <a class="map-link" href="https://maps.app.goo.gl/7Ady6yJTRreeDx769" target="_blank" rel="noopener">📍 Postane konumu</a>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-foto-gevolgen-eu.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🇪🇺</div>
+        <h2>AB ve AB dışı vatandaşlar</h2>
+        <p>Ödemeden eve uçarsanız, süre dolunca Yunanistan otomatik işlem başlatır.</p>
+        <p>Ödenmemiş cezalar AB mekanizmalarıyla ekstra maliyetle tahsil edilebilir. Yunanistan’da kayıtlı kalırsınız; sonraki ziyarette ceza yine istenebilir.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-foto-gevolgen-uk.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🇬🇧</div>
+        <h2>BK istisnası</h2>
+        <p>Brexit sonrası Birleşik Krallık AB trafik ceza sisteminde değildir. Yunanistan AB üzerinden otomatik tahsilat yapamaz.</p>
+        <p>Ceza yine de durur; Yunanistan’a dönüşte veya AB’ye yerleşmede sonuçları olabilir.</p>
+      </div>
+    </article>
+  </div>
+</div>
+
+<div data-lang-block="es" style="display:none">
+  <header class="page-head">
+    <h1>Si no pagas</h1>
+    <p class="intro">Qué ocurre si no pagas una multa a tiempo.</p>
+  </header>
+  <div class="alert"><strong>¡Importante!</strong> Antes, pagar en 10 días reducía la multa un 50%. Esto <strong>ya no aplica</strong>.</div>
+  <div class="tips">
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-foto-gevolgen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">📮</div>
+        <h2>Paga en 10 días</h2>
+        <p>La multa debe pagarse en <strong>10 días</strong> desde su emisión, en <strong>correos de Kos</strong>.</p>
+        <a class="map-link" href="https://maps.app.goo.gl/7Ady6yJTRreeDx769" target="_blank" rel="noopener">📍 Ubicación correos</a>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-foto-gevolgen-eu.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🇪🇺</div>
+        <h2>Ciudadanos UE y no UE</h2>
+        <p>Si te vas sin pagar, Grecia inicia automáticamente un procedimiento al vencer el plazo.</p>
+        <p>Las multas impagadas pueden reclamarse en la UE con costes extra. Quedas registrado en Grecia y en una visita posterior pueden exigir la multa.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-foto-gevolgen-uk.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🇬🇧</div>
+        <h2>Excepción UK</h2>
+        <p>Tras el Brexit, el Reino Unido no está en el sistema de multas de la UE. Grecia no puede cobrar automáticamente vía UE en el Reino Unido.</p>
+        <p>La multa sigue existiendo y puede tener consecuencias si vuelves a Grecia o te estableces en la UE.</p>
+      </div>
+    </article>
+  </div>
+</div>
+
+</main>
+<footer class="footer">
+  <div class="footer-logo">🔅 Hello Kos</div>
+  <p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a></p>
+</footer>
+<script>
+(function(){
+  var lang=localStorage.getItem('hk-lang')||'en';
+  var supported=['nl','de','en','it','tr','es'];
+  function setLang(l){
+    if(supported.indexOf(l)<0)l='en';
+    lang=l;localStorage.setItem('hk-lang',l);
+    document.querySelectorAll('[data-lang-block]').forEach(function(el){
+      el.style.display = (el.getAttribute('data-lang-block')===l) ? 'block' : 'none';
+    });
+    var opt=document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if(opt){document.getElementById('flag').textContent=opt.getAttribute('data-flag');document.getElementById('code').textContent=l.toUpperCase()}
+    document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===l)});
+    document.documentElement.lang=l;closeMenu();
+  }
+  var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu'),overlay=document.getElementById('overlay');
+  function openMenu(){langMenu.classList.add('open');overlay.classList.add('open')}
+  function closeMenu(){langMenu.classList.remove('open');overlay.classList.remove('open')}
+  langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.contains('open')?closeMenu():openMenu()});
+  overlay.addEventListener('click',closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'))})});
+  setLang(lang);
+})();
+</script>
+</body>
+</html>

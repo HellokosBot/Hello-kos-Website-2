@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0a0c0c">
+<title>Posidonia balls – Hello Kos</title>
+<style>
+:root{--bg:#0a0c0c;--bg-elevated:#141818;--bg-card:#1a1f1f;--border:rgba(255,255,255,0.08);--text:#e8e8e8;--text-soft:#a0a8a8;--petrol:#3d9a9a;--gold:#e0b84a;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);line-height:1.5}
+.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:12px 14px;background:rgba(10,12,12,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-btns{display:flex;gap:6px}
+.nav-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);text-decoration:none;font-size:1.15rem}
+.nav-btn:active{transform:scale(.94)}
+.logo{justify-self:center;display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo-icon{font-size:22px}
+.logo-text{font-size:1.1rem;font-weight:700;color:var(--gold);font-family:Georgia,serif}
+.logo-text span{color:#f0c85a;font-style:italic}
+.lang-wrap{justify-self:end;position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-soft)}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:8px;min-width:160px;z-index:50}
+.lang-menu.open{display:block}
+.lang-option{display:block;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;color:var(--text)}
+.lang-option.active{background:rgba(61,154,154,.15);color:var(--petrol)}
+.overlay{display:none;position:fixed;inset:0;z-index:40}.overlay.open{display:block}
+.main{max-width:480px;margin:0 auto;padding:16px 14px 48px}
+.page-head{text-align:center;margin-bottom:14px}
+.page-head h1{font-size:1.25rem;font-weight:800}
+.page-head .intro{color:var(--text-soft);font-size:.92rem;margin-top:6px}
+.tip-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:16px;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.tip-photo{height:140px;overflow:hidden;background:linear-gradient(135deg,#1a2a2a,#0d1515)}
+.tip-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.tip-photo.no-img{height:0}
+.tip-body{padding:16px 16px 18px;position:relative}
+.tip-icon{position:absolute;top:-22px;right:14px;width:40px;height:40px;border-radius:12px;background:var(--bg-elevated);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.tip-body h2{font-size:1.05rem;font-weight:800;color:var(--gold);margin-bottom:8px;padding-right:36px}
+.tip-body p{font-size:.92rem;color:var(--text-soft);line-height:1.55;margin-bottom:10px}
+.tip-body p:last-child{margin-bottom:0}
+.tip-body strong{color:var(--text)}
+.tip-body em{color:var(--text);font-style:italic}
+.note{background:rgba(61,154,154,.12);border:1px solid rgba(61,154,154,.3);border-radius:12px;padding:12px 14px;margin-top:10px;font-size:.9rem;color:#b8e0e0;line-height:1.5}
+.footer{text-align:center;padding:20px 16px;background:var(--bg-elevated);border-top:1px solid var(--border)}
+.footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
+.footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html">🏠</a>
+    <a class="nav-btn" href="wist-je-dat.html">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+
+<div data-lang-block="nl" style="display:none">
+  <header class="page-head"><h1>🟤 Posidonia-ballen</h1><p class="intro">Die bruine ballen op het strand – geen afval, maar natuur.</p></header>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-posidonia-wat.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">❓</div>
+      <h2>Wat zijn die bruine ballen?</h2>
+      <p>Op de stranden van Kos kom je regelmatig bruine, ronde vezelbollen tegen. Dit zijn <strong>Posidonia-ballen</strong> – een natuurlijk verschijnsel van de zeeplant <em>Posidonia oceanica</em> (Mediterraan zeegras).</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-posidonia-ontstaan.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🌊</div>
+      <h2>Hoe ontstaan ze?</h2>
+      <p>Oude bladeren en vezels van het zeegras raken los en worden door golven en stroming heen en weer gerold. Zo vormen zich compacte, ronde ballen die op het strand aanspoelen.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-posidonia-ecosysteem.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🌿</div>
+      <h2>Gezond ecosysteem</h2>
+      <p>Hoewel ze er soms vreemd uitzien, zijn ze een <strong>teken van een gezond onderwaterleven</strong>. Zeegrasvelden produceren zuurstof, beschermen vissen en helpen de kust tegen erosie.</p>
+      <div class="note">Op sommige stranden worden ze weggehaald voor comfort; op andere blijven ze liggen vanwege hun ecologische waarde. Geen afval – puur natuur uit de Middellandse Zee.</div>
+    </div>
+  </article>
+</div>
+
+<div data-lang-block="en" style="display:none">
+  <header class="page-head"><h1>🟤 Posidonia balls</h1><p class="intro">Those brown balls on the beach – not rubbish, pure nature.</p></header>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-posidonia-wat.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">❓</div>
+      <h2>What are those brown balls?</h2>
+      <p>On Kos beaches you’ll often find brown, round fibre balls. These are <strong>Posidonia balls</strong> – a natural product of the seagrass <em>Posidonia oceanica</em> (Mediterranean seagrass).</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-posidonia-ontstaan.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🌊</div>
+      <h2>How do they form?</h2>
+      <p>Old leaves and fibres of the seagrass break loose and are rolled back and forth by waves and currents. That creates compact, round balls that wash up on the shore.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-posidonia-ecosysteem.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🌿</div>
+      <h2>A healthy ecosystem</h2>
+      <p>They may look odd, but they are a <strong>sign of healthy underwater life</strong>. Seagrass beds produce oxygen, shelter fish and help protect the coast from erosion.</p>
+      <div class="note">On some beaches they are removed for comfort; on others they stay for their ecological value. Not litter – pure nature from the Mediterranean.</div>
+    </div>
+  </article>
+</div>
+
+<div data-lang-block="de" style="display:none">
+  <header class="page-head"><h1>🟤 Posidonia-Kugeln</h1><p class="intro">Die braunen Kugeln am Strand – kein Müll, pure Natur.</p></header>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-posidonia-wat.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">❓</div>
+      <h2>Was sind diese braunen Kugeln?</h2>
+      <p>An den Stränden von Kos findest du oft braune, runde Faserkugeln. Das sind <strong>Posidonia-Kugeln</strong> – ein Naturprodukt des Seegrases <em>Posidonia oceanica</em>.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-posidonia-ontstaan.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🌊</div>
+      <h2>Wie entstehen sie?</h2>
+      <p>Alte Blätter und Fasern lösen sich und werden von Wellen und Strömung gerollt. So entstehen kompakte Kugeln, die an den Strand gespült werden.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-posidonia-ecosysteem.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🌿</div>
+      <h2>Gesundes Ökosystem</h2>
+      <p>Sie sind ein <strong>Zeichen für gesundes Unterwasserleben</strong>. Seegraswiesen erzeugen Sauerstoff, schützen Fische und die Küste vor Erosion.</p>
+      <div class="note">Kein Müll – pure Natur aus dem Mittelmeer.</div>
+    </div>
+  </article>
+</div>
+
+<div data-lang-block="it" style="display:none">
+  <header class="page-head"><h1>🟤 Palline di Posidonia</h1><p class="intro">Quelle palle marroni sulla spiaggia – non sono rifiuti.</p></header>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-posidonia-wat.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">❓</div>
+      <h2>Cosa sono?</h2>
+      <p>Sulle spiagge di Kos trovi spesso palle di fibre marroni. Sono <strong>palline di Posidonia</strong> – un fenomeno naturale della pianta marina <em>Posidonia oceanica</em>.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-posidonia-ontstaan.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🌊</div>
+      <h2>Come si formano?</h2>
+      <p>Foglie e fibre vecchie si staccano e vengono arrotolate dalle onde. Così nascono palle compatte che arrivano a riva.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-posidonia-ecosysteem.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🌿</div>
+      <h2>Ecosistema sano</h2>
+      <p>Sono un <strong>segno di vita sottomarina sana</strong>. Le praterie di posidonia producono ossigeno e proteggono la costa.</p>
+      <div class="note">Non è spazzatura – pura natura del Mediterraneo.</div>
+    </div>
+  </article>
+</div>
+
+<div data-lang-block="tr" style="display:none">
+  <header class="page-head"><h1>🟤 Posidonia topları</h1><p class="intro">Sahildeki kahverengi toplar – çöp değil, doğa.</p></header>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-posidonia-wat.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">❓</div>
+      <h2>Bu kahverengi toplar nedir?</h2>
+      <p>Kos plajlarında sıkça kahverengi, yuvarlak lif topları görürsünüz. Bunlar <strong>Posidonia topları</strong> – deniz çimeni <em>Posidonia oceanica</em>’nın doğal ürünüdür.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-posidonia-ontstaan.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🌊</div>
+      <h2>Nasıl oluşurlar?</h2>
+      <p>Eski yaprak ve lifler kopar, dalgalarla yuvarlanır ve sıkı toplar halinde kıyıya vurur.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-posidonia-ecosysteem.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🌿</div>
+      <h2>Sağlıklı ekosistem</h2>
+      <p><strong>Sağlıklı su altı yaşamının işaretidir</strong>. Deniz çimeni oksijen üretir ve kıyıyı korur.</p>
+      <div class="note">Çöp değil – Akdeniz’in saf doğası.</div>
+    </div>
+  </article>
+</div>
+
+<div data-lang-block="es" style="display:none">
+  <header class="page-head"><h1>🟤 Bolas de Posidonia</h1><p class="intro">Esas bolas marrones en la playa – no son basura.</p></header>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-posidonia-wat.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">❓</div>
+      <h2>¿Qué son esas bolas marrones?</h2>
+      <p>En las playas de Kos encuentras a menudo bolas de fibra marrones. Son <strong>bolas de Posidonia</strong> – un fenómeno natural de la planta marina <em>Posidonia oceanica</em>.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-posidonia-ontstaan.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🌊</div>
+      <h2>¿Cómo se forman?</h2>
+      <p>Hojas y fibras viejas se desprenden y las olas las van enrollando hasta formar bolas compactas que llegan a la orilla.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-posidonia-ecosysteem.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🌿</div>
+      <h2>Ecosistema sano</h2>
+      <p>Son una <strong>señal de vida submarina sana</strong>. Las praderas de posidonia producen oxígeno y protegen la costa.</p>
+      <div class="note">No es basura – pura naturaleza del Mediterráneo.</div>
+    </div>
+  </article>
+</div>
+
+</main>
+<footer class="footer">
+  <div class="footer-logo">🔅 Hello Kos</div>
+  <p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a></p>
+</footer>
+<script>
+(function(){
+  var lang=localStorage.getItem('hk-lang')||'en';
+  var supported=['nl','de','en','it','tr','es'];
+  function setLang(l){
+    if(supported.indexOf(l)<0)l='en';
+    lang=l;localStorage.setItem('hk-lang',l);
+    document.querySelectorAll('[data-lang-block]').forEach(function(el){
+      el.style.display=(el.getAttribute('data-lang-block')===l)?'block':'none';
+    });
+    var opt=document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if(opt){document.getElementById('flag').textContent=opt.getAttribute('data-flag');document.getElementById('code').textContent=l.toUpperCase()}
+    document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===l)});
+    document.documentElement.lang=l;closeMenu();
+  }
+  var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu'),overlay=document.getElementById('overlay');
+  function openMenu(){langMenu.classList.add('open');overlay.classList.add('open')}
+  function closeMenu(){langMenu.classList.remove('open');overlay.classList.remove('open')}
+  langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.contains('open')?closeMenu():openMenu()});
+  overlay.addEventListener('click',closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'))})});
+  setLang(lang);
+})();
+</script>
+</body>
+</html>

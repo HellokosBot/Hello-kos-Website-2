@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0a0c0c">
+<title>Paying – Hello Kos</title>
+<style>
+:root{--bg:#0a0c0c;--bg-elevated:#141818;--bg-card:#1a1f1f;--border:rgba(255,255,255,0.08);--text:#e8e8e8;--text-soft:#a0a8a8;--petrol:#3d9a9a;--gold:#e0b84a;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);line-height:1.5}
+.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:12px 14px;background:rgba(10,12,12,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-btns{display:flex;gap:6px}
+.nav-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);text-decoration:none;font-size:1.15rem}
+.nav-btn:active{transform:scale(.94)}
+.logo{justify-self:center;display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo-icon{font-size:22px}
+.logo-text{font-size:1.1rem;font-weight:700;color:var(--gold);font-family:Georgia,serif}
+.logo-text span{color:#f0c85a;font-style:italic}
+.lang-wrap{justify-self:end;position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-soft)}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:8px;min-width:160px;z-index:50}
+.lang-menu.open{display:block}
+.lang-option{display:block;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;color:var(--text)}
+.lang-option.active{background:rgba(61,154,154,.15);color:var(--petrol)}
+.overlay{display:none;position:fixed;inset:0;z-index:40}.overlay.open{display:block}
+.main{max-width:480px;margin:0 auto;padding:16px 14px 48px}
+.page-head{text-align:center;margin-bottom:14px}
+.page-head h1{font-size:1.3rem;font-weight:800}
+.page-head .intro{color:var(--text-soft);font-size:.92rem;margin-top:6px}
+.tip-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:16px;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.tip-photo{height:140px;overflow:hidden;background:linear-gradient(135deg,#1a2a2a,#0d1515)}
+.tip-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.tip-photo.no-img{height:0}
+.tip-body{padding:16px 16px 18px;position:relative}
+.tip-icon{position:absolute;top:-22px;right:14px;width:40px;height:40px;border-radius:12px;background:var(--bg-elevated);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.tip-body h2{font-size:1.05rem;font-weight:800;color:var(--gold);margin-bottom:8px;padding-right:36px}
+.tip-body p{font-size:.92rem;color:var(--text-soft);line-height:1.55;margin-bottom:10px}
+.tip-body p:last-child{margin-bottom:0}
+.tip-body strong{color:var(--text)}
+.note{background:rgba(61,154,154,.12);border:1px solid rgba(61,154,154,.3);border-radius:12px;padding:12px 14px;margin-top:10px;font-size:.9rem;color:#b8e0e0;line-height:1.5}
+.tbl{width:100%;border-collapse:collapse;margin:10px 0;font-size:.82rem}
+.tbl th,.tbl td{padding:10px 8px;text-align:left;border-bottom:1px solid var(--border)}
+.tbl th{color:var(--gold);font-weight:700;background:rgba(61,154,154,.08)}
+.tbl td{color:var(--text-soft)}
+.footer{text-align:center;padding:20px 16px;background:var(--bg-elevated);border-top:1px solid var(--border)}
+.footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
+.footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html">🏠</a>
+    <a class="nav-btn" href="wist-je-dat.html">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+
+<div data-lang-block="nl" style="display:none">
+  <header class="page-head"><h1>💳 Betalen: cash of card</h1><p class="intro">Contant blijft favoriet – en handig bij stroomuitval.</p></header>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-betalen-cash.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">💶</div>
+      <h2>Cash of card</h2>
+      <p>Op Kos is betalen de afgelopen jaren veranderd, maar <strong>contant geld blijft de favoriet</strong>. Hoewel horecazaken en winkels pin moeten accepteren, prefereert men contant – pinnen brengt voor ondernemers relatief hoge kosten met zich mee.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-betalen-stroom.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">⚡</div>
+      <h2>Stroomuitval</h2>
+      <p>Stroomstoringen komen voor. Dan werken pinautomaten en terminals niet. Heb altijd voldoende contant geld bij je.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-betalen-pinnen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">📱</div>
+      <h2>Pinnen in winkels & restaurants</h2>
+      <p>Voor <strong>EU-kaarten</strong> (Nederland, Duitsland, etc.) is betalen met pin in euro’s meestal <strong>gratis</strong> – de kosten zijn voor de ondernemer. Sommige zaken vragen toch een kleine toeslag.</p>
+      <p>Voor <strong>Britse (UK) kaarten</strong> na Brexit: vaak wel een foreign transaction fee van je eigen bank (typisch 1–3%).</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-betalen-atm.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🏧</div>
+      <h2>Geld opnemen bij de automaat</h2>
+      <p><strong>Griekse bankautomaten</strong> (National Bank of Greece, Alpha Bank, Eurobank, Piraeus): sinds 2025/2026 vaak <strong>€ 0 lokale kosten</strong> voor buitenlandse kaarten.</p>
+      <p><strong>Onafhankelijke automaten</strong> (Euronet e.d. – vaak op toeristische plekken/luchthaven): vermijd deze. Lokale fee tot ca. € 1,50–€ 5 + vaak slechte koers (DCC).</p>
+      <table class="tbl">
+        <tr><th>Situatie</th><th>EU-kaarten</th><th>UK-kaarten</th></tr>
+        <tr><td>Pinnen in winkel (EUR)</td><td>Meestal gratis</td><td>Vaak 1–3% eigen bank</td></tr>
+        <tr><td>ATM Griekse bank</td><td>€ 0 lokaal + evt. eigen bank</td><td>€ 0 lokaal + vaak FX-fee</td></tr>
+        <tr><td>ATM Euronet / private</td><td>€ 1,50–€ 5+ + slechte koers</td><td>Idem + FX-fee</td></tr>
+      </table>
+      <div class="note">
+        <strong>Tips:</strong><br>
+        • Kies altijd <strong>EUR</strong> (niet je eigen valuta) – weiger Dynamic Currency Conversion<br>
+        • Gebruik bankautomaten van Griekse banken, geen blauwe Euronet<br>
+        • Wise / Revolut / N26: vaak de goedkoopste optie<br>
+        • Fooi: bij voorkeur <strong>contant</strong> (pin-fooi komt niet altijd bij het personeel)
+      </div>
+    </div>
+  </article>
+</div>
+
+<div data-lang-block="en" style="display:none">
+  <header class="page-head"><h1>💳 Paying: cash or card</h1><p class="intro">Cash is still preferred – and useful during power cuts.</p></header>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-betalen-cash.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">💶</div>
+      <h2>Cash or card</h2>
+      <p>Paying on Kos has changed in recent years, but <strong>cash remains the favourite</strong>. Although restaurants and shops must accept cards, many prefer cash – card payments cost businesses relatively more.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-betalen-stroom.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">⚡</div>
+      <h2>Power cuts</h2>
+      <p>Power cuts do happen. Then ATMs and card terminals don’t work. Always carry enough cash.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-betalen-pinnen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">📱</div>
+      <h2>Cards in shops & restaurants</h2>
+      <p>For <strong>EU cards</strong> (Netherlands, Germany, etc.), paying in euros is usually <strong>free</strong> – the merchant pays the fee. Some places still add a small surcharge.</p>
+      <p>For <strong>UK cards</strong> after Brexit: your own bank often charges a foreign transaction fee (typically 1–3%).</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-betalen-atm.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🏧</div>
+      <h2>Withdrawing cash at ATMs</h2>
+      <p><strong>Greek bank ATMs</strong> (National Bank of Greece, Alpha Bank, Eurobank, Piraeus): since 2025/2026 often <strong>€ 0 local fee</strong> for foreign cards.</p>
+      <p><strong>Independent ATMs</strong> (Euronet etc. – often in tourist spots/airport): avoid these. Local fee around € 1.50–€ 5 + often a poor rate (DCC).</p>
+      <table class="tbl">
+        <tr><th>Situation</th><th>EU cards</th><th>UK cards</th></tr>
+        <tr><td>Pay in shop (EUR)</td><td>Usually free</td><td>Often 1–3% own bank</td></tr>
+        <tr><td>ATM Greek bank</td><td>€ 0 local + maybe own bank</td><td>€ 0 local + often FX fee</td></tr>
+        <tr><td>ATM Euronet / private</td><td>€ 1.50–€ 5+ + poor rate</td><td>Same + FX fee</td></tr>
+      </table>
+      <div class="note">
+        <strong>Tips:</strong><br>
+        • Always choose <strong>EUR</strong> (not your home currency) – refuse Dynamic Currency Conversion<br>
+        • Use Greek bank ATMs, not blue Euronet machines<br>
+        • Wise / Revolut / N26: often the cheapest option<br>
+        • Tips: preferably <strong>cash</strong> (card tips don’t always reach staff)
+      </div>
+    </div>
+  </article>
+</div>
+
+<div data-lang-block="de" style="display:none">
+  <header class="page-head"><h1>💳 Bezahlen: Bargeld oder Karte</h1><p class="intro">Bargeld bleibt bevorzugt – und nützlich bei Stromausfall.</p></header>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-betalen-cash.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">💶</div><h2>Bargeld oder Karte</h2>
+  <p><strong>Bargeld bleibt Favorit</strong>. Karten müssen akzeptiert werden, viele Betriebe bevorzugen aber Cash.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-betalen-stroom.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">⚡</div><h2>Stromausfall</h2>
+  <p>Stromausfälle kommen vor. Dann funktionieren Terminals nicht. Immer genug Bargeld dabei haben.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-betalen-pinnen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">📱</div><h2>Kartenzahlung</h2>
+  <p><strong>EU-Karten</strong>: meist kostenlos in Euro. <strong>UK-Karten</strong>: oft 1–3 % Gebühr der eigenen Bank.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-betalen-atm.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🏧</div><h2>Geld am Automaten</h2>
+  <p>Griechische Banken: oft <strong>€ 0 lokal</strong>. Euronet vermeiden (Gebühr + schlechter Kurs).</p>
+  <div class="note">Immer <strong>EUR</strong> wählen, nicht Heimatwährung. Trinkgeld lieber bar.</div></div></article>
+</div>
+
+<div data-lang-block="it" style="display:none">
+  <header class="page-head"><h1>💳 Pagare: contanti o carta</h1><p class="intro">I contanti restano preferiti – e utili in caso di blackout.</p></header>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-betalen-cash.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">💶</div><h2>Contanti o carta</h2>
+  <p>I <strong>contanti restano i preferiti</strong>. Le carte devono essere accettate, ma molti preferiscono il cash.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-betalen-stroom.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">⚡</div><h2>Blackout</h2>
+  <p>I blackout succedono. Allora POS e bancomat non funzionano. Porta sempre abbastanza contanti.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-betalen-pinnen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">📱</div><h2>Pagare con carta</h2>
+  <p><strong>Carte UE</strong>: di solito gratis in euro. <strong>Carte UK</strong>: spesso 1–3 % dalla propria banca.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-betalen-atm.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🏧</div><h2>Prelevare al bancomat</h2>
+  <p>Banche greche: spesso <strong>€ 0 locale</strong>. Evita Euronet (commissione + cambio sfavorevole).</p>
+  <div class="note">Scegli sempre <strong>EUR</strong>. Mancia meglio in contanti.</div></div></article>
+</div>
+
+<div data-lang-block="tr" style="display:none">
+  <header class="page-head"><h1>💳 Ödeme: nakit veya kart</h1><p class="intro">Nakit hâlâ tercih ediliyor – elektrik kesintisinde de işe yarar.</p></header>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-betalen-cash.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">💶</div><h2>Nakit veya kart</h2>
+  <p><strong>Nakit hâlâ favori</strong>. Kart kabul edilmeli ama birçok işletme nakit tercih eder.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-betalen-stroom.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">⚡</div><h2>Elektrik kesintisi</h2>
+  <p>Kesintiler olur. O zaman POS ve ATM çalışmaz. Her zaman yeterli nakit taşıyın.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-betalen-pinnen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">📱</div><h2>Kartla ödeme</h2>
+  <p><strong>AB kartları</strong>: euroda genellikle ücretsiz. <strong>UK kartları</strong>: kendi bankanızdan sıkça %1–3 ücret.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-betalen-atm.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🏧</div><h2>ATM’den para çekme</h2>
+  <p>Yunan bankaları: sıkça <strong>€ 0 yerel</strong>. Euronet’ten kaçının (ücret + kötü kur).</p>
+  <div class="note">Her zaman <strong>EUR</strong> seçin. Bahşiş tercihen nakit.</div></div></article>
+</div>
+
+<div data-lang-block="es" style="display:none">
+  <header class="page-head"><h1>💳 Pagar: efectivo o tarjeta</h1><p class="intro">El efectivo sigue siendo preferido – y útil en un apagón.</p></header>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-betalen-cash.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">💶</div><h2>Efectivo o tarjeta</h2>
+  <p>El <strong>efectivo sigue siendo el favorito</strong>. Las tarjetas deben aceptarse, pero muchos prefieren cash.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-betalen-stroom.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">⚡</div><h2>Cortes de luz</h2>
+  <p>Hay cortes de luz. Entonces no funcionan los datáfonos ni los cajeros. Lleva siempre suficiente efectivo.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-betalen-pinnen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">📱</div><h2>Pagar con tarjeta</h2>
+  <p><strong>Tarjetas UE</strong>: suele ser gratis en euros. <strong>Tarjetas UK</strong>: a menudo 1–3 % del propio banco.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-betalen-atm.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🏧</div><h2>Sacar dinero en el cajero</h2>
+  <p>Bancos griegos: a menudo <strong>€ 0 local</strong>. Evita Euronet (comisión + mal tipo de cambio).</p>
+  <div class="note">Elige siempre <strong>EUR</strong>. Propina mejor en efectivo.</div></div></article>
+</div>
+
+</main>
+<footer class="footer">
+  <div class="footer-logo">🔅 Hello Kos</div>
+  <p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a></p>
+</footer>
+<script>
+(function(){
+  var lang=localStorage.getItem('hk-lang')||'en';
+  var supported=['nl','de','en','it','tr','es'];
+  function setLang(l){
+    if(supported.indexOf(l)<0)l='en';
+    lang=l;localStorage.setItem('hk-lang',l);
+    document.querySelectorAll('[data-lang-block]').forEach(function(el){
+      el.style.display=(el.getAttribute('data-lang-block')===l)?'block':'none';
+    });
+    var opt=document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if(opt){document.getElementById('flag').textContent=opt.getAttribute('data-flag');document.getElementById('code').textContent=l.toUpperCase()}
+    document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===l)});
+    document.documentElement.lang=l;closeMenu();
+  }
+  var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu'),overlay=document.getElementById('overlay');
+  function openMenu(){langMenu.classList.add('open');overlay.classList.add('open')}
+  function closeMenu(){langMenu.classList.remove('open');overlay.classList.remove('open')}
+  langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.contains('open')?closeMenu():openMenu()});
+  overlay.addEventListener('click',closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'))})});
+  setLang(lang);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0a0c0c">
+<title>Traffic rules – Hello Kos</title>
+<style>
+:root{--bg:#0a0c0c;--bg-elevated:#141818;--bg-card:#1a1f1f;--border:rgba(255,255,255,0.08);--text:#e8e8e8;--text-soft:#a0a8a8;--petrol:#3d9a9a;--gold:#e0b84a;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);line-height:1.5}
+.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:12px 14px;background:rgba(10,12,12,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-btns{display:flex;gap:6px}
+.nav-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);text-decoration:none;font-size:1.15rem}
+.logo{justify-self:center;display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo-icon{font-size:22px}
+.logo-text{font-size:1.1rem;font-weight:700;color:var(--gold);font-family:Georgia,serif}
+.logo-text span{color:#f0c85a;font-style:italic}
+.lang-wrap{justify-self:end;position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-soft)}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:8px;min-width:160px;z-index:50}
+.lang-menu.open{display:block}
+.lang-option{display:block;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;color:var(--text)}
+.lang-option.active{background:rgba(61,154,154,.15);color:var(--petrol)}
+.overlay{display:none;position:fixed;inset:0;z-index:40}
+.overlay.open{display:block}
+.main{max-width:480px;margin:0 auto;padding:16px 14px 48px}
+.page-head{text-align:center;margin-bottom:18px}
+.page-head h1{font-size:1.4rem;font-weight:800;letter-spacing:-.02em}
+.page-head .intro{color:var(--text-soft);font-size:.92rem;margin-top:6px}
+.tips{display:flex;flex-direction:column;gap:16px}
+.tip-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.tip-photo{height:140px;background:linear-gradient(135deg,#1a2a2a,#0d1515);overflow:hidden}
+.tip-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.tip-photo.no-img{height:0}
+.tip-body{padding:16px 16px 18px;position:relative}
+.tip-icon{position:absolute;top:-22px;right:14px;width:40px;height:40px;border-radius:12px;background:var(--bg-elevated);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.tip-body h2{font-size:1.05rem;font-weight:800;color:var(--gold);margin-bottom:8px;padding-right:36px}
+.tip-body p{font-size:.92rem;color:var(--text-soft);line-height:1.55;margin-bottom:10px}
+.tip-body p:last-child{margin-bottom:0}
+.tip-body strong{color:var(--text)}
+.footer{text-align:center;padding:20px 16px;background:var(--bg-elevated);border-top:1px solid var(--border)}
+.footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
+.footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="verkeersregels.html" title="Back">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+
+<div data-lang-block="nl" style="display:none">
+  <header class="page-head">
+    <h1>Verkeersregels</h1>
+    <p class="intro">De belangrijkste verschillen op Kos — kort en duidelijk.</p>
+  </header>
+  <div class="tips">
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-rotonde.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🔄</div>
+        <h2>Rotondes</h2>
+        <p>Bij rotondes heeft de <strong>bestuurder op de rotonde geen voorrang</strong>. Je moet verkeer dat de rotonde oprijdt voorrang geven. Dit is anders dan in Nederland en veel andere landen.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-berg.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">⛰️</div>
+        <h2>Passeren in de bergen</h2>
+        <p>Op smalle bergwegen heeft <strong>stijgend verkeer voorrang</strong> op dalend verkeer.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-politie.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🚓</div>
+        <h2>Handhaving</h2>
+        <p>Men ziet hier vaker mensen zonder helm of zonder gordel rijden, of zelfs telefonerend achter het stuur zitten. Er wordt hier in Kos minder streng gecontroleerd. Dat wil niet zeggen dat er helemaal niet gecontroleerd wordt. Boetes zijn dan in Griekenland niet mals.</p>
+        <p>Sinds 2018 is er op het eiland een speciale verkeerspolitie. Deze zal strenger handhaven dan de politie in de voorgaande jaren deed, omdat het immers hun taak is deelnemers in het verkeer te controleren, terwijl de (gewone) politie zich ook met andere zaken bezighoudt. Ook heeft de verkeerspolitie sinds kort een laser gun die op snelheid kan controleren.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-rijstijl.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">👀</div>
+        <h2>Rijstijl &amp; gladde wegen</h2>
+        <p>Men heeft op Kos een eigen rijstijl ontwikkeld, dus ga er niet automatisch van uit dat de andere weggebruiker zich altijd netjes aan de verkeersregels houdt. Let dus altijd goed op!</p>
+        <p>Daarnaast kunnen de wegen zeer glad zijn in de zomer. Dit komt doordat er geen regenval is en vuil niet van de weg gespoeld wordt. Vooral als u op een scooter rijdt kan dit gevaarlijk zijn. Rem daarom ook nooit alleen met het voorwiel.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-parkeren.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🅿️</div>
+        <h2>Parkeren</h2>
+        <p>Er zijn op Kos <strong>geen betaalde parkeerplaatsen</strong>. Bij illegaal parkeren kun je wel een boete krijgen.</p>
+      </div>
+    </article>
+  </div>
+</div>
+
+<div data-lang-block="en" style="display:none">
+  <header class="page-head">
+    <h1>Traffic rules</h1>
+    <p class="intro">The most important differences on Kos — short and clear.</p>
+  </header>
+  <div class="tips">
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-rotonde.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🔄</div>
+        <h2>Roundabouts</h2>
+        <p>On Kos, traffic already on the roundabout does <strong>not</strong> have priority. You must give way to vehicles entering the roundabout. This is different from many European countries.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-berg.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">⛰️</div>
+        <h2>Mountain roads</h2>
+        <p>On narrow mountain roads, vehicles going <strong>uphill</strong> have priority over those going downhill.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-politie.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🚓</div>
+        <h2>Enforcement</h2>
+        <p>You may see people without a helmet or seatbelt, or even on the phone while driving. Checks are less strict here, but that does not mean there are no checks. Fines in Greece are not mild.</p>
+        <p>Since 2018 Kos has a dedicated traffic police. They enforce more strictly than before, because that is their job. They also have a laser gun for speed checks.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-rijstijl.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">👀</div>
+        <h2>Driving style &amp; slippery roads</h2>
+        <p>Kos has its own driving style, so do not assume other road users always follow the rules. Always stay alert!</p>
+        <p>Roads can also be very slippery in summer. There is little rain, so dirt is not washed off the road. This is especially dangerous on a scooter. Never brake with the front wheel only.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-parkeren.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🅿️</div>
+        <h2>Parking</h2>
+        <p>There are <strong>no</strong> paid parking zones on Kos. Illegal parking can still lead to a fine.</p>
+      </div>
+    </article>
+  </div>
+</div>
+
+<div data-lang-block="de" style="display:none">
+  <header class="page-head">
+    <h1>Verkehrsregeln</h1>
+    <p class="intro">Die wichtigsten Unterschiede auf Kos — kurz und klar.</p>
+  </header>
+  <div class="tips">
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-rotonde.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🔄</div>
+        <h2>Kreisverkehre</h2>
+        <p>Im Kreisverkehr hat der Verkehr <strong>keinen</strong> Vorrang. Du musst Fahrzeugen Vorrang geben, die einfahren.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-berg.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">⛰️</div>
+        <h2>Bergstraßen</h2>
+        <p>Auf engen Bergstraßen hat der <strong>bergauf</strong> fahrende Verkehr Vorrang.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-politie.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🚓</div>
+        <h2>Kontrollen</h2>
+        <p>Du siehst oft Leute ohne Helm oder Gurt, oder am Steuer telefonierend. Es wird weniger streng kontrolliert, aber Kontrollen gibt es. Bußgelder in Griechenland sind nicht mild.</p>
+        <p>Seit 2018 gibt es eine spezielle Verkehrspolizei. Sie kontrolliert strenger und hat eine Laserpistole für Geschwindigkeitskontrollen.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-rijstijl.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">👀</div>
+        <h2>Fahrstil &amp; glatte Straßen</h2>
+        <p>Auf Kos gibt es einen eigenen Fahrstil — gehe nicht davon aus, dass alle die Regeln einhalten. Immer aufpassen!</p>
+        <p>Im Sommer können Straßen sehr glatt sein: wenig Regen, Schmutz bleibt liegen. Besonders auf dem Roller gefährlich. Niemals nur mit dem Vorderrad bremsen.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-parkeren.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🅿️</div>
+        <h2>Parken</h2>
+        <p>Es gibt <strong>keine</strong> kostenpflichtigen Parkplätze auf Kos. Illegales Parken kann trotzdem bußgeldpflichtig sein.</p>
+      </div>
+    </article>
+  </div>
+</div>
+
+<div data-lang-block="it" style="display:none">
+  <header class="page-head">
+    <h1>Regole stradali</h1>
+    <p class="intro">Le differenze più importanti a Kos — brevi e chiare.</p>
+  </header>
+  <div class="tips">
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-rotonde.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🔄</div>
+        <h2>Rotatorie</h2>
+        <p>Chi è già in rotatoria <strong>non</strong> ha la precedenza. Devi dare precedenza a chi entra.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-berg.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">⛰️</div>
+        <h2>Strade di montagna</h2>
+        <p>Sulle strade strette ha precedenza chi va <strong>in salita</strong>.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-politie.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🚓</div>
+        <h2>Controlli</h2>
+        <p>Si vedono spesso persone senza casco o cintura, o al telefono mentre guidano. I controlli sono meno rigorosi, ma ci sono. Le multe in Grecia non sono leggere.</p>
+        <p>Dal 2018 c’è una polizia stradale dedicata, più severa, anche con laser per la velocità.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-rijstijl.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">👀</div>
+        <h2>Stile di guida &amp; strade scivolose</h2>
+        <p>A Kos c’è uno stile di guida proprio: non dare per scontato che tutti rispettino le regole. Resta sempre attento!</p>
+        <p>In estate le strade possono essere molto scivolose: poca pioggia, sporco che resta. Specialmente in scooter è pericoloso. Non frenare mai solo con la ruota anteriore.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-parkeren.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🅿️</div>
+        <h2>Parcheggio</h2>
+        <p><strong>Non</strong> ci sono parcheggi a pagamento. Parcheggiare male può comunque costare una multa.</p>
+      </div>
+    </article>
+  </div>
+</div>
+
+<div data-lang-block="tr" style="display:none">
+  <header class="page-head">
+    <h1>Trafik kuralları</h1>
+    <p class="intro">Kos’taki en önemli farklar — kısa ve net.</p>
+  </header>
+  <div class="tips">
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-rotonde.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🔄</div>
+        <h2>Dönel kavşaklar</h2>
+        <p>Kavşaktaki araçların <strong>önceliği yoktur</strong>. Giren araçlara yol vermelisiniz.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-berg.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">⛰️</div>
+        <h2>Dağ yolları</h2>
+        <p>Dar dağ yollarında <strong>yokuş yukarı</strong> gidenler önceliklidir.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-politie.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🚓</div>
+        <h2>Denetim</h2>
+        <p>Kask veya emniyet kemeri olmadan, hatta telefonla sürerken görenler olabilir. Kontroller daha az sıkı olabilir ama yok değildir. Yunanistan’da cezalar hafif değildir.</p>
+        <p>2018’den beri özel trafik polisi var; daha sıkı denetler ve hız için lazer kullanır.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-rijstijl.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">👀</div>
+        <h2>Sürüş stili &amp; kaygan yollar</h2>
+        <p>Kos’ta kendine özgü bir sürüş stili vardır; herkesin kurallara uyduğunu varsaymayın. Her zaman dikkatli olun!</p>
+        <p>Yazın yollar çok kaygan olabilir: yağmur az, kir yıkanmaz. Özellikle scooter’da tehlikelidir. Sadece ön tekerlekle asla fren yapmayın.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-parkeren.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🅿️</div>
+        <h2>Park</h2>
+        <p>Ücretli park yeri <strong>yoktur</strong>. Yanlış park cezaya yol açabilir.</p>
+      </div>
+    </article>
+  </div>
+</div>
+
+<div data-lang-block="es" style="display:none">
+  <header class="page-head">
+    <h1>Normas de tráfico</h1>
+    <p class="intro">Las diferencias más importantes en Kos — breves y claras.</p>
+  </header>
+  <div class="tips">
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-rotonde.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🔄</div>
+        <h2>Rotondas</h2>
+        <p>El tráfico que ya está en la rotonda <strong>no</strong> tiene prioridad. Debes ceder el paso a quien entra.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-berg.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">⛰️</div>
+        <h2>Carreteras de montaña</h2>
+        <p>En carreteras estrechas tiene prioridad quien <strong>sube</strong>.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-politie.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🚓</div>
+        <h2>Controles</h2>
+        <p>Se ve a menudo gente sin casco o cinturón, o al teléfono al volante. Los controles son menos estrictos, pero existen. Las multas en Grecia no son leves.</p>
+        <p>Desde 2018 hay policía de tráfico dedicada, más estricta, también con láser de velocidad.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-rijstijl.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">👀</div>
+        <h2>Estilo de conducción &amp; carreteras resbaladizas</h2>
+        <p>En Kos hay un estilo de conducción propio: no asumas que todos siguen las normas. ¡Mantente siempre atento!</p>
+        <p>En verano las carreteras pueden estar muy resbaladizas: poca lluvia, la suciedad no se limpia. Especialmente en scooter es peligroso. Nunca frenes solo con la rueda delantera.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="vr-inhoud-parkeren.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🅿️</div>
+        <h2>Aparcamiento</h2>
+        <p><strong>No</strong> hay aparcamiento de pago. Aparcar mal puede conllevar multa.</p>
+      </div>
+    </article>
+  </div>
+</div>
+
+</main>
+<footer class="footer">
+  <div class="footer-logo">🔅 Hello Kos</div>
+  <p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a></p>
+</footer>
+<script>
+(function(){
+  var lang=localStorage.getItem('hk-lang')||'en';
+  var supported=['nl','de','en','it','tr','es'];
+  function setLang(l){
+    if(supported.indexOf(l)<0)l='en';
+    lang=l;localStorage.setItem('hk-lang',l);
+    document.querySelectorAll('[data-lang-block]').forEach(function(el){
+      el.style.display = (el.getAttribute('data-lang-block')===l) ? 'block' : 'none';
+    });
+    var opt=document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if(opt){document.getElementById('flag').textContent=opt.getAttribute('data-flag');document.getElementById('code').textContent=l.toUpperCase()}
+    document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===l)});
+    document.documentElement.lang=l;closeMenu();
+  }
+  var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu'),overlay=document.getElementById('overlay');
+  function openMenu(){langMenu.classList.add('open');overlay.classList.add('open')}
+  function closeMenu(){langMenu.classList.remove('open');overlay.classList.remove('open')}
+  langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.contains('open')?closeMenu():openMenu()});
+  overlay.addEventListener('click',closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'))})});
+  setLang(lang);
+})();
+</script>
+</body>
+</html>

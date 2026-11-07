@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0a0c0c">
+<title>Did you know… – Hello Kos</title>
+<style>
+:root{--bg:#0a0c0c;--bg-elevated:#141818;--bg-card:#1a1f1f;--border:rgba(255,255,255,0.08);--text:#e8e8e8;--text-soft:#a0a8a8;--text-muted:#6b7373;--petrol:#3d9a9a;--gold:#e0b84a;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);padding-top:var(--safe-top);padding-bottom:var(--safe-bottom)}
+.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:12px 14px;background:rgba(10,12,12,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-btns{display:flex;gap:6px;align-items:center}
+.nav-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);text-decoration:none;font-size:1.15rem;line-height:1}
+.nav-btn:active{opacity:.75}
+.logo{justify-self:center;display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo-icon{font-size:22px}
+.logo-text{font-size:1.1rem;font-weight:700;color:var(--gold);font-family:Georgia,serif}
+.logo-text span{color:#f0c85a;font-style:italic}
+.lang-wrap{justify-self:end;position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-soft)}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:8px;min-width:160px;z-index:50}
+.lang-menu.open{display:block}
+.lang-option{display:block;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;color:var(--text)}
+.lang-option:hover,.lang-option.active{background:rgba(61,154,154,.15);color:var(--petrol)}
+.overlay{display:none;position:fixed;inset:0;z-index:40}
+.overlay.open{display:block}
+.main{max-width:480px;margin:0 auto;padding:18px 14px 40px}
+.page-title{text-align:center;margin-bottom:16px}
+.page-title h1{font-size:1.35rem;font-weight:800}
+.page-title p{color:var(--text-soft);font-size:.9rem;margin-top:4px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:.95;text-decoration:none;color:#fff;box-shadow:0 2px 12px rgba(0,0,0,.22);border:1px solid var(--border)}
+.card img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.82)}
+.card-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.75) 0%,transparent 48%);display:flex;align-items:flex-start;justify-content:center;padding:12px 8px;text-align:center}
+.card-title{font-size:.85rem;font-weight:800;line-height:1.25;text-shadow:0 1px 6px rgba(0,0,0,.85);text-align:center;width:100%;background:rgba(0,0,0,.35);backdrop-filter:blur(6px);border-radius:10px;padding:6px 8px}
+.footer{text-align:center;padding:20px 16px 28px;background:var(--bg-elevated);border-top:1px solid var(--border)}
+.footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
+.footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
+.footer .copy{font-size:.72rem;color:var(--text-muted);margin-top:10px}
+#zoomLayer{position:fixed;inset:0;z-index:8000;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s,visibility .25s}
+#zoomLayer.show{opacity:1;visibility:visible;pointer-events:auto}
+#zoomLayer img{max-width:92vw;max-height:78vh;border-radius:16px;object-fit:contain;transform:scale(.88);transition:transform .35s cubic-bezier(.22,1,.36,1)}
+#zoomLayer.show img{transform:scale(1)}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Back">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="page-title">
+    <h1 id="pageH1">Did you know…</h1>
+    <p id="pageSub">Useful facts & tips for Kos</p>
+  </div>
+  <div class="grid">
+      <a href="turks-netwerk.html" class="card">
+        <img src="wjd-turks-netwerk.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t0">Mobile phone<br>on Turkish network</div></div>
+      </a>
+      <a href="verkeersregels.html" class="card">
+        <img src="wjd-verkeersregels.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t1">Traffic rules<br>& fines</div></div>
+      </a>
+      <a href="shoppen-bodrum.html" class="card">
+        <img src="wjd-shoppen-bodrum.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t2">Shopping Bodrum<br>& customs</div></div>
+      </a>
+      <a href="bedelaars-muzikanten.html" class="card">
+        <img src="wjd-bedelaars.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t3">Beggars &<br>musicians</div></div>
+      </a>
+      <a href="water-ijsklontjes.html" class="card">
+        <img src="wjd-water.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t4">Water &<br>ice cubes</div></div>
+      </a>
+      <a href="kakkerlakken.html" class="card">
+        <img src="wjd-kakkerlakken.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t5">Cockroaches<br>& pests</div></div>
+      </a>
+      <a href="boete-eigen-eten.html" class="card">
+        <img src="wjd-boete-eten.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t6">Fine for<br>bringing your own food</div></div>
+      </a>
+      <a href="toiletten.html" class="card">
+        <img src="wjd-toiletten.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t7">Toilets</div></div>
+      </a>
+      <a href="afdingen.html" class="card">
+        <img src="wjd-afdingen.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t8">Bargaining</div></div>
+      </a>
+      <a href="siesta.html" class="card">
+        <img src="wjd-siesta.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t9">Siesta</div></div>
+      </a>
+      <a href="drugs.html" class="card">
+        <img src="wjd-drugs.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t10">Drugs</div></div>
+      </a>
+      <a href="criminaliteit.html" class="card">
+        <img src="wjd-criminaliteit.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t11">Crime</div></div>
+      </a>
+      <a href="aardbevingen.html" class="card">
+        <img src="wjd-aardbevingen.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t12">Earthquakes</div></div>
+      </a>
+      <a href="gevaarlijke-dieren.html" class="card">
+        <img src="wjd-gevaarlijke-dieren.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t13">Dangerous<br>animals</div></div>
+      </a>
+      <a href="borden-kapot-gooien.html" class="card">
+        <img src="wjd-borden.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t14">Smashing<br>plates</div></div>
+      </a>
+      <a href="proppers.html" class="card">
+        <img src="wjd-proppers.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t15">Restaurant<br>touts</div></div>
+      </a>
+      <a href="toeristenbelasting.html" class="card">
+        <img src="wjd-toeristenbelasting.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t16">Tourist<br>tax</div></div>
+      </a>
+      <a href="fooien.html" class="card">
+        <img src="wjd-fooien.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t17">Tipping</div></div>
+      </a>
+      <a href="kapelletjes.html" class="card">
+        <img src="wjd-kapelletjes.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t18">Roadside<br>chapels</div></div>
+      </a>
+      <a href="vlag-hijsen.html" class="card">
+        <img src="wjd-vlag.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t19">Sunday flag<br>ceremony</div></div>
+      </a>
+      <a href="winter-kos.html" class="card">
+        <img src="wjd-winter.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t20">Kos in<br>winter</div></div>
+      </a>
+      <a href="bonnen.html" class="card">
+        <img src="wjd-bonnen.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t21">Receipts<br>on the table</div></div>
+      </a>
+      <a href="zonsondergang.html" class="card">
+        <img src="wjd-zonsondergang.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t22">Sunset<br>countdown</div></div>
+      </a>
+      <a href="posidonia-ballen.html" class="card">
+        <img src="wjd-posidonia.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t23">Posidonia<br>balls</div></div>
+      </a>
+      <a href="gratis-poster.html" class="card">
+        <img src="wjd-poster.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t24">Free Kos<br>art poster</div></div>
+      </a>
+      <a href="kinderserie.html" class="card">
+        <img src="wjd-kinderserie.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t25">Kids series<br>Nikos & Eleni</div></div>
+      </a>
+      <a href="afgeknipte-oren.html" class="card">
+        <img src="wjd-afgeknipte-oren.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t26">Cats with<br>cut ears</div></div>
+      </a>
+      <a href="cash-of-card.html" class="card">
+        <img src="wjd-cash-card.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t27">Cash or<br>card</div></div>
+      </a>
+      <a href="eenoudertoestemming.html" class="card">
+        <img src="wjd-eenoudertoestemming.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t28">Single parent<br>consent</div></div>
+      </a>
+      <a href="fabels.html" class="card">
+        <img src="wjd-fabels.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t29">Myths &<br>fables</div></div>
+      </a>
+      <a href="gyros.html" class="card">
+        <img src="wjd-gyros.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t30">Gyros</div></div>
+      </a>
+      <a href="zwerfkatten.html" class="card">
+        <img src="wjd-zwerfdieren.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t31">Stray<br>animals</div></div>
+      </a>
+      <a href="webcams.html" class="card">
+        <img src="wjd-webcams.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t32">Webcams</div></div>
+      </a>
+      <a href="voordringen.html" class="card">
+        <img src="wjd-voordringen.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t33">Cutting in<br>line</div></div>
+      </a>
+      <a href="visum-bodrum.html" class="card">
+        <img src="wjd-visa-bodrum.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t34">Visa<br>Bodrum</div></div>
+      </a>
+      <a href="roken.html" class="card">
+        <img src="wjd-roken.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="t35">Smoking<br>rules</div></div>
+      </a>
+  </div>
+</main>
+<div id="zoomLayer"><img src="" alt=""></div>
+<footer class="footer">
+  <div class="footer-logo">🔅 Hello Kos</div>
+  <p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a> · <a href="mailto:info@hellokos.com">Contact</a></p>
+  <p class="copy">© 2026 Hello Kos</p>
+</footer>
+<script>
+(function(){
+  var dict={
+    en:{pageH1:"Did you know…",pageSub:"Useful facts & tips for Kos",
+      t0:"Mobile phone<br>on Turkish network",
+      t1:"Traffic rules<br>& fines",
+      t2:"Shopping Bodrum<br>& customs",
+      t3:"Beggars &<br>musicians",
+      t4:"Water &<br>ice cubes",
+      t5:"Cockroaches<br>& pests",
+      t6:"Fine for<br>bringing your own food",
+      t7:"Toilets",
+      t8:"Bargaining",
+      t9:"Siesta",
+      t10:"Drugs",
+      t11:"Crime",
+      t12:"Earthquakes",
+      t13:"Dangerous<br>animals",
+      t14:"Smashing<br>plates",
+      t15:"Restaurant<br>touts",
+      t16:"Tourist<br>tax",
+      t17:"Tipping",
+      t18:"Roadside<br>chapels",
+      t19:"Sunday flag<br>ceremony",
+      t20:"Kos in<br>winter",
+      t21:"Receipts<br>on the table",
+      t22:"Sunset<br>countdown",
+      t23:"Posidonia<br>balls",
+      t24:"Free Kos<br>art poster",
+      t25:"Kids series<br>Nikos & Eleni",
+      t26:"Cats with<br>cut ears",
+      t27:"Cash or<br>card",
+      t28:"Single parent<br>consent",
+      t29:"Myths &<br>fables",
+      t30:"Gyros",
+      t31:"Stray<br>animals",
+      t32:"Webcams",
+      t33:"Cutting in<br>line",
+      t34:"Visa<br>Bodrum",
+      t35:"Smoking<br>rules"
+    },
+    nl:{pageH1:"Wist je dat…",pageSub:"Handige feiten & tips voor Kos",
+      t0:"Mobiele telefoon<br>op Turks netwerk",
+      t1:"Verkeersregels<br>& boetes",
+      t2:"Shoppen Bodrum<br>& douane",
+      t3:"Bedelaars &<br>muzikanten",
+      t4:"Water &<br>ijsklontjes",
+      t5:"Kakkerlakken<br>& ongedierte",
+      t6:"Boete voor<br>meegenomen eten",
+      t7:"Toiletten",
+      t8:"Afdingen",
+      t9:"Siësta",
+      t10:"Drugs",
+      t11:"Criminaliteit",
+      t12:"Aardbevingen",
+      t13:"Gevaarlijke<br>dieren",
+      t14:"Borden kapot<br>gooien",
+      t15:"Proppers",
+      t16:"Toeristen<br>belasting",
+      t17:"Fooien",
+      t18:"Kapelletjes",
+      t19:"Vlag hijsen<br>zondags",
+      t20:"Winter<br>op Kos",
+      t21:"Bonnen<br>op tafel",
+      t22:"Countdown naar<br>zonsondergang",
+      t23:"Posidonia<br>ballen",
+      t24:"Gratis art<br>poster van Kos",
+      t25:"Kinderserie<br>Nikos & Eleni",
+      t26:"Afgeknipte oren<br>(katten)",
+      t27:"Cash of card<br>betalen",
+      t28:"Eenouder<br>toestemming",
+      t29:"Fabels",
+      t30:"Gyros",
+      t31:"Zwerfdieren",
+      t32:"Webcams",
+      t33:"Voordringen",
+      t34:"Visa<br>Bodrum",
+      t35:"Roken<br>(niet)"
+    },
+    de:{pageH1:"Wusstest du…",pageSub:"Nützliche Fakten & Tipps für Kos"},
+    it:{pageH1:"Lo sapevi…",pageSub:"Fatti utili e consigli su Kos"},
+    tr:{pageH1:"Biliyor muydun…",pageSub:"Kos için faydalı bilgiler"},
+    es:{pageH1:"¿Sabías que…",pageSub:"Datos útiles y tips sobre Kos"}
+  };
+  ['de','it','tr','es'].forEach(function(l){
+    for(var i=0;i<36;i++){
+      var k='t'+i;
+      if(!dict[l][k]) dict[l][k]=dict.en[k];
+    }
+  });
+  var lang=localStorage.getItem('hk-lang')||'en';
+  function setLang(l){
+    lang=l;localStorage.setItem('hk-lang',l);
+    var d=dict[l]||dict.en;
+    document.getElementById('pageH1').textContent=d.pageH1;
+    document.getElementById('pageSub').textContent=d.pageSub;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k=el.getAttribute('data-i18n');
+      if(d[k]) el.innerHTML=d[k];
+    });
+    var opt=document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if(opt){
+      document.getElementById('flag').textContent=opt.getAttribute('data-flag');
+      document.getElementById('code').textContent=l.toUpperCase();
+    }
+    document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===l)});
+    document.documentElement.lang=l;closeMenu();
+  }
+  var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu'),overlay=document.getElementById('overlay');
+  function openMenu(){langMenu.classList.add('open');overlay.classList.add('open')}
+  function closeMenu(){langMenu.classList.remove('open');overlay.classList.remove('open')}
+  langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.contains('open')?closeMenu():openMenu()});
+  overlay.addEventListener('click',closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){
+    btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'))});
+  });
+  document.addEventListener('click',function(e){
+    var card=e.target.closest('a.card');
+    if(!card) return;
+    e.preventDefault();
+    var img=card.querySelector('img');
+    var href=card.getAttribute('href');
+    if(!href||href==='#') return;
+    var layer=document.getElementById('zoomLayer');
+    layer.querySelector('img').src=img?img.src:'';
+    layer.classList.add('show');
+    setTimeout(function(){window.location.href=href},550);
+  },true);
+  setLang(lang);
+})();
+</script>
+</body>
+</html>

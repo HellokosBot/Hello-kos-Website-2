@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0a0c0c">
+<title>Fines – Hello Kos</title>
+<style>
+:root{--bg:#0a0c0c;--bg-elevated:#141818;--bg-card:#1a1f1f;--border:rgba(255,255,255,0.08);--text:#e8e8e8;--text-soft:#a0a8a8;--petrol:#3d9a9a;--gold:#e0b84a;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);line-height:1.5}
+.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:12px 14px;background:rgba(10,12,12,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-btns{display:flex;gap:6px}
+.nav-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);text-decoration:none;font-size:1.15rem}
+.logo{justify-self:center;display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo-icon{font-size:22px}
+.logo-text{font-size:1.1rem;font-weight:700;color:var(--gold);font-family:Georgia,serif}
+.logo-text span{color:#f0c85a;font-style:italic}
+.lang-wrap{justify-self:end;position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-soft)}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:8px;min-width:160px;z-index:50}
+.lang-menu.open{display:block}
+.lang-option{display:block;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;color:var(--text)}
+.lang-option.active{background:rgba(61,154,154,.15);color:var(--petrol)}
+.overlay{display:none;position:fixed;inset:0;z-index:40}
+.overlay.open{display:block}
+.main{max-width:480px;margin:0 auto;padding:16px 14px 48px}
+.page-head{text-align:center;margin-bottom:14px}
+.page-head h1{font-size:1.4rem;font-weight:800}
+.page-head .intro{color:var(--text-soft);font-size:.92rem;margin-top:6px}
+.alert{background:rgba(224,122,74,.12);border:1px solid rgba(224,122,74,.35);border-radius:14px;padding:14px 16px;margin-bottom:16px;font-size:.9rem;color:#f0c8b0;line-height:1.5}
+.alert strong{color:#ffd4b8}
+.panel{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:14px}
+.panel h2{font-size:1rem;color:var(--gold);margin:14px 16px 10px;font-weight:800}
+.sec-photo{height:120px;overflow:hidden;background:linear-gradient(135deg,#1a2a2a,#0d1515)}
+.sec-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.sec-photo.hide{display:none}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 16px 16px}
+table{width:100%;border-collapse:collapse;font-size:.84rem;min-width:280px}
+th,td{padding:10px 8px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+th{color:var(--petrol);font-weight:700;font-size:.72rem;text-transform:uppercase;letter-spacing:.03em}
+td.amt{color:var(--gold);font-weight:700;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+.map-link{display:inline-flex;align-items:center;gap:8px;margin:0 16px 16px;padding:10px 14px;background:rgba(61,154,154,.15);border:1px solid rgba(61,154,154,.35);border-radius:12px;color:var(--petrol);text-decoration:none;font-weight:600;font-size:.9rem}
+.footer{text-align:center;padding:20px 16px;background:var(--bg-elevated);border-top:1px solid var(--border)}
+.footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
+.footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="verkeersregels.html" title="Back">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+
+<!-- NL -->
+<div data-lang-block="nl" style="display:none">
+  <header class="page-head">
+    <h1>Boetes</h1>
+    <p class="intro">Bedragen en regels op Kos.</p>
+  </header>
+  <div class="alert"><strong>Betalen:</strong> binnen <strong>10 dagen</strong> bij het postkantoor op Kos. Geen 50% korting meer bij snelle betaling. <a href="gevolgen-niet-betalen.html" style="color:#ffd4b8">Gevolgen niet betalen →</a></div>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-boetes-scooter.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Scooter / motor</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Overtreding</th><th>Boete</th></tr></thead>
+      <tbody>
+        <tr><td>Rijden zonder helm</td><td class="amt">€350 + 30 dagen rijontzegging</td></tr>
+        <tr><td>Zonder helm (2e keer)</td><td class="amt">€700 + 60 dagen rijontzegging</td></tr>
+        <tr><td>Meerijden zonder helm</td><td class="amt">€350 + €350 bestuurder</td></tr>
+        <tr><td>Rijden met slippers</td><td class="amt">€150</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-boetes-auto.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Auto</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Overtreding</th><th>Boete</th></tr></thead>
+      <tbody>
+        <tr><td>Zonder gordel (bestuurder)</td><td class="amt">€350</td></tr>
+        <tr><td>Passagier zonder gordel</td><td class="amt">€150 + €150 bestuurder</td></tr>
+        <tr><td>Door rood licht</td><td class="amt">€700 + 60 dagen rijontzegging</td></tr>
+        <tr><td>Geen voorrang verlenen</td><td class="amt">€350 + 30 dagen rijontzegging</td></tr>
+        <tr><td>Inhalen bij inhaalverbod</td><td class="amt">€700 + 60 dagen rijontzegging</td></tr>
+        <tr><td>Over doorgetrokken streep</td><td class="amt">€700 + 60 dagen rijontzegging</td></tr>
+        <tr><td>Parkeerovertreding</td><td class="amt">€150</td></tr>
+        <tr><td>Mobiele telefoon</td><td class="amt">€350 + 30 dagen rijontzegging</td></tr>
+        <tr><td>Geen voorrang (rotonde / voetganger)</td><td class="amt">€350 + 30 dagen rijontzegging</td></tr>
+        <tr><td>Stopteken negeren</td><td class="amt">€350 + 30 dagen rijontzegging</td></tr>
+        <tr><td>Stopteken negeren + ongeval</td><td class="amt">€700 + 60 dagen rijontzegging</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-boetes-snelheid.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Snelheid</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Overschrijding</th><th>Boete</th></tr></thead>
+      <tbody>
+        <tr><td>20–29 km/u te hard</td><td class="amt">€150</td></tr>
+        <tr><td>30–39 km/u te hard</td><td class="amt">€350 + 30 dagen rijontzegging</td></tr>
+        <tr><td>40–49 km/u te hard</td><td class="amt">€700 + 60 dagen rijontzegging</td></tr>
+        <tr><td>50+ km/u te hard</td><td class="amt">€700 + 60 dagen rijontzegging</td></tr>
+        <tr><td>Extreem / straatracen</td><td class="amt">€2.000 + 1 jaar rijontzegging</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-boetes-alcohol.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Alcohol</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Gehalte</th><th>Boete</th></tr></thead>
+      <tbody>
+        <tr><td>0,0‰ – 0,5‰</td><td class="amt">Toegestaan</td></tr>
+        <tr><td>0,5‰ – 0,8‰</td><td class="amt">€350 + 30 dagen rijontzegging</td></tr>
+        <tr><td>0,8‰ – 1,1‰</td><td class="amt">€700 + 90 dagen rijontzegging</td></tr>
+        <tr><td>> 1,1‰</td><td class="amt">€1.200 + 180 dagen rijontzegging</td></tr>
+        <tr><td>Herhaling / ongeval onder invloed</td><td class="amt">€2.000–€4.000 + lange rijontzegging</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <h2>Waar betalen</h2>
+    <p style="padding:0 16px 8px;color:var(--text-soft);font-size:.92rem">Postkantoor op Kos, binnen 10 dagen.</p>
+    <a class="map-link" href="https://maps.app.goo.gl/7Ady6yJTRreeDx769" target="_blank" rel="noopener">📍 Locatie postkantoor</a>
+  </section>
+</div>
+
+<!-- EN -->
+<div data-lang-block="en" style="display:none">
+  <header class="page-head">
+    <h1>Fines</h1>
+    <p class="intro">Amounts and rules on Kos.</p>
+  </header>
+  <div class="alert"><strong>Payment:</strong> within <strong>10 days</strong> at the post office on Kos. No more 50% early-payment discount. <a href="gevolgen-niet-betalen.html" style="color:#ffd4b8">If you don't pay →</a></div>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-boetes-scooter.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Scooter / motorcycle</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Offence</th><th>Fine</th></tr></thead>
+      <tbody>
+        <tr><td>No helmet (driver)</td><td class="amt">€350 + 30 days ban</td></tr>
+        <tr><td>No helmet (2nd time)</td><td class="amt">€700 + 60 days ban</td></tr>
+        <tr><td>Passenger without helmet</td><td class="amt">€350 + €350 driver</td></tr>
+        <tr><td>Riding in flip-flops</td><td class="amt">€150</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-boetes-auto.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Car</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Offence</th><th>Fine</th></tr></thead>
+      <tbody>
+        <tr><td>No seatbelt (driver)</td><td class="amt">€350</td></tr>
+        <tr><td>Passenger without seatbelt</td><td class="amt">€150 + €150 driver</td></tr>
+        <tr><td>Running red light</td><td class="amt">€700 + 60 days ban</td></tr>
+        <tr><td>Failure to give way</td><td class="amt">€350 + 30 days ban</td></tr>
+        <tr><td>Overtaking where forbidden</td><td class="amt">€700 + 60 days ban</td></tr>
+        <tr><td>Crossing solid line</td><td class="amt">€700 + 60 days ban</td></tr>
+        <tr><td>Parking offence</td><td class="amt">€150</td></tr>
+        <tr><td>Using mobile phone</td><td class="amt">€350 + 30 days ban</td></tr>
+        <tr><td>No priority (roundabout / pedestrian)</td><td class="amt">€350 + 30 days ban</td></tr>
+        <tr><td>Ignoring stop sign</td><td class="amt">€350 + 30 days ban</td></tr>
+        <tr><td>Ignoring stop + accident</td><td class="amt">€700 + 60 days ban</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-boetes-snelheid.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Speeding</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Excess</th><th>Fine</th></tr></thead>
+      <tbody>
+        <tr><td>20–29 km/h over</td><td class="amt">€150</td></tr>
+        <tr><td>30–39 km/h over</td><td class="amt">€350 + 30 days ban</td></tr>
+        <tr><td>40–49 km/h over</td><td class="amt">€700 + 60 days ban</td></tr>
+        <tr><td>50+ km/h over</td><td class="amt">€700 + 60 days ban</td></tr>
+        <tr><td>Extreme / street racing</td><td class="amt">€2.000 + 1 year ban</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-boetes-alcohol.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Alcohol</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Level</th><th>Fine</th></tr></thead>
+      <tbody>
+        <tr><td>0.0‰ – 0.5‰</td><td class="amt">Allowed</td></tr>
+        <tr><td>0.5‰ – 0.8‰</td><td class="amt">€350 + 30 days ban</td></tr>
+        <tr><td>0.8‰ – 1.1‰</td><td class="amt">€700 + 90 days ban</td></tr>
+        <tr><td>> 1.1‰</td><td class="amt">€1.200 + 180 days ban</td></tr>
+        <tr><td>Repeat / accident under influence</td><td class="amt">€2.000–€4.000 + long ban</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <h2>Where to pay</h2>
+    <p style="padding:0 16px 8px;color:var(--text-soft);font-size:.92rem">Post office on Kos, within 10 days.</p>
+    <a class="map-link" href="https://maps.app.goo.gl/7Ady6yJTRreeDx769" target="_blank" rel="noopener">📍 Post office location</a>
+  </section>
+</div>
+
+<!-- DE -->
+<div data-lang-block="de" style="display:none">
+  <header class="page-head">
+    <h1>Bußgelder</h1>
+    <p class="intro">Beträge und Regeln auf Kos.</p>
+  </header>
+  <div class="alert"><strong>Zahlung:</strong> innerhalb von <strong>10 Tagen</strong> im Postamt auf Kos. Kein 50%-Rabatt mehr. <a href="gevolgen-niet-betalen.html" style="color:#ffd4b8">Bei Nichtzahlung →</a></div>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-boetes-scooter.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Roller / Motorrad</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Verstoß</th><th>Strafe</th></tr></thead>
+      <tbody>
+        <tr><td>Ohne Helm (Fahrer)</td><td class="amt">€350 + 30 Tage Fahrverbot</td></tr>
+        <tr><td>Ohne Helm (2. Mal)</td><td class="amt">€700 + 60 Tage Fahrverbot</td></tr>
+        <tr><td>Beifahrer ohne Helm</td><td class="amt">€350 + €350 Fahrer</td></tr>
+        <tr><td>Fahren in Flip-Flops</td><td class="amt">€150</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-boetes-auto.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Auto</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Verstoß</th><th>Strafe</th></tr></thead>
+      <tbody>
+        <tr><td>Ohne Gurt (Fahrer)</td><td class="amt">€350</td></tr>
+        <tr><td>Beifahrer ohne Gurt</td><td class="amt">€150 + €150 Fahrer</td></tr>
+        <tr><td>Rote Ampel</td><td class="amt">€700 + 60 Tage Fahrverbot</td></tr>
+        <tr><td>Keine Vorfahrt</td><td class="amt">€350 + 30 Tage Fahrverbot</td></tr>
+        <tr><td>Überholen bei Verbot</td><td class="amt">€700 + 60 Tage Fahrverbot</td></tr>
+        <tr><td>Durchgezogene Linie</td><td class="amt">€700 + 60 Tage Fahrverbot</td></tr>
+        <tr><td>Parkverstoß</td><td class="amt">€150</td></tr>
+        <tr><td>Handy am Steuer</td><td class="amt">€350 + 30 Tage Fahrverbot</td></tr>
+        <tr><td>Keine Vorfahrt (Kreisverkehr / Fußgänger)</td><td class="amt">€350 + 30 Tage Fahrverbot</td></tr>
+        <tr><td>Stoppschild ignorieren</td><td class="amt">€350 + 30 Tage Fahrverbot</td></tr>
+        <tr><td>Stoppschild + Unfall</td><td class="amt">€700 + 60 Tage Fahrverbot</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-boetes-snelheid.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Geschwindigkeit</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Überschreitung</th><th>Strafe</th></tr></thead>
+      <tbody>
+        <tr><td>20–29 km/h zu schnell</td><td class="amt">€150</td></tr>
+        <tr><td>30–39 km/h zu schnell</td><td class="amt">€350 + 30 Tage Fahrverbot</td></tr>
+        <tr><td>40–49 km/h zu schnell</td><td class="amt">€700 + 60 Tage Fahrverbot</td></tr>
+        <tr><td>50+ km/h zu schnell</td><td class="amt">€700 + 60 Tage Fahrverbot</td></tr>
+        <tr><td>Extrem / Straßenrennen</td><td class="amt">€2.000 + 1 Jahr Fahrverbot</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-boetes-alcohol.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Alkohol</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Wert</th><th>Strafe</th></tr></thead>
+      <tbody>
+        <tr><td>0,0‰ – 0,5‰</td><td class="amt">Erlaubt</td></tr>
+        <tr><td>0,5‰ – 0,8‰</td><td class="amt">€350 + 30 Tage Fahrverbot</td></tr>
+        <tr><td>0,8‰ – 1,1‰</td><td class="amt">€700 + 90 Tage Fahrverbot</td></tr>
+        <tr><td>> 1,1‰</td><td class="amt">€1.200 + 180 Tage Fahrverbot</td></tr>
+        <tr><td>Wiederholung / Unfall unter Einfluss</td><td class="amt">€2.000–€4.000 + langes Fahrverbot</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <h2>Wo zahlen</h2>
+    <p style="padding:0 16px 8px;color:var(--text-soft);font-size:.92rem">Postamt auf Kos, innerhalb von 10 Tagen.</p>
+    <a class="map-link" href="https://maps.app.goo.gl/7Ady6yJTRreeDx769" target="_blank" rel="noopener">📍 Postamt</a>
+  </section>
+</div>
+
+<!-- IT (compact - same amounts) -->
+<div data-lang-block="it" style="display:none">
+  <header class="page-head"><h1>Multe</h1><p class="intro">Importi e regole a Kos.</p></header>
+  <div class="alert"><strong>Pagamento:</strong> entro <strong>10 giorni</strong> all’ufficio postale di Kos. Niente più sconto del 50%. <a href="gevolgen-niet-betalen.html" style="color:#ffd4b8">Se non paghi →</a></div>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-boetes-scooter.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Scooter / moto</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Infrazione</th><th>Multa</th></tr></thead>
+      <tbody>
+        <tr><td>Senza casco (conducente)</td><td class="amt">€350 + 30 giorni sospensione</td></tr>
+        <tr><td>Senza casco (2ª volta)</td><td class="amt">€700 + 60 giorni sospensione</td></tr>
+        <tr><td>Passeggero senza casco</td><td class="amt">€350 + €350 conducente</td></tr>
+        <tr><td>Guidare in infradito</td><td class="amt">€150</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-boetes-auto.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Auto</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Infrazione</th><th>Multa</th></tr></thead>
+      <tbody>
+        <tr><td>Senza cintura (conducente)</td><td class="amt">€350</td></tr>
+        <tr><td>Passeggero senza cintura</td><td class="amt">€150 + €150 conducente</td></tr>
+        <tr><td>Semaforo rosso</td><td class="amt">€700 + 60 giorni sospensione</td></tr>
+        <tr><td>Mancata precedenza</td><td class="amt">€350 + 30 giorni sospensione</td></tr>
+        <tr><td>Sorpasso vietato</td><td class="amt">€700 + 60 giorni sospensione</td></tr>
+        <tr><td>Linea continua</td><td class="amt">€700 + 60 giorni sospensione</td></tr>
+        <tr><td>Sosta irregolare</td><td class="amt">€150</td></tr>
+        <tr><td>Cellulare alla guida</td><td class="amt">€350 + 30 giorni sospensione</td></tr>
+        <tr><td>Mancata precedenza (rotonda / pedone)</td><td class="amt">€350 + 30 giorni sospensione</td></tr>
+        <tr><td>Stop ignorato</td><td class="amt">€350 + 30 giorni sospensione</td></tr>
+        <tr><td>Stop ignorato + incidente</td><td class="amt">€700 + 60 giorni sospensione</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-boetes-snelheid.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Velocità</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Eccesso</th><th>Multa</th></tr></thead>
+      <tbody>
+        <tr><td>20–29 km/h in più</td><td class="amt">€150</td></tr>
+        <tr><td>30–39 km/h in più</td><td class="amt">€350 + 30 giorni sospensione</td></tr>
+        <tr><td>40–49 km/h in più</td><td class="amt">€700 + 60 giorni sospensione</td></tr>
+        <tr><td>50+ km/h in più</td><td class="amt">€700 + 60 giorni sospensione</td></tr>
+        <tr><td>Estremo / gare</td><td class="amt">€2.000 + 1 anno sospensione</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-boetes-alcohol.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Alcol</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Livello</th><th>Multa</th></tr></thead>
+      <tbody>
+        <tr><td>0,0‰ – 0,5‰</td><td class="amt">Consentito</td></tr>
+        <tr><td>0,5‰ – 0,8‰</td><td class="amt">€350 + 30 giorni sospensione</td></tr>
+        <tr><td>0,8‰ – 1,1‰</td><td class="amt">€700 + 90 giorni sospensione</td></tr>
+        <tr><td>> 1,1‰</td><td class="amt">€1.200 + 180 giorni sospensione</td></tr>
+        <tr><td>Recidiva / incidente sotto effetto</td><td class="amt">€2.000–€4.000 + lunga sospensione</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <h2>Dove pagare</h2>
+    <p style="padding:0 16px 8px;color:var(--text-soft);font-size:.92rem">Ufficio postale di Kos, entro 10 giorni.</p>
+    <a class="map-link" href="https://maps.app.goo.gl/7Ady6yJTRreeDx769" target="_blank" rel="noopener">📍 Ufficio postale</a>
+  </section>
+</div>
+
+<!-- TR -->
+<div data-lang-block="tr" style="display:none">
+  <header class="page-head"><h1>Cezalar</h1><p class="intro">Kos’taki tutarlar ve kurallar.</p></header>
+  <div class="alert"><strong>Ödeme:</strong> <strong>10 gün</strong> içinde Kos postanesinde. Artık %50 indirim yok. <a href="gevolgen-niet-betalen.html" style="color:#ffd4b8">Ödemezseniz →</a></div>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-boetes-scooter.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Scooter / motorsiklet</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>İhlal</th><th>Ceza</th></tr></thead>
+      <tbody>
+        <tr><td>Kasksız (sürücü)</td><td class="amt">€350 + 30 gün ehliyet yasağı</td></tr>
+        <tr><td>Kasksız (2. kez)</td><td class="amt">€700 + 60 gün ehliyet yasağı</td></tr>
+        <tr><td>Yolcu kasksız</td><td class="amt">€350 + €350 sürücü</td></tr>
+        <tr><td>Terlikle sürmek</td><td class="amt">€150</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-boetes-auto.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Araba</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>İhlal</th><th>Ceza</th></tr></thead>
+      <tbody>
+        <tr><td>Kemer takmama (sürücü)</td><td class="amt">€350</td></tr>
+        <tr><td>Yolcu kemersiz</td><td class="amt">€150 + €150 sürücü</td></tr>
+        <tr><td>Kırmızı ışık</td><td class="amt">€700 + 60 gün ehliyet yasağı</td></tr>
+        <tr><td>Yol vermeme</td><td class="amt">€350 + 30 gün ehliyet yasağı</td></tr>
+        <tr><td>Yasak yerde sollama</td><td class="amt">€700 + 60 gün ehliyet yasağı</td></tr>
+        <tr><td>Çift çizgi</td><td class="amt">€700 + 60 gün ehliyet yasağı</td></tr>
+        <tr><td>Park ihlali</td><td class="amt">€150</td></tr>
+        <tr><td>Telefon kullanma</td><td class="amt">€350 + 30 gün ehliyet yasağı</td></tr>
+        <tr><td>Yol vermeme (kavşak / yaya)</td><td class="amt">€350 + 30 gün ehliyet yasağı</td></tr>
+        <tr><td>Stop işaretini yok sayma</td><td class="amt">€350 + 30 gün ehliyet yasağı</td></tr>
+        <tr><td>Stop + kaza</td><td class="amt">€700 + 60 gün ehliyet yasağı</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-boetes-snelheid.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Hız</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Aşım</th><th>Ceza</th></tr></thead>
+      <tbody>
+        <tr><td>20–29 km/s fazla</td><td class="amt">€150</td></tr>
+        <tr><td>30–39 km/s fazla</td><td class="amt">€350 + 30 gün ehliyet yasağı</td></tr>
+        <tr><td>40–49 km/s fazla</td><td class="amt">€700 + 60 gün ehliyet yasağı</td></tr>
+        <tr><td>50+ km/s fazla</td><td class="amt">€700 + 60 gün ehliyet yasağı</td></tr>
+        <tr><td>Aşırı / yarış</td><td class="amt">€2.000 + 1 yıl ehliyet yasağı</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-boetes-alcohol.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Alkol</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Seviye</th><th>Ceza</th></tr></thead>
+      <tbody>
+        <tr><td>0,0‰ – 0,5‰</td><td class="amt">İzinli</td></tr>
+        <tr><td>0,5‰ – 0,8‰</td><td class="amt">€350 + 30 gün ehliyet yasağı</td></tr>
+        <tr><td>0,8‰ – 1,1‰</td><td class="amt">€700 + 90 gün ehliyet yasağı</td></tr>
+        <tr><td>> 1,1‰</td><td class="amt">€1.200 + 180 gün ehliyet yasağı</td></tr>
+        <tr><td>Tekrar / etki altında kaza</td><td class="amt">€2.000–€4.000 + uzun yasak</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <h2>Nerede ödenir</h2>
+    <p style="padding:0 16px 8px;color:var(--text-soft);font-size:.92rem">Kos postanesi, 10 gün içinde.</p>
+    <a class="map-link" href="https://maps.app.goo.gl/7Ady6yJTRreeDx769" target="_blank" rel="noopener">📍 Postane</a>
+  </section>
+</div>
+
+<!-- ES -->
+<div data-lang-block="es" style="display:none">
+  <header class="page-head"><h1>Multas</h1><p class="intro">Importes y normas en Kos.</p></header>
+  <div class="alert"><strong>Pago:</strong> en <strong>10 días</strong> en correos de Kos. Ya no hay descuento del 50%. <a href="gevolgen-niet-betalen.html" style="color:#ffd4b8">Si no pagas →</a></div>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-boetes-scooter.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Scooter / moto</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Infracción</th><th>Multa</th></tr></thead>
+      <tbody>
+        <tr><td>Sin casco (conductor)</td><td class="amt">€350 + 30 días de retirada</td></tr>
+        <tr><td>Sin casco (2ª vez)</td><td class="amt">€700 + 60 días de retirada</td></tr>
+        <tr><td>Pasajero sin casco</td><td class="amt">€350 + €350 conductor</td></tr>
+        <tr><td>Conducir con chanclas</td><td class="amt">€150</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-boetes-auto.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Coche</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Infracción</th><th>Multa</th></tr></thead>
+      <tbody>
+        <tr><td>Sin cinturón (conductor)</td><td class="amt">€350</td></tr>
+        <tr><td>Pasajero sin cinturón</td><td class="amt">€150 + €150 conductor</td></tr>
+        <tr><td>Semáforo en rojo</td><td class="amt">€700 + 60 días de retirada</td></tr>
+        <tr><td>No ceder el paso</td><td class="amt">€350 + 30 días de retirada</td></tr>
+        <tr><td>Adelantar donde está prohibido</td><td class="amt">€700 + 60 días de retirada</td></tr>
+        <tr><td>Línea continua</td><td class="amt">€700 + 60 días de retirada</td></tr>
+        <tr><td>Aparcamiento indebido</td><td class="amt">€150</td></tr>
+        <tr><td>Móvil al volante</td><td class="amt">€350 + 30 días de retirada</td></tr>
+        <tr><td>No ceder (rotonda / peatón)</td><td class="amt">€350 + 30 días de retirada</td></tr>
+        <tr><td>Ignorar stop</td><td class="amt">€350 + 30 días de retirada</td></tr>
+        <tr><td>Ignorar stop + accidente</td><td class="amt">€700 + 60 días de retirada</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-boetes-snelheid.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Velocidad</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Exceso</th><th>Multa</th></tr></thead>
+      <tbody>
+        <tr><td>20–29 km/h de más</td><td class="amt">€150</td></tr>
+        <tr><td>30–39 km/h de más</td><td class="amt">€350 + 30 días de retirada</td></tr>
+        <tr><td>40–49 km/h de más</td><td class="amt">€700 + 60 días de retirada</td></tr>
+        <tr><td>50+ km/h de más</td><td class="amt">€700 + 60 días de retirada</td></tr>
+        <tr><td>Extremo / carreras</td><td class="amt">€2.000 + 1 año de retirada</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <div class="sec-photo"><img src="vr-foto-boetes-alcohol.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('hide')"></div>
+    <h2>Alcohol</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Nivel</th><th>Multa</th></tr></thead>
+      <tbody>
+        <tr><td>0,0‰ – 0,5‰</td><td class="amt">Permitido</td></tr>
+        <tr><td>0,5‰ – 0,8‰</td><td class="amt">€350 + 30 días de retirada</td></tr>
+        <tr><td>0,8‰ – 1,1‰</td><td class="amt">€700 + 90 días de retirada</td></tr>
+        <tr><td>> 1,1‰</td><td class="amt">€1.200 + 180 días de retirada</td></tr>
+        <tr><td>Reincidencia / accidente bajo efectos</td><td class="amt">€2.000–€4.000 + retirada larga</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section class="panel">
+    <h2>Dónde pagar</h2>
+    <p style="padding:0 16px 8px;color:var(--text-soft);font-size:.92rem">Correos de Kos, en 10 días.</p>
+    <a class="map-link" href="https://maps.app.goo.gl/7Ady6yJTRreeDx769" target="_blank" rel="noopener">📍 Correos</a>
+  </section>
+</div>
+
+</main>
+<footer class="footer">
+  <div class="footer-logo">🔅 Hello Kos</div>
+  <p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a></p>
+</footer>
+<script>
+(function(){
+  var lang=localStorage.getItem('hk-lang')||'en';
+  var supported=['nl','de','en','it','tr','es'];
+  function setLang(l){
+    if(supported.indexOf(l)<0)l='en';
+    lang=l;localStorage.setItem('hk-lang',l);
+    document.querySelectorAll('[data-lang-block]').forEach(function(el){
+      el.style.display = (el.getAttribute('data-lang-block')===l) ? 'block' : 'none';
+    });
+    var opt=document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if(opt){document.getElementById('flag').textContent=opt.getAttribute('data-flag');document.getElementById('code').textContent=l.toUpperCase()}
+    document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===l)});
+    document.documentElement.lang=l;closeMenu();
+  }
+  var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu'),overlay=document.getElementById('overlay');
+  function openMenu(){langMenu.classList.add('open');overlay.classList.add('open')}
+  function closeMenu(){langMenu.classList.remove('open');overlay.classList.remove('open')}
+  langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.contains('open')?closeMenu():openMenu()});
+  overlay.addEventListener('click',closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'))})});
+  setLang(lang);
+})();
+</script>
+</body>
+</html>

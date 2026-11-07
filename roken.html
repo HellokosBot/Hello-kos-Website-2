@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0a0c0c">
+<title>Smoking – Hello Kos</title>
+<style>
+:root{--bg:#0a0c0c;--bg-elevated:#141818;--bg-card:#1a1f1f;--border:rgba(255,255,255,0.08);--text:#e8e8e8;--text-soft:#a0a8a8;--petrol:#3d9a9a;--gold:#e0b84a;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);line-height:1.5}
+.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:12px 14px;background:rgba(10,12,12,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-btns{display:flex;gap:6px}
+.nav-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);text-decoration:none;font-size:1.15rem}
+.nav-btn:active{transform:scale(.94)}
+.logo{justify-self:center;display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo-icon{font-size:22px}
+.logo-text{font-size:1.1rem;font-weight:700;color:var(--gold);font-family:Georgia,serif}
+.logo-text span{color:#f0c85a;font-style:italic}
+.lang-wrap{justify-self:end;position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-soft)}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:8px;min-width:160px;z-index:50}
+.lang-menu.open{display:block}
+.lang-option{display:block;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;color:var(--text)}
+.lang-option.active{background:rgba(61,154,154,.15);color:var(--petrol)}
+.overlay{display:none;position:fixed;inset:0;z-index:40}.overlay.open{display:block}
+.main{max-width:480px;margin:0 auto;padding:16px 14px 48px}
+.page-head{text-align:center;margin-bottom:14px}
+.page-head h1{font-size:1.35rem;font-weight:800}
+.page-head .intro{color:var(--text-soft);font-size:.92rem;margin-top:6px}
+.tip-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:16px;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.tip-photo{height:150px;overflow:hidden;background:linear-gradient(135deg,#1a2a2a,#0d1515)}
+.tip-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.tip-photo.no-img{height:0}
+.tip-body{padding:16px 16px 18px;position:relative}
+.tip-icon{position:absolute;top:-22px;right:14px;width:40px;height:40px;border-radius:12px;background:var(--bg-elevated);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.tip-body h2{font-size:1.05rem;font-weight:800;color:var(--gold);margin-bottom:8px;padding-right:36px}
+.tip-body p{font-size:.92rem;color:var(--text-soft);line-height:1.55;margin-bottom:10px}
+.tip-body p:last-child{margin-bottom:0}
+.tip-body strong{color:var(--text)}
+.tip-body em{color:var(--text);font-style:italic}
+.note{background:rgba(61,154,154,.12);border:1px solid rgba(61,154,154,.3);border-radius:12px;padding:12px 14px;margin-top:10px;font-size:.9rem;color:#b8e0e0;line-height:1.5}
+.footer{text-align:center;padding:20px 16px;background:var(--bg-elevated);border-top:1px solid var(--border)}
+.footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
+.footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html">🏠</a>
+    <a class="nav-btn" href="wist-je-dat.html">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+
+<div data-lang-block="nl" style="display:none">
+  <header class="page-head">
+    <h1>🚬 Roken</h1>
+    <p class="intro">Op Kos wordt er meer gerookt dan in veel andere Europese landen.</p>
+  </header>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-roken-veel.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">💨</div>
+      <h2>Veel voorkomend</h2>
+      <p>Roken is op Kos, en in heel Griekenland, nog altijd een veelvoorkomend verschijnsel. In vergelijking met veel andere Europese landen wordt er relatief veel gerookt. Het is niet ongewoon om mensen te zien roken op terrassen, stranden of tijdens het uitgaan. Voor niet-rokers kan dit even wennen zijn.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-roken-kopen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🏪</div>
+      <h2>Sigaretten kopen</h2>
+      <p>Je kunt sigaretten kopen in <strong>supermarkten, buurtwinkels, kiosken</strong> en bij enkele boekwinkels. In horecagelegenheden zelf worden doorgaans <strong>geen sigaretten verkocht</strong>.</p>
+      <p>Na ongeveer <strong>23:00</strong> wordt het lastiger om nog sigaretten te vinden (op een enkele nachtwinkel na). Sla dus op tijd in.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-roken-prijs.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">💶</div>
+      <h2>Prijs</h2>
+      <p>Sigaretten op Kos zijn <strong>goedkoper</strong> dan in veel andere landen. Dit geldt ook voor shag, al bevatten pakjes shag vaak slechts <strong>15 gram</strong> tabak.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-roken-verbod.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🚫</div>
+      <h2>Rookverbod</h2>
+      <p>Officieel is roken in openbare binnenruimtes (restaurants, cafés, bars, taxi’s, ov) <strong>verboden</strong>. In de praktijk wordt dit niet altijd strikt nageleefd – vooral in kleinere zaken en ’s avonds. In grotere hotels en moderne zaken vaak wel.</p>
+      <p>Buiten, op terrassen en in de openlucht, is roken vrijwel overal toegestaan.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-roken-auto.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🚗</div>
+      <h2>Roken in de auto met kinderen</h2>
+      <p>Roken in een auto is <strong>verboden</strong> als er een kind <strong>jonger dan 12 jaar</strong> in zit. Dit geldt voor gewone sigaretten én e-sigaretten. Boete is mogelijk.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-roken-esig.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🔋</div>
+      <h2>E-sigaretten & vapes</h2>
+      <p>E-sigaretten en vapes vallen onder <strong>dezelfde regels</strong> als gewone sigaretten: niet binnen waar roken verboden is, wel buiten en op de meeste terrassen. Ook in de auto met een kind onder 12 is vapen verboden.</p>
+      <p>Smaken (fruit, mint, menthol enz.) zijn voor e-sigaretten <strong>nog toegestaan</strong>. Max. nicotine: 20 mg/ml (EU-regel).</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-roken-menthol.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🌿</div>
+      <h2>Mentholsigaretten</h2>
+      <p>Menthol- en andere smaaksigaretten (en shag met smaak) zijn in de hele EU, dus ook in Griekenland, <strong>verboden</strong> sinds 2020. Je koopt ze officieel niet meer in de winkel. Menthol/mint in <em>e-sigaretten</em> mag wél.</p>
+    </div>
+  </article>
+</div>
+
+<div data-lang-block="en" style="display:none">
+  <header class="page-head">
+    <h1>🚬 Smoking</h1>
+    <p class="intro">On Kos people smoke more than in many other European countries.</p>
+  </header>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-roken-veel.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">💨</div>
+      <h2>Common</h2>
+      <p>Smoking is still common on Kos and across Greece. Compared with many other European countries, more people smoke. It is not unusual to see people smoking on terraces, beaches or when going out. Non-smokers may need a moment to get used to this.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-roken-kopen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🏪</div>
+      <h2>Buying cigarettes</h2>
+      <p>You can buy cigarettes in <strong>supermarkets, neighbourhood shops, kiosks</strong> and some bookshops. Bars and restaurants usually <strong>do not sell cigarettes</strong>.</p>
+      <p>After about <strong>23:00</strong> it becomes harder to find cigarettes (except the occasional night shop). Stock up in time.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-roken-prijs.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">💶</div>
+      <h2>Price</h2>
+      <p>Cigarettes on Kos are <strong>cheaper</strong> than in many other countries. The same goes for rolling tobacco, though packs often contain only <strong>15 grams</strong>.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-roken-verbod.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🚫</div>
+      <h2>Smoking ban</h2>
+      <p>Officially smoking is <strong>banned</strong> indoors in public places (restaurants, cafés, bars, taxis, public transport). In practice this is not always strictly enforced – especially in smaller venues and in the evening. Larger hotels and modern places often do enforce it.</p>
+      <p>Outside, on terraces and in the open air, smoking is almost always allowed.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-roken-auto.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🚗</div>
+      <h2>Smoking in the car with children</h2>
+      <p>Smoking in a car is <strong>banned</strong> if a child <strong>under 12</strong> is in the vehicle. This applies to cigarettes and e-cigarettes. A fine is possible.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-roken-esig.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🔋</div>
+      <h2>E-cigarettes & vapes</h2>
+      <p>E-cigarettes and vapes fall under the <strong>same rules</strong> as regular cigarettes: not indoors where smoking is banned, yes outside and on most terraces. Vaping in a car with a child under 12 is also banned.</p>
+      <p>Flavours (fruit, mint, menthol etc.) are still <strong>allowed</strong> for e-cigarettes. Max. nicotine: 20 mg/ml (EU rule).</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-roken-menthol.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🌿</div>
+      <h2>Menthol cigarettes</h2>
+      <p>Menthol and other flavoured cigarettes (and flavoured rolling tobacco) have been <strong>banned</strong> across the EU, including Greece, since 2020. You will not find them in shops. Menthol/mint in <em>e-cigarettes</em> is still allowed.</p>
+    </div>
+  </article>
+</div>
+
+<div data-lang-block="de" style="display:none">
+  <header class="page-head"><h1>🚬 Rauchen</h1><p class="intro">Auf Kos wird mehr geraucht als in vielen anderen europäischen Ländern.</p></header>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-roken-veel.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">💨</div><h2>Häufig</h2>
+  <p>Rauchen ist auf Kos und in ganz Griechenland noch weit verbreitet.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-roken-kopen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🏪</div><h2>Zigaretten kaufen</h2>
+  <p>In Supermärkten, Kiosken usw. Nach ca. 23:00 schwieriger.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-roken-verbod.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🚫</div><h2>Rauchverbot</h2>
+  <p>In Innenräumen offiziell verboten. Draußen und auf Terrassen fast überall erlaubt.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-roken-auto.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🚗</div><h2>Rauchen im Auto mit Kindern</h2>
+  <p>Verboten, wenn ein Kind unter 12 mitfährt (auch E-Zigarette).</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-roken-esig.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🔋</div><h2>E-Zigaretten & Vapes</h2>
+  <p>Gleiche Regeln wie Zigaretten. Aromen (Frucht, Minze, Menthol) für E-Zigaretten <strong>noch erlaubt</strong>.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-roken-menthol.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🌿</div><h2>Mentholzigaretten</h2>
+  <p>Menthol- und Aromazigaretten sind in der EU seit 2020 <strong>verboten</strong>. Menthol in E-Zigaretten ist weiterhin erlaubt.</p></div></article>
+</div>
+
+<div data-lang-block="it" style="display:none">
+  <header class="page-head"><h1>🚬 Fumo</h1><p class="intro">A Kos si fuma di più che in molti altri paesi europei.</p></header>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-roken-veel.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">💨</div><h2>Molto comune</h2>
+  <p>Fumare è ancora comune a Kos e in Grecia.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-roken-verbod.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🚫</div><h2>Divieto</h2>
+  <p>Vietato al chiuso. All’aperto quasi sempre permesso.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-roken-auto.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🚗</div><h2>Fumare in auto con bambini</h2>
+  <p>Vietato con un bambino sotto i 12 anni (anche e-cig).</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-roken-esig.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🔋</div><h2>Sigarette elettroniche & vape</h2>
+  <p>Stesse regole delle sigarette. I gusti (frutta, menta, mentolo) sono ancora <strong>consentiti</strong>.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-roken-menthol.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🌿</div><h2>Sigarette al mentolo</h2>
+  <p>Sigarette al mentolo e aromatizzate <strong>vietate</strong> nell’UE dal 2020. Mentolo nelle e-cig ancora permesso.</p></div></article>
+</div>
+
+<div data-lang-block="tr" style="display:none">
+  <header class="page-head"><h1>🚬 Sigara</h1><p class="intro">Kos’ta birçok Avrupa ülkesine göre daha fazla sigara içilir.</p></header>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-roken-veel.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">💨</div><h2>Yaygın</h2>
+  <p>Sigara içmek Kos ve Yunanistan’da hâlâ yaygındır.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-roken-verbod.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🚫</div><h2>Yasak</h2>
+  <p>Kapalı alanlarda yasak. Dışarıda neredeyse her yerde serbest.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-roken-auto.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🚗</div><h2>Arabada çocukla sigara</h2>
+  <p>12 yaşından küçük çocuk varken yasak (e-sigara da).</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-roken-esig.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🔋</div><h2>Elektronik sigara & vape</h2>
+  <p>Aynı kurallar. Aromalar (meyve, nane, mentol) hâlâ <strong>izinlidir</strong>.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-roken-menthol.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🌿</div><h2>Mentollü sigara</h2>
+  <p>Mentollü ve aromalı sigaralar AB’de 2020’den beri <strong>yasaktır</strong>. E-sigarada mentol/nane serbesttir.</p></div></article>
+</div>
+
+<div data-lang-block="es" style="display:none">
+  <header class="page-head"><h1>🚬 Fumar</h1><p class="intro">En Kos se fuma más que en muchos otros países europeos.</p></header>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-roken-veel.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">💨</div><h2>Muy común</h2>
+  <p>Fumar sigue siendo habitual en Kos y en Grecia.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-roken-verbod.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🚫</div><h2>Prohibición</h2>
+  <p>Prohibido en interiores. Al aire libre casi siempre permitido.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-roken-auto.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🚗</div><h2>Fumar en el coche con niños</h2>
+  <p>Prohibido con un niño menor de 12 años (también e-cig).</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-roken-esig.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🔋</div><h2>Cigarrillos electrónicos y vapes</h2>
+  <p>Mismas reglas. Los sabores (fruta, menta, mentol) siguen <strong>permitidos</strong>.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-roken-menthol.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🌿</div><h2>Cigarrillos de mentol</h2>
+  <p>Cigarrillos de mentol y con sabor <strong>prohibidos</strong> en la UE desde 2020. Mentol en e-cig sigue permitido.</p></div></article>
+</div>
+
+</main>
+<footer class="footer">
+  <div class="footer-logo">🔅 Hello Kos</div>
+  <p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a></p>
+</footer>
+<script>
+(function(){
+  var lang=localStorage.getItem('hk-lang')||'en';
+  var supported=['nl','de','en','it','tr','es'];
+  function setLang(l){
+    if(supported.indexOf(l)<0)l='en';
+    lang=l;localStorage.setItem('hk-lang',l);
+    document.querySelectorAll('[data-lang-block]').forEach(function(el){
+      el.style.display=(el.getAttribute('data-lang-block')===l)?'block':'none';
+    });
+    var opt=document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if(opt){document.getElementById('flag').textContent=opt.getAttribute('data-flag');document.getElementById('code').textContent=l.toUpperCase()}
+    document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===l)});
+    document.documentElement.lang=l;closeMenu();
+  }
+  var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu'),overlay=document.getElementById('overlay');
+  function openMenu(){langMenu.classList.add('open');overlay.classList.add('open')}
+  function closeMenu(){langMenu.classList.remove('open');overlay.classList.remove('open')}
+  langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.contains('open')?closeMenu():openMenu()});
+  overlay.addEventListener('click',closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'))})});
+  setLang(lang);
+})();
+</script>
+</body>
+</html>

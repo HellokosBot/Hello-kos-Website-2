@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0a0c0c">
+<title>Earthquakes – Hello Kos</title>
+<style>
+:root{--bg:#0a0c0c;--bg-elevated:#141818;--bg-card:#1a1f1f;--border:rgba(255,255,255,0.08);--text:#e8e8e8;--text-soft:#a0a8a8;--petrol:#3d9a9a;--gold:#e0b84a;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);line-height:1.5}
+.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:12px 14px;background:rgba(10,12,12,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-btns{display:flex;gap:6px}
+.nav-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);text-decoration:none;font-size:1.15rem;transition:transform .12s ease}
+.nav-btn:active{transform:scale(.94)}
+.logo{justify-self:center;display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo-icon{font-size:22px}
+.logo-text{font-size:1.1rem;font-weight:700;color:var(--gold);font-family:Georgia,serif}
+.logo-text span{color:#f0c85a;font-style:italic}
+.lang-wrap{justify-self:end;position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-soft);transition:transform .12s ease}
+.lang-btn:active{transform:scale(.96)}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:8px;min-width:160px;z-index:50}
+.lang-menu.open{display:block}
+.lang-option{display:block;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;color:var(--text)}
+.lang-option.active{background:rgba(61,154,154,.15);color:var(--petrol)}
+.overlay{display:none;position:fixed;inset:0;z-index:40}.overlay.open{display:block}
+.main{max-width:480px;margin:0 auto;padding:16px 14px 48px}
+.page-head{text-align:center;margin-bottom:14px}
+.page-head h1{font-size:1.35rem;font-weight:800}
+.page-head .intro{color:var(--text-soft);font-size:.92rem;margin-top:6px}
+.live-box{background:linear-gradient(160deg,#1a2e2e,#143030);border:1px solid rgba(61,154,154,.35);border-radius:16px;padding:16px;margin-bottom:18px}
+.live-box .live-label{font-size:.82rem;color:#7ecfcf;font-weight:700;margin-bottom:6px}
+.live-box .live-status{font-size:1.02rem;font-weight:800;color:var(--text);margin-bottom:6px;min-height:1.3em}
+.live-box .live-detail{font-size:.85rem;color:var(--text-soft);line-height:1.45;margin-bottom:12px;min-height:1.2em}
+.live-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:100%;padding:16px 16px 14px;background:linear-gradient(180deg,#4aafaf 0%,#2f8a8a 100%);color:#041212;text-decoration:none;border-radius:14px;font-weight:800;font-size:1.05rem;border:2px solid rgba(255,255,255,.22);box-shadow:0 5px 0 #1a5555,0 8px 18px rgba(0,0,0,.35);transition:transform .12s ease,box-shadow .12s ease;text-align:center}
+.live-btn:active{transform:translateY(4px);box-shadow:0 1px 0 #1a5555,0 4px 10px rgba(0,0,0,.3)}
+.live-btn .sub{font-size:.72rem;font-weight:600;color:rgba(4,18,18,.7)}
+.tips{display:flex;flex-direction:column;gap:16px}
+.tip-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.tip-photo{height:140px;background:linear-gradient(135deg,#1a2a2a,#0d1515);overflow:hidden}
+.tip-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.tip-photo.no-img{height:0}
+.tip-body{padding:16px 16px 18px;position:relative}
+.tip-icon{position:absolute;top:-22px;right:14px;width:40px;height:40px;border-radius:12px;background:var(--bg-elevated);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.tip-body h2{font-size:1.05rem;font-weight:800;color:var(--gold);margin-bottom:8px;padding-right:36px}
+.tip-body p{font-size:.92rem;color:var(--text-soft);line-height:1.55;margin-bottom:10px}
+.tip-body p:last-child{margin-bottom:0}
+.tip-body strong{color:var(--text)}
+.note{background:rgba(61,154,154,.12);border:1px solid rgba(61,154,154,.3);border-radius:12px;padding:12px 14px;margin-top:10px;font-size:.9rem;color:#b8e0e0;line-height:1.5}
+.gallery{margin-top:24px}
+.gallery-head{text-align:center;margin:0 0 14px}
+.gallery-head h2{font-size:1.15rem;font-weight:800;color:var(--gold)}
+.gallery-head p{font-size:.88rem;color:var(--text-soft);margin-top:4px}
+.gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.gallery-item{position:relative;aspect-ratio:1/1;border-radius:14px;overflow:hidden;background:var(--bg-card);border:1px solid var(--border)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block}
+.gallery-item.wide{grid-column:span 2;aspect-ratio:16/10}
+.footer{text-align:center;padding:20px 16px;background:var(--bg-elevated);border-top:1px solid var(--border)}
+.footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
+.footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+
+<div data-lang-block="nl" style="display:none">
+  <header class="page-head"><h1>Aardbevingen op Kos</h1><p class="intro">Seismisch gebied, geschiedenis en wat je moet weten.</p></header>
+  <div class="live-box">
+    <div class="live-label">🔴 Live – laatste 24 uur (regio Kos)</div>
+    <div class="live-status" data-live-status>Laden…</div>
+    <p class="live-detail" data-live-detail></p>
+    <a class="live-btn" href="http://www.geophysics.geol.uoa.gr/stations/maps/recent.html" target="_blank" rel="noopener">
+      <span class="main-line">⚠️ Actuele aardbevingen</span>
+      <span class="sub">Kaart Universiteit van Athene</span>
+    </a>
+  </div>
+  <div class="tips">
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-quake-gebied.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body"><div class="tip-icon">🌍</div><h2>Seismisch gebied</h2>
+    <p>Kos ligt in een van de seismisch actieve gebieden van de Middellandse Zee. Griekenland telt jaarlijks zo’n 20.000 aardbevingen, waarvan de meeste mild zijn.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-quake-1933.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body"><div class="tip-icon">🏚️</div><h2>1933 – de meest verwoestende</h2>
+    <p>De bekendste aardbeving vond plaats in <strong>1933</strong>. Bijna de hele stad Kos werd verwoest: ruim 90% van de gebouwen stortte in of raakte zwaar beschadigd.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-quake-2017.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body"><div class="tip-icon">📉</div><h2>2017 – recente grote beving</h2>
+    <p>Op 21 juli 2017 trof een beving van <strong>6,6</strong> het eiland. Twee mensen kwamen om en zo’n 200 raakten gewond. De schade was beperkt vergeleken met 1933.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-quake-bouw.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body"><div class="tip-icon">🏗️</div><h2>Bouwvoorschriften</h2>
+    <p>Moderne bouwvoorschriften maken nieuwe gebouwen beter bestand tegen aardbevingen.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-quake-tip.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body"><div class="tip-icon">💡</div><h2>Wat betekent dit voor jou?</h2>
+    <p>Grote bevingen komen gemiddeld eens per 70–80 jaar voor. De beving van <strong>2017 ligt achter ons</strong>, dus de volgende grote aardbeving zal naar verwachting pas over ongeveer <strong>60 jaar</strong> plaatsvinden.</p>
+    <div class="note"><strong>Tip:</strong> bij een beving: blijf kalm, zoek beschutting onder een tafel of in een deuropening, en vermijd liften.</div></div></article>
+  </div>
+  <div class="gallery">
+    <div class="gallery-head"><h2>Grote aardbevingen op Kos</h2><p>15 foto’s van de grote aardbevingen die Kos heeft meegemaakt.</p></div>
+    <div class="gallery-grid">
+      <div class="gallery-item wide"><img src="wjd-quake-gallery-01.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-02.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-03.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-04.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-05.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-06.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-07.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item wide"><img src="wjd-quake-gallery-08.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-09.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-10.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-11.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-12.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-13.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-14.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item wide"><img src="wjd-quake-gallery-15.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+    </div>
+  </div>
+</div>
+
+<div data-lang-block="en" style="display:none">
+  <header class="page-head"><h1>Earthquakes on Kos</h1><p class="intro">Seismic area, history and what you need to know.</p></header>
+  <div class="live-box">
+    <div class="live-label">🔴 Live – last 24 hours (Kos region)</div>
+    <div class="live-status" data-live-status>Loading…</div>
+    <p class="live-detail" data-live-detail></p>
+    <a class="live-btn" href="http://www.geophysics.geol.uoa.gr/stations/maps/recent.html" target="_blank" rel="noopener">
+      <span class="main-line">⚠️ Current earthquakes</span>
+      <span class="sub">University of Athens map</span>
+    </a>
+  </div>
+  <div class="tips">
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-quake-gebied.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body"><div class="tip-icon">🌍</div><h2>Seismic area</h2><p>Kos lies in a seismically active area. Most quakes are mild.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-quake-1933.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body"><div class="tip-icon">🏚️</div><h2>1933 – most destructive</h2><p>Almost the whole town was destroyed; over 90% of buildings were lost or badly damaged.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-quake-2017.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body"><div class="tip-icon">📉</div><h2>2017 – major quake</h2><p>Magnitude <strong>6.6</strong>. Two died, about 200 injured.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-quake-bouw.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body"><div class="tip-icon">🏗️</div><h2>Building codes</h2><p>Modern buildings are designed to withstand earthquakes better.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-quake-tip.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body"><div class="tip-icon">💡</div><h2>What this means for you</h2>
+    <p>The <strong>2017 quake is behind us</strong>; the next major one is expected in about <strong>60 years</strong>.</p>
+    <div class="note"><strong>Tip:</strong> stay calm, take cover under a table or in a doorway, avoid lifts.</div></div></article>
+  </div>
+  <div class="gallery">
+    <div class="gallery-head"><h2>Major earthquakes on Kos</h2><p>15 photos of the major earthquakes that hit Kos.</p></div>
+    <div class="gallery-grid">
+      <div class="gallery-item wide"><img src="wjd-quake-gallery-01.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-02.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-03.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-04.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-05.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-06.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-07.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item wide"><img src="wjd-quake-gallery-08.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-09.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-10.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-11.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-12.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-13.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-14.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item wide"><img src="wjd-quake-gallery-15.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+    </div>
+  </div>
+</div>
+
+<div data-lang-block="de" style="display:none">
+  <header class="page-head"><h1>Erdbeben auf Kos</h1><p class="intro">Seismisches Gebiet, Geschichte und Tipps.</p></header>
+  <div class="live-box">
+    <div class="live-label">🔴 Live – letzte 24 Stunden (Region Kos)</div>
+    <div class="live-status" data-live-status>Laden…</div>
+    <p class="live-detail" data-live-detail></p>
+    <a class="live-btn" href="http://www.geophysics.geol.uoa.gr/stations/maps/recent.html" target="_blank" rel="noopener">
+      <span class="main-line">⚠️ Aktuelle Erdbeben</span>
+      <span class="sub">Karte Universität Athen</span>
+    </a>
+  </div>
+  <div class="gallery">
+    <div class="gallery-head"><h2>Große Erdbeben auf Kos</h2><p>15 Fotos der großen Erdbeben, die Kos getroffen haben.</p></div>
+    <div class="gallery-grid">
+      <div class="gallery-item wide"><img src="wjd-quake-gallery-01.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-02.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-03.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-04.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-05.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-06.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-07.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item wide"><img src="wjd-quake-gallery-08.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-09.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-10.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-11.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-12.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-13.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-14.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item wide"><img src="wjd-quake-gallery-15.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+    </div>
+  </div>
+</div>
+
+<div data-lang-block="it" style="display:none">
+  <header class="page-head"><h1>Terremoti a Kos</h1><p class="intro">Zona sismica, storia e consigli.</p></header>
+  <div class="live-box">
+    <div class="live-label">🔴 Live – ultime 24 ore (regione Kos)</div>
+    <div class="live-status" data-live-status>Caricamento…</div>
+    <p class="live-detail" data-live-detail></p>
+    <a class="live-btn" href="http://www.geophysics.geol.uoa.gr/stations/maps/recent.html" target="_blank" rel="noopener">
+      <span class="main-line">⚠️ Terremoti attuali</span>
+      <span class="sub">Mappa Università di Atene</span>
+    </a>
+  </div>
+  <div class="gallery">
+    <div class="gallery-head"><h2>Grandi terremoti a Kos</h2><p>15 foto dei grandi terremoti che hanno colpito Kos.</p></div>
+    <div class="gallery-grid">
+      <div class="gallery-item wide"><img src="wjd-quake-gallery-01.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-02.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-03.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-04.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-05.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-06.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-07.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item wide"><img src="wjd-quake-gallery-08.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-09.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-10.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-11.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-12.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-13.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-14.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item wide"><img src="wjd-quake-gallery-15.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+    </div>
+  </div>
+</div>
+
+<div data-lang-block="tr" style="display:none">
+  <header class="page-head"><h1>Kos’ta depremler</h1><p class="intro">Sismik bölge, tarih ve ipuçları.</p></header>
+  <div class="live-box">
+    <div class="live-label">🔴 Canlı – son 24 saat (Kos bölgesi)</div>
+    <div class="live-status" data-live-status>Yükleniyor…</div>
+    <p class="live-detail" data-live-detail></p>
+    <a class="live-btn" href="http://www.geophysics.geol.uoa.gr/stations/maps/recent.html" target="_blank" rel="noopener">
+      <span class="main-line">⚠️ Güncel depremler</span>
+      <span class="sub">Atina Üniversitesi haritası</span>
+    </a>
+  </div>
+  <div class="gallery">
+    <div class="gallery-head"><h2>Kos’taki büyük depremler</h2><p>Kos’u etkileyen büyük depremlerden 15 fotoğraf.</p></div>
+    <div class="gallery-grid">
+      <div class="gallery-item wide"><img src="wjd-quake-gallery-01.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-02.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-03.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-04.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-05.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-06.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-07.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item wide"><img src="wjd-quake-gallery-08.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-09.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-10.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-11.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-12.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-13.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-14.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item wide"><img src="wjd-quake-gallery-15.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+    </div>
+  </div>
+</div>
+
+<div data-lang-block="es" style="display:none">
+  <header class="page-head"><h1>Terremotos en Kos</h1><p class="intro">Zona sísmica, historia y consejos.</p></header>
+  <div class="live-box">
+    <div class="live-label">🔴 En vivo – últimas 24 horas (región de Kos)</div>
+    <div class="live-status" data-live-status>Cargando…</div>
+    <p class="live-detail" data-live-detail></p>
+    <a class="live-btn" href="http://www.geophysics.geol.uoa.gr/stations/maps/recent.html" target="_blank" rel="noopener">
+      <span class="main-line">⚠️ Terremotos actuales</span>
+      <span class="sub">Mapa Universidad de Atenas</span>
+    </a>
+  </div>
+  <div class="gallery">
+    <div class="gallery-head"><h2>Grandes terremotos en Kos</h2><p>15 fotos de los grandes terremotos que afectaron a Kos.</p></div>
+    <div class="gallery-grid">
+      <div class="gallery-item wide"><img src="wjd-quake-gallery-01.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-02.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-03.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-04.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-05.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-06.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-07.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item wide"><img src="wjd-quake-gallery-08.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-09.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-10.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-11.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-12.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-13.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-14.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item wide"><img src="wjd-quake-gallery-15.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+    </div>
+  </div>
+</div>
+
+</main>
+<footer class="footer">
+  <div class="footer-logo">🔅 Hello Kos</div>
+  <p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a></p>
+</footer>
+<script>
+(function(){
+  var lang=localStorage.getItem('hk-lang')||'en';
+  var supported=['nl','de','en','it','tr','es'];
+  function setLang(l){
+    if(supported.indexOf(l)<0)l='en';
+    lang=l;localStorage.setItem('hk-lang',l);
+    document.querySelectorAll('[data-lang-block]').forEach(function(el){
+      el.style.display = (el.getAttribute('data-lang-block')===l) ? 'block' : 'none';
+    });
+    var opt=document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if(opt){document.getElementById('flag').textContent=opt.getAttribute('data-flag');document.getElementById('code').textContent=l.toUpperCase()}
+    document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===l)});
+    document.documentElement.lang=l;closeMenu();
+    updateLiveUI();
+  }
+  var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu'),overlay=document.getElementById('overlay');
+  function openMenu(){langMenu.classList.add('open');overlay.classList.add('open')}
+  function closeMenu(){langMenu.classList.remove('open');overlay.classList.remove('open')}
+  langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.contains('open')?closeMenu():openMenu()});
+  overlay.addEventListener('click',closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'))})});
+  var liveData={state:'loading',count:0,maxMag:null,place:null,hoursAgo:null};
+  var MSG={
+    nl:{loading:'Laden…',none:'Geen noemenswaardige bevingen nabij Kos',noneDetail:'Geen bevingen van magnitude 2+ in de regio Kos (straal ca. 200 km) in de afgelopen 24 uur.',one:'1 beving nabij Kos',many:function(n){return n+' bevingen nabij Kos'},detail:function(m,p,h){return 'Sterkste: M'+m+(p?' – '+p:'')+(h!=null?' · ca. '+h+' uur geleden':'')},err:'Live data tijdelijk niet beschikbaar',errDetail:'Open de knop hieronder voor de actuele kaart.'},
+    en:{loading:'Loading…',none:'No significant quakes near Kos',noneDetail:'No magnitude 2+ earthquakes in the Kos region (≈200 km) in the last 24 hours.',one:'1 quake near Kos',many:function(n){return n+' quakes near Kos'},detail:function(m,p,h){return 'Strongest: M'+m+(p?' – '+p:'')+(h!=null?' · about '+h+' h ago':'')},err:'Live data temporarily unavailable',errDetail:'Use the button below for the current map.'},
+    de:{loading:'Laden…',none:'Keine nennenswerten Beben nahe Kos',noneDetail:'Keine Beben ab Stärke 2 in der Region Kos in den letzten 24 Stunden.',one:'1 Beben nahe Kos',many:function(n){return n+' Beben nahe Kos'},detail:function(m,p,h){return 'Stärkstes: M'+m+(p?' – '+p:'')+(h!=null?' · vor ca. '+h+' Std.':'')},err:'Live-Daten vorübergehend nicht verfügbar',errDetail:'Button unten für aktuelle Karte.'},
+    it:{loading:'Caricamento…',none:'Nessun terremoto significativo vicino a Kos',noneDetail:'Nessun terremoto di magnitudo 2+ nella regione di Kos nelle ultime 24 ore.',one:'1 terremoto vicino a Kos',many:function(n){return n+' terremoti vicino a Kos'},detail:function(m,p,h){return 'Più forte: M'+m+(p?' – '+p:'')+(h!=null?' · ca. '+h+' ore fa':'')},err:'Dati live temporaneamente non disponibili',errDetail:'Usa il pulsante sotto per la mappa.'},
+    tr:{loading:'Yükleniyor…',none:'Kos yakınında önemli deprem yok',noneDetail:'Son 24 saatte Kos bölgesinde büyüklük 2+ deprem yok.',one:'Kos yakınında 1 deprem',many:function(n){return 'Kos yakınında '+n+' deprem'},detail:function(m,p,h){return 'En güçlüsü: M'+m+(p?' – '+p:'')+(h!=null?' · yakl. '+h+' saat önce':'')},err:'Canlı veri geçici olarak yok',errDetail:'Güncel harita için düğmeyi kullanın.'},
+    es:{loading:'Cargando…',none:'Sin terremotos significativos cerca de Kos',noneDetail:'Ningún terremoto de magnitud 2+ en la región de Kos en las últimas 24 horas.',one:'1 terremoto cerca de Kos',many:function(n){return n+' terremotos cerca de Kos'},detail:function(m,p,h){return 'Más fuerte: M'+m+(p?' – '+p:'')+(h!=null?' · hace ca. '+h+' h':'')},err:'Datos en vivo temporalmente no disponibles',errDetail:'Usa el botón de abajo para el mapa.'}
+  };
+  function updateLiveUI(){
+    var m=MSG[lang]||MSG.en;
+    document.querySelectorAll('[data-live-status]').forEach(function(el){
+      if(liveData.state==='loading')el.textContent=m.loading;
+      else if(liveData.state==='error')el.textContent=m.err;
+      else if(liveData.count===0)el.textContent=m.none;
+      else if(liveData.count===1)el.textContent=m.one;
+      else el.textContent=m.many(liveData.count);
+    });
+    document.querySelectorAll('[data-live-detail]').forEach(function(el){
+      if(liveData.state==='loading')el.textContent='';
+      else if(liveData.state==='error')el.textContent=m.errDetail;
+      else if(liveData.count===0)el.textContent=m.noneDetail;
+      else el.textContent=m.detail(liveData.maxMag,liveData.place,liveData.hoursAgo);
+    });
+  }
+  function fetchLive(){
+    liveData.state='loading';updateLiveUI();
+    var start=new Date(Date.now()-24*60*60*1000).toISOString().slice(0,19);
+    var url='https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime='+encodeURIComponent(start)+'&minmagnitude=2&latitude=36.89&longitude=27.29&maxradiuskm=200&orderby=time&limit=50';
+    fetch(url).then(function(r){if(!r.ok)throw new Error('HTTP');return r.json();})
+    .then(function(data){
+      var feats=(data&&data.features)||[];
+      liveData.count=feats.length;liveData.state='ok';
+      if(feats.length){
+        var best=feats[0],maxM=-1;
+        feats.forEach(function(f){var mag=f.properties&&f.properties.mag;if(mag!=null&&mag>maxM){maxM=mag;best=f;}});
+        liveData.maxMag=parseFloat(maxM).toFixed(1);
+        liveData.place=(best.properties&&best.properties.place)||'';
+        var t=best.properties&&best.properties.time;
+        liveData.hoursAgo=t?Math.max(0,Math.round((Date.now()-t)/3600000)):null;
+      }else{liveData.maxMag=null;liveData.place=null;liveData.hoursAgo=null;}
+      updateLiveUI();
+    }).catch(function(){liveData.state='error';updateLiveUI();});
+  }
+  setLang(lang);fetchLive();
+})();
+</script>
+</body>
+</html>

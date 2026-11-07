@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0a0c0c">
+<title>Receipts on the table – Hello Kos</title>
+<style>
+:root{--bg:#0a0c0c;--bg-elevated:#141818;--bg-card:#1a1f1f;--border:rgba(255,255,255,0.08);--text:#e8e8e8;--text-soft:#a0a8a8;--petrol:#3d9a9a;--gold:#e0b84a;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);line-height:1.5}
+.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:12px 14px;background:rgba(10,12,12,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-btns{display:flex;gap:6px}
+.nav-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);text-decoration:none;font-size:1.15rem}
+.nav-btn:active{transform:scale(.94)}
+.logo{justify-self:center;display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo-icon{font-size:22px}
+.logo-text{font-size:1.1rem;font-weight:700;color:var(--gold);font-family:Georgia,serif}
+.logo-text span{color:#f0c85a;font-style:italic}
+.lang-wrap{justify-self:end;position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-soft)}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:8px;min-width:160px;z-index:50}
+.lang-menu.open{display:block}
+.lang-option{display:block;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;color:var(--text)}
+.lang-option.active{background:rgba(61,154,154,.15);color:var(--petrol)}
+.overlay{display:none;position:fixed;inset:0;z-index:40}.overlay.open{display:block}
+.main{max-width:480px;margin:0 auto;padding:16px 14px 48px}
+.page-head{text-align:center;margin-bottom:14px}
+.page-head h1{font-size:1.35rem;font-weight:800}
+.page-head .intro{color:var(--text-soft);font-size:.92rem;margin-top:6px}
+.tip-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:16px;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.tip-photo{height:150px;overflow:hidden;background:linear-gradient(135deg,#1a2a2a,#0d1515)}
+.tip-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.tip-photo.no-img{height:0}
+.tip-body{padding:16px 16px 18px;position:relative}
+.tip-icon{position:absolute;top:-22px;right:14px;width:40px;height:40px;border-radius:12px;background:var(--bg-elevated);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.tip-body h2{font-size:1.05rem;font-weight:800;color:var(--gold);margin-bottom:8px;padding-right:36px}
+.tip-body p{font-size:.92rem;color:var(--text-soft);line-height:1.55;margin-bottom:10px}
+.tip-body p:last-child{margin-bottom:0}
+.tip-body strong{color:var(--text)}
+.note{background:rgba(61,154,154,.12);border:1px solid rgba(61,154,154,.3);border-radius:12px;padding:12px 14px;margin-top:10px;font-size:.9rem;color:#b8e0e0;line-height:1.5}
+.link-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 0 16px;padding:14px 16px;background:linear-gradient(135deg,#2a6f6f,#1e5555);color:#fff;text-decoration:none;border-radius:14px;font-weight:600;font-size:.92rem;box-shadow:0 4px 14px rgba(42,111,111,.35);border:1px solid rgba(255,255,255,.08)}
+.link-btn:active{transform:scale(.98)}
+.footer{text-align:center;padding:20px 16px;background:var(--bg-elevated);border-top:1px solid var(--border)}
+.footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
+.footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html">🏠</a>
+    <a class="nav-btn" href="wist-je-dat.html">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+
+<div data-lang-block="nl" style="display:none">
+  <header class="page-head">
+    <h1>🧾 Bonnen op tafel</h1>
+    <p class="intro">Waarom staat er een kassabon in een glaasje op je tafel?</p>
+  </header>
+  <a class="link-btn" href="boete-eigen-eten.html">⚠️ Boete voor eigen eten & drinken meenemen →</a>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-bonnen-glaasje.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🥃</div>
+      <h2>Kassabon in een glaasje</h2>
+      <p>Velen vragen zich af waarom er kleine glaasjes met de kassabon erin op tafel staan. En waarom bij de één wel en bij de ander niet?</p>
+      <p>“Is dit omdat de ober vergeet wat u gedronken heeft?”</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-bonnen-controle.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🔍</div>
+      <h2>Controle door de belastingdienst</h2>
+      <p>Als je ergens iets gaat drinken, is men verplicht het bedrag direct op de kassa aan te slaan en het bonnetje op de tafel te leggen. Zo kan de belastingdienst (die regelmatig controleert) meteen zien of alle drankjes zijn aangeslagen.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-bonnen-kassa.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🖨️</div>
+      <h2>Witte kassa’s</h2>
+      <p>In Griekenland werkt men met zogenaamde <strong>witte kassa’s</strong>. Als bedragen eenmaal zijn aangeslagen, kan men deze er niet zomaar meer uit verwijderen.</p>
+      <p>Bij eten zie je deze bonnen vaak niet op tafel: ze liggen dan achterin naast de kassa, anders zou het een warboel van bonnetjes worden.</p>
+      <div class="note">
+        Kortom: de bon op tafel is geen vergeetachtigheid van de ober, maar een wettelijke verplichting voor de controle.
+      </div>
+    </div>
+  </article>
+</div>
+
+<div data-lang-block="en" style="display:none">
+  <header class="page-head">
+    <h1>🧾 Receipts on the table</h1>
+    <p class="intro">Why is there a receipt in a little glass on your table?</p>
+  </header>
+  <a class="link-btn" href="boete-eigen-eten.html">⚠️ Fine for bringing your own food & drinks →</a>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-bonnen-glaasje.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🥃</div>
+      <h2>Receipt in a glass</h2>
+      <p>Many people wonder why small glasses with the receipt inside stand on the table. And why at one place yes, at another no?</p>
+      <p>“Is it because the waiter forgets what you ordered?”</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-bonnen-controle.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🔍</div>
+      <h2>Tax office checks</h2>
+      <p>When you order a drink, the bar is required to ring it up on the till straight away and put the receipt on the table. That way the tax authorities (who check regularly) can see at a glance that every drink has been recorded.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-bonnen-kassa.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">🖨️</div>
+      <h2>“White” tills</h2>
+      <p>Greece uses so-called <strong>white tills</strong>. Once amounts are entered, they cannot simply be removed again.</p>
+      <p>With food you often don’t see receipts on the table – they stay near the till, otherwise it would be a mess of slips.</p>
+      <div class="note">
+        In short: the receipt on the table is not the waiter being forgetful – it is a legal requirement for tax checks.
+      </div>
+    </div>
+  </article>
+</div>
+
+<div data-lang-block="de" style="display:none">
+  <header class="page-head"><h1>🧾 Bons auf dem Tisch</h1><p class="intro">Warum steht ein Kassenbon in einem Gläschen auf dem Tisch?</p></header>
+  <a class="link-btn" href="boete-eigen-eten.html">⚠️ Bußgeld für eigenes Essen & Trinken →</a>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-bonnen-glaasje.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🥃</div><h2>Bon im Glas</h2>
+  <p>Viele fragen sich, warum kleine Gläser mit dem Kassenbon darin auf dem Tisch stehen. Und warum bei dem einen ja, beim anderen nicht?</p>
+  <p>„Vergisst der Kellner, was man getrunken hat?“</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-bonnen-controle.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🔍</div><h2>Kontrolle durch das Finanzamt</h2>
+  <p>Beim Bestellen eines Getränks muss der Betrag sofort an der Kasse erfasst und der Bon auf den Tisch gelegt werden. So sieht die Steuerbehörde (die regelmäßig kontrolliert) sofort, ob alles verbucht ist.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-bonnen-kassa.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🖨️</div><h2>„Weiße“ Kassen</h2>
+  <p>In Griechenland gibt es sogenannte <strong>weiße Kassen</strong>. Einmal erfasste Beträge lassen sich nicht einfach wieder löschen.</p>
+  <p>Beim Essen liegen die Bons oft nicht auf dem Tisch, sondern bei der Kasse – sonst würde es ein Zettelchaos.</p>
+  <div class="note">Kurz: Der Bon auf dem Tisch ist keine Vergesslichkeit, sondern gesetzliche Pflicht zur Kontrolle.</div></div></article>
+</div>
+
+<div data-lang-block="it" style="display:none">
+  <header class="page-head"><h1>🧾 Scontrini sul tavolo</h1><p class="intro">Perché c’è uno scontrino in un bicchierino sul tavolo?</p></header>
+  <a class="link-btn" href="boete-eigen-eten.html">⚠️ Multa per cibo e bevande portati da casa →</a>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-bonnen-glaasje.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🥃</div><h2>Scontrino nel bicchiere</h2>
+  <p>Molti si chiedono perché ci siano piccoli bicchieri con lo scontrino dentro sul tavolo. E perché in un locale sì e in un altro no?</p>
+  <p>«Il cameriere dimentica cosa hai bevuto?»</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-bonnen-controle.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🔍</div><h2>Controlli del fisco</h2>
+  <p>Quando ordini qualcosa da bere, il locale deve registrare subito l’importo in cassa e lasciare lo scontrino sul tavolo. Così il fisco (che controlla regolarmente) vede subito se tutto è stato registrato.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-bonnen-kassa.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🖨️</div><h2>Casse «bianche»</h2>
+  <p>In Grecia si usano le cosiddette <strong>casse bianche</strong>: una volta registrati, gli importi non si possono semplicemente cancellare.</p>
+  <p>Con il cibo spesso non vedi gli scontrini sul tavolo: restano vicino alla cassa, altrimenti sarebbe un caos di pezzetti di carta.</p>
+  <div class="note">In breve: lo scontrino sul tavolo non è dimenticanza del cameriere, ma un obbligo di legge per i controlli.</div></div></article>
+</div>
+
+<div data-lang-block="tr" style="display:none">
+  <header class="page-head"><h1>🧾 Masada fiş</h1><p class="intro">Neden masada küçük bir bardakta fiş duruyor?</p></header>
+  <a class="link-btn" href="boete-eigen-eten.html">⚠️ Kendi yiyecek-içecek getirmenin cezası →</a>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-bonnen-glaasje.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🥃</div><h2>Bardakta fiş</h2>
+  <p>Birçok kişi masada içindeki fişle küçük bardakların neden durduğunu merak eder. Bir yerde var, diğerinde yok?</p>
+  <p>«Garson ne içtiğinizi mi unutuyor?»</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-bonnen-controle.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🔍</div><h2>Vergi dairesi kontrolü</h2>
+  <p>Bir şey içtiğinizde tutarın hemen kasaya işlenmesi ve fişin masaya konması zorunludur. Böylece vergi dairesi (sık kontrol eder) her şeyin kayda geçtiğini hemen görür.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-bonnen-kassa.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🖨️</div><h2>«Beyaz» kasalar</h2>
+  <p>Yunanistan’da <strong>beyaz kasalar</strong> kullanılır. Tutar bir kez işlendi mi kolayca silinemez.</p>
+  <p>Yemekte fişler çoğu zaman masada değil, kasanın yanında durur; yoksa fiş karmaşası olur.</p>
+  <div class="note">Kısaca: masadaki fiş garsonun unutkanlığı değil, kontrol için yasal zorunluluktur.</div></div></article>
+</div>
+
+<div data-lang-block="es" style="display:none">
+  <header class="page-head"><h1>🧾 Tickets en la mesa</h1><p class="intro">¿Por qué hay un ticket en un vasito sobre la mesa?</p></header>
+  <a class="link-btn" href="boete-eigen-eten.html">⚠️ Multa por traer comida y bebida propia →</a>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-bonnen-glaasje.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🥃</div><h2>Ticket en el vaso</h2>
+  <p>Muchos se preguntan por qué hay vasitos pequeños con el ticket dentro en la mesa. ¿Y por qué en un sitio sí y en otro no?</p>
+  <p>«¿Es que el camarero se olvida de lo que has bebido?»</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-bonnen-controle.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🔍</div><h2>Control de Hacienda</h2>
+  <p>Cuando pides una bebida, el local debe registrar el importe en caja al momento y dejar el ticket en la mesa. Así Hacienda (que controla a menudo) ve de un vistazo que todo está registrado.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-bonnen-kassa.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">🖨️</div><h2>Cajas «blancas»</h2>
+  <p>En Grecia se usan las llamadas <strong>cajas blancas</strong>. Una vez registrados, los importes no se pueden borrar fácilmente.</p>
+  <p>Con la comida a menudo no ves los tickets en la mesa: quedan junto a la caja, si no sería un lío de papeles.</p>
+  <div class="note">En resumen: el ticket en la mesa no es despiste del camarero, sino una obligación legal para el control.</div></div></article>
+</div>
+
+</main>
+<footer class="footer">
+  <div class="footer-logo">🔅 Hello Kos</div>
+  <p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a></p>
+</footer>
+<script>
+(function(){
+  var lang=localStorage.getItem('hk-lang')||'en';
+  var supported=['nl','de','en','it','tr','es'];
+  function setLang(l){
+    if(supported.indexOf(l)<0)l='en';
+    lang=l;localStorage.setItem('hk-lang',l);
+    document.querySelectorAll('[data-lang-block]').forEach(function(el){
+      el.style.display=(el.getAttribute('data-lang-block')===l)?'block':'none';
+    });
+    var opt=document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if(opt){document.getElementById('flag').textContent=opt.getAttribute('data-flag');document.getElementById('code').textContent=l.toUpperCase()}
+    document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===l)});
+    document.documentElement.lang=l;closeMenu();
+  }
+  var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu'),overlay=document.getElementById('overlay');
+  function openMenu(){langMenu.classList.add('open');overlay.classList.add('open')}
+  function closeMenu(){langMenu.classList.remove('open');overlay.classList.remove('open')}
+  langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.contains('open')?closeMenu():openMenu()});
+  overlay.addEventListener('click',closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'))})});
+  setLang(lang);
+})();
+</script>
+</body>
+</html>

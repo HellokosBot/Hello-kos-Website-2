@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0a0c0c">
+<title>Hello Kos | hellokos.com</title>
+<style>
+:root{--bg:#0a0c0c;--bg-elevated:#141818;--bg-card:#1a1f1f;--border:rgba(255,255,255,0.08);--text:#e8e8e8;--text-soft:#a0a8a8;--text-muted:#6b7373;--petrol:#3d9a9a;--gold:#e0b84a;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);padding-top:var(--safe-top);padding-bottom:var(--safe-bottom)}
+body.intro-lock{overflow:hidden}
+#intro{position:fixed;inset:0;z-index:9999;background:#050707;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity .9s ease,visibility .9s}
+#intro.done{opacity:0;visibility:hidden;pointer-events:none}
+#intro .intro-bg{position:absolute;inset:0;background:linear-gradient(160deg,rgba(5,7,7,.55) 0%,rgba(20,40,40,.65) 50%,rgba(5,7,7,.9) 100%),url("intro.jpg") center/cover no-repeat;animation:introKen 8s ease-out forwards;transform:scale(1.12)}
+@keyframes introKen{to{transform:scale(1)}}
+#intro .intro-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 25%,rgba(0,0,0,.7) 100%);pointer-events:none}
+#intro .intro-logo{position:relative;z-index:2;text-align:center;opacity:0;transform:scale(.88);animation:introLogoIn 1.4s cubic-bezier(.22,1,.36,1) .35s forwards}
+@keyframes introLogoIn{to{opacity:1;transform:scale(1)}}
+#intro .intro-sun{margin:0 auto 14px;font-size:68px;line-height:1;filter:drop-shadow(0 0 28px rgba(224,184,74,.5));animation:introPulse 2.4s ease-in-out infinite 1.5s;user-select:none}
+@keyframes introPulse{0%,100%{filter:drop-shadow(0 0 22px rgba(224,184,74,.4));transform:scale(1)}50%{filter:drop-shadow(0 0 38px rgba(224,184,74,.7));transform:scale(1.05)}}
+#intro .intro-title{font-family:Georgia,"Times New Roman",serif;font-size:clamp(2.2rem,8vw,3.2rem);font-weight:700;color:var(--gold);letter-spacing:-.02em;text-shadow:0 2px 24px rgba(0,0,0,.6)}
+#intro .intro-title span{color:#f0c85a;font-style:italic}
+#intro .intro-tag{margin-top:10px;font-size:.95rem;color:rgba(200,210,210,.75);letter-spacing:.12em;text-transform:uppercase;font-weight:500;opacity:0;animation:introFade 1s ease 1.2s forwards}
+@keyframes introFade{to{opacity:1}}
+#intro .intro-flags{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;opacity:0;animation:introFade 1s ease 1.4s forwards}
+#intro .intro-flags button{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:5px 9px;font-size:1.15rem;cursor:pointer;line-height:1}
+#intro .intro-temp{margin-top:18px;font-size:clamp(2.8rem,12vw,3.6rem);font-weight:700;color:#fff;letter-spacing:-.02em;text-shadow:0 2px 20px rgba(0,0,0,.5);line-height:1.1;opacity:0;animation:introFade 1s ease 1.55s forwards}
+#intro .intro-skip{position:absolute;bottom:max(28px,env(safe-area-inset-bottom));right:20px;z-index:3;background:transparent;border:1px solid rgba(255,255,255,.25);color:rgba(220,220,220,.85);font-size:.8rem;font-weight:600;padding:8px 16px;border-radius:999px;cursor:pointer;font-family:inherit}
+#desktopGate{position:fixed;inset:0;z-index:9998;background:rgba(5,7,7,.94);display:none;align-items:center;justify-content:center;padding:24px}
+#desktopGate.show{display:flex}
+#desktopGate .gate-box{max-width:420px;width:100%;background:var(--bg-elevated);border:1px solid var(--border);border-radius:20px;padding:28px 24px;text-align:center}
+#desktopGate h2{font-size:1.2rem;margin-bottom:10px}
+#desktopGate p{color:var(--text-soft);font-size:.92rem;line-height:1.5;margin-bottom:20px}
+#desktopGate .gate-go{background:var(--petrol);color:#fff;border:none;border-radius:999px;padding:14px;font-weight:800;font-size:.95rem;cursor:pointer;font-family:inherit;width:100%}
+.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:14px 16px;background:rgba(10,12,12,.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.logo{grid-column:2;justify-self:center;display:flex;align-items:center;gap:8px;text-decoration:none}
+.logo-icon{font-size:28px}
+.logo-text{font-size:1.3rem;font-weight:700;color:var(--gold);font-family:Georgia,serif}
+.logo-text span{color:#f0c85a;font-style:italic}
+.lang-wrap{grid-column:3;justify-self:end;position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-soft)}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:8px;min-width:160px;z-index:50}
+.lang-menu.open{display:block}
+.lang-option{display:block;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;color:var(--text)}
+.lang-option:hover,.lang-option.active{background:rgba(61,154,154,.15);color:var(--petrol)}
+.overlay{display:none;position:fixed;inset:0;z-index:40}
+.overlay.open{display:block}
+.main{max-width:480px;margin:0 auto;padding:16px 14px 36px}
+.welcome{text-align:center;margin-bottom:12px}
+.welcome h1{font-size:1.35rem;font-weight:800;letter-spacing:-.02em}
+.welcome p{color:var(--text-soft);font-size:.92rem;margin-top:4px}
+.search-wrap{margin:12px 0 18px;position:relative}
+.search-wrap input{width:100%;padding:12px 14px 12px 42px;border-radius:14px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:1rem;font-family:inherit;outline:none}
+.search-wrap input::placeholder{color:var(--text-muted)}
+.search-wrap input:focus{border-color:rgba(61,154,154,.45);box-shadow:0 0 0 3px rgba(61,154,154,.12)}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);opacity:.55;font-size:1rem;pointer-events:none}
+.search-empty{display:none;text-align:center;color:var(--text-muted);font-size:.9rem;padding:20px 10px}
+.search-empty.show{display:block}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.card{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:.95;text-decoration:none;color:#fff;box-shadow:0 2px 12px rgba(0,0,0,.22);border:1px solid var(--border);opacity:0;transform:translateY(14px);animation:cardIn .45s ease forwards}
+.card:nth-child(1){animation-delay:.04s}.card:nth-child(2){animation-delay:.08s}.card:nth-child(3){animation-delay:.12s}.card:nth-child(4){animation-delay:.16s}.card:nth-child(5){animation-delay:.20s}.card:nth-child(6){animation-delay:.24s}.card:nth-child(7){animation-delay:.28s}.card:nth-child(8){animation-delay:.32s}.card:nth-child(9){animation-delay:.36s}.card:nth-child(10){animation-delay:.40s}.card:nth-child(11){animation-delay:.44s}.card:nth-child(12){animation-delay:.48s}
+@keyframes cardIn{to{opacity:1;transform:translateY(0)}}
+.card.hidden{display:none}
+.card img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.82)}
+.card-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.72) 0%,rgba(0,0,0,.25) 40%,transparent 55%);display:flex;align-items:flex-start;justify-content:center;padding:12px 10px;text-align:center}
+.card-title{font-size:.9rem;font-weight:800;line-height:1.3;text-shadow:0 1px 8px rgba(0,0,0,.9);text-align:center;width:100%;background:rgba(0,0,0,.35);backdrop-filter:blur(6px);border-radius:10px;padding:6px 8px}
+.footer{text-align:center;padding:20px 16px 28px;background:var(--bg-elevated);border-top:1px solid var(--border)}
+.footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700;font-size:1.05rem}
+.footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
+.footer .copy{font-size:.72rem;color:var(--text-muted);margin-top:10px}
+#zoomLayer{position:fixed;inset:0;z-index:8000;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s,visibility .25s}
+#zoomLayer.show{opacity:1;visibility:visible;pointer-events:auto}
+#zoomLayer img{max-width:92vw;max-height:78vh;border-radius:16px;object-fit:contain;transform:scale(.88);transition:transform .35s cubic-bezier(.22,1,.36,1)}
+#zoomLayer.show img{transform:scale(1)}
+</style>
+</head>
+<body class="intro-lock">
+<div id="intro">
+  <div class="intro-bg"></div>
+  <div class="intro-vignette"></div>
+  <div class="intro-logo">
+    <div class="intro-sun">🔅</div>
+    <div class="intro-title">Hello <span>Kos</span></div>
+    <div class="intro-tag">All of Kos in your pocket</div>
+    <div class="intro-flags" id="introFlags">
+      <button type="button" data-lang="nl" title="Nederlands">🇳🇱</button>
+      <button type="button" data-lang="de" title="Deutsch">🇩🇪</button>
+      <button type="button" data-lang="en" title="English">🇬🇧</button>
+      <button type="button" data-lang="it" title="Italiano">🇮🇹</button>
+      <button type="button" data-lang="tr" title="Türkçe">🇹🇷</button>
+      <button type="button" data-lang="es" title="Español">🇪🇸</button>
+    </div>
+    <div class="intro-temp" id="introTemp">–</div>
+  </div>
+  <button type="button" class="intro-skip" id="introSkip">Skip</button>
+</div>
+<div id="desktopGate">
+  <div class="gate-box">
+    <div style="font-size:2.4rem;margin-bottom:10px">📱</div>
+    <h2>Better on your phone</h2>
+    <p>Hello Kos is designed for mobile phones. It works on a computer, but the experience is better on your phone.</p>
+    <button type="button" class="gate-go" id="gateContinue">Continue anyway</button>
+  </div>
+</div>
+<header class="app-header">
+  <a href="index.html" class="logo"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option active" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="welcome">
+    <h1 id="heroTitle">All of Kos in your pocket</h1>
+    <p id="heroSub">Choose what you want to do</p>
+  </div>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="search" id="searchInput" placeholder="Search Kos…" autocomplete="off" enterkeyhint="search">
+  </div>
+  <div class="search-empty" id="searchEmpty">No results</div>
+  <div class="grid" id="tileGrid">
+      <a href="wist-je-dat.html" class="card" data-search="did you know facts myths wist je dat fabels">
+        <img src="wist-je-dat.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="c1">Did you know…</div></div>
+      </a>
+      <a href="taxi-bussen.html" class="card" data-search="taxi bus buses transfer prices prijzen bussen">
+        <img src="taxi-bussen.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="c2">Taxi & buses<br>Transfer & prices</div></div>
+      </a>
+      <a href="bezienswaardigheden.html" class="card" data-search="sights routes bezienswaardigheden routes map">
+        <img src="bezienswaardigheden.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="c3">Sights &<br>routes</div></div>
+      </a>
+      <a href="excursies.html" class="card" data-search="excursions activities tours excursies activiteiten">
+        <img src="excursies.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="c4">Excursions &<br>activities</div></div>
+      </a>
+      <a href="beste-lekkerste.html" class="card" data-search="best tastiest food restaurant beste lekkerste">
+        <img src="beste-lekkerste.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="c5">Best &<br>tastiest</div></div>
+      </a>
+      <a href="stranden.html" class="card" data-search="beaches beach bars stranden beachbars">
+        <img src="stranden.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="c6">Beaches &<br>beach bars</div></div>
+      </a>
+      <a href="rentals.html" class="card" data-search="rentals rent car scooter huren auto">
+        <img src="rentals.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="c7">Rentals</div></div>
+      </a>
+      <a href="wellness.html" class="card" data-search="wellness care massage spa verzorging">
+        <img src="wellness.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="c8">Wellness &<br>care</div></div>
+      </a>
+      <a href="bars-nightlife.html" class="card" data-search="bars nightlife night bar nachtleven">
+        <img src="bars-nightlife.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="c9">Bars &<br>nightlife</div></div>
+      </a>
+      <a href="praktische-winkels.html" class="card" data-search="practical shops shops winkels supermarket">
+        <img src="praktische-winkels.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="c10">Practical<br>shops</div></div>
+      </a>
+      <a href="noodgevallen.html" class="card" data-search="emergencies help hospital police noodgevallen hulp">
+        <img src="noodgevallen.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="c11">Emergencies &<br>help</div></div>
+      </a>
+      <a href="water-wind.html" class="card" data-search="water wind sea temperature watertemperatuur wind zwemmen meltemi warm koud">
+        <img src="water-wind.jpg" alt="" loading="lazy">
+        <div class="card-overlay"><div class="card-title" data-i18n="c12">Water &<br>wind</div></div>
+      </a>
+  </div>
+</main>
+<div id="zoomLayer"><img src="" alt=""></div>
+<footer class="footer">
+  <div class="footer-logo">🔅 Hello Kos</div>
+  <p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a> · <a href="mailto:info@hellokos.com">Contact</a></p>
+  <p class="copy">© 2026 Hello Kos</p>
+</footer>
+<script>
+(function(){
+  var audioCtx=null;
+  function ensureCtx(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();return audioCtx}
+  function playIntroSound(){try{var ctx=ensureCtx(),t0=ctx.currentTime;var o1=ctx.createOscillator(),g1=ctx.createGain(),f1=ctx.createBiquadFilter();o1.type='sawtooth';o1.frequency.setValueAtTime(120,t0);o1.frequency.exponentialRampToValueAtTime(40,t0+.9);f1.type='lowpass';f1.frequency.setValueAtTime(800,t0);f1.frequency.exponentialRampToValueAtTime(120,t0+.9);g1.gain.setValueAtTime(.0001,t0);g1.gain.exponentialRampToValueAtTime(.22,t0+.08);g1.gain.exponentialRampToValueAtTime(.0001,t0+1.1);o1.connect(f1);f1.connect(g1);g1.connect(ctx.destination);o1.start(t0);o1.stop(t0+1.15)}catch(e){}}
+  function playClick(){try{var ctx=ensureCtx(),t=ctx.currentTime;var o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.setValueAtTime(880,t);o.frequency.exponentialRampToValueAtTime(440,t+.06);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.12,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+.08);o.connect(g);g.connect(ctx.destination);o.start(t);o.stop(t+.09)}catch(e){}}
+  function playTapWhoosh(){try{var ctx=ensureCtx(),t=ctx.currentTime;var o=ctx.createOscillator(),g=ctx.createGain(),f=ctx.createBiquadFilter();o.type='triangle';o.frequency.setValueAtTime(320,t);o.frequency.exponentialRampToValueAtTime(140,t+.12);f.type='lowpass';f.frequency.value=900;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.09,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+.14);o.connect(f);f.connect(g);g.connect(ctx.destination);o.start(t);o.stop(t+.15)}catch(e){}}
+
+  (function fetchKosTemp(){
+    var url='https://api.open-meteo.com/v1/forecast?latitude=36.89&longitude=27.29&current=temperature_2m&timezone=Europe%2FAthens';
+    fetch(url).then(function(r){return r.json()}).then(function(data){
+      if(data&&data.current&&typeof data.current.temperature_2m==='number'){
+        var el=document.getElementById('introTemp');
+        if(el) el.textContent=Math.round(data.current.temperature_2m)+'°C';
+      }
+    }).catch(function(){});
+  })();
+
+  var intro=document.getElementById('intro'),gate=document.getElementById('desktopGate'),introDone=false,introSoundPlayed=false;
+  function isDesktop(){return window.innerWidth>=900&&!(window.matchMedia&&window.matchMedia('(pointer: coarse)').matches)}
+  function finishIntro(){if(introDone)return;introDone=true;intro.classList.add('done');document.body.classList.remove('intro-lock');setTimeout(function(){intro.style.display='none'},950);if(isDesktop()&&sessionStorage.getItem('hk-desktop-ok')!=='1')gate.classList.add('show')}
+  function tryIntroSound(){if(introSoundPlayed)return;introSoundPlayed=true;playIntroSound()}
+  document.addEventListener('touchstart',tryIntroSound,{once:true,passive:true});
+  document.addEventListener('click',tryIntroSound,{once:true});
+  var introTimer=setTimeout(finishIntro,3200);
+  document.getElementById('introSkip').addEventListener('click',function(){clearTimeout(introTimer);tryIntroSound();playClick();finishIntro()});
+  document.getElementById('gateContinue').addEventListener('click',function(){sessionStorage.setItem('hk-desktop-ok','1');gate.classList.remove('show');playClick()});
+
+  document.addEventListener('click',function(e){
+    if(!introDone)return;
+    var card=e.target.closest('a.card');
+    if(card){
+      e.preventDefault();
+      e.stopPropagation();
+      playTapWhoosh();
+      var href=card.getAttribute('href');
+      if(!href||href==='#')return;
+      var img=card.querySelector('img');
+      var layer=document.getElementById('zoomLayer');
+      if(layer&&img){
+        layer.querySelector('img').src=img.src||'';
+        layer.classList.add('show');
+        setTimeout(function(){ window.location.href=href; },450);
+      } else {
+        window.location.href=href;
+      }
+      return;
+    }
+    if(e.target.closest('button,.lang-btn,.lang-option'))playClick();
+  },true);
+
+  var searchInput=document.getElementById('searchInput');
+  var searchEmpty=document.getElementById('searchEmpty');
+  var cardsEl=document.querySelectorAll('#tileGrid .card');
+  searchInput.addEventListener('input',function(){
+    var q=searchInput.value.trim().toLowerCase();
+    var shown=0;
+    cardsEl.forEach(function(c){
+      var hay=((c.getAttribute('data-search')||'')+' '+(c.querySelector('.card-title')?c.querySelector('.card-title').textContent:'')).toLowerCase();
+      var ok=!q||hay.indexOf(q)!==-1;
+      c.classList.toggle('hidden',!ok);
+      if(ok)shown++;
+    });
+    searchEmpty.classList.toggle('show',shown===0);
+  });
+  var dict={
+    en:{heroTitle:"All of Kos in your pocket",heroSub:"Choose what you want to do",searchPh:"Search Kos…",noRes:"No results",c1:"Did you know…",c2:"Taxi & buses<br>Transfer & prices",c3:"Sights &<br>routes",c4:"Excursions &<br>activities",c5:"Best &<br>tastiest",c6:"Beaches &<br>beach bars",c7:"Rentals",c8:"Wellness &<br>care",c9:"Bars &<br>nightlife",c10:"Practical<br>shops",c11:"Emergencies &<br>help",c12:"Water &<br>wind"},
+    nl:{heroTitle:"Heel Kos in je broekzak",heroSub:"Kies wat je wilt doen",searchPh:"Zoek in Kos…",noRes:"Geen resultaten",c1:"Wist je dat…",c2:"Taxi & bussen<br>Transfer en prijzen",c3:"Bezienswaardigheden<br>& routes",c4:"Excursies &<br>activiteiten",c5:"Beste &<br>lekkerste",c6:"Stranden en<br>beachbars",c7:"Huren",c8:"Wellness &<br>verzorging",c9:"Bars &<br>nachtleven",c10:"Praktische<br>winkels",c11:"Noodgevallen &<br>hulp",c12:"Water &<br>wind"},
+    de:{heroTitle:"Ganz Kos in der Tasche",heroSub:"Wähle, was du tun möchtest",searchPh:"Kos durchsuchen…",noRes:"Keine Ergebnisse",c1:"Wusstest du…",c2:"Taxi & Bus<br>Transfer & Preise",c3:"Sehenswürdigkeiten<br>& Routen",c4:"Ausflüge &<br>Aktivitäten",c5:"Beste &<br>Leckerste",c6:"Strände &<br>Beachbars",c7:"Mieten",c8:"Wellness &<br>Pflege",c9:"Bars &<br>Nachtleben",c10:"Praktische<br>Shops",c11:"Notfälle &<br>Hilfe",c12:"Wasser &<br>Wind"},
+    it:{heroTitle:"Tutta Kos in tasca",heroSub:"Scegli cosa vuoi fare",searchPh:"Cerca a Kos…",noRes:"Nessun risultato",c1:"Lo sapevi…",c2:"Taxi & bus<br>Transfer e prezzi",c3:"Attrazioni<br>& percorsi",c4:"Escursioni &<br>attività",c5:"Il meglio &<br>più buono",c6:"Spiagge e<br>beach bar",c7:"Noleggio",c8:"Wellness &<br>cura",c9:"Bar &<br>nightlife",c10:"Negozi<br>pratici",c11:"Emergenze &<br>aiuto",c12:"Acqua &<br>vento"},
+    tr:{heroTitle:"Kos cebinde",heroSub:"Ne yapmak istediğini seç",searchPh:"Kos'ta ara…",noRes:"Sonuç yok",c1:"Biliyor muydun…",c2:"Taksi & otobüs<br>Transfer ve fiyatlar",c3:"Gezilecek yerler<br>& rotalar",c4:"Turlar &<br>aktiviteler",c5:"En iyi &<br>lezzetli",c6:"Plajlar ve<br>beach barlar",c7:"Kiralama",c8:"Wellness &<br>bakım",c9:"Barlar &<br>gece hayatı",c10:"Pratik<br>dükkanlar",c11:"Acil durum &<br>yardım",c12:"Su &<br>rüzgar"},
+    es:{heroTitle:"Todo Kos en tu bolsillo",heroSub:"Elige lo que quieres hacer",searchPh:"Buscar en Kos…",noRes:"Sin resultados",c1:"¿Sabías que…",c2:"Taxi y buses<br>Transfer y precios",c3:"Lugares de interés<br>& rutas",c4:"Excursiones &<br>actividades",c5:"Lo mejor &<br>más rico",c6:"Playas y<br>beach bars",c7:"Alquiler",c8:"Wellness &<br>cuidado",c9:"Bares &<br>nightlife",c10:"Tiendas<br>prácticas",c11:"Emergencias &<br>ayuda",c12:"Agua y<br>viento"}
+  };
+  var lang=localStorage.getItem('hk-lang')||'en';
+  function setLang(l){
+    lang=l;localStorage.setItem('hk-lang',l);
+    var d=dict[l]||dict.en;
+    document.getElementById('heroTitle').textContent=d.heroTitle;
+    document.getElementById('heroSub').textContent=d.heroSub;
+    document.getElementById('searchInput').placeholder=d.searchPh||'Search Kos…';
+    document.getElementById('searchEmpty').textContent=d.noRes||'No results';
+    document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(d[k])el.innerHTML=d[k]});
+    var opt=document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if(opt){document.getElementById('flag').textContent=opt.getAttribute('data-flag');document.getElementById('code').textContent=l.toUpperCase()}
+    document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===l)});
+    document.documentElement.lang=l;closeMenu();
+  }
+  var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu'),overlay=document.getElementById('overlay');
+  function openMenu(){langMenu.classList.add('open');overlay.classList.add('open')}
+  function closeMenu(){langMenu.classList.remove('open');overlay.classList.remove('open')}
+  langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.contains('open')?closeMenu():openMenu()});
+  overlay.addEventListener('click',closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'))})});
+  document.getElementById('introFlags').addEventListener('click',function(e){
+    var b=e.target.closest('button[data-lang]');
+    if(!b)return;
+    setLang(b.getAttribute('data-lang'));
+    playClick();
+  });
+  setLang(lang);
+})();
+</script>
+</body>
+</html>

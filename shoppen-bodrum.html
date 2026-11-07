@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0a0c0c">
+<title>Shopping Bodrum – Hello Kos</title>
+<style>
+:root{--bg:#0a0c0c;--bg-elevated:#141818;--bg-card:#1a1f1f;--border:rgba(255,255,255,0.08);--text:#e8e8e8;--text-soft:#a0a8a8;--petrol:#3d9a9a;--gold:#e0b84a;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);line-height:1.5}
+.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:12px 14px;background:rgba(10,12,12,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-btns{display:flex;gap:6px}
+.nav-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);text-decoration:none;font-size:1.15rem}
+.logo{justify-self:center;display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo-icon{font-size:22px}
+.logo-text{font-size:1.1rem;font-weight:700;color:var(--gold);font-family:Georgia,serif}
+.logo-text span{color:#f0c85a;font-style:italic}
+.lang-wrap{justify-self:end;position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-soft)}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:8px;min-width:160px;z-index:50}
+.lang-menu.open{display:block}
+.lang-option{display:block;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;color:var(--text)}
+.lang-option.active{background:rgba(61,154,154,.15);color:var(--petrol)}
+.overlay{display:none;position:fixed;inset:0;z-index:40}.overlay.open{display:block}
+.main{max-width:480px;margin:0 auto;padding:16px 14px 48px}
+.page-head{text-align:center;margin-bottom:16px}
+.page-head h1{font-size:1.3rem;font-weight:800}
+.page-head .intro{color:var(--text-soft);font-size:.92rem;margin-top:6px}
+.tips{display:flex;flex-direction:column;gap:16px}
+.tip-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.tip-photo{height:140px;background:linear-gradient(135deg,#1a2a2a,#0d1515);overflow:hidden}
+.tip-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.tip-photo.no-img{height:0}
+.tip-body{padding:16px 16px 18px;position:relative}
+.tip-icon{position:absolute;top:-22px;right:14px;width:40px;height:40px;border-radius:12px;background:var(--bg-elevated);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.tip-body h2{font-size:1.05rem;font-weight:800;color:var(--gold);margin-bottom:8px;padding-right:36px}
+.tip-body h3{font-size:.95rem;font-weight:700;color:var(--petrol);margin:12px 0 6px}
+.tip-body p{font-size:.92rem;color:var(--text-soft);line-height:1.55;margin-bottom:10px}
+.tip-body p:last-child{margin-bottom:0}
+.tip-body strong{color:var(--text)}
+.tip-body ul{margin:8px 0 10px 1.1em;color:var(--text-soft);font-size:.92rem}
+.tip-body li{margin-bottom:4px}
+.example{background:rgba(61,154,154,.1);border:1px solid rgba(61,154,154,.25);border-radius:12px;padding:12px 14px;margin:10px 0;font-size:.9rem;color:var(--text);line-height:1.5}
+.alert{background:rgba(224,122,74,.12);border:1px solid rgba(224,122,74,.35);border-radius:14px;padding:14px 16px;margin-bottom:16px;font-size:.9rem;color:#f0c8b0;line-height:1.5}
+.alert strong{color:#ffd4b8}
+.footer{text-align:center;padding:20px 16px;background:var(--bg-elevated);border-top:1px solid var(--border)}
+.footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
+.footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="nav-btns"><a class="nav-btn" href="index.html">🏠</a><a class="nav-btn" href="javascript:history.back()">←</a></div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+
+<div data-lang-block="nl" style="display:none">
+  <header class="page-head"><h1>Shoppen Bodrum & douane</h1><p class="intro">Een dagje Bodrum is populair — let op de ferry-regels bij terugkomst op Kos.</p></header>
+  <div class="alert"><strong>Belangrijk:</strong> Met de ferry terug van Bodrum naar Kos gelden de <strong>strengere zeereis-regels</strong>, niet de ruimere vlieg-regels.</div>
+  <div class="tips">
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-intro.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">⛴️</div>
+      <h2>Ferry = zeereis (niet vliegtuig)</h2>
+      <p>Veel vakantiegangers kennen de regels van een <strong>vliegreis</strong>. Wanneer je vanuit Turkije met het vliegtuig naar Europa reist, gelden andere (ruimere) regels.</p>
+      <p>Maar een toerist die op Kos verblijft en een dagtrip naar Bodrum maakt, komt met de <strong>ferry</strong> terug. Daarom gelden de strengere regels voor een <strong>zeereis</strong>.</p>
+    </div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-tabak.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🚬</div>
+      <h2>Tabak (ferry Bodrum → Kos)</h2>
+      <p>Maximaal per persoon (combineer naar verhouding):</p>
+      <ul><li>40 sigaretten (2 pakjes)</li><li>of 20 cigarillo’s</li><li>of 10 sigaren</li><li>of 50 gram rooktabak (shag)</li></ul>
+      <div class="example"><strong>Voorbeeld:</strong> Neem je 20 sigaretten mee? Dan heb je de helft van je toegestane hoeveelheid gebruikt. Je mag dan daarnaast nog ongeveer de helft van een andere hoeveelheid meenemen, bijvoorbeeld 5 sigaren of 25 gram shag.</div>
+    </div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-aankopen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🛍️</div>
+      <h2>Kleding en andere aankopen</h2>
+      <p>Naast tabak mag je andere spullen meenemen voor <strong>persoonlijk gebruik</strong> tot een maximale waarde van <strong>€430 per persoon</strong>.</p>
+      <p><strong>Let op</strong> met grote hoeveelheden van hetzelfde product. Koop je bijvoorbeeld meerdere dezelfde jassen of schoenen, dan kan de douane dit zien als goederen voor verkoop in plaats van persoonlijk gebruik.</p>
+    </div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-alcohol.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🍷</div>
+      <h2>Alcohol (ferry)</h2>
+      <ul><li><strong>1 liter</strong> sterke drank (meer dan 22% alcohol), <em>of</em></li><li><strong>2 liter</strong> alcoholische drank met een lager percentage (tot 22%)</li></ul>
+      <p>Je kiest één van de twee. Sterke drank is bijvoorbeeld whisky of wodka; lager percentage is bijvoorbeeld likeur, port of sherry tot 22%.</p>
+    </div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-uk.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🇬🇧</div>
+      <h2>UK: van Kos terug naar het Verenigd Koninkrijk</h2>
+      <p>De ferry-regels Bodrum → Kos gelden voor iedereen. Vlieg je later van Kos (Griekenland) naar het VK, dan gelden bij aankomst in de UK de <strong>Britse regels</strong> (sinds Brexit). Samengevat:</p>
+      <h3>Tabak</h3>
+      <ul>
+        <li>200 sigaretten</li>
+        <li>of 100 cigarillo’s</li>
+        <li>of 50 sigaren</li>
+        <li>of 250 gram rooktabak / shag</li>
+        <li>of 200 sticks verwarmde tabak</li>
+      </ul>
+      <p>Je mag dit naar verhouding combineren (bijv. 100 sigaretten + 25 sigaren).</p>
+      <h3>Alcohol</h3>
+      <ul>
+        <li>42 liter bier <em>én</em> 18 liter stille wijn</li>
+        <li>plus óf 4 liter sterke drank (>22%) óf 9 liter andere alcohol tot 22% (mousserende wijn, port, sherry, enz.)</li>
+      </ul>
+      <h3>Overige goederen</h3>
+      <p>Tot <strong>£390</strong> per persoon (kleding, souvenirs, elektronica, enz.). Bij privéboot of privévliegtuig: £270.</p>
+      <p>Ga je over de limiet? Dan betaal je belasting en accijns over <strong>alles</strong> in die categorie, niet alleen over het deel erboven. Declareer dit vooraf online via de Britse douane.</p>
+    </div></article>
+  </div>
+</div>
+
+<div data-lang-block="en" style="display:none">
+  <header class="page-head"><h1>Shopping Bodrum & customs</h1><p class="intro">A day trip to Bodrum is popular — watch the ferry rules when you return to Kos.</p></header>
+  <div class="alert"><strong>Important:</strong> Returning by ferry from Bodrum to Kos means the <strong>stricter sea-travel rules</strong>, not the more generous air-travel allowances.</div>
+  <div class="tips">
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-intro.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">⛴️</div>
+      <h2>Ferry = sea travel (not by plane)</h2>
+      <p>Flying from Turkey into Europe has different (more generous) limits. A day trip to Bodrum means you return by <strong>ferry</strong> — so the stricter <strong>sea journey</strong> rules apply.</p>
+    </div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-tabak.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🚬</div>
+      <h2>Tobacco (ferry Bodrum → Kos)</h2>
+      <ul><li>40 cigarettes (2 packs)</li><li>or 20 cigarillos</li><li>or 10 cigars</li><li>or 50 g tobacco</li></ul>
+      <div class="example"><strong>Example:</strong> 20 cigarettes = half your allowance. You may then take about half of another type — e.g. 5 cigars or 25 g tobacco.</div>
+    </div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-aankopen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🛍️</div>
+      <h2>Clothes and other goods</h2>
+      <p>Other items for <strong>personal use</strong> up to <strong>€430 per person</strong>. Large quantities of the same product may be treated as goods for sale.</p>
+    </div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-alcohol.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🍷</div>
+      <h2>Alcohol (ferry)</h2>
+      <ul><li><strong>1 litre</strong> of spirits (over 22%), <em>or</em></li><li><strong>2 litres</strong> of drinks up to 22%</li></ul>
+    </div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-uk.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🇬🇧</div>
+      <h2>UK: from Kos back to the United Kingdom</h2>
+      <p>Ferry rules Bodrum → Kos apply to everyone. When you later fly from Kos (Greece) to the UK, British arrival rules apply. Summary:</p>
+      <h3>Tobacco</h3>
+      <ul><li>200 cigarettes</li><li>or 100 cigarillos</li><li>or 50 cigars</li><li>or 250 g tobacco</li><li>or 200 heated tobacco sticks</li></ul>
+      <p>You may combine in proportion (e.g. 100 cigarettes + 25 cigars).</p>
+      <h3>Alcohol</h3>
+      <ul><li>42 litres of beer <em>and</em> 18 litres of still wine</li><li>plus either 4 litres of spirits (>22%) or 9 litres of other alcohol up to 22%</li></ul>
+      <h3>Other goods</h3>
+      <p>Up to <strong>£390</strong> per person. Private boat or plane: £270. Over the limit? Duty applies to the whole amount in that category — declare in advance online via UK customs.</p>
+    </div></article>
+  </div>
+</div>
+
+<div data-lang-block="de" style="display:none">
+  <header class="page-head"><h1>Shopping Bodrum & Zoll</h1><p class="intro">Tagesausflug nach Bodrum — Fährregeln beachten.</p></header>
+  <div class="alert"><strong>Wichtig:</strong> Rückfahrt mit der Fähre = <strong>strengere Seereise-Regeln</strong>.</div>
+  <div class="tips">
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-intro.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">⛴️</div><h2>Fähre = Seereise</h2><p>Mit der Fähre zurück nach Kos gelten die strengeren Regeln für eine Seereise, nicht die großzügigeren Flugregeln.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-tabak.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🚬</div><h2>Tabak (Fähre)</h2><ul><li>40 Zigaretten</li><li>oder 20 Zigarillos</li><li>oder 10 Zigarren</li><li>oder 50 g Tabak</li></ul><div class="example"><strong>Beispiel:</strong> 20 Zigaretten = Hälfte. Dann noch z. B. 5 Zigarren oder 25 g Tabak.</div></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-aankopen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🛍️</div><h2>Sonstige Einkäufe</h2><p>Persönlicher Gebrauch bis max. <strong>€430 pro Person</strong>.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-alcohol.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🍷</div><h2>Alkohol (Fähre)</h2><ul><li><strong>1 l</strong> Spirituosen (>22 %) oder <strong>2 l</strong> bis 22 %</li></ul></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-uk.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🇬🇧</div>
+      <h2>UK: von Kos zurück nach Großbritannien</h2>
+      <p>Fährregeln gelten für alle. Beim Flug von Kos ins UK:</p>
+      <ul>
+        <li><strong>Tabak:</strong> 200 Zigaretten / 100 Zigarillos / 50 Zigarren / 250 g / 200 Sticks</li>
+        <li><strong>Alkohol:</strong> 42 l Bier und 18 l stiller Wein, plus 4 l Spirituosen (>22 %) oder 9 l andere bis 22 %</li>
+        <li><strong>Sonstige Waren:</strong> bis £390 pro Person</li>
+      </ul>
+    </div></article>
+  </div>
+</div>
+
+<div data-lang-block="it" style="display:none">
+  <header class="page-head"><h1>Shopping Bodrum e dogana</h1><p class="intro">Gita a Bodrum — regole del traghetto.</p></header>
+  <div class="alert"><strong>Importante:</strong> Rientro in traghetto = regole più severe del viaggio via mare.</div>
+  <div class="tips">
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-intro.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">⛴️</div><h2>Traghetto = via mare</h2><p>Con il traghetto valgono le regole più severe del viaggio via mare.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-tabak.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🚬</div><h2>Tabacco (traghetto)</h2><ul><li>40 sigarette</li><li>o 20 cigarillos</li><li>o 10 sigari</li><li>o 50 g tabacco</li></ul></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-aankopen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🛍️</div><h2>Altri acquisti</h2><p>Uso personale fino a <strong>€430 a persona</strong>.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-alcohol.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🍷</div><h2>Alcol (traghetto)</h2><ul><li><strong>1 l</strong> superalcolici (>22 %) o <strong>2 l</strong> fino al 22 %</li></ul></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-uk.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🇬🇧</div>
+      <h2>UK: da Kos al Regno Unito</h2>
+      <ul>
+        <li><strong>Tabacco:</strong> 200 sigarette / 100 cigarillos / 50 sigari / 250 g / 200 sticks</li>
+        <li><strong>Alcol:</strong> 42 l birra e 18 l vino fermo, più 4 l superalcolici o 9 l altri fino al 22 %</li>
+        <li><strong>Altri beni:</strong> fino a £390 a persona</li>
+      </ul>
+    </div></article>
+  </div>
+</div>
+
+<div data-lang-block="tr" style="display:none">
+  <header class="page-head"><h1>Bodrum alışveriş ve gümrük</h1><p class="intro">Bodrum günü — feribot kuralları.</p></header>
+  <div class="alert"><strong>Önemli:</strong> Feribotla dönüş = daha sıkı deniz yolu kuralları.</div>
+  <div class="tips">
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-intro.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">⛴️</div><h2>Feribot = deniz yolu</h2><p>Feribotla dönüşte deniz yolu kuralları geçerlidir.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-tabak.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🚬</div><h2>Tütün (feribot)</h2><ul><li>40 sigara</li><li>veya 20 cigarillo</li><li>veya 10 puro</li><li>veya 50 g tütün</li></ul></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-aankopen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🛍️</div><h2>Diğer alışveriş</h2><p>Kişisel kullanım kişi başı en fazla <strong>€430</strong>.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-alcohol.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🍷</div><h2>Alkol (feribot)</h2><ul><li><strong>1 litre</strong> sert içki (>%22) veya <strong>2 litre</strong> en fazla %22</li></ul></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-uk.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🇬🇧</div>
+      <h2>UK: Kos’tan Birleşik Krallık’a</h2>
+      <ul>
+        <li><strong>Tütün:</strong> 200 sigara / 100 cigarillo / 50 puro / 250 g / 200 stick</li>
+        <li><strong>Alkol:</strong> 42 l bira ve 18 l sakin şarap, artı 4 l sert içki veya 9 l diğer (en fazla %22)</li>
+        <li><strong>Diğer:</strong> kişi başı £390’a kadar</li>
+      </ul>
+    </div></article>
+  </div>
+</div>
+
+<div data-lang-block="es" style="display:none">
+  <header class="page-head"><h1>Compras en Bodrum y aduana</h1><p class="intro">Excursión a Bodrum — normas del ferry.</p></header>
+  <div class="alert"><strong>Importante:</strong> Vuelta en ferry = normas más estrictas del viaje por mar.</div>
+  <div class="tips">
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-intro.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">⛴️</div><h2>Ferry = viaje por mar</h2><p>Con el ferry rigen las normas más estrictas del viaje por mar.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-tabak.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🚬</div><h2>Tabaco (ferry)</h2><ul><li>40 cigarrillos</li><li>o 20 cigarritos</li><li>o 10 puros</li><li>o 50 g de tabaco</li></ul></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-aankopen.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🛍️</div><h2>Otras compras</h2><p>Uso personal hasta <strong>€430 por persona</strong>.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-alcohol.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🍷</div><h2>Alcohol (ferry)</h2><ul><li><strong>1 litro</strong> de licores (>22 %) o <strong>2 litros</strong> hasta 22 %</li></ul></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-bodrum-uk.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🇬🇧</div>
+      <h2>UK: de Kos al Reino Unido</h2>
+      <ul>
+        <li><strong>Tabaco:</strong> 200 cigarrillos / 100 cigarritos / 50 puros / 250 g / 200 sticks</li>
+        <li><strong>Alcohol:</strong> 42 l de cerveza y 18 l de vino tranquilo, más 4 l de licores (>22 %) o 9 l de otros hasta 22 %</li>
+        <li><strong>Otros bienes:</strong> hasta £390 por persona</li>
+      </ul>
+    </div></article>
+  </div>
+</div>
+
+</main>
+<footer class="footer"><div class="footer-logo">🔅 Hello Kos</div><p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a></p></footer>
+<script>
+(function(){
+  var lang=localStorage.getItem('hk-lang')||'en';
+  var supported=['nl','de','en','it','tr','es'];
+  function setLang(l){
+    if(supported.indexOf(l)<0)l='en';
+    lang=l;localStorage.setItem('hk-lang',l);
+    document.querySelectorAll('[data-lang-block]').forEach(function(el){
+      el.style.display = (el.getAttribute('data-lang-block')===l) ? 'block' : 'none';
+    });
+    var opt=document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if(opt){document.getElementById('flag').textContent=opt.getAttribute('data-flag');document.getElementById('code').textContent=l.toUpperCase()}
+    document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===l)});
+    document.documentElement.lang=l;closeMenu();
+  }
+  var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu'),overlay=document.getElementById('overlay');
+  function openMenu(){langMenu.classList.add('open');overlay.classList.add('open')}
+  function closeMenu(){langMenu.classList.remove('open');overlay.classList.remove('open')}
+  langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.contains('open')?closeMenu():openMenu()});
+  overlay.addEventListener('click',closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'))})});
+  setLang(lang);
+})();
+</script>
+</body>
+</html>

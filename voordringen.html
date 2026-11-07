@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0a0c0c">
+<title>Voordringen – Hello Kos</title>
+<style>
+:root{--bg:#0a0c0c;--bg-elevated:#141818;--bg-card:#1a1f1f;--border:rgba(255,255,255,0.08);--text:#e8e8e8;--text-soft:#a0a8a8;--petrol:#3d9a9a;--gold:#e0b84a;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);line-height:1.5}
+.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:12px 14px;background:rgba(10,12,12,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-btns{display:flex;gap:6px}
+.nav-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);text-decoration:none;font-size:1.15rem}
+.nav-btn:active{transform:scale(.94)}
+.logo{justify-self:center;display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo-icon{font-size:22px}
+.logo-text{font-size:1.1rem;font-weight:700;color:var(--gold);font-family:Georgia,serif}
+.logo-text span{color:#f0c85a;font-style:italic}
+.lang-wrap{justify-self:end;position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-soft)}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:8px;min-width:160px;z-index:50}
+.lang-menu.open{display:block}
+.lang-option{display:block;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;color:var(--text)}
+.lang-option.active{background:rgba(61,154,154,.15);color:var(--petrol)}
+.overlay{display:none;position:fixed;inset:0;z-index:40}.overlay.open{display:block}
+.main{max-width:480px;margin:0 auto;padding:16px 14px 48px}
+.page-head{text-align:center;margin-bottom:14px}
+.page-head h1{font-size:1.35rem;font-weight:800}
+.page-head .intro{color:var(--text-soft);font-size:.92rem;margin-top:6px}
+.tip-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:16px;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.tip-photo{height:150px;overflow:hidden;background:linear-gradient(135deg,#1a2a2a,#0d1515)}
+.tip-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.tip-photo.no-img{height:0}
+.tip-body{padding:16px 16px 18px;position:relative}
+.tip-icon{position:absolute;top:-22px;right:14px;width:40px;height:40px;border-radius:12px;background:var(--bg-elevated);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.tip-body h2{font-size:1.05rem;font-weight:800;color:var(--gold);margin-bottom:8px;padding-right:36px}
+.tip-body p{font-size:.92rem;color:var(--text-soft);line-height:1.55;margin-bottom:10px}
+.tip-body p:last-child{margin-bottom:0}
+.tip-body strong{color:var(--text)}
+.note{background:rgba(61,154,154,.12);border:1px solid rgba(61,154,154,.3);border-radius:12px;padding:12px 14px;margin-top:10px;font-size:.9rem;color:#b8e0e0;line-height:1.5}
+.footer{text-align:center;padding:20px 16px;background:var(--bg-elevated);border-top:1px solid var(--border)}
+.footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
+.footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html">🏠</a>
+    <a class="nav-btn" href="wist-je-dat.html">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+
+<div data-lang-block="nl" style="display:none">
+  <header class="page-head">
+    <h1>🙋 Voordringen</h1>
+    <p class="intro">Geduld is een schone zaak – maar dat gezegde geldt hier niet altijd.</p>
+  </header>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-voordringen-geduld.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">⏳</div>
+      <h2>Geduld is een schone zaak</h2>
+      <p>Dit gezegde geldt niet altijd voor de Grieken. Ze hebben een hekel aan wachten of in de rij staan. Zolang ze zelf niet vooraan staan, proberen ze voortdurend – soms onbeschaamd – die koppositie te veroveren.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-voordringen-tweede.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">2️⃣</div>
+      <h2>Tweede rij</h2>
+      <p>Of ze creëren een tweede rij naast de eerste, waar ze uiteraard weer vooraan komen te staan. Bij de bank, in de winkel of in het ziekenhuis – het voordringen kent geen grenzen. Dit fenomeen komt overal voor.</p>
+      <div class="note">
+        Maak u er vooral niet kwaad over, maar laat u ook niet de kaas van het brood eten. Wie dat wél doet, loopt het risico dat hij of zij – zelfs met nummertje – uren later nog steeds niet aan de beurt is.
+      </div>
+    </div>
+  </article>
+</div>
+
+<div data-lang-block="en" style="display:none">
+  <header class="page-head">
+    <h1>🙋 Queue jumping</h1>
+    <p class="intro">Patience is a virtue – but that saying doesn’t always apply here.</p>
+  </header>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-voordringen-geduld.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">⏳</div>
+      <h2>Patience is a virtue</h2>
+      <p>This saying doesn’t always hold true for the Greeks. They hate waiting or standing in line. As long as they’re not at the front themselves, they keep trying – sometimes shamelessly – to claim that top spot.</p>
+    </div>
+  </article>
+  <article class="tip-card">
+    <div class="tip-photo"><img src="wjd-voordringen-tweede.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body">
+      <div class="tip-icon">2️⃣</div>
+      <h2>A second queue</h2>
+      <p>Or they create a second queue next to the first – where of course they end up at the front again. At the bank, in the shop or at the hospital – queue jumping knows no bounds. This happens everywhere.</p>
+      <div class="note">
+        Don’t get angry about it – but don’t let people walk all over you either. If you do, you risk still waiting hours later even with a ticket number.
+      </div>
+    </div>
+  </article>
+</div>
+
+<div data-lang-block="de" style="display:none">
+  <header class="page-head"><h1>🙋 Vordrängeln</h1><p class="intro">Geduld ist eine Tugend – aber dieses Sprichwort gilt hier nicht immer.</p></header>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-voordringen-geduld.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">⏳</div><h2>Geduld ist eine Tugend</h2>
+  <p>Dieses Sprichwort gilt nicht immer für die Griechen. Sie hassen das Warten oder Anstehen. Solange sie selbst nicht vorne stehen, versuchen sie ständig – manchmal schamlos – den vordersten Platz zu erobern.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-voordringen-tweede.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">2️⃣</div><h2>Zweite Schlange</h2>
+  <p>Oder sie bilden eine zweite Schlange neben der ersten – und stehen dort natürlich wieder vorne. Bei der Bank, im Laden oder im Krankenhaus – Vordrängeln kennt keine Grenzen.</p>
+  <div class="note">Ärgern Sie sich nicht darüber – aber lassen Sie sich auch nicht über den Tisch ziehen. Wer das tut, riskiert, selbst mit Nummerstunden später noch zu warten.</div></div></article>
+</div>
+
+<div data-lang-block="it" style="display:none">
+  <header class="page-head"><h1>🙋 Saltare la fila</h1><p class="intro">La pazienza è una virtù – ma questo detto qui non vale sempre.</p></header>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-voordringen-geduld.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">⏳</div><h2>La pazienza è una virtù</h2>
+  <p>Questo detto non vale sempre per i greci. Odiano aspettare o fare la fila. Finché non sono davanti, cercano continuamente – a volte senza pudore – di conquistare il primo posto.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-voordringen-tweede.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">2️⃣</div><h2>Seconda fila</h2>
+  <p>O creano una seconda fila accanto alla prima, dove ovviamente si ritrovano di nuovo davanti. In banca, al negozio o in ospedale – saltare la fila non ha limiti.</p>
+  <div class="note">Non arrabbiarti – ma non farti neanche soverchiare. Chi lo fa rischia di aspettare ancora per ore, anche con il numeretto.</div></div></article>
+</div>
+
+<div data-lang-block="tr" style="display:none">
+  <header class="page-head"><h1>🙋 Sıra ihlali</h1><p class="intro">Sabır erdemdir – ama bu söz burada her zaman geçerli değil.</p></header>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-voordringen-geduld.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">⏳</div><h2>Sabır erdemdir</h2>
+  <p>Bu söz Yunanlar için her zaman geçerli değil. Beklemekten veya sırada durmaktan nefret ederler. Kendileri önde olmadıkları sürece – bazen utanmadan – o birinci yeri ele geçirmeye çalışırlar.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-voordringen-tweede.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">2️⃣</div><h2>İkinci sıra</h2>
+  <p>Ya da birinci sıranın yanında ikinci bir sıra oluştururlar – ve tabii orada yine öne geçerler. Bankada, dükkânda veya hastanede – sıra ihlalinin sınırı yoktur.</p>
+  <div class="note">Kızmayın – ama hakkınızı da yedirmeyin. Yoksa numarayla bile saatlerce bekleyebilirsiniz.</div></div></article>
+</div>
+
+<div data-lang-block="es" style="display:none">
+  <header class="page-head"><h1>🙋 Colarse en la cola</h1><p class="intro">La paciencia es una virtud – pero ese dicho aquí no siempre vale.</p></header>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-voordringen-geduld.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">⏳</div><h2>La paciencia es una virtud</h2>
+  <p>Este dicho no siempre se cumple con los griegos. Odian esperar o hacer cola. Mientras no estén delante, intentan sin parar – a veces sin vergüenza – conquistar ese primer puesto.</p></div></article>
+  <article class="tip-card"><div class="tip-photo"><img src="wjd-voordringen-tweede.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="tip-body"><div class="tip-icon">2️⃣</div><h2>Segunda fila</h2>
+  <p>O crean una segunda fila al lado de la primera, donde por supuesto vuelven a quedar delante. En el banco, la tienda o el hospital – colarse no tiene límites.</p>
+  <div class="note">No te enfades – pero tampoco dejes que te pisen. Si lo haces, puedes seguir esperando horas después, incluso con número.</div></div></article>
+</div>
+
+</main>
+<footer class="footer">
+  <div class="footer-logo">🔅 Hello Kos</div>
+  <p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a></p>
+</footer>
+<script>
+(function(){
+  var lang=localStorage.getItem('hk-lang')||'en';
+  var supported=['nl','de','en','it','tr','es'];
+  function setLang(l){
+    if(supported.indexOf(l)<0)l='en';
+    lang=l;localStorage.setItem('hk-lang',l);
+    document.querySelectorAll('[data-lang-block]').forEach(function(el){
+      el.style.display=(el.getAttribute('data-lang-block')===l)?'block':'none';
+    });
+    var opt=document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if(opt){document.getElementById('flag').textContent=opt.getAttribute('data-flag');document.getElementById('code').textContent=l.toUpperCase()}
+    document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===l)});
+    document.documentElement.lang=l;closeMenu();
+  }
+  var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu'),overlay=document.getElementById('overlay');
+  function openMenu(){langMenu.classList.add('open');overlay.classList.add('open')}
+  function closeMenu(){langMenu.classList.remove('open');overlay.classList.remove('open')}
+  langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.contains('open')?closeMenu():openMenu()});
+  overlay.addEventListener('click',closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'))})});
+  setLang(lang);
+})();
+</script>
+</body>
+</html>

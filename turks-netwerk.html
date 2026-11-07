@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#0a0c0c">
+<title>Turkish network on Kos – Hello Kos</title>
+<style>
+:root{--bg:#0a0c0c;--bg-elevated:#141818;--bg-card:#1a1f1f;--border:rgba(255,255,255,0.08);--text:#e8e8e8;--text-soft:#a0a8a8;--petrol:#3d9a9a;--gold:#e0b84a;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);line-height:1.5;overflow-x:hidden}
+.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:12px 14px;background:rgba(10,12,12,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-btns{display:flex;gap:6px}
+.nav-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);text-decoration:none;font-size:1.15rem}
+.nav-btn:active{transform:scale(.94)}
+.logo{justify-self:center;display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo-icon{font-size:22px}
+.logo-text{font-size:1.1rem;font-weight:700;color:var(--gold);font-family:Georgia,serif}
+.logo-text span{color:#f0c85a;font-style:italic}
+.lang-wrap{justify-self:end;position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-soft)}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:8px;min-width:160px;z-index:50}
+.lang-menu.open{display:block}
+.lang-option{display:block;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;color:var(--text)}
+.lang-option.active{background:rgba(61,154,154,.15);color:var(--petrol)}
+.overlay{display:none;position:fixed;inset:0;z-index:40}.overlay.open{display:block}
+.main{max-width:480px;margin:0 auto;padding:16px 14px 48px}
+.page-head{text-align:center;margin-bottom:12px}
+.page-head h1{font-size:1.25rem;font-weight:800}
+.page-head .intro{color:var(--text-soft);font-size:.92rem;margin-top:6px}
+.top-photo{width:100%;height:160px;border-radius:16px;overflow:hidden;margin-bottom:14px;background:linear-gradient(145deg,#1a2a2a,#0d1515);border:1px solid var(--border)}
+.top-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.top-photo.no-img{height:0;border:none;margin:0}
+.info{background:rgba(224,184,74,.1);border:1px solid rgba(224,184,74,.35);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:.9rem;color:#f0d78a;line-height:1.5}
+.tip-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:16px;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.tip-body{padding:16px 16px 18px}
+.tip-body h2{font-size:1.05rem;font-weight:800;color:var(--gold);margin-bottom:8px}
+.tip-body p{font-size:.92rem;color:var(--text-soft);line-height:1.55;margin-bottom:10px}
+.tip-body strong{color:var(--text)}
+.swipe-hint{text-align:center;font-size:.85rem;color:var(--text-soft);margin-bottom:10px}
+.deck-wrap{position:relative;height:360px;margin:0 auto 12px;max-width:320px}
+.card-stack{position:relative;width:100%;height:100%}
+.phone-card{position:absolute;inset:0;background:linear-gradient(165deg,#1e2626 0%,#141a1a 100%);border:1px solid var(--border);border-radius:22px;box-shadow:0 12px 40px rgba(0,0,0,.45);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 16px;user-select:none;touch-action:none;transition:transform .25s ease,opacity .25s ease;cursor:grab}
+.phone-card:active{cursor:grabbing}
+.phone-card.behind{transform:scale(.94) translateY(10px);opacity:.55;pointer-events:none;z-index:0}
+.phone-card.front{z-index:2}
+.phone-card.swiping{transition:none;z-index:3}
+.phone-img-wrap{width:170px;height:170px;border-radius:28px;overflow:hidden;margin-bottom:14px;background:linear-gradient(145deg,#243030,#151c1c);border:1px solid var(--border);box-shadow:0 8px 24px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center}
+.phone-img-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.phone-img-wrap.fallback{font-size:3.8rem}
+.phone-name{font-size:1.2rem;font-weight:800;color:var(--gold);text-align:center}
+.phone-sub{font-size:.85rem;color:var(--text-soft);margin-top:4px;text-align:center}
+.swipe-arrows{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);display:flex;justify-content:space-between;padding:0 6px;pointer-events:none;z-index:5}
+.swipe-arrows span{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:rgba(255,255,255,.45);animation:pulseArrow 2s ease-in-out infinite}
+@keyframes pulseArrow{0%,100%{opacity:.35}50%{opacity:.7}}
+.stamp{position:absolute;top:28px;font-size:1.4rem;font-weight:900;padding:6px 14px;border:3px solid;border-radius:8px;opacity:0;transform:rotate(-12deg);pointer-events:none;z-index:4}
+.stamp.yes{left:18px;color:#3dd68c;border-color:#3dd68c}
+.stamp.no{right:18px;color:#ff5a5a;border-color:#ff5a5a;transform:rotate(12deg)}
+.actions{display:flex;justify-content:center;gap:28px;margin-top:8px}
+.act-btn{width:64px;height:64px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 6px 20px rgba(0,0,0,.35);transition:transform .15s}
+.act-btn:active{transform:scale(.9)}
+.act-x{background:linear-gradient(145deg,#3a1a1a,#2a1212);border:2px solid #ff5a5a;color:#ff5a5a}
+.act-v{background:linear-gradient(145deg,#1a3a2a,#123022);border:2px solid #3dd68c;color:#3dd68c}
+.detail{display:none;margin-top:8px}
+.detail.open{display:block}
+.detail-head{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.detail-head .back-swipe{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:8px 12px;color:var(--text);font-size:.85rem;font-weight:600;cursor:pointer;font-family:inherit}
+.detail-title{font-size:1.1rem;font-weight:800;color:var(--gold)}
+.detail ol{margin:0;padding-left:20px}
+.detail li{margin-bottom:8px;font-size:.92rem;color:var(--text-soft);line-height:1.45}
+.detail li strong{color:var(--text)}
+.footer{text-align:center;padding:20px 16px;background:var(--bg-elevated);border-top:1px solid var(--border)}
+.footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
+.footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html">🏠</a>
+    <a class="nav-btn" href="wist-je-dat.html">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+
+<div data-lang-block="nl" style="display:none">
+  <header class="page-head"><h1>📱 Turks netwerk op Kos</h1><p class="intro">Eenvoudig voorkomen dat je telefoon op Turkije springt.</p></header>
+  <div class="top-photo"><img src="wjd-turks-netwerk.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="info">Kos ligt dicht bij Turkije. Op sommige plekken (bijv. dicht bij de kust of bij uitzichtpunten) kan je telefoon vanzelf overschakelen naar een Turks netwerk (Turkcell, Vodafone TR, Türk Telekom). Turkije zit niet in de EU-roamingregeling – dat kan onnodig duur uitpakken. Met één korte instelling blijft alles rustig op Grieks netwerk.</div>
+  <article class="tip-card"><div class="tip-body">
+    <h2>Wat kun je doen? (simpel)</h2>
+    <p>1. Zet <strong>handmatige netwerkselectie</strong> aan<br>
+    2. Kies een <strong>Grieks</strong> netwerk: Cosmote, Vodafone GR of Wind<br>
+    3. Klaar – je telefoon blijft op Griekenland<br>
+    4. Thuis weer op <strong>Automatisch</strong> zetten</p>
+  </div></article>
+  <div class="swipe-section" id="swipeNL">
+    <p class="swipe-hint">Swipe naar jouw toestel · ✓ = uitleg · ✕ = volgende</p>
+    <div class="deck-wrap"><div class="swipe-arrows"><span>‹</span><span>›</span></div><div class="card-stack" id="stackNL"></div></div>
+    <div class="actions"><button class="act-btn act-x" type="button" data-act="x">✕</button><button class="act-btn act-v" type="button" data-act="v">✓</button></div>
+    <div class="detail" id="detailNL"><div class="detail-head"><button class="back-swipe" type="button" data-back>← Andere telefoon</button><span class="detail-title" id="detailTitleNL"></span></div><div id="detailStepsNL"></div></div>
+  </div>
+</div>
+
+<div data-lang-block="en" style="display:none">
+  <header class="page-head"><h1>📱 Turkish network on Kos</h1><p class="intro">Easily stop your phone jumping onto Turkey.</p></header>
+  <div class="top-photo"><img src="wjd-turks-netwerk.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="info">Kos is close to Turkey. In some places (near the coast or viewpoints) your phone may automatically switch to a Turkish network. Turkey is not in the EU roaming scheme. One short setting keeps you on a Greek network.</div>
+  <article class="tip-card"><div class="tip-body">
+    <h2>What can you do? (simple)</h2>
+    <p>1. Turn on <strong>manual network selection</strong><br>
+    2. Choose a <strong>Greek</strong> network: Cosmote, Vodafone GR or Wind<br>
+    3. Done – your phone stays on Greece<br>
+    4. At home, set it back to <strong>Automatic</strong></p>
+  </div></article>
+  <div class="swipe-section" id="swipeEN">
+    <p class="swipe-hint">Swipe to your phone · ✓ = guide · ✕ = next</p>
+    <div class="deck-wrap"><div class="swipe-arrows"><span>‹</span><span>›</span></div><div class="card-stack" id="stackEN"></div></div>
+    <div class="actions"><button class="act-btn act-x" type="button" data-act="x">✕</button><button class="act-btn act-v" type="button" data-act="v">✓</button></div>
+    <div class="detail" id="detailEN"><div class="detail-head"><button class="back-swipe" type="button" data-back>← Other phone</button><span class="detail-title" id="detailTitleEN"></span></div><div id="detailStepsEN"></div></div>
+  </div>
+</div>
+
+<div data-lang-block="de" style="display:none">
+  <header class="page-head"><h1>📱 Türkisches Netz auf Kos</h1><p class="intro">Verhindere, dass dein Handy auf die Türkei springt.</p></header>
+  <div class="top-photo"><img src="wjd-turks-netwerk.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="info">Kos liegt nah an der Türkei. An manchen Stellen kann das Handy auf ein türkisches Netz wechseln. Mit manueller Netzauswahl bleibst du auf einem griechischen Netz.</div>
+  <article class="tip-card"><div class="tip-body"><h2>Was kannst du tun?</h2>
+    <p>1. <strong>Manuelle Netzauswahl</strong> einschalten<br>2. Griechisches Netz: Cosmote, Vodafone GR oder Wind<br>3. Zu Hause wieder <strong>Automatisch</strong></p>
+  </div></article>
+  <div class="swipe-section" id="swipeDE">
+    <p class="swipe-hint">Zum Handy swipen · ✓ = Anleitung · ✕ = weiter</p>
+    <div class="deck-wrap"><div class="swipe-arrows"><span>‹</span><span>›</span></div><div class="card-stack" id="stackDE"></div></div>
+    <div class="actions"><button class="act-btn act-x" type="button" data-act="x">✕</button><button class="act-btn act-v" type="button" data-act="v">✓</button></div>
+    <div class="detail" id="detailDE"><div class="detail-head"><button class="back-swipe" type="button" data-back>← Anderes Handy</button><span class="detail-title" id="detailTitleDE"></span></div><div id="detailStepsDE"></div></div>
+  </div>
+</div>
+
+<div data-lang-block="it" style="display:none">
+  <header class="page-head"><h1>📱 Rete turca a Kos</h1><p class="intro">Evita che il telefono passi alla Turchia.</p></header>
+  <div class="top-photo"><img src="wjd-turks-netwerk.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="info">Kos è vicina alla Turchia. In alcuni punti il telefono può passare a una rete turca. Con selezione manuale resti sulla rete greca.</div>
+  <article class="tip-card"><div class="tip-body"><h2>Cosa fare?</h2>
+    <p>1. Attiva <strong>selezione manuale rete</strong><br>2. Rete greca: Cosmote, Vodafone GR o Wind<br>3. A casa di nuovo <strong>Automatico</strong></p>
+  </div></article>
+  <div class="swipe-section" id="swipeIT">
+    <p class="swipe-hint">Scorri al telefono · ✓ = guida · ✕ = successivo</p>
+    <div class="deck-wrap"><div class="swipe-arrows"><span>‹</span><span>›</span></div><div class="card-stack" id="stackIT"></div></div>
+    <div class="actions"><button class="act-btn act-x" type="button" data-act="x">✕</button><button class="act-btn act-v" type="button" data-act="v">✓</button></div>
+    <div class="detail" id="detailIT"><div class="detail-head"><button class="back-swipe" type="button" data-back>← Altro telefono</button><span class="detail-title" id="detailTitleIT"></span></div><div id="detailStepsIT"></div></div>
+  </div>
+</div>
+
+<div data-lang-block="tr" style="display:none">
+  <header class="page-head"><h1>📱 Kos’ta Türk şebekesi</h1><p class="intro">Telefonunuzun Türkiye’ye geçmesini engelleyin.</p></header>
+  <div class="top-photo"><img src="wjd-turks-netwerk.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="info">Kos Türkiye’ye yakındır. Bazı noktalarda telefon Türk şebekesine geçebilir. Manuel seçimle Yunan şebekesinde kalırsınız.</div>
+  <article class="tip-card"><div class="tip-body"><h2>Ne yapabilirsiniz?</h2>
+    <p>1. <strong>Manuel şebeke seçimi</strong> açın<br>2. Yunan şebeke: Cosmote, Vodafone GR veya Wind<br>3. Evde tekrar <strong>Otomatik</strong></p>
+  </div></article>
+  <div class="swipe-section" id="swipeTR">
+    <p class="swipe-hint">Telefonunuza kaydırın · ✓ = rehber · ✕ = sonraki</p>
+    <div class="deck-wrap"><div class="swipe-arrows"><span>‹</span><span>›</span></div><div class="card-stack" id="stackTR"></div></div>
+    <div class="actions"><button class="act-btn act-x" type="button" data-act="x">✕</button><button class="act-btn act-v" type="button" data-act="v">✓</button></div>
+    <div class="detail" id="detailTR"><div class="detail-head"><button class="back-swipe" type="button" data-back>← Diğer telefon</button><span class="detail-title" id="detailTitleTR"></span></div><div id="detailStepsTR"></div></div>
+  </div>
+</div>
+
+<div data-lang-block="es" style="display:none">
+  <header class="page-head"><h1>📱 Red turca en Kos</h1><p class="intro">Evita que el móvil salte a Turquía.</p></header>
+  <div class="top-photo"><img src="wjd-turks-netwerk.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+  <div class="info">Kos está cerca de Turquía. En algunos sitios el móvil puede pasar a una red turca. Con selección manual te quedas en red griega.</div>
+  <article class="tip-card"><div class="tip-body"><h2>¿Qué puedes hacer?</h2>
+    <p>1. Activa <strong>selección manual de red</strong><br>2. Red griega: Cosmote, Vodafone GR o Wind<br>3. En casa vuelve a <strong>Automático</strong></p>
+  </div></article>
+  <div class="swipe-section" id="swipeES">
+    <p class="swipe-hint">Desliza a tu móvil · ✓ = guía · ✕ = siguiente</p>
+    <div class="deck-wrap"><div class="swipe-arrows"><span>‹</span><span>›</span></div><div class="card-stack" id="stackES"></div></div>
+    <div class="actions"><button class="act-btn act-x" type="button" data-act="x">✕</button><button class="act-btn act-v" type="button" data-act="v">✓</button></div>
+    <div class="detail" id="detailES"><div class="detail-head"><button class="back-swipe" type="button" data-back>← Otro móvil</button><span class="detail-title" id="detailTitleES"></span></div><div id="detailStepsES"></div></div>
+  </div>
+</div>
+
+</main>
+<footer class="footer"><div class="footer-logo">🔅 Hello Kos</div><p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a></p></footer>
+<script>
+(function(){
+  var audioCtx=null;
+  function whoosh(){
+    try{
+      if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+      var t=audioCtx.currentTime;
+      var o=audioCtx.createOscillator();
+      var g=audioCtx.createGain();
+      o.type='sine';
+      o.frequency.setValueAtTime(420,t);
+      o.frequency.exponentialRampToValueAtTime(90,t+0.18);
+      g.gain.setValueAtTime(0.0001,t);
+      g.gain.exponentialRampToValueAtTime(0.12,t+0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001,t+0.2);
+      o.connect(g);g.connect(audioCtx.destination);
+      o.start(t);o.stop(t+0.22);
+    }catch(e){}
+  }
+  function steps(lang, key){
+    var s={
+      iphone:{nl:'<ol><li>Open <strong>Instellingen</strong></li><li>Tik op <strong>Mobiel netwerk</strong></li><li>Tik op <strong>Netwerkselectie</strong></li><li>Zet <strong>Automatisch</strong> uit</li><li>Kies <strong>Cosmote</strong>, Vodafone GR of Wind</li></ol>',en:'<ol><li>Open <strong>Settings</strong></li><li>Tap <strong>Mobile Service</strong></li><li>Tap <strong>Network Selection</strong></li><li>Turn <strong>Automatic</strong> off</li><li>Choose <strong>Cosmote</strong>, Vodafone GR or Wind</li></ol>',de:'<ol><li><strong>Einstellungen → Mobiles Netz → Netzauswahl</strong></li><li>Automatisch aus → Cosmote / Vodafone GR / Wind</li></ol>',it:'<ol><li><strong>Impostazioni → Cellulare → Selezione rete</strong></li><li>Disattiva Automatico → Cosmote / Vodafone GR / Wind</li></ol>',tr:'<ol><li><strong>Ayarlar → Mobil servis → Şebeke seçimi</strong></li><li>Otomatiği kapat → Cosmote / Vodafone GR / Wind</li></ol>',es:'<ol><li><strong>Ajustes → Datos móviles → Selección de red</strong></li><li>Desactiva Automático → Cosmote / Vodafone GR / Wind</li></ol>'},
+      samsung:{nl:'<ol><li>Open <strong>Instellingen</strong></li><li><strong>Verbindingen → Mobiele netwerken → Netwerkoperators</strong></li><li>Automatisch uit → Cosmote / Vodafone GR / Wind</li></ol>',en:'<ol><li>Open <strong>Settings</strong></li><li><strong>Connections → Mobile networks → Network operators</strong></li><li>Turn automatic off → Cosmote / Vodafone GR / Wind</li></ol>',de:'<ol><li>Einstellungen → Verbindungen → Mobile Netzwerke → Netzanbieter</li><li>Automatisch aus → griechisches Netz</li></ol>',it:'<ol><li>Impostazioni → Connessioni → Reti mobili → Operatori</li><li>Disattiva automatico → rete greca</li></ol>',tr:'<ol><li>Ayarlar → Bağlantılar → Mobil ağlar → Operatörler</li><li>Otomatiği kapat → Yunan şebeke</li></ol>',es:'<ol><li>Ajustes → Conexiones → Redes móviles → Operadores</li><li>Desactiva automático → red griega</li></ol>'},
+      pixel:{nl:'<ol><li>Instellingen → Netwerk en internet → SIM’s → Netwerkoperators</li><li>Automatisch uit → Grieks netwerk</li></ol>',en:'<ol><li>Settings → Network & internet → SIMs → Network operators</li><li>Automatic off → Greek network</li></ol>',de:'<ol><li>Einstellungen → Netzwerk & Internet → SIMs → Netzanbieter</li><li>Automatisch aus → griechisches Netz</li></ol>',it:'<ol><li>Impostazioni → Rete e Internet → SIM → Operatori</li><li>Disattiva automatico → rete greca</li></ol>',tr:'<ol><li>Ayarlar → Ağ ve internet → SIM → Operatörler</li><li>Otomatiği kapat → Yunan şebeke</li></ol>',es:'<ol><li>Ajustes → Red e internet → SIM → Operadores</li><li>Desactiva automático → red griega</li></ol>'},
+      oneplus:{nl:'<ol><li>Instellingen → Mobiele netwerken → Netwerkoperators</li><li>Automatisch uit → Cosmote / Vodafone GR / Wind</li></ol>',en:'<ol><li>Settings → Mobile network → Network operators</li><li>Automatic off → Cosmote / Vodafone GR / Wind</li></ol>',de:'<ol><li>Einstellungen → Mobiles Netzwerk → Netzanbieter</li><li>Automatisch aus → griechisches Netz</li></ol>',it:'<ol><li>Impostazioni → Rete mobile → Operatori</li><li>Disattiva automatico → rete greca</li></ol>',tr:'<ol><li>Ayarlar → Mobil ağ → Operatörler</li><li>Otomatiği kapat → Yunan şebeke</li></ol>',es:'<ol><li>Ajustes → Red móvil → Operadores</li><li>Desactiva automático → red griega</li></ol>'},
+      xiaomi:{nl:'<ol><li>Instellingen → SIM-kaarten & mobiele netwerken</li><li>Automatisch netwerk selecteren uit → Grieks netwerk</li></ol>',en:'<ol><li>Settings → SIM cards & mobile networks</li><li>Turn automatic selection off → Greek network</li></ol>',de:'<ol><li>Einstellungen → SIM-Karten & mobile Netzwerke</li><li>Automatische Auswahl aus → griechisches Netz</li></ol>',it:'<ol><li>Impostazioni → SIM e reti mobili</li><li>Disattiva selezione automatica → rete greca</li></ol>',tr:'<ol><li>Ayarlar → SIM kartlar ve mobil ağlar</li><li>Otomatik seçimi kapat → Yunan şebeke</li></ol>',es:'<ol><li>Ajustes → Tarjetas SIM y redes móviles</li><li>Desactiva selección automática → red griega</li></ol>'},
+      motorola:{nl:'<ol><li>Instellingen → Netwerk & internet → SIM’s → Netwerkoperators</li><li>Automatisch uit → Grieks netwerk</li></ol>',en:'<ol><li>Settings → Network & internet → SIMs → Network operators</li><li>Automatic off → Greek network</li></ol>',de:'<ol><li>Einstellungen → Netzwerk & Internet → SIMs → Netzanbieter</li><li>Automatisch aus</li></ol>',it:'<ol><li>Impostazioni → Rete e Internet → SIM → Operatori</li><li>Disattiva automatico</li></ol>',tr:'<ol><li>Ayarlar → Ağ ve internet → SIM → Operatörler</li><li>Otomatiği kapat</li></ol>',es:'<ol><li>Ajustes → Red e internet → SIM → Operadores</li><li>Desactiva automático</li></ol>'},
+      other:{nl:'<ol><li>Open Instellingen</li><li>Zoek op <strong>Netwerkoperators</strong></li><li>Automatisch uit → Cosmote / Vodafone GR / Wind</li></ol>',en:'<ol><li>Open Settings</li><li>Search <strong>Network operators</strong></li><li>Automatic off → Cosmote / Vodafone GR / Wind</li></ol>',de:'<ol><li>In Einstellungen nach Netzanbieter suchen</li><li>Automatisch aus → griechisches Netz</li></ol>',it:'<ol><li>Cerca in Impostazioni Operatori di rete</li><li>Disattiva automatico → rete greca</li></ol>',tr:'<ol><li>Ayarlar’da şebeke operatörleri ara</li><li>Otomatiği kapat → Yunan şebeke</li></ol>',es:'<ol><li>Busca en Ajustes Operadores de red</li><li>Desactiva automático → red griega</li></ol>'}
+    };
+    return (s[key]&&s[key][lang])||(s[key]&&s[key].en)||'';
+  }
+  var basePhones=[
+    {id:'iphone',img:'wjd-phone-iphone.jpg',emoji:'🍎',name:'iPhone',sub:'iOS'},
+    {id:'samsung',img:'wjd-phone-samsung.jpg',emoji:'📱',name:'Samsung Galaxy',sub:'Android'},
+    {id:'pixel',img:'wjd-phone-pixel.jpg',emoji:'🔷',name:'Google Pixel',sub:'Android'},
+    {id:'oneplus',img:'wjd-phone-oneplus.jpg',emoji:'🔴',name:'OnePlus',sub:'Android'},
+    {id:'xiaomi',img:'wjd-phone-xiaomi.jpg',emoji:'🟠',name:'Xiaomi / Redmi / POCO',sub:'Android'},
+    {id:'motorola',img:'wjd-phone-motorola.jpg',emoji:'⚪',name:'Motorola',sub:'Android'},
+    {id:'other',img:'wjd-phone-other.jpg',emoji:'📲',name:'Other Android',sub:'Other'}
+  ];
+  function initSwipe(lang){
+    var list=basePhones.map(function(p){return Object.assign({},p,{steps:steps(lang,p.id)})});
+    if(lang==='nl') list[6].name='Andere Android';
+    if(lang==='de') list[6].name='Anderes Android';
+    if(lang==='it') list[6].name='Altro Android';
+    if(lang==='tr') list[6].name='Diğer Android';
+    if(lang==='es') list[6].name='Otro Android';
+    var L=lang.toUpperCase();
+    var stack=document.getElementById('stack'+L);
+    var detail=document.getElementById('detail'+L);
+    var detailTitle=document.getElementById('detailTitle'+L);
+    var detailSteps=document.getElementById('detailSteps'+L);
+    var section=document.getElementById('swipe'+L);
+    if(!stack||!section)return;
+    var idx=0,dragging=false,startX=0,curX=0;
+    function render(){
+      stack.innerHTML='';
+      var a=list[idx%list.length],b=list[(idx+1)%list.length];
+      function mk(p,cls){
+        var d=document.createElement('div');
+        d.className='phone-card '+cls;
+        d.innerHTML='<div class="stamp yes">✓</div><div class="stamp no">✕</div><div class="phone-img-wrap"><img src="'+p.img+'" alt="'+p.name+'" loading="lazy" onerror="this.parentElement.classList.add(\'fallback\');this.parentElement.textContent=\''+p.emoji+'\';this.remove()"></div><div class="phone-name">'+p.name+'</div><div class="phone-sub">'+p.sub+'</div>';
+        return d;
+      }
+      stack.appendChild(mk(b,'behind'));
+      var front=mk(a,'front');
+      stack.appendChild(front);
+      bind(front);
+    }
+    function bind(card){
+      card.addEventListener('pointerdown',function(e){dragging=true;startX=e.clientX;curX=0;card.classList.add('swiping');card.setPointerCapture(e.pointerId)});
+      card.addEventListener('pointermove',function(e){
+        if(!dragging)return;
+        curX=e.clientX-startX;
+        card.style.transform='translateX('+curX+'px) rotate('+(curX*0.04)+'deg)';
+        var yes=card.querySelector('.stamp.yes'),no=card.querySelector('.stamp.no');
+        if(curX>40){yes.style.opacity=Math.min(1,(curX-40)/80);no.style.opacity=0}
+        else if(curX<-40){no.style.opacity=Math.min(1,(-curX-40)/80);yes.style.opacity=0}
+        else{yes.style.opacity=0;no.style.opacity=0}
+      });
+      card.addEventListener('pointerup',function(){
+        if(!dragging)return;dragging=false;card.classList.remove('swiping');
+        if(curX>90){fly(card,1);setTimeout(selectCurrent,180)}
+        else if(curX<-90){fly(card,-1);setTimeout(next,180)}
+        else{card.style.transform='';card.querySelector('.stamp.yes').style.opacity=0;card.querySelector('.stamp.no').style.opacity=0}
+      });
+      card.addEventListener('pointercancel',function(){dragging=false;card.classList.remove('swiping');card.style.transform=''});
+    }
+    function fly(card,dir){whoosh();card.style.transition='transform .28s ease, opacity .28s ease';card.style.transform='translateX('+(dir*500)+'px) rotate('+(dir*18)+'deg)';card.style.opacity='0'}
+    function next(){whoosh();idx=(idx+1)%list.length;render()}
+    function selectCurrent(){
+      whoosh();
+      var p=list[idx%list.length];
+      section.querySelector('.deck-wrap').style.display='none';
+      section.querySelector('.actions').style.display='none';
+      section.querySelector('.swipe-hint').style.display='none';
+      detail.classList.add('open');
+      detailTitle.textContent=p.name;
+      detailSteps.innerHTML=p.steps;
+    }
+    function showDeck(){
+      detail.classList.remove('open');
+      section.querySelector('.deck-wrap').style.display='';
+      section.querySelector('.actions').style.display='flex';
+      section.querySelector('.swipe-hint').style.display='';
+      render();
+    }
+    section.querySelectorAll('[data-act]').forEach(function(btn){
+      btn.onclick=function(){btn.getAttribute('data-act')==='x'?next():selectCurrent()};
+    });
+    var back=section.querySelector('[data-back]');
+    if(back)back.onclick=showDeck;
+    render();
+  }
+  var lang=localStorage.getItem('hk-lang')||'en';
+  var supported=['nl','de','en','it','tr','es'];
+  function setLang(l){
+    if(supported.indexOf(l)<0)l='en';
+    lang=l;localStorage.setItem('hk-lang',l);
+    document.querySelectorAll('[data-lang-block]').forEach(function(el){
+      el.style.display=(el.getAttribute('data-lang-block')===l)?'block':'none';
+    });
+    var opt=document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if(opt){document.getElementById('flag').textContent=opt.getAttribute('data-flag');document.getElementById('code').textContent=l.toUpperCase()}
+    document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===l)});
+    document.documentElement.lang=l;closeMenu();
+    initSwipe(l);
+  }
+  var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu'),overlay=document.getElementById('overlay');
+  function openMenu(){langMenu.classList.add('open');overlay.classList.add('open')}
+  function closeMenu(){langMenu.classList.remove('open');overlay.classList.remove('open')}
+  langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.contains('open')?closeMenu():openMenu()});
+  overlay.addEventListener('click',closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'))})});
+  setLang(lang);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0a0c0c">
+<title>Water & Wind – Hello Kos</title>
+<style>
+:root{--bg:#0a0c0c;--bg-elevated:#141818;--bg-card:#1a1f1f;--border:rgba(255,255,255,0.08);--text:#e8e8e8;--text-soft:#a0a8a8;--petrol:#3d9a9a;--gold:#e0b84a;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);line-height:1.5}
+.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:12px 14px;background:rgba(10,12,12,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-btns{display:flex;gap:6px}
+.nav-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);text-decoration:none;font-size:1.15rem}
+.nav-btn:active{transform:scale(.94)}
+.logo{justify-self:center;display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo-icon{font-size:22px}
+.logo-text{font-size:1.1rem;font-weight:700;color:var(--gold);font-family:Georgia,serif}
+.logo-text span{color:#f0c85a;font-style:italic}
+.lang-wrap{justify-self:end;position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-soft)}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:8px;min-width:160px;z-index:50}
+.lang-menu.open{display:block}
+.lang-option{display:block;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;color:var(--text)}
+.lang-option.active{background:rgba(61,154,154,.15);color:var(--petrol)}
+.overlay{display:none;position:fixed;inset:0;z-index:40}.overlay.open{display:block}
+.main{max-width:480px;margin:0 auto;padding:16px 14px 48px}
+.page-head{text-align:center;margin-bottom:14px}
+.page-head h1{font-size:1.35rem;font-weight:800}
+.page-head .intro{color:var(--text-soft);font-size:.92rem;margin-top:6px}
+.sea-hero{background:linear-gradient(160deg,#0a4a6e,#06304a);border:1px solid rgba(79,195,247,.35);border-radius:20px;padding:20px 16px;text-align:center;margin-bottom:14px}
+.sea-hero .lbl{font-size:.82rem;color:#90caf9;font-weight:600}
+.sea-hero .big{font-size:3rem;font-weight:800;color:#fff;line-height:1.1;margin:6px 0}
+.sea-hero .verdict{font-size:1rem;font-weight:700;color:var(--gold);margin-bottom:6px}
+.sea-hero .updated{font-size:.75rem;color:rgba(255,255,255,.55)}
+.metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
+.metric{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:12px 8px;text-align:center}
+.metric .v{font-size:1.2rem;font-weight:800;color:#fff}
+.metric .l{font-size:.72rem;color:var(--text-soft);margin-top:4px}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:14px 16px;margin-bottom:12px}
+.card h2{font-size:1.05rem;color:var(--gold);margin-bottom:10px;font-weight:800}
+.card p{font-size:.9rem;line-height:1.55;color:var(--text-soft);margin-bottom:8px}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table.spots{width:100%;border-collapse:collapse;font-size:.88rem}
+table.spots th{text-align:left;color:var(--gold);font-weight:700;padding:8px 6px;border-bottom:1px solid var(--border);font-size:.75rem}
+table.spots td{padding:10px 6px;border-bottom:1px solid var(--border);color:var(--text-soft);vertical-align:middle}
+table.spots tr:last-child td{border-bottom:none}
+table.spots .place{color:#fff;font-weight:700}
+table.spots .warm{color:#4fc3f7;font-weight:800}
+table.spots .hot{color:#81c784;font-weight:800}
+.tip{background:rgba(61,154,154,.12);border:1px solid rgba(61,154,154,.3);border-radius:12px;padding:12px 14px;font-size:.88rem;color:#b8e0e0;line-height:1.5;margin-top:8px}
+.status-err{color:#ef9a9a;font-size:.9rem;text-align:center;padding:12px}
+.footer{text-align:center;padding:20px 16px;background:var(--bg-elevated);border-top:1px solid var(--border)}
+.footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
+.footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+
+<div data-lang-block="nl" style="display:none">
+  <header class="page-head"><h1>🌊 Water & wind</h1><p class="intro">Live data voor Kos</p></header>
+</div>
+<div data-lang-block="en" style="display:none">
+  <header class="page-head"><h1>🌊 Water & wind</h1><p class="intro">Live data for Kos</p></header>
+</div>
+<div data-lang-block="de" style="display:none">
+  <header class="page-head"><h1>🌊 Wasser & Wind</h1><p class="intro">Live-Daten für Kos</p></header>
+</div>
+<div data-lang-block="it" style="display:none">
+  <header class="page-head"><h1>🌊 Acqua & vento</h1><p class="intro">Dati live per Kos</p></header>
+</div>
+<div data-lang-block="tr" style="display:none">
+  <header class="page-head"><h1>🌊 Su & rüzgar</h1><p class="intro">Kos için canlı veri</p></header>
+</div>
+<div data-lang-block="es" style="display:none">
+  <header class="page-head"><h1>🌊 Agua y viento</h1><p class="intro">Datos en vivo para Kos</p></header>
+</div>
+
+<div class="sea-hero">
+  <div class="lbl" data-t="seaLbl">Sea temperature Kos</div>
+  <div class="big" id="seaTemp">…</div>
+  <div class="verdict" id="seaVerdict">…</div>
+  <div class="updated" id="updated">…</div>
+</div>
+
+<div class="metrics">
+  <div class="metric"><div class="v" id="mAir">…</div><div class="l" data-t="air">Air</div></div>
+  <div class="metric"><div class="v" id="mWind">…</div><div class="l" data-t="wind">Wind</div></div>
+  <div class="metric"><div class="v" id="mGust">…</div><div class="l" data-t="gust">Gusts</div></div>
+</div>
+
+<div class="card">
+  <h2 data-t="placesTitle">Warmest sea spots today</h2>
+  <p data-t="placesSub">Live water temperature, air temperature and wave height per location.</p>
+  <div class="table-wrap">
+    <table class="spots">
+      <thead>
+        <tr>
+          <th data-t="thPlace">Place</th>
+          <th data-t="thWater">Water</th>
+          <th data-t="thAir">Air</th>
+          <th data-t="thWave">Wave</th>
+        </tr>
+      </thead>
+      <tbody id="spotsBody">
+        <tr><td colspan="4" style="text-align:center;color:#a0a8a8" data-t="loading">Loading…</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2 data-t="windTitle">Wind tip</h2>
+  <p data-t="windText">Meltemi (northerly wind) can make the north coast cooler and choppier; the south coast is often calmer then.</p>
+  <div class="tip" id="liveTip">…</div>
+</div>
+
+<div class="card">
+  <h2 data-t="seasonTitle">Season guideline</h2>
+  <p data-t="seasonText">• Jun–Sep: 23–27 °C – perfect swimming<br>• May / Oct: 19–23 °C – fresh but swimmable<br>• Nov–Apr (winter): ± 16–18 °C – not beach weather</p>
+</div>
+
+<div id="errBox" class="status-err" style="display:none"></div>
+</main>
+<footer class="footer">
+  <div class="footer-logo">🔅 Hello Kos</div>
+  <p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a></p>
+</footer>
+<script>
+(function(){
+  var lang=localStorage.getItem('hk-lang')||'en';
+  var supported=['nl','de','en','it','tr','es'];
+
+  var PLACES=[
+    {name:'Agios Fokas', lat:36.855, lon:27.325},
+    {name:'Kardamena', lat:36.782, lon:27.142},
+    {name:'Marmari', lat:36.875, lon:27.145},
+    {name:'Kos Town', lat:36.893, lon:27.288},
+    {name:'Lambi', lat:36.912, lon:27.287},
+    {name:'Tigaki', lat:36.898, lon:27.205},
+    {name:'Mastichari', lat:36.848, lon:27.075}
+  ];
+
+  var T={
+    en:{seaLbl:'Sea temperature Kos',air:'Air',wind:'Wind',gust:'Gusts',placesTitle:'Warmest sea spots today',placesSub:'Live water temperature, air temperature and wave height per location.',thPlace:'Place',thWater:'Water',thAir:'Air',thWave:'Wave',windTitle:'Wind tip',windText:'Meltemi (northerly wind) can make the north coast cooler and choppier; the south coast is often calmer then.',seasonTitle:'Season guideline',seasonText:'• Jun–Sep: 23–27 °C – perfect swimming<br>• May / Oct: 19–23 °C – fresh but swimmable<br>• Nov–Apr (winter): ± 16–18 °C – not beach weather',updated:'Updated',loading:'Loading…',err:'Could not load live data. Check your connection.',vGood:'Pleasant swimming',vOk:'Fresh but swimmable',vCool:'Cool',calm:'Calm sea – good for swimming',waves:'Some waves – check more exposed beaches',windy:'Windy – prefer sheltered bays (south/east)'},
+    nl:{seaLbl:'Zeetemperatuur Kos',air:'Lucht',wind:'Wind',gust:'Windstoten',placesTitle:'Warmste plekken vandaag',placesSub:'Live watertemperatuur, luchttemperatuur en golfhoogte per locatie.',thPlace:'Plek',thWater:'Water',thAir:'Lucht',thWave:'Golf',windTitle:'Wind-tip',windText:'Meltemi (noordenwind) kan de noordkust koeler en golvender maken; de zuidkust is dan vaak rustiger.',seasonTitle:'Seizoen (richtlijn)',seasonText:'• Juni–sept: 23–27 °C – perfect zwemweer<br>• Mei / okt: 19–23 °C – fris maar zwembaar<br>• Nov–apr (winter): ± 16–18 °C – geen strandweer',updated:'Bijgewerkt',loading:'Laden…',err:'Kon live data niet laden. Controleer je verbinding.',vGood:'Aangenaam zwemweer',vOk:'Fris maar zwembaar',vCool:'Koel',calm:'Kalme zee – goed om te zwemmen',waves:'Enige golfslag – let op open stranden',windy:'Winderig – kies beschutte baaien (zuid/oost)'},
+    de:{seaLbl:'Meerestemperatur Kos',air:'Luft',wind:'Wind',gust:'Böen',placesTitle:'Wärmste Stellen heute',placesSub:'Live Wassertemperatur, Lufttemperatur und Wellenhöhe pro Ort.',thPlace:'Ort',thWater:'Wasser',thAir:'Luft',thWave:'Welle',windTitle:'Wind-Tipp',windText:'Meltemi (Nordwind) kann die Nordküste kühler und welliger machen.',seasonTitle:'Saison',seasonText:'• Jun–Sep: 23–27 °C – ideal zum Schwimmen<br>• Mai / Okt: 19–23 °C – frisch aber badbar<br>• Nov–Apr (Winter): ± 16–18 °C – kein Strandwetter',updated:'Aktualisiert',loading:'Laden…',err:'Live-Daten nicht geladen.',vGood:'Angenehm zum Schwimmen',vOk:'Frisch aber badbar',vCool:'Kühl',calm:'Ruhige See',waves:'Etwas Wellengang',windy:'Windig – geschützte Buchten wählen'},
+    it:{seaLbl:'Temperatura mare Kos',air:'Aria',wind:'Vento',gust:'Raffiche',placesTitle:'Punti più caldi oggi',placesSub:'Temperatura acqua, aria e onde per località (live).',thPlace:'Luogo',thWater:'Acqua',thAir:'Aria',thWave:'Onda',windTitle:'Vento',windText:'Il Meltemi può rendere la costa nord più fresca e mossa.',seasonTitle:'Stagione',seasonText:'• Giu–set: 23–27 °C – ideale per nuotare<br>• Mag / ott: 19–23 °C – fresco ma si può nuotare<br>• Nov–apr (inverno): ± 16–18 °C – non da spiaggia',updated:'Aggiornato',loading:'Caricamento…',err:'Dati live non disponibili.',vGood:'Piacevole per nuotare',vOk:'Fresco ma si può nuotare',vCool:'Fresco',calm:'Mare calmo',waves:'Qualche onda',windy:'Ventoso – preferisci baie riparate'},
+    tr:{seaLbl:'Kos deniz sıcaklığı',air:'Hava',wind:'Rüzgar',gust:'Sert rüzgar',placesTitle:'Bugün en sıcak noktalar',placesSub:'Canlı su sıcaklığı, hava ve dalga yüksekliği.',thPlace:'Yer',thWater:'Su',thAir:'Hava',thWave:'Dalga',windTitle:'Rüzgar',windText:'Meltemi kuzey sahilini daha serin ve dalgalı yapabilir.',seasonTitle:'Sezon',seasonText:'• Haz–eyl: 23–27 °C – yüzmek için ideal<br>• May / eki: 19–23 °C – serin ama yüzülebilir<br>• Kas–nis (kış): ± 16–18 °C – plaj için değil',updated:'Güncellendi',loading:'Yükleniyor…',err:'Canlı veri yüklenemedi.',vGood:'Yüzmek için uygun',vOk:'Serin ama yüzülebilir',vCool:'Soğuk',calm:'Sakin deniz',waves:'Biraz dalga',windy:'Rüzgarlı – korunaklı koyları tercih edin'},
+    es:{seaLbl:'Temperatura del mar Kos',air:'Aire',wind:'Viento',gust:'Ráfagas',placesTitle:'Puntos más cálidos hoy',placesSub:'Temperatura del agua, aire y olas por lugar (en vivo).',thPlace:'Lugar',thWater:'Agua',thAir:'Aire',thWave:'Ola',windTitle:'Viento',windText:'El Meltemi puede hacer la costa norte más fresca y con olas.',seasonTitle:'Temporada',seasonText:'• Jun–sep: 23–27 °C – ideal para nadar<br>• May / oct: 19–23 °C – fresca pero se puede nadar<br>• Nov–abr (invierno): ± 16–18 °C – no es tiempo de playa',updated:'Actualizado',loading:'Cargando…',err:'No se pudieron cargar los datos en vivo.',vGood:'Agradable para nadar',vOk:'Fresca pero se puede nadar',vCool:'Fresca',calm:'Mar calmado',waves:'Algo de oleaje',windy:'Ventoso – prefiere bahías resguardadas'}
+  };
+
+  function setLang(l){
+    if(supported.indexOf(l)<0)l='en';
+    lang=l;localStorage.setItem('hk-lang',l);
+    document.querySelectorAll('[data-lang-block]').forEach(function(el){
+      el.style.display=(el.getAttribute('data-lang-block')===l)?'block':'none';
+    });
+    var t=T[l]||T.en;
+    document.querySelectorAll('[data-t]').forEach(function(el){
+      var k=el.getAttribute('data-t');
+      if(t[k]) el.innerHTML=t[k];
+    });
+    var opt=document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if(opt){document.getElementById('flag').textContent=opt.getAttribute('data-flag');document.getElementById('code').textContent=l.toUpperCase()}
+    document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===l)});
+    document.documentElement.lang=l;closeMenu();
+  }
+  var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu'),overlay=document.getElementById('overlay');
+  function openMenu(){langMenu.classList.add('open');overlay.classList.add('open')}
+  function closeMenu(){langMenu.classList.remove('open');overlay.classList.remove('open')}
+  langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.contains('open')?closeMenu():openMenu()});
+  overlay.addEventListener('click',closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'))})});
+
+  function fetchPlace(p){
+    var marine='https://marine-api.open-meteo.com/v1/marine?latitude='+p.lat+'&longitude='+p.lon+'&current=sea_surface_temperature,wave_height';
+    var air='https://api.open-meteo.com/v1/forecast?latitude='+p.lat+'&longitude='+p.lon+'&current=temperature_2m,wind_speed_10m,wind_gusts_10m&timezone=auto';
+    return Promise.all([
+      fetch(marine).then(function(r){return r.json()}),
+      fetch(air).then(function(r){return r.json()})
+    ]).then(function(res){
+      return {
+        name:p.name,
+        sea: res[0].current && res[0].current.sea_surface_temperature,
+        wave: res[0].current && res[0].current.wave_height,
+        air: res[1].current && res[1].current.temperature_2m,
+        wind: res[1].current && res[1].current.wind_speed_10m,
+        gust: res[1].current && res[1].current.wind_gusts_10m
+      };
+    });
+  }
+
+  function load(){
+    var t=T[lang]||T.en;
+    document.getElementById('seaTemp').textContent='…';
+    document.getElementById('seaVerdict').textContent=t.loading;
+    document.getElementById('spotsBody').innerHTML='<tr><td colspan="4" style="text-align:center;color:#a0a8a8">'+t.loading+'</td></tr>';
+
+    Promise.all(PLACES.map(fetchPlace)).then(function(rows){
+      rows.sort(function(a,b){
+        var sa=a.sea!=null?a.sea:-999, sb=b.sea!=null?b.sea:-999;
+        return sb-sa;
+      });
+      var best=rows[0];
+      var avgSea=0, n=0;
+      rows.forEach(function(r){ if(r.sea!=null){ avgSea+=r.sea; n++; } });
+      var seaShow = best && best.sea!=null ? best.sea : (n?avgSea/n:null);
+
+      document.getElementById('seaTemp').textContent = seaShow!=null ? (Math.round(seaShow*10)/10)+' °C' : '—';
+      document.getElementById('seaVerdict').textContent = seaShow>=23 ? t.vGood : seaShow>=19 ? t.vOk : t.vCool;
+      var now=new Date();
+      var hh=('0'+now.getHours()).slice(-2), mm=('0'+now.getMinutes()).slice(-2);
+      document.getElementById('updated').textContent = t.updated+' '+hh+':'+mm;
+
+      var kos=rows.find(function(r){return r.name==='Kos Town'})||rows[0];
+      document.getElementById('mAir').textContent = kos.air!=null ? Math.round(kos.air)+'°' : '—';
+      document.getElementById('mWind').textContent = kos.wind!=null ? Math.round(kos.wind)+' km/h' : '—';
+      document.getElementById('mGust').textContent = kos.gust!=null ? Math.round(kos.gust)+' km/h' : '—';
+
+      var tip=t.calm;
+      if(kos.wind!=null && kos.wind>=25) tip=t.windy;
+      else if(rows.some(function(r){return r.wave!=null && r.wave>=0.5})) tip=t.waves;
+      document.getElementById('liveTip').textContent=tip;
+
+      var body=document.getElementById('spotsBody');
+      body.innerHTML='';
+      rows.forEach(function(r,i){
+        var tr=document.createElement('tr');
+        var seaCls = i===0 ? 'hot' : 'warm';
+        tr.innerHTML=
+          '<td class="place">'+r.name+'</td>'+
+          '<td class="'+seaCls+'">'+(r.sea!=null?(Math.round(r.sea*10)/10)+'°C':'—')+'</td>'+
+          '<td>'+(r.air!=null?Math.round(r.air)+'°C':'—')+'</td>'+
+          '<td>'+(r.wave!=null?(Math.round(r.wave*100)/100)+' m':'—')+'</td>';
+        body.appendChild(tr);
+      });
+      document.getElementById('errBox').style.display='none';
+    }).catch(function(){
+      document.getElementById('errBox').style.display='block';
+      document.getElementById('errBox').textContent=(T[lang]||T.en).err;
+    });
+  }
+
+  setLang(lang);
+  load();
+})();
+</script>
+</body>
+</html>

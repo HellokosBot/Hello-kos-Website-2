@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0a0c0c">
+<title>Sunday flag ceremony – Hello Kos</title>
+<style>
+:root{--bg:#0a0c0c;--bg-elevated:#141818;--bg-card:#1a1f1f;--border:rgba(255,255,255,0.08);--text:#e8e8e8;--text-soft:#a0a8a8;--petrol:#3d9a9a;--gold:#e0b84a;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);line-height:1.5}
+.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:12px 14px;background:rgba(10,12,12,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-btns{display:flex;gap:6px}
+.nav-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);text-decoration:none;font-size:1.15rem;transition:transform .12s ease}
+.nav-btn:active{transform:scale(.94)}
+.logo{justify-self:center;display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo-icon{font-size:22px}
+.logo-text{font-size:1.1rem;font-weight:700;color:var(--gold);font-family:Georgia,serif}
+.logo-text span{color:#f0c85a;font-style:italic}
+.lang-wrap{justify-self:end;position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-soft);transition:transform .12s ease}
+.lang-btn:active{transform:scale(.96)}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:8px;min-width:160px;z-index:50}
+.lang-menu.open{display:block}
+.lang-option{display:block;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;color:var(--text)}
+.lang-option.active{background:rgba(61,154,154,.15);color:var(--petrol)}
+.overlay{display:none;position:fixed;inset:0;z-index:40}.overlay.open{display:block}
+.main{max-width:480px;margin:0 auto;padding:16px 14px 48px}
+.page-head{text-align:center;margin-bottom:14px}
+.page-head h1{font-size:1.35rem;font-weight:800}
+.page-head .intro{color:var(--text-soft);font-size:.92rem;margin-top:6px}
+.sun-box{background:linear-gradient(160deg,#2a2218,#1a1810);border:1px solid rgba(224,184,74,.35);border-radius:16px;padding:16px;margin-bottom:18px}
+.sun-box .sun-label{font-size:.82rem;color:var(--gold);font-weight:700;margin-bottom:8px}
+.sun-box .sun-time{font-size:1.6rem;font-weight:800;color:#fff;letter-spacing:.02em;margin-bottom:4px}
+.sun-box .sun-sub{font-size:.85rem;color:var(--text-soft);line-height:1.45;margin-bottom:10px}
+.sun-box .sun-extra{display:flex;gap:10px;flex-wrap:wrap;font-size:.82rem;color:var(--text-soft)}
+.sun-box .sun-extra span{background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:10px;padding:6px 10px}
+.maps-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px 16px;margin-bottom:16px;background:linear-gradient(180deg,#4aafaf 0%,#2f8a8a 100%);color:#041212;text-decoration:none;border-radius:14px;font-weight:800;font-size:.95rem;border:2px solid rgba(255,255,255,.18);box-shadow:0 4px 0 #1a5555,0 6px 14px rgba(0,0,0,.3);transition:transform .12s ease,box-shadow .12s ease}
+.maps-btn:active{transform:translateY(3px);box-shadow:0 1px 0 #1a5555}
+.free-tag{text-align:center;font-size:.85rem;color:var(--text-soft);margin:-8px 0 16px}
+.tips{display:flex;flex-direction:column;gap:16px}
+.tip-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.tip-photo{height:140px;background:linear-gradient(135deg,#1a2a2a,#0d1515);overflow:hidden}
+.tip-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.tip-photo.no-img{height:0}
+.tip-body{padding:16px 16px 18px;position:relative}
+.tip-icon{position:absolute;top:-22px;right:14px;width:40px;height:40px;border-radius:12px;background:var(--bg-elevated);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.tip-body h2{font-size:1.05rem;font-weight:800;color:var(--gold);margin-bottom:8px;padding-right:36px}
+.tip-body p{font-size:.92rem;color:var(--text-soft);line-height:1.55;margin-bottom:10px}
+.tip-body p:last-child{margin-bottom:0}
+.tip-body strong{color:var(--text)}
+.note{background:rgba(61,154,154,.12);border:1px solid rgba(61,154,154,.3);border-radius:12px;padding:12px 14px;margin-top:10px;font-size:.9rem;color:#b8e0e0;line-height:1.5}
+.sched{width:100%;border-collapse:collapse;margin-top:8px;font-size:.88rem}
+.sched th,.sched td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+.sched th{color:var(--gold);font-weight:700}
+.sched td{color:var(--text-soft)}
+.sched strong{color:var(--text)}
+.sched .hint{display:block;font-size:.78rem;color:var(--petrol);margin-top:4px}
+.footer{text-align:center;padding:20px 16px;background:var(--bg-elevated);border-top:1px solid var(--border)}
+.footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
+.footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+
+<div data-lang-block="nl" style="display:none">
+  <header class="page-head">
+    <h1>Zondag de vlag hijsen</h1>
+    <p class="intro">De Griekse vlagceremonie bij het Palazzo del Governo.</p>
+  </header>
+  <div class="sun-box">
+    <div class="sun-label">🌅 Zonsondergang op Kos (vandaag)</div>
+    <div class="sun-time" data-sunset>—</div>
+    <p class="sun-sub" data-sunset-sub>Berekenen…</p>
+    <div class="sun-extra">
+      <span data-sunrise>Zonsopgang: —</span>
+      <span data-next-sun>Volgende zondag: —</span>
+    </div>
+  </div>
+  <a class="maps-btn" href="https://maps.app.goo.gl/KNifzFpUbZoa1EQv5" target="_blank" rel="noopener">📍 Palazzo del Governo – locatie</a>
+  <p class="free-tag">Toegang gratis</p>
+  <div class="tips">
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-vlag-ceremonie.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🇬🇷</div>
+        <h2>De Griekse vlagceremonie</h2>
+        <p>Elke <strong>zondag</strong> komt Kos even tot rust voor een mooi, plechtig moment: het hijsen (en later neerhalen) van de nationale Griekse vlag.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-vlag-respect.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🫡</div>
+        <h2>Een traditie vol respect</h2>
+        <p>In de vroege zondagochtend verzamelen soldaten zich bij het <strong>Palazzo del Governo</strong> in Kos-stad. Met discipline en in stilte wordt de blauw-witte vlag omhoog gehesen. Het volkslied klinkt; omstanders buigen hun hoofd of salueren.</p>
+        <p>De vlag blijft de hele dag wapperen boven de stad.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-vlag-zonsondergang.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🌇</div>
+        <h2>Afhalen bij zonsondergang</h2>
+        <p>Rond <strong>zonsondergang</strong> vindt de omgekeerde ceremonie plaats. Opnieuw volkslied, saluut, en de vlag wordt zorgvuldig neergehaald.</p>
+        <p>Zie voor de zonsondergang de tijd <strong>hierboven</strong>. Wees een paar minuten eerder aanwezig.</p>
+        <table class="sched">
+          <tr><th>Dag</th><th>Hijsen</th><th>Afhalen</th></tr>
+          <tr><td>Ma–za</td><td>—</td><td>—</td></tr>
+          <tr><td><strong>Zondag</strong></td><td>ca. 08:00</td><td>rond zonsondergang<span class="hint">→ zie tijd hierboven</span></td></tr>
+        </table>
+        <div class="note">Voor locals: een wekelijks moment van verbondenheid.<br>Voor bezoekers: een authentieke, waardige inkijk in de Griekse cultuur.<br>Op zondag even kijken bij het Palazzo del Governo is de moeite waard.</div>
+      </div>
+    </article>
+  </div>
+</div>
+
+<div data-lang-block="en" style="display:none">
+  <header class="page-head">
+    <h1>Sunday flag ceremony</h1>
+    <p class="intro">The Greek flag ceremony at the Palazzo del Governo.</p>
+  </header>
+  <div class="sun-box">
+    <div class="sun-label">🌅 Sunset on Kos (today)</div>
+    <div class="sun-time" data-sunset>—</div>
+    <p class="sun-sub" data-sunset-sub>Calculating…</p>
+    <div class="sun-extra">
+      <span data-sunrise>Sunrise: —</span>
+      <span data-next-sun>Next Sunday: —</span>
+    </div>
+  </div>
+  <a class="maps-btn" href="https://maps.app.goo.gl/KNifzFpUbZoa1EQv5" target="_blank" rel="noopener">📍 Palazzo del Governo – location</a>
+  <p class="free-tag">Free entry</p>
+  <div class="tips">
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-vlag-ceremonie.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🇬🇷</div>
+        <h2>The Greek flag ceremony</h2>
+        <p>Every <strong>Sunday</strong> Kos pauses for a solemn moment: the raising (and later lowering) of the national Greek flag.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-vlag-respect.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🫡</div>
+        <h2>A tradition of respect</h2>
+        <p>Early on Sunday morning soldiers gather at the <strong>Palazzo del Governo</strong> in Kos Town. The blue-and-white flag is raised in silence. The national anthem plays; onlookers bow their heads or salute.</p>
+        <p>The flag flies above the town all day.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-vlag-zonsondergang.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🌇</div>
+        <h2>Lowering at sunset</h2>
+        <p>Around <strong>sunset</strong> the reverse ceremony takes place. Anthem, salute, and the flag is carefully lowered.</p>
+        <p>See the sunset time <strong>above</strong>. Arrive a few minutes early.</p>
+        <table class="sched">
+          <tr><th>Day</th><th>Raise</th><th>Lower</th></tr>
+          <tr><td>Mon–Sat</td><td>—</td><td>—</td></tr>
+          <tr><td><strong>Sunday</strong></td><td>c. 08:00</td><td>around sunset<span class="hint">→ see time above</span></td></tr>
+        </table>
+        <div class="note">For locals: a weekly moment of connection.<br>For visitors: a genuine glimpse of Greek culture.<br>Worth stopping by the Palazzo del Governo on Sunday.</div>
+      </div>
+    </article>
+  </div>
+</div>
+
+<div data-lang-block="de" style="display:none">
+  <header class="page-head"><h1>Sonntags Flaggenzeremonie</h1><p class="intro">Die griechische Flaggenzeremonie am Palazzo del Governo.</p></header>
+  <div class="sun-box">
+    <div class="sun-label">🌅 Sonnenuntergang auf Kos (heute)</div>
+    <div class="sun-time" data-sunset>—</div>
+    <p class="sun-sub" data-sunset-sub>Berechnen…</p>
+    <div class="sun-extra"><span data-sunrise>Sonnenaufgang: —</span><span data-next-sun>Nächster Sonntag: —</span></div>
+  </div>
+  <a class="maps-btn" href="https://maps.app.goo.gl/KNifzFpUbZoa1EQv5" target="_blank" rel="noopener">📍 Palazzo del Governo – Standort</a>
+  <p class="free-tag">Eintritt frei</p>
+  <div class="tips">
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-vlag-ceremonie.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body"><div class="tip-icon">🇬🇷</div><h2>Flaggenzeremonie</h2>
+    <p>Jeden <strong>Sonntag</strong>: Hissen und später Einholen der griechischen Flagge am Palazzo del Governo.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-vlag-zonsondergang.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body"><div class="tip-icon">🌇</div><h2>Einholen bei Sonnenuntergang</h2>
+    <p>Siehe für den Sonnenuntergang die Zeit <strong>oben</strong>. Ein paar Minuten früher da sein.</p>
+    <table class="sched"><tr><th>Tag</th><th>Hissen</th><th>Einholen</th></tr>
+    <tr><td>Mo–Sa</td><td>—</td><td>—</td></tr>
+    <tr><td><strong>Sonntag</strong></td><td>ca. 08:00</td><td>bei Sonnenuntergang<span class="hint">→ siehe Zeit oben</span></td></tr></table></div></article>
+  </div>
+</div>
+
+<div data-lang-block="it" style="display:none">
+  <header class="page-head"><h1>Cerimonia della bandiera (domenica)</h1><p class="intro">La cerimonia greca al Palazzo del Governo.</p></header>
+  <div class="sun-box">
+    <div class="sun-label">🌅 Tramonto a Kos (oggi)</div>
+    <div class="sun-time" data-sunset>—</div>
+    <p class="sun-sub" data-sunset-sub>Calcolo…</p>
+    <div class="sun-extra"><span data-sunrise>Alba: —</span><span data-next-sun>Prossima domenica: —</span></div>
+  </div>
+  <a class="maps-btn" href="https://maps.app.goo.gl/KNifzFpUbZoa1EQv5" target="_blank" rel="noopener">📍 Palazzo del Governo – posizione</a>
+  <p class="free-tag">Ingresso gratuito</p>
+  <div class="tips">
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-vlag-ceremonie.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body"><div class="tip-icon">🇬🇷</div><h2>Cerimonia</h2>
+    <p>Ogni <strong>domenica</strong>: alzabandiera e al tramonto ammainabandiera.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-vlag-zonsondergang.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body"><div class="tip-icon">🌇</div><h2>Ammainare al tramonto</h2>
+    <p>Vedi l’ora del tramonto <strong>sopra</strong>. Arriva qualche minuto prima.</p>
+    <table class="sched"><tr><th>Giorno</th><th>Alza</th><th>Ammaina</th></tr>
+    <tr><td>Lun–Sab</td><td>—</td><td>—</td></tr>
+    <tr><td><strong>Domenica</strong></td><td>ca. 08:00</td><td>al tramonto<span class="hint">→ vedi ora sopra</span></td></tr></table></div></article>
+  </div>
+</div>
+
+<div data-lang-block="tr" style="display:none">
+  <header class="page-head"><h1>Pazar bayrak töreni</h1><p class="intro">Palazzo del Governo’da Yunan bayrak töreni.</p></header>
+  <div class="sun-box">
+    <div class="sun-label">🌅 Kos’ta gün batımı (bugün)</div>
+    <div class="sun-time" data-sunset>—</div>
+    <p class="sun-sub" data-sunset-sub>Hesaplanıyor…</p>
+    <div class="sun-extra"><span data-sunrise>Gün doğumu: —</span><span data-next-sun>Sonraki Pazar: —</span></div>
+  </div>
+  <a class="maps-btn" href="https://maps.app.goo.gl/KNifzFpUbZoa1EQv5" target="_blank" rel="noopener">📍 Palazzo del Governo – konum</a>
+  <p class="free-tag">Ücretsiz</p>
+  <div class="tips">
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-vlag-ceremonie.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body"><div class="tip-icon">🇬🇷</div><h2>Tören</h2>
+    <p>Her <strong>Pazar</strong> bayrak göndere çekilir; gün batımında indirilir.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-vlag-zonsondergang.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body"><div class="tip-icon">🌇</div><h2>Gün batımında indirme</h2>
+    <p>Gün batımı saatini <strong>yukarıda</strong> görün. Birkaç dakika erken gelin.</p>
+    <table class="sched"><tr><th>Gün</th><th>Çekme</th><th>İndirme</th></tr>
+    <tr><td>Pzt–Cmt</td><td>—</td><td>—</td></tr>
+    <tr><td><strong>Pazar</strong></td><td>yak. 08:00</td><td>gün batımında<span class="hint">→ yukarıdaki saate bakın</span></td></tr></table></div></article>
+  </div>
+</div>
+
+<div data-lang-block="es" style="display:none">
+  <header class="page-head"><h1>Ceremonia de la bandera (domingo)</h1><p class="intro">La ceremonia griega en el Palazzo del Governo.</p></header>
+  <div class="sun-box">
+    <div class="sun-label">🌅 Puesta de sol en Kos (hoy)</div>
+    <div class="sun-time" data-sunset>—</div>
+    <p class="sun-sub" data-sunset-sub>Calculando…</p>
+    <div class="sun-extra"><span data-sunrise>Amanecer: —</span><span data-next-sun>Próximo domingo: —</span></div>
+  </div>
+  <a class="maps-btn" href="https://maps.app.goo.gl/KNifzFpUbZoa1EQv5" target="_blank" rel="noopener">📍 Palazzo del Governo – ubicación</a>
+  <p class="free-tag">Entrada gratuita</p>
+  <div class="tips">
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-vlag-ceremonie.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body"><div class="tip-icon">🇬🇷</div><h2>Ceremonia</h2>
+    <p>Cada <strong>domingo</strong>: izado y al atardecer arriado de la bandera.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-vlag-zonsondergang.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+    <div class="tip-body"><div class="tip-icon">🌇</div><h2>Arriado al atardecer</h2>
+    <p>Mira la hora de la puesta de sol <strong>arriba</strong>. Llega unos minutos antes.</p>
+    <table class="sched"><tr><th>Día</th><th>Izado</th><th>Arriado</th></tr>
+    <tr><td>Lun–Sáb</td><td>—</td><td>—</td></tr>
+    <tr><td><strong>Domingo</strong></td><td>c. 08:00</td><td>al atardecer<span class="hint">→ ver hora arriba</span></td></tr></table></div></article>
+  </div>
+</div>
+
+</main>
+<footer class="footer">
+  <div class="footer-logo">🔅 Hello Kos</div>
+  <p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a></p>
+</footer>
+<script>
+(function(){
+  var LAT = 36.891, LNG = 27.288;
+  function toRad(d){ return d * Math.PI / 180; }
+  function toDeg(r){ return r * 180 / Math.PI; }
+  function solarTimes(date, lat, lng){
+    var day = Math.floor((Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - Date.UTC(date.getFullYear(), 0, 0)) / 86400000);
+    var gamma = 2 * Math.PI / 365 * (day - 1);
+    var eqTime = 229.18 * (0.000075 + 0.001868 * Math.cos(gamma) - 0.032077 * Math.sin(gamma)
+      - 0.014615 * Math.cos(2*gamma) - 0.040849 * Math.sin(2*gamma));
+    var decl = 0.006918 - 0.399912 * Math.cos(gamma) + 0.070257 * Math.sin(gamma)
+      - 0.006758 * Math.cos(2*gamma) + 0.000907 * Math.sin(2*gamma)
+      - 0.002697 * Math.cos(3*gamma) + 0.00148 * Math.sin(3*gamma);
+    var haArg = Math.cos(toRad(90.833)) / (Math.cos(toRad(lat)) * Math.cos(decl)) - Math.tan(toRad(lat)) * Math.tan(decl);
+    if(haArg < -1 || haArg > 1) return null;
+    var ha = toDeg(Math.acos(haArg));
+    return { sunriseMin: 720 - 4 * (lng + ha) - eqTime, sunsetMin: 720 - 4 * (lng - ha) - eqTime };
+  }
+  function localClockFromUTCMin(utcMin, date){
+    var utcMs = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0) + utcMin * 60000;
+    var local = new Date(utcMs);
+    var hh = local.getHours(), mm = local.getMinutes();
+    return (hh < 10 ? '0' : '') + hh + ':' + (mm < 10 ? '0' : '') + mm;
+  }
+  function nextSunday(from){
+    var d = new Date(from.getFullYear(), from.getMonth(), from.getDate());
+    var day = d.getDay();
+    var add = day === 0 ? 7 : 7 - day;
+    d.setDate(d.getDate() + add);
+    return d;
+  }
+  function fmtDate(d, lang){
+    try {
+      return d.toLocaleDateString(lang === 'nl' ? 'nl-NL' : lang === 'de' ? 'de-DE' : lang === 'it' ? 'it-IT' : lang === 'tr' ? 'tr-TR' : lang === 'es' ? 'es-ES' : 'en-GB', { weekday:'short', day:'numeric', month:'short' });
+    } catch(e){ return d.getDate() + '/' + (d.getMonth()+1); }
+  }
+  var SUB = {
+    nl: { today: 'Tijd voor het afhalen van de vlag (Kos-stad). Wees een paar minuten eerder.', sundayToday: 'Vandaag is zondag — dit is de tijd voor de ceremonie.', rise: function(t){ return 'Zonsopgang: '+t; }, nextLabel: function(t,d){ return 'Volgende zondag ('+d+'): '+t; } },
+    en: { today: 'Time for the flag lowering (Kos Town). Arrive a few minutes early.', sundayToday: 'Today is Sunday — this is the ceremony time.', rise: function(t){ return 'Sunrise: '+t; }, nextLabel: function(t,d){ return 'Next Sunday ('+d+'): '+t; } },
+    de: { today: 'Zeit zum Einholen der Flagge. Ein paar Minuten früher da sein.', sundayToday: 'Heute ist Sonntag — Zeit für die Zeremonie.', rise: function(t){ return 'Sonnenaufgang: '+t; }, nextLabel: function(t,d){ return 'Nächster Sonntag ('+d+'): '+t; } },
+    it: { today: 'Ora dell’ammainabandiera. Arriva qualche minuto prima.', sundayToday: 'Oggi è domenica — ora della cerimonia.', rise: function(t){ return 'Alba: '+t; }, nextLabel: function(t,d){ return 'Prossima domenica ('+d+'): '+t; } },
+    tr: { today: 'Bayrak indirme saati. Birkaç dakika erken gelin.', sundayToday: 'Bugün Pazar — tören saati.', rise: function(t){ return 'Gün doğumu: '+t; }, nextLabel: function(t,d){ return 'Sonraki Pazar ('+d+'): '+t; } },
+    es: { today: 'Hora del arriado. Llega unos minutos antes.', sundayToday: 'Hoy es domingo — hora de la ceremonia.', rise: function(t){ return 'Amanecer: '+t; }, nextLabel: function(t,d){ return 'Próximo domingo ('+d+'): '+t; } }
+  };
+  var sunCache = { todaySet: null, todayRise: null, nextSet: null, nextDate: null, isSunday: false };
+  function calcSun(){
+    var today = new Date();
+    var st = solarTimes(today, LAT, LNG);
+    if(st){
+      sunCache.todaySet = localClockFromUTCMin(st.sunsetMin, today);
+      sunCache.todayRise = localClockFromUTCMin(st.sunriseMin, today);
+    }
+    sunCache.isSunday = today.getDay() === 0;
+    var ns = nextSunday(today);
+    if(sunCache.isSunday) ns = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
+    var st2 = solarTimes(ns, LAT, LNG);
+    if(st2){ sunCache.nextSet = localClockFromUTCMin(st2.sunsetMin, ns); sunCache.nextDate = ns; }
+  }
+  function updateSunUI(){
+    var m = SUB[lang] || SUB.en;
+    document.querySelectorAll('[data-sunset]').forEach(function(el){ el.textContent = sunCache.todaySet || '—'; });
+    document.querySelectorAll('[data-sunset-sub]').forEach(function(el){ el.textContent = sunCache.isSunday ? m.sundayToday : m.today; });
+    document.querySelectorAll('[data-sunrise]').forEach(function(el){ el.textContent = m.rise(sunCache.todayRise || '—'); });
+    document.querySelectorAll('[data-next-sun]').forEach(function(el){
+      el.textContent = (sunCache.nextSet && sunCache.nextDate) ? m.nextLabel(sunCache.nextSet, fmtDate(sunCache.nextDate, lang)) : '—';
+    });
+  }
+  var lang = localStorage.getItem('hk-lang') || 'en';
+  var supported = ['nl','de','en','it','tr','es'];
+  function setLang(l){
+    if(supported.indexOf(l)<0) l = 'en';
+    lang = l; localStorage.setItem('hk-lang', l);
+    document.querySelectorAll('[data-lang-block]').forEach(function(el){
+      el.style.display = (el.getAttribute('data-lang-block') === l) ? 'block' : 'none';
+    });
+    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if(opt){ document.getElementById('flag').textContent = opt.getAttribute('data-flag'); document.getElementById('code').textContent = l.toUpperCase(); }
+    document.querySelectorAll('.lang-option').forEach(function(o){ o.classList.toggle('active', o.getAttribute('data-lang') === l); });
+    document.documentElement.lang = l; closeMenu(); updateSunUI();
+  }
+  var langBtn = document.getElementById('langBtn'), langMenu = document.getElementById('langMenu'), overlay = document.getElementById('overlay');
+  function openMenu(){ langMenu.classList.add('open'); overlay.classList.add('open'); }
+  function closeMenu(){ langMenu.classList.remove('open'); overlay.classList.remove('open'); }
+  langBtn.addEventListener('click', function(e){ e.stopPropagation(); langMenu.classList.contains('open') ? closeMenu() : openMenu(); });
+  overlay.addEventListener('click', closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){ btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); }); });
+  calcSun(); setLang(lang);
+})();
+</script>
+</body>
+</html>

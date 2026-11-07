@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0a0c0c">
+<title>Traffic rules &amp; fines – Hello Kos</title>
+<style>
+:root{--bg:#0a0c0c;--bg-elevated:#141818;--bg-card:#1a1f1f;--border:rgba(255,255,255,0.08);--text:#e8e8e8;--text-soft:#a0a8a8;--petrol:#3d9a9a;--gold:#e0b84a;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);padding-top:var(--safe-top);padding-bottom:var(--safe-bottom)}
+.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:12px 14px;background:rgba(10,12,12,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-btns{display:flex;gap:6px}
+.nav-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);text-decoration:none;font-size:1.15rem}
+.logo{justify-self:center;display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo-icon{font-size:22px}
+.logo-text{font-size:1.1rem;font-weight:700;color:var(--gold);font-family:Georgia,serif}
+.logo-text span{color:#f0c85a;font-style:italic}
+.lang-wrap{justify-self:end;position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-soft)}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:8px;min-width:160px;z-index:50}
+.lang-menu.open{display:block}
+.lang-option{display:block;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;color:var(--text)}
+.lang-option.active{background:rgba(61,154,154,.15);color:var(--petrol)}
+.overlay{display:none;position:fixed;inset:0;z-index:40}
+.overlay.open{display:block}
+.main{max-width:480px;margin:0 auto;padding:18px 14px 40px}
+.page-title{text-align:center;margin-bottom:18px}
+.page-title h1{font-size:1.35rem;font-weight:800}
+.page-title p{color:var(--text-soft);font-size:.9rem;margin-top:4px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:.95;text-decoration:none;color:#fff;box-shadow:0 2px 12px rgba(0,0,0,.22);border:1px solid var(--border)}
+.card img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.8)}
+.card-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.75) 0%,transparent 48%);display:flex;align-items:flex-start;justify-content:center;padding:12px 8px;text-align:center}
+.card-title{font-size:.88rem;font-weight:800;line-height:1.25;text-shadow:0 1px 6px rgba(0,0,0,.85);width:100%;background:rgba(0,0,0,.35);backdrop-filter:blur(6px);border-radius:10px;padding:6px 8px}
+.footer{text-align:center;padding:20px 16px;background:var(--bg-elevated);border-top:1px solid var(--border)}
+.footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
+.footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
+#zoomLayer{position:fixed;inset:0;z-index:8000;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s,visibility .25s}
+#zoomLayer.show{opacity:1;visibility:visible;pointer-events:auto}
+#zoomLayer img{max-width:92vw;max-height:78vh;border-radius:16px;object-fit:contain;transform:scale(.88);transition:transform .35s cubic-bezier(.22,1,.36,1)}
+#zoomLayer.show img{transform:scale(1)}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Back">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="page-title">
+    <h1 id="h1">Traffic rules &amp; fines</h1>
+    <p id="sub">Choose a topic</p>
+  </div>
+  <div class="grid">
+    <a class="card" href="verkeersregels-inhoud.html">
+      <img src="vr-tegel-regels.jpg" alt="" loading="lazy">
+      <div class="card-overlay"><div class="card-title" data-i18n="t1">Traffic rules</div></div>
+    </a>
+    <a class="card" href="rijbewijs-snelheden.html">
+      <img src="vr-tegel-rijbewijs.jpg" alt="" loading="lazy">
+      <div class="card-overlay"><div class="card-title" data-i18n="t2">Licence &amp; speeds</div></div>
+    </a>
+    <a class="card" href="boetes.html">
+      <img src="vr-tegel-boetes.jpg" alt="" loading="lazy">
+      <div class="card-overlay"><div class="card-title" data-i18n="t3">Fines</div></div>
+    </a>
+    <a class="card" href="gevolgen-niet-betalen.html">
+      <img src="vr-tegel-gevolgen.jpg" alt="" loading="lazy">
+      <div class="card-overlay"><div class="card-title" data-i18n="t4">If you don't pay</div></div>
+    </a>
+  </div>
+</main>
+<div id="zoomLayer"><img src="" alt=""></div>
+<footer class="footer">
+  <div class="footer-logo">🔅 Hello Kos</div>
+  <p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a></p>
+</footer>
+<script>
+(function(){
+  var dict={
+    en:{h1:"Traffic rules & fines",sub:"Choose a topic",t1:"Traffic rules",t2:"Licence & speeds",t3:"Fines",t4:"If you don't pay"},
+    nl:{h1:"Verkeersregels & boetes",sub:"Kies een onderwerp",t1:"Verkeersregels",t2:"Rijbewijs & snelheden",t3:"Boetes",t4:"Gevolgen niet betalen"},
+    de:{h1:"Verkehrsregeln & Bußgelder",sub:"Thema wählen",t1:"Verkehrsregeln",t2:"Führerschein & Tempo",t3:"Bußgelder",t4:"Bei Nichtzahlung"},
+    it:{h1:"Regole e multe",sub:"Scegli un argomento",t1:"Regole stradali",t2:"Patente e limiti",t3:"Multe",t4:"Se non paghi"},
+    tr:{h1:"Trafik kuralları ve cezalar",sub:"Bir konu seçin",t1:"Trafik kuralları",t2:"Ehliyet ve hız",t3:"Cezalar",t4:"Ödemezseniz"},
+    es:{h1:"Normas y multas",sub:"Elige un tema",t1:"Normas de tráfico",t2:"Carnet y límites",t3:"Multas",t4:"Si no pagas"}
+  };
+  var lang=localStorage.getItem('hk-lang')||'en';
+  function setLang(l){
+    if(!dict[l])l='en';
+    lang=l;localStorage.setItem('hk-lang',l);
+    var d=dict[l];
+    document.getElementById('h1').textContent=d.h1;
+    document.getElementById('sub').textContent=d.sub;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(d[k])el.textContent=d[k]});
+    var opt=document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if(opt){document.getElementById('flag').textContent=opt.getAttribute('data-flag');document.getElementById('code').textContent=l.toUpperCase()}
+    document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===l)});
+    document.documentElement.lang=l;closeMenu();
+  }
+  var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu'),overlay=document.getElementById('overlay');
+  function openMenu(){langMenu.classList.add('open');overlay.classList.add('open')}
+  function closeMenu(){langMenu.classList.remove('open');overlay.classList.remove('open')}
+  langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.contains('open')?closeMenu():openMenu()});
+  overlay.addEventListener('click',closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'))})});
+  document.addEventListener('click',function(e){
+    var card=e.target.closest('a.card');
+    if(!card)return;
+    e.preventDefault();
+    var href=card.getAttribute('href');if(!href)return;
+    var img=card.querySelector('img');var layer=document.getElementById('zoomLayer');
+    if(layer&&img){layer.querySelector('img').src=img.src||'';layer.classList.add('show');setTimeout(function(){window.location.href=href},450)}
+    else window.location.href=href;
+  },true);
+  setLang(lang);
+})();
+</script>
+</body>
+</html>

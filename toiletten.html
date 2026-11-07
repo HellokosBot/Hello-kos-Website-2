@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0a0c0c">
+<title>Toilets – Hello Kos</title>
+<style>
+:root{--bg:#0a0c0c;--bg-elevated:#141818;--bg-card:#1a1f1f;--border:rgba(255,255,255,0.08);--text:#e8e8e8;--text-soft:#a0a8a8;--petrol:#3d9a9a;--gold:#e0b84a;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);line-height:1.5}
+.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:12px 14px;background:rgba(10,12,12,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-btns{display:flex;gap:6px}
+.nav-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);text-decoration:none;font-size:1.15rem}
+.logo{justify-self:center;display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo-icon{font-size:22px}
+.logo-text{font-size:1.1rem;font-weight:700;color:var(--gold);font-family:Georgia,serif}
+.logo-text span{color:#f0c85a;font-style:italic}
+.lang-wrap{justify-self:end;position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-soft)}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:8px;min-width:160px;z-index:50}
+.lang-menu.open{display:block}
+.lang-option{display:block;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;color:var(--text)}
+.lang-option.active{background:rgba(61,154,154,.15);color:var(--petrol)}
+.overlay{display:none;position:fixed;inset:0;z-index:40}.overlay.open{display:block}
+.main{max-width:480px;margin:0 auto;padding:16px 14px 48px}
+.page-head{text-align:center;margin-bottom:14px}
+.page-head h1{font-size:1.35rem;font-weight:800}
+.page-head .intro{color:var(--text-soft);font-size:.92rem;margin-top:6px}
+.radar{position:relative;background:radial-gradient(ellipse at center,#1a2e2e 0%,#121a1a 55%,#0e1414 100%);border:1px solid rgba(61,154,154,.35);border-radius:22px;padding:22px 18px 20px;margin-bottom:20px;text-align:center;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.4),inset 0 0 60px rgba(61,154,154,.06)}
+.radar::before{content:'';position:absolute;inset:0;background:repeating-radial-gradient(circle at 50% 42%,transparent 0,transparent 28px,rgba(61,154,154,.07) 28px,rgba(61,154,154,.07) 29px);pointer-events:none}
+.radar-inner{position:relative;z-index:1}
+.radar-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(61,154,154,.18);border:1px solid rgba(61,154,154,.35);color:var(--petrol);font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:999px;margin-bottom:14px}
+.radar-icon{font-size:2.4rem;line-height:1;margin-bottom:6px;filter:drop-shadow(0 0 12px rgba(61,154,154,.5))}
+.radar-name{font-size:1.2rem;font-weight:800;color:var(--gold);margin-bottom:2px;min-height:1.4em}
+.radar-dist{font-size:2.2rem;font-weight:900;color:#5ecfcf;text-shadow:0 0 24px rgba(61,154,154,.45);margin:4px 0 0}
+.radar-unit{font-size:.85rem;color:var(--text-soft);margin-bottom:8px}
+.radar-status{font-size:.88rem;color:var(--text-soft);min-height:1.3em;margin:6px 0 4px}
+.radar-btns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
+.radar-btn{border:none;border-radius:14px;padding:13px 18px;font-family:inherit;font-size:.9rem;font-weight:700;cursor:pointer}
+.radar-btn.primary{background:linear-gradient(135deg,#4ab0b0,#2d8a8a);color:#061010;box-shadow:0 4px 16px rgba(61,154,154,.35)}
+.radar-btn.secondary{background:rgba(255,255,255,.06);color:var(--text);border:1px solid var(--border)}
+.radar-btn a{color:inherit;text-decoration:none}
+.featured{margin:0 0 20px;border-radius:22px;overflow:hidden;border:1px solid rgba(224,184,74,.35);background:linear-gradient(160deg,#1c1a12 0%,#141818 50%,#1a1f1f 100%);box-shadow:0 8px 28px rgba(0,0,0,.35)}
+.featured-photo{height:180px;background:linear-gradient(135deg,#1a2a22,#0d1515);position:relative;overflow:hidden}
+.featured-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.featured-photo.no-img{height:0}
+.featured-badge{position:absolute;top:12px;left:12px;background:rgba(224,184,74,.92);color:#1a1408;font-size:.72rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:6px 12px;border-radius:999px}
+.featured-body{padding:18px 16px 20px}
+.featured-body h2{font-size:1.2rem;font-weight:800;color:var(--gold);margin-bottom:8px}
+.featured-body p{font-size:.92rem;color:var(--text-soft);line-height:1.55;margin-bottom:10px}
+.featured-body strong{color:var(--text)}
+.featured-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.featured-btn{display:inline-flex;align-items:center;gap:6px;border:none;border-radius:14px;padding:12px 16px;font-family:inherit;font-size:.9rem;font-weight:700;cursor:pointer;text-decoration:none}
+.featured-btn.gold{background:linear-gradient(135deg,#e8c45a,#c9a030);color:#1a1408}
+.featured-btn.ghost{background:rgba(255,255,255,.06);color:var(--text);border:1px solid var(--border)}
+.tips{display:flex;flex-direction:column;gap:16px}
+.tip-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.tip-photo{height:140px;background:linear-gradient(135deg,#1a2a2a,#0d1515);overflow:hidden}
+.tip-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.tip-photo.no-img{height:0}
+.tip-body{padding:16px 16px 18px;position:relative}
+.tip-icon{position:absolute;top:-22px;right:14px;width:40px;height:40px;border-radius:12px;background:var(--bg-elevated);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.tip-body h2{font-size:1.05rem;font-weight:800;color:var(--gold);margin-bottom:8px;padding-right:36px}
+.tip-body p{font-size:.92rem;color:var(--text-soft);line-height:1.55;margin-bottom:10px}
+.tip-body p:last-child{margin-bottom:0}
+.tip-body strong{color:var(--text)}
+.alert{background:rgba(224,122,74,.12);border:1px solid rgba(224,122,74,.35);border-radius:14px;padding:14px 16px;margin-bottom:16px;font-size:.9rem;color:#f0c8b0;line-height:1.5}
+.alert strong{color:#ffd4b8}
+.footer{text-align:center;padding:20px 16px;background:var(--bg-elevated);border-top:1px solid var(--border)}
+.footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
+.footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="nav-btns"><a class="nav-btn" href="index.html">🏠</a><a class="nav-btn" href="javascript:history.back()">←</a></div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+<section class="radar" id="radar">
+  <div class="radar-inner">
+    <div class="radar-badge">🚻 <span data-i18n="radarTitle">Nearest public toilet</span></div>
+    <div class="radar-icon">🚽</div>
+    <div class="radar-name" id="radarName">—</div>
+    <div class="radar-dist" id="radarDist">—</div>
+    <div class="radar-unit" id="radarUnit"></div>
+    <div class="radar-status" id="radarStatus" data-i18n="radarWait">Tap the button and allow location</div>
+    <div class="radar-btns">
+      <button type="button" class="radar-btn primary" id="btnLocate" data-i18n="btnLocate">Find nearest WC</button>
+      <button type="button" class="radar-btn secondary" id="btnSkip" style="display:none" data-i18n="btnSkip">Skip → next</button>
+      <a class="radar-btn secondary" id="btnMaps" href="#" target="_blank" rel="noopener" style="display:none" data-i18n="btnMaps">Open in Google Maps</a>
+    </div>
+  </div>
+</section>
+
+<div data-lang-block="nl" style="display:none">
+  <header class="page-head"><h1>Toiletten</h1><p class="intro">Praktische tips en openbare wc’s op Kos.</p></header>
+  <div class="alert"><strong>Belangrijk:</strong> Toiletpapier <strong>niet</strong> door de wc spoelen — in de prullenbak ernaast.</div>
+  <article class="featured">
+    <div class="featured-photo"><img src="wjd-toilet-pyli.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"><span class="featured-badge">Meest bekende wc van Kos</span></div>
+    <div class="featured-body">
+      <h2>De wc van Oud Pyli</h2>
+      <p>Midden in de bergen bij het oude dorp <strong>Oud Pyli</strong> staat de bekendste openbare wc van het eiland.</p>
+      <p>Er is <strong>geen dak en geen ramen</strong> — je zit letterlijk in de natuur. Toch hoef je niet bang te zijn dat iemand je ziet: de plek is zo gekozen dat je privacy hebt.</p>
+      <p>Wat je wél hebt, is een <strong>prachtig uitzicht</strong> over de omgeving. Uniek op Kos.</p>
+      <div class="featured-btns">
+        <a class="featured-btn gold" href="https://www.google.com/maps/dir/?api=1&destination=36.8420,27.1570" target="_blank" rel="noopener">📍 Route naar Oud Pyli</a>
+        <button type="button" class="featured-btn ghost btn-pyli">🚻 Zet in de radar</button>
+      </div>
+    </div>
+  </article>
+  <div class="tips">
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-toilet-papier.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🧻</div><h2>Doorspoelen wc-papier</h2><p>In Griekenland mag je <strong>geen toiletpapier door de wc spoelen</strong>. Gebruik de prullenbak ernaast. De leidingen zijn oud en smal en verstoppen snel.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-toilet-deur.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🚪</div><h2>Open of dicht = vrij of bezet</h2><p>Op veel toiletten op Kos (zeker in de horeca) geldt een eenvoudige regel:</p><p><strong>Deur open</strong> → de wc is vrij.<br><strong>Deur dicht</strong> → er zit iemand.</p><p>Twijfel je bij een dichte deur? Even aankloppen of kort iets roepen (bijvoorbeeld „Allous?”) is heel gebruikelijk. Zo weet je of de ruimte nog bezet is.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-toilet-slot.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🔒</div><h2>Geen slot / geen wc-bril</h2><p>In veel horeca geen slot of geen bril — vroeger feesteiland, deuren werden opengebroken. Verbetert langzaam, vooral waar Grieken komen.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-toilet-openbaar.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🚻</div><h2>Openbare toiletten</h2><p>Slechts enkele openbare wc’s. In een restaurant of bar: bestel een consumptie of geef een kleine vergoeding. Soms 100 personen per dag op één wc.</p></div></article>
+  </div>
+</div>
+
+<div data-lang-block="en" style="display:none">
+  <header class="page-head"><h1>Toilets</h1><p class="intro">Practical tips and public toilets on Kos.</p></header>
+  <div class="alert"><strong>Important:</strong> Do <strong>not</strong> flush toilet paper — use the bin next to the toilet.</div>
+  <article class="featured">
+    <div class="featured-photo"><img src="wjd-toilet-pyli.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"><span class="featured-badge">Most famous WC on Kos</span></div>
+    <div class="featured-body">
+      <h2>The toilet of Old Pyli</h2>
+      <p>In the mountains by <strong>Old Pyli</strong>: the best-known public toilet on the island.</p>
+      <p><strong>No roof and no windows</strong> — right in nature, with privacy and a <strong>beautiful view</strong>.</p>
+      <div class="featured-btns">
+        <a class="featured-btn gold" href="https://www.google.com/maps/dir/?api=1&destination=36.8420,27.1570" target="_blank" rel="noopener">📍 Route to Old Pyli</a>
+        <button type="button" class="featured-btn ghost btn-pyli">🚻 Put in radar</button>
+      </div>
+    </div>
+  </article>
+  <div class="tips">
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-toilet-papier.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🧻</div><h2>Do not flush toilet paper</h2><p>Use the bin next to the toilet. Pipes are old and narrow.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-toilet-deur.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🚪</div><h2>Open or closed = free or occupied</h2><p>In many toilets on Kos (especially in bars and restaurants):</p><p><strong>Door open</strong> → free.<br><strong>Door closed</strong> → someone is inside.</p><p>If you are unsure, a quick knock or a short call (e.g. “Allous?”) is normal.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-toilet-slot.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🔒</div><h2>No lock / no seat</h2><p>Common in some places. Slowly improving.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-toilet-openbaar.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🚻</div><h2>Public toilets</h2><p>Only a few. In a restaurant, order a drink or pay a small fee.</p></div></article>
+  </div>
+</div>
+
+<div data-lang-block="de" style="display:none">
+  <header class="page-head"><h1>Toiletten</h1><p class="intro">Praktische Tipps und öffentliche WCs auf Kos.</p></header>
+  <div class="alert"><strong>Wichtig:</strong> Toilettenpapier <strong>nicht</strong> spülen — in den Eimer daneben.</div>
+  <article class="featured">
+    <div class="featured-photo"><img src="wjd-toilet-pyli.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"><span class="featured-badge">Bekannteste WC auf Kos</span></div>
+    <div class="featured-body">
+      <h2>Die WC von Alt-Pyli</h2>
+      <p><strong>Kein Dach, keine Fenster</strong> — mitten in der Natur, mit Privatsphäre und schöner Aussicht.</p>
+      <div class="featured-btns">
+        <a class="featured-btn gold" href="https://www.google.com/maps/dir/?api=1&destination=36.8420,27.1570" target="_blank" rel="noopener">📍 Route nach Alt-Pyli</a>
+        <button type="button" class="featured-btn ghost btn-pyli">🚻 In Radar setzen</button>
+      </div>
+    </div>
+  </article>
+  <div class="tips">
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-toilet-papier.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🧻</div><h2>Toilettenpapier nicht spülen</h2><p>Eimer daneben nutzen.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-toilet-deur.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🚪</div><h2>Offen oder zu = frei oder besetzt</h2><p><strong>Tür offen</strong> → frei.<br><strong>Tür zu</strong> → besetzt. Bei Zweifel kurz klopfen oder rufen (z. B. „Allous?“).</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-toilet-slot.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🔒</div><h2>Kein Schloss / kein Sitz</h2><p>In manchen Lokalen fehlt das.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-toilet-openbaar.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🚻</div><h2>Öffentliche Toiletten</h2><p>Nur wenige.</p></div></article>
+  </div>
+</div>
+
+<div data-lang-block="it" style="display:none">
+  <header class="page-head"><h1>Toilette</h1><p class="intro">Consigli pratici e bagni pubblici a Kos.</p></header>
+  <div class="alert"><strong>Importante:</strong> Non gettare la carta nello scarico — nel cestino.</div>
+  <article class="featured">
+    <div class="featured-photo"><img src="wjd-toilet-pyli.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"><span class="featured-badge">WC più noto di Kos</span></div>
+    <div class="featured-body">
+      <h2>Il bagno di Vecchia Pyli</h2>
+      <p><strong>Senza tetto e senza finestre</strong> — in mezzo alla natura, con privacy e bella vista.</p>
+      <div class="featured-btns">
+        <a class="featured-btn gold" href="https://www.google.com/maps/dir/?api=1&destination=36.8420,27.1570" target="_blank" rel="noopener">📍 Percorso a Vecchia Pyli</a>
+        <button type="button" class="featured-btn ghost btn-pyli">🚻 Metti nel radar</button>
+      </div>
+    </div>
+  </article>
+  <div class="tips">
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-toilet-papier.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🧻</div><h2>Carta non nello scarico</h2><p>Usa il cestino.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-toilet-deur.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🚪</div><h2>Aperta o chiusa = libera o occupata</h2><p><strong>Porta aperta</strong> → libera.<br><strong>Porta chiusa</strong> → occupata. In dubbio: bussa o chiama (es. „Allous?“).</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-toilet-slot.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🔒</div><h2>Senza serratura / sedile</h2><p>In alcuni locali manca.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-toilet-openbaar.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🚻</div><h2>Bagni pubblici</h2><p>Pochi.</p></div></article>
+  </div>
+</div>
+
+<div data-lang-block="tr" style="display:none">
+  <header class="page-head"><h1>Tuvaletler</h1><p class="intro">Kos’ta pratik ipuçları ve umumi tuvaletler.</p></header>
+  <div class="alert"><strong>Önemli:</strong> Kâğıdı <strong>sifona atmayın</strong> — yanındaki çöpe.</div>
+  <article class="featured">
+    <div class="featured-photo"><img src="wjd-toilet-pyli.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"><span class="featured-badge">Kos’un en bilinen tuvaleti</span></div>
+    <div class="featured-body">
+      <h2>Eski Pyli tuvaleti</h2>
+      <p><strong>Çatı ve pencere yok</strong> — doğanın ortasında, mahremiyet ve güzel manzara.</p>
+      <div class="featured-btns">
+        <a class="featured-btn gold" href="https://www.google.com/maps/dir/?api=1&destination=36.8420,27.1570" target="_blank" rel="noopener">📍 Eski Pyli’ye yol</a>
+        <button type="button" class="featured-btn ghost btn-pyli">🚻 Radara koy</button>
+      </div>
+    </div>
+  </article>
+  <div class="tips">
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-toilet-papier.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🧻</div><h2>Kâğıt sifona atılmaz</h2><p>Yanındaki çöpü kullanın.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-toilet-deur.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🚪</div><h2>Açık veya kapalı = boş veya dolu</h2><p><strong>Kapı açık</strong> → boş.<br><strong>Kapı kapalı</strong> → dolu. Emin değilseniz hafifçe vurun veya seslenin (ör. „Allous?“).</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-toilet-slot.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🔒</div><h2>Kilit / kapak yok</h2><p>Bazı yerlerde yoktur.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-toilet-openbaar.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🚻</div><h2>Umumi tuvaletler</h2><p>Az sayıdadır.</p></div></article>
+  </div>
+</div>
+
+<div data-lang-block="es" style="display:none">
+  <header class="page-head"><h1>Aseos</h1><p class="intro">Consejos prácticos y aseos públicos en Kos.</p></header>
+  <div class="alert"><strong>Importante:</strong> No tires el papel al inodoro — al cubo.</div>
+  <article class="featured">
+    <div class="featured-photo"><img src="wjd-toilet-pyli.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"><span class="featured-badge">WC más conocido de Kos</span></div>
+    <div class="featured-body">
+      <h2>El aseo de Antigua Pyli</h2>
+      <p><strong>Sin techo ni ventanas</strong> — en plena naturaleza, con privacidad y una vista preciosa.</p>
+      <div class="featured-btns">
+        <a class="featured-btn gold" href="https://www.google.com/maps/dir/?api=1&destination=36.8420,27.1570" target="_blank" rel="noopener">📍 Ruta a Antigua Pyli</a>
+        <button type="button" class="featured-btn ghost btn-pyli">🚻 Poner en el radar</button>
+      </div>
+    </div>
+  </article>
+  <div class="tips">
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-toilet-papier.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🧻</div><h2>No tirar el papel</h2><p>Usa el cubo de al lado.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-toilet-deur.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🚪</div><h2>Abierta o cerrada = libre u ocupada</h2><p><strong>Puerta abierta</strong> → libre.<br><strong>Puerta cerrada</strong> → ocupada. Si dudas, llama suavemente (p. ej. „Allous?“).</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-toilet-slot.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🔒</div><h2>Sin pestillo / asiento</h2><p>En algunos locales falta.</p></div></article>
+    <article class="tip-card"><div class="tip-photo"><img src="wjd-toilet-openbaar.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div><div class="tip-body"><div class="tip-icon">🚻</div><h2>Aseos públicos</h2><p>Hay pocos.</p></div></article>
+  </div>
+</div>
+
+</main>
+<footer class="footer"><div class="footer-logo">🔅 Hello Kos</div><p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a></p></footer>
+<script>
+(function(){
+  var toilets=[
+    {id:'harbour',lat:36.8960,lng:27.2880,names:{nl:'Haven Kos-stad',en:'Kos Town harbour',de:'Hafen Kos-Stadt',it:'Porto Kos città',tr:'Kos liman',es:'Puerto Kos ciudad'}},
+    {id:'market',lat:36.8935,lng:27.2885,names:{nl:'Achter marktgebouw',en:'Behind market building',de:'Hinter dem Marktgebäude',it:'Dietro il mercato',tr:'Pazar arkası',es:'Detrás del mercado'}},
+    {id:'castle',lat:36.8945,lng:27.2900,names:{nl:'Bij kasteel / brug',en:'By the castle / bridge',de:'Am Schloss / Brücke',it:'Al castello / ponte',tr:'Kale / köprü',es:'Junto al castillo / puente'}},
+    {id:'ferry',lat:36.8947,lng:27.2903,names:{nl:'Achter kasteel bij de ferry',en:'Behind castle at the ferry',de:'Hinter Schloss bei der Fähre',it:'Dietro il castello al traghetto',tr:'Kale arkası feribot',es:'Detrás del castillo en el ferry'}},
+    {id:'marina',lat:36.8957,lng:27.2873,names:{nl:'Kos Marina',en:'Kos Marina',de:'Kos Marina',it:'Kos Marina',tr:'Kos Marina',es:'Kos Marina'}},
+    {id:'tigaki',lat:36.8820,lng:27.1450,names:{nl:'Tigaki strand',en:'Tigaki beach',de:'Tigaki Strand',it:'Spiaggia Tigaki',tr:'Tigaki plajı',es:'Playa Tigaki'}},
+    {id:'pyli',lat:36.8420,lng:27.1570,names:{nl:'Oud Pyli',en:'Old Pyli',de:'Alt-Pyli',it:'Vecchia Pyli',tr:'Eski Pyli',es:'Antigua Pyli'}}
+  ];
+  var skip=[],sorted=[],idx=0,userLat=null,userLng=null,lang=localStorage.getItem('hk-lang')||'en';
+  var i18n={
+    nl:{radarTitle:'Dichtstbijzijnde openbare wc',radarWait:'Tik op de knop en sta locatie toe',btnLocate:'Zoek dichtstbijzijnde wc',btnSkip:'Overslaan → volgende',btnMaps:'Open in Google Maps',locating:'Locatie ophalen…',denied:'Locatie niet toegestaan. Zet GPS aan.',error:'Kon locatie niet bepalen.',m:'meter',km:'km'},
+    en:{radarTitle:'Nearest public toilet',radarWait:'Tap the button and allow location',btnLocate:'Find nearest WC',btnSkip:'Skip → next',btnMaps:'Open in Google Maps',locating:'Getting location…',denied:'Location denied. Enable GPS.',error:'Could not get location.',m:'metres',km:'km'},
+    de:{radarTitle:'Nächste öffentliche Toilette',radarWait:'Tippen und Standort erlauben',btnLocate:'Nächste WC finden',btnSkip:'Überspringen → nächste',btnMaps:'In Google Maps öffnen',locating:'Standort wird ermittelt…',denied:'Standort verweigert.',error:'Standort nicht verfügbar.',m:'Meter',km:'km'},
+    it:{radarTitle:'Bagno pubblico più vicino',radarWait:'Tocca e consenti la posizione',btnLocate:'Trova bagno più vicino',btnSkip:'Salta → successivo',btnMaps:'Apri in Google Maps',locating:'Posizione…',denied:'Posizione negata.',error:'Posizione non disponibile.',m:'metri',km:'km'},
+    tr:{radarTitle:'En yakın umumi tuvalet',radarWait:'Düğmeye bas ve konuma izin ver',btnLocate:'En yakın tuvaleti bul',btnSkip:'Atla → sonraki',btnMaps:'Google Maps’te aç',locating:'Konum alınıyor…',denied:'Konum reddedildi.',error:'Konum alınamadı.',m:'metre',km:'km'},
+    es:{radarTitle:'Aseo público más cercano',radarWait:'Pulsa y permite la ubicación',btnLocate:'Buscar aseo más cercano',btnSkip:'Saltar → siguiente',btnMaps:'Abrir en Google Maps',locating:'Obteniendo ubicación…',denied:'Ubicación denegada.',error:'No se pudo obtener la ubicación.',m:'metros',km:'km'}
+  };
+  function t(k){return (i18n[lang]||i18n.en)[k]||i18n.en[k]}
+  function applyI18n(){document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(k&&t(k))el.textContent=t(k)})}
+  function haversine(a,b,c,d){var R=6371000,r=Math.PI/180,x=(c-a)*r,y=(d-b)*r,s=Math.sin(x/2)*Math.sin(x/2)+Math.cos(a*r)*Math.cos(c*r)*Math.sin(y/2)*Math.sin(y/2);return R*2*Math.atan2(Math.sqrt(s),Math.sqrt(1-s))}
+  function showCurrent(){if(!sorted.length)return;var item=sorted[idx];document.getElementById('radarName').textContent=item.names[lang]||item.names.en;var d=Math.round(item.dist);if(d<1000){document.getElementById('radarDist').textContent=d;document.getElementById('radarUnit').textContent=t('m')}else{document.getElementById('radarDist').textContent=(d/1000).toFixed(1);document.getElementById('radarUnit').textContent=t('km')}document.getElementById('radarStatus').textContent='';var m=document.getElementById('btnMaps');m.href='https://www.google.com/maps/dir/?api=1&destination='+item.lat+','+item.lng;m.style.display='inline-block';document.getElementById('btnSkip').style.display=sorted.length>1?'inline-block':'none'}
+  function rank(){sorted=toilets.filter(function(x){return skip.indexOf(x.id)<0}).map(function(x){return Object.assign({},x,{dist:haversine(userLat,userLng,x.lat,x.lng)})}).sort(function(a,b){return a.dist-b.dist});idx=0;showCurrent()}
+  function locate(){document.getElementById('radarStatus').textContent=t('locating');if(!navigator.geolocation){document.getElementById('radarStatus').textContent=t('error');return}navigator.geolocation.getCurrentPosition(function(pos){userLat=pos.coords.latitude;userLng=pos.coords.longitude;skip=[];rank()},function(){document.getElementById('radarStatus').textContent=t('denied')},{enableHighAccuracy:true,timeout:15000,maximumAge:30000})}
+  document.getElementById('btnLocate').addEventListener('click',locate);
+  document.getElementById('btnSkip').addEventListener('click',function(){if(!sorted.length)return;skip.push(sorted[idx].id);rank()});
+  document.querySelectorAll('.btn-pyli').forEach(function(btn){btn.addEventListener('click',function(){document.getElementById('radar').scrollIntoView({behavior:'smooth',block:'start'});if(userLat!=null){sorted=toilets.map(function(x){return Object.assign({},x,{dist:haversine(userLat,userLng,x.lat,x.lng)})}).sort(function(a,b){if(a.id==='pyli')return-1;if(b.id==='pyli')return 1;return a.dist-b.dist});idx=0;showCurrent()}else{locate();setTimeout(function(){if(userLat!=null){sorted=toilets.map(function(x){return Object.assign({},x,{dist:haversine(userLat,userLng,x.lat,x.lng)})}).sort(function(a,b){if(a.id==='pyli')return-1;if(b.id==='pyli')return 1;return a.dist-b.dist});idx=0;showCurrent()}},2000)}})});
+  var supported=['nl','de','en','it','tr','es'];
+  function setLang(l){if(supported.indexOf(l)<0)l='en';lang=l;localStorage.setItem('hk-lang',l);document.querySelectorAll('[data-lang-block]').forEach(function(el){el.style.display=el.getAttribute('data-lang-block')===l?'block':'none'});var opt=document.querySelector('.lang-option[data-lang="'+l+'"]');if(opt){document.getElementById('flag').textContent=opt.getAttribute('data-flag');document.getElementById('code').textContent=l.toUpperCase()}document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===l)});document.documentElement.lang=l;applyI18n();if(userLat!=null)showCurrent();closeMenu()}
+  var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu'),overlay=document.getElementById('overlay');
+  function openMenu(){langMenu.classList.add('open');overlay.classList.add('open')}
+  function closeMenu(){langMenu.classList.remove('open');overlay.classList.remove('open')}
+  langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.contains('open')?closeMenu():openMenu()});
+  overlay.addEventListener('click',closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'))})});
+  setLang(lang);
+})();
+</script>
+</body>
+</html>

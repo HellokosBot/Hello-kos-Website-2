@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0a0c0c">
+<title>Drugs – Hello Kos</title>
+<style>
+:root{--bg:#0a0c0c;--bg-elevated:#141818;--bg-card:#1a1f1f;--border:rgba(255,255,255,0.08);--text:#e8e8e8;--text-soft:#a0a8a8;--petrol:#3d9a9a;--gold:#e0b84a;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);line-height:1.5}
+.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:12px 14px;background:rgba(10,12,12,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-btns{display:flex;gap:6px}
+.nav-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);text-decoration:none;font-size:1.15rem}
+.logo{justify-self:center;display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo-icon{font-size:22px}
+.logo-text{font-size:1.1rem;font-weight:700;color:var(--gold);font-family:Georgia,serif}
+.logo-text span{color:#f0c85a;font-style:italic}
+.lang-wrap{justify-self:end;position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-soft)}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:8px;min-width:160px;z-index:50}
+.lang-menu.open{display:block}
+.lang-option{display:block;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;color:var(--text)}
+.lang-option.active{background:rgba(61,154,154,.15);color:var(--petrol)}
+.overlay{display:none;position:fixed;inset:0;z-index:40}.overlay.open{display:block}
+.main{max-width:480px;margin:0 auto;padding:16px 14px 48px}
+.page-head{text-align:center;margin-bottom:16px}
+.page-head h1{font-size:1.35rem;font-weight:800}
+.page-head .intro{color:var(--text-soft);font-size:.92rem;margin-top:6px}
+.tips{display:flex;flex-direction:column;gap:16px}
+.tip-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.tip-photo{height:140px;background:linear-gradient(135deg,#1a2a2a,#0d1515);overflow:hidden}
+.tip-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.tip-photo.no-img{height:0}
+.tip-body{padding:16px 16px 18px;position:relative}
+.tip-icon{position:absolute;top:-22px;right:14px;width:40px;height:40px;border-radius:12px;background:var(--bg-elevated);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.tip-body h2{font-size:1.05rem;font-weight:800;color:var(--gold);margin-bottom:8px;padding-right:36px}
+.tip-body p{font-size:.92rem;color:var(--text-soft);line-height:1.55;margin-bottom:10px}
+.tip-body p:last-child{margin-bottom:0}
+.tip-body strong{color:var(--text)}
+.alert{background:rgba(224,80,60,.14);border:1px solid rgba(224,100,80,.4);border-radius:14px;padding:14px 16px;margin-bottom:16px;font-size:.9rem;color:#f0c0b0;line-height:1.5}
+.alert strong{color:#ffd0c0}
+.note{background:rgba(224,122,74,.12);border:1px solid rgba(224,122,74,.35);border-radius:12px;padding:12px 14px;margin-top:10px;font-size:.9rem;color:#f0c8b0;line-height:1.5}
+.note strong{color:#ffd4b8}
+.footer{text-align:center;padding:20px 16px;background:var(--bg-elevated);border-top:1px solid var(--border)}
+.footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
+.footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+
+<div data-lang-block="nl" style="display:none">
+  <header class="page-head">
+    <h1>Drugs op Kos</h1>
+    <p class="intro">Wat je moet weten over de wet en handhaving.</p>
+  </header>
+  <div class="alert">⚠️ In Griekenland (en dus op Kos) is bezit, gebruik, teelt of handel in verdovende middelen <strong>strikt verboden</strong>. Er is geen officieel onderscheid tussen softdrugs en harddrugs.</div>
+  <div class="tips">
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-intro.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🚫</div>
+        <h2>Drugs op Kos</h2>
+        <p>Kos is een prachtig eiland, maar toeristen moeten goed weten: cannabis, wiet, hasj, cocaïne, MDMA, heroïne en andere psychoactieve stoffen zijn illegaal. Buitenlanders worden precies hetzelfde behandeld als Grieken.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-boetes.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">⚖️</div>
+        <h2>Boetes &amp; straffen (persoonlijk gebruik)</h2>
+        <p>Bij bezit van een kleine hoeveelheid voor eigen gebruik (Law 4139/2013):</p>
+        <div class="note">
+          • Maximaal <strong>5 maanden gevangenisstraf</strong><br>
+          • In de praktijk bij een eerste overtreding vaak omgezet in een voorwaardelijke straf of boete<br>
+          • Mogelijke boetes in de orde van <strong>€200 – €2.000</strong> (afhankelijk van de zaak)
+        </div>
+        <p>Zelfs kleine hoeveelheden kunnen leiden tot arrestatie en een juridische procedure.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-handel.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">⛔</div>
+        <h2>Handel in drugs</h2>
+        <p>Bij handel, verkoop, teelt, import of export gelden veel zwaardere straffen:</p>
+        <div class="note">
+          • Minimaal <strong>8 jaar</strong> gevangenisstraf<br>
+          • Kan oplopen tot 12–20 jaar of in ernstige gevallen <strong>levenslang</strong><br>
+          • Boetes tot <strong>€300.000</strong> (en hoger bij verzwarende omstandigheden)
+        </div>
+        <p>Verkoop of verspreiding in de buurt van scholen of plekken met jongeren maakt de straf zwaarder.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-cbd.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🌿</div>
+        <h2>CBD-producten</h2>
+        <p>Op Kos bestaan winkels die “wiet” of joints verkopen. Dit zijn meestal <strong>CBD-producten met minder dan 0,2% THC</strong> – legaal in Griekenland en zonder psychoactief effect (geen high).</p>
+        <p>Alles boven die limiet blijft verboden. Recreatieve cannabis of THC-producten zijn niet legaal verkrijgbaar.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-medicinal.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">💊</div>
+        <h2>Medicinale wiet</h2>
+        <p>Medische cannabis is legaal, maar strikt gereguleerd. Alleen met een <strong>Grieks recept van een erkende arts</strong>. Buitenlandse recepten worden meestal niet erkend. Zonder geldig Grieks recept is gebruik illegaal.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-handhaving.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">👮</div>
+        <h2>Strikte handhaving</h2>
+        <p>De autoriteiten handhaven strikt, vooral in toeristische gebieden, op stranden, in bars/clubs en bij grens- en douanecontroles. Drugs meenemen naar Kos – ook kleine hoeveelheden – is altijd illegaal en kan direct tot arrestatie leiden.</p>
+        <div class="note"><strong>Advies:</strong> houd je aan de wet. Geniet van zon, zee, cultuur en eten – en laat drugs links liggen.</div>
+      </div>
+    </article>
+  </div>
+</div>
+
+<div data-lang-block="en" style="display:none">
+  <header class="page-head">
+    <h1>Drugs on Kos</h1>
+    <p class="intro">What you need to know about the law and enforcement.</p>
+  </header>
+  <div class="alert">⚠️ In Greece (and on Kos) possession, use, cultivation or trafficking of narcotics is <strong>strictly forbidden</strong>. There is no official distinction between soft and hard drugs.</div>
+  <div class="tips">
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-intro.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🚫</div>
+        <h2>Drugs on Kos</h2>
+        <p>Kos is a beautiful island, but tourists should know: cannabis, weed, hash, cocaine, MDMA, heroin and other psychoactive substances are illegal. Foreigners are treated exactly the same as Greeks.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-boetes.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">⚖️</div>
+        <h2>Fines &amp; penalties (personal use)</h2>
+        <p>For possession of a small amount for personal use (Law 4139/2013):</p>
+        <div class="note">
+          • Maximum <strong>5 months imprisonment</strong><br>
+          • In practice, a first offence is often converted to a suspended sentence or fine<br>
+          • Possible fines in the range of <strong>€200 – €2,000</strong> (depending on the case)
+        </div>
+        <p>Even small amounts can lead to arrest and legal proceedings.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-handel.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">⛔</div>
+        <h2>Drug trafficking</h2>
+        <p>For trafficking, sale, cultivation, import or export, much heavier penalties apply:</p>
+        <div class="note">
+          • Minimum <strong>8 years</strong> imprisonment<br>
+          • Can rise to 12–20 years or, in serious cases, <strong>life</strong><br>
+          • Fines up to <strong>€300,000</strong> (and higher in aggravating circumstances)
+        </div>
+        <p>Sale or distribution near schools or places with young people makes the penalty heavier.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-cbd.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🌿</div>
+        <h2>CBD products</h2>
+        <p>On Kos there are shops that sell “weed” or joints. These are usually <strong>CBD products with less than 0.2% THC</strong> – legal in Greece and without psychoactive effect (no high).</p>
+        <p>Anything above that limit remains forbidden. Recreational cannabis or THC products are not legally available.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-medicinal.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">💊</div>
+        <h2>Medicinal cannabis</h2>
+        <p>Medical cannabis is legal but strictly regulated. Only with a <strong>Greek prescription from a recognised doctor</strong>. Foreign prescriptions are usually not recognised. Without a valid Greek prescription, use is illegal.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-handhaving.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">👮</div>
+        <h2>Strict enforcement</h2>
+        <p>Authorities enforce strictly, especially in tourist areas, on beaches, in bars/clubs and at border and customs controls. Bringing drugs to Kos – even small amounts – is always illegal and can lead to immediate arrest.</p>
+        <div class="note"><strong>Advice:</strong> stick to the law. Enjoy sun, sea, culture and food – and leave drugs alone.</div>
+      </div>
+    </article>
+  </div>
+</div>
+
+<div data-lang-block="de" style="display:none">
+  <header class="page-head">
+    <h1>Drogen auf Kos</h1>
+    <p class="intro">Was du über Gesetz und Kontrolle wissen solltest.</p>
+  </header>
+  <div class="alert">⚠️ In Griechenland (und auf Kos) sind Besitz, Konsum, Anbau oder Handel mit Betäubungsmitteln <strong>streng verboten</strong>. Es gibt keinen offiziellen Unterschied zwischen Soft- und Harddrugs.</div>
+  <div class="tips">
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-intro.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🚫</div>
+        <h2>Drogen auf Kos</h2>
+        <p>Cannabis, Haschisch, Kokain, MDMA, Heroin und andere psychoaktive Stoffe sind illegal. Ausländer werden genauso behandelt wie Griechen.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-boetes.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">⚖️</div>
+        <h2>Bußgelder &amp; Strafen (Eigengebrauch)</h2>
+        <p>Bei Besitz einer kleinen Menge zum Eigengebrauch (Gesetz 4139/2013):</p>
+        <div class="note">
+          • Maximal <strong>5 Monate Gefängnis</strong><br>
+          • In der Praxis oft Bewährung oder Buße beim ersten Verstoß<br>
+          • Bußgelder etwa <strong>€200 – €2.000</strong>
+        </div>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-handel.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">⛔</div>
+        <h2>Drogenhandel</h2>
+        <div class="note">
+          • Mindestens <strong>8 Jahre</strong> Gefängnis<br>
+          • Bis 12–20 Jahre oder in schweren Fällen <strong>lebenslang</strong><br>
+          • Bußen bis <strong>€300.000</strong>
+        </div>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-cbd.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🌿</div>
+        <h2>CBD-Produkte</h2>
+        <p>Läden mit „Weed“ verkaufen meist <strong>CBD mit unter 0,2 % THC</strong> – legal und ohne Rausch. Alles darüber bleibt verboten.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-medicinal.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">💊</div>
+        <h2>Medizinisches Cannabis</h2>
+        <p>Nur mit <strong>griechischem Rezept</strong> eines anerkannten Arztes. Ausländische Rezepte werden meist nicht anerkannt.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-handhaving.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">👮</div>
+        <h2>Strenge Kontrolle</h2>
+        <p>Besonders in Touristengebieten, an Stränden, in Bars und bei Zollkontrollen. Auch kleine Mengen können zur Festnahme führen.</p>
+        <div class="note"><strong>Tipp:</strong> An das Gesetz halten – Sonne, Meer und Essen genießen.</div>
+      </div>
+    </article>
+  </div>
+</div>
+
+<div data-lang-block="it" style="display:none">
+  <header class="page-head">
+    <h1>Droghe a Kos</h1>
+    <p class="intro">Cosa sapere su legge e controlli.</p>
+  </header>
+  <div class="alert">⚠️ In Grecia (e a Kos) possesso, uso, coltivazione o traffico di stupefacenti sono <strong>severamente vietati</strong>. Non c’è distinzione ufficiale tra soft e hard drugs.</div>
+  <div class="tips">
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-intro.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🚫</div>
+        <h2>Droghe a Kos</h2>
+        <p>Cannabis, hashish, cocaina, MDMA, eroina e altre sostanze psicoattive sono illegali. Gli stranieri sono trattati come i greci.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-boetes.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">⚖️</div>
+        <h2>Multe e pene (uso personale)</h2>
+        <div class="note">
+          • Massimo <strong>5 mesi di carcere</strong><br>
+          • Spesso sospensione o multa al primo reato<br>
+          • Multe circa <strong>€200 – €2.000</strong>
+        </div>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-handel.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">⛔</div>
+        <h2>Traffico</h2>
+        <div class="note">
+          • Minimo <strong>8 anni</strong> di carcere<br>
+          • Fino a 12–20 anni o, nei casi gravi, <strong>ergastolo</strong><br>
+          • Multe fino a <strong>€300.000</strong>
+        </div>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-cbd.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🌿</div>
+        <h2>Prodotti CBD</h2>
+        <p>Di solito <strong>CBD con meno dello 0,2% di THC</strong> – legali e senza effetto psicoattivo. Oltre quel limite resta vietato.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-medicinal.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">💊</div>
+        <h2>Cannabis medica</h2>
+        <p>Solo con <strong>ricetta greca</strong> di un medico riconosciuto. Le ricette estere di solito non sono riconosciute.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-handhaving.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">👮</div>
+        <h2>Controlli rigorosi</h2>
+        <p>Soprattutto in zone turistiche, spiagge, bar e ai controlli doganali. Anche piccole quantità possono portare all’arresto.</p>
+        <div class="note"><strong>Consiglio:</strong> rispettare la legge. Goditi sole, mare e cibo.</div>
+      </div>
+    </article>
+  </div>
+</div>
+
+<div data-lang-block="tr" style="display:none">
+  <header class="page-head">
+    <h1>Kos’ta uyuşturucu</h1>
+    <p class="intro">Yasa ve uygulama hakkında bilmeniz gerekenler.</p>
+  </header>
+  <div class="alert">⚠️ Yunanistan’da (ve Kos’ta) uyuşturucu bulundurma, kullanma, yetiştirme veya ticaret <strong>kesinlikle yasaktır</strong>. Soft ve hard drug ayrımı yoktur.</div>
+  <div class="tips">
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-intro.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🚫</div>
+        <h2>Kos’ta uyuşturucu</h2>
+        <p>Kannabis, esrar, kokain, MDMA, eroin ve diğer psikotrop maddeler yasaktır. Yabancılar Yunanlılarla aynı muameleyi görür.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-boetes.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">⚖️</div>
+        <h2>Cezalar (kişisel kullanım)</h2>
+        <div class="note">
+          • En fazla <strong>5 ay hapis</strong><br>
+          • İlk ihlalde genelde ertelenmiş ceza veya para cezası<br>
+          • Para cezaları yaklaşık <strong>€200 – €2.000</strong>
+        </div>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-handel.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">⛔</div>
+        <h2>Ticaret</h2>
+        <div class="note">
+          • En az <strong>8 yıl</strong> hapis<br>
+          • 12–20 yıla veya ağır durumlarda <strong>müebbet</strong><br>
+          • Para cezası <strong>€300.000</strong>’a kadar
+        </div>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-cbd.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🌿</div>
+        <h2>CBD ürünleri</h2>
+        <p>Genelde <strong>%0,2’den az THC’li CBD</strong> – yasal ve keyif vermez. Üzeri yasaktır.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-medicinal.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">💊</div>
+        <h2>Tıbbi kannabis</h2>
+        <p>Yalnızca <strong>Yunan reçetesi</strong> ile. Yabancı reçeteler genelde kabul edilmez.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-handhaving.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">👮</div>
+        <h2>Sıkı denetim</h2>
+        <p>Turistik bölgelerde, plajlarda, barlarda ve gümrükte. Küçük miktarlar bile tutuklamaya yol açabilir.</p>
+        <div class="note"><strong>Tavsiye:</strong> Yasaya uyun. Güneş, deniz ve yemekten keyif alın.</div>
+      </div>
+    </article>
+  </div>
+</div>
+
+<div data-lang-block="es" style="display:none">
+  <header class="page-head">
+    <h1>Drogas en Kos</h1>
+    <p class="intro">Lo que debes saber sobre la ley y el control.</p>
+  </header>
+  <div class="alert">⚠️ En Grecia (y en Kos) la posesión, el uso, el cultivo o el tráfico de estupefacientes está <strong>estrictamente prohibido</strong>. No hay distinción oficial entre drogas blandas y duras.</div>
+  <div class="tips">
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-intro.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🚫</div>
+        <h2>Drogas en Kos</h2>
+        <p>Cannabis, hachís, cocaína, MDMA, heroína y otras sustancias psicoactivas son ilegales. Los extranjeros reciben el mismo trato que los griegos.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-boetes.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">⚖️</div>
+        <h2>Multas y penas (uso personal)</h2>
+        <div class="note">
+          • Máximo <strong>5 meses de prisión</strong><br>
+          • En la práctica, a menudo suspensión o multa en la primera infracción<br>
+          • Multas del orden de <strong>€200 – €2.000</strong>
+        </div>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-handel.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">⛔</div>
+        <h2>Tráfico</h2>
+        <div class="note">
+          • Mínimo <strong>8 años</strong> de prisión<br>
+          • Hasta 12–20 años o, en casos graves, <strong>cadena perpetua</strong><br>
+          • Multas hasta <strong>€300.000</strong>
+        </div>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-cbd.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">🌿</div>
+        <h2>Productos CBD</h2>
+        <p>Suelen ser <strong>CBD con menos del 0,2% de THC</strong> – legales y sin efecto psicoactivo. Por encima de ese límite sigue prohibido.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-medicinal.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">💊</div>
+        <h2>Cannabis medicinal</h2>
+        <p>Solo con <strong>receta griega</strong> de un médico reconocido. Las recetas extranjeras suelen no reconocerse.</p>
+      </div>
+    </article>
+    <article class="tip-card">
+      <div class="tip-photo"><img src="wjd-drugs-handhaving.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+      <div class="tip-body">
+        <div class="tip-icon">👮</div>
+        <h2>Control estricto</h2>
+        <p>Sobre todo en zonas turísticas, playas, bares y en aduanas. Incluso pequeñas cantidades pueden llevar a la detención.</p>
+        <div class="note"><strong>Consejo:</strong> respeta la ley. Disfruta del sol, el mar y la comida.</div>
+      </div>
+    </article>
+  </div>
+</div>
+
+</main>
+<footer class="footer">
+  <div class="footer-logo">🔅 Hello Kos</div>
+  <p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a></p>
+</footer>
+<script>
+(function(){
+  var lang=localStorage.getItem('hk-lang')||'en';
+  var supported=['nl','de','en','it','tr','es'];
+  function setLang(l){
+    if(supported.indexOf(l)<0)l='en';
+    lang=l;localStorage.setItem('hk-lang',l);
+    document.querySelectorAll('[data-lang-block]').forEach(function(el){
+      el.style.display = (el.getAttribute('data-lang-block')===l) ? 'block' : 'none';
+    });
+    var opt=document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if(opt){document.getElementById('flag').textContent=opt.getAttribute('data-flag');document.getElementById('code').textContent=l.toUpperCase()}
+    document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===l)});
+    document.documentElement.lang=l;closeMenu();
+  }
+  var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu'),overlay=document.getElementById('overlay');
+  function openMenu(){langMenu.classList.add('open');overlay.classList.add('open')}
+  function closeMenu(){langMenu.classList.remove('open');overlay.classList.remove('open')}
+  langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.contains('open')?closeMenu():openMenu()});
+  overlay.addEventListener('click',closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'))})});
+  setLang(lang);
+})();
+</script>
+</body>
+</html>
