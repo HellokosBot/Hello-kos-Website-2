@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Molen van Antimachia – Hello Kos</title>
+  <style>
+    :root {
+      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
+      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
+      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
+      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text); -webkit-font-smoothing: antialiased;
+      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
+      background: var(--bg); min-height: 100vh; line-height: 1.55;
+    }
+    .app-header {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px 16px; background: var(--bg-header);
+      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+    }
+    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
+    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
+    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
+    .logo-text span { color: var(--gold-dark); font-style: italic; }
+    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
+    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
+    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
+    .lang-menu.open { display: block; }
+    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
+    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
+    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
+    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+    .content { padding: 18px 16px 0; }
+    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
+    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
+    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
+    .btn-audio { background: var(--petrol); color: #fff; }
+    .btn-audio.playing { background: var(--petrol-dark); }
+    .btn-stop { background: #3A4545; color: #fff; display: none; }
+    .btn-stop.show { display: flex; }
+    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
+    .btn-apple { background: #111; color: #fff; }
+    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
+    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
+    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
+    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
+    .card p:last-child { margin-bottom: 0; }
+    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
+    .tip strong { color: var(--gold); }
+    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+    .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
+    .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
+    .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
+    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
+    .footer a { color: var(--petrol); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="bezienswaardigheden.html" class="back-btn">← Terug</a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🔅</div>
+      <div class="logo-text">Hello <span>Kos</span></div>
+    </a>
+    <div class="lang-wrap">
+      <button type="button" class="lang-btn" id="langBtn">
+        <span id="flag">🇳🇱</span> <span id="code">NL</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="hero-wrap">
+      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/traditional-mill-antimachia-2-standard.jpg" alt="Molen van Antimachia" loading="eager">
+      <div class="hero-caption" data-i18n="heroCap">Molen van Antimachia</div>
+    </div>
+
+    <div class="content">
+      <h1 data-i18n="title">Molen van Antimachia</h1>
+      <p class="lead" data-i18n="lead">Laatste traditionele windmolen van Kos – gerestaureerd museum in het dorp, waar nog meel wordt gemalen.</p>
+
+      <div class="badges">
+        <span class="badge">Antimachia</span>
+        <span class="badge" data-i18n="badgeMuseum">Museum</span>
+        <span class="badge">± €2,50</span>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
+        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
+        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Windmill%20Antimachia%20Kos" target="_blank" rel="noopener">📍 Google Maps</a>
+        <a class="btn btn-apple" href="https://maps.apple.com/?q=Windmill%20Antimachia%20Kos" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      <p class="status" id="ttsStatus"></p>
+
+      <div id="readText">
+        <div class="card">
+          <h2 data-i18n="h2last">Laatste molen van Kos</h2>
+          <p data-i18n="p1">De Molen van Antimachia staat midden in het dorp. Deze traditionele windmolen is ongeveer 130–150 jaar oud en volledig gerestaureerd. Vroeger stonden er op Kos acht windmolens om graan te malen; dit is de laatste die over is.</p>
+        </div>
+
+        <div class="facts">
+          <div class="fact">
+            <span class="n">± €2,50</span>
+            <span class="l" data-i18n="factEntry">entree</span>
+          </div>
+          <div class="fact">
+            <span class="n" data-i18n="factMuseum">Museum</span>
+            <span class="l" data-i18n="factWorking">nog in werking</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2flour">Museum met meel</h2>
+          <p data-i18n="p2">Het is nu een museum waar je ziet hoe het maalproces werkt. Er wordt nog meel gemaakt – een levend stukje eilandgeschiedenis.</p>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2visit">Bezoeken</h2>
+          <p data-i18n="p3">In Antimachia, midden op het eiland. Entree rond € 2,50.</p>
+          <div class="tip" data-i18n="tip">Tip: vraag of ze het mechaniek even laten draaien – dat maakt het bezoek concreter.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div>Hello Kos</div>
+    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
+  </footer>
+
+<script>
+(function(){
+  var I18N = {
+    nl: {
+      title: "Molen van Antimachia",
+      lead: "Laatste traditionele windmolen van Kos – gerestaureerd museum in het dorp, waar nog meel wordt gemalen.",
+      heroCap: "Molen van Antimachia",
+      badgeMuseum: "Museum",
+      btnPlay: "🔊 Voorlezen",
+      h2last: "Laatste molen van Kos",
+      p1: "De Molen van Antimachia staat midden in het dorp. Deze traditionele windmolen is ongeveer 130–150 jaar oud en volledig gerestaureerd. Vroeger stonden er op Kos acht windmolens om graan te malen; dit is de laatste die over is.",
+      factEntry: "entree", factMuseum: "Museum", factWorking: "nog in werking",
+      h2flour: "Museum met meel",
+      p2: "Het is nu een museum waar je ziet hoe het maalproces werkt. Er wordt nog meel gemaakt – een levend stukje eilandgeschiedenis.",
+      h2visit: "Bezoeken",
+      p3: "In Antimachia, midden op het eiland. Entree rond € 2,50.",
+      tip: "Tip: vraag of ze het mechaniek even laten draaien – dat maakt het bezoek concreter."
+    },
+    en: {
+      title: "Windmill of Antimachia",
+      lead: "Last traditional windmill of Kos – restored museum in the village, where flour is still ground.",
+      heroCap: "Windmill of Antimachia",
+      badgeMuseum: "Museum",
+      btnPlay: "🔊 Read aloud",
+      h2last: "Last windmill of Kos",
+      p1: "The Windmill of Antimachia stands in the middle of the village. This traditional windmill is about 130–150 years old and fully restored. In the past there were eight windmills on Kos for grinding grain; this is the last one remaining.",
+      factEntry: "entry", factMuseum: "Museum", factWorking: "still working",
+      h2flour: "Museum with flour",
+      p2: "It is now a museum where you can see how the milling process works. Flour is still being made – a living piece of island history.",
+      h2visit: "Visiting",
+      p3: "In Antimachia, in the middle of the island. Entry around €2.50.",
+      tip: "Tip: ask if they can briefly turn the mechanism – it makes the visit more concrete."
+    },
+    de: {
+      title: "Windmühle von Antimachia",
+      lead: "Letzte traditionelle Windmühle von Kos – restauriertes Museum im Dorf, wo noch Mehl gemahlen wird.",
+      heroCap: "Windmühle von Antimachia",
+      badgeMuseum: "Museum",
+      btnPlay: "🔊 Vorlesen",
+      h2last: "Letzte Mühle von Kos",
+      p1: "Die Windmühle von Antimachia steht mitten im Dorf. Diese traditionelle Windmühle ist etwa 130–150 Jahre alt und vollständig restauriert. Früher standen auf Kos acht Windmühlen zum Mahlen von Getreide; dies ist die letzte, die übrig ist.",
+      factEntry: "Eintritt", factMuseum: "Museum", factWorking: "noch in Betrieb",
+      h2flour: "Museum mit Mehl",
+      p2: "Es ist jetzt ein Museum, in dem man sieht, wie der Mahlprozess funktioniert. Es wird noch Mehl hergestellt – ein lebendiges Stück Inselgeschichte.",
+      h2visit: "Besuchen",
+      p3: "In Antimachia, in der Mitte der Insel. Eintritt rund € 2,50.",
+      tip: "Tipp: frag, ob sie das Mechanik kurz drehen lassen – das macht den Besuch konkreter."
+    },
+    it: {
+      title: "Mulino di Antimachia",
+      lead: "Ultimo mulino a vento tradizionale di Kos – museo restaurato nel villaggio, dove si macina ancora farina.",
+      heroCap: "Mulino di Antimachia",
+      badgeMuseum: "Museo",
+      btnPlay: "🔊 Leggi ad alta voce",
+      h2last: "Ultimo mulino di Kos",
+      p1: "Il Mulino di Antimachia si trova nel centro del villaggio. Questo mulino a vento tradizionale ha circa 130–150 anni ed è completamente restaurato. In passato su Kos c’erano otto mulini a vento per macinare il grano; questo è l’ultimo rimasto.",
+      factEntry: "ingresso", factMuseum: "Museo", factWorking: "ancora in funzione",
+      h2flour: "Museo con farina",
+      p2: "Ora è un museo dove si vede come funziona il processo di macinazione. Si produce ancora farina – un pezzo vivente di storia dell’isola.",
+      h2visit: "Visitare",
+      p3: "Ad Antimachia, nel centro dell’isola. Ingresso circa € 2,50.",
+      tip: "Consiglio: chiedi se possono far girare brevemente il meccanismo – rende la visita più concreta."
+    },
+    tr: {
+      title: "Antimachia Değirmeni",
+      lead: "Kos’un son geleneksel yel değirmeni – köydeki restore edilmiş müze, hâlâ un öğütülüyor.",
+      heroCap: "Antimachia Değirmeni",
+      badgeMuseum: "Müze",
+      btnPlay: "🔊 Sesli oku",
+      h2last: "Kos’un son değirmeni",
+      p1: "Antimachia Değirmeni köyün ortasında duruyor. Bu geleneksel yel değirmeni yaklaşık 130–150 yaşında ve tamamen restore edilmiş. Eskiden Kos’ta tahıl öğütmek için sekiz yel değirmeni vardı; bu kalan sonuncusu.",
+      factEntry: "giriş", factMuseum: "Müze", factWorking: "hâlâ çalışıyor",
+      h2flour: "Unlu müze",
+      p2: "Şimdi öğütme sürecinin nasıl çalıştığını görebileceğiniz bir müze. Hâlâ un üretiliyor – adanın canlı bir tarih parçası.",
+      h2visit: "Ziyaret",
+      p3: "Antimachia’da, adanın ortasında. Giriş yaklaşık €2,50.",
+      tip: "İpucu: mekanizmayı kısa süre çalıştırıp çalıştıramayacaklarını sor – ziyareti daha somut hale getirir."
+    },
+    es: {
+      title: "Molino de Antimachia",
+      lead: "Último molino de viento tradicional de Kos – museo restaurado en el pueblo, donde aún se muele harina.",
+      heroCap: "Molino de Antimachia",
+      badgeMuseum: "Museo",
+      btnPlay: "🔊 Leer en voz alta",
+      h2last: "Último molino de Kos",
+      p1: "El Molino de Antimachia se encuentra en el centro del pueblo. Este molino de viento tradicional tiene unos 130–150 años y está completamente restaurado. En el pasado había ocho molinos de viento en Kos para moler grano; este es el último que queda.",
+      factEntry: "entrada", factMuseum: "Museo", factWorking: "aún en funcionamiento",
+      h2flour: "Museo con harina",
+      p2: "Ahora es un museo donde se ve cómo funciona el proceso de molienda. Aún se produce harina – un pedazo vivo de la historia de la isla.",
+      h2visit: "Visitar",
+      p3: "En Antimachia, en el centro de la isla. Entrada alrededor de €2,50.",
+      tip: "Consejo: pregunta si pueden hacer girar un momento el mecanismo – hace la visita más concreta."
+    }
+  };
+
+  function setLang(l) {
+    if (!I18N[l]) l = 'nl';
+    localStorage.setItem('hk-lang', l);
+    document.documentElement.lang = l;
+    var d = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (d[k]) el.textContent = d[k];
+    });
+    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if (opt) {
+      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
+      document.getElementById('code').textContent = l.toUpperCase();
+    }
+    document.querySelectorAll('.lang-option').forEach(function(o){
+      o.classList.toggle('active', o.getAttribute('data-lang') === l);
+    });
+    closeMenu();
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  function openMenu(){ langMenu.classList.add('open'); }
+  function closeMenu(){ langMenu.classList.remove('open'); }
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    langMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.addEventListener('click', function(){ closeMenu(); });
+  document.querySelectorAll('.lang-option').forEach(function(btn){
+    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
+  });
+
+  var saved = localStorage.getItem('hk-lang') || 'nl';
+  setLang(saved);
+
+  /* TTS */
+  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
+  function getLang(){
+    var l = localStorage.getItem('hk-lang') || 'nl';
+    return LANG_VOICE[l] ? l : 'nl';
+  }
+  function pickVoice(code){
+    var voices = speechSynthesis.getVoices() || [];
+    var prefix = code.slice(0,2).toLowerCase();
+    return voices.find(function(v){ return v.lang === code; })
+      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
+      || null;
+  }
+  var btnPlay = document.getElementById('btnPlay');
+  var btnStop = document.getElementById('btnStop');
+  var status = document.getElementById('ttsStatus');
+  function setStatus(t){ if(status) status.textContent = t; }
+  function play(){
+    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
+    speechSynthesis.cancel();
+    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
+    var l = getLang();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = LANG_VOICE[l];
+    u.rate = 0.92;
+    var v = pickVoice(LANG_VOICE[l]);
+    if(v) u.voice = v;
+    u.onstart = function(){
+      btnPlay.classList.add('playing');
+      btnStop.classList.add('show');
+      setStatus('Voorlezen… ('+l.toUpperCase()+')');
+    };
+    u.onend = u.onerror = function(){
+      btnPlay.classList.remove('playing');
+      btnStop.classList.remove('show');
+      setStatus('');
+    };
+    if(!speechSynthesis.getVoices().length){
+      speechSynthesis.onvoiceschanged = function(){
+        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
+        speechSynthesis.speak(u);
+      };
+      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
+    } else {
+      speechSynthesis.speak(u);
+    }
+  }
+  function stop(){
+    if(window.speechSynthesis) speechSynthesis.cancel();
+    btnPlay.classList.remove('playing');
+    btnStop.classList.remove('show');
+    setStatus('Gestopt.');
+  }
+  btnPlay.addEventListener('click', play);
+  btnStop.addEventListener('click', stop);
+  if(window.speechSynthesis){
+    speechSynthesis.getVoices();
+    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  }
+})();
+</script>
+</body>
+</html>
