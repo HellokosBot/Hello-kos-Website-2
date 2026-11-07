@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#2A6F6F">
+  <title>Agora – oude markt – Hello Kos</title>
+  <style>
+    :root {
+      --petrol: #2A6F6F;
+      --petrol-dark: #1A4A4A;
+      --cream: #f5f2ec;
+      --text: #1A1A1A;
+      --soft: #4A4A4A;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.55;
+      padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+    .app-header {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 12px 14px;
+      background: rgba(245, 242, 236, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(42, 111, 111, 0.12);
+    }
+    .back-btn { color: var(--petrol-dark); font-weight: 600; text-decoration: none; font-size: 0.9rem; }
+    .logo { justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-icon {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: linear-gradient(145deg, #F0C040, #D4A017);
+      display: flex; align-items: center; justify-content: center;
+      color: #FFFDF5; font-size: 20px;
+    }
+    .logo-text { font-size: 1.2rem; font-weight: 700; color: #D4A017; font-family: Georgia, serif; }
+    .logo-text span { color: #C4920F; font-style: italic; }
+    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
+    .hero-wrap {
+      position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #d4cfc6;
+    }
+    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-caption {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 28px 16px 14px;
+      background: linear-gradient(to top, rgba(0,0,0,0.65), transparent);
+      color: #fff; font-size: 0.78rem; font-weight: 500;
+    }
+    .content { padding: 18px 16px 0; }
+    h1 {
+      font-size: 1.45rem; font-weight: 800; color: var(--petrol-dark);
+      letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2;
+    }
+    .lead { font-size: 0.95rem; color: var(--soft); margin-bottom: 14px; }
+    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .badge {
+      background: #e8f5f3; color: var(--petrol-dark);
+      font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px;
+    }
+    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+    .btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer;
+      font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none;
+    }
+    .btn-audio { background: var(--petrol); color: #fff; }
+    .btn-audio.playing { background: var(--petrol-dark); }
+    .btn-stop { background: #6b7280; color: #fff; display: none; }
+    .btn-stop.show { display: flex; }
+    .btn-map { background: #fff; color: var(--petrol-dark); border: 2px solid var(--petrol); }
+    .btn-apple { background: #111; color: #fff; }
+    .status { text-align: center; font-size: 0.78rem; color: var(--soft); min-height: 1.1em; margin-bottom: 8px; }
+    .card {
+      background: #fff; border-radius: 16px; padding: 16px 16px 14px;
+      margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+    .card h2 {
+      font-size: 1.02rem; color: var(--petrol-dark); margin-bottom: 8px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
+    .card p:last-child { margin-bottom: 0; }
+    .tip {
+      background: #fff8e6; border-left: 4px solid #e6b422;
+      border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0;
+      font-size: 0.88rem; color: #3d3420;
+    }
+    .tip strong { color: #5c4a12; }
+    .photo-block {
+      margin: 8px 0 14px; border-radius: 14px; overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
+    .photo-block .cap {
+      background: #fff; padding: 8px 12px; font-size: 0.75rem; color: var(--soft); text-align: center;
+    }
+    .facts {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;
+    }
+    .fact {
+      background: #fff; border-radius: 12px; padding: 12px; text-align: center;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+    }
+    .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
+    .fact .l { font-size: 0.72rem; color: var(--soft); font-weight: 600; }
+    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--soft); }
+    
+    .hours { margin-top: 8px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(42,111,111,0.12); }
+    .h-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 9px 12px; font-size: 0.88rem;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      background: #fafafa;
+    }
+    .h-row:nth-child(odd) { background: #fff; }
+    .h-row:last-child { border-bottom: none; }
+    .h-row span:last-child { font-weight: 700; color: var(--petrol-dark); }
+    .h-row.closed span:last-child { color: #b45309; }
+
+    .footer a { color: var(--petrol); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="bezienswaardigheden.html" class="back-btn">← Terug</a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">☀</div>
+      <div class="logo-text">Hello <span>Kos</span></div>
+    </a>
+    <div></div>
+  </header>
+
+  <main class="main">
+    <div class="hero-wrap">
+      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/untitled_snapshot_02-22-2026_17_33_32-high.jpg" alt="Agora oude markt Kos" loading="eager">
+      <div class="hero-caption">Agora · oude markt · Kos-stad</div>
+    </div>
+
+    <div class="content">
+      <h1>Agora – oude markt</h1>
+      <p class="lead">Het oude hart van Kos-stad: restanten van de grootste marktplaats van de regio.</p>
+
+      <div class="badges">
+        <span class="badge">Gratis</span>
+        <span class="badge">Kos-stad</span>
+        <span class="badge">Openlucht</span>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn btn-audio" id="btnPlay">🔊 Voorlezen</button>
+        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
+        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Ancient%20Agora%20Kos%20Town%20Greece" target="_blank" rel="noopener">📍 Google Maps</a>
+        <a class="btn btn-apple" href="https://maps.apple.com/?q=Ancient%20Agora%20Kos%20Town%20Greece" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      <p class="status" id="ttsStatus"></p>
+
+      <div id="readText">
+        <div class="card">
+          <h2>Wat was de Agora?</h2>
+          <p>Midden in Kos-stad liggen de restanten van de oude Agora – de marktplaats die ooit de grootste van de omgeving was. <em>Agora</em> betekent letterlijk <strong>verzamelplaats</strong>.</p>
+          <p>Hier speelde het sociale leven zich af: handel, gesprekken en vergaderingen van vrije burgers.</p>
+        </div>
+
+        <div class="facts">
+          <div class="fact">
+            <span class="n">Grootste</span>
+            <span class="l">markt van de regio</span>
+          </div>
+          <div class="fact">
+            <span class="n">Gratis</span>
+            <span class="l">openlucht-terrein</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Van ontmoetingsplaats tot markt</h2>
+          <p>In eerste instantie was de Agora een ontmoetings- en vergaderplaats. Hier kwam ook de <strong>Ekklèsia</strong> (volksvergadering) bijeen. Later werd het steeds meer de plek voor handel en dagelijks leven.</p>
+          <p>Rondom stonden vaak tempels. Mannen ontmoetten elkaar op het plein of in de schaduw van de <strong>stoai</strong> (zuilenhallen) – vooral om te praten.</p>
+        </div>
+
+        <div class="photo-block">
+          <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/dsc_6818-high.jpg" alt="Restanten van de Agora in Kos" loading="lazy">
+          <div class="cap">Restanten van zuilen en straten in de Agora</div>
+        </div>
+
+        <div class="card">
+          <h2>Aardbevingen en herontdekking</h2>
+          <p>Grote delen van de Agora gingen verloren bij aardbevingen in de 5e en 6e eeuw na Christus. Na de zware aardbeving van <strong>1933</strong> kwamen veel resten weer bloot te liggen.</p>
+          <p>Italiaanse archeologen (Kos stond toen onder Italiaans bestuur) groeven verder. Zo zie je vandaag nog winkels, zuilen en straten uit de oudheid – midden in de moderne stad.</p>
+        </div>
+
+        <div class="photo-block">
+          <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/dsc0088-1200x731-high.jpg" alt="Agora Kos archeologische resten" loading="lazy">
+          <div class="cap">Archeologische resten midden in Kos-stad</div>
+        </div>
+
+
+        <div class="card">
+          <h2>Openingstijden</h2>
+          <p>Toegang is <strong>gratis</strong>. Meestal gelden deze tijden (controleer lokaal bij de ingang):</p>
+          <div class="hours">
+            <div class="h-row"><span>Maandag</span><span>08:30 – 15:30</span></div>
+            <div class="h-row closed"><span>Dinsdag</span><span>Gesloten</span></div>
+            <div class="h-row"><span>Woensdag</span><span>08:30 – 15:30</span></div>
+            <div class="h-row"><span>Donderdag</span><span>08:30 – 15:30</span></div>
+            <div class="h-row"><span>Vrijdag</span><span>08:30 – 15:30</span></div>
+            <div class="h-row"><span>Zaterdag</span><span>08:30 – 15:30</span></div>
+            <div class="h-row"><span>Zondag</span><span>08:30 – 15:30</span></div>
+          </div>
+          <p style="margin-top:10px;font-size:0.82rem;color:#4A4A4A">Tijden kunnen wisselen per seizoen. Dinsdag is de vaste sluitingsdag van veel archeologische sites op Kos.</p>
+        </div>
+
+        <div class="card">
+          <h2>Bezoeken</h2>
+          <p>Je loopt er zo naartoe: centraal in Kos-stad, dicht bij de haven en de winkelstraten. Geen ticket nodig – het is een openluchtterrein.</p>
+          <div class="tip">
+            <strong>Tip:</strong> combineer met de Witte trappen, Palm tree lane of het Archeologisch museum – allemaal op loopafstand.
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div>Hello Kos</div>
+    <p><a href="mailto:info@hellokos.nl">info@hellokos.nl</a></p>
+  </footer>
+
+  <script>
+  (function(){
+    var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR' };
+    function getLang(){
+      var l = localStorage.getItem('hk-lang') || 'nl';
+      return LANG_VOICE[l] ? l : 'nl';
+    }
+    function pickVoice(code){
+      var voices = speechSynthesis.getVoices() || [];
+      var prefix = code.slice(0,2).toLowerCase();
+      return voices.find(function(v){ return v.lang === code; })
+        || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
+        || null;
+    }
+    var btnPlay = document.getElementById('btnPlay');
+    var btnStop = document.getElementById('btnStop');
+    var status = document.getElementById('ttsStatus');
+    function setStatus(t){ if(status) status.textContent = t; }
+    function play(){
+      if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
+      speechSynthesis.cancel();
+      var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
+      var l = getLang();
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = LANG_VOICE[l];
+      u.rate = 0.92;
+      var v = pickVoice(LANG_VOICE[l]);
+      if(v) u.voice = v;
+      u.onstart = function(){
+        btnPlay.classList.add('playing');
+        btnStop.classList.add('show');
+        setStatus('Voorlezen… ('+l.toUpperCase()+')');
+      };
+      u.onend = u.onerror = function(){
+        btnPlay.classList.remove('playing');
+        btnStop.classList.remove('show');
+        setStatus('');
+      };
+      if(!speechSynthesis.getVoices().length){
+        speechSynthesis.onvoiceschanged = function(){
+          var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
+          speechSynthesis.speak(u);
+        };
+        setTimeout(function(){ speechSynthesis.speak(u); }, 250);
+      } else {
+        speechSynthesis.speak(u);
+      }
+    }
+    function stop(){
+      if(window.speechSynthesis) speechSynthesis.cancel();
+      btnPlay.classList.remove('playing');
+      btnStop.classList.remove('show');
+      setStatus('Gestopt.');
+    }
+    btnPlay.addEventListener('click', play);
+    btnStop.addEventListener('click', stop);
+    if(window.speechSynthesis){
+      speechSynthesis.getVoices();
+      speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+    }
+  })();
+  </script>
+</body>
+</html>
