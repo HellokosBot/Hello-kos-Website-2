@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Kasteel van Antimachia – Hello Kos</title>
+  <style>
+    :root {
+      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
+      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
+      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
+      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text); -webkit-font-smoothing: antialiased;
+      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
+      background: var(--bg); min-height: 100vh; line-height: 1.55;
+    }
+    .app-header {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px 16px; background: var(--bg-header);
+      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+    }
+    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
+    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
+    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
+    .logo-text span { color: var(--gold-dark); font-style: italic; }
+    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
+    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
+    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
+    .lang-menu.open { display: block; }
+    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
+    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
+    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
+    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+    .content { padding: 18px 16px 0; }
+    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
+    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
+    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
+    .btn-audio { background: var(--petrol); color: #fff; }
+    .btn-audio.playing { background: var(--petrol-dark); }
+    .btn-stop { background: #3A4545; color: #fff; display: none; }
+    .btn-stop.show { display: flex; }
+    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
+    .btn-apple { background: #111; color: #fff; }
+    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
+    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
+    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
+    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
+    .card p:last-child { margin-bottom: 0; }
+    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
+    .tip strong { color: var(--gold); }
+    .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
+    .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
+    .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
+    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+    .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
+    .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
+    .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
+    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
+    .footer a { color: var(--petrol); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="bezienswaardigheden.html" class="back-btn">← Terug</a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🔅</div>
+      <div class="logo-text">Hello <span>Kos</span></div>
+    </a>
+    <div class="lang-wrap">
+      <button type="button" class="lang-btn" id="langBtn">
+        <span id="flag">🇳🇱</span> <span id="code">NL</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="hero-wrap">
+      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/antimachia-castle-kos-island-high.jpg" alt="Kasteel van Antimachia" loading="eager">
+      <div class="hero-caption" data-i18n="heroCap">Kasteel van Antimachia</div>
+    </div>
+
+    <div class="content">
+      <h1 data-i18n="title">Kasteel van Antimachia</h1>
+      <p class="lead" data-i18n="lead">Middeleeuws fort op een heuvel – heldhaftige verdediging in 1457 door 15 ridders en eilandbewoners tegen 16.000 Ottomanen.</p>
+
+      <div class="badges">
+        <span class="badge" data-i18n="badgeFree">Gratis</span>
+        <span class="badge">Antimachia</span>
+        <span class="badge" data-i18n="badgeCentury">15e eeuw</span>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
+        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
+        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Antimachia%20Castle%20Kos" target="_blank" rel="noopener">📍 Google Maps</a>
+        <a class="btn btn-apple" href="https://maps.apple.com/?q=Antimachia%20Castle%20Kos" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      <p class="status" id="ttsStatus"></p>
+
+      <div id="readText">
+        <div class="card">
+          <h2 data-i18n="h2fort">Fort op de heuvel</h2>
+          <p data-i18n="p1">Het Kasteel van Antimachia ligt op een heuvel bij het dorp Antimachia, midden op Kos. Middeleeuws fort met dikke muren en strategisch uitzicht over binnenland en zee.</p>
+        </div>
+
+        <div class="facts">
+          <div class="fact">
+            <span class="n">1457</span>
+            <span class="l" data-i18n="factSiege">23 dagen belegering</span>
+          </div>
+          <div class="fact">
+            <span class="n" data-i18n="factFree">Gratis</span>
+            <span class="l" data-i18n="factAccess">toegang</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2siege">Belegering van 1457</h2>
+          <p data-i18n="p2">In juni 1457 viel een Ottomaans leger Kos aan: zo’n 16.000 soldaten en 156 schepen. Na aanvallen op Kos-stad, Pyli en Kefalos kwamen ze bij Antimachia.</p>
+          <p data-i18n="p3">Het fort werd verdedigd door slechts 15 ridders van de Orde van Sint-Jan en ongeveer 200–300 eilandbewoners – vaak boeren met eenvoudige wapens. Toch hielden ze 23 dagen stand (tot 26 juni). De Ottomanen probeerden tunnels onder de muren te graven; de verdedigers stopten dat. Uiteindelijk trokken de aanvallers zich terug.</p>
+        </div>
+
+        <div class="photo-block">
+          <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/kos-antimachia-venetian-castle-thumb-1-640-high.jpg" alt="Kasteel Antimachia" loading="lazy">
+          <div class="cap" data-i18n="cap1">Muren van het fort</div>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2later">Later</h2>
+          <p data-i18n="p4">Na de aardbeving van 1493 werd het fort herbouwd. De Ottomanen gebruikten het tot 1871 als militaire basis; daarna verviel het langzaam.</p>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2visit">Bezoeken</h2>
+          <p data-i18n="p5">Gratis toegankelijk. Soms staat er iemand verkleed als ridder bij de ingang die een gift vraagt voor een foto – dat is vrijwillig, geen officiële entreeprijs.</p>
+          <div class="tip" data-i18n="tip">Tip: geniet van het uitzicht vanaf de muren. Neem water mee; er is weinig schaduw.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div>Hello Kos</div>
+    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
+  </footer>
+
+<script>
+(function(){
+  var I18N = {
+    nl: {
+      title: "Kasteel van Antimachia",
+      lead: "Middeleeuws fort op een heuvel – heldhaftige verdediging in 1457 door 15 ridders en eilandbewoners tegen 16.000 Ottomanen.",
+      heroCap: "Kasteel van Antimachia",
+      badgeFree: "Gratis", badgeCentury: "15e eeuw",
+      btnPlay: "🔊 Voorlezen",
+      h2fort: "Fort op de heuvel",
+      p1: "Het Kasteel van Antimachia ligt op een heuvel bij het dorp Antimachia, midden op Kos. Middeleeuws fort met dikke muren en strategisch uitzicht over binnenland en zee.",
+      factSiege: "23 dagen belegering", factFree: "Gratis", factAccess: "toegang",
+      h2siege: "Belegering van 1457",
+      p2: "In juni 1457 viel een Ottomaans leger Kos aan: zo’n 16.000 soldaten en 156 schepen. Na aanvallen op Kos-stad, Pyli en Kefalos kwamen ze bij Antimachia.",
+      p3: "Het fort werd verdedigd door slechts 15 ridders van de Orde van Sint-Jan en ongeveer 200–300 eilandbewoners – vaak boeren met eenvoudige wapens. Toch hielden ze 23 dagen stand (tot 26 juni). De Ottomanen probeerden tunnels onder de muren te graven; de verdedigers stopten dat. Uiteindelijk trokken de aanvallers zich terug.",
+      cap1: "Muren van het fort",
+      h2later: "Later",
+      p4: "Na de aardbeving van 1493 werd het fort herbouwd. De Ottomanen gebruikten het tot 1871 als militaire basis; daarna verviel het langzaam.",
+      h2visit: "Bezoeken",
+      p5: "Gratis toegankelijk. Soms staat er iemand verkleed als ridder bij de ingang die een gift vraagt voor een foto – dat is vrijwillig, geen officiële entreeprijs.",
+      tip: "Tip: geniet van het uitzicht vanaf de muren. Neem water mee; er is weinig schaduw."
+    },
+    en: {
+      title: "Castle of Antimachia",
+      lead: "Medieval fort on a hill – heroic defence in 1457 by 15 knights and islanders against 16,000 Ottomans.",
+      heroCap: "Castle of Antimachia",
+      badgeFree: "Free", badgeCentury: "15th century",
+      btnPlay: "🔊 Read aloud",
+      h2fort: "Fort on the hill",
+      p1: "The Castle of Antimachia stands on a hill near the village of Antimachia, in the middle of Kos. Medieval fort with thick walls and strategic views over the interior and the sea.",
+      factSiege: "23-day siege", factFree: "Free", factAccess: "access",
+      h2siege: "Siege of 1457",
+      p2: "In June 1457 an Ottoman army attacked Kos: about 16,000 soldiers and 156 ships. After attacks on Kos Town, Pyli and Kefalos they reached Antimachia.",
+      p3: "The fort was defended by only 15 knights of the Order of Saint John and about 200–300 islanders – often farmers with simple weapons. Yet they held out for 23 days (until 26 June). The Ottomans tried to dig tunnels under the walls; the defenders stopped them. Eventually the attackers withdrew.",
+      cap1: "Walls of the fort",
+      h2later: "Later",
+      p4: "After the earthquake of 1493 the fort was rebuilt. The Ottomans used it as a military base until 1871; afterwards it slowly fell into ruin.",
+      h2visit: "Visiting",
+      p5: "Freely accessible. Sometimes someone dressed as a knight stands at the entrance asking for a tip for a photo – that is voluntary, not an official entry fee.",
+      tip: "Tip: enjoy the view from the walls. Bring water; there is little shade."
+    },
+    de: {
+      title: "Burg von Antimachia",
+      lead: "Mittelalterliche Festung auf einem Hügel – heldenhafte Verteidigung 1457 durch 15 Ritter und Inselbewohner gegen 16.000 Osmanen.",
+      heroCap: "Burg von Antimachia",
+      badgeFree: "Kostenlos", badgeCentury: "15. Jahrhundert",
+      btnPlay: "🔊 Vorlesen",
+      h2fort: "Festung auf dem Hügel",
+      p1: "Die Burg von Antimachia liegt auf einem Hügel beim Dorf Antimachia, in der Mitte von Kos. Mittelalterliche Festung mit dicken Mauern und strategischem Blick über Inland und Meer.",
+      factSiege: "23 Tage Belagerung", factFree: "Kostenlos", factAccess: "Zugang",
+      h2siege: "Belagerung von 1457",
+      p2: "Im Juni 1457 griff eine osmanische Armee Kos an: etwa 16.000 Soldaten und 156 Schiffe. Nach Angriffen auf Kos-Stadt, Pyli und Kefalos kamen sie nach Antimachia.",
+      p3: "Die Festung wurde von nur 15 Rittern des Johanniterordens und etwa 200–300 Inselbewohnern verteidigt – oft Bauern mit einfachen Waffen. Dennoch hielten sie 23 Tage stand (bis 26. Juni). Die Osmanen versuchten Tunnel unter den Mauern zu graben; die Verteidiger stoppten das. Schließlich zogen sich die Angreifer zurück.",
+      cap1: "Mauern der Festung",
+      h2later: "Später",
+      p4: "Nach dem Erdbeben von 1493 wurde die Festung wiederaufgebaut. Die Osmanen nutzten sie bis 1871 als Militärbasis; danach verfiel sie langsam.",
+      h2visit: "Besuchen",
+      p5: "Kostenlos zugänglich. Manchmal steht jemand als Ritter verkleidet am Eingang und bittet um ein Trinkgeld für ein Foto – das ist freiwillig, keine offizielle Eintrittsgebühr.",
+      tip: "Tipp: genieße den Blick von den Mauern. Nimm Wasser mit; es gibt wenig Schatten."
+    },
+    it: {
+      title: "Castello di Antimachia",
+      lead: "Fortezza medievale su una collina – eroica difesa nel 1457 da 15 cavalieri e isolani contro 16.000 ottomani.",
+      heroCap: "Castello di Antimachia",
+      badgeFree: "Gratis", badgeCentury: "XV secolo",
+      btnPlay: "🔊 Leggi ad alta voce",
+      h2fort: "Forte sulla collina",
+      p1: "Il Castello di Antimachia si trova su una collina vicino al villaggio di Antimachia, nel centro di Kos. Fortezza medievale con mura spesse e vista strategica sull’entroterra e sul mare.",
+      factSiege: "assedio di 23 giorni", factFree: "Gratis", factAccess: "accesso",
+      h2siege: "Assedio del 1457",
+      p2: "Nel giugno 1457 un esercito ottomano attaccò Kos: circa 16.000 soldati e 156 navi. Dopo attacchi a Kos città, Pyli e Kefalos arrivarono ad Antimachia.",
+      p3: "La fortezza fu difesa da soli 15 cavalieri dell’Ordine di San Giovanni e circa 200–300 isolani – spesso contadini con armi semplici. Eppure resistettero 23 giorni (fino al 26 giugno). Gli Ottomani tentarono di scavare tunnel sotto le mura; i difensori li fermarono. Alla fine gli attaccanti si ritirarono.",
+      cap1: "Mura della fortezza",
+      h2later: "In seguito",
+      p4: "Dopo il terremoto del 1493 la fortezza fu ricostruita. Gli Ottomani la usarono come base militare fino al 1871; poi cadde lentamente in rovina.",
+      h2visit: "Visitare",
+      p5: "Accesso gratuito. A volte c’è qualcuno vestito da cavaliere all’ingresso che chiede un’offerta per una foto – è volontario, non una tassa d’ingresso ufficiale.",
+      tip: "Consiglio: goditi la vista dalle mura. Porta acqua; c’è poca ombra."
+    },
+    tr: {
+      title: "Antimachia Kalesi",
+      lead: "Tepedeki ortaçağ kalesi – 1457’de 15 şövalye ve ada sakinlerinin 16.000 Osmanlı’ya karşı kahramanca savunması.",
+      heroCap: "Antimachia Kalesi",
+      badgeFree: "Ücretsiz", badgeCentury: "15. yüzyıl",
+      btnPlay: "🔊 Sesli oku",
+      h2fort: "Tepedeki kale",
+      p1: "Antimachia Kalesi, Antimachia köyünün yakınındaki bir tepede, Kos’un ortasında yer alır. Kalın duvarlı ortaçağ kalesi, iç kesimler ve denize stratejik manzara.",
+      factSiege: "23 günlük kuşatma", factFree: "Ücretsiz", factAccess: "giriş",
+      h2siege: "1457 Kuşatması",
+      p2: "Haziran 1457’de bir Osmanlı ordusu Kos’a saldırdı: yaklaşık 16.000 asker ve 156 gemi. Kos şehri, Pyli ve Kefalos’a saldırılardan sonra Antimachia’ya geldiler.",
+      p3: "Kale sadece Aziz Yahya Şövalyeleri Tarikatı’ndan 15 şövalye ve yaklaşık 200–300 ada sakini tarafından savunuldu – çoğu basit silahlı çiftçiler. Yine de 23 gün (26 Haziran’a kadar) dayandılar. Osmanlılar duvarların altına tünel kazmaya çalıştı; savunucular bunu engelledi. Sonunda saldırganlar çekildi.",
+      cap1: "Kalenin duvarları",
+      h2later: "Sonra",
+      p4: "1493 depreminden sonra kale yeniden inşa edildi. Osmanlılar 1871’e kadar askeri üs olarak kullandı; sonra yavaşça harap oldu.",
+      h2visit: "Ziyaret",
+      p5: "Ücretsiz erişilebilir. Bazen girişte şövalye kılığında biri fotoğraf için bahşiş ister – bu gönüllüdür, resmi giriş ücreti değildir.",
+      tip: "İpucu: duvarlardan manzaranın keyfini çıkar. Su getir; gölge az."
+    },
+    es: {
+      title: "Castillo de Antimachia",
+      lead: "Fortaleza medieval en una colina – heroica defensa en 1457 por 15 caballeros e isleños contra 16.000 otomanos.",
+      heroCap: "Castillo de Antimachia",
+      badgeFree: "Gratis", badgeCentury: "siglo XV",
+      btnPlay: "🔊 Leer en voz alta",
+      h2fort: "Fortaleza en la colina",
+      p1: "El Castillo de Antimachia se encuentra en una colina cerca del pueblo de Antimachia, en el centro de Kos. Fortaleza medieval con muros gruesos y vista estratégica sobre el interior y el mar.",
+      factSiege: "asedio de 23 días", factFree: "Gratis", factAccess: "acceso",
+      h2siege: "Asedio de 1457",
+      p2: "En junio de 1457 un ejército otomano atacó Kos: unos 16.000 soldados y 156 barcos. Tras ataques a Kos ciudad, Pyli y Kefalos llegaron a Antimachia.",
+      p3: "La fortaleza fue defendida por solo 15 caballeros de la Orden de San Juan y unos 200–300 isleños – a menudo campesinos con armas sencillas. Aun así resistieron 23 días (hasta el 26 de junio). Los otomanos intentaron cavar túneles bajo los muros; los defensores lo impidieron. Al final los atacantes se retiraron.",
+      cap1: "Muros de la fortaleza",
+      h2later: "Después",
+      p4: "Tras el terremoto de 1493 la fortaleza fue reconstruida. Los otomanos la usaron como base militar hasta 1871; luego cayó lentamente en ruinas.",
+      h2visit: "Visitar",
+      p5: "Acceso gratuito. A veces hay alguien vestido de caballero en la entrada que pide una propina por una foto – es voluntario, no una tasa oficial.",
+      tip: "Consejo: disfruta de la vista desde los muros. Lleva agua; hay poca sombra."
+    }
+  };
+
+  function setLang(l) {
+    if (!I18N[l]) l = 'nl';
+    localStorage.setItem('hk-lang', l);
+    document.documentElement.lang = l;
+    var d = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (d[k]) el.textContent = d[k];
+    });
+    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if (opt) {
+      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
+      document.getElementById('code').textContent = l.toUpperCase();
+    }
+    document.querySelectorAll('.lang-option').forEach(function(o){
+      o.classList.toggle('active', o.getAttribute('data-lang') === l);
+    });
+    closeMenu();
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  function openMenu(){ langMenu.classList.add('open'); }
+  function closeMenu(){ langMenu.classList.remove('open'); }
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    langMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.addEventListener('click', function(){ closeMenu(); });
+  document.querySelectorAll('.lang-option').forEach(function(btn){
+    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
+  });
+
+  var saved = localStorage.getItem('hk-lang') || 'nl';
+  setLang(saved);
+
+  /* TTS */
+  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
+  function getLang(){
+    var l = localStorage.getItem('hk-lang') || 'nl';
+    return LANG_VOICE[l] ? l : 'nl';
+  }
+  function pickVoice(code){
+    var voices = speechSynthesis.getVoices() || [];
+    var prefix = code.slice(0,2).toLowerCase();
+    return voices.find(function(v){ return v.lang === code; })
+      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
+      || null;
+  }
+  var btnPlay = document.getElementById('btnPlay');
+  var btnStop = document.getElementById('btnStop');
+  var status = document.getElementById('ttsStatus');
+  function setStatus(t){ if(status) status.textContent = t; }
+  function play(){
+    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
+    speechSynthesis.cancel();
+    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
+    var l = getLang();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = LANG_VOICE[l];
+    u.rate = 0.92;
+    var v = pickVoice(LANG_VOICE[l]);
+    if(v) u.voice = v;
+    u.onstart = function(){
+      btnPlay.classList.add('playing');
+      btnStop.classList.add('show');
+      setStatus('Voorlezen… ('+l.toUpperCase()+')');
+    };
+    u.onend = u.onerror = function(){
+      btnPlay.classList.remove('playing');
+      btnStop.classList.remove('show');
+      setStatus('');
+    };
+    if(!speechSynthesis.getVoices().length){
+      speechSynthesis.onvoiceschanged = function(){
+        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
+        speechSynthesis.speak(u);
+      };
+      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
+    } else {
+      speechSynthesis.speak(u);
+    }
+  }
+  function stop(){
+    if(window.speechSynthesis) speechSynthesis.cancel();
+    btnPlay.classList.remove('playing');
+    btnStop.classList.remove('show');
+    setStatus('Gestopt.');
+  }
+  btnPlay.addEventListener('click', play);
+  btnStop.addEventListener('click', stop);
+  if(window.speechSynthesis){
+    speechSynthesis.getVoices();
+    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  }
+})();
+</script>
+</body>
+</html>
