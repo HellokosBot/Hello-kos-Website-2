@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Old Town – Hello Kos</title>
+  <style>
+    :root {
+      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
+      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
+      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
+      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text); -webkit-font-smoothing: antialiased;
+      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
+      background: var(--bg); min-height: 100vh; line-height: 1.55;
+    }
+    .app-header {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px 16px; background: var(--bg-header);
+      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+    }
+    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
+    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
+    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
+    .logo-text span { color: var(--gold-dark); font-style: italic; }
+    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
+    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
+    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
+    .lang-menu.open { display: block; }
+    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
+    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
+    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
+    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+    .content { padding: 18px 16px 0; }
+    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
+    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
+    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
+    .btn-audio { background: var(--petrol); color: #fff; }
+    .btn-audio.playing { background: var(--petrol-dark); }
+    .btn-stop { background: #3A4545; color: #fff; display: none; }
+    .btn-stop.show { display: flex; }
+    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
+    .btn-apple { background: #111; color: #fff; }
+    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
+    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
+    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
+    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
+    .card p:last-child { margin-bottom: 0; }
+    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
+    .tip strong { color: var(--gold); }
+    .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
+    .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
+    .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
+    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+    .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
+    .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
+    .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
+    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
+    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
+    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
+    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
+    .footer a { color: var(--petrol); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="bezienswaardigheden.html" class="back-btn">← Terug</a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🔅</div>
+      <div class="logo-text">Hello <span>Kos</span></div>
+    </a>
+    <div class="lang-wrap">
+      <button type="button" class="lang-btn" id="langBtn">
+        <span id="flag">🇳🇱</span> <span id="code">NL</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="hero-wrap">
+      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/kos-shopping-tipps-einkaufsmeile-old-town-high.jpg" alt="Old Town" loading="eager">
+      <div class="hero-caption" data-i18n="heroCap">Old Town</div>
+    </div>
+
+    <div class="content">
+      <h1 data-i18n="title">Old Town</h1>
+      <p class="lead" data-i18n="lead">Smalle, autovrije straatjes met souvenirwinkels, terrassen en restaurants – vaak over het hoofd gezien, maar de moeite waard.</p>
+
+      <div class="badges">
+        <span class="badge" data-i18n="badgeFree">Gratis</span>
+        <span class="badge">Kos-stad</span>
+        <span class="badge" data-i18n="badgeCarfree">Autovrij</span>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
+        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
+        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Old%20Town%20Kos%20shopping%20street" target="_blank" rel="noopener">📍 Google Maps</a>
+        <a class="btn btn-apple" href="https://maps.apple.com/?q=Old%20Town%20Kos%20shopping%20street" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      <p class="status" id="ttsStatus"></p>
+
+      <div id="readText">
+        <div class="card">
+          <h2 data-i18n="h2lively">Levendige winkelstraat</h2>
+          <p data-i18n="p1">Old Town is een deel van het centrum van Kos-stad: een strook van ongeveer 500 meter met winkels, terrassen en restaurants. Het wordt vaak overgeslagen, omdat je een specifieke straat in moet lopen om er te komen.</p>
+        </div>
+
+        <div class="facts">
+          <div class="fact">
+            <span class="n">± 500 m</span>
+            <span class="l" data-i18n="factLength">lengte</span>
+          </div>
+          <div class="fact">
+            <span class="n" data-i18n="factCarfree">Autovrij</span>
+            <span class="l" data-i18n="factNarrow">smalle straten</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2narrow">Smal en autovrij</h2>
+          <p data-i18n="p2">De straten zijn autovrij en smal, met typische beschilderde lijnen op de grond. Er zijn souvenirwinkels, kledingzaken, restaurants en terrassen.</p>
+          <p data-i18n="p3">Winkeliers zetten hun waar buiten; daardoor voelt het soms als een oosterse bazaar.</p>
+        </div>
+
+        <div class="photo-block">
+          <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/1688637552-nik_2570-hdr-high.jpg" alt="Old Town Kos" loading="lazy">
+          <div class="cap" data-i18n="cap1">Smalle straat met winkels</div>
+        </div>
+
+        <div class="gallery">
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/kos-altstadt-einkausmeile-elia-restaurant-jpg-high.webp" alt="Terras" loading="lazy">
+            <span data-i18n="g1">Terrassen</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/old-town-luxury-apartment-kos-town-photo-4-high-tttbxe.jpg" alt="Straat" loading="lazy">
+            <span data-i18n="g2">Straatbeeld</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2visit">Bezoeken</h2>
+          <p data-i18n="p4">Gratis, altijd toegankelijk. Zoek de ingang vanaf het centrum; de straat is makkelijk te missen als je er niet op let.</p>
+          <div class="tip" data-i18n="tip">Tip: ideaal om even te shoppen of op een terras te zitten. ’s Avonds is het vaak sfeervol verlicht.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div>Hello Kos</div>
+    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
+  </footer>
+
+<script>
+(function(){
+  var I18N = {
+    nl: {
+      title: "Old Town",
+      lead: "Smalle, autovrije straatjes met souvenirwinkels, terrassen en restaurants – vaak over het hoofd gezien, maar de moeite waard.",
+      heroCap: "Old Town",
+      badgeFree: "Gratis", badgeCarfree: "Autovrij",
+      btnPlay: "🔊 Voorlezen",
+      h2lively: "Levendige winkelstraat",
+      p1: "Old Town is een deel van het centrum van Kos-stad: een strook van ongeveer 500 meter met winkels, terrassen en restaurants. Het wordt vaak overgeslagen, omdat je een specifieke straat in moet lopen om er te komen.",
+      factLength: "lengte", factCarfree: "Autovrij", factNarrow: "smalle straten",
+      h2narrow: "Smal en autovrij",
+      p2: "De straten zijn autovrij en smal, met typische beschilderde lijnen op de grond. Er zijn souvenirwinkels, kledingzaken, restaurants en terrassen.",
+      p3: "Winkeliers zetten hun waar buiten; daardoor voelt het soms als een oosterse bazaar.",
+      cap1: "Smalle straat met winkels",
+      g1: "Terrassen", g2: "Straatbeeld",
+      h2visit: "Bezoeken",
+      p4: "Gratis, altijd toegankelijk. Zoek de ingang vanaf het centrum; de straat is makkelijk te missen als je er niet op let.",
+      tip: "Tip: ideaal om even te shoppen of op een terras te zitten. ’s Avonds is het vaak sfeervol verlicht."
+    },
+    en: {
+      title: "Old Town",
+      lead: "Narrow, car-free streets with souvenir shops, terraces and restaurants – often overlooked, but well worth a visit.",
+      heroCap: "Old Town",
+      badgeFree: "Free", badgeCarfree: "Car-free",
+      btnPlay: "🔊 Read aloud",
+      h2lively: "Lively shopping street",
+      p1: "Old Town is a part of the centre of Kos Town: a stretch of about 500 metres with shops, terraces and restaurants. It is often skipped because you have to walk into a specific street to reach it.",
+      factLength: "length", factCarfree: "Car-free", factNarrow: "narrow streets",
+      h2narrow: "Narrow and car-free",
+      p2: "The streets are car-free and narrow, with typical painted lines on the ground. There are souvenir shops, clothing stores, restaurants and terraces.",
+      p3: "Shopkeepers put their goods outside; that sometimes makes it feel like an oriental bazaar.",
+      cap1: "Narrow street with shops",
+      g1: "Terraces", g2: "Street view",
+      h2visit: "Visiting",
+      p4: "Free, always accessible. Look for the entrance from the centre; the street is easy to miss if you don’t pay attention.",
+      tip: "Tip: ideal for a bit of shopping or sitting on a terrace. In the evening it is often atmospherically lit."
+    },
+    de: {
+      title: "Old Town",
+      lead: "Enge, autofreie Gassen mit Souvenirläden, Terrassen und Restaurants – oft übersehen, aber lohnenswert.",
+      heroCap: "Old Town",
+      badgeFree: "Kostenlos", badgeCarfree: "Autofrei",
+      btnPlay: "🔊 Vorlesen",
+      h2lively: "Lebhafte Einkaufsstraße",
+      p1: "Old Town ist ein Teil des Zentrums von Kos-Stadt: ein Abschnitt von etwa 500 Metern mit Geschäften, Terrassen und Restaurants. Er wird oft ausgelassen, weil man in eine bestimmte Straße gehen muss, um dorthin zu kommen.",
+      factLength: "Länge", factCarfree: "Autofrei", factNarrow: "enge Straßen",
+      h2narrow: "Eng und autofrei",
+      p2: "Die Straßen sind autofrei und eng, mit typischen bemalten Linien auf dem Boden. Es gibt Souvenirläden, Bekleidungsgeschäfte, Restaurants und Terrassen.",
+      p3: "Händler stellen ihre Ware draußen aus; dadurch wirkt es manchmal wie ein orientalischer Basar.",
+      cap1: "Enge Straße mit Geschäften",
+      g1: "Terrassen", g2: "Straßenbild",
+      h2visit: "Besuchen",
+      p4: "Kostenlos, immer zugänglich. Suche den Eingang vom Zentrum aus; die Straße ist leicht zu übersehen, wenn man nicht aufpasst.",
+      tip: "Tipp: ideal zum Shoppen oder auf einer Terrasse sitzen. Abends ist es oft stimmungsvoll beleuchtet."
+    },
+    it: {
+      title: "Old Town",
+      lead: "Stradine strette e pedonali con negozi di souvenir, terrazze e ristoranti – spesso trascurate, ma vale la pena.",
+      heroCap: "Old Town",
+      badgeFree: "Gratis", badgeCarfree: "Pedonale",
+      btnPlay: "🔊 Leggi ad alta voce",
+      h2lively: "Vivace via dello shopping",
+      p1: "Old Town è una parte del centro di Kos città: un tratto di circa 500 metri con negozi, terrazze e ristoranti. Viene spesso saltata perché bisogna entrare in una strada specifica per arrivarci.",
+      factLength: "lunghezza", factCarfree: "Pedonale", factNarrow: "strade strette",
+      h2narrow: "Stretta e pedonale",
+      p2: "Le strade sono pedonali e strette, con tipiche linee dipinte a terra. Ci sono negozi di souvenir, negozi di abbigliamento, ristoranti e terrazze.",
+      p3: "I negozianti mettono la merce fuori; per questo a volte sembra un bazar orientale.",
+      cap1: "Strada stretta con negozi",
+      g1: "Terrazze", g2: "Vista strada",
+      h2visit: "Visitare",
+      p4: "Gratis, sempre accessibile. Cerca l’ingresso dal centro; la strada è facile da mancare se non presti attenzione.",
+      tip: "Consiglio: ideale per fare un po’ di shopping o sedersi in terrazza. Di sera è spesso illuminata in modo suggestivo."
+    },
+    tr: {
+      title: "Old Town",
+      lead: "Hediye dükkânları, teraslar ve restoranlarla dar, araçsız sokaklar – çoğu zaman gözden kaçırılır ama ziyaret etmeye değer.",
+      heroCap: "Old Town",
+      badgeFree: "Ücretsiz", badgeCarfree: "Araçsız",
+      btnPlay: "🔊 Sesli oku",
+      h2lively: "Canlı alışveriş caddesi",
+      p1: "Old Town, Kos şehrinin merkezinin bir parçasıdır: yaklaşık 500 metrelik dükkânlar, teraslar ve restoranlarla dolu bir bölüm. Oraya ulaşmak için belirli bir sokağa girmek gerektiği için sık sık atlanır.",
+      factLength: "uzunluk", factCarfree: "Araçsız", factNarrow: "dar sokaklar",
+      h2narrow: "Dar ve araçsız",
+      p2: "Sokaklar araçsız ve dardır, yerde tipik boyalı çizgiler vardır. Hediye dükkânları, giyim mağazaları, restoranlar ve teraslar bulunur.",
+      p3: "Dükkân sahipleri mallarını dışarı koyar; bu yüzden bazen doğu pazarı gibi hissettirir.",
+      cap1: "Dükkânlı dar sokak",
+      g1: "Teraslar", g2: "Sokak görünümü",
+      h2visit: "Ziyaret",
+      p4: "Ücretsiz, her zaman erişilebilir. Merkezden girişi ara; dikkat etmezsen sokağı kolayca kaçırırsın.",
+      tip: "İpucu: biraz alışveriş yapmak veya terasta oturmak için ideal. Akşamları genellikle atmosferik şekilde aydınlatılır."
+    },
+    es: {
+      title: "Old Town",
+      lead: "Calles estrechas y peatonales con tiendas de souvenirs, terrazas y restaurantes – a menudo pasado por alto, pero merece la pena.",
+      heroCap: "Old Town",
+      badgeFree: "Gratis", badgeCarfree: "Peatonal",
+      btnPlay: "🔊 Leer en voz alta",
+      h2lively: "Calle comercial animada",
+      p1: "Old Town es una parte del centro de Kos ciudad: un tramo de unos 500 metros con tiendas, terrazas y restaurantes. A menudo se salta porque hay que entrar por una calle concreta para llegar.",
+      factLength: "longitud", factCarfree: "Peatonal", factNarrow: "calles estrechas",
+      h2narrow: "Estrecha y peatonal",
+      p2: "Las calles son peatonales y estrechas, con típicas líneas pintadas en el suelo. Hay tiendas de souvenirs, tiendas de ropa, restaurantes y terrazas.",
+      p3: "Los comerciantes sacan su mercancía fuera; por eso a veces parece un bazar oriental.",
+      cap1: "Calle estrecha con tiendas",
+      g1: "Terrazas", g2: "Vista de la calle",
+      h2visit: "Visitar",
+      p4: "Gratis, siempre accesible. Busca la entrada desde el centro; la calle es fácil de pasar por alto si no prestas atención.",
+      tip: "Consejo: ideal para comprar un poco o sentarse en una terraza. Por la noche suele estar iluminada de forma agradable."
+    }
+  };
+
+  function setLang(l) {
+    if (!I18N[l]) l = 'nl';
+    localStorage.setItem('hk-lang', l);
+    document.documentElement.lang = l;
+    var d = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (d[k]) el.textContent = d[k];
+    });
+    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if (opt) {
+      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
+      document.getElementById('code').textContent = l.toUpperCase();
+    }
+    document.querySelectorAll('.lang-option').forEach(function(o){
+      o.classList.toggle('active', o.getAttribute('data-lang') === l);
+    });
+    closeMenu();
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  function openMenu(){ langMenu.classList.add('open'); }
+  function closeMenu(){ langMenu.classList.remove('open'); }
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    langMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.addEventListener('click', function(){ closeMenu(); });
+  document.querySelectorAll('.lang-option').forEach(function(btn){
+    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
+  });
+
+  var saved = localStorage.getItem('hk-lang') || 'nl';
+  setLang(saved);
+
+  /* TTS */
+  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
+  function getLang(){
+    var l = localStorage.getItem('hk-lang') || 'nl';
+    return LANG_VOICE[l] ? l : 'nl';
+  }
+  function pickVoice(code){
+    var voices = speechSynthesis.getVoices() || [];
+    var prefix = code.slice(0,2).toLowerCase();
+    return voices.find(function(v){ return v.lang === code; })
+      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
+      || null;
+  }
+  var btnPlay = document.getElementById('btnPlay');
+  var btnStop = document.getElementById('btnStop');
+  var status = document.getElementById('ttsStatus');
+  function setStatus(t){ if(status) status.textContent = t; }
+  function play(){
+    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
+    speechSynthesis.cancel();
+    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
+    var l = getLang();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = LANG_VOICE[l];
+    u.rate = 0.92;
+    var v = pickVoice(LANG_VOICE[l]);
+    if(v) u.voice = v;
+    u.onstart = function(){
+      btnPlay.classList.add('playing');
+      btnStop.classList.add('show');
+      setStatus('Voorlezen… ('+l.toUpperCase()+')');
+    };
+    u.onend = u.onerror = function(){
+      btnPlay.classList.remove('playing');
+      btnStop.classList.remove('show');
+      setStatus('');
+    };
+    if(!speechSynthesis.getVoices().length){
+      speechSynthesis.onvoiceschanged = function(){
+        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
+        speechSynthesis.speak(u);
+      };
+      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
+    } else {
+      speechSynthesis.speak(u);
+    }
+  }
+  function stop(){
+    if(window.speechSynthesis) speechSynthesis.cancel();
+    btnPlay.classList.remove('playing');
+    btnStop.classList.remove('show');
+    setStatus('Gestopt.');
+  }
+  btnPlay.addEventListener('click', play);
+  btnStop.addEventListener('click', stop);
+  if(window.speechSynthesis){
+    speechSynthesis.getVoices();
+    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  }
+})();
+</script>
+</body>
+</html>
