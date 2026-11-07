@@ -46,6 +46,7 @@
     .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
     .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
     .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+    .badge.warn { background: rgba(224,176,64,0.2); color: var(--gold); border-color: rgba(224,176,64,0.4); }
     .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
     .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
     .btn-audio { background: var(--petrol); color: #fff; }
@@ -61,10 +62,21 @@
     .card p:last-child { margin-bottom: 0; }
     .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
     .tip strong { color: var(--gold); }
+    .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
+    .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
+    .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
+    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+    .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
+    .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
+    .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
     .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
     .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
     .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
     .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
+    .video-block { margin: 0 0 14px; border-radius: 14px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
+    .video-wrap { position: relative; width: 100%; padding-bottom: 56.25%; background: #111; }
+    .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .video-block .cap { padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
     .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
     .footer a { color: var(--petrol); text-decoration: none; }
   </style>
@@ -93,17 +105,17 @@
 
   <main class="main">
     <div class="hero-wrap">
-      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/palio-pyli3-standard.jpg" alt="Palio Pyli (spookdorp)" loading="eager">
+      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/palio-pyli3-high.jpg" alt="Palio Pyli (spookdorp)" loading="eager">
       <div class="hero-caption" data-i18n="heroCap">Palio Pyli (spookdorp)</div>
     </div>
 
     <div class="content">
       <h1 data-i18n="title">Palio Pyli (spookdorp)</h1>
-      <p class="lead" data-i18n="lead">Verlaten bergdorp met uitzicht – natuur nam de huizen over; sfeervol en stil.</p>
+      <p class="lead" data-i18n="lead">Verlaten Byzantijns dorp op een heuvel – leeg door een cholera-epidemie rond 1830, met kasteel, 14e-eeuwse fresco’s en taverna met uitzicht.</p>
 
       <div class="badges">
-        <span class="badge" data-i18n="badgeGhost">Spookdorp</span>
-        <span class="badge" data-i18n="badgeMountain">Berg</span>
+        <span class="badge warn" data-i18n="badgeFoot">Alleen te voet</span>
+        <span class="badge" data-i18n="badgeByz">Byzantijns</span>
         <span class="badge" data-i18n="badgeFree">Gratis</span>
       </div>
 
@@ -117,38 +129,75 @@
 
       <div id="readText">
         <div class="card">
-          <h2 data-i18n="h2abandoned">Verlaten dorp</h2>
-          <p data-i18n="p1">Palio Pyli is een voormalig bergdorp. De natuur nam de huizen over; het voelt als een openluchtspookdorp met smalle paadjes en stenen resten.</p>
+          <h2 data-i18n="h2foot">Let op: alleen te voet</h2>
+          <p data-i18n="p1">Palio Pyli ligt op een heuvel en is alleen te voet via een klim bereikbaar. Wees goed ter been en draag geen slippers of flipflops – stevige schoenen.</p>
+        </div>
+
+        <div class="facts">
+          <div class="fact">
+            <span class="n" data-i18n="fact1080">± 1080</span>
+            <span class="l" data-i18n="factMonastery">klooster gesticht</span>
+          </div>
+          <div class="fact">
+            <span class="n" data-i18n="fact1830">± 1830</span>
+            <span class="l" data-i18n="factCholera">cholera → verlaten</span>
+          </div>
         </div>
 
         <div class="card">
-          <h2 data-i18n="h2history">Geschiedenis</h2>
-          <p data-i18n="p2">Het dorp bleef bewoond tot in de 19e/20e eeuw; daarna vertrokken de bewoners. Het kasteel erboven bood eeuwenlang bescherming (Johannieters, later Ottomanen).</p>
+          <h2 data-i18n="h2begin">Hoe het begon</h2>
+          <p data-i18n="p2">In 1080 kwam monnik Christodoulos uit Patmos naar deze onbewoonde plek. Hij stichtte er een klooster. Kort daarna bouwden de Byzantijnen het kasteel (einde 11e eeuw).</p>
+          <p data-i18n="p3">De poort is een bijzonder voorbeeld van Byzantijnse bouwtechniek. Het kasteel beschermde de inwoners tegen piraten en later tegen de Turken. Mensen woonden binnen en rond de muren in stenen huizen met kleine deuren en raampjes.</p>
+        </div>
+
+        <div class="photo-block">
+          <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/palio-pyli-wandeling-high.jpg" alt="Wandeling Palio Pyli" loading="lazy">
+          <div class="cap" data-i18n="capPath">Pad door het verlaten dorp</div>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2church">Kerk met fresco’s</h2>
+          <p data-i18n="p4">In de kerk Ypapanti (ook Panagia Kastriani) zijn nog fresco’s uit de 14e eeuw te zien – een van de verborgen juweeltjes van de site.</p>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2cholera">Cholera – waarom het spookdorp werd</h2>
+          <p data-i18n="p5">Het dorp bleef bewoond tot begin 19e eeuw. Rond 1830 (sommige bronnen: 1813 of 1820) brak een cholera-epidemie uit. Veel inwoners stierven; de overlevenden vluchtten. Daarna is het nooit meer bewoond geraakt. De natuur nam de huizen over – vandaar “spookdorp”.</p>
+        </div>
+
+        <div class="photo-block">
+          <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/castle-of-paleo-pyli-kos-greece_kos4all_002-high.jpg" alt="Kasteel Palio Pyli" loading="lazy">
+          <div class="cap" data-i18n="capCastle">Kasteelresten boven het dorp</div>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2castle">Kasteel en taverna</h2>
+          <p data-i18n="p6">Vanaf het dorp kun je doorlopen naar het kasteel boven op de heuvel, of stoppen bij taverna Oria – bekend om het uitzicht (en “het beroemdste wc van Kos”). Beide zijn de moeite waard.</p>
         </div>
 
         <div class="gallery">
           <div class="g-item">
-            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/palio-pyli3-standard.jpg" alt="" loading="lazy">
-            <span data-i18n="g1">Palio Pyli</span>
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/01-high.jpg" alt="Ruïnes" loading="lazy">
+            <span data-i18n="g1">Ruïnes</span>
           </div>
           <div class="g-item">
-            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/01-high.jpg" alt="" loading="lazy">
-            <span data-i18n="g2">Palio Pyli</span>
-          </div>
-          <div class="g-item">
-            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/palio-pyli3-high.jpg" alt="" loading="lazy">
-            <span data-i18n="g3">Palio Pyli</span>
-          </div>
-          <div class="g-item">
-            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/palio-pyli-wandeling-high.jpg" alt="" loading="lazy">
-            <span data-i18n="g4">Palio Pyli</span>
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-38-high.jpg" alt="Dorp" loading="lazy">
+            <span data-i18n="g2">Dorp</span>
           </div>
         </div>
 
         <div class="card">
           <h2 data-i18n="h2visit">Bezoeken</h2>
-          <p data-i18n="p3">Gratis. Stevige schoenen; paden kunnen steil of oneffen zijn.</p>
-          <div class="tip" data-i18n="tip">Tip: combineer met het kasteel van Palio Pyli hogerop voor het uitzicht.</div>
+          <p data-i18n="p7">Gratis. Alleen te voet; stevige schoenen; water meenemen.</p>
+          <div class="tip" data-i18n="tip">Tip: plan tijd in voor de klim én voor de fresco’s in de kerk – dat zijn de details die je onthoudt.</div>
+        </div>
+
+        <div class="card"><h2 data-i18n="h2video">Video</h2></div>
+        <div class="video-block">
+          <div class="video-wrap">
+            <iframe src="https://www.youtube-nocookie.com/embed/1ZrSELtS5jk?rel=0&modestbranding=1" title="Palio Pyli" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="cap" data-i18n="videoCap">Palio Pyli</div>
         </div>
       </div>
     </div>
@@ -164,93 +213,159 @@
   var I18N = {
     nl: {
       title: "Palio Pyli (spookdorp)",
-      lead: "Verlaten bergdorp met uitzicht – natuur nam de huizen over; sfeervol en stil.",
+      lead: "Verlaten Byzantijns dorp op een heuvel – leeg door een cholera-epidemie rond 1830, met kasteel, 14e-eeuwse fresco’s en taverna met uitzicht.",
       heroCap: "Palio Pyli (spookdorp)",
-      badgeGhost: "Spookdorp", badgeMountain: "Berg", badgeFree: "Gratis",
+      badgeFoot: "Alleen te voet", badgeByz: "Byzantijns", badgeFree: "Gratis",
       btnPlay: "🔊 Voorlezen",
-      h2abandoned: "Verlaten dorp",
-      p1: "Palio Pyli is een voormalig bergdorp. De natuur nam de huizen over; het voelt als een openluchtspookdorp met smalle paadjes en stenen resten.",
-      h2history: "Geschiedenis",
-      p2: "Het dorp bleef bewoond tot in de 19e/20e eeuw; daarna vertrokken de bewoners. Het kasteel erboven bood eeuwenlang bescherming (Johannieters, later Ottomanen).",
-      g1: "Palio Pyli", g2: "Palio Pyli", g3: "Palio Pyli", g4: "Palio Pyli",
+      h2foot: "Let op: alleen te voet",
+      p1: "Palio Pyli ligt op een heuvel en is alleen te voet via een klim bereikbaar. Wees goed ter been en draag geen slippers of flipflops – stevige schoenen.",
+      fact1080: "± 1080", factMonastery: "klooster gesticht", fact1830: "± 1830", factCholera: "cholera → verlaten",
+      h2begin: "Hoe het begon",
+      p2: "In 1080 kwam monnik Christodoulos uit Patmos naar deze onbewoonde plek. Hij stichtte er een klooster. Kort daarna bouwden de Byzantijnen het kasteel (einde 11e eeuw).",
+      p3: "De poort is een bijzonder voorbeeld van Byzantijnse bouwtechniek. Het kasteel beschermde de inwoners tegen piraten en later tegen de Turken. Mensen woonden binnen en rond de muren in stenen huizen met kleine deuren en raampjes.",
+      capPath: "Pad door het verlaten dorp",
+      h2church: "Kerk met fresco’s",
+      p4: "In de kerk Ypapanti (ook Panagia Kastriani) zijn nog fresco’s uit de 14e eeuw te zien – een van de verborgen juweeltjes van de site.",
+      h2cholera: "Cholera – waarom het spookdorp werd",
+      p5: "Het dorp bleef bewoond tot begin 19e eeuw. Rond 1830 (sommige bronnen: 1813 of 1820) brak een cholera-epidemie uit. Veel inwoners stierven; de overlevenden vluchtten. Daarna is het nooit meer bewoond geraakt. De natuur nam de huizen over – vandaar “spookdorp”.",
+      capCastle: "Kasteelresten boven het dorp",
+      h2castle: "Kasteel en taverna",
+      p6: "Vanaf het dorp kun je doorlopen naar het kasteel boven op de heuvel, of stoppen bij taverna Oria – bekend om het uitzicht (en “het beroemdste wc van Kos”). Beide zijn de moeite waard.",
+      g1: "Ruïnes", g2: "Dorp",
       h2visit: "Bezoeken",
-      p3: "Gratis. Stevige schoenen; paden kunnen steil of oneffen zijn.",
-      tip: "Tip: combineer met het kasteel van Palio Pyli hogerop voor het uitzicht."
+      p7: "Gratis. Alleen te voet; stevige schoenen; water meenemen.",
+      tip: "Tip: plan tijd in voor de klim én voor de fresco’s in de kerk – dat zijn de details die je onthoudt.",
+      h2video: "Video", videoCap: "Palio Pyli"
     },
     en: {
       title: "Palio Pyli (ghost village)",
-      lead: "Abandoned mountain village with views – nature took over the houses; atmospheric and quiet.",
+      lead: "Abandoned Byzantine village on a hill – emptied by a cholera epidemic around 1830, with castle, 14th-century frescoes and a taverna with a view.",
       heroCap: "Palio Pyli (ghost village)",
-      badgeGhost: "Ghost village", badgeMountain: "Mountain", badgeFree: "Free",
+      badgeFoot: "On foot only", badgeByz: "Byzantine", badgeFree: "Free",
       btnPlay: "🔊 Read aloud",
-      h2abandoned: "Abandoned village",
-      p1: "Palio Pyli is a former mountain village. Nature took over the houses; it feels like an open-air ghost village with narrow paths and stone remains.",
-      h2history: "History",
-      p2: "The village remained inhabited until the 19th/20th century; then the residents left. The castle above offered protection for centuries (Knights of St John, later Ottomans).",
-      g1: "Palio Pyli", g2: "Palio Pyli", g3: "Palio Pyli", g4: "Palio Pyli",
+      h2foot: "Note: on foot only",
+      p1: "Palio Pyli is on a hill and is only accessible on foot via a climb. Be fit and do not wear slippers or flip-flops – sturdy shoes.",
+      fact1080: "± 1080", factMonastery: "monastery founded", fact1830: "± 1830", factCholera: "cholera → abandoned",
+      h2begin: "How it started",
+      p2: "In 1080 monk Christodoulos came from Patmos to this uninhabited place. He founded a monastery. Shortly afterwards the Byzantines built the castle (end of the 11th century).",
+      p3: "The gate is a special example of Byzantine building technique. The castle protected the inhabitants against pirates and later against the Turks. People lived inside and around the walls in stone houses with small doors and windows.",
+      capPath: "Path through the abandoned village",
+      h2church: "Church with frescoes",
+      p4: "In the church Ypapanti (also Panagia Kastriani) there are still frescoes from the 14th century – one of the hidden gems of the site.",
+      h2cholera: "Cholera – why it became a ghost village",
+      p5: "The village remained inhabited until the early 19th century. Around 1830 (some sources: 1813 or 1820) a cholera epidemic broke out. Many inhabitants died; the survivors fled. After that it was never inhabited again. Nature took over the houses – hence “ghost village”.",
+      capCastle: "Castle remains above the village",
+      h2castle: "Castle and taverna",
+      p6: "From the village you can continue to the castle on top of the hill, or stop at taverna Oria – known for the view (and “the most famous toilet on Kos”). Both are worth it.",
+      g1: "Ruins", g2: "Village",
       h2visit: "Visiting",
-      p3: "Free. Sturdy shoes; paths can be steep or uneven.",
-      tip: "Tip: combine with the castle of Palio Pyli higher up for the view."
+      p7: "Free. On foot only; sturdy shoes; take water.",
+      tip: "Tip: plan time for the climb and for the frescoes in the church – those are the details you remember.",
+      h2video: "Video", videoCap: "Palio Pyli"
     },
     de: {
       title: "Palio Pyli (Geisterdorf)",
-      lead: "Verlassenes Bergdorf mit Aussicht – die Natur hat die Häuser übernommen; stimmungsvoll und still.",
+      lead: "Verlassenes byzantinisches Dorf auf einem Hügel – leer durch eine Cholera-Epidemie um 1830, mit Burg, Fresken aus dem 14. Jahrhundert und Taverne mit Aussicht.",
       heroCap: "Palio Pyli (Geisterdorf)",
-      badgeGhost: "Geisterdorf", badgeMountain: "Berg", badgeFree: "Kostenlos",
+      badgeFoot: "Nur zu Fuß", badgeByz: "Byzantinisch", badgeFree: "Kostenlos",
       btnPlay: "🔊 Vorlesen",
-      h2abandoned: "Verlassenes Dorf",
-      p1: "Palio Pyli ist ein ehemaliges Bergdorf. Die Natur hat die Häuser übernommen; es fühlt sich an wie ein Freiluft-Geisterdorf mit engen Pfaden und Steinresten.",
-      h2history: "Geschichte",
-      p2: "Das Dorf blieb bis ins 19./20. Jahrhundert bewohnt; danach zogen die Bewohner weg. Die Burg darüber bot jahrhundertelang Schutz (Johanniter, später Osmanen).",
-      g1: "Palio Pyli", g2: "Palio Pyli", g3: "Palio Pyli", g4: "Palio Pyli",
+      h2foot: "Hinweis: nur zu Fuß",
+      p1: "Palio Pyli liegt auf einem Hügel und ist nur zu Fuß über einen Aufstieg erreichbar. Sei fit und trage keine Schlappen oder Flip-Flops – feste Schuhe.",
+      fact1080: "± 1080", factMonastery: "Kloster gegründet", fact1830: "± 1830", factCholera: "Cholera → verlassen",
+      h2begin: "Wie es begann",
+      p2: "1080 kam der Mönch Christodoulos aus Patmos an diesen unbewohnten Ort. Er gründete ein Kloster. Kurz danach bauten die Byzantiner die Burg (Ende des 11. Jahrhunderts).",
+      p3: "Das Tor ist ein besonderes Beispiel byzantinischer Bautechnik. Die Burg schützte die Bewohner vor Piraten und später vor den Türken. Menschen wohnten innerhalb und um die Mauern in Steinhäusern mit kleinen Türen und Fenstern.",
+      capPath: "Pfad durch das verlassene Dorf",
+      h2church: "Kirche mit Fresken",
+      p4: "In der Kirche Ypapanti (auch Panagia Kastriani) sind noch Fresken aus dem 14. Jahrhundert zu sehen – eines der verborgenen Juwelen der Stätte.",
+      h2cholera: "Cholera – warum es ein Geisterdorf wurde",
+      p5: "Das Dorf blieb bis Anfang des 19. Jahrhunderts bewohnt. Um 1830 (einige Quellen: 1813 oder 1820) brach eine Cholera-Epidemie aus. Viele Einwohner starben; die Überlebenden flohen. Danach wurde es nie wieder bewohnt. Die Natur übernahm die Häuser – daher „Geisterdorf“.",
+      capCastle: "Burgreste über dem Dorf",
+      h2castle: "Burg und Taverne",
+      p6: "Vom Dorf aus kannst du zur Burg oben auf dem Hügel weitergehen oder bei der Taverne Oria anhalten – bekannt für die Aussicht (und „die berühmteste Toilette von Kos“). Beides lohnt sich.",
+      g1: "Ruinen", g2: "Dorf",
       h2visit: "Besuchen",
-      p3: "Kostenlos. Feste Schuhe; Pfade können steil oder uneben sein.",
-      tip: "Tipp: kombiniere mit dem Schloss von Palio Pyli weiter oben für die Aussicht."
+      p7: "Kostenlos. Nur zu Fuß; feste Schuhe; Wasser mitnehmen.",
+      tip: "Tipp: plane Zeit für den Aufstieg und die Fresken in der Kirche ein – das sind die Details, die man sich merkt.",
+      h2video: "Video", videoCap: "Palio Pyli"
     },
     it: {
       title: "Palio Pyli (villaggio fantasma)",
-      lead: "Villaggio di montagna abbandonato con vista – la natura ha preso le case; atmosferico e silenzioso.",
+      lead: "Villaggio bizantino abbandonato su una collina – svuotato da un’epidemia di colera intorno al 1830, con castello, affreschi del XIV secolo e taverna con vista.",
       heroCap: "Palio Pyli (villaggio fantasma)",
-      badgeGhost: "Villaggio fantasma", badgeMountain: "Montagna", badgeFree: "Gratis",
+      badgeFoot: "Solo a piedi", badgeByz: "Bizantino", badgeFree: "Gratis",
       btnPlay: "🔊 Leggi ad alta voce",
-      h2abandoned: "Villaggio abbandonato",
-      p1: "Palio Pyli è un ex villaggio di montagna. La natura ha preso le case; sembra un villaggio fantasma all’aperto con sentieri stretti e resti di pietra.",
-      h2history: "Storia",
-      p2: "Il villaggio rimase abitato fino al XIX/XX secolo; poi gli abitanti se ne andarono. Il castello sopra offrì protezione per secoli (Cavalieri di San Giovanni, poi Ottomani).",
-      g1: "Palio Pyli", g2: "Palio Pyli", g3: "Palio Pyli", g4: "Palio Pyli",
+      h2foot: "Attenzione: solo a piedi",
+      p1: "Palio Pyli si trova su una collina ed è accessibile solo a piedi tramite una salita. Sii in forma e non indossare ciabatte o infradito – scarpe robuste.",
+      fact1080: "± 1080", factMonastery: "monastero fondato", fact1830: "± 1830", factCholera: "colera → abbandonato",
+      h2begin: "Come è iniziato",
+      p2: "Nel 1080 il monaco Christodoulos arrivò da Patmos in questo luogo disabitato. Fondò un monastero. Poco dopo i bizantini costruirono il castello (fine XI secolo).",
+      p3: "La porta è un esempio speciale di tecnica costruttiva bizantina. Il castello proteggeva gli abitanti dai pirati e successivamente dai turchi. La gente viveva dentro e intorno alle mura in case di pietra con piccole porte e finestre.",
+      capPath: "Sentiero attraverso il villaggio abbandonato",
+      h2church: "Chiesa con affreschi",
+      p4: "Nella chiesa Ypapanti (anche Panagia Kastriani) si vedono ancora affreschi del XIV secolo – uno dei gioielli nascosti del sito.",
+      h2cholera: "Colera – perché divenne un villaggio fantasma",
+      p5: "Il villaggio rimase abitato fino all’inizio del XIX secolo. Intorno al 1830 (alcune fonti: 1813 o 1820) scoppiò un’epidemia di colera. Molti abitanti morirono; i sopravvissuti fuggirono. Dopo non fu più abitato. La natura prese il sopravvento sulle case – da qui “villaggio fantasma”.",
+      capCastle: "Resti del castello sopra il villaggio",
+      h2castle: "Castello e taverna",
+      p6: "Dal villaggio puoi proseguire fino al castello in cima alla collina, o fermarti alla taverna Oria – famosa per la vista (e “il wc più famoso di Kos”). Entrambi meritano.",
+      g1: "Rovine", g2: "Villaggio",
       h2visit: "Visitare",
-      p3: "Gratis. Scarpe robuste; i sentieri possono essere ripidi o irregolari.",
-      tip: "Consiglio: combina con il castello di Palio Pyli più in alto per la vista."
+      p7: "Gratis. Solo a piedi; scarpe robuste; porta acqua.",
+      tip: "Consiglio: pianifica tempo per la salita e per gli affreschi nella chiesa – sono i dettagli che ricordi.",
+      h2video: "Video", videoCap: "Palio Pyli"
     },
     tr: {
       title: "Palio Pyli (hayalet köy)",
-      lead: "Manzaralı terk edilmiş dağ köyü – doğa evleri ele geçirdi; atmosferik ve sessiz.",
+      lead: "Bir tepede terk edilmiş Bizans köyü – 1830 civarında kolera salgınıyla boşaltılmış, kale, 14. yüzyıl freskleri ve manzaralı taverna ile.",
       heroCap: "Palio Pyli (hayalet köy)",
-      badgeGhost: "Hayalet köy", badgeMountain: "Dağ", badgeFree: "Ücretsiz",
+      badgeFoot: "Sadece yaya", badgeByz: "Bizans", badgeFree: "Ücretsiz",
       btnPlay: "🔊 Sesli oku",
-      h2abandoned: "Terk edilmiş köy",
-      p1: "Palio Pyli eski bir dağ köyüdür. Doğa evleri ele geçirdi; dar yollar ve taş kalıntılarla açık hava hayalet köyü gibi hissettirir.",
-      h2history: "Tarih",
-      p2: "Köy 19./20. yüzyıla kadar yerleşim yeri olarak kaldı; sonra sakinler ayrıldı. Yukarıdaki kale yüzyıllarca koruma sağladı (St. John Şövalyeleri, sonra Osmanlılar).",
-      g1: "Palio Pyli", g2: "Palio Pyli", g3: "Palio Pyli", g4: "Palio Pyli",
+      h2foot: "Dikkat: sadece yaya",
+      p1: "Palio Pyli bir tepede yer alır ve sadece bir tırmanışla yaya olarak ulaşılabilir. Formda olun ve terlik veya parmak arası terlik giymeyin – sağlam ayakkabı.",
+      fact1080: "± 1080", factMonastery: "manastır kuruldu", fact1830: "± 1830", factCholera: "kolera → terk edildi",
+      h2begin: "Nasıl başladı",
+      p2: "1080’de keşiş Christodoulos Patmos’tan bu ıssız yere geldi. Bir manastır kurdu. Kısa süre sonra Bizanslılar kaleyi inşa etti (11. yüzyıl sonu).",
+      p3: "Kapı Bizans inşaat tekniğinin özel bir örneğidir. Kale sakinleri korsanlara ve daha sonra Türklere karşı korudu. İnsanlar surların içinde ve çevresinde küçük kapılı ve pencereli taş evlerde yaşadı.",
+      capPath: "Terk edilmiş köyden geçen patika",
+      h2church: "Freskli kilise",
+      p4: "Ypapanti kilisesinde (ayrıca Panagia Kastriani) 14. yüzyıldan freskler hâlâ görülür – sitenin gizli mücevherlerinden biri.",
+      h2cholera: "Kolera – neden hayalet köy oldu",
+      p5: "Köy 19. yüzyıl başına kadar yerleşikti. 1830 civarında (bazı kaynaklar: 1813 veya 1820) bir kolera salgını çıktı. Birçok sakin öldü; hayatta kalanlar kaçtı. Ondan sonra bir daha yerleşilmedi. Doğa evleri ele geçirdi – bu yüzden “hayalet köy”.",
+      capCastle: "Köyün üstündeki kale kalıntıları",
+      h2castle: "Kale ve taverna",
+      p6: "Köyden tepedeki kaleye devam edebilir veya manzarasıyla bilinen (ve “Kos’un en ünlü tuvaleti”) taverna Oria’da durabilirsiniz. İkisi de değer.",
+      g1: "Harabeler", g2: "Köy",
       h2visit: "Ziyaret",
-      p3: "Ücretsiz. Sağlam ayakkabı; yollar dik veya engebeli olabilir.",
-      tip: "İpucu: manzara için yukarıdaki Palio Pyli kalesiyle birleştirin."
+      p7: "Ücretsiz. Sadece yaya; sağlam ayakkabı; su alın.",
+      tip: "İpucu: tırmanış ve kilisedeki freskler için zaman ayırın – hatırladığınız detaylar bunlardır.",
+      h2video: "Video", videoCap: "Palio Pyli"
     },
     es: {
       title: "Palio Pyli (pueblo fantasma)",
-      lead: "Pueblo de montaña abandonado con vistas – la naturaleza tomó las casas; atmosférico y tranquilo.",
+      lead: "Pueblo bizantino abandonado en una colina – vaciado por una epidemia de cólera alrededor de 1830, con castillo, frescos del siglo XIV y taberna con vistas.",
       heroCap: "Palio Pyli (pueblo fantasma)",
-      badgeGhost: "Pueblo fantasma", badgeMountain: "Montaña", badgeFree: "Gratis",
+      badgeFoot: "Solo a pie", badgeByz: "Bizantino", badgeFree: "Gratis",
       btnPlay: "🔊 Leer en voz alta",
-      h2abandoned: "Pueblo abandonado",
-      p1: "Palio Pyli es un antiguo pueblo de montaña. La naturaleza se apoderó de las casas; se siente como un pueblo fantasma al aire libre con senderos estrechos y restos de piedra.",
-      h2history: "Historia",
-      p2: "El pueblo permaneció habitado hasta el siglo XIX/XX; después los residentes se marcharon. El castillo de arriba ofreció protección durante siglos (Caballeros de San Juan, luego otomanos).",
-      g1: "Palio Pyli", g2: "Palio Pyli", g3: "Palio Pyli", g4: "Palio Pyli",
+      h2foot: "Atención: solo a pie",
+      p1: "Palio Pyli está en una colina y solo es accesible a pie mediante una subida. Esté en forma y no lleve chanclas o sandalias – zapatos resistentes.",
+      fact1080: "± 1080", factMonastery: "monasterio fundado", fact1830: "± 1830", factCholera: "cólera → abandonado",
+      h2begin: "Cómo empezó",
+      p2: "En 1080 el monje Christodoulos llegó de Patmos a este lugar deshabitado. Fundó un monasterio. Poco después los bizantinos construyeron el castillo (finales del siglo XI).",
+      p3: "La puerta es un ejemplo especial de técnica constructiva bizantina. El castillo protegía a los habitantes de piratas y más tarde de los turcos. La gente vivía dentro y alrededor de los muros en casas de piedra con pequeñas puertas y ventanas.",
+      capPath: "Sendero por el pueblo abandonado",
+      h2church: "Iglesia con frescos",
+      p4: "En la iglesia Ypapanti (también Panagia Kastriani) aún se ven frescos del siglo XIV – una de las joyas ocultas del sitio.",
+      h2cholera: "Cólera – por qué se convirtió en pueblo fantasma",
+      p5: "El pueblo permaneció habitado hasta principios del siglo XIX. Alrededor de 1830 (algunas fuentes: 1813 o 1820) estalló una epidemia de cólera. Muchos habitantes murieron; los supervivientes huyeron. Después nunca volvió a estar habitado. La naturaleza se apoderó de las casas – de ahí “pueblo fantasma”.",
+      capCastle: "Restos del castillo sobre el pueblo",
+      h2castle: "Castillo y taberna",
+      p6: "Desde el pueblo puedes continuar hasta el castillo en lo alto de la colina, o parar en la taberna Oria – conocida por las vistas (y “el wc más famoso de Kos”). Ambos merecen la pena.",
+      g1: "Ruinas", g2: "Pueblo",
       h2visit: "Visitar",
-      p3: "Gratis. Zapatos firmes; los senderos pueden ser empinados o irregulares.",
-      tip: "Consejo: combínalo con el castillo de Palio Pyli más arriba para la vista."
+      p7: "Gratis. Solo a pie; zapatos resistentes; lleva agua.",
+      tip: "Consejo: planifica tiempo para la subida y para los frescos de la iglesia – son los detalles que recuerdas.",
+      h2video: "Vídeo", videoCap: "Palio Pyli"
     }
   };
 
