@@ -26,12 +26,10 @@
       padding: 14px 16px; background: var(--bg-header);
       backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
     }
-    .home-btn {
+    .back-btn {
       grid-column: 1; justify-self: start;
-      width: 36px; height: 36px; border-radius: 50%;
-      background: rgba(58,154,154,0.15); border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      text-decoration: none; font-size: 1.15rem; color: var(--petrol);
+      color: var(--petrol); font-size: 0.9rem; font-weight: 600;
+      text-decoration: none; padding: 6px 8px;
     }
     .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
     .logo-icon {
@@ -95,7 +93,7 @@
 </head>
 <body>
   <header class="app-header">
-    <a href="index.html" class="home-btn" title="Home">🏠</a>
+    <a href="index.html" class="back-btn">← Terug</a>
     <a href="index.html" class="logo">
       <div class="logo-icon">🔅</div>
       <div class="logo-text">Hello <span>Kos</span></div>
@@ -163,72 +161,12 @@
 <script>
 (function(){
   var I18N = {
-    nl: {
-      title: "Taxi, bussen & transfers",
-      sub: "Prijzen, reserveren & openbaar vervoer",
-      taxiPrijzen: "Taxi prijzen & meter",
-      openbaar: "Openbaar vervoer",
-      transfer: "Transfer (vliegveld e.d.)",
-      waterTaxi: "Water taxi",
-      rolstoel: "Rolstoelvervoer",
-      touringcar: "Touringcar",
-      standplaatsen: "Taxi standplaatsen"
-    },
-    en: {
-      title: "Taxi, buses & transfers",
-      sub: "Prices, booking & public transport",
-      taxiPrijzen: "Taxi prices & meter",
-      openbaar: "Public transport",
-      transfer: "Transfer (airport etc.)",
-      waterTaxi: "Water taxi",
-      rolstoel: "Wheelchair transport",
-      touringcar: "Coach / touring bus",
-      standplaatsen: "Taxi ranks"
-    },
-    de: {
-      title: "Taxi, Busse & Transfers",
-      sub: "Preise, Buchung & öffentlicher Verkehr",
-      taxiPrijzen: "Taxi-Preise & Taxameter",
-      openbaar: "Öffentlicher Verkehr",
-      transfer: "Transfer (Flughafen usw.)",
-      waterTaxi: "Wassertaxi",
-      rolstoel: "Rollstuhltransport",
-      touringcar: "Reisebus",
-      standplaatsen: "Taxistände"
-    },
-    it: {
-      title: "Taxi, autobus e transfer",
-      sub: "Prezzi, prenotazioni e trasporti pubblici",
-      taxiPrijzen: "Prezzi taxi e tassametro",
-      openbaar: "Trasporto pubblico",
-      transfer: "Transfer (aeroporto ecc.)",
-      waterTaxi: "Taxi d'acqua",
-      rolstoel: "Trasporto disabili",
-      touringcar: "Pullman",
-      standplaatsen: "Posteggi taxi"
-    },
-    tr: {
-      title: "Taksi, otobüs ve transfer",
-      sub: "Fiyatlar, rezervasyon ve toplu taşıma",
-      taxiPrijzen: "Taksi fiyatları ve taksimetre",
-      openbaar: "Toplu taşıma",
-      transfer: "Transfer (havaalanı vb.)",
-      waterTaxi: "Su taksisi",
-      rolstoel: "Tekerlekli sandalye taşıması",
-      touringcar: "Tur otobüsü",
-      standplaatsen: "Taksi durakları"
-    },
-    es: {
-      title: "Taxi, autobuses y transfers",
-      sub: "Precios, reservas y transporte público",
-      taxiPrijzen: "Precios taxi y taxímetro",
-      openbaar: "Transporte público",
-      transfer: "Transfer (aeropuerto etc.)",
-      waterTaxi: "Taxi acuático",
-      rolstoel: "Transporte para silla de ruedas",
-      touringcar: "Autocar / bus turístico",
-      standplaatsen: "Paradas de taxi"
-    }
+    nl: { title: "Taxi, bussen & transfers", sub: "Prijzen, reserveren & openbaar vervoer", taxiPrijzen: "Taxi prijzen & meter", openbaar: "Openbaar vervoer", transfer: "Transfer (vliegveld e.d.)", waterTaxi: "Water taxi", rolstoel: "Rolstoelvervoer", touringcar: "Touringcar", standplaatsen: "Taxi standplaatsen" },
+    en: { title: "Taxi, buses & transfers", sub: "Prices, booking & public transport", taxiPrijzen: "Taxi prices & meter", openbaar: "Public transport", transfer: "Transfer (airport etc.)", waterTaxi: "Water taxi", rolstoel: "Wheelchair transport", touringcar: "Coach / touring bus", standplaatsen: "Taxi ranks" },
+    de: { title: "Taxi, Busse & Transfers", sub: "Preise, Buchung & öffentlicher Verkehr", taxiPrijzen: "Taxi-Preise & Taxameter", openbaar: "Öffentlicher Verkehr", transfer: "Transfer (Flughafen usw.)", waterTaxi: "Wassertaxi", rolstoel: "Rollstuhltransport", touringcar: "Reisebus", standplaatsen: "Taxistände" },
+    it: { title: "Taxi, autobus e transfer", sub: "Prezzi, prenotazioni e trasporti pubblici", taxiPrijzen: "Prezzi taxi e tassametro", openbaar: "Trasporto pubblico", transfer: "Transfer (aeroporto ecc.)", waterTaxi: "Taxi d'acqua", rolstoel: "Trasporto disabili", touringcar: "Pullman", standplaatsen: "Posteggi taxi" },
+    tr: { title: "Taksi, otobüs ve transfer", sub: "Fiyatlar, rezervasyon ve toplu taşıma", taxiPrijzen: "Taksi fiyatları ve taksimetre", openbaar: "Toplu taşıma", transfer: "Transfer (havaalanı vb.)", waterTaxi: "Su taksisi", rolstoel: "Tekerlekli sandalye taşıması", touringcar: "Tur otobüsü", standplaatsen: "Taksi durakları" },
+    es: { title: "Taxi, autobuses y transfers", sub: "Precios, reservas y transporte público", taxiPrijzen: "Precios taxi y taxímetro", openbaar: "Transporte público", transfer: "Transfer (aeropuerto etc.)", waterTaxi: "Taxi acuático", rolstoel: "Transporte para silla de ruedas", touringcar: "Autocar / bus turístico", standplaatsen: "Paradas de taxi" }
   };
 
   function setLang(l) {
