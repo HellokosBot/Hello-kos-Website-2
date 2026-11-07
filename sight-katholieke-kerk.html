@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Katholieke Kerk Heilig Kruis – Hello Kos</title>
+  <style>
+    :root {
+      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
+      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
+      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
+      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text); -webkit-font-smoothing: antialiased;
+      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
+      background: var(--bg); min-height: 100vh; line-height: 1.55;
+    }
+    .app-header {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px 16px; background: var(--bg-header);
+      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+    }
+    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
+    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
+    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
+    .logo-text span { color: var(--gold-dark); font-style: italic; }
+    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
+    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
+    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
+    .lang-menu.open { display: block; }
+    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
+    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
+    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
+    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+    .content { padding: 18px 16px 0; }
+    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
+    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
+    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
+    .btn-audio { background: var(--petrol); color: #fff; }
+    .btn-audio.playing { background: var(--petrol-dark); }
+    .btn-stop { background: #3A4545; color: #fff; display: none; }
+    .btn-stop.show { display: flex; }
+    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
+    .btn-apple { background: #111; color: #fff; }
+    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
+    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
+    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
+    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
+    .card p:last-child { margin-bottom: 0; }
+    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
+    .tip strong { color: var(--gold); }
+    .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
+    .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
+    .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
+    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+    .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
+    .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
+    .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
+    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
+    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
+    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
+    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
+    .footer a { color: var(--petrol); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="bezienswaardigheden.html" class="back-btn">← Terug</a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🔅</div>
+      <div class="logo-text">Hello <span>Kos</span></div>
+    </a>
+    <div class="lang-wrap">
+      <button type="button" class="lang-btn" id="langBtn">
+        <span id="flag">🇳🇱</span> <span id="code">NL</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="hero-wrap">
+      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/kosciol-od-glownego-wejscia-standard.jpg" alt="Katholieke Kerk Heilig Kruis" loading="eager">
+      <div class="hero-caption" data-i18n="heroCap">Katholieke Kerk Heilig Kruis</div>
+    </div>
+
+    <div class="content">
+      <h1 data-i18n="title">Katholieke Kerk Heilig Kruis</h1>
+      <p class="lead" data-i18n="lead">De enige katholieke kerk op Kos – Italiaanse stijl, Franciscaner missen in het Engels.</p>
+
+      <div class="badges">
+        <span class="badge" data-i18n="badgeFree">Gratis</span>
+        <span class="badge">Kos-stad</span>
+        <span class="badge" data-i18n="badgeOnly">Enige katholieke</span>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
+        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
+        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Catholic%20Church%20of%20the%20Holy%20Cross%20Kos%20Agnus%20Dei" target="_blank" rel="noopener">📍 Google Maps</a>
+        <a class="btn btn-apple" href="https://maps.apple.com/?q=Catholic%20Church%20of%20the%20Holy%20Cross%20Kos%20Agnus%20Dei" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      <p class="status" id="ttsStatus"></p>
+
+      <div id="readText">
+        <div class="card">
+          <h2 data-i18n="h2only">Enige katholieke kerk</h2>
+          <p data-i18n="p1">De Katholieke Kerk van het Heilig Kruis is de enige katholieke kerk op het hele eiland. Ze ligt bij de katholieke begraafplaats (bijnaam Agnus Dei – Lam Gods).</p>
+        </div>
+
+        <div class="facts">
+          <div class="fact">
+            <span class="n">1920s</span>
+            <span class="l" data-i18n="factBuilt">gebouwd</span>
+          </div>
+          <div class="fact">
+            <span class="n" data-i18n="factEng">Engels</span>
+            <span class="l" data-i18n="factMass">missen</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2style">Italiaanse stijl</h2>
+          <p data-i18n="p2">Gebouwd in de jaren 1920 tijdens de Italiaanse bezetting. Na de aardbeving van 1933 herbouwden de Italianen de kerk volledig. Vandaag zie je een stevige, mooie Italiaanse stijl met dubbele zuilen, een boog en een versierd tympanon.</p>
+        </div>
+
+        <div class="photo-block">
+          <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/brama-prowadzaca-do-kosciola-standard.jpg" alt="Ingang kerk" loading="lazy">
+          <div class="cap" data-i18n="cap1">Ingang met zuilen en boog</div>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2mass">Missen</h2>
+          <p data-i18n="p3">Franciscaner paters uit Rhodos komen hier de mis vieren. De missen zijn in het Engels.</p>
+          <p data-i18n="p4">Zondag 11:00 · Zaterdag 18:00. In de zomer vaak dagelijkse diensten.</p>
+        </div>
+
+        <div class="photo-block">
+          <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/ic-mekan-standard.jpg" alt="Interieur" loading="lazy">
+          <div class="cap" data-i18n="cap2">Interieur</div>
+        </div>
+
+        <div class="gallery">
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/agnus-dei-catholic-church-standard.jpg" alt="Kerk" loading="lazy">
+            <span data-i18n="g1">Exterieur</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/avlu-standard.jpg" alt="Binnenplaats" loading="lazy">
+            <span data-i18n="g2">Binnenplaats</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/oltarz-na-swiezym-powietrzu-standard.jpg" alt="Altaar" loading="lazy">
+            <span data-i18n="g3">Altaar buiten</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/kos-kapel-van-het-heilig-kruis-standard.jpg" alt="Kapel" loading="lazy">
+            <span data-i18n="g4">Kapel</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2visit">Bezoeken</h2>
+          <div class="tip" data-i18n="tip">Tip: Binnen is het rustig en sfeervol. Bij een mis: stil en respectvol. Check de tijden (zo 11:00, za 18:00) als je wilt meedoen.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div>Hello Kos</div>
+    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
+  </footer>
+
+<script>
+(function(){
+  var I18N = {
+    nl: {
+      title: "Katholieke Kerk Heilig Kruis",
+      lead: "De enige katholieke kerk op Kos – Italiaanse stijl, Franciscaner missen in het Engels.",
+      heroCap: "Katholieke Kerk Heilig Kruis",
+      badgeFree: "Gratis", badgeOnly: "Enige katholieke",
+      btnPlay: "🔊 Voorlezen",
+      h2only: "Enige katholieke kerk",
+      p1: "De Katholieke Kerk van het Heilig Kruis is de enige katholieke kerk op het hele eiland. Ze ligt bij de katholieke begraafplaats (bijnaam Agnus Dei – Lam Gods).",
+      factBuilt: "gebouwd", factEng: "Engels", factMass: "missen",
+      h2style: "Italiaanse stijl",
+      p2: "Gebouwd in de jaren 1920 tijdens de Italiaanse bezetting. Na de aardbeving van 1933 herbouwden de Italianen de kerk volledig. Vandaag zie je een stevige, mooie Italiaanse stijl met dubbele zuilen, een boog en een versierd tympanon.",
+      cap1: "Ingang met zuilen en boog",
+      h2mass: "Missen",
+      p3: "Franciscaner paters uit Rhodos komen hier de mis vieren. De missen zijn in het Engels.",
+      p4: "Zondag 11:00 · Zaterdag 18:00. In de zomer vaak dagelijkse diensten.",
+      cap2: "Interieur",
+      g1: "Exterieur", g2: "Binnenplaats", g3: "Altaar buiten", g4: "Kapel",
+      h2visit: "Bezoeken",
+      tip: "Tip: Binnen is het rustig en sfeervol. Bij een mis: stil en respectvol. Check de tijden (zo 11:00, za 18:00) als je wilt meedoen."
+    },
+    en: {
+      title: "Catholic Church of the Holy Cross",
+      lead: "The only Catholic church on Kos – Italian style, Franciscan masses in English.",
+      heroCap: "Catholic Church of the Holy Cross",
+      badgeFree: "Free", badgeOnly: "Only Catholic",
+      btnPlay: "🔊 Read aloud",
+      h2only: "Only Catholic church",
+      p1: "The Catholic Church of the Holy Cross is the only Catholic church on the entire island. It is located by the Catholic cemetery (nickname Agnus Dei – Lamb of God).",
+      factBuilt: "built", factEng: "English", factMass: "masses",
+      h2style: "Italian style",
+      p2: "Built in the 1920s during the Italian occupation. After the 1933 earthquake the Italians completely rebuilt the church. Today you see a solid, beautiful Italian style with double columns, an arch and a decorated tympanum.",
+      cap1: "Entrance with columns and arch",
+      h2mass: "Masses",
+      p3: "Franciscan fathers from Rhodes come here to celebrate mass. The masses are in English.",
+      p4: "Sunday 11:00 · Saturday 18:00. In summer often daily services.",
+      cap2: "Interior",
+      g1: "Exterior", g2: "Courtyard", g3: "Outdoor altar", g4: "Chapel",
+      h2visit: "Visiting",
+      tip: "Tip: Inside it is quiet and atmospheric. At mass: silent and respectful. Check the times (Sun 11:00, Sat 18:00) if you want to join."
+    },
+    de: {
+      title: "Katholische Kirche Heiligkreuz",
+      lead: "Die einzige katholische Kirche auf Kos – italienischer Stil, Franziskanermessen auf Englisch.",
+      heroCap: "Katholische Kirche Heiligkreuz",
+      badgeFree: "Kostenlos", badgeOnly: "Einzige katholische",
+      btnPlay: "🔊 Vorlesen",
+      h2only: "Einzige katholische Kirche",
+      p1: "Die Katholische Kirche vom Heiligen Kreuz ist die einzige katholische Kirche auf der ganzen Insel. Sie liegt beim katholischen Friedhof (Spitzname Agnus Dei – Lamm Gottes).",
+      factBuilt: "gebaut", factEng: "Englisch", factMass: "Messen",
+      h2style: "Italienischer Stil",
+      p2: "Gebaut in den 1920er Jahren während der italienischen Besetzung. Nach dem Erdbeben von 1933 bauten die Italiener die Kirche vollständig neu. Heute siehst du einen soliden, schönen italienischen Stil mit doppelten Säulen, einem Bogen und einem verzierten Tympanon.",
+      cap1: "Eingang mit Säulen und Bogen",
+      h2mass: "Messen",
+      p3: "Franziskanerpatres aus Rhodos kommen hierher, um die Messe zu feiern. Die Messen sind auf Englisch.",
+      p4: "Sonntag 11:00 · Samstag 18:00. Im Sommer oft tägliche Gottesdienste.",
+      cap2: "Innenraum",
+      g1: "Außenansicht", g2: "Innenhof", g3: "Altar draußen", g4: "Kapelle",
+      h2visit: "Besuchen",
+      tip: "Tipp: Innen ist es ruhig und stimmungsvoll. Bei einer Messe: still und respektvoll. Check die Zeiten (So 11:00, Sa 18:00), wenn du mitmachen möchtest."
+    },
+    it: {
+      title: "Chiesa Cattolica della Santa Croce",
+      lead: "L’unica chiesa cattolica di Kos – stile italiano, messe francescane in inglese.",
+      heroCap: "Chiesa Cattolica della Santa Croce",
+      badgeFree: "Gratis", badgeOnly: "Unica cattolica",
+      btnPlay: "🔊 Leggi ad alta voce",
+      h2only: "Unica chiesa cattolica",
+      p1: "La Chiesa Cattolica della Santa Croce è l’unica chiesa cattolica dell’intera isola. Si trova presso il cimitero cattolico (soprannome Agnus Dei – Agnello di Dio).",
+      factBuilt: "costruita", factEng: "Inglese", factMass: "messe",
+      h2style: "Stile italiano",
+      p2: "Costruita negli anni ’20 durante l’occupazione italiana. Dopo il terremoto del 1933 gli italiani ricostruirono completamente la chiesa. Oggi vedi uno stile italiano solido e bello con doppie colonne, un arco e un timpano decorato.",
+      cap1: "Ingresso con colonne e arco",
+      h2mass: "Messe",
+      p3: "Padri francescani da Rodi vengono qui a celebrare la messa. Le messe sono in inglese.",
+      p4: "Domenica 11:00 · Sabato 18:00. In estate spesso servizi giornalieri.",
+      cap2: "Interno",
+      g1: "Esterno", g2: "Cortile", g3: "Altare all’aperto", g4: "Cappella",
+      h2visit: "Visitare",
+      tip: "Consiglio: all’interno è tranquillo e suggestivo. Durante la messa: silenzioso e rispettoso. Controlla gli orari (dom 11:00, sab 18:00) se vuoi partecipare."
+    },
+    tr: {
+      title: "Kutsal Haç Katolik Kilisesi",
+      lead: "Kos’taki tek Katolik kilisesi – İtalyan tarzı, İngilizce Fransiskan ayinleri.",
+      heroCap: "Kutsal Haç Katolik Kilisesi",
+      badgeFree: "Ücretsiz", badgeOnly: "Tek Katolik",
+      btnPlay: "🔊 Sesli oku",
+      h2only: "Tek Katolik kilisesi",
+      p1: "Kutsal Haç Katolik Kilisesi adanın tek Katolik kilisesidir. Katolik mezarlığının yanında bulunur (takma adı Agnus Dei – Tanrı’nın Kuzusu).",
+      factBuilt: "inşa edildi", factEng: "İngilizce", factMass: "ayinler",
+      h2style: "İtalyan tarzı",
+      p2: "1920’lerde İtalyan işgali sırasında inşa edildi. 1933 depreminden sonra İtalyanlar kiliseyi tamamen yeniden yaptı. Bugün çift sütunlu, kemerli ve süslü alınlıklı sağlam, güzel bir İtalyan tarzı görürsün.",
+      cap1: "Sütunlu ve kemerli giriş",
+      h2mass: "Ayinler",
+      p3: "Rodos’tan Fransiskan rahipleri burada ayin yapmak için gelir. Ayinler İngilizcedir.",
+      p4: "Pazar 11:00 · Cumartesi 18:00. Yazın sık sık günlük ayinler olur.",
+      cap2: "İç mekân",
+      g1: "Dış cephe", g2: "Avlu", g3: "Dış altar", g4: "Şapel",
+      h2visit: "Ziyaret",
+      tip: "İpucu: İçerisi sakin ve atmosferik. Ayinde: sessiz ve saygılı ol. Katılmak istersen saatleri kontrol et (Paz 11:00, Cts 18:00)."
+    },
+    es: {
+      title: "Iglesia Católica de la Santa Cruz",
+      lead: "La única iglesia católica de Kos – estilo italiano, misas franciscanas en inglés.",
+      heroCap: "Iglesia Católica de la Santa Cruz",
+      badgeFree: "Gratis", badgeOnly: "Única católica",
+      btnPlay: "🔊 Leer en voz alta",
+      h2only: "Única iglesia católica",
+      p1: "La Iglesia Católica de la Santa Cruz es la única iglesia católica de toda la isla. Está junto al cementerio católico (apodo Agnus Dei – Cordero de Dios).",
+      factBuilt: "construida", factEng: "Inglés", factMass: "misas",
+      h2style: "Estilo italiano",
+      p2: "Construida en los años 20 durante la ocupación italiana. Tras el terremoto de 1933 los italianos reconstruyeron completamente la iglesia. Hoy ves un estilo italiano sólido y bonito con columnas dobles, un arco y un tímpano decorado.",
+      cap1: "Entrada con columnas y arco",
+      h2mass: "Misas",
+      p3: "Padres franciscanos de Rodas vienen aquí a celebrar la misa. Las misas son en inglés.",
+      p4: "Domingo 11:00 · Sábado 18:00. En verano a menudo servicios diarios.",
+      cap2: "Interior",
+      g1: "Exterior", g2: "Patio", g3: "Altar al aire libre", g4: "Capilla",
+      h2visit: "Visitar",
+      tip: "Consejo: dentro es tranquilo y con ambiente. En misa: silencioso y respetuoso. Comprueba los horarios (dom 11:00, sáb 18:00) si quieres participar."
+    }
+  };
+
+  function setLang(l) {
+    if (!I18N[l]) l = 'nl';
+    localStorage.setItem('hk-lang', l);
+    document.documentElement.lang = l;
+    var d = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (d[k]) el.textContent = d[k];
+    });
+    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if (opt) {
+      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
+      document.getElementById('code').textContent = l.toUpperCase();
+    }
+    document.querySelectorAll('.lang-option').forEach(function(o){
+      o.classList.toggle('active', o.getAttribute('data-lang') === l);
+    });
+    closeMenu();
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  function openMenu(){ langMenu.classList.add('open'); }
+  function closeMenu(){ langMenu.classList.remove('open'); }
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    langMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.addEventListener('click', function(){ closeMenu(); });
+  document.querySelectorAll('.lang-option').forEach(function(btn){
+    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
+  });
+
+  var saved = localStorage.getItem('hk-lang') || 'nl';
+  setLang(saved);
+
+  /* TTS */
+  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
+  function getLang(){
+    var l = localStorage.getItem('hk-lang') || 'nl';
+    return LANG_VOICE[l] ? l : 'nl';
+  }
+  function pickVoice(code){
+    var voices = speechSynthesis.getVoices() || [];
+    var prefix = code.slice(0,2).toLowerCase();
+    return voices.find(function(v){ return v.lang === code; })
+      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
+      || null;
+  }
+  var btnPlay = document.getElementById('btnPlay');
+  var btnStop = document.getElementById('btnStop');
+  var status = document.getElementById('ttsStatus');
+  function setStatus(t){ if(status) status.textContent = t; }
+  function play(){
+    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
+    speechSynthesis.cancel();
+    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
+    var l = getLang();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = LANG_VOICE[l];
+    u.rate = 0.92;
+    var v = pickVoice(LANG_VOICE[l]);
+    if(v) u.voice = v;
+    u.onstart = function(){
+      btnPlay.classList.add('playing');
+      btnStop.classList.add('show');
+      setStatus('Voorlezen… ('+l.toUpperCase()+')');
+    };
+    u.onend = u.onerror = function(){
+      btnPlay.classList.remove('playing');
+      btnStop.classList.remove('show');
+      setStatus('');
+    };
+    if(!speechSynthesis.getVoices().length){
+      speechSynthesis.onvoiceschanged = function(){
+        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
+        speechSynthesis.speak(u);
+      };
+      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
+    } else {
+      speechSynthesis.speak(u);
+    }
+  }
+  function stop(){
+    if(window.speechSynthesis) speechSynthesis.cancel();
+    btnPlay.classList.remove('playing');
+    btnStop.classList.remove('show');
+    setStatus('Gestopt.');
+  }
+  btnPlay.addEventListener('click', play);
+  btnStop.addEventListener('click', stop);
+  if(window.speechSynthesis){
+    speechSynthesis.getVoices();
+    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  }
+})();
+</script>
+</body>
+</html>
+Sla dit op als sight-katholieke-kerk.html. Alle tekst is vertaald en de voorleesknop leest de gekozen taal.
+
