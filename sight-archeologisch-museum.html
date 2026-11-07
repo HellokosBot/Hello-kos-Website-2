@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Archeologisch Museum – Hello Kos</title>
+  <style>
+    :root {
+      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
+      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
+      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
+      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text); -webkit-font-smoothing: antialiased;
+      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
+      background: var(--bg); min-height: 100vh; line-height: 1.55;
+    }
+    .app-header {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px 16px; background: var(--bg-header);
+      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+    }
+    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
+    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
+    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
+    .logo-text span { color: var(--gold-dark); font-style: italic; }
+    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
+    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
+    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
+    .lang-menu.open { display: block; }
+    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
+    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
+    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
+    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+    .content { padding: 18px 16px 0; }
+    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
+    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
+    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+    .badge.paid { background: rgba(224,176,64,0.2); color: var(--gold); }
+    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
+    .btn-audio { background: var(--petrol); color: #fff; }
+    .btn-audio.playing { background: var(--petrol-dark); }
+    .btn-stop { background: #3A4545; color: #fff; display: none; }
+    .btn-stop.show { display: flex; }
+    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
+    .btn-apple { background: #111; color: #fff; }
+    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
+    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
+    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
+    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
+    .card p:last-child { margin-bottom: 0; }
+    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
+    .tip strong { color: var(--gold); }
+    .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
+    .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
+    .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
+    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+    .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
+    .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
+    .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
+    .hours { margin-top: 8px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+    .h-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 12px; font-size: 0.88rem; border-bottom: 1px solid var(--border); background: #1a2525; }
+    .h-row:nth-child(odd) { background: #152525; }
+    .h-row:last-child { border-bottom: none; }
+    .h-row span:last-child { font-weight: 700; color: var(--petrol); }
+    .h-row.closed span:last-child { color: #e0a040; }
+    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
+    .footer a { color: var(--petrol); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="bezienswaardigheden.html" class="back-btn">← Terug</a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🔅</div>
+      <div class="logo-text">Hello <span>Kos</span></div>
+    </a>
+    <div class="lang-wrap">
+      <button type="button" class="lang-btn" id="langBtn">
+        <span id="flag">🇳🇱</span> <span id="code">NL</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="hero-wrap">
+      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/kos-archaeological-museum-gallery-10-480-standard.jpg" alt="Archeologisch Museum Kos" loading="eager">
+      <div class="hero-caption" data-i18n="heroCap">Archeologisch Museum · Eleftherias-plein</div>
+    </div>
+
+    <div class="content">
+      <h1 data-i18n="title">Archeologisch Museum</h1>
+      <p class="lead" data-i18n="lead">Van prehistorie tot Romeinse tijd – de rijke geschiedenis van Kos in één gebouw in het centrum.</p>
+
+      <div class="badges">
+        <span class="badge paid" data-i18n="badgePaid">Entree € 10</span>
+        <span class="badge">Kos-stad</span>
+        <span class="badge" data-i18n="badgeTue">Dinsdag dicht</span>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
+        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
+        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Archaeological%20Museum%20of%20Kos%20Eleftherias%20Square" target="_blank" rel="noopener">📍 Google Maps</a>
+        <a class="btn btn-apple" href="https://maps.apple.com/?q=Archaeological%20Museum%20of%20Kos%20Eleftherias%20Square" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      <p class="status" id="ttsStatus"></p>
+
+      <div id="readText">
+        <div class="card">
+          <h2 data-i18n="h2what">Wat zie je hier?</h2>
+          <p data-i18n="p1">Het Archeologisch Museum van Kos geeft een overzicht van de geschiedenis van het eiland, van de prehistorie tot de Romeinse tijd. Het ligt op Eleftherias-plein, midden in Kos-stad.</p>
+          <p data-i18n="p2">Het gebouw zelf is uit 1935 (Italiaanse periode) en is een beschermd monument.</p>
+        </div>
+
+        <div class="facts">
+          <div class="fact">
+            <span class="n">€ 10</span>
+            <span class="l" data-i18n="factEntry">entree (volwassenen)</span>
+          </div>
+          <div class="fact">
+            <span class="n" data-i18n="factTue">Dinsdag</span>
+            <span class="l" data-i18n="factClosed">gesloten</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2hours">Openingstijden</h2>
+          <p data-i18n="summer"><strong>Zomer</strong> (1 april – 31 oktober)</p>
+          <div class="hours">
+            <div class="h-row"><span data-i18n="monSun">Ma – Zo</span><span>08:00 – 20:00</span></div>
+            <div class="h-row closed"><span data-i18n="tue">Dinsdag</span><span data-i18n="closed">Gesloten</span></div>
+          </div>
+          <p style="margin-top:12px" data-i18n="winter"><strong>Winter</strong> (1 november – 31 maart)</p>
+          <div class="hours">
+            <div class="h-row"><span data-i18n="monSun">Ma – Zo</span><span>08:30 – 15:30</span></div>
+            <div class="h-row closed"><span data-i18n="tue">Dinsdag</span><span data-i18n="closed">Gesloten</span></div>
+          </div>
+          <p style="margin-top:10px;font-size:0.82rem;color:var(--text-soft)" data-i18n="hoursNote">Entree circa € 10. Er bestaat ook een combinatiekaart (o.a. met Asklepion en Casa Romana). Controleer ter plaatse de actuele prijs.</p>
+        </div>
+
+        <div class="photo-block">
+          <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/archaeological-museum-kos-0011-high.jpg" alt="Collectie Archeologisch Museum Kos" loading="lazy">
+          <div class="cap" data-i18n="cap1">Beelden en vondsten uit opgravingen op het eiland</div>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2objects">Objecten in het museum</h2>
+          <p data-i18n="p3">De oudste stukken komen uit de prehistorische periode (ca. 3000–1200 v.Chr.): gereedschappen en ceramiek van de eerste bewoners.</p>
+          <p data-i18n="p4">Uit de klassieke en Hellenistische tijd zie je beelden en sculpturen van goden en helden. Kos was toen al een belangrijk centrum.</p>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2ask">Asklepios en de Romeinen</h2>
+          <p data-i18n="p5">Een van de indrukwekkendste stukken is het beeld van Asklepios, god van de geneeskunde – verbonden met de beroemde tempel en medische school van Kos.</p>
+          <p data-i18n="p6">Uit de Romeinse periode (ca. 100 v.Chr. – 400 n.Chr.) liggen er mozaïeken, grafstenen en gereedschappen die het dagelijks leven en de Romeinse invloed tonen.</p>
+        </div>
+
+        <div class="photo-block">
+          <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/kos-mouseio-kouris_2-high.jpg" alt="Museum interieur Kos" loading="lazy">
+          <div class="cap" data-i18n="cap2">Interieur van het museum</div>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2visit">Bezoeken</h2>
+          <p data-i18n="p7">Centraal op Eleftherias-plein – makkelijk te voet of met de fiets. Combineer met de Agora, Markthal of Palm tree lane in de buurt.</p>
+          <div class="tip" data-i18n="tip">Tip: plan minstens 1 tot 1,5 uur. In de zomer is het ’s ochtends of later in de middag vaak rustiger.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div>Hello Kos</div>
+    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
+  </footer>
+
+<script>
+(function(){
+  var I18N = {
+    nl: {
+      title: "Archeologisch Museum",
+      lead: "Van prehistorie tot Romeinse tijd – de rijke geschiedenis van Kos in één gebouw in het centrum.",
+      heroCap: "Archeologisch Museum · Eleftherias-plein",
+      badgePaid: "Entree € 10", badgeTue: "Dinsdag dicht",
+      btnPlay: "🔊 Voorlezen",
+      h2what: "Wat zie je hier?",
+      p1: "Het Archeologisch Museum van Kos geeft een overzicht van de geschiedenis van het eiland, van de prehistorie tot de Romeinse tijd. Het ligt op Eleftherias-plein, midden in Kos-stad.",
+      p2: "Het gebouw zelf is uit 1935 (Italiaanse periode) en is een beschermd monument.",
+      factEntry: "entree (volwassenen)", factTue: "Dinsdag", factClosed: "gesloten",
+      h2hours: "Openingstijden",
+      summer: "Zomer (1 april – 31 oktober)",
+      winter: "Winter (1 november – 31 maart)",
+      monSun: "Ma – Zo", tue: "Dinsdag", closed: "Gesloten",
+      hoursNote: "Entree circa € 10. Er bestaat ook een combinatiekaart (o.a. met Asklepion en Casa Romana). Controleer ter plaatse de actuele prijs.",
+      cap1: "Beelden en vondsten uit opgravingen op het eiland",
+      h2objects: "Objecten in het museum",
+      p3: "De oudste stukken komen uit de prehistorische periode (ca. 3000–1200 v.Chr.): gereedschappen en ceramiek van de eerste bewoners.",
+      p4: "Uit de klassieke en Hellenistische tijd zie je beelden en sculpturen van goden en helden. Kos was toen al een belangrijk centrum.",
+      h2ask: "Asklepios en de Romeinen",
+      p5: "Een van de indrukwekkendste stukken is het beeld van Asklepios, god van de geneeskunde – verbonden met de beroemde tempel en medische school van Kos.",
+      p6: "Uit de Romeinse periode (ca. 100 v.Chr. – 400 n.Chr.) liggen er mozaïeken, grafstenen en gereedschappen die het dagelijks leven en de Romeinse invloed tonen.",
+      cap2: "Interieur van het museum",
+      h2visit: "Bezoeken",
+      p7: "Centraal op Eleftherias-plein – makkelijk te voet of met de fiets. Combineer met de Agora, Markthal of Palm tree lane in de buurt.",
+      tip: "Tip: plan minstens 1 tot 1,5 uur. In de zomer is het ’s ochtends of later in de middag vaak rustiger."
+    },
+    en: {
+      title: "Archaeological Museum",
+      lead: "From prehistory to Roman times – the rich history of Kos in one building in the centre.",
+      heroCap: "Archaeological Museum · Eleftherias Square",
+      badgePaid: "Entry € 10", badgeTue: "Closed Tuesday",
+      btnPlay: "🔊 Read aloud",
+      h2what: "What do you see here?",
+      p1: "The Archaeological Museum of Kos gives an overview of the history of the island, from prehistory to Roman times. It is located on Eleftherias Square, in the centre of Kos Town.",
+      p2: "The building itself dates from 1935 (Italian period) and is a protected monument.",
+      factEntry: "entry (adults)", factTue: "Tuesday", factClosed: "closed",
+      h2hours: "Opening hours",
+      summer: "Summer (1 April – 31 October)",
+      winter: "Winter (1 November – 31 March)",
+      monSun: "Mon – Sun", tue: "Tuesday", closed: "Closed",
+      hoursNote: "Entry about € 10. There is also a combination ticket (including Asklepion and Casa Romana). Check the current price on site.",
+      cap1: "Statues and finds from excavations on the island",
+      h2objects: "Objects in the museum",
+      p3: "The oldest pieces come from the prehistoric period (approx. 3000–1200 BC): tools and ceramics of the first inhabitants.",
+      p4: "From the classical and Hellenistic period you see statues and sculptures of gods and heroes. Kos was already an important centre then.",
+      h2ask: "Asklepios and the Romans",
+      p5: "One of the most impressive pieces is the statue of Asklepios, god of medicine – connected to the famous temple and medical school of Kos.",
+      p6: "From the Roman period (approx. 100 BC – 400 AD) there are mosaics, tombstones and tools that show daily life and Roman influence.",
+      cap2: "Interior of the museum",
+      h2visit: "Visiting",
+      p7: "Central on Eleftherias Square – easy on foot or by bike. Combine with the Agora, Market Hall or Palm tree lane nearby.",
+      tip: "Tip: plan at least 1 to 1.5 hours. In summer it is often quieter in the morning or later in the afternoon."
+    },
+    de: {
+      title: "Archäologisches Museum",
+      lead: "Von der Vorgeschichte bis zur römischen Zeit – die reiche Geschichte von Kos in einem Gebäude im Zentrum.",
+      heroCap: "Archäologisches Museum · Eleftherias-Platz",
+      badgePaid: "Eintritt € 10", badgeTue: "Dienstag geschlossen",
+      btnPlay: "🔊 Vorlesen",
+      h2what: "Was siehst du hier?",
+      p1: "Das Archäologische Museum von Kos gibt einen Überblick über die Geschichte der Insel, von der Vorgeschichte bis zur römischen Zeit. Es liegt am Eleftherias-Platz, mitten in Kos-Stadt.",
+      p2: "Das Gebäude selbst stammt aus 1935 (italienische Periode) und ist ein geschütztes Denkmal.",
+      factEntry: "Eintritt (Erwachsene)", factTue: "Dienstag", factClosed: "geschlossen",
+      h2hours: "Öffnungszeiten",
+      summer: "Sommer (1. April – 31. Oktober)",
+      winter: "Winter (1. November – 31. März)",
+      monSun: "Mo – So", tue: "Dienstag", closed: "Geschlossen",
+      hoursNote: "Eintritt ca. € 10. Es gibt auch eine Kombi-Karte (u. a. mit Asklepion und Casa Romana). Aktuellen Preis vor Ort prüfen.",
+      cap1: "Statuen und Funde aus Ausgrabungen auf der Insel",
+      h2objects: "Objekte im Museum",
+      p3: "Die ältesten Stücke stammen aus der prähistorischen Periode (ca. 3000–1200 v. Chr.): Werkzeuge und Keramik der ersten Bewohner.",
+      p4: "Aus der klassischen und hellenistischen Zeit siehst du Statuen und Skulpturen von Göttern und Helden. Kos war damals schon ein wichtiges Zentrum.",
+      h2ask: "Asklepios und die Römer",
+      p5: "Eines der beeindruckendsten Stücke ist die Statue des Asklepios, Gott der Medizin – verbunden mit dem berühmten Tempel und der medizinischen Schule von Kos.",
+      p6: "Aus der römischen Periode (ca. 100 v. Chr. – 400 n. Chr.) gibt es Mosaike, Grabsteine und Werkzeuge, die den Alltag und den römischen Einfluss zeigen.",
+      cap2: "Innenraum des Museums",
+      h2visit: "Besuchen",
+      p7: "Zentral am Eleftherias-Platz – einfach zu Fuß oder mit dem Fahrrad. Kombiniere mit der Agora, der Markthalle oder Palm tree lane in der Nähe.",
+      tip: "Tipp: plane mindestens 1 bis 1,5 Stunden. Im Sommer ist es morgens oder später am Nachmittag oft ruhiger."
+    },
+    it: {
+      title: "Museo Archeologico",
+      lead: "Dalla preistoria all’epoca romana – la ricca storia di Kos in un edificio nel centro.",
+      heroCap: "Museo Archeologico · Piazza Eleftherias",
+      badgePaid: "Ingresso € 10", badgeTue: "Chiuso martedì",
+      btnPlay: "🔊 Leggi ad alta voce",
+      h2what: "Cosa vedi qui?",
+      p1: "Il Museo Archeologico di Kos offre una panoramica della storia dell’isola, dalla preistoria all’epoca romana. Si trova in Piazza Eleftherias, nel centro di Kos città.",
+      p2: "L’edificio stesso risale al 1935 (periodo italiano) ed è un monumento protetto.",
+      factEntry: "ingresso (adulti)", factTue: "Martedì", factClosed: "chiuso",
+      h2hours: "Orari di apertura",
+      summer: "Estate (1 aprile – 31 ottobre)",
+      winter: "Inverno (1 novembre – 31 marzo)",
+      monSun: "Lun – Dom", tue: "Martedì", closed: "Chiuso",
+      hoursNote: "Ingresso circa € 10. Esiste anche un biglietto combinato (tra cui Asklepion e Casa Romana). Controlla il prezzo attuale sul posto.",
+      cap1: "Statue e reperti dagli scavi sull’isola",
+      h2objects: "Oggetti nel museo",
+      p3: "I pezzi più antichi provengono dal periodo preistorico (ca. 3000–1200 a.C.): utensili e ceramica dei primi abitanti.",
+      p4: "Dal periodo classico ed ellenistico vedi statue e sculture di dei ed eroi. Kos era già allora un centro importante.",
+      h2ask: "Asclepio e i Romani",
+      p5: "Uno dei pezzi più impressionanti è la statua di Asclepio, dio della medicina – collegata al famoso tempio e alla scuola medica di Kos.",
+      p6: "Dal periodo romano (ca. 100 a.C. – 400 d.C.) ci sono mosaici, lapidi e utensili che mostrano la vita quotidiana e l’influenza romana.",
+      cap2: "Interno del museo",
+      h2visit: "Visitare",
+      p7: "Centrale in Piazza Eleftherias – facile a piedi o in bici. Combina con l’Agora, il Mercato coperto o Palm tree lane nelle vicinanze.",
+      tip: "Consiglio: pianifica almeno 1–1,5 ore. In estate è spesso più tranquillo la mattina o nel tardo pomeriggio."
+    },
+    tr: {
+      title: "Arkeoloji Müzesi",
+      lead: "Tarih öncesinden Roma dönemine – Kos’un zengin tarihi merkezdeki tek bir binada.",
+      heroCap: "Arkeoloji Müzesi · Eleftherias Meydanı",
+      badgePaid: "Giriş € 10", badgeTue: "Salı kapalı",
+      btnPlay: "🔊 Sesli oku",
+      h2what: "Burada ne görüyorsun?",
+      p1: "Kos Arkeoloji Müzesi adanın tarihine genel bir bakış sunar, tarih öncesinden Roma dönemine kadar. Eleftherias Meydanı’nda, Kos şehrinin merkezindedir.",
+      p2: "Bina 1935’ten (İtalyan dönemi) kalmadır ve koruma altındaki bir anıttır.",
+      factEntry: "giriş (yetişkin)", factTue: "Salı", factClosed: "kapalı",
+      h2hours: "Açılış saatleri",
+      summer: "Yaz (1 Nisan – 31 Ekim)",
+      winter: "Kış (1 Kasım – 31 Mart)",
+      monSun: "Pzt – Paz", tue: "Salı", closed: "Kapalı",
+      hoursNote: "Giriş yaklaşık € 10. Ayrıca kombine bilet de vardır (Asklepion ve Casa Romana dahil). Güncel fiyatı yerinde kontrol et.",
+      cap1: "Adadaki kazılardan heykeller ve buluntular",
+      h2objects: "Müzedeki objeler",
+      p3: "En eski parçalar tarih öncesi dönemden gelir (yaklaşık MÖ 3000–1200): ilk sakinlerin aletleri ve seramikleri.",
+      p4: "Klasik ve Helenistik dönemden tanrı ve kahraman heykelleri görürsün. Kos o zamanlar zaten önemli bir merkezdi.",
+      h2ask: "Asklepios ve Romalılar",
+      p5: "En etkileyici parçalardan biri tıp tanrısı Asklepios’un heykelidir – Kos’un ünlü tapınağı ve tıp okuluyla bağlantılıdır.",
+      p6: "Roma döneminden (yaklaşık MÖ 100 – MS 400) günlük yaşamı ve Roma etkisini gösteren mozaikler, mezar taşları ve aletler vardır.",
+      cap2: "Müzenin içi",
+      h2visit: "Ziyaret",
+      p7: "Eleftherias Meydanı’nda merkezi – yürüyerek veya bisikletle kolay. Yakındaki Agora, Kapalı Pazar veya Palm tree lane ile birleştir.",
+      tip: "İpucu: en az 1–1,5 saat planla. Yazın sabahları veya öğleden sonra geç saatlerde genellikle daha sakin olur."
+    },
+    es: {
+      title: "Museo Arqueológico",
+      lead: "De la prehistoria a la época romana – la rica historia de Kos en un edificio del centro.",
+      heroCap: "Museo Arqueológico · Plaza Eleftherias",
+      badgePaid: "Entrada € 10", badgeTue: "Cerrado martes",
+      btnPlay: "🔊 Leer en voz alta",
+      h2what: "¿Qué ves aquí?",
+      p1: "El Museo Arqueológico de Kos ofrece una visión general de la historia de la isla, desde la prehistoria hasta la época romana. Está en la Plaza Eleftherias, en el centro de Kos ciudad.",
+      p2: "El edificio data de 1935 (periodo italiano) y es un monumento protegido.",
+      factEntry: "entrada (adultos)", factTue: "Martes", factClosed: "cerrado",
+      h2hours: "Horarios de apertura",
+      summer: "Verano (1 abril – 31 octubre)",
+      winter: "Invierno (1 noviembre – 31 marzo)",
+      monSun: "Lun – Dom", tue: "Martes", closed: "Cerrado",
+      hoursNote: "Entrada aproximadamente € 10. También existe un billete combinado (incluido Asklepion y Casa Romana). Comprueba el precio actual in situ.",
+      cap1: "Estatuas y hallazgos de excavaciones en la isla",
+      h2objects: "Objetos en el museo",
+      p3: "Las piezas más antiguas proceden del periodo prehistórico (aprox. 3000–1200 a.C.): herramientas y cerámica de los primeros habitantes.",
+      p4: "Del periodo clásico y helenístico ves estatuas y esculturas de dioses y héroes. Kos ya era entonces un centro importante.",
+      h2ask: "Asclepio y los romanos",
+      p5: "Una de las piezas más impresionantes es la estatua de Asclepio, dios de la medicina – vinculada al famoso templo y escuela médica de Kos.",
+      p6: "Del periodo romano (aprox. 100 a.C. – 400 d.C.) hay mosaicos, lápidas y herramientas que muestran la vida cotidiana y la influencia romana.",
+      cap2: "Interior del museo",
+      h2visit: "Visitar",
+      p7: "Central en la Plaza Eleftherias – fácil a pie o en bici. Combínalo con el Ágora, el Mercado cubierto o Palm tree lane cerca.",
+      tip: "Consejo: planifica al menos 1–1,5 horas. En verano suele estar más tranquilo por la mañana o al final de la tarde."
+    }
+  };
+
+  function setLang(l) {
+    if (!I18N[l]) l = 'nl';
+    localStorage.setItem('hk-lang', l);
+    document.documentElement.lang = l;
+    var d = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (d[k]) el.textContent = d[k];
+    });
+    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if (opt) {
+      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
+      document.getElementById('code').textContent = l.toUpperCase();
+    }
+    document.querySelectorAll('.lang-option').forEach(function(o){
+      o.classList.toggle('active', o.getAttribute('data-lang') === l);
+    });
+    closeMenu();
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  function openMenu(){ langMenu.classList.add('open'); }
+  function closeMenu(){ langMenu.classList.remove('open'); }
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    langMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.addEventListener('click', function(){ closeMenu(); });
+  document.querySelectorAll('.lang-option').forEach(function(btn){
+    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
+  });
+
+  var saved = localStorage.getItem('hk-lang') || 'nl';
+  setLang(saved);
+
+  /* TTS */
+  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
+  function getLang(){
+    var l = localStorage.getItem('hk-lang') || 'nl';
+    return LANG_VOICE[l] ? l : 'nl';
+  }
+  function pickVoice(code){
+    var voices = speechSynthesis.getVoices() || [];
+    var prefix = code.slice(0,2).toLowerCase();
+    return voices.find(function(v){ return v.lang === code; })
+      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
+      || null;
+  }
+  var btnPlay = document.getElementById('btnPlay');
+  var btnStop = document.getElementById('btnStop');
+  var status = document.getElementById('ttsStatus');
+  function setStatus(t){ if(status) status.textContent = t; }
+  function play(){
+    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
+    speechSynthesis.cancel();
+    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
+    var l = getLang();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = LANG_VOICE[l];
+    u.rate = 0.92;
+    var v = pickVoice(LANG_VOICE[l]);
+    if(v) u.voice = v;
+    u.onstart = function(){
+      btnPlay.classList.add('playing');
+      btnStop.classList.add('show');
+      setStatus('Voorlezen… ('+l.toUpperCase()+')');
+    };
+    u.onend = u.onerror = function(){
+      btnPlay.classList.remove('playing');
+      btnStop.classList.remove('show');
+      setStatus('');
+    };
+    if(!speechSynthesis.getVoices().length){
+      speechSynthesis.onvoiceschanged = function(){
+        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
+        speechSynthesis.speak(u);
+      };
+      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
+    } else {
+      speechSynthesis.speak(u);
+    }
+  }
+  function stop(){
+    if(window.speechSynthesis) speechSynthesis.cancel();
+    btnPlay.classList.remove('playing');
+    btnStop.classList.remove('show');
+    setStatus('Gestopt.');
+  }
+  btnPlay.addEventListener('click', play);
+  btnStop.addEventListener('click', stop);
+  if(window.speechSynthesis){
+    speechSynthesis.getVoices();
+    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  }
+})();
+</script>
+</body>
+</html>
