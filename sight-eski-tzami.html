@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Eski Tzami moskee – Hello Kos</title>
+  <style>
+    :root {
+      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
+      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
+      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
+      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text); -webkit-font-smoothing: antialiased;
+      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
+      background: var(--bg); min-height: 100vh; line-height: 1.55;
+    }
+    .app-header {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px 16px; background: var(--bg-header);
+      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+    }
+    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
+    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
+    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
+    .logo-text span { color: var(--gold-dark); font-style: italic; }
+    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
+    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
+    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
+    .lang-menu.open { display: block; }
+    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
+    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
+    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
+    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+    .content { padding: 18px 16px 0; }
+    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
+    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
+    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
+    .btn-audio { background: var(--petrol); color: #fff; }
+    .btn-audio.playing { background: var(--petrol-dark); }
+    .btn-stop { background: #3A4545; color: #fff; display: none; }
+    .btn-stop.show { display: flex; }
+    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
+    .btn-apple { background: #111; color: #fff; }
+    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
+    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
+    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
+    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
+    .card p:last-child { margin-bottom: 0; }
+    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
+    .tip strong { color: var(--gold); }
+    .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
+    .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
+    .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
+    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+    .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
+    .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
+    .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
+    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
+    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
+    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
+    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
+    .footer a { color: var(--petrol); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="bezienswaardigheden.html" class="back-btn">← Terug</a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🔅</div>
+      <div class="logo-text">Hello <span>Kos</span></div>
+    </a>
+    <div class="lang-wrap">
+      <button type="button" class="lang-btn" id="langBtn">
+        <span id="flag">🇳🇱</span> <span id="code">NL</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="hero-wrap">
+      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/493287811_9619227934781654_7184517507473617472_n-high.jpg" alt="Eski Tzami minaret Kos" loading="eager">
+      <div class="hero-caption" data-i18n="heroCap">Eski Tzami · restant van de minaret</div>
+    </div>
+
+    <div class="content">
+      <h1 data-i18n="title">Eski Tzami moskee</h1>
+      <p class="lead" data-i18n="lead">De oudste moskee van Kos-stad – van het gebouw zelf is alleen de minaret over, op Diagoras-plein.</p>
+
+      <div class="badges">
+        <span class="badge" data-i18n="badgeFree">Gratis</span>
+        <span class="badge">Kos-stad</span>
+        <span class="badge">± 1586</span>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
+        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
+        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Eski%20Tzami%20Mosque%20Diagoras%20Square%20Kos" target="_blank" rel="noopener">📍 Google Maps</a>
+        <a class="btn btn-apple" href="https://maps.apple.com/?q=Eski%20Tzami%20Mosque%20Diagoras%20Square%20Kos" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      <p class="status" id="ttsStatus"></p>
+
+      <div id="readText">
+        <div class="card">
+          <h2 data-i18n="h2oldest">Oudste moskee van Kos-stad</h2>
+          <p data-i18n="p1">Eski Tzami betekent “oude moskee”. Het is een van de oudste Ottomaanse sporen op het eiland – waarschijnlijk gebouwd in 1586 en de oudste moskee in Kos-stad.</p>
+        </div>
+
+        <div class="facts">
+          <div class="fact">
+            <span class="n">± 1586</span>
+            <span class="l" data-i18n="factBuilt">gebouwd</span>
+          </div>
+          <div class="fact">
+            <span class="n">± 11 m</span>
+            <span class="l" data-i18n="factMinaret">minaret over</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2minaret">Alleen de minaret</h2>
+          <p data-i18n="p2">Van de moskee zelf is niets meer over, behalve de minaret van iets meer dan elf meter. Die staat op Diagoras-plein.</p>
+          <p data-i18n="p3">De moskee is verwoest tijdens de aardbeving van 1933. De restanten werden gesloopt; alleen een deel van de minaret bleef staan.</p>
+        </div>
+
+        <div class="photo-block">
+          <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/img_5547-copy-high.jpg" alt="Eski Tzami minaret" loading="lazy">
+          <div class="cap" data-i18n="cap1">De minaret op Diagoras-plein</div>
+        </div>
+
+        <div class="gallery">
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/kos-kos_city-bab_gedid_mosque_or_eski-13esd-high-4fqiz0.jpg" alt="Eski Tzami" loading="lazy">
+            <span data-i18n="g1">Minaret</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/bougainvilleas-by-the-high-udemw3.jpg" alt="Omgeving" loading="lazy">
+            <span data-i18n="g2">Omgeving</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2visit">Bezoeken</h2>
+          <p data-i18n="p4">Gratis, altijd van buitenaf te zien op Diagoras-plein. Er is geen interieur meer te bezoeken.</p>
+          <div class="tip" data-i18n="tip">Tip: de minaret is makkelijk te missen tussen de gebouwen – kijk omhoog op Diagoras-plein. Leuk om even stil bij stil te staan: dit is het oudste Ottomaanse restant in de stad.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div>Hello Kos</div>
+    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
+  </footer>
+
+<script>
+(function(){
+  var I18N = {
+    nl: {
+      title: "Eski Tzami moskee",
+      lead: "De oudste moskee van Kos-stad – van het gebouw zelf is alleen de minaret over, op Diagoras-plein.",
+      heroCap: "Eski Tzami · restant van de minaret",
+      badgeFree: "Gratis",
+      btnPlay: "🔊 Voorlezen",
+      h2oldest: "Oudste moskee van Kos-stad",
+      p1: "Eski Tzami betekent “oude moskee”. Het is een van de oudste Ottomaanse sporen op het eiland – waarschijnlijk gebouwd in 1586 en de oudste moskee in Kos-stad.",
+      factBuilt: "gebouwd", factMinaret: "minaret over",
+      h2minaret: "Alleen de minaret",
+      p2: "Van de moskee zelf is niets meer over, behalve de minaret van iets meer dan elf meter. Die staat op Diagoras-plein.",
+      p3: "De moskee is verwoest tijdens de aardbeving van 1933. De restanten werden gesloopt; alleen een deel van de minaret bleef staan.",
+      cap1: "De minaret op Diagoras-plein",
+      g1: "Minaret", g2: "Omgeving",
+      h2visit: "Bezoeken",
+      p4: "Gratis, altijd van buitenaf te zien op Diagoras-plein. Er is geen interieur meer te bezoeken.",
+      tip: "Tip: de minaret is makkelijk te missen tussen de gebouwen – kijk omhoog op Diagoras-plein. Leuk om even stil bij stil te staan: dit is het oudste Ottomaanse restant in de stad."
+    },
+    en: {
+      title: "Eski Tzami Mosque",
+      lead: "The oldest mosque in Kos Town – of the building itself only the minaret remains, on Diagoras Square.",
+      heroCap: "Eski Tzami · remaining minaret",
+      badgeFree: "Free",
+      btnPlay: "🔊 Read aloud",
+      h2oldest: "Oldest mosque in Kos Town",
+      p1: "Eski Tzami means “old mosque”. It is one of the oldest Ottoman traces on the island – probably built in 1586 and the oldest mosque in Kos Town.",
+      factBuilt: "built", factMinaret: "minaret left",
+      h2minaret: "Only the minaret",
+      p2: "Nothing remains of the mosque itself, except the minaret of a little more than eleven metres. It stands on Diagoras Square.",
+      p3: "The mosque was destroyed in the earthquake of 1933. The remains were demolished; only part of the minaret stayed standing.",
+      cap1: "The minaret on Diagoras Square",
+      g1: "Minaret", g2: "Surroundings",
+      h2visit: "Visiting",
+      p4: "Free, always visible from outside on Diagoras Square. There is no interior left to visit.",
+      tip: "Tip: the minaret is easy to miss between the buildings – look up on Diagoras Square. Nice to pause for a moment: this is the oldest Ottoman remnant in the town."
+    },
+    de: {
+      title: "Eski Tzami Moschee",
+      lead: "Die älteste Moschee in Kos-Stadt – vom Gebäude selbst ist nur noch das Minarett übrig, am Diagoras-Platz.",
+      heroCap: "Eski Tzami · Rest des Minaretts",
+      badgeFree: "Kostenlos",
+      btnPlay: "🔊 Vorlesen",
+      h2oldest: "Älteste Moschee in Kos-Stadt",
+      p1: "Eski Tzami bedeutet „alte Moschee“. Es ist eine der ältesten osmanischen Spuren auf der Insel – wahrscheinlich 1586 gebaut und die älteste Moschee in Kos-Stadt.",
+      factBuilt: "gebaut", factMinaret: "Minarett übrig",
+      h2minaret: "Nur das Minarett",
+      p2: "Von der Moschee selbst ist nichts mehr übrig, außer dem Minarett von etwas mehr als elf Metern. Es steht am Diagoras-Platz.",
+      p3: "Die Moschee wurde beim Erdbeben von 1933 zerstört. Die Reste wurden abgerissen; nur ein Teil des Minaretts blieb stehen.",
+      cap1: "Das Minarett am Diagoras-Platz",
+      g1: "Minarett", g2: "Umgebung",
+      h2visit: "Besuchen",
+      p4: "Kostenlos, immer von außen am Diagoras-Platz zu sehen. Es gibt kein Inneres mehr zu besichtigen.",
+      tip: "Tipp: das Minarett ist zwischen den Gebäuden leicht zu übersehen – schau am Diagoras-Platz nach oben. Schön, einen Moment innezuhalten: dies ist der älteste osmanische Rest in der Stadt."
+    },
+    it: {
+      title: "Moschea Eski Tzami",
+      lead: "La moschea più antica di Kos città – dell’edificio stesso resta solo il minareto, in Piazza Diagoras.",
+      heroCap: "Eski Tzami · resti del minareto",
+      badgeFree: "Gratis",
+      btnPlay: "🔊 Leggi ad alta voce",
+      h2oldest: "Moschea più antica di Kos città",
+      p1: "Eski Tzami significa “vecchia moschea”. È una delle tracce ottomane più antiche dell’isola – probabilmente costruita nel 1586 e la moschea più antica di Kos città.",
+      factBuilt: "costruita", factMinaret: "minareto rimasto",
+      h2minaret: "Solo il minareto",
+      p2: "Della moschea stessa non resta nulla, tranne il minareto di poco più di undici metri. Si trova in Piazza Diagoras.",
+      p3: "La moschea fu distrutta nel terremoto del 1933. I resti furono demoliti; solo una parte del minareto rimase in piedi.",
+      cap1: "Il minareto in Piazza Diagoras",
+      g1: "Minareto", g2: "Dintorni",
+      h2visit: "Visitare",
+      p4: "Gratis, sempre visibile dall’esterno in Piazza Diagoras. Non c’è più un interno da visitare.",
+      tip: "Consiglio: il minareto è facile da perdere tra gli edifici – guarda in alto in Piazza Diagoras. Bello fermarsi un attimo: questo è il resto ottomano più antico della città."
+    },
+    tr: {
+      title: "Eski Tzami Camii",
+      lead: "Kos şehrinin en eski camisi – binanın kendisinden sadece minare kaldı, Diagoras Meydanı’nda.",
+      heroCap: "Eski Tzami · minare kalıntısı",
+      badgeFree: "Ücretsiz",
+      btnPlay: "🔊 Sesli oku",
+      h2oldest: "Kos şehrinin en eski camisi",
+      p1: "Eski Tzami “eski cami” anlamına gelir. Adanın en eski Osmanlı izlerinden biridir – muhtemelen 1586’da inşa edilmiş ve Kos şehrinin en eski camisidir.",
+      factBuilt: "inşa edildi", factMinaret: "minare kaldı",
+      h2minaret: "Sadece minare",
+      p2: "Caminin kendisinden hiçbir şey kalmadı, sadece on bir metreden biraz uzun minare. Diagoras Meydanı’nda duruyor.",
+      p3: "Cami 1933 depreminde yıkıldı. Kalıntılar yıkıldı; sadece minarenin bir kısmı ayakta kaldı.",
+      cap1: "Diagoras Meydanı’ndaki minare",
+      g1: "Minare", g2: "Çevre",
+      h2visit: "Ziyaret",
+      p4: "Ücretsiz, Diagoras Meydanı’ndan her zaman dışarıdan görülebilir. Ziyaret edilecek bir iç mekân kalmadı.",
+      tip: "İpucu: minare binalar arasında kolayca gözden kaçabilir – Diagoras Meydanı’nda yukarı bak. Bir an durmak güzel: bu şehirdeki en eski Osmanlı kalıntısı."
+    },
+    es: {
+      title: "Mezquita Eski Tzami",
+      lead: "La mezquita más antigua de Kos ciudad – del edificio mismo solo queda el minarete, en la Plaza Diagoras.",
+      heroCap: "Eski Tzami · resto del minarete",
+      badgeFree: "Gratis",
+      btnPlay: "🔊 Leer en voz alta",
+      h2oldest: "Mezquita más antigua de Kos ciudad",
+      p1: "Eski Tzami significa “mezquita antigua”. Es una de las huellas otomanas más antiguas de la isla – probablemente construida en 1586 y la mezquita más antigua de Kos ciudad.",
+      factBuilt: "construida", factMinaret: "minarete restante",
+      h2minaret: "Solo el minarete",
+      p2: "De la mezquita misma no queda nada, excepto el minarete de algo más de once metros. Está en la Plaza Diagoras.",
+      p3: "La mezquita fue destruida en el terremoto de 1933. Los restos fueron demolidos; solo quedó en pie una parte del minarete.",
+      cap1: "El minarete en la Plaza Diagoras",
+      g1: "Minarete", g2: "Entorno",
+      h2visit: "Visitar",
+      p4: "Gratis, siempre visible desde fuera en la Plaza Diagoras. Ya no hay interior que visitar.",
+      tip: "Consejo: el minarete es fácil de pasar por alto entre los edificios – mira hacia arriba en la Plaza Diagoras. Bonito detenerse un momento: este es el resto otomano más antiguo de la ciudad."
+    }
+  };
+
+  function setLang(l) {
+    if (!I18N[l]) l = 'nl';
+    localStorage.setItem('hk-lang', l);
+    document.documentElement.lang = l;
+    var d = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (d[k]) el.textContent = d[k];
+    });
+    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if (opt) {
+      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
+      document.getElementById('code').textContent = l.toUpperCase();
+    }
+    document.querySelectorAll('.lang-option').forEach(function(o){
+      o.classList.toggle('active', o.getAttribute('data-lang') === l);
+    });
+    closeMenu();
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  function openMenu(){ langMenu.classList.add('open'); }
+  function closeMenu(){ langMenu.classList.remove('open'); }
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    langMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.addEventListener('click', function(){ closeMenu(); });
+  document.querySelectorAll('.lang-option').forEach(function(btn){
+    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
+  });
+
+  var saved = localStorage.getItem('hk-lang') || 'nl';
+  setLang(saved);
+
+  /* TTS */
+  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
+  function getLang(){
+    var l = localStorage.getItem('hk-lang') || 'nl';
+    return LANG_VOICE[l] ? l : 'nl';
+  }
+  function pickVoice(code){
+    var voices = speechSynthesis.getVoices() || [];
+    var prefix = code.slice(0,2).toLowerCase();
+    return voices.find(function(v){ return v.lang === code; })
+      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
+      || null;
+  }
+  var btnPlay = document.getElementById('btnPlay');
+  var btnStop = document.getElementById('btnStop');
+  var status = document.getElementById('ttsStatus');
+  function setStatus(t){ if(status) status.textContent = t; }
+  function play(){
+    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
+    speechSynthesis.cancel();
+    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
+    var l = getLang();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = LANG_VOICE[l];
+    u.rate = 0.92;
+    var v = pickVoice(LANG_VOICE[l]);
+    if(v) u.voice = v;
+    u.onstart = function(){
+      btnPlay.classList.add('playing');
+      btnStop.classList.add('show');
+      setStatus('Voorlezen… ('+l.toUpperCase()+')');
+    };
+    u.onend = u.onerror = function(){
+      btnPlay.classList.remove('playing');
+      btnStop.classList.remove('show');
+      setStatus('');
+    };
+    if(!speechSynthesis.getVoices().length){
+      speechSynthesis.onvoiceschanged = function(){
+        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
+        speechSynthesis.speak(u);
+      };
+      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
+    } else {
+      speechSynthesis.speak(u);
+    }
+  }
+  function stop(){
+    if(window.speechSynthesis) speechSynthesis.cancel();
+    btnPlay.classList.remove('playing');
+    btnStop.classList.remove('show');
+    setStatus('Gestopt.');
+  }
+  btnPlay.addEventListener('click', play);
+  btnStop.addEventListener('click', stop);
+  if(window.speechSynthesis){
+    speechSynthesis.getVoices();
+    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  }
+})();
+</script>
+</body>
+</html>
