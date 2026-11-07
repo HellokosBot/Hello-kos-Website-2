@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Palio Pyli (spookdorp) – Hello Kos</title>
+  <style>
+    :root {
+      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
+      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
+      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
+      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text); -webkit-font-smoothing: antialiased;
+      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
+      background: var(--bg); min-height: 100vh; line-height: 1.55;
+    }
+    .app-header {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px 16px; background: var(--bg-header);
+      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+    }
+    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
+    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
+    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
+    .logo-text span { color: var(--gold-dark); font-style: italic; }
+    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
+    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
+    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
+    .lang-menu.open { display: block; }
+    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
+    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
+    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
+    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+    .content { padding: 18px 16px 0; }
+    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
+    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
+    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
+    .btn-audio { background: var(--petrol); color: #fff; }
+    .btn-audio.playing { background: var(--petrol-dark); }
+    .btn-stop { background: #3A4545; color: #fff; display: none; }
+    .btn-stop.show { display: flex; }
+    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
+    .btn-apple { background: #111; color: #fff; }
+    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
+    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
+    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
+    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
+    .card p:last-child { margin-bottom: 0; }
+    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
+    .tip strong { color: var(--gold); }
+    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
+    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
+    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
+    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
+    .footer a { color: var(--petrol); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="bezienswaardigheden.html" class="back-btn">← Terug</a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🔅</div>
+      <div class="logo-text">Hello <span>Kos</span></div>
+    </a>
+    <div class="lang-wrap">
+      <button type="button" class="lang-btn" id="langBtn">
+        <span id="flag">🇳🇱</span> <span id="code">NL</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="hero-wrap">
+      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/palio-pyli3-standard.jpg" alt="Palio Pyli (spookdorp)" loading="eager">
+      <div class="hero-caption" data-i18n="heroCap">Palio Pyli (spookdorp)</div>
+    </div>
+
+    <div class="content">
+      <h1 data-i18n="title">Palio Pyli (spookdorp)</h1>
+      <p class="lead" data-i18n="lead">Verlaten bergdorp met uitzicht – natuur nam de huizen over; sfeervol en stil.</p>
+
+      <div class="badges">
+        <span class="badge" data-i18n="badgeGhost">Spookdorp</span>
+        <span class="badge" data-i18n="badgeMountain">Berg</span>
+        <span class="badge" data-i18n="badgeFree">Gratis</span>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
+        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
+        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Palio%20Pyli%20abandoned%20village%20Kos" target="_blank" rel="noopener">📍 Google Maps</a>
+        <a class="btn btn-apple" href="https://maps.apple.com/?q=Palio%20Pyli%20abandoned%20village%20Kos" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      <p class="status" id="ttsStatus"></p>
+
+      <div id="readText">
+        <div class="card">
+          <h2 data-i18n="h2abandoned">Verlaten dorp</h2>
+          <p data-i18n="p1">Palio Pyli is een voormalig bergdorp. De natuur nam de huizen over; het voelt als een openluchtspookdorp met smalle paadjes en stenen resten.</p>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2history">Geschiedenis</h2>
+          <p data-i18n="p2">Het dorp bleef bewoond tot in de 19e/20e eeuw; daarna vertrokken de bewoners. Het kasteel erboven bood eeuwenlang bescherming (Johannieters, later Ottomanen).</p>
+        </div>
+
+        <div class="gallery">
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/palio-pyli3-standard.jpg" alt="" loading="lazy">
+            <span data-i18n="g1">Palio Pyli</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/01-high.jpg" alt="" loading="lazy">
+            <span data-i18n="g2">Palio Pyli</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/palio-pyli3-high.jpg" alt="" loading="lazy">
+            <span data-i18n="g3">Palio Pyli</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/palio-pyli-wandeling-high.jpg" alt="" loading="lazy">
+            <span data-i18n="g4">Palio Pyli</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2visit">Bezoeken</h2>
+          <p data-i18n="p3">Gratis. Stevige schoenen; paden kunnen steil of oneffen zijn.</p>
+          <div class="tip" data-i18n="tip">Tip: combineer met het kasteel van Palio Pyli hogerop voor het uitzicht.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div>Hello Kos</div>
+    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
+  </footer>
+
+<script>
+(function(){
+  var I18N = {
+    nl: {
+      title: "Palio Pyli (spookdorp)",
+      lead: "Verlaten bergdorp met uitzicht – natuur nam de huizen over; sfeervol en stil.",
+      heroCap: "Palio Pyli (spookdorp)",
+      badgeGhost: "Spookdorp", badgeMountain: "Berg", badgeFree: "Gratis",
+      btnPlay: "🔊 Voorlezen",
+      h2abandoned: "Verlaten dorp",
+      p1: "Palio Pyli is een voormalig bergdorp. De natuur nam de huizen over; het voelt als een openluchtspookdorp met smalle paadjes en stenen resten.",
+      h2history: "Geschiedenis",
+      p2: "Het dorp bleef bewoond tot in de 19e/20e eeuw; daarna vertrokken de bewoners. Het kasteel erboven bood eeuwenlang bescherming (Johannieters, later Ottomanen).",
+      g1: "Palio Pyli", g2: "Palio Pyli", g3: "Palio Pyli", g4: "Palio Pyli",
+      h2visit: "Bezoeken",
+      p3: "Gratis. Stevige schoenen; paden kunnen steil of oneffen zijn.",
+      tip: "Tip: combineer met het kasteel van Palio Pyli hogerop voor het uitzicht."
+    },
+    en: {
+      title: "Palio Pyli (ghost village)",
+      lead: "Abandoned mountain village with views – nature took over the houses; atmospheric and quiet.",
+      heroCap: "Palio Pyli (ghost village)",
+      badgeGhost: "Ghost village", badgeMountain: "Mountain", badgeFree: "Free",
+      btnPlay: "🔊 Read aloud",
+      h2abandoned: "Abandoned village",
+      p1: "Palio Pyli is a former mountain village. Nature took over the houses; it feels like an open-air ghost village with narrow paths and stone remains.",
+      h2history: "History",
+      p2: "The village remained inhabited until the 19th/20th century; then the residents left. The castle above offered protection for centuries (Knights of St John, later Ottomans).",
+      g1: "Palio Pyli", g2: "Palio Pyli", g3: "Palio Pyli", g4: "Palio Pyli",
+      h2visit: "Visiting",
+      p3: "Free. Sturdy shoes; paths can be steep or uneven.",
+      tip: "Tip: combine with the castle of Palio Pyli higher up for the view."
+    },
+    de: {
+      title: "Palio Pyli (Geisterdorf)",
+      lead: "Verlassenes Bergdorf mit Aussicht – die Natur hat die Häuser übernommen; stimmungsvoll und still.",
+      heroCap: "Palio Pyli (Geisterdorf)",
+      badgeGhost: "Geisterdorf", badgeMountain: "Berg", badgeFree: "Kostenlos",
+      btnPlay: "🔊 Vorlesen",
+      h2abandoned: "Verlassenes Dorf",
+      p1: "Palio Pyli ist ein ehemaliges Bergdorf. Die Natur hat die Häuser übernommen; es fühlt sich an wie ein Freiluft-Geisterdorf mit engen Pfaden und Steinresten.",
+      h2history: "Geschichte",
+      p2: "Das Dorf blieb bis ins 19./20. Jahrhundert bewohnt; danach zogen die Bewohner weg. Die Burg darüber bot jahrhundertelang Schutz (Johanniter, später Osmanen).",
+      g1: "Palio Pyli", g2: "Palio Pyli", g3: "Palio Pyli", g4: "Palio Pyli",
+      h2visit: "Besuchen",
+      p3: "Kostenlos. Feste Schuhe; Pfade können steil oder uneben sein.",
+      tip: "Tipp: kombiniere mit dem Schloss von Palio Pyli weiter oben für die Aussicht."
+    },
+    it: {
+      title: "Palio Pyli (villaggio fantasma)",
+      lead: "Villaggio di montagna abbandonato con vista – la natura ha preso le case; atmosferico e silenzioso.",
+      heroCap: "Palio Pyli (villaggio fantasma)",
+      badgeGhost: "Villaggio fantasma", badgeMountain: "Montagna", badgeFree: "Gratis",
+      btnPlay: "🔊 Leggi ad alta voce",
+      h2abandoned: "Villaggio abbandonato",
+      p1: "Palio Pyli è un ex villaggio di montagna. La natura ha preso le case; sembra un villaggio fantasma all’aperto con sentieri stretti e resti di pietra.",
+      h2history: "Storia",
+      p2: "Il villaggio rimase abitato fino al XIX/XX secolo; poi gli abitanti se ne andarono. Il castello sopra offrì protezione per secoli (Cavalieri di San Giovanni, poi Ottomani).",
+      g1: "Palio Pyli", g2: "Palio Pyli", g3: "Palio Pyli", g4: "Palio Pyli",
+      h2visit: "Visitare",
+      p3: "Gratis. Scarpe robuste; i sentieri possono essere ripidi o irregolari.",
+      tip: "Consiglio: combina con il castello di Palio Pyli più in alto per la vista."
+    },
+    tr: {
+      title: "Palio Pyli (hayalet köy)",
+      lead: "Manzaralı terk edilmiş dağ köyü – doğa evleri ele geçirdi; atmosferik ve sessiz.",
+      heroCap: "Palio Pyli (hayalet köy)",
+      badgeGhost: "Hayalet köy", badgeMountain: "Dağ", badgeFree: "Ücretsiz",
+      btnPlay: "🔊 Sesli oku",
+      h2abandoned: "Terk edilmiş köy",
+      p1: "Palio Pyli eski bir dağ köyüdür. Doğa evleri ele geçirdi; dar yollar ve taş kalıntılarla açık hava hayalet köyü gibi hissettirir.",
+      h2history: "Tarih",
+      p2: "Köy 19./20. yüzyıla kadar yerleşim yeri olarak kaldı; sonra sakinler ayrıldı. Yukarıdaki kale yüzyıllarca koruma sağladı (St. John Şövalyeleri, sonra Osmanlılar).",
+      g1: "Palio Pyli", g2: "Palio Pyli", g3: "Palio Pyli", g4: "Palio Pyli",
+      h2visit: "Ziyaret",
+      p3: "Ücretsiz. Sağlam ayakkabı; yollar dik veya engebeli olabilir.",
+      tip: "İpucu: manzara için yukarıdaki Palio Pyli kalesiyle birleştirin."
+    },
+    es: {
+      title: "Palio Pyli (pueblo fantasma)",
+      lead: "Pueblo de montaña abandonado con vistas – la naturaleza tomó las casas; atmosférico y tranquilo.",
+      heroCap: "Palio Pyli (pueblo fantasma)",
+      badgeGhost: "Pueblo fantasma", badgeMountain: "Montaña", badgeFree: "Gratis",
+      btnPlay: "🔊 Leer en voz alta",
+      h2abandoned: "Pueblo abandonado",
+      p1: "Palio Pyli es un antiguo pueblo de montaña. La naturaleza se apoderó de las casas; se siente como un pueblo fantasma al aire libre con senderos estrechos y restos de piedra.",
+      h2history: "Historia",
+      p2: "El pueblo permaneció habitado hasta el siglo XIX/XX; después los residentes se marcharon. El castillo de arriba ofreció protección durante siglos (Caballeros de San Juan, luego otomanos).",
+      g1: "Palio Pyli", g2: "Palio Pyli", g3: "Palio Pyli", g4: "Palio Pyli",
+      h2visit: "Visitar",
+      p3: "Gratis. Zapatos firmes; los senderos pueden ser empinados o irregulares.",
+      tip: "Consejo: combínalo con el castillo de Palio Pyli más arriba para la vista."
+    }
+  };
+
+  function setLang(l) {
+    if (!I18N[l]) l = 'nl';
+    localStorage.setItem('hk-lang', l);
+    document.documentElement.lang = l;
+    var d = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (d[k]) el.textContent = d[k];
+    });
+    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if (opt) {
+      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
+      document.getElementById('code').textContent = l.toUpperCase();
+    }
+    document.querySelectorAll('.lang-option').forEach(function(o){
+      o.classList.toggle('active', o.getAttribute('data-lang') === l);
+    });
+    closeMenu();
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  function openMenu(){ langMenu.classList.add('open'); }
+  function closeMenu(){ langMenu.classList.remove('open'); }
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    langMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.addEventListener('click', function(){ closeMenu(); });
+  document.querySelectorAll('.lang-option').forEach(function(btn){
+    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
+  });
+
+  var saved = localStorage.getItem('hk-lang') || 'nl';
+  setLang(saved);
+
+  /* TTS */
+  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
+  function getLang(){
+    var l = localStorage.getItem('hk-lang') || 'nl';
+    return LANG_VOICE[l] ? l : 'nl';
+  }
+  function pickVoice(code){
+    var voices = speechSynthesis.getVoices() || [];
+    var prefix = code.slice(0,2).toLowerCase();
+    return voices.find(function(v){ return v.lang === code; })
+      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
+      || null;
+  }
+  var btnPlay = document.getElementById('btnPlay');
+  var btnStop = document.getElementById('btnStop');
+  var status = document.getElementById('ttsStatus');
+  function setStatus(t){ if(status) status.textContent = t; }
+  function play(){
+    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
+    speechSynthesis.cancel();
+    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
+    var l = getLang();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = LANG_VOICE[l];
+    u.rate = 0.92;
+    var v = pickVoice(LANG_VOICE[l]);
+    if(v) u.voice = v;
+    u.onstart = function(){
+      btnPlay.classList.add('playing');
+      btnStop.classList.add('show');
+      setStatus('Voorlezen… ('+l.toUpperCase()+')');
+    };
+    u.onend = u.onerror = function(){
+      btnPlay.classList.remove('playing');
+      btnStop.classList.remove('show');
+      setStatus('');
+    };
+    if(!speechSynthesis.getVoices().length){
+      speechSynthesis.onvoiceschanged = function(){
+        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
+        speechSynthesis.speak(u);
+      };
+      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
+    } else {
+      speechSynthesis.speak(u);
+    }
+  }
+  function stop(){
+    if(window.speechSynthesis) speechSynthesis.cancel();
+    btnPlay.classList.remove('playing');
+    btnStop.classList.remove('show');
+    setStatus('Gestopt.');
+  }
+  btnPlay.addEventListener('click', play);
+  btnStop.addEventListener('click', stop);
+  if(window.speechSynthesis){
+    speechSynthesis.getVoices();
+    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+  }
+})();
+</script>
+</body>
+</html>
