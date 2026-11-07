@@ -1,26 +1,26 @@
+Hier is de complete code van **bezienswaardigheden.html** met:
+
+- **🏠 huis-icoon** links (naar home / index.html)
+- **Taalknop** rechts met menu (NL, EN, DE, IT, TR, ES)
+- **Taal wordt onthouden** (localStorage `hk-lang`)
+
+Kopieer alles hieronder en sla het op als `bezienswaardigheden.html` in je map.
+
+```html
 <!DOCTYPE html>
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
   <meta name="theme-color" content="#0D1F1F">
-  <title>Bezienswaardigheden & routes – Hello Kos</title>
+  <title>Bezienswaardigheden &amp; routes – Hello Kos</title>
   <style>
     :root {
-      --petrol: #3A9A9A;
-      --petrol-dark: #2A7A7A;
-      --petrol-deep: #1A4A4A;
-      --bg: #0D1A1A;
-      --bg-card: #152525;
-      --bg-header: rgba(13, 26, 26, 0.92);
-      --bg-note: #1E2E1E;
-      --text: #E8EDE8;
-      --text-soft: #A0B0A0;
-      --border: rgba(58, 154, 154, 0.18);
-      --gold: #E0B040;
-      --gold-dark: #C4920F;
-      --safe-top: env(safe-area-inset-top, 0px);
-      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
+      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
+      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
+      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body {
@@ -35,15 +35,41 @@
       padding: 14px 16px; background: var(--bg-header);
       backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
     }
-    .back-btn { grid-column: 1; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
+    .home-btn {
+      grid-column: 1; justify-self: start;
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(58,154,154,0.15); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; font-size: 1.15rem; color: var(--petrol);
+    }
     .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
     .logo-icon {
       width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017);
       border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      color: #FFFDF5; font-size: 18px;
+      color: #FFFDF5; font-size: 20px;
     }
     .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
     .logo-text span { color: var(--gold-dark); font-style: italic; }
+    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
+    .lang-btn {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(58,154,154,0.15); border: 1px solid var(--border);
+      color: var(--text); font-weight: 700; font-size: 0.85rem;
+      padding: 6px 10px; border-radius: 20px; cursor: pointer;
+    }
+    .lang-menu {
+      display: none; position: absolute; right: 0; top: 44px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      z-index: 200; overflow: hidden;
+    }
+    .lang-menu.open { display: block; }
+    .lang-option {
+      display: flex; align-items: center; gap: 8px; width: 100%;
+      padding: 10px 14px; background: none; border: none; color: var(--text);
+      font: inherit; text-align: left; cursor: pointer;
+    }
+    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
     .main { max-width: 480px; margin: 0 auto; padding: 16px 14px 32px; }
     h1 { font-size: 1.15rem; font-weight: 700; color: var(--text); text-align: center; margin-bottom: 4px; }
     .sub { text-align: center; font-size: 0.86rem; color: var(--text-soft); margin-bottom: 14px; }
@@ -75,8 +101,7 @@
     .card-meta { display: block; font-size: 0.7rem; font-weight: 600; opacity: 0.9; margin-top: 2px; }
     .acc {
       background: var(--bg-card); border-radius: 14px; margin-bottom: 10px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.3); overflow: hidden;
-      border: 1px solid var(--border);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3); overflow: hidden; border: 1px solid var(--border);
     }
     .acc-btn {
       width: 100%; display: flex; align-items: center; justify-content: space-between;
@@ -87,13 +112,9 @@
       font-size: 0.72rem; font-weight: 600; color: var(--petrol);
       background: rgba(58, 154, 154, 0.15); padding: 3px 8px; border-radius: 8px; white-space: nowrap;
     }
-    .acc-btn .chevron {
-      font-size: 0.85rem; color: var(--petrol); transition: transform 0.2s; flex-shrink: 0;
-    }
+    .acc-btn .chevron { font-size: 0.85rem; color: var(--petrol); transition: transform 0.2s; flex-shrink: 0; }
     .acc.open .acc-btn .chevron { transform: rotate(180deg); }
-    .acc-panel {
-      display: none; padding: 0 12px 14px; border-top: 1px solid var(--border);
-    }
+    .acc-panel { display: none; padding: 0 12px 14px; border-top: 1px solid var(--border); }
     .acc.open .acc-panel { display: block; }
     .acc-panel .grid { margin-top: 12px; }
     .footer {
@@ -115,19 +136,32 @@
 </head>
 <body>
   <header class="app-header">
-    <a href="index.html" class="back-btn">← Terug</a>
+    <a href="index.html" class="home-btn" title="Home">🏠</a>
     <a href="index.html" class="logo">
       <div class="logo-icon">🔅</div>
       <div class="logo-text">Hello <span>Kos</span></div>
     </a>
-    <div></div>
+    <div class="lang-wrap">
+      <button type="button" class="lang-btn" id="langBtn">
+        <span id="flag">🇳🇱</span> <span id="code">NL</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      </div>
+    </div>
   </header>
+
   <main class="main">
-    <h1>Bezienswaardigheden &amp; routes</h1>
-    <p class="sub">Audiogidsen · gratis of met entree</p>
+    <h1 data-i18n="title">Bezienswaardigheden &amp; routes</h1>
+    <p class="sub" data-i18n="sub">Audiogidsen · gratis of met entree</p>
     <div class="note" id="soundNote">
       <strong>🔊 Geluidstest</strong><br>
-      Druk op de knop. Je hoort een korte zin in de taal die je hebt gekozen (NL / DE / EN / IT / TR).
+      <span data-i18n="soundText">Druk op de knop. Je hoort een korte zin in de taal die je hebt gekozen.</span>
       <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
         <button type="button" class="sound-btn" id="btnTestSound">▶ Test geluid</button>
         <button type="button" class="sound-btn secondary" id="btnStopSound">⏹ Stop</button>
@@ -135,343 +169,135 @@
       <p id="soundStatus" style="margin-top:8px;font-size:0.8rem"></p>
     </div>
 
-    <div class="section-label">Routes – tik om uit te klappen</div>
+    <div class="section-label" data-i18n="routesLabel">Routes – tik om uit te klappen</div>
     <div class="acc open">
       <button type="button" class="acc-btn" onclick="this.parentElement.classList.toggle('open')">
         <span>Routes</span>
-        <span style="display:flex;align-items:center;gap:8px">
-          <span class="count">4 routes</span>
-          <span class="chevron">▼</span>
-        </span>
+        <span style="display:flex;align-items:center;gap:8px"><span class="count">4 routes</span><span class="chevron">▼</span></span>
       </button>
-      <div class="acc-panel">
-        <div class="grid">
-          <a class="card" href="route-wandel.html">
-            <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&h=400&fit=crop&q=80" alt="Wandelroute Kos-stad" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Wandelroute Kos-stad<span class="card-meta">Te voet</span></span></div>
-          </a>
-          <a class="card" href="route-vrij.html">
-            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80" alt="Radar tourguide" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Radar tourguide<span class="card-meta">Vrije route</span></span></div>
-          </a>
-          <a class="card" href="route-auto-kort.html">
-            <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&h=400&fit=crop&q=80" alt="Rij 1 dag" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Rij 1 dag<span class="card-meta">Auto / scooter</span></span></div>
-          </a>
-          <a class="card" href="route-auto-lang.html">
-            <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&h=400&fit=crop&q=80" alt="Rij 2 dagen" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Rij 2 dagen<span class="card-meta">Auto / scooter</span></span></div>
-          </a>
-        </div>
-      </div>
+      <div class="acc-panel"><div class="grid">
+        <a class="card" href="route-wandel.html"><img src="route-wandel.jpg" alt="Wandelroute Kos-stad" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Wandelroute Kos-stad<span class="card-meta">Te voet</span></span></div></a>
+        <a class="card" href="route-vrij.html"><img src="route-radar.jpg" alt="Radar tourguide" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Radar tourguide<span class="card-meta">Vrije route</span></span></div></a>
+        <a class="card" href="route-auto-kort.html"><img src="route-1dag.jpg" alt="Rij 1 dag" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Rij 1 dag<span class="card-meta">Auto / scooter</span></span></div></a>
+        <a class="card" href="route-auto-lang.html"><img src="route-2dagen.jpg" alt="Rij 2 dagen" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Rij 2 dagen<span class="card-meta">Auto / scooter</span></span></div></a>
+      </div></div>
     </div>
 
-    <div class="section-label">Locaties – tik om uit te klappen</div>
+    <div class="section-label" data-i18n="locsLabel">Locaties – tik om uit te klappen</div>
 
     <div class="acc open">
       <button type="button" class="acc-btn" onclick="this.parentElement.classList.toggle('open')">
         <span>Kos-stad</span>
-        <span style="display:flex;align-items:center;gap:8px">
-          <span class="count">28 plekken</span>
-          <span class="chevron">▼</span>
-        </span>
+        <span style="display:flex;align-items:center;gap:8px"><span class="count">28 plekken</span><span class="chevron">▼</span></span>
       </button>
-      <div class="acc-panel">
-        <div class="grid">
-          <a class="card" href="sight-witte-trappen.html">
-            <img src="https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=400&h=400&fit=crop&q=80" alt="Witte trappen" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Witte trappen<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-agora.html">
-            <img src="https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?w=400&h=400&fit=crop&q=80" alt="Agora oude markt" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Agora oude markt<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-albergo.html">
-            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=400&fit=crop&q=80" alt="Albergo Gelsamino" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Albergo Gelsamino<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-altaar-dionysos.html">
-            <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&h=400&fit=crop&q=80" alt="Altaar Dionysos" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Altaar Dionysos<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-museum.html">
-            <img src="https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?w=400&h=400&fit=crop&q=80" alt="Archeologisch museum" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Archeologisch museum<span class="card-meta">Entree</span></span></div>
-          </a>
-          <a class="card" href="sight-belastingpoort.html">
-            <img src="https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?w=400&h=400&fit=crop&q=80" alt="Belastingpoort" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Belastingpoort<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-boom-hippocrates.html">
-            <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=400&h=400&fit=crop&q=80" alt="Boom Hippocrates" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Boom Hippocrates<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-casa-del-fascio.html">
-            <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=400&h=400&fit=crop&q=80" alt="Casa del Fascio" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Casa del Fascio<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-casa-romana.html">
-            <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&h=400&fit=crop&q=80" alt="Casa Romana" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Casa Romana<span class="card-meta">Entree</span></span></div>
-          </a>
-          <a class="card" href="sight-defterdar.html">
-            <img src="https://images.unsplash.com/photo-1564769625905-50e93615e769?w=400&h=400&fit=crop&q=80" alt="Defterdar moskee" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Defterdar moskee<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-eski-tzami.html">
-            <img src="https://images.unsplash.com/photo-1564769625905-50e93615e769?w=400&h=400&fit=crop&q=80" alt="Eskitzami moskee" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Eskitzami moskee<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-i-love-kos.html">
-            <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400&h=400&fit=crop&q=80" alt="I love Kos" loading="lazy">
-            <div class="card-overlay"><span class="card-title">I love Kos<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-katholieke-kerk.html">
-            <img src="https://images.unsplash.com/photo-1548013146-72479768bada?w=400&h=400&fit=crop&q=80" alt="Katholieke kerk" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Katholieke kerk<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-neratzia.html">
-            <img src="https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=400&h=400&fit=crop&q=80" alt="Kasteel Neratzia" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Kasteel Neratzia<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-kathedraal.html">
-            <img src="https://images.unsplash.com/photo-1548013146-72479768bada?w=400&h=400&fit=crop&q=80" alt="Kathedraal" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Kathedraal<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-paraskevi.html">
-            <img src="https://images.unsplash.com/photo-1548013146-72479768bada?w=400&h=400&fit=crop&q=80" alt="St. Paraskevi" loading="lazy">
-            <div class="card-overlay"><span class="card-title">St. Paraskevi<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-markthal.html">
-            <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=400&h=400&fit=crop&q=80" alt="Markthal" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Markthal<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-old-town.html">
-            <img src="https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?w=400&h=400&fit=crop&q=80" alt="Old Town" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Old Town<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-palazzo.html">
-            <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=400&h=400&fit=crop&q=80" alt="Palazzo di Giustizia" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Palazzo di Giustizia<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-palm-lane.html">
-            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80" alt="Palm tree lane" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Palm tree lane<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-turks-badhuis.html">
-            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=400&h=400&fit=crop&q=80" alt="Turks badhuis" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Turks badhuis<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-westelijke-opgraving.html">
-            <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&h=400&fit=crop&q=80" alt="Westelijke opgraving" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Westelijke opgraving<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-hasan-moskee.html">
-            <img src="https://images.unsplash.com/photo-1564769625905-50e93615e769?w=400&h=400&fit=crop&q=80" alt="Gazi Hasan moskee" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Gazi Hasan moskee<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-mausoleum.html">
-            <img src="https://images.unsplash.com/photo-1564769625905-50e93615e769?w=400&h=400&fit=crop&q=80" alt="Hatzi Pasha mausoleum" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Hatzi Pasha mausoleum<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-morouk.html">
-            <img src="https://images.unsplash.com/photo-1564769625905-50e93615e769?w=400&h=400&fit=crop&q=80" alt="Morouk moskee" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Morouk moskee<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-odeon.html">
-            <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=400&h=400&fit=crop&q=80" alt="Odeon" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Odeon<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-vlag.html">
-            <img src="https://images.unsplash.com/photo-1525874680703-f9e3c0c4a0a0?w=400&h=400&fit=crop&q=80" alt="Hijsen van de vlag" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Hijsen van de vlag<span class="card-meta">Zondag</span></span></div>
-          </a>
-          <a class="card" href="sight-aquaduct.html">
-            <img src="https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=400&h=400&fit=crop&q=80" alt="Aquaduct Linopotas" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Aquaduct Linopotas<span class="card-meta">Gratis</span></span></div>
-          </a>
-        </div>
-      </div>
+      <div class="acc-panel"><div class="grid">
+        <a class="card" href="sight-witte-trappen.html"><img src="sight-witte-trappen.jpg" alt="Witte trappen" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Witte trappen<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-agora.html"><img src="sight-agora.jpg" alt="Agora oude markt" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Agora oude markt<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-albergo.html"><img src="sight-albergo.jpg" alt="Albergo Gelsamino" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Albergo Gelsamino<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-altaar-dionysos.html"><img src="sight-altaar-dionysos.jpg" alt="Altaar Dionysos" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Altaar Dionysos<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-museum.html"><img src="sight-museum.jpg" alt="Archeologisch museum" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Archeologisch museum<span class="card-meta">Entree</span></span></div></a>
+        <a class="card" href="sight-belastingpoort.html"><img src="sight-belastingpoort.jpg" alt="Belastingpoort" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Belastingpoort<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-boom-hippocrates.html"><img src="sight-boom-hippocrates.jpg" alt="Boom Hippocrates" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Boom Hippocrates<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-casa-del-fascio.html"><img src="sight-casa-del-fascio.jpg" alt="Casa del Fascio" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Casa del Fascio<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-casa-romana.html"><img src="sight-casa-romana.jpg" alt="Casa Romana" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Casa Romana<span class="card-meta">Entree</span></span></div></a>
+        <a class="card" href="sight-defterdar.html"><img src="sight-defterdar.jpg" alt="Defterdar moskee" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1564769625905-50e93615e769?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Defterdar moskee<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-eski-tzami.html"><img src="sight-eski-tzami.jpg" alt="Eskitzami moskee" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1564769625905-50e93615e769?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Eskitzami moskee<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-i-love-kos.html"><img src="sight-i-love-kos.jpg" alt="I love Kos" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">I love Kos<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-katholieke-kerk.html"><img src="sight-katholieke-kerk.jpg" alt="Katholieke kerk" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1548013146-72479768bada?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Katholieke kerk<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-neratzia.html"><img src="sight-neratzia.jpg" alt="Kasteel Neratzia" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Kasteel Neratzia<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-kathedraal.html"><img src="sight-kathedraal.jpg" alt="Kathedraal" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1548013146-72479768bada?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Kathedraal<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-paraskevi.html"><img src="sight-paraskevi.jpg" alt="St. Paraskevi" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1548013146-72479768bada?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">St. Paraskevi<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-markthal.html"><img src="sight-markthal.jpg" alt="Markthal" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Markthal<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-old-town.html"><img src="sight-old-town.jpg" alt="Old Town" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Old Town<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-palazzo.html"><img src="sight-palazzo.jpg" alt="Palazzo di Giustizia" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Palazzo di Giustizia<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-palm-lane.html"><img src="sight-palm-lane.jpg" alt="Palm tree lane" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Palm tree lane<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-turks-badhuis.html"><img src="sight-turks-badhuis.jpg" alt="Turks badhuis" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Turks badhuis<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-westelijke-opgraving.html"><img src="sight-westelijke-opgraving.jpg" alt="Westelijke opgraving" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Westelijke opgraving<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-hasan-moskee.html"><img src="sight-hasan-moskee.jpg" alt="Gazi Hasan moskee" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1564769625905-50e93615e769?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Gazi Hasan moskee<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-mausoleum.html"><img src="sight-mausoleum.jpg" alt="Hatzi Pasha mausoleum" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1564769625905-50e93615e769?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Hatzi Pasha mausoleum<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-morouk.html"><img src="sight-morouk.jpg" alt="Morouk moskee" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1564769625905-50e93615e769?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Morouk moskee<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-odeon.html"><img src="sight-odeon.jpg" alt="Odeon" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Odeon<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-vlag.html"><img src="sight-vlag.jpg" alt="Hijsen van de vlag" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1525874680703-f9e3c0c4a0a0?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Hijsen van de vlag<span class="card-meta">Zondag</span></span></div></a>
+        <a class="card" href="sight-aquaduct.html"><img src="sight-aquaduct.jpg" alt="Aquaduct Linopotas" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Aquaduct Linopotas<span class="card-meta">Gratis</span></span></div></a>
+      </div></div>
     </div>
 
     <div class="acc">
       <button type="button" class="acc-btn" onclick="this.parentElement.classList.toggle('open')">
         <span>Rondom Kos-stad</span>
-        <span style="display:flex;align-items:center;gap:8px">
-          <span class="count">5 plekken</span>
-          <span class="chevron">▼</span>
-        </span>
+        <span style="display:flex;align-items:center;gap:8px"><span class="count">5 plekken</span><span class="chevron">▼</span></span>
       </button>
-      <div class="acc-panel">
-        <div class="grid">
-          <a class="card" href="sight-asklepion.html">
-            <img src="https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=400&h=400&fit=crop&q=80" alt="Asklepion" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Asklepion<span class="card-meta">Entree</span></span></div>
-          </a>
-          <a class="card" href="sight-platani.html">
-            <img src="https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?w=400&h=400&fit=crop&q=80" alt="Platani" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Platani<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-waterval-platani.html">
-            <img src="https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=400&h=400&fit=crop&q=80" alt="Waterval Platani" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Waterval Platani<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-therma.html">
-            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=400&h=400&fit=crop&q=80" alt="Therma Hot Springs" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Therma Hot Springs<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-hippocratic-foundation.html">
-            <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=400&fit=crop&q=80" alt="Hippocratic Foundation" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Hippocratic Foundation<span class="card-meta">Gratis</span></span></div>
-          </a>
-        </div>
-      </div>
+      <div class="acc-panel"><div class="grid">
+        <a class="card" href="sight-asklepion.html"><img src="sight-asklepion.jpg" alt="Asklepion" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Asklepion<span class="card-meta">Entree</span></span></div></a>
+        <a class="card" href="sight-platani.html"><img src="sight-platani.jpg" alt="Platani" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Platani<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-waterval-platani.html"><img src="sight-waterval-platani.jpg" alt="Waterval Platani" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Waterval Platani<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-therma.html"><img src="sight-therma.jpg" alt="Therma Hot Springs" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Therma Hot Springs<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-hippocratic-foundation.html"><img src="sight-hippocratic-foundation.jpg" alt="Hippocratic Foundation" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Hippocratic Foundation<span class="card-meta">Gratis</span></span></div></a>
+      </div></div>
     </div>
 
     <div class="acc">
       <button type="button" class="acc-btn" onclick="this.parentElement.classList.toggle('open')">
         <span>Antimachia & omgeving</span>
-        <span style="display:flex;align-items:center;gap:8px">
-          <span class="count">4 plekken</span>
-          <span class="chevron">▼</span>
-        </span>
+        <span style="display:flex;align-items:center;gap:8px"><span class="count">4 plekken</span><span class="chevron">▼</span></span>
       </button>
-      <div class="acc-panel">
-        <div class="grid">
-          <a class="card" href="sight-antimachia-kasteel.html">
-            <img src="https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=400&h=400&fit=crop&q=80" alt="Kasteel Antimachia" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Kasteel Antimachia<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-molen-antimachia.html">
-            <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=400&fit=crop&q=80" alt="Molen Antimachia" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Molen Antimachia<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-traditioneel-huis.html">
-            <img src="https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?w=400&h=400&fit=crop&q=80" alt="Traditioneel huis" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Traditioneel huis<span class="card-meta">Entree</span></span></div>
-          </a>
-          <a class="card" href="sight-plaka.html">
-            <img src="https://images.unsplash.com/photo-1452570053594-10cdae1a4a7a?w=400&h=400&fit=crop&q=80" alt="Plaka pauwenbos" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Plaka pauwenbos<span class="card-meta">Gratis</span></span></div>
-          </a>
-        </div>
-      </div>
+      <div class="acc-panel"><div class="grid">
+        <a class="card" href="sight-antimachia-kasteel.html"><img src="sight-antimachia-kasteel.jpg" alt="Kasteel Antimachia" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Kasteel Antimachia<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-molen-antimachia.html"><img src="sight-molen-antimachia.jpg" alt="Molen Antimachia" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Molen Antimachia<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-traditioneel-huis.html"><img src="sight-traditioneel-huis.jpg" alt="Traditioneel huis" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Traditioneel huis<span class="card-meta">Entree</span></span></div></a>
+        <a class="card" href="sight-plaka.html"><img src="sight-plaka.jpg" alt="Plaka pauwenbos" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1452570053594-10cdae1a4a7a?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Plaka pauwenbos<span class="card-meta">Gratis</span></span></div></a>
+      </div></div>
     </div>
 
     <div class="acc">
       <button type="button" class="acc-btn" onclick="this.parentElement.classList.toggle('open')">
         <span>Zia & bergen</span>
-        <span style="display:flex;align-items:center;gap:8px">
-          <span class="count">3 plekken</span>
-          <span class="chevron">▼</span>
-        </span>
+        <span style="display:flex;align-items:center;gap:8px"><span class="count">3 plekken</span><span class="chevron">▼</span></span>
       </button>
-      <div class="acc-panel">
-        <div class="grid">
-          <a class="card" href="sight-zia.html">
-            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80" alt="Zia" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Zia<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-natuurpark-zia.html">
-            <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=400&fit=crop&q=80" alt="Natuurpark Zia" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Natuurpark Zia<span class="card-meta">Entree</span></span></div>
-          </a>
-          <a class="card" href="sight-haihoutes.html">
-            <img src="https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?w=400&h=400&fit=crop&q=80" alt="Haihoutes" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Haihoutes<span class="card-meta">Gratis</span></span></div>
-          </a>
-        </div>
-      </div>
+      <div class="acc-panel"><div class="grid">
+        <a class="card" href="sight-zia.html"><img src="sight-zia.jpg" alt="Zia" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Zia<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-natuurpark-zia.html"><img src="sight-natuurpark-zia.jpg" alt="Natuurpark Zia" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Natuurpark Zia<span class="card-meta">Entree</span></span></div></a>
+        <a class="card" href="sight-haihoutes.html"><img src="sight-haihoutes.jpg" alt="Haihoutes" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Haihoutes<span class="card-meta">Gratis</span></span></div></a>
+      </div></div>
     </div>
 
     <div class="acc">
       <button type="button" class="acc-btn" onclick="this.parentElement.classList.toggle('open')">
         <span>Palio Pyli</span>
-        <span style="display:flex;align-items:center;gap:8px">
-          <span class="count">2 plekken</span>
-          <span class="chevron">▼</span>
-        </span>
+        <span style="display:flex;align-items:center;gap:8px"><span class="count">2 plekken</span><span class="chevron">▼</span></span>
       </button>
-      <div class="acc-panel">
-        <div class="grid">
-          <a class="card" href="sight-palio-pyli.html">
-            <img src="https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?w=400&h=400&fit=crop&q=80" alt="Palio Pyli spookdorp" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Palio Pyli spookdorp<span class="card-meta">Gratis · klim</span></span></div>
-          </a>
-          <a class="card" href="sight-kasteel-palio-pyli.html">
-            <img src="https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=400&h=400&fit=crop&q=80" alt="Kasteel Palio Pyli" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Kasteel Palio Pyli<span class="card-meta">Gratis · klim</span></span></div>
-          </a>
-        </div>
-      </div>
+      <div class="acc-panel"><div class="grid">
+        <a class="card" href="sight-palio-pyli.html"><img src="sight-palio-pyli.jpg" alt="Palio Pyli spookdorp" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Palio Pyli spookdorp<span class="card-meta">Gratis · klim</span></span></div></a>
+        <a class="card" href="sight-kasteel-palio-pyli.html"><img src="sight-kasteel-palio-pyli.jpg" alt="Kasteel Palio Pyli" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Kasteel Palio Pyli<span class="card-meta">Gratis · klim</span></span></div></a>
+      </div></div>
     </div>
 
     <div class="acc">
       <button type="button" class="acc-btn" onclick="this.parentElement.classList.toggle('open')">
         <span>Noordkust</span>
-        <span style="display:flex;align-items:center;gap:8px">
-          <span class="count">5 plekken</span>
-          <span class="chevron">▼</span>
-        </span>
+        <span style="display:flex;align-items:center;gap:8px"><span class="count">5 plekken</span><span class="chevron">▼</span></span>
       </button>
-      <div class="acc-panel">
-        <div class="grid">
-          <a class="card" href="sight-tigaki.html">
-            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80" alt="Tigaki" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Tigaki<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-zoutmeer.html">
-            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80" alt="Zoutmeer & flamingo’s" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Zoutmeer & flamingo’s<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-marmari.html">
-            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80" alt="Marmari" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Marmari<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-mastichari.html">
-            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80" alt="Mastichari" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Mastichari<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-hippocrates-garden.html">
-            <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=400&fit=crop&q=80" alt="Hippocrates Garden" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Hippocrates Garden<span class="card-meta">Entree</span></span></div>
-          </a>
-        </div>
-      </div>
+      <div class="acc-panel"><div class="grid">
+        <a class="card" href="sight-tigaki.html"><img src="sight-tigaki.jpg" alt="Tigaki" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Tigaki<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-zoutmeer.html"><img src="sight-zoutmeer.jpg" alt="Zoutmeer & flamingo’s" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Zoutmeer & flamingo’s<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-marmari.html"><img src="sight-marmari.jpg" alt="Marmari" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Marmari<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-mastichari.html"><img src="sight-mastichari.jpg" alt="Mastichari" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Mastichari<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-hippocrates-garden.html"><img src="sight-hippocrates-garden.jpg" alt="Hippocrates Garden" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Hippocrates Garden<span class="card-meta">Entree</span></span></div></a>
+      </div></div>
     </div>
 
     <div class="acc">
       <button type="button" class="acc-btn" onclick="this.parentElement.classList.toggle('open')">
         <span>Kefalos & west</span>
-        <span style="display:flex;align-items:center;gap:8px">
-          <span class="count">5 plekken</span>
-          <span class="chevron">▼</span>
-        </span>
+        <span style="display:flex;align-items:center;gap:8px"><span class="count">5 plekken</span><span class="chevron">▼</span></span>
       </button>
-      <div class="acc-panel">
-        <div class="grid">
-          <a class="card" href="sight-agios-stefanos.html">
-            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80" alt="Agios Stefanos" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Agios Stefanos<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-agios-nikolaos.html">
-            <img src="https://images.unsplash.com/photo-1548013146-72479768bada?w=400&h=400&fit=crop&q=80" alt="Agios Nikolaos" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Agios Nikolaos<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-cavo-paradiso.html">
-            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80" alt="Cavo Paradiso" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Cavo Paradiso<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-kardamena.html">
-            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80" alt="Kardamena" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Kardamena<span class="card-meta">Gratis</span></span></div>
-          </a>
-          <a class="card" href="sight-limnionas.html">
-            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80" alt="Limnionas" loading="lazy">
-            <div class="card-overlay"><span class="card-title">Limnionas<span class="card-meta">Gratis</span></span></div>
-          </a>
-        </div>
-      </div>
+      <div class="acc-panel"><div class="grid">
+        <a class="card" href="sight-agios-stefanos.html"><img src="sight-agios-stefanos.jpg" alt="Agios Stefanos" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Agios Stefanos<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-agios-nikolaos.html"><img src="sight-agios-nikolaos.jpg" alt="Agios Nikolaos" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1548013146-72479768bada?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Agios Nikolaos<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-cavo-paradiso.html"><img src="sight-cavo-paradiso.jpg" alt="Cavo Paradiso" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Cavo Paradiso<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-kardamena.html"><img src="sight-kardamena.jpg" alt="Kardamena" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Kardamena<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-limnionas.html"><img src="sight-limnionas.jpg" alt="Limnionas" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Limnionas<span class="card-meta">Gratis</span></span></div></a>
+      </div></div>
     </div>
   </main>
 
@@ -481,79 +307,82 @@
   </footer>
 
 <script>
-(function() {
-  var LANG_MAP = {
-    nl: { code: 'nl-NL', text: 'Hallo. Dit is de geluidstest van Hello Kos. Als je dit hoort, werkt het geluid van je telefoon. Je kunt nu de audiogidsen beluisteren.' },
-    de: { code: 'de-DE', text: 'Hallo. Das ist der Soundtest von Hello Kos. Wenn du das hörst, funktioniert der Ton deines Telefons. Du kannst jetzt die Audioguides anhören.' },
-    en: { code: 'en-GB', text: 'Hello. This is the Hello Kos sound test. If you can hear this, your phone audio is working. You can now listen to the audio guides.' },
-    it: { code: 'it-IT', text: 'Ciao. Questo è il test audio di Hello Kos. Se senti questo messaggio, l’audio del telefono funziona. Ora puoi ascoltare le audioguide.' },
-    tr: { code: 'tr-TR', text: 'Merhaba. Bu Hello Kos ses testidir. Bunu duyuyorsanız telefonunuzun sesi çalışıyor. Artık sesli rehberleri dinleyebilirsiniz.' },
-    es: { code: 'es-ES', text: 'Hola. Esta es la prueba de sonido de Hello Kos. Si oyes esto, el audio de tu teléfono funciona. Ya puedes escuchar las audioguías.' }
+(function(){
+  var I18N = {
+    nl: { title: "Bezienswaardigheden & routes", sub: "Audiogidsen · gratis of met entree", soundText: "Druk op de knop. Je hoort een korte zin in de taal die je hebt gekozen.", routesLabel: "Routes – tik om uit te klappen", locsLabel: "Locaties – tik om uit te klappen" },
+    en: { title: "Sights & routes", sub: "Audio guides · free or with entrance", soundText: "Press the button. You will hear a short sentence in the language you selected.", routesLabel: "Routes – tap to expand", locsLabel: "Locations – tap to expand" },
+    de: { title: "Sehenswürdigkeiten & Routen", sub: "Audioguides · kostenlos oder mit Eintritt", soundText: "Drücke die Taste. Du hörst einen kurzen Satz in der gewählten Sprache.", routesLabel: "Routen – tippen zum Aufklappen", locsLabel: "Orte – tippen zum Aufklappen" },
+    it: { title: "Attrazioni & percorsi", sub: "Audioguide · gratis o a pagamento", soundText: "Premi il pulsante. Sentirai una breve frase nella lingua scelta.", routesLabel: "Percorsi – tocca per espandere", locsLabel: "Luoghi – tocca per espandere" },
+    tr: { title: "Gezilecek yerler & rotalar", sub: "Sesli rehberler · ücretsiz veya giriş ücretli", soundText: "Düğmeye basın. Seçtiğiniz dilde kısa bir cümle duyacaksınız.", routesLabel: "Rotalar – açmak için dokunun", locsLabel: "Yerler – açmak için dokunun" },
+    es: { title: "Lugares de interés y rutas", sub: "Audioguías · gratis o con entrada", soundText: "Pulsa el botón. Oirás una frase corta en el idioma elegido.", routesLabel: "Rutas – toca para desplegar", locsLabel: "Lugares – toca para desplegar" }
   };
 
-  function getLang() {
-    var l = localStorage.getItem('hk-lang') || document.documentElement.lang || 'nl';
-    if (!LANG_MAP[l]) l = 'nl';
-    return l;
-  }
-
-  function pickVoice(langCode) {
-    var voices = speechSynthesis.getVoices() || [];
-    var prefix = langCode.slice(0, 2).toLowerCase();
-    var exact = voices.find(function(v) { return v.lang === langCode; });
-    if (exact) return exact;
-    var same = voices.find(function(v) { return v.lang && v.lang.toLowerCase().indexOf(prefix) === 0; });
-    return same || null;
-  }
-
-  function setStatus(msg) {
-    var el = document.getElementById('soundStatus');
-    if (el) el.textContent = msg;
-  }
-
-  function testSound() {
-    if (!window.speechSynthesis) {
-      setStatus('Spraak wordt niet ondersteund op dit apparaat. Controleer of het mediageluid aan staat.');
-      return;
+  function setLang(l) {
+    if (!I18N[l]) l = 'nl';
+    localStorage.setItem('hk-lang', l);
+    document.documentElement.lang = l;
+    var d = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (d[k]) el.textContent = d[k];
+    });
+    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if (opt) {
+      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
+      document.getElementById('code').textContent = l.toUpperCase();
     }
+    document.querySelectorAll('.lang-option').forEach(function(o){
+      o.classList.toggle('active', o.getAttribute('data-lang') === l);
+    });
+    closeMenu();
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  function openMenu(){ langMenu.classList.add('open'); }
+  function closeMenu(){ langMenu.classList.remove('open'); }
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    langMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.addEventListener('click', function(){ closeMenu(); });
+  document.querySelectorAll('.lang-option').forEach(function(btn){
+    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
+  });
+
+  var saved = localStorage.getItem('hk-lang') || 'nl';
+  setLang(saved);
+
+  var LANG_MAP = {
+    nl: { code: 'nl-NL', text: 'Hallo. Dit is de geluidstest van Hello Kos.' },
+    de: { code: 'de-DE', text: 'Hallo. Das ist der Soundtest von Hello Kos.' },
+    en: { code: 'en-GB', text: 'Hello. This is the Hello Kos sound test.' },
+    it: { code: 'it-IT', text: 'Ciao. Questo è il test audio di Hello Kos.' },
+    tr: { code: 'tr-TR', text: 'Merhaba. Bu Hello Kos ses testidir.' },
+    es: { code: 'es-ES', text: 'Hola. Esta es la prueba de sonido de Hello Kos.' }
+  };
+  function getLang(){ return localStorage.getItem('hk-lang') || 'nl'; }
+  function setStatus(msg){ var el = document.getElementById('soundStatus'); if(el) el.textContent = msg; }
+  function testSound(){
+    if (!window.speechSynthesis){ setStatus('Spraak niet ondersteund'); return; }
     speechSynthesis.cancel();
     var l = getLang();
-    var info = LANG_MAP[l];
+    var info = LANG_MAP[l] || LANG_MAP.nl;
     var u = new SpeechSynthesisUtterance(info.text);
-    u.lang = info.code;
-    u.rate = 0.95;
-    u.pitch = 1;
-    var voice = pickVoice(info.code);
-    if (voice) u.voice = voice;
-    u.onstart = function() { setStatus('Afspelen in ' + l.toUpperCase() + '…'); };
-    u.onend = function() { setStatus('Geluid werkt. Je kunt verder.'); };
-    u.onerror = function() { setStatus('Kon niet afspelen. Zet de stille modus uit en probeer opnieuw.'); };
-    var voices = speechSynthesis.getVoices();
-    if (!voices || voices.length === 0) {
-      speechSynthesis.onvoiceschanged = function() {
-        var v2 = pickVoice(info.code);
-        if (v2) u.voice = v2;
-        speechSynthesis.speak(u);
-      };
-      setTimeout(function() { speechSynthesis.speak(u); }, 300);
-    } else {
-      speechSynthesis.speak(u);
-    }
+    u.lang = info.code; u.rate = 0.95;
+    u.onstart = function(){ setStatus('Afspelen…'); };
+    u.onend = function(){ setStatus('Klaar'); };
+    speechSynthesis.speak(u);
   }
-
-  function stopSound() {
-    if (window.speechSynthesis) speechSynthesis.cancel();
-    setStatus('Gestopt.');
-  }
-
+  function stopSound(){ if(window.speechSynthesis) speechSynthesis.cancel(); setStatus('Gestopt'); }
   document.getElementById('btnTestSound').addEventListener('click', testSound);
   document.getElementById('btnStopSound').addEventListener('click', stopSound);
-
-  if (window.speechSynthesis) {
-    speechSynthesis.getVoices();
-    speechSynthesis.onvoiceschanged = function() { speechSynthesis.getVoices(); };
-  }
 })();
 </script>
 </body>
 </html>
+```
+
+Sla dit op als `bezienswaardigheden.html` in je map **Hello kos website** (waar ook `index.html` staat).  
+
+De taal die je kiest wordt onthouden, en het huisje brengt je direct terug naar home.
