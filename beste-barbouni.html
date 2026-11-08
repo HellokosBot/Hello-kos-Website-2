@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Barbouni – Hello Kos</title>
+  <style>
+    :root {
+      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
+      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
+      --text: #E8EDE8; --text-soft: #A0B0A0;
+      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.55;
+      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
+    }
+    .app-header {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px 16px; background: var(--bg-header);
+      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+    }
+    .back-btn { grid-column: 1; color: var(--petrol); font-weight: 600; text-decoration: none; font-size: 0.9rem; }
+    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(145deg, #F0C040, #D4A017); display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
+    .logo-text { font-size: 1.2rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
+    .logo-text span { color: var(--gold-dark); font-style: italic; }
+    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
+    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
+    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; }
+    .lang-menu.open { display: block; }
+    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
+    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
+    .hero { position: relative; width: 100%; aspect-ratio: 16/11; overflow: hidden; background: #1a2525; }
+    .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.6), transparent); color: #fff; }
+    .hero-cap .area { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; opacity: 0.9; }
+    .hero-cap h1 { font-size: 1.5rem; font-weight: 800; margin-top: 2px; letter-spacing: -0.02em; }
+    .content { padding: 16px 16px 0; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+    .badge { background: rgba(58,154,154,0.15); color: #99f6e4; font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+    .block { background: var(--bg-card); border-radius: 16px; padding: 15px 16px; margin-bottom: 12px; border: 1px solid var(--border); }
+    .block h2 { font-size: 1rem; color: var(--text); margin-bottom: 8px; }
+    .block p { font-size: 0.92rem; color: var(--text); margin-bottom: 0; }
+    .img-full { margin: 0 0 12px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); }
+    .img-full img { width: 100%; display: block; max-height: 210px; object-fit: cover; }
+    .img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 0 12px; }
+    .img-pair img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; display: block; border: 1px solid var(--border); }
+    .actions { display: flex; flex-direction: column; gap: 8px; margin: 8px 0 12px; }
+    .btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 13px 16px; border-radius: 14px; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
+    .btn-map { background: var(--bg-card); color: var(--text); border: 2px solid var(--petrol); }
+    .footer { text-align: center; padding: 16px; font-size: 0.75rem; color: var(--text-soft); }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="beste-restaurants.html" class="back-btn">← Terug</a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🔅</div>
+      <div class="logo-text">Hello <span>Kos</span></div>
+    </a>
+    <div class="lang-wrap">
+      <button type="button" class="lang-btn" id="langBtn">
+        <span id="flag">🇳🇱</span> <span id="code">NL</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="hero">
+      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/photo0jpg-8-high.jpg" alt="Barbouni" loading="eager">
+      <div class="hero-cap"><div class="area" data-i18n="area">Kos-stad</div><h1>Barbouni</h1></div>
+    </div>
+    <div class="content">
+      <div class="badge-row">
+        <span class="badge" data-i18n="badge1">Kos-stad</span>
+        <span class="badge" data-i18n="badge2">Strand & zeezicht</span>
+      </div>
+      <div class="block"><h2 data-i18n="h1">Over dit restaurant</h2><p data-i18n="p1">Elegant en relaxed: tafels op het strand of binnen, vriendelijke service en een verfijnde maar toegankelijke kaart. Ideaal voor lunch, diner of eten bij zonsondergang.</p></div>
+      <div class="img-full"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/img-20200829-wa0017-largejpg-high.jpg" alt="" loading="lazy"></div>
+      <div class="block"><h2 data-i18n="h2">Sfeer & eten</h2><p data-i18n="p2">Er zijn ook vegetarische, vegan en glutenvrije opties. Iets duurder dan een doorsnee taverna, maar vaak nog steeds scherper geprijsd dan in Noord-Europa. Het trekt een mix van bezoekers en locals.</p></div>
+      <div class="img-pair"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/barbouni-1-high.jpg" alt="" loading="lazy"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/img-20200829-wa0018-largejpg-high.jpg" alt="" loading="lazy"></div>
+      <div class="block"><h2 data-i18n="h3">Praktisch</h2><p data-i18n="p3">In Kos-stad aan zee. Reserveer vooraf bij mooi weer en in het hoogseizoen – populaire avonden zitten snel vol.</p></div>
+      <div class="img-full"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/barbouni-3-high.jpg" alt="" loading="lazy"></div>
+      <div class="img-pair"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/photo0jpg-8-high-36pz96.jpg" alt="" loading="lazy"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/barbouni-2-high.jpg" alt="" loading="lazy"></div>
+      <div class="actions">
+        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Barbouni%20Restaurant%20Kos" target="_blank" rel="noopener" data-i18n="mapBtn">Locatie op de kaart</a>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">Hello Kos</footer>
+
+<script>
+(function(){
+  var I18N = {
+    nl: {
+      area: "Kos-stad",
+      badge1: "Kos-stad",
+      badge2: "Strand & zeezicht",
+      h1: "Over dit restaurant",
+      p1: "Elegant en relaxed: tafels op het strand of binnen, vriendelijke service en een verfijnde maar toegankelijke kaart. Ideaal voor lunch, diner of eten bij zonsondergang.",
+      h2: "Sfeer & eten",
+      p2: "Er zijn ook vegetarische, vegan en glutenvrije opties. Iets duurder dan een doorsnee taverna, maar vaak nog steeds scherper geprijsd dan in Noord-Europa. Het trekt een mix van bezoekers en locals.",
+      h3: "Praktisch",
+      p3: "In Kos-stad aan zee. Reserveer vooraf bij mooi weer en in het hoogseizoen – populaire avonden zitten snel vol.",
+      mapBtn: "Locatie op de kaart"
+    },
+    en: {
+      area: "Kos town",
+      badge1: "Kos town",
+      badge2: "Beach & sea view",
+      h1: "About this restaurant",
+      p1: "Elegant and relaxed: tables on the beach or inside, friendly service and a refined but accessible menu. Ideal for lunch, dinner or eating at sunset.",
+      h2: "Atmosphere & food",
+      p2: "There are also vegetarian, vegan and gluten-free options. A bit more expensive than an average taverna, but often still better priced than in Northern Europe. It attracts a mix of visitors and locals.",
+      h3: "Practical",
+      p3: "In Kos town by the sea. Book ahead in good weather and high season – popular evenings fill up quickly.",
+      mapBtn: "Location on the map"
+    },
+    de: {
+      area: "Kos-Stadt",
+      badge1: "Kos-Stadt",
+      badge2: "Strand & Meerblick",
+      h1: "Über dieses Restaurant",
+      p1: "Elegant und entspannt: Tische am Strand oder drinnen, freundlicher Service und eine raffinierte, aber zugängliche Karte. Ideal für Mittagessen, Abendessen oder Essen bei Sonnenuntergang.",
+      h2: "Atmosphäre & Essen",
+      p2: "Es gibt auch vegetarische, vegane und glutenfreie Optionen. Etwas teurer als eine durchschnittliche Taverne, aber oft immer noch günstiger als in Nordeuropa. Es zieht eine Mischung aus Besuchern und Locals an.",
+      h3: "Praktisch",
+      p3: "In Kos-Stadt am Meer. Bei schönem Wetter und in der Hochsaison vorab reservieren – beliebte Abende sind schnell ausgebucht.",
+      mapBtn: "Standort auf der Karte"
+    },
+    it: {
+      area: "Città di Kos",
+      badge1: "Città di Kos",
+      badge2: "Spiaggia & vista mare",
+      h1: "Su questo ristorante",
+      p1: "Elegante e rilassato: tavoli sulla spiaggia o all’interno, servizio amichevole e un menu raffinato ma accessibile. Ideale per pranzo, cena o mangiare al tramonto.",
+      h2: "Atmosfera & cibo",
+      p2: "Ci sono anche opzioni vegetariane, vegane e senza glutine. Un po’ più caro di una taverna media, ma spesso ancora più conveniente rispetto al Nord Europa. Attira un mix di visitatori e locali.",
+      h3: "Pratico",
+      p3: "Nella città di Kos sul mare. Prenota in anticipo con bel tempo e in alta stagione – le serate popolari si riempiono in fretta.",
+      mapBtn: "Posizione sulla mappa"
+    },
+    tr: {
+      area: "Kos şehri",
+      badge1: "Kos şehri",
+      badge2: "Plaj & deniz manzarası",
+      h1: "Bu restoran hakkında",
+      p1: "Zarif ve rahat: plajda veya içeride masalar, samimi servis ve incelikli ama erişilebilir menü. Öğle yemeği, akşam yemeği veya gün batımında yemek için ideal.",
+      h2: "Atmosfer & yemek",
+      p2: "Vejetaryen, vegan ve glutensiz seçenekler de var. Ortalama bir tavernadan biraz daha pahalı, ama genellikle Kuzey Avrupa’ya göre daha uygun fiyatlı. Ziyaretçiler ve yerel halkın karışımını çeker.",
+      h3: "Pratik",
+      p3: "Kos şehrinde denize yakın. Güzel havalarda ve yüksek sezonda önceden rezervasyon yap – popüler akşamlar çabuk dolar.",
+      mapBtn: "Haritada konum"
+    },
+    es: {
+      area: "Ciudad de Kos",
+      badge1: "Ciudad de Kos",
+      badge2: "Playa & vistas al mar",
+      h1: "Sobre este restaurante",
+      p1: "Elegante y relajado: mesas en la playa o en el interior, servicio amable y una carta refinada pero accesible. Ideal para almuerzo, cena o comer al atardecer.",
+      h2: "Ambiente & comida",
+      p2: "También hay opciones vegetarianas, veganas y sin gluten. Un poco más caro que una taverna media, pero a menudo todavía más económico que en el norte de Europa. Atrae una mezcla de visitantes y locales.",
+      h3: "Práctico",
+      p3: "En la ciudad de Kos junto al mar. Reserva con antelación con buen tiempo y en temporada alta – las noches populares se llenan rápido.",
+      mapBtn: "Ubicación en el mapa"
+    }
+  };
+
+  function setLang(l) {
+    if (!I18N[l]) l = 'nl';
+    localStorage.setItem('hk-lang', l);
+    document.documentElement.lang = l;
+    var d = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (d[k]) el.textContent = d[k];
+    });
+    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if (opt) {
+      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
+      document.getElementById('code').textContent = l.toUpperCase();
+    }
+    document.querySelectorAll('.lang-option').forEach(function(o){
+      o.classList.toggle('active', o.getAttribute('data-lang') === l);
+    });
+    closeMenu();
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  function openMenu(){ langMenu.classList.add('open'); }
+  function closeMenu(){ langMenu.classList.remove('open'); }
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    langMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.addEventListener('click', closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){
+    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
+  });
+
+  var saved = localStorage.getItem('hk-lang') || 'nl';
+  setLang(saved);
+})();
+</script>
+</body>
+</html>
