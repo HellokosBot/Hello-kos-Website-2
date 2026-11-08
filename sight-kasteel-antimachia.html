@@ -68,6 +68,10 @@
     .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
     .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
     .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
+    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
+    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
+    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
     .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
     .footer a { color: var(--petrol); text-decoration: none; }
   </style>
@@ -96,18 +100,18 @@
 
   <main class="main">
     <div class="hero-wrap">
-      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/antimachia-castle-kos-island-high.jpg" alt="Kasteel van Antimachia" loading="eager">
+      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/yxnzzxrzl2ltywdlcy9wywdlcy9tb251bwvudhmvyw50aw1hy2hlawfjyxn0bguvrepjxza2ndnryxn0cm9hbnrpbwf4zwlhcy5qcgc-standard.jpg" alt="Kasteel van Antimachia" loading="eager">
       <div class="hero-caption" data-i18n="heroCap">Kasteel van Antimachia</div>
     </div>
 
     <div class="content">
       <h1 data-i18n="title">Kasteel van Antimachia</h1>
-      <p class="lead" data-i18n="lead">Middeleeuws fort op een heuvel – heldhaftige verdediging in 1457 door 15 ridders en eilandbewoners tegen 16.000 Ottomanen.</p>
+      <p class="lead" data-i18n="lead">Middeleeuws fort – in 1457 23 dagen standgehouden door 15 ridders en eilanders tegen 16.000 Ottomanen. Gratis toegankelijk.</p>
 
       <div class="badges">
         <span class="badge" data-i18n="badgeFree">Gratis</span>
-        <span class="badge">Antimachia</span>
-        <span class="badge" data-i18n="badgeCentury">15e eeuw</span>
+        <span class="badge" data-i18n="badge1457">1457</span>
+        <span class="badge" data-i18n="badgeAnti">Antimachia</span>
       </div>
 
       <div class="actions">
@@ -121,29 +125,29 @@
       <div id="readText">
         <div class="card">
           <h2 data-i18n="h2fort">Fort op de heuvel</h2>
-          <p data-i18n="p1">Het Kasteel van Antimachia ligt op een heuvel bij het dorp Antimachia, midden op Kos. Middeleeuws fort met dikke muren en strategisch uitzicht over binnenland en zee.</p>
+          <p data-i18n="p1">Het kasteel ligt op een heuvel bij Antimachia, midden op Kos: dikke muren en strategisch uitzicht over binnenland en zee.</p>
         </div>
 
         <div class="facts">
           <div class="fact">
-            <span class="n">1457</span>
-            <span class="l" data-i18n="factSiege">23 dagen belegering</span>
+            <span class="n" data-i18n="factDays">23 dagen</span>
+            <span class="l" data-i18n="factSiege">belegering 1457</span>
           </div>
           <div class="fact">
-            <span class="n" data-i18n="factFree">Gratis</span>
-            <span class="l" data-i18n="factAccess">toegang</span>
+            <span class="n" data-i18n="factKnights">15 ridders</span>
+            <span class="l" data-i18n="factIslanders">+ 200–300 eilanders</span>
           </div>
         </div>
 
         <div class="card">
-          <h2 data-i18n="h2siege">Belegering van 1457</h2>
-          <p data-i18n="p2">In juni 1457 viel een Ottomaans leger Kos aan: zo’n 16.000 soldaten en 156 schepen. Na aanvallen op Kos-stad, Pyli en Kefalos kwamen ze bij Antimachia.</p>
-          <p data-i18n="p3">Het fort werd verdedigd door slechts 15 ridders van de Orde van Sint-Jan en ongeveer 200–300 eilandbewoners – vaak boeren met eenvoudige wapens. Toch hielden ze 23 dagen stand (tot 26 juni). De Ottomanen probeerden tunnels onder de muren te graven; de verdedigers stopten dat. Uiteindelijk trokken de aanvallers zich terug.</p>
+          <h2 data-i18n="h2siege">Belegering van juni 1457</h2>
+          <p data-i18n="p2">Een Ottomaans leger viel Kos aan: zo’n 16.000 soldaten en 156 schepen. Eerst brandden ze het kasteel in Kos-stad, daarna Pyli en Kefalos, en ten slotte Antimachia.</p>
+          <p data-i18n="p3">Verdedigd door slechts 15 ridders van de Orde van Sint-Jan en 200–300 eilandbewoners – vaak boeren met eenvoudige wapens. Ze hielden 23 dagen stand (tot 26 juni). De Ottomanen groeven tunnels onder de muren; de verdedigers ontdekten en stopten dat. Uiteindelijk trokken de aanvallers zich terug – een van de heldhaftigste momenten van het kasteel.</p>
         </div>
 
         <div class="photo-block">
-          <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/kos-antimachia-venetian-castle-thumb-1-640-high.jpg" alt="Kasteel Antimachia" loading="lazy">
-          <div class="cap" data-i18n="cap1">Muren van het fort</div>
+          <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/antimach-q-high-fna7t6.jpg" alt="Kasteel" loading="lazy">
+          <div class="cap" data-i18n="capWalls">Muren van Antimachia</div>
         </div>
 
         <div class="card">
@@ -153,8 +157,27 @@
 
         <div class="card">
           <h2 data-i18n="h2visit">Bezoeken</h2>
-          <p data-i18n="p5">Gratis toegankelijk. Soms staat er iemand verkleed als ridder bij de ingang die een gift vraagt voor een foto – dat is vrijwillig, geen officiële entreeprijs.</p>
+          <p data-i18n="p5">Gratis. Soms staat er iemand verkleed als ridder die een gift vraagt voor een foto – dat is vrijwillig, geen officiële entreeprijs.</p>
           <div class="tip" data-i18n="tip">Tip: geniet van het uitzicht vanaf de muren. Neem water mee; er is weinig schaduw.</div>
+        </div>
+
+        <div class="gallery">
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/kos-antimachia-venetian-castle-thumb-1-640-high.jpg" alt="" loading="lazy">
+            <span data-i18n="g1">Kasteel</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/yxnzzxrzl2ltywdlcy9wywdlcy9tb251bwvudhmvyw50aw1hy2hlawfjyxn0bguvrepjxza2ndnryxn0cm9hbnrpbwf4zwlhcy5qcgc-high.jpg" alt="" loading="lazy">
+            <span data-i18n="g2">Kasteel</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/antimachia-castle-kos-island-high.jpg" alt="" loading="lazy">
+            <span data-i18n="g3">Kasteel</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/575109457_24983878377963806_4736117863808071143_n-high.jpg" alt="" loading="lazy">
+            <span data-i18n="g4">Kasteel</span>
+          </div>
         </div>
       </div>
     </div>
@@ -170,117 +193,123 @@
   var I18N = {
     nl: {
       title: "Kasteel van Antimachia",
-      lead: "Middeleeuws fort op een heuvel – heldhaftige verdediging in 1457 door 15 ridders en eilandbewoners tegen 16.000 Ottomanen.",
+      lead: "Middeleeuws fort – in 1457 23 dagen standgehouden door 15 ridders en eilanders tegen 16.000 Ottomanen. Gratis toegankelijk.",
       heroCap: "Kasteel van Antimachia",
-      badgeFree: "Gratis", badgeCentury: "15e eeuw",
+      badgeFree: "Gratis", badge1457: "1457", badgeAnti: "Antimachia",
       btnPlay: "🔊 Voorlezen",
       h2fort: "Fort op de heuvel",
-      p1: "Het Kasteel van Antimachia ligt op een heuvel bij het dorp Antimachia, midden op Kos. Middeleeuws fort met dikke muren en strategisch uitzicht over binnenland en zee.",
-      factSiege: "23 dagen belegering", factFree: "Gratis", factAccess: "toegang",
-      h2siege: "Belegering van 1457",
-      p2: "In juni 1457 viel een Ottomaans leger Kos aan: zo’n 16.000 soldaten en 156 schepen. Na aanvallen op Kos-stad, Pyli en Kefalos kwamen ze bij Antimachia.",
-      p3: "Het fort werd verdedigd door slechts 15 ridders van de Orde van Sint-Jan en ongeveer 200–300 eilandbewoners – vaak boeren met eenvoudige wapens. Toch hielden ze 23 dagen stand (tot 26 juni). De Ottomanen probeerden tunnels onder de muren te graven; de verdedigers stopten dat. Uiteindelijk trokken de aanvallers zich terug.",
-      cap1: "Muren van het fort",
+      p1: "Het kasteel ligt op een heuvel bij Antimachia, midden op Kos: dikke muren en strategisch uitzicht over binnenland en zee.",
+      factDays: "23 dagen", factSiege: "belegering 1457", factKnights: "15 ridders", factIslanders: "+ 200–300 eilanders",
+      h2siege: "Belegering van juni 1457",
+      p2: "Een Ottomaans leger viel Kos aan: zo’n 16.000 soldaten en 156 schepen. Eerst brandden ze het kasteel in Kos-stad, daarna Pyli en Kefalos, en ten slotte Antimachia.",
+      p3: "Verdedigd door slechts 15 ridders van de Orde van Sint-Jan en 200–300 eilandbewoners – vaak boeren met eenvoudige wapens. Ze hielden 23 dagen stand (tot 26 juni). De Ottomanen groeven tunnels onder de muren; de verdedigers ontdekten en stopten dat. Uiteindelijk trokken de aanvallers zich terug – een van de heldhaftigste momenten van het kasteel.",
+      capWalls: "Muren van Antimachia",
       h2later: "Later",
       p4: "Na de aardbeving van 1493 werd het fort herbouwd. De Ottomanen gebruikten het tot 1871 als militaire basis; daarna verviel het langzaam.",
       h2visit: "Bezoeken",
-      p5: "Gratis toegankelijk. Soms staat er iemand verkleed als ridder bij de ingang die een gift vraagt voor een foto – dat is vrijwillig, geen officiële entreeprijs.",
-      tip: "Tip: geniet van het uitzicht vanaf de muren. Neem water mee; er is weinig schaduw."
+      p5: "Gratis. Soms staat er iemand verkleed als ridder die een gift vraagt voor een foto – dat is vrijwillig, geen officiële entreeprijs.",
+      tip: "Tip: geniet van het uitzicht vanaf de muren. Neem water mee; er is weinig schaduw.",
+      g1: "Kasteel", g2: "Kasteel", g3: "Kasteel", g4: "Kasteel"
     },
     en: {
       title: "Castle of Antimachia",
-      lead: "Medieval fort on a hill – heroic defence in 1457 by 15 knights and islanders against 16,000 Ottomans.",
+      lead: "Medieval fort – in 1457 held for 23 days by 15 knights and islanders against 16,000 Ottomans. Free to enter.",
       heroCap: "Castle of Antimachia",
-      badgeFree: "Free", badgeCentury: "15th century",
+      badgeFree: "Free", badge1457: "1457", badgeAnti: "Antimachia",
       btnPlay: "🔊 Read aloud",
       h2fort: "Fort on the hill",
-      p1: "The Castle of Antimachia stands on a hill near the village of Antimachia, in the middle of Kos. Medieval fort with thick walls and strategic views over the interior and the sea.",
-      factSiege: "23-day siege", factFree: "Free", factAccess: "access",
-      h2siege: "Siege of 1457",
-      p2: "In June 1457 an Ottoman army attacked Kos: about 16,000 soldiers and 156 ships. After attacks on Kos Town, Pyli and Kefalos they reached Antimachia.",
-      p3: "The fort was defended by only 15 knights of the Order of Saint John and about 200–300 islanders – often farmers with simple weapons. Yet they held out for 23 days (until 26 June). The Ottomans tried to dig tunnels under the walls; the defenders stopped them. Eventually the attackers withdrew.",
-      cap1: "Walls of the fort",
+      p1: "The castle stands on a hill near Antimachia, in the middle of Kos: thick walls and a strategic view over the interior and the sea.",
+      factDays: "23 days", factSiege: "siege 1457", factKnights: "15 knights", factIslanders: "+ 200–300 islanders",
+      h2siege: "Siege of June 1457",
+      p2: "An Ottoman army attacked Kos: about 16,000 soldiers and 156 ships. First they burned the castle in Kos town, then Pyli and Kefalos, and finally Antimachia.",
+      p3: "Defended by only 15 knights of the Order of St John and 200–300 islanders – often farmers with simple weapons. They held out for 23 days (until 26 June). The Ottomans dug tunnels under the walls; the defenders discovered and stopped that. Eventually the attackers withdrew – one of the most heroic moments of the castle.",
+      capWalls: "Walls of Antimachia",
       h2later: "Later",
-      p4: "After the earthquake of 1493 the fort was rebuilt. The Ottomans used it as a military base until 1871; afterwards it slowly fell into ruin.",
+      p4: "After the earthquake of 1493 the fort was rebuilt. The Ottomans used it as a military base until 1871; after that it slowly fell into ruin.",
       h2visit: "Visiting",
-      p5: "Freely accessible. Sometimes someone dressed as a knight stands at the entrance asking for a tip for a photo – that is voluntary, not an official entry fee.",
-      tip: "Tip: enjoy the view from the walls. Bring water; there is little shade."
+      p5: "Free. Sometimes someone dressed as a knight asks for a tip for a photo – that is voluntary, not an official entrance fee.",
+      tip: "Tip: enjoy the view from the walls. Take water; there is little shade.",
+      g1: "Castle", g2: "Castle", g3: "Castle", g4: "Castle"
     },
     de: {
-      title: "Burg von Antimachia",
-      lead: "Mittelalterliche Festung auf einem Hügel – heldenhafte Verteidigung 1457 durch 15 Ritter und Inselbewohner gegen 16.000 Osmanen.",
-      heroCap: "Burg von Antimachia",
-      badgeFree: "Kostenlos", badgeCentury: "15. Jahrhundert",
+      title: "Schloss von Antimachia",
+      lead: "Mittelalterliche Festung – 1457 23 Tage von 15 Rittern und Inselbewohnern gegen 16.000 Osmanen gehalten. Kostenlos zugänglich.",
+      heroCap: "Schloss von Antimachia",
+      badgeFree: "Kostenlos", badge1457: "1457", badgeAnti: "Antimachia",
       btnPlay: "🔊 Vorlesen",
       h2fort: "Festung auf dem Hügel",
-      p1: "Die Burg von Antimachia liegt auf einem Hügel beim Dorf Antimachia, in der Mitte von Kos. Mittelalterliche Festung mit dicken Mauern und strategischem Blick über Inland und Meer.",
-      factSiege: "23 Tage Belagerung", factFree: "Kostenlos", factAccess: "Zugang",
-      h2siege: "Belagerung von 1457",
-      p2: "Im Juni 1457 griff eine osmanische Armee Kos an: etwa 16.000 Soldaten und 156 Schiffe. Nach Angriffen auf Kos-Stadt, Pyli und Kefalos kamen sie nach Antimachia.",
-      p3: "Die Festung wurde von nur 15 Rittern des Johanniterordens und etwa 200–300 Inselbewohnern verteidigt – oft Bauern mit einfachen Waffen. Dennoch hielten sie 23 Tage stand (bis 26. Juni). Die Osmanen versuchten Tunnel unter den Mauern zu graben; die Verteidiger stoppten das. Schließlich zogen sich die Angreifer zurück.",
-      cap1: "Mauern der Festung",
+      p1: "Das Schloss liegt auf einem Hügel bei Antimachia, mitten auf Kos: dicke Mauern und strategischer Blick über das Innere und das Meer.",
+      factDays: "23 Tage", factSiege: "Belagerung 1457", factKnights: "15 Ritter", factIslanders: "+ 200–300 Inselbewohner",
+      h2siege: "Belagerung im Juni 1457",
+      p2: "Eine osmanische Armee griff Kos an: etwa 16.000 Soldaten und 156 Schiffe. Zuerst brannten sie das Schloss in Kos-Stadt, dann Pyli und Kefalos, und schließlich Antimachia.",
+      p3: "Verteidigt von nur 15 Rittern des Johanniterordens und 200–300 Inselbewohnern – oft Bauern mit einfachen Waffen. Sie hielten 23 Tage stand (bis 26. Juni). Die Osmanen gruben Tunnel unter den Mauern; die Verteidiger entdeckten und stoppten das. Schließlich zogen sich die Angreifer zurück – einer der heldenhaftesten Momente des Schlosses.",
+      capWalls: "Mauern von Antimachia",
       h2later: "Später",
-      p4: "Nach dem Erdbeben von 1493 wurde die Festung wiederaufgebaut. Die Osmanen nutzten sie bis 1871 als Militärbasis; danach verfiel sie langsam.",
+      p4: "Nach dem Erdbeben von 1493 wurde die Festung wieder aufgebaut. Die Osmanen nutzten sie bis 1871 als Militärbasis; danach verfiel sie langsam.",
       h2visit: "Besuchen",
-      p5: "Kostenlos zugänglich. Manchmal steht jemand als Ritter verkleidet am Eingang und bittet um ein Trinkgeld für ein Foto – das ist freiwillig, keine offizielle Eintrittsgebühr.",
-      tip: "Tipp: genieße den Blick von den Mauern. Nimm Wasser mit; es gibt wenig Schatten."
+      p5: "Kostenlos. Manchmal steht jemand als Ritter verkleidet da und bittet um ein Trinkgeld für ein Foto – das ist freiwillig, kein offizieller Eintrittspreis.",
+      tip: "Tipp: genieße den Blick von den Mauern. Nimm Wasser mit; es gibt wenig Schatten.",
+      g1: "Schloss", g2: "Schloss", g3: "Schloss", g4: "Schloss"
     },
     it: {
       title: "Castello di Antimachia",
-      lead: "Fortezza medievale su una collina – eroica difesa nel 1457 da 15 cavalieri e isolani contro 16.000 ottomani.",
+      lead: "Fortezza medievale – nel 1457 tenuta per 23 giorni da 15 cavalieri e isolani contro 16.000 Ottomani. Accesso gratuito.",
       heroCap: "Castello di Antimachia",
-      badgeFree: "Gratis", badgeCentury: "XV secolo",
+      badgeFree: "Gratis", badge1457: "1457", badgeAnti: "Antimachia",
       btnPlay: "🔊 Leggi ad alta voce",
       h2fort: "Forte sulla collina",
-      p1: "Il Castello di Antimachia si trova su una collina vicino al villaggio di Antimachia, nel centro di Kos. Fortezza medievale con mura spesse e vista strategica sull’entroterra e sul mare.",
-      factSiege: "assedio di 23 giorni", factFree: "Gratis", factAccess: "accesso",
-      h2siege: "Assedio del 1457",
-      p2: "Nel giugno 1457 un esercito ottomano attaccò Kos: circa 16.000 soldati e 156 navi. Dopo attacchi a Kos città, Pyli e Kefalos arrivarono ad Antimachia.",
-      p3: "La fortezza fu difesa da soli 15 cavalieri dell’Ordine di San Giovanni e circa 200–300 isolani – spesso contadini con armi semplici. Eppure resistettero 23 giorni (fino al 26 giugno). Gli Ottomani tentarono di scavare tunnel sotto le mura; i difensori li fermarono. Alla fine gli attaccanti si ritirarono.",
-      cap1: "Mura della fortezza",
-      h2later: "In seguito",
-      p4: "Dopo il terremoto del 1493 la fortezza fu ricostruita. Gli Ottomani la usarono come base militare fino al 1871; poi cadde lentamente in rovina.",
+      p1: "Il castello si trova su una collina vicino ad Antimachia, in mezzo a Kos: mura spesse e vista strategica sull’interno e sul mare.",
+      factDays: "23 giorni", factSiege: "assedio 1457", factKnights: "15 cavalieri", factIslanders: "+ 200–300 isolani",
+      h2siege: "Assedio del giugno 1457",
+      p2: "Un esercito ottomano attaccò Kos: circa 16.000 soldati e 156 navi. Prima bruciarono il castello a Kos città, poi Pyli e Kefalos, e infine Antimachia.",
+      p3: "Difeso da soli 15 cavalieri dell’Ordine di San Giovanni e 200–300 isolani – spesso contadini con armi semplici. Resistettero 23 giorni (fino al 26 giugno). Gli Ottomani scavarono tunnel sotto le mura; i difensori lo scoprirono e lo fermarono. Alla fine gli attaccanti si ritirarono – uno dei momenti più eroici del castello.",
+      capWalls: "Mura di Antimachia",
+      h2later: "Più tardi",
+      p4: "Dopo il terremoto del 1493 il forte fu ricostruito. Gli Ottomani lo usarono come base militare fino al 1871; dopo decadde lentamente.",
       h2visit: "Visitare",
-      p5: "Accesso gratuito. A volte c’è qualcuno vestito da cavaliere all’ingresso che chiede un’offerta per una foto – è volontario, non una tassa d’ingresso ufficiale.",
-      tip: "Consiglio: goditi la vista dalle mura. Porta acqua; c’è poca ombra."
+      p5: "Gratis. A volte c’è qualcuno vestito da cavaliere che chiede una mancia per una foto – è volontario, non un biglietto ufficiale.",
+      tip: "Consiglio: goditi la vista dalle mura. Porta acqua; c’è poca ombra.",
+      g1: "Castello", g2: "Castello", g3: "Castello", g4: "Castello"
     },
     tr: {
       title: "Antimachia Kalesi",
-      lead: "Tepedeki ortaçağ kalesi – 1457’de 15 şövalye ve ada sakinlerinin 16.000 Osmanlı’ya karşı kahramanca savunması.",
+      lead: "Ortaçağ kalesi – 1457’de 15 şövalye ve adalı tarafından 16.000 Osmanlı’ya karşı 23 gün tutuldu. Ücretsiz giriş.",
       heroCap: "Antimachia Kalesi",
-      badgeFree: "Ücretsiz", badgeCentury: "15. yüzyıl",
+      badgeFree: "Ücretsiz", badge1457: "1457", badgeAnti: "Antimachia",
       btnPlay: "🔊 Sesli oku",
       h2fort: "Tepedeki kale",
-      p1: "Antimachia Kalesi, Antimachia köyünün yakınındaki bir tepede, Kos’un ortasında yer alır. Kalın duvarlı ortaçağ kalesi, iç kesimler ve denize stratejik manzara.",
-      factSiege: "23 günlük kuşatma", factFree: "Ücretsiz", factAccess: "giriş",
-      h2siege: "1457 Kuşatması",
-      p2: "Haziran 1457’de bir Osmanlı ordusu Kos’a saldırdı: yaklaşık 16.000 asker ve 156 gemi. Kos şehri, Pyli ve Kefalos’a saldırılardan sonra Antimachia’ya geldiler.",
-      p3: "Kale sadece Aziz Yahya Şövalyeleri Tarikatı’ndan 15 şövalye ve yaklaşık 200–300 ada sakini tarafından savunuldu – çoğu basit silahlı çiftçiler. Yine de 23 gün (26 Haziran’a kadar) dayandılar. Osmanlılar duvarların altına tünel kazmaya çalıştı; savunucular bunu engelledi. Sonunda saldırganlar çekildi.",
-      cap1: "Kalenin duvarları",
-      h2later: "Sonra",
+      p1: "Kale Antimachia yakınlarındaki bir tepede, Kos’un ortasında yer alır: kalın surlar ve iç kesim ile denize stratejik manzara.",
+      factDays: "23 gün", factSiege: "1457 kuşatması", factKnights: "15 şövalye", factIslanders: "+ 200–300 adalı",
+      h2siege: "Haziran 1457 kuşatması",
+      p2: "Osmanlı ordusu Kos’u saldırdı: yaklaşık 16.000 asker ve 156 gemi. Önce Kos kasabasındaki kaleyi yaktılar, sonra Pyli ve Kefalos’u, en sonunda Antimachia’yı.",
+      p3: "Sadece 15 St. John Şövalyesi ve 200–300 adalı tarafından savunuldu – çoğu basit silahlı çiftçiler. 23 gün dayandılar (26 Haziran’a kadar). Osmanlılar surların altına tünel kazdı; savunucular bunu fark edip durdurdu. Sonunda saldırganlar çekildi – kalenin en kahramanca anlarından biri.",
+      capWalls: "Antimachia surları",
+      h2later: "Daha sonra",
       p4: "1493 depreminden sonra kale yeniden inşa edildi. Osmanlılar 1871’e kadar askeri üs olarak kullandı; sonra yavaşça harap oldu.",
       h2visit: "Ziyaret",
-      p5: "Ücretsiz erişilebilir. Bazen girişte şövalye kılığında biri fotoğraf için bahşiş ister – bu gönüllüdür, resmi giriş ücreti değildir.",
-      tip: "İpucu: duvarlardan manzaranın keyfini çıkar. Su getir; gölge az."
+      p5: "Ücretsiz. Bazen şövalye kılığında biri fotoğraf için bahşiş ister – bu gönüllüdür, resmi giriş ücreti değildir.",
+      tip: "İpucu: surlardan manzaranın keyfini çıkarın. Su alın; az gölge var.",
+      g1: "Kale", g2: "Kale", g3: "Kale", g4: "Kale"
     },
     es: {
       title: "Castillo de Antimachia",
-      lead: "Fortaleza medieval en una colina – heroica defensa en 1457 por 15 caballeros e isleños contra 16.000 otomanos.",
+      lead: "Fortaleza medieval – en 1457 mantenida 23 días por 15 caballeros e isleños contra 16.000 otomanos. Entrada gratuita.",
       heroCap: "Castillo de Antimachia",
-      badgeFree: "Gratis", badgeCentury: "siglo XV",
+      badgeFree: "Gratis", badge1457: "1457", badgeAnti: "Antimachia",
       btnPlay: "🔊 Leer en voz alta",
       h2fort: "Fortaleza en la colina",
-      p1: "El Castillo de Antimachia se encuentra en una colina cerca del pueblo de Antimachia, en el centro de Kos. Fortaleza medieval con muros gruesos y vista estratégica sobre el interior y el mar.",
-      factSiege: "asedio de 23 días", factFree: "Gratis", factAccess: "acceso",
-      h2siege: "Asedio de 1457",
-      p2: "En junio de 1457 un ejército otomano atacó Kos: unos 16.000 soldados y 156 barcos. Tras ataques a Kos ciudad, Pyli y Kefalos llegaron a Antimachia.",
-      p3: "La fortaleza fue defendida por solo 15 caballeros de la Orden de San Juan y unos 200–300 isleños – a menudo campesinos con armas sencillas. Aun así resistieron 23 días (hasta el 26 de junio). Los otomanos intentaron cavar túneles bajo los muros; los defensores lo impidieron. Al final los atacantes se retiraron.",
-      cap1: "Muros de la fortaleza",
-      h2later: "Después",
-      p4: "Tras el terremoto de 1493 la fortaleza fue reconstruida. Los otomanos la usaron como base militar hasta 1871; luego cayó lentamente en ruinas.",
+      p1: "El castillo está en una colina cerca de Antimachia, en medio de Kos: muros gruesos y vista estratégica sobre el interior y el mar.",
+      factDays: "23 días", factSiege: "asedio 1457", factKnights: "15 caballeros", factIslanders: "+ 200–300 isleños",
+      h2siege: "Asedio de junio de 1457",
+      p2: "Un ejército otomano atacó Kos: unos 16.000 soldados y 156 barcos. Primero quemaron el castillo en la ciudad de Kos, luego Pyli y Kefalos, y finalmente Antimachia.",
+      p3: "Defendida por solo 15 caballeros de la Orden de San Juan y 200–300 isleños – a menudo campesinos con armas sencillas. Resistieron 23 días (hasta el 26 de junio). Los otomanos cavaron túneles bajo los muros; los defensores lo descubrieron y lo detuvieron. Finalmente los atacantes se retiraron – uno de los momentos más heroicos del castillo.",
+      capWalls: "Muros de Antimachia",
+      h2later: "Más tarde",
+      p4: "Tras el terremoto de 1493 el fuerte fue reconstruido. Los otomanos lo usaron como base militar hasta 1871; después cayó lentamente en ruinas.",
       h2visit: "Visitar",
-      p5: "Acceso gratuito. A veces hay alguien vestido de caballero en la entrada que pide una propina por una foto – es voluntario, no una tasa oficial.",
-      tip: "Consejo: disfruta de la vista desde los muros. Lleva agua; hay poca sombra."
+      p5: "Gratis. A veces hay alguien vestido de caballero que pide una propina por una foto – es voluntario, no una entrada oficial.",
+      tip: "Consejo: disfruta de las vistas desde los muros. Lleva agua; hay poca sombra.",
+      g1: "Castillo", g2: "Castillo", g3: "Castillo", g4: "Castillo"
     }
   };
 
@@ -383,3 +412,5 @@
 </script>
 </body>
 </html>
+Sla dit op als sight-kasteel-antimachia.html. Alle tekst is vertaald en de voorleesknop leest de gekozen taal.
+
