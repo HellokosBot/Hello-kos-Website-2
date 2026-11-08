@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Stranden – Hello Kos</title>
+  <style>
+    :root {
+      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
+      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
+      --text: #E8EDE8; --text-soft: #A0B0A0;
+      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.45;
+      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
+    }
+    .app-header {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px 16px; background: var(--bg-header);
+      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+    }
+    .back-btn { grid-column: 1; color: var(--petrol); font-weight: 600; text-decoration: none; font-size: 0.9rem; }
+    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(145deg, #F0C040, #D4A017); display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
+    .logo-text { font-size: 1.2rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
+    .logo-text span { color: var(--gold-dark); font-style: italic; }
+    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
+    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
+    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; }
+    .lang-menu.open { display: block; }
+    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
+    .main { max-width: 480px; margin: 0 auto; padding: 16px 14px 40px; }
+    h1 { font-size: 1.2rem; font-weight: 800; color: var(--text); text-align: center; margin-bottom: 4px; }
+    .sub { text-align: center; font-size: 0.86rem; color: var(--text-soft); margin-bottom: 16px; }
+    .acc { background: var(--bg-card); border-radius: 16px; margin-bottom: 10px; border: 1px solid var(--border); overflow: hidden; }
+    .acc-btn { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border: none; background: transparent; cursor: pointer; font-family: inherit; font-size: 1rem; font-weight: 700; color: var(--text); text-align: left; }
+    .acc-btn .count { font-size: 0.75rem; font-weight: 600; color: #99f6e4; background: rgba(58,154,154,0.18); padding: 4px 10px; border-radius: 999px; margin-left: auto; margin-right: 8px; }
+    .acc-btn .chev { color: var(--petrol); transition: transform 0.2s; }
+    .acc.open .acc-btn .chev { transform: rotate(180deg); }
+    .acc-body { display: none; padding: 0 12px 14px; }
+    .acc.open .acc-body { display: block; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .card { display: block; position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 1; background: #1a2525 center/cover no-repeat; text-decoration: none; border: 1px solid var(--border); }
+    .card-overlay { position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 12px; background: linear-gradient(to top, rgba(0,0,0,0.72), transparent 55%); }
+    .card-title { color: #fff; font-size: 0.85rem; font-weight: 700; line-height: 1.25; display: flex; flex-direction: column; gap: 2px; }
+    .card-meta { font-size: 0.68rem; font-weight: 600; opacity: 0.9; color: #e8f5f3; }
+    .footer { text-align: center; padding: 20px; font-size: 0.78rem; color: var(--text-soft); }
+    .twin { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 0 18px; }
+    .twin a { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 16px 10px; border-radius: 16px; text-decoration: none; font-weight: 700; font-size: 0.9rem; min-height: 88px; gap: 6px; border: 1px solid var(--border); }
+    .twin .ico { font-size: 1.6rem; line-height: 1; }
+    .twin-water { background: linear-gradient(145deg, #0277bd, #01579b); color: #fff; }
+    .twin-wind { background: linear-gradient(145deg, #455a64, #37474f); color: #fff; }
+    .twin small { font-size: 0.72rem; font-weight: 600; opacity: 0.9; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="index.html" class="back-btn">← Terug</a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🔅</div>
+      <div class="logo-text">Hello <span>Kos</span></div>
+    </a>
+    <div class="lang-wrap">
+      <button type="button" class="lang-btn" id="langBtn">
+        <span id="flag">🇳🇱</span> <span id="code">NL</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <main class="main">
+    <h1 data-i18n="title">Stranden & beach bars</h1>
+    <p class="sub" data-i18n="sub">Klap een regio open – tik op een tegel</p>
+
+    <div class="twin">
+      <a class="twin-water" href="watertemperatuur.html">
+        <span class="ico">🌊</span>
+        <span data-i18n="twin1">Watertemperatuur</span>
+        <small data-i18n="twin1s">Rondom het eiland</small>
+      </a>
+      <a class="twin-wind" href="windrichting.html">
+        <span class="ico">💨</span>
+        <span data-i18n="twin2">Windrichting</span>
+        <small data-i18n="twin2s">Live op Kos</small>
+      </a>
+    </div>
+
+    <div class="acc open" id="acc-0">
+      <button type="button" class="acc-btn" onclick="document.getElementById('acc-0').classList.toggle('open')">
+        <span data-i18n="acc0">Kos-stad / Lambi</span> <span class="count">5</span><span class="chev">▼</span>
+      </button>
+      <div class="acc-body"><div class="grid">
+        <a class="card" href="strand-big-beach-lambi.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/lambi-beach-looking-towards-high.jpg')">
+          <div class="card-overlay"><span class="card-title">Big Beach Lambi<span class="card-meta" data-i18n="m1">Lang strand</span></span></div>
+        </a>
+        <a class="card" href="strand-mylos-beach.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/650123078_18570402781039994_125697670263376022_n-high-vmmg97.jpg')">
+          <div class="card-overlay"><span class="card-title">Mylos Beach<span class="card-meta" data-i18n="m2">Strand + beachbar</span></span></div>
+        </a>
+        <a class="card" href="strand-c-food-mood-beach.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/c-food-on-the-beach-1-high.jpg')">
+          <div class="card-overlay"><span class="card-title">C Food & Mood Beach<span class="card-meta" data-i18n="m3">Strand · restaurant</span></span></div>
+        </a>
+        <a class="card" href="strand-aqua-blue-beach.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/beach-view-2-high.jpg')">
+          <div class="card-overlay"><span class="card-title">Aqua Blue Beach<span class="card-meta" data-i18n="m4">Strand</span></span></div>
+        </a>
+        <a class="card" href="strand-amos-beach.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/ammos-beach-bar-8-high.jpg')">
+          <div class="card-overlay"><span class="card-title">Amos Beach<span class="card-meta" data-i18n="m5">Strand · feesten</span></span></div>
+        </a>
+      </div></div>
+    </div>
+    <div class="acc" id="acc-1">
+      <button type="button" class="acc-btn" onclick="document.getElementById('acc-1').classList.toggle('open')">
+        <span data-i18n="acc1">Oostkust</span> <span class="count">2</span><span class="chev">▼</span>
+      </button>
+      <div class="acc-body"><div class="grid">
+        <a class="card" href="strand-therma-beach.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/a32eefa8-877b-4d23-a560-ef1872e63bed-high-lqkuj6.jpg')">
+          <div class="card-overlay"><span class="card-title">Therma Beach<span class="card-meta" data-i18n="m6">Warm water</span></span></div>
+        </a>
+        <a class="card" href="strand-agios-fokas.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/beach-view-1-high.jpg')">
+          <div class="card-overlay"><span class="card-title">Agios Fokas<span class="card-meta" data-i18n="m7">Strand</span></span></div>
+        </a>
+      </div></div>
+    </div>
+    <div class="acc" id="acc-2">
+      <button type="button" class="acc-btn" onclick="document.getElementById('acc-2').classList.toggle('open')">
+        <span data-i18n="acc2">Tigaki</span> <span class="count">3</span><span class="chev">▼</span>
+      </button>
+      <div class="acc-body"><div class="grid">
+        <a class="card" href="strand-tigaki-beach.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/tigaki-kos-strand-660-1-high-zl1x4s.jpg')">
+          <div class="card-overlay"><span class="card-title">Tigaki Beach<span class="card-meta" data-i18n="m8">Lang zandstrand</span></span></div>
+        </a>
+        <a class="card" href="strand-tam-tam-beach.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/hp-beach-image-1-high.jpg')">
+          <div class="card-overlay"><span class="card-title">Tam Tam Beach<span class="card-meta" data-i18n="m9">Strand</span></span></div>
+        </a>
+        <a class="card" href="strand-naaktstrand-tigaki.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/mastihari-beach-high-hrbyp3.jpg')">
+          <div class="card-overlay"><span class="card-title">Naaktstrand Tigaki<span class="card-meta" data-i18n="m10">Naaktstrand</span></span></div>
+        </a>
+      </div></div>
+    </div>
+    <div class="acc" id="acc-3">
+      <button type="button" class="acc-btn" onclick="document.getElementById('acc-3').classList.toggle('open')">
+        <span data-i18n="acc3">Marmari</span> <span class="count">1</span><span class="chev">▼</span>
+      </button>
+      <div class="acc-body"><div class="grid">
+        <a class="card" href="strand-marmari-beach.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/marmari-beach-2-high-m0rfzj.jpg')">
+          <div class="card-overlay"><span class="card-title">Marmari Beach<span class="card-meta" data-i18n="m11">Zandstrand</span></span></div>
+        </a>
+      </div></div>
+    </div>
+    <div class="acc" id="acc-4">
+      <button type="button" class="acc-btn" onclick="document.getElementById('acc-4').classList.toggle('open')">
+        <span data-i18n="acc4">Mastichari</span> <span class="count">1</span><span class="chev">▼</span>
+      </button>
+      <div class="acc-body"><div class="grid">
+        <a class="card" href="strand-mastichari-beach.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/mastihari-beach-2017-high-1ru7v7.jpg')">
+          <div class="card-overlay"><span class="card-title">Mastichari Beach<span class="card-meta" data-i18n="m12">Strand · veerboot</span></span></div>
+        </a>
+      </div></div>
+    </div>
+    <div class="acc" id="acc-5">
+      <button type="button" class="acc-btn" onclick="document.getElementById('acc-5').classList.toggle('open')">
+        <span data-i18n="acc5">Zuid / Kardamena</span> <span class="count">1</span><span class="chev">▼</span>
+      </button>
+      <div class="acc-body"><div class="grid">
+        <a class="card" href="strand-paradise-beach.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/paradise-beach-kos-header-high.jpg')">
+          <div class="card-overlay"><span class="card-title">Paradise Beach<span class="card-meta" data-i18n="m13">Paradise</span></span></div>
+        </a>
+      </div></div>
+    </div>
+    <div class="acc" id="acc-6">
+      <button type="button" class="acc-btn" onclick="document.getElementById('acc-6').classList.toggle('open')">
+        <span data-i18n="acc6">Zuid</span> <span class="count">2</span><span class="chev">▼</span>
+      </button>
+      <div class="acc-body"><div class="grid">
+        <a class="card" href="strand-kavo-parediso.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/cavo-paradiso-beach-standard.jpg')">
+          <div class="card-overlay"><span class="card-title">Kavo Parediso<span class="card-meta" data-i18n="m14">Strand</span></span></div>
+        </a>
+        <a class="card" href="strand-exotic-beach.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/exotic-beach-high.jpg')">
+          <div class="card-overlay"><span class="card-title">Exotic Beach<span class="card-meta" data-i18n="m15">Naaktstrand</span></span></div>
+        </a>
+      </div></div>
+    </div>
+    <div class="acc" id="acc-7">
+      <button type="button" class="acc-btn" onclick="document.getElementById('acc-7').classList.toggle('open')">
+        <span data-i18n="acc7">Westkust</span> <span class="count">1</span><span class="chev">▼</span>
+      </button>
+      <div class="acc-body"><div class="grid">
+        <a class="card" href="strand-limnionas.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/limnionas-beach-high.jpg')">
+          <div class="card-overlay"><span class="card-title">Limnionas<span class="card-meta" data-i18n="m16">Baai</span></span></div>
+        </a>
+      </div></div>
+    </div>
+    <div class="acc" id="acc-8">
+      <button type="button" class="acc-btn" onclick="document.getElementById('acc-8').classList.toggle('open')">
+        <span data-i18n="acc8">Kardamena</span> <span class="count">1</span><span class="chev">▼</span>
+      </button>
+      <div class="acc-body"><div class="grid">
+        <a class="card" href="strand-naaktstrand-kardamena.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/exotic-beach-high-8nwluy.jpg')">
+          <div class="card-overlay"><span class="card-title">Naaktstrand Kardamena<span class="card-meta" data-i18n="m17">Naaktstrand</span></span></div>
+        </a>
+      </div></div>
+    </div>
+  </main>
+  <footer class="footer">Hello Kos</footer>
+
+<script>
+(function(){
+  var I18N = {
+    nl: {
+      title: "Stranden & beach bars",
+      sub: "Klap een regio open – tik op een tegel",
+      twin1: "Watertemperatuur",
+      twin1s: "Rondom het eiland",
+      twin2: "Windrichting",
+      twin2s: "Live op Kos",
+      acc0: "Kos-stad / Lambi",
+      acc1: "Oostkust",
+      acc2: "Tigaki",
+      acc3: "Marmari",
+      acc4: "Mastichari",
+      acc5: "Zuid / Kardamena",
+      acc6: "Zuid",
+      acc7: "Westkust",
+      acc8: "Kardamena",
+      m1: "Lang strand",
+      m2: "Strand + beachbar",
+      m3: "Strand · restaurant",
+      m4: "Strand",
+      m5: "Strand · feesten",
+      m6: "Warm water",
+      m7: "Strand",
+      m8: "Lang zandstrand",
+      m9: "Strand",
+      m10: "Naaktstrand",
+      m11: "Zandstrand",
+      m12: "Strand · veerboot",
+      m13: "Paradise",
+      m14: "Strand",
+      m15: "Naaktstrand",
+      m16: "Baai",
+      m17: "Naaktstrand"
+    },
+    en: {
+      title: "Beaches & beach bars",
+      sub: "Open a region – tap a tile",
+      twin1: "Water temperature",
+      twin1s: "Around the island",
+      twin2: "Wind direction",
+      twin2s: "Live on Kos",
+      acc0: "Kos town / Lambi",
+      acc1: "East coast",
+      acc2: "Tigaki",
+      acc3: "Marmari",
+      acc4: "Mastichari",
+      acc5: "South / Kardamena",
+      acc6: "South",
+      acc7: "West coast",
+      acc8: "Kardamena",
+      m1: "Long beach",
+      m2: "Beach + beach bar",
+      m3: "Beach · restaurant",
+      m4: "Beach",
+      m5: "Beach · parties",
+      m6: "Warm water",
+      m7: "Beach",
+      m8: "Long sandy beach",
+      m9: "Beach",
+      m10: "Nudist beach",
+      m11: "Sandy beach",
+      m12: "Beach · ferry",
+      m13: "Paradise",
+      m14: "Beach",
+      m15: "Nudist beach",
+      m16: "Bay",
+      m17: "Nudist beach"
+    },
+    de: {
+      title: "Strände & Beachbars",
+      sub: "Region öffnen – tippe auf eine Kachel",
+      twin1: "Wassertemperatur",
+      twin1s: "Rund um die Insel",
+      twin2: "Windrichtung",
+      twin2s: "Live auf Kos",
+      acc0: "Kos-Stadt / Lambi",
+      acc1: "Ostküste",
+      acc2: "Tigaki",
+      acc3: "Marmari",
+      acc4: "Mastichari",
+      acc5: "Süd / Kardamena",
+      acc6: "Süd",
+      acc7: "Westküste",
+      acc8: "Kardamena",
+      m1: "Langer Strand",
+      m2: "Strand + Beachbar",
+      m3: "Strand · Restaurant",
+      m4: "Strand",
+      m5: "Strand · Partys",
+      m6: "Warmes Wasser",
+      m7: "Strand",
+      m8: "Langer Sandstrand",
+      m9: "Strand",
+      m10: "FKK-Strand",
+      m11: "Sandstrand",
+      m12: "Strand · Fähre",
+      m13: "Paradise",
+      m14: "Strand",
+      m15: "FKK-Strand",
+      m16: "Bucht",
+      m17: "FKK-Strand"
+    },
+    it: {
+      title: "Spiagge & beach bar",
+      sub: "Apri una zona – tocca una tessera",
+      twin1: "Temperatura dell’acqua",
+      twin1s: "Intorno all’isola",
+      twin2: "Direzione del vento",
+      twin2s: "Live a Kos",
+      acc0: "Città di Kos / Lambi",
+      acc1: "Costa est",
+      acc2: "Tigaki",
+      acc3: "Marmari",
+      acc4: "Mastichari",
+      acc5: "Sud / Kardamena",
+      acc6: "Sud",
+      acc7: "Costa ovest",
+      acc8: "Kardamena",
+      m1: "Spiaggia lunga",
+      m2: "Spiaggia + beach bar",
+      m3: "Spiaggia · ristorante",
+      m4: "Spiaggia",
+      m5: "Spiaggia · feste",
+      m6: "Acqua calda",
+      m7: "Spiaggia",
+      m8: "Lunga spiaggia sabbiosa",
+      m9: "Spiaggia",
+      m10: "Spiaggia naturista",
+      m11: "Spiaggia sabbiosa",
+      m12: "Spiaggia · traghetto",
+      m13: "Paradise",
+      m14: "Spiaggia",
+      m15: "Spiaggia naturista",
+      m16: "Baia",
+      m17: "Spiaggia naturista"
+    },
+    tr: {
+      title: "Plajlar & beach barlar",
+      sub: "Bir bölge aç – bir karoya dokun",
+      twin1: "Su sıcaklığı",
+      twin1s: "Ada çevresinde",
+      twin2: "Rüzgar yönü",
+      twin2s: "Kos’ta canlı",
+      acc0: "Kos şehri / Lambi",
+      acc1: "Doğu kıyısı",
+      acc2: "Tigaki",
+      acc3: "Marmari",
+      acc4: "Mastichari",
+      acc5: "Güney / Kardamena",
+      acc6: "Güney",
+      acc7: "Batı kıyısı",
+      acc8: "Kardamena",
+      m1: "Uzun plaj",
+      m2: "Plaj + beach bar",
+      m3: "Plaj · restoran",
+      m4: "Plaj",
+      m5: "Plaj · partiler",
+      m6: "Sıcak su",
+      m7: "Plaj",
+      m8: "Uzun kumsal",
+      m9: "Plaj",
+      m10: "Çıplak plaj",
+      m11: "Kumsal",
+      m12: "Plaj · feribot",
+      m13: "Paradise",
+      m14: "Plaj",
+      m15: "Çıplak plaj",
+      m16: "Koy",
+      m17: "Çıplak plaj"
+    },
+    es: {
+      title: "Playas & beach bars",
+      sub: "Abre una zona – toca una ficha",
+      twin1: "Temperatura del agua",
+      twin1s: "Alrededor de la isla",
+      twin2: "Dirección del viento",
+      twin2s: "En vivo en Kos",
+      acc0: "Ciudad de Kos / Lambi",
+      acc1: "Costa este",
+      acc2: "Tigaki",
+      acc3: "Marmari",
+      acc4: "Mastichari",
+      acc5: "Sur / Kardamena",
+      acc6: "Sur",
+      acc7: "Costa oeste",
+      acc8: "Kardamena",
+      m1: "Playa larga",
+      m2: "Playa + beach bar",
+      m3: "Playa · restaurante",
+      m4: "Playa",
+      m5: "Playa · fiestas",
+      m6: "Agua cálida",
+      m7: "Playa",
+      m8: "Larga playa de arena",
+      m9: "Playa",
+      m10: "Playa nudista",
+      m11: "Playa de arena",
+      m12: "Playa · ferry",
+      m13: "Paradise",
+      m14: "Playa",
+      m15: "Playa nudista",
+      m16: "Bahía",
+      m17: "Playa nudista"
+    }
+  };
+
+  function setLang(l) {
+    if (!I18N[l]) l = 'nl';
+    localStorage.setItem('hk-lang', l);
+    document.documentElement.lang = l;
+    var d = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (d[k]) el.textContent = d[k];
+    });
+    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if (opt) {
+      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
+      document.getElementById('code').textContent = l.toUpperCase();
+    }
+    document.querySelectorAll('.lang-option').forEach(function(o){
+      o.classList.toggle('active', o.getAttribute('data-lang') === l);
+    });
+    closeMenu();
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  function openMenu(){ langMenu.classList.add('open'); }
+  function closeMenu(){ langMenu.classList.remove('open'); }
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    langMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.addEventListener('click', closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){
+    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
+  });
+
+  var saved = localStorage.getItem('hk-lang') || 'nl';
+  setLang(saved);
+})();
+</script>
+</body>
+</html>
