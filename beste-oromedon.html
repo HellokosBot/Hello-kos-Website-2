@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Oromedon – Hello Kos</title>
+  <style>
+    :root {
+      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
+      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
+      --text: #E8EDE8; --text-soft: #A0B0A0;
+      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.55;
+      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
+    }
+    .app-header {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px 16px; background: var(--bg-header);
+      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+    }
+    .back-btn { grid-column: 1; color: var(--petrol); font-weight: 600; text-decoration: none; font-size: 0.9rem; }
+    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(145deg, #F0C040, #D4A017); display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
+    .logo-text { font-size: 1.2rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
+    .logo-text span { color: var(--gold-dark); font-style: italic; }
+    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
+    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
+    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; }
+    .lang-menu.open { display: block; }
+    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
+    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
+    .hero { position: relative; width: 100%; aspect-ratio: 16/11; overflow: hidden; background: #1a2525; }
+    .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.6), transparent); color: #fff; }
+    .hero-cap .area { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; opacity: 0.9; }
+    .hero-cap h1 { font-size: 1.5rem; font-weight: 800; margin-top: 2px; letter-spacing: -0.02em; }
+    .content { padding: 16px 16px 0; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+    .badge { background: rgba(58,154,154,0.15); color: #99f6e4; font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+    .block { background: var(--bg-card); border-radius: 16px; padding: 15px 16px; margin-bottom: 12px; border: 1px solid var(--border); }
+    .block h2 { font-size: 1rem; color: var(--text); margin-bottom: 8px; }
+    .block p { font-size: 0.92rem; color: var(--text); margin-bottom: 0; }
+    .img-full { margin: 0 0 12px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); }
+    .img-full img { width: 100%; display: block; max-height: 210px; object-fit: cover; }
+    .img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 0 12px; }
+    .img-pair img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; display: block; border: 1px solid var(--border); }
+    .actions { display: flex; flex-direction: column; gap: 8px; margin: 8px 0 12px; }
+    .btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 13px 16px; border-radius: 14px; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
+    .btn-map { background: var(--bg-card); color: var(--text); border: 2px solid var(--petrol); }
+    .footer { text-align: center; padding: 16px; font-size: 0.75rem; color: var(--text-soft); }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="beste-restaurants.html" class="back-btn">← Terug</a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🔅</div>
+      <div class="logo-text">Hello <span>Kos</span></div>
+    </a>
+    <div class="lang-wrap">
+      <button type="button" class="lang-btn" id="langBtn">
+        <span id="flag">🇳🇱</span> <span id="code">NL</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="hero">
+      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/oromedon-restaurant-high-f0a8hz.jpg" alt="Oromedon" loading="eager">
+      <div class="hero-cap"><div class="area" data-i18n="area">Zia</div><h1>Oromedon</h1></div>
+    </div>
+    <div class="content">
+      <div class="badge-row">
+        <span class="badge" data-i18n="badge1">Zia</span>
+        <span class="badge" data-i18n="badge2">Grieks met uitzicht</span>
+      </div>
+      <div class="block"><h2 data-i18n="h1">Over dit restaurant</h2><p data-i18n="p1">Oromedon in bergdorp Zia: authentieke Dodekanesos- en Kos-specialiteiten – moussaka, stifado, gegrilde lamsschouder, verse vis en meze.</p></div>
+      <div class="img-full"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/556234675_31557670340515297_4839161115823925169_n-high.jpg" alt="" loading="lazy"></div>
+      <div class="block"><h2 data-i18n="h2">Sfeer & eten</h2><p data-i18n="p2">Je kijkt uit over de westkant van het eiland en de zee; bij helder weer tot aan Turkije. Rond zonsondergang is het hier bijzonder – veel mensen komen juist daarvoor.</p></div>
+      <div class="img-pair"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/558176266_31555528454062819_6332499791299016892_n-high.jpg" alt="" loading="lazy"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/554534347_31501112902837708_1643758776502121964_n-high.jpg" alt="" loading="lazy"></div>
+      <div class="block"><h2 data-i18n="h3">Praktisch</h2><p data-i18n="p3">Zia ligt in de heuvels: reken op auto, taxi of transfer. Voor sunset is op tijd komen of reserveren verstandig, vooral voor het terras.</p></div>
+      <div class="img-full"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/556606781_31555528047396193_4241447657974950774_n-high.jpg" alt="" loading="lazy"></div>
+      <div class="img-pair"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/hcmp290496_1734836-high.jpg" alt="" loading="lazy"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/downloaden-9-high.jpg" alt="" loading="lazy"></div>
+      <div class="actions">
+        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Oromedon%20Restaurant%20Zia%20Kos" target="_blank" rel="noopener" data-i18n="mapBtn">Locatie op de kaart</a>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">Hello Kos</footer>
+
+<script>
+(function(){
+  var I18N = {
+    nl: {
+      area: "Zia",
+      badge1: "Zia",
+      badge2: "Grieks met uitzicht",
+      h1: "Over dit restaurant",
+      p1: "Oromedon in bergdorp Zia: authentieke Dodekanesos- en Kos-specialiteiten – moussaka, stifado, gegrilde lamsschouder, verse vis en meze.",
+      h2: "Sfeer & eten",
+      p2: "Je kijkt uit over de westkant van het eiland en de zee; bij helder weer tot aan Turkije. Rond zonsondergang is het hier bijzonder – veel mensen komen juist daarvoor.",
+      h3: "Praktisch",
+      p3: "Zia ligt in de heuvels: reken op auto, taxi of transfer. Voor sunset is op tijd komen of reserveren verstandig, vooral voor het terras.",
+      mapBtn: "Locatie op de kaart"
+    },
+    en: {
+      area: "Zia",
+      badge1: "Zia",
+      badge2: "Greek with a view",
+      h1: "About this restaurant",
+      p1: "Oromedon in the mountain village of Zia: authentic Dodecanese and Kos specialities – moussaka, stifado, grilled lamb shoulder, fresh fish and meze.",
+      h2: "Atmosphere & food",
+      p2: "You look out over the west side of the island and the sea; on clear days as far as Turkey. Around sunset it’s special here – many people come specifically for that.",
+      h3: "Practical",
+      p3: "Zia is in the hills: count on a car, taxi or transfer. For sunset it’s wise to arrive early or book, especially for the terrace.",
+      mapBtn: "Location on the map"
+    },
+    de: {
+      area: "Zia",
+      badge1: "Zia",
+      badge2: "Griechisch mit Aussicht",
+      h1: "Über dieses Restaurant",
+      p1: "Oromedon im Bergdorf Zia: authentische Dodekanes- und Kos-Spezialitäten – Moussaka, Stifado, gegrillte Lammkeule, frischer Fisch und Meze.",
+      h2: "Atmosphäre & Essen",
+      p2: "Du blickst über die Westseite der Insel und das Meer; bei klarem Wetter bis zur Türkei. Rund um den Sonnenuntergang ist es hier besonders – viele kommen genau deswegen.",
+      h3: "Praktisch",
+      p3: "Zia liegt in den Hügeln: rechne mit Auto, Taxi oder Transfer. Für den Sunset ist früh kommen oder reservieren sinnvoll, besonders für die Terrasse.",
+      mapBtn: "Standort auf der Karte"
+    },
+    it: {
+      area: "Zia",
+      badge1: "Zia",
+      badge2: "Greco con vista",
+      h1: "Su questo ristorante",
+      p1: "Oromedon nel villaggio di montagna di Zia: specialità autentiche del Dodecaneso e di Kos – moussaka, stifado, spalla d’agnello alla griglia, pesce fresco e meze.",
+      h2: "Atmosfera & cibo",
+      p2: "Si guarda il lato ovest dell’isola e il mare; con tempo chiaro fino alla Turchia. Al tramonto è speciale qui – molti vengono apposta per questo.",
+      h3: "Pratico",
+      p3: "Zia è sulle colline: conta su auto, taxi o transfer. Per il sunset conviene arrivare presto o prenotare, soprattutto per la terrazza.",
+      mapBtn: "Posizione sulla mappa"
+    },
+    tr: {
+      area: "Zia",
+      badge1: "Zia",
+      badge2: "Manzaralı Yunan",
+      h1: "Bu restoran hakkında",
+      p1: "Zia dağ köyündeki Oromedon: otantik Dodecanese ve Kos spesiyalleri – moussaka, stifado, ızgara kuzu omuzu, taze balık ve meze.",
+      h2: "Atmosfer & yemek",
+      p2: "Adanın batı tarafına ve denize bakarsın; açık havada Türkiye’ye kadar. Gün batımında burası özeldir – birçok kişi tam bunun için gelir.",
+      h3: "Pratik",
+      p3: "Zia tepelerde: araba, taksi veya transfer hesapla. Gün batımı için erken gelmek veya rezervasyon yapmak akıllıca, özellikle teras için.",
+      mapBtn: "Haritada konum"
+    },
+    es: {
+      area: "Zia",
+      badge1: "Zia",
+      badge2: "Griego con vistas",
+      h1: "Sobre este restaurante",
+      p1: "Oromedon en el pueblo de montaña de Zia: especialidades auténticas del Dodecaneso y Kos – moussaka, stifado, paletilla de cordero a la parrilla, pescado fresco y meze.",
+      h2: "Ambiente & comida",
+      p2: "Miras el lado oeste de la isla y el mar; con tiempo claro hasta Turquía. Al atardecer es especial aquí – mucha gente viene precisamente por eso.",
+      h3: "Práctico",
+      p3: "Zia está en las colinas: cuenta con coche, taxi o transfer. Para el atardecer conviene llegar temprano o reservar, sobre todo para la terraza.",
+      mapBtn: "Ubicación en el mapa"
+    }
+  };
+
+  function setLang(l) {
+    if (!I18N[l]) l = 'nl';
+    localStorage.setItem('hk-lang', l);
+    document.documentElement.lang = l;
+    var d = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (d[k]) el.textContent = d[k];
+    });
+    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if (opt) {
+      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
+      document.getElementById('code').textContent = l.toUpperCase();
+    }
+    document.querySelectorAll('.lang-option').forEach(function(o){
+      o.classList.toggle('active', o.getAttribute('data-lang') === l);
+    });
+    closeMenu();
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  function openMenu(){ langMenu.classList.add('open'); }
+  function closeMenu(){ langMenu.classList.remove('open'); }
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    langMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.addEventListener('click', closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){
+    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
+  });
+
+  var saved = localStorage.getItem('hk-lang') || 'nl';
+  setLang(saved);
+})();
+</script>
+</body>
+</html>
