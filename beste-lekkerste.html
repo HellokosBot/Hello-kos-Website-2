@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Beste & lekkerste – Hello Kos</title>
+  <style>
+    :root {
+      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
+      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
+      --text: #E8EDE8; --text-soft: #A0B0A0;
+      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text); -webkit-font-smoothing: antialiased;
+      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
+      background: var(--bg); min-height: 100vh;
+    }
+    .app-header {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px 16px; background: var(--bg-header);
+      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+    }
+    .back-btn { grid-column: 1; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
+    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-icon {
+      width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      color: #FFFDF5; font-size: 22px;
+    }
+    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
+    .logo-text span { color: var(--gold-dark); font-style: italic; }
+    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
+    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
+    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; }
+    .lang-menu.open { display: block; }
+    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
+    .main { max-width: 480px; margin: 0 auto; padding: 16px 14px 40px; }
+    h1 { font-size: 1.2rem; font-weight: 800; color: var(--text); text-align: center; margin-bottom: 4px; }
+    .sub { text-align: center; font-size: 0.86rem; color: var(--text-soft); margin-bottom: 16px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .card {
+      display: block; position: relative; border-radius: 16px; overflow: hidden;
+      aspect-ratio: 1; background: #1a2525 center/cover no-repeat;
+      text-decoration: none; box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      border: 1px solid var(--border);
+    }
+    .card-overlay {
+      position: absolute; inset: 0; display: flex; align-items: flex-end;
+      padding: 12px; background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);
+    }
+    .card-title {
+      color: #fff; font-size: 0.92rem; font-weight: 700; line-height: 1.25;
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .card-meta {
+      font-size: 0.7rem; font-weight: 600; opacity: 0.9; color: #e8f5f3;
+    }
+    .footer { text-align: center; padding: 24px 16px; font-size: 0.78rem; color: var(--text-soft); }
+    .footer a { color: var(--petrol); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="index.html" class="back-btn">← Home</a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🔅</div>
+      <div class="logo-text">Hello <span>Kos</span></div>
+    </a>
+    <div class="lang-wrap">
+      <button type="button" class="lang-btn" id="langBtn">
+        <span id="flag">🇳🇱</span> <span id="code">NL</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <h1 data-i18n="title">Beste & lekkerste</h1>
+    <p class="sub" data-i18n="sub">Restaurants, gyros, cocktails, ijs en meer – tik op een tegel</p>
+    <div class="grid">
+      <a class="card" href="beste-restaurants.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/4210026.jpeg')">
+        <div class="card-overlay"><span class="card-title"><span data-i18n="t1">Restaurants</span><span class="card-meta" data-i18n="m1">De beste restaurants op Kos</span></span></div>
+      </a>
+      <a class="card" href="beste-gyros.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/905847.jpeg')">
+        <div class="card-overlay"><span class="card-title"><span data-i18n="t2">Beste gyros</span><span class="card-meta" data-i18n="m2">Waar je de lekkerste gyros eet</span></span></div>
+      </a>
+      <a class="card" href="beste-cocktails.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/13620477.jpeg')">
+        <div class="card-overlay"><span class="card-title"><span data-i18n="t3">Cocktails</span><span class="card-meta" data-i18n="m3">Cocktailbars & beach bars</span></span></div>
+      </a>
+      <a class="card" href="beste-vis.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/1838583.jpeg')">
+        <div class="card-overlay"><span class="card-title"><span data-i18n="t4">Vis & taverna</span><span class="card-meta" data-i18n="m4">Verse vis en visspecialisten</span></span></div>
+      </a>
+      <a class="card" href="beste-sushi.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/1148086.jpeg')">
+        <div class="card-overlay"><span class="card-title"><span data-i18n="t5">Sushi</span><span class="card-meta" data-i18n="m5">Beste sushi op het eiland</span></span></div>
+      </a>
+      <a class="card" href="beste-ontbijt.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/10039861.jpeg')">
+        <div class="card-overlay"><span class="card-title"><span data-i18n="t6">Ontbijt</span><span class="card-meta" data-i18n="m6">Goed starten op Kos</span></span></div>
+      </a>
+      <a class="card" href="beste-ijs.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/1978181.jpeg')">
+        <div class="card-overlay"><span class="card-title"><span data-i18n="t7">IJs</span><span class="card-meta" data-i18n="m7">Het lekkerste ijs</span></span></div>
+      </a>
+      <a class="card" href="beste-koffie.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/17748172.jpeg')">
+        <div class="card-overlay"><span class="card-title"><span data-i18n="t8">Koffie</span><span class="card-meta" data-i18n="m8">Koffiebars & specialty</span></span></div>
+      </a>
+      <a class="card" href="beste-pizza.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/12165311.jpeg')">
+        <div class="card-overlay"><span class="card-title"><span data-i18n="t9">Pizza & Italiaans</span><span class="card-meta" data-i18n="m9">Pizza en Italiaanse keuken</span></span></div>
+      </a>
+      <a class="card" href="beste-broodjes.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/4109256.jpeg')">
+        <div class="card-overlay"><span class="card-title"><span data-i18n="t10">Broodjes</span><span class="card-meta" data-i18n="m10">Snelle hap & broodjes</span></span></div>
+      </a>
+      <a class="card" href="beste-vegan.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/3756501.jpeg')">
+        <div class="card-overlay"><span class="card-title"><span data-i18n="t11">Vegan & vegetarisch</span><span class="card-meta" data-i18n="m11">Plantaardig lekker</span></span></div>
+      </a>
+      <a class="card" href="beste-fastfood.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/8392462.jpeg')">
+        <div class="card-overlay"><span class="card-title"><span data-i18n="t12">Fastfood & ketens</span><span class="card-meta" data-i18n="m12">Bekende ketens op Kos</span></span></div>
+      </a>
+      <a class="card" href="beste-crepes.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/2732666.jpeg')">
+        <div class="card-overlay"><span class="card-title"><span data-i18n="t13">Crêpes</span><span class="card-meta" data-i18n="m13">Zoet en hartig</span></span></div>
+      </a>
+      <a class="card" href="beste-stranden.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/4210026.jpeg')">
+        <div class="card-overlay"><span class="card-title"><span data-i18n="t14">Stranden (eten & bars)</span><span class="card-meta" data-i18n="m14">Beach bars & strandtips</span></span></div>
+      </a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div>Hello Kos</div>
+    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
+  </footer>
+
+<script>
+(function(){
+  var I18N = {
+    nl: {
+      title: "Beste & lekkerste",
+      sub: "Restaurants, gyros, cocktails, ijs en meer – tik op een tegel",
+      t1: "Restaurants", m1: "De beste restaurants op Kos",
+      t2: "Beste gyros", m2: "Waar je de lekkerste gyros eet",
+      t3: "Cocktails", m3: "Cocktailbars & beach bars",
+      t4: "Vis & taverna", m4: "Verse vis en visspecialisten",
+      t5: "Sushi", m5: "Beste sushi op het eiland",
+      t6: "Ontbijt", m6: "Goed starten op Kos",
+      t7: "IJs", m7: "Het lekkerste ijs",
+      t8: "Koffie", m8: "Koffiebars & specialty",
+      t9: "Pizza & Italiaans", m9: "Pizza en Italiaanse keuken",
+      t10: "Broodjes", m10: "Snelle hap & broodjes",
+      t11: "Vegan & vegetarisch", m11: "Plantaardig lekker",
+      t12: "Fastfood & ketens", m12: "Bekende ketens op Kos",
+      t13: "Crêpes", m13: "Zoet en hartig",
+      t14: "Stranden (eten & bars)", m14: "Beach bars & strandtips"
+    },
+    en: {
+      title: "Best & tastiest",
+      sub: "Restaurants, gyros, cocktails, ice cream and more – tap a tile",
+      t1: "Restaurants", m1: "The best restaurants on Kos",
+      t2: "Best gyros", m2: "Where to eat the tastiest gyros",
+      t3: "Cocktails", m3: "Cocktail bars & beach bars",
+      t4: "Fish & taverna", m4: "Fresh fish and specialists",
+      t5: "Sushi", m5: "Best sushi on the island",
+      t6: "Breakfast", m6: "Start the day well on Kos",
+      t7: "Ice cream", m7: "The tastiest ice cream",
+      t8: "Coffee", m8: "Coffee bars & specialty",
+      t9: "Pizza & Italian", m9: "Pizza and Italian cuisine",
+      t10: "Sandwiches", m10: "Quick bites & sandwiches",
+      t11: "Vegan & vegetarian", m11: "Plant-based delicious",
+      t12: "Fast food & chains", m12: "Well-known chains on Kos",
+      t13: "Crêpes", m13: "Sweet and savoury",
+      t14: "Beaches (food & bars)", m14: "Beach bars & beach tips"
+    },
+    de: {
+      title: "Beste & leckerste",
+      sub: "Restaurants, Gyros, Cocktails, Eis und mehr – tippe auf eine Kachel",
+      t1: "Restaurants", m1: "Die besten Restaurants auf Kos",
+      t2: "Beste Gyros", m2: "Wo du die leckersten Gyros isst",
+      t3: "Cocktails", m3: "Cocktailbars & Beach Bars",
+      t4: "Fisch & Taverne", m4: "Frischer Fisch und Spezialisten",
+      t5: "Sushi", m5: "Bestes Sushi auf der Insel",
+      t6: "Frühstück", m6: "Gut starten auf Kos",
+      t7: "Eis", m7: "Das leckerste Eis",
+      t8: "Kaffee", m8: "Kaffeebars & Specialty",
+      t9: "Pizza & Italienisch", m9: "Pizza und italienische Küche",
+      t10: "Brote", m10: "Schneller Happen & Brote",
+      t11: "Vegan & vegetarisch", m11: "Pflanzlich lecker",
+      t12: "Fastfood & Ketten", m12: "Bekannte Ketten auf Kos",
+      t13: "Crêpes", m13: "Süß und herzhaft",
+      t14: "Strände (Essen & Bars)", m14: "Beach Bars & Strandtipps"
+    },
+    it: {
+      title: "Migliori & più buoni",
+      sub: "Ristoranti, gyros, cocktail, gelato e altro – tocca una tessera",
+      t1: "Ristoranti", m1: "I migliori ristoranti a Kos",
+      t2: "Migliori gyros", m2: "Dove mangiare i gyros più buoni",
+      t3: "Cocktail", m3: "Cocktail bar & beach bar",
+      t4: "Pesce & taverna", m4: "Pesce fresco e specialisti",
+      t5: "Sushi", m5: "Miglior sushi sull’isola",
+      t6: "Colazione", m6: "Iniziare bene a Kos",
+      t7: "Gelato", m7: "Il gelato più buono",
+      t8: "Caffè", m8: "Caffetterie & specialty",
+      t9: "Pizza & italiano", m9: "Pizza e cucina italiana",
+      t10: "Panini", m10: "Spuntini veloci & panini",
+      t11: "Vegan & vegetariano", m11: "Vegetale delizioso",
+      t12: "Fast food & catene", m12: "Catene note a Kos",
+      t13: "Crêpes", m13: "Dolci e salate",
+      t14: "Spiagge (cibo & bar)", m14: "Beach bar & consigli spiaggia"
+    },
+    tr: {
+      title: "En iyi & en lezzetli",
+      sub: "Restoranlar, gyros, kokteyl, dondurma ve daha fazlası – bir kareye dokun",
+      t1: "Restoranlar", m1: "Kos’taki en iyi restoranlar",
+      t2: "En iyi gyros", m2: "En lezzetli gyros nerede yenir",
+      t3: "Kokteyller", m3: "Kokteyl barları & plaj barları",
+      t4: "Balık & taverna", m4: "Taze balık ve uzmanlar",
+      t5: "Sushi", m5: "Adadaki en iyi sushi",
+      t6: "Kahvaltı", m6: "Kos’ta güne iyi başla",
+      t7: "Dondurma", m7: "En lezzetli dondurma",
+      t8: "Kahve", m8: "Kahve barları & specialty",
+      t9: "Pizza & İtalyan", m9: "Pizza ve İtalyan mutfağı",
+      t10: "Sandviçler", m10: "Hızlı atıştırmalık & sandviçler",
+      t11: "Vegan & vejetaryen", m11: "Bitkisel lezzetli",
+      t12: "Fast food & zincirler", m12: "Kos’taki bilinen zincirler",
+      t13: "Krep", m13: "Tatlı ve tuzlu",
+      t14: "Plajlar (yemek & barlar)", m14: "Plaj barları & plaj ipuçları"
+    },
+    es: {
+      title: "Mejores & más ricos",
+      sub: "Restaurantes, gyros, cócteles, helado y más – toca una ficha",
+      t1: "Restaurantes", m1: "Los mejores restaurantes en Kos",
+      t2: "Mejores gyros", m2: "Dónde comer los gyros más ricos",
+      t3: "Cócteles", m3: "Bares de cócteles & beach bars",
+      t4: "Pescado & taverna", m4: "Pescado fresco y especialistas",
+      t5: "Sushi", m5: "Mejor sushi en la isla",
+      t6: "Desayuno", m6: "Empezar bien en Kos",
+      t7: "Helado", m7: "El helado más rico",
+      t8: "Café", m8: "Cafeterías & specialty",
+      t9: "Pizza e italiano", m9: "Pizza y cocina italiana",
+      t10: "Bocadillos", m10: "Comida rápida & bocadillos",
+      t11: "Vegano & vegetariano", m11: "Vegetal delicioso",
+      t12: "Fast food & cadenas", m12: "Cadenas conocidas en Kos",
+      t13: "Crêpes", m13: "Dulces y salados",
+      t14: "Playas (comida & bares)", m14: "Beach bars & consejos de playa"
+    }
+  };
+
+  function setLang(l) {
+    if (!I18N[l]) l = 'nl';
+    localStorage.setItem('hk-lang', l);
+    document.documentElement.lang = l;
+    var d = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (d[k]) el.textContent = d[k];
+    });
+    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if (opt) {
+      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
+      document.getElementById('code').textContent = l.toUpperCase();
+    }
+    document.querySelectorAll('.lang-option').forEach(function(o){
+      o.classList.toggle('active', o.getAttribute('data-lang') === l);
+    });
+    closeMenu();
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  function openMenu(){ langMenu.classList.add('open'); }
+  function closeMenu(){ langMenu.classList.remove('open'); }
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    langMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.addEventListener('click', closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){
+    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
+  });
+
+  var saved = localStorage.getItem('hk-lang') || 'nl';
+  setLang(saved);
+})();
+</script>
+</body>
+</html>
