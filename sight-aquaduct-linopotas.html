@@ -65,6 +65,10 @@
     .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
     .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
     .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
+    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
+    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
+    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
     .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
     .footer a { color: var(--petrol); text-decoration: none; }
   </style>
@@ -99,12 +103,12 @@
 
     <div class="content">
       <h1 data-i18n="title">Aquaduct van Linopotas</h1>
-      <p class="lead" data-i18n="lead">Meer dan 2000 jaar oude Romeinse waterleiding – bogen over de vallei, gebouwd voor irrigatie en drinkwater.</p>
+      <p class="lead" data-i18n="lead">Meer dan 2000 jaar oude Romeinse waterleiding met bogen midden in de weg – later ook een Italiaans aquaduct ernaast.</p>
 
       <div class="badges">
-        <span class="badge" data-i18n="badgeFree">Gratis</span>
-        <span class="badge">Linopotas</span>
         <span class="badge" data-i18n="badgeRoman">Romeins</span>
+        <span class="badge" data-i18n="badgeAge">± 2000 jr</span>
+        <span class="badge" data-i18n="badgeFree">Gratis</span>
       </div>
 
       <div class="actions">
@@ -117,30 +121,54 @@
 
       <div id="readText">
         <div class="card">
-          <h2 data-i18n="h2roman">Romeinse waterleiding</h2>
-          <p data-i18n="p1">Het aquaduct van Linopotas is een overblijfsel van meer dan 2000 jaar oud Romeins waterbeheer. De Romeinen brachten water van de heuvels naar de vruchtbare vlaktes: irrigatie voor de landbouw en drinkwater, ook in droge zomers.</p>
+          <h2 data-i18n="h2roman">Romeinse watertechniek</h2>
+          <p data-i18n="p1">Het aquaduct van Linopotas is een overblijfsel van meer dan 2000 jaar oud Romeins waterbeheer. De Romeinen brachten water van de heuvels naar de vruchtbare vlaktes: irrigatie voor boeren en drinkwater, ook in droge zomers.</p>
         </div>
 
         <div class="facts">
           <div class="fact">
-            <span class="n">± 2000 jr</span>
+            <span class="n" data-i18n="factAge">± 2000 jr</span>
             <span class="l" data-i18n="factOld">oud</span>
           </div>
           <div class="fact">
-            <span class="n" data-i18n="factFree">Gratis</span>
-            <span class="l" data-i18n="factOpen">openlucht</span>
+            <span class="n" data-i18n="factSlope">Lichte helling</span>
+            <span class="l" data-i18n="factFlow">water liep vanzelf</span>
           </div>
         </div>
 
         <div class="card">
-          <h2 data-i18n="h2arches">Bogen in het landschap</h2>
-          <p data-i18n="p2">De stenen bogen overbruggen de vallei en zijn nog steeds indrukwekkend in het landschap bij Linopotas. Een duidelijk voorbeeld van hoe geavanceerd de Romeinen water wisten te sturen.</p>
+          <h2 data-i18n="h2arches">Bogen midden in de weg</h2>
+          <p data-i18n="p2">Wat je nu ziet, zijn vooral resten van de hoge bogen en kanaaldelen die nog overeind staan – deels midden in de weg. De Romeinen lieten het water met een heel lichte helling stromen, zonder pompen: pure watertechniek.</p>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2italian">Italiaans aquaduct ernaast</h2>
+          <p data-i18n="p3">Tegenover het Romeinse deel bouwden de Italianen tijdens hun bezetting (1912–1943) een eigen aquaduct. Beide hadden hetzelfde doel: water naar de akkers leiden. Zo zie je twee tijdperken naast elkaar.</p>
+        </div>
+
+        <div class="gallery">
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/img_3394-standard.jpg" alt="" loading="lazy">
+            <span data-i18n="g1">Aquaduct</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/schermopname_7-3-2026_223219_www-google-com-high.jpg" alt="" loading="lazy">
+            <span data-i18n="g2">Aquaduct</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/img_3405-high.jpg" alt="" loading="lazy">
+            <span data-i18n="g3">Aquaduct</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/img_3394-high-eej9fz.jpg" alt="" loading="lazy">
+            <span data-i18n="g4">Aquaduct</span>
+          </div>
         </div>
 
         <div class="card">
           <h2 data-i18n="h2visit">Bezoeken</h2>
-          <p data-i18n="p3">Bij Linopotas, gratis toegankelijk in de open lucht.</p>
-          <div class="tip" data-i18n="tip">Tip: combineer met een rit door het binnenland; de bogen komen het best uit bij ochtend- of avondlicht.</div>
+          <p data-i18n="p4">Bij Linopotas, gratis in de open lucht.</p>
+          <div class="tip" data-i18n="tip">Tip: let op de bogen die de weg “doorsnijden” – dat is het moment waarop je de Romeinse schaal echt voelt.</div>
         </div>
       </div>
     </div>
@@ -156,93 +184,111 @@
   var I18N = {
     nl: {
       title: "Aquaduct van Linopotas",
-      lead: "Meer dan 2000 jaar oude Romeinse waterleiding – bogen over de vallei, gebouwd voor irrigatie en drinkwater.",
+      lead: "Meer dan 2000 jaar oude Romeinse waterleiding met bogen midden in de weg – later ook een Italiaans aquaduct ernaast.",
       heroCap: "Aquaduct van Linopotas",
-      badgeFree: "Gratis", badgeRoman: "Romeins",
+      badgeRoman: "Romeins", badgeAge: "± 2000 jr", badgeFree: "Gratis",
       btnPlay: "🔊 Voorlezen",
-      h2roman: "Romeinse waterleiding",
-      p1: "Het aquaduct van Linopotas is een overblijfsel van meer dan 2000 jaar oud Romeins waterbeheer. De Romeinen brachten water van de heuvels naar de vruchtbare vlaktes: irrigatie voor de landbouw en drinkwater, ook in droge zomers.",
-      factOld: "oud", factFree: "Gratis", factOpen: "openlucht",
-      h2arches: "Bogen in het landschap",
-      p2: "De stenen bogen overbruggen de vallei en zijn nog steeds indrukwekkend in het landschap bij Linopotas. Een duidelijk voorbeeld van hoe geavanceerd de Romeinen water wisten te sturen.",
+      h2roman: "Romeinse watertechniek",
+      p1: "Het aquaduct van Linopotas is een overblijfsel van meer dan 2000 jaar oud Romeins waterbeheer. De Romeinen brachten water van de heuvels naar de vruchtbare vlaktes: irrigatie voor boeren en drinkwater, ook in droge zomers.",
+      factAge: "± 2000 jr", factOld: "oud", factSlope: "Lichte helling", factFlow: "water liep vanzelf",
+      h2arches: "Bogen midden in de weg",
+      p2: "Wat je nu ziet, zijn vooral resten van de hoge bogen en kanaaldelen die nog overeind staan – deels midden in de weg. De Romeinen lieten het water met een heel lichte helling stromen, zonder pompen: pure watertechniek.",
+      h2italian: "Italiaans aquaduct ernaast",
+      p3: "Tegenover het Romeinse deel bouwden de Italianen tijdens hun bezetting (1912–1943) een eigen aquaduct. Beide hadden hetzelfde doel: water naar de akkers leiden. Zo zie je twee tijdperken naast elkaar.",
+      g1: "Aquaduct", g2: "Aquaduct", g3: "Aquaduct", g4: "Aquaduct",
       h2visit: "Bezoeken",
-      p3: "Bij Linopotas, gratis toegankelijk in de open lucht.",
-      tip: "Tip: combineer met een rit door het binnenland; de bogen komen het best uit bij ochtend- of avondlicht."
+      p4: "Bij Linopotas, gratis in de open lucht.",
+      tip: "Tip: let op de bogen die de weg “doorsnijden” – dat is het moment waarop je de Romeinse schaal echt voelt."
     },
     en: {
-      title: "Aqueduct of Linopotas",
-      lead: "More than 2000-year-old Roman water supply – arches across the valley, built for irrigation and drinking water.",
-      heroCap: "Aqueduct of Linopotas",
-      badgeFree: "Free", badgeRoman: "Roman",
+      title: "Linopotas Aqueduct",
+      lead: "More than 2000-year-old Roman water supply with arches in the middle of the road – later also an Italian aqueduct next to it.",
+      heroCap: "Linopotas Aqueduct",
+      badgeRoman: "Roman", badgeAge: "± 2000 yrs", badgeFree: "Free",
       btnPlay: "🔊 Read aloud",
-      h2roman: "Roman water supply",
-      p1: "The aqueduct of Linopotas is a remnant of more than 2000-year-old Roman water management. The Romans brought water from the hills to the fertile plains: irrigation for agriculture and drinking water, even in dry summers.",
-      factOld: "old", factFree: "Free", factOpen: "open air",
-      h2arches: "Arches in the landscape",
-      p2: "The stone arches span the valley and are still impressive in the landscape near Linopotas. A clear example of how advanced the Romans were at directing water.",
+      h2roman: "Roman water technology",
+      p1: "The Linopotas aqueduct is a remnant of more than 2000-year-old Roman water management. The Romans brought water from the hills to the fertile plains: irrigation for farmers and drinking water, even in dry summers.",
+      factAge: "± 2000 yrs", factOld: "old", factSlope: "Slight slope", factFlow: "water flowed by itself",
+      h2arches: "Arches in the middle of the road",
+      p2: "What you see now are mainly remains of the high arches and channel sections that still stand – partly in the middle of the road. The Romans let the water flow with a very slight slope, without pumps: pure water technology.",
+      h2italian: "Italian aqueduct next to it",
+      p3: "Opposite the Roman part, the Italians built their own aqueduct during their occupation (1912–1943). Both had the same purpose: to lead water to the fields. So you see two eras side by side.",
+      g1: "Aqueduct", g2: "Aqueduct", g3: "Aqueduct", g4: "Aqueduct",
       h2visit: "Visiting",
-      p3: "Near Linopotas, freely accessible in the open air.",
-      tip: "Tip: combine with a drive through the interior; the arches look best in morning or evening light."
+      p4: "Near Linopotas, free outdoors.",
+      tip: "Tip: notice the arches that “cut through” the road – that’s the moment you really feel the Roman scale."
     },
     de: {
       title: "Aquädukt von Linopotas",
-      lead: "Mehr als 2000 Jahre alte römische Wasserleitung – Bögen über das Tal, gebaut für Bewässerung und Trinkwasser.",
+      lead: "Mehr als 2000 Jahre alte römische Wasserleitung mit Bögen mitten in der Straße – später auch ein italienisches Aquädukt daneben.",
       heroCap: "Aquädukt von Linopotas",
-      badgeFree: "Kostenlos", badgeRoman: "Römisch",
+      badgeRoman: "Römisch", badgeAge: "± 2000 J.", badgeFree: "Kostenlos",
       btnPlay: "🔊 Vorlesen",
-      h2roman: "Römische Wasserleitung",
-      p1: "Das Aquädukt von Linopotas ist ein Überrest von mehr als 2000 Jahre altem römischem Wassermanagement. Die Römer brachten Wasser von den Hügeln in die fruchtbaren Ebenen: Bewässerung für die Landwirtschaft und Trinkwasser, auch in trockenen Sommern.",
-      factOld: "alt", factFree: "Kostenlos", factOpen: "Freiluft",
-      h2arches: "Bögen in der Landschaft",
-      p2: "Die Steinbögen überspannen das Tal und sind noch immer beeindruckend in der Landschaft bei Linopotas. Ein klares Beispiel dafür, wie fortgeschritten die Römer Wasser leiten konnten.",
+      h2roman: "Römische Wassertechnik",
+      p1: "Das Aquädukt von Linopotas ist ein Überrest von mehr als 2000 Jahre altem römischem Wassermanagement. Die Römer brachten Wasser von den Hügeln in die fruchtbaren Ebenen: Bewässerung für Bauern und Trinkwasser, auch in trockenen Sommern.",
+      factAge: "± 2000 J.", factOld: "alt", factSlope: "Leichtes Gefälle", factFlow: "Wasser floss von selbst",
+      h2arches: "Bögen mitten in der Straße",
+      p2: "Was du jetzt siehst, sind vor allem Reste der hohen Bögen und Kanalteile, die noch stehen – teilweise mitten in der Straße. Die Römer ließen das Wasser mit einem sehr leichten Gefälle fließen, ohne Pumpen: reine Wassertechnik.",
+      h2italian: "Italienisches Aquädukt daneben",
+      p3: "Gegenüber dem römischen Teil bauten die Italiener während ihrer Besetzung (1912–1943) ein eigenes Aquädukt. Beide hatten denselben Zweck: Wasser zu den Feldern leiten. So siehst du zwei Epochen nebeneinander.",
+      g1: "Aquädukt", g2: "Aquädukt", g3: "Aquädukt", g4: "Aquädukt",
       h2visit: "Besuchen",
-      p3: "Bei Linopotas, frei zugänglich im Freien.",
-      tip: "Tipp: kombiniere mit einer Fahrt durch das Inland; die Bögen kommen am besten bei Morgen- oder Abendlicht zur Geltung."
+      p4: "Bei Linopotas, kostenlos im Freien.",
+      tip: "Tipp: achte auf die Bögen, die die Straße „durchschneiden“ – das ist der Moment, in dem du die römische Größe wirklich spürst."
     },
     it: {
       title: "Acquedotto di Linopotas",
-      lead: "Acquedotto romano di oltre 2000 anni – archi attraverso la valle, costruito per irrigazione e acqua potabile.",
+      lead: "Acquedotto romano di oltre 2000 anni con archi in mezzo alla strada – più tardi anche un acquedotto italiano accanto.",
       heroCap: "Acquedotto di Linopotas",
-      badgeFree: "Gratis", badgeRoman: "Romano",
+      badgeRoman: "Romano", badgeAge: "± 2000 anni", badgeFree: "Gratis",
       btnPlay: "🔊 Leggi ad alta voce",
-      h2roman: "Acquedotto romano",
-      p1: "L’acquedotto di Linopotas è un resto di gestione idrica romana di oltre 2000 anni. I Romani portavano l’acqua dalle colline alle pianure fertili: irrigazione per l’agricoltura e acqua potabile, anche nelle estati secche.",
-      factOld: "antico", factFree: "Gratis", factOpen: "all’aperto",
-      h2arches: "Archi nel paesaggio",
-      p2: "Gli archi di pietra attraversano la valle e sono ancora impressionanti nel paesaggio vicino a Linopotas. Un chiaro esempio di quanto fossero avanzati i Romani nel dirigere l’acqua.",
+      h2roman: "Tecnica idrica romana",
+      p1: "L’acquedotto di Linopotas è un resto di gestione idrica romana di oltre 2000 anni. I Romani portavano l’acqua dalle colline alle pianure fertili: irrigazione per gli agricoltori e acqua potabile, anche nelle estati secche.",
+      factAge: "± 2000 anni", factOld: "vecchio", factSlope: "Leggera pendenza", factFlow: "l’acqua scorreva da sola",
+      h2arches: "Archi in mezzo alla strada",
+      p2: "Quello che vedi ora sono soprattutto resti degli alti archi e parti di canale che ancora stanno in piedi – in parte in mezzo alla strada. I Romani facevano scorrere l’acqua con una pendenza molto leggera, senza pompe: pura tecnica idrica.",
+      h2italian: "Acquedotto italiano accanto",
+      p3: "Di fronte alla parte romana gli Italiani costruirono un proprio acquedotto durante l’occupazione (1912–1943). Entrambi avevano lo stesso scopo: portare l’acqua ai campi. Così vedi due epoche affiancate.",
+      g1: "Acquedotto", g2: "Acquedotto", g3: "Acquedotto", g4: "Acquedotto",
       h2visit: "Visitare",
-      p3: "Vicino a Linopotas, liberamente accessibile all’aperto.",
-      tip: "Consiglio: combina con un giro nell’entroterra; gli archi sono più belli alla luce del mattino o della sera."
+      p4: "Vicino a Linopotas, gratis all’aperto.",
+      tip: "Consiglio: nota gli archi che “attraversano” la strada – è il momento in cui senti davvero la scala romana."
     },
     tr: {
       title: "Linopotas Su Kemeri",
-      lead: "2000 yıldan eski Roma su kemeri – vadiyi geçen kemerler, sulama ve içme suyu için inşa edilmiş.",
+      lead: "2000 yıldan fazla eski Roma su kemeri, yolun ortasında kemerlerle – daha sonra yanında İtalyan su kemeri de.",
       heroCap: "Linopotas Su Kemeri",
-      badgeFree: "Ücretsiz", badgeRoman: "Roma",
+      badgeRoman: "Roma", badgeAge: "± 2000 yıl", badgeFree: "Ücretsiz",
       btnPlay: "🔊 Sesli oku",
-      h2roman: "Roma su kemeri",
-      p1: "Linopotas su kemeri 2000 yıldan eski Roma su yönetiminin bir kalıntısıdır. Romalılar suyu tepelerden verimli ovalara getiriyordu: tarım için sulama ve içme suyu, kuru yazlarda bile.",
-      factOld: "eski", factFree: "Ücretsiz", factOpen: "açık hava",
-      h2arches: "Manzaradaki kemerler",
-      p2: "Taş kemerler vadiyi geçiyor ve Linopotas yakınındaki manzarada hâlâ etkileyici. Romalıların suyu nasıl yönlendirdiğinin açık bir örneği.",
+      h2roman: "Roma su tekniği",
+      p1: "Linopotas su kemeri, 2000 yıldan fazla eski Roma su yönetiminin bir kalıntısıdır. Romalılar suyu tepelerden verimli ovalara getirdi: çiftçiler için sulama ve içme suyu, kuru yazlarda bile.",
+      factAge: "± 2000 yıl", factOld: "eski", factSlope: "Hafif eğim", factFlow: "su kendiliğinden akardı",
+      h2arches: "Yolun ortasındaki kemerler",
+      p2: "Şimdi gördüğünüz şeyler, hâlâ ayakta duran yüksek kemerlerin ve kanal parçalarının kalıntılarıdır – kısmen yolun ortasında. Romalılar suyu pompasız, çok hafif bir eğimle akıttı: saf su tekniği.",
+      h2italian: "Yanında İtalyan su kemeri",
+      p3: "Roma kısmının karşısında İtalyanlar işgal sırasında (1912–1943) kendi su kemerlerini inşa etti. İkisinin de amacı aynıydı: suyu tarlalara iletmek. Böylece iki dönemi yan yana görürsünüz.",
+      g1: "Su kemeri", g2: "Su kemeri", g3: "Su kemeri", g4: "Su kemeri",
       h2visit: "Ziyaret",
-      p3: "Linopotas yakınında, açık havada ücretsiz erişilebilir.",
-      tip: "İpucu: iç kesimlerde bir gezintiyle birleştir; kemerler sabah veya akşam ışığında en iyi görünür."
+      p4: "Linopotas yakınlarında, açık havada ücretsiz.",
+      tip: "İpucu: yolu “kesen” kemerlere dikkat edin – Roma ölçeğini gerçekten hissettiğiniz an budur."
     },
     es: {
       title: "Acueducto de Linopotas",
-      lead: "Acueducto romano de más de 2000 años – arcos sobre el valle, construido para riego y agua potable.",
+      lead: "Acueducto romano de más de 2000 años con arcos en medio de la carretera – más tarde también un acueducto italiano al lado.",
       heroCap: "Acueducto de Linopotas",
-      badgeFree: "Gratis", badgeRoman: "Romano",
+      badgeRoman: "Romano", badgeAge: "± 2000 años", badgeFree: "Gratis",
       btnPlay: "🔊 Leer en voz alta",
-      h2roman: "Acueducto romano",
-      p1: "El acueducto de Linopotas es un resto de gestión hídrica romana de más de 2000 años. Los romanos llevaban el agua de las colinas a las llanuras fértiles: riego para la agricultura y agua potable, incluso en veranos secos.",
-      factOld: "antiguo", factFree: "Gratis", factOpen: "al aire libre",
-      h2arches: "Arcos en el paisaje",
-      p2: "Los arcos de piedra cruzan el valle y siguen siendo impresionantes en el paisaje cerca de Linopotas. Un claro ejemplo de lo avanzados que eran los romanos dirigiendo el agua.",
+      h2roman: "Técnica de agua romana",
+      p1: "El acueducto de Linopotas es un resto de gestión de agua romana de más de 2000 años. Los romanos llevaban agua de las colinas a las llanuras fértiles: riego para agricultores y agua potable, incluso en veranos secos.",
+      factAge: "± 2000 años", factOld: "antiguo", factSlope: "Ligera pendiente", factFlow: "el agua fluía sola",
+      h2arches: "Arcos en medio de la carretera",
+      p2: "Lo que ves ahora son principalmente restos de los altos arcos y partes de canal que aún están en pie – en parte en medio de la carretera. Los romanos hacían fluir el agua con una pendiente muy ligera, sin bombas: pura técnica de agua.",
+      h2italian: "Acueducto italiano al lado",
+      p3: "Frente a la parte romana, los italianos construyeron su propio acueducto durante la ocupación (1912–1943). Ambos tenían el mismo propósito: llevar agua a los campos. Así ves dos épocas lado a lado.",
+      g1: "Acueducto", g2: "Acueducto", g3: "Acueducto", g4: "Acueducto",
       h2visit: "Visitar",
-      p3: "Cerca de Linopotas, accesible gratuitamente al aire libre.",
-      tip: "Consejo: combínalo con un paseo por el interior; los arcos se ven mejor con luz de mañana o atardecer."
+      p4: "Cerca de Linopotas, gratis al aire libre.",
+      tip: "Consejo: fíjate en los arcos que “cortan” la carretera – es el momento en que realmente sientes la escala romana."
     }
   };
 
