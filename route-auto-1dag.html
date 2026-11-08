@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Rijroute 1 dag – Hello Kos</title>
+  <style>
+    :root {
+      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
+      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
+      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
+      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text); -webkit-font-smoothing: antialiased;
+      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
+      background: var(--bg); min-height: 100vh; line-height: 1.5;
+    }
+    .app-header {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px 16px; background: var(--bg-header);
+      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+    }
+    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
+    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
+    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
+    .logo-text span { color: var(--gold-dark); font-style: italic; }
+    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
+    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
+    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
+    .lang-menu.open { display: block; }
+    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
+    .main { max-width: 480px; margin: 0 auto; padding: 16px 14px 40px; }
+    h1 { font-size: 1.3rem; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+    .lead { font-size: 0.9rem; color: var(--text-soft); margin-bottom: 12px; }
+    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+    .warn-box { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin-bottom: 14px; font-size: 0.86rem; color: var(--text); }
+    .switch { display: flex; gap: 6px; margin-bottom: 12px; }
+    .switch a { flex: 1; text-align: center; padding: 10px; border-radius: 12px; font-weight: 700; font-size: 0.85rem; text-decoration: none; background: var(--bg-card); color: var(--text); border: 2px solid var(--border); }
+    .switch a.on { background: var(--petrol); color: #fff; border-color: var(--petrol); }
+    .big-btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 14px; border-radius: 14px; background: var(--petrol); color: #fff; font-weight: 800; text-decoration: none; margin-bottom: 12px; }
+    .cp { display: grid; grid-template-columns: 88px 1fr; gap: 12px; background: var(--bg-card); border-radius: 16px; overflow: hidden; margin-bottom: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.25); border: 1px solid var(--border); }
+    .cp .ph { min-height: 88px; background: #1a2525 center/cover; position: relative; }
+    .cp .num { position: absolute; top: 8px; left: 8px; width: 28px; height: 28px; border-radius: 50%; background: var(--petrol); color: #fff; font-weight: 800; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; }
+    .cp .body { padding: 10px 12px 12px 0; }
+    .cp h2 { font-size: 0.98rem; margin-bottom: 4px; }
+    .cp h2 a { color: var(--text); text-decoration: none; }
+    .cp p { font-size: 0.82rem; color: var(--text-soft); margin-bottom: 6px; }
+    .cp .acts a { font-size: 0.75rem; font-weight: 700; text-decoration: none; color: var(--petrol); margin-right: 10px; }
+    .extra { display: flex; gap: 8px; margin-bottom: 12px; }
+    .extra a { flex: 1; text-align: center; padding: 10px; border-radius: 12px; background: var(--bg-card); border: 1.5px solid var(--petrol); color: var(--text); font-weight: 700; font-size: 0.8rem; text-decoration: none; }
+    .footer { text-align: center; padding: 16px; font-size: 0.78rem; color: var(--text-soft); }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="bezienswaardigheden.html" class="back-btn">← Terug</a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🔅</div>
+      <div class="logo-text">Hello <span>Kos</span></div>
+    </a>
+    <div class="lang-wrap">
+      <button type="button" class="lang-btn" id="langBtn">
+        <span id="flag">🇳🇱</span> <span id="code">NL</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <h1 data-i18n="title">Rijroute 1 dag</h1>
+    <p class="lead" data-i18n="lead">Hele eiland met controlepunten + foto’s.</p>
+
+    <div class="badges">
+      <span class="badge" data-i18n="badgeCar">Auto/scooter</span>
+      <span class="badge" data-i18n="badgePoints">8 punten</span>
+    </div>
+
+    <div class="switch">
+      <a class="on" href="route-auto-1dag.html" data-i18n="switch1">1 dag</a>
+      <a href="route-auto-2dagen.html" data-i18n="switch2">2 dagen</a>
+    </div>
+
+    <div class="extra">
+      <a href="route-zelf.html" data-i18n="extraSelf">✦ Zelf samenstellen</a>
+      <a href="route-kos-stad-tegels.html" data-i18n="extraWalk">Wandel Kos-stad</a>
+    </div>
+
+    <div class="warn-box" data-i18n="warn">Controlepunten: volg alle punten in volgorde in Google Maps – sla er geen over.</div>
+
+    <a class="big-btn" href="https://www.google.com/maps/dir/?api=1&origin=36.876,27.295&destination=36.738,26.958&travelmode=driving&waypoints=36.8765%2C27.257%7C36.847%2C27.208%7C36.89%2C27.185%7C36.807%2C27.098%7C36.8105%2C27.103%7C36.745%2C26.963" target="_blank" rel="noopener" data-i18n="bigBtn">▶ Open hele route in Google Maps</a>
+
+    <div class="cp">
+      <div class="ph" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/bros-therma-1-standard.jpg')"><span class="num">1</span></div>
+      <div class="body">
+        <h2><a href="sight-therma.html" data-i18n="cp1title">Therma (heetwaterbron)</a></h2>
+        <p data-i18n="cp1desc">Natuurlijke hete bron aan zee.</p>
+        <div class="acts"><a href="sight-therma.html" data-i18n="info">Info →</a><a href="https://www.google.com/maps/search/?api=1&query=36.876,27.295" target="_blank" rel="noopener" data-i18n="point">📍 Punt</a></div>
+      </div>
+    </div>
+
+    <div class="cp">
+      <div class="ph" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/image-60-standard.jpg')"><span class="num">2</span></div>
+      <div class="body">
+        <h2><a href="sight-asklepion.html" data-i18n="cp2title">Asklepion</a></h2>
+        <p data-i18n="cp2desc">Belangrijkste site – Hippocrates.</p>
+        <div class="acts"><a href="sight-asklepion.html" data-i18n="info">Info →</a><a href="https://www.google.com/maps/search/?api=1&query=36.8765,27.257" target="_blank" rel="noopener" data-i18n="point">📍 Punt</a></div>
+      </div>
+    </div>
+
+    <div class="cp">
+      <div class="ph" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/zia-kos-sehenswuerdigkeiten-tipps-ausflug-standard-n0yut8.jpg')"><span class="num">3</span></div>
+      <div class="body">
+        <h2><a href="sight-zia.html" data-i18n="cp3title">Zia</a></h2>
+        <p data-i18n="cp3desc">Bergdorp met zonsondergang.</p>
+        <div class="acts"><a href="sight-zia.html" data-i18n="info">Info →</a><a href="https://www.google.com/maps/search/?api=1&query=36.847,27.208" target="_blank" rel="noopener" data-i18n="point">📍 Punt</a></div>
+      </div>
+    </div>
+
+    <div class="cp">
+      <div class="ph" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/schermopname_12-3-2026_03240_kos-gr-standard.jpg')"><span class="num">4</span></div>
+      <div class="body">
+        <h2><a href="sight-zoutmeer.html" data-i18n="cp4title">Zoutmeer & flamingo’s</a></h2>
+        <p data-i18n="cp4desc">Zoutpannen Tigaki – geen auto op zout.</p>
+        <div class="acts"><a href="sight-zoutmeer.html" data-i18n="info">Info →</a><a href="https://www.google.com/maps/search/?api=1&query=36.89,27.185" target="_blank" rel="noopener" data-i18n="point">📍 Punt</a></div>
+      </div>
+    </div>
+
+    <div class="cp">
+      <div class="ph" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/yxnzzxrzl2ltywdlcy9wywdlcy9tb251bwvudhmvyw50aw1hy2hlawfjyxn0bguvrepjxza2ndnryxn0cm9hbnrpbwf4zwlhcy5qcgc-standard.jpg')"><span class="num">5</span></div>
+      <div class="body">
+        <h2><a href="sight-kasteel-antimachia.html" data-i18n="cp5title">Kasteel Antimachia</a></h2>
+        <p data-i18n="cp5desc">Fort Johannieters – gratis.</p>
+        <div class="acts"><a href="sight-kasteel-antimachia.html" data-i18n="info">Info →</a><a href="https://www.google.com/maps/search/?api=1&query=36.807,27.098" target="_blank" rel="noopener" data-i18n="point">📍 Punt</a></div>
+      </div>
+    </div>
+
+    <div class="cp">
+      <div class="ph" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/traditional-mill-antimachia-2-standard.jpg')"><span class="num">6</span></div>
+      <div class="body">
+        <h2><a href="sight-molen-antimachia.html" data-i18n="cp6title">Molen Antimachia</a></h2>
+        <p data-i18n="cp6desc">Laatste windmolen – museum.</p>
+        <div class="acts"><a href="sight-molen-antimachia.html" data-i18n="info">Info →</a><a href="https://www.google.com/maps/search/?api=1&query=36.8105,27.103" target="_blank" rel="noopener" data-i18n="point">📍 Punt</a></div>
+      </div>
+    </div>
+
+    <div class="cp">
+      <div class="ph" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/agios-stefanos-high.jpg')"><span class="num">7</span></div>
+      <div class="body">
+        <h2><a href="sight-agios-stefanos.html" data-i18n="cp7title">Agios Stefanos</a></h2>
+        <p data-i18n="cp7desc">Basiliek op het strand + Kastri.</p>
+        <div class="acts"><a href="sight-agios-stefanos.html" data-i18n="info">Info →</a><a href="https://www.google.com/maps/search/?api=1&query=36.745,26.963" target="_blank" rel="noopener" data-i18n="point">📍 Punt</a></div>
+      </div>
+    </div>
+
+    <div class="cp">
+      <div class="ph" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/limnionas-beach-standard-gptzjn.jpg')"><span class="num">8</span></div>
+      <div class="body">
+        <h2><a href="sight-limnionas.html" data-i18n="cp8title">Limnionas</a></h2>
+        <p data-i18n="cp8desc">Strand – auto-vriendelijk.</p>
+        <div class="acts"><a href="sight-limnionas.html" data-i18n="info">Info →</a><a href="https://www.google.com/maps/search/?api=1&query=36.738,26.958" target="_blank" rel="noopener" data-i18n="point">📍 Punt</a></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">Hello Kos</footer>
+
+<script>
+(function(){
+  var I18N = {
+    nl: {
+      title: "Rijroute 1 dag",
+      lead: "Hele eiland met controlepunten + foto’s.",
+      badgeCar: "Auto/scooter", badgePoints: "8 punten",
+      switch1: "1 dag", switch2: "2 dagen",
+      extraSelf: "✦ Zelf samenstellen", extraWalk: "Wandel Kos-stad",
+      warn: "Controlepunten: volg alle punten in volgorde in Google Maps – sla er geen over.",
+      bigBtn: "▶ Open hele route in Google Maps",
+      cp1title: "Therma (heetwaterbron)", cp1desc: "Natuurlijke hete bron aan zee.",
+      cp2title: "Asklepion", cp2desc: "Belangrijkste site – Hippocrates.",
+      cp3title: "Zia", cp3desc: "Bergdorp met zonsondergang.",
+      cp4title: "Zoutmeer & flamingo’s", cp4desc: "Zoutpannen Tigaki – geen auto op zout.",
+      cp5title: "Kasteel Antimachia", cp5desc: "Fort Johannieters – gratis.",
+      cp6title: "Molen Antimachia", cp6desc: "Laatste windmolen – museum.",
+      cp7title: "Agios Stefanos", cp7desc: "Basiliek op het strand + Kastri.",
+      cp8title: "Limnionas", cp8desc: "Strand – auto-vriendelijk.",
+      info: "Info →", point: "📍 Punt"
+    },
+    en: {
+      title: "Driving route 1 day",
+      lead: "Whole island with checkpoints + photos.",
+      badgeCar: "Car/scooter", badgePoints: "8 points",
+      switch1: "1 day", switch2: "2 days",
+      extraSelf: "✦ Create your own", extraWalk: "Walk Kos town",
+      warn: "Checkpoints: follow all points in order in Google Maps – do not skip any.",
+      bigBtn: "▶ Open full route in Google Maps",
+      cp1title: "Therma (hot spring)", cp1desc: "Natural hot spring by the sea.",
+      cp2title: "Asklepion", cp2desc: "Main site – Hippocrates.",
+      cp3title: "Zia", cp3desc: "Mountain village with sunset.",
+      cp4title: "Salt lake & flamingos", cp4desc: "Tigaki salt pans – no car on salt.",
+      cp5title: "Antimachia Castle", cp5desc: "Knights of St John fort – free.",
+      cp6title: "Antimachia Mill", cp6desc: "Last windmill – museum.",
+      cp7title: "Agios Stefanos", cp7desc: "Basilica on the beach + Kastri.",
+      cp8title: "Limnionas", cp8desc: "Beach – car-friendly.",
+      info: "Info →", point: "📍 Point"
+    },
+    de: {
+      title: "Fahrroute 1 Tag",
+      lead: "Ganze Insel mit Kontrollpunkten + Fotos.",
+      badgeCar: "Auto/Scooter", badgePoints: "8 Punkte",
+      switch1: "1 Tag", switch2: "2 Tage",
+      extraSelf: "✦ Selbst zusammenstellen", extraWalk: "Spaziergang Kos-Stadt",
+      warn: "Kontrollpunkte: folge allen Punkten der Reihe nach in Google Maps – überspringe keine.",
+      bigBtn: "▶ Ganze Route in Google Maps öffnen",
+      cp1title: "Therma (heiße Quelle)", cp1desc: "Natürliche heiße Quelle am Meer.",
+      cp2title: "Asklepion", cp2desc: "Wichtigste Stätte – Hippokrates.",
+      cp3title: "Zia", cp3desc: "Bergdorf mit Sonnenuntergang.",
+      cp4title: "Salzsee & Flamingos", cp4desc: "Tigaki-Salzpfannen – kein Auto auf Salz.",
+      cp5title: "Burg Antimachia", cp5desc: "Johanniter-Festung – kostenlos.",
+      cp6title: "Mühle Antimachia", cp6desc: "Letzte Windmühle – Museum.",
+      cp7title: "Agios Stefanos", cp7desc: "Basilika am Strand + Kastri.",
+      cp8title: "Limnionas", cp8desc: "Strand – autofreundlich.",
+      info: "Info →", point: "📍 Punkt"
+    },
+    it: {
+      title: "Itinerario in auto 1 giorno",
+      lead: "Tutta l’isola con punti di controllo + foto.",
+      badgeCar: "Auto/scooter", badgePoints: "8 punti",
+      switch1: "1 giorno", switch2: "2 giorni",
+      extraSelf: "✦ Componi da solo", extraWalk: "Passeggiata Kos città",
+      warn: "Punti di controllo: segui tutti i punti in ordine in Google Maps – non saltarne nessuno.",
+      bigBtn: "▶ Apri l’intero itinerario in Google Maps",
+      cp1title: "Therma (sorgente termale)", cp1desc: "Sorgente termale naturale al mare.",
+      cp2title: "Asklepion", cp2desc: "Sito principale – Ippocrate.",
+      cp3title: "Zia", cp3desc: "Villaggio di montagna con tramonto.",
+      cp4title: "Lago salato & fenicotteri", cp4desc: "Saline di Tigaki – niente auto sul sale.",
+      cp5title: "Castello Antimachia", cp5desc: "Forte dei Cavalieri – gratis.",
+      cp6title: "Mulino Antimachia", cp6desc: "Ultimo mulino a vento – museo.",
+      cp7title: "Agios Stefanos", cp7desc: "Basilica sulla spiaggia + Kastri.",
+      cp8title: "Limnionas", cp8desc: "Spiaggia – adatta alle auto.",
+      info: "Info →", point: "📍 Punto"
+    },
+    tr: {
+      title: "1 günlük sürüş rotası",
+      lead: "Kontrol noktaları + fotoğraflarla tüm ada.",
+      badgeCar: "Araba/scooter", badgePoints: "8 nokta",
+      switch1: "1 gün", switch2: "2 gün",
+      extraSelf: "✦ Kendin oluştur", extraWalk: "Kos şehri yürüyüşü",
+      warn: "Kontrol noktaları: Google Maps’te tüm noktaları sırayla takip et – hiçbirini atlama.",
+      bigBtn: "▶ Tüm rotayı Google Maps’te aç",
+      cp1title: "Therma (sıcak su kaynağı)", cp1desc: "Deniz kenarında doğal sıcak kaynak.",
+      cp2title: "Asklepion", cp2desc: "Ana site – Hipokrat.",
+      cp3title: "Zia", cp3desc: "Gün batımlı dağ köyü.",
+      cp4title: "Tuz gölü & flamingolar", cp4desc: "Tigaki tuzlaları – tuz üzerinde araba yok.",
+      cp5title: "Antimachia Kalesi", cp5desc: "Şövalyeler kalesi – ücretsiz.",
+      cp6title: "Antimachia Değirmeni", cp6desc: "Son yel değirmeni – müze.",
+      cp7title: "Agios Stefanos", cp7desc: "Sahilde bazilika + Kastri.",
+      cp8title: "Limnionas", cp8desc: "Plaj – araba dostu.",
+      info: "Bilgi →", point: "📍 Nokta"
+    },
+    es: {
+      title: "Ruta en coche 1 día",
+      lead: "Toda la isla con puntos de control + fotos.",
+      badgeCar: "Coche/scooter", badgePoints: "8 puntos",
+      switch1: "1 día", switch2: "2 días",
+      extraSelf: "✦ Crear tú mismo", extraWalk: "Paseo Kos ciudad",
+      warn: "Puntos de control: sigue todos los puntos en orden en Google Maps – no saltes ninguno.",
+      bigBtn: "▶ Abrir toda la ruta en Google Maps",
+      cp1title: "Therma (fuente termal)", cp1desc: "Fuente termal natural junto al mar.",
+      cp2title: "Asklepion", cp2desc: "Sitio principal – Hipócrates.",
+      cp3title: "Zia", cp3desc: "Pueblo de montaña con atardecer.",
+      cp4title: "Lago salado & flamencos", cp4desc: "Salinas de Tigaki – no coche sobre la sal.",
+      cp5title: "Castillo Antimachia", cp5desc: "Fuerte de los Caballeros – gratis.",
+      cp6title: "Molino Antimachia", cp6desc: "Último molino de viento – museo.",
+      cp7title: "Agios Stefanos", cp7desc: "Basílica en la playa + Kastri.",
+      cp8title: "Limnionas", cp8desc: "Playa – apta para coches.",
+      info: "Info →", point: "📍 Punto"
+    }
+  };
+
+  function setLang(l) {
+    if (!I18N[l]) l = 'nl';
+    localStorage.setItem('hk-lang', l);
+    document.documentElement.lang = l;
+    var d = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (d[k]) el.textContent = d[k];
+    });
+    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if (opt) {
+      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
+      document.getElementById('code').textContent = l.toUpperCase();
+    }
+    document.querySelectorAll('.lang-option').forEach(function(o){
+      o.classList.toggle('active', o.getAttribute('data-lang') === l);
+    });
+    closeMenu();
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  function openMenu(){ langMenu.classList.add('open'); }
+  function closeMenu(){ langMenu.classList.remove('open'); }
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    langMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.addEventListener('click', function(){ closeMenu(); });
+  document.querySelectorAll('.lang-option').forEach(function(btn){
+    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
+  });
+
+  var saved = localStorage.getItem('hk-lang') || 'nl';
+  setLang(saved);
+})();
+</script>
+</body>
+</html>
