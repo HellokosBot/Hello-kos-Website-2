@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Tigaki Beach – Hello Kos</title>
+  <style>
+    :root {
+      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
+      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
+      --text: #E8EDE8; --text-soft: #A0B0A0;
+      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.55;
+      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
+    }
+    .app-header {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px 16px; background: var(--bg-header);
+      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+    }
+    .back-btn { grid-column: 1; color: var(--petrol); font-weight: 600; text-decoration: none; font-size: 0.9rem; }
+    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(145deg, #F0C040, #D4A017); display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
+    .logo-text { font-size: 1.2rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
+    .logo-text span { color: var(--gold-dark); font-style: italic; }
+    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
+    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
+    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; }
+    .lang-menu.open { display: block; }
+    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
+    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
+    .hero { position: relative; width: 100%; aspect-ratio: 16/11; overflow: hidden; background: #1a2525; }
+    .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,.55), transparent); color: #fff; }
+    .hero-cap .area { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; opacity: .9; }
+    .hero-cap h1 { font-size: 1.4rem; font-weight: 800; margin-top: 2px; }
+    .content { padding: 16px 16px 0; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+    .badge { background: rgba(58,154,154,0.18); color: #99f6e4; font-size: .72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; }
+    .block { background: var(--bg-card); border-radius: 16px; padding: 15px 16px; margin-bottom: 12px; border: 1px solid var(--border); }
+    .block h2 { font-size: 1rem; color: var(--text); margin-bottom: 8px; }
+    .block p { font-size: .92rem; color: var(--text-soft); margin-bottom: 10px; }
+    .block p:last-child { margin-bottom: 0; }
+    .img-full { margin: 0 0 12px; border-radius: 16px; overflow: hidden; }
+    .img-full img { width: 100%; display: block; max-height: 210px; object-fit: cover; }
+    .img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 0 12px; }
+    .img-pair img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; display: block; }
+    .actions { display: flex; flex-direction: column; gap: 8px; margin: 8px 0 12px; }
+    .btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 13px 16px; border-radius: 14px; font-weight: 700; font-size: .9rem; text-decoration: none; }
+    .btn-map { background: var(--bg-card); color: var(--text); border: 2px solid var(--petrol); }
+    .btn-water { background: linear-gradient(145deg, #0277bd, #01579b); color: #fff; }
+    .footer { text-align: center; padding: 16px; font-size: .75rem; color: var(--text-soft); }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="stranden.html" class="back-btn">← Terug</a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🔅</div>
+      <div class="logo-text">Hello <span>Kos</span></div>
+    </a>
+    <div class="lang-wrap">
+      <button type="button" class="lang-btn" id="langBtn">
+        <span id="flag">🇳🇱</span> <span id="code">NL</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <main class="main">
+    <div class="hero">
+      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/tigaki-kos-strand-660-1-high-zl1x4s.jpg" alt="Tigaki Beach" loading="eager">
+      <div class="hero-cap"><div class="area" data-i18n="area">Tigaki</div><h1>Tigaki Beach</h1></div>
+    </div>
+    <div class="content">
+      <div class="badge-row">
+        <span class="badge" data-i18n="badge1">Tigaki</span>
+        <span class="badge" data-i18n="badge2">Lang zandstrand</span>
+      </div>
+      <div class="block">
+        <h2 data-i18n="h2_1">Over dit strand</h2>
+        <p data-i18n="p1">Tigaki herbergt een van de langste en meest populaire stranden van het eiland, dat zich bijna 10 km uitstrekt. Hier geniet je van fijn wit-goudkleurig zand en kristalhelder turquoise water, dat heerlijk warm en ondiep blijft over een grote afstand. Dit maakt het ideaal voor gezinnen en kinderen, evenals voor lange zwemsessies zonder in diep water te komen.</p>
+      </div>
+      <div class="img-full"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/kgs_tigaki_beach_0117_06_rgb-136-dpi-for-web-high-ctso3u.jpg" alt="" loading="lazy"></div>
+      <div class="block">
+        <h2 data-i18n="h2_2">Sfeer & ligging</h2>
+        <p data-i18n="p2">Deze kant van het eiland is wat warmer, maar zeker aangenaam. Je vindt er volop ligbedden met comfortabele kussens en breed draaibare rieten parasols. Hoewel het hier af en toe wat kan waaien is dat juist prettig bij de zomerse hitte. Langs de hele kustlijn zijn er strandbars te vinden die direct aan je ligbed serveren.</p>
+      </div>
+      <div class="img-pair">
+        <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/kgs_tigaki_beach_0117_06_rgb-136-dpi-for-web-standard-xpfvib.jpg" alt="" loading="lazy">
+        <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/197154007_1418134505229526_8073901737944437376_n-high.jpg" alt="" loading="lazy">
+      </div>
+      <div class="block">
+        <h2 data-i18n="h2_3">Goed om te weten</h2>
+        <p data-i18n="p3">Voor de avontuurlijke bezoekers zijn er diverse watersportactiviteiten beschikbaar, zoals windsurfen, paddleboarding, jetskiën en beachvolleybal. Dit strand heeft de prestigieuze Blue Flag ontvangen, een officiële erkenning voor uitstekende waterkwaliteit, netheid en voorzieningen. Met palmbomen en tamariskbomen langs de kust creëert het strand een tropische sfeer, perfect voor een ontspannen, familiegerichte dag. Ontdek rustige hoekjes waar je even kunt ontsnappen aan de drukte.</p>
+      </div>
+      <div class="img-full"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/yxnzzxrzl2ltywdlcy9wywdlcy9izwfjagvzl3rpz2fras9esklfmdm2nhrpbmdha2kuanbn-high.jpg" alt="" loading="lazy"></div>
+      <div class="actions">
+        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Tigaki%20Beach%20Kos" target="_blank" rel="noopener" data-i18n="mapBtn">Locatie op de kaart</a>
+        <a class="btn btn-water" href="watertemperatuur.html" data-i18n="waterBtn">Watertemperatuur →</a>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">Hello Kos</footer>
+  <script>
+  (function(){
+    var I18N = {
+      nl: {
+        area: "Tigaki",
+        badge1: "Tigaki",
+        badge2: "Lang zandstrand",
+        h2_1: "Over dit strand",
+        p1: "Tigaki herbergt een van de langste en meest populaire stranden van het eiland, dat zich bijna 10 km uitstrekt. Hier geniet je van fijn wit-goudkleurig zand en kristalhelder turquoise water, dat heerlijk warm en ondiep blijft over een grote afstand. Dit maakt het ideaal voor gezinnen en kinderen, evenals voor lange zwemsessies zonder in diep water te komen.",
+        h2_2: "Sfeer & ligging",
+        p2: "Deze kant van het eiland is wat warmer, maar zeker aangenaam. Je vindt er volop ligbedden met comfortabele kussens en breed draaibare rieten parasols. Hoewel het hier af en toe wat kan waaien is dat juist prettig bij de zomerse hitte. Langs de hele kustlijn zijn er strandbars te vinden die direct aan je ligbed serveren.",
+        h2_3: "Goed om te weten",
+        p3: "Voor de avontuurlijke bezoekers zijn er diverse watersportactiviteiten beschikbaar, zoals windsurfen, paddleboarding, jetskiën en beachvolleybal. Dit strand heeft de prestigieuze Blue Flag ontvangen, een officiële erkenning voor uitstekende waterkwaliteit, netheid en voorzieningen. Met palmbomen en tamariskbomen langs de kust creëert het strand een tropische sfeer, perfect voor een ontspannen, familiegerichte dag. Ontdek rustige hoekjes waar je even kunt ontsnappen aan de drukte.",
+        mapBtn: "Locatie op de kaart",
+        waterBtn: "Watertemperatuur →"
+      },
+      en: {
+        area: "Tigaki",
+        badge1: "Tigaki",
+        badge2: "Long sandy beach",
+        h2_1: "About this beach",
+        p1: "Tigaki is home to one of the longest and most popular beaches on the island, stretching almost 10 km. Here you enjoy fine white-golden sand and crystal-clear turquoise water that stays pleasantly warm and shallow over a long distance. This makes it ideal for families and children, as well as for long swimming sessions without getting into deep water.",
+        h2_2: "Atmosphere & location",
+        p2: "This side of the island is a bit warmer, but definitely pleasant. You’ll find plenty of sunbeds with comfortable cushions and wide rotating straw parasols. Although it can be a bit windy here from time to time, that is actually pleasant in the summer heat. Along the entire coastline there are beach bars that serve directly to your sunbed.",
+        h2_3: "Good to know",
+        p3: "For the more adventurous visitors there are various water sports available, such as windsurfing, paddleboarding, jet skiing and beach volleyball. This beach has received the prestigious Blue Flag, an official recognition for excellent water quality, cleanliness and facilities. With palm trees and tamarisk trees along the coast the beach creates a tropical atmosphere, perfect for a relaxed, family-oriented day. Discover quiet corners where you can escape the crowds for a while.",
+        mapBtn: "Location on the map",
+        waterBtn: "Water temperature →"
+      },
+      de: {
+        area: "Tigaki",
+        badge1: "Tigaki",
+        badge2: "Langer Sandstrand",
+        h2_1: "Über diesen Strand",
+        p1: "Tigaki beherbergt einen der längsten und beliebtesten Strände der Insel, der sich fast 10 km erstreckt. Hier genießt du feinen weiß-goldenen Sand und kristallklares türkisfarbenes Wasser, das über eine große Entfernung angenehm warm und flach bleibt. Das macht ihn ideal für Familien und Kinder sowie für lange Schwimmrunden, ohne in tiefes Wasser zu kommen.",
+        h2_2: "Atmosphäre & Lage",
+        p2: "Diese Seite der Insel ist etwas wärmer, aber definitiv angenehm. Du findest reichlich Liegestühle mit bequemen Kissen und breit drehbaren Strohhimmeln. Obwohl es hier ab und zu etwas windig sein kann, ist das bei der Sommerhitze gerade angenehm. Entlang der gesamten Küstenlinie gibt es Strandbars, die direkt an deinen Liegestuhl servieren.",
+        h2_3: "Gut zu wissen",
+        p3: "Für die abenteuerlustigeren Besucher gibt es verschiedene Wassersportaktivitäten wie Windsurfen, Paddleboarding, Jetski und Beachvolleyball. Dieser Strand hat die prestigeträchtige Blaue Flagge erhalten, eine offizielle Anerkennung für ausgezeichnete Wasserqualität, Sauberkeit und Einrichtungen. Mit Palmen und Tamariskenbäumen entlang der Küste schafft der Strand eine tropische Atmosphäre, perfekt für einen entspannten, familienorientierten Tag. Entdecke ruhige Ecken, wo du der Hektik entfliehen kannst.",
+        mapBtn: "Standort auf der Karte",
+        waterBtn: "Wassertemperatur →"
+      },
+      it: {
+        area: "Tigaki",
+        badge1: "Tigaki",
+        badge2: "Lunga spiaggia sabbiosa",
+        h2_1: "Su questa spiaggia",
+        p1: "Tigaki ospita una delle spiagge più lunghe e popolari dell’isola, che si estende per quasi 10 km. Qui godi di sabbia fine bianco-dorata e acqua turchese cristallina che rimane piacevolmente calda e bassa per una grande distanza. Questo la rende ideale per famiglie e bambini, nonché per lunghe sessioni di nuoto senza finire in acque profonde.",
+        h2_2: "Atmosfera e posizione",
+        p2: "Questo lato dell’isola è un po’ più caldo, ma sicuramente piacevole. Trovi molti lettini con cuscini comodi e ombrelloni di paglia ampiamente orientabili. Anche se qui può soffiare un po’ di vento di tanto in tanto, è proprio piacevole con il caldo estivo. Lungo tutta la costa ci sono beach bar che servono direttamente al tuo lettino.",
+        h2_3: "Buono a sapersi",
+        p3: "Per i visitatori più avventurosi ci sono varie attività di sport acquatici come windsurf, paddleboard, jet ski e beach volley. Questa spiaggia ha ricevuto la prestigiosa Bandiera Blu, un riconoscimento ufficiale per l’eccellente qualità dell’acqua, pulizia e servizi. Con palme e tamerici lungo la costa la spiaggia crea un’atmosfera tropicale, perfetta per una giornata rilassata e orientata alla famiglia. Scopri angoli tranquilli dove puoi fuggire dalla folla per un po’.",
+        mapBtn: "Posizione sulla mappa",
+        waterBtn: "Temperatura dell’acqua →"
+      },
+      tr: {
+        area: "Tigaki",
+        badge1: "Tigaki",
+        badge2: "Uzun kumsal",
+        h2_1: "Bu plaj hakkında",
+        p1: "Tigaki, adanın neredeyse 10 km boyunca uzanan en uzun ve en popüler plajlarından birine ev sahipliği yapar. Burada ince beyaz-altın renkli kum ve uzun mesafe boyunca keyifli derecede sıcak ve sığ kalan kristal berraklığında turkuaz suyun tadını çıkarırsın. Bu, aileler ve çocuklar için idealdir, aynı zamanda derin suya girmeden uzun yüzme seansları için de uygundur.",
+        h2_2: "Atmosfer ve konum",
+        p2: "Adanın bu tarafı biraz daha sıcak ama kesinlikle keyifli. Rahat yastıklı bol miktarda şezlong ve geniş dönebilen hasır şemsiyeler bulursun. Burada ara sıra biraz rüzgar esse de yaz sıcağında bu tam da hoştur. Tüm kıyı boyunca şezlonguna doğrudan servis yapan plaj barları vardır.",
+        h2_3: "Bilmenizde fayda var",
+        p3: "Maceracı ziyaretçiler için rüzgar sörfü, paddleboard, jet ski ve plaj voleybolu gibi çeşitli su sporları mevcuttur. Bu plaj, mükemmel su kalitesi, temizlik ve tesisler için resmi bir takdir olan prestijli Mavi Bayrak’ı almıştır. Kıyı boyunca palmiye ve ılgın ağaçlarıyla plaj tropikal bir atmosfer yaratır, rahat ve aile odaklı bir gün için mükemmeldir. Kalabalıktan bir süre kaçabileceğin sakin köşeler keşfet.",
+        mapBtn: "Haritada konum",
+        waterBtn: "Su sıcaklığı →"
+      },
+      es: {
+        area: "Tigaki",
+        badge1: "Tigaki",
+        badge2: "Larga playa de arena",
+        h2_1: "Sobre esta playa",
+        p1: "Tigaki alberga una de las playas más largas y populares de la isla, que se extiende casi 10 km. Aquí disfrutas de arena fina blanco-dorada y agua turquesa cristalina que permanece agradablemente cálida y poco profunda durante una gran distancia. Esto la hace ideal para familias y niños, así como para largas sesiones de natación sin entrar en aguas profundas.",
+        h2_2: "Ambiente y ubicación",
+        p2: "Este lado de la isla es un poco más cálido, pero definitivamente agradable. Encuentras abundantes tumbonas con cojines cómodos y sombrillas de paja amplias y giratorias. Aunque aquí puede soplar un poco de vez en cuando, eso es precisamente agradable con el calor del verano. A lo largo de toda la costa hay beach bars que sirven directamente a tu tumbona.",
+        h2_3: "Bueno saber",
+        p3: "Para los visitantes más aventureros hay diversas actividades de deportes acuáticos como windsurf, paddleboard, jet ski y vóley playa. Esta playa ha recibido la prestigiosa Bandera Azul, un reconocimiento oficial por la excelente calidad del agua, limpieza e instalaciones. Con palmeras y tamariscos a lo largo de la costa la playa crea un ambiente tropical, perfecto para un día relajado y orientado a la familia. Descubre rincones tranquilos donde puedes escapar de la multitud un rato.",
+        mapBtn: "Ubicación en el mapa",
+        waterBtn: "Temperatura del agua →"
+      }
+    };
+
+    function setLang(l) {
+      if (!I18N[l]) l = 'nl';
+      localStorage.setItem('hk-lang', l);
+      document.documentElement.lang = l;
+      var d = I18N[l];
+      document.querySelectorAll('[data-i18n]').forEach(function(el){
+        var k = el.getAttribute('data-i18n');
+        if (d[k]) el.textContent = d[k];
+      });
+      var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+      if (opt) {
+        document.getElementById('flag').textContent = opt.getAttribute('data-flag');
+        document.getElementById('code').textContent = l.toUpperCase();
+      }
+      document.querySelectorAll('.lang-option').forEach(function(o){
+        o.classList.toggle('active', o.getAttribute('data-lang') === l);
+      });
+      closeMenu();
+    }
+
+    var langBtn = document.getElementById('langBtn');
+    var langMenu = document.getElementById('langMenu');
+    function openMenu(){ langMenu.classList.add('open'); }
+    function closeMenu(){ langMenu.classList.remove('open'); }
+    langBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      langMenu.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    document.addEventListener('click', closeMenu);
+    document.querySelectorAll('.lang-option').forEach(function(btn){
+      btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
+    });
+
+    var saved = localStorage.getItem('hk-lang') || 'nl';
+    setLang(saved);
+  })();
+  </script>
+</body>
+</html>
