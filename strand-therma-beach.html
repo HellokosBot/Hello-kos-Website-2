@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Therma Beach – Hello Kos</title>
+  <style>
+    :root {
+      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
+      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
+      --text: #E8EDE8; --text-soft: #A0B0A0;
+      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.55;
+      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
+    }
+    .app-header {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px 16px; background: var(--bg-header);
+      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+    }
+    .back-btn { grid-column: 1; color: var(--petrol); font-weight: 600; text-decoration: none; font-size: 0.9rem; }
+    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(145deg, #F0C040, #D4A017); display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
+    .logo-text { font-size: 1.2rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
+    .logo-text span { color: var(--gold-dark); font-style: italic; }
+    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
+    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
+    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; }
+    .lang-menu.open { display: block; }
+    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
+    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
+    .hero { position: relative; width: 100%; aspect-ratio: 16/11; overflow: hidden; background: #1a2525; }
+    .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,.55), transparent); color: #fff; }
+    .hero-cap .area { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; opacity: .9; }
+    .hero-cap h1 { font-size: 1.4rem; font-weight: 800; margin-top: 2px; }
+    .content { padding: 16px 16px 0; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+    .badge { background: rgba(58,154,154,0.18); color: #99f6e4; font-size: .72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; }
+    .block { background: var(--bg-card); border-radius: 16px; padding: 15px 16px; margin-bottom: 12px; border: 1px solid var(--border); }
+    .block h2 { font-size: 1rem; color: var(--text); margin-bottom: 8px; }
+    .block p { font-size: .92rem; color: var(--text-soft); margin-bottom: 10px; }
+    .block p:last-child { margin-bottom: 0; }
+    .img-full { margin: 0 0 12px; border-radius: 16px; overflow: hidden; }
+    .img-full img { width: 100%; display: block; max-height: 210px; object-fit: cover; }
+    .img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 0 12px; }
+    .img-pair img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; display: block; }
+    .actions { display: flex; flex-direction: column; gap: 8px; margin: 8px 0 12px; }
+    .btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 13px 16px; border-radius: 14px; font-weight: 700; font-size: .9rem; text-decoration: none; }
+    .btn-map { background: var(--bg-card); color: var(--text); border: 2px solid var(--petrol); }
+    .btn-water { background: linear-gradient(145deg, #0277bd, #01579b); color: #fff; }
+    .footer { text-align: center; padding: 16px; font-size: .75rem; color: var(--text-soft); }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="stranden.html" class="back-btn">← Terug</a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🔅</div>
+      <div class="logo-text">Hello <span>Kos</span></div>
+    </a>
+    <div class="lang-wrap">
+      <button type="button" class="lang-btn" id="langBtn">
+        <span id="flag">🇳🇱</span> <span id="code">NL</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <main class="main">
+    <div class="hero">
+      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/a32eefa8-877b-4d23-a560-ef1872e63bed-high-lqkuj6.jpg" alt="Therma Beach" loading="eager">
+      <div class="hero-cap"><div class="area" data-i18n="area">Oostkust</div><h1>Therma Beach</h1></div>
+    </div>
+    <div class="content">
+      <div class="badge-row">
+        <span class="badge" data-i18n="badge1">Oostkust</span>
+        <span class="badge" data-i18n="badge2">Warm water</span>
+      </div>
+      <div class="block">
+        <h2 data-i18n="h2_1">Over dit strand</h2>
+        <p data-i18n="p1">Doe alle sieraden af als u in de naastgelegen heet waterbron gaat. Door de samenstelling van het water zullen deze zwart worden of verkleuren.</p>
+      </div>
+      <div class="img-full"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/488989101_2042619029566234_9222825061236591605_n-high.jpg" alt="" loading="lazy"></div>
+      <div class="block">
+        <h2 data-i18n="h2_2">Sfeer & ligging</h2>
+        <p data-i18n="p2">Attentie!! Men kan van bovenaf bij het parkeerterrein naar beneden rijden tot aan de volgende parkeerplaats en daarna nog een keer tot aan de laatste parkeerplaats. Zo hoeft u minder te lopen.</p>
+      </div>
+      <div class="img-pair">
+        <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/488568547_2042618902899580_5466025900902751008_n-high.jpg" alt="" loading="lazy">
+        <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/488568547_2042618902899580_5466025900902751008_n-high-agma67.jpg" alt="" loading="lazy">
+      </div>
+      <div class="block">
+        <h2 data-i18n="h2_3">Goed om te weten</h2>
+        <p data-i18n="p3">Therma Strand is een uniek kiezelstrand dat in eerste instantie misschien niet opvalt door schoonheid, maar wel bijzonder is vanwege het zwarte vulkaanzand en de nabijgelegen natuurlijke thermale bronnen. Deze bronnen vormen een natuurlijke hot spring pool met temperaturen van 42-50°C, wat je een gratis outdoor spa-ervaring biedt. Hoewel het strand voornamelijk uit kiezels bestaat (water-schoenen worden aanbevolen), zijn er enkele ligbedden bij de taverna. Dit trekt veel toeristen.</p>
+      </div>
+      <div class="img-full"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/488989101_2042619029566234_9222825061236591605_n-high-aub6rv.jpg" alt="" loading="lazy"></div>
+      <div class="actions">
+        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Therma%20Beach%20Kos" target="_blank" rel="noopener" data-i18n="mapBtn">Locatie op de kaart</a>
+        <a class="btn btn-water" href="watertemperatuur.html" data-i18n="waterBtn">Watertemperatuur →</a>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">Hello Kos</footer>
+  <script>
+  (function(){
+    var I18N = {
+      nl: {
+        area: "Oostkust",
+        badge1: "Oostkust",
+        badge2: "Warm water",
+        h2_1: "Over dit strand",
+        p1: "Doe alle sieraden af als u in de naastgelegen heet waterbron gaat. Door de samenstelling van het water zullen deze zwart worden of verkleuren.",
+        h2_2: "Sfeer & ligging",
+        p2: "Attentie!! Men kan van bovenaf bij het parkeerterrein naar beneden rijden tot aan de volgende parkeerplaats en daarna nog een keer tot aan de laatste parkeerplaats. Zo hoeft u minder te lopen.",
+        h2_3: "Goed om te weten",
+        p3: "Therma Strand is een uniek kiezelstrand dat in eerste instantie misschien niet opvalt door schoonheid, maar wel bijzonder is vanwege het zwarte vulkaanzand en de nabijgelegen natuurlijke thermale bronnen. Deze bronnen vormen een natuurlijke hot spring pool met temperaturen van 42-50°C, wat je een gratis outdoor spa-ervaring biedt. Hoewel het strand voornamelijk uit kiezels bestaat (water-schoenen worden aanbevolen), zijn er enkele ligbedden bij de taverna. Dit trekt veel toeristen.",
+        mapBtn: "Locatie op de kaart",
+        waterBtn: "Watertemperatuur →"
+      },
+      en: {
+        area: "East coast",
+        badge1: "East coast",
+        badge2: "Warm water",
+        h2_1: "About this beach",
+        p1: "Remove all jewellery if you go into the adjacent hot water spring. Due to the composition of the water these will turn black or discolour.",
+        h2_2: "Atmosphere & location",
+        p2: "Attention!! From the top at the parking area you can drive down to the next parking spot and then again to the last parking spot. That way you have to walk less.",
+        h2_3: "Good to know",
+        p3: "Therma Beach is a unique pebble beach that may not stand out for beauty at first, but is special because of the black volcanic sand and the nearby natural thermal springs. These springs form a natural hot spring pool with temperatures of 42-50°C, giving you a free outdoor spa experience. Although the beach consists mainly of pebbles (water shoes are recommended), there are some sunbeds at the taverna. This attracts many tourists.",
+        mapBtn: "Location on the map",
+        waterBtn: "Water temperature →"
+      },
+      de: {
+        area: "Ostküste",
+        badge1: "Ostküste",
+        badge2: "Warmes Wasser",
+        h2_1: "Über diesen Strand",
+        p1: "Ziehen Sie allen Schmuck aus, wenn Sie in die danebenliegende heiße Wasserquelle gehen. Durch die Zusammensetzung des Wassers werden diese schwarz oder verfärben sich.",
+        h2_2: "Atmosphäre & Lage",
+        p2: "Achtung!! Man kann von oben beim Parkplatz nach unten fahren bis zum nächsten Parkplatz und danach noch einmal bis zum letzten Parkplatz. So muss man weniger laufen.",
+        h2_3: "Gut zu wissen",
+        p3: "Therma Strand ist ein einzigartiger Kieselstrand, der auf den ersten Blick vielleicht nicht durch Schönheit auffällt, aber besonders ist wegen des schwarzen Vulkansands und der nahegelegenen natürlichen Thermalquellen. Diese Quellen bilden einen natürlichen Hot-Spring-Pool mit Temperaturen von 42-50°C, was eine kostenlose Outdoor-Spa-Erfahrung bietet. Obwohl der Strand hauptsächlich aus Kies besteht (Wasserschuhe werden empfohlen), gibt es einige Liegestühle bei der Taverne. Das zieht viele Touristen an.",
+        mapBtn: "Standort auf der Karte",
+        waterBtn: "Wassertemperatur →"
+      },
+      it: {
+        area: "Costa est",
+        badge1: "Costa est",
+        badge2: "Acqua calda",
+        h2_1: "Su questa spiaggia",
+        p1: "Togli tutti i gioielli se entri nella sorgente di acqua calda accanto. A causa della composizione dell’acqua questi diventeranno neri o si scoloriranno.",
+        h2_2: "Atmosfera e posizione",
+        p2: "Attenzione!! Dall’alto presso il parcheggio si può scendere in auto fino al parcheggio successivo e poi ancora una volta fino all’ultimo parcheggio. Così si cammina di meno.",
+        h2_3: "Buono a sapersi",
+        p3: "Therma Beach è una spiaggia unica di ciottoli che a prima vista forse non colpisce per bellezza, ma è speciale per la sabbia vulcanica nera e le vicine sorgenti termali naturali. Queste sorgenti formano una piscina di hot spring naturale con temperature di 42-50°C, offrendo un’esperienza spa outdoor gratuita. Sebbene la spiaggia sia composta principalmente da ciottoli (si consigliano scarpe da acqua), ci sono alcuni lettini presso la taverna. Questo attira molti turisti.",
+        mapBtn: "Posizione sulla mappa",
+        waterBtn: "Temperatura dell’acqua →"
+      },
+      tr: {
+        area: "Doğu kıyısı",
+        badge1: "Doğu kıyısı",
+        badge2: "Sıcak su",
+        h2_1: "Bu plaj hakkında",
+        p1: "Yanındaki sıcak su kaynağına girerseniz tüm takılarınızı çıkarın. Suyun bileşimi nedeniyle bunlar kararır veya renk değiştirir.",
+        h2_2: "Atmosfer ve konum",
+        p2: "Dikkat!! Yukarıdan otoparktan aşağıya bir sonraki otoparka kadar inebilirsiniz ve sonra tekrar son otoparka kadar. Böylece daha az yürümek zorunda kalırsınız.",
+        h2_3: "Bilmenizde fayda var",
+        p3: "Therma Plajı, ilk bakışta güzelliğiyle dikkat çekmeyebilen ama siyah volkanik kum ve yakındaki doğal termal kaynaklar nedeniyle özel olan benzersiz bir çakıl plajıdır. Bu kaynaklar 42-50°C sıcaklıkta doğal bir sıcak su havuzu oluşturur ve ücretsiz açık hava spa deneyimi sunar. Plaj çoğunlukla çakıldan oluşsa da (su ayakkabısı önerilir), taverna yanında birkaç şezlong vardır. Bu çok sayıda turisti çeker.",
+        mapBtn: "Haritada konum",
+        waterBtn: "Su sıcaklığı →"
+      },
+      es: {
+        area: "Costa este",
+        badge1: "Costa este",
+        badge2: "Agua cálida",
+        h2_1: "Sobre esta playa",
+        p1: "Quítate todas las joyas si entras en la fuente de agua caliente adyacente. Debido a la composición del agua estas se volverán negras o se decolorarán.",
+        h2_2: "Ambiente y ubicación",
+        p2: "¡Atención!! Desde arriba en el aparcamiento se puede bajar en coche hasta el siguiente aparcamiento y después otra vez hasta el último aparcamiento. Así tienes que caminar menos.",
+        h2_3: "Bueno saber",
+        p3: "Therma Beach es una playa de guijarros única que a primera vista quizá no destaca por su belleza, pero es especial por la arena volcánica negra y las cercanas fuentes termales naturales. Estas fuentes forman una piscina de hot spring natural con temperaturas de 42-50°C, lo que ofrece una experiencia spa al aire libre gratuita. Aunque la playa consiste principalmente en guijarros (se recomiendan zapatos de agua), hay algunas tumbonas en la taberna. Esto atrae a muchos turistas.",
+        mapBtn: "Ubicación en el mapa",
+        waterBtn: "Temperatura del agua →"
+      }
+    };
+
+    function setLang(l) {
+      if (!I18N[l]) l = 'nl';
+      localStorage.setItem('hk-lang', l);
+      document.documentElement.lang = l;
+      var d = I18N[l];
+      document.querySelectorAll('[data-i18n]').forEach(function(el){
+        var k = el.getAttribute('data-i18n');
+        if (d[k]) el.textContent = d[k];
+      });
+      var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+      if (opt) {
+        document.getElementById('flag').textContent = opt.getAttribute('data-flag');
+        document.getElementById('code').textContent = l.toUpperCase();
+      }
+      document.querySelectorAll('.lang-option').forEach(function(o){
+        o.classList.toggle('active', o.getAttribute('data-lang') === l);
+      });
+      closeMenu();
+    }
+
+    var langBtn = document.getElementById('langBtn');
+    var langMenu = document.getElementById('langMenu');
+    function openMenu(){ langMenu.classList.add('open'); }
+    function closeMenu(){ langMenu.classList.remove('open'); }
+    langBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      langMenu.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    document.addEventListener('click', closeMenu);
+    document.querySelectorAll('.lang-option').forEach(function(btn){
+      btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
+    });
+
+    var saved = localStorage.getItem('hk-lang') || 'nl';
+    setLang(saved);
+  })();
+  </script>
+</body>
+</html>
