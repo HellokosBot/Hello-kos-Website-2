@@ -56,16 +56,7 @@
     .live-now { background: rgba(46,125,50,0.12); border: 2px solid var(--green); border-radius: 16px; padding: 14px; margin-bottom: 12px; }
     .live-now h2 { font-size: 1.05rem; color: #a5d6a7; margin-bottom: 4px; }
     .live-now .when { font-size: .78rem; color: #81c784; font-weight: 700; margin-bottom: 12px; }
-    .ph-card { background: var(--bg-card); border-radius: 14px; padding: 12px 14px; margin-bottom: 8px; border: 1px solid var(--border); }
-    .ph-card:last-child { margin-bottom: 0; }
-    .ph-card .open { display: inline-block; background: var(--green); color: #fff; font-size: .68rem; font-weight: 800; padding: 3px 8px; border-radius: 999px; margin-bottom: 6px; letter-spacing: .03em; }
-    .ph-card h3 { font-size: .95rem; color: var(--text); margin-bottom: 4px; }
-    .ph-card p { font-size: .84rem; color: var(--text-soft); margin-bottom: 6px; }
-    .ph-card .tijd { font-size: .88rem; font-weight: 700; color: #a5d6a7; margin-bottom: 8px; }
-    .ph-acts { display: flex; gap: 8px; }
-    .ph-acts a { flex: 1; text-align: center; padding: 10px 8px; border-radius: 10px; font-weight: 700; font-size: .82rem; text-decoration: none; }
-    .ph-acts .call { background: var(--petrol); color: #fff; }
-    .ph-acts .map { background: var(--bg); color: var(--text); border: 2px solid var(--petrol); }
+    .live-btn { display: block; text-align: center; padding: 14px; background: var(--green); color: #fff; border-radius: 12px; font-weight: 800; font-size: 1rem; text-decoration: none; margin-top: 8px; }
     .hours { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); margin-top: 8px; }
     .h-row { display: flex; justify-content: space-between; padding: 9px 12px; font-size: .86rem; border-bottom: 1px solid var(--border); background: var(--bg-card); }
     .h-row:nth-child(even) { background: #1a2a2a; }
@@ -107,51 +98,14 @@
         <p data-i18n="p2">In Griekenland doen apothekers meer dan alleen medicijnen meegeven: ze geven advies bij veelvoorkomende klachten, verstrekken eenvoudige middelen zonder recept (lichte infecties, allergie, pijn) en verwijzen door naar ziekenhuis of specialist als dat nodig is.</p>
       </div>
       <div class="img-full"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/schermopname_18-2-2026_14307_greekreporter-com-high.jpg" alt="" loading="lazy"></div>
+
       <div class="live-now">
         <h2 data-i18n="liveH">Nu van dienst op Kos</h2>
-        <p class="when" data-i18n="liveWhen">Nachtdienst / 24-uurs dienst · donderdag 1 oktober 2026 · bron: Vrisko</p>
-        <div class="ph-card">
-          <span class="open" data-i18n="night">NACHTDIENST</span>
-          <h3>Kilimatos Ilias</h3>
-          <p>Leoforos Venizelou Eleftheriou 42, Kos-stad</p>
-          <p class="tijd" data-i18n="open24">Open: 08:30 → 08:30 volgende ochtend (24 uur)</p>
-          <div class="ph-acts">
-            <a class="call" href="tel:+302242028959" data-i18n="call">Bellen</a>
-            <a class="map" href="https://www.google.com/maps/search/?api=1&query=Kilimatos%20Ilias%20pharmacy%20Venizelou%2042%20Kos" target="_blank" rel="noopener" data-i18n="map">Kaart</a>
-          </div>
-        </div>
-        <div class="ph-card">
-          <span class="open" data-i18n="night">NACHTDIENST</span>
-          <h3>Lamprinos Georgios K.</h3>
-          <p>Zipari, Kos</p>
-          <p class="tijd" data-i18n="open24">Open: 08:30 → 08:30 volgende ochtend (24 uur)</p>
-          <div class="ph-acts">
-            <a class="call" href="tel:+302242067174" data-i18n="call">Bellen</a>
-            <a class="map" href="https://www.google.com/maps/search/?api=1&query=Lamprinos%20pharmacy%20Zipari%20Kos" target="_blank" rel="noopener" data-i18n="map">Kaart</a>
-          </div>
-        </div>
-        <div class="ph-card">
-          <span class="open" data-i18n="night">NACHTDIENST</span>
-          <h3>Chatzipantsou Eleni A.</h3>
-          <p>Pyli & Paleologou, Agios Georgios / Pyli</p>
-          <p class="tijd" data-i18n="open24">Open: 08:30 → 08:30 volgende ochtend (24 uur)</p>
-          <div class="ph-acts">
-            <a class="call" href="tel:+302242041642" data-i18n="call">Bellen</a>
-            <a class="map" href="https://www.google.com/maps/search/?api=1&query=Chatzipantsou%20pharmacy%20Pyli%20Kos" target="_blank" rel="noopener" data-i18n="map">Kaart</a>
-          </div>
-        </div>
-        <div class="ph-card">
-          <span class="open" data-i18n="night">NACHTDIENST</span>
-          <h3>Kampani Anna-Maria I.</h3>
-          <p>Vassileos Georgiou & Charmylou, Kos-stad</p>
-          <p class="tijd" data-i18n="open24">Open: 08:30 → 08:30 volgende ochtend (24 uur)</p>
-          <div class="ph-acts">
-            <a class="call" href="tel:+302242025001" data-i18n="call">Bellen</a>
-            <a class="map" href="https://www.google.com/maps/search/?api=1&query=Kampani%20pharmacy%20Vassileos%20Georgiou%20Kos" target="_blank" rel="noopener" data-i18n="map">Kaart</a>
-          </div>
-        </div>
-        <p class="note" style="margin-top:10px" data-i18n="nightNote">08:30–08:30 (next day) = nachtdienst: open tot de volgende ochtend 08:30. Bel even als je midden in de nacht gaat; het rooster kan wijzigen.</p>
+        <p class="when" id="liveWhen">Laden van actuele datum…</p>
+        <p class="note" data-i18n="liveInfo">De nachtdienst wisselt elke dag. Tik op de knop hieronder voor de live lijst van vandaag (bron: Vrisko).</p>
+        <a class="live-btn" href="https://www.vrisko.gr/efimeries-farmakeion/kos" target="_blank" rel="noopener" data-i18n="liveBtn">Bekijk live nachtdienst vandaag →</a>
       </div>
+
       <div class="block">
         <h2 data-i18n="h2_hours">Gewone openingstijden (zomer)</h2>
         <p data-i18n="hoursP">Typische tijden in de zomerperiode (kan per zaak iets verschillen):</p>
@@ -160,7 +114,7 @@
           <div class="h-row"><span data-i18n="za">Zaterdag</span><span>08:00–14:00</span></div>
           <div class="h-row"><span data-i18n="zo">Zondag</span><span data-i18n="closed">Gesloten*</span></div>
         </div>
-        <p class="note" data-i18n="hoursNote">*Op zondag en ’s nachts: alleen de apotheek van dienst hierboven. Bel bij twijfel even van tevoren.</p>
+        <p class="note" data-i18n="hoursNote">*Op zondag en ’s nachts: alleen de apotheek van dienst. Bel bij twijfel even van tevoren.</p>
       </div>
       <div class="block">
         <h2 data-i18n="h2_tip">Tip bij noodgevallen</h2>
@@ -181,19 +135,15 @@
         p1: "In Kos-stad vind je op bijna elke hoek een apotheek, herkenbaar aan het groene kruis.",
         p2: "In Griekenland doen apothekers meer dan alleen medicijnen meegeven: ze geven advies bij veelvoorkomende klachten, verstrekken eenvoudige middelen zonder recept (lichte infecties, allergie, pijn) en verwijzen door naar ziekenhuis of specialist als dat nodig is.",
         liveH: "Nu van dienst op Kos",
-        liveWhen: "Nachtdienst / 24-uurs dienst · donderdag 1 oktober 2026 · bron: Vrisko",
-        night: "NACHTDIENST",
-        open24: "Open: 08:30 → 08:30 volgende ochtend (24 uur)",
-        call: "Bellen",
-        map: "Kaart",
-        nightNote: "08:30–08:30 (next day) = nachtdienst: open tot de volgende ochtend 08:30. Bel even als je midden in de nacht gaat; het rooster kan wijzigen.",
+        liveInfo: "De nachtdienst wisselt elke dag. Tik op de knop hieronder voor de live lijst van vandaag (bron: Vrisko).",
+        liveBtn: "Bekijk live nachtdienst vandaag →",
         h2_hours: "Gewone openingstijden (zomer)",
         hoursP: "Typische tijden in de zomerperiode (kan per zaak iets verschillen):",
         ma: "Ma – vr",
         za: "Zaterdag",
         zo: "Zondag",
         closed: "Gesloten*",
-        hoursNote: "*Op zondag en ’s nachts: alleen de apotheek van dienst hierboven. Bel bij twijfel even van tevoren.",
+        hoursNote: "*Op zondag en ’s nachts: alleen de apotheek van dienst. Bel bij twijfel even van tevoren.",
         h2_tip: "Tip bij noodgevallen",
         tipP: "Kijk op de winkeldeur van een gesloten apotheek: daar staat welke apotheek die dag 24-uurs dienst heeft.",
         mapAll: "Apotheken op de kaart →"
@@ -204,19 +154,15 @@
         p1: "In Kos town you find a pharmacy on almost every corner, recognizable by the green cross.",
         p2: "In Greece pharmacists do more than just hand out medicines: they give advice for common complaints, supply simple remedies without a prescription (mild infections, allergy, pain) and refer to hospital or specialist if needed.",
         liveH: "On duty now on Kos",
-        liveWhen: "Night duty / 24-hour service · Thursday 1 October 2026 · source: Vrisko",
-        night: "NIGHT DUTY",
-        open24: "Open: 08:30 → 08:30 next morning (24 hours)",
-        call: "Call",
-        map: "Map",
-        nightNote: "08:30–08:30 (next day) = night duty: open until the next morning 08:30. Call if you go in the middle of the night; the schedule can change.",
+        liveInfo: "The night duty changes every day. Tap the button below for today's live list (source: Vrisko).",
+        liveBtn: "View live night duty today →",
         h2_hours: "Normal opening hours (summer)",
         hoursP: "Typical times in the summer period (can differ slightly per pharmacy):",
         ma: "Mon – Fri",
         za: "Saturday",
         zo: "Sunday",
         closed: "Closed*",
-        hoursNote: "*On Sunday and at night: only the on-duty pharmacy above. Call ahead if in doubt.",
+        hoursNote: "*On Sunday and at night: only the on-duty pharmacy. Call ahead if in doubt.",
         h2_tip: "Tip for emergencies",
         tipP: "Look at the shop door of a closed pharmacy: it shows which pharmacy has 24-hour duty that day.",
         mapAll: "Pharmacies on the map →"
@@ -227,19 +173,15 @@
         p1: "In Kos-Stadt findest du an fast jeder Ecke eine Apotheke, erkennbar am grünen Kreuz.",
         p2: "In Griechenland machen Apotheker mehr als nur Medikamente ausgeben: sie geben Rat bei häufigen Beschwerden, geben einfache Mittel ohne Rezept (leichte Infektionen, Allergie, Schmerzen) und verweisen an Krankenhaus oder Spezialisten, wenn nötig.",
         liveH: "Jetzt im Dienst auf Kos",
-        liveWhen: "Nachtdienst / 24-Stunden-Dienst · Donnerstag 1. Oktober 2026 · Quelle: Vrisko",
-        night: "NACHTDIENST",
-        open24: "Offen: 08:30 → 08:30 nächsten Morgen (24 Stunden)",
-        call: "Anrufen",
-        map: "Karte",
-        nightNote: "08:30–08:30 (nächster Tag) = Nachtdienst: offen bis zum nächsten Morgen 08:30. Rufe an, wenn du mitten in der Nacht gehst; der Plan kann sich ändern.",
+        liveInfo: "Der Nachtdienst wechselt jeden Tag. Tippe auf den Button unten für die Live-Liste von heute (Quelle: Vrisko).",
+        liveBtn: "Live-Nachtdienst heute ansehen →",
         h2_hours: "Normale Öffnungszeiten (Sommer)",
         hoursP: "Typische Zeiten im Sommer (kann pro Apotheke etwas abweichen):",
         ma: "Mo – Fr",
         za: "Samstag",
         zo: "Sonntag",
         closed: "Geschlossen*",
-        hoursNote: "*Sonntags und nachts: nur die Dienstapotheke oben. Im Zweifel vorher anrufen.",
+        hoursNote: "*Sonntags und nachts: nur die Dienstapotheke. Im Zweifel vorher anrufen.",
         h2_tip: "Tipp bei Notfällen",
         tipP: "Schau an die Tür einer geschlossenen Apotheke: dort steht, welche Apotheke an dem Tag 24-Stunden-Dienst hat.",
         mapAll: "Apotheken auf der Karte →"
@@ -250,19 +192,15 @@
         p1: "Nella città di Kos trovi una farmacia quasi ad ogni angolo, riconoscibile dalla croce verde.",
         p2: "In Grecia i farmacisti fanno più che consegnare medicine: danno consigli per disturbi comuni, forniscono rimedi semplici senza ricetta (infezioni leggere, allergia, dolore) e indirizzano all’ospedale o specialista se necessario.",
         liveH: "Di turno ora a Kos",
-        liveWhen: "Servizio notturno / 24 ore · giovedì 1 ottobre 2026 · fonte: Vrisko",
-        night: "SERVIZIO NOTTURNO",
-        open24: "Aperto: 08:30 → 08:30 mattina successiva (24 ore)",
-        call: "Chiama",
-        map: "Mappa",
-        nightNote: "08:30–08:30 (giorno successivo) = servizio notturno: aperto fino alla mattina successiva alle 08:30. Chiama se vai nel cuore della notte; l’orario può cambiare.",
+        liveInfo: "Il servizio notturno cambia ogni giorno. Tocca il pulsante sotto per la lista live di oggi (fonte: Vrisko).",
+        liveBtn: "Vedi servizio notturno live oggi →",
         h2_hours: "Orari normali (estate)",
         hoursP: "Orari tipici nel periodo estivo (possono variare leggermente per farmacia):",
         ma: "Lun – Ven",
         za: "Sabato",
         zo: "Domenica",
         closed: "Chiuso*",
-        hoursNote: "*Domenica e di notte: solo la farmacia di turno sopra. Chiama in anticipo in caso di dubbio.",
+        hoursNote: "*Domenica e di notte: solo la farmacia di turno. Chiama in anticipo in caso di dubbio.",
         h2_tip: "Consiglio per emergenze",
         tipP: "Guarda sulla porta di una farmacia chiusa: lì è scritto quale farmacia ha il servizio 24 ore quel giorno.",
         mapAll: "Farmacie sulla mappa →"
@@ -273,19 +211,15 @@
         p1: "Kos şehrinde neredeyse her köşede yeşil haçla tanınan bir eczane bulunur.",
         p2: "Yunanistan’da eczacılar sadece ilaç vermekle kalmaz: yaygın şikayetlerde tavsiye verir, reçetesiz basit ilaçlar verir (hafif enfeksiyon, alerji, ağrı) ve gerekirse hastane veya uzmana yönlendirir.",
         liveH: "Kos’ta şu an nöbetçi",
-        liveWhen: "Gece nöbeti / 24 saat hizmet · 1 Ekim 2026 Perşembe · kaynak: Vrisko",
-        night: "GECE NÖBETİ",
-        open24: "Açık: 08:30 → ertesi sabah 08:30 (24 saat)",
-        call: "Ara",
-        map: "Harita",
-        nightNote: "08:30–08:30 (ertesi gün) = gece nöbeti: ertesi sabah 08:30’a kadar açık. Gece yarısı gideceksen ara; program değişebilir.",
+        liveInfo: "Gece nöbeti her gün değişir. Bugünün canlı listesi için aşağıdaki düğmeye dokunun (kaynak: Vrisko).",
+        liveBtn: "Bugünün canlı gece nöbetini gör →",
         h2_hours: "Normal çalışma saatleri (yaz)",
         hoursP: "Yaz döneminde tipik saatler (eczaneye göre biraz değişebilir):",
         ma: "Pzt – Cuma",
         za: "Cumartesi",
         zo: "Pazar",
         closed: "Kapalı*",
-        hoursNote: "*Pazar ve gece: sadece yukarıdaki nöbetçi eczane. Şüphen varsa önceden ara.",
+        hoursNote: "*Pazar ve gece: sadece nöbetçi eczane. Şüphen varsa önceden ara.",
         h2_tip: "Acil durum ipucu",
         tipP: "Kapalı bir eczanenin kapısına bak: o gün hangi eczanenin 24 saat nöbetçi olduğu yazıyor.",
         mapAll: "Eczaneler haritada →"
@@ -296,24 +230,30 @@
         p1: "En la ciudad de Kos encuentras una farmacia en casi cada esquina, reconocible por la cruz verde.",
         p2: "En Grecia los farmacéuticos hacen más que entregar medicamentos: dan consejos para quejas comunes, suministran remedios simples sin receta (infecciones leves, alergia, dolor) y derivan al hospital o especialista si es necesario.",
         liveH: "De servicio ahora en Kos",
-        liveWhen: "Servicio nocturno / 24 horas · jueves 1 de octubre 2026 · fuente: Vrisko",
-        night: "SERVICIO NOCTURNO",
-        open24: "Abierto: 08:30 → 08:30 mañana siguiente (24 horas)",
-        call: "Llamar",
-        map: "Mapa",
-        nightNote: "08:30–08:30 (día siguiente) = servicio nocturno: abierto hasta la mañana siguiente a las 08:30. Llama si vas en plena noche; el horario puede cambiar.",
+        liveInfo: "El servicio nocturno cambia cada día. Toca el botón de abajo para la lista en vivo de hoy (fuente: Vrisko).",
+        liveBtn: "Ver servicio nocturno en vivo hoy →",
         h2_hours: "Horarios normales (verano)",
         hoursP: "Horarios típicos en el período de verano (pueden variar ligeramente por farmacia):",
         ma: "Lun – Vie",
         za: "Sábado",
         zo: "Domingo",
         closed: "Cerrado*",
-        hoursNote: "*Domingo y de noche: solo la farmacia de servicio de arriba. Llama con antelación si tienes dudas.",
+        hoursNote: "*Domingo y de noche: solo la farmacia de servicio. Llama con antelación si tienes dudas.",
         h2_tip: "Consejo para emergencias",
         tipP: "Mira en la puerta de una farmacia cerrada: allí indica qué farmacia tiene servicio 24 horas ese día.",
         mapAll: "Farmacias en el mapa →"
       }
     };
+
+    function updateLiveDate() {
+      var now = new Date();
+      var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      var dateStr = now.toLocaleDateString(document.documentElement.lang || 'nl', options);
+      var el = document.getElementById('liveWhen');
+      if (el) {
+        el.textContent = (I18N[document.documentElement.lang] || I18N.nl).liveH + ' · ' + dateStr;
+      }
+    }
 
     function setLang(l) {
       if (!I18N[l]) l = 'nl';
@@ -333,6 +273,7 @@
         o.classList.toggle('active', o.getAttribute('data-lang') === l);
       });
       closeMenu();
+      updateLiveDate();
     }
 
     var langBtn = document.getElementById('langBtn');
@@ -354,5 +295,3 @@
   </script>
 </body>
 </html>
-Sla dit op als hulp-apotheek.html. De pagina is nu volledig in de donkere stijl met taalondersteuning.
-
