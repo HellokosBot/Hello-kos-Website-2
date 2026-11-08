@@ -1,3 +1,6 @@
+De vorige proxy werkte niet. Hier is een verbeterde versie die meerdere proxies probeert en de data beter uitleest. Sla dit op als hulp-apotheek.html.
+
+html
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -120,7 +123,6 @@
         <p class="when" id="liveWhen"></p>
         <div id="liveStatus" class="live-status"><span class="spinner"></span><span data-i18n="loading">Laden van actuele dienst…</span></div>
         <div id="liveList"></div>
-        <p class="note" id="liveFallback" style="display:none"></p>
       </div>
 
       <div class="block">
@@ -146,7 +148,7 @@
   <script>
   (function(){
     var I18N = {
-      nl: { hero:"Apotheek", h2_1:"Apotheken op Kos", p1:"In Kos-stad vind je op bijna elke hoek een apotheek, herkenbaar aan het groene kruis.", p2:"In Griekenland doen apothekers meer dan alleen medicijnen meegeven: ze geven advies bij veelvoorkomende klachten, verstrekken eenvoudige middelen zonder recept (lichte infecties, allergie, pijn) en verwijzen door naar ziekenhuis of specialist als dat nodig is.", liveH:"Nu van dienst op Kos", loading:"Laden van actuele dienst…", fail:"Kon de live data niet laden. Probeer de pagina te verversen of bekijk de lijst op Vrisko.", call:"Bellen", map:"Kaart", h2_hours:"Gewone openingstijden (zomer)", hoursP:"Typische tijden in de zomerperiode (kan per zaak iets verschillen):", ma:"Ma – vr", za:"Zaterdag", zo:"Zondag", closed:"Gesloten*", hoursNote:"*Op zondag en ’s nachts: alleen de apotheek van dienst. Bel bij twijfel even van tevoren.", h2_tip:"Tip bij noodgevallen", tipP:"Kijk op de winkeldeur van een gesloten apotheek: daar staat welke apotheek die dag 24-uurs dienst heeft.", mapAll:"Apotheken op de kaart →" },
+      nl: { hero:"Apotheek", h2_1:"Apotheken op Kos", p1:"In Kos-stad vind je op bijna elke hoek een apotheek, herkenbaar aan het groene kruis.", p2:"In Griekenland doen apothekers meer dan alleen medicijnen meegeven: ze geven advies bij veelvoorkomende klachten, verstrekken eenvoudige middelen zonder recept (lichte infecties, allergie, pijn) en verwijzen door naar ziekenhuis of specialist als dat nodig is.", liveH:"Nu van dienst op Kos", loading:"Laden van actuele dienst…", fail:"Kon de live data niet laden. Ververs de pagina of bekijk de lijst op Vrisko.", call:"Bellen", map:"Kaart", h2_hours:"Gewone openingstijden (zomer)", hoursP:"Typische tijden in de zomerperiode (kan per zaak iets verschillen):", ma:"Ma – vr", za:"Zaterdag", zo:"Zondag", closed:"Gesloten*", hoursNote:"*Op zondag en ’s nachts: alleen de apotheek van dienst. Bel bij twijfel even van tevoren.", h2_tip:"Tip bij noodgevallen", tipP:"Kijk op de winkeldeur van een gesloten apotheek: daar staat welke apotheek die dag 24-uurs dienst heeft.", mapAll:"Apotheken op de kaart →" },
       en: { hero:"Pharmacy", h2_1:"Pharmacies on Kos", p1:"In Kos town you find a pharmacy on almost every corner, recognizable by the green cross.", p2:"In Greece pharmacists do more than just hand out medicines: they give advice for common complaints, supply simple remedies without a prescription and refer to hospital or specialist if needed.", liveH:"On duty now on Kos", loading:"Loading current duty…", fail:"Could not load live data. Refresh the page or check the list on Vrisko.", call:"Call", map:"Map", h2_hours:"Normal opening hours (summer)", hoursP:"Typical times in the summer period (can differ slightly per pharmacy):", ma:"Mon – Fri", za:"Saturday", zo:"Sunday", closed:"Closed*", hoursNote:"*On Sunday and at night: only the on-duty pharmacy. Call ahead if in doubt.", h2_tip:"Tip for emergencies", tipP:"Look at the shop door of a closed pharmacy: it shows which pharmacy has 24-hour duty that day.", mapAll:"Pharmacies on the map →" },
       de: { hero:"Apotheke", h2_1:"Apotheken auf Kos", p1:"In Kos-Stadt findest du an fast jeder Ecke eine Apotheke, erkennbar am grünen Kreuz.", p2:"In Griechenland machen Apotheker mehr als nur Medikamente ausgeben: sie geben Rat bei häufigen Beschwerden und verweisen bei Bedarf an Krankenhaus oder Spezialisten.", liveH:"Jetzt im Dienst auf Kos", loading:"Aktuelle Dienst wird geladen…", fail:"Live-Daten konnten nicht geladen werden. Seite aktualisieren oder Liste auf Vrisko prüfen.", call:"Anrufen", map:"Karte", h2_hours:"Normale Öffnungszeiten (Sommer)", hoursP:"Typische Zeiten im Sommer (kann pro Apotheke etwas abweichen):", ma:"Mo – Fr", za:"Samstag", zo:"Sonntag", closed:"Geschlossen*", hoursNote:"*Sonntags und nachts: nur die Dienstapotheke. Im Zweifel vorher anrufen.", h2_tip:"Tipp bei Notfällen", tipP:"Schau an die Tür einer geschlossenen Apotheke: dort steht, welche Apotheke 24-Stunden-Dienst hat.", mapAll:"Apotheken auf der Karte →" },
       it: { hero:"Farmacia", h2_1:"Farmacie a Kos", p1:"Nella città di Kos trovi una farmacia quasi ad ogni angolo, riconoscibile dalla croce verde.", p2:"In Grecia i farmacisti fanno più che consegnare medicine: danno consigli e indirizzano all’ospedale se necessario.", liveH:"Di turno ora a Kos", loading:"Caricamento servizio attuale…", fail:"Impossibile caricare i dati live. Aggiorna la pagina o controlla Vrisko.", call:"Chiama", map:"Mappa", h2_hours:"Orari normali (estate)", hoursP:"Orari tipici nel periodo estivo:", ma:"Lun – Ven", za:"Sabato", zo:"Domenica", closed:"Chiuso*", hoursNote:"*Domenica e di notte: solo la farmacia di turno. Chiama in anticipo in caso di dubbio.", h2_tip:"Consiglio per emergenze", tipP:"Guarda sulla porta di una farmacia chiusa: lì è scritto quale ha il servizio 24 ore.", mapAll:"Farmacie sulla mappa →" },
@@ -186,39 +188,55 @@
     function loadLiveDuty() {
       var status = document.getElementById('liveStatus');
       var list = document.getElementById('liveList');
-      var fallback = document.getElementById('liveFallback');
-      var proxy = 'https://proxy.cors.dev/?url=' + encodeURIComponent('https://www.vrisko.gr/efimeries-farmakeion/kos');
+      var target = 'https://www.vrisko.gr/efimeries-farmakeion/kos';
+      var proxies = [
+        'https://api.allorigins.win/raw?url=',
+        'https://corsproxy.io/?',
+        'https://api.codetabs.com/v1/proxy?quest='
+      ];
 
-      fetch(proxy)
-        .then(function(r){ if(!r.ok) throw new Error(); return r.text(); })
-        .then(function(html){
-          var doc = new DOMParser().parseFromString(html, 'text/html');
-          var cards = doc.querySelectorAll('.pharmacy-card, .efimeria-item, .result-item, [class*="pharmacy"], [class*="efimeria"]');
-          if (!cards.length) cards = doc.querySelectorAll('article, .card, li');
-          list.innerHTML = '';
-          var found = 0;
-          cards.forEach(function(c, i){
-            if (found >= 6) return;
-            var name = (c.querySelector('h2, h3, .name, strong') || c).textContent.trim().split('\n')[0];
-            var addr = (c.querySelector('.address, .addr, p') || {}).textContent || '';
-            var tel = (c.querySelector('a[href^="tel:"]') || {}).href || '';
-            if (name && name.length > 3 && name.length < 80) {
-              found++;
-              var div = document.createElement('div');
-              div.className = 'ph-card';
-              div.innerHTML = '<span class="open">NACHTDIENST</span><h3>' + name + '</h3><p>' + addr.substring(0,120) + '</p>' +
-                (tel ? '<div class="ph-acts"><a class="call" href="' + tel + '">Bellen</a><a class="map" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(name + ' Kos') + '" target="_blank">Kaart</a></div>' : '');
-              list.appendChild(div);
-            }
-          });
-          status.style.display = 'none';
-          if (!found) throw new Error('none');
-        })
-        .catch(function(){
+      function tryProxy(index) {
+        if (index >= proxies.length) {
           status.className = 'live-status err';
-          status.innerHTML = (I18N[document.documentElement.lang] || I18N.nl).fail + ' <a href="https://www.vrisko.gr/efimeries-farmakeion/kos" target="_blank" style="color:#a5d6a7">Vrisko →</a>';
-          fallback.style.display = 'block';
-        });
+          status.innerHTML = (I18N[document.documentElement.lang] || I18N.nl).fail + ' <a href="' + target + '" target="_blank" style="color:#a5d6a7">Vrisko →</a>';
+          return;
+        }
+        var url = proxies[index] + encodeURIComponent(target);
+        fetch(url)
+          .then(function(r){ if(!r.ok) throw new Error(); return r.text(); })
+          .then(function(html){
+            var doc = new DOMParser().parseFromString(html, 'text/html');
+            var cards = doc.querySelectorAll('.pharmacy, .efimeria, .result, article, .card, li, div[class*="pharm"]');
+            list.innerHTML = '';
+            var found = 0;
+            cards.forEach(function(c){
+              if (found >= 5) return;
+              var text = c.textContent.replace(/\s+/g,' ').trim();
+              if (text.length < 15 || text.length > 300) return;
+              var nameMatch = text.match(/([A-ZΑ-Ω][a-zα-ωάέήίόύώ\s\.]{4,40})/);
+              var name = nameMatch ? nameMatch[1].trim() : text.substring(0,40);
+              var telMatch = text.match(/(\+30\s?\d{3,4}\s?\d{6,7}|\d{10})/);
+              var tel = telMatch ? 'tel:' + telMatch[1].replace(/\s/g,'') : '';
+              if (name && /[A-Za-zΑ-Ωα-ω]/.test(name)) {
+                found++;
+                var div = document.createElement('div');
+                div.className = 'ph-card';
+                div.innerHTML = '<span class="open">NACHTDIENST</span><h3>' + name + '</h3><p>' + text.substring(0,100) + '</p>' +
+                  (tel ? '<div class="ph-acts"><a class="call" href="' + tel + '">Bellen</a><a class="map" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(name + ' Kos') + '" target="_blank">Kaart</a></div>' : '');
+                list.appendChild(div);
+              }
+            });
+            if (found > 0) {
+              status.style.display = 'none';
+            } else {
+              throw new Error('none');
+            }
+          })
+          .catch(function(){
+            tryProxy(index + 1);
+          });
+      }
+      tryProxy(0);
     }
 
     var langBtn = document.getElementById('langBtn');
