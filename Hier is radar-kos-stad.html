@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Radar Kos-stad – Hello Kos</title>
+  <style>
+    :root {
+      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
+      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
+      --text: #E8EDE8; --text-soft: #A0B0A0; --radar: #2dd4bf;
+      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.45;
+      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom); min-height: 100vh;
+    }
+    .app-header {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px 16px; background: var(--bg-header);
+      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+    }
+    .back-btn { grid-column: 1; color: var(--petrol); font-weight: 600; text-decoration: none; font-size: 0.9rem; }
+    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(145deg, #F0C040, #D4A017); display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
+    .logo-text { font-size: 1.2rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
+    .logo-text span { color: #C4920F; font-style: italic; }
+    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
+    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
+    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; }
+    .lang-menu.open { display: block; }
+    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
+    .main { max-width: 480px; margin: 0 auto; padding: 12px 14px 32px; }
+    h1 { font-size: 1.2rem; font-weight: 800; color: #99f6e4; margin-bottom: 4px; }
+    .sub { font-size: 0.82rem; color: var(--text-soft); margin-bottom: 12px; }
+    .status-bar {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+      background: rgba(45, 212, 191, 0.08); border: 1px solid rgba(45, 212, 191, 0.2);
+      border-radius: 12px; padding: 10px 12px; margin-bottom: 12px; font-size: 0.8rem;
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: #64748b; flex-shrink: 0; }
+    .dot.on { background: #22c55e; box-shadow: 0 0 8px #22c55e; }
+    .dot.warn { background: #f59e0b; box-shadow: 0 0 8px #f59e0b; }
+    .dot.err { background: #ef4444; }
+    .radar-wrap { position: relative; width: 100%; max-width: 320px; margin: 0 auto 16px; aspect-ratio: 1; }
+    .radar {
+      width: 100%; height: 100%; border-radius: 50%;
+      background:
+        radial-gradient(circle at center, transparent 0%, transparent 28%, rgba(45,212,191,0.06) 28.5%, transparent 29%),
+        radial-gradient(circle at center, transparent 0%, transparent 48%, rgba(45,212,191,0.08) 48.5%, transparent 49%),
+        radial-gradient(circle at center, transparent 0%, transparent 68%, rgba(45,212,191,0.1) 68.5%, transparent 69%),
+        radial-gradient(circle at center, #0a1a1a 0%, #122828 100%);
+      border: 2px solid rgba(45, 212, 191, 0.35);
+      box-shadow: inset 0 0 40px rgba(45, 212, 191, 0.12), 0 0 30px rgba(0,0,0,0.5);
+      position: relative; overflow: hidden;
+    }
+    .radar::before, .radar::after { content: ''; position: absolute; background: rgba(45, 212, 191, 0.15); }
+    .radar::before { left: 50%; top: 0; bottom: 0; width: 1px; transform: translateX(-50%); }
+    .radar::after { top: 50%; left: 0; right: 0; height: 1px; transform: translateY(-50%); }
+    .sweep {
+      position: absolute; inset: 0; border-radius: 50%;
+      background: conic-gradient(from 0deg, transparent 0deg, rgba(45,212,191,0.35) 40deg, transparent 50deg);
+      animation: sweep 3s linear infinite; transform-origin: center;
+    }
+    @keyframes sweep { to { transform: rotate(360deg); } }
+    .you {
+      position: absolute; left: 50%; top: 50%; width: 14px; height: 14px;
+      margin: -7px 0 0 -7px; border-radius: 50%; background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34,197,94,0.3), 0 0 12px #22c55e; z-index: 5;
+    }
+    .blip {
+      position: absolute; width: 10px; height: 10px; margin: -5px 0 0 -5px;
+      border-radius: 50%; background: #2dd4bf; box-shadow: 0 0 8px #2dd4bf;
+      z-index: 4; transition: left 0.4s, top 0.4s, opacity 0.3s;
+    }
+    .blip.near { background: #fbbf24; box-shadow: 0 0 12px #fbbf24; animation: pulse 1s ease-in-out infinite; }
+    .blip.alert { background: #f87171; box-shadow: 0 0 14px #f87171; animation: pulse 0.5s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.4); } }
+    .range-label { position: absolute; font-size: 0.65rem; color: rgba(45,212,191,0.5); font-weight: 600; }
+    .range-label.r1 { bottom: 52%; right: 8%; }
+    .range-label.r2 { bottom: 32%; right: 4%; }
+    .range-label.r3 { bottom: 12%; right: 2%; }
+    .nearest {
+      background: rgba(45, 212, 191, 0.1); border: 1px solid rgba(45, 212, 191, 0.3);
+      border-radius: 16px; padding: 14px 16px; margin-bottom: 14px;
+    }
+    .nearest .lbl { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: #5eead4; font-weight: 700; }
+    .nearest .name { font-size: 1.25rem; font-weight: 800; color: #fff; margin: 4px 0; }
+    .nearest .dist { font-size: 1.5rem; font-weight: 800; color: #2dd4bf; }
+    .nearest .dist span { font-size: 0.85rem; font-weight: 600; color: #94a3b8; }
+    .nearest .story { font-size: 0.85rem; color: #cbd5e1; margin-top: 8px; line-height: 1.4; }
+    .nearest .btns { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+    .nearest a, .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 10px 14px; border-radius: 12px; font-weight: 700; font-size: 0.85rem;
+      text-decoration: none; border: none; cursor: pointer; font-family: inherit;
+    }
+    .btn-primary { background: #2dd4bf; color: #0f1f1f; }
+    .btn-ghost { background: rgba(255,255,255,0.08); color: #e8f5f3; border: 1px solid rgba(255,255,255,0.15); }
+    .alert-banner {
+      display: none; background: #7f1d1d; border: 1px solid #f87171;
+      border-radius: 12px; padding: 12px 14px; margin-bottom: 12px;
+      font-weight: 700; font-size: 0.9rem; text-align: center;
+      animation: pulse 0.8s ease-in-out infinite;
+    }
+    .alert-banner.show { display: block; }
+    .settings {
+      background: rgba(255,255,255,0.04); border-radius: 16px; padding: 14px;
+      margin-bottom: 14px; border: 1px solid rgba(255,255,255,0.08);
+    }
+    .settings h2 { font-size: 0.85rem; color: #99f6e4; margin-bottom: 10px; }
+    .row { margin-bottom: 12px; }
+    .row label { display: block; font-size: 0.78rem; color: #94a3b8; margin-bottom: 6px; font-weight: 600; }
+    .pills { display: flex; gap: 6px; flex-wrap: wrap; }
+    .pill {
+      padding: 8px 14px; border-radius: 999px; border: 1.5px solid rgba(45,212,191,0.35);
+      background: transparent; color: #99f6e4; font-weight: 700; font-size: 0.8rem;
+      cursor: pointer; font-family: inherit;
+    }
+    .pill.on { background: #2dd4bf; color: #0f1f1f; border-color: #2dd4bf; }
+    select {
+      width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(45,212,191,0.3);
+      background: #122828; color: #e8f5f3; font-size: 0.9rem; font-family: inherit;
+    }
+    .start-btn {
+      width: 100%; padding: 16px; border-radius: 14px; border: none;
+      background: linear-gradient(145deg, #2dd4bf, #14b8a6); color: #0f1f1f;
+      font-weight: 800; font-size: 1rem; cursor: pointer; font-family: inherit;
+      margin-bottom: 12px;
+    }
+    .start-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .start-btn.stop { background: linear-gradient(145deg, #f87171, #ef4444); color: #fff; }
+    .list-title { font-size: 0.78rem; font-weight: 700; color: #5eead4; text-transform: uppercase; letter-spacing: 0.04em; margin: 8px 0 8px; }
+    .loc {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.04); border-radius: 12px; padding: 10px 12px;
+      margin-bottom: 6px; text-decoration: none; color: inherit;
+      border: 1px solid transparent;
+    }
+    .loc.hot { border-color: rgba(251, 191, 36, 0.5); background: rgba(251, 191, 36, 0.08); }
+    .loc .m { font-weight: 800; color: #2dd4bf; min-width: 64px; font-size: 0.9rem; }
+    .loc .n { flex: 1; font-weight: 600; font-size: 0.88rem; }
+    .footer { text-align: center; padding: 16px; font-size: 0.75rem; color: #64748b; }
+    .footer a { color: #2dd4bf; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="bezienswaardigheden.html" class="back-btn">← Terug</a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🔅</div>
+      <div class="logo-text">Hello <span>Kos</span></div>
+    </a>
+    <div class="lang-wrap">
+      <button type="button" class="lang-btn" id="langBtn">
+        <span id="flag">🇳🇱</span> <span id="code">NL</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <h1 data-i18n="title">Radar Kos-stad</h1>
+    <p class="sub" data-i18n="sub">Loop vrij rond – bij een locatie krijg je een signaal en het verhaal.</p>
+
+    <div class="status-bar" id="statusBar">
+      <span class="dot" id="gpsDot"></span>
+      <span id="statusText" data-i18n="statusIdle">GPS nog niet gestart</span>
+    </div>
+
+    <div class="alert-banner" id="alertBanner">Je bent dicht bij een bezienswaardigheid!</div>
+
+    <div class="radar-wrap">
+      <div class="radar" id="radar">
+        <div class="sweep" id="sweep"></div>
+        <div class="you" title="Jij"></div>
+        <span class="range-label r1">50 m</span>
+        <span class="range-label r2">100 m</span>
+        <span class="range-label r3">150 m</span>
+      </div>
+    </div>
+
+    <div class="nearest" id="nearest">
+      <div class="lbl" data-i18n="nearestLbl">Dichtstbijzijnde locatie</div>
+      <div class="name" id="nearName">—</div>
+      <div class="dist" id="nearDist">— <span data-i18n="meter">meter</span></div>
+      <p class="story" id="nearStory" data-i18n="storyIdle">Start de radar om te zien wat het dichtst bij je is.</p>
+      <div class="btns">
+        <a class="btn-primary" id="nearLink" href="#" style="display:none" data-i18n="openStory">Open verhaal →</a>
+        <a class="btn-ghost" id="nearMaps" href="#" target="_blank" rel="noopener" style="display:none" data-i18n="navigate">📍 Navigeer</a>
+      </div>
+    </div>
+
+    <button type="button" class="start-btn" id="startBtn" data-i18n="start">▶ Start radar</button>
+
+    <div class="settings">
+      <h2 data-i18n="settingsTitle">Waarschuwing instellen</h2>
+      <div class="row">
+        <label data-i18n="radiusLbl">Signaal bij afstand</label>
+        <div class="pills" id="radiusPills">
+          <button type="button" class="pill" data-r="5">5 m</button>
+          <button type="button" class="pill on" data-r="10">10 m</button>
+          <button type="button" class="pill" data-r="20">20 m</button>
+          <button type="button" class="pill" data-r="50">50 m</button>
+        </div>
+      </div>
+      <div class="row">
+        <label data-i18n="soundLbl">Geluid</label>
+        <select id="soundSelect">
+          <option value="beep" data-i18n="soundBeep">Korte piep</option>
+          <option value="chime" data-i18n="soundChime">Bel / chime</option>
+          <option value="soft" data-i18n="soundSoft">Zachte toon</option>
+          <option value="double" data-i18n="soundDouble">Dubbele piep</option>
+          <option value="off" data-i18n="soundOff">Geen geluid (alleen trillen)</option>
+        </select>
+      </div>
+      <div class="row">
+        <label data-i18n="testLbl">Test geluid</label>
+        <button type="button" class="btn-ghost" id="testSound" style="width:100%" data-i18n="testBtn">▶ Afspelen</button>
+      </div>
+    </div>
+
+    <div class="list-title" data-i18n="nearbyTitle">In de buurt</div>
+    <div id="nearbyList"></div>
+  </main>
+
+  <footer class="footer">
+    <div data-i18n="footerTitle">Hello Kos Radar</div>
+    <p data-i18n="footerGps">GPS werkt het best buiten, met locatietoestemming aan.</p>
+    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
+  </footer>
+
+<script>
+(function () {
+  var I18N = {
+    nl: {
+      title: "Radar Kos-stad",
+      sub: "Loop vrij rond – bij een locatie krijg je een signaal en het verhaal.",
+      statusIdle: "GPS nog niet gestart",
+      statusGetting: "GPS ophalen…",
+      statusActive: "GPS actief",
+      statusDenied: "Locatie geweigerd – zet toestemming aan",
+      statusError: "GPS-fout",
+      statusUnsupported: "GPS niet ondersteund op dit apparaat",
+      nearestLbl: "Dichtstbijzijnde locatie",
+      meter: "meter",
+      storyIdle: "Start de radar om te zien wat het dichtst bij je is.",
+      openStory: "Open verhaal →",
+      navigate: "📍 Navigeer",
+      start: "▶ Start radar",
+      stop: "⏹ Stop radar",
+      settingsTitle: "Waarschuwing instellen",
+      radiusLbl: "Signaal bij afstand",
+      soundLbl: "Geluid",
+      soundBeep: "Korte piep",
+      soundChime: "Bel / chime",
+      soundSoft: "Zachte toon",
+      soundDouble: "Dubbele piep",
+      soundOff: "Geen geluid (alleen trillen)",
+      testLbl: "Test geluid",
+      testBtn: "▶ Afspelen",
+      nearbyTitle: "In de buurt",
+      footerTitle: "Hello Kos Radar",
+      footerGps: "GPS werkt het best buiten, met locatietoestemming aan.",
+      alertNear: "Je bent dicht bij een bezienswaardigheid!",
+      alertDist: "Je bent {d} m van {n}!"
+    },
+    en: {
+      title: "Radar Kos town",
+      sub: "Walk freely – when you approach a location you get a signal and the story.",
+      statusIdle: "GPS not started yet",
+      statusGetting: "Getting GPS…",
+      statusActive: "GPS active",
+      statusDenied: "Location denied – enable permission",
+      statusError: "GPS error",
+      statusUnsupported: "GPS not supported on this device",
+      nearestLbl: "Nearest location",
+      meter: "metres",
+      storyIdle: "Start the radar to see what’s closest to you.",
+      openStory: "Open story →",
+      navigate: "📍 Navigate",
+      start: "▶ Start radar",
+      stop: "⏹ Stop radar",
+      settingsTitle: "Alert settings",
+      radiusLbl: "Signal at distance",
+      soundLbl: "Sound",
+      soundBeep: "Short beep",
+      soundChime: "Bell / chime",
+      soundSoft: "Soft tone",
+      soundDouble: "Double beep",
+      soundOff: "No sound (vibrate only)",
+      testLbl: "Test sound",
+      testBtn: "▶ Play",
+      nearbyTitle: "Nearby",
+      footerTitle: "Hello Kos Radar",
+      footerGps: "GPS works best outdoors with location permission on.",
+      alertNear: "You are close to a sight!",
+      alertDist: "You are {d} m from {n}!"
+    },
+    de: {
+      title: "Radar Kos-Stadt",
+      sub: "Geh frei herum – bei einer Location bekommst du ein Signal und die Geschichte.",
+      statusIdle: "GPS noch nicht gestartet",
+      statusGetting: "GPS wird ermittelt…",
+      statusActive: "GPS aktiv",
+      statusDenied: "Standort abgelehnt – Berechtigung aktivieren",
+      statusError: "GPS-Fehler",
+      statusUnsupported: "GPS wird auf diesem Gerät nicht unterstützt",
+      nearestLbl: "Nächste Location",
+      meter: "Meter",
+      storyIdle: "Starte das Radar, um zu sehen, was am nächsten ist.",
+      openStory: "Geschichte öffnen →",
+      navigate: "📍 Navigieren",
+      start: "▶ Radar starten",
+      stop: "⏹ Radar stoppen",
+      settingsTitle: "Warnung einstellen",
+      radiusLbl: "Signal bei Entfernung",
+      soundLbl: "Ton",
+      soundBeep: "Kurzer Piep",
+      soundChime: "Glocke / Chime",
+      soundSoft: "Sanfter Ton",
+      soundDouble: "Doppelter Piep",
+      soundOff: "Kein Ton (nur Vibration)",
+      testLbl: "Ton testen",
+      testBtn: "▶ Abspielen",
+      nearbyTitle: "In der Nähe",
+      footerTitle: "Hello Kos Radar",
+      footerGps: "GPS funktioniert am besten draußen mit Standortberechtigung.",
+      alertNear: "Du bist nah an einer Sehenswürdigkeit!",
+      alertDist: "Du bist {d} m von {n} entfernt!"
+    },
+    it: {
+      title: "Radar città di Kos",
+      sub: "Cammina liberamente – vicino a un luogo ricevi un segnale e la storia.",
+      statusIdle: "GPS non ancora avviato",
+      statusGetting: "Recupero GPS…",
+      statusActive: "GPS attivo",
+      statusDenied: "Posizione negata – attiva il permesso",
+      statusError: "Errore GPS",
+      statusUnsupported: "GPS non supportato su questo dispositivo",
+      nearestLbl: "Luogo più vicino",
+      meter: "metri",
+      storyIdle: "Avvia il radar per vedere cosa c’è più vicino.",
+      openStory: "Apri storia →",
+      navigate: "📍 Naviga",
+      start: "▶ Avvia radar",
+      stop: "⏹ Ferma radar",
+      settingsTitle: "Imposta avviso",
+      radiusLbl: "Segnale a distanza",
+      soundLbl: "Suono",
+      soundBeep: "Beep breve",
+      soundChime: "Campanella / chime",
+      soundSoft: "Tono morbido",
+      soundDouble: "Doppio beep",
+      soundOff: "Nessun suono (solo vibrazione)",
+      testLbl: "Prova suono",
+      testBtn: "▶ Riproduci",
+      nearbyTitle: "Nelle vicinanze",
+      footerTitle: "Hello Kos Radar",
+      footerGps: "Il GPS funziona meglio all’aperto con il permesso posizione attivo.",
+      alertNear: "Sei vicino a un’attrazione!",
+      alertDist: "Sei a {d} m da {n}!"
+    },
+    tr: {
+      title: "Radar Kos şehri",
+      sub: "Özgürce dolaş – bir yere yaklaşınca sinyal ve hikaye alırsın.",
+      statusIdle: "GPS henüz başlatılmadı",
+      statusGetting: "GPS alınıyor…",
+      statusActive: "GPS aktif",
+      statusDenied: "Konum reddedildi – izni aç",
+      statusError: "GPS hatası",
+      statusUnsupported: "Bu cihazda GPS desteklenmiyor",
+      nearestLbl: "En yakın konum",
+      meter: "metre",
+      storyIdle: "Radar’ı başlatarak en yakını gör.",
+      openStory: "Hikayeyi aç →",
+      navigate: "📍 Navigasyon",
+      start: "▶ Radar başlat",
+      stop: "⏹ Radar durdur",
+      settingsTitle: "Uyarı ayarla",
+      radiusLbl: "Mesafede sinyal",
+      soundLbl: "Ses",
+      soundBeep: "Kısa bip",
+      soundChime: "Zil / chime",
+      soundSoft: "Yumuşak ton",
+      soundDouble: "Çift bip",
+      soundOff: "Ses yok (sadece titreşim)",
+      testLbl: "Sesi test et",
+      testBtn: "▶ Çal",
+      nearbyTitle: "Yakında",
+      footerTitle: "Hello Kos Radar",
+      footerGps: "GPS en iyi dışarıda ve konum izni açıkken çalışır.",
+      alertNear: "Bir görülecek yere yakınsın!",
+      alertDist: "{n} noktasından {d} m uzaktasın!"
+    },
+    es: {
+      title: "Radar ciudad de Kos",
+      sub: "Camina libremente – cerca de un lugar recibes una señal y la historia.",
+      statusIdle: "GPS aún no iniciado",
+      statusGetting: "Obteniendo GPS…",
+      statusActive: "GPS activo",
+      statusDenied: "Ubicación denegada – activa el permiso",
+      statusError: "Error de GPS",
+      statusUnsupported: "GPS no compatible en este dispositivo",
+      nearestLbl: "Lugar más cercano",
+      meter: "metros",
+      storyIdle: "Inicia el radar para ver qué hay más cerca.",
+      openStory: "Abrir historia →",
+      navigate: "📍 Navegar",
+      start: "▶ Iniciar radar",
+      stop: "⏹ Detener radar",
+      settingsTitle: "Configurar alerta",
+      radiusLbl: "Señal a distancia",
+      soundLbl: "Sonido",
+      soundBeep: "Pitido corto",
+      soundChime: "Campana / chime",
+      soundSoft: "Tono suave",
+      soundDouble: "Doble pitido",
+      soundOff: "Sin sonido (solo vibrar)",
+      testLbl: "Probar sonido",
+      testBtn: "▶ Reproducir",
+      nearbyTitle: "Cerca",
+      footerTitle: "Hello Kos Radar",
+      footerGps: "El GPS funciona mejor al aire libre con el permiso de ubicación activado.",
+      alertNear: "¡Estás cerca de un lugar de interés!",
+      alertDist: "¡Estás a {d} m de {n}!"
+    }
+  };
+
+  function getLang() { return localStorage.getItem('hk-lang') || 'nl'; }
+
+  function setLang(l) {
+    if (!I18N[l]) l = 'nl';
+    localStorage.setItem('hk-lang', l);
+    document.documentElement.lang = l;
+    var d = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (d[k]) el.textContent = d[k];
+    });
+    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if (opt) {
+      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
+      document.getElementById('code').textContent = l.toUpperCase();
+    }
+    document.querySelectorAll('.lang-option').forEach(function(o){
+      o.classList.toggle('active', o.getAttribute('data-lang') === l);
+    });
+    closeMenu();
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  function openMenu(){ langMenu.classList.add('open'); }
+  function closeMenu(){ langMenu.classList.remove('open'); }
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    langMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.addEventListener('click', closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){
+    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
+  });
+
+  setLang(getLang());
+
+  /* === RADAR LOGIC (unchanged) === */
+  var LOCATIONS = [
+    { name: 'Witte trappen', lat: 36.8918, lng: 27.2885, href: 'sight-witte-trappen.html', story: 'Meest fotogenieke trappetjes van Kos-stad – blauwe accenten, richting de vis-taverne.' },
+    { name: 'I Love Kos', lat: 36.8935, lng: 27.2902, href: 'sight-i-love-kos.html', story: 'Populaire fotospot met de letters bij de haven.' },
+    { name: 'Palm Tree Lane', lat: 36.8939, lng: 27.2908, href: 'sight-palm-tree-lane.html', story: 'Palmenlaan onder de stenen brug van het ridderkasteel.' },
+    { name: 'Palazzo di Giustizia', lat: 36.8932, lng: 27.2880, href: 'sight-palazzo-giustizia.html', story: 'Gerechtshof uit 1928 – nu rechtbank en politie.' },
+    { name: 'Turks badhuis', lat: 36.8928, lng: 27.2875, href: 'sight-turks-badhuis.html', story: 'Ottomaanse hamam (± 1650), later zoutmagazijn.' },
+    { name: 'Boom van Hippocrates', lat: 36.8930, lng: 27.2895, href: 'sight-boom-hippocrates.html', story: 'Plataan ± 500 jaar – nazaat uit de tijd van Hippocrates.' },
+    { name: 'Gazi Hasan-moskee', lat: 36.8931, lng: 27.2893, href: 'sight-gazi-hasan.html', story: 'Moskee 1786 van de Leeuwenpasha, bij de plataan.' },
+    { name: 'Kasteel van Neratzia', lat: 36.8945, lng: 27.2905, href: 'sight-neratzia.html', story: 'Johannieter-kasteel aan de haven – dubbele muren en brug.' },
+    { name: 'Albergo Gelsomino', lat: 36.8942, lng: 27.2912, href: 'sight-albergo.html', story: 'Iconisch gastenverblijf 1927–28 aan de boulevard.' },
+    { name: 'Kathedraal', lat: 36.8925, lng: 27.2870, href: 'sight-kathedraal.html', story: 'Zetel van de Metropolis van Kos en Nisyros.' },
+    { name: 'Hatzi Pasha', lat: 36.8922, lng: 27.2878, href: 'sight-hatzi-pasha.html', story: 'Klein Ottomaans graf (1527) – piratenaanval.' },
+    { name: 'Agora', lat: 36.8915, lng: 27.2888, href: 'sight-agora.html', story: 'Oude markt – zuilen, baden, tempelresten (gratis).' },
+    { name: 'Belastingpoort', lat: 36.8919, lng: 27.2892, href: 'sight-belastingpoort.html', story: 'Poort uit 1396 van de Ridders van Sint-Jan.' },
+    { name: 'Museum', lat: 36.8920, lng: 27.2872, href: 'sight-museum.html', story: 'Archeologisch museum 1935 – mozaïeken en beelden.' },
+    { name: 'Casa del Fascio', lat: 36.8926, lng: 27.2865, href: 'sight-casa-del-fascio.html', story: 'Italiaans partijgebouw 1935 / propagandacinema.' },
+    { name: 'Defterdar-moskee', lat: 36.8924, lng: 27.2876, href: 'sight-defterdar.html', story: 'Moskee 1786 – weer te bezoeken.' },
+    { name: 'Markthal', lat: 36.8927, lng: 27.2879, href: 'sight-markthal.html', story: 'Markthal 1934 aan Eleftherias-plein.' },
+    { name: 'Agia Paraskevi', lat: 36.8912, lng: 27.2868, href: 'sight-paraskevi.html', story: 'Grote orthodoxe parochiekerk.' },
+    { name: 'Old Town', lat: 36.8910, lng: 27.2862, href: 'sight-old-town.html', story: 'Smalle autovrije winkelstraatjes.' },
+    { name: 'Morouk-moskee', lat: 36.8908, lng: 27.2860, href: 'sight-morouk.html', story: 'Zonder minaret – antieke sarcofaag als wasbak.' },
+    { name: 'Eski Tzami', lat: 36.8923, lng: 27.2882, href: 'sight-eski-tzami.html', story: 'Vooral de minaret blijft overeind.' },
+    { name: 'Odeon', lat: 36.8914, lng: 27.2855, href: 'sight-odeon.html', story: 'Klein overdekt Romeins theater.' },
+    { name: 'Westelijke opgraving', lat: 36.8910, lng: 27.2850, href: 'sight-westelijke-opgraving.html', story: 'Gymnasium, thermen, forica, Huis van Europa.' },
+    { name: 'Casa Romana', lat: 36.8905, lng: 27.2848, href: 'sight-casa-romana.html', story: 'Best bewaarde Romeinse huizen.' },
+    { name: 'Altaar Dionysos', lat: 36.8907, lng: 27.2852, href: 'sight-altaar-dionysos.html', story: 'Altaar 2e eeuw v.Chr. – god van wijn en feest.' }
+  ];
+
+  var RADAR_RANGE = 150;
+  var alertRadius = 10;
+  var soundType = 'beep';
+  var watching = false;
+  var watchId = null;
+  var lastAlertId = null;
+  var lastAlertAt = 0;
+  var audioCtx = null;
+
+  var gpsDot = document.getElementById('gpsDot');
+  var statusText = document.getElementById('statusText');
+  var startBtn = document.getElementById('startBtn');
+  var nearName = document.getElementById('nearName');
+  var nearDist = document.getElementById('nearDist');
+  var nearStory = document.getElementById('nearStory');
+  var nearLink = document.getElementById('nearLink');
+  var nearMaps = document.getElementById('nearMaps');
+  var alertBanner = document.getElementById('alertBanner');
+  var radar = document.getElementById('radar');
+  var nearbyList = document.getElementById('nearbyList');
+
+  document.querySelectorAll('#radiusPills .pill').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('#radiusPills .pill').forEach(function (b) { b.classList.remove('on'); });
+      btn.classList.add('on');
+      alertRadius = parseInt(btn.getAttribute('data-r'), 10);
+      try { localStorage.setItem('hk-radar-radius', String(alertRadius)); } catch (e) {}
+    });
+  });
+  document.getElementById('soundSelect').addEventListener('change', function () {
+    soundType = this.value;
+    try { localStorage.setItem('hk-radar-sound', soundType); } catch (e) {}
+  });
+  document.getElementById('testSound').addEventListener('click', function () {
+    playAlert();
+  });
+
+  try {
+    var r = localStorage.getItem('hk-radar-radius');
+    if (r) {
+      alertRadius = parseInt(r, 10);
+      document.querySelectorAll('#radiusPills .pill').forEach(function (b) {
+        b.classList.toggle('on', parseInt(b.getAttribute('data-r'), 10) === alertRadius);
+      });
+    }
+    var s = localStorage.getItem('hk-radar-sound');
+    if (s) {
+      soundType = s;
+      document.getElementById('soundSelect').value = s;
+    }
+  } catch (e) {}
+
+  function haversine(lat1, lon1, lat2, lon2) {
+    var R = 6371000;
+    var toRad = Math.PI / 180;
+    var dLat = (lat2 - lat1) * toRad;
+    var dLon = (lon2 - lon1) * toRad;
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1 * toRad) * Math.cos(lat2 * toRad) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
+
+  function bearing(lat1, lon1, lat2, lon2) {
+    var toRad = Math.PI / 180;
+    var dLon = (lon2 - lon1) * toRad;
+    var y = Math.sin(dLon) * Math.cos(lat2 * toRad);
+    var x = Math.cos(lat1 * toRad) * Math.sin(lat2 * toRad) -
+      Math.sin(lat1 * toRad) * Math.cos(lat2 * toRad) * Math.cos(dLon);
+    return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
+  }
+
+  function ensureAudio() {
+    if (!audioCtx) {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (AC) audioCtx = new AC();
+    }
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  }
+
+  function tone(freq, dur, type, gain) {
+    if (!audioCtx) return;
+    var o = audioCtx.createOscillator();
+    var g = audioCtx.createGain();
+    o.type = type || 'sine';
+    o.frequency.value = freq;
+    g.gain.value = gain || 0.15;
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start();
+    g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+    o.stop(audioCtx.currentTime + dur + 0.02);
+  }
+
+  function playAlert() {
+    ensureAudio();
+    if (soundType === 'off') {
+      if (navigator.vibrate) navigator.vibrate([80, 40, 80]);
+      return;
+    }
+    if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+    if (!audioCtx) return;
+    if (soundType === 'beep') {
+      tone(880, 0.12, 'square', 0.12);
+    } else if (soundType === 'chime') {
+      tone(523, 0.2, 'sine', 0.15);
+      setTimeout(function () { tone(784, 0.35, 'sine', 0.12); }, 120);
+    } else if (soundType === 'soft') {
+      tone(440, 0.4, 'sine', 0.08);
+    } else if (soundType === 'double') {
+      tone(660, 0.1, 'square', 0.12);
+      setTimeout(function () { tone(660, 0.1, 'square', 0.12); }, 150);
+    }
+  }
+
+  function setStatus(ok, text, kind) {
+    gpsDot.className = 'dot' + (ok ? ' on' : (kind === 'err' ? ' err' : (kind === 'warn' ? ' warn' : '')));
+    statusText.textContent = text;
+  }
+
+  function updateUI(lat, lng, accuracy) {
+    var lang = getLang();
+    var d = I18N[lang] || I18N.nl;
+
+    var ranked = LOCATIONS.map(function (loc) {
+      var dist = haversine(lat, lng, loc.lat, loc.lng);
+      return { loc: loc, d: dist, brg: bearing(lat, lng, loc.lat, loc.lng) };
+    }).sort(function (a, b) { return a.d - b.d; });
+
+    var nearest = ranked[0];
+    nearName.textContent = nearest.loc.name;
+    nearDist.innerHTML = Math.round(nearest.d) + ' <span>' + d.meter + '</span>';
+    nearStory.textContent = nearest.loc.story;
+    nearLink.href = nearest.loc.href;
+    nearLink.style.display = 'inline-flex';
+    nearMaps.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(nearest.loc.lat + ',' + nearest.loc.lng);
+    nearMaps.style.display = 'inline-flex';
+
+    if (nearest.d <= alertRadius) {
+      alertBanner.classList.add('show');
+      alertBanner.textContent = (d.alertDist || 'Je bent {d} m van {n}!').replace('{d}', Math.round(nearest.d)).replace('{n}', nearest.loc.name);
+      var now = Date.now();
+      if (lastAlertId !== nearest.loc.name || now - lastAlertAt > 45000) {
+        lastAlertId = nearest.loc.name;
+        lastAlertAt = now;
+        playAlert();
+      }
+    } else {
+      alertBanner.classList.remove('show');
+      if (nearest.d > alertRadius + 15) lastAlertId = null;
+    }
+
+    radar.querySelectorAll('.blip').forEach(function (el) { el.remove(); });
+    ranked.forEach(function (item) {
+      if (item.d > RADAR_RANGE) return;
+      var ratio = Math.min(item.d / RADAR_RANGE, 1);
+      var rad = (item.brg - 90) * Math.PI / 180;
+      var x = 50 + Math.cos(rad) * ratio * 46;
+      var y = 50 + Math.sin(rad) * ratio * 46;
+      var blip = document.createElement('div');
+      blip.className = 'blip' + (item.d <= alertRadius ? ' alert' : (item.d <= 40 ? ' near' : ''));
+      blip.style.left = x + '%';
+      blip.style.top = y + '%';
+      blip.title = item.loc.name + ' · ' + Math.round(item.d) + ' m';
+      radar.appendChild(blip);
+    });
+
+    nearbyList.innerHTML = '';
+    ranked.slice(0, 8).forEach(function (item) {
+      var a = document.createElement('a');
+      a.className = 'loc' + (item.d <= alertRadius ? ' hot' : '');
+      a.href = item.loc.href;
+      a.innerHTML = '<span class="m">' + Math.round(item.d) + ' m</span><span class="n">' + item.loc.name + '</span>';
+      nearbyList.appendChild(a);
+    });
+
+    var acc = accuracy ? ' (±' + Math.round(accuracy) + ' m)' : '';
+    setStatus(true, (d.statusActive || 'GPS actief') + acc + ' · ' + ranked.filter(function (x) { return x.d <= RADAR_RANGE; }).length + ' in bereik', 'on');
+  }
+
+  function onPos(pos) {
+    updateUI(pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy);
+  }
+  function onErr(err) {
+    var lang = getLang();
+    var d = I18N[lang] || I18N.nl;
+    setStatus(false, err.code === 1 ? (d.statusDenied || 'Locatie geweigerd') : (d.statusError || 'GPS-fout'), 'err');
+    stopWatch();
+  }
+
+  function startWatch() {
+    var lang = getLang();
+    var d = I18N[lang] || I18N.nl;
+    if (!navigator.geolocation) {
+      setStatus(false, d.statusUnsupported || 'GPS niet ondersteund', 'err');
+      return;
+    }
+    ensureAudio();
+    watching = true;
+    startBtn.textContent = d.stop || '⏹ Stop radar';
+    startBtn.classList.add('stop');
+    setStatus(false, d.statusGetting || 'GPS ophalen…', 'warn');
+    watchId = navigator.geolocation.watchPosition(onPos, onErr, {
+      enableHighAccuracy: true,
+      maximumAge: 2000,
+      timeout: 15000
+    });
+  }
+  function stopWatch() {
+    var lang = getLang();
+    var d = I18N[lang] || I18N.nl;
+    watching = false;
+    if (watchId != null && navigator.geolocation) {
+      navigator.geolocation.clearWatch(watchId);
+      watchId = null;
+    }
+    startBtn.textContent = d.start || '▶ Start radar';
+    startBtn.classList.remove('stop');
+  }
+
+  startBtn.addEventListener('click', function () {
+    if (watching) stopWatch();
+    else startWatch();
+  });
+})();
+</script>
+</body>
+</html>
