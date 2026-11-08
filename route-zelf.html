@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Maak je eigen route – Hello Kos</title>
+  <style>
+    :root {
+      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
+      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
+      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
+      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text); -webkit-font-smoothing: antialiased;
+      padding-top: var(--safe-top); padding-bottom: calc(88px + env(safe-area-inset-bottom, 0));
+      background: var(--bg); min-height: 100vh; line-height: 1.45;
+    }
+    .app-header {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px 16px; background: var(--bg-header);
+      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+    }
+    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
+    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
+    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
+    .logo-text span { color: var(--gold-dark); font-style: italic; }
+    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
+    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
+    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
+    .lang-menu.open { display: block; }
+    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
+    .main { max-width: 480px; margin: 0 auto; padding: 14px 14px 20px; }
+    h1 { font-size: 1.25rem; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+    .lead { font-size: 0.88rem; color: var(--text-soft); margin-bottom: 12px; }
+    .tabs { display: flex; gap: 6px; margin-bottom: 12px; }
+    .tabs button { flex: 1; padding: 10px; border-radius: 12px; border: 2px solid var(--border); background: var(--bg-card); font-weight: 700; font-size: 0.82rem; cursor: pointer; font-family: inherit; color: var(--text); }
+    .tabs button.on { background: var(--petrol); color: #fff; border-color: var(--petrol); }
+    .section { font-size: 0.75rem; font-weight: 800; color: var(--petrol); text-transform: uppercase; letter-spacing: 0.04em; margin: 12px 0 8px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .tile { position: relative; aspect-ratio: 1; border-radius: 16px; overflow: hidden; background: #1a2525 center/cover no-repeat; border: 3px solid transparent; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.25); padding: 0; }
+    .tile.on { border-color: var(--petrol); box-shadow: 0 0 0 2px rgba(58,154,154,0.4); }
+    .tile .ov { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 10px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent 50%); }
+    .tile .t { color: #fff; font-size: 0.82rem; font-weight: 700; line-height: 1.2; text-align: left; }
+    .tile .check { position: absolute; top: 8px; right: 8px; width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 800; color: transparent; }
+    .tile.on .check { background: var(--petrol); color: #fff; }
+    .mode { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
+    .mode label { font-size: 0.78rem; font-weight: 700; padding: 8px 12px; border-radius: 999px; background: var(--bg-card); border: 1.5px solid var(--border); cursor: pointer; color: var(--text); }
+    .mode input { margin-right: 4px; }
+    .bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 200; background: rgba(13,26,26,0.97); backdrop-filter: blur(12px); padding: 12px 14px calc(12px + env(safe-area-inset-bottom,0)); color: #fff; border-top: 1px solid var(--border); }
+    .bar-inner { max-width: 480px; margin: 0 auto; display: flex; align-items: center; gap: 10px; }
+    .bar .count { font-weight: 800; font-size: 0.95rem; min-width: 70px; }
+    .bar button { flex: 1; padding: 12px; border: none; border-radius: 12px; background: var(--gold); color: #1A1A1A; font-weight: 800; font-size: 0.9rem; cursor: pointer; font-family: inherit; }
+    .bar button:disabled { opacity: 0.4; cursor: not-allowed; }
+    .bar .clear { background: transparent; color: #99f6e4; border: 1px solid rgba(153,246,228,0.4); flex: 0; padding: 12px 14px; }
+    .panel { display: none; position: fixed; inset: 0; z-index: 300; background: rgba(0,0,0,0.6); align-items: flex-end; justify-content: center; }
+    .panel.show { display: flex; }
+    .sheet { background: var(--bg); border-radius: 20px 20px 0 0; width: 100%; max-width: 480px; max-height: 85vh; overflow: auto; padding: 16px 14px calc(20px + env(safe-area-inset-bottom,0)); border-top: 1px solid var(--border); }
+    .sheet h2 { font-size: 1.1rem; color: var(--text); margin-bottom: 6px; }
+    .sheet .hint { font-size: 0.82rem; color: var(--text-soft); margin-bottom: 12px; }
+    .order-item { display: grid; grid-template-columns: 40px 56px 1fr; gap: 10px; align-items: center; background: var(--bg-card); border-radius: 12px; padding: 8px; margin-bottom: 8px; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
+    .order-item .n { width: 32px; height: 32px; border-radius: 50%; background: var(--petrol); color: #fff; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; }
+    .order-item .ph { width: 56px; height: 56px; border-radius: 10px; background: #1a2525 center/cover; }
+    .order-item .nm { font-weight: 700; font-size: 0.9rem; color: var(--text); }
+    .sheet .actions { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+    .sheet a.btn, .sheet button.btn { display: flex; align-items: center; justify-content: center; padding: 14px; border-radius: 14px; font-weight: 800; font-size: 0.95rem; text-decoration: none; border: none; cursor: pointer; font-family: inherit; }
+    .btn-go { background: var(--petrol); color: #fff; }
+    .btn-close { background: var(--bg-card); color: var(--text); border: 2px solid var(--petrol) !important; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="bezienswaardigheden.html" class="back-btn">← Terug</a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🔅</div>
+      <div class="logo-text">Hello <span>Kos</span></div>
+    </a>
+    <div class="lang-wrap">
+      <button type="button" class="lang-btn" id="langBtn">
+        <span id="flag">🇳🇱</span> <span id="code">NL</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <h1 data-i18n="title">Maak je eigen route</h1>
+    <p class="lead" data-i18n="lead">Tik de plekken aan die je wilt bezoeken. Wij zetten ze in een slimme volgorde met controlepunten voor Google Maps.</p>
+
+    <div class="mode">
+      <label><input type="radio" name="mode" value="drive" checked> <span data-i18n="modeDrive">Rijden</span></label>
+      <label><input type="radio" name="mode" value="walk"> <span data-i18n="modeWalk">Lopen (Kos-stad)</span></label>
+    </div>
+
+    <div class="tabs">
+      <button type="button" class="on" data-f="all" data-i18n="tabAll">Alles</button>
+      <button type="button" data-f="Kos-stad" data-i18n="tabCity">Kos-stad</button>
+      <button type="button" data-f="Eiland" data-i18n="tabIsland">Eiland</button>
+    </div>
+
+    <div id="grids"></div>
+  </main>
+
+  <div class="bar">
+    <div class="bar-inner">
+      <span class="count" id="count">0 gekozen</span>
+      <button type="button" class="clear" id="clearBtn" data-i18n="clear">Wis</button>
+      <button type="button" id="buildBtn" disabled data-i18n="build">Maak route →</button>
+    </div>
+  </div>
+
+  <div class="panel" id="panel">
+    <div class="sheet">
+      <h2 data-i18n="sheetTitle">Jouw route</h2>
+      <p class="hint" id="orderHint" data-i18n="hint">Volgorde geoptimaliseerd zodat je niet heen-en-weer rijdt. Gebruik deze volgorde als controlepunten in Maps.</p>
+      <div id="orderList"></div>
+      <div class="actions">
+        <a class="btn btn-go" id="mapsBtn" href="#" target="_blank" rel="noopener" data-i18n="mapsBtn">▶ Open in Google Maps</a>
+        <button type="button" class="btn btn-close" id="closePanel" data-i18n="close">Sluiten</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+(function(){
+  var I18N = {
+    nl: {
+      title: "Maak je eigen route",
+      lead: "Tik de plekken aan die je wilt bezoeken. Wij zetten ze in een slimme volgorde met controlepunten voor Google Maps.",
+      modeDrive: "Rijden", modeWalk: "Lopen (Kos-stad)",
+      tabAll: "Alles", tabCity: "Kos-stad", tabIsland: "Eiland",
+      clear: "Wis", build: "Maak route →",
+      sheetTitle: "Jouw route",
+      hint: "Volgorde geoptimaliseerd zodat je niet heen-en-weer rijdt. Gebruik deze volgorde als controlepunten in Maps.",
+      mapsBtn: "▶ Open in Google Maps", close: "Sluiten",
+      count: "0 gekozen"
+    },
+    en: {
+      title: "Create your own route",
+      lead: "Tap the places you want to visit. We put them in a smart order with checkpoints for Google Maps.",
+      modeDrive: "Drive", modeWalk: "Walk (Kos town)",
+      tabAll: "All", tabCity: "Kos town", tabIsland: "Island",
+      clear: "Clear", build: "Create route →",
+      sheetTitle: "Your route",
+      hint: "Order optimised so you don’t drive back and forth. Use this order as checkpoints in Maps.",
+      mapsBtn: "▶ Open in Google Maps", close: "Close",
+      count: "0 selected"
+    },
+    de: {
+      title: "Eigene Route erstellen",
+      lead: "Tippe die Orte an, die du besuchen möchtest. Wir ordnen sie intelligent mit Kontrollpunkten für Google Maps.",
+      modeDrive: "Fahren", modeWalk: "Gehen (Kos-Stadt)",
+      tabAll: "Alles", tabCity: "Kos-Stadt", tabIsland: "Insel",
+      clear: "Löschen", build: "Route erstellen →",
+      sheetTitle: "Deine Route",
+      hint: "Reihenfolge optimiert, damit du nicht hin und her fährst. Nutze diese Reihenfolge als Kontrollpunkte in Maps.",
+      mapsBtn: "▶ In Google Maps öffnen", close: "Schließen",
+      count: "0 ausgewählt"
+    },
+    it: {
+      title: "Crea il tuo itinerario",
+      lead: "Tocca i luoghi che vuoi visitare. Li mettiamo in un ordine intelligente con punti di controllo per Google Maps.",
+      modeDrive: "Guidare", modeWalk: "Camminare (città di Kos)",
+      tabAll: "Tutto", tabCity: "Città di Kos", tabIsland: "Isola",
+      clear: "Cancella", build: "Crea itinerario →",
+      sheetTitle: "Il tuo itinerario",
+      hint: "Ordine ottimizzato per non andare avanti e indietro. Usa questo ordine come punti di controllo in Maps.",
+      mapsBtn: "▶ Apri in Google Maps", close: "Chiudi",
+      count: "0 selezionati"
+    },
+    tr: {
+      title: "Kendi rotanı oluştur",
+      lead: "Ziyaret etmek istediğin yerlere dokun. Google Maps için akıllı sırayla kontrol noktalarıyla sıralıyoruz.",
+      modeDrive: "Sürüş", modeWalk: "Yürüme (Kos şehri)",
+      tabAll: "Hepsi", tabCity: "Kos şehri", tabIsland: "Ada",
+      clear: "Temizle", build: "Rota oluştur →",
+      sheetTitle: "Rotan",
+      hint: "İleri geri gitmemek için sıra optimize edildi. Bu sırayı Maps’te kontrol noktaları olarak kullan.",
+      mapsBtn: "▶ Google Maps’te aç", close: "Kapat",
+      count: "0 seçildi"
+    },
+    es: {
+      title: "Crea tu propia ruta",
+      lead: "Toca los lugares que quieres visitar. Los ponemos en un orden inteligente con puntos de control para Google Maps.",
+      modeDrive: "Conducir", modeWalk: "Caminar (ciudad de Kos)",
+      tabAll: "Todo", tabCity: "Ciudad de Kos", tabIsland: "Isla",
+      clear: "Borrar", build: "Crear ruta →",
+      sheetTitle: "Tu ruta",
+      hint: "Orden optimizado para no ir de un lado a otro. Usa este orden como puntos de control en Maps.",
+      mapsBtn: "▶ Abrir en Google Maps", close: "Cerrar",
+      count: "0 seleccionados"
+    }
+  };
+
+  function setLang(l) {
+    if (!I18N[l]) l = 'nl';
+    localStorage.setItem('hk-lang', l);
+    document.documentElement.lang = l;
+    var d = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (d[k]) el.textContent = d[k];
+    });
+    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if (opt) {
+      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
+      document.getElementById('code').textContent = l.toUpperCase();
+    }
+    document.querySelectorAll('.lang-option').forEach(function(o){
+      o.classList.toggle('active', o.getAttribute('data-lang') === l);
+    });
+    closeMenu();
+    updateCount();
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  function openMenu(){ langMenu.classList.add('open'); }
+  function closeMenu(){ langMenu.classList.remove('open'); }
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    langMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.addEventListener('click', function(){ closeMenu(); });
+  document.querySelectorAll('.lang-option').forEach(function(btn){
+    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
+  });
+
+  var saved = localStorage.getItem('hk-lang') || 'nl';
+  setLang(saved);
+
+  /* Route builder logic */
+  var LOCS = [{"name": "Witte trappen", "lat": 36.8918, "lng": 27.2885, "href": "sight-witte-trappen.html", "region": "Kos-stad", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-2-high.jpg"}, {"name": "I Love Kos", "lat": 36.8935, "lng": 27.2902, "href": "sight-i-love-kos.html", "region": "Kos-stad", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/565151116_1552661852852838_1840308219660787866_n-high.jpg"}, {"name": "Palm Tree Lane", "lat": 36.8939, "lng": 27.2908, "href": "sight-palm-tree-lane.html", "region": "Kos-stad", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/biking_by_the_famous_bridge_in_the_avenue_of_palm_tress_kos_town-1-high.jpg"}, {"name": "Palazzo di Giustizia", "lat": 36.8932, "lng": 27.288, "href": "sight-palazzo-giustizia.html", "region": "Kos-stad", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/kos-stadt-palazzo-di-giustizia-standard.jpg"}, {"name": "Turks badhuis", "lat": 36.8928, "lng": 27.2875, "href": "sight-turks-badhuis.html", "region": "Kos-stad", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/inside-turkish-bath-house-1-high.jpg"}, {"name": "Boom van Hippocrates", "lat": 36.893, "lng": 27.2895, "href": "sight-boom-hippocrates.html", "region": "Kos-stad", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/plane-tree-of-hippocrates-5-high.jpg"}, {"name": "Gazi Hasan-moskee", "lat": 36.8931, "lng": 27.2893, "href": "sight-gazi-hasan.html", "region": "Kos-stad", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/750xhaci-hasan-mosque-4416-high.jpg"}, {"name": "Kasteel van Neratzia", "lat": 36.8945, "lng": 27.2905, "href": "sight-neratzia.html", "region": "Kos-stad", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/neratziakasteel2-standard.jpg"}, {"name": "Albergo Gelsomino", "lat": 36.8942, "lng": 27.2912, "href": "sight-albergo.html", "region": "Kos-stad", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/albergo_gelsomino_cover-high.jpg"}, {"name": "Kathedraal", "lat": 36.8925, "lng": 27.287, "href": "sight-kathedraal.html", "region": "Kos-stad", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/kos-cathedral_-metropolis-_of_kos_and_nisyros-01asd-high-4cng8t.jpg"}, {"name": "Hatzi Pasha", "lat": 36.8922, "lng": 27.2878, "href": "sight-hatzi-pasha.html", "region": "Kos-stad", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/schermopname_7-3-2026_115330_www-google-com-standard.jpg"}, {"name": "Agora", "lat": 36.8915, "lng": 27.2888, "href": "sight-agora.html", "region": "Kos-stad", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/untitled_snapshot_02-22-2026_17_33_32-high.jpg"}, {"name": "Belastingpoort", "lat": 36.8919, "lng": 27.2892, "href": "sight-belastingpoort.html", "region": "Kos-stad", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/5975597a203fa-high.jpg"}, {"name": "Museum", "lat": 36.892, "lng": 27.2872, "href": "sight-museum.html", "region": "Kos-stad", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/kos-archaeological-museum-gallery-10-480-standard.jpg"}, {"name": "Casa del Fascio", "lat": 36.8926, "lng": 27.2865, "href": "sight-casa-del-fascio.html", "region": "Kos-stad", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/kos-eleftherias_square_-piazza-orfeas_-former_casa_del_fascio-03asd-standard.jpg"}, {"name": "Defterdar-moskee", "lat": 36.8924, "lng": 27.2876, "href": "sight-defterdar.html", "region": "Kos-stad", "img": "img/defterdar/koepel.jpg"}, {"name": "Markthal", "lat": 36.8927, "lng": 27.2879, "href": "sight-markthal.html", "region": "Kos-stad", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/kos-stad-winkels-agora-markt-high-4neznf.jpg"}, {"name": "Agia Paraskevi", "lat": 36.8912, "lng": 27.2868, "href": "sight-paraskevi.html", "region": "Kos-stad", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/483964717_9339979962706454_4357688743527501014_n-high-m7oum1.jpg"}, {"name": "Old Town", "lat": 36.891, "lng": 27.2862, "href": "sight-old-town.html", "region": "Kos-stad", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/kos-shopping-tipps-einkaufsmeile-old-town-high.jpg"}, {"name": "Morouk-moskee", "lat": 36.8908, "lng": 27.286, "href": "sight-morouk.html", "region": "Kos-stad", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/morouk-tzami-03-standard.jpg"}, {"name": "Eski Tzami", "lat": 36.8923, "lng": 27.2882, "href": "sight-eski-tzami.html", "region": "Kos-stad", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/493287811_9619227934781654_7184517507473617472_n-high.jpg"}, {"name": "Odeon", "lat": 36.8914, "lng": 27.2855, "href": "sight-odeon.html", "region": "Kos-stad", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-29-standard.jpg"}, {"name": "Westelijke opgraving", "lat": 36.891, "lng": 27.285, "href": "sight-westelijke-opgraving.html", "region": "Kos-stad", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-18-standard.jpg"}, {"name": "Casa Romana", "lat": 36.8905, "lng": 27.2848, "href": "sight-casa-romana.html", "region": "Kos-stad", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/yxnzzxrzl2ltywdlcy9wywdlcy9tb251bwvudhmvy2fzyxjvbwfuys9htvnfntg3mgnhc2fyb21hbmeuanbn-standard.jpg"}, {"name": "Altaar Dionysos", "lat": 36.8907, "lng": 27.2852, "href": "sight-altaar-dionysos.html", "region": "Kos-stad", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/schermopname_2-3-2026_232540_kos-gr-high.jpg"}, {"name": "Therma", "lat": 36.876, "lng": 27.295, "href": "sight-therma.html", "region": "Eiland", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/bros-therma-1-standard.jpg"}, {"name": "Asklepion", "lat": 36.8765, "lng": 27.257, "href": "sight-asklepion.html", "region": "Eiland", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/image-60-standard.jpg"}, {"name": "Hippocratic Foundation", "lat": 36.878, "lng": 27.255, "href": "sight-hippocratic-foundation.html", "region": "Eiland", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/yxnzzxrzl2ltywdlcy9wywdlcy9tb251bwvudhmvzglpay9esklfmdcwngrpawtfbmv3lmpwzw-standard.jpg"}, {"name": "Hippocrates Garden", "lat": 36.8775, "lng": 27.2545, "href": "sight-hippocrates-garden.html", "region": "Eiland", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/replica-of-old-greek-standard.jpg"}, {"name": "Zia", "lat": 36.847, "lng": 27.208, "href": "sight-zia.html", "region": "Eiland", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/zia-kos-sehenswuerdigkeiten-tipps-ausflug-standard-n0yut8.jpg"}, {"name": "Palio Pyli", "lat": 36.84, "lng": 27.155, "href": "sight-palio-pyli.html", "region": "Eiland", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/palio-pyli3-high.jpg"}, {"name": "Kasteel Palio Pyli", "lat": 36.841, "lng": 27.154, "href": "sight-kasteel-palio-pyli.html", "region": "Eiland", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/schermopname_12-3-2026_0841_kos-gr-standard.jpg"}, {"name": "Zoutmeer & flamingo’s", "lat": 36.89, "lng": 27.185, "href": "sight-zoutmeer.html", "region": "Eiland", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/schermopname_12-3-2026_03240_kos-gr-standard.jpg"}, {"name": "Marmari", "lat": 36.885, "lng": 27.145, "href": "sight-marmari.html", "region": "Eiland", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/marmari-beach-2-standard-2crvoc.jpg"}, {"name": "Mastichari", "lat": 36.852, "lng": 27.075, "href": "sight-mastichari.html", "region": "Eiland", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/mastichari-beach-standard-aejz7n.jpg"}, {"name": "Kasteel Antimachia", "lat": 36.807, "lng": 27.098, "href": "sight-kasteel-antimachia.html", "region": "Eiland", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/yxnzzxrzl2ltywdlcy9wywdlcy9tb251bwvudhmvyw50aw1hy2hlawfjyxn0bguvrepjxza2ndnryxn0cm9hbnrpbwf4zwlhcy5qcgc-standard.jpg"}, {"name": "Molen Antimachia", "lat": 36.8105, "lng": 27.103, "href": "sight-molen-antimachia.html", "region": "Eiland", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/traditional-mill-antimachia-2-standard.jpg"}, {"name": "Huis Antimachia", "lat": 36.8095, "lng": 27.102, "href": "sight-huis-antimachia.html", "region": "Eiland", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/traditional_house_of_antimachia_kos_001-standard.jpg"}, {"name": "Haihoutes", "lat": 36.82, "lng": 27.12, "href": "sight-haihoutes.html", "region": "Eiland", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/yxnzzxrzl2ltywdlcy9wywdlcy9zzxr0bgvtzw50cy9oywlob3v0zxmvr01txzmxmtr4ywl4b3v0zxmuanbn-standard.jpg"}, {"name": "Agios Stefanos", "lat": 36.745, "lng": 26.963, "href": "sight-agios-stefanos.html", "region": "Eiland", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/agios-stefanos-high.jpg"}, {"name": "Limnionas", "lat": 36.738, "lng": 26.958, "href": "sight-limnionas.html", "region": "Eiland", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/limnionas-beach-standard-gptzjn.jpg"}, {"name": "Aquaduct Linopotas", "lat": 36.86, "lng": 27.24, "href": "sight-aquaduct.html", "region": "Eiland", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/img_3394-standard.jpg"}, {"name": "Tigaki", "lat": 36.892, "lng": 27.18, "href": "sight-tigaki.html", "region": "Eiland", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/schermopname_8-3-2026_53029_kos-gr-standard-2yfj3d.jpg"}, {"name": "Kardamena", "lat": 36.78, "lng": 27.14, "href": "sight-kardamena.html", "region": "Eiland", "img": "https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/yxnzzxrzl2ltywdlcy9wywdlcy9zzxr0bgvtzw50cy9ryxjkyw1lbmevrepjxza5mzzryxjkyw1lbmeuanbn-standard.jpg"}];
+
+  var selected = {};
+  var filter = 'all';
+
+  function render(){
+    var by = {'Kos-stad':[], 'Eiland':[]};
+    LOCS.forEach(function(l,i){
+      if(filter!=='all' && l.region!==filter) return;
+      by[l.region].push({l:l,i:i});
+    });
+    var html='';
+    ['Kos-stad','Eiland'].forEach(function(reg){
+      if(!by[reg].length) return;
+      html+='<div class="section">'+reg+'</div><div class="grid">';
+      by[reg].forEach(function(item){
+        var l=item.l, i=item.i;
+        var on = selected[i] ? ' on' : '';
+        var bg = l.img ? 'style="background-image:url(\''+l.img+'\')"' : '';
+        html+='<button type="button" class="tile'+on+'" data-i="'+i+'" '+bg+'>'+
+          '<span class="check">✓</span>'+
+          '<span class="ov"><span class="t">'+l.name+'</span></span></button>';
+      });
+      html+='</div>';
+    });
+    document.getElementById('grids').innerHTML = html;
+    document.querySelectorAll('.tile').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var i = parseInt(btn.getAttribute('data-i'),10);
+        if(selected[i]) delete selected[i]; else selected[i]=true;
+        btn.classList.toggle('on');
+        updateCount();
+      });
+    });
+  }
+
+  function updateCount(){
+    var n = Object.keys(selected).length;
+    var lang = localStorage.getItem('hk-lang') || 'nl';
+    var label = (I18N[lang] && I18N[lang].count) ? I18N[lang].count.replace('0', n) : n+' gekozen';
+    document.getElementById('count').textContent = label;
+    document.getElementById('buildBtn').disabled = n<1;
+  }
+
+  document.querySelectorAll('.tabs button').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('.tabs button').forEach(function(x){x.classList.remove('on')});
+      b.classList.add('on');
+      filter = b.getAttribute('data-f');
+      render();
+    });
+  });
+
+  document.getElementById('clearBtn').addEventListener('click', function(){
+    selected={};
+    render();
+    updateCount();
+  });
+
+  function orderStops(indices){
+    var pts = indices.map(function(i){ return {i:i, lat:LOCS[i].lat, lng:LOCS[i].lng}; });
+    if(pts.length<=1) return indices;
+    pts.sort(function(a,b){ return b.lat-a.lat; });
+    var ordered = [pts[0]];
+    var left = pts.slice(1);
+    while(left.length){
+      var last = ordered[ordered.length-1];
+      var best=0, bestD=1e18;
+      for(var k=0;k<left.length;k++){
+        var d = Math.pow(left[k].lat-last.lat,2)+Math.pow(left[k].lng-last.lng,2);
+        if(d<bestD){ bestD=d; best=k; }
+      }
+      ordered.push(left[best]);
+      left.splice(best,1);
+    }
+    return ordered.map(function(p){ return p.i; });
+  }
+
+  function haversine(a,b){
+    var R=6371, toR=Math.PI/180;
+    var dLat=(b.lat-a.lat)*toR, dLon=(b.lng-a.lng)*toR;
+    var x=Math.sin(dLat/2)**2+Math.cos(a.lat*toR)*Math.cos(b.lat*toR)*Math.sin(dLon/2)**2;
+    return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x));
+  }
+
+  document.getElementById('buildBtn').addEventListener('click', function(){
+    var idxs = Object.keys(selected).map(Number);
+    if(!idxs.length) return;
+    var mode = document.querySelector('input[name=mode]:checked').value;
+    var ordered = orderStops(idxs);
+    var list = document.getElementById('orderList');
+    list.innerHTML='';
+    var totalKm=0;
+    ordered.forEach(function(i, n){
+      var l=LOCS[i];
+      if(n>0) totalKm += haversine(LOCS[ordered[n-1]], l);
+      var bg = l.img ? 'style="background-image:url(\''+l.img+'\')"' : '';
+      list.innerHTML += '<div class="order-item"><div class="n">'+(n+1)+'</div><div class="ph" '+bg+'></div><div class="nm">'+l.name+'</div></div>';
+    });
+    var lang = localStorage.getItem('hk-lang') || 'nl';
+    var hintBase = (I18N[lang] && I18N[lang].hint) ? I18N[lang].hint : 'Volgorde geoptimaliseerd.';
+    document.getElementById('orderHint').textContent = hintBase + ' (~'+totalKm.toFixed(1)+' km)';
+
+    var modeTravel = mode==='walk' ? 'walking' : 'driving';
+    var origin = LOCS[ordered[0]].lat+','+LOCS[ordered[0]].lng;
+    var dest = LOCS[ordered[ordered.length-1]].lat+','+LOCS[ordered[ordered.length-1]].lng;
+    var url = 'https://www.google.com/maps/dir/?api=1&origin='+origin+'&destination='+dest+'&travelmode='+modeTravel;
+    if(ordered.length>2){
+      var wps = ordered.slice(1,-1).map(function(i){ return LOCS[i].lat+','+LOCS[i].lng; }).join('|');
+      url += '&waypoints='+encodeURIComponent(wps);
+    }
+    document.getElementById('mapsBtn').href = url;
+    document.getElementById('panel').classList.add('show');
+  });
+
+  document.getElementById('closePanel').addEventListener('click', function(){
+    document.getElementById('panel').classList.remove('show');
+  });
+  document.getElementById('panel').addEventListener('click', function(e){
+    if(e.target===this) this.classList.remove('show');
+  });
+
+  render();
+  updateCount();
+})();
+</script>
+</body>
+</html>
