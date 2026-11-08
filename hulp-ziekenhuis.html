@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Ziekenhuis – Hello Kos</title>
+  <style>
+    :root {
+      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
+      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
+      --text: #E8EDE8; --text-soft: #A0B0A0;
+      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
+      --danger: #ef5350;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.55;
+      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
+    }
+    .app-header {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px 16px; background: var(--bg-header);
+      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+    }
+    .back-btn { grid-column: 1; color: var(--petrol); font-weight: 600; text-decoration: none; font-size: 0.9rem; }
+    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(145deg, #F0C040, #D4A017); display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
+    .logo-text { font-size: 1.2rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
+    .logo-text span { color: var(--gold-dark); font-style: italic; }
+    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
+    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
+    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; }
+    .lang-menu.open { display: block; }
+    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
+    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
+    .hero { position: relative; width: 100%; aspect-ratio: 16/10; overflow: hidden; background: #1a2525; }
+    .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 24px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,.55), transparent); color: #fff; }
+    .hero-cap h1 { font-size: 1.4rem; font-weight: 800; }
+    .content { padding: 16px 16px 0; }
+    .block { background: var(--bg-card); border-radius: 16px; padding: 15px 16px; margin-bottom: 12px; border: 1px solid var(--border); }
+    .block h2 { font-size: 1rem; color: var(--text); margin-bottom: 8px; }
+    .block p { font-size: .92rem; color: var(--text-soft); margin-bottom: 10px; }
+    .block p:last-child { margin-bottom: 0; }
+    .phones { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+    .phones a { display: flex; align-items: center; justify-content: center; padding: 14px; background: var(--danger); color: #fff; border-radius: 12px; font-weight: 800; font-size: 1.05rem; text-decoration: none; }
+    .phones a.secondary { background: var(--petrol); }
+    .img-full { margin: 0 0 12px; border-radius: 16px; overflow: hidden; }
+    .img-full img { width: 100%; display: block; max-height: 200px; object-fit: cover; }
+    .actions { display: flex; flex-direction: column; gap: 8px; margin: 8px 0 12px; }
+    .btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 13px 16px; border-radius: 14px; font-weight: 700; font-size: .9rem; text-decoration: none; }
+    .btn-map { background: var(--bg-card); color: var(--text); border: 2px solid var(--petrol); }
+    .footer { text-align: center; padding: 16px; font-size: .75rem; color: var(--text-soft); }
+    .loc { background: var(--bg-card); border-radius: 16px; padding: 16px; margin-bottom: 12px; border: 1px solid var(--border); border-left: 4px solid var(--petrol); }
+    .loc h2 { font-size: 1.05rem; color: var(--text); margin-bottom: 6px; }
+    .loc .tag { display: inline-block; background: rgba(58,154,154,0.18); color: #99f6e4; font-size: .72rem; font-weight: 700; padding: 4px 10px; border-radius: 999px; margin-bottom: 10px; }
+    .loc p { font-size: .9rem; color: var(--text-soft); margin-bottom: 8px; line-height: 1.5; }
+    .loc .phones { display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }
+    .loc .phones a { display: flex; align-items: center; justify-content: center; padding: 12px; background: var(--petrol); color: #fff; border-radius: 12px; font-weight: 700; font-size: .95rem; text-decoration: none; }
+    .loc .phones a.sos { background: var(--danger); }
+    .loc .map { display: flex; align-items: center; justify-content: center; padding: 11px; border: 2px solid var(--petrol); color: var(--text); border-radius: 12px; font-weight: 700; font-size: .9rem; text-decoration: none; margin-top: 4px; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="noodgevallen.html" class="back-btn">← Terug</a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🔅</div>
+      <div class="logo-text">Hello <span>Kos</span></div>
+    </a>
+    <div class="lang-wrap">
+      <button type="button" class="lang-btn" id="langBtn">
+        <span id="flag">🇳🇱</span> <span id="code">NL</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <main class="main">
+    <div class="hero">
+      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/fc-ziekenhuis-griekenland-standard-501vxp.jpg" alt="Ziekenhuis Kos" loading="eager">
+      <div class="hero-cap"><h1 data-i18n="hero">Ziekenhuis & eerste hulp</h1></div>
+    </div>
+    <div class="content">
+      <div class="block">
+        <h2 data-i18n="h2_1">Op Kos</h2>
+        <p data-i18n="p1">Er is <strong>één algemeen ziekenhuis</strong> (in Kos-stad) en een <strong>eerste-hulppost in Antimachia</strong>. Bij ernstige noodgevallen kunnen patiënten worden overgebracht naar Athene of gerepatrieerd.</p>
+      </div>
+      <div class="block">
+        <h2 data-i18n="h2_2">Noodnummers</h2>
+        <div class="phones">
+          <a href="tel:112">112 – Algemeen noodgeval</a>
+          <a class="secondary" href="tel:166">166 – Ambulance</a>
+        </div>
+      </div>
+      <div class="loc">
+        <span class="tag" data-i18n="tag1">Kos-stad</span>
+        <h2 data-i18n="loc1h">Algemeen Ziekenhuis Kos</h2>
+        <p data-i18n="loc1p1">Het grootste ziekenhuis op het eiland, met <strong>spoedeisende hulp</strong>. Dit is de plek voor serieuze medische spoed.</p>
+        <p style="font-size:.84rem;color:var(--text-soft)" data-i18n="loc1p2">General Hospital of Kos (Ippokrateio / Hippocrates-gebied, Kos-stad)</p>
+        <div class="phones">
+          <a class="sos" href="tel:112">112 – Spoed</a>
+          <a href="tel:+302242054200">+30 2242 054200</a>
+          <a href="tel:+302242022126">+30 2242 022126</a>
+          <a href="tel:+302242022300">+30 2242 022300</a>
+          <a href="tel:+302242051230">+30 2242 051230</a>
+        </div>
+        <a class="map" href="https://www.google.com/maps/search/?api=1&query=General%20Hospital%20of%20Kos" target="_blank" rel="noopener" data-i18n="map1">Locatie ziekenhuis Kos op de kaart →</a>
+      </div>
+      <div class="loc">
+        <span class="tag" data-i18n="tag2">Antimachia</span>
+        <h2 data-i18n="loc2h">Eerste hulp / arts Antimachia</h2>
+        <p data-i18n="loc2p">In het dorp <strong>Antimachia</strong>: eerste hulp met arts en basiszorg. Geen volledig ziekenhuis, wel medische hulp dichterbij als je in het midden/zuiden van het eiland bent.</p>
+        <div class="phones">
+          <a class="sos" href="tel:112">112 – Spoed</a>
+          <a href="tel:+302242092996">+30 2242 092996</a>
+        </div>
+        <a class="map" href="https://www.google.com/maps/search/?api=1&query=Antimachia%20medical%20center%20Kos%20OR%20health%20center%20Antimachia%20Kos" target="_blank" rel="noopener" data-i18n="map2">Locatie Antimachia op de kaart →</a>
+      </div>
+      <div class="loc">
+        <span class="tag" data-i18n="tag3">Kardamena e.o.</span>
+        <h2 data-i18n="loc3h">Kardamena</h2>
+        <p data-i18n="loc3p">In Kardamena is <strong>geen volledig ziekenhuis</strong>. Bij spoed: bel <strong>112</strong> of <strong>166</strong> (ambulance). Voor ziekenhuiszorg ga je naar het algemeen ziekenhuis in <strong>Kos-stad</strong>; Antimachia ligt dichterbij voor basiszorg/eerste hulp.</p>
+        <div class="phones">
+          <a class="sos" href="tel:112">112 – Spoed</a>
+          <a href="tel:166">166 – Ambulance</a>
+        </div>
+        <a class="map" href="https://www.google.com/maps/search/?api=1&query=Kardamena%20medical%20clinic%20hospital%20Kos" target="_blank" rel="noopener" data-i18n="map3">Kardamena op de kaart →</a>
+      </div>
+      <div class="block">
+        <h2 data-i18n="h2_3">Goed om te weten</h2>
+        <p data-i18n="p3">Op Kos gaan veel mensen bij klachten meteen naar het ziekenhuis in plaats van de huisarts (huisarts wordt vaak niet vergoed, ziekenhuisbezoek wel). Bij de eerste hulp kan het druk zijn en is voordringen helaas niet ongewoon – blijf beleefd maar stevig bij je beurt als het nodig is.</p>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">Hello Kos</footer>
+  <script>
+  (function(){
+    var I18N = {
+      nl: {
+        hero: "Ziekenhuis & eerste hulp",
+        h2_1: "Op Kos",
+        p1: "Er is één algemeen ziekenhuis (in Kos-stad) en een eerste-hulppost in Antimachia. Bij ernstige noodgevallen kunnen patiënten worden overgebracht naar Athene of gerepatrieerd.",
+        h2_2: "Noodnummers",
+        tag1: "Kos-stad",
+        loc1h: "Algemeen Ziekenhuis Kos",
+        loc1p1: "Het grootste ziekenhuis op het eiland, met spoedeisende hulp. Dit is de plek voor serieuze medische spoed.",
+        loc1p2: "General Hospital of Kos (Ippokrateio / Hippocrates-gebied, Kos-stad)",
+        map1: "Locatie ziekenhuis Kos op de kaart →",
+        tag2: "Antimachia",
+        loc2h: "Eerste hulp / arts Antimachia",
+        loc2p: "In het dorp Antimachia: eerste hulp met arts en basiszorg. Geen volledig ziekenhuis, wel medische hulp dichterbij als je in het midden/zuiden van het eiland bent.",
+        map2: "Locatie Antimachia op de kaart →",
+        tag3: "Kardamena e.o.",
+        loc3h: "Kardamena",
+        loc3p: "In Kardamena is geen volledig ziekenhuis. Bij spoed: bel 112 of 166 (ambulance). Voor ziekenhuiszorg ga je naar het algemeen ziekenhuis in Kos-stad; Antimachia ligt dichterbij voor basiszorg/eerste hulp.",
+        map3: "Kardamena op de kaart →",
+        h2_3: "Goed om te weten",
+        p3: "Op Kos gaan veel mensen bij klachten meteen naar het ziekenhuis in plaats van de huisarts (huisarts wordt vaak niet vergoed, ziekenhuisbezoek wel). Bij de eerste hulp kan het druk zijn en is voordringen helaas niet ongewoon – blijf beleefd maar stevig bij je beurt als het nodig is."
+      },
+      en: {
+        hero: "Hospital & first aid",
+        h2_1: "On Kos",
+        p1: "There is one general hospital (in Kos town) and a first-aid post in Antimachia. In serious emergencies patients can be transferred to Athens or repatriated.",
+        h2_2: "Emergency numbers",
+        tag1: "Kos town",
+        loc1h: "General Hospital of Kos",
+        loc1p1: "The largest hospital on the island, with emergency care. This is the place for serious medical emergencies.",
+        loc1p2: "General Hospital of Kos (Ippokrateio / Hippocrates area, Kos town)",
+        map1: "Hospital Kos location on the map →",
+        tag2: "Antimachia",
+        loc2h: "First aid / doctor Antimachia",
+        loc2p: "In the village of Antimachia: first aid with a doctor and basic care. Not a full hospital, but medical help closer by if you are in the middle/south of the island.",
+        map2: "Antimachia location on the map →",
+        tag3: "Kardamena area",
+        loc3h: "Kardamena",
+        loc3p: "There is no full hospital in Kardamena. In an emergency: call 112 or 166 (ambulance). For hospital care go to the general hospital in Kos town; Antimachia is closer for basic care/first aid.",
+        map3: "Kardamena on the map →",
+        h2_3: "Good to know",
+        p3: "On Kos many people go straight to the hospital with complaints instead of a GP (GPs are often not reimbursed, hospital visits are). At first aid it can be busy and queue-jumping is unfortunately not uncommon – stay polite but firm about your turn if necessary."
+      },
+      de: {
+        hero: "Krankenhaus & Erste Hilfe",
+        h2_1: "Auf Kos",
+        p1: "Es gibt ein allgemeines Krankenhaus (in Kos-Stadt) und eine Erste-Hilfe-Station in Antimachia. Bei schweren Notfällen können Patienten nach Athen verlegt oder repatriiert werden.",
+        h2_2: "Notrufnummern",
+        tag1: "Kos-Stadt",
+        loc1h: "Allgemeines Krankenhaus Kos",
+        loc1p1: "Das größte Krankenhaus der Insel mit Notaufnahme. Dies ist der Ort für ernste medizinische Notfälle.",
+        loc1p2: "General Hospital of Kos (Ippokrateio / Hippocrates-Gebiet, Kos-Stadt)",
+        map1: "Standort Krankenhaus Kos auf der Karte →",
+        tag2: "Antimachia",
+        loc2h: "Erste Hilfe / Arzt Antimachia",
+        loc2p: "Im Dorf Antimachia: Erste Hilfe mit Arzt und Grundversorgung. Kein vollständiges Krankenhaus, aber medizinische Hilfe näher, wenn man in der Mitte/im Süden der Insel ist.",
+        map2: "Standort Antimachia auf der Karte →",
+        tag3: "Kardamena u. Umgebung",
+        loc3h: "Kardamena",
+        loc3p: "In Kardamena gibt es kein vollständiges Krankenhaus. Im Notfall: rufe 112 oder 166 (Krankenwagen). Für Krankenhausversorgung gehe zum allgemeinen Krankenhaus in Kos-Stadt; Antimachia liegt näher für Grundversorgung/Erste Hilfe.",
+        map3: "Kardamena auf der Karte →",
+        h2_3: "Gut zu wissen",
+        p3: "Auf Kos gehen viele Menschen bei Beschwerden direkt ins Krankenhaus statt zum Hausarzt (Hausarzt wird oft nicht erstattet, Krankenhausbesuch schon). Bei der Ersten Hilfe kann es voll sein und Vordrängeln ist leider nicht ungewöhnlich – bleib höflich, aber steh fest zu deiner Reihe, wenn nötig."
+      },
+      it: {
+        hero: "Ospedale & pronto soccorso",
+        h2_1: "A Kos",
+        p1: "C’è un ospedale generale (nella città di Kos) e un posto di pronto soccorso ad Antimachia. In caso di emergenze gravi i pazienti possono essere trasferiti ad Atene o rimpatriati.",
+        h2_2: "Numeri di emergenza",
+        tag1: "Città di Kos",
+        loc1h: "Ospedale Generale di Kos",
+        loc1p1: "Il più grande ospedale dell’isola, con pronto soccorso. Questo è il posto per emergenze mediche serie.",
+        loc1p2: "General Hospital of Kos (area Ippokrateio / Hippocrates, città di Kos)",
+        map1: "Posizione ospedale Kos sulla mappa →",
+        tag2: "Antimachia",
+        loc2h: "Pronto soccorso / medico Antimachia",
+        loc2p: "Nel villaggio di Antimachia: pronto soccorso con medico e cure di base. Non un ospedale completo, ma aiuto medico più vicino se sei al centro/sud dell’isola.",
+        map2: "Posizione Antimachia sulla mappa →",
+        tag3: "Zona Kardamena",
+        loc3h: "Kardamena",
+        loc3p: "A Kardamena non c’è un ospedale completo. In emergenza: chiama 112 o 166 (ambulanza). Per cure ospedaliere vai all’ospedale generale nella città di Kos; Antimachia è più vicino per cure di base/pronto soccorso.",
+        map3: "Kardamena sulla mappa →",
+        h2_3: "Buono a sapersi",
+        p3: "A Kos molte persone vanno subito in ospedale con i disturbi invece che dal medico di base (il medico di base spesso non è rimborsato, la visita ospedaliera sì). Al pronto soccorso può essere affollato e saltare la fila purtroppo non è raro – resta educato ma fermo sul tuo turno se necessario."
+      },
+      tr: {
+        hero: "Hastane & ilk yardım",
+        h2_1: "Kos’ta",
+        p1: "Bir genel hastane (Kos şehrinde) ve Antimachia’da bir ilk yardım postası vardır. Ciddi acil durumlarda hastalar Atina’ya nakledilebilir veya geri gönderilebilir.",
+        h2_2: "Acil numaralar",
+        tag1: "Kos şehri",
+        loc1h: "Kos Genel Hastanesi",
+        loc1p1: "Adanın en büyük hastanesi, acil servisli. Ciddi tıbbi aciller için burasıdır.",
+        loc1p2: "General Hospital of Kos (Ippokrateio / Hippocrates bölgesi, Kos şehri)",
+        map1: "Kos hastanesi konumu haritada →",
+        tag2: "Antimachia",
+        loc2h: "İlk yardım / doktor Antimachia",
+        loc2p: "Antimachia köyünde: doktorlu ilk yardım ve temel bakım. Tam bir hastane değil, ama adanın orta/güneyindeyseniz daha yakın tıbbi yardım.",
+        map2: "Antimachia konumu haritada →",
+        tag3: "Kardamena bölgesi",
+        loc3h: "Kardamena",
+        loc3p: "Kardamena’da tam bir hastane yoktur. Acil durumda: 112 veya 166’yı (ambulans) ara. Hastane bakımı için Kos şehrindeki genel hastaneye gidin; Antimachia temel bakım/ilk yardım için daha yakındır.",
+        map3: "Kardamena haritada →",
+        h2_3: "Bilmenizde fayda var",
+        p3: "Kos’ta birçok insan şikayetlerle doğrudan hastaneye gider, aile hekimine değil (aile hekimi genellikle karşılanmaz, hastane ziyareti edilir). İlk yardımda kalabalık olabilir ve sıra atlama maalesef nadir değildir – gerektiğinde kibar ama kararlı kalın."
+      },
+      es: {
+        hero: "Hospital & primeros auxilios",
+        h2_1: "En Kos",
+        p1: "Hay un hospital general (en la ciudad de Kos) y un puesto de primeros auxilios en Antimachia. En emergencias graves los pacientes pueden ser trasladados a Atenas o repatriados.",
+        h2_2: "Números de emergencia",
+        tag1: "Ciudad de Kos",
+        loc1h: "Hospital General de Kos",
+        loc1p1: "El hospital más grande de la isla, con urgencias. Este es el lugar para emergencias médicas serias.",
+        loc1p2: "General Hospital of Kos (zona Ippokrateio / Hippocrates, ciudad de Kos)",
+        map1: "Ubicación del hospital Kos en el mapa →",
+        tag2: "Antimachia",
+        loc2h: "Primeros auxilios / médico Antimachia",
+        loc2p: "En el pueblo de Antimachia: primeros auxilios con médico y atención básica. No es un hospital completo, pero ayuda médica más cercana si estás en el centro/sur de la isla.",
+        map2: "Ubicación Antimachia en el mapa →",
+        tag3: "Zona Kardamena",
+        loc3h: "Kardamena",
+        loc3p: "En Kardamena no hay un hospital completo. En emergencia: llama al 112 o 166 (ambulancia). Para atención hospitalaria ve al hospital general en la ciudad de Kos; Antimachia está más cerca para atención básica/primeros auxilios.",
+        map3: "Kardamena en el mapa →",
+        h2_3: "Bueno saber",
+        p3: "En Kos mucha gente va directamente al hospital con quejas en lugar del médico de cabecera (el médico de cabecera a menudo no se reembolsa, la visita al hospital sí). En urgencias puede haber mucha gente y adelantarse en la cola no es raro – mantente educado pero firme con tu turno si es necesario."
+      }
+    };
+
+    function setLang(l) {
+      if (!I18N[l]) l = 'nl';
+      localStorage.setItem('hk-lang', l);
+      document.documentElement.lang = l;
+      var d = I18N[l];
+      document.querySelectorAll('[data-i18n]').forEach(function(el){
+        var k = el.getAttribute('data-i18n');
+        if (d[k]) el.textContent = d[k];
+      });
+      var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+      if (opt) {
+        document.getElementById('flag').textContent = opt.getAttribute('data-flag');
+        document.getElementById('code').textContent = l.toUpperCase();
+      }
+      document.querySelectorAll('.lang-option').forEach(function(o){
+        o.classList.toggle('active', o.getAttribute('data-lang') === l);
+      });
+      closeMenu();
+    }
+
+    var langBtn = document.getElementById('langBtn');
+    var langMenu = document.getElementById('langMenu');
+    function openMenu(){ langMenu.classList.add('open'); }
+    function closeMenu(){ langMenu.classList.remove('open'); }
+    langBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      langMenu.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    document.addEventListener('click', closeMenu);
+    document.querySelectorAll('.lang-option').forEach(function(btn){
+      btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
+    });
+
+    var saved = localStorage.getItem('hk-lang') || 'nl';
+    setLang(saved);
+  })();
+  </script>
+</body>
+</html>
