@@ -65,6 +65,15 @@
     .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
     .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
     .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
+    .hours { margin-top: 8px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+    .h-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 12px; font-size: 0.88rem; border-bottom: 1px solid rgba(255,255,255,0.05); background: var(--bg-card); }
+    .h-row:nth-child(odd) { background: #1A2A2A; }
+    .h-row:last-child { border-bottom: none; }
+    .h-row span:last-child { font-weight: 700; color: var(--petrol); }
+    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
+    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
+    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
     .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
     .footer a { color: var(--petrol); text-decoration: none; }
   </style>
@@ -99,12 +108,12 @@
 
     <div class="content">
       <h1 data-i18n="title">Molen van Antimachia</h1>
-      <p class="lead" data-i18n="lead">Laatste traditionele windmolen van Kos – gerestaureerd museum in het dorp, waar nog meel wordt gemalen.</p>
+      <p class="lead" data-i18n="lead">Laatste windmolen van Kos (± 130–150 jaar) – familie Amallos, nog in werking, rondleiding en koekjes van eigen meel.</p>
 
       <div class="badges">
-        <span class="badge">Antimachia</span>
         <span class="badge" data-i18n="badgeMuseum">Museum</span>
-        <span class="badge">± €2,50</span>
+        <span class="badge" data-i18n="badgePrice">± €2,50</span>
+        <span class="badge" data-i18n="badgeHours">09:30–17:30</span>
       </div>
 
       <div class="actions">
@@ -117,30 +126,63 @@
 
       <div id="readText">
         <div class="card">
-          <h2 data-i18n="h2last">Laatste molen van Kos</h2>
-          <p data-i18n="p1">De Molen van Antimachia staat midden in het dorp. Deze traditionele windmolen is ongeveer 130–150 jaar oud en volledig gerestaureerd. Vroeger stonden er op Kos acht windmolens om graan te malen; dit is de laatste die over is.</p>
+          <h2 data-i18n="h2last">Laatste van acht</h2>
+          <p data-i18n="p1">De molen staat midden in Antimachia. Ongeveer 130–150 jaar oud en volledig gerestaureerd. Vroeger stonden er op Kos acht windmolens om graan te malen; dit is de laatste die over is.</p>
         </div>
 
         <div class="facts">
           <div class="fact">
-            <span class="n">± €2,50</span>
+            <span class="n" data-i18n="factPrice">± €2,50</span>
             <span class="l" data-i18n="factEntry">entree</span>
           </div>
           <div class="fact">
-            <span class="n" data-i18n="factMuseum">Museum</span>
-            <span class="l" data-i18n="factWorking">nog in werking</span>
+            <span class="n" data-i18n="factGen">4 generaties</span>
+            <span class="l" data-i18n="factFamily">familie Amallos</span>
           </div>
         </div>
 
         <div class="card">
-          <h2 data-i18n="h2flour">Museum met meel</h2>
-          <p data-i18n="p2">Het is nu een museum waar je ziet hoe het maalproces werkt. Er wordt nog meel gemaakt – een levend stukje eilandgeschiedenis.</p>
+          <h2 data-i18n="h2family">Familie Amallos</h2>
+          <p data-i18n="p2">Hij behoort al vier generaties toe aan de familie Amallos (ook “molen van de priester” of Amallou-molen). De molen maalt nog steeds graan met de wind.</p>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2tour">Rondleiding en koekjes</h2>
+          <p data-i18n="p3">Bezoekers mogen naar binnen (rond € 2,50). Je ziet hoe het maalproces werkt. De molenaar geeft een rondleiding over de geschiedenis. Van het gemalen graan worden koekjes gebakken die je ter plaatse kunt kopen.</p>
+        </div>
+
+        <div class="card">
+          <h2 data-i18n="h2hours">Openingstijden</h2>
+          <div class="hours">
+            <div class="h-row"><span data-i18n="hoursMon">Maandag t/m zaterdag</span><span>09:30 – 17:30</span></div>
+            <div class="h-row"><span data-i18n="hoursSun">Zondag</span><span>09:30 – 17:30</span></div>
+          </div>
+          <p style="margin-top:8px;font-size:0.85rem;color:var(--text-soft)" data-i18n="hoursNote">Check lokaal bij feestdagen of seizoenswijzigingen.</p>
+        </div>
+
+        <div class="gallery">
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/traditional-mill-antimachia-2-standard.jpg" alt="" loading="lazy">
+            <span data-i18n="g1">Molen</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/yxnzzxrzl2ltywdlcy9wywdlcy9jdwx0dxjll3dpbmrtawxsl0rksv8wnjq5bxlsb3muanbn-high.jpg" alt="" loading="lazy">
+            <span data-i18n="g2">Molen</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/mauritius-images-15608589-old-tou-papa-windmill-in-antimachia-on-the-island-of-kos-in-greece-high.jpg" alt="" loading="lazy">
+            <span data-i18n="g3">Molen</span>
+          </div>
+          <div class="g-item">
+            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/photo0jpg-1-high.jpg" alt="" loading="lazy">
+            <span data-i18n="g4">Molen</span>
+          </div>
         </div>
 
         <div class="card">
           <h2 data-i18n="h2visit">Bezoeken</h2>
-          <p data-i18n="p3">In Antimachia, midden op het eiland. Entree rond € 2,50.</p>
-          <div class="tip" data-i18n="tip">Tip: vraag of ze het mechaniek even laten draaien – dat maakt het bezoek concreter.</div>
+          <p data-i18n="p4">In Antimachia, midden op het eiland.</p>
+          <div class="tip" data-i18n="tip">Tip: vraag of de molen even draait – en proef de koekjes van eigen meel.</div>
         </div>
       </div>
     </div>
@@ -156,93 +198,123 @@
   var I18N = {
     nl: {
       title: "Molen van Antimachia",
-      lead: "Laatste traditionele windmolen van Kos – gerestaureerd museum in het dorp, waar nog meel wordt gemalen.",
+      lead: "Laatste windmolen van Kos (± 130–150 jaar) – familie Amallos, nog in werking, rondleiding en koekjes van eigen meel.",
       heroCap: "Molen van Antimachia",
-      badgeMuseum: "Museum",
+      badgeMuseum: "Museum", badgePrice: "± €2,50", badgeHours: "09:30–17:30",
       btnPlay: "🔊 Voorlezen",
-      h2last: "Laatste molen van Kos",
-      p1: "De Molen van Antimachia staat midden in het dorp. Deze traditionele windmolen is ongeveer 130–150 jaar oud en volledig gerestaureerd. Vroeger stonden er op Kos acht windmolens om graan te malen; dit is de laatste die over is.",
-      factEntry: "entree", factMuseum: "Museum", factWorking: "nog in werking",
-      h2flour: "Museum met meel",
-      p2: "Het is nu een museum waar je ziet hoe het maalproces werkt. Er wordt nog meel gemaakt – een levend stukje eilandgeschiedenis.",
+      h2last: "Laatste van acht",
+      p1: "De molen staat midden in Antimachia. Ongeveer 130–150 jaar oud en volledig gerestaureerd. Vroeger stonden er op Kos acht windmolens om graan te malen; dit is de laatste die over is.",
+      factPrice: "± €2,50", factEntry: "entree", factGen: "4 generaties", factFamily: "familie Amallos",
+      h2family: "Familie Amallos",
+      p2: "Hij behoort al vier generaties toe aan de familie Amallos (ook “molen van de priester” of Amallou-molen). De molen maalt nog steeds graan met de wind.",
+      h2tour: "Rondleiding en koekjes",
+      p3: "Bezoekers mogen naar binnen (rond € 2,50). Je ziet hoe het maalproces werkt. De molenaar geeft een rondleiding over de geschiedenis. Van het gemalen graan worden koekjes gebakken die je ter plaatse kunt kopen.",
+      h2hours: "Openingstijden",
+      hoursMon: "Maandag t/m zaterdag", hoursSun: "Zondag", hoursNote: "Check lokaal bij feestdagen of seizoenswijzigingen.",
+      g1: "Molen", g2: "Molen", g3: "Molen", g4: "Molen",
       h2visit: "Bezoeken",
-      p3: "In Antimachia, midden op het eiland. Entree rond € 2,50.",
-      tip: "Tip: vraag of ze het mechaniek even laten draaien – dat maakt het bezoek concreter."
+      p4: "In Antimachia, midden op het eiland.",
+      tip: "Tip: vraag of de molen even draait – en proef de koekjes van eigen meel."
     },
     en: {
-      title: "Windmill of Antimachia",
-      lead: "Last traditional windmill of Kos – restored museum in the village, where flour is still ground.",
-      heroCap: "Windmill of Antimachia",
-      badgeMuseum: "Museum",
+      title: "Antimachia Windmill",
+      lead: "Last windmill of Kos (± 130–150 years) – Amallos family, still operating, guided tour and cookies from their own flour.",
+      heroCap: "Antimachia Windmill",
+      badgeMuseum: "Museum", badgePrice: "± €2.50", badgeHours: "09:30–17:30",
       btnPlay: "🔊 Read aloud",
-      h2last: "Last windmill of Kos",
-      p1: "The Windmill of Antimachia stands in the middle of the village. This traditional windmill is about 130–150 years old and fully restored. In the past there were eight windmills on Kos for grinding grain; this is the last one remaining.",
-      factEntry: "entry", factMuseum: "Museum", factWorking: "still working",
-      h2flour: "Museum with flour",
-      p2: "It is now a museum where you can see how the milling process works. Flour is still being made – a living piece of island history.",
+      h2last: "Last of eight",
+      p1: "The mill stands in the middle of Antimachia. About 130–150 years old and fully restored. In the past there were eight windmills on Kos to grind grain; this is the last one left.",
+      factPrice: "± €2.50", factEntry: "entry", factGen: "4 generations", factFamily: "Amallos family",
+      h2family: "Amallos family",
+      p2: "It has belonged to the Amallos family for four generations (also “priest’s mill” or Amallou mill). The mill still grinds grain with the wind.",
+      h2tour: "Guided tour and cookies",
+      p3: "Visitors may go inside (around €2.50). You see how the grinding process works. The miller gives a guided tour about the history. Cookies are baked from the ground grain that you can buy on the spot.",
+      h2hours: "Opening hours",
+      hoursMon: "Monday to Saturday", hoursSun: "Sunday", hoursNote: "Check locally for holidays or seasonal changes.",
+      g1: "Windmill", g2: "Windmill", g3: "Windmill", g4: "Windmill",
       h2visit: "Visiting",
-      p3: "In Antimachia, in the middle of the island. Entry around €2.50.",
-      tip: "Tip: ask if they can briefly turn the mechanism – it makes the visit more concrete."
+      p4: "In Antimachia, in the middle of the island.",
+      tip: "Tip: ask if the mill turns for a moment – and taste the cookies from their own flour."
     },
     de: {
       title: "Windmühle von Antimachia",
-      lead: "Letzte traditionelle Windmühle von Kos – restauriertes Museum im Dorf, wo noch Mehl gemahlen wird.",
+      lead: "Letzte Windmühle von Kos (± 130–150 Jahre) – Familie Amallos, noch in Betrieb, Führung und Kekse aus eigenem Mehl.",
       heroCap: "Windmühle von Antimachia",
-      badgeMuseum: "Museum",
+      badgeMuseum: "Museum", badgePrice: "± €2,50", badgeHours: "09:30–17:30",
       btnPlay: "🔊 Vorlesen",
-      h2last: "Letzte Mühle von Kos",
-      p1: "Die Windmühle von Antimachia steht mitten im Dorf. Diese traditionelle Windmühle ist etwa 130–150 Jahre alt und vollständig restauriert. Früher standen auf Kos acht Windmühlen zum Mahlen von Getreide; dies ist die letzte, die übrig ist.",
-      factEntry: "Eintritt", factMuseum: "Museum", factWorking: "noch in Betrieb",
-      h2flour: "Museum mit Mehl",
-      p2: "Es ist jetzt ein Museum, in dem man sieht, wie der Mahlprozess funktioniert. Es wird noch Mehl hergestellt – ein lebendiges Stück Inselgeschichte.",
+      h2last: "Letzte von acht",
+      p1: "Die Mühle steht mitten in Antimachia. Etwa 130–150 Jahre alt und vollständig restauriert. Früher standen auf Kos acht Windmühlen, um Getreide zu mahlen; dies ist die letzte, die übrig ist.",
+      factPrice: "± €2,50", factEntry: "Eintritt", factGen: "4 Generationen", factFamily: "Familie Amallos",
+      h2family: "Familie Amallos",
+      p2: "Sie gehört seit vier Generationen der Familie Amallos (auch „Mühle des Priesters“ oder Amallou-Mühle). Die Mühle mahlt immer noch Getreide mit dem Wind.",
+      h2tour: "Führung und Kekse",
+      p3: "Besucher dürfen hinein (ca. € 2,50). Du siehst, wie der Mahlprozess funktioniert. Der Müller gibt eine Führung über die Geschichte. Aus dem gemahlenen Getreide werden Kekse gebacken, die du vor Ort kaufen kannst.",
+      h2hours: "Öffnungszeiten",
+      hoursMon: "Montag bis Samstag", hoursSun: "Sonntag", hoursNote: "Lokal bei Feiertagen oder saisonalen Änderungen prüfen.",
+      g1: "Mühle", g2: "Mühle", g3: "Mühle", g4: "Mühle",
       h2visit: "Besuchen",
-      p3: "In Antimachia, in der Mitte der Insel. Eintritt rund € 2,50.",
-      tip: "Tipp: frag, ob sie das Mechanik kurz drehen lassen – das macht den Besuch konkreter."
+      p4: "In Antimachia, mitten auf der Insel.",
+      tip: "Tipp: frag, ob die Mühle kurz dreht – und probiere die Kekse aus eigenem Mehl."
     },
     it: {
       title: "Mulino di Antimachia",
-      lead: "Ultimo mulino a vento tradizionale di Kos – museo restaurato nel villaggio, dove si macina ancora farina.",
+      lead: "Ultimo mulino a vento di Kos (± 130–150 anni) – famiglia Amallos, ancora in funzione, visita guidata e biscotti con la propria farina.",
       heroCap: "Mulino di Antimachia",
-      badgeMuseum: "Museo",
+      badgeMuseum: "Museo", badgePrice: "± €2,50", badgeHours: "09:30–17:30",
       btnPlay: "🔊 Leggi ad alta voce",
-      h2last: "Ultimo mulino di Kos",
-      p1: "Il Mulino di Antimachia si trova nel centro del villaggio. Questo mulino a vento tradizionale ha circa 130–150 anni ed è completamente restaurato. In passato su Kos c’erano otto mulini a vento per macinare il grano; questo è l’ultimo rimasto.",
-      factEntry: "ingresso", factMuseum: "Museo", factWorking: "ancora in funzione",
-      h2flour: "Museo con farina",
-      p2: "Ora è un museo dove si vede come funziona il processo di macinazione. Si produce ancora farina – un pezzo vivente di storia dell’isola.",
+      h2last: "Ultimo di otto",
+      p1: "Il mulino si trova in mezzo ad Antimachia. Circa 130–150 anni e completamente restaurato. In passato c’erano otto mulini a vento a Kos per macinare il grano; questo è l’ultimo rimasto.",
+      factPrice: "± €2,50", factEntry: "ingresso", factGen: "4 generazioni", factFamily: "famiglia Amallos",
+      h2family: "Famiglia Amallos",
+      p2: "Appartiene da quattro generazioni alla famiglia Amallos (anche “mulino del prete” o mulino Amallou). Il mulino macina ancora il grano con il vento.",
+      h2tour: "Visita guidata e biscotti",
+      p3: "I visitatori possono entrare (circa € 2,50). Vedi come funziona il processo di macinazione. Il mugnaio fa una visita guidata sulla storia. Con il grano macinato si fanno biscotti che puoi comprare sul posto.",
+      h2hours: "Orari di apertura",
+      hoursMon: "Lunedì a sabato", hoursSun: "Domenica", hoursNote: "Controlla localmente per festività o cambiamenti stagionali.",
+      g1: "Mulino", g2: "Mulino", g3: "Mulino", g4: "Mulino",
       h2visit: "Visitare",
-      p3: "Ad Antimachia, nel centro dell’isola. Ingresso circa € 2,50.",
-      tip: "Consiglio: chiedi se possono far girare brevemente il meccanismo – rende la visita più concreta."
+      p4: "Ad Antimachia, in mezzo all’isola.",
+      tip: "Consiglio: chiedi se il mulino gira un momento – e assaggia i biscotti con la propria farina."
     },
     tr: {
-      title: "Antimachia Değirmeni",
-      lead: "Kos’un son geleneksel yel değirmeni – köydeki restore edilmiş müze, hâlâ un öğütülüyor.",
-      heroCap: "Antimachia Değirmeni",
-      badgeMuseum: "Müze",
+      title: "Antimachia Yel Değirmeni",
+      lead: "Kos’un son yel değirmeni (± 130–150 yıl) – Amallos ailesi, hâlâ çalışıyor, rehberli tur ve kendi unundan kurabiyeler.",
+      heroCap: "Antimachia Yel Değirmeni",
+      badgeMuseum: "Müze", badgePrice: "± €2,50", badgeHours: "09:30–17:30",
       btnPlay: "🔊 Sesli oku",
-      h2last: "Kos’un son değirmeni",
-      p1: "Antimachia Değirmeni köyün ortasında duruyor. Bu geleneksel yel değirmeni yaklaşık 130–150 yaşında ve tamamen restore edilmiş. Eskiden Kos’ta tahıl öğütmek için sekiz yel değirmeni vardı; bu kalan sonuncusu.",
-      factEntry: "giriş", factMuseum: "Müze", factWorking: "hâlâ çalışıyor",
-      h2flour: "Unlu müze",
-      p2: "Şimdi öğütme sürecinin nasıl çalıştığını görebileceğiniz bir müze. Hâlâ un üretiliyor – adanın canlı bir tarih parçası.",
+      h2last: "Sekizden sonuncusu",
+      p1: "Değirmen Antimachia’nın ortasında durur. Yaklaşık 130–150 yıllık ve tamamen restore edilmiş. Eskiden Kos’ta tahıl öğütmek için sekiz yel değirmeni vardı; bu kalan sonuncusu.",
+      factPrice: "± €2,50", factEntry: "giriş", factGen: "4 nesil", factFamily: "Amallos ailesi",
+      h2family: "Amallos ailesi",
+      p2: "Dört nesildir Amallos ailesine aittir (ayrıca “rahibin değirmeni” veya Amallou değirmeni). Değirmen hâlâ rüzgarla tahıl öğütür.",
+      h2tour: "Rehberli tur ve kurabiyeler",
+      p3: "Ziyaretçiler içeri girebilir (yaklaşık € 2,50). Öğütme sürecinin nasıl çalıştığını görürsünüz. Değirmenci tarih hakkında rehberli tur verir. Öğütülen tahıldan yerinde satın alabileceğiniz kurabiyeler yapılır.",
+      h2hours: "Açılış saatleri",
+      hoursMon: "Pazartesi–Cumartesi", hoursSun: "Pazar", hoursNote: "Tatiller veya mevsimsel değişiklikler için yerel kontrol edin.",
+      g1: "Değirmen", g2: "Değirmen", g3: "Değirmen", g4: "Değirmen",
       h2visit: "Ziyaret",
-      p3: "Antimachia’da, adanın ortasında. Giriş yaklaşık €2,50.",
-      tip: "İpucu: mekanizmayı kısa süre çalıştırıp çalıştıramayacaklarını sor – ziyareti daha somut hale getirir."
+      p4: "Antimachia’da, adanın ortasında.",
+      tip: "İpucu: değirmenin bir an dönmesini isteyin – ve kendi unundan kurabiyeleri tadın."
     },
     es: {
       title: "Molino de Antimachia",
-      lead: "Último molino de viento tradicional de Kos – museo restaurado en el pueblo, donde aún se muele harina.",
+      lead: "Último molino de viento de Kos (± 130–150 años) – familia Amallos, aún en funcionamiento, visita guiada y galletas con su propia harina.",
       heroCap: "Molino de Antimachia",
-      badgeMuseum: "Museo",
+      badgeMuseum: "Museo", badgePrice: "± €2,50", badgeHours: "09:30–17:30",
       btnPlay: "🔊 Leer en voz alta",
-      h2last: "Último molino de Kos",
-      p1: "El Molino de Antimachia se encuentra en el centro del pueblo. Este molino de viento tradicional tiene unos 130–150 años y está completamente restaurado. En el pasado había ocho molinos de viento en Kos para moler grano; este es el último que queda.",
-      factEntry: "entrada", factMuseum: "Museo", factWorking: "aún en funcionamiento",
-      h2flour: "Museo con harina",
-      p2: "Ahora es un museo donde se ve cómo funciona el proceso de molienda. Aún se produce harina – un pedazo vivo de la historia de la isla.",
+      h2last: "Último de ocho",
+      p1: "El molino está en medio de Antimachia. Unos 130–150 años y completamente restaurado. Antes había ocho molinos de viento en Kos para moler grano; este es el último que queda.",
+      factPrice: "± €2,50", factEntry: "entrada", factGen: "4 generaciones", factFamily: "familia Amallos",
+      h2family: "Familia Amallos",
+      p2: "Pertenece a la familia Amallos desde hace cuatro generaciones (también “molino del sacerdote” o molino Amallou). El molino sigue moliendo grano con el viento.",
+      h2tour: "Visita guiada y galletas",
+      p3: "Los visitantes pueden entrar (alrededor de € 2,50). Ves cómo funciona el proceso de molienda. El molinero hace una visita guiada sobre la historia. Con el grano molido se hornean galletas que puedes comprar allí mismo.",
+      h2hours: "Horario de apertura",
+      hoursMon: "Lunes a sábado", hoursSun: "Domingo", hoursNote: "Comprueba localmente en festivos o cambios estacionales.",
+      g1: "Molino", g2: "Molino", g3: "Molino", g4: "Molino",
       h2visit: "Visitar",
-      p3: "En Antimachia, en el centro de la isla. Entrada alrededor de €2,50.",
-      tip: "Consejo: pregunta si pueden hacer girar un momento el mecanismo – hace la visita más concreta."
+      p4: "En Antimachia, en medio de la isla.",
+      tip: "Consejo: pregunta si el molino gira un momento – y prueba las galletas con su propia harina."
     }
   };
 
@@ -345,3 +417,5 @@
 </script>
 </body>
 </html>
+Sla dit op als sight-molen-antimachia.html. Alle tekst is vertaald en de voorleesknop leest de gekozen taal.
+
