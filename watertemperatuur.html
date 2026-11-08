@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Watertemperatuur – Hello Kos</title>
+  <style>
+    :root {
+      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
+      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
+      --text: #E8EDE8; --text-soft: #A0B0A0;
+      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5;
+      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
+    }
+    .app-header {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px 16px; background: var(--bg-header);
+      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+    }
+    .back-btn { grid-column: 1; color: var(--petrol); font-weight: 600; text-decoration: none; font-size: 0.9rem; }
+    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(145deg, #F0C040, #D4A017); display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
+    .logo-text { font-size: 1.2rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
+    .logo-text span { color: var(--gold-dark); font-style: italic; }
+    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
+    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
+    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; }
+    .lang-menu.open { display: block; }
+    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
+    .main { max-width: 480px; margin: 0 auto; padding: 16px 14px 40px; }
+    h1 { font-size: 1.25rem; font-weight: 800; color: var(--text); text-align: center; margin-bottom: 4px; }
+    .sub { text-align: center; font-size: 0.86rem; color: var(--text-soft); margin-bottom: 16px; }
+    .live { background: linear-gradient(135deg, #0277bd, #01579b); color: #fff; border-radius: 18px; padding: 20px 16px; text-align: center; margin-bottom: 14px; box-shadow: 0 4px 16px rgba(2,119,189,0.25); }
+    .live .label { font-size: 0.8rem; opacity: 0.9; text-transform: uppercase; letter-spacing: 0.04em; }
+    .live .temp { font-size: 2.6rem; font-weight: 800; margin: 8px 0 4px; }
+    .live .hint { font-size: 0.88rem; opacity: 0.95; }
+    .btn-live { display: block; margin-top: 14px; background: rgba(255,255,255,0.22); color: #fff; text-decoration: none; padding: 13px 14px; border-radius: 12px; font-weight: 700; font-size: 0.9rem; }
+    .card { background: var(--bg-card); border-radius: 16px; padding: 15px 16px; margin-bottom: 12px; border: 1px solid var(--border); }
+    .card h2 { font-size: 1rem; color: var(--text); margin-bottom: 8px; }
+    .card p { font-size: 0.9rem; color: var(--text-soft); margin-bottom: 8px; }
+    .spots { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+    .spot { background: rgba(2,119,189,0.15); border-radius: 12px; padding: 12px 10px; text-align: center; border: 1px solid rgba(2,119,189,0.25); }
+    .spot strong { display: block; font-size: 1.05rem; color: #81d4fa; margin-bottom: 2px; }
+    .spot span { font-size: 0.78rem; color: var(--text-soft); }
+    .footer { text-align: center; padding: 16px; font-size: 0.75rem; color: var(--text-soft); }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="stranden.html" class="back-btn">← Terug</a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🔅</div>
+      <div class="logo-text">Hello <span>Kos</span></div>
+    </a>
+    <div class="lang-wrap">
+      <button type="button" class="lang-btn" id="langBtn">
+        <span id="flag">🇳🇱</span> <span id="code">NL</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <main class="main">
+    <h1 data-i18n="title">Watertemperatuur</h1>
+    <p class="sub" data-i18n="sub">Rondom het eiland Kos</p>
+
+    <div class="live">
+      <div class="label" data-i18n="liveLabel">Live zeetemperatuur</div>
+      <div class="temp" id="temp-display">…</div>
+      <div class="hint" data-i18n="liveHint">Open de live-pagina voor de actuele temperatuur per plek</div>
+      <a class="btn-live" href="https://seatemperature.info/kos-island-water-temperature.html" target="_blank" rel="noopener" data-i18n="btn1">Live watertemperatuur Kos →</a>
+      <a class="btn-live" href="https://www.seatemperature.org/europe/greece/kos.htm" target="_blank" rel="noopener" data-i18n="btn2">Andere bron (seatemperature.org) →</a>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="h2_1">Waarom dit handig is</h2>
+      <p data-i18n="p1">De watertemperatuur verschilt een beetje rondom Kos: beschutte baaien warmen sneller op dan open kust. Met de live-link zie je de actuele stand, niet alleen een seizoensgemiddelde.</p>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="h2_2">Richtlijnen per seizoen</h2>
+      <div class="spots">
+        <div class="spot"><strong>± 17–20 °C</strong><span data-i18n="s1">april – mei</span></div>
+        <div class="spot"><strong>± 22–26 °C</strong><span data-i18n="s2">juni – juli</span></div>
+        <div class="spot"><strong>± 25–27 °C</strong><span data-i18n="s3">aug – sept</span></div>
+        <div class="spot"><strong>± 20–23 °C</strong><span data-i18n="s4">oktober</span></div>
+      </div>
+      <p style="margin-top:12px;font-size:.84rem;color:var(--text-soft)" data-i18n="p2">Dit zijn globale waarden. Voor vandaag: gebruik de live-knop hierboven.</p>
+    </div>
+  </main>
+  <footer class="footer">Hello Kos</footer>
+  <script>
+  (function(){
+    var m = new Date().getMonth();
+    var t;
+    if(m>=3&&m<=4) t='± 17–20 °C';
+    else if(m>=5&&m<=6) t='± 22–26 °C';
+    else if(m>=7&&m<=8) t='± 25–27 °C';
+    else if(m===9) t='± 20–23 °C';
+    else t='± 16–20 °C';
+    document.getElementById('temp-display').textContent = t;
+
+    var I18N = {
+      nl: {
+        title: "Watertemperatuur",
+        sub: "Rondom het eiland Kos",
+        liveLabel: "Live zeetemperatuur",
+        liveHint: "Open de live-pagina voor de actuele temperatuur per plek",
+        btn1: "Live watertemperatuur Kos →",
+        btn2: "Andere bron (seatemperature.org) →",
+        h2_1: "Waarom dit handig is",
+        p1: "De watertemperatuur verschilt een beetje rondom Kos: beschutte baaien warmen sneller op dan open kust. Met de live-link zie je de actuele stand, niet alleen een seizoensgemiddelde.",
+        h2_2: "Richtlijnen per seizoen",
+        s1: "april – mei",
+        s2: "juni – juli",
+        s3: "aug – sept",
+        s4: "oktober",
+        p2: "Dit zijn globale waarden. Voor vandaag: gebruik de live-knop hierboven."
+      },
+      en: {
+        title: "Water temperature",
+        sub: "Around the island of Kos",
+        liveLabel: "Live sea temperature",
+        liveHint: "Open the live page for the current temperature per location",
+        btn1: "Live water temperature Kos →",
+        btn2: "Other source (seatemperature.org) →",
+        h2_1: "Why this is useful",
+        p1: "The water temperature varies slightly around Kos: sheltered bays warm up faster than open coast. With the live link you see the current reading, not just a seasonal average.",
+        h2_2: "Guidelines per season",
+        s1: "April – May",
+        s2: "June – July",
+        s3: "Aug – Sept",
+        s4: "October",
+        p2: "These are global values. For today: use the live button above."
+      },
+      de: {
+        title: "Wassertemperatur",
+        sub: "Rund um die Insel Kos",
+        liveLabel: "Live Meerestemperatur",
+        liveHint: "Öffne die Live-Seite für die aktuelle Temperatur pro Ort",
+        btn1: "Live Wassertemperatur Kos →",
+        btn2: "Andere Quelle (seatemperature.org) →",
+        h2_1: "Warum das nützlich ist",
+        p1: "Die Wassertemperatur unterscheidet sich etwas um Kos: geschützte Buchten erwärmen sich schneller als die offene Küste. Mit dem Live-Link siehst du den aktuellen Stand, nicht nur einen Saisondurchschnitt.",
+        h2_2: "Richtlinien pro Saison",
+        s1: "April – Mai",
+        s2: "Juni – Juli",
+        s3: "Aug – Sept",
+        s4: "Oktober",
+        p2: "Dies sind globale Werte. Für heute: nutze den Live-Button oben."
+      },
+      it: {
+        title: "Temperatura dell’acqua",
+        sub: "Intorno all’isola di Kos",
+        liveLabel: "Temperatura del mare live",
+        liveHint: "Apri la pagina live per la temperatura attuale per località",
+        btn1: "Temperatura dell’acqua live Kos →",
+        btn2: "Altra fonte (seatemperature.org) →",
+        h2_1: "Perché è utile",
+        p1: "La temperatura dell’acqua varia leggermente intorno a Kos: le baie riparate si riscaldano più velocemente della costa aperta. Con il link live vedi la temperatura attuale, non solo una media stagionale.",
+        h2_2: "Indicazioni per stagione",
+        s1: "aprile – maggio",
+        s2: "giugno – luglio",
+        s3: "ago – sett",
+        s4: "ottobre",
+        p2: "Questi sono valori globali. Per oggi: usa il pulsante live sopra."
+      },
+      tr: {
+        title: "Su sıcaklığı",
+        sub: "Kos adası çevresinde",
+        liveLabel: "Canlı deniz sıcaklığı",
+        liveHint: "Yerine göre güncel sıcaklık için canlı sayfayı aç",
+        btn1: "Canlı su sıcaklığı Kos →",
+        btn2: "Diğer kaynak (seatemperature.org) →",
+        h2_1: "Neden faydalı",
+        p1: "Kos çevresinde su sıcaklığı biraz farklılık gösterir: korunaklı koylar açık kıyıya göre daha hızlı ısınır. Canlı link ile sadece mevsimsel ortalama değil, güncel değeri görürsün.",
+        h2_2: "Sezona göre rehber",
+        s1: "nisan – mayıs",
+        s2: "haziran – temmuz",
+        s3: "ağustos – eylül",
+        s4: "ekim",
+        p2: "Bunlar genel değerlerdir. Bugün için: yukarıdaki canlı butonunu kullan."
+      },
+      es: {
+        title: "Temperatura del agua",
+        sub: "Alrededor de la isla de Kos",
+        liveLabel: "Temperatura del mar en vivo",
+        liveHint: "Abre la página en vivo para la temperatura actual por lugar",
+        btn1: "Temperatura del agua en vivo Kos →",
+        btn2: "Otra fuente (seatemperature.org) →",
+        h2_1: "Por qué es útil",
+        p1: "La temperatura del agua varía un poco alrededor de Kos: las bahías resguardadas se calientan más rápido que la costa abierta. Con el enlace en vivo ves el valor actual, no solo un promedio de temporada.",
+        h2_2: "Guías por temporada",
+        s1: "abril – mayo",
+        s2: "junio – julio",
+        s3: "ago – sept",
+        s4: "octubre",
+        p2: "Estos son valores globales. Para hoy: usa el botón en vivo de arriba."
+      }
+    };
+
+    function setLang(l) {
+      if (!I18N[l]) l = 'nl';
+      localStorage.setItem('hk-lang', l);
+      document.documentElement.lang = l;
+      var d = I18N[l];
+      document.querySelectorAll('[data-i18n]').forEach(function(el){
+        var k = el.getAttribute('data-i18n');
+        if (d[k]) el.textContent = d[k];
+      });
+      var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+      if (opt) {
+        document.getElementById('flag').textContent = opt.getAttribute('data-flag');
+        document.getElementById('code').textContent = l.toUpperCase();
+      }
+      document.querySelectorAll('.lang-option').forEach(function(o){
+        o.classList.toggle('active', o.getAttribute('data-lang') === l);
+      });
+      closeMenu();
+    }
+
+    var langBtn = document.getElementById('langBtn');
+    var langMenu = document.getElementById('langMenu');
+    function openMenu(){ langMenu.classList.add('open'); }
+    function closeMenu(){ langMenu.classList.remove('open'); }
+    langBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      langMenu.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    document.addEventListener('click', closeMenu);
+    document.querySelectorAll('.lang-option').forEach(function(btn){
+      btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
+    });
+
+    var saved = localStorage.getItem('hk-lang') || 'nl';
+    setLang(saved);
+  })();
+  </script>
+</body>
+</html>
