@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Mamma Rosa – Hello Kos</title>
+  <style>
+    :root {
+      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
+      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
+      --text: #E8EDE8; --text-soft: #A0B0A0;
+      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.55;
+      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
+    }
+    .app-header {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px 16px; background: var(--bg-header);
+      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+    }
+    .back-btn { grid-column: 1; color: var(--petrol); font-weight: 600; text-decoration: none; font-size: 0.9rem; }
+    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(145deg, #F0C040, #D4A017); display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
+    .logo-text { font-size: 1.2rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
+    .logo-text span { color: var(--gold-dark); font-style: italic; }
+    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
+    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
+    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; }
+    .lang-menu.open { display: block; }
+    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
+    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
+    .hero { position: relative; width: 100%; aspect-ratio: 16/11; overflow: hidden; background: #1a2525; }
+    .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.6), transparent); color: #fff; }
+    .hero-cap .area { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; opacity: 0.9; }
+    .hero-cap h1 { font-size: 1.5rem; font-weight: 800; margin-top: 2px; }
+    .content { padding: 16px 16px 0; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+    .badge { background: rgba(58,154,154,0.15); color: #99f6e4; font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+    .badge-gold { background: rgba(224,176,64,0.2); color: #F0C040; border-color: rgba(224,176,64,0.4); }
+    .block { background: var(--bg-card); border-radius: 16px; padding: 15px 16px; margin-bottom: 12px; border: 1px solid var(--border); }
+    .block h2 { font-size: 1rem; color: var(--text); margin-bottom: 8px; }
+    .block p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
+    .block p:last-child { margin-bottom: 0; }
+    .img-full { margin: 0 0 12px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); }
+    .img-full img { width: 100%; display: block; max-height: 210px; object-fit: cover; }
+    .img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 0 12px; }
+    .img-pair img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; display: block; border: 1px solid var(--border); }
+    .actions { display: flex; flex-direction: column; gap: 8px; margin: 8px 0 12px; }
+    .btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 13px 16px; border-radius: 14px; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
+    .btn-map { background: var(--bg-card); color: var(--text); border: 2px solid var(--petrol); }
+    .btn-call { background: var(--petrol); color: #fff; }
+    .footer { text-align: center; padding: 16px; font-size: 0.75rem; color: var(--text-soft); }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="beste-pizza.html" class="back-btn">← Terug</a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🔅</div>
+      <div class="logo-text">Hello <span>Kos</span></div>
+    </a>
+    <div class="lang-wrap">
+      <button type="button" class="lang-btn" id="langBtn">
+        <span id="flag">🇳🇱</span> <span id="code">NL</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <main class="main">
+    <div class="hero">
+      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-2026-03-24t195059-556-high-uw6woo.jpg" alt="Mamma Rosa" loading="eager">
+      <div class="hero-cap"><div class="area" data-i18n="area">Kos-stad</div><h1>Mamma Rosa</h1></div>
+    </div>
+    <div class="content">
+      <div class="badge-row">
+        <span class="badge badge-gold" data-i18n="badgeGold">★ Echt de beste pizza op Kos</span>
+        <span class="badge" data-i18n="badge1">Kos-stad</span>
+        <span class="badge" data-i18n="badge2">Italiaanse pizzeria · sinds 1992</span>
+      </div>
+      <div class="block"><h2 data-i18n="h1">De beste pizza op Kos</h2><p data-i18n="p1">Mamma Rosa is absolute nummer 1: de beste pizza van het hele eiland. Deze Italiaanse pizzeria in Kos-stad bestaat al sinds 1992. Dunne, knapperige pizza’s met verse ingrediënten en een perfecte korst uit de houtoven.</p></div>
+      <div class="img-full"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/hcmp360521_2236784-high-r2lu1n.jpg" alt="" loading="lazy"></div>
+      <div class="block"><h2 data-i18n="h2">Sfeer & eten</h2><p data-i18n="p2">Royaal, smaakvol, recht uit de oven. Locals en terugkerende bezoekers komen hier bewust voor de pizza. Daarnaast pasta’s en salades. Eenvoudig, gezellig en vaak druk – precies zoals een goede Italiaanse pizzeria hoort te zijn. Als je op Kos de allerbeste pizza wilt, is dit de plek.</p></div>
+      <div class="img-pair"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-2026-03-24t195030-761-high-9a1uwk.jpg" alt="" loading="lazy"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/hcmp360521_2236779-high-abrh9b.jpg" alt="" loading="lazy"></div>
+      <div class="block"><h2 data-i18n="h3">Praktisch</h2><p data-i18n="p3">In Kos-stad. Meestal open 11:00–23:30, dagelijks. Populair: bij drukte even wachten of vroeg komen. Telefonisch bereikbaar voor info of een tafel.</p></div>
+      <div class="img-full"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-2026-03-24t195011-828-high-ydhvws.jpg" alt="" loading="lazy"></div>
+      <div class="actions">
+        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Mamma%20Rosa%20Pizza%20Kos%20Town" target="_blank" rel="noopener" data-i18n="mapBtn">Locatie op de kaart</a>
+        <a class="btn btn-call" href="tel:+302242026554" data-i18n="callBtn">Bellen · +30 2242 026554</a>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">Hello Kos</footer>
+
+<script>
+(function(){
+  var I18N = {
+    nl: {
+      area: "Kos-stad",
+      badgeGold: "★ Echt de beste pizza op Kos",
+      badge1: "Kos-stad",
+      badge2: "Italiaanse pizzeria · sinds 1992",
+      h1: "De beste pizza op Kos",
+      p1: "Mamma Rosa is absolute nummer 1: de beste pizza van het hele eiland. Deze Italiaanse pizzeria in Kos-stad bestaat al sinds 1992. Dunne, knapperige pizza’s met verse ingrediënten en een perfecte korst uit de houtoven.",
+      h2: "Sfeer & eten",
+      p2: "Royaal, smaakvol, recht uit de oven. Locals en terugkerende bezoekers komen hier bewust voor de pizza. Daarnaast pasta’s en salades. Eenvoudig, gezellig en vaak druk – precies zoals een goede Italiaanse pizzeria hoort te zijn. Als je op Kos de allerbeste pizza wilt, is dit de plek.",
+      h3: "Praktisch",
+      p3: "In Kos-stad. Meestal open 11:00–23:30, dagelijks. Populair: bij drukte even wachten of vroeg komen. Telefonisch bereikbaar voor info of een tafel.",
+      mapBtn: "Locatie op de kaart",
+      callBtn: "Bellen · +30 2242 026554"
+    },
+    en: {
+      area: "Kos town",
+      badgeGold: "★ Truly the best pizza on Kos",
+      badge1: "Kos town",
+      badge2: "Italian pizzeria · since 1992",
+      h1: "The best pizza on Kos",
+      p1: "Mamma Rosa is absolute number 1: the best pizza on the whole island. This Italian pizzeria in Kos town has been around since 1992. Thin, crispy pizzas with fresh ingredients and a perfect crust from the wood-fired oven.",
+      h2: "Atmosphere & food",
+      p2: "Generous, flavourful, straight from the oven. Locals and returning visitors come here deliberately for the pizza. Also pastas and salads. Simple, cosy and often busy – exactly how a good Italian pizzeria should be. If you want the absolute best pizza on Kos, this is the place.",
+      h3: "Practical",
+      p3: "In Kos town. Usually open 11:00–23:30, daily. Popular: wait a bit or come early when it’s busy. Reachable by phone for info or a table.",
+      mapBtn: "Location on the map",
+      callBtn: "Call · +30 2242 026554"
+    },
+    de: {
+      area: "Kos-Stadt",
+      badgeGold: "★ Wirklich die beste Pizza auf Kos",
+      badge1: "Kos-Stadt",
+      badge2: "Italienische Pizzeria · seit 1992",
+      h1: "Die beste Pizza auf Kos",
+      p1: "Mamma Rosa ist absolute Nummer 1: die beste Pizza der ganzen Insel. Diese italienische Pizzeria in Kos-Stadt gibt es seit 1992. Dünne, knusprige Pizzen mit frischen Zutaten und einer perfekten Kruste aus dem Holzofen.",
+      h2: "Atmosphäre & Essen",
+      p2: "Großzügig, geschmackvoll, direkt aus dem Ofen. Einheimische und wiederkehrende Besucher kommen hier bewusst für die Pizza. Außerdem Pastas und Salate. Einfach, gemütlich und oft voll – genau so, wie eine gute italienische Pizzeria sein soll. Wenn du die allerbeste Pizza auf Kos willst, ist das der Ort.",
+      h3: "Praktisch",
+      p3: "In Kos-Stadt. Meist geöffnet 11:00–23:30, täglich. Beliebt: bei Andrang etwas warten oder früh kommen. Telefonisch erreichbar für Infos oder einen Tisch.",
+      mapBtn: "Standort auf der Karte",
+      callBtn: "Anrufen · +30 2242 026554"
+    },
+    it: {
+      area: "Città di Kos",
+      badgeGold: "★ Davvero la migliore pizza su Kos",
+      badge1: "Città di Kos",
+      badge2: "Pizzeria italiana · dal 1992",
+      h1: "La migliore pizza su Kos",
+      p1: "Mamma Rosa è assoluta numero 1: la migliore pizza di tutta l’isola. Questa pizzeria italiana nella città di Kos esiste dal 1992. Pizze sottili e croccanti con ingredienti freschi e una crosta perfetta dal forno a legna.",
+      h2: "Atmosfera & cibo",
+      p2: "Generosa, saporita, dritta dal forno. Locali e visitatori di ritorno vengono qui apposta per la pizza. Anche paste e insalate. Semplice, accogliente e spesso piena – proprio come deve essere una buona pizzeria italiana. Se vuoi la pizza migliore in assoluto su Kos, questo è il posto.",
+      h3: "Pratico",
+      p3: "Nella città di Kos. Di solito aperto 11:00–23:30, tutti i giorni. Popolare: in caso di affollamento aspetta un po’ o arriva presto. Raggiungibile per telefono per info o un tavolo.",
+      mapBtn: "Posizione sulla mappa",
+      callBtn: "Chiama · +30 2242 026554"
+    },
+    tr: {
+      area: "Kos şehri",
+      badgeGold: "★ Gerçekten Kos’un en iyi pizzası",
+      badge1: "Kos şehri",
+      badge2: "İtalyan pizzeria · 1992’den beri",
+      h1: "Kos’un en iyi pizzası",
+      p1: "Mamma Rosa mutlak 1 numara: adanın en iyi pizzası. Kos şehrindeki bu İtalyan pizzeria 1992’den beri var. Taze malzemelerle ince, çıtır pizzalar ve odun fırınından mükemmel hamur.",
+      h2: "Atmosfer & yemek",
+      p2: "Cömert, lezzetli, fırından direkt. Yereller ve tekrar gelen ziyaretçiler bilerek pizza için buraya gelir. Ayrıca makarna ve salatalar. Basit, sıcak ve sıkça kalabalık – iyi bir İtalyan pizzeria’nın olması gerektiği gibi. Kos’ta en iyi pizzayı istiyorsan burası yer.",
+      h3: "Pratik",
+      p3: "Kos şehrinde. Genelde 11:00–23:30 açık, her gün. Popüler: kalabalıkta biraz bekle veya erken gel. Bilgi veya masa için telefonla ulaşılabilir.",
+      mapBtn: "Haritada konum",
+      callBtn: "Ara · +30 2242 026554"
+    },
+    es: {
+      area: "Ciudad de Kos",
+      badgeGold: "★ Realmente la mejor pizza en Kos",
+      badge1: "Ciudad de Kos",
+      badge2: "Pizzería italiana · desde 1992",
+      h1: "La mejor pizza en Kos",
+      p1: "Mamma Rosa es absoluta número 1: la mejor pizza de toda la isla. Esta pizzería italiana en la ciudad de Kos existe desde 1992. Pizzas finas y crujientes con ingredientes frescos y una corteza perfecta del horno de leña.",
+      h2: "Ambiente & comida",
+      p2: "Generosa, sabrosa, directa del horno. Locales y visitantes que regresan vienen aquí a propósito por la pizza. También pastas y ensaladas. Sencilla, acogedora y a menudo llena – exactamente como debe ser una buena pizzería italiana. Si quieres la mejor pizza absoluta en Kos, este es el lugar.",
+      h3: "Práctico",
+      p3: "En la ciudad de Kos. Normalmente abierto 11:00–23:30, todos los días. Popular: espera un poco o llega temprano cuando hay gente. Alcanzable por teléfono para info o una mesa.",
+      mapBtn: "Ubicación en el mapa",
+      callBtn: "Llamar · +30 2242 026554"
+    }
+  };
+
+  function setLang(l) {
+    if (!I18N[l]) l = 'nl';
+    localStorage.setItem('hk-lang', l);
+    document.documentElement.lang = l;
+    var d = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (d[k]) el.textContent = d[k];
+    });
+    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if (opt) {
+      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
+      document.getElementById('code').textContent = l.toUpperCase();
+    }
+    document.querySelectorAll('.lang-option').forEach(function(o){
+      o.classList.toggle('active', o.getAttribute('data-lang') === l);
+    });
+    closeMenu();
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  function openMenu(){ langMenu.classList.add('open'); }
+  function closeMenu(){ langMenu.classList.remove('open'); }
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    langMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.addEventListener('click', closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){
+    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
+  });
+
+  var saved = localStorage.getItem('hk-lang') || 'nl';
+  setLang(saved);
+})();
+</script>
+</body>
+</html>
