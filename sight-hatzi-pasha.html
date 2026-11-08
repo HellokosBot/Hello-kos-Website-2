@@ -1,406 +1,106 @@
 <!DOCTYPE html>
-<html lang="nl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
-  <meta name="theme-color" content="#0D1F1F">
-  <title>Hatzi Pasha Mausoleum – Hello Kos</title>
-  <style>
-    :root {
-      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
-      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
-      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
-      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
-      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text); -webkit-font-smoothing: antialiased;
-      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
-      background: var(--bg); min-height: 100vh; line-height: 1.55;
-    }
-    .app-header {
-      position: sticky; top: 0; z-index: 100;
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-      padding: 14px 16px; background: var(--bg-header);
-      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
-    }
-    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
-    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
-    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
-    .logo-text span { color: var(--gold-dark); font-style: italic; }
-    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
-    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
-    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
-    .lang-menu.open { display: block; }
-    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
-    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
-    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
-    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
-    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
-    .content { padding: 18px 16px 0; }
-    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
-    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
-    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
-    .btn-audio { background: var(--petrol); color: #fff; }
-    .btn-audio.playing { background: var(--petrol-dark); }
-    .btn-stop { background: #3A4545; color: #fff; display: none; }
-    .btn-stop.show { display: flex; }
-    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
-    .btn-apple { background: #111; color: #fff; }
-    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
-    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
-    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
-    .card p:last-child { margin-bottom: 0; }
-    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
-    .tip strong { color: var(--gold); }
-    .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
-    .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
-    .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
-    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-    .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
-    .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
-    .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
-    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
-    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
-    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
-    .footer a { color: var(--petrol); text-decoration: none; }
-  </style>
-</head>
-<body>
-  <header class="app-header">
-    <a href="bezienswaardigheden.html" class="back-btn">← Terug</a>
-    <a href="index.html" class="logo">
-      <div class="logo-icon">🔅</div>
-      <div class="logo-text">Hello <span>Kos</span></div>
-    </a>
-    <div class="lang-wrap">
-      <button type="button" class="lang-btn" id="langBtn">
-        <span id="flag">🇳🇱</span> <span id="code">NL</span>
-      </button>
-      <div class="lang-menu" id="langMenu">
-        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
-        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
-        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
-        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
-        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
-        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
-      </div>
-    </div>
-  </header>
-
-  <main class="main">
-    <div class="hero-wrap">
-      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/whatsapp-image-2026-04-04-at-05-29-21-1-high.jpg" alt="Hatzi Pasha Mausoleum" loading="eager">
-      <div class="hero-caption" data-i18n="heroCap">Hatzi Pasha Mausoleum</div>
-    </div>
-
-    <div class="content">
-      <h1 data-i18n="title">Hatzi Pasha Mausoleum</h1>
-      <p class="lead" data-i18n="lead">Klein Ottomaans grafmonument met koepeltje – sarcofaag van officier Hatzi Pasha, gesneuveld in 1527 bij een piratenaanval.</p>
-
-      <div class="badges">
-        <span class="badge" data-i18n="badgeFree">Gratis</span>
-        <span class="badge">Kos-stad</span>
-        <span class="badge" data-i18n="badgeCentury">16e eeuw</span>
-      </div>
-
-      <div class="actions">
-        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
-        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Hatzi%20Pasha%20Mausoleum%20Kos%20Town" target="_blank" rel="noopener">📍 Google Maps</a>
-        <a class="btn btn-apple" href="https://maps.apple.com/?q=Hatzi%20Pasha%20Mausoleum%20Kos%20Town" target="_blank" rel="noopener">🍎 Apple Maps</a>
-      </div>
-      <p class="status" id="ttsStatus"></p>
-
-      <div id="readText">
-        <div class="card">
-          <h2 data-i18n="h2unobtrusive">Onopvallend, bijna 500 jaar oud</h2>
-          <p data-i18n="p1">Een bescheiden, vierkant stenen gebouw in het hart van Kos-stad. Veel mensen lopen er voorbij zonder te weten dat hier de sarcofaag van Hatzi Pasha staat – al bijna 500 jaar.</p>
-        </div>
-
-        <div class="facts">
-          <div class="fact">
-            <span class="n">1527</span>
-            <span class="l" data-i18n="factKilled">gesneuveld</span>
-          </div>
-          <div class="fact">
-            <span class="n" data-i18n="factFree">Gratis</span>
-            <span class="l" data-i18n="factOutside">van buitenaf</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2who">Wie was Hatzi Pasha?</h2>
-          <p data-i18n="p2">Hatzi Pasha was een Ottomaanse officier op het eiland. In 1527 sneuvelde hij tijdens een aanval van piraten die de kust onveilig maakten.</p>
-          <p data-i18n="p3">Zijn lichaam werd begraven in deze marmeren sarcofaag, die nog altijd op dezelfde plek staat. Het is het enige directe spoor dat van hem overblijft.</p>
-        </div>
-
-        <div class="photo-block">
-          <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/schermopname_7-3-2026_115310_www-google-com-high.jpg" alt="Mausoleum" loading="lazy">
-          <div class="cap" data-i18n="cap1">Het mausoleum met koepeltje</div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2building">Het gebouw</h2>
-          <p data-i18n="p4">Een eenvoudige, rechthoekige stenen mausoleum met een klein koepeltje erbovenop. Typisch Ottomaans grafmonument uit de vroege periode op Kos.</p>
-        </div>
-
-        <div class="gallery">
-          <div class="g-item">
-            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/schermopname_7-3-2026_115330_www-google-com-standard.jpg" alt="Detail" loading="lazy">
-            <span data-i18n="g1">Detail</span>
-          </div>
-          <div class="g-item">
-            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/whatsapp-image-2026-04-04-at-05-29-21-1-high-eh9aw9.jpg" alt="Mausoleum" loading="lazy">
-            <span data-i18n="g2">Gebouw</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2visit">Bezoeken</h2>
-          <p data-i18n="p5">In het centrum van Kos-stad. Van buitenaf gratis te zien; makkelijk te missen als je er niet op let.</p>
-          <div class="tip" data-i18n="tip">Tip: zoek het kleine gebouwtje met het koepeltje – het is snel over het hoofd gezien tussen de andere gebouwen.</div>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <footer class="footer">
-    <div>Hello Kos</div>
-    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
-  </footer>
-
+<html lang="nl"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#2A6F6F"><title>Hatzi Pasha Mausoleum – Hello Kos</title>
+<style>
+:root{--petrol:#2A6F6F;--petrol-dark:#1A4A4A;--cream:#f5f2ec;--text:#1A1A1A;--soft:#4A4A4A}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--cream);color:var(--text);line-height:1.55;padding-bottom:env(safe-area-inset-bottom,0)}
+.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:12px 14px;background:rgba(245,242,236,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(42,111,111,.12)}
+.back-btn{color:var(--petrol-dark);font-weight:600;text-decoration:none;font-size:.9rem}
+.logo{justify-self:center;display:flex;align-items:center;gap:8px;text-decoration:none}
+.logo-icon{width:34px;height:34px;border-radius:50%;background:linear-gradient(145deg,#F0C040,#D4A017);display:flex;align-items:center;justify-content:center;color:#FFFDF5;font-size:20px}
+.logo-text{font-size:1.2rem;font-weight:700;color:#D4A017;font-family:Georgia,serif}
+.logo-text span{color:#C4920F;font-style:italic}
+.main{max-width:480px;margin:0 auto;padding:0 0 40px}
+.hero-wrap{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;background:#d4cfc6}
+.hero-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-caption{position:absolute;left:0;right:0;bottom:0;padding:28px 16px 14px;background:linear-gradient(to top,rgba(0,0,0,.65),transparent);color:#fff;font-size:.78rem;font-weight:500}
+.content{padding:18px 16px 0}
+h1{font-size:1.45rem;font-weight:800;color:var(--petrol-dark);letter-spacing:-.02em;margin-bottom:8px;line-height:1.2}
+.lead{font-size:.95rem;color:var(--soft);margin-bottom:14px}
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.badge{background:#e8f5f3;color:var(--petrol-dark);font-size:.72rem;font-weight:700;padding:5px 11px;border-radius:999px}
+.actions{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px 16px;border-radius:14px;border:none;cursor:pointer;font-family:inherit;font-weight:700;font-size:.9rem;text-decoration:none}
+.btn-audio{background:var(--petrol);color:#fff}.btn-audio.playing{background:var(--petrol-dark)}
+.btn-stop{background:#6b7280;color:#fff;display:none}.btn-stop.show{display:flex}
+.btn-map{background:#fff;color:var(--petrol-dark);border:2px solid var(--petrol)}.btn-apple{background:#111;color:#fff}
+.status{text-align:center;font-size:.78rem;color:var(--soft);min-height:1.1em;margin-bottom:8px}
+.card{background:#fff;border-radius:16px;padding:16px 16px 14px;margin-bottom:12px;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.card h2{font-size:1.02rem;color:var(--petrol-dark);margin-bottom:8px}
+.card p{font-size:.92rem;color:var(--text);margin-bottom:10px}.card p:last-child{margin-bottom:0}
+.tip{background:#fff8e6;border-left:4px solid #e6b422;border-radius:0 12px 12px 0;padding:12px 14px;margin:4px 0 0;font-size:.88rem;color:#3d3420}
+.tip strong{color:#5c4a12}
+.photo-block{margin:8px 0 14px;border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+.photo-block img{width:100%;display:block;max-height:240px;object-fit:cover}
+.photo-block .cap{background:#fff;padding:8px 12px;font-size:.75rem;color:var(--soft);text-align:center}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.fact{background:#fff;border-radius:12px;padding:12px;text-align:center;box-shadow:0 1px 6px rgba(0,0,0,.04)}
+.fact .n{font-size:1.05rem;font-weight:800;color:var(--petrol);display:block;margin-bottom:2px}
+.fact .l{font-size:.72rem;color:var(--soft);font-weight:600}
+.hours{margin-top:8px;border-radius:12px;overflow:hidden;border:1px solid rgba(42,111,111,.12)}
+.h-row{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;font-size:.88rem;border-bottom:1px solid rgba(0,0,0,.05);background:#fafafa}
+.h-row:nth-child(odd){background:#fff}.h-row:last-child{border-bottom:none}
+.h-row span:last-child{font-weight:700;color:var(--petrol-dark)}
+.h-row.closed span:last-child{color:#b45309}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:4px 0 14px}
+.g-item{border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.g-item img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.g-item span{display:block;padding:6px 8px;font-size:.7rem;color:var(--soft);text-align:center}
+.footer{text-align:center;padding:20px 16px;font-size:.78rem;color:var(--soft)}.footer a{color:var(--petrol);text-decoration:none}
+</style></head><body>
+<header class="app-header">
+<a href="bezienswaardigheden.html" class="back-btn">← Terug</a>
+<a href="index.html" class="logo"><div class="logo-icon">☀</div><div class="logo-text">Hello <span>Kos</span></div></a>
+<div></div></header>
+<main class="main">
+<div class="hero-wrap"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/schermopname_7-3-2026_115330_www-google-com-standard.jpg" alt="Hatzi Pasha Mausoleum" loading="eager"><div class="hero-caption">Hatzi Pasha Mausoleum</div></div>
+<div class="content">
+<h1>Hatzi Pasha Mausoleum</h1><p class="lead">Klein Ottomaans grafmonument met koepeltje – sarcofaag van officier Hatzi Pasha, gesneuveld in 1527 bij een piratenaanval. Bijna 500 jaar op dezelfde plek.</p>
+<div class="badges"><span class="badge">Gratis</span><span class="badge">1527</span><span class="badge">Kos-stad</span></div>
+<div class="actions">
+<button type="button" class="btn btn-audio" id="btnPlay">🔊 Voorlezen</button>
+<button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
+<a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Hatzi%20Pasha%20Mausoleum%20Kos%20Town" target="_blank" rel="noopener">📍 Google Maps</a>
+<a class="btn btn-apple" href="https://maps.apple.com/?q=Hatzi%20Pasha%20Mausoleum%20Kos%20Town" target="_blank" rel="noopener">🍎 Apple Maps</a>
+</div>
+<p class="status" id="ttsStatus"></p>
+<div id="readText">
+<div class="card"><h2>Onopvallend, bijna 500 jaar</h2>
+<p>Een bescheiden, vierkant stenen gebouw in het hart van Kos-stad. Veel mensen lopen er voorbij zonder te weten dat hier de sarcofaag van <strong>Hatzi Pasha</strong> staat – al bijna 500 jaar.</p></div>
+<div class="facts"><div class="fact"><span class="n">1527</span><span class="l">gesneuveld</span></div><div class="fact"><span class="n">Koepeltje</span><span class="l">Ottomaans graf</span></div></div>
+<div class="card"><h2>Wie was Hatzi Pasha?</h2>
+<p>Ottomaanse officier op het eiland. In <strong>1527</strong> sneuvelde hij tijdens een aanval van <strong>piraten</strong> die de kust onveilig maakten. Zijn lichaam werd begraven in deze marmeren sarcofaag, die nog altijd op dezelfde plek staat – het enige directe spoor van hem.</p></div>
+<div class="card"><h2>Het gebouw</h2>
+<p>Eenvoudige, rechthoekige stenen mausoleum met een <strong>klein koepeltje</strong> – typisch Ottomaans grafmonument uit de vroege periode op Kos.</p></div>
+<div class="gallery"><div class="g-item"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/schermopname_7-3-2026_115330_www-google-com-standard.jpg" alt="" loading="lazy"><span>Mausoleum</span></div><div class="g-item"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/schermopname_7-3-2026_115310_www-google-com-high.jpg" alt="" loading="lazy"><span>Mausoleum</span></div><div class="g-item"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/whatsapp-image-2026-04-04-at-05-29-21-1-high.jpg" alt="" loading="lazy"><span>Mausoleum</span></div><div class="g-item"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/whatsapp-image-2026-04-04-at-05-29-21-1-high-eh9aw9.jpg" alt="" loading="lazy"><span>Mausoleum</span></div></div>
+<div class="card"><h2>Bezoeken</h2>
+<p>In het centrum, van buitenaf gratis. Makkelijk te missen.</p>
+<div class="tip"><strong>Tip:</strong> zoek het kleine gebouwtje met het koepeltje – één keer gezien, herken je het altijd.</div></div>
+</div>
+</div></main>
+<footer class="footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.nl">info@hellokos.nl</a></p></footer>
 <script>
 (function(){
-  var I18N = {
-    nl: {
-      title: "Hatzi Pasha Mausoleum",
-      lead: "Klein Ottomaans grafmonument met koepeltje – sarcofaag van officier Hatzi Pasha, gesneuveld in 1527 bij een piratenaanval.",
-      heroCap: "Hatzi Pasha Mausoleum",
-      badgeFree: "Gratis", badgeCentury: "16e eeuw",
-      btnPlay: "🔊 Voorlezen",
-      h2unobtrusive: "Onopvallend, bijna 500 jaar oud",
-      p1: "Een bescheiden, vierkant stenen gebouw in het hart van Kos-stad. Veel mensen lopen er voorbij zonder te weten dat hier de sarcofaag van Hatzi Pasha staat – al bijna 500 jaar.",
-      factKilled: "gesneuveld", factFree: "Gratis", factOutside: "van buitenaf",
-      h2who: "Wie was Hatzi Pasha?",
-      p2: "Hatzi Pasha was een Ottomaanse officier op het eiland. In 1527 sneuvelde hij tijdens een aanval van piraten die de kust onveilig maakten.",
-      p3: "Zijn lichaam werd begraven in deze marmeren sarcofaag, die nog altijd op dezelfde plek staat. Het is het enige directe spoor dat van hem overblijft.",
-      cap1: "Het mausoleum met koepeltje",
-      h2building: "Het gebouw",
-      p4: "Een eenvoudige, rechthoekige stenen mausoleum met een klein koepeltje erbovenop. Typisch Ottomaans grafmonument uit de vroege periode op Kos.",
-      g1: "Detail", g2: "Gebouw",
-      h2visit: "Bezoeken",
-      p5: "In het centrum van Kos-stad. Van buitenaf gratis te zien; makkelijk te missen als je er niet op let.",
-      tip: "Tip: zoek het kleine gebouwtje met het koepeltje – het is snel over het hoofd gezien tussen de andere gebouwen."
-    },
-    en: {
-      title: "Hatzi Pasha Mausoleum",
-      lead: "Small Ottoman funerary monument with a little dome – sarcophagus of officer Hatzi Pasha, killed in 1527 during a pirate attack.",
-      heroCap: "Hatzi Pasha Mausoleum",
-      badgeFree: "Free", badgeCentury: "16th century",
-      btnPlay: "🔊 Read aloud",
-      h2unobtrusive: "Unobtrusive, almost 500 years old",
-      p1: "A modest, square stone building in the heart of Kos Town. Many people walk past without realising that the sarcophagus of Hatzi Pasha has stood here for almost 500 years.",
-      factKilled: "killed", factFree: "Free", factOutside: "from outside",
-      h2who: "Who was Hatzi Pasha?",
-      p2: "Hatzi Pasha was an Ottoman officer on the island. In 1527 he was killed during an attack by pirates who made the coast unsafe.",
-      p3: "His body was buried in this marble sarcophagus, which still stands in the same place. It is the only direct trace that remains of him.",
-      cap1: "The mausoleum with its little dome",
-      h2building: "The building",
-      p4: "A simple, rectangular stone mausoleum with a small dome on top. A typical Ottoman funerary monument from the early period on Kos.",
-      g1: "Detail", g2: "Building",
-      h2visit: "Visiting",
-      p5: "In the centre of Kos Town. Free to see from the outside; easy to miss if you don’t look carefully.",
-      tip: "Tip: look for the small building with the little dome – it is quickly overlooked among the other buildings."
-    },
-    de: {
-      title: "Hatzi-Pasha-Mausoleum",
-      lead: "Kleines osmanisches Grabmal mit Kuppelchen – Sarkophag des Offiziers Hatzi Pasha, 1527 bei einem Piratenangriff gefallen.",
-      heroCap: "Hatzi-Pasha-Mausoleum",
-      badgeFree: "Kostenlos", badgeCentury: "16. Jahrhundert",
-      btnPlay: "🔊 Vorlesen",
-      h2unobtrusive: "Unauffällig, fast 500 Jahre alt",
-      p1: "Ein bescheidenes, quadratisches Steingebäude im Herzen von Kos-Stadt. Viele Menschen gehen vorbei, ohne zu wissen, dass hier der Sarkophag von Hatzi Pasha steht – seit fast 500 Jahren.",
-      factKilled: "gefallen", factFree: "Kostenlos", factOutside: "von außen",
-      h2who: "Wer war Hatzi Pasha?",
-      p2: "Hatzi Pasha war ein osmanischer Offizier auf der Insel. 1527 fiel er bei einem Angriff von Piraten, die die Küste unsicher machten.",
-      p3: "Sein Leichnam wurde in diesem Marmorsarkophag bestattet, der noch immer an derselben Stelle steht. Es ist die einzige direkte Spur, die von ihm übrig bleibt.",
-      cap1: "Das Mausoleum mit Kuppelchen",
-      h2building: "Das Gebäude",
-      p4: "Ein einfaches, rechteckiges steinernes Mausoleum mit einem kleinen Kuppelchen darauf. Typisches osmanisches Grabmal aus der frühen Periode auf Kos.",
-      g1: "Detail", g2: "Gebäude",
-      h2visit: "Besuchen",
-      p5: "Im Zentrum von Kos-Stadt. Von außen kostenlos zu sehen; leicht zu übersehen, wenn man nicht darauf achtet.",
-      tip: "Tipp: such das kleine Gebäude mit dem Kuppelchen – es wird schnell zwischen den anderen Gebäuden übersehen."
-    },
-    it: {
-      title: "Mausoleo di Hatzi Pasha",
-      lead: "Piccolo monumento funerario ottomano con cupoletta – sarcofago dell’ufficiale Hatzi Pasha, caduto nel 1527 durante un attacco di pirati.",
-      heroCap: "Mausoleo di Hatzi Pasha",
-      badgeFree: "Gratis", badgeCentury: "XVI secolo",
-      btnPlay: "🔊 Leggi ad alta voce",
-      h2unobtrusive: "Discreto, quasi 500 anni",
-      p1: "Un modesto edificio in pietra quadrato nel cuore di Kos città. Molte persone passano senza sapere che qui si trova il sarcofago di Hatzi Pasha – da quasi 500 anni.",
-      factKilled: "caduto", factFree: "Gratis", factOutside: "dall’esterno",
-      h2who: "Chi era Hatzi Pasha?",
-      p2: "Hatzi Pasha era un ufficiale ottomano sull’isola. Nel 1527 cadde durante un attacco di pirati che rendevano insicura la costa.",
-      p3: "Il suo corpo fu sepolto in questo sarcofago di marmo, che si trova ancora nello stesso posto. È l’unica traccia diretta che rimane di lui.",
-      cap1: "Il mausoleo con la cupoletta",
-      h2building: "L’edificio",
-      p4: "Un semplice mausoleo in pietra rettangolare con una piccola cupola sopra. Tipico monumento funerario ottomano del primo periodo a Kos.",
-      g1: "Dettaglio", g2: "Edificio",
-      h2visit: "Visitare",
-      p5: "Nel centro di Kos città. Visibile gratuitamente dall’esterno; facile da non notare se non si fa attenzione.",
-      tip: "Consiglio: cerca il piccolo edificio con la cupoletta – è facile non vederlo tra gli altri edifici."
-    },
-    tr: {
-      title: "Hatzi Pasha Türbesi",
-      lead: "Küçük kubbeli Osmanlı mezar anıtı – 1527’de korsan saldırısında ölen subay Hatzi Pasha’nın lahti.",
-      heroCap: "Hatzi Pasha Türbesi",
-      badgeFree: "Ücretsiz", badgeCentury: "16. yüzyıl",
-      btnPlay: "🔊 Sesli oku",
-      h2unobtrusive: "Göze çarpmayan, neredeyse 500 yıllık",
-      p1: "Kos şehrinin kalbinde mütevazı, kare taş bir bina. Birçok insan, Hatzi Pasha’nın lahtinin neredeyse 500 yıldır burada durduğunu bilmeden geçip gidiyor.",
-      factKilled: "öldü", factFree: "Ücretsiz", factOutside: "dışarıdan",
-      h2who: "Hatzi Pasha kimdi?",
-      p2: "Hatzi Pasha adada bir Osmanlı subayıydı. 1527’de kıyıyı güvensiz hale getiren korsanların saldırısında öldü.",
-      p3: "Cesedi bu mermer lahte gömüldü, hâlâ aynı yerde duruyor. Ondan kalan tek doğrudan iz budur.",
-      cap1: "Küçük kubbeli türbe",
-      h2building: "Bina",
-      p4: "Üzerinde küçük bir kubbe bulunan basit, dikdörtgen taş türbe. Kos’taki erken dönem tipik Osmanlı mezar anıtı.",
-      g1: "Detay", g2: "Bina",
-      h2visit: "Ziyaret",
-      p5: "Kos şehrinin merkezinde. Dışarıdan ücretsiz görülebilir; dikkat etmezsen kolayca kaçırılır.",
-      tip: "İpucu: küçük kubbeli binayı ara – diğer binaların arasında çabuk gözden kaçar."
-    },
-    es: {
-      title: "Mausoleo de Hatzi Pasha",
-      lead: "Pequeño monumento funerario otomano con cúpula – sarcófago del oficial Hatzi Pasha, caído en 1527 durante un ataque de piratas.",
-      heroCap: "Mausoleo de Hatzi Pasha",
-      badgeFree: "Gratis", badgeCentury: "siglo XVI",
-      btnPlay: "🔊 Leer en voz alta",
-      h2unobtrusive: "Discreto, casi 500 años",
-      p1: "Un modesto edificio de piedra cuadrado en el corazón de Kos ciudad. Mucha gente pasa sin saber que aquí está el sarcófago de Hatzi Pasha – desde hace casi 500 años.",
-      factKilled: "caído", factFree: "Gratis", factOutside: "desde fuera",
-      h2who: "¿Quién era Hatzi Pasha?",
-      p2: "Hatzi Pasha era un oficial otomano en la isla. En 1527 cayó durante un ataque de piratas que hacían insegura la costa.",
-      p3: "Su cuerpo fue enterrado en este sarcófago de mármol, que sigue en el mismo lugar. Es la única huella directa que queda de él.",
-      cap1: "El mausoleo con su pequeña cúpula",
-      h2building: "El edificio",
-      p4: "Un mausoleo de piedra rectangular sencillo con una pequeña cúpula encima. Típico monumento funerario otomano del periodo temprano en Kos.",
-      g1: "Detalle", g2: "Edificio",
-      h2visit: "Visitar",
-      p5: "En el centro de Kos ciudad. Se puede ver gratis desde fuera; fácil de pasar por alto si no se presta atención.",
-      tip: "Consejo: busca el pequeño edificio con la cúpula – se pasa por alto fácilmente entre los demás edificios."
-    }
-  };
-
-  function setLang(l) {
-    if (!I18N[l]) l = 'nl';
-    localStorage.setItem('hk-lang', l);
-    document.documentElement.lang = l;
-    var d = I18N[l];
-    document.querySelectorAll('[data-i18n]').forEach(function(el){
-      var k = el.getAttribute('data-i18n');
-      if (d[k]) el.textContent = d[k];
-    });
-    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
-    if (opt) {
-      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
-      document.getElementById('code').textContent = l.toUpperCase();
-    }
-    document.querySelectorAll('.lang-option').forEach(function(o){
-      o.classList.toggle('active', o.getAttribute('data-lang') === l);
-    });
-    closeMenu();
-  }
-
-  var langBtn = document.getElementById('langBtn');
-  var langMenu = document.getElementById('langMenu');
-  function openMenu(){ langMenu.classList.add('open'); }
-  function closeMenu(){ langMenu.classList.remove('open'); }
-  langBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    langMenu.classList.contains('open') ? closeMenu() : openMenu();
-  });
-  document.addEventListener('click', function(){ closeMenu(); });
-  document.querySelectorAll('.lang-option').forEach(function(btn){
-    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
-  });
-
-  var saved = localStorage.getItem('hk-lang') || 'nl';
-  setLang(saved);
-
-  /* TTS */
-  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
-  function getLang(){
-    var l = localStorage.getItem('hk-lang') || 'nl';
-    return LANG_VOICE[l] ? l : 'nl';
-  }
-  function pickVoice(code){
-    var voices = speechSynthesis.getVoices() || [];
-    var prefix = code.slice(0,2).toLowerCase();
-    return voices.find(function(v){ return v.lang === code; })
-      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
-      || null;
-  }
-  var btnPlay = document.getElementById('btnPlay');
-  var btnStop = document.getElementById('btnStop');
-  var status = document.getElementById('ttsStatus');
-  function setStatus(t){ if(status) status.textContent = t; }
-  function play(){
-    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
-    speechSynthesis.cancel();
-    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
-    var l = getLang();
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = LANG_VOICE[l];
-    u.rate = 0.92;
-    var v = pickVoice(LANG_VOICE[l]);
-    if(v) u.voice = v;
-    u.onstart = function(){
-      btnPlay.classList.add('playing');
-      btnStop.classList.add('show');
-      setStatus('Voorlezen… ('+l.toUpperCase()+')');
-    };
-    u.onend = u.onerror = function(){
-      btnPlay.classList.remove('playing');
-      btnStop.classList.remove('show');
-      setStatus('');
-    };
-    if(!speechSynthesis.getVoices().length){
-      speechSynthesis.onvoiceschanged = function(){
-        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
-        speechSynthesis.speak(u);
-      };
-      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
-    } else {
-      speechSynthesis.speak(u);
-    }
-  }
-  function stop(){
-    if(window.speechSynthesis) speechSynthesis.cancel();
-    btnPlay.classList.remove('playing');
-    btnStop.classList.remove('show');
-    setStatus('Gestopt.');
-  }
-  btnPlay.addEventListener('click', play);
-  btnStop.addEventListener('click', stop);
-  if(window.speechSynthesis){
-    speechSynthesis.getVoices();
-    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
-  }
+var LANG_VOICE={nl:'nl-NL',de:'de-DE',en:'en-GB',it:'it-IT',tr:'tr-TR'};
+function getLang(){var l=localStorage.getItem('hk-lang')||'nl';return LANG_VOICE[l]?l:'nl'}
+function pickVoice(code){var voices=speechSynthesis.getVoices()||[];var p=code.slice(0,2).toLowerCase();return voices.find(function(v){return v.lang===code})||voices.find(function(v){return v.lang&&v.lang.toLowerCase().indexOf(p)===0})||null}
+var btnPlay=document.getElementById('btnPlay'),btnStop=document.getElementById('btnStop'),status=document.getElementById('ttsStatus');
+function setStatus(t){if(status)status.textContent=t}
+function play(){
+if(!window.speechSynthesis){setStatus('Voorlezen niet ondersteund.');return}
+speechSynthesis.cancel();
+var text=document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
+var l=getLang();var u=new SpeechSynthesisUtterance(text);u.lang=LANG_VOICE[l];u.rate=0.92;
+var v=pickVoice(LANG_VOICE[l]);if(v)u.voice=v;
+u.onstart=function(){btnPlay.classList.add('playing');btnStop.classList.add('show');setStatus('Voorlezen… ('+l.toUpperCase()+')')};
+u.onend=u.onerror=function(){btnPlay.classList.remove('playing');btnStop.classList.remove('show');setStatus('')};
+if(!speechSynthesis.getVoices().length){speechSynthesis.onvoiceschanged=function(){var v2=pickVoice(LANG_VOICE[l]);if(v2)u.voice=v2;speechSynthesis.speak(u)};setTimeout(function(){speechSynthesis.speak(u)},250)}
+else speechSynthesis.speak(u);
+}
+function stop(){if(window.speechSynthesis)speechSynthesis.cancel();btnPlay.classList.remove('playing');btnStop.classList.remove('show');setStatus('Gestopt.')}
+btnPlay.addEventListener('click',play);btnStop.addEventListener('click',stop);
+if(window.speechSynthesis){speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=function(){speechSynthesis.getVoices()}}
 })();
-</script>
-</body>
-</html>
+</script></body></html>
