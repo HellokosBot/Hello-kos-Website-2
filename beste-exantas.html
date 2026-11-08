@@ -1,0 +1,235 @@
+Hier is beste-exantas.html in de donkere stijl met volledige vertalingen van alle zichtbare tekst. Afbeeldingen, links en telefoonnummer blijven hetzelfde.
+
+Sla op als beste-exantas.html in je map.
+
+html
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Exántas – Hello Kos</title>
+  <style>
+    :root {
+      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
+      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
+      --text: #E8EDE8; --text-soft: #A0B0A0;
+      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
+      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.55;
+      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
+    }
+    .app-header {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px 16px; background: var(--bg-header);
+      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
+    }
+    .back-btn { grid-column: 1; color: var(--petrol); font-weight: 600; text-decoration: none; font-size: 0.9rem; }
+    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(145deg, #F0C040, #D4A017); display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
+    .logo-text { font-size: 1.2rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
+    .logo-text span { color: var(--gold-dark); font-style: italic; }
+    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
+    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
+    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; }
+    .lang-menu.open { display: block; }
+    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
+    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
+    .hero { position: relative; width: 100%; aspect-ratio: 16/11; overflow: hidden; background: #1a2525; }
+    .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.6), transparent); color: #fff; }
+    .hero-cap .area { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; opacity: 0.9; }
+    .hero-cap h1 { font-size: 1.5rem; font-weight: 800; margin-top: 2px; letter-spacing: -0.02em; }
+    .content { padding: 16px 16px 0; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+    .badge { background: rgba(58,154,154,0.15); color: #99f6e4; font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+    .block { background: var(--bg-card); border-radius: 16px; padding: 15px 16px; margin-bottom: 12px; border: 1px solid var(--border); }
+    .block h2 { font-size: 1rem; color: var(--text); margin-bottom: 8px; }
+    .block p { font-size: 0.92rem; color: var(--text); margin-bottom: 0; }
+    .img-full { margin: 0 0 12px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); }
+    .img-full img { width: 100%; display: block; max-height: 210px; object-fit: cover; }
+    .img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 0 12px; }
+    .img-pair img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; display: block; border: 1px solid var(--border); }
+    .actions { display: flex; flex-direction: column; gap: 8px; margin: 8px 0 12px; }
+    .btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 13px 16px; border-radius: 14px; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
+    .btn-map { background: var(--bg-card); color: var(--text); border: 2px solid var(--petrol); }
+    .btn-call { background: var(--petrol); color: #fff; }
+    .footer { text-align: center; padding: 16px; font-size: 0.75rem; color: var(--text-soft); }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="beste-restaurants.html" class="back-btn">← Terug</a>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🔅</div>
+      <div class="logo-text">Hello <span>Kos</span></div>
+    </a>
+    <div class="lang-wrap">
+      <button type="button" class="lang-btn" id="langBtn">
+        <span id="flag">🇳🇱</span> <span id="code">NL</span>
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="hero">
+      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-2026-03-25t175651-986-high.jpg" alt="Exántas" loading="eager">
+      <div class="hero-cap"><div class="area" data-i18n="area">Kos-stad</div><h1>Exántas</h1></div>
+    </div>
+    <div class="content">
+      <div class="badge-row">
+        <span class="badge" data-i18n="badge1">Kos-stad</span>
+        <span class="badge" data-i18n="badge2">Ouzeri & meze</span>
+      </div>
+      <div class="block"><h2 data-i18n="h1">Over dit restaurant</h2><p data-i18n="p1">Exántas is een authentieke ouzeri-kafeneío in een rustige straat net buiten het drukke centrum. Hier proef je wat Grieken zelf bestellen bij een glas ouzo.</p></div>
+      <div class="img-full"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-2026-03-25t175631-967-high.jpg" alt="" loading="lazy"></div>
+      <div class="block"><h2 data-i18n="h2">Sfeer & eten</h2><p data-i18n="p2">Versgebakken octopus, gegrilde sardines, feta met honing, dolmadakia, courgetteballen – eenvoudig, vers en zonder toeristische opsmuk. Warme, ongedwongen sfeer.</p></div>
+      <div class="img-pair"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-2026-03-25t175622-865-high.jpg" alt="" loading="lazy"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-2026-03-25t175631-967-standard-9pzc03.jpg" alt="" loading="lazy"></div>
+      <div class="block"><h2 data-i18n="h3">Praktisch</h2><p data-i18n="p3">Rustiger dan de boulevard. Geschikt voor een ontspannen middag of avond met meze om te delen.</p></div>
+      <div class="img-full"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-2026-03-25t175651-986-standard-fqq4qp.jpg" alt="" loading="lazy"></div>
+      <div class="img-pair"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-2026-03-25t175622-865-standard-1iyhoe.jpg" alt="" loading="lazy"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/476800604_580489168317462_7337032027792842929_n-high-wxs72o.jpg" alt="" loading="lazy"></div>
+      <div class="actions">
+        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Exantas%20ouzeri%20Kos" target="_blank" rel="noopener" data-i18n="mapBtn">Locatie op de kaart</a>
+        <a class="btn btn-call" href="tel:+302242023642" data-i18n="callBtn">Bellen · +30 2242 023642</a>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">Hello Kos</footer>
+
+<script>
+(function(){
+  var I18N = {
+    nl: {
+      area: "Kos-stad",
+      badge1: "Kos-stad",
+      badge2: "Ouzeri & meze",
+      h1: "Over dit restaurant",
+      p1: "Exántas is een authentieke ouzeri-kafeneío in een rustige straat net buiten het drukke centrum. Hier proef je wat Grieken zelf bestellen bij een glas ouzo.",
+      h2: "Sfeer & eten",
+      p2: "Versgebakken octopus, gegrilde sardines, feta met honing, dolmadakia, courgetteballen – eenvoudig, vers en zonder toeristische opsmuk. Warme, ongedwongen sfeer.",
+      h3: "Praktisch",
+      p3: "Rustiger dan de boulevard. Geschikt voor een ontspannen middag of avond met meze om te delen.",
+      mapBtn: "Locatie op de kaart",
+      callBtn: "Bellen · +30 2242 023642"
+    },
+    en: {
+      area: "Kos town",
+      badge1: "Kos town",
+      badge2: "Ouzeri & meze",
+      h1: "About this restaurant",
+      p1: "Exántas is an authentic ouzeri-kafeneio on a quiet street just outside the busy centre. Here you taste what Greeks themselves order with a glass of ouzo.",
+      h2: "Atmosphere & food",
+      p2: "Freshly fried octopus, grilled sardines, feta with honey, dolmadakia, courgette balls – simple, fresh and without tourist frills. Warm, relaxed atmosphere.",
+      h3: "Practical",
+      p3: "Quieter than the boulevard. Suitable for a relaxed afternoon or evening with meze to share.",
+      mapBtn: "Location on the map",
+      callBtn: "Call · +30 2242 023642"
+    },
+    de: {
+      area: "Kos-Stadt",
+      badge1: "Kos-Stadt",
+      badge2: "Ouzeri & Meze",
+      h1: "Über dieses Restaurant",
+      p1: "Exántas ist ein authentisches Ouzeri-Kafeneio in einer ruhigen Straße knapp außerhalb des belebten Zentrums. Hier schmeckst du, was Griechen selbst zu einem Glas Ouzo bestellen.",
+      h2: "Atmosphäre & Essen",
+      p2: "Frisch gebratener Oktopus, gegrillte Sardinen, Feta mit Honig, Dolmadakia, Zucchinibällchen – einfach, frisch und ohne touristischen Schnickschnack. Warme, lockere Atmosphäre.",
+      h3: "Praktisch",
+      p3: "Ruhiger als die Promenade. Geeignet für einen entspannten Nachmittag oder Abend mit Meze zum Teilen.",
+      mapBtn: "Standort auf der Karte",
+      callBtn: "Anrufen · +30 2242 023642"
+    },
+    it: {
+      area: "Città di Kos",
+      badge1: "Città di Kos",
+      badge2: "Ouzeri & meze",
+      h1: "Su questo ristorante",
+      p1: "Exántas è un autentico ouzeri-kafeneio in una strada tranquilla appena fuori dal centro affollato. Qui assaggi ciò che i greci ordinano con un bicchiere di ouzo.",
+      h2: "Atmosfera & cibo",
+      p2: "Polpo appena fritto, sardine alla griglia, feta con miele, dolmadakia, polpette di zucchine – semplice, fresco e senza fronzoli turistici. Atmosfera calda e informale.",
+      h3: "Pratico",
+      p3: "Più tranquillo del boulevard. Adatto a un pomeriggio o sera rilassata con meze da condividere.",
+      mapBtn: "Posizione sulla mappa",
+      callBtn: "Chiama · +30 2242 023642"
+    },
+    tr: {
+      area: "Kos şehri",
+      badge1: "Kos şehri",
+      badge2: "Ouzeri & meze",
+      h1: "Bu restoran hakkında",
+      p1: "Exántas, kalabalık merkezin hemen dışında sakin bir sokakta otantik bir ouzeri-kafeneio’dur. Burada Yunanların kendilerinin bir bardak ouzo ile sipariş ettiğini tadarsın.",
+      h2: "Atmosfer & yemek",
+      p2: "Taze kızarmış ahtapot, ızgara sardalya, ballı feta, dolmadakia, kabak köftesi – basit, taze ve turistik süslemeler olmadan. Sıcak, rahat atmosfer.",
+      h3: "Pratik",
+      p3: "Bulvardan daha sakin. Paylaşmak için meze ile rahat bir öğleden sonra veya akşam için uygun.",
+      mapBtn: "Haritada konum",
+      callBtn: "Ara · +30 2242 023642"
+    },
+    es: {
+      area: "Ciudad de Kos",
+      badge1: "Ciudad de Kos",
+      badge2: "Ouzeri & meze",
+      h1: "Sobre este restaurante",
+      p1: "Exántas es un auténtico ouzeri-kafeneio en una calle tranquila justo fuera del centro concurrido. Aquí pruebas lo que los griegos piden con un vaso de ouzo.",
+      h2: "Ambiente & comida",
+      p2: "Pulpo recién frito, sardinas a la parrilla, feta con miel, dolmadakia, albóndigas de calabacín – sencillo, fresco y sin adornos turísticos. Ambiente cálido y relajado.",
+      h3: "Práctico",
+      p3: "Más tranquilo que el bulevar. Adecuado para una tarde o noche relajada con meze para compartir.",
+      mapBtn: "Ubicación en el mapa",
+      callBtn: "Llamar · +30 2242 023642"
+    }
+  };
+
+  function setLang(l) {
+    if (!I18N[l]) l = 'nl';
+    localStorage.setItem('hk-lang', l);
+    document.documentElement.lang = l;
+    var d = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (d[k]) el.textContent = d[k];
+    });
+    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
+    if (opt) {
+      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
+      document.getElementById('code').textContent = l.toUpperCase();
+    }
+    document.querySelectorAll('.lang-option').forEach(function(o){
+      o.classList.toggle('active', o.getAttribute('data-lang') === l);
+    });
+    closeMenu();
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  function openMenu(){ langMenu.classList.add('open'); }
+  function closeMenu(){ langMenu.classList.remove('open'); }
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    langMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.addEventListener('click', closeMenu);
+  document.querySelectorAll('.lang-option').forEach(function(btn){
+    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
+  });
+
+  var saved = localStorage.getItem('hk-lang') || 'nl';
+  setLang(saved);
+})();
+</script>
+</body>
+</html>
