@@ -6,6 +6,26 @@
 <meta name="theme-color" content="#0D1A1A">
 <title>Tandarts – Hello Kos</title>
 <link rel="stylesheet" href="hello-kos.css">
+<style>
+.call-list{display:flex;flex-direction:column;gap:10px;margin:12px 0}
+a.call-btn{display:flex;align-items:center;gap:12px;text-decoration:none;background:linear-gradient(180deg,#3eaeae 0%,#2b7e7e 100%);color:#fff;border:0;border-radius:16px;padding:14px 16px;box-shadow:0 6px 16px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.25);cursor:pointer}
+a.call-btn:active{transform:translateY(1px);box-shadow:0 2px 8px rgba(0,0,0,.3)}
+a.call-btn .ico{flex:0 0 44px;width:44px;height:44px;border-radius:14px;background:var(--gold);color:#1c1404;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 -2px 0 rgba(0,0,0,.15)}
+a.call-btn .call-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
+a.call-btn .call-main{font-weight:800;font-size:1.08rem;line-height:1.25}
+a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba(255,255,255,.9)}
+.photo{margin:12px 0;border-radius:14px;overflow:hidden;border:1px solid var(--border)}
+.photo img{display:block;height:auto}
+.photo-wait img{width:408px;max-width:100%}
+.photo-sign img{width:562px;max-width:100%}
+.photo-card img{width:400px;max-width:100%}
+.card h3{font-size:.95rem;margin:12px 0 8px;color:var(--text)}
+.card ul{margin:0 0 8px;padding-left:1.1rem;color:var(--text-soft);font-size:.92rem}
+.card li{margin:0 0 4px}
+.hours{margin:4px 0 8px}
+.h-row{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:.86rem;color:var(--text-soft)}
+.h-row span:last-child{font-weight:700;color:var(--text);text-align:right}
+</style>
 </head>
 <body class="hk-page">
 <header class="app-header">
@@ -28,24 +48,319 @@
 </header>
 <div class="overlay" id="overlay"></div>
 <main class="main">
-  <div class="hero-wrap"><img src="img/hk/hulp-tandarts.jpg" alt=""></div>
+  <div class="hero-wrap"><img src="img/hk/hulp-tandarts.jpg" alt="" width="1920" height="1280"></div>
   <p class="parent-link"><a href="noodgevallen.html" data-i18n="back">← Noodgevallen</a></p>
   <h1 data-i18n="title">Tandarts</h1>
-  <p class="lead" data-i18n="lead">De gids noemde praktijken voor een afgebroken tand of een spoed, onder meer Georgios & Koutsouradis en George Hatzinikitas, en ook een praktijk bij Bar Street en een bij de rotonde. Telefoon en adres staan hier niet.</p>
-  <div class="badges"><span class="badge" data-i18n="b0">Prijs ter plaatse</span></div>
-  <div class="actions">
-    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
-    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
-    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=dentist%20Kos%20town" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=dentist%20Kos%20town" target="_blank" rel="noopener">Apple Maps</a>
-  </div>
-  <p class="status" id="ttsStatus"></p>
-  <div id="readText">
-    <article class="card"><h2 data-i18n="h0">Pijn</h2><p data-i18n="p0">Apotheken kunnen soms helpen tot je een tandarts ziet. Het ziekenhuis is voor echte spoed.</p></article>
-    <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">Het telefoonnummer en het exacte adres staan nog niet in deze gids. Bel bij direct gevaar 112.</span></div>
-  </div>
+  <p class="lead" data-i18n="lead">Tik op een knop om te bellen.</p>
+
+  <article class="card">
+    <p data-i18n="pIntro">Op het prachtige Griekse eiland Kos vind je veel tandartsen. Door de jaren heen zijn er diverse tandartspraktijken ontstaan met uiteenlopende specialisaties, met moderne en minder moderne faciliteiten. Het aanbod is breed. Wij van Hello Kos begrijpen dat u tijdens uw vakantie alleen in geval van nood naar de tandarts wilt. Daarom hebben we een zorgvuldige selectie gemaakt van twee tandartsen die voldoen aan hoge kwaliteitsnormen, vergelijkbaar met Nederlandse standaarden.</p>
+    <h2 data-i18n="hModern">Moderne zorg, vertrouwde kwaliteit</h2>
+    <p data-i18n="pModern">De meeste praktijken op Kos zijn uitstekend uitgerust, werken met de nieuwste technieken en zijn gewend aan het behandelen van buitenlandse patiënten. Engels spreken is meestal geen probleem. Wij hebben twee tandartsen geselecteerd waarvan we het werk en de werkwijze goed kennen, en waarvan de kwaliteit vergelijkbaar is met Nederlandse standaarden, zodat u zich geen zorgen hoeft te maken dat men hier “nog met een steen en beitel werkt”.</p>
+    <h2 data-i18n="hEach">Voor elke situatie</h2>
+    <p data-i18n="pEach">Het is fijn om te weten dat u snel en professioneel geholpen kunt worden, zodat u zo snel mogelijk weer zorgeloos van uw vakantie kunt genieten. De eerste tandarts die wij aanbevelen, richt zich specifiek op esthetische tandheelkunde, zoals een afgebroken tand, spoed, en andere ernstige klachten als kiespijn. Onze tweede tandartskeuze is er als u last heeft van ontstekingen of acute problemen tijdens uw vakantie.</p>
+  </article>
+
+  <article class="card">
+    <h2 data-i18n="h1">Zware ingrepen: Georgios &amp; Koutsouradis</h2>
+    <h3 data-i18n="h1b">Betrouwbare tandheelkundige zorg voor toeristen</h3>
+    <p data-i18n="p1a">Tandartspraktijk Georgios &amp; Koutsouradis is een moderne tandartspraktijk in het centrum van Kos-stad. De praktijk wordt gerund door vader en zoon: Georgios Koutsouradis en Konstantinos Koutsouradis. De praktijk biedt volledige tandheelkundige zorg en is goed bekend bij zowel lokale bewoners als toeristen die tijdens hun vakantie dringend een tandarts nodig hebben.</p>
+    <h3 data-i18n="treat">Behandelingen</h3>
+    <ul>
+      <li data-i18n="t1a">Spoedbehandelingen bij kiespijn, afgebroken tanden, ontstoken tandvlees of losse vullingen</li>
+      <li data-i18n="t1b">Algemene tandheelkunde (controles, reiniging, vullingen)</li>
+      <li data-i18n="t1c">Wortelkanaalbehandelingen</li>
+      <li data-i18n="t1d">Kronen, bruggen en protheses</li>
+      <li data-i18n="t1e">Esthetische behandelingen zoals bleken en witte vullingen</li>
+      <li data-i18n="t1f">Kindertandheelkunde</li>
+    </ul>
+    <p data-i18n="p1b">De praktijk beschikt over moderne apparatuur en werkt met hoogwaardige materialen. Patiënten worden snel en zorgvuldig geholpen in een rustige en schone omgeving.</p>
+    <p data-i18n="p1c">Of u nu last heeft van acute pijn of gewoon een controle wilt: bij Tandarts Georgios &amp; Koutsouradis kunt u rekenen op professionele en vriendelijke hulp.</p>
+    <h3 data-i18n="addrH">Adres</h3>
+    <p><strong>Alexandrou Diakou 7, Kos 853 00 (Barstreet)</strong></p>
+    <h3 data-i18n="hours">Uren</h3>
+    <div class="hours">
+      <div class="h-row"><span data-i18n="dMa">Ma.</span><span>09:00–13:30 18:00–20:00</span></div>
+      <div class="h-row"><span data-i18n="dDi">Di.</span><span>09:00–13:30 18:00–20:00</span></div>
+      <div class="h-row"><span data-i18n="dWo">Woe.</span><span>09:00–14:00</span></div>
+      <div class="h-row"><span data-i18n="dDo">Don.</span><span>09:00–13:30 18:00–20:00</span></div>
+      <div class="h-row"><span data-i18n="dVr">Vrij.</span><span>09:00–13:30</span></div>
+      <div class="h-row"><span data-i18n="dZa">Zat.</span><span data-i18n="closed">Gesloten</span></div>
+      <div class="h-row"><span data-i18n="dZo">Zon.</span><span data-i18n="closed">Gesloten</span></div>
+    </div>
+    <div class="call-list">
+      <a class="call-btn" href="tel:+302242028827"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="call-copy"><span class="call-main"><span data-i18n="call">Bel</span> +30 22420 28827</span><span class="call-sub">Georgios &amp; Koutsouradis</span></span></a>
+      <a class="call-btn" href="https://api.whatsapp.com/send?phone=%2B302242028827"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.7-1.2A9 9 0 1 0 12 3zm0 2a7 7 0 0 1 6.1 3.6 7 7 0 0 1-.6 8.1 7 7 0 0 1-8.2.7l-.3-.2-2.8.7.7-2.7-.2-.3A7 7 0 0 1 12 5z"/></svg></span><span class="call-copy"><span class="call-main" data-i18n="wa">WhatsApp</span><span class="call-sub">Georgios &amp; Koutsouradis</span></span></a>
+    </div>
+    <div class="photo photo-wait"><img src="img/hk/tandarts-wachtkamer.jpg" alt="" width="408" height="544"></div>
+    <div class="photo photo-sign"><img src="img/hk/tandarts-koutsouradis-bord.jpg" alt="" width="562" height="313"></div>
+    <div class="photo photo-card"><img src="img/hk/tandarts-koutsouradis-kaart.jpg" alt="" width="400" height="261"></div>
+  </article>
+
+  <article class="card">
+    <h2 data-i18n="h2">Cosmetisch: Hatzinikitas George</h2>
+    <p data-i18n="p2a">Tandarts Hatzinikitas George, Georgios Hatzinikitas, is een ervaren tandarts in het centrum van Kos-stad. Hij is gespecialiseerd als prothetoloog (protheses en restauraties) en implantoloog (implantaten). De praktijk wordt vaak samen met orthodontist Christina Hatzinikita gerund. Samen bieden zij een breed scala aan tandheelkundige behandelingen aan voor zowel lokale bewoners als toeristen.</p>
+    <h3 data-i18n="treat">Behandelingen</h3>
+    <ul>
+      <li data-i18n="t2a">Spoedbehandelingen (kiespijn, afgebroken tand, ontsteking, losse vulling)</li>
+      <li data-i18n="t2b">Algemene tandheelkunde en controles</li>
+      <li data-i18n="t2c">Kronen, bruggen en protheses</li>
+      <li data-i18n="t2d">Implantaten en implantologie</li>
+      <li data-i18n="t2e">Wortelkanaalbehandelingen</li>
+      <li data-i18n="t2f">Esthetische tandheelkunde (bleken, witte vullingen)</li>
+      <li data-i18n="t2g">Orthodontie (via Christina Hatzinikita)</li>
+    </ul>
+    <p data-i18n="p2b">De praktijk staat bekend om een vriendelijke aanpak, duidelijke uitleg en redelijke prijzen. Toeristen waarderen vooral de snelle hulp bij spoedgevallen en de goede beheersing van de Engelse taal.</p>
+    <h3 data-i18n="addrH">Adres</h3>
+    <p><strong>Eth. Antistasis 1, Kos 853 00</strong></p>
+    <h3 data-i18n="hours">Uren</h3>
+    <div class="hours">
+      <div class="h-row"><span data-i18n="dMa">Ma.</span><span>09:00–13:30 18:00–20:00</span></div>
+      <div class="h-row"><span data-i18n="dDi">Di.</span><span>09:00–13:30 18:00–20:00</span></div>
+      <div class="h-row"><span data-i18n="dWo">Woe.</span><span>09:00–14:00</span></div>
+      <div class="h-row"><span data-i18n="dDo2">Do.</span><span>09:00–13:30 18:00–20:00</span></div>
+      <div class="h-row"><span data-i18n="dVr">Vrij.</span><span>09:00–13:30</span></div>
+      <div class="h-row"><span data-i18n="dZa">Zat.</span><span data-i18n="closed">Gesloten</span></div>
+      <div class="h-row"><span data-i18n="dZo">Zon.</span><span data-i18n="closed">Gesloten</span></div>
+    </div>
+    <div class="call-list">
+      <a class="call-btn" href="tel:+302242023700"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="call-copy"><span class="call-main"><span data-i18n="call">Bel</span> +30 22420 23700</span><span class="call-sub">Hatzinikitas George</span></span></a>
+    </div>
+  </article>
 </main>
 <footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
-<script>window.HK_DICT = {"nl": {"title": "Tandarts", "lead": "De gids noemde praktijken voor een afgebroken tand of een spoed, onder meer Georgios & Koutsouradis en George Hatzinikitas, en ook een praktijk bij Bar Street en een bij de rotonde. Telefoon en adres staan hier niet.", "back": "← Noodgevallen", "note": "Het telefoonnummer en het exacte adres staan nog niet in deze gids. Bel bij direct gevaar 112.", "h0": "Pijn", "p0": "Apotheken kunnen soms helpen tot je een tandarts ziet. Het ziekenhuis is voor echte spoed.", "b0": "Prijs ter plaatse"}, "de": {"title": "Zahnarzt", "lead": "Der Guide nannte Praxen für einen abgebrochenen Zahn oder einen Notfall, unter anderem Georgios & Koutsouradis und George Hatzinikitas, und auch eine Praxis bei Bar Street und eine am Kreisverkehr. Telefon und Adresse stehen hier nicht.", "back": "← Notfälle", "note": "Telefonnummer und genaue Adresse stehen noch nicht in diesem Guide. Bei direkter Gefahr: 112.", "h0": "Schmerz", "p0": "Apotheken können manchmal helfen, bis du einen Zahnarzt siehst. Das Krankenhaus ist für echte Notfälle.", "b0": "Preis vor Ort"}, "en": {"title": "Dentist", "lead": "The guide named practices for a broken tooth or an emergency, including Georgios & Koutsouradis and George Hatzinikitas, and also a practice by Bar Street and one by the roundabout. Phone and address are not written here.", "back": "← Emergencies", "note": "The phone number and exact address are not in this guide yet. If you are in danger, call 112.", "h0": "Pain", "p0": "A pharmacy can sometimes help until you see a dentist. The hospital is for a real emergency.", "b0": "Price on site"}, "it": {"title": "Dentista", "lead": "La guida citava studi per un dente rotto o un’urgenza, tra cui Georgios & Koutsouradis e George Hatzinikitas, e anche uno studio verso Bar Street e uno alla rotonda. Telefono e indirizzo non sono scritti qui.", "back": "← Emergenze", "note": "Numero di telefono e indirizzo esatto non sono ancora in questa guida. In pericolo chiama il 112.", "h0": "Dolore", "p0": "Una farmacia a volte aiuta finché non vedi un dentista. L’ospedale è per una vera urgenza.", "b0": "Prezzo sul posto"}, "tr": {"title": "Diş hekimi", "lead": "Rehber kırık diş veya acil için muayenehaneler saydı, Georgios & Koutsouradis ve George Hatzinikitas dahil, ayrıca Bar Street tarafında ve kavşakta bir muayenehane. Telefon ve adres burada yok.", "back": "← Acil durum", "note": "Telefon ve tam adres bu rehberde henüz yok. Tehlike varsa 112'yi ara.", "h0": "Ağrı", "p0": "Diş hekimini görene kadar eczane bazen yardım eder. Hastane gerçek acil içindir.", "b0": "Fiyat yerinde"}, "es": {"title": "Dentista", "lead": "La guía citaba consultas para un diente roto o una urgencia, entre ellas Georgios & Koutsouradis y George Hatzinikitas, y también una hacia Bar Street y una en la rotonda. Teléfono y dirección no están aquí.", "back": "← Emergencias", "note": "El teléfono y la dirección exacta aún no están en esta guía. Si hay peligro, llama al 112.", "h0": "Dolor", "p0": "Una farmacia a veces ayuda hasta que ves al dentista. El hospital es para una urgencia de verdad.", "b0": "Precio en el sitio"}};</script>
+<script>
+window.HK_DICT = {
+  nl: {
+    title: "Tandarts",
+    back: "← Noodgevallen",
+    lead: "Tik op een knop om te bellen.",
+    call: "Bel",
+    wa: "WhatsApp",
+    pIntro: "Op het prachtige Griekse eiland Kos vind je veel tandartsen. Door de jaren heen zijn er diverse tandartspraktijken ontstaan met uiteenlopende specialisaties, met moderne en minder moderne faciliteiten. Het aanbod is breed. Wij van Hello Kos begrijpen dat u tijdens uw vakantie alleen in geval van nood naar de tandarts wilt. Daarom hebben we een zorgvuldige selectie gemaakt van twee tandartsen die voldoen aan hoge kwaliteitsnormen, vergelijkbaar met Nederlandse standaarden.",
+    hModern: "Moderne zorg, vertrouwde kwaliteit",
+    pModern: "De meeste praktijken op Kos zijn uitstekend uitgerust, werken met de nieuwste technieken en zijn gewend aan het behandelen van buitenlandse patiënten. Engels spreken is meestal geen probleem. Wij hebben twee tandartsen geselecteerd waarvan we het werk en de werkwijze goed kennen, en waarvan de kwaliteit vergelijkbaar is met Nederlandse standaarden, zodat u zich geen zorgen hoeft te maken dat men hier “nog met een steen en beitel werkt”.",
+    hEach: "Voor elke situatie",
+    pEach: "Het is fijn om te weten dat u snel en professioneel geholpen kunt worden, zodat u zo snel mogelijk weer zorgeloos van uw vakantie kunt genieten. De eerste tandarts die wij aanbevelen, richt zich specifiek op esthetische tandheelkunde, zoals een afgebroken tand, spoed, en andere ernstige klachten als kiespijn. Onze tweede tandartskeuze is er als u last heeft van ontstekingen of acute problemen tijdens uw vakantie.",
+    h1: "Zware ingrepen: Georgios & Koutsouradis",
+    h1b: "Betrouwbare tandheelkundige zorg voor toeristen",
+    p1a: "Tandartspraktijk Georgios & Koutsouradis is een moderne tandartspraktijk in het centrum van Kos-stad. De praktijk wordt gerund door vader en zoon: Georgios Koutsouradis en Konstantinos Koutsouradis. De praktijk biedt volledige tandheelkundige zorg en is goed bekend bij zowel lokale bewoners als toeristen die tijdens hun vakantie dringend een tandarts nodig hebben.",
+    treat: "Behandelingen",
+    t1a: "Spoedbehandelingen bij kiespijn, afgebroken tanden, ontstoken tandvlees of losse vullingen",
+    t1b: "Algemene tandheelkunde (controles, reiniging, vullingen)",
+    t1c: "Wortelkanaalbehandelingen",
+    t1d: "Kronen, bruggen en protheses",
+    t1e: "Esthetische behandelingen zoals bleken en witte vullingen",
+    t1f: "Kindertandheelkunde",
+    p1b: "De praktijk beschikt over moderne apparatuur en werkt met hoogwaardige materialen. Patiënten worden snel en zorgvuldig geholpen in een rustige en schone omgeving.",
+    p1c: "Of u nu last heeft van acute pijn of gewoon een controle wilt: bij Tandarts Georgios & Koutsouradis kunt u rekenen op professionele en vriendelijke hulp.",
+    addrH: "Adres",
+    hours: "Uren",
+    dMa: "Ma.", dDi: "Di.", dWo: "Woe.", dDo: "Don.", dDo2: "Do.", dVr: "Vrij.", dZa: "Zat.", dZo: "Zon.",
+    closed: "Gesloten",
+    h2: "Cosmetisch: Hatzinikitas George",
+    p2a: "Tandarts Hatzinikitas George, Georgios Hatzinikitas, is een ervaren tandarts in het centrum van Kos-stad. Hij is gespecialiseerd als prothetoloog (protheses en restauraties) en implantoloog (implantaten). De praktijk wordt vaak samen met orthodontist Christina Hatzinikita gerund. Samen bieden zij een breed scala aan tandheelkundige behandelingen aan voor zowel lokale bewoners als toeristen.",
+    t2a: "Spoedbehandelingen (kiespijn, afgebroken tand, ontsteking, losse vulling)",
+    t2b: "Algemene tandheelkunde en controles",
+    t2c: "Kronen, bruggen en protheses",
+    t2d: "Implantaten en implantologie",
+    t2e: "Wortelkanaalbehandelingen",
+    t2f: "Esthetische tandheelkunde (bleken, witte vullingen)",
+    t2g: "Orthodontie (via Christina Hatzinikita)",
+    p2b: "De praktijk staat bekend om een vriendelijke aanpak, duidelijke uitleg en redelijke prijzen. Toeristen waarderen vooral de snelle hulp bij spoedgevallen en de goede beheersing van de Engelse taal."
+  },
+  de: {
+    title: "Zahnarzt",
+    back: "← Notfälle",
+    lead: "Tippe auf eine Schaltfläche, um anzurufen.",
+    call: "Anrufen",
+    wa: "WhatsApp",
+    pIntro: "Auf der schönen griechischen Insel Kos gibt es viele Zahnärzte. Im Laufe der Jahre sind verschiedene Zahnarztpraxen mit unterschiedlichen Fachrichtungen entstanden, mit modernen und weniger modernen Einrichtungen. Das Angebot ist breit. Wir von Hello Kos verstehen, dass Sie im Urlaub nur im Notfall zum Zahnarzt wollen. Deshalb haben wir sorgfältig zwei Zahnärzte ausgewählt, die hohen Qualitätsmaßstäben entsprechen, vergleichbar mit niederländischen Standards.",
+    hModern: "Moderne Versorgung, vertraute Qualität",
+    pModern: "Die meisten Praxen auf Kos sind sehr gut ausgestattet, arbeiten mit den neuesten Techniken und sind es gewohnt, ausländische Patienten zu behandeln. Englisch zu sprechen ist meist kein Problem. Wir haben zwei Zahnärzte ausgewählt, deren Arbeit und Arbeitsweise wir gut kennen und deren Qualität mit niederländischen Standards vergleichbar ist, damit Sie sich keine Sorgen machen müssen, dass man hier „noch mit Stein und Meißel arbeitet“.",
+    hEach: "Für jede Situation",
+    pEach: "Es ist gut zu wissen, dass Ihnen schnell und professionell geholfen wird, damit Sie so bald wie möglich wieder unbeschwert Urlaub machen können. Der erste Zahnarzt, den wir empfehlen, richtet sich speziell auf ästhetische Zahnheilkunde, etwa einen abgebrochenen Zahn, Notfälle und andere ernste Beschwerden wie Zahnschmerzen. Unsere zweite Wahl ist da, wenn Sie während des Urlaubs Entzündungen oder akute Probleme haben.",
+    h1: "Schwere Eingriffe: Georgios & Koutsouradis",
+    h1b: "Zuverlässige zahnärztliche Versorgung für Touristen",
+    p1a: "Die Zahnarztpraxis Georgios & Koutsouradis ist eine moderne Praxis im Zentrum von Kos-Stadt. Die Praxis wird von Vater und Sohn geführt: Georgios Koutsouradis und Konstantinos Koutsouradis. Die Praxis bietet vollständige zahnärztliche Versorgung und ist sowohl bei Einheimischen als auch bei Touristen bekannt, die im Urlaub dringend einen Zahnarzt brauchen.",
+    treat: "Behandlungen",
+    t1a: "Notfallbehandlungen bei Zahnschmerzen, abgebrochenen Zähnen, entzündetem Zahnfleisch oder lockeren Füllungen",
+    t1b: "Allgemeine Zahnheilkunde (Kontrollen, Reinigung, Füllungen)",
+    t1c: "Wurzelkanalbehandlungen",
+    t1d: "Kronen, Brücken und Prothesen",
+    t1e: "Ästhetische Behandlungen wie Bleichen und weiße Füllungen",
+    t1f: "Kinderzahnheilkunde",
+    p1b: "Die Praxis hat moderne Geräte und arbeitet mit hochwertigen Materialien. Patienten werden schnell und sorgfältig in einer ruhigen und sauberen Umgebung geholfen.",
+    p1c: "Ob Sie akute Schmerzen haben oder nur eine Kontrolle wollen: bei Zahnarzt Georgios & Koutsouradis können Sie auf professionelle und freundliche Hilfe zählen.",
+    addrH: "Adresse",
+    hours: "Zeiten",
+    dMa: "Mo.", dDi: "Di.", dWo: "Mi.", dDo: "Do.", dDo2: "Do.", dVr: "Fr.", dZa: "Sa.", dZo: "So.",
+    closed: "Geschlossen",
+    h2: "Kosmetisch: Hatzinikitas George",
+    p2a: "Zahnarzt Hatzinikitas George, Georgios Hatzinikitas, ist ein erfahrener Zahnarzt im Zentrum von Kos-Stadt. Er ist spezialisiert als Prothetiker (Prothesen und Restaurationen) und Implantologe (Implantate). Die Praxis wird oft zusammen mit der Kieferorthopädin Christina Hatzinikita geführt. Zusammen bieten sie ein breites Spektrum zahnärztlicher Behandlungen für Einheimische und Touristen.",
+    t2a: "Notfallbehandlungen (Zahnschmerzen, abgebrochener Zahn, Entzündung, lockere Füllung)",
+    t2b: "Allgemeine Zahnheilkunde und Kontrollen",
+    t2c: "Kronen, Brücken und Prothesen",
+    t2d: "Implantate und Implantologie",
+    t2e: "Wurzelkanalbehandlungen",
+    t2f: "Ästhetische Zahnheilkunde (Bleichen, weiße Füllungen)",
+    t2g: "Kieferorthopädie (über Christina Hatzinikita)",
+    p2b: "Die Praxis ist bekannt für einen freundlichen Umgang, klare Erklärungen und angemessene Preise. Touristen schätzen vor allem die schnelle Hilfe im Notfall und die guten Englischkenntnisse."
+  },
+  en: {
+    title: "Dentist",
+    back: "← Emergencies",
+    lead: "Tap a button to call.",
+    call: "Call",
+    wa: "WhatsApp",
+    pIntro: "On the beautiful Greek island of Kos you will find many dentists. Over the years various dental practices have grown up, with different specialisms and with modern and less modern facilities. The range is wide. We at Hello Kos understand that on holiday you only want a dentist in an emergency. That is why we have carefully selected two dentists who meet high quality standards, comparable to Dutch standards.",
+    hModern: "Modern care, familiar quality",
+    pModern: "Most practices on Kos are very well equipped, work with the latest techniques and are used to treating foreign patients. Speaking English is usually no problem. We have selected two dentists whose work and way of working we know well, and whose quality is comparable to Dutch standards, so you do not have to worry that people here “still work with a stone and a chisel”.",
+    hEach: "For every situation",
+    pEach: "It is good to know that you can be helped quickly and professionally, so you can get back to enjoying your holiday without worry as soon as possible. The first dentist we recommend focuses specifically on aesthetic dentistry, such as a broken tooth, emergencies, and other serious complaints such as toothache. Our second dentist is there if you have infections or acute problems during your holiday.",
+    h1: "Major procedures: Georgios & Koutsouradis",
+    h1b: "Reliable dental care for tourists",
+    p1a: "The Georgios & Koutsouradis dental practice is a modern practice in the centre of Kos town. The practice is run by father and son: Georgios Koutsouradis and Konstantinos Koutsouradis. The practice offers full dental care and is well known to both local residents and tourists who urgently need a dentist during their holiday.",
+    treat: "Treatments",
+    t1a: "Emergency treatment for toothache, broken teeth, inflamed gums or loose fillings",
+    t1b: "General dentistry (check-ups, cleaning, fillings)",
+    t1c: "Root canal treatments",
+    t1d: "Crowns, bridges and dentures",
+    t1e: "Aesthetic treatments such as whitening and white fillings",
+    t1f: "Children’s dentistry",
+    p1b: "The practice has modern equipment and works with high-quality materials. Patients are helped quickly and carefully in a quiet, clean setting.",
+    p1c: "Whether you have acute pain or just want a check-up: at Dentist Georgios & Koutsouradis you can count on professional and friendly help.",
+    addrH: "Address",
+    hours: "Hours",
+    dMa: "Mon", dDi: "Tue", dWo: "Wed", dDo: "Thu", dDo2: "Thu", dVr: "Fri", dZa: "Sat", dZo: "Sun",
+    closed: "Closed",
+    h2: "Cosmetic: Hatzinikitas George",
+    p2a: "Dentist Hatzinikitas George, Georgios Hatzinikitas, is an experienced dentist in the centre of Kos town. He specialises as a prosthodontist (dentures and restorations) and implantologist (implants). The practice is often run together with orthodontist Christina Hatzinikita. Together they offer a wide range of dental treatments for both local residents and tourists.",
+    t2a: "Emergency treatment (toothache, broken tooth, infection, loose filling)",
+    t2b: "General dentistry and check-ups",
+    t2c: "Crowns, bridges and dentures",
+    t2d: "Implants and implantology",
+    t2e: "Root canal treatments",
+    t2f: "Aesthetic dentistry (whitening, white fillings)",
+    t2g: "Orthodontics (via Christina Hatzinikita)",
+    p2b: "The practice is known for a friendly approach, clear explanations and reasonable prices. Tourists especially appreciate the quick help in emergencies and the good command of English."
+  },
+  it: {
+    title: "Dentista",
+    back: "← Emergenze",
+    lead: "Tocca un pulsante per chiamare.",
+    call: "Chiama",
+    wa: "WhatsApp",
+    pIntro: "Sulla bella isola greca di Kos trovi molti dentisti. Nel corso degli anni sono nati diversi studi dentistici con specializzazioni diverse, con strutture moderne e meno moderne. L’offerta è ampia. Noi di Hello Kos capiamo che in vacanza vuoi andare dal dentista solo in caso di emergenza. Per questo abbiamo scelto con cura due dentisti che rispettano standard di qualità alti, paragonabili a quelli olandesi.",
+    hModern: "Cure moderne, qualità familiare",
+    pModern: "La maggior parte degli studi a Kos è molto ben attrezzata, lavora con le tecniche più recenti ed è abituata a curare pazienti stranieri. Parlare inglese di solito non è un problema. Abbiamo scelto due dentisti di cui conosciamo bene il lavoro e il modo di lavorare, e la cui qualità è paragonabile agli standard olandesi, così non devi preoccuparti che qui si lavori “ancora con pietra e scalpello”.",
+    hEach: "Per ogni situazione",
+    pEach: "È bello sapere che puoi essere aiutato in fretta e in modo professionale, così puoi tornare il prima possibile a goderti la vacanza senza pensieri. Il primo dentista che consigliamo si dedica in particolare all’odontoiatria estetica, come un dente spezzato, un’urgenza e altri disturbi seri come il mal di denti. La nostra seconda scelta è lì se durante la vacanza hai infiammazioni o problemi acuti.",
+    h1: "Interventi importanti: Georgios & Koutsouradis",
+    h1b: "Cure dentistiche affidabili per i turisti",
+    p1a: "Lo studio dentistico Georgios & Koutsouradis è uno studio moderno nel centro della città di Kos. Lo studio è gestito da padre e figlio: Georgios Koutsouradis e Konstantinos Koutsouradis. Offre cure dentistiche complete ed è ben conosciuto sia dai residenti sia dai turisti che in vacanza hanno urgente bisogno di un dentista.",
+    treat: "Trattamenti",
+    t1a: "Urgenze per mal di denti, denti spezzati, gengive infiammate o otturazioni allentate",
+    t1b: "Odontoiatria generale (controlli, pulizia, otturazioni)",
+    t1c: "Devitalizzazioni",
+    t1d: "Corone, ponti e protesi",
+    t1e: "Trattamenti estetici come sbiancamento e otturazioni bianche",
+    t1f: "Odontoiatria infantile",
+    p1b: "Lo studio ha attrezzature moderne e lavora con materiali di qualità. I pazienti vengono aiutati in fretta e con cura in un ambiente tranquillo e pulito.",
+    p1c: "Che tu abbia un dolore acuto o voglia solo un controllo: dal dentista Georgios & Koutsouradis puoi contare su un aiuto professionale e cordiale.",
+    addrH: "Indirizzo",
+    hours: "Orari",
+    dMa: "Lun", dDi: "Mar", dWo: "Mer", dDo: "Gio", dDo2: "Gio", dVr: "Ven", dZa: "Sab", dZo: "Dom",
+    closed: "Chiuso",
+    h2: "Estetica: Hatzinikitas George",
+    p2a: "Il dentista Hatzinikitas George, Georgios Hatzinikitas, è un dentista esperto nel centro della città di Kos. È specializzato come protesista (protesi e restauri) e implantologo (impianti). Lo studio è spesso gestito insieme all’ortodontista Christina Hatzinikita. Insieme offrono un’ampia gamma di cure dentistiche sia ai residenti sia ai turisti.",
+    t2a: "Urgenze (mal di denti, dente spezzato, infiammazione, otturazione allentata)",
+    t2b: "Odontoiatria generale e controlli",
+    t2c: "Corone, ponti e protesi",
+    t2d: "Impianti e implantologia",
+    t2e: "Devitalizzazioni",
+    t2f: "Odontoiatria estetica (sbiancamento, otturazioni bianche)",
+    t2g: "Ortodonzia (tramite Christina Hatzinikita)",
+    p2b: "Lo studio è noto per un approccio cordiale, spiegazioni chiare e prezzi ragionevoli. I turisti apprezzano soprattutto l’aiuto rapido nelle urgenze e la buona conoscenza dell’inglese."
+  },
+  tr: {
+    title: "Diş hekimi",
+    back: "← Acil durum",
+    lead: "Aramak için bir düğmeye dokun.",
+    call: "Ara",
+    wa: "WhatsApp",
+    pIntro: "Güzel Yunan adası Kos’ta çok diş hekimi vardır. Yıllar içinde farklı uzmanlıkları olan, modern ve daha az modern olanaklara sahip çeşitli muayenehaneler oluşmuştur. Seçenekler geniştir. Hello Kos olarak tatilde yalnızca acil durumda diş hekimine gitmek istediğinizi anlıyoruz. Bu yüzden Hollanda standartlarıyla karşılaştırılabilir yüksek kalite ölçütlerine uyan iki diş hekimini özenle seçtik.",
+    hModern: "Modern bakım, tanıdık kalite",
+    pModern: "Kos’taki muayenehanelerin çoğu çok iyi donanımlıdır, en yeni tekniklerle çalışır ve yabancı hastaları tedavi etmeye alışkındır. İngilizce konuşmak genelde sorun değildir. Çalışmasını ve çalışma biçimini iyi bildiğimiz, kalitesi Hollanda standartlarıyla karşılaştırılabilir iki diş hekimi seçtik; böylece burada “hâlâ taş ve keskiyle çalışılıyor” diye kaygılanmanıza gerek kalmaz.",
+    hEach: "Her durum için",
+    pEach: "Hızlı ve profesyonel yardım alabileceğinizi bilmek güzeldir; böylece en kısa sürede yeniden tatilinizin keyfini çıkarırsınız. Önerdiğimiz ilk diş hekimi özellikle estetik diş hekimliğine yönelir: kırık diş, acil durum ve diş ağrısı gibi ciddi şikayetler. İkinci diş hekimi seçeneğimiz, tatilde iltihap veya ani sorunlarınız olduğunda oradadır.",
+    h1: "Ağır müdahaleler: Georgios & Koutsouradis",
+    h1b: "Turistler için güvenilir diş bakımı",
+    p1a: "Georgios & Koutsouradis diş muayenehanesi Kos şehrinin merkezinde modern bir muayenehanedir. Muayenehaneyi baba ve oğul yönetir: Georgios Koutsouradis ve Konstantinos Koutsouradis. Tam diş bakımı sunar ve hem yerli halk hem de tatilde acil diş hekimine ihtiyaç duyan turistler tarafından iyi bilinir.",
+    treat: "Tedaviler",
+    t1a: "Diş ağrısı, kırık diş, iltihaplı diş eti veya gevşek dolgu için acil tedaviler",
+    t1b: "Genel diş hekimliği (kontroller, temizlik, dolgular)",
+    t1c: "Kök kanal tedavileri",
+    t1d: "Kron, köprü ve protez",
+    t1e: "Beyazlatma ve beyaz dolgu gibi estetik tedaviler",
+    t1f: "Çocuk diş hekimliği",
+    p1b: "Muayenehanede modern cihazlar vardır ve kaliteli malzemelerle çalışılır. Hastalara sakin ve temiz bir ortamda hızlı ve özenli yardım edilir.",
+    p1c: "İster ani ağrınız olsun ister yalnızca kontrol isteyin: Diş hekimi Georgios & Koutsouradis’te profesyonel ve güler yüzlü yardıma güvenebilirsiniz.",
+    addrH: "Adres",
+    hours: "Saatler",
+    dMa: "Pzt", dDi: "Sal", dWo: "Çar", dDo: "Per", dDo2: "Per", dVr: "Cum", dZa: "Cmt", dZo: "Paz",
+    closed: "Kapalı",
+    h2: "Kozmetik: Hatzinikitas George",
+    p2a: "Diş hekimi Hatzinikitas George, Georgios Hatzinikitas, Kos şehrinin merkezinde deneyimli bir diş hekimidir. Protez uzmanı (protez ve restorasyon) ve implantolog (implant) olarak uzmanlaşmıştır. Muayenehane çoğu zaman ortodontist Christina Hatzinikita ile birlikte yürütülür. Birlikte hem yerli halka hem turistlere geniş bir diş tedavisi yelpazesi sunarlar.",
+    t2a: "Acil tedaviler (diş ağrısı, kırık diş, iltihap, gevşek dolgu)",
+    t2b: "Genel diş hekimliği ve kontroller",
+    t2c: "Kron, köprü ve protez",
+    t2d: "İmplant ve implantoloji",
+    t2e: "Kök kanal tedavileri",
+    t2f: "Estetik diş hekimliği (beyazlatma, beyaz dolgular)",
+    t2g: "Ortodonti (Christina Hatzinikita aracılığıyla)",
+    p2b: "Muayenehane güler yüzlü yaklaşımı, açık anlatımı ve makul fiyatlarıyla bilinir. Turistler özellikle acil durumda hızlı yardımı ve iyi İngilizceyi takdir eder."
+  },
+  es: {
+    title: "Dentista",
+    back: "← Emergencias",
+    lead: "Toca un botón para llamar.",
+    call: "Llama",
+    wa: "WhatsApp",
+    pIntro: "En la hermosa isla griega de Kos hay muchos dentistas. Con los años han surgido varias clínicas con especialidades distintas, con instalaciones modernas y menos modernas. La oferta es amplia. En Hello Kos entendemos que en vacaciones solo quieres ir al dentista en caso de urgencia. Por eso hemos elegido con cuidado a dos dentistas que cumplen normas de calidad altas, comparables con los estándares neerlandeses.",
+    hModern: "Atención moderna, calidad conocida",
+    pModern: "La mayoría de las clínicas en Kos están muy bien equipadas, trabajan con las técnicas más recientes y están acostumbradas a tratar a pacientes extranjeros. Hablar inglés no suele ser un problema. Hemos elegido a dos dentistas cuyo trabajo y forma de trabajar conocemos bien, y cuya calidad es comparable con los estándares neerlandeses, para que no tengas que preocuparte de que aquí “todavía se trabaje con piedra y cincel”.",
+    hEach: "Para cada situación",
+    pEach: "Es bueno saber que te pueden atender rápido y con profesionalidad, para que vuelvas cuanto antes a disfrutar de las vacaciones sin preocupaciones. El primer dentista que recomendamos se centra en la odontología estética, como un diente partido, una urgencia y otras molestias graves como el dolor de muelas. Nuestra segunda opción está si durante las vacaciones tienes inflamaciones o problemas agudos.",
+    h1: "Intervenciones mayores: Georgios & Koutsouradis",
+    h1b: "Atención dental fiable para turistas",
+    p1a: "La clínica Georgios & Koutsouradis es una clínica moderna en el centro de la ciudad de Kos. La llevan padre e hijo: Georgios Koutsouradis y Konstantinos Koutsouradis. Ofrece atención dental completa y es bien conocida tanto por los vecinos como por los turistas que en vacaciones necesitan un dentista con urgencia.",
+    treat: "Tratamientos",
+    t1a: "Urgencias por dolor de muelas, dientes partidos, encías inflamadas o empastes sueltos",
+    t1b: "Odontología general (revisiones, limpieza, empastes)",
+    t1c: "Endodoncias",
+    t1d: "Coronas, puentes y prótesis",
+    t1e: "Tratamientos estéticos como blanqueamiento y empastes blancos",
+    t1f: "Odontología infantil",
+    p1b: "La clínica tiene equipo moderno y trabaja con materiales de calidad. Atienden a los pacientes rápido y con cuidado, en un entorno tranquilo y limpio.",
+    p1c: "Tengas un dolor agudo o solo quieras una revisión: en el dentista Georgios & Koutsouradis puedes contar con una ayuda profesional y amable.",
+    addrH: "Dirección",
+    hours: "Horario",
+    dMa: "Lun", dDi: "Mar", dWo: "Mié", dDo: "Jue", dDo2: "Jue", dVr: "Vie", dZa: "Sáb", dZo: "Dom",
+    closed: "Cerrado",
+    h2: "Estética: Hatzinikitas George",
+    p2a: "El dentista Hatzinikitas George, Georgios Hatzinikitas, es un dentista con experiencia en el centro de la ciudad de Kos. Está especializado como protesista (prótesis y restauraciones) e implantólogo (implantes). La clínica a menudo la lleva junto con la ortodoncista Christina Hatzinikita. Juntos ofrecen una amplia gama de tratamientos dentales tanto a vecinos como a turistas.",
+    t2a: "Urgencias (dolor de muelas, diente partido, inflamación, empaste suelto)",
+    t2b: "Odontología general y revisiones",
+    t2c: "Coronas, puentes y prótesis",
+    t2d: "Implantes e implantología",
+    t2e: "Endodoncias",
+    t2f: "Odontología estética (blanqueamiento, empastes blancos)",
+    t2g: "Ortodoncia (a través de Christina Hatzinikita)",
+    p2b: "La clínica es conocida por un trato amable, explicaciones claras y precios razonables. Los turistas valoran sobre todo la ayuda rápida en urgencias y el buen dominio del inglés."
+  }
+};
+</script>
 <script src="hello-kos-i18n.js"></script>
 </body>
 </html>
