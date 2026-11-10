@@ -18,8 +18,7 @@
       when: "Van {from} tot {to}",
       until: "Tot {to}",
       official: "Tekst van ΔΕΥΑΚ (Grieks)",
-      checked: "Lijst opgehaald: {time}. Ongeveer elk uur ververst.",
-      hint: "De meldingen gaan over gebieden, niet over één gebouw."
+      checked: "Lijst opgehaald: {time}. Ongeveer elk uur ververst."
     },
     de: {
       loading: "Die Meldungen von ΔΕΥΑΚ werden geladen…",
@@ -34,8 +33,7 @@
       when: "Von {from} bis {to}",
       until: "Bis {to}",
       official: "Text von ΔΕΥΑΚ (Griechisch)",
-      checked: "Liste geholt: {time}. Wird etwa stündlich erneuert.",
-      hint: "Die Meldungen gelten für Gebiete, nicht für ein einzelnes Gebäude."
+      checked: "Liste geholt: {time}. Wird etwa stündlich erneuert."
     },
     en: {
       loading: "Loading the ΔΕΥΑΚ notices…",
@@ -50,8 +48,7 @@
       when: "From {from} until {to}",
       until: "Until {to}",
       official: "Text from ΔΕΥΑΚ (Greek)",
-      checked: "List fetched: {time}. Refreshed about once an hour.",
-      hint: "The notices are about areas, not about one building."
+      checked: "List fetched: {time}. Refreshed about once an hour."
     },
     it: {
       loading: "Caricamento degli avvisi ΔΕΥΑΚ…",
@@ -66,8 +63,7 @@
       when: "Dal {from} al {to}",
       until: "Fino al {to}",
       official: "Testo di ΔΕΥΑΚ (greco)",
-      checked: "Elenco scaricato: {time}. Si aggiorna circa ogni ora.",
-      hint: "Gli avvisi riguardano zone, non un singolo edificio."
+      checked: "Elenco scaricato: {time}. Si aggiorna circa ogni ora."
     },
     tr: {
       loading: "ΔΕΥΑΚ duyuruları yükleniyor…",
@@ -82,8 +78,7 @@
       when: "{from} – {to}",
       until: "{to} kadar",
       official: "ΔΕΥΑΚ metni (Yunanca)",
-      checked: "Liste alındı: {time}. Yaklaşık saatte bir yenilenir.",
-      hint: "Duyurular bölgeler içindir, tek bir bina için değil."
+      checked: "Liste alındı: {time}. Yaklaşık saatte bir yenilenir."
     },
     es: {
       loading: "Cargando los avisos de ΔΕΥΑΚ…",
@@ -98,8 +93,7 @@
       when: "Del {from} al {to}",
       until: "Hasta el {to}",
       official: "Texto de ΔΕΥΑΚ (griego)",
-      checked: "Lista descargada: {time}. Se actualiza más o menos cada hora.",
-      hint: "Los avisos son de zonas, no de un solo edificio."
+      checked: "Lista descargada: {time}. Se actualiza más o menos cada hora."
     }
   };
 
@@ -173,9 +167,7 @@
     var box = document.getElementById("waterSummary");
     var list = document.getElementById("waterList");
     var checked = document.getElementById("waterChecked");
-    var hint = document.getElementById("waterHint");
     if (!box || !list) return;
-    if (hint) hint.textContent = t("hint");
     if (!data) {
       box.textContent = t("loading");
       list.innerHTML = "";
