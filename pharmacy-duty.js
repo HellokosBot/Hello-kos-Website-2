@@ -91,6 +91,34 @@
     return '<a href="' + esc(href) + '">' + esc(number) + "</a>";
   }
 
+  function mapQuery(row) {
+    var parts = [];
+    function add(value) {
+      var text = String(value || "").replace(/\s+/g, " ").trim();
+      if (!text) return;
+      var joined = parts.join(", ").toLowerCase();
+      if (joined.indexOf(text.toLowerCase()) >= 0) return;
+      parts.push(text);
+    }
+    add(row.name);
+    add(row.address);
+    add(row.area);
+    add("Kos");
+    add("Greece");
+    return parts.join(", ");
+  }
+
+  function mapHtml(row) {
+    if (!String(row.address || "").trim()) return "";
+    var query = encodeURIComponent(mapQuery(row));
+    var google = "https://www.google.com/maps/search/?api=1&query=" + query;
+    var apple = "https://maps.apple.com/?q=" + query;
+    return '<div class="actions">' +
+      '<a class="btn btn-map" href="' + esc(google) + '" target="_blank" rel="noopener">Google Maps</a>' +
+      '<a class="btn btn-map" href="' + esc(apple) + '" target="_blank" rel="noopener">Apple Maps</a>' +
+      "</div>";
+  }
+
   function itemHtml(row) {
     var meta = esc(row.dutyLabel || "");
     if (row.area) meta += (meta ? " · " : "") + esc(row.area);
@@ -100,6 +128,7 @@
       (meta ? '<p class="duty-meta">' + meta + "</p>" : "") +
       (row.address ? "<p>" + esc(row.address) + "</p>" : "") +
       (phones ? "<p>" + phones + "</p>" : "") +
+      mapHtml(row) +
       "</article>";
   }
 
