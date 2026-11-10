@@ -70,10 +70,6 @@ body.intro-lock{overflow:hidden}
 .footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700;font-size:1.05rem}
 .footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
 .footer .copy{font-size:.72rem;color:var(--text-muted);margin-top:10px}
-#zoomLayer{position:fixed;inset:0;z-index:8000;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s,visibility .25s}
-#zoomLayer.show{opacity:1;visibility:visible;pointer-events:auto}
-#zoomLayer img{max-width:92vw;max-height:78vh;border-radius:16px;object-fit:contain;transform:scale(.88);transition:transform .35s cubic-bezier(.22,1,.36,1)}
-#zoomLayer.show img{transform:scale(1)}
 </style>
 <link rel="stylesheet" href="hello-kos.css">
 </head>
@@ -185,7 +181,6 @@ body.intro-lock{overflow:hidden}
       </a>
   </div>
 </main>
-<div id="zoomLayer"><img src="" alt=""></div>
 <footer class="footer">
   <div class="footer-logo">🔅 Hello Kos</div>
   <p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a> · <a href="mailto:info@hellokos.com">Contact</a></p>
@@ -197,8 +192,6 @@ body.intro-lock{overflow:hidden}
   function ensureCtx(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();return audioCtx}
   function playIntroSound(){try{var ctx=ensureCtx(),t0=ctx.currentTime;var o1=ctx.createOscillator(),g1=ctx.createGain(),f1=ctx.createBiquadFilter();o1.type='sawtooth';o1.frequency.setValueAtTime(120,t0);o1.frequency.exponentialRampToValueAtTime(40,t0+.9);f1.type='lowpass';f1.frequency.setValueAtTime(800,t0);f1.frequency.exponentialRampToValueAtTime(120,t0+.9);g1.gain.setValueAtTime(.0001,t0);g1.gain.exponentialRampToValueAtTime(.22,t0+.08);g1.gain.exponentialRampToValueAtTime(.0001,t0+1.1);o1.connect(f1);f1.connect(g1);g1.connect(ctx.destination);o1.start(t0);o1.stop(t0+1.15)}catch(e){}}
   function playClick(){try{var ctx=ensureCtx(),t=ctx.currentTime;var o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.setValueAtTime(880,t);o.frequency.exponentialRampToValueAtTime(440,t+.06);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.12,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+.08);o.connect(g);g.connect(ctx.destination);o.start(t);o.stop(t+.09)}catch(e){}}
-  function playTapWhoosh(){try{var ctx=ensureCtx(),t=ctx.currentTime;var o=ctx.createOscillator(),g=ctx.createGain(),f=ctx.createBiquadFilter();o.type='triangle';o.frequency.setValueAtTime(320,t);o.frequency.exponentialRampToValueAtTime(140,t+.12);f.type='lowpass';f.frequency.value=900;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.09,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+.14);o.connect(f);f.connect(g);g.connect(ctx.destination);o.start(t);o.stop(t+.15)}catch(e){}}
-
   (function fetchKosTemp(){
     var url='https://api.open-meteo.com/v1/forecast?latitude=36.89&longitude=27.29&current=temperature_2m&timezone=Europe%2FAthens';
     fetch(url).then(function(r){return r.json()}).then(function(data){
@@ -221,27 +214,6 @@ body.intro-lock{overflow:hidden}
 
   document.addEventListener('click',function(e){
     if(!introDone)return;
-    var card=e.target.closest('a.card');
-    if(card){
-      e.preventDefault();
-      e.stopPropagation();
-      playTapWhoosh();
-      var href=card.getAttribute('href');
-      if(!href||href==='#')return;
-      var img=card.querySelector('img');
-      var layer=document.getElementById('zoomLayer');
-      if(layer&&img){
-        layer.querySelector('img').src=img.src||'';
-        layer.classList.add('show');
-        setTimeout(function(){
-          layer.classList.remove('show');
-          window.location.href=href;
-        },450);
-      } else {
-        window.location.href=href;
-      }
-      return;
-    }
     if(e.target.closest('button,.lang-btn,.lang-option'))playClick();
   },true);
 
