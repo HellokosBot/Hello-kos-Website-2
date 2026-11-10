@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Katten met een geknipt oor – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="wjd-afgeknipte-oren.jpg" alt=""></div>
+  <p class="parent-link"><a href="wist-je-dat.html" data-i18n="back">← Wist je dat</a></p>
+  <h1 data-i18n="title">Katten met een geknipt oor</h1>
+  <p class="lead" data-i18n="lead">Een recht afgeknipt puntje aan het oor is een teken uit een TNR-programma: de kat is gevangen, gecastreerd of gesteriliseerd, nagekeken en weer vrijgelaten. Het is geen mishandeling.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">TNR</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Wat jij doet</h2><p data-i18n="p0">Je hoeft niet te schrikken. De gids noemde N-Joy in Kos-stad: een zaak van de Nederlandse Nicolle die katten laat castreren. Meer over zwerfkatten staat op de eigen pagina.</p></article>
+    
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Katten met een geknipt oor", "lead": "Een recht afgeknipt puntje aan het oor is een teken uit een TNR-programma: de kat is gevangen, gecastreerd of gesteriliseerd, nagekeken en weer vrijgelaten. Het is geen mishandeling.", "back": "← Wist je dat", "h0": "Wat jij doet", "p0": "Je hoeft niet te schrikken. De gids noemde N-Joy in Kos-stad: een zaak van de Nederlandse Nicolle die katten laat castreren. Meer over zwerfkatten staat op de eigen pagina.", "b0": "TNR"}, "de": {"title": "Katzen mit gekipptem Ohr", "lead": "Eine gerade gekappte Ohrspitze ist ein Zeichen aus einem TNR-Programm: die Katze wurde gefangen, kastriert, untersucht und wieder freigelassen. Es ist keine Misshandlung.", "back": "← Wusstest du", "h0": "Was du tust", "p0": "Du musst nicht erschrecken. Der Guide nannte N-Joy in Kos-Stadt: ein Lokal der Niederländerin Nicolle, das Katzen kastrieren lässt. Mehr über Streuner steht auf der eigenen Seite.", "b0": "TNR"}, "en": {"title": "Cats with a tipped ear", "lead": "A straight cut tip on the ear is a sign from a TNR programme: the cat was trapped, neutered or spayed, checked and released. It is not abuse.", "back": "← Did you know", "h0": "What you do", "p0": "You do not need to be alarmed. The guide named N-Joy in Kos town: a place run by the Dutch owner Nicolle that has cats neutered. More about strays is on its own page.", "b0": "TNR"}, "it": {"title": "Gatti con l’orecchio tagliato", "lead": "Una punta d’orecchio tagliata dritta è un segno di un programma TNR: il gatto è stato catturato, sterilizzato, controllato e liberato. Non è maltrattamento.", "back": "← Lo sapevi", "h0": "Cosa fai", "p0": "Non devi spaventarti. La guida citava N-Joy in città: un locale della olandese Nicolle che fa sterilizzare i gatti. Altro sui randagi è nella pagina dedicata.", "b0": "TNR"}, "tr": {"title": "Kulağı kesik kediler", "lead": "Kulağın düz kesilmiş ucu bir TNR programının işaretidir: kedi yakalanmış, kısırlaştırılmış, kontrol edilmiş ve bırakılmıştır. Bu kötü muamele değildir.", "back": "← Biliyor muydun", "h0": "Ne yaparsın", "p0": "Korkmana gerek yok. Rehber Kos şehrinde N-Joy’u saydı: Hollandalı Nicolle’in işlettiği, kedileri kısırlaştıran bir yer. Sokak kedileri kendi sayfasında.", "b0": "TNR"}, "es": {"title": "Gatos con la oreja cortada", "lead": "Una punta de oreja cortada recta es una señal de un programa TNR: el gato fue capturado, esterilizado, revisado y soltado. No es maltrato.", "back": "← ¿Sabías que", "h0": "Qué haces", "p0": "No hace falta asustarse. La guía citaba N-Joy en la ciudad: un local de la holandesa Nicolle que esteriliza gatos. Más sobre callejeros está en su página.", "b0": "TNR"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

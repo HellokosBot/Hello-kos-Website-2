@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Beste koffie – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="beste-lekkerste.jpg" alt=""></div>
+  <p class="parent-link"><a href="beste-lekkerste.html" data-i18n="back">← Beste & lekkerste</a></p>
+  <h1 data-i18n="title">Beste koffie</h1>
+  <p class="lead" data-i18n="lead">De gids zocht koffie in de marina, het centrum en net buiten het centrum. Een vaste lijst met prijzen ontbreekt.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Kos-stad</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=coffee%20Kos%20town" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=coffee%20Kos%20town" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Tip</h2><p data-i18n="p0">Marina Cafe en Coffee House staan ook bij het ontbijt. Voor een kleine bestelling is een fooi van ongeveer een euro gebruikelijk.</p></article>
+    <div class="placeholder" data-i18n="note"><strong>Nog aan te vullen.</strong> Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.</div>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Beste koffie", "lead": "De gids zocht koffie in de marina, het centrum en net buiten het centrum. Een vaste lijst met prijzen ontbreekt.", "back": "← Beste & lekkerste", "note": "Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.", "h0": "Tip", "p0": "Marina Cafe en Coffee House staan ook bij het ontbijt. Voor een kleine bestelling is een fooi van ongeveer een euro gebruikelijk.", "b0": "Kos-stad"}, "de": {"title": "Bester Kaffee", "lead": "Der Guide suchte Kaffee in der Marina, im Zentrum und knapp außerhalb. Eine feste Preisliste fehlt.", "back": "← Beste & Leckerste", "note": "Preise und Öffnungszeiten stehen hier nicht fest, sie ändern sich. Frag vor Ort nach.", "h0": "Tipp", "p0": "Marina Cafe und Coffee House stehen auch beim Frühstück. Bei einer kleinen Bestellung ist etwa ein Euro Trinkgeld üblich.", "b0": "Kos-Stadt"}, "en": {"title": "Best coffee", "lead": "The guide looked for coffee in the marina, the centre and just outside the centre. There is no fixed price list.", "back": "← Best & tastiest", "note": "Prices and opening hours are not fixed here: they change. Ask on the spot.", "h0": "Tip", "p0": "Marina Cafe and Coffee House are also under breakfast. For a small order a tip of about one euro is usual.", "b0": "Kos town"}, "it": {"title": "Miglior caffè", "lead": "La guida cercava il caffè in marina, in centro e appena fuori. Non c’è un listino fisso.", "back": "← Il meglio", "note": "Prezzi e orari non sono fissi: cambiano. Chiedi sul posto.", "h0": "Consiglio", "p0": "Marina Cafe e Coffee House sono anche sotto colazione. Per un ordine piccolo è normale circa un euro di mancia.", "b0": "Città di Kos"}, "tr": {"title": "En iyi kahve", "lead": "Rehber kahveyi marinada, merkezde ve merkezin hemen dışında arıyordu. Sabit fiyat listesi yok.", "back": "← En iyiler", "note": "Fiyat ve açılış saatleri burada sabit değil, değişir. Yerinde sorun.", "h0": "İpucu", "p0": "Marina Cafe ve Coffee House kahvaltıda da var. Küçük bir siparişte yaklaşık bir euro bahşiş normaldir.", "b0": "Kos şehri"}, "es": {"title": "Mejor café", "lead": "La guía buscaba café en la marina, el centro y justo fuera. No hay una lista de precios fija.", "back": "← Lo mejor", "note": "Los precios y horarios no están fijos: cambian. Pregunta en el sitio.", "h0": "Consejo", "p0": "Marina Cafe y Coffee House están también en el desayuno. En un pedido pequeño es habitual cerca de un euro de propina.", "b0": "Ciudad de Kos"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

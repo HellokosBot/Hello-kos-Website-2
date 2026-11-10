@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Kathedraal van Kos en Nisyros – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="img/hk/sight-kathedraal.jpg" alt=""></div>
+  <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back">← Bezienswaardigheden</a></p>
+  <h1 data-i18n="title">Kathedraal van Kos en Nisyros</h1>
+  <p class="lead" data-i18n="lead">Zetel van de metropool van Kos en Nisyros. Na de Tweede Wereldoorlog werd het gebouw een orthodoxe kathedraal, gewijd aan de Aankondiging (Evangelismos).</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Gratis</span><span class="badge" data-i18n="b1">Kos-stad</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Cathedral%20Kos%20town" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=Cathedral%20Kos%20town" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Gebouw</h2><p data-i18n="p0">Na de aardbeving van 1933 moesten delen hersteld worden, maar het gebouw bleef grotendeels overeind. Binnen is een houten iconostase uit de jaren 1970 en veel licht door brede ramen, in de trant van de Italiaanse bouw uit die tijd.</p></article>
+    <article class="card"><h2 data-i18n="h1">Bezoek</h2><p data-i18n="p1">Vaak open, soms dicht wegens onderhoud of een feestdag. Mensen steken een kaars aan of kijken alleen even binnen. De katholieke kerk is een ander gebouw.</p></article>
+    <div class="placeholder" data-i18n="note"><strong>Nog aan te vullen.</strong> De precieze openingstijden wisselen. Kijk ter plaatse.</div>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Kathedraal van Kos en Nisyros", "lead": "Zetel van de metropool van Kos en Nisyros. Na de Tweede Wereldoorlog werd het gebouw een orthodoxe kathedraal, gewijd aan de Aankondiging (Evangelismos).", "back": "← Bezienswaardigheden", "note": "De precieze openingstijden wisselen. Kijk ter plaatse.", "h0": "Gebouw", "p0": "Na de aardbeving van 1933 moesten delen hersteld worden, maar het gebouw bleef grotendeels overeind. Binnen is een houten iconostase uit de jaren 1970 en veel licht door brede ramen, in de trant van de Italiaanse bouw uit die tijd.", "h1": "Bezoek", "p1": "Vaak open, soms dicht wegens onderhoud of een feestdag. Mensen steken een kaars aan of kijken alleen even binnen. De katholieke kerk is een ander gebouw.", "b0": "Gratis", "b1": "Kos-stad"}, "de": {"title": "Kathedrale von Kos und Nisyros", "lead": "Sitz der Metropolie von Kos und Nisyros. Nach dem Zweiten Weltkrieg wurde das Gebäude eine orthodoxe Kathedrale, geweiht der Verkündigung (Evangelismos).", "back": "← Sehenswürdigkeiten", "note": "Die genauen Öffnungszeiten wechseln. Schau vor Ort.", "h0": "Gebäude", "p0": "Nach dem Beben von 1933 mussten Teile repariert werden, aber das Gebäude blieb weitgehend stehen. Innen eine hölzerne Ikonostase aus den 1970er Jahren und viel Licht durch breite Fenster, im Stil der italienischen Architektur jener Zeit.", "h1": "Besuch", "p1": "Oft offen, manchmal zu wegen Wartung oder eines Feiertags. Leute zünden eine Kerze an oder schauen nur kurz hinein. Die katholische Kirche ist ein anderes Gebäude.", "b0": "Kostenlos", "b1": "Kos-Stadt"}, "en": {"title": "Cathedral of Kos and Nisyros", "lead": "Seat of the metropolis of Kos and Nisyros. After the Second World War the building became an Orthodox cathedral, dedicated to the Annunciation (Evangelismos).", "back": "← Sights", "note": "Exact opening hours change. Check on the spot.", "h0": "Building", "p0": "After the 1933 earthquake parts had to be repaired, but the building largely stayed standing. Inside there is a wooden iconostasis from the 1970s and a lot of light through wide windows, in the manner of Italian building of that time.", "h1": "Visit", "p1": "Often open, sometimes closed for maintenance or a feast day. People light a candle or just look inside. The Catholic church is a different building.", "b0": "Free", "b1": "Kos town"}, "it": {"title": "Cattedrale di Kos e Nisyros", "lead": "Sede della metropolia di Kos e Nisyros. Dopo la Seconda guerra mondiale l’edificio divenne cattedrale ortodossa, dedicata all’Annunciazione (Evangelismos).", "back": "← Attrazioni", "note": "Gli orari precisi cambiano. Controlla sul posto.", "h0": "Edificio", "p0": "Dopo il terremoto del 1933 alcune parti andarono riparate, ma l’edificio restò in gran parte in piedi. Dentro c’è un’iconostasi di legno degli anni ’70 e molta luce da finestre larghe, nello stile dell’architettura italiana di allora.", "h1": "Visita", "p1": "Spesso aperta, a volte chiusa per lavori o una festa. La gente accende una candela o guarda solo dentro. La chiesa cattolica è un altro edificio.", "b0": "Gratis", "b1": "Città di Kos"}, "tr": {"title": "Kos ve Nisyros katedrali", "lead": "Kos ve Nisyros metropolitliğinin merkezi. İkinci Dünya Savaşı’ndan sonra bina, Müjde’ye (Evangelismos) adanmış Ortodoks katedral oldu.", "back": "← Gezilecek yerler", "note": "Kesin açılış saatleri değişir. Yerinde bak.", "h0": "Bina", "p0": "1933 depreminden sonra bazı bölümler onarıldı, ama bina büyük ölçüde ayakta kaldı. İçeride 1970’lerden ahşap bir ikonostasis ve o dönemin İtalyan mimarisine uygun geniş pencerelerden çok ışık var.", "h1": "Ziyaret", "p1": "Çoğu zaman açık, bakım veya bir yortu yüzünden bazen kapalı. İnsanlar mum yakar ya da sadece içeri bakar. Katolik kilisesi başka bir yapıdır.", "b0": "Ücretsiz", "b1": "Kos şehri"}, "es": {"title": "Catedral de Kos y Nisiros", "lead": "Sede de la metrópoli de Kos y Nisiros. Tras la Segunda Guerra Mundial el edificio pasó a ser catedral ortodoxa, dedicada a la Anunciación (Evangelismos).", "back": "← Lugares de interés", "note": "El horario exacto cambia. Mira en el sitio.", "h0": "Edificio", "p0": "Tras el terremoto de 1933 hubo que reparar partes, pero el edificio quedó en pie en gran parte. Dentro hay un iconostasio de madera de los años 70 y mucha luz por ventanas anchas, al modo de la arquitectura italiana de entonces.", "h1": "Visita", "p1": "A menudo abierta, a veces cerrada por obras o una fiesta. La gente enciende una vela o solo mira dentro. La iglesia católica es otro edificio.", "b0": "Gratis", "b1": "Ciudad de Kos"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

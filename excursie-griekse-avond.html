@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Griekse avond – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="excursies.jpg" alt=""></div>
+  <p class="parent-link"><a href="excursies.html" data-i18n="back">← Excursies</a></p>
+  <h1 data-i18n="title">Griekse avond</h1>
+  <p class="lead" data-i18n="lead">Bus naar Zia, diner buiten, wijn onbeperkt, andere drank tegen betaling, muziek en dans, en de bus terug. Zo stond het in de gids.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Prijs ter plaatse</span><span class="badge" data-i18n="b1">Zia</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Zia%20Kos%20Greek%20night" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=Zia%20Kos%20Greek%20night" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Prijs</h2><p data-i18n="p0">Het bedrag per persoon staat niet in deze pagina. Vraag het bij de organisatie.</p></article>
+    <div class="placeholder" data-i18n="note"><strong>Nog aan te vullen.</strong> Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.</div>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Griekse avond", "lead": "Bus naar Zia, diner buiten, wijn onbeperkt, andere drank tegen betaling, muziek en dans, en de bus terug. Zo stond het in de gids.", "back": "← Excursies", "note": "Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.", "h0": "Prijs", "p0": "Het bedrag per persoon staat niet in deze pagina. Vraag het bij de organisatie.", "b0": "Prijs ter plaatse", "b1": "Zia"}, "de": {"title": "Griechischer Abend", "lead": "Bus nach Zia, Abendessen draußen, Wein unbegrenzt, andere Getränke gegen Bezahlung, Musik und Tanz, und der Bus zurück. So stand es im Guide.", "back": "← Ausflüge", "note": "Preise und Öffnungszeiten stehen hier nicht fest, sie ändern sich. Frag vor Ort nach.", "h0": "Preis", "p0": "Der Betrag pro Person steht nicht auf dieser Seite. Frag bei der Organisation.", "b0": "Preis vor Ort", "b1": "Zia"}, "en": {"title": "Greek evening", "lead": "A bus to Zia, dinner outside, unlimited wine, other drinks paid, music and dance, and the bus back. That is how the guide described it.", "back": "← Excursions", "note": "Prices and opening hours are not fixed here: they change. Ask on the spot.", "h0": "Price", "p0": "The price per person is not on this page. Ask the organiser.", "b0": "Price on site", "b1": "Zia"}, "it": {"title": "Serata greca", "lead": "Bus per Zia, cena all’aperto, vino illimitato, altre bevande a pagamento, musica e danza, e il bus di ritorno. Così lo descriveva la guida.", "back": "← Escursioni", "note": "Prezzi e orari non sono fissi: cambiano. Chiedi sul posto.", "h0": "Prezzo", "p0": "L’importo a persona non è in questa pagina. Chiedi all’organizzazione.", "b0": "Prezzo sul posto", "b1": "Zia"}, "tr": {"title": "Yunan gecesi", "lead": "Zia’ya otobüs, dışarıda akşam yemeği, sınırsız şarap, diğer içkiler ücretli, müzik ve dans, dönüş otobüsü. Rehber böyle anlatıyordu.", "back": "← Turlar", "note": "Fiyat ve açılış saatleri burada sabit değil, değişir. Yerinde sorun.", "h0": "Fiyat", "p0": "Kişi başı tutar bu sayfada yok. Organizatöre sor.", "b0": "Fiyat yerinde", "b1": "Zia"}, "es": {"title": "Noche griega", "lead": "Autobús a Zia, cena fuera, vino ilimitado, otras bebidas de pago, música y baile, y el autobús de vuelta. Así lo describía la guía.", "back": "← Excursiones", "note": "Los precios y horarios no están fijos: cambian. Pregunta en el sitio.", "h0": "Precio", "p0": "El importe por persona no está en esta página. Pregunta a la organización.", "b0": "Precio en el sitio", "b1": "Zia"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

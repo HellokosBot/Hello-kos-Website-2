@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Beste sushi – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="beste-lekkerste.jpg" alt=""></div>
+  <p class="parent-link"><a href="beste-lekkerste.html" data-i18n="back">← Beste & lekkerste</a></p>
+  <h1 data-i18n="title">Beste sushi</h1>
+  <p class="lead" data-i18n="lead">Sushi op een Grieks eiland is geen klassieker, maar de gids noemde Barbouni, Nama en C Food & Mood.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Kos-stad</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=sushi%20Kos" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=sushi%20Kos" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Let op</h2><p data-i18n="p0">Of een zaak sushi én vis heeft, zie je op de kaart. Openingstijden zijn niet ingevuld.</p></article>
+    <div class="placeholder" data-i18n="note"><strong>Nog aan te vullen.</strong> Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.</div>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Beste sushi", "lead": "Sushi op een Grieks eiland is geen klassieker, maar de gids noemde Barbouni, Nama en C Food & Mood.", "back": "← Beste & lekkerste", "note": "Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.", "h0": "Let op", "p0": "Of een zaak sushi én vis heeft, zie je op de kaart. Openingstijden zijn niet ingevuld.", "b0": "Kos-stad"}, "de": {"title": "Bestes Sushi", "lead": "Sushi auf einer griechischen Insel ist kein Klassiker, aber der Guide nannte Barbouni, Nama und C Food & Mood.", "back": "← Beste & Leckerste", "note": "Preise und Öffnungszeiten stehen hier nicht fest, sie ändern sich. Frag vor Ort nach.", "h0": "Achtung", "p0": "Ob ein Lokal Sushi und Fisch hat, steht auf der Karte. Öffnungszeiten fehlen.", "b0": "Kos-Stadt"}, "en": {"title": "Best sushi", "lead": "Sushi on a Greek island is not a classic, but the guide named Barbouni, Nama and C Food & Mood.", "back": "← Best & tastiest", "note": "Prices and opening hours are not fixed here: they change. Ask on the spot.", "h0": "Note", "p0": "Whether a place does sushi and fish is on its menu. Opening hours are not filled in.", "b0": "Kos town"}, "it": {"title": "Miglior sushi", "lead": "Il sushi su un’isola greca non è un classico, ma la guida citava Barbouni, Nama e C Food & Mood.", "back": "← Il meglio", "note": "Prezzi e orari non sono fissi: cambiano. Chiedi sul posto.", "h0": "Nota", "p0": "Se un locale fa sushi e pesce lo vedi sul menu. Gli orari non ci sono.", "b0": "Città di Kos"}, "tr": {"title": "En iyi suşi", "lead": "Yunan adasında suşi klasik değil, ama rehber Barbouni, Nama ve C Food & Mood’u saydı.", "back": "← En iyiler", "note": "Fiyat ve açılış saatleri burada sabit değil, değişir. Yerinde sorun.", "h0": "Not", "p0": "Bir yerin suşi ve balık yapıp yapmadığı menüde. Saatler yok.", "b0": "Kos şehri"}, "es": {"title": "Mejor sushi", "lead": "El sushi en una isla griega no es lo clásico, pero la guía citaba Barbouni, Nama y C Food & Mood.", "back": "← Lo mejor", "note": "Los precios y horarios no están fijos: cambian. Pregunta en el sitio.", "h0": "Ojo", "p0": "Si un sitio hace sushi y pescado se ve en la carta. Los horarios no están.", "b0": "Ciudad de Kos"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

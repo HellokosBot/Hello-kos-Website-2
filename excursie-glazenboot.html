@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Boot met glazen bodem – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="excursies.jpg" alt=""></div>
+  <p class="parent-link"><a href="excursies.html" data-i18n="back">← Excursies</a></p>
+  <h1 data-i18n="title">Boot met glazen bodem</h1>
+  <p class="lead" data-i18n="lead">Korte tocht vanuit Kos-stad: onderwatercabine, vissen kijken en een zwemstop. De gids noemde twee boten. Yellow: 12:00–13:30, 14:00–15:30 en 16:00–17:30. Kinderen 0–3 gratis, 4–12 €12, vanaf 13 jaar €23. Dory: 11:00–13:30 en 13:30–16:00, langs een wrak van ongeveer 40 jaar en de Blue Lagoon. 0–4 gratis, 5–12 €10, vanaf 13 €20. Op vrijdag was er een zonsondergang van 19:00 tot 20:45 voor 13+, €30 met mezze en salade.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Prijs ter plaatse</span><span class="badge" data-i18n="b1">Kos-stad</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=glass%20bottom%20boat%20Kos" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=glass%20bottom%20boat%20Kos" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Meenemen</h2><p data-i18n="p0">Neem zwemkleding mee. Dit zijn de prijzen uit de oude gids.</p></article>
+    <div class="placeholder" data-i18n="note"><strong>Nog aan te vullen.</strong> Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.</div>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Boot met glazen bodem", "lead": "Korte tocht vanuit Kos-stad: onderwatercabine, vissen kijken en een zwemstop. De gids noemde twee boten. Yellow: 12:00–13:30, 14:00–15:30 en 16:00–17:30. Kinderen 0–3 gratis, 4–12 €12, vanaf 13 jaar €23. Dory: 11:00–13:30 en 13:30–16:00, langs een wrak van ongeveer 40 jaar en de Blue Lagoon. 0–4 gratis, 5–12 €10, vanaf 13 €20. Op vrijdag was er een zonsondergang van 19:00 tot 20:45 voor 13+, €30 met mezze en salade.", "back": "← Excursies", "note": "Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.", "h0": "Meenemen", "p0": "Neem zwemkleding mee. Dit zijn de prijzen uit de oude gids.", "b0": "Prijs ter plaatse", "b1": "Kos-stad"}, "de": {"title": "Glasbodenboot", "lead": "Kurze Fahrt ab Kos-Stadt: Unterwasserkabine, Fische und eine Schwimmstopps. Der Guide nannte zwei Boote. Yellow: 12:00–13:30, 14:00–15:30 und 16:00–17:30. Kinder 0–3 gratis, 4–12 €12, ab 13 €23. Dory: 11:00–13:30 und 13:30–16:00, an einem etwa 40 Jahre alten Wrack und der Blue Lagoon vorbei. 0–4 gratis, 5–12 €10, ab 13 €20. Freitags gab es einen Sonnenuntergang 19:00–20:45 ab 13, €30 mit Mezze und Salat.", "back": "← Ausflüge", "note": "Preise und Öffnungszeiten stehen hier nicht fest, sie ändern sich. Frag vor Ort nach.", "h0": "Mitnehmen", "p0": "Nimm Badesachen mit. Das sind die Preise aus dem alten Guide.", "b0": "Preis vor Ort", "b1": "Kos-Stadt"}, "en": {"title": "Glass-bottom boat", "lead": "A short trip from Kos town: underwater cabin, watching fish and a swim stop. The guide named two boats. Yellow: 12:00–13:30, 14:00–15:30 and 16:00–17:30. Children 0–3 free, 4–12 €12, from 13 €23. Dory: 11:00–13:30 and 13:30–16:00, past a wreck about 40 years old and the Blue Lagoon. 0–4 free, 5–12 €10, from 13 €20. On Friday there was a sunset from 19:00 to 20:45 for ages 13+, €30 with mezze and salad.", "back": "← Excursions", "note": "Prices and opening hours are not fixed here: they change. Ask on the spot.", "h0": "Bring", "p0": "Bring swimwear. These are the prices from the old guide.", "b0": "Price on site", "b1": "Kos town"}, "it": {"title": "Barca dal fondo di vetro", "lead": "Giro breve da Kos città: cabina sott’acqua, pesci e una sosta per nuotare. La guida citava due barche. Yellow: 12:00–13:30, 14:00–15:30 e 16:00–17:30. Bambini 0–3 gratis, 4–12 €12, dai 13 €23. Dory: 11:00–13:30 e 13:30–16:00, lungo un relitto di circa 40 anni e la Blue Lagoon. 0–4 gratis, 5–12 €10, dai 13 €20. Il venerdì c’era un tramonto 19:00–20:45 dai 13 anni, €30 con mezze e insalata.", "back": "← Escursioni", "note": "Prezzi e orari non sono fissi: cambiano. Chiedi sul posto.", "h0": "Porta", "p0": "Porta il costume. Questi sono i prezzi della vecchia guida.", "b0": "Prezzo sul posto", "b1": "Città di Kos"}, "tr": {"title": "Cam tabanlı tekne", "lead": "Kos şehrinden kısa tur: su altı kabin, balık ve yüzme molası. Rehber iki tekne saydı. Yellow: 12:00–13:30, 14:00–15:30 ve 16:00–17:30. 0–3 ücretsiz, 4–12 €12, 13 yaştan €23. Dory: 11:00–13:30 ve 13:30–16:00, yaklaşık 40 yıllık batık ve Blue Lagoon. 0–4 ücretsiz, 5–12 €10, 13’ten €20. Cuma 19:00–20:45, 13+, €30 meze ve salata ile gün batımı vardı.", "back": "← Turlar", "note": "Fiyat ve açılış saatleri burada sabit değil, değişir. Yerinde sorun.", "h0": "Götür", "p0": "Mayo götür. Bunlar eski rehberin fiyatları.", "b0": "Fiyat yerinde", "b1": "Kos şehri"}, "es": {"title": "Barco de fondo de cristal", "lead": "Paseo corto desde la ciudad: cabina bajo el agua, peces y una parada para nadar. La guía citaba dos barcos. Yellow: 12:00–13:30, 14:00–15:30 y 16:00–17:30. Niños de 0–3 gratis, 4–12 12 €, desde 13 23 €. Dory: 11:00–13:30 y 13:30–16:00, junto a un pecio de unos 40 años y la Blue Lagoon. 0–4 gratis, 5–12 10 €, desde 13 20 €. El viernes había un atardecer de 19:00 a 20:45 para mayores de 13, 30 € con mezze y ensalada.", "back": "← Excursiones", "note": "Los precios y horarios no están fijos: cambian. Pregunta en el sitio.", "h0": "Lleva", "p0": "Lleva bañador. Estos son los precios de la guía antigua.", "b0": "Precio en el sitio", "b1": "Ciudad de Kos"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

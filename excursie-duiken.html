@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Duiken en snorkelen – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="excursies.jpg" alt=""></div>
+  <p class="parent-link"><a href="excursies.html" data-i18n="back">← Excursies</a></p>
+  <h1 data-i18n="title">Duiken en snorkelen</h1>
+  <p class="lead" data-i18n="lead">Meerdere centra. De gids noemde: Liamis in de haven van Kos-stad (PADI, ook naar Pserimos), Kos Divers in Psalidi, Sea World op het strand van Agios Stefanos in Kefalos, Arian in Kardamena (SSI en ANDI), Silent Explorers in Mastichari, en Volcano Bubbles op Nisyros.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Prijs ter plaatse</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=diving%20Kos" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=diving%20Kos" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Eerste keer</h2><p data-i18n="p0">Een introductieduik kan zonder brevet. Een medische verklaring vragen ze vaak. De prijs staat hier niet.</p></article>
+    <div class="placeholder" data-i18n="note"><strong>Nog aan te vullen.</strong> Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.</div>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Duiken en snorkelen", "lead": "Meerdere centra. De gids noemde: Liamis in de haven van Kos-stad (PADI, ook naar Pserimos), Kos Divers in Psalidi, Sea World op het strand van Agios Stefanos in Kefalos, Arian in Kardamena (SSI en ANDI), Silent Explorers in Mastichari, en Volcano Bubbles op Nisyros.", "back": "← Excursies", "note": "Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.", "h0": "Eerste keer", "p0": "Een introductieduik kan zonder brevet. Een medische verklaring vragen ze vaak. De prijs staat hier niet.", "b0": "Prijs ter plaatse"}, "de": {"title": "Tauchen und Schnorcheln", "lead": "Mehrere Zentren. Der Guide nannte: Liamis im Hafen von Kos-Stadt (PADI, auch nach Pserimos), Kos Divers in Psalidi, Sea World am Strand von Agios Stefanos in Kefalos, Arian in Kardamena (SSI und ANDI), Silent Explorers in Mastichari und Volcano Bubbles auf Nisyros.", "back": "← Ausflüge", "note": "Preise und Öffnungszeiten stehen hier nicht fest, sie ändern sich. Frag vor Ort nach.", "h0": "Erstes Mal", "p0": "Ein Schnuppertauchgang geht ohne Schein. Eine ärztliche Erklärung wird oft verlangt. Der Preis steht hier nicht.", "b0": "Preis vor Ort"}, "en": {"title": "Diving and snorkelling", "lead": "Several centres. The guide named: Liamis in Kos town harbour (PADI, also to Pserimos), Kos Divers in Psalidi, Sea World on Agios Stefanos beach in Kefalos, Arian in Kardamena (SSI and ANDI), Silent Explorers in Mastichari, and Volcano Bubbles on Nisyros.", "back": "← Excursions", "note": "Prices and opening hours are not fixed here: they change. Ask on the spot.", "h0": "First time", "p0": "A try-dive can be done without a certificate. They often ask for a medical form. The price is not written here.", "b0": "Price on site"}, "it": {"title": "Immersioni e snorkeling", "lead": "Più centri. La guida citava: Liamis nel porto di Kos città (PADI, anche verso Pserimos), Kos Divers a Psalidi, Sea World sulla spiaggia di Agios Stefanos a Kefalos, Arian a Kardamena (SSI e ANDI), Silent Explorers a Mastichari e Volcano Bubbles a Nisyros.", "back": "← Escursioni", "note": "Prezzi e orari non sono fissi: cambiano. Chiedi sul posto.", "h0": "Prima volta", "p0": "Un battesimo può farsi senza brevetto. Spesso chiedono un modulo medico. Il prezzo non è scritto qui.", "b0": "Prezzo sul posto"}, "tr": {"title": "Dalış ve şnorkel", "lead": "Birkaç merkez. Rehber saydı: Kos limanında Liamis (PADI, Pserimos’a da), Psalidi’de Kos Divers, Kefalos Agios Stefanos plajında Sea World, Kardamena’da Arian (SSI ve ANDI), Mastichari’de Silent Explorers ve Nisyros’ta Volcano Bubbles.", "back": "← Turlar", "note": "Fiyat ve açılış saatleri burada sabit değil, değişir. Yerinde sorun.", "h0": "İlk kez", "p0": "Deneme dalışı belgesiz yapılabilir. Çoğu zaman sağlık formu isterler. Fiyat burada yok.", "b0": "Fiyat yerinde"}, "es": {"title": "Buceo y esnórquel", "lead": "Varios centros. La guía citaba: Liamis en el puerto de la ciudad (PADI, también a Pserimos), Kos Divers en Psalidi, Sea World en la playa de Agios Stefanos en Kéfalos, Arian en Kardamena (SSI y ANDI), Silent Explorers en Mastichari y Volcano Bubbles en Nísiros.", "back": "← Excursiones", "note": "Los precios y horarios no están fijos: cambian. Pregunta en el sitio.", "h0": "Primera vez", "p0": "Un bautizo puede hacerse sin título. A menudo piden un formulario médico. El precio no está aquí.", "b0": "Precio en el sitio"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

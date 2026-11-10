@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Praktische winkels – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="praktische-winkels.jpg" alt=""></div>
+  <p class="parent-link"><a href="index.html" data-i18n="back">← Home</a></p>
+  <h1 data-i18n="title">Praktische winkels</h1>
+  <p class="lead" data-i18n="lead">Geen souvenirlijst, maar zaken die je nodig hebt als er iets stuk is of op is. Adressen zijn nog niet ingevuld.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Kos-stad</span><span class="badge" data-i18n="b1">Prijs ter plaatse</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Kos%20town%20shops" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=Kos%20town%20shops" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Dagelijks</h2><p data-i18n="p0">Supermarkt, markt, drogist, opticien, Vodafone, telefoonreparatie (iRepair), dierenwinkel Zootopia, visspullen (Saltylife), sleutelmaker, schoenmaker, kledingreparatie en babyspullen.</p></article>
+    <article class="card"><h2 data-i18n="h1">Parfum en printen</h2><p data-i18n="p1">Parfum en cosmetica: Honduros, Milva Galerie en Myrenia. Verder een print- en boekwinkel, handgemaakte sandalen (Elli), Jeans Center, Interspot en E-clik.</p></article>
+    <div class="placeholder" data-i18n="note"><strong>Nog aan te vullen.</strong> Straat en huisnummer per winkel zijn nog niet ingevuld.</div>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Praktische winkels", "lead": "Geen souvenirlijst, maar zaken die je nodig hebt als er iets stuk is of op is. Adressen zijn nog niet ingevuld.", "back": "← Home", "note": "Straat en huisnummer per winkel zijn nog niet ingevuld.", "h0": "Dagelijks", "p0": "Supermarkt, markt, drogist, opticien, Vodafone, telefoonreparatie (iRepair), dierenwinkel Zootopia, visspullen (Saltylife), sleutelmaker, schoenmaker, kledingreparatie en babyspullen.", "h1": "Parfum en printen", "p1": "Parfum en cosmetica: Honduros, Milva Galerie en Myrenia. Verder een print- en boekwinkel, handgemaakte sandalen (Elli), Jeans Center, Interspot en E-clik.", "b0": "Kos-stad", "b1": "Prijs ter plaatse"}, "de": {"title": "Praktische Läden", "lead": "Keine Souvenirliste, sondern Läden, die du brauchst, wenn etwas kaputt oder alle ist. Adressen fehlen noch.", "back": "← Start", "note": "Straße und Hausnummer pro Laden sind noch nicht eingetragen.", "h0": "Alltag", "p0": "Supermarkt, Markt, Drogerie, Optiker, Vodafone, Handyreparatur (iRepair), Tierladen Zootopia, Angelshop (Saltylife), Schlüsseldienst, Schuster, Kleidungsreparatur und Babysachen.", "h1": "Parfum und Drucken", "p1": "Parfum und Kosmetik: Honduros, Milva Galerie und Myrenia. Dazu Druck- und Buchladen, handgemachte Sandalen (Elli), Jeans Center, Interspot und E-clik.", "b0": "Kos-Stadt", "b1": "Preis vor Ort"}, "en": {"title": "Practical shops", "lead": "Not a souvenir list. These are the shops you need when something breaks or runs out. Addresses are not filled in yet.", "back": "← Home", "note": "Street and number for each shop are not filled in yet.", "h0": "Everyday", "p0": "Supermarket, market, drugstore, optician, Vodafone, phone repair (iRepair), pet shop Zootopia, fishing shop (Saltylife), locksmith, cobbler, clothing repair and baby things.", "h1": "Perfume and printing", "p1": "Perfume and cosmetics: Honduros, Milva Galerie and Myrenia. Also a print and book shop, handmade sandals (Elli), Jeans Center, Interspot and E-clik.", "b0": "Kos town", "b1": "Price on site"}, "it": {"title": "Negozi pratici", "lead": "Non è una lista di souvenir. Sono i negozi utili quando qualcosa si rompe o finisce. Gli indirizzi non ci sono ancora.", "back": "← Home", "note": "Via e numero di ogni negozio non sono ancora inseriti.", "h0": "Ogni giorno", "p0": "Supermercato, mercato, drogheria, ottico, Vodafone, riparazione telefoni (iRepair), pet shop Zootopia, pesca (Saltylife), chiavi, calzolaio, riparazione abiti e cose per bambini.", "h1": "Profumo e stampe", "p1": "Profumo e cosmetici: Honduros, Milva Galerie e Myrenia. Anche stampa e libreria, sandali fatti a mano (Elli), Jeans Center, Interspot ed E-clik.", "b0": "Città di Kos", "b1": "Prezzo sul posto"}, "tr": {"title": "Pratik dükkanlar", "lead": "Hediyelik listesi değil. Bir şey bozulunca veya bitince lazım olan dükkanlar. Adresler henüz yok.", "back": "← Ana sayfa", "note": "Her dükkanın sokağı ve numarası henüz yok.", "h0": "Günlük", "p0": "Süpermarket, pazar, eczane/drogist, gözlükçü, Vodafone, telefon tamiri (iRepair), Zootopia pet shop, olta (Saltylife), çilingir, ayakkabıcı, giysi tamiri ve bebek eşyası.", "h1": "Parfüm ve baskı", "p1": "Parfüm ve kozmetik: Honduros, Milva Galerie ve Myrenia. Ayrıca baskı ve kitapçı, el yapımı sandal (Elli), Jeans Center, Interspot ve E-clik.", "b0": "Kos şehri", "b1": "Fiyat yerinde"}, "es": {"title": "Tiendas prácticas", "lead": "No es una lista de souvenirs. Son las tiendas útiles cuando algo se rompe o se acaba. Las direcciones aún no están.", "back": "← Inicio", "note": "La calle y el número de cada tienda aún no están.", "h0": "Día a día", "p0": "Supermercado, mercado, droguería, óptica, Vodafone, reparación de móviles (iRepair), tienda de mascotas Zootopia, pesca (Saltylife), cerrajero, zapatero, arreglos de ropa y cosas de bebé.", "h1": "Perfume e impresión", "p1": "Perfume y cosmética: Honduros, Milva Galerie y Myrenia. También imprenta y librería, sandalias hechas a mano (Elli), Jeans Center, Interspot y E-clik.", "b0": "Ciudad de Kos", "b1": "Precio en el sitio"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

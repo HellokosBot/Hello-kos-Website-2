@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Toestemming van één ouder – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="wjd-eenoudertoestemming.jpg" alt=""></div>
+  <p class="parent-link"><a href="wist-je-dat.html" data-i18n="back">← Wist je dat</a></p>
+  <h1 data-i18n="title">Toestemming van één ouder</h1>
+  <p class="lead" data-i18n="lead">Reis je met een kind en de andere ouder is er niet bij, dan vragen luchtvaartmaatschappijen en sommige landen een toestemmingsbrief. De gids raadde een brief in het Engels aan, soms bij de notaris, plus een kopie van de geboorteakte.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Kinderen</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Regels verschillen</h2><p data-i18n="p0">Dit is geen wetstekst. Vraag het na bij je airline en, voor een dagtocht naar Bodrum, bij de Turkse regels. Een printwinkel op Kos kan een brief printen als je die nog per mail krijgt. Het adres van die winkel is hier nog niet ingevuld.</p></article>
+    <div class="placeholder" data-i18n="note"><strong>Nog aan te vullen.</strong> Het adres van de printwinkel is nog niet ingevuld.</div>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Toestemming van één ouder", "lead": "Reis je met een kind en de andere ouder is er niet bij, dan vragen luchtvaartmaatschappijen en sommige landen een toestemmingsbrief. De gids raadde een brief in het Engels aan, soms bij de notaris, plus een kopie van de geboorteakte.", "back": "← Wist je dat", "note": "Het adres van de printwinkel is nog niet ingevuld.", "h0": "Regels verschillen", "p0": "Dit is geen wetstekst. Vraag het na bij je airline en, voor een dagtocht naar Bodrum, bij de Turkse regels. Een printwinkel op Kos kan een brief printen als je die nog per mail krijgt. Het adres van die winkel is hier nog niet ingevuld.", "b0": "Kinderen"}, "de": {"title": "Einverständnis eines Elternteils", "lead": "Reist du mit einem Kind und der andere Elternteil ist nicht dabei, verlangen Fluggesellschaften und manche Länder eine Einverständniserklärung. Der Guide riet zu einem Brief auf Englisch, manchmal beim Notar, plus einer Kopie der Geburtsurkunde.", "back": "← Wusstest du", "note": "Die Adresse des Copyshops ist noch nicht eingetragen.", "h0": "Regeln unterscheiden sich", "p0": "Das ist kein Gesetzestext. Frag bei deiner Airline und, für einen Tagesausflug nach Bodrum, bei den türkischen Regeln nach. Ein Copyshop auf Kos kann einen Brief drucken, wenn du ihn noch per Mail bekommst. Die Adresse dieses Ladens fehlt hier noch.", "b0": "Kinder"}, "en": {"title": "Consent of one parent", "lead": "If you travel with a child and the other parent is not there, airlines and some countries ask for a consent letter. The guide advised a letter in English, sometimes notarised, plus a copy of the birth certificate.", "back": "← Did you know", "note": "The print shop address is not filled in yet.", "h0": "Rules differ", "p0": "This is not a statute. Check with your airline and, for a day trip to Bodrum, with the Turkish rules. A print shop on Kos can print a letter if it is still emailed to you. That shop’s address is not filled in here yet.", "b0": "Children"}, "it": {"title": "Consenso di un genitore", "lead": "Se viaggi con un bambino e l’altro genitore non c’è, le compagnie e alcuni paesi chiedono una lettera di consenso. La guida consigliava una lettera in inglese, a volte dal notaio, più una copia dell’atto di nascita.", "back": "← Lo sapevi", "note": "L’indirizzo del negozio di stampe non è ancora inserito.", "h0": "Le regole cambiano", "p0": "Questo non è un testo di legge. Verifica con la compagnia e, per una gita a Bodrum, con le regole turche. Un negozio di stampe a Kos può stampare una lettera se te la mandano ancora per mail. L’indirizzo di quel negozio non è ancora qui.", "b0": "Bambini"}, "tr": {"title": "Tek ebeveyn onayı", "lead": "Çocukla seyahat ediyorsan ve diğer ebeveyn yoksa, havayolları ve bazı ülkeler onay mektubu ister. Rehber İngilizce bir mektup, bazen noterli, ve doğum belgesinin kopyasını önerdi.", "back": "← Biliyor muydun", "note": "Baskı dükkanının adresi henüz yok.", "h0": "Kurallar değişir", "p0": "Bu bir kanun metni değil. Havayoluna ve Bodrum günübirlik için Türk kurallarına sor. Mektup hâlâ e-postayla gelirse Kos’ta bir baskı dükkanı basabilir. O dükkanın adresi burada henüz yok.", "b0": "Çocuklar"}, "es": {"title": "Consentimiento de un progenitor", "lead": "Si viajas con un niño y el otro progenitor no está, las aerolíneas y algunos países piden una carta de consentimiento. La guía aconsejaba una carta en inglés, a veces ante notario, más una copia del acta de nacimiento.", "back": "← ¿Sabías que", "note": "La dirección de la copistería aún no está.", "h0": "Las normas cambian", "p0": "Esto no es un texto legal. Consúltalo con tu aerolínea y, para un día a Bodrum, con las normas turcas. Una copistería en Kos puede imprimir una carta si aún te la envían por correo. La dirección de esa tienda aún no está aquí.", "b0": "Niños"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

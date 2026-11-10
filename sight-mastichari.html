@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Mastichari – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="img/hk/sight-mastichari.jpg" alt=""></div>
+  <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back">← Bezienswaardigheden</a></p>
+  <h1 data-i18n="title">Mastichari</h1>
+  <p class="lead" data-i18n="lead">Vissersdorp aan de noordkust met een lang strand en een veerboot naar Kalymnos. De gids noemde een Blauwe Vlag voor het strand. Er is wind voor wind- en kitesurfen. Lido Waterpark ligt in de buurt.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Gratis</span><span class="badge" data-i18n="b1">Veerboot</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Mastichari%20Kos" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=Mastichari%20Kos" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Kustpad</h2><p data-i18n="p0">Er zijn lage duinen en een pad langs de kust, naast drukkere stukken met bars.</p></article>
+    
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Mastichari", "lead": "Vissersdorp aan de noordkust met een lang strand en een veerboot naar Kalymnos. De gids noemde een Blauwe Vlag voor het strand. Er is wind voor wind- en kitesurfen. Lido Waterpark ligt in de buurt.", "back": "← Bezienswaardigheden", "h0": "Kustpad", "p0": "Er zijn lage duinen en een pad langs de kust, naast drukkere stukken met bars.", "b0": "Gratis", "b1": "Veerboot"}, "de": {"title": "Mastichari", "lead": "Fischerdorf an der Nordküste mit langem Strand und einer Fähre nach Kalymnos. Der Guide nannte eine Blaue Flagge für den Strand. Es gibt Wind zum Wind- und Kitesurfen. Lido Waterpark liegt in der Nähe.", "back": "← Sehenswürdigkeiten", "h0": "Küstenweg", "p0": "Es gibt niedrige Dünen und einen Weg an der Küste, neben belebteren Abschnitten mit Bars.", "b0": "Kostenlos", "b1": "Fähre"}, "en": {"title": "Mastichari", "lead": "Fishing village on the north coast with a long beach and a ferry to Kalymnos. The guide mentioned a Blue Flag for the beach. There is wind for windsurfing and kitesurfing. Lido Waterpark is nearby.", "back": "← Sights", "h0": "Coast path", "p0": "There are low dunes and a path along the coast, next to busier parts with bars.", "b0": "Free", "b1": "Ferry"}, "it": {"title": "Mastichari", "lead": "Villaggio di pescatori sulla costa nord con una lunga spiaggia e un traghetto per Kalymnos. La guida citava una Bandiera Blu per la spiaggia. C’è vento per windsurf e kitesurf. Lido Waterpark è vicino.", "back": "← Attrazioni", "h0": "Sentiero", "p0": "Ci sono dune basse e un sentiero lungo la costa, accanto a tratti più animati con bar.", "b0": "Gratis", "b1": "Traghetto"}, "tr": {"title": "Mastichari", "lead": "Kuzey kıyıda uzun plajlı ve Kalymnos feribotlu balıkçı köyü. Rehber plaj için Mavi Bayrak’tan söz etti. Rüzgar sörfü ve kite için rüzgar var. Lido Waterpark yakın.", "back": "← Gezilecek yerler", "h0": "Kıyı yolu", "p0": "Alçak kum tepeleri ve kıyı boyunca bir patika var, barlı kalabalık kısımların yanında.", "b0": "Ücretsiz", "b1": "Feribot"}, "es": {"title": "Mastichari", "lead": "Pueblo pesquero en la costa norte con playa larga y ferry a Kálimnos. La guía citaba una Bandera Azul para la playa. Hay viento para windsurf y kitesurf. Lido Waterpark está cerca.", "back": "← Lugares de interés", "h0": "Sendero", "p0": "Hay dunas bajas y un camino por la costa, junto a tramos más animados con bares.", "b0": "Gratis", "b1": "Ferry"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

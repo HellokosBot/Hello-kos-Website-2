@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Mylos Beach – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="img/hk/strand-mylos-beach.jpg" alt=""></div>
+  <p class="parent-link"><a href="stranden.html" data-i18n="back">← Stranden</a></p>
+  <h1 data-i18n="title">Mylos Beach</h1>
+  <p class="lead" data-i18n="lead">Strand met beachbar bij Kos-stad. Cocktails en soms een feest. Er is een aparte barpagina.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Strand</span><span class="badge" data-i18n="b1">Prijs ter plaatse</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Mylos%20Beach%20Kos" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=Mylos%20Beach%20Kos" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Voorzieningen</h2><p data-i18n="p0">Ligbedden, eten en een reddingspost zijn niet op elk stuk hetzelfde. De prijs van een bed staat hier niet.</p></article>
+    <div class="placeholder" data-i18n="note"><strong>Nog aan te vullen.</strong> Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.</div>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Mylos Beach", "lead": "Strand met beachbar bij Kos-stad. Cocktails en soms een feest. Er is een aparte barpagina.", "back": "← Stranden", "note": "Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.", "h0": "Voorzieningen", "p0": "Ligbedden, eten en een reddingspost zijn niet op elk stuk hetzelfde. De prijs van een bed staat hier niet.", "b0": "Strand", "b1": "Prijs ter plaatse"}, "de": {"title": "Mylos Beach", "lead": "Strand mit Beachbar bei Kos-Stadt. Cocktails und manchmal eine Party. Es gibt eine eigene Barseite.", "back": "← Strände", "note": "Preise und Öffnungszeiten stehen hier nicht fest, sie ändern sich. Frag vor Ort nach.", "h0": "Ausstattung", "p0": "Liegen, Essen und eine Rettungsstation sind nicht auf jedem Abschnitt gleich. Der Preis für eine Liege steht hier nicht.", "b0": "Strand", "b1": "Preis vor Ort"}, "en": {"title": "Mylos Beach", "lead": "Beach with a beach bar near Kos town. Cocktails and sometimes a party. There is a separate bar page.", "back": "← Beaches", "note": "Prices and opening hours are not fixed here: they change. Ask on the spot.", "h0": "Facilities", "p0": "Sunbeds, food and a lifeguard are not the same on every stretch. The price of a bed is not written here.", "b0": "Beach", "b1": "Price on site"}, "it": {"title": "Mylos Beach", "lead": "Spiaggia con beach bar vicino alla città. Cocktail e a volte una festa. C’è una pagina del bar.", "back": "← Spiagge", "note": "Prezzi e orari non sono fissi: cambiano. Chiedi sul posto.", "h0": "Servizi", "p0": "Lettini, cibo e un bagnino non sono uguali su ogni tratto. Il prezzo di un lettino non è scritto qui.", "b0": "Spiaggia", "b1": "Prezzo sul posto"}, "tr": {"title": "Mylos Beach", "lead": "Kos şehri yakınında beach barlı plaj. Kokteyl ve bazen parti. Barın ayrı sayfası var.", "back": "← Plajlar", "note": "Fiyat ve açılış saatleri burada sabit değil, değişir. Yerinde sorun.", "h0": "Olanaklar", "p0": "Şezlong, yemek ve cankurtaran her kesimde aynı değil. Yatak fiyatı burada yok.", "b0": "Plaj", "b1": "Fiyat yerinde"}, "es": {"title": "Mylos Beach", "lead": "Playa con beach bar cerca de la ciudad. Cócteles y a veces fiesta. Hay una página del bar.", "back": "← Playas", "note": "Los precios y horarios no están fijos: cambian. Pregunta en el sitio.", "h0": "Servicios", "p0": "Hamacas, comida y socorrista no son iguales en cada tramo. El precio de una hamaca no está aquí.", "b0": "Playa", "b1": "Precio en el sitio"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

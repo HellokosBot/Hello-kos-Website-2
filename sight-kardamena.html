@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Kardamena – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="img/hk/sight-kardamena.jpg" alt=""></div>
+  <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back">← Bezienswaardigheden</a></p>
+  <h1 data-i18n="title">Kardamena</h1>
+  <p class="lead" data-i18n="lead">Badplaats aan de zuidkust. Overdag strand, ’s avonds eten en uitgaan in de straatjes. Er zijn stukken met ligbedden en stillere stukken met alleen een handdoek.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Gratis</span><span class="badge" data-i18n="b1">Zuidkust</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Kardamena%20Kos" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=Kardamena%20Kos" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Verder</h2><p data-i18n="p0">Er is geen volledig ziekenhuis. Bij spoed bel je 112 of 166. Het strand heeft een eigen pagina.</p></article>
+    
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Kardamena", "lead": "Badplaats aan de zuidkust. Overdag strand, ’s avonds eten en uitgaan in de straatjes. Er zijn stukken met ligbedden en stillere stukken met alleen een handdoek.", "back": "← Bezienswaardigheden", "h0": "Verder", "p0": "Er is geen volledig ziekenhuis. Bij spoed bel je 112 of 166. Het strand heeft een eigen pagina.", "b0": "Gratis", "b1": "Zuidkust"}, "de": {"title": "Kardamena", "lead": "Badeort an der Südküste. Tagsüber Strand, abends Essen und Ausgehen in den Gassen. Es gibt Abschnitte mit Liegen und ruhigere nur mit Handtuch.", "back": "← Sehenswürdigkeiten", "h0": "Weiter", "p0": "Es gibt kein volles Krankenhaus. Im Notfall rufst du 112 oder 166. Der Strand hat eine eigene Seite.", "b0": "Kostenlos", "b1": "Südküste"}, "en": {"title": "Kardamena", "lead": "Resort on the south coast. Beach by day, food and going out in the lanes at night. There are parts with sunbeds and quieter parts with just a towel.", "back": "← Sights", "h0": "More", "p0": "There is no full hospital. In an emergency call 112 or 166. The beach has its own page.", "b0": "Free", "b1": "South coast"}, "it": {"title": "Kardamena", "lead": "Località sulla costa sud. Spiaggia di giorno, cibo e uscita nei vicoli di sera. Ci sono tratti con lettini e tratti più quieti solo con l’asciugamano.", "back": "← Attrazioni", "h0": "Altro", "p0": "Non c’è un ospedale completo. In emergenza chiama il 112 o il 166. La spiaggia ha una pagina.", "b0": "Gratis", "b1": "Costa sud"}, "tr": {"title": "Kardamena", "lead": "Güney kıyıda tatil yeri. Gündüz plaj, akşam sokaklarda yemek ve çıkış. Şezlonglu kısımlar ve yalnız havlulu sakin kısımlar var.", "back": "← Gezilecek yerler", "h0": "Devamı", "p0": "Tam bir hastane yok. Acilde 112 veya 166’yı ara. Plajın sayfası var.", "b0": "Ücretsiz", "b1": "Güney kıyı"}, "es": {"title": "Kardamena", "lead": "Localidad en la costa sur. Playa de día, comida y salir por los callejones de noche. Hay tramos con hamacas y tramos más quietos solo con toalla.", "back": "← Lugares de interés", "h0": "Más", "p0": "No hay un hospital completo. En emergencia llama al 112 o al 166. La playa tiene página.", "b0": "Gratis", "b1": "Costa sur"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

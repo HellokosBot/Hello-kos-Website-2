@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Brandweer – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="img/hk/hulp-brandweer.jpg" alt=""></div>
+  <p class="parent-link"><a href="noodgevallen.html" data-i18n="back">← Noodgevallen</a></p>
+  <h1 data-i18n="title">Brandweer</h1>
+  <p class="lead" data-i18n="lead">Bel 112 bij brand. In het droge seizoen zet de brandweer extra ploegen in, onder meer bij Kefalos en Kardamena. Bij grote branden komt er hulp uit de lucht.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">112</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=fire%20station%20Kos" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=fire%20station%20Kos" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Zelf</h2><p data-i18n="p0">Een wegwerpbarbecue in droog gras is een slecht idee. Het kazernenummer staat hier niet.</p></article>
+    <div class="placeholder" data-i18n="note"><strong>Nog aan te vullen.</strong> Het telefoonnummer en het exacte adres staan nog niet in deze gids. Bel bij direct gevaar 112.</div>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Brandweer", "lead": "Bel 112 bij brand. In het droge seizoen zet de brandweer extra ploegen in, onder meer bij Kefalos en Kardamena. Bij grote branden komt er hulp uit de lucht.", "back": "← Noodgevallen", "note": "Het telefoonnummer en het exacte adres staan nog niet in deze gids. Bel bij direct gevaar 112.", "h0": "Zelf", "p0": "Een wegwerpbarbecue in droog gras is een slecht idee. Het kazernenummer staat hier niet.", "b0": "112"}, "de": {"title": "Feuerwehr", "lead": "Ruf 112 bei Feuer. In der trockenen Saison setzt die Feuerwehr Extra-Teams ein, unter anderem bei Kefalos und Kardamena. Bei großen Bränden kommt Hilfe aus der Luft.", "back": "← Notfälle", "note": "Telefonnummer und genaue Adresse stehen noch nicht in diesem Guide. Bei direkter Gefahr: 112.", "h0": "Selbst", "p0": "Ein Einweggrill in trockenem Gras ist eine schlechte Idee. Die Wachnummer steht hier nicht.", "b0": "112"}, "en": {"title": "Fire service", "lead": "Call 112 if there is a fire. In the dry season the fire service adds crews, including near Kefalos and Kardamena. Big fires get help from the air.", "back": "← Emergencies", "note": "The phone number and exact address are not in this guide yet. If you are in danger, call 112.", "h0": "Yourself", "p0": "A disposable barbecue in dry grass is a bad idea. The station number is not written here.", "b0": "112"}, "it": {"title": "Vigili del fuoco", "lead": "Chiama il 112 in caso di incendio. Nella stagione secca i vigili del fuoco aggiungono squadre, anche verso Kefalos e Kardamena. I grandi incendi ricevono aiuto dall’aria.", "back": "← Emergenze", "note": "Numero di telefono e indirizzo esatto non sono ancora in questa guida. In pericolo chiama il 112.", "h0": "Da solo", "p0": "Un barbecue usa e getta nell’erba secca è una cattiva idea. Il numero della caserma non è scritto qui.", "b0": "112"}, "tr": {"title": "İtfaiye", "lead": "Yangında 112’yi ara. Kurak sezonda itfaiye ek ekip koyar, Kefalos ve Kardamena tarafı dahil. Büyük yangınlara havadan yardım gelir.", "back": "← Acil durum", "note": "Telefon ve tam adres bu rehberde henüz yok. Tehlike varsa 112'yi ara.", "h0": "Kendin", "p0": "Kuru otta tek kullanımlık mangal kötü fikirdir. İstasyon numarası burada yok.", "b0": "112"}, "es": {"title": "Bomberos", "lead": "Llama al 112 si hay fuego. En la temporada seca los bomberos añaden equipos, también hacia Kéfalos y Kardamena. Los incendios grandes reciben ayuda desde el aire.", "back": "← Emergencias", "note": "El teléfono y la dirección exacta aún no están en esta guía. Si hay peligro, llama al 112.", "h0": "Tú mismo", "p0": "Una barbacoa desechable en hierba seca es mala idea. El número del parque no está aquí.", "b0": "112"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

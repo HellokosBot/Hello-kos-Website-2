@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Tandarts – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="img/hk/hulp-tandarts.jpg" alt=""></div>
+  <p class="parent-link"><a href="noodgevallen.html" data-i18n="back">← Noodgevallen</a></p>
+  <h1 data-i18n="title">Tandarts</h1>
+  <p class="lead" data-i18n="lead">De gids noemde praktijken voor een afgebroken tand of een spoed, onder meer Georgios & Koutsouradis en George Hatzinikitas, en ook een praktijk bij Bar Street en een bij de rotonde. Telefoon en adres staan hier niet.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Prijs ter plaatse</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=dentist%20Kos%20town" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=dentist%20Kos%20town" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Pijn</h2><p data-i18n="p0">Apotheken kunnen soms helpen tot je een tandarts ziet. Het ziekenhuis is voor echte spoed.</p></article>
+    <div class="placeholder" data-i18n="note"><strong>Nog aan te vullen.</strong> Het telefoonnummer en het exacte adres staan nog niet in deze gids. Bel bij direct gevaar 112.</div>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Tandarts", "lead": "De gids noemde praktijken voor een afgebroken tand of een spoed, onder meer Georgios & Koutsouradis en George Hatzinikitas, en ook een praktijk bij Bar Street en een bij de rotonde. Telefoon en adres staan hier niet.", "back": "← Noodgevallen", "note": "Het telefoonnummer en het exacte adres staan nog niet in deze gids. Bel bij direct gevaar 112.", "h0": "Pijn", "p0": "Apotheken kunnen soms helpen tot je een tandarts ziet. Het ziekenhuis is voor echte spoed.", "b0": "Prijs ter plaatse"}, "de": {"title": "Zahnarzt", "lead": "Der Guide nannte Praxen für einen abgebrochenen Zahn oder einen Notfall, unter anderem Georgios & Koutsouradis und George Hatzinikitas, und auch eine Praxis bei Bar Street und eine am Kreisverkehr. Telefon und Adresse stehen hier nicht.", "back": "← Notfälle", "note": "Telefonnummer und genaue Adresse stehen noch nicht in diesem Guide. Bei direkter Gefahr: 112.", "h0": "Schmerz", "p0": "Apotheken können manchmal helfen, bis du einen Zahnarzt siehst. Das Krankenhaus ist für echte Notfälle.", "b0": "Preis vor Ort"}, "en": {"title": "Dentist", "lead": "The guide named practices for a broken tooth or an emergency, including Georgios & Koutsouradis and George Hatzinikitas, and also a practice by Bar Street and one by the roundabout. Phone and address are not written here.", "back": "← Emergencies", "note": "The phone number and exact address are not in this guide yet. If you are in danger, call 112.", "h0": "Pain", "p0": "A pharmacy can sometimes help until you see a dentist. The hospital is for a real emergency.", "b0": "Price on site"}, "it": {"title": "Dentista", "lead": "La guida citava studi per un dente rotto o un’urgenza, tra cui Georgios & Koutsouradis e George Hatzinikitas, e anche uno studio verso Bar Street e uno alla rotonda. Telefono e indirizzo non sono scritti qui.", "back": "← Emergenze", "note": "Numero di telefono e indirizzo esatto non sono ancora in questa guida. In pericolo chiama il 112.", "h0": "Dolore", "p0": "Una farmacia a volte aiuta finché non vedi un dentista. L’ospedale è per una vera urgenza.", "b0": "Prezzo sul posto"}, "tr": {"title": "Diş hekimi", "lead": "Rehber kırık diş veya acil için muayenehaneler saydı, Georgios & Koutsouradis ve George Hatzinikitas dahil, ayrıca Bar Street tarafında ve kavşakta bir muayenehane. Telefon ve adres burada yok.", "back": "← Acil durum", "note": "Telefon ve tam adres bu rehberde henüz yok. Tehlike varsa 112'yi ara.", "h0": "Ağrı", "p0": "Diş hekimini görene kadar eczane bazen yardım eder. Hastane gerçek acil içindir.", "b0": "Fiyat yerinde"}, "es": {"title": "Dentista", "lead": "La guía citaba consultas para un diente roto o una urgencia, entre ellas Georgios & Koutsouradis y George Hatzinikitas, y también una hacia Bar Street y una en la rotonda. Teléfono y dirección no están aquí.", "back": "← Emergencias", "note": "El teléfono y la dirección exacta aún no están en esta guía. Si hay peligro, llama al 112.", "h0": "Dolor", "p0": "Una farmacia a veces ayuda hasta que ves al dentista. El hospital es para una urgencia de verdad.", "b0": "Precio en el sitio"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

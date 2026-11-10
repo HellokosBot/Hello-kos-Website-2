@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Zia in de avond – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="excursies.jpg" alt=""></div>
+  <p class="parent-link"><a href="excursies.html" data-i18n="back">← Excursies</a></p>
+  <h1 data-i18n="title">Zia in de avond</h1>
+  <p class="lead" data-i18n="lead">Rit naar Zia voor de zonsondergang, zonder het grote diner van de Griekse avond. De gids noemde gedeelde ritten van 18:00 tot 21:30: €15 per persoon vanuit een deel van het eiland en €18 vanuit Psalidi. Privé vanuit Kos-stad: €90 voor 4 personen en €130 voor 8, op een zelfgekozen tijd.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Prijs ter plaatse</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Zia%20Kos%20sunset" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=Zia%20Kos%20sunset" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Druk</h2><p data-i18n="p0">De weg is rond zonsondergang vol. Deze bedragen komen uit de oude gids.</p></article>
+    <div class="placeholder" data-i18n="note"><strong>Nog aan te vullen.</strong> Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.</div>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Zia in de avond", "lead": "Rit naar Zia voor de zonsondergang, zonder het grote diner van de Griekse avond. De gids noemde gedeelde ritten van 18:00 tot 21:30: €15 per persoon vanuit een deel van het eiland en €18 vanuit Psalidi. Privé vanuit Kos-stad: €90 voor 4 personen en €130 voor 8, op een zelfgekozen tijd.", "back": "← Excursies", "note": "Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.", "h0": "Druk", "p0": "De weg is rond zonsondergang vol. Deze bedragen komen uit de oude gids.", "b0": "Prijs ter plaatse"}, "de": {"title": "Zia am Abend", "lead": "Fahrt nach Zia zum Sonnenuntergang, ohne das große Essen des griechischen Abends. Der Guide nannte geteilte Fahrten von 18:00 bis 21:30: €15 pro Person aus einem Teil der Insel und €18 aus Psalidi. Privat ab Kos-Stadt: €90 für 4 Personen und €130 für 8, zur selbst gewählten Zeit.", "back": "← Ausflüge", "note": "Preise und Öffnungszeiten stehen hier nicht fest, sie ändern sich. Frag vor Ort nach.", "h0": "Voll", "p0": "Die Straße ist zum Sonnenuntergang voll. Diese Beträge kommen aus dem alten Guide.", "b0": "Preis vor Ort"}, "en": {"title": "Zia in the evening", "lead": "A ride to Zia for the sunset, without the big dinner of the Greek evening. The guide listed shared rides from 18:00 to 21:30: €15 per person from part of the island and €18 from Psalidi. Private from Kos town: €90 for 4 people and €130 for 8, at a time you choose.", "back": "← Excursions", "note": "Prices and opening hours are not fixed here: they change. Ask on the spot.", "h0": "Busy", "p0": "The road is full around sunset. These amounts come from the old guide.", "b0": "Price on site"}, "it": {"title": "Zia di sera", "lead": "Corsa per Zia al tramonto, senza la grande cena della serata greca. La guida indicava corse condivise dalle 18:00 alle 21:30: €15 a persona da una parte dell’isola e €18 da Psalidi. Privato da Kos città: €90 per 4 persone e €130 per 8, all’ora che scegli.", "back": "← Escursioni", "note": "Prezzi e orari non sono fissi: cambiano. Chiedi sul posto.", "h0": "Pieno", "p0": "La strada è piena al tramonto. Queste cifre vengono dalla vecchia guida.", "b0": "Prezzo sul posto"}, "tr": {"title": "Akşam Zia", "lead": "Yunan gecesinin büyük yemeği olmadan, gün batımı için Zia’ya gidiş. Rehber 18:00–21:30 paylaşımlı sefer yazdı: adanın bir kısmından kişi başı €15, Psalidi’den €18. Kos şehrinden özel: 4 kişi €90, 8 kişi €130, seçtiğin saatte.", "back": "← Turlar", "note": "Fiyat ve açılış saatleri burada sabit değil, değişir. Yerinde sorun.", "h0": "Kalabalık", "p0": "Yol gün batımında dolar. Bu tutarlar eski rehberden.", "b0": "Fiyat yerinde"}, "es": {"title": "Zia por la tarde", "lead": "Trayecto a Zia para el atardecer, sin la gran cena de la noche griega. La guía citaba viajes compartidos de 18:00 a 21:30: 15 € por persona desde una parte de la isla y 18 € desde Psalidi. Privado desde la ciudad: 90 € para 4 personas y 130 € para 8, a la hora que elijas.", "back": "← Excursiones", "note": "Los precios y horarios no están fijos: cambian. Pregunta en el sitio.", "h0": "Lleno", "p0": "La carretera se llena al atardecer. Estas cifras vienen de la guía antigua.", "b0": "Precio en el sitio"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>
