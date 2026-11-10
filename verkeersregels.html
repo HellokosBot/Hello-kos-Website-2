@@ -36,10 +36,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
 .footer{text-align:center;padding:20px 16px;background:var(--bg-elevated);border-top:1px solid var(--border)}
 .footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
 .footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
-#zoomLayer{position:fixed;inset:0;z-index:8000;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s,visibility .25s}
-#zoomLayer.show{opacity:1;visibility:visible;pointer-events:auto}
-#zoomLayer img{max-width:92vw;max-height:78vh;border-radius:16px;object-fit:contain;transform:scale(.88);transition:transform .35s cubic-bezier(.22,1,.36,1)}
-#zoomLayer.show img{transform:scale(1)}
 </style>
 <link rel="stylesheet" href="hello-kos.css">
 </head>
@@ -87,7 +83,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
     </a>
   </div>
 </main>
-<div id="zoomLayer"><img src="" alt=""></div>
 <footer class="footer">
   <div class="footer-logo">🔅 Hello Kos</div>
   <p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a></p>
@@ -121,15 +116,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
   langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.contains('open')?closeMenu():openMenu()});
   overlay.addEventListener('click',closeMenu);
   document.querySelectorAll('.lang-option').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'))})});
-  document.addEventListener('click',function(e){
-    var card=e.target.closest('a.card');
-    if(!card)return;
-    e.preventDefault();
-    var href=card.getAttribute('href');if(!href)return;
-    var img=card.querySelector('img');var layer=document.getElementById('zoomLayer');
-    if(layer&&img){layer.querySelector('img').src=img.src||'';layer.classList.add('show');setTimeout(function(){layer.classList.remove('show');window.location.href=href},450)}
-    else window.location.href=href;
-  },true);
   setLang(lang);
 })();
 </script>
