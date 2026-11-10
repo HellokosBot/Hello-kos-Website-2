@@ -1,60 +1,195 @@
-(function(){
-  var LANGS={nl:'Nederlands',de:'Deutsch',en:'English',it:'Italiano',tr:'Türkçe'};
-  var FLAGS={nl:'🇳🇱',de:'🇩🇪',en:'🇬🇧',it:'🇮🇹',tr:'🇹🇷'};
-  var VOICE={nl:'nl-NL',de:'de-DE',en:'en-GB',it:'it-IT',tr:'tr-TR'};
-  var T={
-    shared:{
-      read:'Voorlezen','stop':'Stop','gmaps:'📍 Google Maps','amaps:'🍏 Apple Maps','back':'← Terug','tip':'Tip'
-    },
-    palm:{
-      title:'Palm Tree Lane',lead:'Brede laan met palmen en de oude boogbrug – vroeger water tussen kasteel-eiland en stad, nu een van de bekendste straten van Kos-stad.',
-      b1:'Gratis',b2:'Kos-stad',b3:'Haven',c1:'Herkenningspunt van Kos-stad',c1p:'<strong>Palm Tree Lane</strong> (Finikon / Phoinikon Avenue) is een van de meest herkenbare plekken van Kos-stad: een brede laan met de oude stenen boogbrug en uitzicht op het kasteel van Neratzia.',
-      f1:'Brug',f1l:'naar het kasteel',f2:'Gratis',f2l:'openbaar',c2:'Van eiland naar laan',c2p1:'Het kasteel van Neratzia stond vroeger op een <strong>klein eiland</strong>, gescheiden van het vasteland door water. Tijdens de Italiaanse bezetting (rond 1912–1943) vulden ze de gracht op met aarde, zodat het eilandje vast kwam te liggen aan de stad.',c2p2:'Ze maakten er een brede laan van, met de oude stenen <strong>boogbrug</strong> die er nog steeds ligt. De Italianen plantten hoge palmen langs beide kanten, voor schaduw en een mooi beeld.',
-      cap1:'Laan met zicht op het kasteel',c3:'Palmen gekapt',c3p:'Enkele jaren geleden moesten alle palmen worden gekapt door een invasieve keversoort die de bomen aantastte en zich kon verspreiden. Er staan weer (nieuwe) palmen; de laan blijft een centrale wandel- en fietsroute bij de haven.',
-      c4:'Video’s',c4p:'Beelden van Palm Tree Lane en de omgeving:',cap2:'Palm Tree Lane',cap3:'De laan en de brug',cap4:'Rondom Palm Tree Lane',g1:'De laan',g2:'Brug',c5:'Bezoeken',c5p:'Gratis, altijd toegankelijk – tussen haven, kasteel en centrum.',tip:'mooi om te wandelen of te fietsen, vooral tegen zonsondergang met het kasteel op de achtergrond.'
-    },
-    agia:{
-      title:'Agia Paraskevi-kerk',lead:'Grote orthodoxe parochiekerk in het centrum – mozaïekvloer, kroonluchters, na 2017 weer gerestaureerd en open.',
-      b1:'Gratis',b2:'Kos-stad',b3:'Weer open',c1:'Parochiekerk in het centrum',c1p:'<strong>Agia Paraskevi</strong> is een van de grootste orthodoxe kerken in Kos-stad en nog steeds actief als parochiekerk. Veel bezoekers lopen binnen om een kaarsje aan te steken of van de rust te genieten.',
-      f1:'Open',f1l:'na renovatie',f2:'Gratis',f2l:'binnen kijken',c2:'Interieur',c2p:'Binnen zie je onder meer kroonluchters en een uniek <strong>mozaïek van kiezelstenen</strong> op de vloer. De sfeer is serene – heel anders dan de drukte buiten.',
-      cap1:'De kerk in het centrum',c3:'Aardbeving 2017',c3p:'Na de grote aardbeving van <strong>2017</strong> had de kerk ernstige schade en was ze gesloten. Na een omvangrijke renovatie is ze <strong>weer geopend</strong> voor bezoekers.',
-      g1:'Detail',g2:'In het centrum',c4:'Bezoeken',c4p:'Vaak open van ’s ochtends tot ’s avonds. Mooie stop tijdens een wandeling door het oude centrum.',tip:'kijk naar de kiezelmozaïekvloer en de kroonluchters – en houd het stil als er een dienst is.'
-    },
-    hatzi:{
-      title:'Hatzi Pasha Mausoleum',lead:'Klein Ottomaans grafmonument met koepeltje – sarcofaag van officier Hatzi Pasha, gesneuveld in 1527 bij een piratenaanval.',
-      b1:'Gratis',b2:'Kos-stad',b3:'16e eeuw',c1:'Onopvallend, bijna 500 jaar oud',c1p:'Een bescheiden, vierkant stenen gebouw in het hart van Kos-stad. Veel mensen lopen er voorbij zonder te weten dat hier de sarcofaag van <strong>Hatzi Pasha</strong> staat – al bijna 500 jaar.',
-      f1:'1527',f1l:'gesneuveld',f2:'Gratis',f2l:'van buitenaf',c2:'Wie was Hatzi Pasha?',c2p1:'Hatzi Pasha was een Ottomaanse officier op het eiland. In <strong>1527</strong> sneuvelde hij tijdens een aanval van piraten die de kust onveilig maakten.',c2p2:'Zijn lichaam werd begraven in deze marmeren sarcofaag, die nog altijd op dezelfde plek staat. Het is het enige directe spoor dat van hem overblijft.',
-      cap1:'Het mausoleum met koepeltje',c3:'Het gebouw',c3p:'Een eenvoudige, rechthoekige stenen mausoleum met een <strong>klein koepeltje</strong> erbovenop. Typisch Ottomaans grafmonument uit de vroege periode op Kos.',
-      g1:'Detail',g2:'Gebouw',c4:'Bezoeken',c4p:'In het centrum van Kos-stad. Van buitenaf gratis te zien; makkelijk te missen als je er niet op let.',tip:'zoek het kleine gebouwtje met het koepeltje – het is snel over het hoofd gezien tussen de andere gebouwen.'
-    }
+/* Shared language switch for Hello Kos.
+   Stores the choice in localStorage key "hk-lang".
+   Pages with their own setLang set <html data-hk-own="1"> and keep that script.
+   Other pages put translations in window.HK_DICT and mark text with data-i18n.
+   Voorlezen uses the visible text, so it follows the chosen language. */
+(function () {
+  var LANGS = ["nl", "de", "en", "it", "tr", "es"];
+  var VOICE = {
+    nl: "nl-NL",
+    de: "de-DE",
+    en: "en-GB",
+    it: "it-IT",
+    tr: "tr-TR",
+    es: "es-ES"
   };
-  var cur='nl';
-  function getLang(){var l=localStorage.getItem('hk-lang')||'nl';return LANGS[l]?l:'nl';}
-  function setLang(l){if(!LANGS[l])return;cur=l;localStorage.setItem('hk-lang',l);apply();}
-  function tr(obj,key){if(!obj)return'';var o=obj[cur];return(o&&o[key])||obj.nl[key]||'';}
-  function apply(){
-    document.querySelectorAll('[data-i18n]').forEach(function(el){
-      var k=el.getAttribute('data-i18n');var p=k.split('.');var v=T;for(var i=0;i<p.length;i++){v=v&&v[p[i]];}
-      if(v){if(el.tagName==='INPUT'||el.tagName==='TEXTAREA')el.placeholder=v;else el.innerHTML=v;}
+  var SOUND = {
+    nl: "Hallo. Dit is de geluidstest van Hello Kos.",
+    de: "Hallo. Das ist der Soundtest von Hello Kos.",
+    en: "Hello. This is the Hello Kos sound test.",
+    it: "Ciao. Questo è il test audio di Hello Kos.",
+    tr: "Merhaba. Bu, Hello Kos ses testidir.",
+    es: "Hola. Esta es la prueba de sonido de Hello Kos."
+  };
+  var UI = {
+    nl: { read: "Voorlezen", stop: "Stop", fill: "Nog aan te vullen.", soundOn: "Afspelen…", soundDone: "Klaar", soundStop: "Gestopt", noSpeech: "Voorlezen wordt door deze browser niet ondersteund." },
+    de: { read: "Vorlesen", stop: "Stopp", fill: "Noch auszufüllen.", soundOn: "Wiedergabe…", soundDone: "Fertig", soundStop: "Gestoppt", noSpeech: "Vorlesen wird von diesem Browser nicht unterstützt." },
+    en: { read: "Read aloud", stop: "Stop", fill: "Still to be filled in.", soundOn: "Playing…", soundDone: "Done", soundStop: "Stopped", noSpeech: "Read-aloud is not supported in this browser." },
+    it: { read: "Leggi ad alta voce", stop: "Stop", fill: "Ancora da completare.", soundOn: "Riproduzione…", soundDone: "Fatto", soundStop: "Interrotto", noSpeech: "La lettura vocale non è supportata da questo browser." },
+    tr: { read: "Sesli oku", stop: "Durdur", fill: "Henüz doldurulacak.", soundOn: "Çalıyor…", soundDone: "Bitti", soundStop: "Durdu", noSpeech: "Sesli okuma bu tarayıcıda desteklenmiyor." },
+    es: { read: "Leer en voz alta", stop: "Parar", fill: "Aún por completar.", soundOn: "Reproduciendo…", soundDone: "Listo", soundStop: "Parado", noSpeech: "La lectura en voz alta no está disponible en este navegador." }
+  };
+
+  function getLang() {
+    var l = localStorage.getItem("hk-lang") || "nl";
+    return LANGS.indexOf(l) >= 0 ? l : "nl";
+  }
+
+  function textFor(lang, key) {
+    var page = window.HK_DICT && window.HK_DICT[lang];
+    if (page && page[key] != null && page[key] !== "") return page[key];
+    var nlPage = window.HK_DICT && window.HK_DICT.nl;
+    if (nlPage && nlPage[key] != null) return nlPage[key];
+    if (UI[lang] && UI[lang][key] != null) return UI[lang][key];
+    if (UI.nl[key] != null) return UI.nl[key];
+    return null;
+  }
+
+  function apply(lang) {
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-lang-block]").forEach(function (el) {
+      el.style.display = el.getAttribute("data-lang-block") === lang ? "block" : "none";
     });
-    var bar=document.getElementById('hk-langbar');if(!bar){bar=document.createElement('div');bar.id='hk-langbar';bar.style.cssText='position:absolute;right:14px;top:50%;transform:translateY(-50%);display:flex;gap:4px;';var h=document.querySelector('.app-header');if(h){h.style.position='relative';h.appendChild(bar);}}
-    bar.innerHTML='';Object.keys(LANGS).forEach(function(l){
-      var b=document.createElement('button');b.type='button';b.textContent=FLAGS[l];b.title=LANGS[l];
-      b.style.cssText='border:none;background:'+(l===cur?'#2A6F6F':'transparent')+';border-radius:6px;padding:4px 6px;cursor:pointer;font-size:1rem;';
-      b.onclick=function(){setLang(l);};bar.appendChild(b);
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n");
+      var value = textFor(lang, key);
+      if (value == null) return;
+      if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") el.placeholder = value;
+      else el.innerHTML = value;
+    });
+    var heading = document.querySelector("h1[data-i18n]");
+    if (heading) {
+      var name = heading.textContent.replace(/\s+/g, " ").trim();
+      if (name) document.title = name + " – Hello Kos";
+    }
+    var opt = document.querySelector('.lang-option[data-lang="' + lang + '"]');
+    var flag = document.getElementById("flag");
+    var code = document.getElementById("code");
+    if (opt && flag) flag.textContent = opt.getAttribute("data-flag") || flag.textContent;
+    if (code) code.textContent = lang.toUpperCase();
+    document.querySelectorAll(".lang-option").forEach(function (o) {
+      o.classList.toggle("active", o.getAttribute("data-lang") === lang);
     });
   }
-  function pickVoice(code){var voices=speechSynthesis.getVoices()||[];var p=code.slice(0,2).toLowerCase();return voices.find(function(v){return v.lang===code;})||voices.find(function(v){return v.lang&&v.lang.toLowerCase().indexOf(p)===0;})||null;}
-  var btnPlay=document.getElementById('btnPlay'),btnStop=document.getElementById('btnStop'),status=document.getElementById('ttsStatus'),readText=document.getElementById('readText);
-  function setStatus(t){if(status)status.textContent=t;}
-  function play(){
-    if(!window.speechSynthesis){setStatus('Voorlezen niet ondersteund.');return;}
-    speechSynthesis.cancel();var text=(readText?readText.innerText:'').replace(/\s+/g,' ').trim();if(!text)return;
-    var u=new SpeechSynthesisUtterance(text);u.lang=VOICE[cur];u.rate=0.92;var v=pickVoice(VOICE[cur]);if(v)u.voice=v;
-    u.onstart=function(){btnPlay.classList.add('playing');btnStop.classList.add('show');setStatus('▶ '+cur.toUpperCase());};u.onend=u.onerror=function(){btnPlay.classList.remove('playing');btnStop.classList.remove('show');setStatus('');};
-    if(!speechSynthesis.getVoices().length){speechSynthesis.onvoiceschanged=function(){var v2=pickVoice(VOICE[cur]);if(v2)u.voice=v2;speechSynthesis.speak(u);};setTimeout(function(){speechSynthesis.speak(u);},250);}else speechSynthesis.speak(u);
+
+  function closeMenu() {
+    var menu = document.getElementById("langMenu");
+    var overlay = document.getElementById("overlay");
+    var btn = document.getElementById("langBtn");
+    if (menu) menu.classList.remove("open");
+    if (overlay) overlay.classList.remove("open");
+    if (btn) btn.setAttribute("aria-expanded", "false");
   }
-  function stop(){if(window.speechSynthesis)speechSynthesis.cancel();if(btnPlay)btnPlay.classList.remove('playing');if(btnStop)btnStop.classList.remove('show');setStatus('⏹ Gestopt.');}
-  if(btnPlay)btnPlay.addEventListener('click',play);if(btnStop)btnStop.addEventListener('click',stop);
-  if(window.speechSynthesis){speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=function(){speechSynthesis.getVoices();};}
-  cur=getLang();apply();window.HK_I18N={setLang:setLang,getLang:getLang,T:T,LANGS:LANGS};})();
+
+  function openMenu() {
+    var menu = document.getElementById("langMenu");
+    var overlay = document.getElementById("overlay");
+    var btn = document.getElementById("langBtn");
+    if (menu) menu.classList.add("open");
+    if (overlay) overlay.classList.add("open");
+    if (btn) btn.setAttribute("aria-expanded", "true");
+  }
+
+  function setLang(lang) {
+    if (LANGS.indexOf(lang) < 0) lang = "nl";
+    localStorage.setItem("hk-lang", lang);
+    apply(lang);
+    closeMenu();
+  }
+
+  function pickVoice(code) {
+    var voices = window.speechSynthesis ? speechSynthesis.getVoices() || [] : [];
+    var prefix = code.slice(0, 2).toLowerCase();
+    return voices.find(function (v) { return v.lang === code; })
+      || voices.find(function (v) { return v.lang && v.lang.toLowerCase().indexOf(prefix) === 0; })
+      || null;
+  }
+
+  function speak(text, lang) {
+    if (!window.speechSynthesis) return false;
+    speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = VOICE[lang] || VOICE.nl;
+    u.rate = 0.95;
+    var voice = pickVoice(u.lang);
+    if (voice) u.voice = voice;
+    speechSynthesis.speak(u);
+    return u;
+  }
+
+  var own = document.documentElement.getAttribute("data-hk-own") === "1";
+  if (!own) {
+    var langBtn = document.getElementById("langBtn");
+    var overlay = document.getElementById("overlay");
+    if (langBtn) {
+      langBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var menu = document.getElementById("langMenu");
+        if (menu && menu.classList.contains("open")) closeMenu();
+        else openMenu();
+      });
+    }
+    if (overlay) overlay.addEventListener("click", closeMenu);
+    document.querySelectorAll(".lang-option").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        setLang(btn.getAttribute("data-lang"));
+      });
+    });
+    apply(getLang());
+
+    if (document.documentElement.getAttribute("data-hk-tts") !== "1") {
+      var btnPlay = document.getElementById("btnPlay");
+      var btnStop = document.getElementById("btnStop");
+      var status = document.getElementById("ttsStatus");
+      function setStatus(msg) { if (status) status.textContent = msg; }
+      if (btnPlay) {
+        btnPlay.addEventListener("click", function () {
+          var lang = getLang();
+          var source = document.getElementById("readText");
+          var text = source ? source.innerText.replace(/\s+/g, " ").trim() : "";
+          if (!text) return;
+          if (!window.speechSynthesis) { setStatus(textFor(lang, "noSpeech")); return; }
+          var u = speak(text, lang);
+          if (!u) return;
+          btnPlay.classList.add("playing");
+          if (btnStop) btnStop.classList.add("show");
+          setStatus(textFor(lang, "soundOn") + " " + lang.toUpperCase());
+          u.onend = u.onerror = function () {
+            btnPlay.classList.remove("playing");
+            if (btnStop) btnStop.classList.remove("show");
+            setStatus("");
+          };
+        });
+      }
+      if (btnStop) {
+        btnStop.addEventListener("click", function () {
+          if (window.speechSynthesis) speechSynthesis.cancel();
+          if (btnPlay) btnPlay.classList.remove("playing");
+          btnStop.classList.remove("show");
+          setStatus(textFor(getLang(), "soundStop"));
+        });
+      }
+      var btnTest = document.getElementById("btnTestSound");
+      var btnTestStop = document.getElementById("btnStopSound");
+      if (btnTest) {
+        btnTest.addEventListener("click", function () {
+          var lang = getLang();
+          var u = speak(SOUND[lang] || SOUND.nl, lang);
+          var el = document.getElementById("soundStatus");
+          if (!u) { if (el) el.textContent = textFor(lang, "noSpeech"); return; }
+          if (el) el.textContent = textFor(lang, "soundOn");
+          u.onend = function () { if (el) el.textContent = textFor(lang, "soundDone"); };
+        });
+      }
+      if (btnTestStop) {
+        btnTestStop.addEventListener("click", function () {
+          if (window.speechSynthesis) speechSynthesis.cancel();
+          var el = document.getElementById("soundStatus");
+          if (el) el.textContent = textFor(getLang(), "soundStop");
+        });
+      }
+    }
+  }
+
+  window.HK_I18N = { setLang: setLang, getLang: getLang, apply: apply, speak: speak, VOICE: VOICE };
+})();

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Waterbedrijf – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="img/hk/hulp-waterbedrijf.jpg" alt=""></div>
+  <p class="parent-link"><a href="noodgevallen.html" data-i18n="back">← Noodgevallen</a></p>
+  <h1 data-i18n="title">Waterbedrijf</h1>
+  <p class="lead" data-i18n="lead">Het waterbedrijf van de gemeente Kos heet Δ.Ε.Υ.Α. Δήμου Κω (DEYAK). Het telefoonnummer voor een storing staat op deze pagina nog niet.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">DEYAK</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=DEYAK%20Kos%20water" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=DEYAK%20Kos%20water" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Kraan</h2><p data-i18n="p0">Of je het kraanwater drinkt, staat bij Water en ijsklontjes. Een lege kraan in één huis is iets anders dan een storing in de wijk.</p></article>
+    <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">Het telefoonnummer en het exacte adres staan nog niet in deze gids. Bel bij direct gevaar 112.</span></div>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Waterbedrijf", "lead": "Het waterbedrijf van de gemeente Kos heet Δ.Ε.Υ.Α. Δήμου Κω (DEYAK). Het telefoonnummer voor een storing staat op deze pagina nog niet.", "back": "← Noodgevallen", "note": "Het telefoonnummer en het exacte adres staan nog niet in deze gids. Bel bij direct gevaar 112.", "h0": "Kraan", "p0": "Of je het kraanwater drinkt, staat bij Water en ijsklontjes. Een lege kraan in één huis is iets anders dan een storing in de wijk.", "b0": "DEYAK"}, "de": {"title": "Wasserwerk", "lead": "Das Wasserwerk der Gemeinde Kos heißt Δ.Ε.Υ.Α. Δήμου Κω (DEYAK). Die Telefonnummer bei einer Störung steht auf dieser Seite noch nicht.", "back": "← Notfälle", "note": "Telefonnummer und genaue Adresse stehen noch nicht in diesem Guide. Bei direkter Gefahr: 112.", "h0": "Hahn", "p0": "Ob du das Leitungswasser trinkst, steht bei Wasser und Eiswürfel. Ein leerer Hahn in einem Haus ist etwas anderes als eine Störung im Viertel.", "b0": "DEYAK"}, "en": {"title": "Water company", "lead": "The water company of the municipality of Kos is called Δ.Ε.Υ.Α. Δήμου Κω (DEYAK). The phone number for a fault is not on this page yet.", "back": "← Emergencies", "note": "The phone number and exact address are not in this guide yet. If you are in danger, call 112.", "h0": "Tap", "p0": "Whether you drink the tap water is under Water and ice cubes. An empty tap in one house is different from a fault in the neighbourhood.", "b0": "DEYAK"}, "it": {"title": "Acquedotto", "lead": "L’acquedotto del comune di Kos si chiama Δ.Ε.Υ.Α. Δήμου Κω (DEYAK). Il numero per un guasto non è ancora in questa pagina.", "back": "← Emergenze", "note": "Numero di telefono e indirizzo esatto non sono ancora in questa guida. In pericolo chiama il 112.", "h0": "Rubinetto", "p0": "Se bevi l’acqua del rubinetto è sotto Acqua e ghiaccio. Un rubinetto vuoto in una casa è diverso da un guasto nel quartiere.", "b0": "DEYAK"}, "tr": {"title": "Su idaresi", "lead": "Kos belediyesinin su idaresi Δ.Ε.Υ.Α. Δήμου Κω (DEYAK) adını taşır. Arıza telefonu bu sayfada henüz yok.", "back": "← Acil durum", "note": "Telefon ve tam adres bu rehberde henüz yok. Tehlike varsa 112'yi ara.", "h0": "Musluk", "p0": "Musluk suyunu içip içmeyeceğin Su ve buz küpleri altında. Tek evde boş musluk, mahalle arızasından farklıdır.", "b0": "DEYAK"}, "es": {"title": "Compañía del agua", "lead": "La compañía de agua del municipio de Kos se llama Δ.Ε.Υ.Α. Δήμου Κω (DEYAK). El teléfono de una avería aún no está en esta página.", "back": "← Emergencias", "note": "El teléfono y la dirección exacta aún no están en esta guía. Si hay peligro, llama al 112.", "h0": "Grifo", "p0": "Si bebes el agua del grifo está en Agua y hielo. Un grifo vacío en una casa no es lo mismo que una avería en el barrio.", "b0": "DEYAK"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Beste ontbijt – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="beste-lekkerste.jpg" alt=""></div>
+  <p class="parent-link"><a href="beste-lekkerste.html" data-i18n="back">← Beste & lekkerste</a></p>
+  <h1 data-i18n="title">Beste ontbijt</h1>
+  <p class="lead" data-i18n="lead">Vroege zaken in Kos-stad, zoals de gids ze noemde. De tijden kunnen gewijzigd zijn.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Kos-stad</span><span class="badge" data-i18n="b1">Prijs ter plaatse</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=breakfast%20Kos%20town" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=breakfast%20Kos%20town" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Volgens de gids</h2><p data-i18n="p0">Ariston vanaf 8:00 (ontbijt en uitzicht). Marina Cafe vanaf 7:00 (buffet). Costa Palace vanaf 6:30 (tosti). Het toastzaakje bij Agia Paraskevi vanaf 5:00. Gregory’s vanaf 6:30 (koffie en baguette). Coffee House vanaf 6:00.</p></article>
+    <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.</span></div>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Beste ontbijt", "lead": "Vroege zaken in Kos-stad, zoals de gids ze noemde. De tijden kunnen gewijzigd zijn.", "back": "← Beste & lekkerste", "note": "Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.", "h0": "Volgens de gids", "p0": "Ariston vanaf 8:00 (ontbijt en uitzicht). Marina Cafe vanaf 7:00 (buffet). Costa Palace vanaf 6:30 (tosti). Het toastzaakje bij Agia Paraskevi vanaf 5:00. Gregory’s vanaf 6:30 (koffie en baguette). Coffee House vanaf 6:00.", "b0": "Kos-stad", "b1": "Prijs ter plaatse"}, "de": {"title": "Bestes Frühstück", "lead": "Frühe Lokale in Kos-Stadt, wie der Guide sie nannte. Die Zeiten können sich geändert haben.", "back": "← Beste & Leckerste", "note": "Preise und Öffnungszeiten stehen hier nicht fest, sie ändern sich. Frag vor Ort nach.", "h0": "Laut Guide", "p0": "Ariston ab 8:00 (Frühstück und Blick). Marina Cafe ab 7:00 (Buffet). Costa Palace ab 6:30 (Toast). Der Toastladen bei Agia Paraskevi ab 5:00. Gregory’s ab 6:30 (Kaffee und Baguette). Coffee House ab 6:00.", "b0": "Kos-Stadt", "b1": "Preis vor Ort"}, "en": {"title": "Best breakfast", "lead": "Early places in Kos town, as the guide named them. The times may have changed.", "back": "← Best & tastiest", "note": "Prices and opening hours are not fixed here: they change. Ask on the spot.", "h0": "According to the guide", "p0": "Ariston from 8:00 (breakfast and a view). Marina Cafe from 7:00 (buffet). Costa Palace from 6:30 (toast). The toast shop by Agia Paraskevi from 5:00. Gregory’s from 6:30 (coffee and baguette). Coffee House from 6:00.", "b0": "Kos town", "b1": "Price on site"}, "it": {"title": "Miglior colazione", "lead": "Locali mattutini in città, come li citava la guida. Gli orari possono essere cambiati.", "back": "← Il meglio", "note": "Prezzi e orari non sono fissi: cambiano. Chiedi sul posto.", "h0": "Secondo la guida", "p0": "Ariston dalle 8:00 (colazione e vista). Marina Cafe dalle 7:00 (buffet). Costa Palace dalle 6:30 (toast). Il toast vicino ad Agia Paraskevi dalle 5:00. Gregory’s dalle 6:30 (caffè e baguette). Coffee House dalle 6:00.", "b0": "Città di Kos", "b1": "Prezzo sul posto"}, "tr": {"title": "En iyi kahvaltı", "lead": "Rehberin saydığı Kos şehrindeki erken yerler. Saatler değişmiş olabilir.", "back": "← En iyiler", "note": "Fiyat ve açılış saatleri burada sabit değil, değişir. Yerinde sorun.", "h0": "Rehbere göre", "p0": "Ariston 8:00’den (kahvaltı ve manzara). Marina Cafe 7:00’den (büfe). Costa Palace 6:30’dan (tost). Agia Paraskevi’deki tostçu 5:00’ten. Gregory’s 6:30’dan (kahve ve baget). Coffee House 6:00’dan.", "b0": "Kos şehri", "b1": "Fiyat yerinde"}, "es": {"title": "Mejor desayuno", "lead": "Sitios tempranos en la ciudad, como los citaba la guía. Las horas pueden haber cambiado.", "back": "← Lo mejor", "note": "Los precios y horarios no están fijos: cambian. Pregunta en el sitio.", "h0": "Según la guía", "p0": "Ariston desde las 8:00 (desayuno y vistas). Marina Cafe desde las 7:00 (bufé). Costa Palace desde las 6:30 (tostada). El sitio de tostadas junto a Agia Paraskevi desde las 5:00. Gregory’s desde las 6:30 (café y baguette). Coffee House desde las 6:00.", "b0": "Ciudad de Kos", "b1": "Precio en el sitio"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-hk-own="1">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
@@ -51,28 +51,28 @@
     .card-meta { font-size: .7rem; font-weight: 600; opacity: .9; color: #e8f5f3; }
     .footer { text-align: center; padding: 20px; font-size: .78rem; color: var(--text-soft); }
   </style>
+<link rel="stylesheet" href="hello-kos.css">
 </head>
 <body>
   <header class="app-header">
-    <a href="index.html" class="back-btn">← Terug</a>
-    <a href="index.html" class="logo">
-      <div class="logo-icon">🔅</div>
-      <div class="logo-text">Hello <span>Kos</span></div>
-    </a>
-    <div class="lang-wrap">
-      <button type="button" class="lang-btn" id="langBtn">
-        <span id="flag">🇳🇱</span> <span id="code">NL</span>
-      </button>
-      <div class="lang-menu" id="langMenu">
-        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
-        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
-        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
-        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
-        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
-        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
-      </div>
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
     </div>
-  </header>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
   <main class="main">
     <h1 data-i18n="title">Noodgevallen & hulp</h1>
     <p class="sub" data-i18n="sub">Tik op een tegel voor details en nummers</p>
@@ -84,25 +84,25 @@
     </div>
 
     <div class="grid">
-      <a class="card" href="hulp-ziekenhuis.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/fc-ziekenhuis-griekenland-standard-501vxp.jpg')">
+      <a class="card" href="hulp-ziekenhuis.html" style="background-image:url('img/jwwb/e205634cad-fc-ziekenhuis-griekenland-standard-501vxp.jpg')">
         <div class="card-overlay"><span class="card-title">Ziekenhuis<span class="card-meta" data-i18n="m1">Spoed & locatie</span></span></div>
       </a>
-      <a class="card" href="hulp-apotheek.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/schermopname_18-2-2026_14307_greekreporter-com-standard.jpg')">
+      <a class="card" href="hulp-apotheek.html" style="background-image:url('img/jwwb/5adaf80f35-schermopname_18-2-2026_14307_greekreporter-com-standard.jpg')">
         <div class="card-overlay"><span class="card-title">Apotheek<span class="card-meta" data-i18n="m2">Medicijnen</span></span></div>
       </a>
       <a class="card" href="hulp-huisartsen.html" style="background-image:url('')">
         <div class="card-overlay"><span class="card-title">Huisartsen<span class="card-meta" data-i18n="m3">Per regio</span></span></div>
       </a>
-      <a class="card" href="hulp-tandarts.html" style="background-image:url('https://primary.jwwb.nl/pexels/42/4269695.jpeg')">
+      <a class="card" href="hulp-tandarts.html" style="background-image:url('img/jwwb/88675adc39-4269695.jpeg')">
         <div class="card-overlay"><span class="card-title">Tandarts<span class="card-meta" data-i18n="m4">Tandzorg</span></span></div>
       </a>
-      <a class="card" href="hulp-politie.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/kos-2-scaled-standard-tjp1i5.jpg')">
+      <a class="card" href="hulp-politie.html" style="background-image:url('img/jwwb/a4f715094c-kos-2-scaled-standard-tjp1i5.jpg')">
         <div class="card-overlay"><span class="card-title">Politie<span class="card-meta" data-i18n="m5">112 / politie</span></span></div>
       </a>
-      <a class="card" href="hulp-brandweer.html" style="background-image:url('https://primary.jwwb.nl/pexels/62/627930.jpeg')">
+      <a class="card" href="hulp-brandweer.html" style="background-image:url('img/jwwb/36e6f30f0a-627930.jpeg')">
         <div class="card-overlay"><span class="card-title">Brandweer<span class="card-meta" data-i18n="m6">Brand & hulp</span></span></div>
       </a>
-      <a class="card" href="hulp-waterbedrijf.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/be2c0e4bc68e97336862a76636fd8047_l-standard-ed7975.jpg')">
+      <a class="card" href="hulp-waterbedrijf.html" style="background-image:url('img/jwwb/a0285bac0d-be2c0e4bc68e97336862a76636fd8047_l-standard-ed7975.jpg')">
         <div class="card-overlay"><span class="card-title">Waterbedrijf<span class="card-meta" data-i18n="m7">Waterproblemen</span></span></div>
       </a>
       <a class="card" href="hulp-stroomuitval.html" style="background-image:url('')">
@@ -237,5 +237,6 @@
     setLang(saved);
   })();
   </script>
+<script src="hello-kos-i18n.js"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-hk-own="1">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
@@ -71,13 +71,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
 .footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
 .footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
 </style>
+<link rel="stylesheet" href="hello-kos.css">
 </head>
 <body>
 <header class="app-header">
-  <div class="nav-btns"><a class="nav-btn" href="index.html">🏠</a><a class="nav-btn" href="javascript:history.back()">←</a></div>
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
   <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
   <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
     <div class="lang-menu" id="langMenu">
       <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
       <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
@@ -254,7 +258,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
     {id:'tigaki',lat:36.8820,lng:27.1450,names:{nl:'Tigaki strand',en:'Tigaki beach',de:'Tigaki Strand',it:'Spiaggia Tigaki',tr:'Tigaki plajı',es:'Playa Tigaki'}},
     {id:'pyli',lat:36.8420,lng:27.1570,names:{nl:'Oud Pyli',en:'Old Pyli',de:'Alt-Pyli',it:'Vecchia Pyli',tr:'Eski Pyli',es:'Antigua Pyli'}}
   ];
-  var skip=[],sorted=[],idx=0,userLat=null,userLng=null,lang=localStorage.getItem('hk-lang')||'en';
+  var skip=[],sorted=[],idx=0,userLat=null,userLng=null,lang=localStorage.getItem('hk-lang')||'nl';
   var i18n={
     nl:{radarTitle:'Dichtstbijzijnde openbare wc',radarWait:'Tik op de knop en sta locatie toe',btnLocate:'Zoek dichtstbijzijnde wc',btnSkip:'Overslaan → volgende',btnMaps:'Open in Google Maps',locating:'Locatie ophalen…',denied:'Locatie niet toegestaan. Zet GPS aan.',error:'Kon locatie niet bepalen.',m:'meter',km:'km'},
     en:{radarTitle:'Nearest public toilet',radarWait:'Tap the button and allow location',btnLocate:'Find nearest WC',btnSkip:'Skip → next',btnMaps:'Open in Google Maps',locating:'Getting location…',denied:'Location denied. Enable GPS.',error:'Could not get location.',m:'metres',km:'km'},
@@ -283,5 +287,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
   setLang(lang);
 })();
 </script>
+<script src="hello-kos-i18n.js"></script>
 </body>
 </html>

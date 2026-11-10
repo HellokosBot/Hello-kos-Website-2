@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Beste vis – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="beste-lekkerste.jpg" alt=""></div>
+  <p class="parent-link"><a href="beste-lekkerste.html" data-i18n="back">← Beste & lekkerste</a></p>
+  <h1 data-i18n="title">Beste vis</h1>
+  <p class="lead" data-i18n="lead">De gids zette Barbouni en Nick the Fisherman bij de viszaken in Kos-stad. Barbouni heeft een pagina.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Kos-stad</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=fish%20restaurant%20Kos%20town" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=fish%20restaurant%20Kos%20town" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Vers</h2><p data-i18n="p0">Vraag wat vandaag van de boot komt. De prijs hangt van de vangst af en staat hier niet vast.</p></article>
+    <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.</span></div>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Beste vis", "lead": "De gids zette Barbouni en Nick the Fisherman bij de viszaken in Kos-stad. Barbouni heeft een pagina.", "back": "← Beste & lekkerste", "note": "Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.", "h0": "Vers", "p0": "Vraag wat vandaag van de boot komt. De prijs hangt van de vangst af en staat hier niet vast.", "b0": "Kos-stad"}, "de": {"title": "Bester Fisch", "lead": "Der Guide setzte Barbouni und Nick the Fisherman bei den Fischlokalen in Kos-Stadt. Barbouni hat eine Seite.", "back": "← Beste & Leckerste", "note": "Preise und Öffnungszeiten stehen hier nicht fest, sie ändern sich. Frag vor Ort nach.", "h0": "Frisch", "p0": "Frag, was heute vom Boot kommt. Der Preis hängt vom Fang ab und steht hier nicht fest.", "b0": "Kos-Stadt"}, "en": {"title": "Best fish", "lead": "The guide put Barbouni and Nick the Fisherman with the fish places in Kos town. Barbouni has a page.", "back": "← Best & tastiest", "note": "Prices and opening hours are not fixed here: they change. Ask on the spot.", "h0": "Fresh", "p0": "Ask what came off the boat today. The price depends on the catch and is not fixed here.", "b0": "Kos town"}, "it": {"title": "Miglior pesce", "lead": "La guida metteva Barbouni e Nick the Fisherman tra i posti di pesce in città. Barbouni ha una pagina.", "back": "← Il meglio", "note": "Prezzi e orari non sono fissi: cambiano. Chiedi sul posto.", "h0": "Fresco", "p0": "Chiedi cosa è arrivato oggi dalla barca. Il prezzo dipende dalla pesca e non è fisso qui.", "b0": "Città di Kos"}, "tr": {"title": "En iyi balık", "lead": "Rehber Barbouni ve Nick the Fisherman’ı şehirdeki balıkçılara koydu. Barbouni’nin sayfası var.", "back": "← En iyiler", "note": "Fiyat ve açılış saatleri burada sabit değil, değişir. Yerinde sorun.", "h0": "Taze", "p0": "Bugün tekneden ne geldiğini sor. Fiyat ava göre değişir, burada sabit değil.", "b0": "Kos şehri"}, "es": {"title": "Mejor pescado", "lead": "La guía ponía Barbouni y Nick the Fisherman entre los de pescado en la ciudad. Barbouni tiene página.", "back": "← Lo mejor", "note": "Los precios y horarios no están fijos: cambian. Pregunta en el sitio.", "h0": "Fresco", "p0": "Pregunta qué llegó hoy del barco. El precio depende de la pesca y no está fijo aquí.", "b0": "Ciudad de Kos"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

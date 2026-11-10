@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-hk-own="1">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
@@ -59,28 +59,28 @@
     .twin-wind { background: linear-gradient(145deg, #455a64, #37474f); color: #fff; }
     .twin small { font-size: 0.72rem; font-weight: 600; opacity: 0.9; }
   </style>
+<link rel="stylesheet" href="hello-kos.css">
 </head>
 <body>
   <header class="app-header">
-    <a href="index.html" class="back-btn">← Terug</a>
-    <a href="index.html" class="logo">
-      <div class="logo-icon">🔅</div>
-      <div class="logo-text">Hello <span>Kos</span></div>
-    </a>
-    <div class="lang-wrap">
-      <button type="button" class="lang-btn" id="langBtn">
-        <span id="flag">🇳🇱</span> <span id="code">NL</span>
-      </button>
-      <div class="lang-menu" id="langMenu">
-        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
-        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
-        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
-        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
-        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
-        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
-      </div>
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
     </div>
-  </header>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
   <main class="main">
     <h1 data-i18n="title">Stranden & beach bars</h1>
     <p class="sub" data-i18n="sub">Klap een regio open – tik op een tegel</p>
@@ -103,19 +103,19 @@
         <span data-i18n="acc0">Kos-stad / Lambi</span> <span class="count">5</span><span class="chev">▼</span>
       </button>
       <div class="acc-body"><div class="grid">
-        <a class="card" href="strand-big-beach-lambi.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/lambi-beach-looking-towards-high.jpg')">
+        <a class="card" href="strand-big-beach-lambi.html" style="background-image:url('img/jwwb/cc5c994d39-lambi-beach-looking-towards-high.jpg')">
           <div class="card-overlay"><span class="card-title">Big Beach Lambi<span class="card-meta" data-i18n="m1">Lang strand</span></span></div>
         </a>
-        <a class="card" href="strand-mylos-beach.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/650123078_18570402781039994_125697670263376022_n-high-vmmg97.jpg')">
+        <a class="card" href="strand-mylos-beach.html" style="background-image:url('img/jwwb/467d884fc8-650123078_18570402781039994_125697670263376022_n-high-vmmg97.jpg')">
           <div class="card-overlay"><span class="card-title">Mylos Beach<span class="card-meta" data-i18n="m2">Strand + beachbar</span></span></div>
         </a>
-        <a class="card" href="strand-c-food-mood-beach.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/c-food-on-the-beach-1-high.jpg')">
+        <a class="card" href="strand-c-food-mood-beach.html" style="background-image:url('img/jwwb/556f00852e-c-food-on-the-beach-1-high.jpg')">
           <div class="card-overlay"><span class="card-title">C Food & Mood Beach<span class="card-meta" data-i18n="m3">Strand · restaurant</span></span></div>
         </a>
-        <a class="card" href="strand-aqua-blue-beach.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/beach-view-2-high.jpg')">
+        <a class="card" href="strand-aqua-blue-beach.html" style="background-image:url('img/jwwb/b7d10adaec-beach-view-2-high.jpg')">
           <div class="card-overlay"><span class="card-title">Aqua Blue Beach<span class="card-meta" data-i18n="m4">Strand</span></span></div>
         </a>
-        <a class="card" href="strand-amos-beach.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/ammos-beach-bar-8-high.jpg')">
+        <a class="card" href="strand-amos-beach.html" style="background-image:url('img/jwwb/3635b486c8-ammos-beach-bar-8-high.jpg')">
           <div class="card-overlay"><span class="card-title">Amos Beach<span class="card-meta" data-i18n="m5">Strand · feesten</span></span></div>
         </a>
       </div></div>
@@ -125,10 +125,10 @@
         <span data-i18n="acc1">Oostkust</span> <span class="count">2</span><span class="chev">▼</span>
       </button>
       <div class="acc-body"><div class="grid">
-        <a class="card" href="strand-therma-beach.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/a32eefa8-877b-4d23-a560-ef1872e63bed-high-lqkuj6.jpg')">
+        <a class="card" href="strand-therma-beach.html" style="background-image:url('img/jwwb/55e8fedf88-a32eefa8-877b-4d23-a560-ef1872e63bed-high-lqkuj6.jpg')">
           <div class="card-overlay"><span class="card-title">Therma Beach<span class="card-meta" data-i18n="m6">Warm water</span></span></div>
         </a>
-        <a class="card" href="strand-agios-fokas.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/beach-view-1-high.jpg')">
+        <a class="card" href="strand-agios-fokas.html" style="background-image:url('img/jwwb/3461721773-beach-view-1-high.jpg')">
           <div class="card-overlay"><span class="card-title">Agios Fokas<span class="card-meta" data-i18n="m7">Strand</span></span></div>
         </a>
       </div></div>
@@ -138,13 +138,13 @@
         <span data-i18n="acc2">Tigaki</span> <span class="count">3</span><span class="chev">▼</span>
       </button>
       <div class="acc-body"><div class="grid">
-        <a class="card" href="strand-tigaki-beach.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/tigaki-kos-strand-660-1-high-zl1x4s.jpg')">
+        <a class="card" href="strand-tigaki-beach.html" style="background-image:url('img/jwwb/d1b49a0864-tigaki-kos-strand-660-1-high-zl1x4s.jpg')">
           <div class="card-overlay"><span class="card-title">Tigaki Beach<span class="card-meta" data-i18n="m8">Lang zandstrand</span></span></div>
         </a>
-        <a class="card" href="strand-tam-tam-beach.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/hp-beach-image-1-high.jpg')">
+        <a class="card" href="strand-tam-tam-beach.html" style="background-image:url('img/jwwb/a3370c35cb-hp-beach-image-1-high.jpg')">
           <div class="card-overlay"><span class="card-title">Tam Tam Beach<span class="card-meta" data-i18n="m9">Strand</span></span></div>
         </a>
-        <a class="card" href="strand-naaktstrand-tigaki.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/mastihari-beach-high-hrbyp3.jpg')">
+        <a class="card" href="strand-naaktstrand-tigaki.html" style="background-image:url('img/jwwb/0a64964fb2-mastihari-beach-high-hrbyp3.jpg')">
           <div class="card-overlay"><span class="card-title">Naaktstrand Tigaki<span class="card-meta" data-i18n="m10">Naaktstrand</span></span></div>
         </a>
       </div></div>
@@ -154,7 +154,7 @@
         <span data-i18n="acc3">Marmari</span> <span class="count">1</span><span class="chev">▼</span>
       </button>
       <div class="acc-body"><div class="grid">
-        <a class="card" href="strand-marmari-beach.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/marmari-beach-2-high-m0rfzj.jpg')">
+        <a class="card" href="strand-marmari-beach.html" style="background-image:url('img/jwwb/be6f1349a7-marmari-beach-2-high-m0rfzj.jpg')">
           <div class="card-overlay"><span class="card-title">Marmari Beach<span class="card-meta" data-i18n="m11">Zandstrand</span></span></div>
         </a>
       </div></div>
@@ -164,7 +164,7 @@
         <span data-i18n="acc4">Mastichari</span> <span class="count">1</span><span class="chev">▼</span>
       </button>
       <div class="acc-body"><div class="grid">
-        <a class="card" href="strand-mastichari-beach.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/mastihari-beach-2017-high-1ru7v7.jpg')">
+        <a class="card" href="strand-mastichari-beach.html" style="background-image:url('img/jwwb/f077358352-mastihari-beach-2017-high-1ru7v7.jpg')">
           <div class="card-overlay"><span class="card-title">Mastichari Beach<span class="card-meta" data-i18n="m12">Strand · veerboot</span></span></div>
         </a>
       </div></div>
@@ -174,7 +174,7 @@
         <span data-i18n="acc5">Zuid / Kardamena</span> <span class="count">1</span><span class="chev">▼</span>
       </button>
       <div class="acc-body"><div class="grid">
-        <a class="card" href="strand-paradise-beach.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/paradise-beach-kos-header-high.jpg')">
+        <a class="card" href="strand-paradise-beach.html" style="background-image:url('img/jwwb/d5d93306e5-paradise-beach-kos-header-high.jpg')">
           <div class="card-overlay"><span class="card-title">Paradise Beach<span class="card-meta" data-i18n="m13">Paradise</span></span></div>
         </a>
       </div></div>
@@ -184,10 +184,10 @@
         <span data-i18n="acc6">Zuid</span> <span class="count">2</span><span class="chev">▼</span>
       </button>
       <div class="acc-body"><div class="grid">
-        <a class="card" href="strand-kavo-parediso.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/cavo-paradiso-beach-standard.jpg')">
+        <a class="card" href="strand-kavo-parediso.html" style="background-image:url('img/jwwb/db078f065e-cavo-paradiso-beach-standard.jpg')">
           <div class="card-overlay"><span class="card-title">Kavo Parediso<span class="card-meta" data-i18n="m14">Strand</span></span></div>
         </a>
-        <a class="card" href="strand-exotic-beach.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/exotic-beach-high.jpg')">
+        <a class="card" href="strand-exotic-beach.html" style="background-image:url('img/jwwb/703e8e8fa9-exotic-beach-high.jpg')">
           <div class="card-overlay"><span class="card-title">Exotic Beach<span class="card-meta" data-i18n="m15">Naaktstrand</span></span></div>
         </a>
       </div></div>
@@ -197,7 +197,7 @@
         <span data-i18n="acc7">Westkust</span> <span class="count">1</span><span class="chev">▼</span>
       </button>
       <div class="acc-body"><div class="grid">
-        <a class="card" href="strand-limnionas.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/limnionas-beach-high.jpg')">
+        <a class="card" href="strand-limnionas.html" style="background-image:url('img/jwwb/356e96a5b1-limnionas-beach-high.jpg')">
           <div class="card-overlay"><span class="card-title">Limnionas<span class="card-meta" data-i18n="m16">Baai</span></span></div>
         </a>
       </div></div>
@@ -207,7 +207,7 @@
         <span data-i18n="acc8">Kardamena</span> <span class="count">1</span><span class="chev">▼</span>
       </button>
       <div class="acc-body"><div class="grid">
-        <a class="card" href="strand-naaktstrand-kardamena.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/exotic-beach-high-8nwluy.jpg')">
+        <a class="card" href="strand-naaktstrand-kardamena.html" style="background-image:url('img/jwwb/5deeb36608-exotic-beach-high-8nwluy.jpg')">
           <div class="card-overlay"><span class="card-title">Naaktstrand Kardamena<span class="card-meta" data-i18n="m17">Naaktstrand</span></span></div>
         </a>
       </div></div>
@@ -461,5 +461,6 @@
   setLang(saved);
 })();
 </script>
+<script src="hello-kos-i18n.js"></script>
 </body>
 </html>

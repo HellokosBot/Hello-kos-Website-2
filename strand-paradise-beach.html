@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-hk-own="1">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
@@ -59,31 +59,31 @@
     .btn-water { background: linear-gradient(145deg, #0277bd, #01579b); color: #fff; }
     .footer { text-align: center; padding: 16px; font-size: .75rem; color: var(--text-soft); }
   </style>
+<link rel="stylesheet" href="hello-kos.css">
 </head>
 <body>
   <header class="app-header">
-    <a href="stranden.html" class="back-btn">← Terug</a>
-    <a href="index.html" class="logo">
-      <div class="logo-icon">🔅</div>
-      <div class="logo-text">Hello <span>Kos</span></div>
-    </a>
-    <div class="lang-wrap">
-      <button type="button" class="lang-btn" id="langBtn">
-        <span id="flag">🇳🇱</span> <span id="code">NL</span>
-      </button>
-      <div class="lang-menu" id="langMenu">
-        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
-        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
-        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
-        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
-        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
-        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
-      </div>
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
     </div>
-  </header>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
   <main class="main">
     <div class="hero">
-      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/paradise-beach-kos-header-high.jpg" alt="Paradise Beach" loading="eager">
+      <img src="img/jwwb/d5d93306e5-paradise-beach-kos-header-high.jpg" alt="Paradise Beach" loading="eager">
       <div class="hero-cap"><div class="area" data-i18n="area">Zuid / Kardamena</div><h1>Paradise Beach</h1></div>
     </div>
     <div class="content">
@@ -95,20 +95,20 @@
         <h2 data-i18n="h2_1">Over dit strand</h2>
         <p data-i18n="p1">Paradise Beach, ook wel bekend als Bubble Beach, is een populair en levendig strand in het hart van Kefalos. Dit zandstrand met zijn kristalheldere turquoise water is kalm, ondiep en biedt een aangename temperatuur – de perfecte omgeving voor gezinnen en kinderen.</p>
       </div>
-      <div class="img-full"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/schermopname_19-3-2026_185233_www-vacanzegreche-com-high.jpg" alt="" loading="lazy"></div>
+      <div class="img-full"><img src="img/jwwb/07c67efd69-schermopname_19-3-2026_185233_www-vacanzegreche-com-high.jpg" alt="" loading="lazy"></div>
       <div class="block">
         <h2 data-i18n="h2_2">Sfeer & ligging</h2>
         <p data-i18n="p2">Een van de belangrijkste attracties zijn de natuurlijke bubbels, die uit de zeebodem oprijzen door vulkanische gassen van de nabijgelegen vulkaan op Nisyros. Dit creëert een jacuzzi-achtig effect en geeft het water een sprankelende uitstraling.</p>
       </div>
       <div class="img-pair">
-        <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/schermopname_19-3-2026_185233_www-vacanzegreche-com-high-bauuwk.jpg" alt="" loading="lazy">
-        <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/yxnzzxrzl2ltywdlcy9wywdlcy9izwfjagvzl3bhcmfkaxnlymvhy2gvrepjxzawodzwyxjhzglzzs5qcgc-high-ciubnr.jpg" alt="" loading="lazy">
+        <img src="img/jwwb/c19488bc2d-schermopname_19-3-2026_185233_www-vacanzegreche-com-high-bauuwk.jpg" alt="" loading="lazy">
+        <img src="img/jwwb/d37451c411-yxnzzxrzl2ltywdlcy9wywdlcy9izwfjagvzl3bhcmfkaxnlym.jpg" alt="" loading="lazy">
       </div>
       <div class="block">
         <h2 data-i18n="h2_3">Goed om te weten</h2>
         <p data-i18n="p3">Ondanks de naam 'Paradise' is het geen verborgen tropisch toevluchtsoord; het is een drukbezocht en goed georganiseerd strand. Deze populariteit is waarschijnlijk te danken aan de naam en de unieke bubbels, wat veel toeristen aantrekt. Voorzieningen zoals ligbedden, parasols, en een beachbar/restaurant met snacks, drankjes en maaltijden zijn volop aanwezig. Verder zijn er douches, kleedruimtes, gratis parkeergelegenheid, en een scala aan watersportactiviteiten.</p>
       </div>
-      <div class="img-full"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/schermopname_19-3-2026_185233_www-vacanzegreche-com-standard-q5jcr8.jpg" alt="" loading="lazy"></div>
+      <div class="img-full"><img src="img/jwwb/3204e2cc21-schermopname_19-3-2026_185233_www-vacanzegreche-co.jpg" alt="" loading="lazy"></div>
       <div class="actions">
         <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Paradise%20Beach%20Kos" target="_blank" rel="noopener" data-i18n="mapBtn">Locatie op de kaart</a>
         <a class="btn btn-water" href="watertemperatuur.html" data-i18n="waterBtn">Watertemperatuur →</a>
@@ -236,5 +236,6 @@
     setLang(saved);
   })();
   </script>
+<script src="hello-kos-i18n.js"></script>
 </body>
 </html>

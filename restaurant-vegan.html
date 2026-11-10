@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>N-Joy – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="beste-lekkerste.jpg" alt=""></div>
+  <p class="parent-link"><a href="beste-vegan.html" data-i18n="back">← Beste & lekkerste</a></p>
+  <h1 data-i18n="title">N-Joy</h1>
+  <p class="lead" data-i18n="lead">Vegetarische en vegan gerechten in Kos-stad. De gids noemde ook dat de Nederlandse uitbaatster Nicolle zwerfkatten laat steriliseren.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Kos-stad</span><span class="badge" data-i18n="b1">Vegan</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=N-Joy%20Kos" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=N-Joy%20Kos" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Eten</h2><p data-i18n="p0">Vraag wat er vegan is, ook bij sauzen. Openingstijden en het adres zijn hier niet ingevuld.</p></article>
+    <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.</span></div>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "N-Joy", "lead": "Vegetarische en vegan gerechten in Kos-stad. De gids noemde ook dat de Nederlandse uitbaatster Nicolle zwerfkatten laat steriliseren.", "back": "← Beste & lekkerste", "note": "Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.", "h0": "Eten", "p0": "Vraag wat er vegan is, ook bij sauzen. Openingstijden en het adres zijn hier niet ingevuld.", "b0": "Kos-stad", "b1": "Vegan"}, "de": {"title": "N-Joy", "lead": "Vegetarische und vegane Gerichte in Kos-Stadt. Der Guide schrieb auch, dass die niederländische Wirtin Nicolle Streunerkatzen kastrieren lässt.", "back": "← Beste & Leckerste", "note": "Preise und Öffnungszeiten stehen hier nicht fest, sie ändern sich. Frag vor Ort nach.", "h0": "Essen", "p0": "Frag, was vegan ist, auch bei den Saucen. Öffnungszeiten und Adresse fehlen hier.", "b0": "Kos-Stadt", "b1": "Vegan"}, "en": {"title": "N-Joy", "lead": "Vegetarian and vegan dishes in Kos town. The guide also said the Dutch owner Nicolle has stray cats sterilised.", "back": "← Best & tastiest", "note": "Prices and opening hours are not fixed here: they change. Ask on the spot.", "h0": "Food", "p0": "Ask what is vegan, including the sauces. Opening hours and the address are not filled in here.", "b0": "Kos town", "b1": "Vegan"}, "it": {"title": "N-Joy", "lead": "Piatti vegetariani e vegani in città. La guida diceva anche che la titolare olandese Nicolle fa sterilizzare i gatti randagi.", "back": "← Il meglio", "note": "Prezzi e orari non sono fissi: cambiano. Chiedi sul posto.", "h0": "Cibo", "p0": "Chiedi cosa è vegano, anche nelle salse. Orari e indirizzo non sono inseriti.", "b0": "Città di Kos", "b1": "Vegano"}, "tr": {"title": "N-Joy", "lead": "Kos şehrinde vejetaryen ve vegan yemekler. Rehber, Hollandalı işletmeci Nicolle’in sokak kedilerini kısırlaştırdığını da yazdı.", "back": "← En iyiler", "note": "Fiyat ve açılış saatleri burada sabit değil, değişir. Yerinde sorun.", "h0": "Yemek", "p0": "Soslar dahil neyin vegan olduğunu sor. Saat ve adres burada yok.", "b0": "Kos şehri", "b1": "Vegan"}, "es": {"title": "N-Joy", "lead": "Platos vegetarianos y veganos en la ciudad. La guía también decía que la dueña holandesa Nicolle esteriliza gatos callejeros.", "back": "← Lo mejor", "note": "Los precios y horarios no están fijos: cambian. Pregunta en el sitio.", "h0": "Comida", "p0": "Pregunta qué es vegano, también en las salsas. Horario y dirección no están aquí.", "b0": "Ciudad de Kos", "b1": "Vegano"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

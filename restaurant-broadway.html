@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-hk-own="1">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
@@ -58,32 +58,32 @@
     .btn-call { background: var(--petrol); color: #fff; }
     .footer { text-align: center; padding: 16px; font-size: 0.75rem; color: var(--text-soft); }
   </style>
+<link rel="stylesheet" href="hello-kos.css">
 </head>
 <body>
   <header class="app-header">
-    <a href="beste-restaurants.html" class="back-btn">← Terug</a>
-    <a href="index.html" class="logo">
-      <div class="logo-icon">🔅</div>
-      <div class="logo-text">Hello <span>Kos</span></div>
-    </a>
-    <div class="lang-wrap">
-      <button type="button" class="lang-btn" id="langBtn">
-        <span id="flag">🇳🇱</span> <span id="code">NL</span>
-      </button>
-      <div class="lang-menu" id="langMenu">
-        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
-        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
-        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
-        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
-        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
-        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
-      </div>
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
     </div>
-  </header>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
 
   <main class="main">
     <div class="hero">
-      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/lamb-saddle-with-smoked-high.jpg" alt="Broadway" loading="eager">
+      <img src="img/jwwb/1556edff83-lamb-saddle-with-smoked-high.jpg" alt="Broadway" loading="eager">
       <div class="hero-cap"><div class="area" data-i18n="area">Lambi</div><h1>Broadway</h1></div>
     </div>
     <div class="content">
@@ -92,12 +92,12 @@
         <span class="badge" data-i18n="badge2">Gastronomisch Grieks</span>
       </div>
       <div class="block"><h2 data-i18n="h1">Over dit restaurant</h2><p data-i18n="p1">Broadway is geen gewoon restaurant. Hier komen traditionele Griekse gerechten samen met moderne presentatie – gastronomisch hoogstaand, zonder de ziel van de Griekse keuken te verliezen.</p></div>
-      <div class="img-full"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/192680968_170072285123545_4752650078798766661_n-high-8hdzi8.jpg" alt="" loading="lazy"></div>
+      <div class="img-full"><img src="img/jwwb/d4869dcd3a-192680968_170072285123545_4752650078798766661_n-high-8hdzi8.jpg" alt="" loading="lazy"></div>
       <div class="block"><h2 data-i18n="h2">Sfeer & eten</h2><p data-i18n="p2">Andere etablissementen laten die diepgang vaak liggen; hier proef je het verschil. Om zeker te zijn van een tafel in dit populaire restaurant is vooraf reserveren verstandig, vooral in het seizoen.</p></div>
-      <div class="img-pair"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/unnamed-4-high.jpg" alt="" loading="lazy"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/489526286_1220616100069153_767473121330648167_n-high.jpg" alt="" loading="lazy"></div>
+      <div class="img-pair"><img src="img/jwwb/d627b16a3a-unnamed-4-high.jpg" alt="" loading="lazy"><img src="img/jwwb/c2718350f4-489526286_1220616100069153_767473121330648167_n-high.jpg" alt="" loading="lazy"></div>
       <div class="block"><h2 data-i18n="h3">Praktisch</h2><p data-i18n="p3">Gelegen in Lambi. Openingstijden liggen meestal rond 12:00–23:00. Telefonisch een tafel regelen is aan te raden bij drukte.</p></div>
-      <div class="img-full"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/34706980_889094831299129_4748906637236895744_n-high.jpg" alt="" loading="lazy"></div>
-      <div class="img-pair"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/42611756_983203385221606_6399621959621017600_n-high.jpg" alt="" loading="lazy"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/images-18-high.jpg" alt="" loading="lazy"></div>
+      <div class="img-full"><img src="img/jwwb/7929e7b9c5-34706980_889094831299129_4748906637236895744_n-high.jpg" alt="" loading="lazy"></div>
+      <div class="img-pair"><img src="img/jwwb/98af1236cd-42611756_983203385221606_6399621959621017600_n-high.jpg" alt="" loading="lazy"><img src="img/jwwb/b05ea96e37-images-18-high.jpg" alt="" loading="lazy"></div>
       <div class="actions">
         <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Broadway%20Restaurant%20Lambi%20Kos" target="_blank" rel="noopener" data-i18n="mapBtn">Locatie op de kaart</a>
         <a class="btn btn-call" href="tel:+302242027052" data-i18n="callBtn">Bellen · +30 2242 027052</a>
@@ -226,5 +226,6 @@
   setLang(saved);
 })();
 </script>
+<script src="hello-kos-i18n.js"></script>
 </body>
 </html>

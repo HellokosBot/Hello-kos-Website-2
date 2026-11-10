@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-hk-own="1" data-hk-tts="1">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
@@ -75,32 +75,32 @@
     .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
     .footer a { color: var(--petrol); text-decoration: none; }
   </style>
+<link rel="stylesheet" href="hello-kos.css">
 </head>
 <body>
   <header class="app-header">
-    <a href="bezienswaardigheden.html" class="back-btn">← Terug</a>
-    <a href="index.html" class="logo">
-      <div class="logo-icon">🔅</div>
-      <div class="logo-text">Hello <span>Kos</span></div>
-    </a>
-    <div class="lang-wrap">
-      <button type="button" class="lang-btn" id="langBtn">
-        <span id="flag">🇳🇱</span> <span id="code">NL</span>
-      </button>
-      <div class="lang-menu" id="langMenu">
-        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
-        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
-        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
-        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
-        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
-        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
-      </div>
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
     </div>
-  </header>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
 
   <main class="main">
     <div class="hero-wrap">
-      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/493287811_9619227934781654_7184517507473617472_n-high.jpg" alt="Eski Tzami minaret Kos" loading="eager">
+      <img src="img/jwwb/2126044505-493287811_9619227934781654_7184517507473617472_n-high.jpg" alt="Eski Tzami minaret Kos" loading="eager">
       <div class="hero-caption" data-i18n="heroCap">Eski Tzami · restant van de minaret</div>
     </div>
 
@@ -146,17 +146,17 @@
         </div>
 
         <div class="photo-block">
-          <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/img_5547-copy-high.jpg" alt="Eski Tzami minaret" loading="lazy">
+          <img src="img/jwwb/7473671b85-img_5547-copy-high.jpg" alt="Eski Tzami minaret" loading="lazy">
           <div class="cap" data-i18n="cap1">De minaret op Diagoras-plein</div>
         </div>
 
         <div class="gallery">
           <div class="g-item">
-            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/kos-kos_city-bab_gedid_mosque_or_eski-13esd-high-4fqiz0.jpg" alt="Eski Tzami" loading="lazy">
+            <img src="img/jwwb/6433208945-kos-kos_city-bab_gedid_mosque_or_eski-13esd-high-4fqiz0.jpg" alt="Eski Tzami" loading="lazy">
             <span data-i18n="g1">Minaret</span>
           </div>
           <div class="g-item">
-            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/bougainvilleas-by-the-high-udemw3.jpg" alt="Omgeving" loading="lazy">
+            <img src="img/jwwb/c9cdccf0d9-bougainvilleas-by-the-high-udemw3.jpg" alt="Omgeving" loading="lazy">
             <span data-i18n="g2">Omgeving</span>
           </div>
         </div>
@@ -385,5 +385,6 @@
   }
 })();
 </script>
+<script src="hello-kos-i18n.js"></script>
 </body>
 </html>

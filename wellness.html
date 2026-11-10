@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Wellness & verzorging – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="wellness.jpg" alt=""></div>
+  <p class="parent-link"><a href="index.html" data-i18n="back">← Home</a></p>
+  <h1 data-i18n="title">Wellness & verzorging</h1>
+  <p class="lead" data-i18n="lead">Knippen, nagels, hamam en massage. De gids noemde deze zaken. Prijzen staan er niet bij.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Prijs ter plaatse</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Kos%20wellness%20massage" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=Kos%20wellness%20massage" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Op de lijst</h2><p data-i18n="p0">Nsalon van Nikos Georgiadis (ook heren en baard), Giannis Nails, Artemis Hamam, Afrodite-massage en Touch of Beauty. Massages aan het strand staan bij de excursie Massage.</p></article>
+    <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.</span></div>
+    <div class="links">
+      <a href="excursie-massage.html"><span data-i18n="l1">Massage</span><small data-i18n="l1s">Therma, Mylos, Kardamena en meer</small></a>
+    </div>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Wellness & verzorging", "lead": "Knippen, nagels, hamam en massage. De gids noemde deze zaken. Prijzen staan er niet bij.", "back": "← Home", "note": "Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.", "h0": "Op de lijst", "p0": "Nsalon van Nikos Georgiadis (ook heren en baard), Giannis Nails, Artemis Hamam, Afrodite-massage en Touch of Beauty. Massages aan het strand staan bij de excursie Massage.", "b0": "Prijs ter plaatse", "l1": "Massage", "l1s": "Therma, Mylos, Kardamena en meer"}, "de": {"title": "Wellness & Pflege", "lead": "Schneiden, Nägel, Hamam und Massage. Der Guide nannte diese Betriebe. Preise standen nicht dabei.", "back": "← Start", "note": "Preise und Öffnungszeiten stehen hier nicht fest, sie ändern sich. Frag vor Ort nach.", "h0": "Auf der Liste", "p0": "Nsalon von Nikos Georgiadis (auch Herren und Bart), Giannis Nails, Artemis Hamam, Afrodite-Massage und Touch of Beauty. Strandmassagen stehen bei der Tour Massage.", "b0": "Preis vor Ort", "l1": "Massage", "l1s": "Therma, Mylos, Kardamena und mehr"}, "en": {"title": "Wellness & care", "lead": "Hair, nails, hamam and massage. The guide named these places. It did not list prices.", "back": "← Home", "note": "Prices and opening hours are not fixed here: they change. Ask on the spot.", "h0": "On the list", "p0": "Nsalon by Nikos Georgiadis (including men and beard), Giannis Nails, Artemis Hamam, Afrodite massage and Touch of Beauty. Beach massages are on the Massage excursion page.", "b0": "Price on site", "l1": "Massage", "l1s": "Therma, Mylos, Kardamena and more"}, "it": {"title": "Wellness e cura", "lead": "Capelli, unghie, hamam e massaggio. La guida citava questi posti. Non indicava i prezzi.", "back": "← Home", "note": "Prezzi e orari non sono fissi: cambiano. Chiedi sul posto.", "h0": "In elenco", "p0": "Nsalon di Nikos Georgiadis (anche uomini e barba), Giannis Nails, Artemis Hamam, massaggio Afrodite e Touch of Beauty. I massaggi in spiaggia sono nella pagina Escursione massaggio.", "b0": "Prezzo sul posto", "l1": "Massaggio", "l1s": "Therma, Mylos, Kardamena e altro"}, "tr": {"title": "Wellness ve bakım", "lead": "Saç, tırnak, hamam ve masaj. Rehber bu yerleri sayıyordu. Fiyat yoktu.", "back": "← Ana sayfa", "note": "Fiyat ve açılış saatleri burada sabit değil, değişir. Yerinde sorun.", "h0": "Listede", "p0": "Nikos Georgiadis’in Nsalon’u (erkek ve sakal dahil), Giannis Nails, Artemis Hamam, Afrodite masajı ve Touch of Beauty. Plaj masajları Masaj turunda.", "b0": "Fiyat yerinde", "l1": "Masaj", "l1s": "Therma, Mylos, Kardamena ve daha fazlası"}, "es": {"title": "Wellness y cuidado", "lead": "Pelo, uñas, hamam y masaje. La guía nombraba estos sitios. No ponía precios.", "back": "← Inicio", "note": "Los precios y horarios no están fijos: cambian. Pregunta en el sitio.", "h0": "En la lista", "p0": "Nsalon de Nikos Georgiadis (también hombres y barba), Giannis Nails, Artemis Hamam, masaje Afrodita y Touch of Beauty. Los masajes de playa están en la excursión Masaje.", "b0": "Precio en el sitio", "l1": "Masaje", "l1s": "Therma, Mylos, Kardamena y más"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

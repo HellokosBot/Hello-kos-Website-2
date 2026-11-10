@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Therma – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="img/hk/excursie-therma.jpg" alt=""></div>
+  <p class="parent-link"><a href="excursies.html" data-i18n="back">← Excursies</a></p>
+  <h1 data-i18n="title">Therma</h1>
+  <p class="lead" data-i18n="lead">De warmwaterbron is gratis en geen georganiseerde excursie. Je kunt er zelf naartoe. De uitleg staat bij de bezienswaardigheid Therma. Een transfer regel je apart.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Gratis</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Embros%20Thermes%20Kos" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=Embros%20Thermes%20Kos" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Route</h2><p data-i18n="p0">De laatste klim is steil. Met de fiets alleen als je dat aankunt.</p></article>
+    
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Therma", "lead": "De warmwaterbron is gratis en geen georganiseerde excursie. Je kunt er zelf naartoe. De uitleg staat bij de bezienswaardigheid Therma. Een transfer regel je apart.", "back": "← Excursies", "h0": "Route", "p0": "De laatste klim is steil. Met de fiets alleen als je dat aankunt.", "b0": "Gratis"}, "de": {"title": "Therma", "lead": "Die heiße Quelle ist kostenlos und keine organisierte Tour. Du kannst selbst hinfahren. Die Erklärung steht bei der Sehenswürdigkeit Therma. Einen Transfer buchst du extra.", "back": "← Ausflüge", "h0": "Route", "p0": "Die letzte Steigung ist steil. Mit dem Rad nur, wenn du das schaffst.", "b0": "Kostenlos"}, "en": {"title": "Therma", "lead": "The hot spring is free and not an organised excursion. You can go yourself. The explanation is on the Therma sight page. You arrange a transfer separately.", "back": "← Excursions", "h0": "Route", "p0": "The last climb is steep. By bike only if you can manage it.", "b0": "Free"}, "it": {"title": "Therma", "lead": "La sorgente calda è gratuita e non è un’escursione organizzata. Puoi andarci da solo. La spiegazione è nella pagina Therma. Il transfer lo organizzi a parte.", "back": "← Escursioni", "h0": "Percorso", "p0": "L’ultima salita è ripida. In bici solo se ce la fai.", "b0": "Gratis"}, "tr": {"title": "Therma", "lead": "Sıcak su ücretsizdir ve organize bir tur değildir. Kendin gidebilirsin. Anlatım Therma sayfasında. Transferi ayrıca ayarlarsın.", "back": "← Turlar", "h0": "Rota", "p0": "Son tırmanış dik. Bisikletle ancak kaldırabiliyorsan.", "b0": "Ücretsiz"}, "es": {"title": "Therma", "lead": "La fuente caliente es gratis y no es una excursión organizada. Puedes ir por tu cuenta. La explicación está en la página de Therma. El transfer lo arreglas aparte.", "back": "← Excursiones", "h0": "Ruta", "p0": "La última cuesta es fuerte. En bici solo si puedes.", "b0": "Gratis"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

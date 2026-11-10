@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Lido Waterpark – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="excursies.jpg" alt=""></div>
+  <p class="parent-link"><a href="excursies.html" data-i18n="back">← Excursies</a></p>
+  <h1 data-i18n="title">Lido Waterpark</h1>
+  <p class="lead" data-i18n="lead">Waterpark bij Mastichari. De gids noemde het een van de grotere van de Dodekanesos, met meer dan 18 onderdelen, zwembaden, schaduw, een EHBO-post en badmeesters. Eten en drinken meenemen was verboden. Als seizoensstart stond 12 juni 2026.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Entree</span><span class="badge" data-i18n="b1">Mastichari</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Lido%20Waterpark%20Kos" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=Lido%20Waterpark%20Kos" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Nu</h2><p data-i18n="p0">Of het park vandaag open is en wat een ticket kost, moet je ter plaatse of bij het park nakijken.</p></article>
+    <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.</span></div>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Lido Waterpark", "lead": "Waterpark bij Mastichari. De gids noemde het een van de grotere van de Dodekanesos, met meer dan 18 onderdelen, zwembaden, schaduw, een EHBO-post en badmeesters. Eten en drinken meenemen was verboden. Als seizoensstart stond 12 juni 2026.", "back": "← Excursies", "note": "Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.", "h0": "Nu", "p0": "Of het park vandaag open is en wat een ticket kost, moet je ter plaatse of bij het park nakijken.", "b0": "Entree", "b1": "Mastichari"}, "de": {"title": "Lido Waterpark", "lead": "Wasserpark bei Mastichari. Der Guide nannte ihn einen der größeren des Dodekanes, mit mehr als 18 Anlagen, Becken, Schatten, einer Erste-Hilfe-Stelle und Rettungsschwimmern. Essen und Trinken mitbringen war verboten. Als Saisonstart stand der 12. Juni 2026.", "back": "← Ausflüge", "note": "Preise und Öffnungszeiten stehen hier nicht fest, sie ändern sich. Frag vor Ort nach.", "h0": "Jetzt", "p0": "Ob der Park heute offen ist und was ein Ticket kostet, musst du vor Ort oder beim Park prüfen.", "b0": "Eintritt", "b1": "Mastichari"}, "en": {"title": "Lido Waterpark", "lead": "Water park near Mastichari. The guide called it one of the larger ones in the Dodecanese, with more than 18 features, pools, shade, a first-aid post and lifeguards. Bringing food and drink was forbidden. 12 June 2026 was listed as the season start.", "back": "← Excursions", "note": "Prices and opening hours are not fixed here: they change. Ask on the spot.", "h0": "Now", "p0": "Whether the park is open today and what a ticket costs, check on site or with the park.", "b0": "Entrance fee", "b1": "Mastichari"}, "it": {"title": "Lido Waterpark", "lead": "Parco acquatico vicino a Mastichari. La guida lo chiamava uno dei più grandi del Dodecaneso, con più di 18 attrazioni, piscine, ombra, un pronto soccorso e bagnini. Portare cibo e bevande era vietato. Come inizio stagione c’era il 12 giugno 2026.", "back": "← Escursioni", "note": "Prezzi e orari non sono fissi: cambiano. Chiedi sul posto.", "h0": "Ora", "p0": "Se il parco è aperto oggi e quanto costa il biglietto, controlla sul posto o con il parco.", "b0": "Ingresso", "b1": "Mastichari"}, "tr": {"title": "Lido Waterpark", "lead": "Mastichari yakınında su parkı. Rehber onu On İki Ada’nın büyüklerinden saydı: 18’den fazla ünite, havuz, gölge, ilk yardım ve cankurtaran. Yiyecek ve içecek getirmek yasaktı. Sezon başlangıcı olarak 12 Haziran 2026 yazıyordu.", "back": "← Turlar", "note": "Fiyat ve açılış saatleri burada sabit değil, değişir. Yerinde sorun.", "h0": "Şimdi", "p0": "Parkın bugün açık olup olmadığını ve biletin fiyatını yerinde veya parktan kontrol et.", "b0": "Giriş ücretli", "b1": "Mastichari"}, "es": {"title": "Lido Waterpark", "lead": "Parque acuático cerca de Mastichari. La guía lo llamaba uno de los grandes del Dodecaneso, con más de 18 atracciones, piscinas, sombra, un puesto de primeros auxilios y socorristas. Llevar comida y bebida estaba prohibido. El 12 de junio de 2026 figuraba como inicio de temporada.", "back": "← Excursiones", "note": "Los precios y horarios no están fijos: cambian. Pregunta en el sitio.", "h0": "Ahora", "p0": "Si el parque está abierto hoy y cuánto cuesta la entrada, míralo en el sitio o con el parque.", "b0": "De pago", "b1": "Mastichari"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

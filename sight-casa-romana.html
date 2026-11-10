@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-hk-own="1" data-hk-tts="1">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
@@ -82,32 +82,32 @@
     .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
     .footer a { color: var(--petrol); text-decoration: none; }
   </style>
+<link rel="stylesheet" href="hello-kos.css">
 </head>
 <body>
   <header class="app-header">
-    <a href="bezienswaardigheden.html" class="back-btn">← Terug</a>
-    <a href="index.html" class="logo">
-      <div class="logo-icon">🔅</div>
-      <div class="logo-text">Hello <span>Kos</span></div>
-    </a>
-    <div class="lang-wrap">
-      <button type="button" class="lang-btn" id="langBtn">
-        <span id="flag">🇳🇱</span> <span id="code">NL</span>
-      </button>
-      <div class="lang-menu" id="langMenu">
-        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
-        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
-        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
-        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
-        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
-        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
-      </div>
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
     </div>
-  </header>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
 
   <main class="main">
     <div class="hero-wrap">
-      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/yxnzzxrzl2ltywdlcy9wywdlcy9tb251bwvudhmvy2fzyxjvbwfuys9htvnfntg3mgnhc2fyb21hbmeuanbn-standard.jpg" alt="Casa Romana Kos" loading="eager">
+      <img src="img/jwwb/d2127b14fd-yxnzzxrzl2ltywdlcy9wywdlcy9tb251bwvudhmvy2fzyxjvbw.jpg" alt="Casa Romana Kos" loading="eager">
       <div class="hero-caption" data-i18n="heroCap">Casa Romana · Romeinse villa</div>
     </div>
 
@@ -162,7 +162,7 @@
         </div>
 
         <div class="photo-block">
-          <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-10-high-tk90lr.jpg" alt="Casa Romana interieur" loading="lazy">
+          <img src="img/jwwb/a77222821b-caption-10-high-tk90lr.jpg" alt="Casa Romana interieur" loading="lazy">
           <div class="cap" data-i18n="cap1">Binnenplaatsen en zuilengalerijen</div>
         </div>
 
@@ -180,19 +180,19 @@
 
         <div class="gallery">
           <div class="g-item">
-            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-13-high.jpg" alt="Mozaïek Casa Romana" loading="lazy">
+            <img src="img/jwwb/68556645b1-caption-13-high.jpg" alt="Mozaïek Casa Romana" loading="lazy">
             <span data-i18n="g1">Mozaïeken</span>
           </div>
           <div class="g-item">
-            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-11-high.jpg" alt="Villa detail" loading="lazy">
+            <img src="img/jwwb/645b47ca0d-caption-11-high.jpg" alt="Villa detail" loading="lazy">
             <span data-i18n="g2">Interieur</span>
           </div>
           <div class="g-item">
-            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-8-high.jpg" alt="Casa Romana" loading="lazy">
+            <img src="img/jwwb/5c0a09bff2-caption-8-high.jpg" alt="Casa Romana" loading="lazy">
             <span data-i18n="g3">Zuilen</span>
           </div>
           <div class="g-item">
-            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-10-high-tk90lr.jpg" alt="Atrium" loading="lazy">
+            <img src="img/jwwb/a77222821b-caption-10-high-tk90lr.jpg" alt="Atrium" loading="lazy">
             <span data-i18n="g4">Atrium</span>
           </div>
         </div>
@@ -469,5 +469,6 @@
   }
 })();
 </script>
+<script src="hello-kos-i18n.js"></script>
 </body>
 </html>

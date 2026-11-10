@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-hk-own="1">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
@@ -43,16 +43,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
 .footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
 .footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
 </style>
+<link rel="stylesheet" href="hello-kos.css">
 </head>
 <body>
 <header class="app-header">
   <div class="nav-btns">
-    <a class="nav-btn" href="index.html">🏠</a>
-    <a class="nav-btn" href="fabels.html">←</a>
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
   </div>
   <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
   <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
     <div class="lang-menu" id="langMenu">
       <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
       <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
@@ -173,7 +174,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
 </footer>
 <script>
 (function(){
-  var lang=localStorage.getItem('hk-lang')||'en';
+  var lang=localStorage.getItem('hk-lang')||'nl';
   var supported=['nl','de','en','it','tr','es'];
   function setLang(l){
     if(supported.indexOf(l)<0)l='en';
@@ -195,5 +196,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
   setLang(lang);
 })();
 </script>
+<script src="hello-kos-i18n.js"></script>
 </body>
 </html>

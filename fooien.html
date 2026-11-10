@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Fooien – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="wjd-fooien.jpg" alt=""></div>
+  <p class="parent-link"><a href="wist-je-dat.html" data-i18n="back">← Wist je dat</a></p>
+  <h1 data-i18n="title">Fooien</h1>
+  <p class="lead" data-i18n="lead">Een fooi is vrijwillig. De gids zei: onder de €1 kan bot overkomen, behalve bij een koffie of een heel kleine bestelling.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Vrijwillig</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Hoeveel</h2><p data-i18n="p0">In een restaurant of taverne is 5 tot 10 procent gebruikelijk. In een café vaak een euro of een paar euro. Bij een taxi rond je naar boven af, iets meer als de chauffeur met koffers helpt. In een hotel een paar euro per dag voor de kamer, of aan het eind van het verblijf. Bij een excursie vaak 2 tot 5 euro per persoon.</p></article>
+    <article class="card"><h2 data-i18n="h1">Contant</h2><p data-i18n="p1">Geef de fooi contant. Via de pin komt het geld niet altijd bij het personeel, en het kan als omzet worden gezien.</p></article>
+    
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Fooien", "lead": "Een fooi is vrijwillig. De gids zei: onder de €1 kan bot overkomen, behalve bij een koffie of een heel kleine bestelling.", "back": "← Wist je dat", "h0": "Hoeveel", "p0": "In een restaurant of taverne is 5 tot 10 procent gebruikelijk. In een café vaak een euro of een paar euro. Bij een taxi rond je naar boven af, iets meer als de chauffeur met koffers helpt. In een hotel een paar euro per dag voor de kamer, of aan het eind van het verblijf. Bij een excursie vaak 2 tot 5 euro per persoon.", "h1": "Contant", "p1": "Geef de fooi contant. Via de pin komt het geld niet altijd bij het personeel, en het kan als omzet worden gezien.", "b0": "Vrijwillig"}, "de": {"title": "Trinkgeld", "lead": "Trinkgeld ist freiwillig. Der Guide sagte: unter €1 kann unhöflich wirken, außer bei einem Kaffee oder einer sehr kleinen Bestellung.", "back": "← Wusstest du", "h0": "Wie viel", "p0": "Im Restaurant oder in der Taverne sind 5 bis 10 Prozent üblich. Im Café oft ein Euro oder ein paar Euro. Beim Taxi rundest du auf, etwas mehr, wenn der Fahrer mit Koffern hilft. Im Hotel ein paar Euro pro Tag fürs Zimmer oder am Ende. Bei einer Tour oft 2 bis 5 Euro pro Person.", "h1": "Bar", "p1": "Gib das Trinkgeld bar. Über die Karte kommt das Geld nicht immer beim Personal an und kann als Umsatz gelten.", "b0": "Freiwillig"}, "en": {"title": "Tipping", "lead": "A tip is voluntary. The guide said: under €1 can feel rude, except for a coffee or a very small order.", "back": "← Did you know", "h0": "How much", "p0": "In a restaurant or taverna 5 to 10 percent is usual. In a café often one euro or a few euros. For a taxi you round up, a bit more if the driver helps with bags. In a hotel a few euros a day for the room, or at the end of the stay. On an excursion often 2 to 5 euros per person.", "h1": "Cash", "p1": "Give the tip in cash. By card the money does not always reach the staff, and it can be treated as turnover.", "b0": "Voluntary"}, "it": {"title": "Mance", "lead": "La mancia è volontaria. La guida diceva: sotto €1 può sembrare scortese, tranne per un caffè o un ordine molto piccolo.", "back": "← Lo sapevi", "h0": "Quanto", "p0": "In un ristorante o in taverna è normale il 5–10 percento. In un caffè spesso un euro o pochi euro. In taxi arrotondi per eccesso, un po’ di più se l’autista aiuta con le valigie. In hotel pochi euro al giorno per la camera, o alla fine. In un’escursione spesso 2–5 euro a persona.", "h1": "Contanti", "p1": "Dai la mancia in contanti. Con la carta i soldi non arrivano sempre al personale e possono contare come incasso.", "b0": "Volontaria"}, "tr": {"title": "Bahşiş", "lead": "Bahşiş isteğe bağlıdır. Rehber diyordu: 1 € altı kaba gelebilir, kahve veya çok küçük bir sipariş hariç.", "back": "← Biliyor muydun", "h0": "Ne kadar", "p0": "Restoran veya tavernada yüzde 5–10 normaldir. Kafede çoğu zaman bir veya birkaç euro. Taksinde yukarı yuvarlarsın, şoför bavula yardım ederse biraz daha. Otelde oda için günde birkaç euro ya da çıkışta. Turda çoğu zaman kişi başı 2–5 euro.", "h1": "Nakit", "p1": "Bahşişi nakit ver. Kartla para her zaman personele ulaşmaz ve ciro sayılabilir.", "b0": "İsteğe bağlı"}, "es": {"title": "Propinas", "lead": "La propina es voluntaria. La guía decía: menos de 1 € puede parecer grosero, salvo un café o un pedido muy pequeño.", "back": "← ¿Sabías que", "h0": "Cuánto", "p0": "En un restaurante o taberna es habitual del 5 al 10 por ciento. En un café a menudo un euro o unos euros. En un taxi redondeas hacia arriba, un poco más si el conductor ayuda con las maletas. En un hotel unos euros al día por la habitación, o al final. En una excursión a menudo de 2 a 5 euros por persona.", "h1": "Efectivo", "p1": "Da la propina en efectivo. Con tarjeta el dinero no siempre llega al personal y puede contar como ingreso.", "b0": "Voluntaria"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

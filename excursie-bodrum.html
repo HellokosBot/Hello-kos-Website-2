@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Veerboot naar Bodrum – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="excursies.jpg" alt=""></div>
+  <p class="parent-link"><a href="excursies.html" data-i18n="back">← Excursies</a></p>
+  <h1 data-i18n="title">Veerboot naar Bodrum</h1>
+  <p class="lead" data-i18n="lead">Bodrum ligt in Turkije, aan de overkant. De gids noemde een vaart van ongeveer 30 minuten naar het centrum, met Sea Star en Apollon 2. Een enkeltje stond op €35 (12 jaar en ouder), €24 (6–12) en €10 (0–5), belastingen inbegrepen. Vertrek rond 9:00 of 9:30, terug in de middag. Er was soms een extra afvaart.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Prijs ter plaatse</span><span class="badge" data-i18n="b1">Turkije</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Kos%20Bodrum%20ferry" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=Kos%20Bodrum%20ferry" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Paspoort</h2><p data-i18n="p0">Je gaat een ander land in. Lees de pagina over het visum voor Bodrum en de pagina over shoppen en de douane. De dienstregeling verandert.</p></article>
+    <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.</span></div>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Veerboot naar Bodrum", "lead": "Bodrum ligt in Turkije, aan de overkant. De gids noemde een vaart van ongeveer 30 minuten naar het centrum, met Sea Star en Apollon 2. Een enkeltje stond op €35 (12 jaar en ouder), €24 (6–12) en €10 (0–5), belastingen inbegrepen. Vertrek rond 9:00 of 9:30, terug in de middag. Er was soms een extra afvaart.", "back": "← Excursies", "note": "Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.", "h0": "Paspoort", "p0": "Je gaat een ander land in. Lees de pagina over het visum voor Bodrum en de pagina over shoppen en de douane. De dienstregeling verandert.", "b0": "Prijs ter plaatse", "b1": "Turkije"}, "de": {"title": "Fähre nach Bodrum", "lead": "Bodrum liegt in der Türkei gegenüber. Der Guide nannte etwa 30 Minuten ins Zentrum, mit Sea Star und Apollon 2. Einzelticket €35 (ab 12), €24 (6–12) und €10 (0–5), Steuern inklusive. Abfahrt um 9:00 oder 9:30, zurück am Nachmittag. Manchmal gab es eine Extrafahrt.", "back": "← Ausflüge", "note": "Preise und Öffnungszeiten stehen hier nicht fest, sie ändern sich. Frag vor Ort nach.", "h0": "Reisepass", "p0": "Du fährst in ein anderes Land. Lies die Seite zum Visum für Bodrum und die Seite über Shopping und Zoll. Der Fahrplan ändert sich.", "b0": "Preis vor Ort", "b1": "Türkei"}, "en": {"title": "Ferry to Bodrum", "lead": "Bodrum is in Turkey, across the water. The guide named a crossing of about 30 minutes to the centre, with Sea Star and Apollon 2. A single was listed at €35 (12 and over), €24 (6–12) and €10 (0–5), tax included. Departure around 9:00 or 9:30, back in the afternoon. There was sometimes an extra sailing.", "back": "← Excursions", "note": "Prices and opening hours are not fixed here: they change. Ask on the spot.", "h0": "Passport", "p0": "You enter another country. Read the page about the Bodrum visa and the page about shopping and customs. The timetable changes.", "b0": "Price on site", "b1": "Turkey"}, "it": {"title": "Traghetto per Bodrum", "lead": "Bodrum è in Turchia, di fronte. La guida indicava circa 30 minuti fino al centro, con Sea Star e Apollon 2. Un solo andata a €35 (dai 12 anni), €24 (6–12) e €10 (0–5), tasse incluse. Partenza verso le 9:00 o le 9:30, ritorno nel pomeriggio. A volte c’era una corsa in più.", "back": "← Escursioni", "note": "Prezzi e orari non sono fissi: cambiano. Chiedi sul posto.", "h0": "Passaporto", "p0": "Entri in un altro paese. Leggi la pagina sul visto per Bodrum e quella su shopping e dogana. L’orario cambia.", "b0": "Prezzo sul posto", "b1": "Turchia"}, "tr": {"title": "Bodrum feribotu", "lead": "Bodrum karşıda, Türkiye’de. Rehber merkeze yaklaşık 30 dakika diyordu, Sea Star ve Apollon 2 ile. Tek yön 12 yaş ve üstü €35, 6–12 €24, 0–5 €10, vergiler dahil. Kalkış 9:00 veya 9:30 civarı, dönüş öğleden sonra. Bazen ek sefer vardı.", "back": "← Turlar", "note": "Fiyat ve açılış saatleri burada sabit değil, değişir. Yerinde sorun.", "h0": "Pasaport", "p0": "Başka bir ülkeye girersin. Bodrum vizesi sayfasını ve alışveriş ile gümrük sayfasını oku. Tarife değişir.", "b0": "Fiyat yerinde", "b1": "Türkiye"}, "es": {"title": "Ferry a Bodrum", "lead": "Bodrum está en Turquía, enfrente. La guía citaba unos 30 minutos hasta el centro, con Sea Star y Apollon 2. Un solo ida a 35 € (desde 12 años), 24 € (6–12) y 10 € (0–5), impuestos incluidos. Salida hacia las 9:00 o las 9:30, vuelta por la tarde. A veces había una salida extra.", "back": "← Excursiones", "note": "Los precios y horarios no están fijos: cambian. Pregunta en el sitio.", "h0": "Pasaporte", "p0": "Entras en otro país. Lee la página del visado de Bodrum y la de compras y aduana. El horario cambia.", "b0": "Precio en el sitio", "b1": "Turquía"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

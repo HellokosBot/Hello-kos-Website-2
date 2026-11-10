@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Kinderserie Nikos & Eleni – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="wjd-kinderserie.jpg" alt=""></div>
+  <p class="parent-link"><a href="wist-je-dat.html" data-i18n="back">← Wist je dat</a></p>
+  <h1 data-i18n="title">Kinderserie Nikos & Eleni</h1>
+  <p class="lead" data-i18n="lead">Hello Kos heeft een kinderserie over Nikos en Eleni. De afleveringen staan nog niet op deze site.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Kinderen</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Taal</h2><p data-i18n="p0">De oude site had een Nederlandse versie. Die films zijn hier nog niet geplaatst, zodat er geen dode link ontstaat.</p></article>
+    <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">De afleveringen zelf zijn nog niet ingevuld.</span></div>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Kinderserie Nikos & Eleni", "lead": "Hello Kos heeft een kinderserie over Nikos en Eleni. De afleveringen staan nog niet op deze site.", "back": "← Wist je dat", "note": "De afleveringen zelf zijn nog niet ingevuld.", "h0": "Taal", "p0": "De oude site had een Nederlandse versie. Die films zijn hier nog niet geplaatst, zodat er geen dode link ontstaat.", "b0": "Kinderen"}, "de": {"title": "Kinderserie Nikos & Eleni", "lead": "Hello Kos hat eine Kinderserie über Nikos und Eleni. Die Folgen stehen noch nicht auf dieser Website.", "back": "← Wusstest du", "note": "Die Folgen selbst sind noch nicht eingetragen.", "h0": "Sprache", "p0": "Die alte Website hatte eine niederländische Fassung. Die Filme sind hier noch nicht eingebunden, damit kein toter Link entsteht.", "b0": "Kinder"}, "en": {"title": "Kids’ series Nikos & Eleni", "lead": "Hello Kos has a children’s series about Nikos and Eleni. The episodes are not on this site yet.", "back": "← Did you know", "note": "The episodes themselves are not filled in yet.", "h0": "Language", "p0": "The old site had a Dutch version. Those films are not placed here yet, so there is no dead link.", "b0": "Children"}, "it": {"title": "Serie per bambini Nikos & Eleni", "lead": "Hello Kos ha una serie per bambini su Nikos ed Eleni. Gli episodi non sono ancora su questo sito.", "back": "← Lo sapevi", "note": "Gli episodi stessi non sono ancora inseriti.", "h0": "Lingua", "p0": "Il vecchio sito aveva una versione olandese. Quei filmati non sono ancora messi qui, così non c’è un link morto.", "b0": "Bambini"}, "tr": {"title": "Çocuk dizisi Nikos & Eleni", "lead": "Hello Kos’un Nikos ve Eleni hakkında bir çocuk dizisi var. Bölümler bu sitede henüz yok.", "back": "← Biliyor muydun", "note": "Bölümlerin kendisi henüz yok.", "h0": "Dil", "p0": "Eski sitede Hollandaca bir sürüm vardı. O filmler burada henüz yok, böylece ölü bağlantı olmaz.", "b0": "Çocuklar"}, "es": {"title": "Serie infantil Nikos y Eleni", "lead": "Hello Kos tiene una serie infantil sobre Nikos y Eleni. Los episodios aún no están en este sitio.", "back": "← ¿Sabías que", "note": "Los episodios en sí aún no están.", "h0": "Idioma", "p0": "El sitio antiguo tenía una versión en neerlandés. Esos vídeos aún no están aquí, para que no haya un enlace muerto.", "b0": "Niños"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

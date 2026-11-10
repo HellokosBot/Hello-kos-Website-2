@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Tigaki – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="img/hk/sight-tigaki.jpg" alt=""></div>
+  <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back">← Bezienswaardigheden</a></p>
+  <h1 data-i18n="title">Tigaki</h1>
+  <p class="lead" data-i18n="lead">Lang zandstrand aan de noordkust, stiller dan Kos-stad. Delen met ligbedden en delen onder de bomen. Naast het dorp ligt het zoutmeer Alykes, een Natura 2000-gebied. Vroeger werd hier zout gewonnen. Er is wind voor wind- en kitesurfen.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Gratis</span><span class="badge" data-i18n="b1">Noordkust</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Tigaki%20Kos" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=Tigaki%20Kos" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Verder</h2><p data-i18n="p0">Het zoutmeer met flamingo’s heeft een eigen pagina, net als het strand.</p></article>
+    
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Tigaki", "lead": "Lang zandstrand aan de noordkust, stiller dan Kos-stad. Delen met ligbedden en delen onder de bomen. Naast het dorp ligt het zoutmeer Alykes, een Natura 2000-gebied. Vroeger werd hier zout gewonnen. Er is wind voor wind- en kitesurfen.", "back": "← Bezienswaardigheden", "h0": "Verder", "p0": "Het zoutmeer met flamingo’s heeft een eigen pagina, net als het strand.", "b0": "Gratis", "b1": "Noordkust"}, "de": {"title": "Tigaki", "lead": "Langer Sandstrand an der Nordküste, ruhiger als Kos-Stadt. Abschnitte mit Liegen und unter Bäumen. Neben dem Dorf liegt der Salzsee Alykes, ein Natura-2000-Gebiet. Früher wurde hier Salz gewonnen. Es gibt Wind zum Wind- und Kitesurfen.", "back": "← Sehenswürdigkeiten", "h0": "Weiter", "p0": "Der Salzsee mit Flamingos hat eine eigene Seite, genau wie der Strand.", "b0": "Kostenlos", "b1": "Nordküste"}, "en": {"title": "Tigaki", "lead": "Long sandy beach on the north coast, calmer than Kos town. Parts with sunbeds and parts under the trees. Next to the village is the Alykes salt lake, a Natura 2000 site. Salt used to be taken here. There is wind for windsurfing and kitesurfing.", "back": "← Sights", "h0": "More", "p0": "The salt lake with flamingos has its own page, as does the beach.", "b0": "Free", "b1": "North coast"}, "it": {"title": "Tigaki", "lead": "Lunga spiaggia di sabbia sulla costa nord, più calma della città. Tratti con lettini e sotto gli alberi. Accanto al villaggio c’è il lago salato Alykes, sito Natura 2000. Un tempo si raccoglieva il sale. C’è vento per windsurf e kitesurf.", "back": "← Attrazioni", "h0": "Altro", "p0": "Il lago salato con i fenicotteri ha una pagina, come la spiaggia.", "b0": "Gratis", "b1": "Costa nord"}, "tr": {"title": "Tigaki", "lead": "Kuzey kıyıda uzun kumsal, Kos şehrinden daha sakin. Şezlonglu ve ağaç altı kısımlar var. Köyün yanında Natura 2000 alanı Alykes tuz gölü var. Eskiden tuz çıkarılırdı. Rüzgar sörfü ve kite için rüzgar olur.", "back": "← Gezilecek yerler", "h0": "Devamı", "p0": "Flamingolu tuz gölünün sayfası var, plajın da.", "b0": "Ücretsiz", "b1": "Kuzey kıyı"}, "es": {"title": "Tigaki", "lead": "Playa larga de arena en la costa norte, más tranquila que la ciudad. Tramos con hamacas y bajo los árboles. Junto al pueblo está el lago salado de Alykes, zona Natura 2000. Antes se sacaba sal. Hay viento para windsurf y kitesurf.", "back": "← Lugares de interés", "h0": "Más", "p0": "El lago salado con flamencos tiene página, igual que la playa.", "b0": "Gratis", "b1": "Costa norte"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

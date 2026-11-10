@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Drie eilanden – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="excursies.jpg" alt=""></div>
+  <p class="parent-link"><a href="excursies.html" data-i18n="back">← Excursies</a></p>
+  <h1 data-i18n="title">Drie eilanden</h1>
+  <p class="lead" data-i18n="lead">Boottocht die vaak Pserimos, Kalymnos en Plati aandoet. Pserimos is klein en rustig. Kalymnos staat bekend om de sponzenvisserij. Bij Plati is het water helder om te zwemmen.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Prijs ter plaatse</span><span class="badge" data-i18n="b1">Boot</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Kos%20harbour%20boat%20trip" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=Kos%20harbour%20boat%20trip" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Meenemen</h2><p data-i18n="p0">De gids zei: drank is vaak voor eigen rekening, neem zonnebrand mee, en eigen drinken mee aan boord mag soms niet. Welke boot vaart, wisselt.</p></article>
+    <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.</span></div>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Drie eilanden", "lead": "Boottocht die vaak Pserimos, Kalymnos en Plati aandoet. Pserimos is klein en rustig. Kalymnos staat bekend om de sponzenvisserij. Bij Plati is het water helder om te zwemmen.", "back": "← Excursies", "note": "Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.", "h0": "Meenemen", "p0": "De gids zei: drank is vaak voor eigen rekening, neem zonnebrand mee, en eigen drinken mee aan boord mag soms niet. Welke boot vaart, wisselt.", "b0": "Prijs ter plaatse", "b1": "Boot"}, "de": {"title": "Drei Inseln", "lead": "Bootsausflug, der oft Pserimos, Kalymnos und Plati anläuft. Pserimos ist klein und ruhig. Kalymnos ist bekannt für die Schwammfischerei. Bei Plati ist das Wasser klar zum Schwimmen.", "back": "← Ausflüge", "note": "Preise und Öffnungszeiten stehen hier nicht fest, sie ändern sich. Frag vor Ort nach.", "h0": "Mitnehmen", "p0": "Der Guide sagte: Getränke sind oft selbst zu zahlen, nimm Sonnencreme mit, und eigene Getränke an Bord sind manchmal verboten. Welches Boot fährt, wechselt.", "b0": "Preis vor Ort", "b1": "Boot"}, "en": {"title": "Three islands", "lead": "A boat trip that often calls at Pserimos, Kalymnos and Plati. Pserimos is small and quiet. Kalymnos is known for sponge fishing. At Plati the water is clear for swimming.", "back": "← Excursions", "note": "Prices and opening hours are not fixed here: they change. Ask on the spot.", "h0": "Bring", "p0": "The guide said: drinks are often extra, bring sunscreen, and your own drinks may not be allowed on board. Which boat sails changes.", "b0": "Price on site", "b1": "Boat"}, "it": {"title": "Tre isole", "lead": "Giro in barca che spesso tocca Pserimos, Kalymnos e Plati. Pserimos è piccola e quieta. Kalymnos è nota per la pesca delle spugne. A Plati l’acqua è limpida per nuotare.", "back": "← Escursioni", "note": "Prezzi e orari non sono fissi: cambiano. Chiedi sul posto.", "h0": "Porta", "p0": "La guida diceva: le bevande sono spesso a parte, porta la crema solare, e le tue bevande a bordo a volte non sono ammesse. Quale barca parte cambia.", "b0": "Prezzo sul posto", "b1": "Barca"}, "tr": {"title": "Üç ada", "lead": "Çoğu zaman Pserimos, Kalymnos ve Plati’ye uğrayan tekne turu. Pserimos küçük ve sakin. Kalymnos sünger avıyla bilinir. Plati’de su yüzmek için berrak.", "back": "← Turlar", "note": "Fiyat ve açılış saatleri burada sabit değil, değişir. Yerinde sorun.", "h0": "Götür", "p0": "Rehber diyordu: içecek çoğu zaman ayrıca, güneş kremi götür, kendi içeceğin bazen güvertede yasak. Hangi tekne kalktığı değişir.", "b0": "Fiyat yerinde", "b1": "Tekne"}, "es": {"title": "Tres islas", "lead": "Paseo en barco que suele tocar Pserimos, Kálimnos y Plati. Pserimos es pequeña y tranquila. Kálimnos es conocida por la pesca de esponjas. En Plati el agua es clara para nadar.", "back": "← Excursiones", "note": "Los precios y horarios no están fijos: cambian. Pregunta en el sitio.", "h0": "Lleva", "p0": "La guía decía: la bebida suele ir aparte, lleva protector solar, y tu propia bebida a bordo a veces no se permite. Qué barco sale cambia.", "b0": "Precio en el sitio", "b1": "Barco"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

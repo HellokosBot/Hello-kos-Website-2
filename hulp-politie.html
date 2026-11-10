@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Politie – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="img/hk/hulp-politie.jpg" alt=""></div>
+  <p class="parent-link"><a href="noodgevallen.html" data-i18n="back">← Noodgevallen</a></p>
+  <h1 data-i18n="title">Politie</h1>
+  <p class="lead" data-i18n="lead">Bij nood bel je 112. Dat nummer staat ook op de pagina Noodgevallen. Het dekt politie, ambulance en brandweer.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">112</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=police%20Kos%20town" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=police%20Kos%20town" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Bureaus</h2><p data-i18n="p0">Er zijn bureaus op het eiland, onder meer in Kos-stad. Het adres en het lokale nummer zijn hier nog niet ingevuld. De fabel dat er geen politie zou zijn, klopt niet.</p></article>
+    <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">Het telefoonnummer en het exacte adres staan nog niet in deze gids. Bel bij direct gevaar 112.</span></div>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Politie", "lead": "Bij nood bel je 112. Dat nummer staat ook op de pagina Noodgevallen. Het dekt politie, ambulance en brandweer.", "back": "← Noodgevallen", "note": "Het telefoonnummer en het exacte adres staan nog niet in deze gids. Bel bij direct gevaar 112.", "h0": "Bureaus", "p0": "Er zijn bureaus op het eiland, onder meer in Kos-stad. Het adres en het lokale nummer zijn hier nog niet ingevuld. De fabel dat er geen politie zou zijn, klopt niet.", "b0": "112"}, "de": {"title": "Polizei", "lead": "Im Notfall rufst du 112. Die Nummer steht auch auf der Seite Notfälle. Sie gilt für Polizei, Rettung und Feuerwehr.", "back": "← Notfälle", "note": "Telefonnummer und genaue Adresse stehen noch nicht in diesem Guide. Bei direkter Gefahr: 112.", "h0": "Wachen", "p0": "Es gibt Wachen auf der Insel, unter anderem in Kos-Stadt. Adresse und lokale Nummer fehlen hier noch. Die Fabel, es gäbe keine Polizei, stimmt nicht.", "b0": "112"}, "en": {"title": "Police", "lead": "In an emergency call 112. That number is also on the Emergencies page. It covers police, ambulance and the fire service.", "back": "← Emergencies", "note": "The phone number and exact address are not in this guide yet. If you are in danger, call 112.", "h0": "Stations", "p0": "There are stations on the island, including in Kos town. The address and the local number are not filled in here yet. The myth that there is no police is wrong.", "b0": "112"}, "it": {"title": "Polizia", "lead": "In emergenza chiami il 112. Il numero è anche nella pagina Emergenze. Vale per polizia, ambulanza e vigili del fuoco.", "back": "← Emergenze", "note": "Numero di telefono e indirizzo esatto non sono ancora in questa guida. In pericolo chiama il 112.", "h0": "Commissariati", "p0": "Ci sono commissariati sull’isola, anche in città. Indirizzo e numero locale non sono ancora qui. La favola che non ci sia polizia è falsa.", "b0": "112"}, "tr": {"title": "Polis", "lead": "Acilde 112’yi ara. Numara Acil durum sayfasında da var. Polis, ambulans ve itfaiyeyi kapsar.", "back": "← Acil durum", "note": "Telefon ve tam adres bu rehberde henüz yok. Tehlike varsa 112'yi ara.", "h0": "Karakollar", "p0": "Adada karakollar var, Kos şehri dahil. Adres ve yerel numara burada henüz yok. Polis olmadığı efsanesi yanlış.", "b0": "112"}, "es": {"title": "Policía", "lead": "En una emergencia llama al 112. Ese número está también en Emergencias. Cubre policía, ambulancia y bomberos.", "back": "← Emergencias", "note": "El teléfono y la dirección exacta aún no están en esta guía. Si hay peligro, llama al 112.", "h0": "Comisarías", "p0": "Hay comisarías en la isla, también en la ciudad. La dirección y el número local aún no están. El mito de que no hay policía es falso.", "b0": "112"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-hk-own="1" data-hk-tts="1">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
@@ -75,32 +75,32 @@
     .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
     .footer a { color: var(--petrol); text-decoration: none; }
   </style>
+<link rel="stylesheet" href="hello-kos.css">
 </head>
 <body>
   <header class="app-header">
-    <a href="bezienswaardigheden.html" class="back-btn">← Terug</a>
-    <a href="index.html" class="logo">
-      <div class="logo-icon">🔅</div>
-      <div class="logo-text">Hello <span>Kos</span></div>
-    </a>
-    <div class="lang-wrap">
-      <button type="button" class="lang-btn" id="langBtn">
-        <span id="flag">🇳🇱</span> <span id="code">NL</span>
-      </button>
-      <div class="lang-menu" id="langMenu">
-        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
-        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
-        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
-        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
-        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
-        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
-      </div>
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
     </div>
-  </header>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
 
   <main class="main">
     <div class="hero-wrap">
-      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/565151116_1552661852852838_1840308219660787866_n-high.jpg" alt="I Love Kos" loading="eager">
+      <img src="img/jwwb/77aa42f347-565151116_1552661852852838_1840308219660787866_n-high.jpg" alt="I Love Kos" loading="eager">
       <div class="hero-caption" data-i18n="heroCap">I Love Kos</div>
     </div>
 
@@ -141,7 +141,7 @@
         </div>
 
         <div class="photo-block">
-          <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/images-14-high.jpg" alt="I Love Kos" loading="lazy">
+          <img src="img/jwwb/9d5ce67eaf-images-14-high.jpg" alt="I Love Kos" loading="lazy">
           <div class="cap" data-i18n="cap1">De letters bij de haven</div>
         </div>
 
@@ -152,19 +152,19 @@
 
         <div class="gallery">
           <div class="g-item">
-            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/images-15-high.jpg" alt="I Love Kos" loading="lazy">
+            <img src="img/jwwb/e5ac1df12d-images-15-high.jpg" alt="I Love Kos" loading="lazy">
             <span data-i18n="g1">Letters</span>
           </div>
           <div class="g-item">
-            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/202146901_192392132889389_1331225783528797045_n-high.jpg" alt="Fotospot" loading="lazy">
+            <img src="img/jwwb/072f35db8f-202146901_192392132889389_1331225783528797045_n-high.jpg" alt="Fotospot" loading="lazy">
             <span data-i18n="g2">Fotospot</span>
           </div>
           <div class="g-item">
-            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/4761ce5cae4fa08acfaf15d62131e1d7-high.jpg" alt="I Love Kos" loading="lazy">
+            <img src="img/jwwb/5ec3673c6c-4761ce5cae4fa08acfaf15d62131e1d7-high.jpg" alt="I Love Kos" loading="lazy">
             <span data-i18n="g3">Letters</span>
           </div>
           <div class="g-item">
-            <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/huikgi-1024x461-standard.jpg" alt="I Love Kos" loading="lazy">
+            <img src="img/jwwb/07862639b5-huikgi-1024x461-standard.jpg" alt="I Love Kos" loading="lazy">
             <span data-i18n="g4">Overzicht</span>
           </div>
         </div>
@@ -386,5 +386,6 @@
   }
 })();
 </script>
+<script src="hello-kos-i18n.js"></script>
 </body>
 </html>

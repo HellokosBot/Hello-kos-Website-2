@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Paardrijden – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="excursies.jpg" alt=""></div>
+  <p class="parent-link"><a href="excursies.html" data-i18n="back">← Excursies</a></p>
+  <h1 data-i18n="title">Paardrijden</h1>
+  <p class="lead" data-i18n="lead">De gids noemde Paradise Ranch bij Zia, Salt Lake Stables, Erika’s Horse Farm en Veroutas tussen Tigaki en Marmari, en een stal bij Kardamena. Ritten gaan over het strand, rond het zoutmeer of de bergen in. Er zijn pony’s voor kinderen.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Prijs ter plaatse</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=horse%20riding%20Kos" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=horse%20riding%20Kos" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Kleding</h2><p data-i18n="p0">Dichte schoenen zijn handiger dan slippers. Gewichtslimiet en prijs vraag je bij de stal.</p></article>
+    <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.</span></div>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Paardrijden", "lead": "De gids noemde Paradise Ranch bij Zia, Salt Lake Stables, Erika’s Horse Farm en Veroutas tussen Tigaki en Marmari, en een stal bij Kardamena. Ritten gaan over het strand, rond het zoutmeer of de bergen in. Er zijn pony’s voor kinderen.", "back": "← Excursies", "note": "Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.", "h0": "Kleding", "p0": "Dichte schoenen zijn handiger dan slippers. Gewichtslimiet en prijs vraag je bij de stal.", "b0": "Prijs ter plaatse"}, "de": {"title": "Reiten", "lead": "Der Guide nannte Paradise Ranch bei Zia, Salt Lake Stables, Erika’s Horse Farm und Veroutas zwischen Tigaki und Marmari und einen Stall bei Kardamena. Ausritte gehen über den Strand, um den Salzsee oder in die Berge. Es gibt Ponys für Kinder.", "back": "← Ausflüge", "note": "Preise und Öffnungszeiten stehen hier nicht fest, sie ändern sich. Frag vor Ort nach.", "h0": "Kleidung", "p0": "Geschlossene Schuhe sind besser als Schlappen. Gewichtslimit und Preis fragst du im Stall.", "b0": "Preis vor Ort"}, "en": {"title": "Horse riding", "lead": "The guide named Paradise Ranch near Zia, Salt Lake Stables, Erika’s Horse Farm and Veroutas between Tigaki and Marmari, and a stable near Kardamena. Rides go on the beach, around the salt lake or into the hills. There are ponies for children.", "back": "← Excursions", "note": "Prices and opening hours are not fixed here: they change. Ask on the spot.", "h0": "Clothes", "p0": "Closed shoes are better than flip-flops. Ask the stable about the weight limit and the price.", "b0": "Price on site"}, "it": {"title": "Equitazione", "lead": "La guida citava Paradise Ranch verso Zia, Salt Lake Stables, Erika’s Horse Farm e Veroutas tra Tigaki e Marmari, e una scuderia verso Kardamena. Le uscite vanno sulla spiaggia, intorno al lago salato o sulle colline. Ci sono pony per i bambini.", "back": "← Escursioni", "note": "Prezzi e orari non sono fissi: cambiano. Chiedi sul posto.", "h0": "Vestiti", "p0": "Scarpe chiuse sono meglio delle ciabatte. Limite di peso e prezzo li chiedi alla scuderia.", "b0": "Prezzo sul posto"}, "tr": {"title": "At binme", "lead": "Rehber saydı: Zia tarafında Paradise Ranch, Salt Lake Stables, Erika’s Horse Farm ve Tigaki ile Marmari arasında Veroutas, Kardamena yakınında bir ahır. Turlar plajda, tuz gölü çevresinde veya tepelerde. Çocuklar için midilli var.", "back": "← Turlar", "note": "Fiyat ve açılış saatleri burada sabit değil, değişir. Yerinde sorun.", "h0": "Giysi", "p0": "Kapalı ayakkabı terlikten iyidir. Kilo sınırı ve fiyatı ahıra sor.", "b0": "Fiyat yerinde"}, "es": {"title": "Paseo a caballo", "lead": "La guía citaba Paradise Ranch hacia Zia, Salt Lake Stables, Erika’s Horse Farm y Veroutas entre Tigaki y Mastichari, y un establo cerca de Kardamena. Los paseos van por la playa, el lago salado o las colinas. Hay ponis para niños.", "back": "← Excursiones", "note": "Los precios y horarios no están fijos: cambian. Pregunta en el sitio.", "h0": "Ropa", "p0": "Zapatos cerrados van mejor que las chanclas. El límite de peso y el precio se preguntan en el establo.", "b0": "Precio en el sitio"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

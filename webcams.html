@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-hk-own="1">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
@@ -42,16 +42,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
 .footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
 .footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
 </style>
+<link rel="stylesheet" href="hello-kos.css">
 </head>
 <body>
 <header class="app-header">
   <div class="nav-btns">
-    <a class="nav-btn" href="index.html">🏠</a>
-    <a class="nav-btn" href="wist-je-dat.html">←</a>
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
   </div>
   <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
   <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
     <div class="lang-menu" id="langMenu">
       <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
       <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
@@ -135,7 +136,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
     tr:{title:'📡 Canlı web kameralar',intro:'Kos’u canlı izle – açmak için dokun',c1t:'Kos Limanı',c1s:'Liman ve sahil',c2t:'Kos Limanı – kale manzarası',c2s:'Neratzia kalesi ve marina',c3t:'Mastichari',c3s:'Neptune Resort – plaj ve deniz',c4t:'Mastichari Beach',c4s:'Skyline – plaj ve deniz',c5t:'Kardamena Limanı',c5s:'Liman ve bulvar',note:'Yayınlar yeni sekmede açılır. Kullanılabilirlik kamera sahibine bağlıdır – bazen çevrimdışı olabilir.'},
     es:{title:'📡 Webcams en vivo',intro:'Mira Kos en directo – toca para abrir',c1t:'Puerto de Kos',c1s:'Puerto y paseo marítimo',c2t:'Puerto de Kos – vista al castillo',c2s:'Castillo Neratzia y marina',c3t:'Mastichari',c3s:'Neptune Resort – playa y mar',c4t:'Mastichari Beach',c4s:'Skyline – playa y mar',c5t:'Puerto de Kardamena',c5s:'Puerto y paseo',note:'Las emisiones se abren en una pestaña nueva. La disponibilidad depende del dueño de la cámara – a veces offline.'}
   };
-  var lang=localStorage.getItem('hk-lang')||'en';
+  var lang=localStorage.getItem('hk-lang')||'nl';
   var supported=['nl','de','en','it','tr','es'];
   function setLang(l){
     if(supported.indexOf(l)<0)l='en';
@@ -159,5 +160,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
   setLang(lang);
 })();
 </script>
+<script src="hello-kos-i18n.js"></script>
 </body>
 </html>

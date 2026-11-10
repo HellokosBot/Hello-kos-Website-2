@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-hk-own="1">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
@@ -59,31 +59,31 @@
     .btn-water { background: linear-gradient(145deg, #0277bd, #01579b); color: #fff; }
     .footer { text-align: center; padding: 16px; font-size: .75rem; color: var(--text-soft); }
   </style>
+<link rel="stylesheet" href="hello-kos.css">
 </head>
 <body>
   <header class="app-header">
-    <a href="stranden.html" class="back-btn">← Terug</a>
-    <a href="index.html" class="logo">
-      <div class="logo-icon">🔅</div>
-      <div class="logo-text">Hello <span>Kos</span></div>
-    </a>
-    <div class="lang-wrap">
-      <button type="button" class="lang-btn" id="langBtn">
-        <span id="flag">🇳🇱</span> <span id="code">NL</span>
-      </button>
-      <div class="lang-menu" id="langMenu">
-        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
-        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
-        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
-        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
-        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
-        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
-      </div>
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
     </div>
-  </header>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
   <main class="main">
     <div class="hero">
-      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/tigaki-kos-strand-660-1-high-zl1x4s.jpg" alt="Tigaki Beach" loading="eager">
+      <img src="img/jwwb/d1b49a0864-tigaki-kos-strand-660-1-high-zl1x4s.jpg" alt="Tigaki Beach" loading="eager">
       <div class="hero-cap"><div class="area" data-i18n="area">Tigaki</div><h1>Tigaki Beach</h1></div>
     </div>
     <div class="content">
@@ -95,20 +95,20 @@
         <h2 data-i18n="h2_1">Over dit strand</h2>
         <p data-i18n="p1">Tigaki herbergt een van de langste en meest populaire stranden van het eiland, dat zich bijna 10 km uitstrekt. Hier geniet je van fijn wit-goudkleurig zand en kristalhelder turquoise water, dat heerlijk warm en ondiep blijft over een grote afstand. Dit maakt het ideaal voor gezinnen en kinderen, evenals voor lange zwemsessies zonder in diep water te komen.</p>
       </div>
-      <div class="img-full"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/kgs_tigaki_beach_0117_06_rgb-136-dpi-for-web-high-ctso3u.jpg" alt="" loading="lazy"></div>
+      <div class="img-full"><img src="img/jwwb/ce590efb4d-kgs_tigaki_beach_0117_06_rgb-136-dpi-for-web-high-ctso3u.jpg" alt="" loading="lazy"></div>
       <div class="block">
         <h2 data-i18n="h2_2">Sfeer & ligging</h2>
         <p data-i18n="p2">Deze kant van het eiland is wat warmer, maar zeker aangenaam. Je vindt er volop ligbedden met comfortabele kussens en breed draaibare rieten parasols. Hoewel het hier af en toe wat kan waaien is dat juist prettig bij de zomerse hitte. Langs de hele kustlijn zijn er strandbars te vinden die direct aan je ligbed serveren.</p>
       </div>
       <div class="img-pair">
-        <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/kgs_tigaki_beach_0117_06_rgb-136-dpi-for-web-standard-xpfvib.jpg" alt="" loading="lazy">
-        <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/197154007_1418134505229526_8073901737944437376_n-high.jpg" alt="" loading="lazy">
+        <img src="img/jwwb/5262193d23-kgs_tigaki_beach_0117_06_rgb-136-dpi-for-web-standard-xpfvib.jpg" alt="" loading="lazy">
+        <img src="img/jwwb/a89e4248c3-197154007_1418134505229526_8073901737944437376_n-high.jpg" alt="" loading="lazy">
       </div>
       <div class="block">
         <h2 data-i18n="h2_3">Goed om te weten</h2>
         <p data-i18n="p3">Voor de avontuurlijke bezoekers zijn er diverse watersportactiviteiten beschikbaar, zoals windsurfen, paddleboarding, jetskiën en beachvolleybal. Dit strand heeft de prestigieuze Blue Flag ontvangen, een officiële erkenning voor uitstekende waterkwaliteit, netheid en voorzieningen. Met palmbomen en tamariskbomen langs de kust creëert het strand een tropische sfeer, perfect voor een ontspannen, familiegerichte dag. Ontdek rustige hoekjes waar je even kunt ontsnappen aan de drukte.</p>
       </div>
-      <div class="img-full"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/yxnzzxrzl2ltywdlcy9wywdlcy9izwfjagvzl3rpz2fras9esklfmdm2nhrpbmdha2kuanbn-high.jpg" alt="" loading="lazy"></div>
+      <div class="img-full"><img src="img/jwwb/f6a536d3c1-yxnzzxrzl2ltywdlcy9wywdlcy9izwfjagvzl3rpz2fras9esk.jpg" alt="" loading="lazy"></div>
       <div class="actions">
         <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Tigaki%20Beach%20Kos" target="_blank" rel="noopener" data-i18n="mapBtn">Locatie op de kaart</a>
         <a class="btn btn-water" href="watertemperatuur.html" data-i18n="waterBtn">Watertemperatuur →</a>
@@ -236,5 +236,6 @@
     setLang(saved);
   })();
   </script>
+<script src="hello-kos-i18n.js"></script>
 </body>
 </html>

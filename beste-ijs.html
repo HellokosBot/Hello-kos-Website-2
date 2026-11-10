@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-hk-own="1">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
@@ -53,28 +53,28 @@
     .card-meta { font-size: 0.68rem; font-weight: 600; opacity: 0.9; color: #e8f5f3; }
     .footer { text-align: center; padding: 20px; font-size: 0.78rem; color: var(--text-soft); }
   </style>
+<link rel="stylesheet" href="hello-kos.css">
 </head>
 <body>
   <header class="app-header">
-    <a href="beste-lekkerste.html" class="back-btn">← Terug</a>
-    <a href="index.html" class="logo">
-      <div class="logo-icon">🔅</div>
-      <div class="logo-text">Hello <span>Kos</span></div>
-    </a>
-    <div class="lang-wrap">
-      <button type="button" class="lang-btn" id="langBtn">
-        <span id="flag">🇳🇱</span> <span id="code">NL</span>
-      </button>
-      <div class="lang-menu" id="langMenu">
-        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
-        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
-        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
-        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
-        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
-        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
-      </div>
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
     </div>
-  </header>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
   <main class="main">
     <h1 data-i18n="title">IJs</h1>
     <p class="sub" data-i18n="sub">Het lekkerste ijs</p>
@@ -83,10 +83,10 @@
         <span data-i18n="acc0">Kos-stad</span> <span class="count">2</span><span class="chev">▼</span>
       </button>
       <div class="acc-body"><div class="grid">
-        <a class="card" href="ijs-gelateria-carino.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/schermopname_15-3-2026_234128_www-google-com-high-vkt2ew.jpg')">
+        <a class="card" href="ijs-gelateria-carino.html" style="background-image:url('img/jwwb/5cd80fd3f9-schermopname_15-3-2026_234128_www-google-com-high-vkt2ew.jpg')">
           <div class="card-overlay"><span class="card-title">Gelateria Carino<span class="card-meta" data-i18n="meta1">Italiaans ijs</span></span></div>
         </a>
-        <a class="card" href="ijs-special-kos.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-62-high-3bq5b0.jpg')">
+        <a class="card" href="ijs-special-kos.html" style="background-image:url('img/jwwb/5d3b31d2e4-caption-62-high-3bq5b0.jpg')">
           <div class="card-overlay"><span class="card-title">Special Kos<span class="card-meta" data-i18n="meta2">IJs</span></span></div>
         </a>
       </div></div>
@@ -96,7 +96,7 @@
         <span data-i18n="acc1">Zipari</span> <span class="count">1</span><span class="chev">▼</span>
       </button>
       <div class="acc-body"><div class="grid">
-        <a class="card" href="ijs-special-ijs-zipari.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-62-high-3bq5b0.jpg')">
+        <a class="card" href="ijs-special-ijs-zipari.html" style="background-image:url('img/jwwb/5d3b31d2e4-caption-62-high-3bq5b0.jpg')">
           <div class="card-overlay"><span class="card-title">Special IJs Zipari<span class="card-meta" data-i18n="meta3">Ambachtelijk ijs</span></span></div>
         </a>
       </div></div>
@@ -106,7 +106,7 @@
         <span data-i18n="acc2">Kardamena</span> <span class="count">1</span><span class="chev">▼</span>
       </button>
       <div class="acc-body"><div class="grid">
-        <a class="card" href="ijs-special-kardamena.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-62-high-3bq5b0.jpg')">
+        <a class="card" href="ijs-special-kardamena.html" style="background-image:url('img/jwwb/5d3b31d2e4-caption-62-high-3bq5b0.jpg')">
           <div class="card-overlay"><span class="card-title">Special Kardamena<span class="card-meta" data-i18n="meta4">IJs</span></span></div>
         </a>
       </div></div>
@@ -116,7 +116,7 @@
         <span data-i18n="acc3">Kos-stad / marina</span> <span class="count">1</span><span class="chev">▼</span>
       </button>
       <div class="acc-body"><div class="grid">
-        <a class="card" href="ijs-special-marina.html" style="background-image:url('https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-62-high-3bq5b0.jpg')">
+        <a class="card" href="ijs-special-marina.html" style="background-image:url('img/jwwb/5d3b31d2e4-caption-62-high-3bq5b0.jpg')">
           <div class="card-overlay"><span class="card-title">Special Marina<span class="card-meta" data-i18n="meta5">IJs</span></span></div>
         </a>
       </div></div>
@@ -244,5 +244,6 @@
   setLang(saved);
 })();
 </script>
+<script src="hello-kos-i18n.js"></script>
 </body>
 </html>

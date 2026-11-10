@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-hk-own="1">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
@@ -58,32 +58,32 @@
     .btn-call { background: var(--petrol); color: #fff; }
     .footer { text-align: center; padding: 16px; font-size: 0.75rem; color: var(--text-soft); }
   </style>
+<link rel="stylesheet" href="hello-kos.css">
 </head>
 <body>
   <header class="app-header">
-    <a href="beste-restaurants.html" class="back-btn">← Terug</a>
-    <a href="index.html" class="logo">
-      <div class="logo-icon">🔅</div>
-      <div class="logo-text">Hello <span>Kos</span></div>
-    </a>
-    <div class="lang-wrap">
-      <button type="button" class="lang-btn" id="langBtn">
-        <span id="flag">🇳🇱</span> <span id="code">NL</span>
-      </button>
-      <div class="lang-menu" id="langMenu">
-        <button class="lang-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</button>
-        <button class="lang-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</button>
-        <button class="lang-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</button>
-        <button class="lang-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</button>
-        <button class="lang-option" data-lang="tr" data-flag="🇹🇷">🇹🇷 Türkçe</button>
-        <button class="lang-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</button>
-      </div>
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
     </div>
-  </header>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
 
   <main class="main">
     <div class="hero">
-      <img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-2026-03-24t134654-852-high.jpg" alt="Soul Kitchen" loading="eager">
+      <img src="img/jwwb/05a3e44206-caption-2026-03-24t134654-852-high.jpg" alt="Soul Kitchen" loading="eager">
       <div class="hero-cap"><div class="area" data-i18n="area">Kos-stad</div><h1>Soul Kitchen</h1></div>
     </div>
     <div class="content">
@@ -92,12 +92,12 @@
         <span class="badge" data-i18n="badge2">Restaurant & cocktails</span>
       </div>
       <div class="block"><h2 data-i18n="h1">Over dit restaurant</h2><p data-i18n="p1">Soul Kitchen is een stijlvolle cocktailbar en restaurant in het centrum van Kos, onder de trappen van de kerk – een plek waar je zowel goed eet als drinkt.</p></div>
-      <div class="img-full"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-2026-03-24t134717-887-high.jpg" alt="" loading="lazy"></div>
+      <div class="img-full"><img src="img/jwwb/2c4780aac9-caption-2026-03-24t134717-887-high.jpg" alt="" loading="lazy"></div>
       <div class="block"><h2 data-i18n="h2">Sfeer & eten</h2><p data-i18n="p2">Stijlvoller dan een klassieke taverna, maar nog steeds toegankelijk. Handig als je niet wilt wisselen van adres tussen diner en borrel.</p></div>
-      <div class="img-pair"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/caption-2026-03-24t134654-852-high-paus7g.jpg" alt="" loading="lazy"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/468307792_486092891163130_8539648236846058726_n-high.jpg" alt="" loading="lazy"></div>
+      <div class="img-pair"><img src="img/jwwb/d81a548141-caption-2026-03-24t134654-852-high-paus7g.jpg" alt="" loading="lazy"><img src="img/jwwb/6976e45db0-468307792_486092891163130_8539648236846058726_n-high.jpg" alt="" loading="lazy"></div>
       <div class="block"><h2 data-i18n="h3">Praktisch</h2><p data-i18n="p3">In het centrum, te voet bereikbaar. Bij drukke avonden is reserveren verstandig.</p></div>
-      <div class="img-full"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/599467799_782161611556255_6241364460102284125_n-high.jpg" alt="" loading="lazy"></div>
-      <div class="img-pair"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/598868790_782174171554999_3660325311542804002_n-high.jpg" alt="" loading="lazy"><img src="https://primary.jwwb.nl/public/k/r/d/temp-qrlwbsokdnzonzcjodwm/at-soul-kitchen-we-take-high-nlknw4.jpg" alt="" loading="lazy"></div>
+      <div class="img-full"><img src="img/jwwb/babc259ffb-599467799_782161611556255_6241364460102284125_n-high.jpg" alt="" loading="lazy"></div>
+      <div class="img-pair"><img src="img/jwwb/9125701f26-598868790_782174171554999_3660325311542804002_n-high.jpg" alt="" loading="lazy"><img src="img/jwwb/d3fb090c33-at-soul-kitchen-we-take-high-nlknw4.jpg" alt="" loading="lazy"></div>
       <div class="actions">
         <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Soul%20Kitchen%20Kos" target="_blank" rel="noopener" data-i18n="mapBtn">Locatie op de kaart</a>
         <a class="btn btn-call" href="tel:+302242026003" data-i18n="callBtn">Bellen · +30 2242 026003</a>
@@ -226,5 +226,6 @@
   setLang(saved);
 })();
 </script>
+<script src="hello-kos-i18n.js"></script>
 </body>
 </html>

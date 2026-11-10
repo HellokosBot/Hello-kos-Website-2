@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Huisartsen – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="img/hk/hulp-huisartsen.jpg" alt=""></div>
+  <p class="parent-link"><a href="noodgevallen.html" data-i18n="back">← Noodgevallen</a></p>
+  <h1 data-i18n="title">Huisartsen</h1>
+  <p class="lead" data-i18n="lead">De gids deelde huisartsen in per streek: Kos-stad, Tigaki en Psalidi. De namen, telefoons en adressen zijn op deze pagina nog niet ingevuld.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Per streek</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=doctor%20Kos" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=doctor%20Kos" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">Spoed</h2><p data-i18n="p0">Voor een noodgeval ga je niet wachten op een afspraak. Bel 112 of 166 (ambulance) of ga naar het ziekenhuis.</p></article>
+    <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">Het telefoonnummer en het exacte adres staan nog niet in deze gids. Bel bij direct gevaar 112.</span></div>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Huisartsen", "lead": "De gids deelde huisartsen in per streek: Kos-stad, Tigaki en Psalidi. De namen, telefoons en adressen zijn op deze pagina nog niet ingevuld.", "back": "← Noodgevallen", "note": "Het telefoonnummer en het exacte adres staan nog niet in deze gids. Bel bij direct gevaar 112.", "h0": "Spoed", "p0": "Voor een noodgeval ga je niet wachten op een afspraak. Bel 112 of 166 (ambulance) of ga naar het ziekenhuis.", "b0": "Per streek"}, "de": {"title": "Hausärzte", "lead": "Der Guide teilte Hausärzte nach Gegend: Kos-Stadt, Tigaki und Psalidi. Namen, Telefone und Adressen fehlen auf dieser Seite noch.", "back": "← Notfälle", "note": "Telefonnummer und genaue Adresse stehen noch nicht in diesem Guide. Bei direkter Gefahr: 112.", "h0": "Notfall", "p0": "Im Notfall wartest du nicht auf einen Termin. Ruf 112 oder 166 (Rettung) oder geh ins Krankenhaus.", "b0": "Nach Gegend"}, "en": {"title": "General practitioners", "lead": "The guide split general practitioners by area: Kos town, Tigaki and Psalidi. Names, phones and addresses are not filled in on this page yet.", "back": "← Emergencies", "note": "The phone number and exact address are not in this guide yet. If you are in danger, call 112.", "h0": "Emergency", "p0": "In an emergency do not wait for an appointment. Call 112 or 166 (ambulance) or go to the hospital.", "b0": "By area"}, "it": {"title": "Medici di base", "lead": "La guida divideva i medici per zona: città di Kos, Tigaki e Psalidi. Nomi, telefoni e indirizzi non sono ancora in questa pagina.", "back": "← Emergenze", "note": "Numero di telefono e indirizzo esatto non sono ancora in questa guida. In pericolo chiama il 112.", "h0": "Urgenza", "p0": "In emergenza non aspetti un appuntamento. Chiama il 112 o il 166 (ambulanza) o vai in ospedale.", "b0": "Per zona"}, "tr": {"title": "Aile hekimleri", "lead": "Rehber aile hekimlerini yöreye göre ayırdı: Kos şehri, Tigaki ve Psalidi. İsim, telefon ve adres bu sayfada henüz yok.", "back": "← Acil durum", "note": "Telefon ve tam adres bu rehberde henüz yok. Tehlike varsa 112'yi ara.", "h0": "Acil", "p0": "Acilde randevu bekleme. 112 veya 166’yı (ambulans) ara ya da hastaneye git.", "b0": "Yöreye göre"}, "es": {"title": "Médicos de cabecera", "lead": "La guía repartía los médicos por zona: ciudad de Kos, Tigaki y Psalidi. Nombres, teléfonos y direcciones aún no están en esta página.", "back": "← Emergencias", "note": "El teléfono y la dirección exacta aún no están en esta guía. Si hay peligro, llama al 112.", "h0": "Urgencia", "p0": "En una urgencia no esperes una cita. Llama al 112 o al 166 (ambulancia) o ve al hospital.", "b0": "Por zona"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

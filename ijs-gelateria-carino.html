@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Gelateria Carino – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap"><img src="img/hk/ijs-gelateria-carino.jpg" alt=""></div>
+  <p class="parent-link"><a href="beste-ijs.html" data-i18n="back">← IJs</a></p>
+  <h1 data-i18n="title">Gelateria Carino</h1>
+  <p class="lead" data-i18n="lead">Een ijssalon die de gids apart noemde.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">Prijs ter plaatse</span></div>
+  <div class="actions">
+    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
+    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
+    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Gelateria%20Carino%20Kos" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=Gelateria%20Carino%20Kos" target="_blank" rel="noopener">Apple Maps</a>
+  </div>
+  <p class="status" id="ttsStatus"></p>
+  <div id="readText">
+    <article class="card"><h2 data-i18n="h0">IJs</h2><p data-i18n="p0">Smaken wisselen per dag. De prijs per bol staat niet in deze gids.</p></article>
+    <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.</span></div>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Gelateria Carino", "lead": "Een ijssalon die de gids apart noemde.", "back": "← IJs", "note": "Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.", "h0": "IJs", "p0": "Smaken wisselen per dag. De prijs per bol staat niet in deze gids.", "b0": "Prijs ter plaatse"}, "de": {"title": "Gelateria Carino", "lead": "Eine Eisdiele, die der Guide extra nannte.", "back": "← Eis", "note": "Preise und Öffnungszeiten stehen hier nicht fest, sie ändern sich. Frag vor Ort nach.", "h0": "Eis", "p0": "Sorten wechseln pro Tag. Der Preis pro Kugel steht nicht in diesem Guide.", "b0": "Preis vor Ort"}, "en": {"title": "Gelateria Carino", "lead": "A gelateria the guide named on its own.", "back": "← Ice cream", "note": "Prices and opening hours are not fixed here: they change. Ask on the spot.", "h0": "Ice cream", "p0": "Flavours change by the day. The price per scoop is not in this guide.", "b0": "Price on site"}, "it": {"title": "Gelateria Carino", "lead": "Una gelateria che la guida citava a parte.", "back": "← Gelato", "note": "Prezzi e orari non sono fissi: cambiano. Chiedi sul posto.", "h0": "Gelato", "p0": "I gusti cambiano ogni giorno. Il prezzo a pallina non è in questa guida.", "b0": "Prezzo sul posto"}, "tr": {"title": "Gelateria Carino", "lead": "Rehberin ayrı saydığı bir dondurmacı.", "back": "← Dondurma", "note": "Fiyat ve açılış saatleri burada sabit değil, değişir. Yerinde sorun.", "h0": "Dondurma", "p0": "Çeşitler güne göre değişir. Top fiyatı bu rehberde yok.", "b0": "Fiyat yerinde"}, "es": {"title": "Gelateria Carino", "lead": "Una heladería que la guía citaba aparte.", "back": "← Helado", "note": "Los precios y horarios no están fijos: cambian. Pregunta en el sitio.", "h0": "Helado", "p0": "Los sabores cambian cada día. El precio por bola no está en esta guía.", "b0": "Precio en el sitio"}};</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>
