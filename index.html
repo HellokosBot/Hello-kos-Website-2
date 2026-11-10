@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-hk-own="1">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
@@ -75,6 +75,7 @@ body.intro-lock{overflow:hidden}
 #zoomLayer img{max-width:92vw;max-height:78vh;border-radius:16px;object-fit:contain;transform:scale(.88);transition:transform .35s cubic-bezier(.22,1,.36,1)}
 #zoomLayer.show img{transform:scale(1)}
 </style>
+<link rel="stylesheet" href="hello-kos.css">
 </head>
 <body class="intro-lock">
 <div id="intro">
@@ -105,13 +106,17 @@ body.intro-lock{overflow:hidden}
   </div>
 </div>
 <header class="app-header">
-  <a href="index.html" class="logo"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
   <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
     <div class="lang-menu" id="langMenu">
       <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
       <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option active" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
       <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
       <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
       <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
@@ -259,7 +264,7 @@ body.intro-lock{overflow:hidden}
     tr:{heroTitle:"Kos cebinde",heroSub:"Ne yapmak istediğini seç",searchPh:"Kos'ta ara…",noRes:"Sonuç yok",c1:"Biliyor muydun…",c2:"Taksi & otobüs<br>Transfer ve fiyatlar",c3:"Gezilecek yerler<br>& rotalar",c4:"Turlar &<br>aktiviteler",c5:"En iyi &<br>lezzetli",c6:"Plajlar ve<br>beach barlar",c7:"Kiralama",c8:"Wellness &<br>bakım",c9:"Barlar &<br>gece hayatı",c10:"Pratik<br>dükkanlar",c11:"Acil durum &<br>yardım",c12:"Su &<br>rüzgar"},
     es:{heroTitle:"Todo Kos en tu bolsillo",heroSub:"Elige lo que quieres hacer",searchPh:"Buscar en Kos…",noRes:"Sin resultados",c1:"¿Sabías que…",c2:"Taxi y buses<br>Transfer y precios",c3:"Lugares de interés<br>& rutas",c4:"Excursiones &<br>actividades",c5:"Lo mejor &<br>más rico",c6:"Playas y<br>beach bars",c7:"Alquiler",c8:"Wellness &<br>cuidado",c9:"Bares &<br>nightlife",c10:"Tiendas<br>prácticas",c11:"Emergencias &<br>ayuda",c12:"Agua y<br>viento"}
   };
-  var lang=localStorage.getItem('hk-lang')||'en';
+  var lang=localStorage.getItem('hk-lang')||'nl';
   function setLang(l){
     lang=l;localStorage.setItem('hk-lang',l);
     var d=dict[l]||dict.en;
@@ -288,5 +293,6 @@ body.intro-lock{overflow:hidden}
   setLang(lang);
 })();
 </script>
+<script src="hello-kos-i18n.js"></script>
 </body>
 </html>

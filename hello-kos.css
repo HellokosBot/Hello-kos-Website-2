@@ -1,0 +1,244 @@
+/* Shared Hello Kos look: dark petrol, sticky header, cards.
+   Linked after each page's own <style> so the header stays the same everywhere. */
+:root {
+  --bg: #0D1A1A;
+  --bg-elevated: #142222;
+  --bg-card: #152525;
+  --bg-header: rgba(13, 26, 26, 0.94);
+  --text: #E8EDE8;
+  --text-soft: #A0B0A0;
+  --text-muted: #7d8c8c;
+  --border: rgba(58, 154, 154, 0.22);
+  --petrol: #3A9A9A;
+  --petrol-dark: #2A7A7A;
+  --gold: #E0B040;
+  --gold-dark: #C4920F;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+header.app-header {
+  position: sticky !important;
+  top: 0;
+  z-index: 200 !important;
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  gap: 8px;
+  padding: 10px 12px !important;
+  padding-top: calc(10px + var(--safe-top));
+  background: var(--bg-header) !important;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border) !important;
+}
+header.app-header .nav-btns {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  grid-column: 1;
+  justify-self: start;
+}
+header.app-header .nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1.05rem;
+  line-height: 1;
+}
+header.app-header .nav-btn:active { opacity: 0.75; }
+header.app-header .logo {
+  grid-column: 2 !important;
+  justify-self: center !important;
+  display: flex !important;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  min-width: 0;
+}
+header.app-header .logo-icon {
+  font-size: 22px;
+  width: auto;
+  height: auto;
+  background: none;
+  border-radius: 0;
+  line-height: 1;
+}
+header.app-header .logo-text {
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  color: var(--gold) !important;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+header.app-header .logo-text span {
+  color: #f0c85a !important;
+  font-style: italic;
+}
+header.app-header .lang-wrap {
+  grid-column: 3 !important;
+  justify-self: end !important;
+  position: relative;
+}
+header.app-header .lang-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-soft);
+}
+header.app-header .lang-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 6px;
+  min-width: 168px;
+  z-index: 300;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+}
+header.app-header .lang-menu.open { display: block; }
+header.app-header .lang-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+header.app-header .lang-option.active,
+header.app-header .lang-option:hover {
+  background: rgba(58, 154, 154, 0.18);
+  color: var(--petrol);
+}
+.overlay { display: none; position: fixed; inset: 0; z-index: 150; }
+.overlay.open { display: block; }
+
+/* Two pages were saved in a light theme. The class sits on <html>. */
+html.hk-fix-light,
+html.hk-fix-light body {
+  background: #0D1A1A !important;
+  color: #E8EDE8 !important;
+}
+html.hk-fix-light h1,
+html.hk-fix-light h2,
+html.hk-fix-light .lead,
+html.hk-fix-light .card p,
+html.hk-fix-light .fact .l,
+html.hk-fix-light .status,
+html.hk-fix-light .footer,
+html.hk-fix-light .photo-block .cap,
+html.hk-fix-light .g-item span {
+  color: #E8EDE8 !important;
+}
+html.hk-fix-light .card,
+html.hk-fix-light .fact,
+html.hk-fix-light .g-item,
+html.hk-fix-light .photo-block .cap,
+html.hk-fix-light .h-row {
+  background: #152525 !important;
+  color: #E8EDE8 !important;
+  border-color: rgba(58, 154, 154, 0.22) !important;
+}
+html.hk-fix-light .card h2,
+html.hk-fix-light .fact .n,
+html.hk-fix-light .badge { color: #3A9A9A !important; }
+html.hk-fix-light .tip {
+  background: #1E2E1E !important;
+  color: #E8EDE8 !important;
+}
+
+/* New pages use body.hk-page so we do not restyle older articles. */
+body.hk-page {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  padding-bottom: var(--safe-bottom);
+}
+body.hk-page .main { max-width: 480px; margin: 0 auto; padding: 16px 14px 40px; }
+body.hk-page h1 { font-size: 1.35rem; font-weight: 800; text-align: center; margin: 0 0 6px; }
+body.hk-page .lead, body.hk-page .sub {
+  text-align: center; color: var(--text-soft); font-size: 0.92rem; margin: 0 0 14px;
+}
+body.hk-page .hero-wrap {
+  margin: -16px -14px 16px; position: relative; aspect-ratio: 16/10; overflow: hidden; background: #1a2525;
+}
+body.hk-page .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+body.hk-page .badges { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-bottom: 14px; }
+body.hk-page .badge {
+  background: rgba(58, 154, 154, 0.15); color: var(--petrol);
+  font-size: 0.72rem; font-weight: 700; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--border);
+}
+body.hk-page .card, body.hk-page .tip-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+  padding: 14px 14px 12px; margin: 0 0 12px;
+}
+body.hk-page .card h2 { font-size: 1.02rem; color: var(--gold); margin: 0 0 8px; }
+body.hk-page .card p { margin: 0 0 8px; color: var(--text-soft); font-size: 0.92rem; }
+body.hk-page .card p:last-child { margin-bottom: 0; }
+body.hk-page .card strong { color: var(--text); }
+body.hk-page .placeholder {
+  background: #1E2E1E; border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0;
+  padding: 12px 14px; margin: 12px 0; font-size: 0.88rem; color: var(--text);
+}
+body.hk-page .placeholder strong { color: var(--gold); }
+body.hk-page .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+body.hk-page .btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; padding: 12px 14px; border-radius: 14px; border: none; cursor: pointer;
+  font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none;
+}
+body.hk-page .btn-audio { background: var(--petrol); color: #fff; }
+body.hk-page .btn-stop { background: #3A4545; color: #fff; display: none; }
+body.hk-page .btn-stop.show { display: flex; }
+body.hk-page .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
+body.hk-page .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; }
+body.hk-page .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+body.hk-page a.tile {
+  position: relative; display: block; border-radius: 16px; overflow: hidden; aspect-ratio: 0.95;
+  text-decoration: none; color: #fff; border: 1px solid var(--border);
+}
+body.hk-page a.tile img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.82); }
+body.hk-page a.tile span {
+  position: absolute; left: 8px; right: 8px; top: 10px; text-align: center;
+  font-size: 0.84rem; font-weight: 800; line-height: 1.25;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.85);
+  background: rgba(0,0,0,0.35); border-radius: 10px; padding: 6px 8px;
+}
+body.hk-page .links { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+body.hk-page .links a {
+  display: block; background: var(--bg-card); border: 1px solid var(--border); color: var(--text);
+  text-decoration: none; border-radius: 12px; padding: 12px 14px; font-weight: 700;
+}
+body.hk-page .links a small { display: block; font-weight: 600; color: var(--text-soft); margin-top: 2px; }
+body.hk-page .footer, body.hk-page + .footer, .hk-footer {
+  text-align: center; padding: 18px 16px 28px; color: var(--text-muted); font-size: 0.78rem;
+}
+body.hk-page .footer a, .hk-footer a { color: var(--petrol); text-decoration: none; }
+body.hk-page .parent-link { display: block; text-align: center; margin: 8px 0 16px; }
+body.hk-page .parent-link a { color: var(--petrol); font-weight: 700; text-decoration: none; }

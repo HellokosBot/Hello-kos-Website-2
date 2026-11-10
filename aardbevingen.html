@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-hk-own="1">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
@@ -60,16 +60,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
 .footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
 .footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
 </style>
+<link rel="stylesheet" href="hello-kos.css">
 </head>
 <body>
 <header class="app-header">
   <div class="nav-btns">
-    <a class="nav-btn" href="index.html">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()">←</a>
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
   </div>
   <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
   <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button"><span id="flag">🇬🇧</span> <span id="code">EN</span></button>
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
     <div class="lang-menu" id="langMenu">
       <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
       <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
@@ -116,7 +117,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
     <div class="gallery-head"><h2>Grote aardbevingen op Kos</h2><p>15 foto’s van de grote aardbevingen die Kos heeft meegemaakt.</p></div>
     <div class="gallery-grid">
       <div class="gallery-item wide"><img src="wjd-quake-gallery-01.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
-      <div class="gallery-item"><img src="wjd-quake-gallery-02.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-02.jpeg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
       <div class="gallery-item"><img src="wjd-quake-gallery-03.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
       <div class="gallery-item"><img src="wjd-quake-gallery-04.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
       <div class="gallery-item"><img src="wjd-quake-gallery-05.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
@@ -163,7 +164,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
     <div class="gallery-head"><h2>Major earthquakes on Kos</h2><p>15 photos of the major earthquakes that hit Kos.</p></div>
     <div class="gallery-grid">
       <div class="gallery-item wide"><img src="wjd-quake-gallery-01.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
-      <div class="gallery-item"><img src="wjd-quake-gallery-02.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-02.jpeg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
       <div class="gallery-item"><img src="wjd-quake-gallery-03.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
       <div class="gallery-item"><img src="wjd-quake-gallery-04.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
       <div class="gallery-item"><img src="wjd-quake-gallery-05.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
@@ -196,7 +197,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
     <div class="gallery-head"><h2>Große Erdbeben auf Kos</h2><p>15 Fotos der großen Erdbeben, die Kos getroffen haben.</p></div>
     <div class="gallery-grid">
       <div class="gallery-item wide"><img src="wjd-quake-gallery-01.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
-      <div class="gallery-item"><img src="wjd-quake-gallery-02.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-02.jpeg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
       <div class="gallery-item"><img src="wjd-quake-gallery-03.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
       <div class="gallery-item"><img src="wjd-quake-gallery-04.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
       <div class="gallery-item"><img src="wjd-quake-gallery-05.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
@@ -229,7 +230,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
     <div class="gallery-head"><h2>Grandi terremoti a Kos</h2><p>15 foto dei grandi terremoti che hanno colpito Kos.</p></div>
     <div class="gallery-grid">
       <div class="gallery-item wide"><img src="wjd-quake-gallery-01.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
-      <div class="gallery-item"><img src="wjd-quake-gallery-02.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-02.jpeg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
       <div class="gallery-item"><img src="wjd-quake-gallery-03.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
       <div class="gallery-item"><img src="wjd-quake-gallery-04.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
       <div class="gallery-item"><img src="wjd-quake-gallery-05.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
@@ -262,7 +263,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
     <div class="gallery-head"><h2>Kos’taki büyük depremler</h2><p>Kos’u etkileyen büyük depremlerden 15 fotoğraf.</p></div>
     <div class="gallery-grid">
       <div class="gallery-item wide"><img src="wjd-quake-gallery-01.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
-      <div class="gallery-item"><img src="wjd-quake-gallery-02.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-02.jpeg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
       <div class="gallery-item"><img src="wjd-quake-gallery-03.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
       <div class="gallery-item"><img src="wjd-quake-gallery-04.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
       <div class="gallery-item"><img src="wjd-quake-gallery-05.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
@@ -295,7 +296,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
     <div class="gallery-head"><h2>Grandes terremotos en Kos</h2><p>15 fotos de los grandes terremotos que afectaron a Kos.</p></div>
     <div class="gallery-grid">
       <div class="gallery-item wide"><img src="wjd-quake-gallery-01.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
-      <div class="gallery-item"><img src="wjd-quake-gallery-02.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
+      <div class="gallery-item"><img src="wjd-quake-gallery-02.jpeg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
       <div class="gallery-item"><img src="wjd-quake-gallery-03.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
       <div class="gallery-item"><img src="wjd-quake-gallery-04.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
       <div class="gallery-item"><img src="wjd-quake-gallery-05.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'"></div>
@@ -320,7 +321,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
 </footer>
 <script>
 (function(){
-  var lang=localStorage.getItem('hk-lang')||'en';
+  var lang=localStorage.getItem('hk-lang')||'nl';
   var supported=['nl','de','en','it','tr','es'];
   function setLang(l){
     if(supported.indexOf(l)<0)l='en';
@@ -387,5 +388,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
   setLang(lang);fetchLive();
 })();
 </script>
+<script src="hello-kos-i18n.js"></script>
 </body>
 </html>

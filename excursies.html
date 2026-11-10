@@ -1,114 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
-  <meta name="theme-color" content="#0a0c0c">
-  <title>Excursions & activities – Hello Kos</title>
-  <style>
-    :root {
-      --bg: #0a0c0c; --bg-elevated: #141818; --border: rgba(255,255,255,0.08);
-      --text: #e8e8e8; --text-soft: #a0a8a8; --petrol: #3d9a9a; --gold: #e0b84a;
-      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg); color: var(--text);
-      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
-    }
-    .app-header {
-      position: sticky; top: 0; z-index: 50;
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-      padding: 14px 16px; background: rgba(10,12,12,0.94); backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-    }
-    .back { color: var(--petrol); text-decoration: none; font-weight: 600; font-size: 0.9rem; }
-    .logo { justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-    .logo-icon { font-size: 24px; }
-    .logo-text { font-family: Georgia, serif; font-weight: 700; color: var(--gold); font-size: 1.15rem; }
-    .logo-text span { font-style: italic; color: #f0c85a; }
-    .main { max-width: 480px; margin: 0 auto; padding: 18px 14px 40px; }
-    h1 { text-align: center; font-size: 1.25rem; margin-bottom: 6px; }
-    .lead { text-align: center; color: var(--text-soft); font-size: 0.9rem; margin-bottom: 16px; }
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .card {
-      position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 0.95;
-      text-decoration: none; color: #fff; border: 1px solid var(--border);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.35);
-    }
-    .card img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.82); }
-    .card-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.78) 0%, transparent 48%);
-      display: flex; align-items: flex-start; justify-content: center;
-      padding: 12px 8px; text-align: center;
-    }
-    .card-title {
-      font-size: 0.88rem; font-weight: 800; line-height: 1.25;
-      text-shadow: 0 1px 6px rgba(0,0,0,0.85); width: 100%; text-align: center;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Excursies & activiteiten – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
 </head>
-<body>
-  <header class="app-header">
-    <a class="back" href="index.html">← Home</a>
-    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-    <div></div>
-  </header>
-  <main class="main">
-    <h1>Excursions & activities</h1>
-    <p class="lead">Choose an activity · book via WhatsApp</p>
-    <div class="grid">
-      <a class="card" href="excursie-3-eilanden.html">
-        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=430&fit=crop&q=80" alt="">
-        <div class="card-overlay"><div class="card-title">3 Islands<br>boat tour</div></div>
-      </a>
-      <a class="card" href="excursie-bodrum.html">
-        <img src="https://images.unsplash.com/photo-1524231757912-13f99176ee39?w=400&h=430&fit=crop&q=80" alt="">
-        <div class="card-overlay"><div class="card-title">Bodrum<br>ferry</div></div>
-      </a>
-      <a class="card" href="excursie-glazenboot.html">
-        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=430&fit=crop&q=80" alt="">
-        <div class="card-overlay"><div class="card-title">Glass<br>bottom boat</div></div>
-      </a>
-      <a class="card" href="excursie-duiken.html">
-        <img src="https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?w=400&h=430&fit=crop&q=80" alt="">
-        <div class="card-overlay"><div class="card-title">Diving &<br>snorkeling</div></div>
-      </a>
-      <a class="card" href="excursie-waterpark.html">
-        <img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=400&h=430&fit=crop&q=80" alt="">
-        <div class="card-overlay"><div class="card-title">Waterpark<br>Lido</div></div>
-      </a>
-      <a class="card" href="excursie-zeevissen.html">
-        <img src="https://images.unsplash.com/photo-1544552866-d3ed42536cfd?w=400&h=430&fit=crop&q=80" alt="">
-        <div class="card-overlay"><div class="card-title">Sea<br>fishing</div></div>
-      </a>
-      <a class="card" href="excursie-griekse-avond.html">
-        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=430&fit=crop&q=80" alt="">
-        <div class="card-overlay"><div class="card-title">Greek<br>evening</div></div>
-      </a>
-      <a class="card" href="excursie-zia-nacht.html">
-        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=430&fit=crop&q=80" alt="">
-        <div class="card-overlay"><div class="card-title">Zia by<br>night</div></div>
-      </a>
-      <a class="card" href="excursie-massage.html">
-        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&h=430&fit=crop&q=80" alt="">
-        <div class="card-overlay"><div class="card-title">Massage</div></div>
-      </a>
-      <a class="card" href="excursie-therma.html">
-        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=430&fit=crop&q=80" alt="">
-        <div class="card-overlay"><div class="card-title">Therma<br>hot springs</div></div>
-      </a>
-      <a class="card" href="excursie-paard.html">
-        <img src="https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=400&h=430&fit=crop&q=80" alt="">
-        <div class="card-overlay"><div class="card-title">Horse<br>riding</div></div>
-      </a>
-      <a class="card" href="excursie-karten.html">
-        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=430&fit=crop&q=80" alt="">
-        <div class="card-overlay"><div class="card-title">Go-karting</div></div>
-      </a>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
     </div>
-  </main>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <p class="parent-link"><a href="index.html" data-i18n="back">← Home</a></p>
+  <h1 data-i18n="title">Excursies & activiteiten</h1>
+  <p class="lead" data-i18n="lead">Kies een uitje. Prijzen in de tekst komen uit de oude gids en kunnen veranderd zijn.</p>
+  <div class="grid" id="readText">
+    <a class="tile" href="excursie-3-eilanden.html"><img src="excursies.jpg" alt=""><span data-i18n="c0">3 eilanden</span></a>
+    <a class="tile" href="excursie-bodrum.html"><img src="excursies.jpg" alt=""><span data-i18n="c1">Veerboot Bodrum</span></a>
+    <a class="tile" href="excursie-glazenboot.html"><img src="excursies.jpg" alt=""><span data-i18n="c2">Glazen boot</span></a>
+    <a class="tile" href="excursie-duiken.html"><img src="excursies.jpg" alt=""><span data-i18n="c3">Duiken</span></a>
+    <a class="tile" href="excursie-waterpark.html"><img src="excursies.jpg" alt=""><span data-i18n="c4">Waterpark Lido</span></a>
+    <a class="tile" href="excursie-zeevissen.html"><img src="excursies.jpg" alt=""><span data-i18n="c5">Zeevissen</span></a>
+    <a class="tile" href="excursie-griekse-avond.html"><img src="excursies.jpg" alt=""><span data-i18n="c6">Griekse avond</span></a>
+    <a class="tile" href="excursie-zia-nacht.html"><img src="excursies.jpg" alt=""><span data-i18n="c7">Zia in de avond</span></a>
+    <a class="tile" href="excursie-massage.html"><img src="excursies.jpg" alt=""><span data-i18n="c8">Massage</span></a>
+    <a class="tile" href="excursie-therma.html"><img src="excursies.jpg" alt=""><span data-i18n="c9">Therma</span></a>
+    <a class="tile" href="excursie-paard.html"><img src="excursies.jpg" alt=""><span data-i18n="c10">Paardrijden</span></a>
+    <a class="tile" href="excursie-karten.html"><img src="excursies.jpg" alt=""><span data-i18n="c11">Karten</span></a>
+  </div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>window.HK_DICT = {"nl": {"title": "Excursies & activiteiten", "lead": "Kies een uitje. Prijzen in de tekst komen uit de oude gids en kunnen veranderd zijn.", "back": "← Home", "c0": "3 eilanden", "c1": "Veerboot Bodrum", "c2": "Glazen boot", "c3": "Duiken", "c4": "Waterpark Lido", "c5": "Zeevissen", "c6": "Griekse avond", "c7": "Zia in de avond", "c8": "Massage", "c9": "Therma", "c10": "Paardrijden", "c11": "Karten"}, "de": {"title": "Ausflüge & Aktivitäten", "lead": "Wähl einen Ausflug. Preise im Text kommen aus dem alten Guide und können sich geändert haben.", "back": "← Start", "c0": "3 Inseln", "c1": "Fähre Bodrum", "c2": "Glasbodenboot", "c3": "Tauchen", "c4": "Wasserpark Lido", "c5": "Hochseefischen", "c6": "Griechischer Abend", "c7": "Zia am Abend", "c8": "Massage", "c9": "Therma", "c10": "Reiten", "c11": "Kartbahn"}, "en": {"title": "Excursions & activities", "lead": "Pick a trip. Prices in the text come from the old guide and may have changed.", "back": "← Home", "c0": "3 islands", "c1": "Bodrum ferry", "c2": "Glass-bottom boat", "c3": "Diving", "c4": "Lido water park", "c5": "Sea fishing", "c6": "Greek evening", "c7": "Zia at night", "c8": "Massage", "c9": "Therma", "c10": "Horse riding", "c11": "Go-karting"}, "it": {"title": "Escursioni e attività", "lead": "Scegli un’uscita. I prezzi nel testo vengono dalla vecchia guida e possono essere cambiati.", "back": "← Home", "c0": "3 isole", "c1": "Traghetto Bodrum", "c2": "Barca con fondo di vetro", "c3": "Immersioni", "c4": "Parco acquatico Lido", "c5": "Pesca in mare", "c6": "Serata greca", "c7": "Zia di sera", "c8": "Massaggio", "c9": "Therma", "c10": "Equitazione", "c11": "Kart"}, "tr": {"title": "Turlar ve aktiviteler", "lead": "Bir gezi seç. Metindeki fiyatlar eski rehberden, değişmiş olabilir.", "back": "← Ana sayfa", "c0": "3 ada", "c1": "Bodrum feribotu", "c2": "Cam tabanlı tekne", "c3": "Dalış", "c4": "Lido su parkı", "c5": "Deniz balıkçılığı", "c6": "Yunan gecesi", "c7": "Akşam Zia", "c8": "Masaj", "c9": "Therma", "c10": "At binme", "c11": "Karting"}, "es": {"title": "Excursiones y actividades", "lead": "Elige una salida. Los precios del texto vienen de la guía antigua y pueden haber cambiado.", "back": "← Inicio", "c0": "3 islas", "c1": "Ferry a Bodrum", "c2": "Barco de fondo de cristal", "c3": "Buceo", "c4": "Parque acuático Lido", "c5": "Pesca en el mar", "c6": "Noche griega", "c7": "Zia de noche", "c8": "Masaje", "c9": "Therma", "c10": "Paseo a caballo", "c11": "Karting"}};</script>
+<script src="hello-kos-i18n.js"></script>
 </body>
 </html>
