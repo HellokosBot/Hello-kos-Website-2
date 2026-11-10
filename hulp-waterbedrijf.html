@@ -6,6 +6,16 @@
 <meta name="theme-color" content="#0D1A1A">
 <title>Waterbedrijf – Hello Kos</title>
 <link rel="stylesheet" href="hello-kos.css">
+<style>
+.outage-item{border-left:4px solid var(--petrol);padding:10px 12px;margin:10px 0;background:rgba(58,154,154,.08);border-radius:0 12px 12px 0}
+.outage-item p{margin:0 0 6px;color:var(--text-soft);font-size:.9rem}
+.outage-item p:last-child{margin-bottom:0}
+.outage-when{color:var(--gold)!important;font-weight:700}
+.outage-now{border-left-color:#e07040}
+.outage-past{opacity:.75}
+#waterSummary{font-size:1rem;color:var(--text);font-weight:700}
+#waterHint,#waterChecked{font-size:.82rem;color:var(--text-soft)}
+</style>
 </head>
 <body class="hk-page">
 <header class="app-header">
@@ -31,21 +41,20 @@
   <div class="hero-wrap"><img src="img/hk/hulp-waterbedrijf.jpg" alt=""></div>
   <p class="parent-link"><a href="noodgevallen.html" data-i18n="back">← Noodgevallen</a></p>
   <h1 data-i18n="title">Waterbedrijf</h1>
-  <p class="lead" data-i18n="lead">Het waterbedrijf van de gemeente Kos heet Δ.Ε.Υ.Α. Δήμου Κω (DEYAK). Het telefoonnummer voor een storing staat op deze pagina nog niet.</p>
-  <div class="badges"><span class="badge" data-i18n="b0">DEYAK</span></div>
-  <div class="actions">
-    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
-    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
-    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=DEYAK%20Kos%20water" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=DEYAK%20Kos%20water" target="_blank" rel="noopener">Apple Maps</a>
-  </div>
-  <p class="status" id="ttsStatus"></p>
-  <div id="readText">
-    <article class="card"><h2 data-i18n="h0">Kraan</h2><p data-i18n="p0">Of je het kraanwater drinkt, staat bij Water en ijsklontjes. Een lege kraan in één huis is iets anders dan een storing in de wijk.</p></article>
-    <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">Het telefoonnummer en het exacte adres staan nog niet in deze gids. Bel bij direct gevaar 112.</span></div>
-  </div>
+  <p class="lead" data-i18n="lead">Deze informatie komt van het waterbedrijf van de gemeente Kos, Δ.Ε.Υ.Α. Δήμου Κω (ΔΕΥΑΚ). Het kan gebeuren dat er geen water uit de kraan komt. Dat kan door een storing zijn, of door werkzaamheden.</p>
+  <div class="badges"><span class="badge" data-i18n="b0">ΔΕΥΑΚ</span></div>
+  <section class="card" aria-live="polite">
+    <h2 data-i18n="statusTitle">Meldingen van het waterbedrijf</h2>
+    <p id="waterSummary">De meldingen van ΔΕΥΑΚ worden geladen…</p>
+    <div id="waterList"></div>
+    <p id="waterHint"></p>
+    <p id="waterChecked"></p>
+  </section>
+  <article class="card"><p data-i18n="building">Als alleen jouw gebouw geen water heeft, kan dat een plaatselijk probleem zijn. De meldingen hierboven gaan over gebieden die het waterbedrijf aankondigt, niet over één gebouw.</p></article>
 </main>
 <footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
-<script>window.HK_DICT = {"nl": {"title": "Waterbedrijf", "lead": "Het waterbedrijf van de gemeente Kos heet Δ.Ε.Υ.Α. Δήμου Κω (DEYAK). Het telefoonnummer voor een storing staat op deze pagina nog niet.", "back": "← Noodgevallen", "note": "Het telefoonnummer en het exacte adres staan nog niet in deze gids. Bel bij direct gevaar 112.", "h0": "Kraan", "p0": "Of je het kraanwater drinkt, staat bij Water en ijsklontjes. Een lege kraan in één huis is iets anders dan een storing in de wijk.", "b0": "DEYAK"}, "de": {"title": "Wasserwerk", "lead": "Das Wasserwerk der Gemeinde Kos heißt Δ.Ε.Υ.Α. Δήμου Κω (DEYAK). Die Telefonnummer bei einer Störung steht auf dieser Seite noch nicht.", "back": "← Notfälle", "note": "Telefonnummer und genaue Adresse stehen noch nicht in diesem Guide. Bei direkter Gefahr: 112.", "h0": "Hahn", "p0": "Ob du das Leitungswasser trinkst, steht bei Wasser und Eiswürfel. Ein leerer Hahn in einem Haus ist etwas anderes als eine Störung im Viertel.", "b0": "DEYAK"}, "en": {"title": "Water company", "lead": "The water company of the municipality of Kos is called Δ.Ε.Υ.Α. Δήμου Κω (DEYAK). The phone number for a fault is not on this page yet.", "back": "← Emergencies", "note": "The phone number and exact address are not in this guide yet. If you are in danger, call 112.", "h0": "Tap", "p0": "Whether you drink the tap water is under Water and ice cubes. An empty tap in one house is different from a fault in the neighbourhood.", "b0": "DEYAK"}, "it": {"title": "Acquedotto", "lead": "L’acquedotto del comune di Kos si chiama Δ.Ε.Υ.Α. Δήμου Κω (DEYAK). Il numero per un guasto non è ancora in questa pagina.", "back": "← Emergenze", "note": "Numero di telefono e indirizzo esatto non sono ancora in questa guida. In pericolo chiama il 112.", "h0": "Rubinetto", "p0": "Se bevi l’acqua del rubinetto è sotto Acqua e ghiaccio. Un rubinetto vuoto in una casa è diverso da un guasto nel quartiere.", "b0": "DEYAK"}, "tr": {"title": "Su idaresi", "lead": "Kos belediyesinin su idaresi Δ.Ε.Υ.Α. Δήμου Κω (DEYAK) adını taşır. Arıza telefonu bu sayfada henüz yok.", "back": "← Acil durum", "note": "Telefon ve tam adres bu rehberde henüz yok. Tehlike varsa 112'yi ara.", "h0": "Musluk", "p0": "Musluk suyunu içip içmeyeceğin Su ve buz küpleri altında. Tek evde boş musluk, mahalle arızasından farklıdır.", "b0": "DEYAK"}, "es": {"title": "Compañía del agua", "lead": "La compañía de agua del municipio de Kos se llama Δ.Ε.Υ.Α. Δήμου Κω (DEYAK). El teléfono de una avería aún no está en esta página.", "back": "← Emergencias", "note": "El teléfono y la dirección exacta aún no están en esta guía. Si hay peligro, llama al 112.", "h0": "Grifo", "p0": "Si bebes el agua del grifo está en Agua y hielo. Un grifo vacío en una casa no es lo mismo que una avería en el barrio.", "b0": "DEYAK"}};</script>
+<script>window.HK_DICT = {"nl": {"title": "Waterbedrijf", "back": "← Noodgevallen", "b0": "ΔΕΥΑΚ", "statusTitle": "Meldingen van het waterbedrijf", "lead": "Deze informatie komt van het waterbedrijf van de gemeente Kos, Δ.Ε.Υ.Α. Δήμου Κω (ΔΕΥΑΚ). Het kan gebeuren dat er geen water uit de kraan komt. Dat kan door een storing zijn, of door werkzaamheden.", "building": "Als alleen jouw gebouw geen water heeft, kan dat een plaatselijk probleem zijn. De meldingen hierboven gaan over gebieden die het waterbedrijf aankondigt, niet over één gebouw."}, "de": {"title": "Wasserwerk", "back": "← Notfälle", "b0": "ΔΕΥΑΚ", "statusTitle": "Meldungen des Wasserwerks", "lead": "Diese Information kommt vom Wasserwerk der Gemeinde Kos, Δ.Ε.Υ.Α. Δήμου Κω (ΔΕΥΑΚ). Es kann vorkommen, dass kein Wasser aus dem Hahn kommt. Das kann eine Störung sein oder Arbeiten.", "building": "Wenn nur dein Gebäude kein Wasser hat, kann das ein örtliches Problem sein. Die Meldungen oben gelten für Gebiete, die das Wasserwerk ankündigt, nicht für ein einzelnes Gebäude."}, "en": {"title": "Water company", "back": "← Emergencies", "b0": "ΔΕΥΑΚ", "statusTitle": "Notices from the water company", "lead": "This information comes from the water company of the municipality of Kos, Δ.Ε.Υ.Α. Δήμου Κω (ΔΕΥΑΚ). It can happen that no water comes from the tap. That can be because of a fault or because of works.", "building": "If only your building has no water, it may be a local issue. The notices above are about areas the water company announces, not about one building."}, "it": {"title": "Azienda dell'acqua", "back": "← Emergenze", "b0": "ΔΕΥΑΚ", "statusTitle": "Avvisi dell'azienda dell'acqua", "lead": "Queste informazioni arrivano dall'azienda dell'acqua del comune di Kos, Δ.Ε.Υ.Α. Δήμου Κω (ΔΕΥΑΚ). Può succedere che dal rubinetto non esca acqua. Può essere un guasto oppure dei lavori.", "building": "Se solo il tuo edificio è senza acqua, può essere un problema locale. Gli avvisi sopra riguardano zone annunciate dall'azienda, non un singolo edificio."}, "tr": {"title": "Su idaresi", "back": "← Acil durum", "b0": "ΔΕΥΑΚ", "statusTitle": "Su idaresinin duyuruları", "lead": "Bu bilgi Kos belediyesinin su idaresinden gelir: Δ.Ε.Υ.Α. Δήμου Κω (ΔΕΥΑΚ). Musluktan su gelmemesi olabilir. Bunun nedeni bir arıza ya da çalışmalar olabilir.", "building": "Yalnız senin binanda su yoksa, bu yerel bir sorun olabilir. Yukarıdaki duyurular su idaresinin ilan ettiği bölgeler içindir, tek bir bina için değil."}, "es": {"title": "Compañía del agua", "back": "← Emergencias", "b0": "ΔΕΥΑΚ", "statusTitle": "Avisos de la compañía del agua", "lead": "Esta información viene de la compañía del agua del municipio de Kos, Δ.Ε.Υ.Α. Δήμου Κω (ΔΕΥΑΚ). Puede pasar que no salga agua del grifo. Puede ser por una avería o por obras.", "building": "Si solo tu edificio no tiene agua, puede ser un problema local. Los avisos de arriba son de zonas que anuncia la compañía, no de un solo edificio."}};</script>
 <script src="hello-kos-i18n.js"></script>
+<script src="deya-status.js"></script>
 </body>
 </html>

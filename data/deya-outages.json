@@ -1,0 +1,108 @@
+{
+  "fetchedAt": "2026-11-11T00:22:39.536689+02:00",
+  "sourceName": "Δ.Ε.Υ.Α. Δήμου Κω",
+  "sourceUrl": "https://www.deyakos.gr/",
+  "area": "Δήμος Κω",
+  "notices": [
+    {
+      "id": "https://www.deyakos.gr/%CE%B5%CE%BD%CE%B7%CE%BC%CE%AD%CF%81%CF%89%CF%83%CE%B7/%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AD%CF%82-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82/item/1012-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AE-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82",
+      "title": "Διακοπή υδροδότησης",
+      "publishedAt": "2026-11-10T08:18:30+02:00",
+      "from": "2026-11-10T09:00:00+02:00",
+      "to": "2026-11-10T13:00:00+02:00",
+      "kind": "fault",
+      "text": "Σας ενημερώνουμε ότι λόγω ζημιάς που προέκυψε στο δίκτυο ύδρευσης, θα γίνει διακοπή υδροδότησης στην περιοχή της Μεσσαριάς σήμερα Τρίτη 10/11/2026 από 09:00π.μ έως 13:00μ.μ. Σας ευχαριστούμε για την κατανόησή σας . Ο Προϊστάμενος Καταναλωτών και Διοικητικού Τμήματος Μούρας Κων/νος",
+      "url": "https://www.deyakos.gr/%CE%B5%CE%BD%CE%B7%CE%BC%CE%AD%CF%81%CF%89%CF%83%CE%B7/%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AD%CF%82-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82/item/1012-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AE-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82"
+    },
+    {
+      "id": "https://www.deyakos.gr/%CE%B5%CE%BD%CE%B7%CE%BC%CE%AD%CF%81%CF%89%CF%83%CE%B7/%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AD%CF%82-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82/item/1011-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AE-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82",
+      "title": "Διακοπή υδροδότησης",
+      "publishedAt": "2026-11-03T14:29:11+02:00",
+      "from": null,
+      "to": "2026-11-03T15:00:00+02:00",
+      "kind": "fault",
+      "text": "Σας ενημερώνουμε ότι λόγω ζημιάς στο δίκτυο ύδρευσης που προκλήθηκε κατά τον καθαρισμό ρέματος από τον εργολάβο της Περιφέρειας Νοτίου Αιγαίου, θα γίνει διακοπή υδροδότησης στην οδό Παμφύλων και στη γύρω περιοχή σήμερα 3 Νοεμβρίου 2026 από τις 15.00μμ. Λόγω της θέσης της ζημιάς (εντός του ρέματος) δεν μπορεί να εκτιμηθεί ο χρόνος αποκαταστασης της . Σας ευχαριστούμε για την κατανόησή σας .",
+      "url": "https://www.deyakos.gr/%CE%B5%CE%BD%CE%B7%CE%BC%CE%AD%CF%81%CF%89%CF%83%CE%B7/%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AD%CF%82-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82/item/1011-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AE-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82"
+    },
+    {
+      "id": "https://www.deyakos.gr/%CE%B5%CE%BD%CE%B7%CE%BC%CE%AD%CF%81%CF%89%CF%83%CE%B7/%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AD%CF%82-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82/item/1010-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AE-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82",
+      "title": "Διακοπή υδροδότησης",
+      "publishedAt": "2026-11-03T07:54:07+02:00",
+      "from": "2026-11-03T08:00:00+02:00",
+      "to": "2026-11-03T13:00:00+02:00",
+      "kind": "fault",
+      "text": "Σας ενημερώνουμε ότι λόγω ζημιάς που προέκυψε στον κεντρικό αγωγό του δικτύου ύδρευσης, θα γίνει διακοπή υδροδότησης στην περιοχή Αγ. Γεωργίου Πυλίου σήμερα Τρίτη 03/11/2026 από 08:00π.μ έως 13:00μ.μ. Σας ευχαριστούμε για την κατανόησή σας . Ο Προϊστάμενος Καταναλωτών και Διοικητικού Τμήματος Μούρας Κων/νος",
+      "url": "https://www.deyakos.gr/%CE%B5%CE%BD%CE%B7%CE%BC%CE%AD%CF%81%CF%89%CF%83%CE%B7/%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AD%CF%82-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82/item/1010-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AE-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82"
+    },
+    {
+      "id": "https://www.deyakos.gr/%CE%B5%CE%BD%CE%B7%CE%BC%CE%AD%CF%81%CF%89%CF%83%CE%B7/%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AD%CF%82-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82/item/1009-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AE-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82",
+      "title": "Διακοπή υδροδότησης",
+      "publishedAt": "2026-10-21T10:31:22+03:00",
+      "from": "2026-10-21T10:00:00+03:00",
+      "to": "2026-10-21T13:00:00+03:00",
+      "kind": "fault",
+      "text": "Σας ενημερώνουμε ότι προκειμένου να γίνει η αποκατάσταση της ζημιάς που προέκυψε στο δίκτυο ύδρευσης της πόλης Κω, θα γίνει διακοπή υδροδότησης στις περιοχές Αμπάβρης, Αγ. Νεκτάριος, Κ. Πρινάρι, Παραδείσι και Ηρακλής σήμερα 21/10/2026 από 10:00 - 13:00. Ευχαριστούμε για την κατανόησή σας. Ο ΠΡΟΙΣΤΑΜΕΝΟΣ ΤΜΗΜΑΤΟΣ ΚΑΤΑΝΑΛΩΤΩΝ ΜΟΥΡΑΣ ΚΩΣΤΑΣ",
+      "url": "https://www.deyakos.gr/%CE%B5%CE%BD%CE%B7%CE%BC%CE%AD%CF%81%CF%89%CF%83%CE%B7/%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AD%CF%82-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82/item/1009-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AE-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82"
+    },
+    {
+      "id": "https://www.deyakos.gr/%CE%B5%CE%BD%CE%B7%CE%BC%CE%AD%CF%81%CF%89%CF%83%CE%B7/%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AD%CF%82-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82/item/1008-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AE-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82",
+      "title": "Διακοπή υδροδότησης",
+      "publishedAt": "2026-10-15T11:07:37+03:00",
+      "from": "2026-10-15T11:00:00+03:00",
+      "to": "2026-10-15T14:00:00+03:00",
+      "kind": "fault",
+      "text": "Σας ενημερώνουμε ότι λόγω ζημιάς που προέκυψε στο δίκτυο ύδρευσης της πόλης Κω , θα γίνει διακοπή υδροδότησης στις περιοχές Γιαπυλί ,Παραδείσι και Ηρακλής σήμερα Πέμπτη 15/10/2026 από 11:00π.μ έως 14:00μ.μ. Σας ευχαριστούμε για την κατανόησή σας . Ο Προϊστάμενος Καταναλωτών και Διοικητικού Τμήματος Μούρας Κων/νος",
+      "url": "https://www.deyakos.gr/%CE%B5%CE%BD%CE%B7%CE%BC%CE%AD%CF%81%CF%89%CF%83%CE%B7/%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AD%CF%82-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82/item/1008-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AE-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82"
+    },
+    {
+      "id": "https://www.deyakos.gr/%CE%B5%CE%BD%CE%B7%CE%BC%CE%AD%CF%81%CF%89%CF%83%CE%B7/%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AD%CF%82-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82/item/1001-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AE-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82",
+      "title": "Διακοπή υδροδότησης",
+      "publishedAt": "2026-09-29T16:53:40+03:00",
+      "from": "2026-09-30T08:00:00+03:00",
+      "to": "2026-09-30T12:00:00+03:00",
+      "kind": "planned",
+      "text": "Σας ενημερώνουμε ότι αύριο 30/9/2026 θα να γίνει προγραμματισμένη επέμβαση στο δίκτυο ύδρευσης της πόλης Κω για την αποκατάσταση ζημιάς που προέκυψε στη οδό Αρτεμησίας. Η διακοπή υδροδότησης αφορά τις οδούς, Αρτεμησίας, Μακρυγιάννη τις παρακείμενες οδούς, την περιοχή της Αγίας Μαρίνας, το Κ. Πρινάρι, Αγ. Νεκτάριο , Παραδείσι, Ηρακλή έως τον Αγ. Φωκά ,και θα γίνει από τις 08:00 έως τις 12:00. Ευχαριστούμε για την κατανόησή σας. Ο ΠΡΟΙΣΤΑΜΕΝΟΣ ΤΜΗΜΑΤΟΣ ΚΑΤΑΝΑΛΩΤΩΝ ΜΟΥΡΑΣ ΚΩΣΤΑΣ",
+      "url": "https://www.deyakos.gr/%CE%B5%CE%BD%CE%B7%CE%BC%CE%AD%CF%81%CF%89%CF%83%CE%B7/%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AD%CF%82-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82/item/1001-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AE-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82"
+    },
+    {
+      "id": "https://www.deyakos.gr/%CE%B5%CE%BD%CE%B7%CE%BC%CE%AD%CF%81%CF%89%CF%83%CE%B7/%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AD%CF%82-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82/item/998-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AE-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82",
+      "title": "Διακοπή υδροδότησης",
+      "publishedAt": "2026-09-22T12:31:08+03:00",
+      "from": "2026-09-22T12:30:00+03:00",
+      "to": "2026-09-22T16:00:00+03:00",
+      "kind": "fault",
+      "text": "Σας ενημερώνουμε ότι προκειμένου να γίνει η αποκατάσταση της ζημιάς που προέκυψε στο δίκτυο ύδρευσης της πόλης Κω, θα γίνει διακοπή υδροδότησης σε μεγάλο τμήμα της πόλης από την οδό Γρηγορίου Ε΄ έως την περιοχή του Αγ. Φωκά και σε όλες τις παρακείμενες οδούς και περιοχές σήμερα 22/9/2026 από 12:30 - 16:00. Ευχαριστούμε για την κατανόησή σας. Ο ΠΡΟΙΣΤΑΜΕΝΟΣ ΤΜΗΜΑΤΟΣ ΚΑΤΑΝΑΛΩΤΩΝ ΜΟΥΡΑΣ ΚΩΣΤΑΣ",
+      "url": "https://www.deyakos.gr/%CE%B5%CE%BD%CE%B7%CE%BC%CE%AD%CF%81%CF%89%CF%83%CE%B7/%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AD%CF%82-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82/item/998-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AE-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82"
+    },
+    {
+      "id": "https://www.deyakos.gr/%CE%B5%CE%BD%CE%B7%CE%BC%CE%AD%CF%81%CF%89%CF%83%CE%B7/%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AD%CF%82-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82/item/997-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AE-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82",
+      "title": "Διακοπή υδροδότησης",
+      "publishedAt": "2026-09-18T08:54:16+03:00",
+      "from": "2026-09-18T08:30:00+03:00",
+      "to": "2026-09-18T13:30:00+03:00",
+      "kind": "fault",
+      "text": "Σας ενημερώνουμε ότι για την αποκατάσταση της βλάβης που προέκυψε στο δίκτυο ύδρευσης στην περιοχή Αγ. Γεώργιος Πυλίου Κω θα γίνει διακοπή υδροδότησης από το ποδοσφαιρικό γήπεδο Πυλίου έως το βενζινάδικο «Καλύβα Γεώργιος» , σήμερα Παρασκευή 18/09/2026 από 08:30 π.μ. - 13:30 μ.μ. Ευχαριστούμε για την κατανόηση σας. Ο Διευθυντής Τεχνικών Υπηρεσιών της ΔΕΥΑ Δήμου Κω Πέτρος Χατζηπέτρος Σας ενημερώνουμε ότι για την αποκατάσταση της βλάβης που προέκυψε στο δίκτυο ύδρευσης στην περιοχή Αγ. Γεώργιος Πυλίου Κω θα γίνει διακοπή υδροδότησης από το ποδοσφαιρικό γήπεδο Πυλίου έως το βενζινάδικο «Καλύβα Γεώργιος» , σήμερα Παρασκευή 18/09/2026 από 08:30 π.μ. - 13:30 μ.μ. Ευχαριστούμε για την κατανόηση σας. Ο Διευθυντής Τεχνικών Υπηρεσιών της ΔΕΥΑ Δήμου Κω Πέτρος Χατζηπέτρος",
+      "url": "https://www.deyakos.gr/%CE%B5%CE%BD%CE%B7%CE%BC%CE%AD%CF%81%CF%89%CF%83%CE%B7/%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AD%CF%82-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82/item/997-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AE-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82"
+    },
+    {
+      "id": "https://www.deyakos.gr/%CE%B5%CE%BD%CE%B7%CE%BC%CE%AD%CF%81%CF%89%CF%83%CE%B7/%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AD%CF%82-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82/item/996-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AE-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82",
+      "title": "Διακοπή υδροδότησης",
+      "publishedAt": "2026-09-18T08:49:04+03:00",
+      "from": "2026-09-18T08:30:00+03:00",
+      "to": "2026-09-18T13:00:00+03:00",
+      "kind": "fault",
+      "text": "Σας ενημερώνουμε ότι για την αποκατάσταση της βλάβης που προέκυψε στο δίκτυο ύδρευσης της πόλης Κω θα γίνει διακοπή υδροδότησης επί της οδού Κανάρη , σήμερα Παρασκευή 18/09/2026 από 08:30 π.μ. - 13:00 μ.μ. Ευχαριστούμε για την κατανόηση σας. Ο Διευθυντής Τεχνικών Υπηρεσιών της ΔΕΥΑ Δήμου Κω Πέτρος Χατζηπέτρος",
+      "url": "https://www.deyakos.gr/%CE%B5%CE%BD%CE%B7%CE%BC%CE%AD%CF%81%CF%89%CF%83%CE%B7/%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AD%CF%82-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82/item/996-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AE-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82"
+    },
+    {
+      "id": "https://www.deyakos.gr/%CE%B5%CE%BD%CE%B7%CE%BC%CE%AD%CF%81%CF%89%CF%83%CE%B7/%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AD%CF%82-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82/item/992-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AE-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82",
+      "title": "Διακοπή υδροδότησης",
+      "publishedAt": "2026-09-07T10:00:33+03:00",
+      "from": "2026-09-07T09:00:00+03:00",
+      "to": "2026-09-07T13:00:00+03:00",
+      "kind": "fault",
+      "text": "Σας ενημερώνουμε ότι προκειμένου να γίνει η αποκατάσταση της ζημιάς που προέκυψε σε κεντρικό αγωγό ύδρευσης της πόλης Κω, θα γίνει διακοπή υδροδότησης στη περιοχή του Μαρμαρωτού, σήμερα 7/9/2026 από 09:00 - 13:00. Ευχαριστούμε για την κατανόησή σας. Ο ΠΡΟΙΣΤΑΜΕΝΟΣ ΤΜΗΜΑΤΟΣ ΚΑΤΑΝΑΛΩΤΩΝ ΜΟΥΡΑΣ ΚΩΣΤΑΣ",
+      "url": "https://www.deyakos.gr/%CE%B5%CE%BD%CE%B7%CE%BC%CE%AD%CF%81%CF%89%CF%83%CE%B7/%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AD%CF%82-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82/item/992-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CF%80%CE%AE-%CF%85%CE%B4%CF%81%CE%BF%CE%B4%CF%8C%CF%84%CE%B7%CF%83%CE%B7%CF%82"
+    }
+  ]
+}
