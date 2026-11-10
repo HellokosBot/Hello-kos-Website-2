@@ -6,6 +6,18 @@
 <meta name="theme-color" content="#0D1A1A">
 <title>Brandweer – Hello Kos</title>
 <link rel="stylesheet" href="hello-kos.css">
+<style>
+.call-list{display:flex;flex-direction:column;gap:8px;margin:0 0 16px}
+a.call-btn{display:flex;align-items:center;gap:10px;text-decoration:none;background:var(--bg-card);border:2px solid var(--petrol);color:var(--text);border-radius:14px;padding:12px 14px;font-weight:700;font-size:.92rem;line-height:1.3}
+a.call-btn .ico{font-size:1.15rem;line-height:1}
+a.call-btn .num{margin-left:auto;color:var(--gold);font-size:1.05rem;white-space:nowrap}
+a.call-btn.main{background:var(--petrol);color:#fff;border-color:var(--petrol)}
+a.call-btn.main .num{color:#fff}
+.photo{margin:12px 0;border-radius:14px;overflow:hidden;border:1px solid var(--border)}
+.photo img{width:100%;height:auto;display:block}
+.photo-plane{margin:12px 0}
+.photo-plane img{width:275px;max-width:100%;height:auto;display:block;border-radius:14px}
+</style>
 </head>
 <body class="hk-page">
 <header class="app-header">
@@ -31,21 +43,114 @@
   <div class="hero-wrap"><img src="img/hk/hulp-brandweer.jpg" alt=""></div>
   <p class="parent-link"><a href="noodgevallen.html" data-i18n="back">← Noodgevallen</a></p>
   <h1 data-i18n="title">Brandweer</h1>
-  <p class="lead" data-i18n="lead">Bel 112 bij brand. In het droge seizoen zet de brandweer extra ploegen in, onder meer bij Kefalos en Kardamena. Bij grote branden komt er hulp uit de lucht.</p>
-  <div class="badges"><span class="badge" data-i18n="b0">112</span></div>
-  <div class="actions">
-    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
-    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
-    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=fire%20station%20Kos" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=fire%20station%20Kos" target="_blank" rel="noopener">Apple Maps</a>
+  <p class="lead" data-i18n="lead">Tik op een nummer om te bellen.</p>
+  <div class="call-list">
+    <a class="call-btn main" href="tel:112"><span class="ico">📞</span><span data-i18n="c1">Algemeen nationaal noodnummer Griekenland</span><span class="num">112</span></a>
+    <a class="call-btn" href="tel:+302242028333"><span class="ico">📞</span><span data-i18n="c2">Direct brandweercontact 1</span><span class="num">+302242028333</span></a>
+    <a class="call-btn" href="tel:+302242026183"><span class="ico">📞</span><span data-i18n="c3">Direct brandweercontact 2</span><span class="num">+302242026183</span></a>
+    <a class="call-btn" href="tel:199"><span class="ico">📞</span><span data-i18n="c4">Nationaal nummer brandweer Griekenland</span><span class="num">199</span></a>
   </div>
-  <p class="status" id="ttsStatus"></p>
-  <div id="readText">
-    <article class="card"><h2 data-i18n="h0">Zelf</h2><p data-i18n="p0">Een wegwerpbarbecue in droog gras is een slecht idee. Het kazernenummer staat hier niet.</p></article>
-    <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">Het telefoonnummer en het exacte adres staan nog niet in deze gids. Bel bij direct gevaar 112.</span></div>
-  </div>
+  <article class="card">
+    <h2 data-i18n="h1">Hoofdpost brandweerkazerne Kos-stad</h2>
+    <p data-i18n="p1">De brandweerkazerne in Kos-stad is de belangrijkste en enige permanente kazerne op het eiland. Hier zijn het merendeel van het personeel, de voertuigen en de middelen gestationeerd.</p>
+  </article>
+  <div class="photo"><img src="img/hk/brandweer-slang.jpg" alt=""></div>
+  <article class="card">
+    <h2 data-i18n="h2">Tijdelijke posten</h2>
+    <p data-i18n="p2">Tijdens het brandseizoen, vooral in de hete en droge zomermaanden, worden er mobiele blusploegen ingezet in dorpen en gebieden zoals Kefalos en Kardamena. Dit zijn geen permanente kazernes, maar tijdelijke operationele posten die worden gebruikt om snel te kunnen reageren op bosbranden en andere noodsituaties.</p>
+    <p data-i18n="p3">Bij ernstige branden is er ook samenwerking met luchtsteun, zoals helikopters en vliegtuigen, om de bestrijding van de branden te ondersteunen.</p>
+  </article>
+  <div class="photo-plane"><img src="img/hk/brandweer-vliegtuig.jpg" alt="" width="275" height="183"></div>
 </main>
 <footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
-<script>window.HK_DICT = {"nl": {"title": "Brandweer", "lead": "Bel 112 bij brand. In het droge seizoen zet de brandweer extra ploegen in, onder meer bij Kefalos en Kardamena. Bij grote branden komt er hulp uit de lucht.", "back": "← Noodgevallen", "note": "Het telefoonnummer en het exacte adres staan nog niet in deze gids. Bel bij direct gevaar 112.", "h0": "Zelf", "p0": "Een wegwerpbarbecue in droog gras is een slecht idee. Het kazernenummer staat hier niet.", "b0": "112"}, "de": {"title": "Feuerwehr", "lead": "Ruf 112 bei Feuer. In der trockenen Saison setzt die Feuerwehr Extra-Teams ein, unter anderem bei Kefalos und Kardamena. Bei großen Bränden kommt Hilfe aus der Luft.", "back": "← Notfälle", "note": "Telefonnummer und genaue Adresse stehen noch nicht in diesem Guide. Bei direkter Gefahr: 112.", "h0": "Selbst", "p0": "Ein Einweggrill in trockenem Gras ist eine schlechte Idee. Die Wachnummer steht hier nicht.", "b0": "112"}, "en": {"title": "Fire service", "lead": "Call 112 if there is a fire. In the dry season the fire service adds crews, including near Kefalos and Kardamena. Big fires get help from the air.", "back": "← Emergencies", "note": "The phone number and exact address are not in this guide yet. If you are in danger, call 112.", "h0": "Yourself", "p0": "A disposable barbecue in dry grass is a bad idea. The station number is not written here.", "b0": "112"}, "it": {"title": "Vigili del fuoco", "lead": "Chiama il 112 in caso di incendio. Nella stagione secca i vigili del fuoco aggiungono squadre, anche verso Kefalos e Kardamena. I grandi incendi ricevono aiuto dall’aria.", "back": "← Emergenze", "note": "Numero di telefono e indirizzo esatto non sono ancora in questa guida. In pericolo chiama il 112.", "h0": "Da solo", "p0": "Un barbecue usa e getta nell’erba secca è una cattiva idea. Il numero della caserma non è scritto qui.", "b0": "112"}, "tr": {"title": "İtfaiye", "lead": "Yangında 112’yi ara. Kurak sezonda itfaiye ek ekip koyar, Kefalos ve Kardamena tarafı dahil. Büyük yangınlara havadan yardım gelir.", "back": "← Acil durum", "note": "Telefon ve tam adres bu rehberde henüz yok. Tehlike varsa 112'yi ara.", "h0": "Kendin", "p0": "Kuru otta tek kullanımlık mangal kötü fikirdir. İstasyon numarası burada yok.", "b0": "112"}, "es": {"title": "Bomberos", "lead": "Llama al 112 si hay fuego. En la temporada seca los bomberos añaden equipos, también hacia Kéfalos y Kardamena. Los incendios grandes reciben ayuda desde el aire.", "back": "← Emergencias", "note": "El teléfono y la dirección exacta aún no están en esta guía. Si hay peligro, llama al 112.", "h0": "Tú mismo", "p0": "Una barbacoa desechable en hierba seca es mala idea. El número del parque no está aquí.", "b0": "112"}};</script>
+<script>
+window.HK_DICT = {
+  nl: {
+    title: "Brandweer",
+    back: "← Noodgevallen",
+    lead: "Tik op een nummer om te bellen.",
+    c1: "Algemeen nationaal noodnummer Griekenland",
+    c2: "Direct brandweercontact 1",
+    c3: "Direct brandweercontact 2",
+    c4: "Nationaal nummer brandweer Griekenland",
+    h1: "Hoofdpost brandweerkazerne Kos-stad",
+    p1: "De brandweerkazerne in Kos-stad is de belangrijkste en enige permanente kazerne op het eiland. Hier zijn het merendeel van het personeel, de voertuigen en de middelen gestationeerd.",
+    h2: "Tijdelijke posten",
+    p2: "Tijdens het brandseizoen, vooral in de hete en droge zomermaanden, worden er mobiele blusploegen ingezet in dorpen en gebieden zoals Kefalos en Kardamena. Dit zijn geen permanente kazernes, maar tijdelijke operationele posten die worden gebruikt om snel te kunnen reageren op bosbranden en andere noodsituaties.",
+    p3: "Bij ernstige branden is er ook samenwerking met luchtsteun, zoals helikopters en vliegtuigen, om de bestrijding van de branden te ondersteunen."
+  },
+  de: {
+    title: "Feuerwehr",
+    back: "← Notfälle",
+    lead: "Tippe auf eine Nummer, um anzurufen.",
+    c1: "Allgemeine nationale Notrufnummer Griechenland",
+    c2: "Direkter Feuerwehrkontakt 1",
+    c3: "Direkter Feuerwehrkontakt 2",
+    c4: "Nationale Feuerwehrnummer Griechenland",
+    h1: "Hauptwache Feuerwehr Kos-Stadt",
+    p1: "Die Feuerwache in Kos-Stadt ist die wichtigste und einzige ständige Wache auf der Insel. Hier sind die meisten Einsatzkräfte, Fahrzeuge und Mittel stationiert.",
+    h2: "Vorübergehende Posten",
+    p2: "In der Brandsaison, vor allem in den heißen und trockenen Sommermonaten, werden mobile Löschtrupps in Dörfern und Gebieten wie Kefalos und Kardamena eingesetzt. Das sind keine ständigen Wachen, sondern vorübergehende Einsatzposten, um schnell auf Waldbrände und andere Notfälle reagieren zu können.",
+    p3: "Bei schweren Bränden gibt es auch Zusammenarbeit mit Luftunterstützung, etwa Hubschraubern und Flugzeugen, um die Brandbekämpfung zu unterstützen."
+  },
+  en: {
+    title: "Fire service",
+    back: "← Emergencies",
+    lead: "Tap a number to call.",
+    c1: "General national emergency number Greece",
+    c2: "Direct fire service contact 1",
+    c3: "Direct fire service contact 2",
+    c4: "National fire service number Greece",
+    h1: "Main fire station Kos town",
+    p1: "The fire station in Kos town is the main and only permanent station on the island. Most of the staff, vehicles and equipment are based here.",
+    h2: "Temporary posts",
+    p2: "During the fire season, especially in the hot, dry summer months, mobile fire crews are deployed in villages and areas such as Kefalos and Kardamena. These are not permanent stations, but temporary operational posts used so they can respond quickly to wildfires and other emergencies.",
+    p3: "In serious fires there is also cooperation with air support, such as helicopters and planes, to help fight the fires."
+  },
+  it: {
+    title: "Vigili del fuoco",
+    back: "← Emergenze",
+    lead: "Tocca un numero per chiamare.",
+    c1: "Numero nazionale di emergenza Grecia",
+    c2: "Contatto diretto vigili del fuoco 1",
+    c3: "Contatto diretto vigili del fuoco 2",
+    c4: "Numero nazionale dei vigili del fuoco Grecia",
+    h1: "Caserma principale dei vigili del fuoco, città di Kos",
+    p1: "La caserma dei vigili del fuoco nella città di Kos è la più importante e l’unica permanente sull’isola. Qui sono di stanza la maggior parte del personale, dei veicoli e dei mezzi.",
+    h2: "Posti temporanei",
+    p2: "Nella stagione degli incendi, soprattutto nei mesi estivi caldi e secchi, squadre mobili vengono impiegate in paesi e zone come Kefalos e Kardamena. Non sono caserme permanenti, ma posti operativi temporanei per reagire in fretta a incendi boschivi e altre emergenze.",
+    p3: "Negli incendi gravi c’è anche collaborazione con il supporto aereo, come elicotteri e aerei, per aiutare a spegnere gli incendi."
+  },
+  tr: {
+    title: "İtfaiye",
+    back: "← Acil durum",
+    lead: "Aramak için bir numaraya dokun.",
+    c1: "Yunanistan genel ulusal acil numara",
+    c2: "Doğrudan itfaiye hattı 1",
+    c3: "Doğrudan itfaiye hattı 2",
+    c4: "Yunanistan ulusal itfaiye numarası",
+    h1: "Kos şehri ana itfaiye istasyonu",
+    p1: "Kos şehrindeki itfaiye istasyonu adadaki en önemli ve tek kalıcı istasyondur. Personelin, araçların ve araç gerecin çoğu burada bulunur.",
+    h2: "Geçici karakollar",
+    p2: "Yangın sezonunda, özellikle sıcak ve kuru yaz aylarında, Kefalos ve Kardamena gibi köy ve bölgelerde seyyar söndürme ekipleri görevlendirilir. Bunlar kalıcı istasyon değil, orman yangınlarına ve diğer acil durumlara hızlı müdahale için geçici operasyon noktalarıdır.",
+    p3: "Ciddi yangınlarda söndürmeye destek için helikopter ve uçak gibi hava desteğiyle de iş birliği yapılır."
+  },
+  es: {
+    title: "Bomberos",
+    back: "← Emergencias",
+    lead: "Toca un número para llamar.",
+    c1: "Número nacional de emergencia Grecia",
+    c2: "Contacto directo de bomberos 1",
+    c3: "Contacto directo de bomberos 2",
+    c4: "Número nacional de bomberos Grecia",
+    h1: "Parque principal de bomberos, ciudad de Kos",
+    p1: "El parque de bomberos de la ciudad de Kos es el principal y el único permanente de la isla. Aquí está la mayor parte del personal, los vehículos y los medios.",
+    h2: "Puestos temporales",
+    p2: "En la temporada de incendios, sobre todo en los meses de verano calurosos y secos, se despliegan equipos móviles en pueblos y zonas como Kéfalos y Kardamena. No son parques permanentes, sino puestos operativos temporales para responder rápido a incendios forestales y otras emergencias.",
+    p3: "En incendios graves también hay colaboración con apoyo aéreo, como helicópteros y aviones, para ayudar a combatirlos."
+  }
+};
+</script>
 <script src="hello-kos-i18n.js"></script>
 </body>
 </html>
