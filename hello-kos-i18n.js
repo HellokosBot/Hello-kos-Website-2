@@ -95,6 +95,7 @@
     localStorage.setItem("hk-lang", lang);
     apply(lang);
     closeMenu();
+    document.dispatchEvent(new CustomEvent("hk-lang", { detail: lang }));
   }
 
   function pickVoice(code) {
