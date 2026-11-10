@@ -22,12 +22,12 @@
     es: "Hola. Esta es la prueba de sonido de Hello Kos."
   };
   var UI = {
-    nl: { read: "Voorlezen", stop: "Stop", soundOn: "Afspelen…", soundDone: "Klaar", soundStop: "Gestopt", noSpeech: "Voorlezen wordt door deze browser niet ondersteund." },
-    de: { read: "Vorlesen", stop: "Stopp", soundOn: "Wiedergabe…", soundDone: "Fertig", soundStop: "Gestoppt", noSpeech: "Vorlesen wird von diesem Browser nicht unterstützt." },
-    en: { read: "Read aloud", stop: "Stop", soundOn: "Playing…", soundDone: "Done", soundStop: "Stopped", noSpeech: "Read-aloud is not supported in this browser." },
-    it: { read: "Leggi ad alta voce", stop: "Stop", soundOn: "Riproduzione…", soundDone: "Fatto", soundStop: "Interrotto", noSpeech: "La lettura vocale non è supportata da questo browser." },
-    tr: { read: "Sesli oku", stop: "Durdur", soundOn: "Çalıyor…", soundDone: "Bitti", soundStop: "Durdu", noSpeech: "Sesli okuma bu tarayıcıda desteklenmiyor." },
-    es: { read: "Leer en voz alta", stop: "Parar", soundOn: "Reproduciendo…", soundDone: "Listo", soundStop: "Parado", noSpeech: "La lectura en voz alta no está disponible en este navegador." }
+    nl: { read: "Voorlezen", stop: "Stop", fill: "Nog aan te vullen.", soundOn: "Afspelen…", soundDone: "Klaar", soundStop: "Gestopt", noSpeech: "Voorlezen wordt door deze browser niet ondersteund." },
+    de: { read: "Vorlesen", stop: "Stopp", fill: "Noch auszufüllen.", soundOn: "Wiedergabe…", soundDone: "Fertig", soundStop: "Gestoppt", noSpeech: "Vorlesen wird von diesem Browser nicht unterstützt." },
+    en: { read: "Read aloud", stop: "Stop", fill: "Still to be filled in.", soundOn: "Playing…", soundDone: "Done", soundStop: "Stopped", noSpeech: "Read-aloud is not supported in this browser." },
+    it: { read: "Leggi ad alta voce", stop: "Stop", fill: "Ancora da completare.", soundOn: "Riproduzione…", soundDone: "Fatto", soundStop: "Interrotto", noSpeech: "La lettura vocale non è supportata da questo browser." },
+    tr: { read: "Sesli oku", stop: "Durdur", fill: "Henüz doldurulacak.", soundOn: "Çalıyor…", soundDone: "Bitti", soundStop: "Durdu", noSpeech: "Sesli okuma bu tarayıcıda desteklenmiyor." },
+    es: { read: "Leer en voz alta", stop: "Parar", fill: "Aún por completar.", soundOn: "Reproduciendo…", soundDone: "Listo", soundStop: "Parado", noSpeech: "La lectura en voz alta no está disponible en este navegador." }
   };
 
   function getLang() {
@@ -57,6 +57,11 @@
       if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") el.placeholder = value;
       else el.innerHTML = value;
     });
+    var heading = document.querySelector("h1[data-i18n]");
+    if (heading) {
+      var name = heading.textContent.replace(/\s+/g, " ").trim();
+      if (name) document.title = name + " – Hello Kos";
+    }
     var opt = document.querySelector('.lang-option[data-lang="' + lang + '"]');
     var flag = document.getElementById("flag");
     var code = document.getElementById("code");
