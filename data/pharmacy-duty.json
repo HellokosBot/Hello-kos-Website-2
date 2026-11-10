@@ -1,0 +1,327 @@
+{
+  "fetchedAt": "2026-11-11T01:26:53.569459+02:00",
+  "timezone": "Europe/Athens",
+  "sourceName": "Φαρμακευτικός Σύλλογος Δωδεκανήσου",
+  "sourceUrl": "https://www.fs12.gr/index.php/efimeries-ko/",
+  "sources": [
+    {
+      "area": "Κως",
+      "url": "https://www.fs12.gr/index.php/efimeries-ko/eventsbyweek/2026/11/09/-",
+      "count": 10
+    },
+    {
+      "area": "Δημ. Εν. Ηρακλειδών Κω",
+      "url": "https://www.fs12.gr/index.php/efimeries-dim-en-irakleidon-ko/eventsbyweek/2026/11/09/-",
+      "count": 7
+    },
+    {
+      "area": "Δημ. Εν. Δικαίου Κω",
+      "url": "https://www.fs12.gr/index.php/efimeries-dim-en-dikaiou-ko/eventsbyweek/2026/11/09/-",
+      "count": 7
+    }
+  ],
+  "pharmacies": [
+    {
+      "date": "2026-11-09",
+      "name": "Σ.Φ. ΓΟΥΝΑΡΗΣ ΕΜΜ. & ΙΩΑΝΝΗΣ Ο.Ε.",
+      "address": "ΑΡΤΕΜΙΣΙΑΣ 2Α, ΚΩΣ",
+      "phones": [
+        "2242026661"
+      ],
+      "duty": "both",
+      "dutyLabel": "Διημέρευση & Διανυκτέρευση",
+      "area": "Κως",
+      "id": "/index.php/efimeries-ko/eventdetail/80743/-/s-f-gounaris-emm-ioannis-o-e"
+    },
+    {
+      "date": "2026-11-09",
+      "name": "Σ.Φ. ΜΟΥΖΟΥΡΑΚΗΣ ΕΥΑΓΓ. - ΜΟΥΖΟΥΡΑΚΗ ΚΑΛΛ. ΟΕ.",
+      "address": "ΚΑΡΔΑΜΑΙΝΑ",
+      "phones": [
+        "2242091478",
+        "6974075963"
+      ],
+      "duty": "both",
+      "dutyLabel": "Διημέρευση & Διανυκτέρευση",
+      "area": "Δημ. Εν. Ηρακλειδών Κω",
+      "id": "/index.php/efimeries-dim-en-irakleidon-ko/eventdetail/80561/-/s-f-mouzourakis-evagg-mouzouraki-kall-oe"
+    },
+    {
+      "date": "2026-11-09",
+      "name": "ΚΩΣΤΗ ΗΛΙΑΝΑ-ΠΑΡΑΣΚΕΥΗ",
+      "address": "ΜΑΡΜΑΡΙ-ΠΥΛΙ",
+      "phones": [
+        "2242041995",
+        "6978922438"
+      ],
+      "duty": "both",
+      "dutyLabel": "Διημέρευση & Διανυκτέρευση",
+      "area": "Δημ. Εν. Δικαίου Κω",
+      "id": "/index.php/efimeries-dim-en-dikaiou-ko/eventdetail/80509/-/kosti-iliana-paraskevi"
+    },
+    {
+      "date": "2026-11-10",
+      "name": "ΚΑΡΚΑΛΗΣ ΒΑΣΙΛΕΙΟΣ",
+      "address": "ΜΗΤΡΟΠΟΛΕΩΣ 3",
+      "phones": [
+        "2242307436"
+      ],
+      "duty": "day",
+      "dutyLabel": "Διημέρευση",
+      "area": "Κως",
+      "id": "/index.php/efimeries-ko/eventdetail/48755/-/karkalis-vasileios"
+    },
+    {
+      "date": "2026-11-10",
+      "name": "ΚΑΣΣΑΝΗ ΣΤΑΥΡΟΥΛΑ ΤΟΥ ΜΙΧΑΗΛ",
+      "address": "ΑΣΚΛΗΠΕΙΟΥ, ΚΩΣ",
+      "phones": [
+        "2242030222"
+      ],
+      "duty": "night",
+      "dutyLabel": "Διανυκτέρευση",
+      "area": "Κως",
+      "id": "/index.php/efimeries-ko/eventdetail/74753/-/kassani-stavroula-tou-mixail"
+    },
+    {
+      "date": "2026-11-10",
+      "name": "ΠΑΝΑΓΙΩΤΟΥ ΚΩΝ. ΝΙΚΟΛΑΟΣ",
+      "address": "ΚΕΦΑΛΟΣ, ΚΩΣ",
+      "phones": [
+        "2242072234",
+        "6974126591"
+      ],
+      "duty": "both",
+      "dutyLabel": "Διημέρευση & Διανυκτέρευση",
+      "area": "Δημ. Εν. Ηρακλειδών Κω",
+      "id": "/index.php/efimeries-dim-en-irakleidon-ko/eventdetail/80616/-/panagiotou-kon-nikolaos"
+    },
+    {
+      "date": "2026-11-10",
+      "name": "ΠΑΠΑΘΩΜΑΣ Ι. ΖΑΧΑΡΙΑΣ",
+      "address": "ΖΗΠΑΡΙ (ΔΗΜ. ΔΙΑΜ. ΑΣΦΕΝΔΙΟΥ)",
+      "phones": [
+        "2242068726",
+        "6974467211"
+      ],
+      "duty": "both",
+      "dutyLabel": "Διημέρευση & Διανυκτέρευση",
+      "area": "Δημ. Εν. Δικαίου Κω",
+      "id": "/index.php/efimeries-dim-en-dikaiou-ko/eventdetail/80524/-/papathomas-i-zaxarias"
+    },
+    {
+      "date": "2026-11-11",
+      "name": "ΠΕΡΙΔΟΥ ΕΜΜ. ΙΩΑΝΝΑ",
+      "address": "ΙΠΠΟΚΡΑΤΟΥΣ 6, ΚΩΣ",
+      "phones": [
+        "2242028410"
+      ],
+      "duty": "both",
+      "dutyLabel": "Διημέρευση & Διανυκτέρευση",
+      "area": "Κως",
+      "id": "/index.php/efimeries-ko/eventdetail/78663/-/peridou-emm-ioanna"
+    },
+    {
+      "date": "2026-11-11",
+      "name": "ΚΩΤΟΥΛΑΣ ΧΡΗΣΤΟΣ & ΣΙΑ Ο.Ε.",
+      "address": "ΚΑΜΑΡΙ 1, ΚΕΦΑΛΟΣ",
+      "phones": [
+        "2242048048",
+        "6943221944"
+      ],
+      "duty": "both",
+      "dutyLabel": "Διημέρευση & Διανυκτέρευση",
+      "area": "Δημ. Εν. Ηρακλειδών Κω",
+      "id": "/index.php/efimeries-dim-en-irakleidon-ko/eventdetail/80631/-/kotoulas-xristos-sia-o-e"
+    },
+    {
+      "date": "2026-11-11",
+      "name": "ΛΑΜΠΡΙΝΟΣ Κ. ΓΕΩΡΓΙΟΣ",
+      "address": "ΖΗΠΑΡΙ ΑΣΦΕΝΔΙΟΥ",
+      "phones": [
+        "2242067174",
+        "6946365887"
+      ],
+      "duty": "both",
+      "dutyLabel": "Διημέρευση & Διανυκτέρευση",
+      "area": "Δημ. Εν. Δικαίου Κω",
+      "id": "/index.php/efimeries-dim-en-dikaiou-ko/eventdetail/80539/-/lamprinos-k-georgios"
+    },
+    {
+      "date": "2026-11-12",
+      "name": "ΚΑΜΠΑΝΗ ΑΝΝΑ ΜΑΡΙΑ",
+      "address": "ΒΑΣ.ΓΕΩΡΓΙΟΥ ΚΑΙ ΧΑΡΜΥΛΟΥ, ΚΩΣ",
+      "phones": [
+        "2242025001"
+      ],
+      "duty": "day",
+      "dutyLabel": "Διημέρευση",
+      "area": "Κως",
+      "id": "/index.php/efimeries-ko/eventdetail/3154/-/kampani-anna-maria"
+    },
+    {
+      "date": "2026-11-12",
+      "name": "ΚΙΛΙΜΑΤΟΣ ΗΛΙΑΣ",
+      "address": "ΕΛΕΥΘΕΡΙΟΥ ΒΕΝΙΖΕΛΟΥ 42, ΚΩΣ",
+      "phones": [
+        "2242028959"
+      ],
+      "duty": "night",
+      "dutyLabel": "Διανυκτέρευση",
+      "area": "Κως",
+      "id": "/index.php/efimeries-ko/eventdetail/79547/-/kilimatos-ilias"
+    },
+    {
+      "date": "2026-11-12",
+      "name": "Σ.Φ. ΜΟΥΖΟΥΡΑΚΗΣ ΕΥΑΓΓ. - ΜΟΥΖΟΥΡΑΚΗ ΚΑΛΛ. ΟΕ.",
+      "address": "ΚΑΡΔΑΜΑΙΝΑ",
+      "phones": [
+        "2242091478",
+        "6974075963"
+      ],
+      "duty": "both",
+      "dutyLabel": "Διημέρευση & Διανυκτέρευση",
+      "area": "Δημ. Εν. Ηρακλειδών Κω",
+      "id": "/index.php/efimeries-dim-en-irakleidon-ko/eventdetail/80562/-/s-f-mouzourakis-evagg-mouzouraki-kall-oe"
+    },
+    {
+      "date": "2026-11-12",
+      "name": "ΧΑΤΖΗΠΑΝΤΣΟΥ Α. ΕΛΕΝΗ",
+      "address": "ΠΥΛΙ",
+      "phones": [
+        "2242041642",
+        "6940725200"
+      ],
+      "duty": "both",
+      "dutyLabel": "Διημέρευση & Διανυκτέρευση",
+      "area": "Δημ. Εν. Δικαίου Κω",
+      "id": "/index.php/efimeries-dim-en-dikaiou-ko/eventdetail/80463/-/xatzipantsou-a-eleni"
+    },
+    {
+      "date": "2026-11-13",
+      "name": "ΠΑΠΑΧΡΗΣΤΟΥ ΖΩΗ ΤΟΥ ΧΡΗΣΤΟΥ",
+      "address": "ΑΝΤΙΝΑΥΑΡΧΟΥ ΙΩΑΝΝΙΔΗ 4, ΕΝΑΝΤΙ ΕΘΝΙΚΗΣ ΤΡΑΠΕΖΑΣ",
+      "phones": [
+        "2242024060"
+      ],
+      "duty": "day",
+      "dutyLabel": "Διημέρευση",
+      "area": "Κως",
+      "id": "/index.php/efimeries-ko/eventdetail/40159/-/papaxristou-zoi-tou-xristou"
+    },
+    {
+      "date": "2026-11-13",
+      "name": "PUZZLE PHARMACY(ΝΤΟΥΣΙΚΟΣ ΖΑΧΑΡΙΑΣ)",
+      "address": "ΦΙΛΙΝΟΥ 12 (ΤΕΡΜΑ ΑΒΕΡΩΦ), ΚΩΣ",
+      "phones": [
+        "2242025820"
+      ],
+      "duty": "night",
+      "dutyLabel": "Διανυκτέρευση",
+      "area": "Κως",
+      "id": "/index.php/efimeries-ko/eventdetail/72855/-/puzzle-pharmacy-ntousikos-zaxarias"
+    },
+    {
+      "date": "2026-11-13",
+      "name": "ΚΑΡΑΘΩΜΑΣ ΚΩΝΣΤΑΝΤΙΝΟΣ",
+      "address": "25ης ΜΑΡΤΙΟΥ ΑΝΤΙΜΑΧΕΙΑ, ΚΩΣ",
+      "phones": [
+        "2242051599",
+        "6948273795"
+      ],
+      "duty": "both",
+      "dutyLabel": "Διημέρευση & Διανυκτέρευση",
+      "area": "Δημ. Εν. Ηρακλειδών Κω",
+      "id": "/index.php/efimeries-dim-en-irakleidon-ko/eventdetail/80586/-/karathomas-konstantinos"
+    },
+    {
+      "date": "2026-11-13",
+      "name": "VARELIS PHARMACY E.E.",
+      "address": "ΤΙΓΚΑΚΙ ΑΣΦΕΝΔΙΟΥ, ΔΙΚΑΙΟ",
+      "phones": [
+        "2242069281",
+        "6933018324"
+      ],
+      "duty": "both",
+      "dutyLabel": "Διημέρευση & Διανυκτέρευση",
+      "area": "Δημ. Εν. Δικαίου Κω",
+      "id": "/index.php/efimeries-dim-en-dikaiou-ko/eventdetail/80479/-/varelis-pharmacy-e-e"
+    },
+    {
+      "date": "2026-11-14",
+      "name": "ΧΑΤΖΗΠΕΤΡΟΥ ΕΛΕΝΗ ΤΟΥ ΣΤΑΜΑΤΙΟΥ",
+      "address": "ΚΟΡΥΤΣΑΣ 2, ΚΩΣ",
+      "phones": [
+        "2242021702"
+      ],
+      "duty": "both",
+      "dutyLabel": "Διημέρευση & Διανυκτέρευση",
+      "area": "Κως",
+      "id": "/index.php/efimeries-ko/eventdetail/3134/-/xatzipetrou-eleni-tou-stamatiou"
+    },
+    {
+      "date": "2026-11-14",
+      "name": "ΠΑΛΑΝΤΖΙΔΟΥ ΑΝΑΣΤΑΣΙΑ",
+      "address": "ΚΥΚΛΟΣ ΑΕΡΟΔΡΟΜΙΟΥ ΑΝΤΙΜΑΧΕΙΑ, ΚΩΣ",
+      "phones": [
+        "2242051524",
+        "6946343105"
+      ],
+      "duty": "both",
+      "dutyLabel": "Διημέρευση & Διανυκτέρευση",
+      "area": "Δημ. Εν. Ηρακλειδών Κω",
+      "id": "/index.php/efimeries-dim-en-irakleidon-ko/eventdetail/80602/-/palantzidou-anastasia"
+    },
+    {
+      "date": "2026-11-14",
+      "name": "ΒΟΓΛΗ ΜΑΡΙΑΝΝΑ",
+      "address": "ΠΥΛΙ",
+      "phones": [
+        "2242042003",
+        "6946343105"
+      ],
+      "duty": "both",
+      "dutyLabel": "Διημέρευση & Διανυκτέρευση",
+      "area": "Δημ. Εν. Δικαίου Κω",
+      "id": "/index.php/efimeries-dim-en-dikaiou-ko/eventdetail/80495/-/vogli-marianna"
+    },
+    {
+      "date": "2026-11-15",
+      "name": "ΧΑΤΖΗΜΑΡΚΟΥ ΠΑΓΩΝΑ ΤΟΥ ΓΕΩΡΓΙΟΥ",
+      "address": "ΒΑΣΙΛΕΩΣ ΠΑΥΛΟΥ 5, ΚΩΣ",
+      "phones": [
+        "2242022346"
+      ],
+      "duty": "both",
+      "dutyLabel": "Διημέρευση & Διανυκτέρευση",
+      "area": "Κως",
+      "id": "/index.php/efimeries-ko/eventdetail/40675/-/xatzimarkou-pagona-tou-georgiou"
+    },
+    {
+      "date": "2026-11-15",
+      "name": "Σ.Φ. ΜΟΥΖΟΥΡΑΚΗΣ ΕΥΑΓΓ. - ΜΟΥΖΟΥΡΑΚΗ ΚΑΛΛ. ΟΕ.",
+      "address": "ΚΑΡΔΑΜΑΙΝΑ",
+      "phones": [
+        "2242091478",
+        "6974075963"
+      ],
+      "duty": "both",
+      "dutyLabel": "Διημέρευση & Διανυκτέρευση",
+      "area": "Δημ. Εν. Ηρακλειδών Κω",
+      "id": "/index.php/efimeries-dim-en-irakleidon-ko/eventdetail/80563/-/s-f-mouzourakis-evagg-mouzouraki-kall-oe"
+    },
+    {
+      "date": "2026-11-15",
+      "name": "ΚΩΣΤΗ ΗΛΙΑΝΑ-ΠΑΡΑΣΚΕΥΗ",
+      "address": "ΜΑΡΜΑΡΙ-ΠΥΛΙ",
+      "phones": [
+        "2242041995",
+        "6978922438"
+      ],
+      "duty": "both",
+      "dutyLabel": "Διημέρευση & Διανυκτέρευση",
+      "area": "Δημ. Εν. Δικαίου Κω",
+      "id": "/index.php/efimeries-dim-en-dikaiou-ko/eventdetail/80510/-/kosti-iliana-paraskevi"
+    }
+  ]
+}

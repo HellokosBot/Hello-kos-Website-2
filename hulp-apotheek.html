@@ -51,6 +51,13 @@
     .block p:last-child { margin-bottom: 0; }
     .img-full { margin: 0 0 12px; border-radius: 16px; overflow: hidden; }
     .img-full img { width: 100%; display: block; max-height: 200px; object-fit: cover; }
+    .img-mark { display: flex; justify-content: center; background: #000; }
+    .img-mark img { width: 400px; max-width: 100%; height: auto; max-height: none; object-fit: contain; }
+    .duty-item { background: rgba(0,0,0,.2); border-radius: 12px; padding: 10px 12px; margin-top: 8px; }
+    .duty-item strong { display: block; color: #fff; font-size: .95rem; }
+    .duty-meta { color: #c8e6c9; font-size: .78rem; font-weight: 700; margin: 2px 0 4px; }
+    .duty-item p { margin: 0 0 4px; color: var(--text); font-size: .86rem; }
+    .duty-item a { color: #fff; font-weight: 800; text-decoration: none; }
     .actions { display: flex; flex-direction: column; gap: 8px; margin: 8px 0 12px; }
     .btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 13px 16px; border-radius: 14px; font-weight: 700; font-size: .9rem; text-decoration: none; }
     .btn-map { background: var(--bg-card); color: var(--text); border: 2px solid var(--petrol); }
@@ -99,13 +106,15 @@
         <p data-i18n="p1">In Kos-stad vind je op bijna elke hoek een apotheek, herkenbaar aan het <strong>groene kruis</strong>.</p>
         <p data-i18n="p2">In Griekenland doen apothekers meer dan alleen medicijnen meegeven: ze geven advies bij veelvoorkomende klachten, verstrekken eenvoudige middelen zonder recept (lichte infecties, allergie, pijn) en verwijzen door naar ziekenhuis of specialist als dat nodig is.</p>
       </div>
-      <div class="img-full"><img src="img/jwwb/8b381260f3-schermopname_18-2-2026_14307_greekreporter-com-high.jpg" alt="" loading="lazy"></div>
+      <div class="img-full img-mark"><img src="img/hk/apotheek-kruis.png" alt="" width="400" height="400" loading="lazy"></div>
 
       <div class="live-now">
         <h2 data-i18n="liveH">Nu van dienst op Kos</h2>
         <p class="when" id="liveWhen"></p>
-        <p class="note" data-i18n="liveInfo">De nachtdienst wisselt elke dag. Tik op de knop hieronder voor de live lijst van vandaag (bron: Vrisko).</p>
-        <a class="live-btn" href="https://www.vrisko.gr/efimeries-farmakeion/kos" target="_blank" rel="noopener" data-i18n="liveBtn">Bekijk live nachtdienst vandaag →</a>
+        <p class="note" data-i18n="liveInfo">De dienstlijst van vandaag op Kos. Bron: Φαρμακευτικός Σύλλογος Δωδεκανήσου.</p>
+        <p class="note" id="pharmacyStatus"></p>
+        <div id="pharmacyList"></div>
+        <p class="note" id="pharmacyChecked"></p>
       </div>
 
       <div class="block">
@@ -131,17 +140,17 @@
   <script>
   (function(){
     var I18N = {
-      nl: { hero:"Apotheek", h2_1:"Apotheken op Kos", p1:"In Kos-stad vind je op bijna elke hoek een apotheek, herkenbaar aan het groene kruis.", p2:"In Griekenland doen apothekers meer dan alleen medicijnen meegeven: ze geven advies bij veelvoorkomende klachten, verstrekken eenvoudige middelen zonder recept (lichte infecties, allergie, pijn) en verwijzen door naar ziekenhuis of specialist als dat nodig is.", liveH:"Nu van dienst op Kos", liveInfo:"De nachtdienst wisselt elke dag. Tik op de knop hieronder voor de live lijst van vandaag (bron: Vrisko).", liveBtn:"Bekijk live nachtdienst vandaag →", h2_hours:"Gewone openingstijden (zomer)", hoursP:"Typische tijden in de zomerperiode (kan per zaak iets verschillen):", ma:"Ma – vr", za:"Zaterdag", zo:"Zondag", closed:"Gesloten*", hoursNote:"*Op zondag en ’s nachts: alleen de apotheek van dienst. Bel bij twijfel even van tevoren.", h2_tip:"Tip bij noodgevallen", tipP:"Kijk op de winkeldeur van een gesloten apotheek: daar staat welke apotheek die dag 24-uurs dienst heeft.", mapAll:"Apotheken op de kaart →" },
-      en: { hero:"Pharmacy", h2_1:"Pharmacies on Kos", p1:"In Kos town you find a pharmacy on almost every corner, recognizable by the green cross.", p2:"In Greece pharmacists do more than just hand out medicines: they give advice for common complaints, supply simple remedies without a prescription and refer to hospital or specialist if needed.", liveH:"On duty now on Kos", liveInfo:"The night duty changes every day. Tap the button below for today's live list (source: Vrisko).", liveBtn:"View live night duty today →", h2_hours:"Normal opening hours (summer)", hoursP:"Typical times in the summer period (can differ slightly per pharmacy):", ma:"Mon – Fri", za:"Saturday", zo:"Sunday", closed:"Closed*", hoursNote:"*On Sunday and at night: only the on-duty pharmacy. Call ahead if in doubt.", h2_tip:"Tip for emergencies", tipP:"Look at the shop door of a closed pharmacy: it shows which pharmacy has 24-hour duty that day.", mapAll:"Pharmacies on the map →" },
-      de: { hero:"Apotheke", h2_1:"Apotheken auf Kos", p1:"In Kos-Stadt findest du an fast jeder Ecke eine Apotheke, erkennbar am grünen Kreuz.", p2:"In Griechenland machen Apotheker mehr als nur Medikamente ausgeben: sie geben Rat bei häufigen Beschwerden und verweisen bei Bedarf an Krankenhaus oder Spezialisten.", liveH:"Jetzt im Dienst auf Kos", liveInfo:"Der Nachtdienst wechselt jeden Tag. Tippe auf den Button unten für die Live-Liste von heute (Quelle: Vrisko).", liveBtn:"Live-Nachtdienst heute ansehen →", h2_hours:"Normale Öffnungszeiten (Sommer)", hoursP:"Typische Zeiten im Sommer (kann pro Apotheke etwas abweichen):", ma:"Mo – Fr", za:"Samstag", zo:"Sonntag", closed:"Geschlossen*", hoursNote:"*Sonntags und nachts: nur die Dienstapotheke. Im Zweifel vorher anrufen.", h2_tip:"Tipp bei Notfällen", tipP:"Schau an die Tür einer geschlossenen Apotheke: dort steht, welche Apotheke 24-Stunden-Dienst hat.", mapAll:"Apotheken auf der Karte →" },
-      it: { hero:"Farmacia", h2_1:"Farmacie a Kos", p1:"Nella città di Kos trovi una farmacia quasi ad ogni angolo, riconoscibile dalla croce verde.", p2:"In Grecia i farmacisti fanno più che consegnare medicine: danno consigli e indirizzano all’ospedale se necessario.", liveH:"Di turno ora a Kos", liveInfo:"Il servizio notturno cambia ogni giorno. Tocca il pulsante sotto per la lista live di oggi (fonte: Vrisko).", liveBtn:"Vedi servizio notturno live oggi →", h2_hours:"Orari normali (estate)", hoursP:"Orari tipici nel periodo estivo:", ma:"Lun – Ven", za:"Sabato", zo:"Domenica", closed:"Chiuso*", hoursNote:"*Domenica e di notte: solo la farmacia di turno. Chiama in anticipo in caso di dubbio.", h2_tip:"Consiglio per emergenze", tipP:"Guarda sulla porta di una farmacia chiusa: lì è scritto quale ha il servizio 24 ore.", mapAll:"Farmacie sulla mappa →" },
-      tr: { hero:"Eczane", h2_1:"Kos’ta eczaneler", p1:"Kos şehrinde neredeyse her köşede yeşil haçla tanınan bir eczane bulunur.", p2:"Yunanistan’da eczacılar sadece ilaç vermekle kalmaz, tavsiye verir ve gerekirse yönlendirir.", liveH:"Kos’ta şu an nöbetçi", liveInfo:"Gece nöbeti her gün değişir. Bugünün canlı listesi için aşağıdaki düğmeye dokunun (kaynak: Vrisko).", liveBtn:"Bugünün canlı gece nöbetini gör →", h2_hours:"Normal çalışma saatleri (yaz)", hoursP:"Yaz döneminde tipik saatler:", ma:"Pzt – Cuma", za:"Cumartesi", zo:"Pazar", closed:"Kapalı*", hoursNote:"*Pazar ve gece: sadece nöbetçi eczane. Şüphen varsa önceden ara.", h2_tip:"Acil durum ipucu", tipP:"Kapalı eczanenin kapısına bak: o gün hangi eczanenin nöbetçi olduğu yazıyor.", mapAll:"Eczaneler haritada →" },
-      es: { hero:"Farmacia", h2_1:"Farmacias en Kos", p1:"En la ciudad de Kos encuentras una farmacia en casi cada esquina, reconocible por la cruz verde.", p2:"En Grecia los farmacéuticos hacen más que entregar medicamentos: dan consejos y derivan al hospital si es necesario.", liveH:"De servicio ahora en Kos", liveInfo:"El servicio nocturno cambia cada día. Toca el botón de abajo para la lista en vivo de hoy (fuente: Vrisko).", liveBtn:"Ver servicio nocturno en vivo hoy →", h2_hours:"Horarios normales (verano)", hoursP:"Horarios típicos en el período de verano:", ma:"Lun – Vie", za:"Sábado", zo:"Domingo", closed:"Cerrado*", hoursNote:"*Domingo y de noche: solo la farmacia de servicio. Llama con antelación si tienes dudas.", h2_tip:"Consejo para emergencias", tipP:"Mira en la puerta de una farmacia cerrada: allí indica qué farmacia tiene servicio 24 horas.", mapAll:"Farmacias en el mapa →" }
+      nl: { hero:"Apotheek", h2_1:"Apotheken op Kos", p1:"In Kos-stad vind je op bijna elke hoek een apotheek, herkenbaar aan het groene kruis.", p2:"In Griekenland doen apothekers meer dan alleen medicijnen meegeven: ze geven advies bij veelvoorkomende klachten, verstrekken eenvoudige middelen zonder recept (lichte infecties, allergie, pijn) en verwijzen door naar ziekenhuis of specialist als dat nodig is.", liveH:"Nu van dienst op Kos", liveInfo:"De dienstlijst van vandaag op Kos. Bron: Φαρμακευτικός Σύλλογος Δωδεκανήσου.", h2_hours:"Gewone openingstijden (zomer)", hoursP:"Typische tijden in de zomerperiode (kan per zaak iets verschillen):", ma:"Ma – vr", za:"Zaterdag", zo:"Zondag", closed:"Gesloten*", hoursNote:"*Op zondag en ’s nachts: alleen de apotheek van dienst. Bel bij twijfel even van tevoren.", h2_tip:"Tip bij noodgevallen", tipP:"Kijk op de winkeldeur van een gesloten apotheek: daar staat welke apotheek die dag 24-uurs dienst heeft.", mapAll:"Apotheken op de kaart →" },
+      en: { hero:"Pharmacy", h2_1:"Pharmacies on Kos", p1:"In Kos town you find a pharmacy on almost every corner, recognizable by the green cross.", p2:"In Greece pharmacists do more than just hand out medicines: they give advice for common complaints, supply simple remedies without a prescription and refer to hospital or specialist if needed.", liveH:"On duty now on Kos", liveInfo:"Today's duty list on Kos. Source: Φαρμακευτικός Σύλλογος Δωδεκανήσου.", h2_hours:"Normal opening hours (summer)", hoursP:"Typical times in the summer period (can differ slightly per pharmacy):", ma:"Mon – Fri", za:"Saturday", zo:"Sunday", closed:"Closed*", hoursNote:"*On Sunday and at night: only the on-duty pharmacy. Call ahead if in doubt.", h2_tip:"Tip for emergencies", tipP:"Look at the shop door of a closed pharmacy: it shows which pharmacy has 24-hour duty that day.", mapAll:"Pharmacies on the map →" },
+      de: { hero:"Apotheke", h2_1:"Apotheken auf Kos", p1:"In Kos-Stadt findest du an fast jeder Ecke eine Apotheke, erkennbar am grünen Kreuz.", p2:"In Griechenland machen Apotheker mehr als nur Medikamente ausgeben: sie geben Rat bei häufigen Beschwerden und verweisen bei Bedarf an Krankenhaus oder Spezialisten.", liveH:"Jetzt im Dienst auf Kos", liveInfo:"Die Dienstliste von heute auf Kos. Quelle: Φαρμακευτικός Σύλλογος Δωδεκανήσου.", h2_hours:"Normale Öffnungszeiten (Sommer)", hoursP:"Typische Zeiten im Sommer (kann pro Apotheke etwas abweichen):", ma:"Mo – Fr", za:"Samstag", zo:"Sonntag", closed:"Geschlossen*", hoursNote:"*Sonntags und nachts: nur die Dienstapotheke. Im Zweifel vorher anrufen.", h2_tip:"Tipp bei Notfällen", tipP:"Schau an die Tür einer geschlossenen Apotheke: dort steht, welche Apotheke 24-Stunden-Dienst hat.", mapAll:"Apotheken auf der Karte →" },
+      it: { hero:"Farmacia", h2_1:"Farmacie a Kos", p1:"Nella città di Kos trovi una farmacia quasi ad ogni angolo, riconoscibile dalla croce verde.", p2:"In Grecia i farmacisti fanno più che consegnare medicine: danno consigli e indirizzano all’ospedale se necessario.", liveH:"Di turno ora a Kos", liveInfo:"L’elenco di turno di oggi a Kos. Fonte: Φαρμακευτικός Σύλλογος Δωδεκανήσου.", h2_hours:"Orari normali (estate)", hoursP:"Orari tipici nel periodo estivo:", ma:"Lun – Ven", za:"Sabato", zo:"Domenica", closed:"Chiuso*", hoursNote:"*Domenica e di notte: solo la farmacia di turno. Chiama in anticipo in caso di dubbio.", h2_tip:"Consiglio per emergenze", tipP:"Guarda sulla porta di una farmacia chiusa: lì è scritto quale ha il servizio 24 ore.", mapAll:"Farmacie sulla mappa →" },
+      tr: { hero:"Eczane", h2_1:"Kos’ta eczaneler", p1:"Kos şehrinde neredeyse her köşede yeşil haçla tanınan bir eczane bulunur.", p2:"Yunanistan’da eczacılar sadece ilaç vermekle kalmaz, tavsiye verir ve gerekirse yönlendirir.", liveH:"Kos’ta şu an nöbetçi", liveInfo:"Kos’ta bugünün nöbet listesi. Kaynak: Φαρμακευτικός Σύλλογος Δωδεκανήσου.", h2_hours:"Normal çalışma saatleri (yaz)", hoursP:"Yaz döneminde tipik saatler:", ma:"Pzt – Cuma", za:"Cumartesi", zo:"Pazar", closed:"Kapalı*", hoursNote:"*Pazar ve gece: sadece nöbetçi eczane. Şüphen varsa önceden ara.", h2_tip:"Acil durum ipucu", tipP:"Kapalı eczanenin kapısına bak: o gün hangi eczanenin nöbetçi olduğu yazıyor.", mapAll:"Eczaneler haritada →" },
+      es: { hero:"Farmacia", h2_1:"Farmacias en Kos", p1:"En la ciudad de Kos encuentras una farmacia en casi cada esquina, reconocible por la cruz verde.", p2:"En Grecia los farmacéuticos hacen más que entregar medicamentos: dan consejos y derivan al hospital si es necesario.", liveH:"De servicio ahora en Kos", liveInfo:"Lista de servicio de hoy en Kos. Fuente: Φαρμακευτικός Σύλλογος Δωδεκανήσου.", h2_hours:"Horarios normales (verano)", hoursP:"Horarios típicos en el período de verano:", ma:"Lun – Vie", za:"Sábado", zo:"Domingo", closed:"Cerrado*", hoursNote:"*Domingo y de noche: solo la farmacia de servicio. Llama con antelación si tienes dudas.", h2_tip:"Consejo para emergencias", tipP:"Mira en la puerta de una farmacia cerrada: allí indica qué farmacia tiene servicio 24 horas.", mapAll:"Farmacias en el mapa →" }
     };
 
     function updateLiveDate() {
       var now = new Date();
-      var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Europe/Athens' };
       var dateStr = now.toLocaleDateString(document.documentElement.lang || 'nl', options);
       var el = document.getElementById('liveWhen');
       if (el) el.textContent = (I18N[document.documentElement.lang] || I18N.nl).liveH + ' · ' + dateStr;
@@ -166,6 +175,7 @@
       });
       closeMenu();
       updateLiveDate();
+      document.dispatchEvent(new CustomEvent("hk-lang", { detail: l }));
     }
 
     var langBtn = document.getElementById('langBtn');
@@ -180,6 +190,7 @@
     setLang(saved);
   })();
   </script>
+<script src="pharmacy-duty.js"></script>
 <script src="hello-kos-i18n.js"></script>
 </body>
 </html>
