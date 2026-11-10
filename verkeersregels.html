@@ -127,7 +127,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
     e.preventDefault();
     var href=card.getAttribute('href');if(!href)return;
     var img=card.querySelector('img');var layer=document.getElementById('zoomLayer');
-    if(layer&&img){layer.querySelector('img').src=img.src||'';layer.classList.add('show');setTimeout(function(){window.location.href=href},450)}
+    if(layer&&img){layer.querySelector('img').src=img.src||'';layer.classList.add('show');setTimeout(function(){layer.classList.remove('show');window.location.href=href},450)}
     else window.location.href=href;
   },true);
   setLang(lang);

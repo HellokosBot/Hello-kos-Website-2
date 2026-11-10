@@ -350,7 +350,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
     var layer=document.getElementById('zoomLayer');
     layer.querySelector('img').src=img?img.src:'';
     layer.classList.add('show');
-    setTimeout(function(){window.location.href=href},550);
+    setTimeout(function(){
+      layer.classList.remove('show');
+      window.location.href=href;
+    },550);
   },true);
   setLang(lang);
 })();

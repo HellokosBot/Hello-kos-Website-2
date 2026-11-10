@@ -191,5 +191,21 @@
     }
   }
 
-  window.HK_I18N = { setLang: setLang, getLang: getLang, apply: apply, speak: speak, VOICE: VOICE };
+  /* Tile menus briefly enlarge a photo, then open the next page.
+     The browser keeps that open photo when you go back (back-forward cache).
+     Close it when leaving and again when the page is shown, so Back
+     returns to the menu instead of a stuck zoom. */
+  function hideZoom() {
+    var layer = document.getElementById("zoomLayer");
+    if (!layer) return;
+    layer.classList.remove("show");
+    var img = layer.querySelector("img");
+    if (img) img.removeAttribute("src");
+  }
+  window.addEventListener("pagehide", hideZoom);
+  window.addEventListener("pageshow", hideZoom);
+  var zoomLayer = document.getElementById("zoomLayer");
+  if (zoomLayer) zoomLayer.addEventListener("click", hideZoom);
+
+  window.HK_I18N = { setLang: setLang, getLang: getLang, apply: apply, speak: speak, hideZoom: hideZoom, VOICE: VOICE };
 })();
