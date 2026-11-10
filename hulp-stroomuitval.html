@@ -6,6 +6,17 @@
 <meta name="theme-color" content="#0D1A1A">
 <title>Stroomuitval – Hello Kos</title>
 <link rel="stylesheet" href="hello-kos.css">
+<style>
+.outage-item{border-left:4px solid var(--petrol);padding:10px 12px;margin:10px 0;background:rgba(58,154,154,.08);border-radius:0 12px 12px 0}
+.outage-item p{margin:0 0 6px;color:var(--text-soft);font-size:.9rem}
+.outage-item p:last-child{margin-bottom:0}
+.outage-when{color:var(--gold)!important;font-weight:700}
+.outage-now{border-left-color:#e07040}
+.outage-past{opacity:.75}
+.outage-other{font-size:1rem;color:var(--gold);margin:16px 0 8px}
+#outageSummary{font-size:1rem;color:var(--text);font-weight:700}
+#outageHint,#outageChecked{font-size:.82rem;color:var(--text-soft)}
+</style>
 </head>
 <body class="hk-page">
 <header class="app-header">
@@ -31,21 +42,23 @@
   <div class="hero-wrap"><img src="img/hk/hulp-stroomuitval.jpg" alt=""></div>
   <p class="parent-link"><a href="noodgevallen.html" data-i18n="back">← Noodgevallen</a></p>
   <h1 data-i18n="title">Stroomuitval</h1>
-  <p class="lead" data-i18n="lead">Het netbeheer heet ΔΕΔΔΗΕ (HEDNO). Geplande onderbrekingen komen voor. Zonder stroom werken pinapparaten niet. Het storingsnummer staat hier nog niet.</p>
+  <p class="lead" data-i18n="lead">ΔΕΔΔΗΕ (HEDNO) beheert het stroomnet. Hieronder staat hun openbare lijst van geplande onderbrekingen voor de Dodekanesos en voor Kos. Zonder stroom werkt pinnen niet.</p>
   <div class="badges"><span class="badge" data-i18n="b0">ΔΕΔΔΗΕ</span></div>
-  <div class="actions">
-    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
-    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
-    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=HEDNO%20Kos%20power" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=HEDNO%20Kos%20power" target="_blank" rel="noopener">Apple Maps</a>
-  </div>
-  <p class="status" id="ttsStatus"></p>
-  <div id="readText">
+  <section class="card" aria-live="polite">
+    <h2 data-i18n="statusTitle">Geplande stroomonderbrekingen</h2>
+    <p id="outageSummary">De lijst van ΔΕΔΔΗΕ wordt geladen…</p>
+    <div id="outageList"></div>
+    <p id="outageHint"></p>
+    <p id="outageChecked"></p>
+  </section>
+  <div>
     <article class="card"><h2 data-i18n="h0">Wat jij kunt doen</h2><p data-i18n="p0">Kijk of alleen jouw huis donker is of de hele straat. Een zaklamp op je telefoon helpt. Lift niet gebruiken als het licht uitgaat. Neem wat contant geld mee, juist omdat pinnen dan stopt.</p></article>
     <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">Het telefoonnummer en het exacte adres staan nog niet in deze gids. Bel bij direct gevaar 112.</span></div>
   </div>
 </main>
 <footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
-<script>window.HK_DICT = {"nl": {"title": "Stroomuitval", "lead": "Het netbeheer heet ΔΕΔΔΗΕ (HEDNO). Geplande onderbrekingen komen voor. Zonder stroom werken pinapparaten niet. Het storingsnummer staat hier nog niet.", "back": "← Noodgevallen", "note": "Het telefoonnummer en het exacte adres staan nog niet in deze gids. Bel bij direct gevaar 112.", "h0": "Wat jij kunt doen", "p0": "Kijk of alleen jouw huis donker is of de hele straat. Een zaklamp op je telefoon helpt. Lift niet gebruiken als het licht uitgaat. Neem wat contant geld mee, juist omdat pinnen dan stopt.", "b0": "ΔΕΔΔΗΕ"}, "de": {"title": "Stromausfall", "lead": "Der Netzbetreiber heißt ΔΕΔΔΗΕ (HEDNO). Geplante Abschaltungen kommen vor. Ohne Strom funktionieren Kartengeräte nicht. Die Störungsnummer steht hier noch nicht.", "back": "← Notfälle", "note": "Telefonnummer und genaue Adresse stehen noch nicht in diesem Guide. Bei direkter Gefahr: 112.", "h0": "Was du tun kannst", "p0": "Schau, ob nur dein Haus dunkel ist oder die ganze Straße. Eine Taschenlampe am Telefon hilft. Fahrstuhl nicht benutzen, wenn das Licht ausgeht. Nimm etwas Bargeld mit, gerade weil Kartenzahlung dann stoppt.", "b0": "ΔΕΔΔΗΕ"}, "en": {"title": "Power cut", "lead": "The grid operator is called ΔΕΔΔΗΕ (HEDNO). Planned cuts happen. Without power, card machines do not work. The fault number is not written here yet.", "back": "← Emergencies", "note": "The phone number and exact address are not in this guide yet. If you are in danger, call 112.", "h0": "What you can do", "p0": "See if only your house is dark or the whole street. A phone torch helps. Do not use the lift if the lights go out. Carry some cash, because card payments stop.", "b0": "HEDNO"}, "it": {"title": "Blackout", "lead": "Il gestore della rete si chiama ΔΕΔΔΗΕ (HEDNO). Le interruzioni programmate capitano. Senza corrente i POS non funzionano. Il numero guasti non è ancora scritto qui.", "back": "← Emergenze", "note": "Numero di telefono e indirizzo esatto non sono ancora in questa guida. In pericolo chiama il 112.", "h0": "Cosa puoi fare", "p0": "Guarda se è buia solo casa tua o tutta la via. La torcia del telefono aiuta. Non usare l’ascensore se si spegne la luce. Porta dei contanti, perché il bancomat si ferma.", "b0": "HEDNO"}, "tr": {"title": "Elektrik kesintisi", "lead": "Şebeke işletmecisi ΔΕΔΔΗΕ (HEDNO) adını taşır. Planlı kesintiler olur. Elektrik yokken kart cihazları çalışmaz. Arıza numarası burada henüz yok.", "back": "← Acil durum", "note": "Telefon ve tam adres bu rehberde henüz yok. Tehlike varsa 112'yi ara.", "h0": "Ne yapabilirsin", "p0": "Yalnız evin mi karanlık yoksa bütün sokak mı bak. Telefon feneri işe yarar. Işık gidince asansöre binme. Kart çalışmadığı için biraz nakit taşı.", "b0": "HEDNO"}, "es": {"title": "Corte de luz", "lead": "El operador de la red se llama ΔΕΔΔΗΕ (HEDNO). Hay cortes previstos. Sin luz, los datáfonos no funcionan. El número de averías aún no está aquí.", "back": "← Emergencias", "note": "El teléfono y la dirección exacta aún no están en esta guía. Si hay peligro, llama al 112.", "h0": "Qué puedes hacer", "p0": "Mira si solo tu casa está a oscuras o toda la calle. La linterna del teléfono ayuda. No uses el ascensor si se va la luz. Lleva algo de efectivo, porque el pago con tarjeta se para.", "b0": "HEDNO"}};</script>
+<script>window.HK_DICT = {"nl": {"title": "Stroomuitval", "lead": "ΔΕΔΔΗΕ (HEDNO) beheert het stroomnet. Hieronder staat hun openbare lijst van geplande onderbrekingen voor de Dodekanesos en voor Kos. Zonder stroom werkt pinnen niet.", "back": "← Noodgevallen", "note": "Het telefoonnummer en het exacte adres staan nog niet in deze gids. Bel bij direct gevaar 112.", "h0": "Wat jij kunt doen", "p0": "Kijk of alleen jouw huis donker is of de hele straat. Een zaklamp op je telefoon helpt. Lift niet gebruiken als het licht uitgaat. Neem wat contant geld mee, juist omdat pinnen dan stopt.", "b0": "ΔΕΔΔΗΕ", "statusTitle": "Geplande stroomonderbrekingen"}, "de": {"title": "Stromausfall", "lead": "ΔΕΔΔΗΕ (HEDNO) betreibt das Stromnetz. Unten steht ihre öffentliche Liste geplanter Abschaltungen für den Dodekanes und für Kos. Ohne Strom funktioniert Kartenzahlung nicht.", "back": "← Notfälle", "note": "Telefonnummer und genaue Adresse stehen noch nicht in diesem Guide. Bei direkter Gefahr: 112.", "h0": "Was du tun kannst", "p0": "Schau, ob nur dein Haus dunkel ist oder die ganze Straße. Eine Taschenlampe am Telefon hilft. Fahrstuhl nicht benutzen, wenn das Licht ausgeht. Nimm etwas Bargeld mit, gerade weil Kartenzahlung dann stoppt.", "b0": "ΔΕΔΔΗΕ", "statusTitle": "Geplante Stromabschaltungen"}, "en": {"title": "Power cut", "lead": "ΔΕΔΔΗΕ (HEDNO) runs the power grid. Below is their public list of planned cuts for the Dodecanese and for Kos. Without power, card payments do not work.", "back": "← Emergencies", "note": "The phone number and exact address are not in this guide yet. If you are in danger, call 112.", "h0": "What you can do", "p0": "See if only your house is dark or the whole street. A phone torch helps. Do not use the lift if the lights go out. Carry some cash, because card payments stop.", "b0": "HEDNO", "statusTitle": "Planned power cuts"}, "it": {"title": "Blackout", "lead": "ΔΕΔΔΗΕ (HEDNO) gestisce la rete elettrica. Sotto c’è l’elenco pubblico delle interruzioni programmate per il Dodecaneso e per Kos. Senza corrente il bancomat non funziona.", "back": "← Emergenze", "note": "Numero di telefono e indirizzo esatto non sono ancora in questa guida. In pericolo chiama il 112.", "h0": "Cosa puoi fare", "p0": "Guarda se è buia solo casa tua o tutta la via. La torcia del telefono aiuta. Non usare l’ascensore se si spegne la luce. Porta dei contanti, perché il bancomat si ferma.", "b0": "HEDNO", "statusTitle": "Interruzioni programmate"}, "tr": {"title": "Elektrik kesintisi", "lead": "ΔΕΔΔΗΕ (HEDNO) elektrik şebekesini işletir. Aşağıda On İki Ada ve Kos için planlı kesintilerin açık listesi var. Elektrik yokken kartla ödeme çalışmaz.", "back": "← Acil durum", "note": "Telefon ve tam adres bu rehberde henüz yok. Tehlike varsa 112'yi ara.", "h0": "Ne yapabilirsin", "p0": "Yalnız evin mi karanlık yoksa bütün sokak mı bak. Telefon feneri işe yarar. Işık gidince asansöre binme. Kart çalışmadığı için biraz nakit taşı.", "b0": "HEDNO", "statusTitle": "Planlı elektrik kesintileri"}, "es": {"title": "Corte de luz", "lead": "ΔΕΔΔΗΕ (HEDNO) gestiona la red eléctrica. Abajo está su lista pública de cortes previstos para el Dodecaneso y para Kos. Sin luz, el pago con tarjeta no funciona.", "back": "← Emergencias", "note": "El teléfono y la dirección exacta aún no están en esta guía. Si hay peligro, llama al 112.", "h0": "Qué puedes hacer", "p0": "Mira si solo tu casa está a oscuras o toda la calle. La linterna del teléfono ayuda. No uses el ascensor si se va la luz. Lleva algo de efectivo, porque el pago con tarjeta se para.", "b0": "HEDNO", "statusTitle": "Cortes de luz previstos"}};</script>
 <script src="hello-kos-i18n.js"></script>
+<script src="deddie-status.js"></script>
 </body>
 </html>
