@@ -6,6 +6,20 @@
 <meta name="theme-color" content="#0D1A1A">
 <title>Politie – Hello Kos</title>
 <link rel="stylesheet" href="hello-kos.css">
+<style>
+.call-list{display:flex;flex-direction:column;gap:10px;margin:0 0 18px}
+a.call-btn{display:flex;align-items:center;gap:12px;text-decoration:none;background:linear-gradient(180deg,#3eaeae 0%,#2b7e7e 100%);color:#fff;border:0;border-radius:16px;padding:14px 16px;box-shadow:0 6px 16px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.25);cursor:pointer}
+a.call-btn:active{transform:translateY(1px);box-shadow:0 2px 8px rgba(0,0,0,.3)}
+a.call-btn .ico{flex:0 0 44px;width:44px;height:44px;border-radius:14px;background:var(--gold);color:#1c1404;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 -2px 0 rgba(0,0,0,.15)}
+a.call-btn .call-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
+a.call-btn .call-main{font-weight:800;font-size:1.08rem;line-height:1.25}
+a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba(255,255,255,.9)}
+.found-mark{display:block;width:192px;max-width:100%;height:auto;margin:-2px 0 10px}
+.photo{margin:12px 0;border-radius:14px;overflow:hidden;border:1px solid var(--border)}
+.photo img{width:100%;height:auto;display:block}
+.photo-bureau img{width:550px;max-width:100%;height:auto}
+.card .actions{margin:12px 0 0}
+</style>
 </head>
 <body class="hk-page">
 <header class="app-header">
@@ -31,21 +45,150 @@
   <div class="hero-wrap"><img src="img/hk/hulp-politie.jpg" alt=""></div>
   <p class="parent-link"><a href="noodgevallen.html" data-i18n="back">← Noodgevallen</a></p>
   <h1 data-i18n="title">Politie</h1>
-  <p class="lead" data-i18n="lead">Bij nood bel je 112. Dat nummer staat ook op de pagina Noodgevallen. Het dekt politie, ambulance en brandweer.</p>
-  <div class="badges"><span class="badge" data-i18n="b0">112</span></div>
+  <p class="lead" data-i18n="lead">Tik op een knop om te bellen.</p>
+  <div id="readText">
+    <div class="call-list">
+      <a class="call-btn" href="tel:112"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="call-copy"><span class="call-main"><span data-i18n="call">Bel</span> 112</span><span class="call-sub" data-i18n="c1">Algemeen nationaal noodnummer Griekenland</span></span></a>
+      <a class="call-btn" href="tel:100"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="call-copy"><span class="call-main"><span data-i18n="call">Bel</span> 100</span><span class="call-sub" data-i18n="c2">Nationaal noodnummer politie Griekenland</span></span></a>
+      <a class="call-btn" href="tel:+302242022222"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="call-copy"><span class="call-main"><span data-i18n="call">Bel</span> +30 22420 22222</span><span class="call-sub" data-i18n="c3">Politiebureau Kos</span></span></a>
+      <a class="call-btn" href="tel:+302242026666"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="call-copy"><span class="call-main"><span data-i18n="call">Bel</span> +30 22420 26666</span><span class="call-sub" data-i18n="c4">Gevonden voorwerpen</span></span></a>
+      <img class="found-mark" src="img/hk/gevonden-voorwerpen.jpg" alt="" width="192" height="65">
+      <a class="call-btn" href="tel:+302242026666"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="call-copy"><span class="call-main"><span data-i18n="call">Bel</span> +30 22420 26666</span><span class="call-sub" data-i18n="c5">Toeristenpolitie</span></span></a>
+      <a class="call-btn" href="tel:+302242051590"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="call-copy"><span class="call-main"><span data-i18n="call">Bel</span> +30 22420 51590</span><span class="call-sub" data-i18n="c6">Politie luchthaven Kos</span></span></a>
+    </div>
+    <article class="card">
+      <h2 data-i18n="h1">Hoofdbureau</h2>
+      <p data-i18n="p1">Kos eiland heeft meerdere kleinere politiebureaus. Het hoofdbureau bevindt zich in Kos stad. Dit bureau zit naast het oude kasteel bij de haven. Voor aangiftes of andere politiezaken kunt u naar één van de politiebureaus.</p>
+      <p><strong data-i18n="addr">Akti Miaouli 2, 853 00 Kos-stad</strong></p>
+    </article>
+    <div class="photo photo-bureau"><img src="img/hk/politie-bureau.jpg" alt="" width="550" height="309"></div>
+    <div class="actions">
+      <a class="btn btn-map" href="https://maps.app.goo.gl/gtCoKgiPvaucXboF6" target="_blank" rel="noopener">Google Maps</a>
+      <a class="btn btn-map" href="https://maps.apple.com/?ll=36.8946829,27.2917818&amp;q=Kos%20Police%20Headquarters" target="_blank" rel="noopener">Apple Maps</a>
+    </div>
+    <article class="card">
+      <h2 data-i18n="h2">Politie luchthaven Kos</h2>
+      <p data-i18n="p2">Dit is de politiepost op de luchthaven van Kos (KGS, Αερολιμένας Κω). Het nummer is +30 22420 51590. Voor spullen die op de luchthaven zijn kwijtgeraakt kun je ook dit nummer gebruiken.</p>
+      <div class="actions">
+        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&amp;query=%CE%91%CF%83%CF%84%CF%85%CE%BD%CE%BF%CE%BC%CE%B9%CE%BA%CF%8C%20%CE%A4%CE%BC%CE%AE%CE%BC%CE%B1%20%CE%91%CE%B5%CF%81%CE%BF%CE%BB%CE%B9%CE%BC%CE%AD%CE%BD%CE%B1%20%CE%9A%CF%89" target="_blank" rel="noopener">Google Maps</a>
+        <a class="btn btn-map" href="https://maps.apple.com/?q=%CE%91%CF%83%CF%84%CF%85%CE%BD%CE%BF%CE%BC%CE%B9%CE%BA%CF%8C%20%CE%A4%CE%BC%CE%AE%CE%BC%CE%B1%20%CE%91%CE%B5%CF%81%CE%BF%CE%BB%CE%B9%CE%BC%CE%AD%CE%BD%CE%B1%20%CE%9A%CF%89" target="_blank" rel="noopener">Apple Maps</a>
+      </div>
+    </article>
+    <div class="photo"><img src="img/hk/politie-verkeer.jpg" alt=""></div>
+  </div>
   <div class="actions">
     <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
     <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
-    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=police%20Kos%20town" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=police%20Kos%20town" target="_blank" rel="noopener">Apple Maps</a>
   </div>
   <p class="status" id="ttsStatus"></p>
-  <div id="readText">
-    <article class="card"><h2 data-i18n="h0">Bureaus</h2><p data-i18n="p0">Er zijn bureaus op het eiland, onder meer in Kos-stad. Het adres en het lokale nummer zijn hier nog niet ingevuld. De fabel dat er geen politie zou zijn, klopt niet.</p></article>
-    <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">Het telefoonnummer en het exacte adres staan nog niet in deze gids. Bel bij direct gevaar 112.</span></div>
-  </div>
 </main>
 <footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
-<script>window.HK_DICT = {"nl": {"title": "Politie", "lead": "Bij nood bel je 112. Dat nummer staat ook op de pagina Noodgevallen. Het dekt politie, ambulance en brandweer.", "back": "← Noodgevallen", "note": "Het telefoonnummer en het exacte adres staan nog niet in deze gids. Bel bij direct gevaar 112.", "h0": "Bureaus", "p0": "Er zijn bureaus op het eiland, onder meer in Kos-stad. Het adres en het lokale nummer zijn hier nog niet ingevuld. De fabel dat er geen politie zou zijn, klopt niet.", "b0": "112"}, "de": {"title": "Polizei", "lead": "Im Notfall rufst du 112. Die Nummer steht auch auf der Seite Notfälle. Sie gilt für Polizei, Rettung und Feuerwehr.", "back": "← Notfälle", "note": "Telefonnummer und genaue Adresse stehen noch nicht in diesem Guide. Bei direkter Gefahr: 112.", "h0": "Wachen", "p0": "Es gibt Wachen auf der Insel, unter anderem in Kos-Stadt. Adresse und lokale Nummer fehlen hier noch. Die Fabel, es gäbe keine Polizei, stimmt nicht.", "b0": "112"}, "en": {"title": "Police", "lead": "In an emergency call 112. That number is also on the Emergencies page. It covers police, ambulance and the fire service.", "back": "← Emergencies", "note": "The phone number and exact address are not in this guide yet. If you are in danger, call 112.", "h0": "Stations", "p0": "There are stations on the island, including in Kos town. The address and the local number are not filled in here yet. The myth that there is no police is wrong.", "b0": "112"}, "it": {"title": "Polizia", "lead": "In emergenza chiami il 112. Il numero è anche nella pagina Emergenze. Vale per polizia, ambulanza e vigili del fuoco.", "back": "← Emergenze", "note": "Numero di telefono e indirizzo esatto non sono ancora in questa guida. In pericolo chiama il 112.", "h0": "Commissariati", "p0": "Ci sono commissariati sull’isola, anche in città. Indirizzo e numero locale non sono ancora qui. La favola che non ci sia polizia è falsa.", "b0": "112"}, "tr": {"title": "Polis", "lead": "Acilde 112’yi ara. Numara Acil durum sayfasında da var. Polis, ambulans ve itfaiyeyi kapsar.", "back": "← Acil durum", "note": "Telefon ve tam adres bu rehberde henüz yok. Tehlike varsa 112'yi ara.", "h0": "Karakollar", "p0": "Adada karakollar var, Kos şehri dahil. Adres ve yerel numara burada henüz yok. Polis olmadığı efsanesi yanlış.", "b0": "112"}, "es": {"title": "Policía", "lead": "En una emergencia llama al 112. Ese número está también en Emergencias. Cubre policía, ambulancia y bomberos.", "back": "← Emergencias", "note": "El teléfono y la dirección exacta aún no están en esta guía. Si hay peligro, llama al 112.", "h0": "Comisarías", "p0": "Hay comisarías en la isla, también en la ciudad. La dirección y el número local aún no están. El mito de que no hay policía es falso.", "b0": "112"}};</script>
+<script>
+window.HK_DICT = {
+  nl: {
+    title: "Politie",
+    back: "← Noodgevallen",
+    lead: "Tik op een knop om te bellen.",
+    call: "Bel",
+    c1: "Algemeen nationaal noodnummer Griekenland",
+    c2: "Nationaal noodnummer politie Griekenland",
+    c3: "Politiebureau Kos",
+    c4: "Gevonden voorwerpen",
+    c5: "Toeristenpolitie",
+    c6: "Politie luchthaven Kos",
+    h1: "Hoofdbureau",
+    p1: "Kos eiland heeft meerdere kleinere politiebureaus. Het hoofdbureau bevindt zich in Kos stad. Dit bureau zit naast het oude kasteel bij de haven. Voor aangiftes of andere politiezaken kunt u naar één van de politiebureaus.",
+    addr: "Akti Miaouli 2, 853 00 Kos-stad",
+    h2: "Politie luchthaven Kos",
+    p2: "Dit is de politiepost op de luchthaven van Kos (KGS, Αερολιμένας Κω). Het nummer is +30 22420 51590. Voor spullen die op de luchthaven zijn kwijtgeraakt kun je ook dit nummer gebruiken."
+  },
+  de: {
+    title: "Polizei",
+    back: "← Notfälle",
+    lead: "Tippe auf eine Schaltfläche, um anzurufen.",
+    call: "Anrufen",
+    c1: "Allgemeine nationale Notrufnummer Griechenland",
+    c2: "Nationale Polizei-Notrufnummer Griechenland",
+    c3: "Polizeiwache Kos",
+    c4: "Fundsachen",
+    c5: "Touristenpolizei",
+    c6: "Polizei Flughafen Kos",
+    h1: "Hauptwache",
+    p1: "Die Insel Kos hat mehrere kleinere Polizeiwachen. Die Hauptwache liegt in Kos-Stadt. Diese Wache sitzt neben der alten Burg am Hafen. Für Anzeigen oder andere Polizeiangelegenheiten kannst du zu einer der Wachen gehen.",
+    addr: "Akti Miaouli 2, 853 00 Kos-Stadt",
+    h2: "Polizei Flughafen Kos",
+    p2: "Das ist die Polizeiwache am Flughafen von Kos (KGS, Αερολιμένας Κω). Die Nummer ist +30 22420 51590. Für Sachen, die am Flughafen verloren wurden, kannst du auch diese Nummer nutzen."
+  },
+  en: {
+    title: "Police",
+    back: "← Emergencies",
+    lead: "Tap a button to call.",
+    call: "Call",
+    c1: "General national emergency number Greece",
+    c2: "National police emergency number Greece",
+    c3: "Kos police station",
+    c4: "Lost property",
+    c5: "Tourist police",
+    c6: "Kos Airport police",
+    h1: "Headquarters",
+    p1: "Kos island has several smaller police stations. The headquarters is in Kos town. This station sits next to the old castle by the harbour. For reports or other police matters you can go to one of the stations.",
+    addr: "Akti Miaouli 2, 853 00 Kos town",
+    h2: "Kos Airport police",
+    p2: "This is the police post at Kos Airport (KGS, Αερολιμένας Κω). The number is +30 22420 51590. For items lost at the airport you can also use this number."
+  },
+  it: {
+    title: "Polizia",
+    back: "← Emergenze",
+    lead: "Tocca un pulsante per chiamare.",
+    call: "Chiama",
+    c1: "Numero nazionale di emergenza Grecia",
+    c2: "Numero di emergenza nazionale della polizia Grecia",
+    c3: "Commissariato di Kos",
+    c4: "Oggetti smarriti",
+    c5: "Polizia turistica",
+    c6: "Polizia aeroporto di Kos",
+    h1: "Comando centrale",
+    p1: "L’isola di Kos ha diversi commissariati più piccoli. Il comando centrale si trova nella città di Kos. Questo commissariato è accanto al vecchio castello vicino al porto. Per denunce o altre questioni di polizia puoi andare in uno dei commissariati.",
+    addr: "Akti Miaouli 2, 853 00 città di Kos",
+    h2: "Polizia aeroporto di Kos",
+    p2: "Questo è il posto di polizia all’aeroporto di Kos (KGS, Αερολιμένας Κω). Il numero è +30 22420 51590. Per oggetti smarriti in aeroporto puoi usare anche questo numero."
+  },
+  tr: {
+    title: "Polis",
+    back: "← Acil durum",
+    lead: "Aramak için bir düğmeye dokun.",
+    call: "Ara",
+    c1: "Yunanistan genel ulusal acil numara",
+    c2: "Yunanistan ulusal polis acil numarası",
+    c3: "Kos polis karakolu",
+    c4: "Kayıp eşya",
+    c5: "Turist polisi",
+    c6: "Kos havalimanı polisi",
+    h1: "Merkez karakol",
+    p1: "Kos adasında birkaç küçük polis karakolu vardır. Merkez karakol Kos şehrindedir. Bu karakol limandaki eski kalenin yanındadır. Şikayet veya diğer polis işleri için karakollardan birine gidebilirsiniz.",
+    addr: "Akti Miaouli 2, 853 00 Kos şehri",
+    h2: "Kos havalimanı polisi",
+    p2: "Bu, Kos Havalimanı’ndaki (KGS, Αερολιμένας Κω) polis noktasıdır. Numara +30 22420 51590. Havalimanında kaybolan eşyalar için de bu numarayı kullanabilirsin."
+  },
+  es: {
+    title: "Policía",
+    back: "← Emergencias",
+    lead: "Toca un botón para llamar.",
+    call: "Llama",
+    c1: "Número nacional de emergencia Grecia",
+    c2: "Número nacional de emergencia de la policía Grecia",
+    c3: "Comisaría de Kos",
+    c4: "Objetos perdidos",
+    c5: "Policía turística",
+    c6: "Policía del aeropuerto de Kos",
+    h1: "Jefatura",
+    p1: "La isla de Kos tiene varias comisarías más pequeñas. La jefatura está en la ciudad de Kos. Esta comisaría está junto al castillo antiguo, en el puerto. Para denuncias u otros asuntos policiales puedes ir a una de las comisarías.",
+    addr: "Akti Miaouli 2, 853 00 ciudad de Kos",
+    h2: "Policía del aeropuerto de Kos",
+    p2: "Este es el puesto de policía del aeropuerto de Kos (KGS, Αερολιμένας Κω). El número es +30 22420 51590. Para objetos perdidos en el aeropuerto también puedes usar este número."
+  }
+};
+</script>
 <script src="hello-kos-i18n.js"></script>
 </body>
 </html>
