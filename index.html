@@ -233,7 +233,10 @@ body.intro-lock{overflow:hidden}
       if(layer&&img){
         layer.querySelector('img').src=img.src||'';
         layer.classList.add('show');
-        setTimeout(function(){ window.location.href=href; },450);
+        setTimeout(function(){
+          layer.classList.remove('show');
+          window.location.href=href;
+        },450);
       } else {
         window.location.href=href;
       }
