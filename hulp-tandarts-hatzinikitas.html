@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Hatzinikitas George – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+<style>
+.call-list{display:flex;flex-direction:column;gap:10px;margin:12px 0}
+a.call-btn{display:flex;align-items:center;gap:12px;text-decoration:none;background:linear-gradient(180deg,#3eaeae 0%,#2b7e7e 100%);color:#fff;border:0;border-radius:16px;padding:14px 16px;box-shadow:0 6px 16px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.25);cursor:pointer}
+a.call-btn:active{transform:translateY(1px);box-shadow:0 2px 8px rgba(0,0,0,.3)}
+a.call-btn .ico{flex:0 0 44px;width:44px;height:44px;border-radius:14px;background:var(--gold);color:#1c1404;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 -2px 0 rgba(0,0,0,.15)}
+a.call-btn .call-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
+a.call-btn .call-main{font-weight:800;font-size:1.08rem;line-height:1.25}
+a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba(255,255,255,.9)}
+.card h3{font-size:.95rem;margin:12px 0 8px;color:var(--text)}
+.card ul{margin:0 0 8px;padding-left:1.1rem;color:var(--text-soft);font-size:.92rem}
+.card li{margin:0 0 4px}
+.hours{margin:4px 0 8px}
+.h-row{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:.86rem;color:var(--text-soft)}
+.h-row span:last-child{font-weight:700;color:var(--text);text-align:right}
+.strip{display:block;width:100%;height:140px;object-fit:cover;border-radius:14px;margin:0 0 12px}
+</style>
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <img class="strip" src="img/hk/tandarts-strip-spiegel.jpg" alt="" width="1280" height="720">
+  <p class="parent-link"><a href="hulp-tandarts.html" data-i18n="back">← Tandarts</a></p>
+  <h1 data-i18n="title">Hatzinikitas George</h1>
+  <p class="lead" data-i18n="lead">Tik op een knop om te bellen.</p>
+  <article class="card">
+    <h2 data-i18n="h2">Cosmetisch: Hatzinikitas George</h2>
+    <p data-i18n="p2a">Tandarts Hatzinikitas George, Georgios Hatzinikitas, is een ervaren tandarts in het centrum van Kos-stad. Hij is gespecialiseerd als prothetoloog (protheses en restauraties) en implantoloog (implantaten). De praktijk wordt vaak samen met orthodontist Christina Hatzinikita gerund. Samen bieden zij een breed scala aan tandheelkundige behandelingen aan voor zowel lokale bewoners als toeristen.</p>
+    <h3 data-i18n="treat">Behandelingen</h3>
+    <ul>
+      <li data-i18n="t2a">Spoedbehandelingen (kiespijn, afgebroken tand, ontsteking, losse vulling)</li>
+      <li data-i18n="t2b">Algemene tandheelkunde en controles</li>
+      <li data-i18n="t2c">Kronen, bruggen en protheses</li>
+      <li data-i18n="t2d">Implantaten en implantologie</li>
+      <li data-i18n="t2e">Wortelkanaalbehandelingen</li>
+      <li data-i18n="t2f">Esthetische tandheelkunde (bleken, witte vullingen)</li>
+      <li data-i18n="t2g">Orthodontie (via Christina Hatzinikita)</li>
+    </ul>
+    <p data-i18n="p2b">De praktijk staat bekend om een vriendelijke aanpak, duidelijke uitleg en redelijke prijzen. Toeristen waarderen vooral de snelle hulp bij spoedgevallen en de goede beheersing van de Engelse taal.</p>
+    <h3 data-i18n="addrH">Adres</h3>
+    <p><strong>Eth. Antistasis 1, Kos 853 00</strong></p>
+    <h3 data-i18n="hours">Uren</h3>
+    <div class="hours">
+      <div class="h-row"><span data-i18n="dMa">Ma.</span><span>09:00–13:30 18:00–20:00</span></div>
+      <div class="h-row"><span data-i18n="dDi">Di.</span><span>09:00–13:30 18:00–20:00</span></div>
+      <div class="h-row"><span data-i18n="dWo">Woe.</span><span>09:00–14:00</span></div>
+      <div class="h-row"><span data-i18n="dDo">Do.</span><span>09:00–13:30 18:00–20:00</span></div>
+      <div class="h-row"><span data-i18n="dVr">Vrij.</span><span>09:00–13:30</span></div>
+      <div class="h-row"><span data-i18n="dZa">Zat.</span><span data-i18n="closed">Gesloten</span></div>
+      <div class="h-row"><span data-i18n="dZo">Zon.</span><span data-i18n="closed">Gesloten</span></div>
+    </div>
+    <div class="call-list">
+      <a class="call-btn" href="tel:+302242023700"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="call-copy"><span class="call-main"><span data-i18n="call">Bel</span> +30 22420 23700</span><span class="call-sub">Hatzinikitas George</span></span></a>
+    </div>
+  </article>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>
+window.HK_DICT = {
+  nl: {
+    title: "Hatzinikitas George",
+    back: "← Tandarts",
+    lead: "Tik op een knop om te bellen.",
+    call: "Bel",
+    h2: "Cosmetisch: Hatzinikitas George",
+    p2a: "Tandarts Hatzinikitas George, Georgios Hatzinikitas, is een ervaren tandarts in het centrum van Kos-stad. Hij is gespecialiseerd als prothetoloog (protheses en restauraties) en implantoloog (implantaten). De praktijk wordt vaak samen met orthodontist Christina Hatzinikita gerund. Samen bieden zij een breed scala aan tandheelkundige behandelingen aan voor zowel lokale bewoners als toeristen.",
+    treat: "Behandelingen",
+    t2a: "Spoedbehandelingen (kiespijn, afgebroken tand, ontsteking, losse vulling)",
+    t2b: "Algemene tandheelkunde en controles",
+    t2c: "Kronen, bruggen en protheses",
+    t2d: "Implantaten en implantologie",
+    t2e: "Wortelkanaalbehandelingen",
+    t2f: "Esthetische tandheelkunde (bleken, witte vullingen)",
+    t2g: "Orthodontie (via Christina Hatzinikita)",
+    p2b: "De praktijk staat bekend om een vriendelijke aanpak, duidelijke uitleg en redelijke prijzen. Toeristen waarderen vooral de snelle hulp bij spoedgevallen en de goede beheersing van de Engelse taal.",
+    addrH: "Adres",
+    hours: "Uren",
+    dMa: "Ma.", dDi: "Di.", dWo: "Woe.", dDo: "Do.", dVr: "Vrij.", dZa: "Zat.", dZo: "Zon.",
+    closed: "Gesloten"
+  },
+  de: {
+    title: "Hatzinikitas George",
+    back: "← Zahnarzt",
+    lead: "Tippe auf eine Schaltfläche, um anzurufen.",
+    call: "Anrufen",
+    h2: "Kosmetisch: Hatzinikitas George",
+    p2a: "Zahnarzt Hatzinikitas George, Georgios Hatzinikitas, ist ein erfahrener Zahnarzt im Zentrum von Kos-Stadt. Er ist spezialisiert als Prothetiker (Prothesen und Restaurationen) und Implantologe (Implantate). Die Praxis wird oft zusammen mit der Kieferorthopädin Christina Hatzinikita geführt. Zusammen bieten sie ein breites Spektrum zahnärztlicher Behandlungen für Einheimische und Touristen.",
+    treat: "Behandlungen",
+    t2a: "Notfallbehandlungen (Zahnschmerzen, abgebrochener Zahn, Entzündung, lockere Füllung)",
+    t2b: "Allgemeine Zahnheilkunde und Kontrollen",
+    t2c: "Kronen, Brücken und Prothesen",
+    t2d: "Implantate und Implantologie",
+    t2e: "Wurzelkanalbehandlungen",
+    t2f: "Ästhetische Zahnheilkunde (Bleichen, weiße Füllungen)",
+    t2g: "Kieferorthopädie (über Christina Hatzinikita)",
+    p2b: "Die Praxis ist bekannt für einen freundlichen Umgang, klare Erklärungen und angemessene Preise. Touristen schätzen vor allem die schnelle Hilfe im Notfall und die guten Englischkenntnisse.",
+    addrH: "Adresse",
+    hours: "Zeiten",
+    dMa: "Mo.", dDi: "Di.", dWo: "Mi.", dDo: "Do.", dVr: "Fr.", dZa: "Sa.", dZo: "So.",
+    closed: "Geschlossen"
+  },
+  en: {
+    title: "Hatzinikitas George",
+    back: "← Dentist",
+    lead: "Tap a button to call.",
+    call: "Call",
+    h2: "Cosmetic: Hatzinikitas George",
+    p2a: "Dentist Hatzinikitas George, Georgios Hatzinikitas, is an experienced dentist in the centre of Kos town. He specialises as a prosthodontist (dentures and restorations) and implantologist (implants). The practice is often run together with orthodontist Christina Hatzinikita. Together they offer a wide range of dental treatments for both local residents and tourists.",
+    treat: "Treatments",
+    t2a: "Emergency treatment (toothache, broken tooth, infection, loose filling)",
+    t2b: "General dentistry and check-ups",
+    t2c: "Crowns, bridges and dentures",
+    t2d: "Implants and implantology",
+    t2e: "Root canal treatments",
+    t2f: "Aesthetic dentistry (whitening, white fillings)",
+    t2g: "Orthodontics (via Christina Hatzinikita)",
+    p2b: "The practice is known for a friendly approach, clear explanations and reasonable prices. Tourists especially appreciate the quick help in emergencies and the good command of English.",
+    addrH: "Address",
+    hours: "Hours",
+    dMa: "Mon", dDi: "Tue", dWo: "Wed", dDo: "Thu", dVr: "Fri", dZa: "Sat", dZo: "Sun",
+    closed: "Closed"
+  },
+  it: {
+    title: "Hatzinikitas George",
+    back: "← Dentista",
+    lead: "Tocca un pulsante per chiamare.",
+    call: "Chiama",
+    h2: "Estetica: Hatzinikitas George",
+    p2a: "Il dentista Hatzinikitas George, Georgios Hatzinikitas, è un dentista esperto nel centro della città di Kos. È specializzato come protesista (protesi e restauri) e implantologo (impianti). Lo studio è spesso gestito insieme all’ortodontista Christina Hatzinikita. Insieme offrono un’ampia gamma di cure dentistiche sia ai residenti sia ai turisti.",
+    treat: "Trattamenti",
+    t2a: "Urgenze (mal di denti, dente spezzato, infiammazione, otturazione allentata)",
+    t2b: "Odontoiatria generale e controlli",
+    t2c: "Corone, ponti e protesi",
+    t2d: "Impianti e implantologia",
+    t2e: "Devitalizzazioni",
+    t2f: "Odontoiatria estetica (sbiancamento, otturazioni bianche)",
+    t2g: "Ortodonzia (tramite Christina Hatzinikita)",
+    p2b: "Lo studio è noto per un approccio cordiale, spiegazioni chiare e prezzi ragionevoli. I turisti apprezzano soprattutto l’aiuto rapido nelle urgenze e la buona conoscenza dell’inglese.",
+    addrH: "Indirizzo",
+    hours: "Orari",
+    dMa: "Lun", dDi: "Mar", dWo: "Mer", dDo: "Gio", dVr: "Ven", dZa: "Sab", dZo: "Dom",
+    closed: "Chiuso"
+  },
+  tr: {
+    title: "Hatzinikitas George",
+    back: "← Diş hekimi",
+    lead: "Aramak için bir düğmeye dokun.",
+    call: "Ara",
+    h2: "Kozmetik: Hatzinikitas George",
+    p2a: "Diş hekimi Hatzinikitas George, Georgios Hatzinikitas, Kos şehrinin merkezinde deneyimli bir diş hekimidir. Protez uzmanı (protez ve restorasyon) ve implantolog (implant) olarak uzmanlaşmıştır. Muayenehane çoğu zaman ortodontist Christina Hatzinikita ile birlikte yürütülür. Birlikte hem yerli halka hem turistlere geniş bir diş tedavisi yelpazesi sunarlar.",
+    treat: "Tedaviler",
+    t2a: "Acil tedaviler (diş ağrısı, kırık diş, iltihap, gevşek dolgu)",
+    t2b: "Genel diş hekimliği ve kontroller",
+    t2c: "Kron, köprü ve protez",
+    t2d: "İmplant ve implantoloji",
+    t2e: "Kök kanal tedavileri",
+    t2f: "Estetik diş hekimliği (beyazlatma, beyaz dolgular)",
+    t2g: "Ortodonti (Christina Hatzinikita aracılığıyla)",
+    p2b: "Muayenehane güler yüzlü yaklaşımı, açık anlatımı ve makul fiyatlarıyla bilinir. Turistler özellikle acil durumda hızlı yardımı ve iyi İngilizceyi takdir eder.",
+    addrH: "Adres",
+    hours: "Saatler",
+    dMa: "Pzt", dDi: "Sal", dWo: "Çar", dDo: "Per", dVr: "Cum", dZa: "Cmt", dZo: "Paz",
+    closed: "Kapalı"
+  },
+  es: {
+    title: "Hatzinikitas George",
+    back: "← Dentista",
+    lead: "Toca un botón para llamar.",
+    call: "Llama",
+    h2: "Estética: Hatzinikitas George",
+    p2a: "El dentista Hatzinikitas George, Georgios Hatzinikitas, es un dentista con experiencia en el centro de la ciudad de Kos. Está especializado como protesista (prótesis y restauraciones) e implantólogo (implantes). La clínica a menudo la lleva junto con la ortodoncista Christina Hatzinikita. Juntos ofrecen una amplia gama de tratamientos dentales tanto a vecinos como a turistas.",
+    treat: "Tratamientos",
+    t2a: "Urgencias (dolor de muelas, diente partido, inflamación, empaste suelto)",
+    t2b: "Odontología general y revisiones",
+    t2c: "Coronas, puentes y prótesis",
+    t2d: "Implantes e implantología",
+    t2e: "Endodoncias",
+    t2f: "Odontología estética (blanqueamiento, empastes blancos)",
+    t2g: "Ortodoncia (a través de Christina Hatzinikita)",
+    p2b: "La clínica es conocida por un trato amable, explicaciones claras y precios razonables. Los turistas valoran sobre todo la ayuda rápida en urgencias y el buen dominio del inglés.",
+    addrH: "Dirección",
+    hours: "Horario",
+    dMa: "Lun", dDi: "Mar", dWo: "Mié", dDo: "Jue", dVr: "Vie", dZa: "Sáb", dZo: "Dom",
+    closed: "Cerrado"
+  }
+};
+</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>
