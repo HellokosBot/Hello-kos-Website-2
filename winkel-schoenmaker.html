@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Τακούνι Expert – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+<style>
+.call-list{display:flex;flex-direction:column;gap:10px;margin:12px 0 0}
+a.call-btn{display:flex;align-items:center;gap:12px;text-decoration:none;background:linear-gradient(180deg,#3eaeae 0%,#2b7e7e 100%);color:#fff;border:0;border-radius:16px;padding:14px 16px;box-shadow:0 6px 16px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.25);cursor:pointer;box-sizing:border-box;max-width:100%}
+a.call-btn:active{transform:translateY(1px)}
+a.call-btn .ico{flex:0 0 44px;width:44px;height:44px;border-radius:14px;background:var(--gold);color:#1c1404;display:flex;align-items:center;justify-content:center}
+a.call-btn .call-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
+a.call-btn .call-main{font-weight:800;font-size:1.05rem;line-height:1.25}
+a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba(255,255,255,.9)}
+.strip{display:block;width:100%;height:140px;object-fit:cover;border-radius:14px;margin:0 0 12px}
+.card h3{font-size:.95rem;margin:12px 0 8px;color:var(--text)}
+.card .actions{margin:12px 0 0}
+.hours{margin:4px 0 8px}
+.h-row{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:.86rem;color:var(--text-soft)}
+.h-row span:last-child{font-weight:700;color:var(--text);text-align:right}
+.addr{white-space:pre-line}
+.card ul{margin:0 0 8px;padding-left:1.1rem;color:var(--text-soft);font-size:.92rem}
+.card li{margin:0 0 4px}
+.loc-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:14px;margin:0 0 12px}
+.loc-card h2{font-size:1.05rem;margin:0 0 8px}
+.loc-name{font-weight:800;font-size:1.05rem}
+.loc-list a{color:var(--petrol);font-weight:700}
+</style>
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+<img class="strip" src="img/hk/winkel-schoen-1.jpg" alt="">
+<p class="parent-link"><a href="praktische-winkels.html" data-i18n="back">← Belangrijke winkels</a></p>
+<h1 data-i18n="title">Τακούνι Expert</h1>
+<article class="card">
+<p data-i18n="p0">Τακούνι Expert is een echte vakman in Kos-stad als het gaat om schoenreparaties. Of je nu een hak is afgebroken, je zool versleten is, een rits kapot is gegaan of je favoriete schoenen dringend een opknapbeurt nodig hebben – hier zorgen ze er snel en vakkundig voor dat je schoenen weer als nieuw zijn. Veel toeristen komen hier met kapotte sandalen, slippers of nette schoenen die tijdens de vakantie stuk zijn gegaan. Het is een ouderwetse, betrouwbare schoenmakerij waar ze snel werken en eerlijke prijzen rekenen.</p>
+<h3 data-i18n="addrH">Adres</h3>
+<p class="addr"><strong>Leof. El. Venizelou 15, Kos 853 00</strong></p>
+<h3 data-i18n="hoursH">Openingstijden</h3><div class="hours">
+<div class="h-row"><span data-i18n="d0">Ma.</span><span>09:00–14:00</span></div>
+<div class="h-row"><span data-i18n="d1">Di.</span><span>09:00–14:00 19:00–21:00</span></div>
+<div class="h-row"><span data-i18n="d2">Woe.</span><span>09:00–14:00</span></div>
+<div class="h-row"><span data-i18n="d3">Don.</span><span>09:00–14:00 18:00–21:00</span></div>
+<div class="h-row"><span data-i18n="d4">Vrij.</span><span>09:00–14:00 18:00–21:00</span></div>
+<div class="h-row"><span data-i18n="d5">Zat.</span><span>09:00–14:00</span></div>
+<div class="h-row"><span data-i18n="d6">Zon.</span><span data-i18n="closed">Gesloten</span></div>
+</div>
+<div class="call-list">
+<a class="call-btn" href="tel:+302242118380"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="call-copy"><span class="call-main"><span data-i18n="call">Bel</span> +30 2242 118380</span><span class="call-sub" data-i18n="phoneL">Telefoon</span></span></a>
+</div>
+<div class="actions"><a class="btn btn-map" href="https://maps.app.goo.gl/m2CN1UCLL9q4Neg97" target="_blank" rel="noopener" data-i18n="map">Google locatie</a></div>
+</article>
+<img class="strip" src="img/hk/winkel-schoen-2.jpg" alt="">
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>
+window.HK_DICT = {
+  "nl": {
+    "back": "← Belangrijke winkels",
+    "hoursH": "Openingstijden",
+    "addrH": "Adres",
+    "call": "Bel",
+    "phoneL": "Telefoon",
+    "emergL": "Nood Telefoon",
+    "map": "Google locatie",
+    "closed": "Gesloten",
+    "d0": "Ma.",
+    "d1": "Di.",
+    "d2": "Woe.",
+    "d3": "Don.",
+    "d4": "Vrij.",
+    "d5": "Zat.",
+    "d6": "Zon.",
+    "title": "Τακούνι Expert",
+    "p0": "Τακούνι Expert is een echte vakman in Kos-stad als het gaat om schoenreparaties. Of je nu een hak is afgebroken, je zool versleten is, een rits kapot is gegaan of je favoriete schoenen dringend een opknapbeurt nodig hebben – hier zorgen ze er snel en vakkundig voor dat je schoenen weer als nieuw zijn. Veel toeristen komen hier met kapotte sandalen, slippers of nette schoenen die tijdens de vakantie stuk zijn gegaan. Het is een ouderwetse, betrouwbare schoenmakerij waar ze snel werken en eerlijke prijzen rekenen."
+  },
+  "de": {
+    "back": "← Wichtige Läden",
+    "hoursH": "Öffnungszeiten",
+    "addrH": "Adresse",
+    "call": "Anrufen",
+    "phoneL": "Telefon",
+    "emergL": "Nottelefon",
+    "map": "Google-Standort",
+    "closed": "Geschlossen",
+    "d0": "Mo.",
+    "d1": "Di.",
+    "d2": "Mi.",
+    "d3": "Do.",
+    "d4": "Fr.",
+    "d5": "Sa.",
+    "d6": "So.",
+    "title": "Τακούνι Expert",
+    "p0": "Τακούνι Expert ist ein echter Fachmann in Kos-Stadt für Schuhreparaturen. Ob ein Absatz abgebrochen ist, die Sohle abgenutzt, ein Reißverschluss kaputt oder deine Lieblingsschuhe dringend eine Auffrischung brauchen – hier werden die Schuhe schnell und fachkundig wieder wie neu. Viele Touristen kommen mit kaputten Sandalen, Schlappen oder feinen Schuhen, die im Urlaub kaputtgegangen sind. Es ist eine altmodische, zuverlässige Schusterwerkstatt, die schnell arbeitet und faire Preise nimmt."
+  },
+  "en": {
+    "back": "← Important shops",
+    "hoursH": "Opening hours",
+    "addrH": "Address",
+    "call": "Call",
+    "phoneL": "Phone",
+    "emergL": "Emergency phone",
+    "map": "Google location",
+    "closed": "Closed",
+    "d0": "Mon",
+    "d1": "Tue",
+    "d2": "Wed",
+    "d3": "Thu",
+    "d4": "Fri",
+    "d5": "Sat",
+    "d6": "Sun",
+    "title": "Τακούνι Expert",
+    "p0": "Τακούνι Expert is a real craftsman in Kos town for shoe repairs. Whether a heel has broken, a sole is worn, a zip has failed or your favourite shoes urgently need a refresh – here they quickly and skilfully make your shoes like new again. Many tourists arrive with broken sandals, flip-flops or smart shoes that failed on holiday. It is an old-fashioned, reliable cobbler’s that works fast and charges fair prices."
+  },
+  "it": {
+    "back": "← Negozi importanti",
+    "hoursH": "Orari",
+    "addrH": "Indirizzo",
+    "call": "Chiama",
+    "phoneL": "Telefono",
+    "emergL": "Telefono di emergenza",
+    "map": "Posizione Google",
+    "closed": "Chiuso",
+    "d0": "Lun",
+    "d1": "Mar",
+    "d2": "Mer",
+    "d3": "Gio",
+    "d4": "Ven",
+    "d5": "Sab",
+    "d6": "Dom",
+    "title": "Τακούνι Expert",
+    "p0": "Τακούνι Expert è un vero artigiano a Kos città per le riparazioni di scarpe. Che si sia rotto un tacco, consumata una suola, rotta una cerniera o che le scarpe preferite abbiano bisogno di una sistemata, qui le rimettono a nuovo in fretta e con competenza. Molti turisti arrivano con sandali, ciabatte o scarpe eleganti rotti in vacanza. È una calzoleria all’antica e affidabile, veloce e a prezzi onesti."
+  },
+  "tr": {
+    "back": "← Önemli dükkanlar",
+    "hoursH": "Çalışma saatleri",
+    "addrH": "Adres",
+    "call": "Ara",
+    "phoneL": "Telefon",
+    "emergL": "Acil telefon",
+    "map": "Google konumu",
+    "closed": "Kapalı",
+    "d0": "Pzt",
+    "d1": "Sal",
+    "d2": "Çar",
+    "d3": "Per",
+    "d4": "Cum",
+    "d5": "Cmt",
+    "d6": "Paz",
+    "title": "Τακούνι Expert",
+    "p0": "Τακούνι Expert, Kos şehrinde ayakkabı tamirinde gerçek bir ustadır. Topuk kırılmış, taban aşınmış, fermuar bozulmuş veya sevdiğin ayakkabılar acil bakım istiyorsa burada hızlı ve ustaca yenilenir. Birçok turist tatilde bozulan sandalet, terlik veya şık ayakkabıyla gelir. Eski usul, güvenilir, hızlı çalışan ve dürüst fiyatlı bir ayakkabı tamircisidir."
+  },
+  "es": {
+    "back": "← Tiendas importantes",
+    "hoursH": "Horario",
+    "addrH": "Dirección",
+    "call": "Llama",
+    "phoneL": "Teléfono",
+    "emergL": "Teléfono de urgencia",
+    "map": "Ubicación en Google",
+    "closed": "Cerrado",
+    "d0": "Lun",
+    "d1": "Mar",
+    "d2": "Mié",
+    "d3": "Jue",
+    "d4": "Vie",
+    "d5": "Sáb",
+    "d6": "Dom",
+    "title": "Τακούνι Expert",
+    "p0": "Τακούνι Expert es un verdadero artesano en la ciudad de Kos para reparar zapatos. Si se rompe un tacón, se gasta una suela, falla una cremallera o tus zapatos favoritos necesitan un arreglo, aquí los dejan como nuevos rápido y con oficio. Muchos turistas llegan con sandalias, chanclas o zapatos de vestir rotos en vacaciones. Es una zapatería de las de antes, fiable, rápida y con precios justos."
+  }
+};
+</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>
