@@ -7,7 +7,13 @@
 <title>Huisartsen – Hello Kos</title>
 <link rel="stylesheet" href="hello-kos.css">
 <style>
-body.hk-page .hero-wrap { aspect-ratio: auto; height: 140px; }
+body.hk-page .hero-wrap { aspect-ratio: auto; height: 176px; }
+body.hk-page .hero-wrap h1 {
+  position: absolute; left: 12px; right: 12px; top: 14px; z-index: 2; margin: 0;
+  text-align: center; color: #fff; font-weight: 800; font-size: clamp(1.7rem, 8vw, 2.2rem); line-height: 1.1;
+  padding: 10px 12px; border-radius: 14px; background: rgba(13,26,26,.55);
+  text-shadow: 0 2px 10px rgba(0,0,0,.85);
+}
 .hint { text-align: center; color: var(--text-soft); font-size: .88rem; margin: -6px 0 14px; }
 .health-note { font-size: .86rem; color: var(--text-soft); margin: 14px 0 8px; }
 .health-note a { color: var(--petrol); font-weight: 700; }
@@ -56,9 +62,11 @@ body.hk-page .hero-wrap { aspect-ratio: auto; height: 140px; }
 </header>
 <div class="overlay" id="overlay"></div>
 <main class="main">
-  <div class="hero-wrap"><img src="img/hk/hulp-huisartsen.jpg" alt="" width="1280" height="720"></div>
+  <div class="hero-wrap">
+    <img src="img/hk/hulp-huisartsen.jpg" alt="" width="1280" height="720">
+    <h1 data-i18n="title">Huisartsen</h1>
+  </div>
   <p class="parent-link"><a href="noodgevallen.html" data-i18n="back">← Noodgevallen</a></p>
-  <h1 data-i18n="title">Huisartsen</h1>
   <p class="lead" data-i18n="lead">Kies een regio.</p>
   <p class="hint" data-i18n="swipeHint">Swipen: veeg links of rechts, of gebruik de pijlen. Tik op de kaart om te openen.</p>
 
@@ -79,7 +87,7 @@ body.hk-page .hero-wrap { aspect-ratio: auto; height: 140px; }
 window.HK_DICT = {
   nl: { title: "Huisartsen", back: "← Noodgevallen", lead: "Kies een regio.", swipeHint: "Swipen: veeg links of rechts, of gebruik de pijlen. Tik op de kaart om te openen.", prev: "Vorige", next: "Volgende", healthNote: "Antimachia, Kardamena en Kefalos hebben hier geen huisarts. De gezondheidsposten staan bij het ziekenhuis.", healthLink: "Ziekenhuis" },
   de: { title: "Hausärzte", back: "← Notfälle", lead: "Wähle eine Region.", swipeHint: "Wischen: nach links oder rechts, oder die Pfeile. Tippe auf die Karte, um zu öffnen.", prev: "Zurück", next: "Weiter", healthNote: "Antimachia, Kardamena und Kefalos haben hier keinen Hausarzt. Die Gesundheitsstationen stehen beim Krankenhaus.", healthLink: "Krankenhaus" },
-  en: { title: "GPs", back: "← Emergencies", lead: "Choose a region.", swipeHint: "Swipe left or right, or use the arrows. Tap the card to open it.", prev: "Previous", next: "Next", healthNote: "Antimachia, Kardamena and Kefalos have no GP page here. The health posts are on the hospital page.", healthLink: "Hospital" },
+  en: { title: "Doctors", back: "← Emergencies", lead: "Choose a region.", swipeHint: "Swipe left or right, or use the arrows. Tap the card to open it.", prev: "Previous", next: "Next", healthNote: "Antimachia, Kardamena and Kefalos have no GP page here. The health posts are on the hospital page.", healthLink: "Hospital" },
   it: { title: "Medici di base", back: "← Emergenze", lead: "Scegli una zona.", swipeHint: "Scorri a sinistra o a destra, oppure usa le frecce. Tocca la scheda per aprirla.", prev: "Indietro", next: "Avanti", healthNote: "Antimachia, Kardamena e Kefalos non hanno qui un medico di base. I presidi sanitari sono nella pagina dell’ospedale.", healthLink: "Ospedale" },
   tr: { title: "Aile hekimleri", back: "← Acil durum", lead: "Bir bölge seç.", swipeHint: "Sola veya sağa kaydır, ya da okları kullan. Açmak için karta dokun.", prev: "Önceki", next: "Sonraki", healthNote: "Antimachia, Kardamena ve Kefalos’un burada aile hekimi sayfası yok. Sağlık noktaları hastane sayfasında.", healthLink: "Hastane" },
   es: { title: "Médicos de cabecera", back: "← Emergencias", lead: "Elige una zona.", swipeHint: "Desliza a izquierda o derecha, o usa las flechas. Toca la tarjeta para abrirla.", prev: "Anterior", next: "Siguiente", healthNote: "Antimachia, Kardamena y Kefalos no tienen aquí médico de cabecera. Los puestos de salud están en la página del hospital.", healthLink: "Hospital" }
