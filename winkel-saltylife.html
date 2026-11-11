@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Saltylife Fishing Equipment – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+<style>
+.call-list{display:flex;flex-direction:column;gap:10px;margin:12px 0 0}
+a.call-btn{display:flex;align-items:center;gap:12px;text-decoration:none;background:linear-gradient(180deg,#3eaeae 0%,#2b7e7e 100%);color:#fff;border:0;border-radius:16px;padding:14px 16px;box-shadow:0 6px 16px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.25);cursor:pointer;box-sizing:border-box;max-width:100%}
+a.call-btn:active{transform:translateY(1px)}
+a.call-btn .ico{flex:0 0 44px;width:44px;height:44px;border-radius:14px;background:var(--gold);color:#1c1404;display:flex;align-items:center;justify-content:center}
+a.call-btn .call-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
+a.call-btn .call-main{font-weight:800;font-size:1.05rem;line-height:1.25}
+a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba(255,255,255,.9)}
+.strip{display:block;width:100%;height:140px;object-fit:cover;border-radius:14px;margin:0 0 12px}
+.card h3{font-size:.95rem;margin:12px 0 8px;color:var(--text)}
+.card .actions{margin:12px 0 0}
+.hours{margin:4px 0 8px}
+.h-row{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:.86rem;color:var(--text-soft)}
+.h-row span:last-child{font-weight:700;color:var(--text);text-align:right}
+.addr{white-space:pre-line}
+.card ul{margin:0 0 8px;padding-left:1.1rem;color:var(--text-soft);font-size:.92rem}
+.card li{margin:0 0 4px}
+.loc-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:14px;margin:0 0 12px}
+.loc-card h2{font-size:1.05rem;margin:0 0 8px}
+.loc-name{font-weight:800;font-size:1.05rem}
+.loc-list a{color:var(--petrol);font-weight:700}
+</style>
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+<img class="strip" src="img/hk/winkel-salty-1.jpg" alt="">
+<p class="parent-link"><a href="praktische-winkels.html" data-i18n="back">← Belangrijke winkels</a></p>
+<h1 data-i18n="title">Saltylife Fishing Equipment</h1>
+<article class="card">
+<p data-i18n="p0">Saltylife Fishing Equipment is de beste winkel op Kos voor iedereen die graag vist. Of je nu serieus vist of gewoon een keer wilt proberen tijdens je vakantie, hier vind je alles wat je nodig hebt: hengels, molens, lijnen, aas, kunstaas, netten en allerlei andere visspullen. De winkel heeft zowel spullen voor beginners als voor ervaren vissers. De eigenaren weten veel over de beste visplekken rondom Kos en geven graag tips over waar en wanneer je het beste kunt vissen. Ze spreken goed Engels, dus ook als toerist word je vriendelijk geholpen. De winkel ligt in Kos-stad, niet ver van de haven, en is makkelijk te bereiken</p>
+<h3 data-i18n="addrH">Adres</h3>
+<p class="addr"><strong>Makrigianni 64, Kos 853 00</strong></p>
+<h3 data-i18n="hoursH">Openingstijden</h3><div class="hours">
+<div class="h-row"><span data-i18n="d0">Ma.</span><span>09:00–17:00</span></div>
+<div class="h-row"><span data-i18n="d1">Di.</span><span>09:00–14:00 17:00–20:00</span></div>
+<div class="h-row"><span data-i18n="d2">Woe.</span><span>09:00–17:00</span></div>
+<div class="h-row"><span data-i18n="d3">Don.</span><span>09:00–14:00 17:00–20:00</span></div>
+<div class="h-row"><span data-i18n="d4">Vrij.</span><span>09:00–17:00</span></div>
+<div class="h-row"><span data-i18n="d5">Zat.</span><span>09:00–17:00</span></div>
+<div class="h-row"><span data-i18n="d6">Zon.</span><span data-i18n="closed">Gesloten</span></div>
+</div>
+<div class="call-list">
+<a class="call-btn" href="tel:+302242302990"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="call-copy"><span class="call-main"><span data-i18n="call">Bel</span> +30 2242 302990</span><span class="call-sub" data-i18n="phoneL">Telefoon</span></span></a>
+</div>
+<div class="actions"><a class="btn btn-map" href="https://maps.app.goo.gl/NMQ4eJ7zFtqbWZzEA" target="_blank" rel="noopener" data-i18n="map">Google locatie</a></div>
+</article>
+<img class="strip" src="img/hk/winkel-salty-2.jpg" alt="">
+<img class="strip" src="img/hk/winkel-salty-3.jpg" alt="">
+<img class="strip" src="img/hk/winkel-salty-4.jpg" alt="">
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>
+window.HK_DICT = {
+  "nl": {
+    "back": "← Belangrijke winkels",
+    "hoursH": "Openingstijden",
+    "addrH": "Adres",
+    "call": "Bel",
+    "phoneL": "Telefoon",
+    "emergL": "Nood Telefoon",
+    "map": "Google locatie",
+    "closed": "Gesloten",
+    "d0": "Ma.",
+    "d1": "Di.",
+    "d2": "Woe.",
+    "d3": "Don.",
+    "d4": "Vrij.",
+    "d5": "Zat.",
+    "d6": "Zon.",
+    "title": "Saltylife Fishing Equipment",
+    "p0": "Saltylife Fishing Equipment is de beste winkel op Kos voor iedereen die graag vist. Of je nu serieus vist of gewoon een keer wilt proberen tijdens je vakantie, hier vind je alles wat je nodig hebt: hengels, molens, lijnen, aas, kunstaas, netten en allerlei andere visspullen. De winkel heeft zowel spullen voor beginners als voor ervaren vissers. De eigenaren weten veel over de beste visplekken rondom Kos en geven graag tips over waar en wanneer je het beste kunt vissen. Ze spreken goed Engels, dus ook als toerist word je vriendelijk geholpen. De winkel ligt in Kos-stad, niet ver van de haven, en is makkelijk te bereiken"
+  },
+  "de": {
+    "back": "← Wichtige Läden",
+    "hoursH": "Öffnungszeiten",
+    "addrH": "Adresse",
+    "call": "Anrufen",
+    "phoneL": "Telefon",
+    "emergL": "Nottelefon",
+    "map": "Google-Standort",
+    "closed": "Geschlossen",
+    "d0": "Mo.",
+    "d1": "Di.",
+    "d2": "Mi.",
+    "d3": "Do.",
+    "d4": "Fr.",
+    "d5": "Sa.",
+    "d6": "So.",
+    "title": "Saltylife Fishing Equipment",
+    "p0": "Saltylife Fishing Equipment ist der beste Laden auf Kos für alle, die gern angeln. Ob du ernsthaft angelst oder es im Urlaub einmal versuchen willst, hier findest du alles: Ruten, Rollen, Schnüre, Köder, Kunstköder, Netze und allerlei anderes Angelzeug. Der Laden hat Sachen für Anfänger und für erfahrene Angler. Die Inhaber wissen viel über die besten Angelplätze rund um Kos und geben gern Tipps, wo und wann du am besten angelst. Sie sprechen gut Englisch, also wirst du auch als Tourist freundlich geholfen. Der Laden liegt in Kos-Stadt, nicht weit vom Hafen, und ist leicht zu erreichen"
+  },
+  "en": {
+    "back": "← Important shops",
+    "hoursH": "Opening hours",
+    "addrH": "Address",
+    "call": "Call",
+    "phoneL": "Phone",
+    "emergL": "Emergency phone",
+    "map": "Google location",
+    "closed": "Closed",
+    "d0": "Mon",
+    "d1": "Tue",
+    "d2": "Wed",
+    "d3": "Thu",
+    "d4": "Fri",
+    "d5": "Sat",
+    "d6": "Sun",
+    "title": "Saltylife Fishing Equipment",
+    "p0": "Saltylife Fishing Equipment is the best shop on Kos for anyone who likes to fish. Whether you fish seriously or just want to try once on holiday, here you find everything you need: rods, reels, lines, bait, lures, nets and all sorts of other fishing gear. The shop has things for beginners and for experienced anglers. The owners know a lot about the best fishing spots around Kos and are happy to give tips on where and when to fish. They speak good English, so as a tourist you are helped in a friendly way. The shop is in Kos town, not far from the harbour, and is easy to reach"
+  },
+  "it": {
+    "back": "← Negozi importanti",
+    "hoursH": "Orari",
+    "addrH": "Indirizzo",
+    "call": "Chiama",
+    "phoneL": "Telefono",
+    "emergL": "Telefono di emergenza",
+    "map": "Posizione Google",
+    "closed": "Chiuso",
+    "d0": "Lun",
+    "d1": "Mar",
+    "d2": "Mer",
+    "d3": "Gio",
+    "d4": "Ven",
+    "d5": "Sab",
+    "d6": "Dom",
+    "title": "Saltylife Fishing Equipment",
+    "p0": "Saltylife Fishing Equipment è il miglior negozio di Kos per chi ama pescare. Che tu peschi sul serio o voglia provare una volta in vacanza, qui trovi tutto: canne, mulinelli, lenze, esche, artificiali, reti e altro. Il negozio ha cose per principianti e per pescatori esperti. I proprietari sanno molto sui migliori punti di pesca intorno a Kos e danno volentieri consigli su dove e quando pescare. Parlano bene inglese, quindi anche da turista sei aiutato con gentilezza. Il negozio è a Kos città, non lontano dal porto, ed è facile da raggiungere"
+  },
+  "tr": {
+    "back": "← Önemli dükkanlar",
+    "hoursH": "Çalışma saatleri",
+    "addrH": "Adres",
+    "call": "Ara",
+    "phoneL": "Telefon",
+    "emergL": "Acil telefon",
+    "map": "Google konumu",
+    "closed": "Kapalı",
+    "d0": "Pzt",
+    "d1": "Sal",
+    "d2": "Çar",
+    "d3": "Per",
+    "d4": "Cum",
+    "d5": "Cmt",
+    "d6": "Paz",
+    "title": "Saltylife Fishing Equipment",
+    "p0": "Saltylife Fishing Equipment, balık tutmayı sevenler için Kos’taki en iyi dükkandır. Ciddi tut veya tatilde bir kez dene, burada ihtiyacın olan her şey var: olta, makara, misina, yem, sahte yem, ağ ve başka balık malzemeleri. Dükkanda hem yeni başlayanlar hem deneyimliler için malzeme vardır. Sahipler Kos çevresindeki en iyi balık yerlerini iyi bilir ve nerede, ne zaman tutmanın iyi olduğunu seve seve söyler. İyi İngilizce konuşurlar, turist olarak da nazikçe yardım edilirsin. Dükkan Kos şehrinde, limana yakın ve kolay ulaşılır"
+  },
+  "es": {
+    "back": "← Tiendas importantes",
+    "hoursH": "Horario",
+    "addrH": "Dirección",
+    "call": "Llama",
+    "phoneL": "Teléfono",
+    "emergL": "Teléfono de urgencia",
+    "map": "Ubicación en Google",
+    "closed": "Cerrado",
+    "d0": "Lun",
+    "d1": "Mar",
+    "d2": "Mié",
+    "d3": "Jue",
+    "d4": "Vie",
+    "d5": "Sáb",
+    "d6": "Dom",
+    "title": "Saltylife Fishing Equipment",
+    "p0": "Saltylife Fishing Equipment es la mejor tienda de Kos para quien le gusta pescar. Pesque en serio o quiera probar una vez en vacaciones, aquí encuentra todo: cañas, carretes, líneas, cebo, señuelos, redes y más. La tienda tiene cosas para principiantes y para pescadores con experiencia. Los dueños saben mucho de los mejores sitios de pesca alrededor de Kos y dan consejos de dónde y cuándo pescar. Hablan bien inglés, así que como turista te atienden con amabilidad. La tienda está en la ciudad de Kos, no lejos del puerto, y es fácil de llegar"
+  }
+};
+</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

@@ -4,8 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0D1A1A">
-<title>Praktische winkels – Hello Kos</title>
+<title>Belangrijke winkels – Hello Kos</title>
 <link rel="stylesheet" href="hello-kos.css">
+<style>
+body.hk-page .shop-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 12px}
+body.hk-page a.shop-card{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;position:relative;border-radius:16px;overflow:hidden;aspect-ratio:1;background:#1a2525;text-decoration:none;border:1px solid var(--border);padding:0;margin:0;color:#fff}
+body.hk-page a.shop-card .pic{flex:1 1 auto;min-height:0;overflow:hidden;background:#1a2525}
+body.hk-page a.shop-card .pic img{width:100%;height:100%;object-fit:cover;display:block}
+body.hk-page a.shop-card .card-bar{flex:0 0 auto;display:flex;align-items:flex-end;box-sizing:border-box;width:100%;padding:7px 10px;background:rgba(13,26,26,.9)}
+body.hk-page a.shop-card .card-title{color:#fff;font-size:.88rem;font-weight:700;line-height:1.25;display:flex;flex-direction:column;gap:2px}
+body.hk-page a.shop-card .card-meta{font-size:.7rem;font-weight:600;opacity:.9;color:#e8f5f3}
+body.hk-page h2.section{font-size:1.05rem;font-weight:800;text-align:center;color:var(--gold);margin:2px 0 12px}
+</style>
 </head>
 <body class="hk-page">
 <header class="app-header">
@@ -28,25 +38,279 @@
 </header>
 <div class="overlay" id="overlay"></div>
 <main class="main">
-  <div class="hero-wrap"><img src="praktische-winkels.jpg" alt=""></div>
-  <p class="parent-link"><a href="index.html" data-i18n="back">← Home</a></p>
-  <h1 data-i18n="title">Praktische winkels</h1>
-  <p class="lead" data-i18n="lead">Geen souvenirlijst, maar zaken die je nodig hebt als er iets stuk is of op is. Adressen zijn nog niet ingevuld.</p>
-  <div class="badges"><span class="badge" data-i18n="b0">Kos-stad</span><span class="badge" data-i18n="b1">Prijs ter plaatse</span></div>
-  <div class="actions">
-    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
-    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
-    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Kos%20town%20shops" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=Kos%20town%20shops" target="_blank" rel="noopener">Apple Maps</a>
-  </div>
-  <p class="status" id="ttsStatus"></p>
-  <div id="readText">
-    <article class="card"><h2 data-i18n="h0">Dagelijks</h2><p data-i18n="p0">Supermarkt, markt, drogist, opticien, Vodafone, telefoonreparatie (iRepair), dierenwinkel Zootopia, visspullen (Saltylife), sleutelmaker, schoenmaker, kledingreparatie en babyspullen.</p></article>
-    <article class="card"><h2 data-i18n="h1">Parfum en printen</h2><p data-i18n="p1">Parfum en cosmetica: Honduros, Milva Galerie en Myrenia. Verder een print- en boekwinkel, handgemaakte sandalen (Elli), Jeans Center, Interspot en E-clik.</p></article>
-    <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">Straat en huisnummer per winkel zijn nog niet ingevuld.</span></div>
-  </div>
+<div class="hero-wrap"><img src="img/hk/winkels-hero.jpg" alt=""></div>
+<p class="parent-link"><a href="index.html" data-i18n="back">← Home</a></p>
+<h1 data-i18n="title">Belangrijke winkels</h1>
+<p class="lead" data-i18n="lead">Iedereen heeft af en toe iets nodig, maar je weet vaak niet waar je het kan vinden. Daarom hebben we een lijst samengesteld met unieke winkels, die handig zijn tijdens uw vakantie.</p>
+<h2 class="section" data-i18n="city">Kos stad</h2>
+<div class="shop-grid">
+<a class="shop-card" href="winkel-supermarkt.html"><span class="pic"><img src="img/hk/winkel-tegel-supermarkt.png" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="t0">Supermarkt</span></span></a>
+<a class="shop-card" href="winkel-markten.html"><span class="pic"><img src="img/hk/winkel-tegel-markten.png" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="t1">Markten</span></span></a>
+<a class="shop-card" href="winkel-drogisterij.html"><span class="pic"><img src="img/hk/winkel-tegel-drogisterij.png" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="t2">Drogisterij Parfumerie</span></span></a>
+<a class="shop-card" href="winkel-jeans-center.html"><span class="pic"><img src="img/hk/winkel-tegel-jeans.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="t3">Broek geschikt voor all-inclusive</span></span></a>
+<a class="shop-card" href="winkel-printen.html"><span class="pic"><img src="img/hk/winkel-tegel-printen.png" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="t4">Printen</span></span></a>
+<a class="shop-card" href="winkel-drogevbio.html"><span class="pic"><img src="img/hk/winkel-tegel-bio.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="t5">Bio-winkel</span></span></a>
+<a class="shop-card" href="winkel-schoenmaker.html"><span class="pic"><img src="img/hk/winkel-tegel-schoen.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="t6">Schoenmaker</span></span></a>
+<a class="shop-card" href="winkel-irepair.html"><span class="pic"><img src="img/hk/winkel-tegel-irepair.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="t7">Reparatie Mobiel</span></span></a>
+<a class="shop-card" href="winkel-e-click.html"><span class="pic"><img src="img/hk/winkel-tegel-eclick.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="t8">Accessoires voor je mobiel</span></span></a>
+<a class="shop-card" href="winkel-vodafone.html"><span class="pic"><img src="img/hk/winkel-tegel-vodafone.png" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="t9">Vodafone</span></span></a>
+<a class="shop-card" href="winkel-elli.html"><span class="pic"><img src="img/hk/winkel-tegel-elli.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="t10">Handgemaakte sandalen</span></span></a>
+<a class="shop-card" href="winkel-saltylife.html"><span class="pic"><img src="img/hk/winkel-tegel-vis.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="t11">Viswinkel</span></span></a>
+<a class="shop-card" href="winkel-zootopia.html"><span class="pic"><img src="img/hk/winkel-tegel-dieren.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="t12">Dierenwinkel</span></span></a>
+<a class="shop-card" href="winkel-interspot.html"><span class="pic"><img src="img/hk/winkel-tegel-internet.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="t13">Internetwinkel</span></span></a>
+<a class="shop-card" href="winkel-markthal.html"><span class="pic"><img src="img/hk/winkel-tegel-kruiden.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="t14">Griekse kruiden</span></span></a>
+<a class="shop-card" href="winkel-sleutelmaker.html"><span class="pic"><img src="img/hk/winkel-tegel-sleutel.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="t15">Sleutelmaker</span></span></a>
+<a class="shop-card" href="winkel-printen.html"><span class="pic"><img src="img/hk/winkel-tegel-kranten.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="t16">Kranten en tijdschriften</span></span></a>
+<a class="shop-card" href="winkel-opticien.html"><span class="pic"><img src="img/hk/winkel-tegel-opticien.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="t17">Opticien</span></span></a>
+<a class="shop-card" href="winkel-kledingreparatie.html"><span class="pic"><img src="img/hk/winkel-tegel-kleding.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="t18">Kledingreparatie</span></span></a>
+<a class="shop-card" href="winkel-babyspullen.html"><span class="pic"><img src="img/hk/winkel-tegel-baby.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="t19">Babyspullen</span></span></a>
+</div>
 </main>
 <footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
-<script>window.HK_DICT = {"nl": {"title": "Praktische winkels", "lead": "Geen souvenirlijst, maar zaken die je nodig hebt als er iets stuk is of op is. Adressen zijn nog niet ingevuld.", "back": "← Home", "note": "Straat en huisnummer per winkel zijn nog niet ingevuld.", "h0": "Dagelijks", "p0": "Supermarkt, markt, drogist, opticien, Vodafone, telefoonreparatie (iRepair), dierenwinkel Zootopia, visspullen (Saltylife), sleutelmaker, schoenmaker, kledingreparatie en babyspullen.", "h1": "Parfum en printen", "p1": "Parfum en cosmetica: Honduros, Milva Galerie en Myrenia. Verder een print- en boekwinkel, handgemaakte sandalen (Elli), Jeans Center, Interspot en E-clik.", "b0": "Kos-stad", "b1": "Prijs ter plaatse"}, "de": {"title": "Praktische Läden", "lead": "Keine Souvenirliste, sondern Läden, die du brauchst, wenn etwas kaputt oder alle ist. Adressen fehlen noch.", "back": "← Start", "note": "Straße und Hausnummer pro Laden sind noch nicht eingetragen.", "h0": "Alltag", "p0": "Supermarkt, Markt, Drogerie, Optiker, Vodafone, Handyreparatur (iRepair), Tierladen Zootopia, Angelshop (Saltylife), Schlüsseldienst, Schuster, Kleidungsreparatur und Babysachen.", "h1": "Parfum und Drucken", "p1": "Parfum und Kosmetik: Honduros, Milva Galerie und Myrenia. Dazu Druck- und Buchladen, handgemachte Sandalen (Elli), Jeans Center, Interspot und E-clik.", "b0": "Kos-Stadt", "b1": "Preis vor Ort"}, "en": {"title": "Practical shops", "lead": "Not a souvenir list. These are the shops you need when something breaks or runs out. Addresses are not filled in yet.", "back": "← Home", "note": "Street and number for each shop are not filled in yet.", "h0": "Everyday", "p0": "Supermarket, market, drugstore, optician, Vodafone, phone repair (iRepair), pet shop Zootopia, fishing shop (Saltylife), locksmith, cobbler, clothing repair and baby things.", "h1": "Perfume and printing", "p1": "Perfume and cosmetics: Honduros, Milva Galerie and Myrenia. Also a print and book shop, handmade sandals (Elli), Jeans Center, Interspot and E-clik.", "b0": "Kos town", "b1": "Price on site"}, "it": {"title": "Negozi pratici", "lead": "Non è una lista di souvenir. Sono i negozi utili quando qualcosa si rompe o finisce. Gli indirizzi non ci sono ancora.", "back": "← Home", "note": "Via e numero di ogni negozio non sono ancora inseriti.", "h0": "Ogni giorno", "p0": "Supermercato, mercato, drogheria, ottico, Vodafone, riparazione telefoni (iRepair), pet shop Zootopia, pesca (Saltylife), chiavi, calzolaio, riparazione abiti e cose per bambini.", "h1": "Profumo e stampe", "p1": "Profumo e cosmetici: Honduros, Milva Galerie e Myrenia. Anche stampa e libreria, sandali fatti a mano (Elli), Jeans Center, Interspot ed E-clik.", "b0": "Città di Kos", "b1": "Prezzo sul posto"}, "tr": {"title": "Pratik dükkanlar", "lead": "Hediyelik listesi değil. Bir şey bozulunca veya bitince lazım olan dükkanlar. Adresler henüz yok.", "back": "← Ana sayfa", "note": "Her dükkanın sokağı ve numarası henüz yok.", "h0": "Günlük", "p0": "Süpermarket, pazar, eczane/drogist, gözlükçü, Vodafone, telefon tamiri (iRepair), Zootopia pet shop, olta (Saltylife), çilingir, ayakkabıcı, giysi tamiri ve bebek eşyası.", "h1": "Parfüm ve baskı", "p1": "Parfüm ve kozmetik: Honduros, Milva Galerie ve Myrenia. Ayrıca baskı ve kitapçı, el yapımı sandal (Elli), Jeans Center, Interspot ve E-clik.", "b0": "Kos şehri", "b1": "Fiyat yerinde"}, "es": {"title": "Tiendas prácticas", "lead": "No es una lista de souvenirs. Son las tiendas útiles cuando algo se rompe o se acaba. Las direcciones aún no están.", "back": "← Inicio", "note": "La calle y el número de cada tienda aún no están.", "h0": "Día a día", "p0": "Supermercado, mercado, droguería, óptica, Vodafone, reparación de móviles (iRepair), tienda de mascotas Zootopia, pesca (Saltylife), cerrajero, zapatero, arreglos de ropa y cosas de bebé.", "h1": "Perfume e impresión", "p1": "Perfume y cosmética: Honduros, Milva Galerie y Myrenia. También imprenta y librería, sandalias hechas a mano (Elli), Jeans Center, Interspot y E-clik.", "b0": "Ciudad de Kos", "b1": "Precio en el sitio"}};</script>
+<script>
+window.HK_DICT = {
+  "nl": {
+    "back": "← Home",
+    "hoursH": "Openingstijden",
+    "addrH": "Adres",
+    "call": "Bel",
+    "phoneL": "Telefoon",
+    "emergL": "Nood Telefoon",
+    "map": "Google locatie",
+    "closed": "Gesloten",
+    "d0": "Ma.",
+    "d1": "Di.",
+    "d2": "Woe.",
+    "d3": "Don.",
+    "d4": "Vrij.",
+    "d5": "Zat.",
+    "d6": "Zon.",
+    "title": "Belangrijke winkels",
+    "lead": "Iedereen heeft af en toe iets nodig, maar je weet vaak niet waar je het kan vinden. Daarom hebben we een lijst samengesteld met unieke winkels, die handig zijn tijdens uw vakantie.",
+    "city": "Kos stad",
+    "t0": "Supermarkt",
+    "t1": "Markten",
+    "t2": "Drogisterij Parfumerie",
+    "t3": "Broek geschikt voor all-inclusive",
+    "t4": "Printen",
+    "t5": "Bio-winkel",
+    "t6": "Schoenmaker",
+    "t7": "Reparatie Mobiel",
+    "t8": "Accessoires voor je mobiel",
+    "t9": "Vodafone",
+    "t10": "Handgemaakte sandalen",
+    "t11": "Viswinkel",
+    "t12": "Dierenwinkel",
+    "t13": "Internetwinkel",
+    "t14": "Griekse kruiden",
+    "t15": "Sleutelmaker",
+    "t16": "Kranten en tijdschriften",
+    "t17": "Opticien",
+    "t18": "Kledingreparatie",
+    "t19": "Babyspullen"
+  },
+  "de": {
+    "back": "← Start",
+    "hoursH": "Öffnungszeiten",
+    "addrH": "Adresse",
+    "call": "Anrufen",
+    "phoneL": "Telefon",
+    "emergL": "Nottelefon",
+    "map": "Google-Standort",
+    "closed": "Geschlossen",
+    "d0": "Mo.",
+    "d1": "Di.",
+    "d2": "Mi.",
+    "d3": "Do.",
+    "d4": "Fr.",
+    "d5": "Sa.",
+    "d6": "So.",
+    "title": "Wichtige Läden",
+    "lead": "Jeder braucht ab und zu etwas, aber oft weißt du nicht, wo du es findest. Deshalb haben wir eine Liste mit besonderen Läden zusammengestellt, die im Urlaub praktisch sind.",
+    "city": "Kos-Stadt",
+    "t0": "Supermarkt",
+    "t1": "Märkte",
+    "t2": "Drogerie Parfümerie",
+    "t3": "Hose für All-inclusive",
+    "t4": "Drucken",
+    "t5": "Bioladen",
+    "t6": "Schuster",
+    "t7": "Handy-Reparatur",
+    "t8": "Handy-Zubehör",
+    "t9": "Vodafone",
+    "t10": "Handgemachte Sandalen",
+    "t11": "Fischladen",
+    "t12": "Tierhandlung",
+    "t13": "Internetladen",
+    "t14": "Griechische Kräuter",
+    "t15": "Schlüsseldienst",
+    "t16": "Zeitungen und Zeitschriften",
+    "t17": "Optiker",
+    "t18": "Kleidungsreparatur",
+    "t19": "Babysachen"
+  },
+  "en": {
+    "back": "← Home",
+    "hoursH": "Opening hours",
+    "addrH": "Address",
+    "call": "Call",
+    "phoneL": "Phone",
+    "emergL": "Emergency phone",
+    "map": "Google location",
+    "closed": "Closed",
+    "d0": "Mon",
+    "d1": "Tue",
+    "d2": "Wed",
+    "d3": "Thu",
+    "d4": "Fri",
+    "d5": "Sat",
+    "d6": "Sun",
+    "title": "Important shops",
+    "lead": "Everyone needs something now and then, but you often do not know where to find it. That is why we put together a list of unique shops that are useful on holiday.",
+    "city": "Kos town",
+    "t0": "Supermarket",
+    "t1": "Markets",
+    "t2": "Drugstore & perfume",
+    "t3": "Trousers for all-inclusive",
+    "t4": "Printing",
+    "t5": "Organic shop",
+    "t6": "Cobbler",
+    "t7": "Phone repair",
+    "t8": "Mobile accessories",
+    "t9": "Vodafone",
+    "t10": "Handmade sandals",
+    "t11": "Fish shop",
+    "t12": "Pet shop",
+    "t13": "Internet shop",
+    "t14": "Greek herbs",
+    "t15": "Locksmith",
+    "t16": "Newspapers and magazines",
+    "t17": "Optician",
+    "t18": "Clothes repair",
+    "t19": "Baby things"
+  },
+  "it": {
+    "back": "← Home",
+    "hoursH": "Orari",
+    "addrH": "Indirizzo",
+    "call": "Chiama",
+    "phoneL": "Telefono",
+    "emergL": "Telefono di emergenza",
+    "map": "Posizione Google",
+    "closed": "Chiuso",
+    "d0": "Lun",
+    "d1": "Mar",
+    "d2": "Mer",
+    "d3": "Gio",
+    "d4": "Ven",
+    "d5": "Sab",
+    "d6": "Dom",
+    "title": "Negozi importanti",
+    "lead": "Tutti hanno ogni tanto bisogno di qualcosa, ma spesso non sai dove trovarla. Per questo abbiamo messo insieme un elenco di negozi particolari, utili in vacanza.",
+    "city": "Kos città",
+    "t0": "Supermercato",
+    "t1": "Mercati",
+    "t2": "Profumeria",
+    "t3": "Pantaloni per all-inclusive",
+    "t4": "Stampa",
+    "t5": "Negozio bio",
+    "t6": "Calzolaio",
+    "t7": "Riparazione cellulare",
+    "t8": "Accessori per il cellulare",
+    "t9": "Vodafone",
+    "t10": "Sandali fatti a mano",
+    "t11": "Pescheria",
+    "t12": "Negozio di animali",
+    "t13": "Negozio internet",
+    "t14": "Erbe greche",
+    "t15": "Fabbro",
+    "t16": "Giornali e riviste",
+    "t17": "Ottico",
+    "t18": "Riparazione abiti",
+    "t19": "Articoli per bebè"
+  },
+  "tr": {
+    "back": "← Ana sayfa",
+    "hoursH": "Çalışma saatleri",
+    "addrH": "Adres",
+    "call": "Ara",
+    "phoneL": "Telefon",
+    "emergL": "Acil telefon",
+    "map": "Google konumu",
+    "closed": "Kapalı",
+    "d0": "Pzt",
+    "d1": "Sal",
+    "d2": "Çar",
+    "d3": "Per",
+    "d4": "Cum",
+    "d5": "Cmt",
+    "d6": "Paz",
+    "title": "Önemli dükkanlar",
+    "lead": "Herkesin ara sıra bir şeye ihtiyacı olur, ama nerede bulacağını çoğu zaman bilemezsin. Bu yüzden tatilde işe yarayan özel dükkanların bir listesini yaptık.",
+    "city": "Kos şehri",
+    "t0": "Süpermarket",
+    "t1": "Pazarlar",
+    "t2": "Parfümeri",
+    "t3": "Her şey dahil için pantolon",
+    "t4": "Baskı",
+    "t5": "Organik dükkan",
+    "t6": "Ayakkabı tamircisi",
+    "t7": "Telefon tamiri",
+    "t8": "Telefon aksesuarı",
+    "t9": "Vodafone",
+    "t10": "El yapımı sandalet",
+    "t11": "Balık dükkanı",
+    "t12": "Pet shop",
+    "t13": "İnternet dükkanı",
+    "t14": "Yunan otları",
+    "t15": "Çilingir",
+    "t16": "Gazete ve dergiler",
+    "t17": "Optisyen",
+    "t18": "Giysi tamiri",
+    "t19": "Bebek eşyaları"
+  },
+  "es": {
+    "back": "← Inicio",
+    "hoursH": "Horario",
+    "addrH": "Dirección",
+    "call": "Llama",
+    "phoneL": "Teléfono",
+    "emergL": "Teléfono de urgencia",
+    "map": "Ubicación en Google",
+    "closed": "Cerrado",
+    "d0": "Lun",
+    "d1": "Mar",
+    "d2": "Mié",
+    "d3": "Jue",
+    "d4": "Vie",
+    "d5": "Sáb",
+    "d6": "Dom",
+    "title": "Tiendas importantes",
+    "lead": "Todo el mundo necesita algo de vez en cuando, pero a menudo no sabes dónde encontrarlo. Por eso reunimos una lista de tiendas singulares, útiles en las vacaciones.",
+    "city": "Kos ciudad",
+    "t0": "Supermercado",
+    "t1": "Mercados",
+    "t2": "Droguería y perfumería",
+    "t3": "Pantalón para todo incluido",
+    "t4": "Imprimir",
+    "t5": "Tienda bio",
+    "t6": "Zapatero",
+    "t7": "Reparación del móvil",
+    "t8": "Accesorios para el móvil",
+    "t9": "Vodafone",
+    "t10": "Sandalias hechas a mano",
+    "t11": "Pescadería",
+    "t12": "Tienda de mascotas",
+    "t13": "Tienda de internet",
+    "t14": "Hierbas griegas",
+    "t15": "Cerrajero",
+    "t16": "Periódicos y revistas",
+    "t17": "Óptico",
+    "t18": "Arreglo de ropa",
+    "t19": "Cosas de bebé"
+  }
+};
+</script>
 <script src="hello-kos-i18n.js"></script>
 </body>
 </html>

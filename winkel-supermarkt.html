@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Supermarkten – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+<style>
+.call-list{display:flex;flex-direction:column;gap:10px;margin:12px 0 0}
+a.call-btn{display:flex;align-items:center;gap:12px;text-decoration:none;background:linear-gradient(180deg,#3eaeae 0%,#2b7e7e 100%);color:#fff;border:0;border-radius:16px;padding:14px 16px;box-shadow:0 6px 16px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.25);cursor:pointer;box-sizing:border-box;max-width:100%}
+a.call-btn:active{transform:translateY(1px)}
+a.call-btn .ico{flex:0 0 44px;width:44px;height:44px;border-radius:14px;background:var(--gold);color:#1c1404;display:flex;align-items:center;justify-content:center}
+a.call-btn .call-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
+a.call-btn .call-main{font-weight:800;font-size:1.05rem;line-height:1.25}
+a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba(255,255,255,.9)}
+.strip{display:block;width:100%;height:140px;object-fit:cover;border-radius:14px;margin:0 0 12px}
+.card h3{font-size:.95rem;margin:12px 0 8px;color:var(--text)}
+.card .actions{margin:12px 0 0}
+.hours{margin:4px 0 8px}
+.h-row{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:.86rem;color:var(--text-soft)}
+.h-row span:last-child{font-weight:700;color:var(--text);text-align:right}
+.addr{white-space:pre-line}
+.card ul{margin:0 0 8px;padding-left:1.1rem;color:var(--text-soft);font-size:.92rem}
+.card li{margin:0 0 4px}
+.loc-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:14px;margin:0 0 12px}
+.loc-card h2{font-size:1.05rem;margin:0 0 8px}
+.loc-name{font-weight:800;font-size:1.05rem}
+.loc-list a{color:var(--petrol);font-weight:700}
+
+body.hk-page .shop-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 12px}
+body.hk-page a.shop-card{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;position:relative;border-radius:16px;overflow:hidden;aspect-ratio:1;background:#1a2525;text-decoration:none;border:1px solid var(--border);padding:0;margin:0;color:#fff}
+body.hk-page a.shop-card .pic{flex:1 1 auto;min-height:0;overflow:hidden;background:#1a2525}
+body.hk-page a.shop-card .pic img{width:100%;height:100%;object-fit:cover;display:block}
+body.hk-page a.shop-card .card-bar{flex:0 0 auto;display:flex;align-items:flex-end;box-sizing:border-box;width:100%;padding:7px 10px;background:rgba(13,26,26,.9)}
+body.hk-page a.shop-card .card-title{color:#fff;font-size:.88rem;font-weight:700;line-height:1.25;display:flex;flex-direction:column;gap:2px}
+body.hk-page a.shop-card .card-meta{font-size:.7rem;font-weight:600;opacity:.9;color:#e8f5f3}
+body.hk-page h2.section{font-size:1.05rem;font-weight:800;text-align:center;color:var(--gold);margin:2px 0 12px}
+
+.btn-solid{background:var(--petrol);color:#fff}
+.loc-list p{margin:0 0 12px;color:var(--text-soft);font-size:.92rem}
+.loc-list a{color:var(--petrol);font-weight:700}
+</style>
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+<div class="hero-wrap"><img src="img/hk/winkel-super-hero.jpg" alt=""></div>
+<p class="parent-link"><a href="praktische-winkels.html" data-i18n="back">← Belangrijke winkels</a></p>
+<h1 data-i18n="title">Supermarkten</h1>
+<article class="card">
+<p data-i18n="p0">In Kos zijn in bijna elke straat wel een supermarktje. Deze shops zijn vaak duur maar wel handig (sommige 24h open) waardoor je er snel iets kunt halen wanneer je het nodig hebt. Maar hebben maar beperkt assortiment</p>
+<p data-i18n="p1">Ben je op zoek naar normale, grotere supermarkten met een volledig assortiment en betere prijzen? Dan helpt onze locator je om eenvoudig de dichtstbijzijnde Normale supermarkten te vinden. Het systeem toont je direct welke supermarkt het dichtst bij jouw locatie ligt, zodat je snel kunt zien waar je heen kunt gaan voor je dagelijkse boodschappen.</p>
+<h2 data-i18n="h15">Na 15 seconden verschijnt de Dichtstbijzijnde locatie van een Grote Supermarkt</h2>
+</article>
+<div class="loc-card" id="loc">
+<h2 data-i18n="locH">🛒 Dichtstbijzijnde Supermarkt</h2>
+<p class="status" id="locStatus">Locatie ophalen...</p>
+<div id="locOne" hidden>
+<p class="loc-name" id="locName"></p>
+<p id="locCity"></p>
+<p id="locDist"></p>
+<div class="actions">
+<a class="btn btn-map" id="locMap" href="#" target="_blank" rel="noopener" data-i18n="openMap">Open Google Maps</a>
+<button type="button" class="btn btn-solid" id="locSkip" data-i18n="skip">Overslaan</button>
+</div></div>
+<div id="locList" class="loc-list" hidden></div>
+</div>
+
+<script>
+(function () {
+  var markets = [
+    {name:"Kritikos Supermarket", city:"Kos-Stad", lat:36.888190, lon:27.298292, url:"https://maps.app.goo.gl/TGw6q8oER3HwAJEH8"},
+    {name:"Supermercato Coop", city:"Kos-Stad", lat:36.895160, lon:27.283699, url:"https://maps.app.goo.gl/1Q8DUX64frvZAYEaA"},
+    {name:"Kritikos Supermarket", city:"Kos-Stad", lat:36.899494, lon:27.280379, url:"https://maps.app.goo.gl/w9F8QAm3m5Yevs7f8"},
+    {name:"AB Supermarkt", city:"Kos-Stad", lat:36.892419, lon:27.272468, url:"https://maps.app.goo.gl/91UJa9Htd9RTBva26"},
+    {name:"AB Supermarkt (duurder)", city:"Kos-Stad", lat:36.902500, lon:27.282227, url:"https://maps.app.goo.gl/RbkHmNjKkWLQnhp9A"},
+    {name:"SPAR (duurder)", city:"Kos-Stad", lat:36.891006, lon:27.288337, url:"https://maps.app.goo.gl/Z9cco65o8skaD2D68"},
+    {name:"Bazar Supermarkt", city:"Kos-Stad", lat:36.888837, lon:27.296912, url:"https://maps.app.goo.gl/MARtwtgMAQ9zPW478"},
+    {name:"Kritikos Supermarket", city:"Kardamena", lat:36.783150, lon:27.142692, url:"https://maps.app.goo.gl/WJAZ8yc6AUDmqaZK6"},
+    {name:"Carrefour", city:"Kardamena", lat:36.784670, lon:27.143461, url:"https://maps.app.goo.gl/TJwB34Xik87NiiWP8"},
+    {name:"Lidl", city:"Hoofdweg", lat:36.880165, lon:27.232816, url:"https://maps.app.goo.gl/xsvisXL2ESD1yaHZA"},
+    {name:"Sklavenitis", city:"Hoofdweg", lat:36.883187, lon:27.241790, url:"https://maps.app.goo.gl/SwogJggJTWaX62RAA"},
+    {name:"Bazar Supermarkt", city:"Hoofdweg", lat:36.876487, lon:27.214163, url:"https://maps.app.goo.gl/xYLR9VBUDztckoKA8"},
+    {name:"AB Supermarkt", city:"Zipari", lat:36.876826, lon:27.213362, url:"https://maps.app.goo.gl/94BiLPg1rk1oHLuR8"},
+    {name:"Bazar", city:"Zipari", lat:36.876043, lon:27.204898, url:"https://maps.app.goo.gl/WKpoRWM6RGrPAeuHA"},
+    {name:"Supermarket Konstantinos", city:"Marmari", lat:36.874595, lon:27.147691, url:"https://maps.app.goo.gl/2b432U4DsnjZqZ8i9"},
+    {name:"Konstantinos Supermarket", city:"Tigaki", lat:36.881031, lon:27.187398, url:"https://maps.app.goo.gl/6MFxQPUwC5X4YucH9"},
+    {name:"Kritikos Supermarket", city:"Airport", lat:36.802707, lon:27.092214, url:"https://maps.app.goo.gl/Bt4d9ArDBjDPaMbf9"},
+    {name:"Peros Supermarket", city:"Kefalos", lat:36.743856, lon:26.959077, url:"https://maps.app.goo.gl/UyctaNMpZAkJV78F6"}
+  ];
+  var mode = "wait";
+  var sorted = [];
+  var idx = 0;
+  function dict() {
+    var lang = document.documentElement.lang || "nl";
+    var all = window.HK_DICT || {};
+    return all[lang] || all.nl || {};
+  }
+  function hav(lat1, lon1, lat2, lon2) {
+    var R = 6371000, p = Math.PI / 180;
+    var dLat = (lat2 - lat1) * p, dLon = (lon2 - lon1) * p;
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1 * p) * Math.cos(lat2 * p) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    return Math.round(2 * R * Math.asin(Math.min(1, Math.sqrt(a))));
+  }
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+  }
+  function showOne() {
+    mode = "one";
+    var m = sorted[idx];
+    var d = dict();
+    document.getElementById("locName").textContent = m.name;
+    document.getElementById("locCity").textContent = (d.cityP || "Stad: ") + m.city;
+    var dist = document.getElementById("locDist");
+    dist.hidden = false;
+    dist.textContent = (d.distP || "Afstand: ") + m.dist + " m";
+    document.getElementById("locMap").href = m.url;
+    document.getElementById("locOne").hidden = false;
+    document.getElementById("locList").hidden = true;
+    document.getElementById("locStatus").textContent = "";
+  }
+  function showList() {
+    mode = "list";
+    var d = dict();
+    var html = "";
+    markets.forEach(function (m) {
+      html += "<p><strong>" + esc(m.name) + "</strong><br>" + esc(d.cityP || "Stad: ") + esc(m.city)
+        + "<br><a href=\"" + esc(m.url) + "\" target=\"_blank\" rel=\"noopener\">" + esc(d.openMap || "Open Google Maps") + "</a></p>";
+    });
+    var box = document.getElementById("locList");
+    box.innerHTML = html;
+    box.hidden = false;
+    document.getElementById("locOne").hidden = true;
+    document.getElementById("locStatus").textContent = d.noLoc || "Locatie niet beschikbaar";
+  }
+  function render() {
+    if (mode === "one" && sorted.length) showOne();
+    else if (mode === "list") showList();
+    else document.getElementById("locStatus").textContent = dict().getting || "Locatie ophalen...";
+  }
+  document.getElementById("locSkip").addEventListener("click", function () {
+    if (mode !== "one" || !sorted.length) return;
+    idx = (idx + 1) % sorted.length;
+    showOne();
+  });
+  document.addEventListener("hk-lang", render);
+  document.addEventListener("DOMContentLoaded", function () {
+    render();
+    if (!navigator.geolocation) { showList(); return; }
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      var lat = pos.coords.latitude, lon = pos.coords.longitude;
+      sorted = markets.map(function (m) {
+        return { name: m.name, city: m.city, url: m.url, dist: hav(lat, lon, m.lat, m.lon) };
+      }).sort(function (a, b) { return a.dist - b.dist; });
+      idx = 0;
+      setTimeout(showOne, 15000);
+    }, function () { showList(); });
+  });
+})();
+</script>
+
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>
+window.HK_DICT = {
+  "nl": {
+    "back": "← Belangrijke winkels",
+    "hoursH": "Openingstijden",
+    "addrH": "Adres",
+    "call": "Bel",
+    "phoneL": "Telefoon",
+    "emergL": "Nood Telefoon",
+    "map": "Google locatie",
+    "closed": "Gesloten",
+    "d0": "Ma.",
+    "d1": "Di.",
+    "d2": "Woe.",
+    "d3": "Don.",
+    "d4": "Vrij.",
+    "d5": "Zat.",
+    "d6": "Zon.",
+    "title": "Supermarkten",
+    "p0": "In Kos zijn in bijna elke straat wel een supermarktje. Deze shops zijn vaak duur maar wel handig (sommige 24h open) waardoor je er snel iets kunt halen wanneer je het nodig hebt. Maar hebben maar beperkt assortiment",
+    "p1": "Ben je op zoek naar normale, grotere supermarkten met een volledig assortiment en betere prijzen? Dan helpt onze locator je om eenvoudig de dichtstbijzijnde Normale supermarkten te vinden. Het systeem toont je direct welke supermarkt het dichtst bij jouw locatie ligt, zodat je snel kunt zien waar je heen kunt gaan voor je dagelijkse boodschappen.",
+    "h15": "Na 15 seconden verschijnt de Dichtstbijzijnde locatie van een Grote Supermarkt",
+    "locH": "🛒 Dichtstbijzijnde Supermarkt",
+    "getting": "Locatie ophalen...",
+    "noLoc": "Locatie niet beschikbaar",
+    "cityP": "Stad: ",
+    "distP": "Afstand: ",
+    "openMap": "Open Google Maps",
+    "skip": "Overslaan"
+  },
+  "de": {
+    "back": "← Wichtige Läden",
+    "hoursH": "Öffnungszeiten",
+    "addrH": "Adresse",
+    "call": "Anrufen",
+    "phoneL": "Telefon",
+    "emergL": "Nottelefon",
+    "map": "Google-Standort",
+    "closed": "Geschlossen",
+    "d0": "Mo.",
+    "d1": "Di.",
+    "d2": "Mi.",
+    "d3": "Do.",
+    "d4": "Fr.",
+    "d5": "Sa.",
+    "d6": "So.",
+    "title": "Supermärkte",
+    "p0": "Auf Kos gibt es in fast jeder Straße einen kleinen Supermarkt. Diese Läden sind oft teuer, aber praktisch (manche 24 Stunden offen), sodass du schnell etwas holen kannst, wenn du es brauchst. Sie haben aber nur ein begrenztes Sortiment",
+    "p1": "Suchst du normale, größere Supermärkte mit vollem Sortiment und besseren Preisen? Dann hilft dir unser Locator, einfach die nächsten normalen Supermärkte zu finden. Das System zeigt direkt, welcher Supermarkt am nächsten zu deinem Standort liegt, damit du schnell siehst, wohin du für den täglichen Einkauf gehen kannst.",
+    "h15": "Nach 15 Sekunden erscheint der nächstgelegene Standort eines großen Supermarkts",
+    "locH": "🛒 Nächster Supermarkt",
+    "getting": "Standort wird ermittelt...",
+    "noLoc": "Standort nicht verfügbar",
+    "cityP": "Stadt: ",
+    "distP": "Entfernung: ",
+    "openMap": "Google Maps öffnen",
+    "skip": "Überspringen"
+  },
+  "en": {
+    "back": "← Important shops",
+    "hoursH": "Opening hours",
+    "addrH": "Address",
+    "call": "Call",
+    "phoneL": "Phone",
+    "emergL": "Emergency phone",
+    "map": "Google location",
+    "closed": "Closed",
+    "d0": "Mon",
+    "d1": "Tue",
+    "d2": "Wed",
+    "d3": "Thu",
+    "d4": "Fri",
+    "d5": "Sat",
+    "d6": "Sun",
+    "title": "Supermarkets",
+    "p0": "On Kos there is a little supermarket in almost every street. These shops are often expensive but handy (some open 24 hours), so you can quickly get something when you need it. But they only have a limited range",
+    "p1": "Looking for normal, larger supermarkets with a full range and better prices? Our locator helps you find the nearest normal supermarkets. The system shows straight away which supermarket is closest to you, so you can see where to go for everyday shopping.",
+    "h15": "After 15 seconds the nearest location of a large supermarket appears",
+    "locH": "🛒 Nearest supermarket",
+    "getting": "Getting location...",
+    "noLoc": "Location not available",
+    "cityP": "City: ",
+    "distP": "Distance: ",
+    "openMap": "Open Google Maps",
+    "skip": "Skip"
+  },
+  "it": {
+    "back": "← Negozi importanti",
+    "hoursH": "Orari",
+    "addrH": "Indirizzo",
+    "call": "Chiama",
+    "phoneL": "Telefono",
+    "emergL": "Telefono di emergenza",
+    "map": "Posizione Google",
+    "closed": "Chiuso",
+    "d0": "Lun",
+    "d1": "Mar",
+    "d2": "Mer",
+    "d3": "Gio",
+    "d4": "Ven",
+    "d5": "Sab",
+    "d6": "Dom",
+    "title": "Supermercati",
+    "p0": "A Kos c’è un piccolo supermercato in quasi ogni strada. Questi negozi sono spesso cari ma comodi (alcuni aperti 24 ore), così prendi in fretta qualcosa quando ti serve. Hanno però un assortimento limitato",
+    "p1": "Cerchi supermercati normali, più grandi, con assortimento completo e prezzi migliori? Il localizzatore ti aiuta a trovare facilmente i supermercati normali più vicini. Il sistema mostra subito quale supermercato è più vicino a te, così vedi in fretta dove fare la spesa di tutti i giorni.",
+    "h15": "Dopo 15 secondi compare la sede più vicina di un grande supermercato",
+    "locH": "🛒 Supermercato più vicino",
+    "getting": "Recupero della posizione...",
+    "noLoc": "Posizione non disponibile",
+    "cityP": "Città: ",
+    "distP": "Distanza: ",
+    "openMap": "Apri Google Maps",
+    "skip": "Salta"
+  },
+  "tr": {
+    "back": "← Önemli dükkanlar",
+    "hoursH": "Çalışma saatleri",
+    "addrH": "Adres",
+    "call": "Ara",
+    "phoneL": "Telefon",
+    "emergL": "Acil telefon",
+    "map": "Google konumu",
+    "closed": "Kapalı",
+    "d0": "Pzt",
+    "d1": "Sal",
+    "d2": "Çar",
+    "d3": "Per",
+    "d4": "Cum",
+    "d5": "Cmt",
+    "d6": "Paz",
+    "title": "Süpermarketler",
+    "p0": "Kos’ta neredeyse her sokakta küçük bir süpermarket vardır. Bu dükkanlar çoğu zaman pahalı ama pratiktir (bazıları 24 saat açık), ihtiyacın olunca çabucak bir şey alırsın. Ama çeşitleri sınırlıdır",
+    "p1": "Tam çeşit ve daha iyi fiyatlı normal, daha büyük süpermarket mi arıyorsun? Konum bulucumuz en yakın normal süpermarketleri kolayca bulmana yardım eder. Sistem, konumuna en yakın süpermarketi hemen gösterir; günlük alışveriş için nereye gideceğini çabucak görürsün.",
+    "h15": "15 saniye sonra büyük bir süpermarketin en yakın konumu görünür",
+    "locH": "🛒 En yakın süpermarket",
+    "getting": "Konum alınıyor...",
+    "noLoc": "Konum kullanılamıyor",
+    "cityP": "Şehir: ",
+    "distP": "Mesafe: ",
+    "openMap": "Google Maps’i aç",
+    "skip": "Atla"
+  },
+  "es": {
+    "back": "← Tiendas importantes",
+    "hoursH": "Horario",
+    "addrH": "Dirección",
+    "call": "Llama",
+    "phoneL": "Teléfono",
+    "emergL": "Teléfono de urgencia",
+    "map": "Ubicación en Google",
+    "closed": "Cerrado",
+    "d0": "Lun",
+    "d1": "Mar",
+    "d2": "Mié",
+    "d3": "Jue",
+    "d4": "Vie",
+    "d5": "Sáb",
+    "d6": "Dom",
+    "title": "Supermercados",
+    "p0": "En Kos hay un supermercado pequeño en casi cada calle. Estas tiendas suelen ser caras pero prácticas (algunas abiertas 24 horas), así que coges algo rápido cuando lo necesitas. Pero tienen un surtido limitado",
+    "p1": "¿Buscas supermercados normales, más grandes, con surtido completo y mejores precios? El localizador te ayuda a encontrar fácilmente los supermercados normales más cercanos. El sistema muestra enseguida cuál está más cerca de ti, para que veas rápido dónde hacer la compra diaria.",
+    "h15": "A los 15 segundos aparece la ubicación más cercana de un gran supermercado",
+    "locH": "🛒 Supermercado más cercano",
+    "getting": "Obteniendo la ubicación...",
+    "noLoc": "Ubicación no disponible",
+    "cityP": "Ciudad: ",
+    "distP": "Distancia: ",
+    "openMap": "Abrir Google Maps",
+    "skip": "Omitir"
+  }
+};
+</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

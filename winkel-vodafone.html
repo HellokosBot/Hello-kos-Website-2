@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Vodafone – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+<style>
+.call-list{display:flex;flex-direction:column;gap:10px;margin:12px 0 0}
+a.call-btn{display:flex;align-items:center;gap:12px;text-decoration:none;background:linear-gradient(180deg,#3eaeae 0%,#2b7e7e 100%);color:#fff;border:0;border-radius:16px;padding:14px 16px;box-shadow:0 6px 16px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.25);cursor:pointer;box-sizing:border-box;max-width:100%}
+a.call-btn:active{transform:translateY(1px)}
+a.call-btn .ico{flex:0 0 44px;width:44px;height:44px;border-radius:14px;background:var(--gold);color:#1c1404;display:flex;align-items:center;justify-content:center}
+a.call-btn .call-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
+a.call-btn .call-main{font-weight:800;font-size:1.05rem;line-height:1.25}
+a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba(255,255,255,.9)}
+.strip{display:block;width:100%;height:140px;object-fit:cover;border-radius:14px;margin:0 0 12px}
+.card h3{font-size:.95rem;margin:12px 0 8px;color:var(--text)}
+.card .actions{margin:12px 0 0}
+.hours{margin:4px 0 8px}
+.h-row{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:.86rem;color:var(--text-soft)}
+.h-row span:last-child{font-weight:700;color:var(--text);text-align:right}
+.addr{white-space:pre-line}
+.card ul{margin:0 0 8px;padding-left:1.1rem;color:var(--text-soft);font-size:.92rem}
+.card li{margin:0 0 4px}
+.loc-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:14px;margin:0 0 12px}
+.loc-card h2{font-size:1.05rem;margin:0 0 8px}
+.loc-name{font-weight:800;font-size:1.05rem}
+.loc-list a{color:var(--petrol);font-weight:700}
+</style>
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+<img class="strip" src="img/hk/winkel-tegel-vodafone.png" alt="">
+<p class="parent-link"><a href="praktische-winkels.html" data-i18n="back">← Belangrijke winkels</a></p>
+<h1 data-i18n="title">Vodafone</h1>
+<p class="lead" data-i18n="lead">Griekse Sim</p>
+<article class="card">
+<p data-i18n="p0">Vodafone is de grootste en meest betrouwbare telecomwinkel op Kos. Of je nu een lokale SIM-kaart nodig hebt, data wilt bijkopen, of problemen hebt met je telefoon tijdens je vakantie – bij Vodafone Kos helpen ze je snel. Je kunt er terecht voor:</p>
+<p data-i18n="p1">Het personeel spreekt goed Engels . Veel vakantiegangers komen hier binnen om goedkoop en snel internet te regelen voor hun verblijf op het eiland.</p>
+<ul>
+<li data-i18n="b0">Griekse simkaarten met veel data</li>
+<li data-i18n="b1">Prepaid beltegoed en internetbundels</li>
+<li data-i18n="b2">Opladers, hoesjes en accessoires</li>
+<li data-i18n="b3">Hulp bij instellingen van je telefoon</li>
+</ul>
+<h3 data-i18n="addrH">Adres</h3>
+<p class="addr"><strong>Leof. Ippokratous 15, Kos 853 00</strong></p>
+<h3 data-i18n="hoursH">Openingstijden</h3><div class="hours">
+<div class="h-row"><span data-i18n="d0">Ma.</span><span>09:00–14:30</span></div>
+<div class="h-row"><span data-i18n="d1">Di.</span><span>09:00–14:00, 17:30–21:00</span></div>
+<div class="h-row"><span data-i18n="d2">Woe.</span><span>09:00–14:30</span></div>
+<div class="h-row"><span data-i18n="d3">Don.</span><span>09:00–14:00, 17:30–21:00</span></div>
+<div class="h-row"><span data-i18n="d4">Vrij.</span><span>09:00–14:00, 17:30–21:00</span></div>
+<div class="h-row"><span data-i18n="d5">Zat.</span><span>09:00–14:30</span></div>
+<div class="h-row"><span data-i18n="d6">Zon.</span><span data-i18n="closed">Gesloten</span></div>
+</div>
+<div class="call-list">
+<a class="call-btn" href="tel:+302242048000"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="call-copy"><span class="call-main"><span data-i18n="call">Bel</span> +30 22420 48000</span><span class="call-sub" data-i18n="phoneL">Telefoon</span></span></a>
+</div>
+<div class="actions"><a class="btn btn-map" href="https://maps.app.goo.gl/53osbCXF3TWpf4W97" target="_blank" rel="noopener" data-i18n="map">Google locatie</a></div>
+</article>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>
+window.HK_DICT = {
+  "nl": {
+    "back": "← Belangrijke winkels",
+    "hoursH": "Openingstijden",
+    "addrH": "Adres",
+    "call": "Bel",
+    "phoneL": "Telefoon",
+    "emergL": "Nood Telefoon",
+    "map": "Google locatie",
+    "closed": "Gesloten",
+    "d0": "Ma.",
+    "d1": "Di.",
+    "d2": "Woe.",
+    "d3": "Don.",
+    "d4": "Vrij.",
+    "d5": "Zat.",
+    "d6": "Zon.",
+    "title": "Vodafone",
+    "p0": "Vodafone is de grootste en meest betrouwbare telecomwinkel op Kos. Of je nu een lokale SIM-kaart nodig hebt, data wilt bijkopen, of problemen hebt met je telefoon tijdens je vakantie – bij Vodafone Kos helpen ze je snel. Je kunt er terecht voor:",
+    "p1": "Het personeel spreekt goed Engels . Veel vakantiegangers komen hier binnen om goedkoop en snel internet te regelen voor hun verblijf op het eiland.",
+    "lead": "Griekse Sim",
+    "b0": "Griekse simkaarten met veel data",
+    "b1": "Prepaid beltegoed en internetbundels",
+    "b2": "Opladers, hoesjes en accessoires",
+    "b3": "Hulp bij instellingen van je telefoon"
+  },
+  "de": {
+    "back": "← Wichtige Läden",
+    "hoursH": "Öffnungszeiten",
+    "addrH": "Adresse",
+    "call": "Anrufen",
+    "phoneL": "Telefon",
+    "emergL": "Nottelefon",
+    "map": "Google-Standort",
+    "closed": "Geschlossen",
+    "d0": "Mo.",
+    "d1": "Di.",
+    "d2": "Mi.",
+    "d3": "Do.",
+    "d4": "Fr.",
+    "d5": "Sa.",
+    "d6": "So.",
+    "title": "Vodafone",
+    "p0": "Vodafone ist der größte und zuverlässigste Telekomladen auf Kos. Ob du eine lokale SIM-Karte brauchst, Daten nachkaufen willst oder im Urlaub Probleme mit dem Telefon hast – bei Vodafone Kos helfen sie schnell. Du kannst dort hin für:",
+    "p1": "Das Personal spricht gut Englisch. Viele Urlauber kommen hierher, um günstig und schnell Internet für den Aufenthalt auf der Insel zu regeln.",
+    "lead": "Griechische SIM",
+    "b0": "Griechische SIM-Karten mit viel Datenvolumen",
+    "b1": "Prepaid-Guthaben und Internetpakete",
+    "b2": "Ladegeräte, Hüllen und Zubehör",
+    "b3": "Hilfe bei den Einstellungen deines Telefons"
+  },
+  "en": {
+    "back": "← Important shops",
+    "hoursH": "Opening hours",
+    "addrH": "Address",
+    "call": "Call",
+    "phoneL": "Phone",
+    "emergL": "Emergency phone",
+    "map": "Google location",
+    "closed": "Closed",
+    "d0": "Mon",
+    "d1": "Tue",
+    "d2": "Wed",
+    "d3": "Thu",
+    "d4": "Fri",
+    "d5": "Sat",
+    "d6": "Sun",
+    "title": "Vodafone",
+    "p0": "Vodafone is the largest and most reliable telecom shop on Kos. Whether you need a local SIM card, want to buy more data, or have problems with your phone on holiday – at Vodafone Kos they help you quickly. You can go there for:",
+    "p1": "The staff speak good English. Many holidaymakers come in to arrange cheap, fast internet for their stay on the island.",
+    "lead": "Greek SIM",
+    "b0": "Greek SIM cards with lots of data",
+    "b1": "Prepaid credit and internet bundles",
+    "b2": "Chargers, cases and accessories",
+    "b3": "Help with your phone settings"
+  },
+  "it": {
+    "back": "← Negozi importanti",
+    "hoursH": "Orari",
+    "addrH": "Indirizzo",
+    "call": "Chiama",
+    "phoneL": "Telefono",
+    "emergL": "Telefono di emergenza",
+    "map": "Posizione Google",
+    "closed": "Chiuso",
+    "d0": "Lun",
+    "d1": "Mar",
+    "d2": "Mer",
+    "d3": "Gio",
+    "d4": "Ven",
+    "d5": "Sab",
+    "d6": "Dom",
+    "title": "Vodafone",
+    "p0": "Vodafone è il negozio di telefonia più grande e affidabile di Kos. Che ti serva una SIM locale, tu voglia ricaricare i dati o tu abbia problemi con il telefono in vacanza, da Vodafone Kos ti aiutano in fretta. Puoi andarci per:",
+    "p1": "Il personale parla bene inglese. Molti vacanzieri entrano per avere internet economico e veloce per il soggiorno sull’isola.",
+    "lead": "SIM greca",
+    "b0": "SIM greche con tanti dati",
+    "b1": "Credito prepagato e pacchetti internet",
+    "b2": "Caricatori, cover e accessori",
+    "b3": "Aiuto con le impostazioni del telefono"
+  },
+  "tr": {
+    "back": "← Önemli dükkanlar",
+    "hoursH": "Çalışma saatleri",
+    "addrH": "Adres",
+    "call": "Ara",
+    "phoneL": "Telefon",
+    "emergL": "Acil telefon",
+    "map": "Google konumu",
+    "closed": "Kapalı",
+    "d0": "Pzt",
+    "d1": "Sal",
+    "d2": "Çar",
+    "d3": "Per",
+    "d4": "Cum",
+    "d5": "Cmt",
+    "d6": "Paz",
+    "title": "Vodafone",
+    "p0": "Vodafone, Kos’taki en büyük ve en güvenilir telekom dükkanıdır. Yerel SIM, ek data veya tatilde telefon sorunu için Vodafone Kos’ta hızlı yardım alırsın. Şunlar için gidebilirsin:",
+    "p1": "Personel iyi İngilizce konuşur. Birçok tatilci adada kalış için ucuz ve hızlı internet ayarlamak üzere buraya gelir.",
+    "lead": "Yunan SIM",
+    "b0": "Bol datalı Yunan SIM kartları",
+    "b1": "Ön ödemeli kontör ve internet paketleri",
+    "b2": "Şarj aletleri, kılıflar ve aksesuarlar",
+    "b3": "Telefon ayarlarında yardım"
+  },
+  "es": {
+    "back": "← Tiendas importantes",
+    "hoursH": "Horario",
+    "addrH": "Dirección",
+    "call": "Llama",
+    "phoneL": "Teléfono",
+    "emergL": "Teléfono de urgencia",
+    "map": "Ubicación en Google",
+    "closed": "Cerrado",
+    "d0": "Lun",
+    "d1": "Mar",
+    "d2": "Mié",
+    "d3": "Jue",
+    "d4": "Vie",
+    "d5": "Sáb",
+    "d6": "Dom",
+    "title": "Vodafone",
+    "p0": "Vodafone es la tienda de telefonía más grande y fiable de Kos. Si necesitas una SIM local, quieres comprar datos o tienes problemas con el teléfono en vacaciones, en Vodafone Kos te ayudan rápido. Puedes ir para:",
+    "p1": "El personal habla bien inglés. Muchos veraneantes entran para conseguir internet barato y rápido para su estancia en la isla.",
+    "lead": "SIM griega",
+    "b0": "Tarjetas SIM griegas con muchos datos",
+    "b1": "Saldo prepago y bonos de internet",
+    "b2": "Cargadores, fundas y accesorios",
+    "b3": "Ayuda con los ajustes del teléfono"
+  }
+};
+</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>
