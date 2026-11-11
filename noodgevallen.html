@@ -45,8 +45,9 @@
     .sos a { display: inline-block; margin-top: 8px; background: #fff; color: #c62828; font-weight: 800; font-size: 1.4rem; padding: 10px 28px; border-radius: 999px; text-decoration: none; }
     .sos p { font-size: .82rem; margin-top: 8px; opacity: .95; }
     .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .card { display: block; position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 1; background: #1a2525 center/cover no-repeat; text-decoration: none; border: 1px solid var(--border); }
-    .card-overlay { position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 12px; background: linear-gradient(to top, rgba(0,0,0,.72), transparent 55%); }
+    .card { display: flex; align-items: center; justify-content: center; position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 1; background: #fff; text-decoration: none; border: 1px solid var(--border); padding: 12px 12px 46px; }
+    .card img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; }
+    .card-overlay { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: flex-end; padding: 7px 10px; background: rgba(13,26,26,.9); }
     .card-title { color: #fff; font-size: .88rem; font-weight: 700; line-height: 1.25; display: flex; flex-direction: column; gap: 2px; }
     .card-meta { font-size: .7rem; font-weight: 600; opacity: .9; color: #e8f5f3; }
     .footer { text-align: center; padding: 20px; font-size: .78rem; color: var(--text-soft); }
@@ -84,29 +85,37 @@
     </div>
 
     <div class="grid">
-      <a class="card" href="hulp-ziekenhuis.html" style="background-image:url('img/jwwb/e205634cad-fc-ziekenhuis-griekenland-standard-501vxp.jpg')">
-        <div class="card-overlay"><span class="card-title">Ziekenhuis<span class="card-meta" data-i18n="m1">Spoed & locatie</span></span></div>
+      <a class="card" href="hulp-ziekenhuis.html">
+        <img src="img/hk/tegel-ziekenhuis.jpg" alt="">
+        <span class="card-overlay"><span class="card-title">Ziekenhuis<span class="card-meta" data-i18n="m1">Spoed & locatie</span></span></span>
       </a>
-      <a class="card" href="hulp-apotheek.html" style="background-image:url('img/jwwb/5adaf80f35-schermopname_18-2-2026_14307_greekreporter-com-standard.jpg')">
-        <div class="card-overlay"><span class="card-title">Apotheek<span class="card-meta" data-i18n="m2">Medicijnen</span></span></div>
+      <a class="card" href="hulp-apotheek.html">
+        <img src="img/hk/tegel-apotheek.png" alt="">
+        <span class="card-overlay"><span class="card-title">Apotheek<span class="card-meta" data-i18n="m2">Medicijnen</span></span></span>
       </a>
-      <a class="card" href="hulp-huisartsen.html" style="background-image:url('img/hk/hulp-huisartsen.jpg')">
-        <div class="card-overlay"><span class="card-title">Huisartsen<span class="card-meta" data-i18n="m3">Per regio</span></span></div>
+      <a class="card" href="hulp-huisartsen.html">
+        <img src="img/hk/tegel-huisartsen.jpg" alt="">
+        <span class="card-overlay"><span class="card-title">Huisartsen<span class="card-meta" data-i18n="m3">Per regio</span></span></span>
       </a>
-      <a class="card" href="hulp-tandarts.html" style="background-image:url('img/jwwb/88675adc39-4269695.jpeg')">
-        <div class="card-overlay"><span class="card-title">Tandarts<span class="card-meta" data-i18n="m4">Tandzorg</span></span></div>
+      <a class="card" href="hulp-tandarts.html">
+        <img src="img/hk/tegel-tandarts.jpg" alt="">
+        <span class="card-overlay"><span class="card-title">Tandarts<span class="card-meta" data-i18n="m4">Tandzorg</span></span></span>
       </a>
-      <a class="card" href="hulp-politie.html" style="background-image:url('img/jwwb/a4f715094c-kos-2-scaled-standard-tjp1i5.jpg')">
-        <div class="card-overlay"><span class="card-title">Politie<span class="card-meta" data-i18n="m5">112 / politie</span></span></div>
+      <a class="card" href="hulp-politie.html">
+        <img src="img/hk/tegel-politie.jpg" alt="">
+        <span class="card-overlay"><span class="card-title">Politie<span class="card-meta" data-i18n="m5">112 / politie</span></span></span>
       </a>
-      <a class="card" href="hulp-brandweer.html" style="background-image:url('img/jwwb/36e6f30f0a-627930.jpeg')">
-        <div class="card-overlay"><span class="card-title">Brandweer<span class="card-meta" data-i18n="m6">Brand & hulp</span></span></div>
+      <a class="card" href="hulp-brandweer.html">
+        <img src="img/hk/tegel-brandweer.jpg" alt="">
+        <span class="card-overlay"><span class="card-title">Brandweer<span class="card-meta" data-i18n="m6">Brand & hulp</span></span></span>
       </a>
-      <a class="card" href="hulp-waterbedrijf.html" style="background-image:url('img/jwwb/a0285bac0d-be2c0e4bc68e97336862a76636fd8047_l-standard-ed7975.jpg')">
-        <div class="card-overlay"><span class="card-title">Waterbedrijf<span class="card-meta" data-i18n="m7">Waterproblemen</span></span></div>
+      <a class="card" href="hulp-waterbedrijf.html">
+        <img src="img/hk/tegel-waterbedrijf.jpg" alt="">
+        <span class="card-overlay"><span class="card-title">Waterbedrijf<span class="card-meta" data-i18n="m7">Waterproblemen</span></span></span>
       </a>
-      <a class="card" href="hulp-stroomuitval.html" style="background-image:url('')">
-        <div class="card-overlay"><span class="card-title">Stroomuitval<span class="card-meta" data-i18n="m8">Elektriciteit</span></span></div>
+      <a class="card" href="hulp-stroomuitval.html">
+        <img src="img/hk/tegel-stroomuitval.png" alt="">
+        <span class="card-overlay"><span class="card-title">Stroomuitval<span class="card-meta" data-i18n="m8">Elektriciteit</span></span></span>
       </a>
     </div>
   </main>
