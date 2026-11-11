@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>MEDICARE KOS – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+<style>
+.strip{display:block;width:100%;height:140px;object-fit:cover;border-radius:14px;margin:0 0 12px}
+.logo-mark{display:block;width:280px;max-width:100%;height:auto;margin:0 auto 12px;background:#fff;border-radius:12px}
+.card h3{font-size:.95rem;margin:12px 0 8px;color:var(--text)}
+.card .actions{margin:12px 0 0}
+</style>
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <img class="strip" src="img/hk/huisarts-strip-stethoscoop.jpg" alt="">
+  <p class="parent-link"><a href="hulp-huisartsen.html" data-i18n="back">← Huisartsen</a></p>
+  <h1>MEDICARE KOS</h1>
+  <img class="logo-mark" src="img/hk/huisarts-medicare-logo.png" alt="Medicare Kos" width="1600" height="800">
+  <article class="card">
+    <p data-i18n="p1">Medicare in Kos is een toegankelijke en betrouwbare medische voorziening voor toeristen en bezoekers die tijdens hun verblijf een huisarts nodig hebben of gezondheidsklachten ervaren. De artsen en medewerkers zijn Engels sprekend en gewend om internationale patiënten te helpen.</p>
+  </article>
+  <img class="strip" src="img/hk/huisarts-strip-tas.jpg" alt="">
+  <article class="card">
+    <p data-i18n="p2">Alles rondom verzekeringen, doorverwijzingen en administratie is goed geregeld, waardoor je snel en zonder gedoe geholpen wordt. Voor niet-acute medische vragen of plotselinge klachten kun je hier eenvoudig terecht.</p>
+    <h3 data-i18n="addrH">Adres</h3>
+    <p><strong>Leof. El. Venizelou 5, Kos 853 00</strong></p>
+    <h3 data-i18n="hoursH">Openingstijden</h3>
+    <p data-i18n="hours">Elke dag 09:00 tot 22:00</p>
+    <div class="actions">
+      <a class="btn btn-map" href="https://maps.app.goo.gl/h71yFVbev85BzmSr9" target="_blank" rel="noopener" data-i18n="map">Google locatie</a>
+    </div>
+  </article>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>
+window.HK_DICT = {
+  nl: { back: "← Huisartsen", p1: "Medicare in Kos is een toegankelijke en betrouwbare medische voorziening voor toeristen en bezoekers die tijdens hun verblijf een huisarts nodig hebben of gezondheidsklachten ervaren. De artsen en medewerkers zijn Engels sprekend en gewend om internationale patiënten te helpen.", p2: "Alles rondom verzekeringen, doorverwijzingen en administratie is goed geregeld, waardoor je snel en zonder gedoe geholpen wordt. Voor niet-acute medische vragen of plotselinge klachten kun je hier eenvoudig terecht.", addrH: "Adres", hoursH: "Openingstijden", hours: "Elke dag 09:00 tot 22:00", map: "Google locatie" },
+  de: { back: "← Hausärzte", p1: "Medicare in Kos ist eine zugängliche und zuverlässige medizinische Einrichtung für Touristen und Besucher, die während ihres Aufenthalts einen Hausarzt brauchen oder gesundheitliche Beschwerden haben. Die Ärzte und Mitarbeitenden sprechen Englisch und sind es gewohnt, internationalen Patienten zu helfen.", p2: "Alles rund um Versicherungen, Überweisungen und Verwaltung ist gut geregelt, sodass dir schnell und ohne Umstände geholfen wird. Bei nicht akuten medizinischen Fragen oder plötzlichen Beschwerden kannst du hier einfach hingehen.", addrH: "Adresse", hoursH: "Öffnungszeiten", hours: "Jeden Tag 09:00 bis 22:00", map: "Google-Standort" },
+  en: { back: "← GPs", p1: "Medicare in Kos is an accessible and reliable medical service for tourists and visitors who need a GP during their stay or have health complaints. The doctors and staff speak English and are used to helping international patients.", p2: "Everything around insurance, referrals and administration is well organised, so you are helped quickly and without fuss. For non-acute medical questions or sudden complaints you can simply come here.", addrH: "Address", hoursH: "Opening hours", hours: "Every day 09:00 to 22:00", map: "Google location" },
+  it: { back: "← Medici di base", p1: "Medicare a Kos è un servizio medico accessibile e affidabile per turisti e visitatori che durante il soggiorno hanno bisogno di un medico di base o hanno disturbi. I medici e il personale parlano inglese e sono abituati ad aiutare pazienti internazionali.", p2: "Tutto ciò che riguarda assicurazioni, invii e amministrazione è ben organizzato, così vieni aiutato in fretta e senza complicazioni. Per domande mediche non acute o disturbi improvvisi puoi rivolgerti qui.", addrH: "Indirizzo", hoursH: "Orari", hours: "Ogni giorno dalle 09:00 alle 22:00", map: "Posizione Google" },
+  tr: { back: "← Aile hekimleri", p1: "Kos’taki Medicare, konaklaması sırasında aile hekimine ihtiyaç duyan veya sağlık şikayeti olan turistler ve ziyaretçiler için ulaşılır ve güvenilir bir sağlık hizmetidir. Hekimler ve çalışanlar İngilizce konuşur ve uluslararası hastalara yardım etmeye alışkındır.", p2: "Sigorta, sevk ve evrak işleri düzenlidir; böylece hızlı ve uğraşsız yardım alırsın. Acil olmayan tıbbi sorular veya ani şikayetler için buraya kolayca gelebilirsin.", addrH: "Adres", hoursH: "Çalışma saatleri", hours: "Her gün 09:00–22:00", map: "Google konumu" },
+  es: { back: "← Médicos de cabecera", p1: "Medicare en Kos es un servicio médico accesible y fiable para turistas y visitantes que durante su estancia necesitan un médico de cabecera o tienen molestias. Los médicos y el personal hablan inglés y están acostumbrados a ayudar a pacientes internacionales.", p2: "Todo lo de seguros, derivaciones y administración está bien organizado, así que te atienden rápido y sin complicaciones. Para preguntas médicas no agudas o molestias repentinas puedes acudir aquí.", addrH: "Dirección", hoursH: "Horario", hours: "Todos los días de 09:00 a 22:00", map: "Ubicación en Google" }
+};
+</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>

@@ -6,6 +6,26 @@
 <meta name="theme-color" content="#0D1A1A">
 <title>Huisartsen – Hello Kos</title>
 <link rel="stylesheet" href="hello-kos.css">
+<style>
+body.hk-page .hero-wrap { aspect-ratio: auto; height: 140px; }
+.kos-map { width: 100%; height: auto; display: block; margin: 0 0 8px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; }
+.kos-map a text { fill: var(--gold); font-weight: 700; }
+.kos-map text.quiet { fill: #8aa89a; font-weight: 600; }
+.health-note { font-size: .86rem; color: var(--text-soft); margin: 0 0 14px; }
+.health-note a { color: var(--petrol); font-weight: 700; }
+.swipe-wrap { position: relative; margin: 0 0 8px; }
+.swipe { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 0 0 10px; -webkit-overflow-scrolling: touch; }
+.swipe::-webkit-scrollbar { height: 0; }
+.swipe-card { flex: 0 0 78%; scroll-snap-align: start; position: relative; height: 180px; border-radius: 16px; overflow: hidden; text-decoration: none; border: 1px solid var(--border); }
+.swipe-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.swipe-card span { position: absolute; left: 10px; right: 10px; bottom: 10px; color: #fff; font-weight: 800; font-size: 1rem; text-shadow: 0 1px 6px rgba(0,0,0,.8); }
+.swipe-btn { position: absolute; top: 70px; z-index: 2; width: 36px; height: 36px; border: 0; border-radius: 50%; background: rgba(13,26,26,.82); color: var(--gold); font-size: 1.3rem; cursor: pointer; }
+.swipe-prev { left: 6px; }
+.swipe-next { right: 6px; }
+.dots { display: flex; justify-content: center; gap: 8px; margin: 0 0 8px; }
+.dots button { width: 8px; height: 8px; border-radius: 50%; border: 0; background: #3a4a4a; padding: 0; cursor: pointer; }
+.dots button.on { background: var(--gold); }
+</style>
 </head>
 <body class="hk-page">
 <header class="app-header">
@@ -28,24 +48,85 @@
 </header>
 <div class="overlay" id="overlay"></div>
 <main class="main">
-  <div class="hero-wrap"><img src="img/hk/hulp-huisartsen.jpg" alt=""></div>
+  <div class="hero-wrap"><img src="img/hk/hulp-huisartsen.jpg" alt="" width="1280" height="720"></div>
   <p class="parent-link"><a href="noodgevallen.html" data-i18n="back">← Noodgevallen</a></p>
   <h1 data-i18n="title">Huisartsen</h1>
-  <p class="lead" data-i18n="lead">De gids deelde huisartsen in per streek: Kos-stad, Tigaki en Psalidi. De namen, telefoons en adressen zijn op deze pagina nog niet ingevuld.</p>
-  <div class="badges"><span class="badge" data-i18n="b0">Per streek</span></div>
-  <div class="actions">
-    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
-    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
-    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=doctor%20Kos" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=doctor%20Kos" target="_blank" rel="noopener">Apple Maps</a>
+  <p class="lead" data-i18n="lead">Kies een regio.</p>
+
+  <svg class="kos-map" viewBox="0 0 420 200" role="img" aria-label="Kos">
+    <path fill="#152525" stroke="#E0B040" stroke-width="2" d="M36 108c8-28 28-34 48-22 10 6 18 22 34 24 18 2 28-16 48-20 22-4 36 8 58 6 24-2 40-18 66-16 28 2 48 16 70 14 18-2 36 8 28 24-10 20-40 18-62 12-24-6-36 8-62 10-28 2-48-8-72-6-20 2-36 16-58 12-18-4-28-22-46-18-16 4-28 8-42-4-8-8-14-16-10-22z"/>
+    <text class="quiet" x="52" y="118" text-anchor="middle" font-size="10">Kefalos</text>
+    <text class="quiet" x="108" y="150" text-anchor="middle" font-size="10">Kardamena</text>
+    <text class="quiet" x="118" y="78" text-anchor="middle" font-size="10">Mastichari</text>
+    <text class="quiet" x="150" y="118" text-anchor="middle" font-size="10">Antimachia</text>
+    <text class="quiet" x="178" y="136" text-anchor="middle" font-size="10">Pyli</text>
+    <text class="quiet" x="188" y="92" text-anchor="middle" font-size="10">Zia</text>
+    <text class="quiet" x="214" y="124" text-anchor="middle" font-size="10">Zipari</text>
+    <a href="hulp-huisarts-tigaki.html"><text x="228" y="72" text-anchor="middle" font-size="12">Tigaki</text></a>
+    <text class="quiet" x="248" y="136" text-anchor="middle" font-size="10">Platani</text>
+    <a href="hulp-huisarts-kos.html"><text x="268" y="78" text-anchor="middle" font-size="12">Lampi</text></a>
+    <a href="hulp-huisarts-kos.html"><text x="300" y="118" text-anchor="middle" font-size="12">Kos-stad</text></a>
+    <a href="hulp-huisarts-psalidi.html"><text x="352" y="108" text-anchor="middle" font-size="12">Psalidi</text></a>
+  </svg>
+  <p class="health-note"><span data-i18n="healthNote">Antimachia, Kardamena en Kefalos hebben hier geen huisarts. De gezondheidsposten staan bij het ziekenhuis.</span> <a href="hulp-ziekenhuis.html" data-i18n="healthLink">Ziekenhuis</a></p>
+
+  <div class="swipe-wrap">
+    <button type="button" class="swipe-btn swipe-prev" id="swipePrev" aria-label="Vorige">‹</button>
+    <div class="swipe" id="swipe">
+      <a class="swipe-card" href="hulp-huisarts-kos.html"><img src="img/jwwb/593adc8aaa-kos-stad-winkels-agora-markt-high-4neznf.jpg" alt=""><span>Kos-stad</span></a>
+      <a class="swipe-card" href="hulp-huisarts-kos.html"><img src="img/jwwb/cc5c994d39-lambi-beach-looking-towards-high.jpg" alt=""><span>Lampi</span></a>
+      <a class="swipe-card" href="hulp-huisarts-tigaki.html"><img src="img/hk/sight-tigaki.jpg" alt=""><span>Tigaki</span></a>
+      <a class="swipe-card" href="hulp-huisarts-psalidi.html"><img src="img/hk/huisarts-psalidi-dokter.jpg" alt="Dr. Nikoletta Lalla"><span>Psalidi</span></a>
+    </div>
+    <button type="button" class="swipe-btn swipe-next" id="swipeNext" aria-label="Volgende">›</button>
   </div>
-  <p class="status" id="ttsStatus"></p>
-  <div id="readText">
-    <article class="card"><h2 data-i18n="h0">Spoed</h2><p data-i18n="p0">Voor een noodgeval ga je niet wachten op een afspraak. Bel 112 of 166 (ambulance) of ga naar het ziekenhuis.</p></article>
-    <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">Het telefoonnummer en het exacte adres staan nog niet in deze gids. Bel bij direct gevaar 112.</span></div>
+  <div class="dots" id="dots">
+    <button type="button" class="on" aria-label="1"></button>
+    <button type="button" aria-label="2"></button>
+    <button type="button" aria-label="3"></button>
+    <button type="button" aria-label="4"></button>
   </div>
 </main>
 <footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
-<script>window.HK_DICT = {"nl": {"title": "Huisartsen", "lead": "De gids deelde huisartsen in per streek: Kos-stad, Tigaki en Psalidi. De namen, telefoons en adressen zijn op deze pagina nog niet ingevuld.", "back": "← Noodgevallen", "note": "Het telefoonnummer en het exacte adres staan nog niet in deze gids. Bel bij direct gevaar 112.", "h0": "Spoed", "p0": "Voor een noodgeval ga je niet wachten op een afspraak. Bel 112 of 166 (ambulance) of ga naar het ziekenhuis.", "b0": "Per streek"}, "de": {"title": "Hausärzte", "lead": "Der Guide teilte Hausärzte nach Gegend: Kos-Stadt, Tigaki und Psalidi. Namen, Telefone und Adressen fehlen auf dieser Seite noch.", "back": "← Notfälle", "note": "Telefonnummer und genaue Adresse stehen noch nicht in diesem Guide. Bei direkter Gefahr: 112.", "h0": "Notfall", "p0": "Im Notfall wartest du nicht auf einen Termin. Ruf 112 oder 166 (Rettung) oder geh ins Krankenhaus.", "b0": "Nach Gegend"}, "en": {"title": "General practitioners", "lead": "The guide split general practitioners by area: Kos town, Tigaki and Psalidi. Names, phones and addresses are not filled in on this page yet.", "back": "← Emergencies", "note": "The phone number and exact address are not in this guide yet. If you are in danger, call 112.", "h0": "Emergency", "p0": "In an emergency do not wait for an appointment. Call 112 or 166 (ambulance) or go to the hospital.", "b0": "By area"}, "it": {"title": "Medici di base", "lead": "La guida divideva i medici per zona: città di Kos, Tigaki e Psalidi. Nomi, telefoni e indirizzi non sono ancora in questa pagina.", "back": "← Emergenze", "note": "Numero di telefono e indirizzo esatto non sono ancora in questa guida. In pericolo chiama il 112.", "h0": "Urgenza", "p0": "In emergenza non aspetti un appuntamento. Chiama il 112 o il 166 (ambulanza) o vai in ospedale.", "b0": "Per zona"}, "tr": {"title": "Aile hekimleri", "lead": "Rehber aile hekimlerini yöreye göre ayırdı: Kos şehri, Tigaki ve Psalidi. İsim, telefon ve adres bu sayfada henüz yok.", "back": "← Acil durum", "note": "Telefon ve tam adres bu rehberde henüz yok. Tehlike varsa 112'yi ara.", "h0": "Acil", "p0": "Acilde randevu bekleme. 112 veya 166’yı (ambulans) ara ya da hastaneye git.", "b0": "Yöreye göre"}, "es": {"title": "Médicos de cabecera", "lead": "La guía repartía los médicos por zona: ciudad de Kos, Tigaki y Psalidi. Nombres, teléfonos y direcciones aún no están en esta página.", "back": "← Emergencias", "note": "El teléfono y la dirección exacta aún no están en esta guía. Si hay peligro, llama al 112.", "h0": "Urgencia", "p0": "En una urgencia no esperes una cita. Llama al 112 o al 166 (ambulancia) o ve al hospital.", "b0": "Por zona"}};</script>
+<script>
+window.HK_DICT = {
+  nl: { title: "Huisartsen", back: "← Noodgevallen", lead: "Kies een regio.", healthNote: "Antimachia, Kardamena en Kefalos hebben hier geen huisarts. De gezondheidsposten staan bij het ziekenhuis.", healthLink: "Ziekenhuis" },
+  de: { title: "Hausärzte", back: "← Notfälle", lead: "Wähle eine Region.", healthNote: "Antimachia, Kardamena und Kefalos haben hier keinen Hausarzt. Die Gesundheitsstationen stehen beim Krankenhaus.", healthLink: "Krankenhaus" },
+  en: { title: "GPs", back: "← Emergencies", lead: "Choose a region.", healthNote: "Antimachia, Kardamena and Kefalos have no GP page here. The health posts are on the hospital page.", healthLink: "Hospital" },
+  it: { title: "Medici di base", back: "← Emergenze", lead: "Scegli una zona.", healthNote: "Antimachia, Kardamena e Kefalos non hanno qui un medico di base. I presidi sanitari sono nella pagina dell’ospedale.", healthLink: "Ospedale" },
+  tr: { title: "Aile hekimleri", back: "← Acil durum", lead: "Bir bölge seç.", healthNote: "Antimachia, Kardamena ve Kefalos’un burada aile hekimi sayfası yok. Sağlık noktaları hastane sayfasında.", healthLink: "Hastane" },
+  es: { title: "Médicos de cabecera", back: "← Emergencias", lead: "Elige una zona.", healthNote: "Antimachia, Kardamena y Kefalos no tienen aquí médico de cabecera. Los puestos de salud están en la página del hospital.", healthLink: "Hospital" }
+};
+</script>
+<script>
+(function () {
+  var scroller = document.getElementById("swipe");
+  var cards = scroller.querySelectorAll(".swipe-card");
+  var dots = document.querySelectorAll("#dots button");
+  function go(index) {
+    var card = cards[index];
+    if (card) scroller.scrollTo({ left: card.offsetLeft, behavior: "smooth" });
+  }
+  document.getElementById("swipePrev").addEventListener("click", function () {
+    scroller.scrollBy({ left: -cards[0].offsetWidth * 0.9, behavior: "smooth" });
+  });
+  document.getElementById("swipeNext").addEventListener("click", function () {
+    scroller.scrollBy({ left: cards[0].offsetWidth * 0.9, behavior: "smooth" });
+  });
+  dots.forEach(function (dot, index) {
+    dot.addEventListener("click", function () { go(index); });
+  });
+  scroller.addEventListener("scroll", function () {
+    var index = 0;
+    var best = Infinity;
+    cards.forEach(function (card, i) {
+      var dist = Math.abs(card.offsetLeft - scroller.scrollLeft);
+      if (dist < best) { best = dist; index = i; }
+    });
+    dots.forEach(function (dot, i) { dot.classList.toggle("on", i === index); });
+  });
+})();
+</script>
 <script src="hello-kos-i18n.js"></script>
 </body>
 </html>
