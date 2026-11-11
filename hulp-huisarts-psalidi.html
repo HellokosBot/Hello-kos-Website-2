@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Dr. Nikoletta Lalla – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+<style>
+.call-list{display:flex;flex-direction:column;gap:10px;margin:12px 0 0}
+a.call-btn{display:flex;align-items:center;gap:12px;text-decoration:none;background:linear-gradient(180deg,#3eaeae 0%,#2b7e7e 100%);color:#fff;border:0;border-radius:16px;padding:14px 16px;box-shadow:0 6px 16px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.25);cursor:pointer}
+a.call-btn:active{transform:translateY(1px);box-shadow:0 2px 8px rgba(0,0,0,.3)}
+a.call-btn .ico{flex:0 0 44px;width:44px;height:44px;border-radius:14px;background:var(--gold);color:#1c1404;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 -2px 0 rgba(0,0,0,.15)}
+a.call-btn .call-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
+a.call-btn .call-main{font-weight:800;font-size:1.08rem;line-height:1.25}
+a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba(255,255,255,.9)}
+.strip{display:block;width:100%;height:140px;object-fit:cover;border-radius:14px;margin:0 0 12px}
+.portrait{display:block;width:100%;max-width:420px;height:auto;border-radius:14px;margin:0 0 12px}
+.card h3{font-size:.95rem;margin:12px 0 8px;color:var(--text)}
+.card .actions{margin:12px 0 0}
+</style>
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <p class="parent-link"><a href="hulp-huisartsen.html" data-i18n="back">← Huisartsen</a></p>
+  <h1>Dr. Nikoletta Lalla</h1>
+  <p class="lead">Psalidi</p>
+  <img class="portrait" src="img/hk/huisarts-psalidi-dokter.jpg" alt="Dr. Nikoletta Lalla" width="1600" height="1651">
+  <img class="strip" src="img/hk/huisarts-strip-stethoscoop.jpg" alt="">
+  <article class="card">
+    <p data-i18n="p1">Medical Doctor Nikoletta Lalla biedt al sinds 1996 betrouwbare en professionele medische zorg op het eiland Kos. Zij is een geregistreerd lid van de Medische Associatie van Kos en spreekt vloeiend Engels en Duits. Tijdens uw vakantie kunt u haar, bij medische klachten, direct telefonisch bereiken. Zij maakt indien nodig een afspraak voor een hotelbezoek of een consult in haar praktijk en staat 24 uur per dag klaar. Ook bij vervolgonderzoeken, samenwerking met specialisten en reisverzekeringen wordt alles voor u geregeld.</p>
+    <h3 data-i18n="addrH">Adres</h3>
+    <p><strong>Vasileos Georgiou V', Kos 853 00</strong></p>
+    <h3 data-i18n="hoursH">Openingstijden</h3>
+    <p data-i18n="hours">Elke dag 24 uur bereikbaar</p>
+    <div class="call-list">
+      <a class="call-btn" href="tel:+302242021442"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="call-copy"><span class="call-main"><span data-i18n="call">Bel</span> +30 22420 21442</span><span class="call-sub">Dr. Nikoletta Lalla</span></span></a>
+      <a class="call-btn" href="tel:+306944642229"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.7-1.2A9 9 0 1 0 12 3zm0 2a7 7 0 0 1 6.1 3.6 7 7 0 0 1-.6 8.1 7 7 0 0 1-8.2.7l-.3-.2-2.8.7.7-2.7-.2-.3A7 7 0 0 1 12 5z"/></svg></span><span class="call-copy"><span class="call-main">WhatsApp</span><span class="call-sub">+30 694 464 2229</span></span></a>
+    </div>
+    <div class="actions">
+      <a class="btn btn-map" href="https://maps.app.goo.gl/jsTrpnvB8iaxUmTA7" target="_blank" rel="noopener" data-i18n="map">Google locatie</a>
+    </div>
+  </article>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>
+window.HK_DICT = {
+  nl: { back: "← Huisartsen", call: "Bel", p1: "Medical Doctor Nikoletta Lalla biedt al sinds 1996 betrouwbare en professionele medische zorg op het eiland Kos. Zij is een geregistreerd lid van de Medische Associatie van Kos en spreekt vloeiend Engels en Duits. Tijdens uw vakantie kunt u haar, bij medische klachten, direct telefonisch bereiken. Zij maakt indien nodig een afspraak voor een hotelbezoek of een consult in haar praktijk en staat 24 uur per dag klaar. Ook bij vervolgonderzoeken, samenwerking met specialisten en reisverzekeringen wordt alles voor u geregeld.", addrH: "Adres", hoursH: "Openingstijden", hours: "Elke dag 24 uur bereikbaar", map: "Google locatie" },
+  de: { back: "← Hausärzte", call: "Anrufen", p1: "Die Ärztin Nikoletta Lalla bietet seit 1996 zuverlässige und professionelle medizinische Versorgung auf der Insel Kos. Sie ist registriertes Mitglied der Medizinischen Vereinigung von Kos und spricht fließend Englisch und Deutsch. Während Ihres Urlaubs können Sie sie bei medizinischen Beschwerden direkt telefonisch erreichen. Sie macht bei Bedarf einen Termin für einen Hotelbesuch oder ein Gespräch in ihrer Praxis und ist 24 Stunden am Tag erreichbar. Auch bei Folgeuntersuchungen, Zusammenarbeit mit Fachärzten und Reiseversicherungen wird alles für Sie geregelt.", addrH: "Adresse", hoursH: "Öffnungszeiten", hours: "Jeden Tag 24 Stunden erreichbar", map: "Google-Standort" },
+  en: { back: "← GPs", call: "Call", p1: "Medical Doctor Nikoletta Lalla has offered reliable and professional medical care on the island of Kos since 1996. She is a registered member of the Medical Association of Kos and speaks fluent English and German. During your holiday you can reach her directly by phone if you have medical complaints. If needed she makes an appointment for a hotel visit or a consultation in her practice, and she is available 24 hours a day. Follow-up tests, working with specialists and travel insurance are also arranged for you.", addrH: "Address", hoursH: "Opening hours", hours: "Reachable 24 hours every day", map: "Google location" },
+  it: { back: "← Medici di base", call: "Chiama", p1: "La dottoressa Nikoletta Lalla offre dal 1996 cure mediche affidabili e professionali sull’isola di Kos. È membro registrato dell’Associazione medica di Kos e parla fluentemente inglese e tedesco. Durante la vacanza puoi raggiungerla direttamente per telefono in caso di disturbi. Se serve fissa un appuntamento per una visita in hotel o un consulto nel suo studio ed è disponibile 24 ore su 24. Anche per controlli successivi, collaborazione con specialisti e assicurazioni di viaggio viene organizzato tutto.", addrH: "Indirizzo", hoursH: "Orari", hours: "Raggiungibile 24 ore ogni giorno", map: "Posizione Google" },
+  tr: { back: "← Aile hekimleri", call: "Ara", p1: "Tıp doktoru Nikoletta Lalla 1996’dan beri Kos adasında güvenilir ve profesyonel tıbbi bakım sunar. Kos Tıp Birliği’nin kayıtlı üyesidir ve akıcı İngilizce ve Almanca konuşur. Tatilinizde tıbbi şikayetlerde onu doğrudan telefonla arayabilirsiniz. Gerekirse otel ziyareti veya muayenehanesinde bir görüşme için randevu ayarlar ve günde 24 saat hazırdır. Kontrol tetkikleri, uzmanlarla iş birliği ve seyahat sigortası da sizin için düzenlenir.", addrH: "Adres", hoursH: "Çalışma saatleri", hours: "Her gün 24 saat ulaşılabilir", map: "Google konumu" },
+  es: { back: "← Médicos de cabecera", call: "Llama", p1: "La doctora Nikoletta Lalla ofrece desde 1996 atención médica fiable y profesional en la isla de Kos. Es miembro registrado de la Asociación Médica de Kos y habla inglés y alemán con fluidez. Durante las vacaciones puedes localizarla directamente por teléfono si tienes molestias. Si hace falta concierta una visita al hotel o una consulta en su clínica y está disponible las 24 horas. También se organiza todo en controles posteriores, colaboración con especialistas y seguros de viaje.", addrH: "Dirección", hoursH: "Horario", hours: "Disponible las 24 horas todos los días", map: "Ubicación en Google" }
+};
+</script>
+<script src="hello-kos-i18n.js"></script>
+</body>
+</html>
