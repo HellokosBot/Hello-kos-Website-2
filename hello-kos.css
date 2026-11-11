@@ -207,11 +207,14 @@ body.hk-page .placeholder {
   padding: 12px 14px; margin: 12px 0; font-size: 0.88rem; color: var(--text);
 }
 body.hk-page .placeholder strong { color: var(--gold); }
-body.hk-page .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+body.hk-page .actions { display: flex; flex-direction: column; align-items: stretch; gap: 8px; margin-bottom: 14px; width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box; }
 body.hk-page .btn {
   display: flex; align-items: center; justify-content: center; gap: 8px;
-  width: 100%; padding: 12px 14px; border-radius: 14px; border: none; cursor: pointer;
+  box-sizing: border-box;
+  width: 100%; max-width: 100%; min-width: 0;
+  padding: 12px 14px; border-radius: 14px; border: none; cursor: pointer;
   font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none;
+  white-space: normal; overflow-wrap: anywhere; text-align: center;
 }
 body.hk-page .btn-audio { background: var(--petrol); color: #fff; }
 body.hk-page .btn-stop { background: #3A4545; color: #fff; display: none; }
@@ -242,3 +245,13 @@ body.hk-page .footer, body.hk-page + .footer, .hk-footer {
 body.hk-page .footer a, .hk-footer a { color: var(--petrol); text-decoration: none; }
 body.hk-page .parent-link { display: block; text-align: center; margin: 8px 0 16px; }
 body.hk-page .parent-link a { color: var(--petrol); font-weight: 700; text-decoration: none; }
+/* Map and call buttons stay inside a phone screen: border and padding count inside the width. */
+a.btn, button.btn, a.btn-map, .btn-map, a.call-btn, .call-list {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+body.hk-page a.call-btn,
+body.hk-page .call-list { min-width: 0; }
+body.hk-page a.call-btn .call-copy,
+body.hk-page a.call-btn .call-main,
+body.hk-page a.call-btn .call-sub { min-width: 0; overflow-wrap: anywhere; }
