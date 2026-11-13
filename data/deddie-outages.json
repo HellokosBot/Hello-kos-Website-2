@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-13T08:20:39.190513+02:00",
+  "fetchedAt": "2026-11-13T10:26:41.550578+02:00",
   "sourceName": "ΔΕΔΔΗΕ",
   "sourceUrl": "https://siteapps.deddie.gr/Outages2Public/",
   "listType": "planned",
@@ -99,6 +99,20 @@
       "noteNumber": "",
       "purpose": "Λειτουργία",
       "onKos": false
+    },
+    {
+      "from": "2026-11-16T08:00:00+02:00",
+      "to": "2026-11-16T12:00:00+02:00",
+      "fromRaw": "16/11/2026 8:00:00 πμ",
+      "toRaw": "16/11/2026 12:00:00 μμ",
+      "places": [
+        "ΗΡΑΚΛΕΙΔΩΝ",
+        "ΚΩ"
+      ],
+      "area": "πέριξ του εστιατορίου Φυτώριο, στην Κέφαλο, στο νησί της Κω.",
+      "noteNumber": "",
+      "purpose": "Κατασκευές",
+      "onKos": true
     }
   ]
 }
