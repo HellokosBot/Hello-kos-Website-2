@@ -1,399 +1,199 @@
 <!DOCTYPE html>
-<html lang="nl" data-hk-own="1" data-hk-tts="1">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0D1F1F">
   <title>Markthal – Hello Kos</title>
-  <style>
-    :root {
-      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
-      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
-      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
-      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
-      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text); -webkit-font-smoothing: antialiased;
-      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
-      background: var(--bg); min-height: 100vh; line-height: 1.55;
-    }
-    .app-header {
-      position: sticky; top: 0; z-index: 100;
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-      padding: 14px 16px; background: var(--bg-header);
-      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
-    }
-    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
-    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
-    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
-    .logo-text span { color: var(--gold-dark); font-style: italic; }
-    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
-    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
-    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
-    .lang-menu.open { display: block; }
-    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
-    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
-    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
-    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
-    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .content { padding: 18px 16px 0; }
-    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
-    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-
-    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
-    .btn-audio { background: var(--petrol); color: #fff; }
-    .btn-audio.playing { background: var(--petrol-dark); }
-    .btn-stop { background: #3A4545; color: #fff; display: none; }
-    .btn-stop.show { display: flex; }
-
-    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
-    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
-    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
-    .card p:last-child { margin-bottom: 0; }
-    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
-    .tip strong { color: var(--gold); }
-    .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
-    .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
-    .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
-
-    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
-    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
-    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
-    .footer a { color: var(--petrol); text-decoration: none; }
-  </style>
-<link rel="stylesheet" href="hello-kos.css">
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body>
+<body class="hk-page hk-guide">
   <header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
   <main class="main">
     <div class="hero-wrap">
-      <img src="img/jwwb/593adc8aaa-kos-stad-winkels-agora-markt-high-4neznf.jpg" alt="Markthal" loading="eager">
-      <div class="hero-title"><h1 data-i18n="title">Markthal</h1></div>
+      <img class="hk-zoom" src="img/jwwb/593adc8aaa-kos-stad-winkels-agora-markt-high-4neznf.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
     </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=36.8927%2C27.2879" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?ll=36.8927,27.2879&amp;q=Markthal" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-markthal-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-markthal-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-markthal-03.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-markthal-04.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-markthal-05.jpg" alt=""></figure>
+<p data-i18n="v3"></p>
 
-    <div class="content">
-<p class="lead" data-i18n="lead">Italiaanse markthal aan Eleftherias-plein – vroeger echte markt, nu souvenirs, kruiden en lokale producten.</p>
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
 
-      
-
-      <div class="actions">
-        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
-        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-      </div>
-      
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Municipal%20Market%20Markthal%20Eleftherias%20Square%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Municipal%20Market%20Markthal%20Eleftherias%20Square%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
-      </div>
-      <p class="status" id="ttsStatus"></p>
-
-      <div id="readText">
-        <div class="card">
-          <h2 data-i18n="hStory">Aan Eleftherias-plein</h2>
-          <p data-i18n="p1">De markthal (Municipal Market / Mercato delle Erbe) ligt aan het grote Eleftherias-plein in het centrum. Gebouwd door de Italianen na de aardbeving van 1933, in Italiaanse stijl met brede bogen.</p>
-        </div>
-
-        
-
-        <div class="card">
-          <h2 data-i18n="hSee">Geen grote verse markt</h2>
-          <p data-i18n="p2">Kos-stad heeft geen grote openluchtmarkt met veel kraampjes en luidruchtige handelaren. De echte groente-/fruitmarkt telt maar een handvol kraampjes (vaak meloenen en tomaten). De markthal zelf was jaren een echte markthal; nu is het vooral een toeristenwinkel.</p>
-        </div>
-
-        <div class="photo-block">
-          <img src="img/jwwb/c104a99738-markt-kos-high.jpg" alt="Markthal binnen" loading="lazy">
-          <div class="cap" data-i18n="cap1">Binnen: kruiden, honing, souvenirs</div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2buy">Wat kun je er kopen?</h2>
-          <p data-i18n="p3">Lokale producten zoals honing, olijfolie, kruiden, zoetigheden en souvenirs. Compact en druk, met alles dicht op elkaar.</p>
-          <p data-i18n="p4">Lokalen kopen hier meestal geen dagelijkse groente of fruit meer – dat gebeurt elders.</p>
-        </div>
-
-        <div class="gallery">
-          <div class="g-item">
-            <img src="img/jwwb/0fce512928-644333610_26007463918864796_3576241640817886719_n-high.jpg" alt="Markthal" loading="lazy">
-            <span data-i18n="g1">Hal</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/d7e0cc2f4a-495054228_10162850263063966_7398502108315246019_n-high.jpg" alt="Plein" loading="lazy">
-            <span data-i18n="g2">Op het plein</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="hKnow">Bezoeken</h2>
-          <p data-i18n="p5">Eleftherias-plein, Kos-stad. Open tijdens winkeltijden.</p>
-          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: handig voor een snelle souvenir of een potje honing. Verwacht hier geen grote verse markt met veel kraampjes.</p></div>
-        </div>
-      </div>
+</article>
     </div>
   </main>
-
-  <footer class="footer">
-    <div>Hello Kos</div>
-    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
-  </footer>
-
-<script>
-(function(){
-  var I18N = window.HK_DICT = {
-    "nl": {
-      "title": "Markthal",
-      "lead": "Italiaanse markthal aan Eleftherias-plein – vroeger echte markt, nu souvenirs, kruiden en lokale producten.",
-      "btnPlay": "Voorlezen",
-      "p1": "De markthal (Municipal Market / Mercato delle Erbe) ligt aan het grote Eleftherias-plein in het centrum. Gebouwd door de Italianen na de aardbeving van 1933, in Italiaanse stijl met brede bogen.",
-      "p2": "Kos-stad heeft geen grote openluchtmarkt met veel kraampjes en luidruchtige handelaren. De echte groente-/fruitmarkt telt maar een handvol kraampjes (vaak meloenen en tomaten). De markthal zelf was jaren een echte markthal; nu is het vooral een toeristenwinkel.",
-      "cap1": "Binnen: kruiden, honing, souvenirs",
-      "h2buy": "Wat kun je er kopen?",
-      "p3": "Lokale producten zoals honing, olijfolie, kruiden, zoetigheden en souvenirs. Compact en druk, met alles dicht op elkaar.",
-      "p4": "Lokalen kopen hier meestal geen dagelijkse groente of fruit meer – dat gebeurt elders.",
-      "g1": "Hal",
-      "g2": "Op het plein",
-      "p5": "Eleftherias-plein, Kos-stad. Open tijdens winkeltijden.",
-      "tip": "handig voor een snelle souvenir of een potje honing. Verwacht hier geen grote verse markt met veel kraampjes.",
-      "hStory": "Het verhaal",
-      "hSee": "Wat je ziet",
-      "hKnow": "Goed om te weten",
-      "tipTitle": "Tip van de gids",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Market Hall",
-      "lead": "Italian market hall on Eleftherias Square – once a real market, now souvenirs, herbs and local products.",
-      "btnPlay": "Read aloud",
-      "p1": "The market hall (Municipal Market / Mercato delle Erbe) is located on the large Eleftherias Square in the centre. Built by the Italians after the 1933 earthquake, in Italian style with wide arches.",
-      "p2": "Kos Town has no large open-air market with many stalls and noisy traders. The real vegetable/fruit market has only a handful of stalls (often melons and tomatoes). The market hall itself was a real market for years; now it is mainly a tourist shop.",
-      "cap1": "Inside: herbs, honey, souvenirs",
-      "h2buy": "What can you buy?",
-      "p3": "Local products such as honey, olive oil, herbs, sweets and souvenirs. Compact and busy, with everything close together.",
-      "p4": "Locals usually no longer buy daily vegetables or fruit here – that happens elsewhere.",
-      "g1": "Hall",
-      "g2": "On the square",
-      "p5": "Eleftherias Square, Kos Town. Open during shop hours.",
-      "tip": "handy for a quick souvenir or a jar of honey. Do not expect a large fresh market with many stalls here.",
-      "hStory": "The story",
-      "hSee": "What you see",
-      "hKnow": "Good to know",
-      "tipTitle": "Guide’s tip",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Markthalle",
-      "lead": "Italienische Markthalle am Eleftherias-Platz – früher echter Markt, jetzt Souvenirs, Kräuter und lokale Produkte.",
-      "btnPlay": "Vorlesen",
-      "p1": "Die Markthalle (Municipal Market / Mercato delle Erbe) liegt am großen Eleftherias-Platz im Zentrum. Nach dem Erdbeben von 1933 von den Italienern im italienischen Stil mit breiten Bögen erbaut.",
-      "p2": "Kos-Stadt hat keinen großen Open-Air-Markt mit vielen Ständen und lauten Händlern. Der echte Obst-/Gemüsemarkt hat nur eine Handvoll Stände (oft Melonen und Tomaten). Die Markthalle selbst war jahrelang ein echter Markt; jetzt ist sie hauptsächlich ein Touristenladen.",
-      "cap1": "Innen: Kräuter, Honig, Souvenirs",
-      "h2buy": "Was kann man kaufen?",
-      "p3": "Lokale Produkte wie Honig, Olivenöl, Kräuter, Süßigkeiten und Souvenirs. Kompakt und voll, alles dicht beieinander.",
-      "p4": "Einheimische kaufen hier meist kein tägliches Gemüse oder Obst mehr – das geschieht woanders.",
-      "g1": "Halle",
-      "g2": "Auf dem Platz",
-      "p5": "Eleftherias-Platz, Kos-Stadt. Während der Ladenöffnungszeiten geöffnet.",
-      "tip": "praktisch für ein schnelles Souvenir oder ein Glas Honig. Erwarte hier keinen großen Frischmarkt mit vielen Ständen.",
-      "hStory": "Die Geschichte",
-      "hSee": "Was du siehst",
-      "hKnow": "Gut zu wissen",
-      "tipTitle": "Tipp des Guides",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Mercato Coperto",
-      "lead": "Mercato coperto italiano in Piazza Eleftherias – un tempo vero mercato, ora souvenir, erbe e prodotti locali.",
-      "btnPlay": "Leggi ad alta voce",
-      "p1": "Il mercato coperto (Municipal Market / Mercato delle Erbe) si trova nella grande Piazza Eleftherias nel centro. Costruito dagli italiani dopo il terremoto del 1933, in stile italiano con ampi archi.",
-      "p2": "Kos città non ha un grande mercato all’aperto con tanti banchi e commercianti rumorosi. Il vero mercato di frutta/verdura ha solo una manciata di banchi (spesso meloni e pomodori). Il mercato coperto stesso è stato per anni un vero mercato; ora è soprattutto un negozio per turisti.",
-      "cap1": "Interno: erbe, miele, souvenir",
-      "h2buy": "Cosa si può comprare?",
-      "p3": "Prodotti locali come miele, olio d’oliva, erbe, dolci e souvenir. Compatto e affollato, tutto stretto insieme.",
-      "p4": "I locali di solito non comprano più qui verdura o frutta quotidiana – succede altrove.",
-      "g1": "Sala",
-      "g2": "Sulla piazza",
-      "p5": "Piazza Eleftherias, Kos città. Aperto negli orari dei negozi.",
-      "tip": "utile per un souvenir veloce o un vasetto di miele. Non aspettarti qui un grande mercato fresco con tanti banchi.",
-      "hStory": "La storia",
-      "hSee": "Cosa vedi",
-      "hKnow": "Buono a sapersi",
-      "tipTitle": "Consiglio della guida",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Pazar Salonu",
-      "lead": "Eleftherias Meydanı’ndaki İtalyan pazar salonu – eskiden gerçek pazar, şimdi hediyelik, baharat ve yerel ürünler.",
-      "btnPlay": "Sesli oku",
-      "p1": "Pazar salonu (Municipal Market / Mercato delle Erbe) merkezdeki büyük Eleftherias Meydanı’nda yer alır. 1933 depreminden sonra İtalyanlar tarafından geniş kemerli İtalyan tarzında inşa edildi.",
-      "p2": "Kos şehrinde çok tezgâhlı ve gürültülü satıcılı büyük açık hava pazarı yok. Gerçek sebze/meyve pazarı sadece bir avuç tezgâhtan oluşur (çoğunlukla karpuz ve domates). Pazar salonu kendisi yıllarca gerçek pazardı; şimdi daha çok turist dükkânı.",
-      "cap1": "İçeride: baharat, bal, hediyelik",
-      "h2buy": "Ne alabilirsin?",
-      "p3": "Bal, zeytinyağı, baharat, tatlılar ve hediyelik gibi yerel ürünler. Kompakt ve kalabalık, her şey birbirine yakın.",
-      "p4": "Yerliler genellikle günlük sebze veya meyveyi artık burada almıyor – başka yerde oluyor.",
-      "g1": "Salon",
-      "g2": "Meydanda",
-      "p5": "Eleftherias Meydanı, Kos şehri. Mağaza saatlerinde açık.",
-      "tip": "hızlı bir hediyelik veya bir kavanoz bal için pratik. Burada çok tezgâhlı büyük taze pazar bekleme.",
-      "hStory": "Hikaye",
-      "hSee": "Ne görürsün",
-      "hKnow": "Bilmekte fayda var",
-      "tipTitle": "Rehberin ipucu",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Mercado Cubierto",
-      "lead": "Mercado cubierto italiano en la Plaza Eleftherias – antes mercado real, ahora souvenirs, hierbas y productos locales.",
-      "btnPlay": "Leer en voz alta",
-      "p1": "El mercado cubierto (Municipal Market / Mercato delle Erbe) está en la gran Plaza Eleftherias del centro. Construido por los italianos tras el terremoto de 1933, en estilo italiano con amplios arcos.",
-      "p2": "Kos ciudad no tiene un gran mercado al aire libre con muchos puestos y vendedores ruidosos. El verdadero mercado de frutas/verduras tiene solo un puñado de puestos (a menudo melones y tomates). El mercado cubierto fue durante años un mercado real; ahora es sobre todo una tienda turística.",
-      "cap1": "Interior: hierbas, miel, souvenirs",
-      "h2buy": "¿Qué se puede comprar?",
-      "p3": "Productos locales como miel, aceite de oliva, hierbas, dulces y souvenirs. Compacto y concurrido, todo junto.",
-      "p4": "Los locales normalmente ya no compran aquí verdura o fruta diaria – eso ocurre en otro sitio.",
-      "g1": "Sala",
-      "g2": "En la plaza",
-      "p5": "Plaza Eleftherias, Kos ciudad. Abierto en horario de tiendas.",
-      "tip": "práctico para un souvenir rápido o un tarro de miel. No esperes aquí un gran mercado fresco con muchos puestos.",
-      "hStory": "La historia",
-      "hSee": "Qué ves",
-      "hKnow": "Bueno saberlo",
-      "tipTitle": "Consejo del guía",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };
-
-  function setLang(l) {
-    if (!I18N[l]) l = 'nl';
-    localStorage.setItem('hk-lang', l);
-    document.documentElement.lang = l;
-    var d = I18N[l];
-    document.querySelectorAll('[data-i18n]').forEach(function(el){
-      var k = el.getAttribute('data-i18n');
-      if (d[k]) el.textContent = d[k];
-    });
-    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
-    if (opt) {
-      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
-      document.getElementById('code').textContent = l.toUpperCase();
-    }
-    document.querySelectorAll('.lang-option').forEach(function(o){
-      o.classList.toggle('active', o.getAttribute('data-lang') === l);
-    });
-    closeMenu();
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Kos-stad",
+    "title": "Markthal",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "Kijk eens even dit mooie gebouw in, mensen we staan nu recht voor de Markthal op het centrale Eleftheriasplein.",
+    "s1": "Kijk eens even dit mooie gebouw in, mensen we staan nu recht voor de Markthal op het centrale Eleftheriasplein. De Italianen bouwden deze markthal na de grote aardbeving van negentien drieëndertig. De bouw duurde twee jaar en het gebouw was in negentiennvijfendertig helemaal klaar.",
+    "s2": "Ze gaven het de naam Mercato delle Erbe, oftewel de kruidenmarkt. Het is gebouwd in een typisch Italiaanse stijl met brede bogen en stevige muren. Binnen is het compact en overzichtelijk.",
+    "s3": "Alles ligt dicht bij elkaar, zodat je in één keer langs de verschillende kraampjes loopt.Vroeger kwamen de inwoners van Kos hier hun verse groente, fruit, kruiden en dagelijkse boodschappen kopen. Het was echt de centrale markt van de stad. Tegenwoordig is het vooral een populaire plek voor toeristen.",
+    "v1": "Je vindt er souvenirs, lokale honing, olijfolie, gedroogde kruiden, traditionele Griekse zoetigheden en allerlei kleine cadeautjes. Het ruikt er vaak lekker naar specerijen en verse producten. Het is er meestal gezellig en levendig.",
+    "v2": "De markthal in het centrum van Kos stad werd na de grote aardbeving van1933 gebouwd door de italiaanen tijdens de Italiaanse overheersing (1922 - 1945.) en is jaren als markthal gebruikt. De markthal is nu een toeristenwinkel met souvenirs en kruiden waar de lokale bevolking zelf hun groente of fruit niet koopt.",
+    "v3": "Het is een levendige plek waar toeristen herinneringen of een cadeautje kopen",
+    "k1": "De echte dagelijkse markt voor groente en fruit is nu kleiner geworden en staat een stukje verderop. Toegang is helemaal gratis en je kunt er gewoon vrij rondwandelen.En wie weet loop jij straks naar buiten met een zakje lekkere oregano of een fles goede olijfolie in je handen. Lekker praktisch, die Italianen – ze wisten wel hoe je een handige markt bouwt!."
+  },
+  "de": {
+    "place": "Kos-Stadt",
+    "title": "Markthal",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Schauen Sie sich dieses wunderschöne Gebäude an, Leute, wir stehen jetzt direkt vor der Markthalle am zentralen Eleftheriasplein.",
+    "s1": "Schauen Sie sich dieses wunderschöne Gebäude an, Leute, wir stehen jetzt direkt vor der Markthalle am zentralen Eleftheriasplein. Die Italiener bauten diese Markthalle nach dem großen Erdbeben von 1933. Der Bau dauerte zwei Jahre und das Gebäude wurde 1935 vollständig fertiggestellt.",
+    "s2": "Sie gaben ihm den Namen Mercato delle Erbe, Gewürzmarkt. Es ist im typisch italienischen Stil mit breiten Bögen und stabilen Mauern erbaut. Im Inneren ist es kompakt und gut organisiert.",
+    "s3": "Alles liegt dicht beieinander, so dass man an einem Stück an den verschiedenen Ständen vorbeilaufen kann. Früher kamen die Bewohner von Kos hierher, um frisches Gemüse, Obst, Kräuter und den täglichen Bedarf zu kaufen. Es war wirklich der zentrale Markt der Stadt. Heutzutage ist es vor allem ein beliebter Ort für Touristen.",
+    "v1": "Sie finden Souvenirs, lokalen Honig, Olivenöl, getrocknete Kräuter, traditionelle griechische Süßigkeiten und allerlei kleine Geschenke. Oft riecht es angenehm nach Gewürzen und frischen Produkten. Es ist meist angenehm und lebhaft.",
+    "v2": "Die Markthalle im Zentrum der Stadt Kos wurde nach dem großen Erdbeben von 1933 von den Italienern während der italienischen Herrschaft (1922 – 1945) erbaut und jahrelang als Markthalle genutzt. Die Markthalle ist heute ein Touristenladen mit Souvenirs und Gewürzen, in dem die Einheimischen kein eigenes Obst oder Gemüse kaufen.",
+    "v3": "Es ist ein lebhafter Ort, an dem Touristen Erinnerungen oder Geschenke kaufen",
+    "k1": "Der eigentliche Tagesmarkt für Obst und Gemüse ist inzwischen kleiner geworden und liegt etwas weiter weg. Der Eintritt ist völlig frei und Sie können einfach frei herumlaufen. Und wer weiß, vielleicht gehen Sie mit einer Tüte köstlichem Oregano oder einer Flasche gutem Olivenöl in der Hand hinaus. Schön und praktisch, diese Italiener – sie wussten, wie man einen praktischen Markt aufbaut!"
+  },
+  "en": {
+    "place": "Kos Town",
+    "title": "Markthal",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "Take a look at this beautiful building, people, we are now standing right in front of the Market Hall on the central Eleftheriasplein.",
+    "s1": "Take a look at this beautiful building, people, we are now standing right in front of the Market Hall on the central Eleftheriasplein. The Italians built this market hall after the great earthquake of nineteen thirty-three. Construction took two years and the building was completely finished in nineteen thirty-five.",
+    "s2": "They gave it the name Mercato delle Erbe, or the spice market. It is built in a typical Italian style with wide arches and sturdy walls. Inside it is compact and well-organized.",
+    "s3": "Everything is close together, so you can walk past the different stalls in one go. In the past, the residents of Kos came here to buy their fresh vegetables, fruit, herbs and daily groceries. It was truly the central market of the city. Nowadays it is mainly a popular place for tourists.",
+    "v1": "You will find souvenirs, local honey, olive oil, dried herbs, traditional Greek sweets and all kinds of small gifts. It often smells nice of spices and fresh products. It is usually pleasant and lively.",
+    "v2": "The market hall in the center of Kos town was built after the great earthquake of 1933 by the Italians during the Italian rule (1922 - 1945.) and was used as a market hall for years. The market hall is now a tourist shop with souvenirs and spices where the locals do not buy their own fruit or vegetables.",
+    "v3": "It is a lively place where tourists buy memories or a gift",
+    "k1": "The real daily market for fruit and vegetables has now become smaller and is located a little further away. Entrance is completely free and you can just walk around freely. And who knows, you might walk out with a bag of delicious oregano or a bottle of good olive oil in your hands. Nice and practical, those Italians – they knew how to build a handy market!"
+  },
+  "it": {
+    "place": "Città di Kos",
+    "title": "Markthal",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Date un'occhiata a questo bellissimo edificio, gente, ora ci troviamo proprio di fronte al mercato coperto sulla centrale Eleftheriasplein.",
+    "s1": "Date un'occhiata a questo bellissimo edificio, gente, ora ci troviamo proprio di fronte al mercato coperto sulla centrale Eleftheriasplein. Gli italiani costruirono questo mercato coperto dopo il grande terremoto del 1933. La costruzione durò due anni e l'edificio fu completamente terminato nel 1935.",
+    "s2": "Gli diedero il nome di Mercato delle Erbe, ovvero mercato delle spezie. È costruito in tipico stile italiano con ampi archi e pareti robuste. All'interno è compatto e ben organizzato.",
+    "s3": "Tutto è vicino, quindi puoi passare davanti alle diverse bancarelle in una volta sola. In passato, gli abitanti di Kos venivano qui per acquistare verdure fresche, frutta, erbe aromatiche e generi alimentari quotidiani. Era davvero il mercato centrale della città. Al giorno d'oggi è principalmente un luogo popolare per i turisti.",
+    "v1": "Troverai souvenir, miele locale, olio d'oliva, erbe essiccate, dolci tradizionali greci e tutti i tipi di piccoli regali. Spesso ha un buon odore di spezie e prodotti freschi. Di solito è piacevole e vivace.",
+    "v2": "Il mercato coperto nel centro della città di Kos fu costruito dagli italiani dopo il grande terremoto del 1933 durante il dominio italiano (1922 - 1945) e per anni fu utilizzato come mercato coperto. Il mercato coperto è ora un negozio turistico con souvenir e spezie dove la gente del posto non acquista frutta o verdura.",
+    "v3": "È un luogo vivace dove i turisti acquistano ricordi o un regalo",
+    "k1": "Il vero mercato giornaliero di frutta e verdura ora è diventato più piccolo e si trova un po' più lontano. L'ingresso è completamente gratuito e si può passeggiare liberamente. E chissà, potresti uscire con un sacchetto di delizioso origano o una bottiglia di buon olio d'oliva tra le mani. Simpatici e pratici, quegli italiani – sapevano come costruire un mercato a portata di mano!"
+  },
+  "tr": {
+    "place": "Kos şehri",
+    "title": "Markthal",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Bu güzel binaya bir bakın millet, şu anda Eleftheriasplein'in merkezindeki Market Hall'un tam önünde duruyoruz.",
+    "s1": "Bu güzel binaya bir bakın millet, şu anda Eleftheriasplein'in merkezindeki Market Hall'un tam önünde duruyoruz. İtalyanlar bu pazar salonunu 1933'teki büyük depremden sonra inşa ettiler. İnşaat iki yıl sürdü ve bina bin dokuz otuz beşte tamamen tamamlandı.",
+    "s2": "Buraya Mercato delle Erbe yani baharat pazarı adını verdiler. Geniş kemerli ve sağlam duvarlı tipik İtalyan tarzında inşa edilmiştir. İçerisi kompakt ve iyi organize edilmiş.",
+    "s3": "Her şey birbirine yakın olduğundan farklı tezgahların yanından tek seferde geçebilirsiniz. Geçmişte Kos sakinleri taze sebze, meyve, ot ve günlük yiyeceklerini satın almak için buraya gelirlerdi. Gerçekten şehrin merkezi pazarıydı. Günümüzde çoğunlukla turistlerin uğrak yeridir.",
+    "v1": "Hediyelik eşyalar, yerel bal, zeytinyağı, kurutulmuş otlar, geleneksel Yunan tatlıları ve her türlü küçük hediyelik eşyayı bulacaksınız. Genellikle güzel baharatlar ve taze ürünler kokar. Genellikle hoş ve canlıdır.",
+    "v2": "Kos ilçesinin merkezinde yer alan hal, 1933 yılındaki büyük depremden sonra, İtalyan egemenliği döneminde (1922 - 1945.) İtalyanlar tarafından inşa edilmiş ve yıllarca pazar yeri olarak kullanılmıştır. Pazar yeri artık yerli halkın kendi meyve ve sebzelerini satın almadığı, hediyelik eşya ve baharatların satıldığı bir turist dükkanı haline geldi.",
+    "v3": "Turistlerin anı veya hediyelik eşya satın aldığı canlı bir yer",
+    "k1": "Meyve ve sebzelerin gerçek günlük pazarı artık daha küçük hale geldi ve biraz daha uzakta bulunuyor. Giriş tamamen ücretsizdir ve serbestçe dolaşabilirsiniz. Kim bilir belki de elinizde bir torba leziz kekik veya bir şişe kaliteli zeytinyağıyla yola çıkabilirsiniz. Güzel ve pratik, bu İtalyanlar, kullanışlı bir pazarın nasıl oluşturulacağını biliyorlardı!"
+  },
+  "es": {
+    "place": "Ciudad de Kos",
+    "title": "Markthal",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Miren este hermoso edificio, gente, ahora estamos justo en frente del Mercado en la céntrica plaza Eleftheriasplein.",
+    "s1": "Miren este hermoso edificio, gente, ahora estamos justo en frente del Mercado en la céntrica plaza Eleftheriasplein. Los italianos construyeron este mercado después del gran terremoto de 1933. La construcción duró dos años y el edificio estuvo completamente terminado en mil novecientos treinta y cinco.",
+    "s2": "Le pusieron el nombre de Mercato delle Erbe, o mercado de las especias. Está construido en un estilo típico italiano con amplios arcos y paredes robustas. Por dentro es compacto y está bien organizado.",
+    "s3": "Todo está muy cerca uno del otro, por lo que puedes pasar por los diferentes puestos de una sola vez. En el pasado, los residentes de Kos venían aquí para comprar verduras, frutas, hierbas y alimentos frescos. Era verdaderamente el mercado central de la ciudad. Hoy en día es principalmente un lugar popular para los turistas.",
+    "v1": "Encontrará souvenirs, miel local, aceite de oliva, hierbas secas, dulces tradicionales griegos y todo tipo de pequeños obsequios. A menudo huele bien a especias y a productos frescos. Suele ser agradable y animado.",
+    "v2": "El mercado en el centro de la ciudad de Kos fue construido después del gran terremoto de 1933 por los italianos durante el dominio italiano (1922 - 1945) y fue utilizado como mercado durante años. El mercado es ahora una tienda turística con recuerdos y especias donde los lugareños no compran sus propias frutas ni verduras.",
+    "v3": "Es un lugar animado donde los turistas compran recuerdos o algún regalo.",
+    "k1": "El verdadero mercado diario de frutas y verduras ahora es más pequeño y está situado un poco más lejos. La entrada es completamente gratuita y puedes caminar libremente. Y quién sabe, quizá salgas con una bolsa de delicioso orégano o una botella de buen aceite de oliva en las manos. Simpáticos y prácticos, esos italianos: ¡sabían cómo construir un mercado práctico!"
   }
-
-  var langBtn = document.getElementById('langBtn');
-  var langMenu = document.getElementById('langMenu');
-  function openMenu(){ langMenu.classList.add('open'); }
-  function closeMenu(){ langMenu.classList.remove('open'); }
-  langBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    langMenu.classList.contains('open') ? closeMenu() : openMenu();
-  });
-  document.addEventListener('click', function(){ closeMenu(); });
-  document.querySelectorAll('.lang-option').forEach(function(btn){
-    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
-  });
-
-  var saved = localStorage.getItem('hk-lang') || 'nl';
-  setLang(saved);
-
-  /* TTS */
-  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
-  function getLang(){
-    var l = localStorage.getItem('hk-lang') || 'nl';
-    return LANG_VOICE[l] ? l : 'nl';
-  }
-  function pickVoice(code){
-    var voices = speechSynthesis.getVoices() || [];
-    var prefix = code.slice(0,2).toLowerCase();
-    return voices.find(function(v){ return v.lang === code; })
-      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
-      || null;
-  }
-  var btnPlay = document.getElementById('btnPlay');
-  var btnStop = document.getElementById('btnStop');
-  var status = document.getElementById('ttsStatus');
-  function setStatus(t){ if(status) status.textContent = t; }
-  function play(){
-    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
-    speechSynthesis.cancel();
-    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
-    var l = getLang();
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = LANG_VOICE[l];
-    u.rate = 0.92;
-    var v = pickVoice(LANG_VOICE[l]);
-    if(v) u.voice = v;
-    u.onstart = function(){
-      btnPlay.classList.add('playing');
-      btnStop.classList.add('show');
-      setStatus('Voorlezen… ('+l.toUpperCase()+')');
-    };
-    u.onend = u.onerror = function(){
-      btnPlay.classList.remove('playing');
-      btnStop.classList.remove('show');
-      setStatus('');
-    };
-    if(!speechSynthesis.getVoices().length){
-      speechSynthesis.onvoiceschanged = function(){
-        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
-        speechSynthesis.speak(u);
-      };
-      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
-    } else {
-      speechSynthesis.speak(u);
-    }
-  }
-  function stop(){
-    if(window.speechSynthesis) speechSynthesis.cancel();
-    btnPlay.classList.remove('playing');
-    btnStop.classList.remove('show');
-    setStatus('Gestopt.');
-  }
-  btnPlay.addEventListener('click', play);
-  btnStop.addEventListener('click', stop);
-  if(window.speechSynthesis){
-    speechSynthesis.getVoices();
-    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
-  }
-})();
-</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

@@ -1,113 +1,183 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0D1A1A">
-<title>Kardamena – Hello Kos</title>
-<link rel="stylesheet" href="hello-kos.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Kardamena – Hello Kos</title>
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body class="hk-page">
-<header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+<body class="hk-page hk-guide">
+  <header class="app-header">
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-<main class="main">
-  <div class="hero-wrap"><img src="img/hk/sight-kardamena.jpg" alt="">
-      <div class="hero-title"><h1 data-i18n="title">Kardamena</h1></div></div>
-  <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back">← Bezienswaardigheden</a></p>
-<p class="lead" data-i18n="lead">Badplaats aan de zuidkust. Overdag strand, ’s avonds eten en uitgaan in de straatjes. Er zijn stukken met ligbedden en stillere stukken met alleen een handdoek.</p>
-  
-  <div class="actions">
-    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
-    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
-    
-  </div>
-  
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Kardamena%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Kardamena%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
       </div>
-      <p class="status" id="ttsStatus"></p>
-  <div id="readText">
-    <article class="card"><h2 data-i18n="hStory">Verder</h2><p data-i18n="p0">Er is geen volledig ziekenhuis. Bij spoed bel je 112 of 166. Het strand heeft een eigen pagina.</p></article>
-    
-  </div>
-</main>
-<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
-<script>window.HK_DICT = {
-    "nl": {
-      "title": "Kardamena",
-      "lead": "Badplaats aan de zuidkust. Overdag strand, ’s avonds eten en uitgaan in de straatjes. Er zijn stukken met ligbedden en stillere stukken met alleen een handdoek.",
-      "back": "← Bezienswaardigheden",
-      "p0": "Er is geen volledig ziekenhuis. Bij spoed bel je 112 of 166. Het strand heeft een eigen pagina.",
-      "hStory": "Het verhaal",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Kardamena",
-      "lead": "Badeort an der Südküste. Tagsüber Strand, abends Essen und Ausgehen in den Gassen. Es gibt Abschnitte mit Liegen und ruhigere nur mit Handtuch.",
-      "back": "← Sehenswürdigkeiten",
-      "p0": "Es gibt kein volles Krankenhaus. Im Notfall rufst du 112 oder 166. Der Strand hat eine eigene Seite.",
-      "hStory": "Die Geschichte",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Kardamena",
-      "lead": "Resort on the south coast. Beach by day, food and going out in the lanes at night. There are parts with sunbeds and quieter parts with just a towel.",
-      "back": "← Sights",
-      "p0": "There is no full hospital. In an emergency call 112 or 166. The beach has its own page.",
-      "hStory": "The story",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Kardamena",
-      "lead": "Località sulla costa sud. Spiaggia di giorno, cibo e uscita nei vicoli di sera. Ci sono tratti con lettini e tratti più quieti solo con l’asciugamano.",
-      "back": "← Attrazioni",
-      "p0": "Non c’è un ospedale completo. In emergenza chiama il 112 o il 166. La spiaggia ha una pagina.",
-      "hStory": "La storia",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Kardamena",
-      "lead": "Güney kıyıda tatil yeri. Gündüz plaj, akşam sokaklarda yemek ve çıkış. Şezlonglu kısımlar ve yalnız havlulu sakin kısımlar var.",
-      "back": "← Gezilecek yerler",
-      "p0": "Tam bir hastane yok. Acilde 112 veya 166’yı ara. Plajın sayfası var.",
-      "hStory": "Hikaye",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Kardamena",
-      "lead": "Localidad en la costa sur. Playa de día, comida y salir por los callejones de noche. Hay tramos con hamacas y tramos más quietos solo con toalla.",
-      "back": "← Lugares de interés",
-      "p0": "No hay un hospital completo. En emergencia llama al 112 o al 166. La playa tiene página.",
-      "hStory": "La historia",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
+  <main class="main">
+    <div class="hero-wrap">
+      <img class="hk-zoom" src="img/hk/sight-kardamena.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
+    </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=Kardamena%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?q=Kardamena%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-kardamena-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-kardamena-02.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-kardamena-03.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
+
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
+
+</article>
+    </div>
+  </main>
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Kardamena",
+    "title": "Kardamena",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "Ongeveer dertig kilometer van Kos-stad.",
+    "s1": "Ongeveer dertig kilometer van Kos-stad. ligt Kardamena, een van de populairste badplaatsen van het eiland. Kardamena ontstond in achttien vijfenzestig.",
+    "s2": "Het werd gebouwd op de plek van de oude stad Alasarna, die in de oudheid een belangrijk religieus centrum was. Vroeger was het een klein, rustig vissersdorp. In de loop van de jaren tachtig en negentig groeide het snel uit tot een levendige toeristenplaats met hotels, winkels en uitgaansgelegenheden.",
+    "v1": "Het dorp heeft een lang zandstrand van ongeveer zes kilometer. Het zand is fijn en goudkleurig, het water is helder en loopt geleidelijk dieper. Aan het strand kun je ligbedden huren, beachvolleybal spelen of watersporten doen zoals jetskiën, windsurfen en suppen.",
+    "v2": "Er zijn zowel drukke, georganiseerde delen als rustiger stukken waar je gewoon je handdoek neerlegt. Langs de boulevard en in de smalle straatjes vind je talloze bars, en pubs, Overdag is het gezellig druk met winkels, tavernes en restaurants langs de haven. Vanaf de haven vertrekken dagelijks boten naar het vulkaaneiland Nisyros, dus je kunt hier makkelijk een dagtocht maken.",
+    "k1": "Kardamena is een typische Griekse badplaats: overdag strand en ontspanning, ’s avonds eten, drinken en feesten. Het is vooral populair bij families die van een mix van strand en gezelligheid houden. Het is een plek waar je overdag heerlijk in de zon ligt en ’s avonds lekker gezellig een drankje kunt doen."
+  },
+  "de": {
+    "place": "Kardamena",
+    "title": "Kardamena",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Etwa dreißig Kilometer von Kos-Stadt entfernt.",
+    "s1": "Etwa dreißig Kilometer von Kos-Stadt entfernt. Kardamena ist einer der beliebtesten Badeorte der Insel. Kardamena entstand im Jahr 1865.",
+    "s2": "Es wurde an der Stelle der antiken Stadt Alasarna erbaut, die in der Antike ein wichtiges religiöses Zentrum war. Früher war es ein kleines, ruhiges Fischerdorf. Im Laufe der 1980er und 1990er Jahre entwickelte sich daraus schnell ein lebhafter Touristenort mit Hotels, Geschäften und Unterhaltungsmöglichkeiten.",
+    "v1": "Das Dorf verfügt über einen etwa sechs Kilometer langen Sandstrand. Der Sand ist fein und golden, das Wasser klar und allmählich tiefer. Am Strand können Sie Liegen mieten, Beachvolleyball spielen oder Wassersportarten wie Jetski, Windsurfen und SUP betreiben.",
+    "v2": "Es gibt sowohl geschäftige, organisierte Bereiche als auch ruhigere Bereiche, in denen Sie einfach Ihr Handtuch ablegen. Entlang des Boulevards und in den engen Gassen finden Sie zahlreiche Bars und Kneipen. Tagsüber herrscht am Hafen ein angenehmes Treiben mit Geschäften, Tavernen und Restaurants. Vom Hafen fahren täglich Boote zur Vulkaninsel Nisyros ab, sodass Sie hier problemlos einen Tagesausflug unternehmen können.",
+    "k1": "Kardamena ist ein typisch griechischer Badeort: Strand und Entspannung tagsüber, Essen, Getränke und Partys am Abend. Besonders beliebt ist es bei Familien, die eine Mischung aus Strand und Spaß mögen. Es ist ein Ort, an dem man tagsüber in der Sonne liegen und abends ein schönes Getränk genießen kann."
+  },
+  "en": {
+    "place": "Kardamena",
+    "title": "Kardamena",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "About thirty kilometers from Kos town.",
+    "s1": "About thirty kilometers from Kos town. Kardamena is one of the most popular seaside resorts on the island. Kardamena came into existence in eighteen sixty-five.",
+    "s2": "It was built on the site of the ancient city of Alasarna, which was an important religious center in ancient times. It used to be a small, quiet fishing village. Over the course of the 1980s and 1990s, it quickly grew into a lively tourist resort with hotels, shops and entertainment venues.",
+    "v1": "The village has a long sandy beach of about six kilometers. The sand is fine and golden, the water is clear and gradually deeper. On the beach you can rent sunbeds, play beach volleyball or do water sports such as jet skiing, windsurfing and SUP.",
+    "v2": "There are both busy, organized parts and quieter parts where you just put down your towel. Along the boulevard and in the narrow streets you will find numerous bars and pubs. During the day it is pleasantly busy with shops, taverns and restaurants along the harbor. Boats depart daily from the harbor to the volcanic island of Nisyros, so you can easily make a day trip here.",
+    "k1": "Kardamena is a typical Greek seaside resort: beach and relaxation during the day, food, drinks and parties in the evening. It is especially popular with families who like a mix of beach and fun. It is a place where you can lie in the sun during the day and have a nice drink in the evening."
+  },
+  "it": {
+    "place": "Kardamena",
+    "title": "Kardamena",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "A una trentina di chilometri dalla città di Kos.",
+    "s1": "A una trentina di chilometri dalla città di Kos. Kardamena è una delle località balneari più frequentate dell'isola. Kardamena nacque nel 1865.",
+    "s2": "Fu costruito sul sito dell'antica città di Alasarna, che nell'antichità era un importante centro religioso. Era un piccolo e tranquillo villaggio di pescatori. Nel corso degli anni '80 e '90 si trasformò rapidamente in una vivace località turistica con alberghi, negozi e luoghi di intrattenimento.",
+    "v1": "Il villaggio dispone di una lunga spiaggia sabbiosa di circa sei chilometri. La sabbia è fine e dorata, l'acqua è limpida e gradualmente più profonda. In spiaggia è possibile noleggiare lettini, giocare a beach volley o praticare sport acquatici come moto d'acqua, windsurf e SUP.",
+    "v2": "Ci sono sia parti affollate e organizzate che parti più tranquille dove metti semplicemente l'asciugamano. Lungo il viale e nelle viuzze troverete numerosi bar e pub. Durante il giorno è piacevolmente affollato di negozi, taverne e ristoranti lungo il porto. Le barche partono ogni giorno dal porto per l'isola vulcanica di Nisyros, quindi puoi facilmente fare una gita di un giorno qui.",
+    "k1": "Kardamena è una tipica località balneare greca: spiaggia e relax di giorno, cibo, bevande e feste la sera. È particolarmente popolare tra le famiglie che amano un mix di spiaggia e divertimento. È un posto dove puoi sdraiarti al sole durante il giorno e bere un buon drink la sera."
+  },
+  "tr": {
+    "place": "Kardamena",
+    "title": "Kardamena",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Kos kasabasına yaklaşık otuz kilometre uzaklıkta.",
+    "s1": "Kos kasabasına yaklaşık otuz kilometre uzaklıkta. Kardamena adanın en popüler sahil beldelerinden biridir. Kardamena bin sekiz altmış beşte ortaya çıktı.",
+    "s2": "Antik çağda önemli bir dini merkez olan Alasarna Antik Kenti'nin bulunduğu yere inşa edilmiştir. Eskiden küçük, sakin bir balıkçı köyüydü. 1980'ler ve 1990'lar boyunca hızla oteller, mağazalar ve eğlence mekanlarıyla canlı bir turizm beldesine dönüştü.",
+    "v1": "Köyün yaklaşık altı kilometrelik uzun bir kumsalı var. Kum ince ve altın rengindedir, su berraktır ve giderek derinleşir. Plajda şezlong kiralayabilir, plaj voleybolu oynayabilir veya jet ski, rüzgar sörfü, SUP gibi su sporları yapabilirsiniz.",
+    "v2": "Hem yoğun, düzenli bölümler hem de havlunuzu bıraktığınız daha sessiz bölümler var. Bulvar boyunca ve dar sokaklarda çok sayıda bar ve pub bulacaksınız. Gün boyunca liman boyunca mağazalar, tavernalar ve restoranlar ile keyifli bir hareketlilik yaşanır. Tekneler limandan her gün volkanik Nisiros adasına hareket etmektedir, dolayısıyla burada rahatlıkla günübirlik gezi yapabilirsiniz.",
+    "k1": "Kardamena tipik bir Yunan sahil beldesidir: Gündüzleri plaj ve dinlenme, akşamları ise yiyecek, içecek ve partiler. Özellikle plaj ve eğlenceyi bir arada seven aileler arasında popülerdir. Gündüzleri güneşlenip, akşamları ise güzel bir içki içebileceğiniz bir yer."
+  },
+  "es": {
+    "place": "Kardamena",
+    "title": "Kardamena",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "A unos treinta kilómetros de la ciudad de Kos.",
+    "s1": "A unos treinta kilómetros de la ciudad de Kos. Kardamena es uno de los balnearios más populares de la isla. Kardamena nació en mil ochocientos sesenta y cinco.",
+    "s2": "Fue construido en el sitio de la antigua ciudad de Alasarna, que fue un importante centro religioso en la antigüedad. Solía ​​ser un pequeño y tranquilo pueblo de pescadores. En el transcurso de las décadas de 1980 y 1990, rápidamente creció hasta convertirse en un animado centro turístico con hoteles, tiendas y lugares de entretenimiento.",
+    "v1": "El pueblo tiene una larga playa de arena de unos seis kilómetros. La arena es fina y dorada, el agua es clara y poco a poco más profunda. En la playa podrás alquilar tumbonas, jugar al vóley playa o practicar deportes acuáticos como motos de agua, windsurf y SUP.",
+    "v2": "Hay partes ocupadas y organizadas y partes más tranquilas en las que simplemente dejas la toalla. A lo largo del bulevar y en las calles estrechas encontrará numerosos bares y pubs. Durante el día hay una agradable actividad con tiendas, tabernas y restaurantes a lo largo del puerto. Desde el puerto salen barcos diariamente hacia la isla volcánica de Nisyros, por lo que puedes hacer fácilmente una excursión de un día aquí.",
+    "k1": "Kardamena es un típico balneario griego: playa y relajación durante el día, comida, bebidas y fiesta por la noche. Es especialmente popular entre las familias a las que les gusta una combinación de playa y diversión. Es un lugar donde puedes tumbarte al sol durante el día y tomar una buena copa por la noche."
+  }
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

@@ -292,3 +292,22 @@ body.hk-page a.call-btn .call-sub { min-width: 0; overflow-wrap: anywhere; }
 }
 .fav-inline svg { width: 18px; height: 18px; display: block; }
 .fav-inline.on { background: #fff; color: #c62828; }
+
+/* Location guide: same layout on every sight page. */
+body.hk-guide .hero-wrap { aspect-ratio: 4/3; margin: -16px -14px 14px; }
+body.hk-guide .lead { text-align: left; color: var(--text); font-size: 1.02rem; line-height: 1.6; }
+body.hk-guide .card h2 { font-family: Georgia, "Times New Roman", serif; font-size: 1.15rem; color: var(--gold); }
+body.hk-guide .card p { color: var(--text); font-size: 0.95rem; line-height: 1.65; }
+body.hk-guide .tip { background: #1E2E1E; padding: 14px 14px 12px; margin: 4px 0 12px; font-size: 0.95rem; line-height: 1.6; }
+body.hk-guide .photo-block { margin: 4px 0 14px; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); }
+body.hk-guide .photo-block img, body.hk-guide .hero-wrap img.hk-zoom { cursor: zoom-in; }
+body.hk-guide .photo-block img { width: 100%; display: block; max-height: 280px; object-fit: cover; }
+body.hk-guide .hero-title .fav-inline { margin-top: 10px; background: rgba(13,26,26,0.45); color: #fff; border-color: rgba(255,255,255,0.85); }
+#hk-lightbox {
+  position: fixed; inset: 0; z-index: 4000;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex; align-items: center; justify-content: center;
+  padding: 12px; cursor: zoom-out;
+}
+#hk-lightbox[hidden] { display: none !important; }
+#hk-lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; cursor: zoom-out; }

@@ -1,489 +1,207 @@
 <!DOCTYPE html>
-<html lang="nl" data-hk-own="1" data-hk-tts="1">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0D1F1F">
   <title>Casa Romana – Hello Kos</title>
-  <style>
-    :root {
-      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
-      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
-      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
-      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
-      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text); -webkit-font-smoothing: antialiased;
-      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
-      background: var(--bg); min-height: 100vh; line-height: 1.55;
-    }
-    .app-header {
-      position: sticky; top: 0; z-index: 100;
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-      padding: 14px 16px; background: var(--bg-header);
-      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
-    }
-    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
-    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
-    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
-    .logo-text span { color: var(--gold-dark); font-style: italic; }
-    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
-    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
-    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
-    .lang-menu.open { display: block; }
-    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
-    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
-    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
-    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
-    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .content { padding: 18px 16px 0; }
-    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
-    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-
-    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
-    .btn-audio { background: var(--petrol); color: #fff; }
-    .btn-audio.playing { background: var(--petrol-dark); }
-    .btn-stop { background: #3A4545; color: #fff; display: none; }
-    .btn-stop.show { display: flex; }
-
-    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
-    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
-    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
-    .card p:last-child { margin-bottom: 0; }
-    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
-    .tip strong { color: var(--gold); }
-    .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
-    .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
-    .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
-
-    .hours { margin-top: 8px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
-    .h-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 12px; font-size: 0.88rem; border-bottom: 1px solid var(--border); background: #1a2525; }
-    .h-row:nth-child(odd) { background: #152525; }
-    .h-row:last-child { border-bottom: none; }
-    .h-row span:last-child { font-weight: 700; color: var(--petrol); }
-    .h-row.closed span:last-child { color: #e0a040; }
-    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
-    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
-    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
-    .footer a { color: var(--petrol); text-decoration: none; }
-  </style>
-<link rel="stylesheet" href="hello-kos.css">
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body>
+<body class="hk-page hk-guide">
   <header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
   <main class="main">
     <div class="hero-wrap">
-      <img src="img/jwwb/d2127b14fd-yxnzzxrzl2ltywdlcy9wywdlcy9tb251bwvudhmvy2fzyxjvbw.jpg" alt="Casa Romana Kos" loading="eager">
-      <div class="hero-title"><h1 data-i18n="title">Casa Romana</h1></div>
+      <img class="hk-zoom" src="img/jwwb/d2127b14fd-yxnzzxrzl2ltywdlcy9wywdlcy9tb251bwvudhmvy2fzyxjvbw.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
     </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=36.8905%2C27.2848" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?ll=36.8905,27.2848&amp;q=Casa%20Romana" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-casa-romana-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-casa-romana-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-casa-romana-03.jpg" alt=""></figure>
+<p data-i18n="s4"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-casa-romana-04.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-casa-romana-05.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-casa-romana-06.jpg" alt=""></figure>
+<p data-i18n="v3"></p>
 
-    <div class="content">
-<p class="lead" data-i18n="lead">Gerestaureerde Romeinse villa met atria, zuilen en mozaïeken – zo woonde een rijke familie zo’n 1800 jaar geleden.</p>
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
 
-      
-
-      <div class="actions">
-        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
-        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-      </div>
-      
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Casa%20Romana%20Kos%20Grigoriou" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Casa%20Romana%20Kos%20Grigoriou" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
-      </div>
-      <p class="status" id="ttsStatus"></p>
-
-      <div id="readText">
-        <div class="card">
-          <h2 data-i18n="hStory">Romeinse villa</h2>
-          <p data-i18n="p1">Casa Romana is een gerestaureerde Romeinse villa. Het huis is gebouwd rond 170–200 na Christus en staat op de resten van een ouder huis uit de Hellenistische tijd (rond 300–100 v.Chr.).</p>
-        </div>
-
-        
-
-        <div class="card">
-          <h2 data-i18n="hSee">Openingstijden</h2>
-          <p data-i18n="summer"><strong>Zomer</strong> (1 april – 31 oktober)</p>
-          <div class="hours">
-            <div class="h-row"><span data-i18n="monSun">Ma – Zo</span><span>08:00 – 19:00</span></div>
-            <div class="h-row closed"><span data-i18n="tue">Dinsdag</span><span data-i18n="closed">Gesloten</span></div>
-          </div>
-          <p style="margin-top:12px" data-i18n="winter"><strong>Winter</strong> (1 november – 31 maart)</p>
-          <div class="hours">
-            <div class="h-row"><span data-i18n="monSun">Ma – Zo</span><span>08:30 – 15:30</span></div>
-            <div class="h-row closed"><span data-i18n="tue">Dinsdag</span><span data-i18n="closed">Gesloten</span></div>
-          </div>
-          <p style="margin-top:10px;font-size:0.82rem;color:var(--text-soft)" data-i18n="hoursNote">Entree circa € 10. Er is vaak een combinatiekaart met het Archeologisch Museum en/of Asklepion. Controleer ter plaatse de actuele prijs.</p>
-        </div>
-
-        <div class="photo-block">
-          <img src="img/jwwb/a77222821b-caption-10-high-tk90lr.jpg" alt="Casa Romana interieur" loading="lazy">
-          <div class="cap" data-i18n="cap1">Binnenplaatsen en zuilengalerijen</div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2disc">Ontdekt na 1933</h2>
-          <p data-i18n="p2">De resten kwamen naar boven door de zware aardbeving op Kos in 1933. De Italianen restaureerden het huis volledig in 1940. Na jarenlange werkzaamheden ging het in 2015 weer open voor publiek.</p>
-          <p data-i18n="p3">Je loopt er tussendoor en ziet hoe rijk en comfortabel een welgestelde familie hier zo’n 1800–1900 jaar geleden woonde.</p>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2atria">Atria en mozaïeken</h2>
-          <p data-i18n="p4">De villa heeft drie binnenplaatsen (atria), waarvan twee omringd door zuilengalerijen. In totaal zo’n 36 kamers.</p>
-          <p data-i18n="p5">Opvallend zijn de mozaïekvloeren uit de 3e eeuw n.Chr.: bijvoorbeeld een panter die een hert verslindt, en een zeebodem vol vissen. Sommige beelden en mozaïeken zijn Hellenistisch en ouder dan 2000 jaar.</p>
-        </div>
-
-        <div class="gallery">
-          <div class="g-item">
-            <img src="img/jwwb/68556645b1-caption-13-high.jpg" alt="Mozaïek Casa Romana" loading="lazy">
-            <span data-i18n="g1">Mozaïeken</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/645b47ca0d-caption-11-high.jpg" alt="Villa detail" loading="lazy">
-            <span data-i18n="g2">Interieur</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/5c0a09bff2-caption-8-high.jpg" alt="Casa Romana" loading="lazy">
-            <span data-i18n="g3">Zuilen</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/a77222821b-caption-10-high-tk90lr.jpg" alt="Atrium" loading="lazy">
-            <span data-i18n="g4">Atrium</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="hKnow">Bezoeken</h2>
-          <p data-i18n="p6">In Kos-stad, Grigoriou E’-straat. Binnen is het indrukwekkender dan de buitenkant doet vermoeden.</p>
-          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: let op de mozaïeken van de panter en de zeebodem – die maken de villa uniek. Neem rustig de tijd; er is veel te zien in de kamers.</p></div>
-        </div>
-      </div>
+</article>
     </div>
   </main>
-
-  <footer class="footer">
-    <div>Hello Kos</div>
-    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
-  </footer>
-
-<script>
-(function(){
-  var I18N = window.HK_DICT = {
-    "nl": {
-      "title": "Casa Romana",
-      "lead": "Gerestaureerde Romeinse villa met atria, zuilen en mozaïeken – zo woonde een rijke familie zo’n 1800 jaar geleden.",
-      "btnPlay": "Voorlezen",
-      "p1": "Casa Romana is een gerestaureerde Romeinse villa. Het huis is gebouwd rond 170–200 na Christus en staat op de resten van een ouder huis uit de Hellenistische tijd (rond 300–100 v.Chr.).",
-      "summer": "Zomer (1 april – 31 oktober)",
-      "winter": "Winter (1 november – 31 maart)",
-      "monSun": "Ma – Zo",
-      "tue": "Dinsdag",
-      "closed": "Gesloten",
-      "hoursNote": "Entree circa € 10. Er is vaak een combinatiekaart met het Archeologisch Museum en/of Asklepion. Controleer ter plaatse de actuele prijs.",
-      "cap1": "Binnenplaatsen en zuilengalerijen",
-      "h2disc": "Ontdekt na 1933",
-      "p2": "De resten kwamen naar boven door de zware aardbeving op Kos in 1933. De Italianen restaureerden het huis volledig in 1940. Na jarenlange werkzaamheden ging het in 2015 weer open voor publiek.",
-      "p3": "Je loopt er tussendoor en ziet hoe rijk en comfortabel een welgestelde familie hier zo’n 1800–1900 jaar geleden woonde.",
-      "h2atria": "Atria en mozaïeken",
-      "p4": "De villa heeft drie binnenplaatsen (atria), waarvan twee omringd door zuilengalerijen. In totaal zo’n 36 kamers.",
-      "p5": "Opvallend zijn de mozaïekvloeren uit de 3e eeuw n.Chr.: bijvoorbeeld een panter die een hert verslindt, en een zeebodem vol vissen. Sommige beelden en mozaïeken zijn Hellenistisch en ouder dan 2000 jaar.",
-      "g1": "Mozaïeken",
-      "g2": "Interieur",
-      "g3": "Zuilen",
-      "g4": "Atrium",
-      "p6": "In Kos-stad, Grigoriou E’-straat. Binnen is het indrukwekkender dan de buitenkant doet vermoeden.",
-      "tip": "let op de mozaïeken van de panter en de zeebodem – die maken de villa uniek. Neem rustig de tijd; er is veel te zien in de kamers.",
-      "hStory": "Het verhaal",
-      "hSee": "Wat je ziet",
-      "hKnow": "Goed om te weten",
-      "tipTitle": "Tip van de gids",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Casa Romana",
-      "lead": "Restored Roman villa with atria, columns and mosaics – this is how a wealthy family lived about 1800 years ago.",
-      "btnPlay": "Read aloud",
-      "p1": "Casa Romana is a restored Roman villa. The house was built around 170–200 AD and stands on the remains of an older house from the Hellenistic period (around 300–100 BC).",
-      "summer": "Summer (1 April – 31 October)",
-      "winter": "Winter (1 November – 31 March)",
-      "monSun": "Mon – Sun",
-      "tue": "Tuesday",
-      "closed": "Closed",
-      "hoursNote": "Entry about € 10. There is often a combination ticket with the Archaeological Museum and/or Asklepion. Check the current price on site.",
-      "cap1": "Courtyards and colonnades",
-      "h2disc": "Discovered after 1933",
-      "p2": "The remains came to light through the severe earthquake on Kos in 1933. The Italians fully restored the house in 1940. After years of work it reopened to the public in 2015.",
-      "p3": "You walk through it and see how richly and comfortably a wealthy family lived here some 1800–1900 years ago.",
-      "h2atria": "Atria and mosaics",
-      "p4": "The villa has three courtyards (atria), two of which are surrounded by colonnades. In total about 36 rooms.",
-      "p5": "Notable are the mosaic floors from the 3rd century AD: for example a panther devouring a deer, and a seabed full of fish. Some statues and mosaics are Hellenistic and older than 2000 years.",
-      "g1": "Mosaics",
-      "g2": "Interior",
-      "g3": "Columns",
-      "g4": "Atrium",
-      "p6": "In Kos Town, Grigoriou E’ street. Inside it is more impressive than the exterior suggests.",
-      "tip": "look for the mosaics of the panther and the seabed – they make the villa unique. Take your time; there is a lot to see in the rooms.",
-      "hStory": "The story",
-      "hSee": "What you see",
-      "hKnow": "Good to know",
-      "tipTitle": "Guide’s tip",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Casa Romana",
-      "lead": "Restaurierte römische Villa mit Atrien, Säulen und Mosaiken – so lebte eine reiche Familie vor etwa 1800 Jahren.",
-      "btnPlay": "Vorlesen",
-      "p1": "Casa Romana ist eine restaurierte römische Villa. Das Haus wurde um 170–200 n. Chr. gebaut und steht auf den Resten eines älteren Hauses aus der hellenistischen Zeit (ca. 300–100 v. Chr.).",
-      "summer": "Sommer (1. April – 31. Oktober)",
-      "winter": "Winter (1. November – 31. März)",
-      "monSun": "Mo – So",
-      "tue": "Dienstag",
-      "closed": "Geschlossen",
-      "hoursNote": "Eintritt ca. € 10. Es gibt oft eine Kombi-Karte mit dem Archäologischen Museum und/oder Asklepion. Aktuellen Preis vor Ort prüfen.",
-      "cap1": "Innenhöfe und Säulengalerien",
-      "h2disc": "Entdeckt nach 1933",
-      "p2": "Die Reste kamen durch das schwere Erdbeben auf Kos 1933 zum Vorschein. Die Italiener restaurierten das Haus vollständig 1940. Nach jahrelangen Arbeiten öffnete es 2015 wieder für die Öffentlichkeit.",
-      "p3": "Du gehst hindurch und siehst, wie reich und komfortabel eine wohlhabende Familie hier vor etwa 1800–1900 Jahren lebte.",
-      "h2atria": "Atrien und Mosaike",
-      "p4": "Die Villa hat drei Innenhöfe (Atrien), von denen zwei von Säulengalerien umgeben sind. Insgesamt etwa 36 Zimmer.",
-      "p5": "Auffällig sind die Mosaikböden aus dem 3. Jahrhundert n. Chr.: zum Beispiel ein Panther, der ein Reh verschlingt, und ein Meeresboden voller Fische. Einige Statuen und Mosaike sind hellenistisch und älter als 2000 Jahre.",
-      "g1": "Mosaike",
-      "g2": "Innenraum",
-      "g3": "Säulen",
-      "g4": "Atrium",
-      "p6": "In Kos-Stadt, Grigoriou E’-Straße. Innen ist es beeindruckender, als die Außenseite vermuten lässt.",
-      "tip": "achte auf die Mosaike des Panthers und des Meeresbodens – die machen die Villa einzigartig. Nimm dir Zeit; es gibt viel zu sehen in den Zimmern.",
-      "hStory": "Die Geschichte",
-      "hSee": "Was du siehst",
-      "hKnow": "Gut zu wissen",
-      "tipTitle": "Tipp des Guides",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Casa Romana",
-      "lead": "Villa romana restaurata con atri, colonne e mosaici – così viveva una famiglia ricca circa 1800 anni fa.",
-      "btnPlay": "Leggi ad alta voce",
-      "p1": "Casa Romana è una villa romana restaurata. La casa fu costruita intorno al 170–200 d.C. e sorge sui resti di una casa più antica del periodo ellenistico (intorno al 300–100 a.C.).",
-      "summer": "Estate (1 aprile – 31 ottobre)",
-      "winter": "Inverno (1 novembre – 31 marzo)",
-      "monSun": "Lun – Dom",
-      "tue": "Martedì",
-      "closed": "Chiuso",
-      "hoursNote": "Ingresso circa € 10. Spesso c’è un biglietto combinato con il Museo Archeologico e/o Asklepion. Controlla il prezzo attuale sul posto.",
-      "cap1": "Cortili e colonnati",
-      "h2disc": "Scoperta dopo il 1933",
-      "p2": "I resti vennero alla luce con il grave terremoto di Kos del 1933. Gli italiani restaurarono completamente la casa nel 1940. Dopo anni di lavori riaprì al pubblico nel 2015.",
-      "p3": "Ci cammini attraverso e vedi quanto riccamente e comodamente viveva una famiglia benestante qui circa 1800–1900 anni fa.",
-      "h2atria": "Atri e mosaici",
-      "p4": "La villa ha tre cortili (atri), di cui due circondati da colonnati. In totale circa 36 stanze.",
-      "p5": "Notevoli sono i pavimenti a mosaico del III secolo d.C.: per esempio una pantera che divora un cervo, e un fondale marino pieno di pesci. Alcune statue e mosaici sono ellenistici e hanno più di 2000 anni.",
-      "g1": "Mosaici",
-      "g2": "Interno",
-      "g3": "Colonne",
-      "g4": "Atrio",
-      "p6": "A Kos città, via Grigoriou E’. All’interno è più impressionante di quanto l’esterno faccia pensare.",
-      "tip": "cerca i mosaici della pantera e del fondale marino – rendono la villa unica. Prenditi tempo; c’è molto da vedere nelle stanze.",
-      "hStory": "La storia",
-      "hSee": "Cosa vedi",
-      "hKnow": "Buono a sapersi",
-      "tipTitle": "Consiglio della guida",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Casa Romana",
-      "lead": "Atria, sütunlar ve mozaiklerle restore edilmiş Roma villası – zengin bir ailenin yaklaşık 1800 yıl önce nasıl yaşadığını gösterir.",
-      "btnPlay": "Sesli oku",
-      "p1": "Casa Romana restore edilmiş bir Roma villasıdır. Ev MS 170–200 civarında inşa edilmiş ve Helenistik dönemden (yaklaşık MÖ 300–100) daha eski bir evin kalıntıları üzerine kuruludur.",
-      "summer": "Yaz (1 Nisan – 31 Ekim)",
-      "winter": "Kış (1 Kasım – 31 Mart)",
-      "monSun": "Pzt – Paz",
-      "tue": "Salı",
-      "closed": "Kapalı",
-      "hoursNote": "Giriş yaklaşık € 10. Genellikle Arkeoloji Müzesi ve/veya Asklepion ile kombine bilet vardır. Güncel fiyatı yerinde kontrol et.",
-      "cap1": "Avlular ve sütunlu galeriler",
-      "h2disc": "1933’ten sonra keşfedildi",
-      "p2": "Kalıntılar 1933’teki ağır Kos depremiyle ortaya çıktı. İtalyanlar evi 1940’ta tamamen restore etti. Yıllarca süren çalışmalardan sonra 2015’te yeniden halka açıldı.",
-      "p3": "İçinden geçerken zengin bir ailenin yaklaşık 1800–1900 yıl önce burada ne kadar rahat ve lüks yaşadığını görürsün.",
-      "h2atria": "Atria ve mozaikler",
-      "p4": "Villanın üç avlusu (atria) vardır, ikisi sütunlu galerilerle çevrilidir. Toplamda yaklaşık 36 oda.",
-      "p5": "Dikkat çekenler MS 3. yüzyıldan mozaik zeminlerdir: örneğin bir geyiği yutan panter ve balıklarla dolu deniz dibi. Bazı heykeller ve mozaikler Helenistiktir ve 2000 yaşından fazladır.",
-      "g1": "Mozaikler",
-      "g2": "İç mekân",
-      "g3": "Sütunlar",
-      "g4": "Atrium",
-      "p6": "Kos şehrinde, Grigoriou E’ caddesinde. İçerisi dışarıdan göründüğünden daha etkileyicidir.",
-      "tip": "panter ve deniz dibi mozaiklerine dikkat et – villayı benzersiz kılan onlardır. Acele etme; odalarda çok şey var.",
-      "hStory": "Hikaye",
-      "hSee": "Ne görürsün",
-      "hKnow": "Bilmekte fayda var",
-      "tipTitle": "Rehberin ipucu",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Casa Romana",
-      "lead": "Villa romana restaurada con atrios, columnas y mosaicos – así vivía una familia rica hace unos 1800 años.",
-      "btnPlay": "Leer en voz alta",
-      "p1": "Casa Romana es una villa romana restaurada. La casa se construyó alrededor del 170–200 d.C. y se levanta sobre los restos de una casa más antigua del periodo helenístico (alrededor del 300–100 a.C.).",
-      "summer": "Verano (1 abril – 31 octubre)",
-      "winter": "Invierno (1 noviembre – 31 marzo)",
-      "monSun": "Lun – Dom",
-      "tue": "Martes",
-      "closed": "Cerrado",
-      "hoursNote": "Entrada aproximadamente € 10. A menudo hay un billete combinado con el Museo Arqueológico y/o Asklepion. Comprueba el precio actual in situ.",
-      "cap1": "Patios y columnatas",
-      "h2disc": "Descubierta después de 1933",
-      "p2": "Los restos salieron a la luz con el grave terremoto de Kos de 1933. Los italianos restauraron completamente la casa en 1940. Tras años de trabajos se reabrió al público en 2015.",
-      "p3": "Caminas por ella y ves lo rica y cómodamente que vivía una familia acomodada aquí hace unos 1800–1900 años.",
-      "h2atria": "Atrios y mosaicos",
-      "p4": "La villa tiene tres patios (atrios), de los cuales dos están rodeados por columnatas. En total unas 36 habitaciones.",
-      "p5": "Destacan los suelos de mosaico del siglo III d.C.: por ejemplo una pantera devorando un ciervo, y un fondo marino lleno de peces. Algunas estatuas y mosaicos son helenísticos y tienen más de 2000 años.",
-      "g1": "Mosaicos",
-      "g2": "Interior",
-      "g3": "Columnas",
-      "g4": "Atrio",
-      "p6": "En Kos ciudad, calle Grigoriou E’. Dentro es más impresionante de lo que sugiere el exterior.",
-      "tip": "fíjate en los mosaicos de la pantera y el fondo marino – hacen única la villa. Tómate tu tiempo; hay mucho que ver en las habitaciones.",
-      "hStory": "La historia",
-      "hSee": "Qué ves",
-      "hKnow": "Bueno saberlo",
-      "tipTitle": "Consejo del guía",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };
-
-  function setLang(l) {
-    if (!I18N[l]) l = 'nl';
-    localStorage.setItem('hk-lang', l);
-    document.documentElement.lang = l;
-    var d = I18N[l];
-    document.querySelectorAll('[data-i18n]').forEach(function(el){
-      var k = el.getAttribute('data-i18n');
-      if (d[k]) el.textContent = d[k];
-    });
-    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
-    if (opt) {
-      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
-      document.getElementById('code').textContent = l.toUpperCase();
-    }
-    document.querySelectorAll('.lang-option').forEach(function(o){
-      o.classList.toggle('active', o.getAttribute('data-lang') === l);
-    });
-    closeMenu();
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Kos-stad",
+    "title": "Casa Romana",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "We staan nu bij de Casa Romana.",
+    "s1": "We staan nu bij de Casa Romana. Dit is een gerestaureerde Romeinse villa uit de Romeinse periode. Het huis werd gebouwd rond het jaar tweehonderd na Christus.",
+    "s2": "Het staat op de resten van een nog ouder huis uit de hellenistische periode, van ongeveer driehonderd voor Christus. De resten van deze villa kwamen pas naar boven door de zware aardbeving op Kos in negentien drieëndertig. De Italianen restaureerden het volledig in negentien veertig.",
+    "s3": "Na jarenlange werkzaamheden ging het in tweeduizend vijftien weer open voor het publiek. Vandaag de dag kun je er doorheen lopen. Je ziet hoe een welgestelde Romeinse familie hier ongeveer negentienhonderd jaar geleden woonde.",
+    "s4": "De villa heeft drie binnenplaatsen, waarvan twee omringd zijn door zuilengalerijen met twee verdiepingen en hoge zuilen in Rodiaanse stijl. In totaal telde het huis ongeveer zesendertig kamers. Wat direct opvalt zijn de mozaïekvloeren.",
+    "v1": "De meeste dateren van tweehonderd na Christus. Je ziet onder andere een panter die een hert verslindt, een zeebodem vol vissen en zeedieren, en andere levendige taferelen. Sommige beelden, zoals nimfen en Athena, en een paar mozaïeken komen nog uit de hellenistische periode en zijn ouder dan tweeduizend jaar.",
+    "v2": "In elke binnenplaats staat een kleine fontein in het midden. Die dienden om regenwater op te vangen en de lucht fris te houden. in de eerste binnenplaats stond vroeger een beeld van Asklepios, de god van de geneeskunde.",
+    "v3": "Dat past goed bij Kos, want het eiland was in de oudheid beroemd om zijn Asklepieion, het grote geneeskundig centrum. De nieuwe restauratiedelen zijn bewust van ander materiaal gemaakt, zodat je duidelijk kunt zien wat origineel is en wat later is toegevoegd.",
+    "k1": "Met fonteinen, marmer, fresco's en al die kunst op de vloer. Doordat de nieuw aangebrachte delen van ander materiaal zijn gemaakt, kan men goed zien wat nieuw is en wat origineel is."
+  },
+  "de": {
+    "place": "Kos-Stadt",
+    "title": "Casa Romana",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Wir sind jetzt in der Casa Romana.",
+    "s1": "Wir sind jetzt in der Casa Romana. Dies ist eine restaurierte römische Villa aus der Römerzeit. Das Haus wurde um das Jahr 200 n. Chr. erbaut.",
+    "s2": "Es steht auf den Überresten eines noch älteren Hauses aus der hellenistischen Zeit, etwa aus dem Jahr 300 v. Chr. Die Überreste dieser Villa kamen erst durch das schwere Erdbeben auf Kos im Jahr 1933 an die Oberfläche. Die Italiener haben es im Jahr 1940 komplett restauriert.",
+    "s3": "Nach jahrelanger Arbeit wurde es im Jahr 2015 wieder für die Öffentlichkeit geöffnet. Heute können Sie es durchgehen. Sie sehen, wie hier vor etwa 1900 Jahren eine wohlhabende römische Familie lebte.",
+    "s4": "Die Villa verfügt über drei Innenhöfe, von denen zwei von zweistöckigen Kolonnaden und hohen Säulen im Rodian-Stil umgeben sind. Insgesamt hatte das Haus etwa sechsunddreißig Zimmer. Was sofort ins Auge fällt, sind die Mosaikböden.",
+    "v1": "Die meisten stammen aus dem Jahr 200 n. Chr. Sie werden einen Panther sehen, der ein Reh verschlingt, einen Meeresboden voller Fische und Meeresbewohner und andere lebhafte Szenen. Einige Statuen wie Nymphen und Athene sowie einige Mosaike stammen aus hellenistischer Zeit und sind mehr als zweitausend Jahre alt.",
+    "v2": "Jeder Hof hat in der Mitte einen kleinen Brunnen. Diese dienten dazu, Regenwasser aufzufangen und die Luft frisch zu halten. Im ersten Hof befand sich einst eine Statue von Asklepios, dem Gott der Medizin.",
+    "v3": "Das passt gut zu Kos, denn die Insel war in der Antike für ihr Asklepieion, das große medizinische Zentrum, berühmt. Die neuen Restaurierungsteile sind bewusst aus unterschiedlichen Materialien gefertigt, sodass man deutlich erkennen kann, was original ist und was später hinzugefügt wurde.",
+    "k1": "Mit Springbrunnen, Marmor, Fresken und all dieser Kunst auf dem Boden. Da die neu eingebauten Teile aus unterschiedlichen Materialien bestehen, ist es leicht zu erkennen, was neu und was original ist."
+  },
+  "en": {
+    "place": "Kos Town",
+    "title": "Casa Romana",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "We are now at the Casa Romana.",
+    "s1": "We are now at the Casa Romana. This is a restored Roman villa from the Roman period. The house was built around the year two hundred AD.",
+    "s2": "It stands on the remains of an even older house from the Hellenistic period, from about three hundred BC. The remains of this villa only came to the surface due to the severe earthquake on Kos in nineteen thirty-three. The Italians completely restored it in nineteen forty.",
+    "s3": "After years of work, it reopened to the public in two thousand and fifteen. Today you can walk through it. You see how a wealthy Roman family lived here about nineteen hundred years ago.",
+    "s4": "The villa has three courtyards, two of which are surrounded by two-storey colonnades and tall Rodian-style columns. In total the house had about thirty-six rooms. What is immediately noticeable are the mosaic floors.",
+    "v1": "Most date from two hundred AD. You'll see a panther devouring a deer, a seabed full of fish and sea creatures, and other lively scenes. Some statues, such as nymphs and Athena, and a few mosaics date from the Hellenistic period and are more than two thousand years old.",
+    "v2": "Each courtyard has a small fountain in the center. These served to collect rainwater and keep the air fresh. In the first courtyard there used to be a statue of Asclepius, the god of medicine.",
+    "v3": "That suits Kos well, because the island was famous in ancient times for its Asclepieion, the great medical center. The new restoration parts are deliberately made from different materials, so that you can clearly see what is original and what was added later.",
+    "k1": "With fountains, marble, frescoes and all that art on the floor. Because the newly installed parts are made of different materials, it is easy to see what is new and what is original."
+  },
+  "it": {
+    "place": "Città di Kos",
+    "title": "Casa Romana",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Ora siamo alla Casa Romana.",
+    "s1": "Ora siamo alla Casa Romana. Si tratta di una villa romana restaurata di epoca romana. La casa fu costruita intorno all'anno duecento d.C.",
+    "s2": "Sorge sui resti di una casa ancora più antica di età ellenistica, del 300 circa a.C. I resti di questa villa vennero alla luce solo a causa del forte terremoto che colpì Kos nel 1933. Gli italiani lo restaurarono completamente nel 1940.",
+    "s3": "Dopo anni di lavori, riaprì al pubblico nel duemilaquindici. Oggi puoi attraversarlo. Vedi come viveva qui una ricca famiglia romana circa millenovecento anni fa.",
+    "s4": "La villa ha tre cortili, due dei quali circondati da colonnati a due piani e alte colonne di tipo rodiano. In totale la casa contava circa trentasei stanze. Ciò che salta subito all'occhio sono i pavimenti a mosaico.",
+    "v1": "La maggior parte risale al 200 d.C. Vedrai una pantera che divora un cervo, un fondale pieno di pesci e creature marine e altre scene vivaci. Alcune statue, come le ninfe e Atena, e alcuni mosaici risalgono al periodo ellenistico e hanno più di duemila anni.",
+    "v2": "Ogni cortile ha una piccola fontana al centro. Questi servivano a raccogliere l'acqua piovana e a mantenere l'aria fresca. Nel primo cortile si trovava la statua di Asclepio, dio della medicina.",
+    "v3": "Ciò si adatta bene a Kos, perché l'isola era famosa nell'antichità per il suo Asclepieion, il grande centro medico. Le nuove parti del restauro sono volutamente realizzate con materiali diversi, in modo da poter vedere chiaramente cosa è originale e cosa è stato aggiunto successivamente.",
+    "k1": "Con fontane, marmi, affreschi e tutta quell'arte sul pavimento. Poiché le parti appena installate sono realizzate con materiali diversi, è facile vedere cosa è nuovo e cosa è originale."
+  },
+  "tr": {
+    "place": "Kos şehri",
+    "title": "Casa Romana",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Şimdi Casa Romana'dayız.",
+    "s1": "Şimdi Casa Romana'dayız. Bu, Roma döneminden kalma restore edilmiş bir Roma villasıdır. Ev MS iki yüz yılı civarında inşa edildi.",
+    "s2": "Helenistik dönemden, yani M.Ö. 300'den kalma, daha da eski bir evin kalıntıları üzerinde duruyor. Bu villanın kalıntıları ancak 1933 yılında Kos'ta meydana gelen şiddetli deprem nedeniyle yüzeye çıkmıştır. İtalyanlar onu 1940'ta tamamen restore ettiler.",
+    "s3": "Yıllar süren çalışmaların ardından iki bin on beşte yeniden halka açıldı. Bugün bunun üzerinden geçebilirsiniz. Yaklaşık bin dokuz yüz yıl önce burada zengin bir Romalı ailenin nasıl yaşadığını görüyorsunuz.",
+    "s4": "Villanın üç avlusu vardır ve bunlardan ikisi iki katlı revaklar ve Rodya tarzı yüksek sütunlarla çevrilidir. Toplamda evin yaklaşık otuz altı odası vardı. Hemen göze çarpan şey mozaik zeminlerdir.",
+    "v1": "Çoğu MS 200'den kalmadır. Bir geyiği yiyen bir panter, balıklar ve deniz canlılarıyla dolu bir deniz tabanı ve daha birçok canlı sahne göreceksiniz. Periler ve Athena gibi bazı heykeller ve birkaç mozaik Helenistik dönemden kalmadır ve iki bin yıldan daha eskidir.",
+    "v2": "Her avlunun ortasında küçük bir çeşme vardır. Bunlar yağmur suyunu toplamaya ve havayı taze tutmaya hizmet ediyordu. Birinci avluda tıp tanrısı Asklepios'un heykeli bulunurdu.",
+    "v3": "Bu Kos'a çok yakışıyor çünkü ada antik çağda büyük tıp merkezi Asklepieion'uyla ünlüydü. Yeni restorasyon parçaları bilinçli olarak farklı malzemelerden yapılmıştır, böylece neyin orijinal olduğunu ve neyin sonradan eklendiğini net bir şekilde görebilirsiniz.",
+    "k1": "Çeşmeler, mermerler, freskler ve zemindeki tüm sanat eserleriyle. Yeni takılan parçalar farklı malzemelerden yapıldığı için neyin yeni, neyin orijinal olduğunu görmek kolaydır."
+  },
+  "es": {
+    "place": "Ciudad de Kos",
+    "title": "Casa Romana",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Ahora estamos en la Casa Romana.",
+    "s1": "Ahora estamos en la Casa Romana. Se trata de una villa romana restaurada de la época romana. La casa fue construida hacia el año doscientos d.C.",
+    "s2": "Se levanta sobre los restos de una casa aún más antigua del período helenístico, aproximadamente del año 300 a.C. Los restos de esta villa sólo salieron a la superficie debido al fuerte terremoto que azotó Kos en el año 1933. Los italianos lo restauraron completamente en el año 1940.",
+    "s3": "Después de años de obras, reabrió sus puertas al público en el año dos mil quince. Hoy puedes recorrerlo. Verá cómo vivió aquí una familia romana adinerada hace unos mil novecientos años.",
+    "s4": "La villa tiene tres patios, dos de los cuales están rodeados por columnatas de dos pisos y altas columnas de estilo rodiano. En total la casa contaba con unas treinta y seis habitaciones. Lo que llama la atención inmediatamente son los suelos de mosaico.",
+    "v1": "La mayoría data del año 200 d.C. Verás una pantera devorando un ciervo, un fondo marino lleno de peces y criaturas marinas, y otras escenas animadas. Algunas estatuas, como las de ninfas y Atenea, y algunos mosaicos datan del período helenístico y tienen más de dos mil años.",
+    "v2": "Cada patio tiene una pequeña fuente en el centro. Estos servían para recoger el agua de lluvia y mantener el aire fresco. En el primer patio había una estatua de Asclepio, el dios de la medicina.",
+    "v3": "Esto le viene bien a Kos, porque la isla era famosa en la antigüedad por su Asclepieion, el gran centro médico. Las nuevas piezas de restauración están fabricadas deliberadamente con diferentes materiales, para que se pueda ver claramente qué es original y qué se añadió posteriormente.",
+    "k1": "Con fuentes, mármol, frescos y todo ese arte en el suelo. Debido a que las piezas recién instaladas están hechas de diferentes materiales, es fácil ver qué es nuevo y qué es original."
   }
-
-  var langBtn = document.getElementById('langBtn');
-  var langMenu = document.getElementById('langMenu');
-  function openMenu(){ langMenu.classList.add('open'); }
-  function closeMenu(){ langMenu.classList.remove('open'); }
-  langBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    langMenu.classList.contains('open') ? closeMenu() : openMenu();
-  });
-  document.addEventListener('click', function(){ closeMenu(); });
-  document.querySelectorAll('.lang-option').forEach(function(btn){
-    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
-  });
-
-  var saved = localStorage.getItem('hk-lang') || 'nl';
-  setLang(saved);
-
-  /* TTS */
-  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
-  function getLang(){
-    var l = localStorage.getItem('hk-lang') || 'nl';
-    return LANG_VOICE[l] ? l : 'nl';
-  }
-  function pickVoice(code){
-    var voices = speechSynthesis.getVoices() || [];
-    var prefix = code.slice(0,2).toLowerCase();
-    return voices.find(function(v){ return v.lang === code; })
-      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
-      || null;
-  }
-  var btnPlay = document.getElementById('btnPlay');
-  var btnStop = document.getElementById('btnStop');
-  var status = document.getElementById('ttsStatus');
-  function setStatus(t){ if(status) status.textContent = t; }
-  function play(){
-    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
-    speechSynthesis.cancel();
-    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
-    var l = getLang();
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = LANG_VOICE[l];
-    u.rate = 0.92;
-    var v = pickVoice(LANG_VOICE[l]);
-    if(v) u.voice = v;
-    u.onstart = function(){
-      btnPlay.classList.add('playing');
-      btnStop.classList.add('show');
-      setStatus('Voorlezen… ('+l.toUpperCase()+')');
-    };
-    u.onend = u.onerror = function(){
-      btnPlay.classList.remove('playing');
-      btnStop.classList.remove('show');
-      setStatus('');
-    };
-    if(!speechSynthesis.getVoices().length){
-      speechSynthesis.onvoiceschanged = function(){
-        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
-        speechSynthesis.speak(u);
-      };
-      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
-    } else {
-      speechSynthesis.speak(u);
-    }
-  }
-  function stop(){
-    if(window.speechSynthesis) speechSynthesis.cancel();
-    btnPlay.classList.remove('playing');
-    btnStop.classList.remove('show');
-    setStatus('Gestopt.');
-  }
-  btnPlay.addEventListener('click', play);
-  btnStop.addEventListener('click', stop);
-  if(window.speechSynthesis){
-    speechSynthesis.getVoices();
-    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
-  }
-})();
-</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

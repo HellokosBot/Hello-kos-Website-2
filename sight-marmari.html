@@ -1,113 +1,190 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0D1A1A">
-<title>Marmari – Hello Kos</title>
-<link rel="stylesheet" href="hello-kos.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Marmari – Hello Kos</title>
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body class="hk-page">
-<header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+<body class="hk-page hk-guide">
+  <header class="app-header">
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-<main class="main">
-  <div class="hero-wrap"><img src="img/hk/sight-marmari.jpg" alt="">
-      <div class="hero-title"><h1 data-i18n="title">Marmari</h1></div></div>
-  <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back">← Bezienswaardigheden</a></p>
-<p class="lead" data-i18n="lead">Zandstrand en dorp aan de noordkust, tussen Tigaki en Mastichari. Paardrijden op het strand en rond het zoutmeer vertrekt hier in de buurt.</p>
-  
-  <div class="actions">
-    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
-    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
-    
-  </div>
-  
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Marmari%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Marmari%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
       </div>
-      <p class="status" id="ttsStatus"></p>
-  <div id="readText">
-    <article class="card"><h2 data-i18n="hStory">Strand</h2><p data-i18n="p0">Het strand heeft een eigen pagina.</p></article>
-    
-  </div>
-</main>
-<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
-<script>window.HK_DICT = {
-    "nl": {
-      "title": "Marmari",
-      "lead": "Zandstrand en dorp aan de noordkust, tussen Tigaki en Mastichari. Paardrijden op het strand en rond het zoutmeer vertrekt hier in de buurt.",
-      "back": "← Bezienswaardigheden",
-      "p0": "Het strand heeft een eigen pagina.",
-      "hStory": "Het verhaal",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Marmari",
-      "lead": "Sandstrand und Dorf an der Nordküste, zwischen Tigaki und Mastichari. Ausritte am Strand und um den Salzsee starten hier in der Nähe.",
-      "back": "← Sehenswürdigkeiten",
-      "p0": "Der Strand hat eine eigene Seite.",
-      "hStory": "Die Geschichte",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Marmari",
-      "lead": "Sandy beach and village on the north coast, between Tigaki and Mastichari. Horse riding on the beach and around the salt lake starts near here.",
-      "back": "← Sights",
-      "p0": "The beach has its own page.",
-      "hStory": "The story",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Marmari",
-      "lead": "Spiaggia di sabbia e villaggio sulla costa nord, tra Tigaki e Mastichari. Le passeggiate a cavallo sulla spiaggia e intorno al lago salato partono qui vicino.",
-      "back": "← Attrazioni",
-      "p0": "La spiaggia ha una pagina.",
-      "hStory": "La storia",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Marmari",
-      "lead": "Tigaki ile Mastichari arasında kuzey kıyıda kumsal ve köy. Plajda ve tuz gölü çevresinde at binme buradan başlar.",
-      "back": "← Gezilecek yerler",
-      "p0": "Plajın sayfası var.",
-      "hStory": "Hikaye",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Marmari",
-      "lead": "Playa de arena y pueblo en la costa norte, entre Tigaki y Mastichari. Los paseos a caballo por la playa y el lago salado salen cerca de aquí.",
-      "back": "← Lugares de interés",
-      "p0": "La playa tiene página.",
-      "hStory": "La historia",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
+  <main class="main">
+    <div class="hero-wrap">
+      <img class="hk-zoom" src="img/hk/sight-marmari.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
+    </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=36.885%2C27.145" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?ll=36.885,27.145&amp;q=Marmari" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-marmari-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-marmari-02.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-marmari-03.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-marmari-04.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-marmari-05.jpg" alt=""></figure>
+</article>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-marmari-06.jpg" alt=""></figure>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-marmari-07.jpg" alt=""></figure>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-marmari-08.jpg" alt=""></figure>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-marmari-09.jpg" alt=""></figure>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-marmari-10.jpg" alt=""></figure>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-marmari-11.jpg" alt=""></figure>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-marmari-12.jpg" alt=""></figure>
+    </div>
+  </main>
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Marmari",
+    "title": "Marmari",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "We rijden nu langs de noordkust, ongeveer twaalf kilometer van Kos-stad.",
+    "s1": "Het zand is heel fijn en licht van kleur, en het water is kristalhelder. Het strand loopt geleidelijk dieper, dus het is veilig en fijn voor families met kinderen. Achter het strand liggen lage duinen met bomen en struiken, wat zorgt voor een natuurlijke en groene uitstraling.",
+    "s2": "Het dorp zelf is klein en gemoedelijk. Je vindt er een aantal tavernes, kleine winkeltjes en eenvoudige accommodaties. Het is geen bruisend feestdorp, maar juist een plek waar je rustig kunt genieten van zee, strand en een ontspannen sfeer.",
+    "v1": "Omdat het aan de noordkant van het eiland ligt, waait het hier vaak een beetje, wat het ook populair maakt bij windsurfers en kitesurfers. Vroeger was Marmari een rustig vissers- en boerendorp. Tegenwoordig is het vooral een fijne bestemming voor mensen die houden van een kalm strandvakantie zonder al te veel drukte.",
+    "v2": "Voor de avontuurlijke bezoekers zijn er ook watersportmogelijkheden zoals windsurfen. Mogelijk gemaakt door de lichte bries. Het strand staat bekend om zijn hoge waterkwaliteit en netheid, vaak aangeduid met een Blue Flag in gidsen. De serene ontspannen sfeer en het uitzicht op de omliggende eilanden, waaronder delen van Turkije (Bodrum), maken het tot een ideale bestemming. Bijzonderheden: Het strand heeft een tropische uitstraling door de prachtige witte zandduinen.",
+    "k1": "We rijden nu langs de noordkust, ongeveer twaalf kilometer van Kos-stad. Hier ligt Marmari, een rustig en ontspannen kustdorpje.Marmari is vooral bekend om zijn prachtige lange zandstrand. Het heeft een van de mooiste en witste stranden van heel Europa."
+  },
+  "de": {
+    "place": "Marmari",
+    "title": "Marmari",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Wir fahren nun entlang der Nordküste, etwa zwölf Kilometer von Kos-Stadt entfernt.",
+    "s1": "Der Sand ist sehr fein und hell und das Wasser ist kristallklar. Der Strand wird allmählich tiefer, sodass er für Familien mit Kindern sicher und angenehm ist. Hinter dem Strand liegen niedrige Dünen mit Bäumen und Sträuchern, die für ein natürliches und grünes Erscheinungsbild sorgen.",
+    "s2": "Das Dorf selbst ist klein und gemütlich. Sie finden eine Reihe von Tavernen, kleinen Geschäften und einfachen Unterkünften. Es ist kein geschäftiges Partydorf, sondern ein Ort, an dem Sie in aller Ruhe das Meer, den Strand und eine entspannte Atmosphäre genießen können.",
+    "v1": "Da es auf der Nordseite der Insel liegt, weht hier oft etwas Wind, was es auch bei Windsurfern und Kitesurfern beliebt macht. Marmari war einst ein ruhiges Fischer- und Bauerndorf. Heutzutage ist es vor allem ein schönes Reiseziel für Menschen, die einen ruhigen Strandurlaub ohne allzu große Menschenmassen genießen möchten.",
+    "v2": "Für abenteuerlustige Besucher gibt es auch Wassersportmöglichkeiten wie Windsurfen. Möglich gemacht durch die leichte Brise. Der Strand ist für seine hohe Wasserqualität und Sauberkeit bekannt und wird in Reiseführern oft mit der Blauen Flagge ausgezeichnet. Die ruhige, entspannte Atmosphäre und die Aussicht auf die umliegenden Inseln, einschließlich Teile der Türkei (Bodrum), machen es zu einem idealen Reiseziel. Einzelheiten: Der Strand hat aufgrund der wunderschönen weißen Sanddünen ein tropisches Aussehen.",
+    "k1": "Wir fahren nun entlang der Nordküste, etwa zwölf Kilometer von Kos-Stadt entfernt. Hier liegt Marmari, ein ruhiges und entspannendes Küstendorf. Marmari ist vor allem für seinen wunderschönen langen Sandstrand bekannt. Es hat einen der schönsten und weißesten Strände in ganz Europa."
+  },
+  "en": {
+    "place": "Marmari",
+    "title": "Marmari",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "We are now driving along the north coast, about twelve kilometers from Kos town.",
+    "s1": "The sand is very fine and light in color, and the water is crystal clear. The beach gradually deepens, so it is safe and nice for families with children. Behind the beach are low dunes with trees and shrubs, which provides a natural and green appearance.",
+    "s2": "The village itself is small and cozy. You will find a number of taverns, small shops and simple accommodations. It is not a bustling party village, but a place where you can quietly enjoy the sea, beach and a relaxed atmosphere.",
+    "v1": "Because it is located on the north side of the island, there is often a bit of wind here, which also makes it popular with windsurfers and kite surfers. Marmari used to be a quiet fishing and farming village. Nowadays it is mainly a nice destination for people who enjoy a quiet beach holiday without too much crowds.",
+    "v2": "For adventurous visitors, there are also water sports options such as windsurfing. Made possible by the light breeze. The beach is known for its high water quality and cleanliness, often awarded a Blue Flag in guidebooks. The serene relaxing atmosphere and views of the surrounding islands, including parts of Turkey (Bodrum), make it an ideal destination. Details: The beach has a tropical appearance due to the beautiful white sand dunes.",
+    "k1": "We are now driving along the north coast, about twelve kilometers from Kos town. Here lies Marmari, a quiet and relaxing coastal village. Marmari is best known for its beautiful long sandy beach. It has one of the most beautiful and whitest beaches in all of Europe."
+  },
+  "it": {
+    "place": "Marmari",
+    "title": "Marmari",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Stiamo ora guidando lungo la costa settentrionale, a circa dodici chilometri dalla città di Kos.",
+    "s1": "La sabbia è molto fine e di colore chiaro, e l'acqua è cristallina. La spiaggia diventa gradualmente più profonda, quindi è sicura e piacevole per le famiglie con bambini. Dietro la spiaggia ci sono dune basse con alberi e arbusti, che conferiscono un aspetto naturale e verde.",
+    "s2": "Il villaggio in sé è piccolo e accogliente. Troverai numerose taverne, piccoli negozi e alloggi semplici. Non è un vivace villaggio di feste, ma un luogo dove puoi goderti tranquillamente il mare, la spiaggia e un'atmosfera rilassata.",
+    "v1": "Poiché si trova sul lato nord dell'isola, qui c'è spesso un po' di vento, il che la rende popolare anche tra gli appassionati di windsurf e kitesurf. Marmari era un tranquillo villaggio di pescatori e agricoltori. Al giorno d'oggi è soprattutto una bella destinazione per chi ama una tranquilla vacanza al mare senza troppa folla.",
+    "v2": "Per i visitatori avventurosi, ci sono anche opzioni per gli sport acquatici come il windsurf. Reso possibile dalla leggera brezza. La spiaggia è nota per l'elevata qualità delle acque e la pulizia, spesso premiata con la Bandiera Blu nelle guide. L'atmosfera serena e rilassante e la vista sulle isole circostanti, comprese parti della Turchia (Bodrum), ne fanno una destinazione ideale. Dettagli: La spiaggia ha un aspetto tropicale grazie alle bellissime dune di sabbia bianca.",
+    "k1": "Stiamo ora guidando lungo la costa settentrionale, a circa dodici chilometri dalla città di Kos. Qui si trova Marmari, un tranquillo e rilassante villaggio costiero. Marmari è conosciuta soprattutto per la sua bellissima lunga spiaggia sabbiosa. Ha una delle spiagge più belle e più bianche di tutta Europa."
+  },
+  "tr": {
+    "place": "Marmari",
+    "title": "Marmari",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Şimdi kuzey sahili boyunca, Kos kasabasından yaklaşık on iki kilometre uzakta ilerliyoruz.",
+    "s1": "Kum çok ince ve açık renklidir, su ise kristal berraklığındadır. Plaj giderek derinleştiğinden çocuklu aileler için güvenli ve güzeldir. Plajın arkasında ağaç ve çalılıklardan oluşan alçak kumullar doğal ve yeşil bir görünüm sağlıyor.",
+    "s2": "Köyün kendisi küçük ve şirindir. Çok sayıda taverna, küçük dükkan ve sade konaklama yerleri bulacaksınız. Hareketli bir parti köyü değil, denizin, kumsalın ve rahat bir atmosferin tadını sessizce çıkarabileceğiniz bir yer.",
+    "v1": "Adanın kuzey tarafında yer aldığı için burada genellikle biraz rüzgar vardır, bu da onu rüzgar sörfçüleri ve uçurtma sörfçüleri arasında popüler kılmaktadır. Marmari eskiden sakin bir balıkçı ve çiftçi köyüydü. Günümüzde burası, çok fazla kalabalığın olmadığı, sakin bir plaj tatilinin keyfini çıkaranlar için güzel bir destinasyondur.",
+    "v2": "Maceracı ziyaretçiler için rüzgar sörfü gibi su sporları seçenekleri de mevcuttur. Hafif esinti sayesinde mümkün oldu. Plaj, yüksek su kalitesi ve temizliği ile tanınır ve rehber kitaplarda sıklıkla Mavi Bayrak ile ödüllendirilir. Sakin ve rahatlatıcı atmosferi ve Türkiye'nin bazı kısımları (Bodrum) da dahil olmak üzere çevredeki adaların manzarası burayı ideal bir destinasyon haline getirmektedir. Detaylar: Plaj, güzel beyaz kum tepeleri nedeniyle tropikal bir görünüme sahiptir.",
+    "k1": "Şimdi kuzey sahili boyunca, Kos kasabasından yaklaşık on iki kilometre uzakta ilerliyoruz. Sessiz ve dinlendirici bir sahil köyü olan Marmari burada yatıyor. Marmari en çok güzel uzun kumlu plajıyla tanınır. Tüm Avrupa'nın en güzel ve en beyaz plajlarından birine sahiptir."
+  },
+  "es": {
+    "place": "Marmari",
+    "title": "Marmari",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Ahora conducimos a lo largo de la costa norte, a unos doce kilómetros de la ciudad de Kos.",
+    "s1": "La arena es muy fina y de color claro y el agua cristalina. La playa se hace más profunda gradualmente, por lo que es segura y agradable para familias con niños. Detrás de la playa hay dunas bajas con árboles y arbustos, lo que proporciona un aspecto natural y verde.",
+    "s2": "El pueblo en sí es pequeño y acogedor. Encontrará numerosas tabernas, pequeñas tiendas y alojamientos sencillos. No es un pueblo bullicioso de fiesta, sino un lugar donde disfrutar tranquilamente del mar, la playa y un ambiente relajado.",
+    "v1": "Debido a que está situada en el lado norte de la isla, aquí suele haber algo de viento, lo que también la hace popular entre los amantes del windsurf y el kitesurf. Marmari solía ser un tranquilo pueblo pesquero y agrícola. Hoy en día es principalmente un destino agradable para personas que disfrutan de unas vacaciones tranquilas en la playa y sin demasiadas aglomeraciones.",
+    "v2": "Para los visitantes aventureros, también hay opciones de deportes acuáticos como el windsurf. Posible gracias a la ligera brisa. La playa es conocida por la alta calidad y limpieza del agua y, a menudo, recibe la Bandera Azul en las guías turísticas. El ambiente sereno y relajante y las vistas de las islas circundantes, incluidas partes de Turquía (Bodrum), lo convierten en un destino ideal. Detalles: La playa tiene un aspecto tropical debido a las hermosas dunas de arena blanca.",
+    "k1": "Ahora conducimos a lo largo de la costa norte, a unos doce kilómetros de la ciudad de Kos. Aquí se encuentra Marmari, un pueblo costero tranquilo y relajante. Marmari es mejor conocida por su hermosa y larga playa de arena. Tiene una de las playas más bonitas y blancas de toda Europa."
+  }
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

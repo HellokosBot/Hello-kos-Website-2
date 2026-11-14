@@ -1,405 +1,231 @@
 <!DOCTYPE html>
-<html lang="nl" data-hk-own="1" data-hk-tts="1">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0D1F1F">
   <title>Odeon – Hello Kos</title>
-  <style>
-    :root {
-      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
-      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
-      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
-      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
-      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text); -webkit-font-smoothing: antialiased;
-      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
-      background: var(--bg); min-height: 100vh; line-height: 1.55;
-    }
-    .app-header {
-      position: sticky; top: 0; z-index: 100;
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-      padding: 14px 16px; background: var(--bg-header);
-      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
-    }
-    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
-    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
-    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
-    .logo-text span { color: var(--gold-dark); font-style: italic; }
-    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
-    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
-    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
-    .lang-menu.open { display: block; }
-    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
-    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
-    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
-    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
-    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .content { padding: 18px 16px 0; }
-    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
-    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-
-    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
-    .btn-audio { background: var(--petrol); color: #fff; }
-    .btn-audio.playing { background: var(--petrol-dark); }
-    .btn-stop { background: #3A4545; color: #fff; display: none; }
-    .btn-stop.show { display: flex; }
-
-    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
-    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
-    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
-    .card p:last-child { margin-bottom: 0; }
-    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
-    .tip strong { color: var(--gold); }
-
-    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
-    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
-    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
-    .footer a { color: var(--petrol); text-decoration: none; }
-  </style>
-<link rel="stylesheet" href="hello-kos.css">
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body>
+<body class="hk-page hk-guide">
   <header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
   <main class="main">
     <div class="hero-wrap">
-      <img src="img/jwwb/7c0e0ff4d1-caption-29-standard.jpg" alt="Odeon" loading="eager">
-      <div class="hero-title"><h1 data-i18n="title">Odeon</h1></div>
+      <img class="hk-zoom" src="img/jwwb/7c0e0ff4d1-caption-29-standard.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
     </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=36.8914%2C27.2855" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?ll=36.8914,27.2855&amp;q=Odeon" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-odeon-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-odeon-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-odeon-03.jpg" alt=""></figure>
+<p data-i18n="s4"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-odeon-04.jpg" alt=""></figure>
+<p data-i18n="s5"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-odeon-05.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-odeon-06.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-odeon-07.jpg" alt=""></figure>
+<p data-i18n="v3"></p>
 
-    <div class="content">
-<p class="lead" data-i18n="lead">Romeins overdekt theater (± 200 n.Chr.) voor ± 750 toeschouwers – marmer voor de elite, nog steeds sterke akoestiek.</p>
+<p data-i18n="v4"></p>
 
-      
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
 
-      <div class="actions">
-        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
-        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-      </div>
-      
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Roman%20Odeon%20Kos%20Town" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Roman%20Odeon%20Kos%20Town" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
-      </div>
-      <p class="status" id="ttsStatus"></p>
+<p data-i18n="k2"></p>
 
-      <div id="readText">
-        <div class="card">
-          <h2 data-i18n="hStory">Gebouwd ± 200 n.Chr.</h2>
-          <p data-i18n="p1">Het Odeon dateert uit de Romeinse periode. Kos was welvarend dankzij het Asklepios-heiligdom. Het verving waarschijnlijk een ouder bouleuterion (raadzaal). Na de aardbeving van 142 n.Chr. financierde keizer Antoninus Pius het herstel.</p>
-        </div>
-
-        
-
-        <div class="card">
-          <h2 data-i18n="hSee">Overdekt en intiem</h2>
-          <p data-i18n="p2">Compact en overdekt – ideaal voor muziek, poëzie en zang het hele jaar. Ongeveer 12 m hoog. Cavea in halve cirkel: eerste negen rijen wit marmer (rijk en elite), hogere rijen eenvoudiger steen.</p>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2acoustics">Opgraving en akoestiek</h2>
-          <p data-i18n="p3">Opgegraven vanaf 1929 door Luciano Laurenzi (Italiaanse periode), later gerestaureerd (1994–1999). Je kunt door de gangen lopen; de akoestiek is nog steeds opvallend goed.</p>
-          <p data-i18n="p4">Toegang gratis; check lokaal de tijden.</p>
-        </div>
-
-        <div class="gallery">
-          <div class="g-item">
-            <img src="img/jwwb/7c0e0ff4d1-caption-29-standard.jpg" alt="" loading="lazy">
-            <span data-i18n="g1">Odeon</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/21fa19e42d-caption-29-high.jpg" alt="" loading="lazy">
-            <span data-i18n="g2">Odeon</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/26c3f6549b-caption-27-high.jpg" alt="" loading="lazy">
-            <span data-i18n="g3">Odeon</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/9df90661b3-caption-25-high.jpg" alt="" loading="lazy">
-            <span data-i18n="g4">Odeon</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="hKnow">Bezoeken</h2>
-          <p data-i18n="p5">In Kos-stad.</p>
-          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: fluister of klap in je handen vanuit de cavea – de akoestiek hoor je meteen.</p></div>
-        </div>
-      </div>
+</article>
     </div>
   </main>
-
-  <footer class="footer">
-    <div>Hello Kos</div>
-    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
-  </footer>
-
-<script>
-(function(){
-  var I18N = window.HK_DICT = {
-    "nl": {
-      "title": "Odeon",
-      "lead": "Romeins overdekt theater (± 200 n.Chr.) voor ± 750 toeschouwers – marmer voor de elite, nog steeds sterke akoestiek.",
-      "btnPlay": "Voorlezen",
-      "p1": "Het Odeon dateert uit de Romeinse periode. Kos was welvarend dankzij het Asklepios-heiligdom. Het verving waarschijnlijk een ouder bouleuterion (raadzaal). Na de aardbeving van 142 n.Chr. financierde keizer Antoninus Pius het herstel.",
-      "p2": "Compact en overdekt – ideaal voor muziek, poëzie en zang het hele jaar. Ongeveer 12 m hoog. Cavea in halve cirkel: eerste negen rijen wit marmer (rijk en elite), hogere rijen eenvoudiger steen.",
-      "h2acoustics": "Opgraving en akoestiek",
-      "p3": "Opgegraven vanaf 1929 door Luciano Laurenzi (Italiaanse periode), later gerestaureerd (1994–1999). Je kunt door de gangen lopen; de akoestiek is nog steeds opvallend goed.",
-      "p4": "Toegang gratis; check lokaal de tijden.",
-      "g1": "Odeon",
-      "g2": "Odeon",
-      "g3": "Odeon",
-      "g4": "Odeon",
-      "p5": "In Kos-stad.",
-      "tip": "fluister of klap in je handen vanuit de cavea – de akoestiek hoor je meteen.",
-      "hStory": "Het verhaal",
-      "hSee": "Wat je ziet",
-      "hKnow": "Goed om te weten",
-      "tipTitle": "Tip van de gids",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Odeon",
-      "lead": "Roman covered theatre (± 200 AD) for ± 750 spectators – marble for the elite, still strong acoustics.",
-      "btnPlay": "Read aloud",
-      "p1": "The Odeon dates from the Roman period. Kos was prosperous thanks to the Asklepios sanctuary. It probably replaced an older bouleuterion (council hall). After the earthquake of 142 AD, Emperor Antoninus Pius financed the restoration.",
-      "p2": "Compact and covered – ideal for music, poetry and singing all year round. About 12 m high. Cavea in a semicircle: first nine rows white marble (rich and elite), higher rows simpler stone.",
-      "h2acoustics": "Excavation and acoustics",
-      "p3": "Excavated from 1929 by Luciano Laurenzi (Italian period), later restored (1994–1999). You can walk through the corridors; the acoustics are still remarkably good.",
-      "p4": "Entry free; check locally for times.",
-      "g1": "Odeon",
-      "g2": "Odeon",
-      "g3": "Odeon",
-      "g4": "Odeon",
-      "p5": "In Kos Town.",
-      "tip": "whisper or clap your hands from the cavea – you hear the acoustics immediately.",
-      "hStory": "The story",
-      "hSee": "What you see",
-      "hKnow": "Good to know",
-      "tipTitle": "Guide’s tip",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Odeon",
-      "lead": "Römisches überdachtes Theater (± 200 n. Chr.) für ± 750 Zuschauer – Marmor für die Elite, noch immer starke Akustik.",
-      "btnPlay": "Vorlesen",
-      "p1": "Das Odeon stammt aus der römischen Zeit. Kos war dank des Asklepios-Heiligtums wohlhabend. Es ersetzte wahrscheinlich ein älteres Bouleuterion (Rathaus). Nach dem Erdbeben von 142 n. Chr. finanzierte Kaiser Antoninus Pius die Wiederherstellung.",
-      "p2": "Kompakt und überdacht – ideal für Musik, Poesie und Gesang das ganze Jahr. Etwa 12 m hoch. Cavea im Halbkreis: erste neun Reihen weißer Marmor (reich und Elite), höhere Reihen einfacherer Stein.",
-      "h2acoustics": "Ausgrabung und Akustik",
-      "p3": "Ab 1929 von Luciano Laurenzi (italienische Periode) ausgegraben, später restauriert (1994–1999). Du kannst durch die Gänge gehen; die Akustik ist immer noch bemerkenswert gut.",
-      "p4": "Eintritt kostenlos; Zeiten lokal prüfen.",
-      "g1": "Odeon",
-      "g2": "Odeon",
-      "g3": "Odeon",
-      "g4": "Odeon",
-      "p5": "In Kos-Stadt.",
-      "tip": "flüstere oder klatsche aus der Cavea – die Akustik hörst du sofort.",
-      "hStory": "Die Geschichte",
-      "hSee": "Was du siehst",
-      "hKnow": "Gut zu wissen",
-      "tipTitle": "Tipp des Guides",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Odeon",
-      "lead": "Teatro romano coperto (± 200 d.C.) per ± 750 spettatori – marmo per l’élite, ancora forte acustica.",
-      "btnPlay": "Leggi ad alta voce",
-      "p1": "L’Odeon risale al periodo romano. Kos era prosperosa grazie al santuario di Asclepio. Probabilmente sostituì un più antico bouleuterion (sala del consiglio). Dopo il terremoto del 142 d.C. l’imperatore Antonino Pio finanziò il restauro.",
-      "p2": "Compatto e coperto – ideale per musica, poesia e canto tutto l’anno. Alto circa 12 m. Cavea a semicerchio: prime nove file di marmo bianco (ricchi ed élite), file superiori pietra più semplice.",
-      "h2acoustics": "Scavo e acustica",
-      "p3": "Scavato dal 1929 da Luciano Laurenzi (periodo italiano), poi restaurato (1994–1999). Puoi camminare nei corridoi; l’acustica è ancora notevolmente buona.",
-      "p4": "Ingresso gratuito; controlla localmente gli orari.",
-      "g1": "Odeon",
-      "g2": "Odeon",
-      "g3": "Odeon",
-      "g4": "Odeon",
-      "p5": "A Kos città.",
-      "tip": "sussurra o batti le mani dalla cavea – senti subito l’acustica.",
-      "hStory": "La storia",
-      "hSee": "Cosa vedi",
-      "hKnow": "Buono a sapersi",
-      "tipTitle": "Consiglio della guida",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Odeon",
-      "lead": "Roma kapalı tiyatrosu (± 200 MS) ± 750 seyirci için – elit için mermer, hâlâ güçlü akustik.",
-      "btnPlay": "Sesli oku",
-      "p1": "Odeon Roma döneminden kalmadır. Kos, Asklepios tapınağı sayesinde zengindi. Muhtemelen daha eski bir bouleuterion (meclis salonu) yerine geçti. 142 MS depreminden sonra İmparator Antoninus Pius restorasyonu finanse etti.",
-      "p2": "Kompakt ve kapalı – yıl boyunca müzik, şiir ve şarkı için ideal. Yaklaşık 12 m yüksek. Yarım daire cavea: ilk dokuz sıra beyaz mermer (zengin ve elit), üst sıralar daha basit taş.",
-      "h2acoustics": "Kazı ve akustik",
-      "p3": "1929’dan itibaren Luciano Laurenzi (İtalyan dönemi) tarafından kazıldı, daha sonra restore edildi (1994–1999). Koridorlardan yürüyebilirsiniz; akustik hâlâ oldukça iyidir.",
-      "p4": "Giriş ücretsiz; saatleri yerel kontrol edin.",
-      "g1": "Odeon",
-      "g2": "Odeon",
-      "g3": "Odeon",
-      "g4": "Odeon",
-      "p5": "Kos kasabasında.",
-      "tip": "cavea’dan fısıldayın veya alkışlayın – akustiği hemen duyarsınız.",
-      "hStory": "Hikaye",
-      "hSee": "Ne görürsün",
-      "hKnow": "Bilmekte fayda var",
-      "tipTitle": "Rehberin ipucu",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Odeón",
-      "lead": "Teatro romano cubierto (± 200 d.C.) para ± 750 espectadores – mármol para la élite, acústica aún fuerte.",
-      "btnPlay": "Leer en voz alta",
-      "p1": "El Odeón data del período romano. Kos era próspera gracias al santuario de Asclepio. Probablemente reemplazó un bouleuterion más antiguo (sala del consejo). Tras el terremoto de 142 d.C., el emperador Antonino Pío financió la restauración.",
-      "p2": "Compacto y cubierto – ideal para música, poesía y canto todo el año. Unos 12 m de alto. Cavea en semicírculo: primeras nueve filas de mármol blanco (ricos y élite), filas superiores de piedra más simple.",
-      "h2acoustics": "Excavación y acústica",
-      "p3": "Excavado desde 1929 por Luciano Laurenzi (período italiano), luego restaurado (1994–1999). Puedes caminar por los pasillos; la acústica sigue siendo notablemente buena.",
-      "p4": "Entrada gratuita; comprueba los horarios localmente.",
-      "g1": "Odeón",
-      "g2": "Odeón",
-      "g3": "Odeón",
-      "g4": "Odeón",
-      "p5": "En la ciudad de Kos.",
-      "tip": "susurra o aplaude desde la cavea – oyes la acústica de inmediato.",
-      "hStory": "La historia",
-      "hSee": "Qué ves",
-      "hKnow": "Bueno saberlo",
-      "tipTitle": "Consejo del guía",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };
-
-  function setLang(l) {
-    if (!I18N[l]) l = 'nl';
-    localStorage.setItem('hk-lang', l);
-    document.documentElement.lang = l;
-    var d = I18N[l];
-    document.querySelectorAll('[data-i18n]').forEach(function(el){
-      var k = el.getAttribute('data-i18n');
-      if (d[k]) el.textContent = d[k];
-    });
-    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
-    if (opt) {
-      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
-      document.getElementById('code').textContent = l.toUpperCase();
-    }
-    document.querySelectorAll('.lang-option').forEach(function(o){
-      o.classList.toggle('active', o.getAttribute('data-lang') === l);
-    });
-    closeMenu();
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Kos-stad",
+    "title": "Odeon",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "We blijven nog even in de Romeinse wijk.",
+    "s1": "We blijven nog even in de Romeinse wijk. Hier ligt het Romeinse Odeon, een compact overdekt theater uit de Romeinse tijd. Het Odeon werd rond tweehonderd na Christus gebouwd.",
+    "s2": "Waarschijnlijk verving het een ouder gebouw, mogelijk de oude raadzaal van de stad. Een zware aardbeving in honderdtweeënveertig na Christus had het odeon flink beschadigd. Keizer Antoninus Pius betaalde later de restauratie, waardoor het theater een keizerlijke uitstraling kreeg.",
+    "s3": "In tegenstelling tot de grote openlucht theaters van het Romeinse Rijk was dit een overdekt gebouw met een dak van twaalf meter hoog, gedragen door vier stevige muren. Zo konden voorstellingen het hele jaar doorgaan, ook bij regen of felle zon. Er was plaats voor ongeveer zevenhonderdvijftig toeschouwers.",
+    "s4": "De zitplaatsen vormden een halve cirkel met veertien rijen. De eerste negen rijen waren van glanzend wit marmer en gereserveerd voor de elite en rijke kooplieden, artsen en hoge ambtenaren. De hogere rijen waren eenvoudiger en voor het gewone publiek.",
+    "s5": "Er vonden vooral intieme optredens plaats: muziekconcerten, poëzievoordrachten, zangwedstrijden en toespraken. Het gebouw diende ook als vergaderplek voor de Gerousia, de ere-raad van Kos die onderscheidingen uitreikte aan verdienstelijke burgers. De Italianen begonnen met de opgraving in negentien negenentwintig.",
+    "v1": "Zij restaureerden het meteen, met aandacht voor de originele marmeren zitplaatsen. Tussen negentien vierennegentig en negentien negenennegentig voerden Griekse archeologen nog meer herstelwerk uit, zodat het nu veilig te bezoeken is. Je kunt vrij door de oude gangen lopen en de akoestiek testen.",
+    "v2": "Onder de tribunes liepen gangen en bogen, gesteund op pilaren van ruwe steen, waar toeschouwers konden schuilen of wandelen.",
+    "v3": "Het podium was pentagonaal (vijfhoekig) van vorm, met een proscenium en achtertoneel, en de orkestvloer was versierd met marmeren mozaïeken. Dankzij inscripties weten we dat het niet alleen voor amusement diende: het was ook de zetel van de Gerousia, een ere-raad zonder echte politieke macht, maar wel verantwoordelijk voor het uitreiken van eerbetuigingen en medailles aan verdienstelijke burgers. Zo klonken hier niet alleen liederen, maar ook toespraken.",
+    "v4": "De opgraving begon in 1929 onder leiding van de Italiaanse archeoloog Luciano Laurenzi, tijdens de Italiaanse bezetting van de Dodekanesos-eilanden. De Italianen restaureerden het meteen, met aandacht voor de originele marmeren zitplaatsen. Later, tussen 1994 en 1999, namen Griekse archeologen het over: verstevigden de structuur, reconstrueerden delen en maakten het toegankelijk voor bezoekers. Vandaag de dag kun je door de oude gangen lopen om de akoestiek te testen, die is nog steeds verbluffend goed, dankzij de ronde vorm.",
+    "k1": "Die is nog steeds verrassend goed dankzij de ronde vorm. Toegang is gratis.Het blijft leuk om hier even te staan en je voor te stellen hoe tweeduizend jaar geleden muziek en toespraken klonken terwijl de elite van Kos in marmeren stoelen zat te luisteren.",
+    "k2": "De openingstijden zijn enkel van toepassing binnen in de kelders van Odeon."
+  },
+  "de": {
+    "place": "Kos-Stadt",
+    "title": "Odeon",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Wir werden noch eine Weile im Römerviertel bleiben.",
+    "s1": "Wir werden noch eine Weile im Römerviertel bleiben. Hier befindet sich das römische Odeon, ein kompaktes überdachtes Theater aus der Römerzeit. Das Odeon wurde um 200 n. Chr. erbaut.",
+    "s2": "Es ersetzte wahrscheinlich ein älteres Gebäude, möglicherweise den alten Ratssaal der Stadt. Ein schweres Erdbeben im Jahr 142 n. Chr. hatte das Odeon schwer beschädigt. Kaiser Antoninus Pius bezahlte später die Restaurierung, die dem Theater ein kaiserliches Aussehen verlieh.",
+    "s3": "Im Gegensatz zu den großen Freilichttheatern des Römischen Reiches handelte es sich hier um ein überdachtes Gebäude mit einem 12 Meter hohen Dach, das von vier stabilen Wänden getragen wurde. Auf diese Weise konnten die Aufführungen das ganze Jahr über fortgesetzt werden, auch bei Regen oder strahlendem Sonnenschein. Es gab Platz für etwa siebenhundertfünfzig Zuschauer.",
+    "s4": "Die Sitze bildeten einen Halbkreis mit vierzehn Reihen. Die ersten neun Reihen bestanden aus glänzend weißem Marmor und waren der Elite und wohlhabenden Kaufleuten, Ärzten und hohen Beamten vorbehalten. Die höheren Reihen waren einfacher und für die breite Öffentlichkeit bestimmt.",
+    "s5": "Es gab hauptsächlich intime Aufführungen: Musikkonzerte, Dichterlesungen, Gesangswettbewerbe und Reden. Das Gebäude diente auch als Treffpunkt für die Gerousia, den Ehrenrat von Kos, der Auszeichnungen an verdiente Bürger verlieh. Die Italiener begannen 1929 mit den Ausgrabungen.",
+    "v1": "Sie haben es umgehend restauriert und dabei auf die originalen Marmorsitze geachtet. Zwischen 1994 und 1999 führten griechische Archäologen weitere Restaurierungsarbeiten durch, so dass der Besuch nun sicher ist. Sie können frei durch die alten Flure gehen und die Akustik testen.",
+    "v2": "Unter den Tribünen verliefen Korridore und Bögen, die auf Säulen aus rauem Stein ruhten und den Zuschauern Schutz oder Spaziergänge boten.",
+    "v3": "Die Bühne hatte eine fünfeckige (fünfeckige) Form mit einem Proszenium und einer Hinterbühne, und der Orchesterboden war mit Marmormosaiken verziert. Dank Inschriften wissen wir, dass es nicht nur der Unterhaltung diente: Es war auch Sitz der Gerousia, eines Ehrenrats ohne wirkliche politische Macht, der jedoch für die Verleihung von Ehren und Medaillen an verdiente Bürger zuständig war. Hier waren nicht nur Lieder zu hören, sondern auch Reden.",
+    "v4": "Die Ausgrabungen begannen 1929 unter der Leitung des italienischen Archäologen Luciano Laurenzi, während der italienischen Besetzung der Dodekanes-Inseln. Die Italiener haben es umgehend restauriert und dabei auf die originalen Marmorsitze geachtet. Später, zwischen 1994 und 1999, übernahmen griechische Archäologen die Aufgabe: Sie verstärkten das Bauwerk, rekonstruierten Teile und machten es für Besucher zugänglich. Heute kann man durch die alten Flure die Akustik testen, die dank der runden Form immer noch erstaunlich gut ist.",
+    "k1": "Dank der runden Form ist es immer noch überraschend gut. Der Eintritt ist frei. Es macht immer noch Spaß, hier zu stehen und sich vorzustellen, wie Musik und Reden vor zweitausend Jahren klangen, während die Elite von Kos in Marmorstühlen saß und zuhörte.",
+    "k2": "Die Öffnungszeiten gelten nur innerhalb der Odeon-Keller."
+  },
+  "en": {
+    "place": "Kos Town",
+    "title": "Odeon",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "We will stay in the Roman district for a while.",
+    "s1": "We will stay in the Roman district for a while. Here is the Roman Odeon, a compact covered theater from Roman times. The Odeon was built around two hundred AD.",
+    "s2": "It probably replaced an older building, possibly the city's old council chamber. A major earthquake in one hundred and forty-two AD had severely damaged the odeon. Emperor Antoninus Pius later paid for the restoration, which gave the theater an imperial appearance.",
+    "s3": "Unlike the great open-air theaters of the Roman Empire, this was a covered building with a roof 12 meters high, supported by four sturdy walls. This way, performances could continue all year round, even in rain or bright sunshine. There was room for about seven hundred and fifty spectators.",
+    "s4": "The seats formed a semicircle with fourteen rows. The first nine rows were made of shiny white marble and reserved for the elite and wealthy merchants, doctors and high officials. The higher rows were simpler and for the general public.",
+    "s5": "There were mainly intimate performances: music concerts, poetry readings, singing competitions and speeches. The building also served as a meeting place for the Gerousia, the honorary council of Kos that awarded awards to deserving citizens. The Italians started the excavation in nineteen twenty-nine.",
+    "v1": "They immediately restored it, paying attention to the original marble seats. Between nineteen ninety-four and nineteen ninety-nine, Greek archaeologists carried out further restoration work so that it is now safe to visit. You can walk freely through the old corridors and test the acoustics.",
+    "v2": "Under the stands ran corridors and arches, supported on pillars of rough stone, where spectators could take shelter or walk.",
+    "v3": "The stage was pentagonal (pentagonal) in shape, with a proscenium and back stage, and the orchestra floor was decorated with marble mosaics. Thanks to inscriptions, we know that it was not just for entertainment: it was also the seat of the Gerousia, an honorary council with no real political power, but responsible for awarding honors and medals to deserving citizens. Not only songs were heard here, but also speeches.",
+    "v4": "The excavation began in 1929 under the direction of Italian archaeologist Luciano Laurenzi, during the Italian occupation of the Dodecanese Islands. The Italians immediately restored it, paying attention to the original marble seats. Later, between 1994 and 1999, Greek archaeologists took over: reinforced the structure, reconstructed parts and made it accessible to visitors. Today you can walk through the old corridors to test the acoustics, which are still astonishingly good, thanks to the round shape.",
+    "k1": "It is still surprisingly good thanks to the round shape. Entrance is free. It is still fun to stand here and imagine how music and speeches sounded two thousand years ago while the elite of Kos sat and listened in marble chairs.",
+    "k2": "The opening hours only apply inside the Odeon cellars."
+  },
+  "it": {
+    "place": "Città di Kos",
+    "title": "Odeon",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Resteremo nel quartiere romano per un po'.",
+    "s1": "Resteremo nel quartiere romano per un po'. Ecco l'Odeon romano, un compatto teatro coperto di epoca romana. L'Odeon fu costruito intorno al 200 d.C.",
+    "s2": "Probabilmente ha sostituito un edificio più antico, forse l'antica sala consiliare della città. Un forte terremoto nel 142 d.C. aveva gravemente danneggiato l'odeon. Successivamente l'imperatore Antonino Pio finanziò il restauro, che diede al teatro un aspetto imperiale.",
+    "s3": "A differenza dei grandi teatri all'aperto dell'Impero Romano, questo era un edificio coperto con un tetto alto 12 metri, sostenuto da quattro robusti muri. In questo modo, gli spettacoli potevano continuare tutto l'anno, anche in caso di pioggia o di sole splendente. C'era posto per circa settecentocinquanta spettatori.",
+    "s4": "I sedili formavano un semicerchio con quattordici file. Le prime nove file erano realizzate in marmo bianco lucido e riservate all'élite e ai ricchi mercanti, medici e alti funzionari. Le file più alte erano più semplici e destinate al grande pubblico.",
+    "s5": "C'erano principalmente spettacoli intimi: concerti di musica, letture di poesie, gare di canto e discorsi. L'edificio fungeva anche da luogo di incontro del Gerousia, il consiglio onorario di Kos che assegnava premi ai cittadini meritevoli. Gli italiani iniziarono gli scavi nel millenovecentoventinove.",
+    "v1": "L'hanno subito restaurata, prestando attenzione ai sedili in marmo originali. Tra il millenovecentonovantaquattro e il millenovecentonovantanove gli archeologi greci eseguirono ulteriori lavori di restauro affinché ora sia visitabile in sicurezza. Puoi camminare liberamente attraverso i vecchi corridoi e testare l'acustica.",
+    "v2": "Sotto le tribune correvano corridoi e archi, sostenuti da pilastri di pietra grezza, dove gli spettatori potevano ripararsi o camminare.",
+    "v3": "Il palco era di forma pentagonale, con proscenio e retroscena, e il pavimento dell'orchestra era decorato con mosaici di marmo. Grazie alle iscrizioni sappiamo che non aveva solo scopo di intrattenimento: era anche la sede della Gerousia, un consiglio onorario privo di vero potere politico, ma incaricato di conferire onorificenze e medaglie ai cittadini meritevoli. Qui non sono state ascoltate solo canzoni, ma anche discorsi.",
+    "v4": "Gli scavi iniziarono nel 1929 sotto la direzione dell'archeologo italiano Luciano Laurenzi, durante l'occupazione italiana delle isole del Dodecaneso. Gli italiani lo restaurarono immediatamente, prestando attenzione ai sedili in marmo originali. Successivamente, tra il 1994 e il 1999, sono subentrati gli archeologi greci: hanno rinforzato la struttura, ricostruito parti e reso accessibile ai visitatori. Oggi è possibile percorrere gli antichi corridoi per testarne l'acustica, che è ancora sorprendentemente buona grazie alla forma rotonda.",
+    "k1": "È ancora sorprendentemente buono grazie alla forma rotonda. L'ingresso è gratuito. È ancora divertente stare qui e immaginare come suonavano la musica e i discorsi duemila anni fa mentre l'élite di Kos sedeva e ascoltava su sedie di marmo.",
+    "k2": "Gli orari di apertura valgono solo all'interno delle cantine dell'Odeon."
+  },
+  "tr": {
+    "place": "Kos şehri",
+    "title": "Odeon",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Bir süre Roma semtinde kalacağız.",
+    "s1": "Bir süre Roma semtinde kalacağız. İşte Roma döneminden kalma kompakt bir kapalı tiyatro olan Roma Odeonu. Odeon MS iki yüz civarında inşa edildi.",
+    "s2": "Muhtemelen eski bir binanın, muhtemelen şehrin eski meclis salonunun yerini almıştır. MS 142 yılında meydana gelen büyük deprem odeona büyük zarar vermiştir. İmparator Antoninus Pius daha sonra tiyatroya imparatorluk görünümü kazandıran restorasyonun masraflarını karşıladı.",
+    "s3": "Roma İmparatorluğu'nun büyük açık hava tiyatrolarından farklı olarak burası, dört sağlam duvarla desteklenen, 12 metre yüksekliğinde çatısı olan kapalı bir yapıydı. Bu şekilde performanslar yağmurda veya parlak güneş ışığında bile tüm yıl boyunca devam edebilir. Yaklaşık yedi yüz elli seyirci için yer vardı.",
+    "s4": "Koltuklar on dört sıradan oluşan yarım daire şeklindeydi. İlk dokuz sıra parlak beyaz mermerden yapılmıştı ve elit ve zengin tüccarlara, doktorlara ve üst düzey yetkililere ayrılmıştı. Daha yüksek sıralar daha basitti ve genel halk içindi.",
+    "s5": "Çoğunlukla samimi performanslar vardı: müzik konserleri, şiir okumaları, şarkı yarışmaları ve konuşmalar. Bina aynı zamanda Kos'un hak eden vatandaşlara ödül veren fahri konseyi Gerousia'nın da buluşma yeri olarak hizmet ediyordu. İtalyanlar 1929 yılında kazılara başladılar.",
+    "v1": "Orijinal mermer koltuklarına dikkat ederek hemen restore ettiler. Bin dokuz yüz doksan dört ile bin dokuz yüz doksan dokuz yılları arasında Yunan arkeologlar, burayı artık güvenli bir şekilde ziyaret edebilmeniz için daha fazla restorasyon çalışması gerçekleştirdiler. Eski koridorlarda özgürce yürüyüp akustiği test edebilirsiniz.",
+    "v2": "Tribünlerin altında, seyircilerin sığınabileceği veya yürüyebileceği, kaba taştan sütunlar üzerinde desteklenen koridorlar ve kemerler uzanıyordu.",
+    "v3": "Sahne beşgen (beşgen) şeklindeydi, sahne önü ve arka sahnesi vardı ve orkestra zemini mermer mozaiklerle süslenmişti. Yazıtlar sayesinde buranın sadece eğlence amaçlı olmadığını biliyoruz: Burası aynı zamanda gerçek bir siyasi güce sahip olmayan ancak hak eden vatandaşlara onur ve madalya vermekten sorumlu bir fahri konsey olan Gerousia'nın da merkeziydi. Burada sadece şarkılar değil, konuşmalar da duyuldu.",
+    "v4": "Kazılar, Oniki Adalar'ın İtalyan işgali sırasında İtalyan arkeolog Luciano Laurenzi'nin başkanlığında 1929 yılında başladı. İtalyanlar, orijinal mermer koltuklarına dikkat ederek hemen restore ettiler. Daha sonra 1994 ile 1999 yılları arasında Yunan arkeologlar işi devraldı: yapıyı güçlendirdiler, bazı kısımları yeniden inşa ettiler ve ziyaretçilerin erişimine açtılar. Bugün, yuvarlak şekli sayesinde hala şaşırtıcı derecede iyi olan akustiği test etmek için eski koridorlarda yürüyebilirsiniz.",
+    "k1": "Yuvarlak şekli sayesinde hala şaşırtıcı derecede iyi. Giriş ücretsizdir. Burada durup iki bin yıl önce Kos'un seçkinleri mermer sandalyelerde oturup dinlerken müziğin ve konuşmaların nasıl ses çıkardığını hayal etmek hala eğlenceli.",
+    "k2": "Açılış saatleri yalnızca Odeon mahzenlerinde geçerlidir."
+  },
+  "es": {
+    "place": "Ciudad de Kos",
+    "title": "Odeon",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Nos quedaremos un tiempo en el barrio romano.",
+    "s1": "Nos quedaremos un tiempo en el barrio romano. Aquí se encuentra el Odeón Romano, un compacto teatro cubierto de la época romana. El Odeón se construyó alrededor del año 200 d.C.",
+    "s2": "Probablemente reemplazó a un edificio más antiguo, posiblemente la antigua cámara del consejo de la ciudad. Un gran terremoto ocurrido en el año 142 d. C. había dañado gravemente el odeón. Posteriormente, el emperador Antonino Pío pagó la restauración, que le dio al teatro un aspecto imperial.",
+    "s3": "A diferencia de los grandes teatros al aire libre del Imperio Romano, este era un edificio cubierto con un techo de 12 metros de altura, sostenido por cuatro robustos muros. De esta manera, las actuaciones podrían continuar durante todo el año, incluso bajo la lluvia o el sol brillante. Había sitio para unos setecientos cincuenta espectadores.",
+    "s4": "Los asientos formaban un semicírculo con catorce filas. Las primeras nueve filas estaban hechas de mármol blanco brillante y estaban reservadas para la élite y los comerciantes ricos, médicos y altos funcionarios. Las filas superiores eran más sencillas y destinadas al público en general.",
+    "s5": "Hubo principalmente actuaciones íntimas: conciertos de música, lecturas de poesía, concursos de canto y discursos. El edificio también sirvió como lugar de reunión para Gerousia, el consejo honorario de Kos que otorgaba premios a los ciudadanos que lo merecían. Los italianos iniciaron la excavación en mil novecientos veintinueve.",
+    "v1": "Inmediatamente lo restauraron, prestando atención a los asientos de mármol originales. Entre 1994 y 1999, los arqueólogos griegos llevaron a cabo nuevos trabajos de restauración para que ahora sea seguro visitarlo. Puedes caminar libremente por los antiguos pasillos y probar la acústica.",
+    "v2": "Debajo de las gradas discurrían pasillos y arcos, sostenidos sobre pilares de piedra tosca, donde los espectadores podían refugiarse o caminar.",
+    "v3": "El escenario tenía forma pentagonal (pentagonal), con proscenio y escenario, y el piso de la orquesta estaba decorado con mosaicos de mármol. Gracias a las inscripciones sabemos que no era sólo un lugar de entretenimiento: también era la sede de la Gerousia, un consejo honorario sin poder político real, pero encargado de conceder honores y medallas a los ciudadanos que lo merecían. Aquí no sólo se escucharon canciones, sino también discursos.",
+    "v4": "La excavación se inició en 1929 bajo la dirección del arqueólogo italiano Luciano Laurenzi, durante la ocupación italiana de las islas del Dodecaneso. Los italianos lo restauraron inmediatamente, prestando atención a los asientos de mármol originales. Posteriormente, entre 1994 y 1999, los arqueólogos griegos se hicieron cargo: reforzaron la estructura, reconstruyeron partes y la hicieron accesible a los visitantes. Hoy en día se pueden recorrer los antiguos pasillos para comprobar la acústica, que sigue siendo sorprendentemente buena gracias a su forma redonda.",
+    "k1": "Sigue siendo sorprendentemente bueno gracias a su forma redonda. La entrada es gratuita. Todavía es divertido estar aquí e imaginar cómo sonaban la música y los discursos hace dos mil años, mientras la élite de Kos se sentaba y escuchaba en sillas de mármol.",
+    "k2": "El horario de apertura sólo se aplica dentro de las bodegas Odeon."
   }
-
-  var langBtn = document.getElementById('langBtn');
-  var langMenu = document.getElementById('langMenu');
-  function openMenu(){ langMenu.classList.add('open'); }
-  function closeMenu(){ langMenu.classList.remove('open'); }
-  langBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    langMenu.classList.contains('open') ? closeMenu() : openMenu();
-  });
-  document.addEventListener('click', function(){ closeMenu(); });
-  document.querySelectorAll('.lang-option').forEach(function(btn){
-    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
-  });
-
-  var saved = localStorage.getItem('hk-lang') || 'nl';
-  setLang(saved);
-
-  /* TTS */
-  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
-  function getLang(){
-    var l = localStorage.getItem('hk-lang') || 'nl';
-    return LANG_VOICE[l] ? l : 'nl';
-  }
-  function pickVoice(code){
-    var voices = speechSynthesis.getVoices() || [];
-    var prefix = code.slice(0,2).toLowerCase();
-    return voices.find(function(v){ return v.lang === code; })
-      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
-      || null;
-  }
-  var btnPlay = document.getElementById('btnPlay');
-  var btnStop = document.getElementById('btnStop');
-  var status = document.getElementById('ttsStatus');
-  function setStatus(t){ if(status) status.textContent = t; }
-  function play(){
-    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
-    speechSynthesis.cancel();
-    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
-    var l = getLang();
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = LANG_VOICE[l];
-    u.rate = 0.92;
-    var v = pickVoice(LANG_VOICE[l]);
-    if(v) u.voice = v;
-    u.onstart = function(){
-      btnPlay.classList.add('playing');
-      btnStop.classList.add('show');
-      setStatus('Voorlezen… ('+l.toUpperCase()+')');
-    };
-    u.onend = u.onerror = function(){
-      btnPlay.classList.remove('playing');
-      btnStop.classList.remove('show');
-      setStatus('');
-    };
-    if(!speechSynthesis.getVoices().length){
-      speechSynthesis.onvoiceschanged = function(){
-        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
-        speechSynthesis.speak(u);
-      };
-      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
-    } else {
-      speechSynthesis.speak(u);
-    }
-  }
-  function stop(){
-    if(window.speechSynthesis) speechSynthesis.cancel();
-    btnPlay.classList.remove('playing');
-    btnStop.classList.remove('show');
-    setStatus('Gestopt.');
-  }
-  btnPlay.addEventListener('click', play);
-  btnStop.addEventListener('click', stop);
-  if(window.speechSynthesis){
-    speechSynthesis.getVoices();
-    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
-  }
-})();
-</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

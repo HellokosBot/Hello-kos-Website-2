@@ -1,132 +1,247 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0D1A1A">
-<title>Asklepion – Hello Kos</title>
-<link rel="stylesheet" href="hello-kos.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Asklepion – Hello Kos</title>
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body class="hk-page">
-<header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+<body class="hk-page hk-guide">
+  <header class="app-header">
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-<main class="main">
-  <div class="hero-wrap"><img src="img/hk/sight-asklepion.jpg" alt="">
-      <div class="hero-title"><h1 data-i18n="title">Asklepion</h1></div></div>
-  <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back">← Bezienswaardigheden</a></p>
-<p class="lead" data-i18n="lead">Het oude genezingsoord buiten Kos-stad. Hippocrates is met deze plek verbonden. De eed die artsen nog afleggen, komt uit die traditie.</p>
-  
-  <div class="actions">
-    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
-    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
-    
-  </div>
-  
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Asklepion%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Asklepion%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
       </div>
-      <p class="status" id="ttsStatus"></p>
-  <div id="readText">
-    <article class="card"><h2 data-i18n="hStory">Opgraving</h2><p data-i18n="p0">Het terrein werd in 1902 aangewezen door de Kos-historicus Iakovos Zarraftis en vanaf 1904 blootgelegd door de Duitser Rudolf Herzog.</p></article>
-    <article class="card"><h2 data-i18n="hSee">Wat het was</h2><p data-i18n="p1">Meer dan een tempel: ziekenhuis, kuuroord en leerschool tegelijk. In de slaapzalen liet men vroeger ongevaarlijke slangen rondlopen. Je loopt nu over dezelfde paden.</p></article>
-    <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">De actuele entreeprijs en de openingstijden zijn nog niet ingevuld.</span></div>
-  </div>
-</main>
-<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
-<script>window.HK_DICT = {
-    "nl": {
-      "title": "Asklepion",
-      "lead": "Het oude genezingsoord buiten Kos-stad. Hippocrates is met deze plek verbonden. De eed die artsen nog afleggen, komt uit die traditie.",
-      "back": "← Bezienswaardigheden",
-      "note": "De actuele entreeprijs en de openingstijden zijn nog niet ingevuld.",
-      "p0": "Het terrein werd in 1902 aangewezen door de Kos-historicus Iakovos Zarraftis en vanaf 1904 blootgelegd door de Duitser Rudolf Herzog.",
-      "p1": "Meer dan een tempel: ziekenhuis, kuuroord en leerschool tegelijk. In de slaapzalen liet men vroeger ongevaarlijke slangen rondlopen. Je loopt nu over dezelfde paden.",
-      "hStory": "Het verhaal",
-      "hSee": "Wat je ziet",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Asklepion",
-      "lead": "Die alte Heilstätte außerhalb von Kos-Stadt. Hippokrates ist mit diesem Ort verbunden. Der Eid, den Ärzte noch leisten, kommt aus dieser Tradition.",
-      "back": "← Sehenswürdigkeiten",
-      "note": "Der aktuelle Eintritt und die Öffnungszeiten sind noch nicht eingetragen.",
-      "p0": "Das Gelände wurde 1902 vom Kos-Historiker Iakovos Zarraftis ausgewiesen und ab 1904 vom Deutschen Rudolf Herzog freigelegt.",
-      "p1": "Mehr als ein Tempel: Krankenhaus, Kurort und Schule zugleich. In den Schlafsälen ließ man früher ungiftige Schlangen laufen. Du gehst heute über dieselben Wege.",
-      "hStory": "Die Geschichte",
-      "hSee": "Was du siehst",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Asklepion",
-      "lead": "The ancient healing sanctuary outside Kos town. Hippocrates is tied to this place. The oath doctors still take comes from that tradition.",
-      "back": "← Sights",
-      "note": "The current ticket price and opening hours are not filled in yet.",
-      "p0": "The site was pointed out in 1902 by the Kos historian Iakovos Zarraftis and uncovered from 1904 by the German Rudolf Herzog.",
-      "p1": "More than a temple: hospital, spa and school at once. Harmless snakes used to be allowed in the sleeping halls. You walk the same paths now.",
-      "hStory": "The story",
-      "hSee": "What you see",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Asklepion",
-      "lead": "L’antico santuario di guarigione fuori città. Ippocrate è legato a questo luogo. Il giuramento dei medici viene da quella tradizione.",
-      "back": "← Attrazioni",
-      "note": "Il prezzo del biglietto e gli orari non sono ancora inseriti.",
-      "p0": "Il sito fu indicato nel 1902 dallo storico di Kos Iakovos Zarraftis e riportato alla luce dal 1904 dal tedesco Rudolf Herzog.",
-      "p1": "Più di un tempio: ospedale, terme e scuola insieme. Nei dormitori si lasciavano serpenti non velenosi. Oggi cammini sugli stessi sentieri.",
-      "hStory": "La storia",
-      "hSee": "Cosa vedi",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Asklepion",
-      "lead": "Kos şehri dışındaki antik şifa yeri. Hipokrat bu yerle bağlantılı. Hekimlerin hâlâ ettiği yemin o gelenekten gelir.",
-      "back": "← Gezilecek yerler",
-      "note": "Güncel bilet fiyatı ve saatler henüz yok.",
-      "p0": "Alan 1902’de Koslu tarihçi Iakovos Zarraftis tarafından gösterildi ve 1904’ten itibaren Alman Rudolf Herzog tarafından açıldı.",
-      "p1": "Tapınaktan fazlası: hastane, kaplıca ve okul bir arada. Uyku salonlarında eskiden zehirsiz yılanlar dolaşırdı. Bugün aynı patikalarda yürürsün.",
-      "hStory": "Hikaye",
-      "hSee": "Ne görürsün",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Asklepion",
-      "lead": "El antiguo santuario de curación fuera de la ciudad. Hipócrates está ligado a este lugar. El juramento de los médicos viene de esa tradición.",
-      "back": "← Lugares de interés",
-      "note": "El precio de la entrada y los horarios aún no están.",
-      "p0": "El lugar fue señalado en 1902 por el historiador de Kos Iakovos Zarraftis y excavado desde 1904 por el alemán Rudolf Herzog.",
-      "p1": "Más que un templo: hospital, balneario y escuela a la vez. En los dormitorios dejaban serpientes no venenosas. Hoy caminas por los mismos senderos.",
-      "hStory": "La historia",
-      "hSee": "Qué ves",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
+  <main class="main">
+    <div class="hero-wrap">
+      <img class="hk-zoom" src="img/hk/sight-asklepion.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
+    </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=36.8765%2C27.257" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?ll=36.8765,27.257&amp;q=Asklepion" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-asklepion-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-asklepion-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-asklepion-03.jpg" alt=""></figure>
+<p data-i18n="s4"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-asklepion-04.jpg" alt=""></figure>
+<p data-i18n="s5"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-asklepion-05.jpg" alt=""></figure>
+<p data-i18n="s6"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-asklepion-06.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-asklepion-07.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-asklepion-08.jpg" alt=""></figure>
+<p data-i18n="v3"></p>
+
+<p data-i18n="v4"></p>
+
+<p data-i18n="v5"></p>
+
+<p data-i18n="v6"></p>
+
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
+
+</article>
+    </div>
+  </main>
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Platani",
+    "title": "Asklepion",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "Oké mensen, we staan nu bij het Asklepion, het oude genezingsheiligdom van Kos.",
+    "s1": "Oké mensen, we staan nu bij het Asklepion, het oude genezingsheiligdom van Kos. Dit complex ligt een paar kilometer buiten de stad op een helling met uitzicht over de zee. Het was gewijd aan Askleepios, de god van de geneeskunde.",
+    "s2": "Het functioneerde als tempel, ziekenhuis, kuuroord en medische school tegelijk.De oudste delen van het Asklepion dateren uit de vierhonderd eeuw voor Christus. De grote uitbreiding en de meeste gebouwen die we vandaag zien, kwamen tot stand in de hellenistische periode, rond tweehonderd voor Christus. Op het hoogste terras staat een grote Dorische tempel van Askleepios uit de tweehonderd voor Christus.",
+    "s3": "Hippocrates werd rond vierhonderd zestig voor Christus geboren op Kos. Hij wordt gezien als de vader van de moderne geneeskunde. Hij haalde tovenarij en godsdienst uit de geneeskunde en legde de nadruk op observatie, hygiëne, gezonde voeding, frisse lucht en het natuurlijke verloop van ziektes.",
+    "s4": "Hoewel hij zelf vóór de grote bouw van dit Asklepion leefde, werd hier later zijn aanpak verder ontwikkeld en onderwezen. Patiënten kwamen van ver. Ze brachten offers, sliepen in speciale ruimtes in de hoop dat Asklepios hen in een droom raad gaf, en kregen behandelingen met baden, kruiden en gesprekken met artsen.",
+    "s5": "Er werden ook niet-giftige slangen gehouden die vrij rondkropen, dat gold als een teken van genezing. Het Asklepion heeft meerdere terrassen die verbonden zijn met een brede trap. Je ziet resten van tempels, altaren, zuilengangen, slaapzalen en Romeinse baden.",
+    "s6": "De ruïnes werden opgegraven in negentien twee. In de loop van de eeuwen is het complex meerdere keren beschadigd door aardbevingen. In de Byzantijnse periode bouwden ze op het hoogste terras een kerk.",
+    "v1": "Het werd in 1902 op aanwijzing van de uit Kos afkomstige historicus Lakovos Zaraftis, in 1904 opgegraven en blootgelegd door de Duitser Rudolf Herzog. Hippocrates heeft een grote invloed gehad op het Asklepion in Kos. Deze arts (Hippocrates) is 460 jaar voor Christus geboren op het eiland Kos.",
+    "v2": "Hij haalde tovenarij en godsdienst uit de geneeskunde. Hij legde sterke nadruk op hygiëne, zowel voor arts als patiënt, op gezonde eet- en drinkgewoonten, het belang van frisse lucht en een natuurlijk verloop van processen in het lichaam.",
+    "v3": "Het Asklepieion was meer dan alleen een tempel. Het werkte als een soort ziekenhuis, kuuroord en medische school tegelijk. Zieke mensen kwamen van ver om hulp te zoeken. Ze brachten offers (vaak een haan of een os), sliepen in de tempel in de hoop dat Asklepios in hun dromen advies gaf, en kregen behandelingen met baden, kruiden, rust en gesprekken met artsen. Hippocrates’ ideeën werden hier verder ontwikkeld en doorgegeven aan studenten.",
+    "v4": "Hij ontwierp een plechtige artseneed waar hij zijn pupillen aan verplichtte en die heden ten dage bij het afstuderen wordt afgelegd. De eed van Hippocrates wordt nog steeds door iedere arts afgelegd.",
+    "v5": "In het Heiligdom van Asklepion werden vroeger niet-giftige slangen gehouden. Priesters lieten deze slangen vrij rondkruipen in de slaapzalen. Patiënten sliepen op de grond of op lage bedden, terwijl de slangen over de slapende mensen kropen – dit werd beschouwd als een direct teken van goddelijke aanwezigheid en aanraking. Soms likten ze wonden, mogelijk helend door de enzymen in hun speeksel. Hippocrates zelf verwierp deze mirakelgenezing.",
+    "v6": "Vandaag de dag loop je over dezelfde paden als de oude patiënten en artsen. Het voelt nog steeds als een rustige, helende plek.",
+    "k1": "Vandaag de dag kun je er rondwandelen over de terrassen. Het is een van de belangrijkste archeologische plekken op Kos. Toegang is niet gratis, je betaalt een entreekaartje."
+  },
+  "de": {
+    "place": "Platani",
+    "title": "Asklepion",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Okay Leute, wir sind jetzt im Asklepion, dem alten Heilheiligtum von Kos.",
+    "s1": "Okay Leute, wir sind jetzt im Asklepion, dem alten Heilheiligtum von Kos. Dieser Komplex liegt einige Kilometer außerhalb der Stadt an einem Hang mit Blick auf das Meer. Es war Asklepios, dem Gott der Medizin, gewidmet.",
+    "s2": "Es fungierte gleichzeitig als Tempel, Krankenhaus, Kurort und medizinische Fakultät. Die ältesten Teile des Asklepieion stammen aus dem 4. Jahrhundert v. Chr. Die große Erweiterung und die meisten Gebäude, die wir heute sehen, wurden in der hellenistischen Zeit, etwa 200 v. Chr., fertiggestellt. Auf der höchsten Terrasse befindet sich ein großer dorischer Tempel des Askleepios aus dem 2. Jahrhundert v. Chr.",
+    "s3": "Hippokrates wurde um 460 v. Chr. auf Kos geboren. Er gilt als Vater der modernen Medizin. Er entfernte Zauberei und Religion aus der Medizin und legte Wert auf Beobachtung, Hygiene, gesunde Ernährung, frische Luft und den natürlichen Krankheitsverlauf.",
+    "s4": "Obwohl er selbst vor dem großen Bau dieses Asklepios lebte, wurde sein Ansatz später weiterentwickelt und hier gelehrt. Die Patienten kamen von weit her. Sie brachten Opfer, schliefen in besonderen Räumen in der Hoffnung, dass Asklepios sie im Traum beraten würde, und erhielten Behandlungen mit Bädern, Kräutern und Konsultationen mit Ärzten.",
+    "s5": "Es wurden auch ungiftige Schlangen gehalten, die frei krochen, was als Zeichen der Heilung galt. Das Asklepieion verfügt über mehrere Terrassen, die durch eine breite Treppe verbunden sind. Sie werden Überreste von Tempeln, Altären, Kolonnaden, Schlafsälen und römischen Bädern sehen.",
+    "s6": "Die Ruinen wurden im Jahr 1922 ausgegraben. Im Laufe der Jahrhunderte wurde die Anlage mehrfach durch Erdbeben beschädigt. In byzantinischer Zeit errichteten sie auf der höchsten Terrasse eine Kirche.",
+    "v1": "Es wurde 1902 im Auftrag des Historikers Lakovos Zaraftis aus Kos ausgegraben und 1904 vom Deutschen Rudolf Herzog ausgegraben. Hippokrates hatte großen Einfluss auf das Asklepieion auf Kos. Dieser Arzt (Hippokrates) wurde 460 Jahre v. Chr. auf der Insel Kos geboren.",
+    "v2": "Er entfernte Zauberei und Religion aus der Medizin. Er legte großen Wert auf die Hygiene für Arzt und Patient, auf gesunde Ess- und Trinkgewohnheiten, die Bedeutung frischer Luft und den natürlichen Ablauf der Prozesse im Körper.",
+    "v3": "Das Asklepieion war mehr als nur ein Tempel. Es fungierte gleichzeitig als eine Art Krankenhaus, Kurort und medizinische Fakultät. Kranke Menschen kamen von weit her, um Hilfe zu suchen. Sie brachten Opfer dar (oft einen Hahn oder einen Ochsen), schliefen im Tempel in der Hoffnung, dass Asklepios ihnen in ihren Träumen Ratschläge geben würde, und erhielten Behandlungen, die Bäder, Kräuter, Ruhe und Konsultationen mit Ärzten umfassten. Hier wurden die Ideen des Hippokrates weiterentwickelt und an Studenten weitergegeben.",
+    "v4": "Er entwarf einen feierlichen medizinischen Eid, zu dem er seine Schüler verpflichtete und der jetzt bei der Graduierung abgelegt wird. Der hippokratische Eid wird noch immer von jedem Arzt geleistet.",
+    "v5": "Im Heiligtum von Asklepieion wurden früher ungiftige Schlangen gehalten. Die Priester ließen diese Schlangen frei in den Schlafsälen herumkriechen. Die Patienten schliefen auf dem Boden oder in niedrigen Betten, während die Schlangen über die schlafenden Menschen krochen – dies galt als direktes Zeichen göttlicher Präsenz und Berührung. Manchmal leckten sie Wunden, die möglicherweise durch die Enzyme in ihrem Speichel heilten. Hippokrates selbst lehnte diese Wunderheilung ab.",
+    "v6": "Heute gehen Sie die gleichen Wege wie die alten Patienten und Ärzte. Es fühlt sich immer noch wie ein friedlicher, heilender Ort an.",
+    "k1": "Heute können Sie über die Terrassen spazieren. Es handelt sich um eine der bedeutendsten archäologischen Stätten auf Kos. Der Eintritt ist nicht frei, Sie zahlen eine Eintrittskarte."
+  },
+  "en": {
+    "place": "Platani",
+    "title": "Asklepion",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "Okay folks, we are now at the Asclepion, the ancient healing sanctuary of Kos.",
+    "s1": "Okay folks, we are now at the Asclepion, the ancient healing sanctuary of Kos. This complex is located a few kilometers outside the city on a slope overlooking the sea. It was dedicated to Asclepios, the god of medicine.",
+    "s2": "It functioned as a temple, hospital, spa and medical school at the same time. The oldest parts of the Asclepion date from the four hundred century BC. The major expansion and most of the buildings we see today were completed in the Hellenistic period, around two hundred BC. On the highest terrace is a large Doric temple of Askleepios from the two hundred BC.",
+    "s3": "Hippocrates was born on Kos around four hundred and sixty BC. He is considered the father of modern medicine. He took sorcery and religion out of medicine and emphasized observation, hygiene, healthy food, fresh air and the natural progression of disease.",
+    "s4": "Although he himself lived before the major construction of this Asclepion, his approach was later further developed and taught here. Patients came from far away. They made sacrifices, slept in special rooms in the hope that Asclepius would advise them in a dream, and received treatments with baths, herbs and consultations with doctors.",
+    "s5": "Non-venomous snakes were also kept that crawled freely, which was considered a sign of healing. The Asclepion has several terraces connected by a wide staircase. You will see remains of temples, altars, colonnades, dormitories and Roman baths.",
+    "s6": "The ruins were excavated in nineteen two. Over the centuries, the complex has been damaged several times by earthquakes. In the Byzantine period they built a church on the highest terrace.",
+    "v1": "It was excavated in 1902 on the instructions of the historian Lakovos Zaraftis from Kos, and excavated in 1904 by the German Rudolf Herzog. Hippocrates had a major influence on the Asclepion in Kos. This doctor (Hippocrates) was born 460 years BC on the island of Kos.",
+    "v2": "He took sorcery and religion out of medicine. He placed a strong emphasis on hygiene, for both doctor and patient, on healthy eating and drinking habits, the importance of fresh air and the natural course of processes in the body.",
+    "v3": "The Asclepeion was more than just a temple. It operated as a kind of hospital, spa and medical school all at the same time. Sick people came from far away to seek help. They made sacrifices (often a rooster or an ox), slept in the temple in the hope that Asclepius would give advice in their dreams, and received treatments that included baths, herbs, rest, and consultations with doctors. Hippocrates' ideas were further developed here and passed on to students.",
+    "v4": "He designed a solemn medical oath to which he obliged his pupils and which is now taken at graduation. The Hippocratic Oath is still taken by every doctor.",
+    "v5": "The Shrine of Asclepion used to keep non-venomous snakes. Priests allowed these snakes to crawl freely in the dormitories. Patients slept on the floor or on low beds, while the snakes crawled over the sleeping people – this was considered a direct sign of divine presence and touch. Sometimes they licked wounds, possibly healing by the enzymes in their saliva. Hippocrates himself rejected this miracle healing.",
+    "v6": "Today you walk the same paths as the old patients and doctors. It still feels like a peaceful, healing place.",
+    "k1": "Today you can walk around the terraces. It is one of the most important archaeological sites on Kos. Entrance is not free, you pay an entrance ticket."
+  },
+  "it": {
+    "place": "Platani",
+    "title": "Asklepion",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Ok gente, ora siamo all'Asclepion, l'antico santuario curativo di Kos.",
+    "s1": "Ok gente, ora siamo all'Asclepion, l'antico santuario curativo di Kos. Questo complesso è situato a pochi chilometri fuori città su un pendio a picco sul mare. Era dedicato ad Asclepio, il dio della medicina.",
+    "s2": "Funzionava allo stesso tempo come tempio, ospedale, terme e scuola di medicina. Le parti più antiche dell'Asclepion risalgono al IV secolo a.C. La maggiore espansione e la maggior parte degli edifici che vediamo oggi furono completati nel periodo ellenistico, intorno al 200 a.C. Sulla terrazza più alta si trova il grande tempio dorico di Askleepios del duecento aC.",
+    "s3": "Ippocrate nacque a Kos intorno al 460 aC. È considerato il padre della medicina moderna. Tolse la stregoneria e la religione dalla medicina e enfatizzò l'osservazione, l'igiene, il cibo sano, l'aria fresca e la progressione naturale della malattia.",
+    "s4": "Sebbene egli stesso sia vissuto prima della grande costruzione di questo Asclepion, il suo approccio è stato successivamente ulteriormente sviluppato e insegnato qui. I pazienti venivano da molto lontano. Facevano sacrifici, dormivano in stanze speciali nella speranza che Asclepio li consigliasse in sogno e ricevevano cure con bagni, erbe e consulti medici.",
+    "s5": "Si tenevano anche serpenti non velenosi che strisciavano liberamente, il che era considerato un segno di guarigione. L'Asclepion dispone di diverse terrazze collegate da un'ampia scalinata. Vedrai resti di templi, altari, colonnati, dormitori e terme romane.",
+    "s6": "Le rovine furono scavate nel diciannovedue. Nel corso dei secoli il complesso è stato più volte danneggiato da terremoti. Nel periodo bizantino costruirono una chiesa sulla terrazza più alta.",
+    "v1": "Fu scavato nel 1902 su istruzione dello storico Lakovos Zaraftis di Kos e nel 1904 dal tedesco Rudolf Herzog. Ippocrate ebbe una grande influenza sull'Asclepion di Kos. Questo medico (Ippocrate) nacque 460 anni aC sull'isola di Kos.",
+    "v2": "Ha eliminato la stregoneria e la religione dalla medicina. Ha posto una forte enfasi sull'igiene sia del medico che del paziente, sulle sane abitudini alimentari e di consumo, sull'importanza dell'aria fresca e sul corso naturale dei processi nel corpo.",
+    "v3": "L'Asclepeion era più di un semplice tempio. Funzionava come una sorta di ospedale, spa e scuola di medicina allo stesso tempo. I malati venivano da lontano per cercare aiuto. Facevano sacrifici (spesso un gallo o un bue), dormivano nel tempio nella speranza che Asclepio desse consigli nei loro sogni e ricevevano cure che includevano bagni, erbe, riposo e consultazioni con i medici. Le idee di Ippocrate furono qui ulteriormente sviluppate e trasmesse agli studenti.",
+    "v4": "Ha progettato un solenne giuramento medico a cui ha obbligato i suoi alunni e che ora viene prestato al momento della laurea. Il giuramento di Ippocrate viene ancora prestato da ogni medico.",
+    "v5": "Il Santuario di Asclepion ospitava serpenti non velenosi. I sacerdoti permettevano a questi serpenti di strisciare liberamente nei dormitori. I pazienti dormivano sul pavimento o su letti bassi, mentre i serpenti strisciavano sulle persone addormentate – questo era considerato un segno diretto della presenza e del tocco divino. A volte leccavano le ferite, forse curandole grazie agli enzimi presenti nella loro saliva. Lo stesso Ippocrate rifiutò questa guarigione miracolosa.",
+    "v6": "Oggi percorrete le stesse strade dei vecchi pazienti e dei medici. Sembra ancora un luogo pacifico e curativo.",
+    "k1": "Oggi puoi passeggiare sulle terrazze. È uno dei siti archeologici più importanti di Kos. L'ingresso non è gratuito, si paga un biglietto d'ingresso."
+  },
+  "tr": {
+    "place": "Platani",
+    "title": "Asklepion",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Pekala millet, şimdi Kos'un antik şifa tapınağı Asklepion'dayız.",
+    "s1": "Pekala millet, şimdi Kos'un antik şifa tapınağı Asklepion'dayız. Bu kompleks şehrin birkaç kilometre dışında, denize bakan bir yamaçta yer alıyor. Tıp tanrısı Asklepios'a adanmıştır.",
+    "s2": "Aynı zamanda tapınak, hastane, kaplıca ve tıp okulu olarak işlev görüyordu. Asklepion'un en eski bölümleri M.Ö. 400'e tarihlenmektedir. Büyük genişleme ve bugün gördüğümüz binaların çoğu Helenistik dönemde, M.Ö. iki yüz civarında tamamlandı. En yüksek terasta MÖ 200'den kalma büyük Dor Askleepios tapınağı bulunmaktadır.",
+    "s3": "Hipokrat M.Ö. 460 civarında Kos'ta doğdu. Modern tıbbın babası olarak kabul edilir. Büyüyü ve dini tıptan çıkardı ve gözlem, hijyen, sağlıklı gıda, temiz hava ve hastalıkların doğal seyrini vurguladı.",
+    "s4": "Kendisi bu Asklepion'un büyük inşasından önce yaşamış olmasına rağmen, yaklaşımı daha sonra burada daha da geliştirildi ve öğretildi. Hastalar çok uzaklardan geldi. Fedakarlık yaptılar, Asklepios'un rüyasında onlara öğüt vermesi umuduyla özel odalarda uyudular, banyolar, şifalı bitkiler ve doktorlarla istişarelerle tedavi gördüler.",
+    "s5": "Ayrıca serbestçe sürünen zehirsiz yılanlar da tutuldu ve bu, iyileşmenin bir işareti olarak kabul edildi. Asklepion'un geniş bir merdivenle birbirine bağlanan birkaç terası vardır. Tapınakların, sunakların, sütunların, yatakhanelerin ve Roma hamamlarının kalıntılarını göreceksiniz.",
+    "s6": "Kalıntılar on dokuz ikide kazıldı. Yüzyıllar boyunca kompleks depremlerden defalarca zarar gördü. Bizans döneminde en üst terasa kilise inşa edilmiş.",
+    "v1": "1902 yılında Kos'lu tarihçi Lakovos Zaraftis'in talimatıyla, 1904 yılında ise Alman Rudolf Herzog tarafından kazılmıştır. Hipokrat'ın Kos'taki Asklepion üzerinde büyük etkisi vardı. Bu doktor (Hipokrat) M.Ö. 460 yılında Kos adasında doğmuştur.",
+    "v2": "Büyüyü ve dini tıptan çıkardı. Hem doktor hem de hasta açısından hijyene, sağlıklı yeme ve içme alışkanlıklarına, temiz havanın önemine ve vücuttaki süreçlerin doğal seyrine büyük önem verdi.",
+    "v3": "Asklepeion bir tapınaktan çok daha fazlasıydı. Aynı anda bir nevi hastane, spa ve tıp okulu olarak faaliyet gösteriyordu. Hasta insanlar uzaklardan yardım istemek için geldiler. Kurbanlar (çoğunlukla bir horoz veya öküz) sundular, Asklepios'un rüyalarında öğüt vermesi umuduyla tapınakta uyudular ve banyo, şifalı bitkiler, dinlenme ve doktorlara danışmayı içeren tedaviler gördüler. Hipokrat'ın fikirleri burada daha da geliştirilerek öğrencilere aktarıldı.",
+    "v4": "Öğrencilerine zorunlu kıldığı ve şimdi mezuniyette yerine getirilecek ciddi bir tıp yemini tasarladı. Hipokrat Yemini hala her doktor tarafından tutulmaktadır.",
+    "v5": "Asklepion Tapınağı'nda zehirsiz yılanlar barındırılırdı. Rahipler bu yılanların yatakhanelerde serbestçe dolaşmasına izin verdiler. Hastalar yerde ya da alçak yataklarda uyurken, yılanlar uyuyan insanların üzerinde geziniyordu; bu, ilahi varlığın ve dokunuşun doğrudan bir işareti olarak kabul ediliyordu. Bazen yaraları yaladılar, muhtemelen tükürüklerindeki enzimler sayesinde iyileşiyorlardı. Hipokrat'ın kendisi bu mucizevi şifayı reddetti.",
+    "v6": "Bugün eski hastalarla, doktorlarla aynı yollardan yürüyorsunuz. Hala huzurlu, şifa veren bir yer gibi geliyor.",
+    "k1": "Bugün teraslarda dolaşabilirsiniz. Kos'un en önemli arkeolojik alanlarından biridir. Giriş ücretsiz değil, giriş bileti ödüyorsunuz."
+  },
+  "es": {
+    "place": "Platani",
+    "title": "Asklepion",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Bien amigos, ahora estamos en Asclepion, el antiguo santuario curativo de Kos.",
+    "s1": "Bien amigos, ahora estamos en Asclepion, el antiguo santuario curativo de Kos. Este complejo está situado a pocos kilómetros de la ciudad en una ladera con vistas al mar. Estaba dedicado a Asclepios, el dios de la medicina.",
+    "s2": "Funcionó como templo, hospital, balneario y escuela de medicina al mismo tiempo. Las partes más antiguas del Asclepion datan del siglo cuatrocientos a.C. La mayor ampliación y la mayoría de los edificios que vemos hoy se completaron en el período helenístico, alrededor del año 200 a.C. En la terraza más alta se encuentra un gran templo dórico de Askleepios del siglo doscientos a.C.",
+    "s3": "Hipócrates nació en Kos alrededor del año 460 a.C. Se le considera el padre de la medicina moderna. Sacó la hechicería y la religión de la medicina y enfatizó la observación, la higiene, la comida sana, el aire fresco y la progresión natural de la enfermedad.",
+    "s4": "Aunque él mismo vivió antes de la construcción principal de este Asclepion, su enfoque se desarrolló y enseñó más tarde aquí. Los pacientes venían de muy lejos. Hicieron sacrificios, durmieron en habitaciones especiales con la esperanza de que Asclepio les aconsejara en sueños y recibieron tratamientos con baños, hierbas y consultas con médicos.",
+    "s5": "También se mantenían serpientes no venenosas que se arrastraban libremente, lo que se consideraba un signo de curación. El Asclepion tiene varias terrazas conectadas por una amplia escalera. Verás restos de templos, altares, columnatas, dormitorios y baños romanos.",
+    "s6": "Las ruinas fueron excavadas en mil novecientos dos. A lo largo de los siglos, el complejo ha sido dañado varias veces por terremotos. En la época bizantina construyeron una iglesia en la terraza más alta.",
+    "v1": "Fue excavado en 1902 siguiendo instrucciones del historiador Lakovos Zaraftis de Kos, y excavado en 1904 por el alemán Rudolf Herzog. Hipócrates tuvo una gran influencia sobre Asclepion en Kos. Este médico (Hipócrates) nació el año 460 a.C. en la isla de Kos.",
+    "v2": "Sacó la brujería y la religión de la medicina. Puso gran énfasis en la higiene tanto del médico como del paciente, en los hábitos saludables de alimentación y bebida, en la importancia del aire fresco y en el curso natural de los procesos del cuerpo.",
+    "v3": "El Asclepeion era más que un simple templo. Funcionó como una especie de hospital, spa y escuela de medicina al mismo tiempo. Los enfermos venían de muy lejos en busca de ayuda. Hacían sacrificios (a menudo un gallo o un buey), dormían en el templo con la esperanza de que Asclepio les diera consejos en sus sueños y recibían tratamientos que incluían baños, hierbas, descanso y consultas con médicos. Las ideas de Hipócrates se desarrollaron aquí y se transmitieron a los estudiantes.",
+    "v4": "Diseñó un solemne juramento médico al que obligó a sus alumnos y que ahora se presta en la graduación. Todos los médicos todavía hacen el juramento hipocrático.",
+    "v5": "El Santuario de Asclepion solía albergar serpientes no venenosas. Los sacerdotes permitían que estas serpientes se arrastraran libremente en los dormitorios. Los pacientes dormían en el suelo o en camas bajas, mientras las serpientes se arrastraban sobre las personas que dormían; esto se consideraba un signo directo de la presencia y el tacto divinos. A veces lamían las heridas, posiblemente curándolas gracias a las enzimas de su saliva. El propio Hipócrates rechazó esta curación milagrosa.",
+    "v6": "Hoy recorres los mismos caminos que los antiguos pacientes y médicos. Todavía se siente como un lugar pacífico y curativo.",
+    "k1": "Hoy puedes pasear por las terrazas. Es uno de los sitios arqueológicos más importantes de Kos. La entrada no es gratuita, se paga una entrada."
+  }
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

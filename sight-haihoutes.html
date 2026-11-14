@@ -1,433 +1,207 @@
 <!DOCTYPE html>
-<html lang="nl" data-hk-own="1" data-hk-tts="1">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0D1F1F">
   <title>Haihoutes – Hello Kos</title>
-  <style>
-    :root {
-      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
-      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
-      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
-      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
-      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text); -webkit-font-smoothing: antialiased;
-      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
-      background: var(--bg); min-height: 100vh; line-height: 1.55;
-    }
-    .app-header {
-      position: sticky; top: 0; z-index: 100;
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-      padding: 14px 16px; background: var(--bg-header);
-      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
-    }
-    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
-    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
-    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
-    .logo-text span { color: var(--gold-dark); font-style: italic; }
-    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
-    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
-    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
-    .lang-menu.open { display: block; }
-    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
-    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
-    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
-    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
-    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .content { padding: 18px 16px 0; }
-    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
-    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-
-    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
-    .btn-audio { background: var(--petrol); color: #fff; }
-    .btn-audio.playing { background: var(--petrol-dark); }
-    .btn-stop { background: #3A4545; color: #fff; display: none; }
-    .btn-stop.show { display: flex; }
-
-    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
-    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
-    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
-    .card p:last-child { margin-bottom: 0; }
-    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
-    .tip strong { color: var(--gold); }
-
-    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
-    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
-    .video-block { margin: 0 0 14px; border-radius: 14px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 10px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .video-wrap { position: relative; width: 100%; padding-bottom: 56.25%; background: #111; }
-    .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
-    .footer a { color: var(--petrol); text-decoration: none; }
-  </style>
-<link rel="stylesheet" href="hello-kos.css">
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body>
+<body class="hk-page hk-guide">
   <header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
   <main class="main">
     <div class="hero-wrap">
-      <img src="img/jwwb/d854284ccc-yxnzzxrzl2ltywdlcy9wywdlcy9zzxr0bgvtzw50cy9oywlob3.jpg" alt="Haihoutes" loading="eager">
-      <div class="hero-title"><h1 data-i18n="title">Haihoutes</h1></div>
+      <img class="hk-zoom" src="img/jwwb/d854284ccc-yxnzzxrzl2ltywdlcy9wywdlcy9zzxr0bgvtzw50cy9oywlob3.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
     </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=Haihoutes%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?q=Haihoutes%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-haihoutes-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-haihoutes-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-haihoutes-03.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-haihoutes-04.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-haihoutes-05.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-haihoutes-06.jpg" alt=""></figure>
+<p data-i18n="k2"></p>
 
-    <div class="content">
-<p class="lead" data-i18n="lead">Voormalig bergdorp (± 1780) – eerste school van Kos, schuilplaats in WO II, nu weer levend met kafeneio en sfeer van een openluchtmuseum.</p>
+<p data-i18n="k3"></p>
 
-      
-
-      <div class="actions">
-        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
-        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-      </div>
-      
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Haihoutes%20village%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Haihoutes%20village%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
-      </div>
-      <p class="status" id="ttsStatus"></p>
-
-      <div id="readText">
-        <div class="card">
-          <h2 data-i18n="hStory">Bergdorp met geschiedenis</h2>
-          <p data-i18n="p1">Haihoutes is een klein, voormalig bergdorp. Rond 1780 vestigden zich hier de eerste bewoners, onder wie een Armeense familie Haihoudes.</p>
-        </div>
-
-        
-
-        <div class="card">
-          <h2 data-i18n="hSee">Eerste school van Kos</h2>
-          <p data-i18n="p2">De allereerste school van het eiland begon hier, in de kerk van Agios Dimitrios (nog steeds op de berg). Toen zo’n 40 tot 50 leerlingen.</p>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2ww2">WO II en leegloop</h2>
-          <p data-i18n="p3">Tijdens de Tweede Wereldoorlog vonden veel mensen uit Kos-stad hier een schuilplaats. In de jaren 1960–1970 vertrokken de laatste inwoners; het dorp werd een spookdorp.</p>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2alive">Weer tot leven</h2>
-          <p data-i18n="p4">Sinds enkele jaren is Haihoutes weer levend: een traditioneel kafeneio, smalle paadjes, oude stenen huizen en overal groen – bijna als een openluchtmuseum.</p>
-        </div>
-
-        <div class="gallery">
-          <div class="g-item">
-            <img src="img/jwwb/d854284ccc-yxnzzxrzl2ltywdlcy9wywdlcy9zzxr0bgvtzw50cy9oywlob3.jpg" alt="" loading="lazy">
-            <span data-i18n="g1">Haihoutes</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/33be9617ee-img_4818-copy-1-high.jpg" alt="" loading="lazy">
-            <span data-i18n="g2">Haihoutes</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/de1f9b1083-img_7467-copy-1200x800-high.jpg" alt="" loading="lazy">
-            <span data-i18n="g3">Haihoutes</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/a48936b24f-478381882_1155163309647655_3293115944635874693_n-high.jpg" alt="" loading="lazy">
-            <span data-i18n="g4">Haihoutes</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2visit">Bezoeken</h2>
-          <p data-i18n="p5">Gratis. Ideaal voor rust en sfeer.</p>
-          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: drink iets in het kafeneio en geniet van de stilte – het voelt als een filmset.</p></div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="hKnow">Video</h2>
-        </div>
-        <div class="video-block">
-          <div class="video-wrap">
-            <iframe src="https://www.youtube-nocookie.com/embed/BYJLJ-Ur8hM?rel=0&modestbranding=1" allowfullscreen loading="lazy"></iframe>
-          </div>
-        </div>
-      </div>
+</article>
     </div>
   </main>
-
-  <footer class="footer">
-    <div>Hello Kos</div>
-    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
-  </footer>
-
-<script>
-(function(){
-  var I18N = window.HK_DICT = {
-    "nl": {
-      "title": "Haihoutes",
-      "lead": "Voormalig bergdorp (± 1780) – eerste school van Kos, schuilplaats in WO II, nu weer levend met kafeneio en sfeer van een openluchtmuseum.",
-      "btnPlay": "Voorlezen",
-      "p1": "Haihoutes is een klein, voormalig bergdorp. Rond 1780 vestigden zich hier de eerste bewoners, onder wie een Armeense familie Haihoudes.",
-      "p2": "De allereerste school van het eiland begon hier, in de kerk van Agios Dimitrios (nog steeds op de berg). Toen zo’n 40 tot 50 leerlingen.",
-      "h2ww2": "WO II en leegloop",
-      "p3": "Tijdens de Tweede Wereldoorlog vonden veel mensen uit Kos-stad hier een schuilplaats. In de jaren 1960–1970 vertrokken de laatste inwoners; het dorp werd een spookdorp.",
-      "h2alive": "Weer tot leven",
-      "p4": "Sinds enkele jaren is Haihoutes weer levend: een traditioneel kafeneio, smalle paadjes, oude stenen huizen en overal groen – bijna als een openluchtmuseum.",
-      "g1": "Haihoutes",
-      "g2": "Haihoutes",
-      "g3": "Haihoutes",
-      "g4": "Haihoutes",
-      "h2visit": "Bezoeken",
-      "p5": "Gratis. Ideaal voor rust en sfeer.",
-      "tip": "drink iets in het kafeneio en geniet van de stilte – het voelt als een filmset.",
-      "hStory": "Het verhaal",
-      "hSee": "Wat je ziet",
-      "hKnow": "Goed om te weten",
-      "tipTitle": "Tip van de gids",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Haihoutes",
-      "lead": "Former mountain village (± 1780) – first school of Kos, shelter in WWII, now alive again with kafeneio and the atmosphere of an open-air museum.",
-      "btnPlay": "Read aloud",
-      "p1": "Haihoutes is a small, former mountain village. Around 1780 the first residents settled here, including an Armenian family Haihoudes.",
-      "p2": "The very first school of the island started here, in the church of Agios Dimitrios (still on the mountain). Then about 40 to 50 pupils.",
-      "h2ww2": "WWII and depopulation",
-      "p3": "During the Second World War many people from Kos town found shelter here. In the 1960s–1970s the last inhabitants left; the village became a ghost village.",
-      "h2alive": "Alive again",
-      "p4": "For several years Haihoutes has been alive again: a traditional kafeneio, narrow paths, old stone houses and greenery everywhere – almost like an open-air museum.",
-      "g1": "Haihoutes",
-      "g2": "Haihoutes",
-      "g3": "Haihoutes",
-      "g4": "Haihoutes",
-      "h2visit": "Visiting",
-      "p5": "Free. Ideal for peace and atmosphere.",
-      "tip": "have a drink in the kafeneio and enjoy the silence – it feels like a film set.",
-      "hStory": "The story",
-      "hSee": "What you see",
-      "hKnow": "Good to know",
-      "tipTitle": "Guide’s tip",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Haihoutes",
-      "lead": "Ehemaliges Bergdorf (± 1780) – erste Schule von Kos, Zufluchtsort im Zweiten Weltkrieg, jetzt wieder lebendig mit Kafeneio und Atmosphäre eines Freilichtmuseums.",
-      "btnPlay": "Vorlesen",
-      "p1": "Haihoutes ist ein kleines, ehemaliges Bergdorf. Um 1780 siedelten sich hier die ersten Bewohner an, darunter eine armenische Familie Haihoudes.",
-      "p2": "Die allererste Schule der Insel begann hier, in der Kirche von Agios Dimitrios (noch immer auf dem Berg). Damals etwa 40 bis 50 Schüler.",
-      "h2ww2": "Zweiter Weltkrieg und Entvölkerung",
-      "p3": "Während des Zweiten Weltkriegs fanden viele Menschen aus Kos-Stadt hier Schutz. In den 1960er–1970er Jahren zogen die letzten Bewohner weg; das Dorf wurde zum Geisterdorf.",
-      "h2alive": "Wieder lebendig",
-      "p4": "Seit einigen Jahren ist Haihoutes wieder lebendig: ein traditionelles Kafeneio, enge Pfade, alte Steinhäuser und überall Grün – fast wie ein Freilichtmuseum.",
-      "g1": "Haihoutes",
-      "g2": "Haihoutes",
-      "g3": "Haihoutes",
-      "g4": "Haihoutes",
-      "h2visit": "Besuchen",
-      "p5": "Kostenlos. Ideal für Ruhe und Atmosphäre.",
-      "tip": "trink etwas im Kafeneio und genieße die Stille – es fühlt sich an wie ein Filmset.",
-      "hStory": "Die Geschichte",
-      "hSee": "Was du siehst",
-      "hKnow": "Gut zu wissen",
-      "tipTitle": "Tipp des Guides",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Haihoutes",
-      "lead": "Ex villaggio di montagna (± 1780) – prima scuola di Kos, rifugio nella Seconda guerra mondiale, ora di nuovo vivo con kafeneio e atmosfera di museo all’aperto.",
-      "btnPlay": "Leggi ad alta voce",
-      "p1": "Haihoutes è un piccolo ex villaggio di montagna. Intorno al 1780 si stabilirono qui i primi abitanti, tra cui una famiglia armena Haihoudes.",
-      "p2": "La primissima scuola dell’isola iniziò qui, nella chiesa di Agios Dimitrios (ancora sulla montagna). Allora circa 40-50 alunni.",
-      "h2ww2": "Seconda guerra mondiale e spopolamento",
-      "p3": "Durante la Seconda guerra mondiale molte persone da Kos città trovarono rifugio qui. Negli anni ’60-’70 gli ultimi abitanti se ne andarono; il villaggio divenne un villaggio fantasma.",
-      "h2alive": "Di nuovo vivo",
-      "p4": "Da alcuni anni Haihoutes è di nuovo vivo: un kafeneio tradizionale, sentieri stretti, vecchie case in pietra e verde ovunque – quasi come un museo all’aperto.",
-      "g1": "Haihoutes",
-      "g2": "Haihoutes",
-      "g3": "Haihoutes",
-      "g4": "Haihoutes",
-      "h2visit": "Visitare",
-      "p5": "Gratis. Ideale per pace e atmosfera.",
-      "tip": "bevi qualcosa nel kafeneio e goditi il silenzio – sembra un set cinematografico.",
-      "hStory": "La storia",
-      "hSee": "Cosa vedi",
-      "hKnow": "Buono a sapersi",
-      "tipTitle": "Consiglio della guida",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Haihoutes",
-      "lead": "Eski dağ köyü (± 1780) – Kos’un ilk okulu, II. Dünya Savaşı’nda sığınak, şimdi kafeneio ve açık hava müzesi atmosferiyle yeniden canlı.",
-      "btnPlay": "Sesli oku",
-      "p1": "Haihoutes küçük, eski bir dağ köyüdür. 1780 civarında ilk sakinler buraya yerleşti, aralarında Ermeni Haihoudes ailesi de vardı.",
-      "p2": "Adanın ilk okulu burada, Agios Dimitrios kilisesinde (hâlâ dağda) başladı. O zaman yaklaşık 40-50 öğrenci vardı.",
-      "h2ww2": "II. Dünya Savaşı ve boşalma",
-      "p3": "İkinci Dünya Savaşı sırasında Kos kentinden birçok kişi burada sığınak buldu. 1960-1970’lerde son sakinler ayrıldı; köy hayalet köy oldu.",
-      "h2alive": "Yeniden canlı",
-      "p4": "Birkaç yıldır Haihoutes yeniden canlı: geleneksel bir kafeneio, dar yollar, eski taş evler ve her yerde yeşillik – neredeyse açık hava müzesi gibi.",
-      "g1": "Haihoutes",
-      "g2": "Haihoutes",
-      "g3": "Haihoutes",
-      "g4": "Haihoutes",
-      "h2visit": "Ziyaret",
-      "p5": "Ücretsiz. Huzur ve atmosfer için ideal.",
-      "tip": "kafeneio’da bir şey için ve sessizliğin tadını çıkarın – film seti gibi hissettirir.",
-      "hStory": "Hikaye",
-      "hSee": "Ne görürsün",
-      "hKnow": "Bilmekte fayda var",
-      "tipTitle": "Rehberin ipucu",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Haihoutes",
-      "lead": "Antiguo pueblo de montaña (± 1780) – primera escuela de Kos, refugio en la Segunda Guerra Mundial, ahora vivo de nuevo con kafeneio y ambiente de museo al aire libre.",
-      "btnPlay": "Leer en voz alta",
-      "p1": "Haihoutes es un pequeño antiguo pueblo de montaña. Alrededor de 1780 se establecieron aquí los primeros habitantes, entre ellos una familia armenia Haihoudes.",
-      "p2": "La primera escuela de la isla empezó aquí, en la iglesia de Agios Dimitrios (aún en la montaña). Entonces unos 40 a 50 alumnos.",
-      "h2ww2": "Segunda Guerra Mundial y despoblación",
-      "p3": "Durante la Segunda Guerra Mundial muchas personas de la ciudad de Kos encontraron refugio aquí. En los años 1960-1970 los últimos habitantes se marcharon; el pueblo se convirtió en un pueblo fantasma.",
-      "h2alive": "Vivo de nuevo",
-      "p4": "Desde hace varios años Haihoutes está vivo de nuevo: un kafeneio tradicional, senderos estrechos, viejas casas de piedra y verdor por todas partes – casi como un museo al aire libre.",
-      "g1": "Haihoutes",
-      "g2": "Haihoutes",
-      "g3": "Haihoutes",
-      "g4": "Haihoutes",
-      "h2visit": "Visitar",
-      "p5": "Gratis. Ideal para paz y ambiente.",
-      "tip": "toma algo en el kafeneio y disfruta del silencio – se siente como un plató de cine.",
-      "hStory": "La historia",
-      "hSee": "Qué ves",
-      "hKnow": "Bueno saberlo",
-      "tipTitle": "Consejo del guía",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };
-
-  function setLang(l) {
-    if (!I18N[l]) l = 'nl';
-    localStorage.setItem('hk-lang', l);
-    document.documentElement.lang = l;
-    var d = I18N[l];
-    document.querySelectorAll('[data-i18n]').forEach(function(el){
-      var k = el.getAttribute('data-i18n');
-      if (d[k]) el.textContent = d[k];
-    });
-    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
-    if (opt) {
-      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
-      document.getElementById('code').textContent = l.toUpperCase();
-    }
-    document.querySelectorAll('.lang-option').forEach(function(o){
-      o.classList.toggle('active', o.getAttribute('data-lang') === l);
-    });
-    closeMenu();
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Platani",
+    "title": "Haihoutes",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "We rijden nu een stukje landinwaarts, omhoog de bergen in.",
+    "s1": "We rijden nu een stukje landinwaarts, omhoog de bergen in. Na een paar kilometer over een smalle weg kom je bij Haihoutes, ook wel bekend als Agios Dimitrios. Dit was ooit een klein bergdorpje dat rond zeventien tachtig ontstond.",
+    "s2": "Een van de eerste families die zich hier vestigden was een Armeense familie met de naam Haihoudes. In achttien eenentwintig stonden er ongeveer vijfendertig huizen, en in het begin van de twintigste eeuw woonden er vijf of zes grote families. Haihoutes was bijzonder omdat hier de allereerste school van het hele eiland Kos begon.",
+    "s3": "De lessen werden gegeven in de kerk van Agios Dimitrios die nog steeds boven op de berg staat. Er zaten toen veertig tot vijftig kinderen in de klas.Tijdens de Tweede Wereldoorlog diende het dorp als veilige schuilplaats voor mensen uit Kos-stad. Maar in de jaren zestig en zeventig vertrokken de laatste inwoners.",
+    "v1": "Er was geen goede weg, geen stromend water en geen elektriciteit. Het dorp raakte verlaten en veranderde in een spookdorp, helemaal overwoekerd door struiken en stilte. De laatste jaren is Haihoutes weer tot leven gekomen.",
+    "v2": "Een vergeten stukje Kos dat nu weer een beetje ademt.",
+    "k1": "Er is een traditioneel dorpscafé geopend waar je koffie, thee, huisgemaakte taart en eenvoudige gerechten kunt krijgen. Het café is alleen open op woensdag tot en met zondag van elf uur ’s ochtends tot zes uur ’s middags. Je kunt er vrij rondwandelen over de smalle paadjes tussen de oude stenen huizen, omringd door groen.",
+    "k2": "Het voelt er rustig en een beetje magisch, alsof je in een filmscène bent beland.Toegang tot het dorp is helemaal gratis. Je kunt er altijd naartoe, ook als het café gesloten is. Het is een bijzondere plek waar je even de tijd kunt nemen om door de oude straatjes te lopen en te beseffen hoe een heel dorp kon verdwijnen en toch weer een nieuwe kans heeft gekregen.",
+    "k3": "Het voelt bijna als een openluchtmuseum: smalle paadjes, oude stenen huizen en overal groen. Bezoekers komen er speciaal voor de rustige, magische sfeer – net een scène uit een film. Het café zelf is slechts een aantal dagen per week geopend, maar de locatie kan altijd bezocht worden. De plek blijft toegankelijk voor bezoekers, die de omgeving willen bekijken of de bijzondere sfeer van de locatie willen ervaren."
+  },
+  "de": {
+    "place": "Platani",
+    "title": "Haihoutes",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Wir fahren nun ein Stück landeinwärts, hinauf in die Berge.",
+    "s1": "Wir fahren nun ein Stück landeinwärts, hinauf in die Berge. Nach ein paar Kilometern auf einer schmalen Straße erreichen Sie Haihoutes, auch bekannt als Agios Dimitrios. Dies war einst ein kleines Bergdorf, das um 1780 entstand.",
+    "s2": "Eine der ersten Familien, die sich hier niederließen, war eine armenische Familie namens Haihoudes. Im Jahr 1821 gab es etwa fünfunddreißig Häuser, und zu Beginn des 20. Jahrhunderts gab es fünf oder sechs kinderreiche Familien. Haihoutes war etwas Besonderes, weil hier die allererste Schule auf der gesamten Insel Kos ihren Anfang nahm.",
+    "s3": "Der Unterricht fand in der Kirche Agios Dimitrios statt, die noch immer auf dem Gipfel des Berges steht. Damals waren in der Klasse vierzig bis fünfzig Kinder. Während des Zweiten Weltkriegs diente das Dorf als sicherer Zufluchtsort für Menschen aus der Stadt Kos. Doch in den 1960er und 1970er Jahren zogen die letzten Bewohner ab.",
+    "v1": "Es gab keine gute Straße, kein fließendes Wasser und keinen Strom. Das Dorf wurde verlassen und verwandelte sich in ein Geisterdorf, völlig überwuchert von Büschen und Stille. In den letzten Jahren ist Haihoutes wieder zum Leben erwacht.",
+    "v2": "Ein vergessener Teil von Kos, der jetzt wieder ein wenig atmet.",
+    "k1": "Es hat ein traditionelles Dorfcafé eröffnet, in dem Sie Kaffee, Tee, hausgemachten Kuchen und einfache Gerichte erhalten. Das Café ist nur Mittwoch bis Sonntag von 11 bis 18 Uhr geöffnet. Auf den schmalen Wegen zwischen den alten Steinhäusern können Sie frei umherwandern, umgeben von viel Grün.",
+    "k2": "Es fühlt sich friedlich und ein bisschen magisch an, als ob man in eine Filmszene eingetreten wäre. Der Eintritt ins Dorf ist völlig kostenlos. Dorthin kann man immer gehen, auch wenn das Café geschlossen ist. It is a special place where you can take a moment to walk through the old streets and realize how an entire village could disappear and yet be given a new chance.",
+    "k3": "Es fühlt sich fast wie ein Freilichtmuseum an: schmale Wege, alte Steinhäuser und überall viel Grün. Besucher kommen vor allem wegen der friedlichen, magischen Atmosphäre – wie eine Szene aus einem Film. Das Café selbst ist nur an wenigen Tagen in der Woche geöffnet, der Standort kann aber jederzeit besichtigt werden. Der Ort bleibt für Besucher zugänglich, die die Umgebung besichtigen oder die besondere Atmosphäre des Ortes erleben möchten."
+  },
+  "en": {
+    "place": "Platani",
+    "title": "Haihoutes",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "We now drive a bit inland, up into the mountains.",
+    "s1": "We now drive a bit inland, up into the mountains. After a few kilometers on a narrow road you arrive at Haihoutes, also known as Agios Dimitrios. This was once a small mountain village that emerged around seventeen eighty.",
+    "s2": "One of the first families to settle here was an Armenian family named Haihoudes. In eighteen twenty-one there were about thirty-five houses, and in the early part of the twentieth century there were five or six large families. Haihoutes was special because the very first school on the entire island of Kos started here.",
+    "s3": "The lessons were given in the church of Agios Dimitrios which still stands on top of the mountain. There were forty to fifty children in the class at the time. During the Second World War the village served as a safe shelter for people from Kos Town. But the last residents left in the 1960s and 1970s.",
+    "v1": "There was no good road, no running water and no electricity. The village became abandoned and turned into a ghost village, completely overgrown by bushes and silence. In recent years, Haihoutes has come back to life.",
+    "v2": "A forgotten part of Kos that now breathes a little again.",
+    "k1": "A traditional village café has opened where you can get coffee, tea, home-made cake and simple dishes. The café is only open on Wednesday to Sunday from 11 a.m. to 6 p.m. You can walk around freely on the narrow paths between the old stone houses, surrounded by greenery.",
+    "k2": "It feels peaceful and a bit magical, as if you have stepped into a movie scene. Entrance to the village is completely free. You can always go there, even when the café is closed. It is a special place where you can take a moment to walk through the old streets and realize how an entire village could disappear and yet be given a new chance.",
+    "k3": "It almost feels like an open-air museum: narrow paths, old stone houses and greenery everywhere. Visitors come especially for the peaceful, magical atmosphere – like a scene from a movie. The café itself is only open a few days a week, but the location can always be visited. The place remains accessible to visitors who want to view the surroundings or experience the special atmosphere of the location."
+  },
+  "it": {
+    "place": "Platani",
+    "title": "Haihoutes",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Ora guidiamo un po' verso l'interno, su per le montagne.",
+    "s1": "Ora guidiamo un po' verso l'interno, su per le montagne. Dopo pochi chilometri su una strada stretta si arriva a Haihoutes, conosciuta anche come Agios Dimitrios. Questo era un tempo un piccolo villaggio di montagna sorto intorno al 1780.",
+    "s2": "Una delle prime famiglie a stabilirsi qui fu una famiglia armena di nome Haihoudes. Nel milleottocentoventuno si contavano circa trentacinque case, e nella prima parte del ventesimo secolo si contavano cinque o sei famiglie numerose. Haihoutes era speciale perché qui iniziò la primissima scuola dell'intera isola di Kos.",
+    "s3": "Le lezioni si tenevano nella chiesa di Agios Dimitrios che ancora si trova in cima alla montagna. A quel tempo nella classe c'erano dai quaranta ai cinquanta bambini. Durante la Seconda Guerra Mondiale il villaggio servì da rifugio sicuro per gli abitanti della città di Kos. Ma gli ultimi residenti se ne andarono negli anni '60 e '70.",
+    "v1": "Non c’erano strade buone, né acqua corrente né elettricità. Il villaggio fu abbandonato e si trasformò in un villaggio fantasma, completamente ricoperto di cespugli e silenzio. Negli ultimi anni Haihoutes è tornata in vita.",
+    "v2": "Una parte dimenticata di Kos che ora respira di nuovo un po'.",
+    "k1": "È stato aperto il tradizionale caffè del villaggio dove potrete prendere caffè, tè, torte fatte in casa e piatti semplici. La caffetteria è aperta solo dal mercoledì alla domenica dalle 11:00 alle 18:00. Potrete passeggiare liberamente sugli stretti sentieri tra le vecchie case in pietra, immersi nel verde.",
+    "k2": "Sembra tranquillo e un po' magico, come se fossi entrato nella scena di un film. L'ingresso al villaggio è completamente gratuito. Puoi sempre andarci, anche quando il bar è chiuso. È un posto speciale dove puoi prenderti un momento per passeggiare per le vecchie strade e renderti conto di come un intero villaggio potrebbe scomparire e tuttavia avere una nuova possibilità.",
+    "k3": "Sembra quasi un museo a cielo aperto: vicoli stretti, vecchie case in pietra e verde ovunque. I visitatori vengono soprattutto per l'atmosfera tranquilla e magica, come una scena di un film. La caffetteria stessa è aperta solo pochi giorni a settimana, ma la location è sempre visitabile. Il luogo rimane accessibile ai visitatori che desiderano vedere i dintorni o sperimentare l'atmosfera speciale del luogo."
+  },
+  "tr": {
+    "place": "Platani",
+    "title": "Haihoutes",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Şimdi biraz içerilere, dağlara doğru ilerliyoruz.",
+    "s1": "Şimdi biraz içerilere, dağlara doğru ilerliyoruz. Dar bir yoldan birkaç kilometre sonra Agios Dimitrios olarak da bilinen Haihoutes'e ulaşıyorsunuz. Burası bir zamanlar bin yedi seksen civarında ortaya çıkan küçük bir dağ köyüydü.",
+    "s2": "Buraya ilk yerleşen ailelerden biri de Haihoudes adında bir Ermeni ailesiydi. 1821'de yaklaşık otuz beş ev vardı ve yirminci yüzyılın başlarında beş veya altı büyük aile vardı. Haihoutes özeldi çünkü Kos adasının tamamındaki ilk okul burada açıldı.",
+    "s3": "Dersler hala dağın tepesinde bulunan Agios Dimitrios kilisesinde veriliyordu. O zamanlar sınıfta kırk-elli çocuk vardı. İkinci Dünya Savaşı sırasında köy, Kos Kasabası sakinleri için güvenli bir barınak görevi gördü. Ancak son sakinler 1960'larda ve 1970'lerde burayı terk etti.",
+    "v1": "İyi bir yol, akan su ve elektrik yoktu. Köy terk edildi ve tamamen çalılar ve sessizlikle kaplanmış hayalet bir köye dönüştü. Son yıllarda Haihoutes yeniden hayata döndü.",
+    "v2": "Kos'un unutulmuş bir parçası artık yeniden nefes alıyor.",
+    "k1": "Kahve, çay, ev yapımı kek ve sade yemekler alabileceğiniz geleneksel bir köy kafesi açıldı. Kafe sadece çarşambadan pazara 11:00 - 18:00 saatleri arasında açıktır. Yeşilliklerle çevrili eski taş evlerin arasındaki dar yollarda özgürce dolaşabilirsiniz.",
+    "k2": "Sanki bir film sahnesine adım atmışsınız gibi huzurlu ve biraz da büyülü bir his veriyor. Köye giriş tamamen ücretsizdir. Kafe kapalı olsa bile her zaman oraya gidebilirsiniz. Eski sokaklarda yürümek için biraz zaman ayırabileceğiniz ve tüm bir köyün nasıl yok olabileceğini ve buna rağmen yeni bir şans verilebileceğini fark edebileceğiniz özel bir yer.",
+    "k3": "Adeta bir açık hava müzesi hissi veriyor: Dar yollar, eski taş evler ve her yer yeşilliklerle dolu. Ziyaretçiler özellikle bir film sahnesi gibi huzurlu, büyülü atmosfer için geliyorlar. Kafenin kendisi haftanın yalnızca birkaç günü açıktır, ancak konumu her zaman ziyaret edilebilir. Mekan, çevreyi görmek veya mekanın özel atmosferini deneyimlemek isteyen ziyaretçilerin erişimine açık olmaya devam ediyor."
+  },
+  "es": {
+    "place": "Platani",
+    "title": "Haihoutes",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Ahora nos dirigimos un poco hacia el interior, hacia las montañas.",
+    "s1": "Ahora nos dirigimos un poco hacia el interior, hacia las montañas. Después de unos kilómetros por una carretera estrecha se llega a Haihoutes, también conocida como Agios Dimitrios. Este fue en su día un pequeño pueblo de montaña que surgió hacia el año 1780.",
+    "s2": "Una de las primeras familias que se estableció aquí fue una familia armenia llamada Haihoudes. En dieciocho veintiuno había unas treinta y cinco casas, y a principios del siglo XX había cinco o seis familias numerosas. Haihoutes fue especial porque aquí comenzó la primera escuela en toda la isla de Kos.",
+    "s3": "Las lecciones se dieron en la iglesia de Agios Dimitrios, que aún se encuentra en la cima de la montaña. En ese momento había entre cuarenta y cincuenta niños en la clase. Durante la Segunda Guerra Mundial, el pueblo sirvió como refugio seguro para la gente de la ciudad de Kos. Pero los últimos residentes se marcharon en las décadas de 1960 y 1970.",
+    "v1": "No había buenas carreteras, ni agua corriente ni electricidad. El pueblo quedó abandonado y se convirtió en un pueblo fantasma, completamente cubierto de arbustos y silencio. En los últimos años, Haihoutes ha vuelto a la vida.",
+    "v2": "Una parte olvidada de Kos que ahora vuelve a respirar un poco.",
+    "k1": "Se ha abierto una cafetería tradicional del pueblo donde se puede tomar café, té, pasteles caseros y platos sencillos. La cafetería sólo abre de miércoles a domingo de 11 a 18 horas. Se puede pasear libremente por los estrechos senderos entre las antiguas casas de piedra, rodeados de vegetación.",
+    "k2": "Se siente tranquilo y un poco mágico, como si hubieras entrado en la escena de una película. La entrada al pueblo es completamente gratuita. Siempre puedes ir allí, incluso cuando la cafetería esté cerrada. Es un lugar especial donde puedes tomarte un momento para caminar por las calles antiguas y darte cuenta de cómo un pueblo entero podría desaparecer y, sin embargo, tener una nueva oportunidad.",
+    "k3": "Casi parece un museo al aire libre: caminos estrechos, antiguas casas de piedra y vegetación por todas partes. Los visitantes vienen especialmente por el ambiente tranquilo y mágico, como una escena de una película. La cafetería en sí sólo abre unos días a la semana, pero siempre se puede visitar. El lugar sigue siendo accesible para los visitantes que quieran ver los alrededores o experimentar la atmósfera especial del lugar."
   }
-
-  var langBtn = document.getElementById('langBtn');
-  var langMenu = document.getElementById('langMenu');
-  function openMenu(){ langMenu.classList.add('open'); }
-  function closeMenu(){ langMenu.classList.remove('open'); }
-  langBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    langMenu.classList.contains('open') ? closeMenu() : openMenu();
-  });
-  document.addEventListener('click', function(){ closeMenu(); });
-  document.querySelectorAll('.lang-option').forEach(function(btn){
-    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
-  });
-
-  var saved = localStorage.getItem('hk-lang') || 'nl';
-  setLang(saved);
-
-  /* TTS */
-  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
-  function getLang(){
-    var l = localStorage.getItem('hk-lang') || 'nl';
-    return LANG_VOICE[l] ? l : 'nl';
-  }
-  function pickVoice(code){
-    var voices = speechSynthesis.getVoices() || [];
-    var prefix = code.slice(0,2).toLowerCase();
-    return voices.find(function(v){ return v.lang === code; })
-      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
-      || null;
-  }
-  var btnPlay = document.getElementById('btnPlay');
-  var btnStop = document.getElementById('btnStop');
-  var status = document.getElementById('ttsStatus');
-  function setStatus(t){ if(status) status.textContent = t; }
-  function play(){
-    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
-    speechSynthesis.cancel();
-    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
-    var l = getLang();
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = LANG_VOICE[l];
-    u.rate = 0.92;
-    var v = pickVoice(LANG_VOICE[l]);
-    if(v) u.voice = v;
-    u.onstart = function(){
-      btnPlay.classList.add('playing');
-      btnStop.classList.add('show');
-      setStatus('Voorlezen… ('+l.toUpperCase()+')');
-    };
-    u.onend = u.onerror = function(){
-      btnPlay.classList.remove('playing');
-      btnStop.classList.remove('show');
-      setStatus('');
-    };
-    if(!speechSynthesis.getVoices().length){
-      speechSynthesis.onvoiceschanged = function(){
-        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
-        speechSynthesis.speak(u);
-      };
-      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
-    } else {
-      speechSynthesis.speak(u);
-    }
-  }
-  function stop(){
-    if(window.speechSynthesis) speechSynthesis.cancel();
-    btnPlay.classList.remove('playing');
-    btnStop.classList.remove('show');
-    setStatus('Gestopt.');
-  }
-  btnPlay.addEventListener('click', play);
-  btnStop.addEventListener('click', stop);
-  if(window.speechSynthesis){
-    speechSynthesis.getVoices();
-    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
-  }
-})();
-</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

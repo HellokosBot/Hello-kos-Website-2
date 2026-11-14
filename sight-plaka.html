@@ -1,113 +1,199 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0D1A1A">
-<title>Plaka, pauwenbos – Hello Kos</title>
-<link rel="stylesheet" href="hello-kos.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Plaka pauwenbos – Hello Kos</title>
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body class="hk-page">
-<header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+<body class="hk-page hk-guide">
+  <header class="app-header">
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-<main class="main">
-  <div class="hero-wrap"><img src="img/hk/sight-plaka.jpg" alt="">
-      <div class="hero-title"><h1 data-i18n="title">Plaka, pauwenbos</h1></div></div>
-  <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back">← Bezienswaardigheden</a></p>
-<p class="lead" data-i18n="lead">Gratis bos bij Antimachia. Pauwen lopen er rond. Bij een beekje zie je soms schildpadden, en katten in de schaduw. Er is een korte verharde weg vanaf de hoofdweg.</p>
-  
-  <div class="actions">
-    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
-    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
-    
-  </div>
-  
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Plaka%20forest%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Plaka%20forest%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
       </div>
-      <p class="status" id="ttsStatus"></p>
-  <div id="readText">
-    <article class="card"><h2 data-i18n="hStory">Piknik</h2><p data-i18n="p0">Er zijn bankjes. Neem water mee. Het kasteel en de molen van Antimachia liggen in dezelfde streek.</p></article>
-    
-  </div>
-</main>
-<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
-<script>window.HK_DICT = {
-    "nl": {
-      "title": "Plaka, pauwenbos",
-      "lead": "Gratis bos bij Antimachia. Pauwen lopen er rond. Bij een beekje zie je soms schildpadden, en katten in de schaduw. Er is een korte verharde weg vanaf de hoofdweg.",
-      "back": "← Bezienswaardigheden",
-      "p0": "Er zijn bankjes. Neem water mee. Het kasteel en de molen van Antimachia liggen in dezelfde streek.",
-      "hStory": "Het verhaal",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Plaka, Pfauenwald",
-      "lead": "Kostenloser Wald bei Antimachia. Pfauen laufen herum. An einem Bach siehst du manchmal Schildkröten, und Katzen im Schatten. Es gibt eine kurze asphaltierte Straße von der Hauptstraße.",
-      "back": "← Sehenswürdigkeiten",
-      "p0": "Es gibt Bänke. Nimm Wasser mit. Burg und Mühle von Antimachia liegen in derselben Gegend.",
-      "hStory": "Die Geschichte",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Plaka peacock forest",
-      "lead": "Free forest near Antimachia. Peacocks walk around. By a stream you sometimes see tortoises, and cats in the shade. There is a short paved road off the main road.",
-      "back": "← Sights",
-      "p0": "There are benches. Bring water. The castle and the windmill of Antimachia are in the same area.",
-      "hStory": "The story",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Plaka, bosco dei pavoni",
-      "lead": "Bosco gratuito vicino ad Antimachia. I pavoni passeggiano. A un ruscello a volte vedi tartarughe, e gatti all’ombra. C’è una breve strada asfaltata dalla principale.",
-      "back": "← Attrazioni",
-      "p0": "Ci sono panchine. Porta acqua. Castello e mulino di Antimachia sono nella stessa zona.",
-      "hStory": "La storia",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Plaka tavus ormanı",
-      "lead": "Antimachia yakınında ücretsiz orman. Tavus kuşları dolaşır. Bir derede bazen kaplumbağa, gölgede kedi görürsün. Ana yoldan kısa asfalt bir yol var.",
-      "back": "← Gezilecek yerler",
-      "p0": "Banklar var. Su götür. Antimachia kalesi ve değirmeni aynı yörede.",
-      "hStory": "Hikaye",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Plaka, bosque de pavos",
-      "lead": "Bosque gratis cerca de Antimachia. Hay pavos reales. Junto a un arroyo a veces ves tortugas, y gatos a la sombra. Hay un tramo corto asfaltado desde la carretera principal.",
-      "back": "← Lugares de interés",
-      "p0": "Hay bancos. Lleva agua. El castillo y el molino de Antimachia están en la misma zona.",
-      "hStory": "La historia",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
+  <main class="main">
+    <div class="hero-wrap">
+      <img class="hk-zoom" src="img/hk/sight-plaka.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
+    </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=Plaka%20pauwenbos%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?q=Plaka%20pauwenbos%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-plaka-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-plaka-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-plaka-03.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-plaka-04.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
+
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
+
+<p data-i18n="k2"></p>
+
+</article>
+    </div>
+  </main>
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Antimachia",
+    "title": "Plaka pauwenbos",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "We slaan even een korte zijweg in, niet ver van Antimachia.",
+    "s1": "We slaan even een korte zijweg in, niet ver van Antimachia. Na een paar kilometer geasfalteerde weg kom je in Plakka, ook wel bekend als het Pauwenbos. Dit is een van de weinige echte dennenbossen op Kos.",
+    "s2": "Terwijl het eiland verder vrij droog en kaal is, vind je hier een dicht, groen dennenbos met hoge bomen die veel schaduw geven. Het voelt meteen koeler en rustiger dan de rest van het eiland. Wat dit bos zo bijzonder maakt, zijn de tientallen pauwen die hier vrij rondlopen.",
+    "s3": "Je ziet de statige mannetjes met hun kleurrijke, uitwaaierende staarten en de wat rustiger vrouwtjes. Ze zijn gewend aan mensen en komen vaak dichtbij, vooral als je een stukje brood of wat zaden bij je hebt. Naast de pauwen leven hier ook veel zwerfkatten die lekker in de schaduw liggen en soms schildpadden in een klein beekje.",
+    "v1": "Er staan een paar bankjes waar je kunt zitten, picknicken of gewoon even ontspannen. Plakka is een fijne plek om even uit de warmte en drukte te stappen. Het is vooral populair bij families met kinderen en bij mensen die van natuur en dieren houden.",
+    "v2": "Midden op een droog Grieks eiland loop je ineens tussen hoge dennenbomen en kleurrijke pauwen die statig over het pad paraderen. Een klein stukje groen paradijs met een vleugje magie.",
+    "k1": "Toegang is helemaal gratis. Je kunt er vrij rondwandelen, op een bankje zitten of een stukje brood meenemen voor de pauwen. Het blijft toch een verrassende oase.",
+    "k2": "Het bos is gratis toegankelijk en makkelijk te bereiken met de auto via een korte, geasfalteerde weg vanaf de hoofdweg bij Antimachia. Ga picknicken, wandelen of gewoon zitten op een bankje en kijk naar de statig paraderende pauwen."
+  },
+  "de": {
+    "place": "Antimachia",
+    "title": "Plaka pauwenbos",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Wir nehmen eine kurze Nebenstraße, nicht weit von Antimachia entfernt.",
+    "s1": "Wir nehmen eine kurze Nebenstraße, nicht weit von Antimachia entfernt. Nach ein paar Kilometern asphaltierter Straße erreichen Sie Plakka, auch bekannt als der Pfauenwald. Dies ist einer der wenigen echten Kiefernwälder auf Kos.",
+    "s2": "Während die Insel ansonsten recht trocken und karg ist, findet man hier einen dichten, grünen Pinienwald mit hohen Bäumen, die viel Schatten spenden. Es fühlt sich sofort kühler und ruhiger an als der Rest der Insel. Was diesen Wald so besonders macht, sind die Dutzenden Pfauen, die sich hier frei bewegen.",
+    "s3": "Sie sehen die stattlichen Männchen mit ihren bunten, gefächerten Schwänzen und die ruhigeren Weibchen. Sie sind an Menschen gewöhnt und kommen ihnen oft nahe, besonders wenn man ein Stück Brot oder einige Samen dabei hat. Neben den Pfauen gibt es auch viele streunende Katzen, die im Schatten liegen und manchmal auch Schildkröten in einem kleinen Bach.",
+    "v1": "Es gibt ein paar Bänke, wo man sitzen, ein Picknick machen oder einfach nur entspannen kann. Plakka ist ein schöner Ort, um der Hitze und dem Trubel zu entfliehen. Besonders beliebt ist es bei Familien mit Kindern und Natur- und Tierliebhabern.",
+    "v2": "Mitten auf einer trockenen griechischen Insel spaziert man plötzlich zwischen hohen Kiefern und bunten Pfauen, die stattlich über den Weg paradieren. Ein kleines Stück grünes Paradies mit einem Hauch von Magie.",
+    "k1": "Der Eintritt ist völlig frei. Sie können frei herumlaufen, auf einer Bank sitzen oder ein Stück Brot für die Pfauen mitnehmen. Es bleibt eine überraschende Oase.",
+    "k2": "Der Eintritt in den Wald ist frei und mit dem Auto über eine kurze, geteerte Straße von der Hauptstraße in Antimachia aus leicht zu erreichen. Machen Sie ein Picknick, gehen Sie spazieren oder setzen Sie sich einfach auf eine Bank und beobachten Sie die stattlichen Paraden der Pfauen."
+  },
+  "en": {
+    "place": "Antimachia",
+    "title": "Plaka pauwenbos",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "We take a short side road, not far from Antimachia.",
+    "s1": "We take a short side road, not far from Antimachia. After a few kilometers of paved road you arrive in Plakka, also known as the Peacock Forest. This is one of the few true pine forests on Kos.",
+    "s2": "While the island is otherwise quite dry and barren, you will find a dense, green pine forest with tall trees that provide plenty of shade. It immediately feels cooler and calmer than the rest of the island. What makes this forest so special are the dozens of peacocks that roam freely here.",
+    "s3": "You see the stately males with their colorful, fanning tails and the more calm females. They are used to people and often come close, especially if you have a piece of bread or some seeds with you. In addition to the peacocks, there are also many stray cats that lie in the shade and sometimes turtles in a small stream.",
+    "v1": "There are a few benches where you can sit, have a picnic or just relax. Plakka is a nice place to get away from the heat and bustle. It is especially popular with families with children and people who love nature and animals.",
+    "v2": "In the middle of a dry Greek island you suddenly walk between tall pine trees and colorful peacocks that parade stately across the path. A little piece of green paradise with a touch of magic.",
+    "k1": "Entry is completely free. You can walk around freely, sit on a bench or take a piece of bread for the peacocks. It remains a surprising oasis.",
+    "k2": "The forest is free to enter and easily reached by car via a short, tarred road from the main road at Antimachia. Have a picnic, walk or just sit on a bench and watch the stately parading peacocks."
+  },
+  "it": {
+    "place": "Antimachia",
+    "title": "Plaka pauwenbos",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Prendiamo una breve strada secondaria, non lontano da Antimachia.",
+    "s1": "Prendiamo una breve strada secondaria, non lontano da Antimachia. Dopo qualche chilometro di strada asfaltata si arriva a Plakka, conosciuta anche come la Foresta del Pavone. Questa è una delle poche vere pinete di Kos.",
+    "s2": "Anche se per il resto l'isola è piuttosto secca e brulla, troverete una fitta e verde pineta con alberi ad alto fusto che forniscono molta ombra. Sembra immediatamente più fresco e tranquillo rispetto al resto dell'isola. Ciò che rende questa foresta così speciale sono le dozzine di pavoni che vagano liberamente qui.",
+    "s3": "Vedi i maschi maestosi con le loro code colorate e a ventaglio e le femmine più calme. Sono abituati alle persone e spesso si avvicinano, soprattutto se hai con te un pezzo di pane o dei semi. Oltre ai pavoni, ci sono anche molti gatti randagi che giacciono all'ombra e talvolta le tartarughe in un piccolo ruscello.",
+    "v1": "Ci sono alcune panchine dove è possibile sedersi, fare un picnic o semplicemente rilassarsi. Plakka è un bel posto per allontanarsi dal caldo e dalla frenesia. È particolarmente apprezzato dalle famiglie con bambini e dagli amanti della natura e degli animali.",
+    "v2": "Nel mezzo di un'isola greca arida si cammina all'improvviso tra alti pini e pavoni colorati che sfilano maestosi lungo il sentiero. Un piccolo angolo di paradiso verde con un tocco di magia.",
+    "k1": "L'ingresso è completamente gratuito. Puoi passeggiare liberamente, sederti su una panchina o prendere un pezzo di pane per i pavoni. Resta un'oasi sorprendente.",
+    "k2": "L'accesso alla foresta è libero e facilmente raggiungibile in auto tramite una breve strada asfaltata dalla strada principale di Antimachia. Fai un picnic, passeggia o semplicemente siediti su una panchina e osserva i maestosi pavoni che sfilano."
+  },
+  "tr": {
+    "place": "Antimachia",
+    "title": "Plaka pauwenbos",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Antimachia'dan çok da uzak olmayan kısa bir yan yoldan geçiyoruz.",
+    "s1": "Antimachia'dan çok da uzak olmayan kısa bir yan yoldan geçiyoruz. Birkaç kilometrelik asfalt yolun ardından Tavus Kuşu Ormanı olarak da bilinen Plakka'ya varıyorsunuz. Burası Kos'taki birkaç gerçek çam ormanından biridir.",
+    "s2": "Ada oldukça kuru ve çorak olsa da, bol miktarda gölge sağlayan uzun ağaçların bulunduğu yoğun, yeşil bir çam ormanı bulacaksınız. Adanın geri kalanından hemen daha serin ve sakin geliyor. Bu ormanı bu kadar özel kılan ise burada özgürce dolaşan onlarca tavus kuşunun bulunması.",
+    "s3": "Rengarenk, yelpaze kuyruklu heybetli erkekleri ve daha sakin dişileri görüyorsunuz. İnsanlara alışkındırlar ve sıklıkla yaklaşırlar, özellikle de yanınızda bir parça ekmek veya biraz tohum varsa. Tavus kuşlarının yanı sıra gölgede yatan çok sayıda başıboş kedi ve bazen de küçük bir derede kaplumbağalar da var.",
+    "v1": "Oturabileceğiniz, piknik yapabileceğiniz veya sadece dinlenebileceğiniz birkaç bank var. Plakka sıcaktan ve karmaşadan uzaklaşmak için güzel bir yer. Özellikle çocuklu aileler, doğayı ve hayvanları seven insanlar tarafından tercih edilmektedir.",
+    "v2": "Kuru bir Yunan adasının ortasında, aniden uzun çam ağaçları ve yol boyunca görkemli bir şekilde geçiş yapan rengarenk tavus kuşları arasında yürüyorsunuz. Büyülü bir dokunuşla küçük bir yeşil cennet parçası.",
+    "k1": "Giriş tamamen ücretsizdir. Serbestçe dolaşabilir, bir bankta oturabilir veya tavus kuşlarına bir parça ekmek götürebilirsiniz. Şaşırtıcı bir vaha olmaya devam ediyor.",
+    "k2": "Ormana giriş ücretsizdir ve Antimachia'daki ana yoldan kısa, katranlı bir yoldan arabayla kolayca ulaşılabilir. Piknik yapın, yürüyün ya da sadece bir bankta oturun ve görkemli geçit töreni yapan tavus kuşlarını izleyin."
+  },
+  "es": {
+    "place": "Antimachia",
+    "title": "Plaka pauwenbos",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Tomamos una pequeña carretera lateral, no lejos de Antimachia.",
+    "s1": "Tomamos una pequeña carretera lateral, no lejos de Antimachia. Después de unos kilómetros de carretera asfaltada se llega a Plakka, también conocido como el Bosque de los Pavos Reales. Este es uno de los pocos bosques de pinos auténticos de Kos.",
+    "s2": "Si bien la isla es bastante seca y árida, encontrará un denso y verde bosque de pinos con árboles altos que brindan mucha sombra. Inmediatamente se siente más fresco y tranquilo que el resto de la isla. Lo que hace que este bosque sea tan especial son las decenas de pavos reales que deambulan libremente por él.",
+    "s3": "Ves a los majestuosos machos con sus coloridas colas en abanico y a las hembras más tranquilas. Están acostumbrados a las personas y a menudo se acercan, especialmente si llevas un trozo de pan o algunas semillas contigo. Además de los pavos reales, también hay muchos gatos callejeros que yacen a la sombra y, a veces, tortugas en un pequeño arroyo.",
+    "v1": "Hay algunos bancos donde podrá sentarse, hacer un picnic o simplemente relajarse. Plakka es un buen lugar para alejarse del calor y el bullicio. Es especialmente popular entre familias con niños y personas amantes de la naturaleza y los animales.",
+    "v2": "En medio de una isla griega seca, de repente caminas entre altos pinos y coloridos pavos reales que desfilan majestuosos por el camino. Un pedacito de paraíso verde con un toque de magia.",
+    "k1": "La entrada es completamente gratuita. Puedes pasear libremente, sentarte en un banco o llevar un trozo de pan para los pavos reales. Sigue siendo un oasis sorprendente.",
+    "k2": "El acceso al bosque es gratuito y se puede llegar fácilmente en coche a través de un camino corto y asfaltado desde la carretera principal de Antimachia. Haga un picnic, camine o simplemente siéntese en un banco y observe cómo desfilan los majestuosos pavos reales."
+  }
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

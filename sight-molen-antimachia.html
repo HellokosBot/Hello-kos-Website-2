@@ -1,436 +1,199 @@
 <!DOCTYPE html>
-<html lang="nl" data-hk-own="1" data-hk-tts="1">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0D1F1F">
-  <title>Molen van Antimachia – Hello Kos</title>
-  <style>
-    :root {
-      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
-      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
-      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
-      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
-      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text); -webkit-font-smoothing: antialiased;
-      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
-      background: var(--bg); min-height: 100vh; line-height: 1.55;
-    }
-    .app-header {
-      position: sticky; top: 0; z-index: 100;
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-      padding: 14px 16px; background: var(--bg-header);
-      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
-    }
-    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
-    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
-    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
-    .logo-text span { color: var(--gold-dark); font-style: italic; }
-    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
-    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
-    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
-    .lang-menu.open { display: block; }
-    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
-    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
-    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
-    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
-    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .content { padding: 18px 16px 0; }
-    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
-    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-
-    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
-    .btn-audio { background: var(--petrol); color: #fff; }
-    .btn-audio.playing { background: var(--petrol-dark); }
-    .btn-stop { background: #3A4545; color: #fff; display: none; }
-    .btn-stop.show { display: flex; }
-
-    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
-    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
-    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
-    .card p:last-child { margin-bottom: 0; }
-    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
-    .tip strong { color: var(--gold); }
-
-    .hours { margin-top: 8px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
-    .h-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 12px; font-size: 0.88rem; border-bottom: 1px solid rgba(255,255,255,0.05); background: var(--bg-card); }
-    .h-row:nth-child(odd) { background: #1A2A2A; }
-    .h-row:last-child { border-bottom: none; }
-    .h-row span:last-child { font-weight: 700; color: var(--petrol); }
-    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
-    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
-    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
-    .footer a { color: var(--petrol); text-decoration: none; }
-  </style>
-<link rel="stylesheet" href="hello-kos.css">
+  <title>Molen Antimachia – Hello Kos</title>
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body>
+<body class="hk-page hk-guide">
   <header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
   <main class="main">
     <div class="hero-wrap">
-      <img src="img/jwwb/34f4aacb73-traditional-mill-antimachia-2-standard.jpg" alt="Molen van Antimachia" loading="eager">
-      <div class="hero-title"><h1 data-i18n="title">Molen van Antimachia</h1></div>
+      <img class="hk-zoom" src="img/jwwb/34f4aacb73-traditional-mill-antimachia-2-standard.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
     </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=36.8105%2C27.103" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?ll=36.8105,27.103&amp;q=Molen%20Antimachia" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-molen-antimachia-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-molen-antimachia-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-molen-antimachia-03.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-molen-antimachia-04.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-molen-antimachia-05.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-molen-antimachia-06.jpg" alt=""></figure>
+<p data-i18n="k2"></p>
 
-    <div class="content">
-<p class="lead" data-i18n="lead">Laatste windmolen van Kos (± 130–150 jaar) – familie Amallos, nog in werking, rondleiding en koekjes van eigen meel.</p>
-
-      
-
-      <div class="actions">
-        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
-        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-      </div>
-      
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Windmill%20Antimachia%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Windmill%20Antimachia%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
-      </div>
-      <p class="status" id="ttsStatus"></p>
-
-      <div id="readText">
-        <div class="card">
-          <h2 data-i18n="hStory">Laatste van acht</h2>
-          <p data-i18n="p1">De molen staat midden in Antimachia. Ongeveer 130–150 jaar oud en volledig gerestaureerd. Vroeger stonden er op Kos acht windmolens om graan te malen; dit is de laatste die over is.</p>
-        </div>
-
-        
-
-        <div class="card">
-          <h2 data-i18n="hSee">Familie Amallos</h2>
-          <p data-i18n="p2">Hij behoort al vier generaties toe aan de familie Amallos (ook “molen van de priester” of Amallou-molen). De molen maalt nog steeds graan met de wind.</p>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2tour">Rondleiding en koekjes</h2>
-          <p data-i18n="p3">Bezoekers mogen naar binnen (rond € 2,50). Je ziet hoe het maalproces werkt. De molenaar geeft een rondleiding over de geschiedenis. Van het gemalen graan worden koekjes gebakken die je ter plaatse kunt kopen.</p>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2hours">Openingstijden</h2>
-          <div class="hours">
-            <div class="h-row"><span data-i18n="hoursMon">Maandag t/m zaterdag</span><span>09:30 – 17:30</span></div>
-            <div class="h-row"><span data-i18n="hoursSun">Zondag</span><span>09:30 – 17:30</span></div>
-          </div>
-          <p style="margin-top:8px;font-size:0.85rem;color:var(--text-soft)" data-i18n="hoursNote">Check lokaal bij feestdagen of seizoenswijzigingen.</p>
-        </div>
-
-        <div class="gallery">
-          <div class="g-item">
-            <img src="img/jwwb/34f4aacb73-traditional-mill-antimachia-2-standard.jpg" alt="" loading="lazy">
-            <span data-i18n="g1">Molen</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/56ab0b5236-yxnzzxrzl2ltywdlcy9wywdlcy9jdwx0dxjll3dpbmrtawxsl0.jpg" alt="" loading="lazy">
-            <span data-i18n="g2">Molen</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/5f160ff363-mauritius-images-15608589-old-tou-papa-windmill-in.jpg" alt="" loading="lazy">
-            <span data-i18n="g3">Molen</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/f9c1820ff6-photo0jpg-1-high.jpg" alt="" loading="lazy">
-            <span data-i18n="g4">Molen</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="hKnow">Bezoeken</h2>
-          <p data-i18n="p4">In Antimachia, midden op het eiland.</p>
-          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: vraag of de molen even draait – en proef de koekjes van eigen meel.</p></div>
-        </div>
-      </div>
+</article>
     </div>
   </main>
-
-  <footer class="footer">
-    <div>Hello Kos</div>
-    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
-  </footer>
-
-<script>
-(function(){
-  var I18N = window.HK_DICT = {
-    "nl": {
-      "title": "Molen van Antimachia",
-      "lead": "Laatste windmolen van Kos (± 130–150 jaar) – familie Amallos, nog in werking, rondleiding en koekjes van eigen meel.",
-      "btnPlay": "Voorlezen",
-      "p1": "De molen staat midden in Antimachia. Ongeveer 130–150 jaar oud en volledig gerestaureerd. Vroeger stonden er op Kos acht windmolens om graan te malen; dit is de laatste die over is.",
-      "p2": "Hij behoort al vier generaties toe aan de familie Amallos (ook “molen van de priester” of Amallou-molen). De molen maalt nog steeds graan met de wind.",
-      "h2tour": "Rondleiding en koekjes",
-      "p3": "Bezoekers mogen naar binnen (rond € 2,50). Je ziet hoe het maalproces werkt. De molenaar geeft een rondleiding over de geschiedenis. Van het gemalen graan worden koekjes gebakken die je ter plaatse kunt kopen.",
-      "h2hours": "Openingstijden",
-      "hoursMon": "Maandag t/m zaterdag",
-      "hoursSun": "Zondag",
-      "hoursNote": "Check lokaal bij feestdagen of seizoenswijzigingen.",
-      "g1": "Molen",
-      "g2": "Molen",
-      "g3": "Molen",
-      "g4": "Molen",
-      "p4": "In Antimachia, midden op het eiland.",
-      "tip": "vraag of de molen even draait – en proef de koekjes van eigen meel.",
-      "hStory": "Het verhaal",
-      "hSee": "Wat je ziet",
-      "hKnow": "Goed om te weten",
-      "tipTitle": "Tip van de gids",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Antimachia Windmill",
-      "lead": "Last windmill of Kos (± 130–150 years) – Amallos family, still operating, guided tour and cookies from their own flour.",
-      "btnPlay": "Read aloud",
-      "p1": "The mill stands in the middle of Antimachia. About 130–150 years old and fully restored. In the past there were eight windmills on Kos to grind grain; this is the last one left.",
-      "p2": "It has belonged to the Amallos family for four generations (also “priest’s mill” or Amallou mill). The mill still grinds grain with the wind.",
-      "h2tour": "Guided tour and cookies",
-      "p3": "Visitors may go inside (around €2.50). You see how the grinding process works. The miller gives a guided tour about the history. Cookies are baked from the ground grain that you can buy on the spot.",
-      "h2hours": "Opening hours",
-      "hoursMon": "Monday to Saturday",
-      "hoursSun": "Sunday",
-      "hoursNote": "Check locally for holidays or seasonal changes.",
-      "g1": "Windmill",
-      "g2": "Windmill",
-      "g3": "Windmill",
-      "g4": "Windmill",
-      "p4": "In Antimachia, in the middle of the island.",
-      "tip": "ask if the mill turns for a moment – and taste the cookies from their own flour.",
-      "hStory": "The story",
-      "hSee": "What you see",
-      "hKnow": "Good to know",
-      "tipTitle": "Guide’s tip",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Windmühle von Antimachia",
-      "lead": "Letzte Windmühle von Kos (± 130–150 Jahre) – Familie Amallos, noch in Betrieb, Führung und Kekse aus eigenem Mehl.",
-      "btnPlay": "Vorlesen",
-      "p1": "Die Mühle steht mitten in Antimachia. Etwa 130–150 Jahre alt und vollständig restauriert. Früher standen auf Kos acht Windmühlen, um Getreide zu mahlen; dies ist die letzte, die übrig ist.",
-      "p2": "Sie gehört seit vier Generationen der Familie Amallos (auch „Mühle des Priesters“ oder Amallou-Mühle). Die Mühle mahlt immer noch Getreide mit dem Wind.",
-      "h2tour": "Führung und Kekse",
-      "p3": "Besucher dürfen hinein (ca. € 2,50). Du siehst, wie der Mahlprozess funktioniert. Der Müller gibt eine Führung über die Geschichte. Aus dem gemahlenen Getreide werden Kekse gebacken, die du vor Ort kaufen kannst.",
-      "h2hours": "Öffnungszeiten",
-      "hoursMon": "Montag bis Samstag",
-      "hoursSun": "Sonntag",
-      "hoursNote": "Lokal bei Feiertagen oder saisonalen Änderungen prüfen.",
-      "g1": "Mühle",
-      "g2": "Mühle",
-      "g3": "Mühle",
-      "g4": "Mühle",
-      "p4": "In Antimachia, mitten auf der Insel.",
-      "tip": "frag, ob die Mühle kurz dreht – und probiere die Kekse aus eigenem Mehl.",
-      "hStory": "Die Geschichte",
-      "hSee": "Was du siehst",
-      "hKnow": "Gut zu wissen",
-      "tipTitle": "Tipp des Guides",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Mulino di Antimachia",
-      "lead": "Ultimo mulino a vento di Kos (± 130–150 anni) – famiglia Amallos, ancora in funzione, visita guidata e biscotti con la propria farina.",
-      "btnPlay": "Leggi ad alta voce",
-      "p1": "Il mulino si trova in mezzo ad Antimachia. Circa 130–150 anni e completamente restaurato. In passato c’erano otto mulini a vento a Kos per macinare il grano; questo è l’ultimo rimasto.",
-      "p2": "Appartiene da quattro generazioni alla famiglia Amallos (anche “mulino del prete” o mulino Amallou). Il mulino macina ancora il grano con il vento.",
-      "h2tour": "Visita guidata e biscotti",
-      "p3": "I visitatori possono entrare (circa € 2,50). Vedi come funziona il processo di macinazione. Il mugnaio fa una visita guidata sulla storia. Con il grano macinato si fanno biscotti che puoi comprare sul posto.",
-      "h2hours": "Orari di apertura",
-      "hoursMon": "Lunedì a sabato",
-      "hoursSun": "Domenica",
-      "hoursNote": "Controlla localmente per festività o cambiamenti stagionali.",
-      "g1": "Mulino",
-      "g2": "Mulino",
-      "g3": "Mulino",
-      "g4": "Mulino",
-      "p4": "Ad Antimachia, in mezzo all’isola.",
-      "tip": "chiedi se il mulino gira un momento – e assaggia i biscotti con la propria farina.",
-      "hStory": "La storia",
-      "hSee": "Cosa vedi",
-      "hKnow": "Buono a sapersi",
-      "tipTitle": "Consiglio della guida",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Antimachia Yel Değirmeni",
-      "lead": "Kos’un son yel değirmeni (± 130–150 yıl) – Amallos ailesi, hâlâ çalışıyor, rehberli tur ve kendi unundan kurabiyeler.",
-      "btnPlay": "Sesli oku",
-      "p1": "Değirmen Antimachia’nın ortasında durur. Yaklaşık 130–150 yıllık ve tamamen restore edilmiş. Eskiden Kos’ta tahıl öğütmek için sekiz yel değirmeni vardı; bu kalan sonuncusu.",
-      "p2": "Dört nesildir Amallos ailesine aittir (ayrıca “rahibin değirmeni” veya Amallou değirmeni). Değirmen hâlâ rüzgarla tahıl öğütür.",
-      "h2tour": "Rehberli tur ve kurabiyeler",
-      "p3": "Ziyaretçiler içeri girebilir (yaklaşık € 2,50). Öğütme sürecinin nasıl çalıştığını görürsünüz. Değirmenci tarih hakkında rehberli tur verir. Öğütülen tahıldan yerinde satın alabileceğiniz kurabiyeler yapılır.",
-      "h2hours": "Açılış saatleri",
-      "hoursMon": "Pazartesi–Cumartesi",
-      "hoursSun": "Pazar",
-      "hoursNote": "Tatiller veya mevsimsel değişiklikler için yerel kontrol edin.",
-      "g1": "Değirmen",
-      "g2": "Değirmen",
-      "g3": "Değirmen",
-      "g4": "Değirmen",
-      "p4": "Antimachia’da, adanın ortasında.",
-      "tip": "değirmenin bir an dönmesini isteyin – ve kendi unundan kurabiyeleri tadın.",
-      "hStory": "Hikaye",
-      "hSee": "Ne görürsün",
-      "hKnow": "Bilmekte fayda var",
-      "tipTitle": "Rehberin ipucu",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Molino de Antimachia",
-      "lead": "Último molino de viento de Kos (± 130–150 años) – familia Amallos, aún en funcionamiento, visita guiada y galletas con su propia harina.",
-      "btnPlay": "Leer en voz alta",
-      "p1": "El molino está en medio de Antimachia. Unos 130–150 años y completamente restaurado. Antes había ocho molinos de viento en Kos para moler grano; este es el último que queda.",
-      "p2": "Pertenece a la familia Amallos desde hace cuatro generaciones (también “molino del sacerdote” o molino Amallou). El molino sigue moliendo grano con el viento.",
-      "h2tour": "Visita guiada y galletas",
-      "p3": "Los visitantes pueden entrar (alrededor de € 2,50). Ves cómo funciona el proceso de molienda. El molinero hace una visita guiada sobre la historia. Con el grano molido se hornean galletas que puedes comprar allí mismo.",
-      "h2hours": "Horario de apertura",
-      "hoursMon": "Lunes a sábado",
-      "hoursSun": "Domingo",
-      "hoursNote": "Comprueba localmente en festivos o cambios estacionales.",
-      "g1": "Molino",
-      "g2": "Molino",
-      "g3": "Molino",
-      "g4": "Molino",
-      "p4": "En Antimachia, en medio de la isla.",
-      "tip": "pregunta si el molino gira un momento – y prueba las galletas con su propia harina.",
-      "hStory": "La historia",
-      "hSee": "Qué ves",
-      "hKnow": "Bueno saberlo",
-      "tipTitle": "Consejo del guía",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };
-
-  function setLang(l) {
-    if (!I18N[l]) l = 'nl';
-    localStorage.setItem('hk-lang', l);
-    document.documentElement.lang = l;
-    var d = I18N[l];
-    document.querySelectorAll('[data-i18n]').forEach(function(el){
-      var k = el.getAttribute('data-i18n');
-      if (d[k]) el.textContent = d[k];
-    });
-    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
-    if (opt) {
-      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
-      document.getElementById('code').textContent = l.toUpperCase();
-    }
-    document.querySelectorAll('.lang-option').forEach(function(o){
-      o.classList.toggle('active', o.getAttribute('data-lang') === l);
-    });
-    closeMenu();
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Antimachia",
+    "title": "Molen Antimachia",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "We blijven nog even in het dorp Antimachia.",
+    "s1": "We blijven nog even in het dorp Antimachia. Midden in het dorp staat een mooie, volledig gerestaureerde traditionele windmolen. De molen is ongeveer honderddertig tot honderdvijftig jaar oud.",
+    "s2": "Vroeger stonden er op heel Kos acht van dit soort windmolens die graan maalden tot meel voor brood en andere producten. Vandaag de dag is dit de enige molen die nog over is en die nog echt met de wind werkt. De molen is al vier generaties in handen van dezelfde familie, de familie Amallos.",
+    "s3": "Daarom noemen sommige locals hem ook wel de molen van de priester of de Amallou, molen. Binnen kun je zien hoe het maalproces nog steeds op de oude manier gebeurt. De wieken draaien mee met de wind, het mechaniek komt in beweging en het graan wordt fijngemalen tussen de stenen.",
+    "v1": "De molenaar zelf geeft een korte rondleiding en vertelt enthousiast over de geschiedenis en hoe alles werkt. Van het verse meel, bakken ze ter plekke lekkere koekjes, die je kunt kopen. De molen fungeert nu ook als een klein museum.",
+    "v2": "Het is een leuke en korte stop, vooral als je wilt zien hoe dingen vroeger op het eiland gedaan werden. Het blijft toch bijzonder om te zien dat deze oude molen nog steeds draait en echt meel produceert, precies zoals hij dat al meer dan een eeuw doet. Een levend stukje traditioneel Kos.",
+    "k1": "Je betaalt twee euro vijftig entree. Hij is geopend van maandag tot en met zaterdag van half tien ’s ochtends tot half zes ’s middags. Op zondag is hij gesloten.",
+    "k2": "Bezoekers mogen naar binnen (tegen een kleine entree, rond de €2,50). Je ziet hoe het maalproces werkt"
+  },
+  "de": {
+    "place": "Antimachia",
+    "title": "Molen Antimachia",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Wir bleiben eine Weile im Dorf Antimachia.",
+    "s1": "Wir bleiben eine Weile im Dorf Antimachia. Mitten im Dorf steht eine wunderschöne, vollständig restaurierte traditionelle Windmühle. Die Mühle ist etwa 130 bis 150 Jahre alt.",
+    "s2": "Früher gab es auf ganz Kos acht dieser Windmühlen, die Getreide zu Mehl für Brot und andere Produkte mahlten. Heute ist dies die einzige Mühle, die tatsächlich noch mit dem Wind arbeitet. Die Mühle ist seit vier Generationen im Besitz derselben Familie, der Familie Amallos.",
+    "s3": "Deshalb wird sie von manchen Einheimischen auch „Priestermühle“ oder „Amallou-Mühle“ genannt. Im Inneren können Sie sehen, wie der Schleifvorgang noch auf die alte Art und Weise erfolgt. Die Flügel drehen sich mit dem Wind, der Mechanismus setzt sich in Bewegung und das Getreide wird zwischen den Steinen gemahlen.",
+    "v1": "Der Müller selbst gibt einen kurzen Rundgang und erklärt begeistert die Geschichte und die Funktionsweise. Sie backen vor Ort köstliche Kekse aus dem frischen Mehl, das Sie kaufen können. Die Mühle fungiert heute auch als kleines Museum.",
+    "v2": "Es ist ein unterhaltsamer und kurzer Zwischenstopp, besonders wenn Sie sehen möchten, wie früher auf der Insel vorgegangen wurde. Es ist immer noch etwas Besonderes zu sehen, dass diese alte Mühle immer noch in Betrieb ist und echtes Mehl produziert, so wie sie es schon seit mehr als einem Jahrhundert tut. Ein lebendiges Stück traditionelles Kos.",
+    "k1": "Sie zahlen zwei Euro fünfzig Eintritt. Es ist von Montag bis Samstag von 9:30 bis 17:30 Uhr geöffnet. Sonntags ist es geschlossen.",
+    "k2": "Besucher haben Zutritt (gegen einen geringen Eintrittspreis von ca. 2,50 €). Sie sehen, wie der Schleifvorgang funktioniert"
+  },
+  "en": {
+    "place": "Antimachia",
+    "title": "Molen Antimachia",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "We stay for a while in the village of Antimachia.",
+    "s1": "We stay for a while in the village of Antimachia. There is a beautiful, fully restored traditional windmill in the middle of the village. The mill is approximately one hundred and thirty to one hundred and fifty years old.",
+    "s2": "There used to be eight of these windmills throughout Kos that ground grain into flour for bread and other products. Today this is the only mill left that actually works with the wind. The mill has been in the hands of the same family, the Amallos family, for four generations.",
+    "s3": "That is why some locals also call it the priest's mill or the Amallou, mill. Inside you can see how the grinding process is still done in the old way. The blades turn with the wind, the mechanism starts moving and the grain is ground between the stones.",
+    "v1": "The miller himself gives a short tour and explains enthusiastically about the history and how everything works. They bake delicious cookies on the spot from the fresh flour, which you can buy. The mill now also functions as a small museum.",
+    "v2": "It's a fun and short stop, especially if you want to see how things used to be done on the island. It remains special to see that this old mill is still running and producing real flour, just as it has been doing for more than a century. A living piece of traditional Kos.",
+    "k1": "You pay two euros fifty entrance fee. It is open from Monday to Saturday from 9:30 am to 5:30 pm. It is closed on Sundays.",
+    "k2": "Visitors are allowed inside (for a small entrance fee, around €2.50). You see how the grinding process works"
+  },
+  "it": {
+    "place": "Antimachia",
+    "title": "Molen Antimachia",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Restiamo per un po' nel villaggio di Antimachia.",
+    "s1": "Restiamo per un po' nel villaggio di Antimachia. C'è un bellissimo mulino a vento tradizionale completamente restaurato nel mezzo del villaggio. Il mulino ha circa centotrenta-centocinquanta anni.",
+    "s2": "C'erano otto di questi mulini a vento in tutta Kos che macinavano il grano in farina per il pane e altri prodotti. Oggi questo è l'unico mulino rimasto che funziona davvero con il vento. Il mulino è di proprietà della stessa famiglia, gli Amallos, da quattro generazioni.",
+    "s3": "Ecco perché alcuni locali lo chiamano anche mulino del prete o Amallou, mulino. All'interno puoi vedere come il processo di macinazione viene ancora eseguito alla vecchia maniera. Le pale girano con il vento, il meccanismo si mette in movimento e il grano viene macinato tra le pietre.",
+    "v1": "Il mugnaio stesso fa una breve visita e spiega con entusiasmo la storia e come funziona il tutto. Cuociono deliziosi biscotti sul posto con farina fresca, che puoi acquistare. Oggi il mulino funge anche da piccolo museo.",
+    "v2": "È una sosta breve e divertente, soprattutto se vuoi vedere come si facevano le cose sull'isola. Resta speciale vedere che questo vecchio mulino è ancora in funzione e produce vera farina, proprio come fa da più di un secolo. Un pezzo vivente della tradizionale Kos.",
+    "k1": "Si paga il biglietto d'ingresso due euro e cinquanta. È aperto dal lunedì al sabato dalle 9:30 alle 17:30. È chiuso la domenica.",
+    "k2": "I visitatori sono ammessi all'interno (pagando un piccolo biglietto d'ingresso, circa € 2,50). Vedi come funziona il processo di macinazione"
+  },
+  "tr": {
+    "place": "Antimachia",
+    "title": "Molen Antimachia",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Bir süre Antimachia köyünde kalıyoruz.",
+    "s1": "Bir süre Antimachia köyünde kalıyoruz. Köyün ortasında tamamen restore edilmiş güzel bir geleneksel yel değirmeni bulunmaktadır. Değirmen yaklaşık yüz otuz ila yüz elli yıllıktır.",
+    "s2": "İstanköy'ün her yerinde tahılları ekmek ve diğer ürünler için un haline getiren bu yel değirmenlerinden sekiz tane vardı. Bugün rüzgarla çalışan tek değirmen bu. Değirmen dört nesildir aynı ailenin, Amallos ailesinin elinde.",
+    "s3": "Bu nedenle bazı yerel halk buraya rahibin değirmeni veya Amallou değirmeni adını da veriyor. İçeride taşlama işleminin hala eski yöntemle yapıldığını görebilirsiniz. Rüzgarla birlikte bıçaklar döner, mekanizma hareket etmeye başlar ve tahıl taşların arasında öğütülür.",
+    "v1": "Değirmenci kısa bir tur atıyor ve heyecanla tarihi ve her şeyin nasıl yürüdüğünü anlatıyor. Satın alabileceğiniz taze undan, yerinde lezzetli kurabiyeler pişiriyorlar. Değirmen artık küçük bir müze olarak da kullanılıyor.",
+    "v2": "Özellikle adada işlerin eskiden nasıl yapıldığını görmek istiyorsanız eğlenceli ve kısa bir durak. Bu eski değirmenin, tıpkı bir asırdan fazla süredir olduğu gibi hâlâ çalışır durumda olduğunu ve gerçek un ürettiğini görmek çok özel. Geleneksel Kos'un yaşayan bir parçası.",
+    "k1": "İki euro elli giriş ücreti ödüyorsunuz. Pazartesiden cumartesiye 09:30 ile 17:30 saatleri arasında açıktır. Pazar günleri kapalıdır.",
+    "k2": "Ziyaretçilerin içeriye girmesine izin verilir (küçük bir giriş ücreti karşılığında, yaklaşık 2,50 €). Öğütme işleminin nasıl çalıştığını görüyorsunuz"
+  },
+  "es": {
+    "place": "Antimachia",
+    "title": "Molen Antimachia",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Nos quedamos un rato en el pueblo de Antimachia.",
+    "s1": "Nos quedamos un rato en el pueblo de Antimachia. Hay un hermoso molino de viento tradicional totalmente restaurado en el centro del pueblo. El molino tiene aproximadamente entre ciento treinta y ciento cincuenta años.",
+    "s2": "Solía ​​haber ocho de estos molinos de viento en todo Kos que molían el grano para convertirlo en harina para pan y otros productos. Hoy en día este es el único molino que realmente funciona con el viento. El molino está en manos de la misma familia, los Amallos, desde hace cuatro generaciones.",
+    "s3": "Por eso algunos lugareños también lo llaman molino del cura o molino de Amallou. En su interior se puede observar cómo el proceso de molienda aún se realiza a la antigua usanza. Las aspas giran con el viento, el mecanismo se pone en movimiento y el grano se muele entre las piedras.",
+    "v1": "El propio molinero hace un breve recorrido y explica con entusiasmo la historia y cómo funciona todo. Hornean deliciosas galletas allí mismo con harina fresca, que puedes comprar. El molino ahora también funciona como un pequeño museo.",
+    "v2": "Es una parada breve y divertida, sobre todo si quieres ver cómo se hacían las cosas antiguamente en la isla. Sigue siendo especial ver que este antiguo molino sigue funcionando y produciendo auténtica harina, tal como lo ha estado haciendo durante más de un siglo. Una pieza viva del Kos tradicional.",
+    "k1": "Pagas dos euros cincuenta de entrada. Está abierto de lunes a sábado de 9:30 am a 5:30 pm. Está cerrado los domingos.",
+    "k2": "Se permite el acceso a los visitantes (por un módico precio de entrada, unos 2,50 €). Ya ves cómo funciona el proceso de molienda."
   }
-
-  var langBtn = document.getElementById('langBtn');
-  var langMenu = document.getElementById('langMenu');
-  function openMenu(){ langMenu.classList.add('open'); }
-  function closeMenu(){ langMenu.classList.remove('open'); }
-  langBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    langMenu.classList.contains('open') ? closeMenu() : openMenu();
-  });
-  document.addEventListener('click', function(){ closeMenu(); });
-  document.querySelectorAll('.lang-option').forEach(function(btn){
-    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
-  });
-
-  var saved = localStorage.getItem('hk-lang') || 'nl';
-  setLang(saved);
-
-  /* TTS */
-  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
-  function getLang(){
-    var l = localStorage.getItem('hk-lang') || 'nl';
-    return LANG_VOICE[l] ? l : 'nl';
-  }
-  function pickVoice(code){
-    var voices = speechSynthesis.getVoices() || [];
-    var prefix = code.slice(0,2).toLowerCase();
-    return voices.find(function(v){ return v.lang === code; })
-      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
-      || null;
-  }
-  var btnPlay = document.getElementById('btnPlay');
-  var btnStop = document.getElementById('btnStop');
-  var status = document.getElementById('ttsStatus');
-  function setStatus(t){ if(status) status.textContent = t; }
-  function play(){
-    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
-    speechSynthesis.cancel();
-    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
-    var l = getLang();
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = LANG_VOICE[l];
-    u.rate = 0.92;
-    var v = pickVoice(LANG_VOICE[l]);
-    if(v) u.voice = v;
-    u.onstart = function(){
-      btnPlay.classList.add('playing');
-      btnStop.classList.add('show');
-      setStatus('Voorlezen… ('+l.toUpperCase()+')');
-    };
-    u.onend = u.onerror = function(){
-      btnPlay.classList.remove('playing');
-      btnStop.classList.remove('show');
-      setStatus('');
-    };
-    if(!speechSynthesis.getVoices().length){
-      speechSynthesis.onvoiceschanged = function(){
-        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
-        speechSynthesis.speak(u);
-      };
-      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
-    } else {
-      speechSynthesis.speak(u);
-    }
-  }
-  function stop(){
-    if(window.speechSynthesis) speechSynthesis.cancel();
-    btnPlay.classList.remove('playing');
-    btnStop.classList.remove('show');
-    setStatus('Gestopt.');
-  }
-  btnPlay.addEventListener('click', play);
-  btnStop.addEventListener('click', stop);
-  if(window.speechSynthesis){
-    speechSynthesis.getVoices();
-    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
-  }
-})();
-</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

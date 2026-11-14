@@ -1,515 +1,223 @@
 <!DOCTYPE html>
-<html lang="nl" data-hk-tts="1" class="hk-fix-light">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
-  <meta name="theme-color" content="#2A6F6F">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0D1F1F">
   <title>Defterdar moskee – Hello Kos</title>
-  <style>
-    :root {
-      --petrol: #2A6F6F; --petrol-dark: #1A4A4A; --cream: #f5f2ec;
-      --text: #1A1A1A; --soft: #4A4A4A;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--cream); color: var(--text); line-height: 1.55;
-      padding-bottom: env(safe-area-inset-bottom, 0);
-    }
-    .app-header {
-      position: sticky; top: 0; z-index: 100;
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-      padding: 12px 14px; background: rgba(245, 242, 236, 0.92);
-      backdrop-filter: blur(16px); border-bottom: 1px solid rgba(42, 111, 111, 0.12);
-    }
-    .back-btn { color: var(--petrol-dark); font-weight: 600; text-decoration: none; font-size: 0.9rem; }
-    .logo { justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-    .logo-icon {
-      width: 34px; height: 34px; border-radius: 50%;
-      background: linear-gradient(145deg, #F0C040, #D4A017);
-      display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px;
-    }
-    .logo-text { font-size: 1.2rem; font-weight: 700; color: #D4A017; font-family: Georgia, serif; }
-    .logo-text span { color: #C4920F; font-style: italic; }
-    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
-    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #d4cfc6; }
-    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .content { padding: 18px 16px 0; }
-    h1 {
-      font-size: 1.45rem; font-weight: 800; color: var(--petrol-dark);
-      letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2;
-    }
-    .lead { font-size: 0.95rem; color: var(--soft); margin-bottom: 14px; }
-
-    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-    .btn {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer;
-      font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none;
-    }
-    .btn-audio { background: var(--petrol); color: #fff; }
-    .btn-audio.playing { background: var(--petrol-dark); }
-    .btn-stop { background: #6b7280; color: #fff; display: none; }
-    .btn-stop.show { display: flex; }
-
-    .status { text-align: center; font-size: 0.78rem; color: var(--soft); min-height: 1.1em; margin-bottom: 8px; }
-    .card {
-      background: #fff; border-radius: 16px; padding: 16px 16px 14px;
-      margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-    }
-    .card h2 { font-size: 1.02rem; color: var(--petrol-dark); margin-bottom: 8px; }
-    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
-    .card p:last-child { margin-bottom: 0; }
-    .tip {
-      background: #fff8e6; border-left: 4px solid #e6b422;
-      border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0;
-      font-size: 0.88rem; color: #3d3420;
-    }
-    .tip strong { color: #5c4a12; }
-    .photo-block {
-      margin: 8px 0 14px; border-radius: 14px; overflow: hidden;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-    }
-    .photo-block img { width: 100%; display: block; max-height: 280px; object-fit: cover; }
-    .photo-block .cap {
-      background: #fff; padding: 8px 12px; font-size: 0.75rem; color: var(--soft); text-align: center;
-    }
-
-    .gallery {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px;
-    }
-    .g-item {
-      border-radius: 12px; overflow: hidden; background: #fff;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    }
-    .g-item img {
-      width: 100%; aspect-ratio: 1; object-fit: cover; display: block;
-      filter: contrast(1.05) saturate(1.05);
-    }
-    .g-item span {
-      display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--soft); text-align: center;
-    }
-    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--soft); }
-    .footer a { color: var(--petrol); text-decoration: none; }
-  </style>
-<link rel="stylesheet" href="hello-kos.css">
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body>
+<body class="hk-page hk-guide">
   <header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
   <main class="main">
     <div class="hero-wrap">
-      <img src="img/defterdar/koepel.jpg" alt="Defterdar-moskee" loading="eager">
-      <div class="hero-title"><h1 data-i18n="title">Defterdar moskee</h1></div>
+      <img class="hk-zoom" src="img/defterdar/koepel.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
     </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=36.8924%2C27.2876" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?ll=36.8924,27.2876&amp;q=Defterdar%20moskee" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-defterdar-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-defterdar-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-defterdar-03.jpg" alt=""></figure>
+<p data-i18n="s4"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-defterdar-04.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-defterdar-05.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-defterdar-06.jpg" alt=""></figure>
+<p data-i18n="v3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-defterdar-07.jpg" alt=""></figure>
+<p data-i18n="v4"></p>
 
-    <div class="content">
-<p class="lead" data-i18n="lead">Ottomaanse moskee op Eleftherias-plein – gerestaureerd en weer open voor bezoekers.</p>
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
 
-      
+<p data-i18n="k2"></p>
 
-      <div class="actions">
-        <button type="button" class="btn btn-audio" id="btnPlay">🔊 <span data-i18n="read">Voorlezen</span></button>
-        <button type="button" class="btn btn-stop" id="btnStop">⏹ <span data-i18n="stop">Stop</span></button>
-      </div>
-      
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Defterdar%20Mosque%20Eleftherias%20Square%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Defterdar%20Mosque%20Eleftherias%20Square%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
-      </div>
-      <p class="status" id="ttsStatus"></p>
-
-      <div id="readText">
-        <div class="card">
-          <h2 data-i18n="hStory">Weer te bezoeken</h2>
-          <p data-i18n="p1">De Defterdar Moskee staat op <strong>Eleftherias-plein</strong> in het hart van Kos-stad. Na de aardbeving van 2017 en een grote restauratie is de moskee <strong>weer in gebruik en te bezoeken</strong>.</p>
-          <p data-i18n="p1b">Binnen zie je de gebedszaal met witte zuilen, bogen, een groene koepel en het typische blauwe gebedstapijt.</p>
-        </div>
-
-        
-
-        <div class="photo-block">
-          <img src="img/defterdar/mihrab.jpg" alt="Defterdar-moskee" loading="lazy">
-          <div class="cap" data-i18n="c1">Mihrab (gebedsnis) en minbar</div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="hSee">Wie was Defterdar?</h2>
-          <p data-i18n="p2">De moskee is vernoemd naar <strong>Defterdar Haci Ibrahim Efendi</strong>. Een <em>defterdar</em> was de minister van financiën van het Ottomaanse Rijk. Hij financierde de moskee uit eigen middelen.</p>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h3">Geschiedenis</h2>
-          <p data-i18n="p3">Gebouwd in de 18e eeuw op de resten van een oudere christelijke kerk (vermoedelijk Sint Paraskevi). Kenmerkend is de <strong>rode koepel</strong> aan de buitenkant.</p>
-          <p data-i18n="p3b">In <strong>2017</strong> stortte de minaret in door de aardbeving. Na restauratie (circa € 1,5 miljoen) is het gebouw weer toegankelijk.</p>
-        </div>
-
-        <div class="photo-block">
-          <img src="img/defterdar/tapijt.jpg" alt="Defterdar-moskee" loading="lazy">
-          <div class="cap" data-i18n="c2">Detail van het blauwe gebedstapijt</div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h4">Binnen</h2>
-          <p data-i18n="p4">Witte zuilen en bogen, groene koepel met kroonluchter, ronde kalligrafieplaten aan de muren, mihrab en minbar. Het blauwe tapijt met ornamenten dekt de hele gebedsvloer.</p>
-        </div>
-
-        <div class="gallery">
-          <div class="g-item">
-            <img src="img/defterdar/koepel.jpg" alt="Defterdar-moskee" loading="lazy">
-            <span data-i18n="c3">Gebedsruimte met groene koepel</span>
-          </div>
-          <div class="g-item">
-            <img src="img/defterdar/mihrab.jpg" alt="Defterdar-moskee" loading="lazy">
-            <span data-i18n="c4">Mihrab en minbar</span>
-          </div>
-          <div class="g-item">
-            <img src="img/defterdar/tapijt.jpg" alt="Defterdar-moskee" loading="lazy">
-            <span data-i18n="c5">Blauw gebedstapijt</span>
-          </div>
-          <div class="g-item">
-            <img src="img/defterdar/interieur-1.jpg" alt="Defterdar-moskee" loading="lazy">
-            <span data-i18n="c6">Interieur met zuilen</span>
-          </div>
-          <div class="g-item">
-            <img src="img/defterdar/interieur-4.jpg" alt="Defterdar-moskee" loading="lazy">
-            <span data-i18n="c7">Overzicht gebedszaal</span>
-          </div>
-          <div class="g-item">
-            <img src="img/defterdar/interieur-3.jpg" alt="Defterdar-moskee" loading="lazy">
-            <span data-i18n="c8">Zuilengalerij</span>
-          </div>
-          <div class="g-item">
-            <img src="img/defterdar/interieur-2.jpg" alt="Defterdar-moskee" loading="lazy">
-            <span data-i18n="c9">Naar de uitgang</span>
-          </div>
-          <div class="g-item">
-            <img src="img/defterdar/interieur-5.jpg" alt="Defterdar-moskee" loading="lazy">
-            <span data-i18n="c10">Bogen en koepel</span>
-          </div>
-          <div class="g-item">
-            <img src="img/defterdar/ingang.jpg" alt="Defterdar-moskee" loading="lazy">
-            <span data-i18n="c11">Ingang met trap</span>
-          </div>
-          <div class="g-item">
-            <img src="img/defterdar/gang.jpg" alt="Defterdar-moskee" loading="lazy">
-            <span data-i18n="c12">Zijruimte</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="hKnow">Bezoeken</h2>
-          <p data-i18n="p5">Op Eleftherias-plein. Trek schoenen uit bij binnenkomst (gebruikelijk in moskeeën). Wees stil en respectvol – het is weer een gebedshuis.</p>
-          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip"><strong>Tip:</strong> kijk omhoog naar de groene koepel en de kalligrafieplaten. Op het blauwe tapijt mag je voorzichtig lopen; volg de lokale aanwijzingen.</p></div>
-        </div>
-      </div>
+</article>
     </div>
   </main>
-
-  <footer class="footer">
-    <div>Hello Kos</div>
-    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
-  </footer>
-
-  <script>
-  (function(){
-    var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR',es:'es-ES' };
-    function getLang(){
-      var l = localStorage.getItem('hk-lang') || 'nl';
-      return LANG_VOICE[l] ? l : 'nl';
-    }
-    function pickVoice(code){
-      var voices = speechSynthesis.getVoices() || [];
-      var prefix = code.slice(0,2).toLowerCase();
-      return voices.find(function(v){ return v.lang === code; })
-        || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
-        || null;
-    }
-    var btnPlay = document.getElementById('btnPlay');
-    var btnStop = document.getElementById('btnStop');
-    var status = document.getElementById('ttsStatus');
-    function setStatus(t){ if(status) status.textContent = t; }
-    function hkMsg(k){var l=localStorage.getItem('hk-lang')||'nl';var T={nl:{play:'Voorlezen…',stop:'Gestopt.',no:'Voorlezen niet ondersteund.'},de:{play:'Vorlesen…',stop:'Gestoppt.',no:'Vorlesen nicht unterstützt.'},en:{play:'Reading…',stop:'Stopped.',no:'Read-aloud is not supported.'},it:{play:'Lettura…',stop:'Interrotto.',no:'Lettura vocale non supportata.'},tr:{play:'Okunuyor…',stop:'Durdu.',no:'Sesli okuma desteklenmiyor.'},es:{play:'Leyendo…',stop:'Parado.',no:'Lectura en voz alta no disponible.'}};return (T[l]||T.nl)[k];}
-    function play(){
-      if(!window.speechSynthesis){ setStatus(hkMsg('no')); return; }
-      speechSynthesis.cancel();
-      var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
-      var l = getLang();
-      var u = new SpeechSynthesisUtterance(text);
-      u.lang = LANG_VOICE[l]; u.rate = 0.92;
-      var v = pickVoice(LANG_VOICE[l]); if(v) u.voice = v;
-      u.onstart = function(){
-        btnPlay.classList.add('playing'); btnStop.classList.add('show');
-        setStatus(hkMsg('play')+' ('+l.toUpperCase()+')');
-      };
-      u.onend = u.onerror = function(){
-        btnPlay.classList.remove('playing'); btnStop.classList.remove('show'); setStatus('');
-      };
-      if(!speechSynthesis.getVoices().length){
-        speechSynthesis.onvoiceschanged = function(){
-          var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
-          speechSynthesis.speak(u);
-        };
-        setTimeout(function(){ speechSynthesis.speak(u); }, 250);
-      } else { speechSynthesis.speak(u); }
-    }
-    function stop(){
-      if(window.speechSynthesis) speechSynthesis.cancel();
-      btnPlay.classList.remove('playing'); btnStop.classList.remove('show'); setStatus(hkMsg('stop'));
-    }
-    btnPlay.addEventListener('click', play);
-    btnStop.addEventListener('click', stop);
-    if(window.speechSynthesis){
-      speechSynthesis.getVoices();
-      speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
-    }
-  })();
-  </script>
-<script>window.HK_DICT = {
-    "nl": {
-      "title": "Defterdar moskee",
-      "lead": "Ottomaanse moskee op Eleftherias-plein – gerestaureerd en weer open voor bezoekers.",
-      "p1": "De Defterdar Moskee staat op <strong>Eleftherias-plein</strong> in het hart van Kos-stad. Na de aardbeving van 2017 en een grote restauratie is de moskee <strong>weer in gebruik en te bezoeken</strong>.",
-      "p1b": "Binnen zie je de gebedszaal met witte zuilen, bogen, een groene koepel en het typische blauwe gebedstapijt.",
-      "p2": "De moskee is vernoemd naar <strong>Defterdar Haci Ibrahim Efendi</strong>. Een <em>defterdar</em> was de minister van financiën van het Ottomaanse Rijk. Hij financierde de moskee uit eigen middelen.",
-      "h3": "Geschiedenis",
-      "p3": "Gebouwd in de 18e eeuw op de resten van een oudere christelijke kerk (vermoedelijk Sint Paraskevi). Kenmerkend is de <strong>rode koepel</strong> aan de buitenkant.",
-      "p3b": "In <strong>2017</strong> stortte de minaret in door de aardbeving. Na restauratie (circa € 1,5 miljoen) is het gebouw weer toegankelijk.",
-      "h4": "Binnen",
-      "p4": "Witte zuilen en bogen, groene koepel met kroonluchter, ronde kalligrafieplaten aan de muren, mihrab en minbar. Het blauwe tapijt met ornamenten dekt de hele gebedsvloer.",
-      "p5": "Op Eleftherias-plein. Trek schoenen uit bij binnenkomst (gebruikelijk in moskeeën). Wees stil en respectvol – het is weer een gebedshuis.",
-      "tip": "<strong>Tip:</strong> kijk omhoog naar de groene koepel en de kalligrafieplaten. Op het blauwe tapijt mag je voorzichtig lopen; volg de lokale aanwijzingen.",
-      "c1": "Mihrab (gebedsnis) en minbar",
-      "c2": "Detail van het blauwe gebedstapijt",
-      "c3": "Gebedsruimte met groene koepel",
-      "c4": "Mihrab en minbar",
-      "c5": "Blauw gebedstapijt",
-      "c6": "Interieur met zuilen",
-      "c7": "Overzicht gebedszaal",
-      "c8": "Zuilengalerij",
-      "c9": "Naar de uitgang",
-      "c10": "Bogen en koepel",
-      "c11": "Ingang met trap",
-      "c12": "Zijruimte",
-      "hero": "Defterdar moskee · weer te bezoeken",
-      "f1": "18e eeuw",
-      "f2": "gebouwd",
-      "f3": "Open",
-      "f4": "binnen te zien",
-      "hStory": "Het verhaal",
-      "hSee": "Wat je ziet",
-      "hKnow": "Goed om te weten",
-      "tipTitle": "Tip van de gids",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Defterdar-Moschee",
-      "lead": "Osmanische Moschee am Eleftherias-Platz – restauriert und wieder für Besucher offen.",
-      "p1": "Die Defterdar-Moschee steht am <strong>Eleftherias-Platz</strong> im Herzen von Kos-Stadt. Nach dem Beben von 2017 und einer großen Restaurierung ist die Moschee <strong>wieder in Gebrauch und zu besuchen</strong>.",
-      "p1b": "Innen siehst du den Gebetsraum mit weißen Säulen, Bögen, einer grünen Kuppel und dem typischen blauen Gebetsteppich.",
-      "p2": "Die Moschee ist nach <strong>Defterdar Haci Ibrahim Efendi</strong> benannt. Ein <em>Defterdar</em> war der Finanzminister des Osmanischen Reichs. Er finanzierte die Moschee aus eigenen Mitteln.",
-      "h3": "Geschichte",
-      "p3": "Im 18. Jahrhundert auf den Resten einer älteren christlichen Kirche gebaut (vermutlich Agia Paraskevi). Typisch ist die <strong>rote Kuppel</strong> außen.",
-      "p3b": "<strong>2017</strong> stürzte das Minarett durch das Beben ein. Nach der Restaurierung (rund 1,5 Millionen Euro) ist das Gebäude wieder zugänglich.",
-      "h4": "Innen",
-      "p4": "Weiße Säulen und Bögen, grüne Kuppel mit Kronleuchter, runde Kalligrafieplatten an den Wänden, Mihrab und Minbar. Der blaue Teppich mit Ornamenten bedeckt den ganzen Gebetsboden.",
-      "p5": "Am Eleftherias-Platz. Schuhe beim Eintreten ausziehen (üblich in Moscheen). Sei still und respektvoll – es ist wieder ein Gebetshaus.",
-      "tip": "<strong>Tipp:</strong> schau nach oben zur grünen Kuppel und den Kalligrafieplatten. Auf dem blauen Teppich darfst du vorsichtig gehen; folge den örtlichen Hinweisen.",
-      "c1": "Mihrab (Gebetsnische) und Minbar",
-      "c2": "Detail des blauen Gebetsteppichs",
-      "c3": "Gebetsraum mit grüner Kuppel",
-      "c4": "Mihrab und Minbar",
-      "c5": "Blauer Gebetsteppich",
-      "c6": "Innenraum mit Säulen",
-      "c7": "Überblick Gebetsraum",
-      "c8": "Säulengang",
-      "c9": "Zum Ausgang",
-      "c10": "Bögen und Kuppel",
-      "c11": "Eingang mit Treppe",
-      "c12": "Nebenraum",
-      "hero": "Defterdar-Moschee · wieder zu besuchen",
-      "f1": "18. Jahrhundert",
-      "f2": "gebaut",
-      "f3": "Offen",
-      "f4": "innen zu sehen",
-      "hStory": "Die Geschichte",
-      "hSee": "Was du siehst",
-      "hKnow": "Gut zu wissen",
-      "tipTitle": "Tipp des Guides",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Defterdar Mosque",
-      "lead": "Ottoman mosque on Eleftherias Square – restored and open to visitors again.",
-      "p1": "The Defterdar Mosque stands on <strong>Eleftherias Square</strong> in the heart of Kos town. After the 2017 earthquake and a major restoration, the mosque is <strong>in use again and open to visitors</strong>.",
-      "p1b": "Inside you see the prayer hall with white columns, arches, a green dome and the typical blue prayer carpet.",
-      "p2": "The mosque is named after <strong>Defterdar Haci Ibrahim Efendi</strong>. A <em>defterdar</em> was the finance minister of the Ottoman Empire. He paid for the mosque himself.",
-      "h3": "History",
-      "p3": "Built in the 18th century on the remains of an older Christian church (probably Saint Paraskevi). The <strong>red dome</strong> on the outside is typical.",
-      "p3b": "In <strong>2017</strong> the minaret collapsed in the earthquake. After restoration (about €1.5 million) the building is open again.",
-      "h4": "Inside",
-      "p4": "White columns and arches, a green dome with a chandelier, round calligraphy panels on the walls, mihrab and minbar. The blue carpet with ornaments covers the whole prayer floor.",
-      "p5": "On Eleftherias Square. Take your shoes off when you go in (usual in mosques). Be quiet and respectful – it is a house of prayer again.",
-      "tip": "<strong>Tip:</strong> look up at the green dome and the calligraphy panels. You may walk carefully on the blue carpet; follow the local signs.",
-      "c1": "Mihrab (prayer niche) and minbar",
-      "c2": "Detail of the blue prayer carpet",
-      "c3": "Prayer hall with the green dome",
-      "c4": "Mihrab and minbar",
-      "c5": "Blue prayer carpet",
-      "c6": "Interior with columns",
-      "c7": "Overview of the prayer hall",
-      "c8": "Colonnade",
-      "c9": "Towards the exit",
-      "c10": "Arches and dome",
-      "c11": "Entrance with steps",
-      "c12": "Side room",
-      "hero": "Defterdar Mosque · open to visit again",
-      "f1": "18th century",
-      "f2": "built",
-      "f3": "Open",
-      "f4": "you can go inside",
-      "hStory": "The story",
-      "hSee": "What you see",
-      "hKnow": "Good to know",
-      "tipTitle": "Guide’s tip",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Moschea Defterdar",
-      "lead": "Moschea ottomana in piazza Eleftherias – restaurata e di nuovo aperta ai visitatori.",
-      "p1": "La moschea Defterdar è in <strong>piazza Eleftherias</strong>, nel cuore della città. Dopo il terremoto del 2017 e un grande restauro la moschea è <strong>di nuovo in uso e visitabile</strong>.",
-      "p1b": "Dentro vedi la sala di preghiera con colonne bianche, archi, una cupola verde e il tipico tappeto blu.",
-      "p2": "La moschea prende il nome da <strong>Defterdar Haci Ibrahim Efendi</strong>. Un <em>defterdar</em> era il ministro delle finanze dell’Impero ottomano. Finanziò la moschea di tasca sua.",
-      "h3": "Storia",
-      "p3": "Costruita nel XVIII secolo sui resti di una chiesa cristiana più antica (probabilmente Sant’Paraskevi). Tipica la <strong>cupola rossa</strong> all’esterno.",
-      "p3b": "Nel <strong>2017</strong> il minareto crollò per il terremoto. Dopo il restauro (circa 1,5 milioni di euro) l’edificio è di nuovo accessibile.",
-      "h4": "Dentro",
-      "p4": "Colonne e archi bianchi, cupola verde con lampadario, pannelli rotondi di calligrafia, mihrab e minbar. Il tappeto blu con ornamenti copre tutto il pavimento di preghiera.",
-      "p5": "In piazza Eleftherias. Togliti le scarpe all’ingresso (come nelle moschee). Stai in silenzio e sii rispettoso: è di nuovo un luogo di preghiera.",
-      "tip": "<strong>Consiglio:</strong> guarda in alto la cupola verde e i pannelli di calligrafia. Sul tappeto blu si cammina con cautela; segui le indicazioni locali.",
-      "c1": "Mihrab (nicchia di preghiera) e minbar",
-      "c2": "Dettaglio del tappeto da preghiera blu",
-      "c3": "Sala di preghiera con la cupola verde",
-      "c4": "Mihrab e minbar",
-      "c5": "Tappeto da preghiera blu",
-      "c6": "Interno con colonne",
-      "c7": "Panorama della sala di preghiera",
-      "c8": "Colonnato",
-      "c9": "Verso l’uscita",
-      "c10": "Archi e cupola",
-      "c11": "Ingresso con scala",
-      "c12": "Stanza laterale",
-      "hero": "Moschea Defterdar · di nuovo visitabile",
-      "f1": "XVIII secolo",
-      "f2": "costruita",
-      "f3": "Aperta",
-      "f4": "si entra",
-      "hStory": "La storia",
-      "hSee": "Cosa vedi",
-      "hKnow": "Buono a sapersi",
-      "tipTitle": "Consiglio della guida",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Defterdar Camii",
-      "lead": "Eleftherias meydanında Osmanlı camii – onarıldı ve yine ziyarete açık.",
-      "p1": "Defterdar Camii, Kos şehrinin göbeğinde <strong>Eleftherias meydanında</strong>. 2017 depremi ve büyük onarımdan sonra cami <strong>yine kullanılıyor ve gezilebiliyor</strong>.",
-      "p1b": "İçeride beyaz sütunlar, kemerler, yeşil kubbe ve tipik mavi seccade görülür.",
-      "p2": "Cami <strong>Defterdar Haci Ibrahim Efendi</strong>’nin adını taşır. <em>Defterdar</em>, Osmanlı maliye bakanıydı. Camiyi kendi imkânıyla yaptırdı.",
-      "h3": "Tarih",
-      "p3": "18. yüzyılda daha eski bir Hristiyan kilisesinin (muhtemelen Aya Paraskevi) kalıntıları üzerine yapıldı. Dışarıda <strong>kırmızı kubbe</strong> tipiktir.",
-      "p3b": "<strong>2017</strong>’de minare depremde yıkıldı. Onarımdan sonra (yaklaşık 1,5 milyon euro) yapı yine açık.",
-      "h4": "İçeride",
-      "p4": "Beyaz sütun ve kemerler, avizeli yeşil kubbe, duvarlarda yuvarlak hat levhaları, mihrap ve minber. Süslü mavi halı bütün namaz alanını kaplar.",
-      "p5": "Eleftherias meydanında. Girerken ayakkabını çıkar (camilerde âdettir). Sessiz ve saygılı ol – yine bir ibadethanedir.",
-      "tip": "<strong>İpucu:</strong> yeşil kubbeye ve hat levhalarına bak. Mavi halıda dikkatle yürünebilir; yerel uyarıları izle.",
-      "c1": "Mihrap (namaz nişi) ve minber",
-      "c2": "Mavi seccadenin detayı",
-      "c3": "Yeşil kubbeli namaz alanı",
-      "c4": "Mihrap ve minber",
-      "c5": "Mavi seccade",
-      "c6": "Sütunlu iç mekân",
-      "c7": "Namaz salonunun görünümü",
-      "c8": "Sütunlu galeri",
-      "c9": "Çıkışa doğru",
-      "c10": "Kemerler ve kubbe",
-      "c11": "Merdivenli giriş",
-      "c12": "Yan oda",
-      "hero": "Defterdar Camii · yine gezilebilir",
-      "f1": "18. yüzyıl",
-      "f2": "yapıldı",
-      "f3": "Açık",
-      "f4": "içeri girilir",
-      "hStory": "Hikaye",
-      "hSee": "Ne görürsün",
-      "hKnow": "Bilmekte fayda var",
-      "tipTitle": "Rehberin ipucu",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Mezquita Defterdar",
-      "lead": "Mezquita otomana en la plaza Eleftherias – restaurada y otra vez abierta a visitantes.",
-      "p1": "La mezquita Defterdar está en la <strong>plaza Eleftherias</strong>, en el corazón de la ciudad. Tras el terremoto de 2017 y una gran restauración, la mezquita <strong>vuelve a usarse y a visitarse</strong>.",
-      "p1b": "Dentro ves la sala de oración con columnas blancas, arcos, una cúpula verde y la típica alfombra azul.",
-      "p2": "La mezquita lleva el nombre de <strong>Defterdar Haci Ibrahim Efendi</strong>. Un <em>defterdar</em> era el ministro de finanzas del Imperio otomano. Pagó la mezquita de su bolsillo.",
-      "h3": "Historia",
-      "p3": "Construida en el siglo XVIII sobre los restos de una iglesia cristiana más antigua (probablemente Santa Paraskevi). Fuera destaca la <strong>cúpula roja</strong>.",
-      "p3b": "En <strong>2017</strong> el minarete se cayó por el terremoto. Tras la restauración (unos 1,5 millones de euros) el edificio vuelve a estar abierto.",
-      "h4": "Dentro",
-      "p4": "Columnas y arcos blancos, cúpula verde con lámpara, paneles redondos de caligrafía, mihrab y minbar. La alfombra azul con adornos cubre todo el suelo de oración.",
-      "p5": "En la plaza Eleftherias. Quítate los zapatos al entrar (habitual en las mezquitas). Habla bajo y sé respetuoso: vuelve a ser un lugar de oración.",
-      "tip": "<strong>Consejo:</strong> mira hacia arriba la cúpula verde y los paneles de caligrafía. Sobre la alfombra azul se camina con cuidado; sigue las indicaciones locales.",
-      "c1": "Mihrab (nicho de oración) y minbar",
-      "c2": "Detalle de la alfombra de oración azul",
-      "c3": "Sala de oración con la cúpula verde",
-      "c4": "Mihrab y minbar",
-      "c5": "Alfombra de oración azul",
-      "c6": "Interior con columnas",
-      "c7": "Vista de la sala de oración",
-      "c8": "Galería de columnas",
-      "c9": "Hacia la salida",
-      "c10": "Arcos y cúpula",
-      "c11": "Entrada con escalera",
-      "c12": "Sala lateral",
-      "hero": "Mezquita Defterdar · se visita otra vez",
-      "f1": "Siglo XVIII",
-      "f2": "construida",
-      "f3": "Abierta",
-      "f4": "se puede entrar",
-      "hStory": "La historia",
-      "hSee": "Qué ves",
-      "hKnow": "Bueno saberlo",
-      "tipTitle": "Consejo del guía",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Kos-stad",
+    "title": "Defterdar moskee",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "Eleftheriasplein, het centrale plein van Kos-stad.",
+    "s1": "Eleftheriasplein, het centrale plein van Kos-stad. Rechts van ons zien jullie de Defterdar Moskee. Dit is een Ottomaanse moskee die gebouwd werd rond zeventien tachtig De moskee is vernoemd naar Ibrahim Efendi, een Ottomaanse minister van financiën – een defterdar – die de bouw liet uitvoeren.",
+    "s2": "De moskee staat op de resten van oudere gebouwen, waaronder een vroegere christelijke kerk en Romeinse tempels. Het is een typisch Ottomaans bouwwerk met een rode koepel en een minaret. Oorspronkelijk hoorde er ook een fontein bij voor de rituele wassing.",
+    "s3": "In negentienhonderd drieëndertig kreeg de moskee het zwaar te verduren. Bij deze aardbevingen raakte het gebouw ernstig beschadigd. De Italianen, die Kos toen in handen hadden, voerden een grote restauratie uit.",
+    "s4": "Daarbij haalden ze onder andere het bovenste deel van de minaret af en bouwden het opnieuw op. Later, in juli tweeduizend zeventien, werd de moskee opnieuw zwaar beschadigd door een aardbeving van zes komma zeven op de schaal van Richter. De Griekse overheid startte daarna een nieuwe restauratie van zowel de moskee als de bijbehorende fontein.",
+    "v1": "Die werkzaamheden zijn recent afgerond in tweeduizend zes en twintig. Vandaag de dag is het een beschermd monument. Het is een van de twee Ottomaanse moskeeën op Kos die nog in gebruik zijn voor de moslimgemeenschap.",
+    "v2": "Je kunt het gebouw van buitenaf bekijken. Let vooral op de rode koepel die goed opvalt tussen de andere gebouwen op het plein.",
+    "v3": "Hij speelde een belangrijke rol in het beheren van de belastingen en financiën voor het gehele Ottomaanse Rijk en financierde de moskee uit eigen middelen, waardoor het een prestigeproject werd.",
+    "v4": "De moskee is gebouwd op de resten van een oude christelijke kerk, vermoedelijk gewijd aan Sint Paraskevi – een lokale traditie die aantoont hoe de plaats al eeuwenlang een wisseling van geloof heeft doorgemaakt. Sommige bronnen vermelden zelfs de aanwezigheid van Romeinse tempels onder de huidige structuur. Kenmerkend voor de moskee is de mooie rode koepel, die de klassieke Ottomaanse stijl accentueert met fraaie stenen details.",
+    "k1": "Voorheen stond er ook een hoge minaret die boven het plein uitsteeg. Helaas is deze minaret tijdens de aardbeving van 2017 ingestort, waardoor het gebouw sindsdien afgesloten is.",
+    "k2": "De cafés op de begane grond zijn gesloten wegens instortingsgevaar. In deze cafés werd vroeger geen alcohol geserveerd, omdat het om een islamitisch gebedshuis ging. De restauratie van de moskee, inclusief de herbouw van de minaret, stabilisatie van de muren en modernisering met verlichting en beveiliging, kostte ongeveer 1,5 miljoen euro en zal naar verwachting in 2026 gereed zijn."
+  },
+  "de": {
+    "place": "Kos-Stadt",
+    "title": "Defterdar moskee",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Eleftherias-Platz, der zentrale Platz der Stadt Kos.",
+    "s1": "Eleftherias-Platz, der zentrale Platz der Stadt Kos. Zu unserer Rechten sehen Sie die Defterdar-Moschee. Dies ist eine osmanische Moschee, die um 1780 erbaut wurde. Die Moschee ist nach Ibrahim Efendi benannt, einem osmanischen Finanzminister – einem Defterdar – der den Bau durchführen ließ.",
+    "s2": "Die Moschee steht auf den Überresten älterer Gebäude, darunter einer ehemaligen christlichen Kirche und römischer Tempel. Es ist ein typisch osmanisches Gebäude mit einer roten Kuppel und einem Minarett. Ursprünglich gab es auch einen Brunnen zur rituellen Waschung.",
+    "s3": "Im Jahr 1933 hatte die Moschee eine schwere Zeit. Das Gebäude wurde bei diesen Erdbeben schwer beschädigt. Die Italiener, die damals Kos kontrollierten, führten eine umfassende Restaurierung durch.",
+    "s4": "Unter anderem entfernten sie den oberen Teil des Minaretts und bauten es wieder auf. Später, im Juli 2001, wurde die Moschee erneut durch ein Erdbeben der Stärke sechs Komma sieben auf der Richterskala schwer beschädigt. Die griechische Regierung begann daraufhin mit einer erneuten Restaurierung sowohl der Moschee als auch des dazugehörigen Brunnens.",
+    "v1": "Diese Arbeiten wurden kürzlich im Jahr 2026 abgeschlossen. Heute ist es ein geschütztes Denkmal. Sie ist eine der beiden osmanischen Moscheen auf Kos, die noch immer von der muslimischen Gemeinschaft genutzt werden.",
+    "v2": "Sie können das Gebäude von außen besichtigen. Achten Sie besonders auf die rote Kuppel, die sich von den anderen Gebäuden auf dem Platz abhebt.",
+    "v3": "Er spielte eine wichtige Rolle bei der Verwaltung der Steuern und Finanzen des gesamten Osmanischen Reiches und finanzierte die Moschee aus eigenen Mitteln, was sie zu einem Prestigeprojekt machte.",
+    "v4": "Die Moschee wurde auf den Überresten einer alten christlichen Kirche erbaut, die vermutlich dem Heiligen Paraskevi geweiht war – eine lokale Tradition, die zeigt, wie der Ort im Laufe der Jahrhunderte einen Glaubenswandel erlebt hat. Einige Quellen erwähnen sogar die Anwesenheit römischer Tempel unter dem heutigen Bauwerk. Charakteristisch für die Moschee ist die wunderschöne rote Kuppel, die mit wunderschönen Steindetails den klassischen osmanischen Stil betont.",
+    "k1": "Zuvor gab es auch ein hohes Minarett, das sich über den Platz erhob. Leider ist dieses Minarett während des Erdbebens 2017 eingestürzt, sodass das Gebäude seitdem geschlossen ist.",
+    "k2": "Die Cafés im Erdgeschoss sind wegen Einsturzgefahr geschlossen. In der Vergangenheit wurde in diesen Cafés kein Alkohol ausgeschenkt, da es sich um eine islamische Kultstätte handelte. Die Restaurierung der Moschee, einschließlich des Wiederaufbaus des Minaretts, der Stabilisierung der Mauern und der Modernisierung mit Beleuchtung und Sicherheit, kostete rund 1,5 Millionen Euro und wird voraussichtlich im Jahr 2026 abgeschlossen sein."
+  },
+  "en": {
+    "place": "Kos Town",
+    "title": "Defterdar moskee",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "Eleftherias Square, the central square of Kos Town.",
+    "s1": "Eleftherias Square, the central square of Kos Town. To our right you will see the Defterdar Mosque. This is an Ottoman mosque that was built around seventeen eighty. The mosque is named after Ibrahim Efendi, an Ottoman minister of finance - a defterdar - who had the construction carried out.",
+    "s2": "The mosque stands on the remains of older buildings, including a former Christian church and Roman temples. It is a typical Ottoman building with a red dome and a minaret. Originally there was also a fountain for ritual washing.",
+    "s3": "In nineteen hundred and thirty-three the mosque had a hard time. The building was seriously damaged in these earthquakes. The Italians, who then controlled Kos, carried out a major restoration.",
+    "s4": "Among other things, they removed the top part of the minaret and rebuilt it. Later, in July two thousand and seventeen, the mosque was again severely damaged by an earthquake measuring six point seven on the Richter scale. The Greek government then started a new restoration of both the mosque and the accompanying fountain.",
+    "v1": "That work was recently completed in two thousand and twenty-six. Today it is a protected monument. It is one of the two Ottoman mosques on Kos that are still in use for the Muslim community.",
+    "v2": "You can view the building from the outside. Pay particular attention to the red dome that stands out among the other buildings on the square.",
+    "v3": "He played an important role in managing taxes and finances for the entire Ottoman Empire and financed the mosque from his own resources, making it a prestige project.",
+    "v4": "The mosque is built on the remains of an old Christian church, believed to be dedicated to Saint Paraskevi – a local tradition that shows how the place has undergone a change of faith over centuries. Some sources even mention the presence of Roman temples beneath the current structure. Characteristic of the mosque is the beautiful red dome, which accentuates the classic Ottoman style with beautiful stone details.",
+    "k1": "Previously there was also a high minaret that rose above the square. Unfortunately, this minaret collapsed during the 2017 earthquake, meaning the building has been closed ever since.",
+    "k2": "The cafes on the ground floor are closed due to the risk of collapse. In the past, alcohol was not served in these cafes because it was an Islamic place of worship. The restoration of the mosque, including the rebuilding of the minaret, stabilization of the walls and modernization with lighting and security, cost approximately 1.5 million euros and is expected to be completed in 2026."
+  },
+  "it": {
+    "place": "Città di Kos",
+    "title": "Defterdar moskee",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Piazza Eleftherias, la piazza centrale della città di Kos.",
+    "s1": "Piazza Eleftherias, la piazza centrale della città di Kos. Alla nostra destra vedrai la Moschea Defterdar. Questa è una moschea ottomana costruita intorno al 1780. La moschea prende il nome da Ibrahim Efendi, un ministro delle finanze ottomano - un defterdar - che ne fece eseguire la costruzione.",
+    "s2": "La moschea sorge sui resti di edifici più antichi, tra cui un'ex chiesa cristiana e templi romani. È un tipico edificio ottomano con una cupola rossa e un minareto. In origine era presente anche una fontana per i lavaggi rituali.",
+    "s3": "Nel millenovecentotrentatré la moschea attraversò un periodo difficile. L'edificio è stato gravemente danneggiato da questi terremoti. Gli italiani, che allora controllavano Kos, effettuarono un importante restauro.",
+    "s4": "Tra le altre cose, rimossero la parte superiore del minareto e lo ricostruirono. Successivamente, nel luglio del duemiladiciassette, la moschea fu nuovamente gravemente danneggiata da un terremoto di sei virgola sette della scala Richter. Il governo greco ha quindi avviato un nuovo restauro sia della moschea che della relativa fontana.",
+    "v1": "Quell'opera è stata recentemente completata nel duemilaventisei. Oggi è un monumento protetto. È una delle due moschee ottomane di Kos ancora in uso per la comunità musulmana.",
+    "v2": "È possibile vedere l'edificio dall'esterno. Presta particolare attenzione alla cupola rossa che spicca tra gli altri edifici della piazza.",
+    "v3": "Ha svolto un ruolo importante nella gestione delle tasse e delle finanze dell'intero impero ottomano e ha finanziato la moschea con risorse proprie, rendendola un progetto di prestigio.",
+    "v4": "La moschea è costruita sui resti di un'antica chiesa cristiana, che si ritiene sia dedicata a San Paraskevi, una tradizione locale che mostra come il luogo abbia subito un cambiamento di fede nel corso dei secoli. Alcune fonti menzionano addirittura la presenza di templi romani al di sotto dell'attuale struttura. Caratteristica della moschea è la bellissima cupola rossa, che accentua il classico stile ottomano con bellissimi dettagli in pietra.",
+    "k1": "Precedentemente esisteva anche un alto minareto che si ergeva sopra la piazza. Sfortunatamente, questo minareto è crollato durante il terremoto del 2017, per cui da allora l’edificio è rimasto chiuso.",
+    "k2": "I bar al piano terra sono chiusi per rischio crollo. In passato in questi caffè non veniva servito alcolici perché si trattava di un luogo di culto islamico. Il restauro della moschea, compresa la ricostruzione del minareto, la stabilizzazione delle mura e l'ammodernamento con illuminazione e sicurezza, è costato circa 1,5 milioni di euro e dovrebbe essere completato nel 2026."
+  },
+  "tr": {
+    "place": "Kos şehri",
+    "title": "Defterdar moskee",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Eleftherias Meydanı, Kos şehrinin merkezi meydanı.",
+    "s1": "Eleftherias Meydanı, Kos şehrinin merkezi meydanı. Sağımızda Defterdar Camii'ni göreceksiniz. Burası bin yedi seksen civarında inşa edilmiş bir Osmanlı camisidir. Cami, adını inşaatı yaptıran Osmanlı maliye nazırı defterdar İbrahim Efendi'den almıştır.",
+    "s2": "Cami, eski bir Hıristiyan kilisesi ve Roma tapınakları da dahil olmak üzere eski binaların kalıntıları üzerinde duruyor. Kırmızı kubbeli ve minareli tipik bir Osmanlı yapısıdır. Başlangıçta ritüel yıkama için bir çeşme de vardı.",
+    "s3": "Bin dokuz yüz otuz üç yılında cami zor günler geçirdi. Bu depremlerde bina ciddi hasar gördü. Daha sonra Kos'u kontrol altına alan İtalyanlar, büyük bir restorasyon gerçekleştirdi.",
+    "s4": "Diğer şeylerin yanı sıra minarenin üst kısmını söküp yeniden inşa ettiler. Daha sonra 2 bin 17 Temmuz'da Richter ölçeğine göre altı virgül yedi şiddetindeki depremde cami yine ağır hasar gördü. Yunan hükümeti daha sonra hem caminin hem de çeşmenin yeni restorasyonuna başladı.",
+    "v1": "Bu çalışma yakın zamanda iki bin yirmi altıda tamamlandı. Bugün korunan bir anıttır. İstanköy'de halen Müslüman cemaati tarafından kullanılan iki Osmanlı camisinden biridir.",
+    "v2": "Binayı dışarıdan görebilirsiniz. Meydandaki diğer binalar arasında öne çıkan kırmızı kubbeye özellikle dikkat edin.",
+    "v3": "Tüm Osmanlı İmparatorluğu'nun vergi ve maliyesinin yönetilmesinde önemli rol oynamış ve camiyi kendi kaynaklarından finanse ederek bir prestij projesi haline getirmiştir.",
+    "v4": "Cami, Aziz Paraskevi'ye adandığına inanılan eski bir Hıristiyan kilisesinin kalıntıları üzerine inşa edilmiştir; bu, mekanın yüzyıllar boyunca nasıl bir inanç değişikliğine uğradığını gösteren yerel bir gelenektir. Hatta bazı kaynaklarda mevcut yapının altında Roma tapınaklarının varlığından bahsedilmektedir. Caminin karakteristik özelliği, klasik Osmanlı tarzını güzel taş detaylarıyla vurgulayan güzel kırmızı kubbesidir.",
+    "k1": "Daha önce meydanın üzerinde yükselen yüksek bir minare de vardı. Ne yazık ki bu minare 2017 depreminde çöktü, yani bina o zamandan beri kapalı durumda.",
+    "k2": "Zemin kattaki kafeler ise çökme riski nedeniyle kapalı. Eskiden bu kafelerde içki servisi yapılmıyordu çünkü burası İslami bir ibadethaneydi. Minarenin yeniden inşası, duvarların sağlamlaştırılması, aydınlatma ve güvenliğin modernizasyonu da dahil olmak üzere caminin restorasyonu yaklaşık 1,5 milyon avroya mal olacak ve 2026 yılında tamamlanması bekleniyor."
+  },
+  "es": {
+    "place": "Ciudad de Kos",
+    "title": "Defterdar moskee",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Plaza Eleftherias, la plaza central de la ciudad de Kos.",
+    "s1": "Plaza Eleftherias, la plaza central de la ciudad de Kos. A nuestra derecha verá la Mezquita Defterdar. Se trata de una mezquita otomana que fue construida alrededor de mil setecientos ochenta. La mezquita lleva el nombre de Ibrahim Efendi, un ministro de finanzas otomano - un defterdar - que hizo llevar a cabo la construcción.",
+    "s2": "La mezquita se levanta sobre los restos de edificios más antiguos, incluida una antigua iglesia cristiana y templos romanos. Es un edificio típico otomano con una cúpula roja y un minarete. Originalmente también había una fuente para el lavado ritual.",
+    "s3": "En mil novecientos treinta y tres la mezquita pasó por momentos difíciles. El edificio resultó gravemente dañado en estos terremotos. Los italianos, que entonces controlaban Kos, llevaron a cabo una importante restauración.",
+    "s4": "Entre otras cosas, quitaron la parte superior del minarete y lo reconstruyeron. Posteriormente, en julio de dos mil diecisiete, la mezquita volvió a sufrir graves daños por un terremoto de magnitud seis, siete en la escala de Richter. Luego, el gobierno griego inició una nueva restauración tanto de la mezquita como de la fuente que la acompaña.",
+    "v1": "Esa obra fue terminada recientemente en el año dos mil veintiséis. Hoy es un monumento protegido. Es una de las dos mezquitas otomanas de Kos que todavía están en uso para la comunidad musulmana.",
+    "v2": "Puedes ver el edificio desde el exterior. Presta especial atención a la cúpula roja que destaca entre los demás edificios de la plaza.",
+    "v3": "Desempeñó un papel importante en la gestión de los impuestos y las finanzas de todo el Imperio Otomano y financió la mezquita con sus propios recursos, lo que la convirtió en un proyecto de prestigio.",
+    "v4": "La mezquita está construida sobre los restos de una antigua iglesia cristiana, que se cree que está dedicada a San Paraskevi, una tradición local que muestra cómo el lugar ha experimentado un cambio de fe a lo largo de los siglos. Algunas fuentes incluso mencionan la presencia de templos romanos debajo de la estructura actual. Una característica de la mezquita es la hermosa cúpula roja, que acentúa el estilo clásico otomano con hermosos detalles de piedra.",
+    "k1": "Anteriormente también había un alto minarete que se elevaba sobre la plaza. Desafortunadamente, este minarete se derrumbó durante el terremoto de 2017, por lo que el edificio ha estado cerrado desde entonces.",
+    "k2": "Las cafeterías de la planta baja están cerradas por riesgo de derrumbe. En el pasado, no se servía alcohol en estos cafés porque era un lugar de culto islámico. La restauración de la mezquita, incluida la reconstrucción del minarete, la estabilización de los muros y la modernización con iluminación y seguridad, costó aproximadamente 1,5 millones de euros y se espera que esté terminada en 2026."
+  }
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

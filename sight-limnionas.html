@@ -1,113 +1,204 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0D1A1A">
-<title>Limnionas – Hello Kos</title>
-<link rel="stylesheet" href="hello-kos.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Limnionas – Hello Kos</title>
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body class="hk-page">
-<header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+<body class="hk-page hk-guide">
+  <header class="app-header">
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-<main class="main">
-  <div class="hero-wrap"><img src="img/hk/sight-limnionas.jpg" alt="">
-      <div class="hero-title"><h1 data-i18n="title">Limnionas</h1></div></div>
-  <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back">← Bezienswaardigheden</a></p>
-<p class="lead" data-i18n="lead">Kleine beschutte baai bij Kefalos. Het water is helder, geschikt om te zwemmen en te snorkelen. De rotsen houden de baai rustig.</p>
-  
-  <div class="actions">
-    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
-    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
-    
-  </div>
-  
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Limnionas%20beach%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Limnionas%20beach%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
       </div>
-      <p class="status" id="ttsStatus"></p>
-  <div id="readText">
-    <article class="card"><h2 data-i18n="hStory">Strand</h2><p data-i18n="p0">De strandpagina van Limnionas vertelt hetzelfde vanuit het water.</p></article>
-    
-  </div>
-</main>
-<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
-<script>window.HK_DICT = {
-    "nl": {
-      "title": "Limnionas",
-      "lead": "Kleine beschutte baai bij Kefalos. Het water is helder, geschikt om te zwemmen en te snorkelen. De rotsen houden de baai rustig.",
-      "back": "← Bezienswaardigheden",
-      "p0": "De strandpagina van Limnionas vertelt hetzelfde vanuit het water.",
-      "hStory": "Het verhaal",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Limnionas",
-      "lead": "Kleine geschützte Bucht bei Kefalos. Das Wasser ist klar, gut zum Schwimmen und Schnorcheln. Die Felsen halten die Bucht ruhig.",
-      "back": "← Sehenswürdigkeiten",
-      "p0": "Die Strandseite von Limnionas erzählt dasselbe vom Wasser aus.",
-      "hStory": "Die Geschichte",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Limnionas",
-      "lead": "Small sheltered bay near Kefalos. The water is clear, good for swimming and snorkelling. The rocks keep the bay calm.",
-      "back": "← Sights",
-      "p0": "The Limnionas beach page tells the same thing from the water.",
-      "hStory": "The story",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Limnionas",
-      "lead": "Piccola baia riparata vicino a Kefalos. L’acqua è limpida, buona per nuotare e fare snorkeling. Le rocce tengono la baia calma.",
-      "back": "← Attrazioni",
-      "p0": "La pagina spiaggia di Limnionas racconta lo stesso dall’acqua.",
-      "hStory": "La storia",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Limnionas",
-      "lead": "Kefalos yakınında küçük korunaklı koy. Su berrak, yüzmek ve şnorkel için iyi. Kayalar koyu sakin tutar.",
-      "back": "← Gezilecek yerler",
-      "p0": "Limnionas plaj sayfası aynı şeyi sudan anlatır.",
-      "hStory": "Hikaye",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Limnionas",
-      "lead": "Cala pequeña y resguardada cerca de Kéfalos. El agua es clara, buena para nadar y hacer esnórquel. Las rocas mantienen la cala en calma.",
-      "back": "← Lugares de interés",
-      "p0": "La página de playa de Limnionas cuenta lo mismo desde el agua.",
-      "hStory": "La historia",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
+  <main class="main">
+    <div class="hero-wrap">
+      <img class="hk-zoom" src="img/hk/sight-limnionas.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
+    </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=36.738%2C26.958" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?ll=36.738,26.958&amp;q=Limnionas" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-limnionas-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-limnionas-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-limnionas-03.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-limnionas-04.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-limnionas-05.jpg" alt=""></figure>
+<p data-i18n="v3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-limnionas-06.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-limnionas-07.jpg" alt=""></figure>
+</article>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-limnionas-08.jpg" alt=""></figure>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-limnionas-09.jpg" alt=""></figure>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-limnionas-10.jpg" alt=""></figure>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-limnionas-11.jpg" alt=""></figure>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-limnionas-12.jpg" alt=""></figure>
+    </div>
+  </main>
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Limnionas",
+    "title": "Limnionas",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "Voorbij Kefalos, ligt Limon Beach, ook wel Limnionas Beach genoemd.",
+    "s1": "Voorbij Kefalos, ligt Limon Beach, ook wel Limnionas Beach genoemd. Dit is een verborgen parel die nog niet door de massa is ontdekt. Het is een klein, beschut strand met een korte strook fijn roodachtig zand.",
+    "s2": "Het water is kristalhelder en heeft een mooie turquoise kleur. Omdat de baai helemaal beschut ligt tussen rotsen, is de zee hier bijna altijd kalm en vlak, geen hoge golven of sterke wind. Dat maakt het strand ideaal om te zwemmen en te snorkelen.",
+    "s3": "Aan één kant ligt een klein vissershaventje met een paar traditionele bootjes. Aan de andere kant beukt de open zee tegen de rotsen. Het contrast is mooi en geeft het strand een rustig, bijna wild gevoel.",
+    "v1": "Er staan slechts een dertigtal ligbedden en parasols. Er is één eenvoudige beach bar / taverna waar ze drankjes en snacks serveren, en je kunt er verse vis eten. Omdat het strand vrij afgelegen ligt, is het er meestal lekker rustig.",
+    "v2": "Veel mensen die hier komen, zoeken juist die stilte en authenticiteit op, Er is een kleine parkeerplaats aan de weg. Het is een van die stranden waar je even helemaal tot rust komt. Een klein, beschut baaitje met helder water, een paar bootjes en bijna geen druktem, precies zoals een Grieks strand hoort te zijn.",
+    "v3": "U vindt er een beperkt aantal ligbedden en parasols (ongeveer 30 plekken). Evenals een eenvoudige beach bar/taverna waar u drankjes en snacks kunt bestellen, die direct naar uw bed worden gebracht.",
+    "k1": "Het voelt als een authentieke, afgelegen oase. Met typische Mediterrane begroeiing, een klein vissershaventje met bootjes aan de ene kant en een relaxed, bijna 'wilde' sfeer. Perfect voor rustzoekers, die willen ontsnappen aan de massa. Geniet van de verse vis bij de taverna!"
+  },
+  "de": {
+    "place": "Limnionas",
+    "title": "Limnionas",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Hinter Kefalos liegt Limon Beach, auch Limnionas Beach genannt.",
+    "s1": "Hinter Kefalos liegt Limon Beach, auch Limnionas Beach genannt. Dies ist ein verstecktes Juwel, das noch nicht von der breiten Masse entdeckt wurde. Es ist ein kleiner, geschützter Strand mit einem kurzen Abschnitt aus feinem rötlichen Sand.",
+    "s2": "Das Wasser ist kristallklar und hat eine wunderschöne türkisfarbene Farbe. Da die Bucht vollständig zwischen Felsen geschützt ist, ist das Meer hier fast immer ruhig und flach, keine hohen Wellen oder starke Winde. Dadurch ist der Strand ideal zum Schwimmen und Schnorcheln.",
+    "s3": "Auf der einen Seite befindet sich ein kleiner Fischerhafen mit einigen traditionellen Booten. Auf der anderen Seite kracht das offene Meer gegen die Felsen. Der Kontrast ist wunderschön und verleiht dem Strand ein ruhiges, fast wildes Gefühl.",
+    "v1": "Es gibt nur etwa dreißig Sonnenliegen und Sonnenschirme. Es gibt eine einfache Strandbar/Taverne, in der Getränke und Snacks serviert werden, und Sie können frischen Fisch essen. Da der Strand ziemlich abgelegen ist, ist es meist schön und ruhig.",
+    "v2": "Viele Menschen, die hierher kommen, suchen diese Stille und Authentizität. An der Straße gibt es einen kleinen Parkplatz. Es ist einer dieser Strände, an denen man vollkommen entspannen kann. Eine kleine, geschützte Bucht mit klarem Wasser, ein paar Booten und fast keinem Gedränge, so wie es sich für einen griechischen Strand gehört.",
+    "v3": "Sie finden eine begrenzte Anzahl an Liegen und Sonnenschirmen (ca. 30 Plätze). Sowie eine einfache Strandbar/Taverne, in der Sie Getränke und Snacks bestellen können, die Ihnen direkt ans Bett gebracht werden.",
+    "k1": "Es fühlt sich an wie eine authentische, abgelegene Oase. Mit typisch mediterraner Vegetation, einem kleinen Fischerhafen mit Booten auf der einen Seite und einer entspannten, fast „wilden“ Atmosphäre. Perfekt für Ruhesuchende, die dem Trubel entfliehen möchten. Genießen Sie den frischen Fisch in der Taverne!"
+  },
+  "en": {
+    "place": "Limnionas",
+    "title": "Limnionas",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "Beyond Kefalos, lies Limon Beach, also called Limnionas Beach.",
+    "s1": "Beyond Kefalos, lies Limon Beach, also called Limnionas Beach. This is a hidden gem that has not yet been discovered by the masses. It is a small, sheltered beach with a short stretch of fine reddish sand.",
+    "s2": "The water is crystal clear and has a beautiful turquoise color. Because the bay is completely sheltered between rocks, the sea here is almost always calm and flat, no high waves or strong winds. This makes the beach ideal for swimming and snorkeling.",
+    "s3": "On one side is a small fishing harbor with a few traditional boats. On the other side, the open sea crashes against the rocks. The contrast is beautiful and gives the beach a calm, almost wild feeling.",
+    "v1": "There are only about thirty sunbeds and parasols. There is one simple beach bar / taverna where they serve drinks and snacks, and you can eat fresh fish. Because the beach is quite remote, it is usually nice and quiet.",
+    "v2": "Many people who come here are looking for that silence and authenticity. There is a small parking lot on the road. It is one of those beaches where you can completely relax. A small, sheltered bay with clear water, a few boats and almost no crowds, just as a Greek beach should be.",
+    "v3": "You will find a limited number of sunbeds and parasols (approximately 30 places). As well as a simple beach bar/taverna where you can order drinks and snacks, which will be brought directly to your bed.",
+    "k1": "It feels like an authentic, remote oasis. With typical Mediterranean vegetation, a small fishing port with boats on one side and a relaxed, almost 'wild' atmosphere. Perfect for those seeking peace and quiet who want to escape the crowds. Enjoy the fresh fish at the taverna!"
+  },
+  "it": {
+    "place": "Limnionas",
+    "title": "Limnionas",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Oltre Kefalos, si trova la spiaggia di Limon, chiamata anche spiaggia di Limnionas.",
+    "s1": "Oltre Kefalos, si trova la spiaggia di Limon, chiamata anche spiaggia di Limnionas. Questa è una gemma nascosta che non è stata ancora scoperta dalle masse. Si tratta di una piccola spiaggia riparata, con un breve tratto di sabbia fine e rossastra.",
+    "s2": "L'acqua è cristallina e ha un bellissimo colore turchese. Poiché la baia è completamente riparata tra le rocce, il mare qui è quasi sempre calmo e piatto, senza onde alte o venti forti. Ciò rende la spiaggia ideale per nuotare e fare snorkeling.",
+    "s3": "Da un lato c'è un piccolo porto di pescatori con alcune barche tradizionali. Dall'altro lato, il mare aperto si infrange contro gli scogli. Il contrasto è bellissimo e dona alla spiaggia un'atmosfera calma, quasi selvaggia.",
+    "v1": "Ci sono solo una trentina tra lettini e ombrelloni. C'è un semplice bar/taverna sulla spiaggia dove servono bevande e snack e si può mangiare pesce fresco. Poiché la spiaggia è piuttosto remota, di solito è bella e tranquilla.",
+    "v2": "Molte persone che vengono qui cercano quel silenzio e quell'autenticità. C'è un piccolo parcheggio sulla strada. È una di quelle spiagge dove ci si può rilassare completamente. Una piccola baia riparata con acqua limpida, poche barche e quasi nessuna folla, proprio come dovrebbe essere una spiaggia greca.",
+    "v3": "Troverai un numero limitato di lettini e ombrelloni (circa 30 posti). Oltre ad un semplice bar/taverna sulla spiaggia dove potrete ordinare bevande e snack, che vi verranno portati direttamente a letto.",
+    "k1": "Sembra un'autentica e remota oasi. Con la tipica vegetazione mediterranea, un piccolo porto di pescatori con le barche da un lato e un'atmosfera rilassata, quasi 'selvaggia'. Perfetto per chi cerca pace e tranquillità e vuole sfuggire alla folla. Godetevi il pesce fresco alla taverna!"
+  },
+  "tr": {
+    "place": "Limnionas",
+    "title": "Limnionas",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Kefalos'un ötesinde, Limnionas Plajı olarak da adlandırılan Limon Plajı yatıyor.",
+    "s1": "Kefalos'un ötesinde, Limnionas Plajı olarak da adlandırılan Limon Plajı yatıyor. Bu henüz kitleler tarafından keşfedilmemiş gizli bir mücevherdir. Kısa bir ince kırmızımsı kum şeridine sahip küçük, korunaklı bir plajdır.",
+    "s2": "Su kristal berraklığındadır ve güzel bir turkuaz rengine sahiptir. Körfez tamamen kayaların arasında korunaklı olduğundan buradaki deniz neredeyse her zaman sakin ve düzdür, yüksek dalgalar veya kuvvetli rüzgarlar yoktur. Bu, plajı yüzme ve şnorkelle dalış için ideal kılar.",
+    "s3": "Bir tarafta birkaç geleneksel teknenin bulunduğu küçük bir balıkçı limanı var. Diğer tarafta açık deniz kayalara çarpıyor. Karşıtlık çok güzel ve plaja sakin, neredeyse vahşi bir his veriyor.",
+    "v1": "Sadece otuza yakın şezlong ve şemsiye var. İçecek ve atıştırmalıkların servis edildiği sade bir plaj barı/tavernası vardır ve taze balık yiyebilirsiniz. Plaj oldukça uzak olduğundan genellikle güzel ve sessizdir.",
+    "v2": "Buraya gelen birçok insan o sessizliği ve özgünlüğü arıyor. Yol üzerinde küçük bir park yeri var. Tamamen rahatlayabileceğiniz plajlardan biridir. Tıpkı bir Yunan plajının olması gerektiği gibi, temiz suları, birkaç teknesi ve neredeyse hiç kalabalığı olmayan küçük, korunaklı bir koy.",
+    "v3": "Sınırlı sayıda şezlong ve şemsiye bulacaksınız (yaklaşık 30 yer). Ayrıca doğrudan yatağınıza getirilecek içecek ve atıştırmalıklar sipariş edebileceğiniz sade bir plaj barı/tavernası da mevcuttur.",
+    "k1": "Otantik, uzak bir vaha gibi geliyor. Tipik Akdeniz bitki örtüsü, bir tarafında teknelerin bulunduğu küçük bir balıkçı limanı ve rahat, neredeyse 'vahşi' bir atmosfer. Kalabalıktan kaçmak, huzur ve sessizlik arayanlar için mükemmel. Tavernada taze balıkların tadını çıkarın!"
+  },
+  "es": {
+    "place": "Limnionas",
+    "title": "Limnionas",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Más allá de Kefalos, se encuentra la playa de Limón, también llamada playa de Limnionas.",
+    "s1": "Más allá de Kefalos, se encuentra la playa de Limón, también llamada playa de Limnionas. Esta es una joya escondida que aún no ha sido descubierta por las masas. Es una pequeña playa resguardada con una corta franja de arena fina y rojiza.",
+    "s2": "El agua es cristalina y tiene un bonito color turquesa. Debido a que la bahía está completamente protegida entre rocas, el mar aquí casi siempre está tranquilo y plano, sin olas altas ni vientos fuertes. Esto hace que la playa sea ideal para nadar y bucear.",
+    "s3": "A un lado hay un pequeño puerto pesquero con algunas embarcaciones tradicionales. Del otro lado, el mar abierto choca contra las rocas. El contraste es hermoso y le da a la playa una sensación de calma, casi salvaje.",
+    "v1": "Sólo hay una treintena de tumbonas y sombrillas. Hay un sencillo bar/taberna en la playa donde sirven bebidas y snacks, y se puede comer pescado fresco. Debido a que la playa es bastante remota, suele ser agradable y tranquila.",
+    "v2": "Mucha gente que viene aquí busca ese silencio y autenticidad. Hay un pequeño aparcamiento en la carretera. Es una de esas playas en las que puedes relajarte por completo. Una pequeña bahía protegida con agua clara, algunos barcos y casi sin aglomeraciones, como debería ser una playa griega.",
+    "v3": "Encontrarás un número limitado de hamacas y sombrillas (unas 30 plazas). Además de un sencillo bar/taberna en la playa donde podrás pedir bebidas y snacks, que te llevarán directamente a tu cama.",
+    "k1": "Parece un oasis auténtico y remoto. Con vegetación típica mediterránea, un pequeño puerto pesquero con barcos a un lado y un ambiente relajado, casi 'salvaje'. Perfecto para aquellos que buscan paz y tranquilidad y quieren escapar de las multitudes. ¡Disfruta del pescado fresco en la taberna!"
+  }
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

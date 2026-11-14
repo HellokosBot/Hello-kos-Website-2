@@ -1,391 +1,208 @@
 <!DOCTYPE html>
-<html lang="nl" data-hk-own="1" data-hk-tts="1">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0D1F1F">
   <title>Albergo Gelsomino – Hello Kos</title>
-  <style>
-    :root {
-      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
-      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
-      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
-      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
-      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text); -webkit-font-smoothing: antialiased;
-      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
-      background: var(--bg); min-height: 100vh; line-height: 1.55;
-    }
-    .app-header {
-      position: sticky; top: 0; z-index: 100;
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-      padding: 14px 16px; background: var(--bg-header);
-      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
-    }
-    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
-    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
-    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
-    .logo-text span { color: var(--gold-dark); font-style: italic; }
-    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
-    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
-    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
-    .lang-menu.open { display: block; }
-    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
-    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
-    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
-    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
-    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .content { padding: 18px 16px 0; }
-    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
-    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-
-    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
-    .btn-audio { background: var(--petrol); color: #fff; }
-    .btn-audio.playing { background: var(--petrol-dark); }
-    .btn-stop { background: #3A4545; color: #fff; display: none; }
-    .btn-stop.show { display: flex; }
-
-    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
-    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
-    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
-    .card p:last-child { margin-bottom: 0; }
-    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
-    .tip strong { color: var(--gold); }
-    .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
-    .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
-    .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
-
-    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
-    .footer a { color: var(--petrol); text-decoration: none; }
-  </style>
-<link rel="stylesheet" href="hello-kos.css">
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body>
+<body class="hk-page hk-guide">
   <header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
   <main class="main">
     <div class="hero-wrap">
-      <img src="img/jwwb/8006ada073-albergo_gelsomino_cover-high.jpg" alt="Albergo Gelsomino Kos" loading="eager">
-      <div class="hero-title"><h1 data-i18n="title">Albergo Gelsomino</h1></div>
+      <img class="hk-zoom" src="img/jwwb/8006ada073-albergo_gelsomino_cover-high.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
     </div>
-
-    <div class="content">
-<p class="lead" data-i18n="lead">Het eerste luxe hotel van Kos-stad – Italiaanse architectuur uit de jaren twintig, opnieuw in glorie hersteld.</p>
-
-      
-
-      <div class="actions">
-        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
-        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-      </div>
-      
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Albergo%20Gelsomino%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Albergo%20Gelsomino%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
-      </div>
-      <p class="status" id="ttsStatus"></p>
-
-      <div id="readText">
-        <div class="card">
-          <h2 data-i18n="hStory">Het eerste hotel van Kos</h2>
-          <p data-i18n="p1">Albergo Gelsomino is een historisch gebouw in Kos-stad, opgericht tussen 1927 en 1928, toen het eiland onder Italiaanse controle stond.</p>
-          <p data-i18n="p2">Het is ontworpen door de Italiaanse architect Rodolfo Petracco en was het eerste luxe hotel op het eiland – vooral voor Italiaanse bezoekers en functionarissen. De stijl is typisch Italiaanse architectuur uit die tijd.</p>
-        </div>
-
-        
-
-        <div class="photo-block">
-          <img src="img/jwwb/0d7e9e7bbd-schermopname_22-2-2026_182533_albergogelsomino-hot.jpg" alt="Albergo Gelsomino exterieur" loading="lazy">
-          <div class="cap" data-i18n="cap1">Italiaanse architectuur in het centrum van Kos-stad</div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="hSee">Oorlog en junta</h2>
-          <p data-i18n="p3">Tijdens de Tweede Wereldoorlog werd het gebouw gebruikt door de Duitse bezetters. Later, toen Griekenland het eiland kreeg, diende het als onderkomen voor Griekse legerofficieren tijdens de junta (jaren ’60 en ’70).</p>
-          <p data-i18n="p4">Daarna bleef het belangrijk voor de gemeente Kos en werd het gebruikt voor verschillende overheidsdiensten.</p>
-        </div>
-
-        <div class="photo-block">
-          <img src="img/jwwb/00d2b3495e-schermopname_22-2-2026_182459_albergogelsomino-hot.jpg" alt="Albergo Gelsomino detail" loading="lazy">
-          <div class="cap" data-i18n="cap2">Gerestaureerd en opnieuw geopend als boutique hotel</div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2glory">De glorie hersteld</h2>
-          <p data-i18n="p5">Tussen 2015 en 2018 is het gebouw volledig gerestaureerd en opnieuw geopend als hotel. Vandaag is Albergo Gelsomino een klein hotel met acht kamers – het historische karakter is behouden.</p>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="hKnow">Bezoeken</h2>
-          <p data-i18n="p6">Het pand ligt in Kos-stad. De buitenkant kun je altijd bekijken vanaf de straat. Het is een werkend hotel: de lobby en kamers zijn voor gasten.</p>
-          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: mooi om te combineren met een wandeling door het centrum – in de buurt van de Agora, Palm tree lane en de haven.</p></div>
-        </div>
-      </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=36.8942%2C27.2912" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?ll=36.8942,27.2912&amp;q=Albergo%20Gelsomino" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-albergo-gelsomino-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-albergo-gelsomino-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-albergo-gelsomino-03.jpg" alt=""></figure>
+<p data-i18n="s4"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-albergo-gelsomino-04.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-albergo-gelsomino-05.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-albergo-gelsomino-06.jpg" alt=""></figure>
+<p data-i18n="v3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-albergo-gelsomino-07.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-albergo-gelsomino-08.jpg" alt=""></figure>
+</article>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-albergo-gelsomino-09.jpg" alt=""></figure>
     </div>
   </main>
-
-  <footer class="footer">
-    <div>Hello Kos</div>
-    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
-  </footer>
-
-<script>
-(function(){
-  var I18N = window.HK_DICT = {
-    "nl": {
-      "title": "Albergo Gelsomino",
-      "lead": "Het eerste luxe hotel van Kos-stad – Italiaanse architectuur uit de jaren twintig, opnieuw in glorie hersteld.",
-      "btnPlay": "Voorlezen",
-      "p1": "Albergo Gelsomino is een historisch gebouw in Kos-stad, opgericht tussen 1927 en 1928, toen het eiland onder Italiaanse controle stond.",
-      "p2": "Het is ontworpen door de Italiaanse architect Rodolfo Petracco en was het eerste luxe hotel op het eiland – vooral voor Italiaanse bezoekers en functionarissen. De stijl is typisch Italiaanse architectuur uit die tijd.",
-      "cap1": "Italiaanse architectuur in het centrum van Kos-stad",
-      "p3": "Tijdens de Tweede Wereldoorlog werd het gebouw gebruikt door de Duitse bezetters. Later, toen Griekenland het eiland kreeg, diende het als onderkomen voor Griekse legerofficieren tijdens de junta (jaren ’60 en ’70).",
-      "p4": "Daarna bleef het belangrijk voor de gemeente Kos en werd het gebruikt voor verschillende overheidsdiensten.",
-      "cap2": "Gerestaureerd en opnieuw geopend als boutique hotel",
-      "h2glory": "De glorie hersteld",
-      "p5": "Tussen 2015 en 2018 is het gebouw volledig gerestaureerd en opnieuw geopend als hotel. Vandaag is Albergo Gelsomino een klein hotel met acht kamers – het historische karakter is behouden.",
-      "p6": "Het pand ligt in Kos-stad. De buitenkant kun je altijd bekijken vanaf de straat. Het is een werkend hotel: de lobby en kamers zijn voor gasten.",
-      "tip": "mooi om te combineren met een wandeling door het centrum – in de buurt van de Agora, Palm tree lane en de haven.",
-      "hStory": "Het verhaal",
-      "hSee": "Wat je ziet",
-      "hKnow": "Goed om te weten",
-      "tipTitle": "Tip van de gids",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Albergo Gelsomino",
-      "lead": "The first luxury hotel of Kos Town – Italian architecture from the 1920s, restored to its former glory.",
-      "btnPlay": "Read aloud",
-      "p1": "Albergo Gelsomino is a historic building in Kos Town, built between 1927 and 1928, when the island was under Italian control.",
-      "p2": "It was designed by the Italian architect Rodolfo Petracco and was the first luxury hotel on the island – mainly for Italian visitors and officials. The style is typical Italian architecture of that period.",
-      "cap1": "Italian architecture in the centre of Kos Town",
-      "p3": "During the Second World War the building was used by the German occupiers. Later, when Greece received the island, it served as accommodation for Greek army officers during the junta (1960s and 1970s).",
-      "p4": "Afterwards it remained important for the municipality of Kos and was used for various government services.",
-      "cap2": "Restored and reopened as a boutique hotel",
-      "h2glory": "Glory restored",
-      "p5": "Between 2015 and 2018 the building was fully restored and reopened as a hotel. Today Albergo Gelsomino is a small hotel with eight rooms – the historic character has been preserved.",
-      "p6": "The building is in Kos Town. You can always view the exterior from the street. It is a working hotel: the lobby and rooms are for guests.",
-      "tip": "nice to combine with a walk through the centre – near the Agora, Palm tree lane and the harbour.",
-      "hStory": "The story",
-      "hSee": "What you see",
-      "hKnow": "Good to know",
-      "tipTitle": "Guide’s tip",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Albergo Gelsomino",
-      "lead": "Das erste Luxushotel von Kos-Stadt – italienische Architektur aus den 1920ern, wieder in Glanz restauriert.",
-      "btnPlay": "Vorlesen",
-      "p1": "Albergo Gelsomino ist ein historisches Gebäude in Kos-Stadt, erbaut zwischen 1927 und 1928, als die Insel unter italienischer Kontrolle stand.",
-      "p2": "Es wurde vom italienischen Architekten Rodolfo Petracco entworfen und war das erste Luxushotel der Insel – hauptsächlich für italienische Besucher und Beamte. Der Stil ist typische italienische Architektur jener Zeit.",
-      "cap1": "Italienische Architektur im Zentrum von Kos-Stadt",
-      "p3": "Während des Zweiten Weltkriegs wurde das Gebäude von den deutschen Besatzern genutzt. Später, als Griechenland die Insel erhielt, diente es als Unterkunft für griechische Armeeoffiziere während der Junta (1960er und 1970er).",
-      "p4": "Danach blieb es wichtig für die Gemeinde Kos und wurde für verschiedene Regierungsdienste genutzt.",
-      "cap2": "Restauriert und wieder als Boutique-Hotel eröffnet",
-      "h2glory": "Die Glorie wiederhergestellt",
-      "p5": "Zwischen 2015 und 2018 wurde das Gebäude vollständig restauriert und wieder als Hotel eröffnet. Heute ist Albergo Gelsomino ein kleines Hotel mit acht Zimmern – der historische Charakter ist erhalten.",
-      "p6": "Das Gebäude liegt in Kos-Stadt. Die Außenseite kannst du immer von der Straße aus betrachten. Es ist ein funktionierendes Hotel: Lobby und Zimmer sind für Gäste.",
-      "tip": "schön zu kombinieren mit einem Spaziergang durch das Zentrum – in der Nähe der Agora, Palm tree lane und des Hafens.",
-      "hStory": "Die Geschichte",
-      "hSee": "Was du siehst",
-      "hKnow": "Gut zu wissen",
-      "tipTitle": "Tipp des Guides",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Albergo Gelsomino",
-      "lead": "Il primo hotel di lusso di Kos città – architettura italiana degli anni Venti, restaurata nel suo splendore.",
-      "btnPlay": "Leggi ad alta voce",
-      "p1": "Albergo Gelsomino è un edificio storico a Kos città, costruito tra il 1927 e il 1928, quando l’isola era sotto controllo italiano.",
-      "p2": "È stato progettato dall’architetto italiano Rodolfo Petracco ed è stato il primo hotel di lusso dell’isola – soprattutto per visitatori e funzionari italiani. Lo stile è tipica architettura italiana di quel periodo.",
-      "cap1": "Architettura italiana nel centro di Kos città",
-      "p3": "Durante la Seconda guerra mondiale l’edificio fu usato dagli occupanti tedeschi. Più tardi, quando la Grecia ricevette l’isola, servì come alloggio per ufficiali dell’esercito greco durante la giunta (anni ’60 e ’70).",
-      "p4": "In seguito rimase importante per il comune di Kos e fu usato per vari servizi governativi.",
-      "cap2": "Restaurato e riaperto come boutique hotel",
-      "h2glory": "La gloria restaurata",
-      "p5": "Tra il 2015 e il 2018 l’edificio è stato completamente restaurato e riaperto come hotel. Oggi Albergo Gelsomino è un piccolo hotel con otto camere – il carattere storico è stato preservato.",
-      "p6": "L’edificio si trova a Kos città. L’esterno si può sempre vedere dalla strada. È un hotel funzionante: la lobby e le camere sono per gli ospiti.",
-      "tip": "bello da combinare con una passeggiata nel centro – vicino all’Agora, Palm tree lane e il porto.",
-      "hStory": "La storia",
-      "hSee": "Cosa vedi",
-      "hKnow": "Buono a sapersi",
-      "tipTitle": "Consiglio della guida",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Albergo Gelsomino",
-      "lead": "Kos şehrinin ilk lüks oteli – 1920’lerden İtalyan mimarisi, eski ihtişamına kavuşturuldu.",
-      "btnPlay": "Sesli oku",
-      "p1": "Albergo Gelsomino, ada İtalyan kontrolündeyken 1927-1928 yılları arasında inşa edilmiş Kos şehrindeki tarihi bir binadır.",
-      "p2": "İtalyan mimar Rodolfo Petracco tarafından tasarlandı ve adanın ilk lüks oteliydi – özellikle İtalyan ziyaretçiler ve görevliler için. Stil o dönemin tipik İtalyan mimarisidir.",
-      "cap1": "Kos şehri merkezinde İtalyan mimarisi",
-      "p3": "İkinci Dünya Savaşı sırasında bina Alman işgalciler tarafından kullanıldı. Daha sonra Yunanistan adayı aldığında, cunta döneminde (1960’lar ve 1970’ler) Yunan ordu subayları için konaklama yeri olarak hizmet etti.",
-      "p4": "Sonrasında Kos belediyesi için önemli kaldı ve çeşitli devlet hizmetleri için kullanıldı.",
-      "cap2": "Restore edilerek boutique otel olarak yeniden açıldı",
-      "h2glory": "İhtişam restore edildi",
-      "p5": "2015-2018 arasında bina tamamen restore edildi ve otel olarak yeniden açıldı. Bugün Albergo Gelsomino sekiz odalı küçük bir oteldir – tarihi karakter korunmuştur.",
-      "p6": "Bina Kos şehrindedir. Dışını her zaman sokaktan görebilirsin. Çalışan bir oteldir: lobi ve odalar misafirler içindir.",
-      "tip": "merkezde bir yürüyüşle birleştirmek güzel – Agora, Palm tree lane ve limana yakın.",
-      "hStory": "Hikaye",
-      "hSee": "Ne görürsün",
-      "hKnow": "Bilmekte fayda var",
-      "tipTitle": "Rehberin ipucu",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Albergo Gelsomino",
-      "lead": "El primer hotel de lujo de Kos ciudad – arquitectura italiana de los años veinte, restaurada a su gloria.",
-      "btnPlay": "Leer en voz alta",
-      "p1": "Albergo Gelsomino es un edificio histórico en Kos ciudad, construido entre 1927 y 1928, cuando la isla estaba bajo control italiano.",
-      "p2": "Fue diseñado por el arquitecto italiano Rodolfo Petracco y fue el primer hotel de lujo de la isla – principalmente para visitantes y funcionarios italianos. El estilo es arquitectura italiana típica de esa época.",
-      "cap1": "Arquitectura italiana en el centro de Kos ciudad",
-      "p3": "Durante la Segunda Guerra Mundial el edificio fue usado por los ocupantes alemanes. Más tarde, cuando Grecia recibió la isla, sirvió de alojamiento para oficiales del ejército griego durante la junta (años 60 y 70).",
-      "p4": "Después siguió siendo importante para el municipio de Kos y se usó para varios servicios gubernamentales.",
-      "cap2": "Restaurado y reabierto como boutique hotel",
-      "h2glory": "La gloria restaurada",
-      "p5": "Entre 2015 y 2018 el edificio fue completamente restaurado y reabierto como hotel. Hoy Albergo Gelsomino es un pequeño hotel con ocho habitaciones – el carácter histórico se ha conservado.",
-      "p6": "El edificio está en Kos ciudad. El exterior se puede ver siempre desde la calle. Es un hotel en funcionamiento: el vestíbulo y las habitaciones son para huéspedes.",
-      "tip": "bonito de combinar con un paseo por el centro – cerca del Ágora, Palm tree lane y el puerto.",
-      "hStory": "La historia",
-      "hSee": "Qué ves",
-      "hKnow": "Bueno saberlo",
-      "tipTitle": "Consejo del guía",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };
-
-  function setLang(l) {
-    if (!I18N[l]) l = 'nl';
-    localStorage.setItem('hk-lang', l);
-    document.documentElement.lang = l;
-    var d = I18N[l];
-    document.querySelectorAll('[data-i18n]').forEach(function(el){
-      var k = el.getAttribute('data-i18n');
-      if (d[k]) el.textContent = d[k];
-    });
-    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
-    if (opt) {
-      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
-      document.getElementById('code').textContent = l.toUpperCase();
-    }
-    document.querySelectorAll('.lang-option').forEach(function(o){
-      o.classList.toggle('active', o.getAttribute('data-lang') === l);
-    });
-    closeMenu();
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Kos-stad",
+    "title": "Albergo Gelsomino",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "Welkom bij Al bergo Gel samino.",
+    "s1": "Welkom bij Al bergo Gel samino. dit gebouw, dat hier zo mooi aan de boulevard staat, zo pal aan de zee, is een van de oudste en bekendste hotels van Kos. Het werd gebouwd in negentienhonderdachtentwintig, in de tijd dat de Italianen het eiland in handen hadden.",
+    "s2": "De architect was Rodolfo Petracco, een Italiaan die destijds nogal wat gebouwen op de omligende eilanden heeft gebauwd. Dit was het allereerste echte luxe hotel op Kos, bedoeld voor Italiaanse officials en belangrijke gasten. Kijk even naar de stijl: typisch Italiaans uit die periode.",
+    "s3": "Strak, elegant, geen overbodige fratsen. In de Tweede Wereldoorlog namen de Duitsers het over. Daarna, toen Kos weer Grieks werd, gebruikte het leger het vooral voor officieren.",
+    "s4": "Vooral in de jaren van de junta in de de jaren zestig en zeventig. Later deed het dienst als gemeentelijk gebouw voor allerlei ambtelijke zaken. In tweeduizendachttien hebben ze het grondig gerenoveerd.",
+    "v1": "Nu is het weer een klein hotel, maar wel een met slechts acht kamers. Dus intiem en behoorlijk exclusief. Wat het leuk maakt: het staat hier al bijna honderd jaar als een soort stille getuige van de moderne geschiedenis van Kos.",
+    "v2": "Van Italiaanse tijd, oorlog, junta, gemeente… het heeft alles meegemaakt en staat er nog steeds.",
+    "v3": "Tijdens de Tweede Wereldoorlog werd het gebouw gebruikt door de Duitse bezetters. Later, toen Griekenland het eiland kreeg, werd het hotel een plek voor de Griekse legerofficieren tijdens de junta (de militaire regering in de jaren '60 en '70). Het bleef daarna een belangrijk gebouw voor de gemeente Kos en werd gebruikt voor verschillende overheidsdiensten.",
+    "k1": "In 2015-2018 werd het gebouw helemaal gerestaureerd en opnieuw geopend als hotel. Vandaag de dag is Albergo Gelsomino een klein hotel met acht kamers,"
+  },
+  "de": {
+    "place": "Kos-Stadt",
+    "title": "Albergo Gelsomino",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Willkommen im Al Bergo Gel Samino.",
+    "s1": "Willkommen im Al Bergo Gel Samino. Dieses so schön am Boulevard direkt am Meer gelegene Gebäude ist eines der ältesten und bekanntesten Hotels auf Kos. Es wurde im Jahr 1928 erbaut, als die Italiener die Insel kontrollierten.",
+    "s2": "Der Architekt war Rodolfo Petracco, ein Italiener, der auf den umliegenden Inseln zahlreiche Gebäude errichtete. Dies war das allererste echte Luxushotel auf Kos, das für italienische Beamte und wichtige Gäste gedacht war. Schauen Sie sich nur den Stil an: typisch italienisch aus dieser Zeit.",
+    "s3": "Schlicht, elegant, ohne unnötigen Schnickschnack. Während des Zweiten Weltkriegs übernahmen die Deutschen die Macht. Später, als Kos wieder griechisch wurde, nutzte die Armee es hauptsächlich für Offiziere.",
+    "s4": "Insbesondere in den Jahren der Junta in den sechziger und siebziger Jahren. Später diente es als Gemeindegebäude für allerlei Amtsangelegenheiten. Im Jahr 2018 wurde es gründlich renoviert.",
+    "v1": "Jetzt ist es wieder ein kleines Hotel, aber eines mit nur acht Zimmern. So intim und ziemlich exklusiv. Das Schöne daran: Es steht seit fast hundert Jahren hier und ist eine Art stummer Zeuge der modernen Geschichte von Kos.",
+    "v2": "Seit der italienischen Zeit, Krieg, Junta, Gemeinde... es hat alles durchgemacht und steht immer noch.",
+    "v3": "Während des Zweiten Weltkriegs wurde das Gebäude von den deutschen Besatzern genutzt. Später, als Griechenland die Insel bekam, wurde das Hotel während der Junta (der Militärregierung in den 60er und 70er Jahren) zum Aufenthaltsort der griechischen Armeeoffiziere. Anschließend blieb es ein wichtiges Gebäude für die Gemeinde Kos und wurde für verschiedene Regierungsdienste genutzt.",
+    "k1": "In den Jahren 2015–2018 wurde das Gebäude komplett restauriert und als Hotel wiedereröffnet. Heute ist Albergo Gelsomino ein kleines Hotel mit acht Zimmern,"
+  },
+  "en": {
+    "place": "Kos Town",
+    "title": "Albergo Gelsomino",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "Welcome to Al bergo Gel samino.",
+    "s1": "Welcome to Al bergo Gel samino. This building, which is located so beautifully on the boulevard, right on the sea, is one of the oldest and best-known hotels in Kos. It was built in nineteen hundred and twenty-eight, during the time when the Italians controlled the island.",
+    "s2": "The architect was Rodolfo Petracco, an Italian who built quite a few buildings on the surrounding islands. This was the very first real luxury hotel on Kos, intended for Italian officials and important guests. Just look at the style: typical Italian from that period.",
+    "s3": "Sleek, elegant, no unnecessary frills. During the Second World War the Germans took over. Afterwards, when Kos became Greek again, the army used it mainly for officers.",
+    "s4": "Especially during the years of the junta in the sixties and seventies. Later it served as a municipal building for all kinds of official matters. In two thousand and eighteen they thoroughly renovated it.",
+    "v1": "Now it is a small hotel again, but one with only eight rooms. So intimate and quite exclusive. What makes it nice: it has been here for almost a hundred years as a kind of silent witness to the modern history of Kos.",
+    "v2": "From Italian times, war, junta, municipality... it has been through everything and is still standing.",
+    "v3": "During the Second World War the building was used by the German occupiers. Later, when Greece got the island, the hotel became a place for the Greek army officers during the junta (the military government in the 60s and 70s). It subsequently remained an important building for the Kos Municipality and was used for various government services.",
+    "k1": "In 2015-2018 the building was completely restored and reopened as a hotel. Today Albergo Gelsomino is a small hotel with eight rooms,"
+  },
+  "it": {
+    "place": "Città di Kos",
+    "title": "Albergo Gelsomino",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Benvenuti all'Albergo Gel Samino.",
+    "s1": "Benvenuti all'Albergo Gel Samino. Questo edificio, situato in modo così bello sul viale, direttamente sul mare, è uno degli hotel più antichi e conosciuti di Kos. Fu costruito nel millenovecentoventotto, nel periodo in cui gli italiani controllavano l'isola.",
+    "s2": "L'architetto fu Rodolfo Petracco, un italiano che costruì non pochi edifici nelle isole circostanti. Questo è stato il primo vero hotel di lusso a Kos, destinato ai funzionari italiani e agli ospiti importanti. Basta guardare lo stile: tipico italiano di quel periodo.",
+    "s3": "Elegante, elegante, senza fronzoli inutili. Durante la seconda guerra mondiale subentrarono i tedeschi. Successivamente, quando Kos tornò ad essere greca, l'esercito la utilizzò principalmente per gli ufficiali.",
+    "s4": "Soprattutto durante gli anni della giunta negli anni Sessanta e Settanta. Successivamente servì come edificio municipale per tutti i tipi di questioni ufficiali. Nel duemiladiciotto lo rinnovarono completamente.",
+    "v1": "Ora è di nuovo un piccolo albergo, ma con solo otto camere. Così intimo e piuttosto esclusivo. Ciò che lo rende bello: è qui da quasi cento anni come una sorta di testimone silenzioso della storia moderna di Kos.",
+    "v2": "Dai tempi italiani, guerra, giunta, comune... ha attraversato tutto ed è ancora in piedi.",
+    "v3": "Durante la seconda guerra mondiale l'edificio fu utilizzato dagli occupanti tedeschi. Più tardi, quando la Grecia ottenne l'isola, l'hotel divenne un luogo di ritrovo per gli ufficiali dell'esercito greco durante la giunta (il governo militare negli anni '60 e '70). Successivamente rimase un edificio importante per il Comune di Kos e fu utilizzato per vari servizi governativi.",
+    "k1": "Nel 2015-2018 l'edificio è stato completamente restaurato e riaperto come albergo. Oggi l'Albergo Gelsomino è un piccolo albergo di otto camere,"
+  },
+  "tr": {
+    "place": "Kos şehri",
+    "title": "Albergo Gelsomino",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Al bergo Gel samino'ya hoş geldiniz.",
+    "s1": "Al bergo Gel samino'ya hoş geldiniz. Bulvar üzerinde, denizin hemen üzerinde çok güzel bir konuma sahip olan bu bina, Kos'un en eski ve en bilinen otellerinden biridir. İtalyanların adayı kontrol ettiği dönemde bin dokuz yüz yirmi sekiz yılında inşa edilmiştir.",
+    "s2": "Mimarı, çevredeki adalarda pek çok bina inşa eden İtalyan Rodolfo Petracco'ydu. Bu, İtalyan yetkililere ve önemli konuklara yönelik Kos'taki ilk gerçek lüks oteldi. Sadece stile bakın: o döneme ait tipik İtalyan.",
+    "s3": "Şık, zarif, gereksiz fırfırlar yok. İkinci Dünya Savaşı sırasında Almanlar yönetimi ele geçirdi. Daha sonra Kos yeniden Yunan olunca ordu burayı çoğunlukla subaylar için kullandı.",
+    "s4": "Özellikle altmışlı ve yetmişli yıllardaki cunta yıllarında. Daha sonra her türlü resmi işlerin yapıldığı belediye binası olarak hizmet verdi. İki bin on sekizde onu baştan aşağı yenilediler.",
+    "v1": "Şimdi yine küçük bir otel ama sadece sekiz odası var. Çok samimi ve oldukça özel. Onu güzel yapan şey: Kos'un modern tarihinin bir tür sessiz tanığı olarak neredeyse yüz yıldır burada olması.",
+    "v2": "İtalyan zamanından beri savaş, cunta, belediye... her şeyden geçti ve hala ayakta.",
+    "v3": "İkinci Dünya Savaşı sırasında bina Alman işgalciler tarafından kullanıldı. Daha sonra Yunanistan adayı alınca otel, cunta (60'lı ve 70'li yıllardaki askeri hükümet) dönemindeki Yunan subaylarının mekanı haline geldi. Daha sonra Kos Belediyesi için önemli bir bina olarak kaldı ve çeşitli devlet hizmetleri için kullanıldı.",
+    "k1": "2015-2018 yıllarında bina tamamen restore edilerek otel olarak yeniden hizmete açılmıştır. Bugün Albergo Gelsomino sekiz odalı küçük bir oteldir."
+  },
+  "es": {
+    "place": "Ciudad de Kos",
+    "title": "Albergo Gelsomino",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Bienvenidos a Al Bergo Gel samino.",
+    "s1": "Bienvenidos a Al Bergo Gel samino. Este edificio, que está situado en un lugar tan bonito en el bulevar, justo en el mar, es uno de los hoteles más antiguos y conocidos de Kos. Fue construido en mil novecientos veintiocho, durante la época en que los italianos controlaban la isla.",
+    "s2": "El arquitecto fue Rodolfo Petracco, un italiano que construyó bastantes edificios en las islas circundantes. Este fue el primer hotel de verdadero lujo en Kos, destinado a funcionarios italianos e invitados importantes. Basta ver el estilo: típico italiano de esa época.",
+    "s3": "Limpio, elegante, sin florituras innecesarias. Durante la Segunda Guerra Mundial los alemanes tomaron el poder. Posteriormente, cuando Kos volvió a ser griega, el ejército la utilizó principalmente para los oficiales.",
+    "s4": "Especialmente durante los años de la junta en los años sesenta y setenta. Posteriormente sirvió como edificio municipal para todo tipo de asuntos oficiales. En dos mil dieciocho lo renovaron a fondo.",
+    "v1": "Ahora vuelve a ser un hotel pequeño, pero con sólo ocho habitaciones. Tan íntimo y bastante exclusivo. Lo que lo hace bonito: desde hace casi cien años está aquí como una especie de testigo silencioso de la historia moderna de Kos.",
+    "v2": "Desde la época italiana, la guerra, la junta, el municipio... ha pasado por todo y sigue en pie.",
+    "v3": "Durante la Segunda Guerra Mundial, el edificio fue utilizado por los ocupantes alemanes. Más tarde, cuando Grecia consiguió la isla, el hotel se convirtió en un lugar para los oficiales del ejército griego durante la junta (el gobierno militar de los años 60 y 70). Posteriormente siguió siendo un edificio importante para el municipio de Kos y se utilizó para diversos servicios gubernamentales.",
+    "k1": "En 2015-2018 el edificio fue completamente restaurado y reabierto como hotel. Hoy Albergo Gelsomino es un pequeño hotel de ocho habitaciones,"
   }
-
-  var langBtn = document.getElementById('langBtn');
-  var langMenu = document.getElementById('langMenu');
-  function openMenu(){ langMenu.classList.add('open'); }
-  function closeMenu(){ langMenu.classList.remove('open'); }
-  langBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    langMenu.classList.contains('open') ? closeMenu() : openMenu();
-  });
-  document.addEventListener('click', function(){ closeMenu(); });
-  document.querySelectorAll('.lang-option').forEach(function(btn){
-    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
-  });
-
-  var saved = localStorage.getItem('hk-lang') || 'nl';
-  setLang(saved);
-
-  /* TTS */
-  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
-  function getLang(){
-    var l = localStorage.getItem('hk-lang') || 'nl';
-    return LANG_VOICE[l] ? l : 'nl';
-  }
-  function pickVoice(code){
-    var voices = speechSynthesis.getVoices() || [];
-    var prefix = code.slice(0,2).toLowerCase();
-    return voices.find(function(v){ return v.lang === code; })
-      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
-      || null;
-  }
-  var btnPlay = document.getElementById('btnPlay');
-  var btnStop = document.getElementById('btnStop');
-  var status = document.getElementById('ttsStatus');
-  function setStatus(t){ if(status) status.textContent = t; }
-  function play(){
-    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
-    speechSynthesis.cancel();
-    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
-    var l = getLang();
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = LANG_VOICE[l];
-    u.rate = 0.92;
-    var v = pickVoice(LANG_VOICE[l]);
-    if(v) u.voice = v;
-    u.onstart = function(){
-      btnPlay.classList.add('playing');
-      btnStop.classList.add('show');
-      setStatus('Voorlezen… ('+l.toUpperCase()+')');
-    };
-    u.onend = u.onerror = function(){
-      btnPlay.classList.remove('playing');
-      btnStop.classList.remove('show');
-      setStatus('');
-    };
-    if(!speechSynthesis.getVoices().length){
-      speechSynthesis.onvoiceschanged = function(){
-        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
-        speechSynthesis.speak(u);
-      };
-      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
-    } else {
-      speechSynthesis.speak(u);
-    }
-  }
-  function stop(){
-    if(window.speechSynthesis) speechSynthesis.cancel();
-    btnPlay.classList.remove('playing');
-    btnStop.classList.remove('show');
-    setStatus('Gestopt.');
-  }
-  btnPlay.addEventListener('click', play);
-  btnStop.addEventListener('click', stop);
-  if(window.speechSynthesis){
-    speechSynthesis.getVoices();
-    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
-  }
-})();
-</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>
-Sla dit 

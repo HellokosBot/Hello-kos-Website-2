@@ -1,113 +1,205 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0D1A1A">
-<title>Mastichari – Hello Kos</title>
-<link rel="stylesheet" href="hello-kos.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Mastichari – Hello Kos</title>
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body class="hk-page">
-<header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+<body class="hk-page hk-guide">
+  <header class="app-header">
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-<main class="main">
-  <div class="hero-wrap"><img src="img/hk/sight-mastichari.jpg" alt="">
-      <div class="hero-title"><h1 data-i18n="title">Mastichari</h1></div></div>
-  <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back">← Bezienswaardigheden</a></p>
-<p class="lead" data-i18n="lead">Vissersdorp aan de noordkust met een lang strand en een veerboot naar Kalymnos. De gids noemde een Blauwe Vlag voor het strand. Er is wind voor wind- en kitesurfen. Lido Waterpark ligt in de buurt.</p>
-  
-  <div class="actions">
-    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
-    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
-    
-  </div>
-  
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Mastichari%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Mastichari%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
       </div>
-      <p class="status" id="ttsStatus"></p>
-  <div id="readText">
-    <article class="card"><h2 data-i18n="hStory">Kustpad</h2><p data-i18n="p0">Er zijn lage duinen en een pad langs de kust, naast drukkere stukken met bars.</p></article>
-    
-  </div>
-</main>
-<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
-<script>window.HK_DICT = {
-    "nl": {
-      "title": "Mastichari",
-      "lead": "Vissersdorp aan de noordkust met een lang strand en een veerboot naar Kalymnos. De gids noemde een Blauwe Vlag voor het strand. Er is wind voor wind- en kitesurfen. Lido Waterpark ligt in de buurt.",
-      "back": "← Bezienswaardigheden",
-      "p0": "Er zijn lage duinen en een pad langs de kust, naast drukkere stukken met bars.",
-      "hStory": "Het verhaal",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Mastichari",
-      "lead": "Fischerdorf an der Nordküste mit langem Strand und einer Fähre nach Kalymnos. Der Guide nannte eine Blaue Flagge für den Strand. Es gibt Wind zum Wind- und Kitesurfen. Lido Waterpark liegt in der Nähe.",
-      "back": "← Sehenswürdigkeiten",
-      "p0": "Es gibt niedrige Dünen und einen Weg an der Küste, neben belebteren Abschnitten mit Bars.",
-      "hStory": "Die Geschichte",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Mastichari",
-      "lead": "Fishing village on the north coast with a long beach and a ferry to Kalymnos. The guide mentioned a Blue Flag for the beach. There is wind for windsurfing and kitesurfing. Lido Waterpark is nearby.",
-      "back": "← Sights",
-      "p0": "There are low dunes and a path along the coast, next to busier parts with bars.",
-      "hStory": "The story",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Mastichari",
-      "lead": "Villaggio di pescatori sulla costa nord con una lunga spiaggia e un traghetto per Kalymnos. La guida citava una Bandiera Blu per la spiaggia. C’è vento per windsurf e kitesurf. Lido Waterpark è vicino.",
-      "back": "← Attrazioni",
-      "p0": "Ci sono dune basse e un sentiero lungo la costa, accanto a tratti più animati con bar.",
-      "hStory": "La storia",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Mastichari",
-      "lead": "Kuzey kıyıda uzun plajlı ve Kalymnos feribotlu balıkçı köyü. Rehber plaj için Mavi Bayrak’tan söz etti. Rüzgar sörfü ve kite için rüzgar var. Lido Waterpark yakın.",
-      "back": "← Gezilecek yerler",
-      "p0": "Alçak kum tepeleri ve kıyı boyunca bir patika var, barlı kalabalık kısımların yanında.",
-      "hStory": "Hikaye",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Mastichari",
-      "lead": "Pueblo pesquero en la costa norte con playa larga y ferry a Kálimnos. La guía citaba una Bandera Azul para la playa. Hay viento para windsurf y kitesurf. Lido Waterpark está cerca.",
-      "back": "← Lugares de interés",
-      "p0": "Hay dunas bajas y un camino por la costa, junto a tramos más animados con bares.",
-      "hStory": "La historia",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
+  <main class="main">
+    <div class="hero-wrap">
+      <img class="hk-zoom" src="img/hk/sight-mastichari.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
+    </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=36.852%2C27.075" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?ll=36.852,27.075&amp;q=Mastichari" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-mastichari-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-mastichari-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-mastichari-03.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-mastichari-04.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-mastichari-05.jpg" alt=""></figure>
+<p data-i18n="v3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-mastichari-06.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-mastichari-07.jpg" alt=""></figure>
+</article>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-mastichari-08.jpg" alt=""></figure>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-mastichari-09.jpg" alt=""></figure>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-mastichari-10.jpg" alt=""></figure>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-mastichari-11.jpg" alt=""></figure>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-mastichari-12.jpg" alt=""></figure>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-mastichari-13.jpg" alt=""></figure>
+    </div>
+  </main>
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Mastichari",
+    "title": "Mastichari",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "Ongeveer dertig kilometer van Kos-stad ligt Mastichari Beach, een van de populairdere stranden aan deze kant van het eiland.",
+    "s1": "Ongeveer dertig kilometer van Kos-stad ligt Mastichari Beach, een van de populairdere stranden aan deze kant van het eiland. Mastichari heeft een lang, breed zandstrand met fijn goudkleurig zand en helder, ondiep water. Het strand loopt langzaam dieper, waardoor het erg geschikt is voor families met kinderen.",
+    "s2": "Er staat meestal een lekkere wind, dus een goede plek maakt voor windsurfers en kitesurfers. Mastichari is nog een echt vissersdorp met een gezellige haven waar elke ochtend verse vis en inktvis wordt aangevoerd. Langs de boulevard en het strand vind je veel tavernes, beach bars en kleine winkeltjes.",
+    "s3": "Je kunt er ligbedden en parasols huren, maar er zijn ook genoeg rustige stukken waar je gewoon je handdoek kunt neerleggen. Wat Mastichari extra leuk maakt, is de combinatie van strand en dorp. Je kunt ’s ochtends op het strand liggen, ’s middags even het dorp in lopen voor een ijsje of verse vis, en ’s avonds genieten van de zonsondergang met je voeten in het zand.",
+    "v1": "Het strand heeft de Blue Flag voor schone zee en goede voorzieningen. In de zomer is het er levendig maar nooit echt overvol. Er is voldoende parkeergelegenheid.",
+    "v2": "Mastichari heeft een echte eiland-sfeer: zand, zee, wind, verse vis en een klein dorpje. Precies de mix waar veel mensen blij van worden op Kos.",
+    "v3": "Populaire watersporten zoals windsurfen en kitesurfen profiteren van de aanwezige wind, waardoor het ook aangenaam koel blijft tijdens warme dagen. Mastichari Beach is bovendien trots op zijn Blue Flag, die de uitstekende waterkwaliteit, netheid en voorzieningen erkent. Bijzonderheden: Geniet van adembenemende zonsondergangen (met een noordwestelijke oriëntatie, beter dan veel noordstranden), een ontspannen eiland vibe met authentieke Griekse tavernes en beach cafés.",
+    "k1": "Verken de zandduinen met lage struiken en volg het schilderachtige wandelpad langs de kust. Het strand biedt een mix van levendige, georganiseerde zones met bars en rustige afgelegen delen. Dit alles trekt bezoekers aan die willen genieten van de relaxte sfeer en de levendige, maar niet-overvolle plekjes."
+  },
+  "de": {
+    "place": "Mastichari",
+    "title": "Mastichari",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Etwa dreißig Kilometer von Kos-Stadt entfernt liegt der Strand Mastichari, einer der beliebtesten Strände auf dieser Seite der Insel.",
+    "s1": "Etwa dreißig Kilometer von Kos-Stadt entfernt liegt der Strand Mastichari, einer der beliebtesten Strände auf dieser Seite der Insel. Mastichari hat einen langen, breiten Sandstrand mit feinem goldenen Sand und klarem, flachem Wasser. Der Strand wird allmählich tiefer und eignet sich daher sehr gut für Familien mit Kindern.",
+    "s2": "Es herrscht meist ein schöner Wind, was den Ort zu einem guten Ort für Windsurfer und Kitesurfer macht. Mastichari ist ein echtes Fischerdorf mit einem gemütlichen Hafen, in dem jeden Morgen frischer Fisch und Tintenfisch geliefert werden. Entlang des Boulevards und des Strandes finden Sie viele Tavernen, Strandbars und kleine Geschäfte.",
+    "s3": "Sie können Liegen und Sonnenschirme mieten, aber es gibt auch viele ruhige Bereiche, in denen Sie einfach Ihr Handtuch ablegen können. Was Mastichari besonders unterhaltsam macht, ist die Kombination aus Strand und Dorf. Sie können morgens am Strand liegen, nachmittags ins Dorf gehen, um ein Eis oder frischen Fisch zu essen, und abends den Sonnenuntergang mit den Füßen im Sand genießen.",
+    "v1": "Der Strand hat die Blaue Flagge für sauberes Meer und gute Einrichtungen. Im Sommer ist es lebhaft, aber nie wirklich überfüllt. Es gibt ausreichend Parkplätze.",
+    "v2": "Mastichari hat eine echte Inselatmosphäre: Sand, Meer, Wind, frischen Fisch und ein kleines Dorf. Genau die Mischung, die viele Menschen auf Kos glücklich macht.",
+    "v3": "Beliebte Wassersportarten wie Windsurfen und Kitesurfen profitieren vom vorhandenen Wind, der es auch an heißen Tagen angenehm kühl hält. Mastichari Beach ist außerdem stolz auf seine Blaue Flagge, die seine hervorragende Wasserqualität, Sauberkeit und Ausstattung würdigt. Spezialitäten: Genießen Sie atemberaubende Sonnenuntergänge (mit Nordwestausrichtung, besser als viele Strände im Norden), eine entspannte Inselatmosphäre mit authentischen griechischen Tavernen und Strandcafés.",
+    "k1": "Erkunden Sie die Sanddünen mit niedrigen Sträuchern und folgen Sie dem malerischen Küstenwanderweg. Der Strand bietet eine Mischung aus belebten, organisierten Bereichen mit Bars und ruhigen, abgeschiedenen Bereichen. All dies lockt Besucher an, die die entspannte Atmosphäre und die lebhaften, aber nicht überfüllten Orte genießen möchten."
+  },
+  "en": {
+    "place": "Mastichari",
+    "title": "Mastichari",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "About thirty kilometers from Kos Town is Mastichari Beach, one of the more popular beaches on this side of the island.",
+    "s1": "About thirty kilometers from Kos Town is Mastichari Beach, one of the more popular beaches on this side of the island. Mastichari has a long, wide sandy beach with fine golden sand and clear, shallow water. The beach gradually deepens, making it very suitable for families with children.",
+    "s2": "There is usually a nice wind, which makes it a good spot for windsurfers and kitesurfers. Mastichari is a real fishing village with a cozy harbor where fresh fish and squid are delivered every morning. Along the boulevard and the beach you will find many taverns, beach bars and small shops.",
+    "s3": "You can rent sunbeds and parasols, but there are also plenty of quiet areas where you can just put down your towel. What makes Mastichari extra fun is the combination of beach and village. You can lie on the beach in the morning, walk into the village for an ice cream or fresh fish in the afternoon, and enjoy the sunset with your feet in the sand in the evening.",
+    "v1": "The beach has the Blue Flag for clean sea and good facilities. In the summer it is lively but never really crowded. There is ample parking.",
+    "v2": "Mastichari has a real island atmosphere: sand, sea, wind, fresh fish and a small village. Exactly the mix that makes many people happy on Kos.",
+    "v3": "Popular water sports such as windsurfing and kitesurfing benefit from the available wind, which also keeps it pleasantly cool during hot days. Mastichari Beach is also proud of its Blue Flag, which recognizes its excellent water quality, cleanliness and amenities. Specialties: Enjoy breathtaking sunsets (with a northwest orientation, better than many northern beaches), a relaxed island vibe with authentic Greek taverns and beach cafes.",
+    "k1": "Explore the sand dunes with low shrubs and follow the scenic coastal walkway. The beach offers a mix of lively, organized areas with bars and quiet secluded areas. All this attracts visitors who want to enjoy the relaxed atmosphere and the lively, but not overcrowded places."
+  },
+  "it": {
+    "place": "Mastichari",
+    "title": "Mastichari",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "A circa trenta chilometri dalla città di Kos si trova la spiaggia di Mastichari, una delle spiagge più famose su questo lato dell'isola.",
+    "s1": "A circa trenta chilometri dalla città di Kos si trova la spiaggia di Mastichari, una delle spiagge più famose su questo lato dell'isola. Mastichari ha una lunga e ampia spiaggia sabbiosa con sabbia fine e dorata e acque limpide e poco profonde. La spiaggia diventa gradualmente più profonda, rendendola molto adatta alle famiglie con bambini.",
+    "s2": "Di solito c'è un bel vento, che lo rende un buon spot per windsurfisti e kitesurfisti. Mastichari è un vero villaggio di pescatori con un accogliente porto dove ogni mattina vengono consegnati pesce fresco e calamari. Lungo il viale e la spiaggia troverete numerose taverne, bar sulla spiaggia e piccoli negozi.",
+    "s3": "È possibile noleggiare lettini e ombrelloni, ma ci sono anche molte zone tranquille dove potrete semplicemente stendere l'asciugamano. Ciò che rende Mastichari ancora più divertente è la combinazione di spiaggia e villaggio. Puoi sdraiarti sulla spiaggia la mattina, passeggiare nel villaggio per un gelato o un pesce fresco nel pomeriggio e goderti il ​​tramonto con i piedi nella sabbia la sera.",
+    "v1": "La spiaggia ha la Bandiera Blu per il mare pulito e i buoni servizi. D'estate è vivace ma mai veramente affollata. C'è un ampio parcheggio.",
+    "v2": "Mastichari ha una vera atmosfera isolana: sabbia, mare, vento, pesce fresco e un piccolo villaggio. Esattamente il mix che rende felici molte persone a Kos.",
+    "v3": "Gli sport acquatici più popolari come il windsurf e il kitesurf beneficiano del vento disponibile, che mantiene il clima piacevolmente fresco anche durante le giornate calde. Mastichari Beach è anche orgogliosa della sua Bandiera Blu, che riconosce l'eccellente qualità dell'acqua, la pulizia e i servizi. Specialità: Godetevi tramonti mozzafiato (con orientamento nord-ovest, migliori di molte spiagge del nord), un'atmosfera rilassata dell'isola con autentiche taverne greche e caffè sulla spiaggia.",
+    "k1": "Esplora le dune di sabbia con bassi arbusti e segui la panoramica passerella costiera. La spiaggia offre un mix di aree vivaci e organizzate con bar e zone tranquille e appartate. Tutto ciò attira i visitatori che vogliono godersi l'atmosfera rilassata e i luoghi vivaci, ma non sovraffollati."
+  },
+  "tr": {
+    "place": "Mastichari",
+    "title": "Mastichari",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Kos Kasabasından yaklaşık otuz kilometre uzakta, adanın bu yakasındaki en popüler plajlardan biri olan Mastichari Plajı bulunmaktadır.",
+    "s1": "Kos Kasabasından yaklaşık otuz kilometre uzakta, adanın bu yakasındaki en popüler plajlardan biri olan Mastichari Plajı bulunmaktadır. Mastichari'nin ince altın rengi kumları ve berrak, sığ suları olan uzun, geniş bir kumsalı vardır. Plaj giderek derinleşerek çocuklu aileler için oldukça uygun hale geliyor.",
+    "s2": "Genellikle güzel bir rüzgar vardır, bu da burayı rüzgar sörfçüleri ve uçurtma sörfçüleri için iyi bir yer haline getirir. Mastichari, her sabah taze balık ve kalamarın teslim edildiği rahat bir limanı olan gerçek bir balıkçı köyüdür. Bulvar ve plaj boyunca çok sayıda taverna, plaj barı ve küçük dükkan bulacaksınız.",
+    "s3": "Şezlong ve şemsiye kiralayabilirsiniz ancak havlunuzu bırakabileceğiniz çok sayıda sessiz alan da bulunmaktadır. Mastichari'yi ekstra eğlenceli kılan şey plaj ve köyün birleşimidir. Sabah sahilde uzanabilir, öğleden sonra dondurma ya da taze balık yemek için köye yürüyebilir, akşam ise ayaklarınızı kuma basarak gün batımının keyfini çıkarabilirsiniz.",
+    "v1": "Plaj, temiz deniz ve iyi olanaklar nedeniyle Mavi Bayrak'a sahiptir. Yaz aylarında hareketlidir ancak hiçbir zaman gerçekten kalabalık değildir. Geniş otopark mevcuttur.",
+    "v2": "Mastichari'de gerçek bir ada atmosferi var: kum, deniz, rüzgar, taze balık ve küçük bir köy. Tam da Kos'ta pek çok insanı mutlu eden karışım.",
+    "v3": "Rüzgar sörfü ve uçurtma sörfü gibi popüler su sporları, sıcak günlerde serinliği de koruyan mevcut rüzgardan yararlanır. Mastichari Plajı aynı zamanda mükemmel su kalitesini, temizliğini ve olanaklarını tanıyan Mavi Bayrakla da gurur duymaktadır. Uzmanlık Alanları: Nefes kesen gün batımlarının (kuzeybatı yönelimli, birçok kuzey plajından daha iyi), otantik Yunan tavernaları ve plaj kafeleriyle rahat bir ada havasının keyfini çıkarın.",
+    "k1": "Alçak çalılıkların bulunduğu kum tepelerini keşfedin ve manzaralı sahil yürüyüş yolunu takip edin. Plaj, barlar ve sessiz tenha alanların bulunduğu canlı, düzenli alanların bir karışımını sunmaktadır. Bütün bunlar, rahat atmosferin ve canlı ancak aşırı kalabalık olmayan yerlerin tadını çıkarmak isteyen ziyaretçilerin ilgisini çekmektedir."
+  },
+  "es": {
+    "place": "Mastichari",
+    "title": "Mastichari",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "A unos treinta kilómetros de la ciudad de Kos se encuentra la playa de Mastichari, una de las playas más populares de este lado de la isla.",
+    "s1": "A unos treinta kilómetros de la ciudad de Kos se encuentra la playa de Mastichari, una de las playas más populares de este lado de la isla. Mastichari tiene una larga y amplia playa de arena fina y dorada y aguas claras y poco profundas. La playa se va profundizando poco a poco, haciéndola muy adecuada para familias con niños.",
+    "s2": "Suele haber viento agradable, lo que lo convierte en un buen lugar para practicantes de windsurf y kitesurf. Mastichari es un auténtico pueblo de pescadores con un acogedor puerto donde todas las mañanas se entrega pescado fresco y calamares. A lo largo del bulevar y de la playa encontrará numerosas tabernas, chiringuitos y pequeñas tiendas.",
+    "s3": "Puedes alquilar tumbonas y sombrillas, pero también hay muchas zonas tranquilas donde simplemente dejar la toalla. Lo que hace que Mastichari sea más divertido es la combinación de playa y pueblo. Puedes tumbarte en la playa por la mañana, caminar hasta el pueblo para tomar un helado o pescado fresco por la tarde y disfrutar de la puesta de sol con los pies en la arena por la noche.",
+    "v1": "La playa tiene la Bandera Azul por su mar limpio y buenas instalaciones. En verano hay mucha vida pero nunca hay mucha gente. Hay un amplio aparcamiento.",
+    "v2": "Mastichari tiene un auténtico ambiente isleño: arena, mar, viento, pescado fresco y un pequeño pueblo. Exactamente la mezcla que hace feliz a mucha gente en Kos.",
+    "v3": "Los deportes acuáticos más populares, como el windsurf y el kitesurf, se benefician del viento disponible, que también lo mantiene agradablemente fresco durante los días calurosos. Mastichari Beach también se enorgullece de su Bandera Azul, que reconoce la excelente calidad del agua, limpieza y comodidades. Especialidades: Disfrute de impresionantes puestas de sol (con orientación noroeste, mejor que muchas playas del norte), un ambiente isleño relajado con auténticas tabernas griegas y cafés en la playa.",
+    "k1": "Explora las dunas de arena con arbustos bajos y sigue el pintoresco sendero costero. La playa ofrece una mezcla de zonas animadas y organizadas con bares y zonas tranquilas y apartadas. Todo esto atrae a visitantes que quieren disfrutar del ambiente relajado y de los lugares animados, pero no abarrotados."
+  }
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

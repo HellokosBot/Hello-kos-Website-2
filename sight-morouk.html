@@ -1,415 +1,207 @@
 <!DOCTYPE html>
-<html lang="nl" data-hk-own="1" data-hk-tts="1">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0D1F1F">
-  <title>Morouk-moskee – Hello Kos</title>
-  <style>
-    :root {
-      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
-      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
-      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
-      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
-      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text); -webkit-font-smoothing: antialiased;
-      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
-      background: var(--bg); min-height: 100vh; line-height: 1.55;
-    }
-    .app-header {
-      position: sticky; top: 0; z-index: 100;
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-      padding: 14px 16px; background: var(--bg-header);
-      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
-    }
-    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
-    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
-    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
-    .logo-text span { color: var(--gold-dark); font-style: italic; }
-    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
-    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
-    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
-    .lang-menu.open { display: block; }
-    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
-    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
-    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
-    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
-    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .content { padding: 18px 16px 0; }
-    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
-    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-
-    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
-    .btn-audio { background: var(--petrol); color: #fff; }
-    .btn-audio.playing { background: var(--petrol-dark); }
-    .btn-stop { background: #3A4545; color: #fff; display: none; }
-    .btn-stop.show { display: flex; }
-
-    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
-    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
-    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
-    .card p:last-child { margin-bottom: 0; }
-    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
-    .tip strong { color: var(--gold); }
-
-    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
-    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
-    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
-    .footer a { color: var(--petrol); text-decoration: none; }
-  </style>
-<link rel="stylesheet" href="hello-kos.css">
+  <title>Morouk moskee – Hello Kos</title>
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body>
+<body class="hk-page hk-guide">
   <header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
   <main class="main">
     <div class="hero-wrap">
-      <img src="img/jwwb/270b776a98-morouk-tzami-03-standard.jpg" alt="Morouk-moskee" loading="eager">
-      <div class="hero-title"><h1 data-i18n="title">Morouk-moskee</h1></div>
+      <img class="hk-zoom" src="img/jwwb/270b776a98-morouk-tzami-03-standard.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
     </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=36.8908%2C27.286" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?ll=36.8908,27.286&amp;q=Morouk%20moskee" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-morouk-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-morouk-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-morouk-03.jpg" alt=""></figure>
+<p data-i18n="s4"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-morouk-04.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
 
-    <div class="content">
-<p class="lead" data-i18n="lead">Verborgen moskee in Old Town zonder minaret – antieke sarcofaag (± 2000 jaar) als wasbak, reparatie-inscriptie 1892.</p>
+<p data-i18n="v2"></p>
 
-      
+<p data-i18n="v3"></p>
 
-      <div class="actions">
-        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
-        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-      </div>
-      
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Moruk%20Mosque%20Old%20Town%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Moruk%20Mosque%20Old%20Town%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
-      </div>
-      <p class="status" id="ttsStatus"></p>
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
 
-      <div id="readText">
-        <div class="card">
-          <h2 data-i18n="hStory">Verborgen tussen de winkels</h2>
-          <p data-i18n="p1">De Moruk-moskee ligt midden in Old Town. Op het eerste gezicht lijkt het geen moskee: er is geen minaret. Veel mensen lopen er voorbij zonder het te herkennen.</p>
-        </div>
-
-        
-
-        <div class="card">
-          <h2 data-i18n="hSee">Morukzade Efendi</h2>
-          <p data-i18n="p2">De naam komt van Morukzade Efendi, een rijke man uit de Mora (Peloponnesos) die de moskee liet bouwen. Wanneer precies is onbekend. Een inscriptie op de deur vermeldt dat Hacı Hasan Rıza het gebouw in 1892 liet repareren, onder sultan Abdul Hamid II.</p>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h21933">1933 en vakıf</h2>
-          <p data-i18n="p3">Oorspronkelijk twee verdiepingen. In 1933 zwaar beschadigd door de aardbeving; de buitenkant bleef grotendeels intact, het interieur werd verbouwd. Vandaag is het een bedrijfsgebouw dat wordt verhuurd; de opbrengst gaat naar de Turkse stichtingsadministratie (vakıf).</p>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2sarcophagus">Antieke sarcofaag als wasbak</h2>
-          <p data-i18n="p4">Extra bijzonder: een antieke sarcofaag (± 2000 jaar oud) werd hergebruikt als drinkbak bij de wasfontein voor het rituele gebed. Typisch voor Kos: de Ottomanen bouwden vaak met antieke materialen die al op het eiland lagen.</p>
-        </div>
-
-        <div class="gallery">
-          <div class="g-item">
-            <img src="img/jwwb/270b776a98-morouk-tzami-03-standard.jpg" alt="" loading="lazy">
-            <span data-i18n="g1">Morouk</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/d0b9b2735d-img_2054-copy-1-800x1200-high.jpg" alt="" loading="lazy">
-            <span data-i18n="g2">Morouk</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/bc5fd252dd-img_4488-copy-800x1200-high.jpg" alt="" loading="lazy">
-            <span data-i18n="g3">Morouk</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/f29bb890b4-img_2050-high.jpg" alt="" loading="lazy">
-            <span data-i18n="g4">Morouk</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="hKnow">Bezoeken</h2>
-          <p data-i18n="p5">In Old Town. Van buitenaf te zien.</p>
-          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: let op het gebouw zonder minaret én op de oude sarcofaag bij de wasfontein als die zichtbaar is.</p></div>
-        </div>
-      </div>
+</article>
     </div>
   </main>
-
-  <footer class="footer">
-    <div>Hello Kos</div>
-    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
-  </footer>
-
-<script>
-(function(){
-  var I18N = window.HK_DICT = {
-    "nl": {
-      "title": "Morouk-moskee",
-      "lead": "Verborgen moskee in Old Town zonder minaret – antieke sarcofaag (± 2000 jaar) als wasbak, reparatie-inscriptie 1892.",
-      "btnPlay": "Voorlezen",
-      "p1": "De Moruk-moskee ligt midden in Old Town. Op het eerste gezicht lijkt het geen moskee: er is geen minaret. Veel mensen lopen er voorbij zonder het te herkennen.",
-      "p2": "De naam komt van Morukzade Efendi, een rijke man uit de Mora (Peloponnesos) die de moskee liet bouwen. Wanneer precies is onbekend. Een inscriptie op de deur vermeldt dat Hacı Hasan Rıza het gebouw in 1892 liet repareren, onder sultan Abdul Hamid II.",
-      "h21933": "1933 en vakıf",
-      "p3": "Oorspronkelijk twee verdiepingen. In 1933 zwaar beschadigd door de aardbeving; de buitenkant bleef grotendeels intact, het interieur werd verbouwd. Vandaag is het een bedrijfsgebouw dat wordt verhuurd; de opbrengst gaat naar de Turkse stichtingsadministratie (vakıf).",
-      "h2sarcophagus": "Antieke sarcofaag als wasbak",
-      "p4": "Extra bijzonder: een antieke sarcofaag (± 2000 jaar oud) werd hergebruikt als drinkbak bij de wasfontein voor het rituele gebed. Typisch voor Kos: de Ottomanen bouwden vaak met antieke materialen die al op het eiland lagen.",
-      "g1": "Morouk",
-      "g2": "Morouk",
-      "g3": "Morouk",
-      "g4": "Morouk",
-      "p5": "In Old Town. Van buitenaf te zien.",
-      "tip": "let op het gebouw zonder minaret én op de oude sarcofaag bij de wasfontein als die zichtbaar is.",
-      "hStory": "Het verhaal",
-      "hSee": "Wat je ziet",
-      "hKnow": "Goed om te weten",
-      "tipTitle": "Tip van de gids",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Morouk Mosque",
-      "lead": "Hidden mosque in Old Town without a minaret – ancient sarcophagus (± 2000 years) used as a washbasin, repair inscription 1892.",
-      "btnPlay": "Read aloud",
-      "p1": "The Moruk Mosque is in the middle of Old Town. At first glance it does not look like a mosque: there is no minaret. Many people walk past without recognising it.",
-      "p2": "The name comes from Morukzade Efendi, a rich man from the Morea (Peloponnese) who had the mosque built. Exactly when is unknown. An inscription on the door states that Hacı Hasan Rıza had the building repaired in 1892, under Sultan Abdul Hamid II.",
-      "h21933": "1933 and vakıf",
-      "p3": "Originally two storeys. Heavily damaged by the 1933 earthquake; the exterior remained largely intact, the interior was remodelled. Today it is a commercial building that is rented out; the proceeds go to the Turkish foundation administration (vakıf).",
-      "h2sarcophagus": "Ancient sarcophagus as washbasin",
-      "p4": "Extra special: an ancient sarcophagus (± 2000 years old) was reused as a drinking basin at the wash fountain for ritual prayer. Typical of Kos: the Ottomans often built with ancient materials that were already on the island.",
-      "g1": "Morouk",
-      "g2": "Morouk",
-      "g3": "Morouk",
-      "g4": "Morouk",
-      "p5": "In Old Town. Visible from the outside.",
-      "tip": "look for the building without a minaret and for the old sarcophagus at the wash fountain if it is visible.",
-      "hStory": "The story",
-      "hSee": "What you see",
-      "hKnow": "Good to know",
-      "tipTitle": "Guide’s tip",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Morouk-Moschee",
-      "lead": "Versteckte Moschee in der Altstadt ohne Minarett – antiker Sarkophag (± 2000 Jahre) als Waschbecken, Reparaturinschrift 1892.",
-      "btnPlay": "Vorlesen",
-      "p1": "Die Moruk-Moschee liegt mitten in der Altstadt. Auf den ersten Blick sieht sie nicht wie eine Moschee aus: es gibt kein Minarett. Viele Menschen gehen vorbei, ohne sie zu erkennen.",
-      "p2": "Der Name stammt von Morukzade Efendi, einem reichen Mann aus der Morea (Peloponnes), der die Moschee bauen ließ. Wann genau ist unbekannt. Eine Inschrift an der Tür besagt, dass Hacı Hasan Rıza das Gebäude 1892 unter Sultan Abdul Hamid II. reparieren ließ.",
-      "h21933": "1933 und vakıf",
-      "p3": "Ursprünglich zwei Stockwerke. 1933 schwer durch das Erdbeben beschädigt; die Außenseite blieb weitgehend intakt, das Innere wurde umgebaut. Heute ist es ein Geschäftsgebäude, das vermietet wird; der Erlös geht an die türkische Stiftungsverwaltung (vakıf).",
-      "h2sarcophagus": "Antiker Sarkophag als Waschbecken",
-      "p4": "Besonders: ein antiker Sarkophag (± 2000 Jahre alt) wurde als Trinkbecken am Waschbrunnen für das rituelle Gebet wiederverwendet. Typisch für Kos: die Osmanen bauten oft mit antiken Materialien, die schon auf der Insel lagen.",
-      "g1": "Morouk",
-      "g2": "Morouk",
-      "g3": "Morouk",
-      "g4": "Morouk",
-      "p5": "In der Altstadt. Von außen sichtbar.",
-      "tip": "achte auf das Gebäude ohne Minarett und auf den alten Sarkophag am Waschbrunnen, falls sichtbar.",
-      "hStory": "Die Geschichte",
-      "hSee": "Was du siehst",
-      "hKnow": "Gut zu wissen",
-      "tipTitle": "Tipp des Guides",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Moschea di Morouk",
-      "lead": "Moschea nascosta nella Città Vecchia senza minareto – sarcofago antico (± 2000 anni) come lavabo, iscrizione di riparazione 1892.",
-      "btnPlay": "Leggi ad alta voce",
-      "p1": "La moschea di Moruk si trova in mezzo alla Città Vecchia. A prima vista non sembra una moschea: non c’è minareto. Molte persone passano senza riconoscerla.",
-      "p2": "Il nome deriva da Morukzade Efendi, un uomo ricco della Morea (Peloponneso) che fece costruire la moschea. Quando esattamente è sconosciuto. Un’iscrizione sulla porta dice che Hacı Hasan Rıza fece riparare l’edificio nel 1892, sotto il sultano Abdul Hamid II.",
-      "h21933": "1933 e vakıf",
-      "p3": "Originariamente due piani. Gravemente danneggiata dal terremoto del 1933; l’esterno rimase in gran parte intatto, l’interno fu ristrutturato. Oggi è un edificio commerciale affittato; i proventi vanno all’amministrazione delle fondazioni turche (vakıf).",
-      "h2sarcophagus": "Sarcofago antico come lavabo",
-      "p4": "Particolare: un sarcofago antico (± 2000 anni) fu riutilizzato come vasca per bere alla fontana di abluzione per la preghiera rituale. Tipico di Kos: gli Ottomani costruivano spesso con materiali antichi già presenti sull’isola.",
-      "g1": "Morouk",
-      "g2": "Morouk",
-      "g3": "Morouk",
-      "g4": "Morouk",
-      "p5": "Nella Città Vecchia. Visibile dall’esterno.",
-      "tip": "nota l’edificio senza minareto e il vecchio sarcofago alla fontana di abluzione se è visibile.",
-      "hStory": "La storia",
-      "hSee": "Cosa vedi",
-      "hKnow": "Buono a sapersi",
-      "tipTitle": "Consiglio della guida",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Morouk Camii",
-      "lead": "Eski Şehir’de minaresiz gizli cami – antik lahit (± 2000 yıl) lavabo olarak, 1892 onarım yazıtı.",
-      "btnPlay": "Sesli oku",
-      "p1": "Moruk Camii Eski Şehir’in ortasındadır. İlk bakışta cami gibi görünmez: minaresi yoktur. Birçok insan tanımadan geçer.",
-      "p2": "Ad, Mora’dan (Peloponnes) zengin bir adam olan Morukzade Efendi’den gelir; camiyi o yaptırmıştır. Tam olarak ne zaman olduğu bilinmiyor. Kapıdaki yazıt Hacı Hasan Rıza’nın binayı 1892’de Sultan II. Abdülhamid döneminde onarttığını belirtir.",
-      "h21933": "1933 ve vakıf",
-      "p3": "Orijinalinde iki katlıydı. 1933 depreminde ağır hasar gördü; dış kısım büyük ölçüde sağlam kaldı, içi yeniden düzenlendi. Bugün kiralanan ticari bir binadır; gelir Türk vakıf yönetimine (vakıf) gider.",
-      "h2sarcophagus": "Antik lahit lavabo olarak",
-      "p4": "Özel: antik bir lahit (± 2000 yıl) ritüel namaz için abdest çeşmesinde içme teknesi olarak yeniden kullanıldı. Kos’a özgü: Osmanlılar genellikle adada zaten bulunan antik malzemelerle inşa etti.",
-      "g1": "Morouk",
-      "g2": "Morouk",
-      "g3": "Morouk",
-      "g4": "Morouk",
-      "p5": "Eski Şehir’de. Dışarıdan görülebilir.",
-      "tip": "minaresiz binaya ve görünürse abdest çeşmesindeki eski lahite dikkat edin.",
-      "hStory": "Hikaye",
-      "hSee": "Ne görürsün",
-      "hKnow": "Bilmekte fayda var",
-      "tipTitle": "Rehberin ipucu",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Mezquita de Morouk",
-      "lead": "Mezquita oculta en el Casco Antiguo sin minarete – sarcófago antiguo (± 2000 años) como lavabo, inscripción de reparación 1892.",
-      "btnPlay": "Leer en voz alta",
-      "p1": "La mezquita de Moruk está en medio del Casco Antiguo. A primera vista no parece una mezquita: no hay minarete. Mucha gente pasa sin reconocerla.",
-      "p2": "El nombre proviene de Morukzade Efendi, un hombre rico de Morea (Peloponeso) que mandó construir la mezquita. Cuándo exactamente se desconoce. Una inscripción en la puerta indica que Hacı Hasan Rıza hizo reparar el edificio en 1892, bajo el sultán Abdul Hamid II.",
-      "h21933": "1933 y vakıf",
-      "p3": "Originalmente dos plantas. Gravemente dañada por el terremoto de 1933; el exterior quedó en gran parte intacto, el interior se remodeló. Hoy es un edificio comercial que se alquila; los ingresos van a la administración de fundaciones turcas (vakıf).",
-      "h2sarcophagus": "Sarcófago antiguo como lavabo",
-      "p4": "Especial: un sarcófago antiguo (± 2000 años) se reutilizó como pila de agua en la fuente de ablución para la oración ritual. Típico de Kos: los otomanos a menudo construían con materiales antiguos que ya estaban en la isla.",
-      "g1": "Morouk",
-      "g2": "Morouk",
-      "g3": "Morouk",
-      "g4": "Morouk",
-      "p5": "En el Casco Antiguo. Visible desde fuera.",
-      "tip": "fíjate en el edificio sin minarete y en el antiguo sarcófago de la fuente de ablución si es visible.",
-      "hStory": "La historia",
-      "hSee": "Qué ves",
-      "hKnow": "Bueno saberlo",
-      "tipTitle": "Consejo del guía",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };
-
-  function setLang(l) {
-    if (!I18N[l]) l = 'nl';
-    localStorage.setItem('hk-lang', l);
-    document.documentElement.lang = l;
-    var d = I18N[l];
-    document.querySelectorAll('[data-i18n]').forEach(function(el){
-      var k = el.getAttribute('data-i18n');
-      if (d[k]) el.textContent = d[k];
-    });
-    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
-    if (opt) {
-      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
-      document.getElementById('code').textContent = l.toUpperCase();
-    }
-    document.querySelectorAll('.lang-option').forEach(function(o){
-      o.classList.toggle('active', o.getAttribute('data-lang') === l);
-    });
-    closeMenu();
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Kos-stad",
+    "title": "Morouk moskee",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "We slaan even een smal straatje in,Hier, tussen de drukke souvenirwinkels in de Ifestoustraat, staat de Moruk Moskee.",
+    "s1": "We slaan even een smal straatje in,Hier, tussen de drukke souvenirwinkels in de Ifestoustraat, staat de Moruk Moskee. De moskee dankt haar naam aan Morukzade Efendi, een rijke man die oorspronkelijk uit de Mora kwam, het schiereiland Peloponnesos. Hij liet de moskee bouwen in de late Ottomaanse periode, men weet niet precies wanneer.",
+    "s2": "Maar Een inscriptie op de deur vertelt dat Hacı Hasan Rıza het gebouw in achttien tweeënnegentig liet repareren, tijdens de regering van sultan Abdul Hamid de Tweede. Het is een kleine moskee zonder minaret. Oorspronkelijk had het twee verdiepingen.",
+    "s3": "Wat vooral opvalt is dat de Ottomanen hier ook weer oude materialen hergebruikten. Bij de wasfontein buiten staat een marmeren sarcofaag die ongeveer tweeduizend jaar oud is en uit de klassieke oudheid komt. Die sarcofaag diende vroeger als drinkbak voor het rituele wassen voor het gebed.",
+    "s4": "In negentien drieëndertig werd de moskee zwaar beschadigd door de grote aardbeving. De buitenkant bleef grotendeels overeind, maar het interieur werd later helemaal verbouwd. Vandaag de dag is het geen actieve moskee meer.",
+    "v1": "Het fungeert als bedrijfsgebouw. De opbrengst gaat naar de Turkse stichtingsadministratie, de vakıf. Op het eerste gezicht herken je het bijna niet als moskee.",
+    "v2": "Het ligt onopvallend tussen de winkels en veel mensen lopen er dan ook gewoon voorbij, zonder het op te merken. Toegang is niet mogelijk. Men kan alleen via de winkel het gebouw zien.",
+    "v3": "Je kunt het gebouw wel van buitenaf bekijken. En wie weet loop jij straks langs dit kleine moskeetje, en bedenk jij je hoe een rijke man uit Mora, hier lang geleden iets liet bouwen. Het is grappig is, hoe zoiets kleins en bescheidens hier al meer dan honderd jaar tussen de drukte van de Oude Stad staat, terwijl bijna niemand het echt opmerkt.",
+    "k1": "Vandaag fungeert het als bedrijfsgebouw dat verhuurd wordt; de opbrengst gaat naar de Turkse stichtingsadministratie (vakıf). Wat het extra bijzonder maakt, is de antieke sarcofaag die hergebruikt werd als drinkbak bij de wasfontein voor het rituele gebed. Dit marmeren stuk uit de klassieke oudheid – zo’n 2000 jaar oud – is typisch voor Kos: de Ottomanen bouwden vaak met antieke materialen die al op het eiland lagen. De Moruk Moskee is bescheiden en niet zo bekend als de andere Moskee."
+  },
+  "de": {
+    "place": "Kos-Stadt",
+    "title": "Morouk moskee",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Wir biegen in eine schmale Straße ein, hier, zwischen den belebten Souvenirläden in der Ifestoustraat, liegt die Moruk-Moschee.",
+    "s1": "Wir biegen in eine schmale Straße ein, hier, zwischen den belebten Souvenirläden in der Ifestoustraat, liegt die Moruk-Moschee. Ihren Namen verdankt die Moschee Morukzade Efendi, einem wohlhabenden Mann, der ursprünglich aus der Mora, der Halbinsel Peloponnes, stammte. Er ließ die Moschee in der späten osmanischen Zeit errichten, der genaue Zeitpunkt ist jedoch nicht bekannt.",
+    "s2": "Eine Inschrift an der Tür besagt jedoch, dass Hacı Hasan Rıza das Gebäude im Jahr 1892, während der Herrschaft von Sultan Abdul Hamid dem Zweiten, reparieren ließ. Es ist eine kleine Moschee ohne Minarett. Ursprünglich hatte es zwei Stockwerke.",
+    "s3": "Besonders auffällig ist, dass die Osmanen auch hier alte Materialien wiederverwendeten. In der Nähe des Waschbrunnens draußen befindet sich ein etwa zweitausend Jahre alter Marmorsarkophag aus der klassischen Antike. Der Sarkophag diente früher als Tränke für die rituelle Waschung vor dem Gebet.",
+    "s4": "Im Jahr 1933 wurde die Moschee durch das große Erdbeben schwer beschädigt. Das Äußere blieb weitgehend erhalten, das Innere wurde jedoch später komplett renoviert. Heute ist sie keine aktive Moschee mehr.",
+    "v1": "Es fungiert als Geschäftsgebäude. Der Erlös geht an die türkische Stiftungsverwaltung, den Vakıf. Auf den ersten Blick erkennt man kaum, dass es sich um eine Moschee handelt.",
+    "v2": "Es liegt unauffällig zwischen den Geschäften und viele Menschen laufen einfach daran vorbei, ohne es zu bemerken. Der Zugriff ist nicht möglich. Man kann das Gebäude nur durch den Laden sehen.",
+    "v3": "Sie können das Gebäude von außen besichtigen. Und wer weiß, vielleicht gehen Sie bald an dieser kleinen Moschee vorbei und stellen sich vor, wie ein reicher Mann aus Mora vor langer Zeit hier etwas bauen ließ. Es ist schon komisch, dass so etwas Kleines und Bescheidenes seit mehr als hundert Jahren hier inmitten des Trubels der Altstadt steht, ohne dass es wirklich jemandem auffällt.",
+    "k1": "Heute dient es als Gewerbegebäude, das vermietet wird; der erlös geht an die türkische stiftungsverwaltung (vakıf). Das Besondere daran ist der antike Sarkophag, der am Waschbrunnen als Tränke für rituelle Gebete diente. Dieses etwa 2.000 Jahre alte Marmorstück aus der klassischen Antike ist typisch für Kos: Die Osmanen bauten oft mit antiken Materialien, die es bereits auf der Insel gab. Die Moruk-Moschee ist bescheiden und nicht so bekannt wie die anderen Moscheen."
+  },
+  "en": {
+    "place": "Kos Town",
+    "title": "Morouk moskee",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "We turn into a narrow street, here, between the busy souvenir shops in Ifestoustraat, is the Moruk Mosque.",
+    "s1": "We turn into a narrow street, here, between the busy souvenir shops in Ifestoustraat, is the Moruk Mosque. The mosque owes its name to Morukzade Efendi, a wealthy man who originally came from the Mora, the Peloponnese peninsula. He had the mosque built in the late Ottoman period, but it is not known exactly when.",
+    "s2": "But An inscription on the door tells that Hacı Hasan Rıza had the building repaired in eighteen ninety-two, during the reign of Sultan Abdul Hamid the Second. It is a small mosque without a minaret. Originally it had two floors.",
+    "s3": "What is particularly striking is that the Ottomans also reused old materials here. Near the washing fountain outside there is a marble sarcophagus that is approximately two thousand years old and dates from classical antiquity. The sarcophagus used to serve as a drinking trough for ritual washing before prayer.",
+    "s4": "In nineteen thirty-three the mosque was severely damaged by the great earthquake. The exterior largely remained intact, but the interior was later completely renovated. Today it is no longer an active mosque.",
+    "v1": "It functions as a business building. The proceeds go to the Turkish foundation administration, the vakıf. At first glance you hardly recognize it as a mosque.",
+    "v2": "It is located inconspicuously between the shops and many people simply walk past it without noticing it. Access is not possible. One can only see the building through the shop.",
+    "v3": "You can view the building from the outside. And who knows, you might soon walk past this little mosque and imagine how a rich man from Mora had something built here a long time ago. It's funny how something so small and modest has been here among the hustle and bustle of the Old City for more than a hundred years, while hardly anyone really notices it.",
+    "k1": "Today it functions as a commercial building that is rented out; the proceeds go to the Turkish foundation administration (vakıf). What makes it extra special is the antique sarcophagus that was reused as a drinking trough at the washing fountain for ritual prayer. This marble piece from classical antiquity - about 2,000 years old - is typical for Kos: the Ottomans often built with antique materials that were already on the island. The Moruk Mosque is modest and not as well known as the other Mosques."
+  },
+  "it": {
+    "place": "Città di Kos",
+    "title": "Morouk moskee",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Svoltiamo in una stradina, qui, tra gli affollati negozi di souvenir di Ifestoustraat, c'è la Moschea Moruk.",
+    "s1": "Svoltiamo in una stradina, qui, tra gli affollati negozi di souvenir di Ifestoustraat, c'è la Moschea Moruk. La moschea deve il suo nome a Morukzade Efendi, un uomo ricco originario della Mora, la penisola del Peloponneso. Fece costruire la moschea nel tardo periodo ottomano, ma non si sa esattamente quando.",
+    "s2": "Ma un'iscrizione sulla porta racconta che Hacı Hasan Rıza fece riparare l'edificio nel 1892, durante il regno del sultano Abdul Hamid II. È una piccola moschea senza minareto. Originariamente aveva due piani.",
+    "s3": "Ciò che colpisce è che anche gli Ottomani riutilizzarono qui vecchi materiali. All'esterno, vicino al lavatoio, si trova un sarcofago in marmo che ha circa duemila anni e risale all'antichità classica. Il sarcofago fungeva da abbeveratoio per il lavaggio rituale prima della preghiera.",
+    "s4": "Nel 1933 la moschea fu gravemente danneggiata dal grande terremoto. L'esterno è rimasto in gran parte intatto, ma l'interno è stato successivamente completamente ristrutturato. Oggi non è più una moschea attiva.",
+    "v1": "Funziona come un edificio commerciale. Il ricavato va all'amministrazione della fondazione turca, la vakıf. A prima vista difficilmente la riconosci come una moschea.",
+    "v2": "Si trova in una posizione discreta tra i negozi e molte persone semplicemente ci passano davanti senza accorgersene. L'accesso non è possibile. Si può vedere l'edificio solo attraverso il negozio.",
+    "v3": "È possibile vedere l'edificio dall'esterno. E chissà, forse presto passerete davanti a questa piccola moschea e immaginerete come un uomo ricco di Mora abbia fatto costruire qualcosa qui molto tempo fa. È curioso come da più di cento anni qualcosa di così piccolo e modesto si trovi qui nel trambusto della Città Vecchia, mentre quasi nessuno se ne accorge.",
+    "k1": "Oggi funziona come un edificio commerciale che viene affittato; il ricavato va all'amministrazione della fondazione turca (vakıf). Ciò che lo rende davvero speciale è l'antico sarcofago che veniva riutilizzato come abbeveratoio presso il lavatoio per la preghiera rituale. Questo pezzo di marmo dell'antichità classica - circa 2.000 anni - è tipico di Kos: gli Ottomani spesso costruivano con materiali antichi che erano già sull'isola. La Moschea Moruk è modesta e non così conosciuta come le altre moschee."
+  },
+  "tr": {
+    "place": "Kos şehri",
+    "title": "Morouk moskee",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Dar bir sokağa dönüyoruz, burada Ifestoustraat'ın kalabalık hediyelik eşya dükkanlarının arasında Moruk Camii var.",
+    "s1": "Dar bir sokağa dönüyoruz, burada Ifestoustraat'ın kalabalık hediyelik eşya dükkanlarının arasında Moruk Camii var. Cami, adını Mora Yarımadası Mora'dan gelen zengin bir adam olan Morukzade Efendi'den almaktadır. Camiyi Osmanlı'nın son döneminde yaptırdı ancak ne zaman yapıldığı tam olarak bilinmiyor.",
+    "s2": "Ancak kapının üzerindeki kitabede, binayı 1892 yılında, Sultan II. Abdülhamid döneminde Hacı Hasan Rıza'nın onardığı yazılıdır. Minaresiz küçük bir camidir. Başlangıçta iki katlıydı.",
+    "s3": "Özellikle dikkat çekici olan Osmanlı'nın burada eski malzemeleri de yeniden kullanmasıdır. Dışarıdaki yıkama çeşmesinin yanında klasik antik çağdan kalma, yaklaşık iki bin yıllık mermer bir lahit bulunmaktadır. Lahit, namazdan önce ritüel yıkama için bir su teknesi görevi görüyordu.",
+    "s4": "1933 yılındaki büyük depremde cami büyük hasar gördü. Dış kısmı büyük ölçüde sağlam kaldı, ancak iç kısmı daha sonra tamamen yenilendi. Bugün artık aktif bir cami değil.",
+    "v1": "İşyeri binası olarak hizmet veriyor. Gelirler Türk vakıf yönetimi olan vakfa gidiyor. İlk bakışta cami olduğunu pek anlayamıyorsunuz.",
+    "v2": "Mağazaların arasında göze çarpmayan bir konumdadır ve birçok insan fark etmeden yanından geçer. Erişim mümkün değildir. Binayı ancak mağazanın içinden görebiliyoruz.",
+    "v3": "Binayı dışarıdan görebilirsiniz. Kim bilir belki yakında bu küçük caminin önünden geçersiniz ve Moralı zengin bir adamın uzun zaman önce buraya nasıl bir şey inşa ettirdiğini hayal edersiniz. Bu kadar küçük ve mütevazi bir şeyin, Eski Şehir'in koşuşturmacası arasında yüz yıldan fazla bir süredir var olması ve neredeyse hiç kimsenin bunu fark etmemesi çok komik.",
+    "k1": "Bugün kiraya verilen ticari bir bina olarak kullanılıyor; gelirler Türk vakıf idaresine (vakıf) gider. Onu daha da özel kılan ise, yıkanma çeşmesinde namaz kılmak için yalak olarak kullanılan antik lahittir. Klasik antik dönemden kalma (yaklaşık 2000 yıllık) bu mermer parçası Kos'a özgüdür: Osmanlılar genellikle adada zaten bulunan antika malzemelerle inşa etmişlerdir. Moruk Camii mütevazıdır ve diğer camiler kadar tanınmaz."
+  },
+  "es": {
+    "place": "Ciudad de Kos",
+    "title": "Morouk moskee",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Giramos por una calle estrecha, aquí, entre las concurridas tiendas de souvenirs de Ifestoustraat, se encuentra la Mezquita Moruk.",
+    "s1": "Giramos por una calle estrecha, aquí, entre las concurridas tiendas de souvenirs de Ifestoustraat, se encuentra la Mezquita Moruk. La mezquita debe su nombre a Morukzade Efendi, un hombre rico originario de Mora, la península del Peloponeso. Hizo construir la mezquita a finales del período otomano, pero no se sabe exactamente cuándo.",
+    "s2": "Pero una inscripción en la puerta dice que Hacı Hasan Rıza hizo reparar el edificio en 1892, durante el reinado del sultán Abdul Hamid II. Es una pequeña mezquita sin minarete. Originalmente tenía dos plantas.",
+    "s3": "Lo que llama la atención es que los otomanos también reutilizaron aquí materiales antiguos. Cerca de la fuente de lavado hay un sarcófago de mármol que tiene aproximadamente dos mil años y data de la antigüedad clásica. El sarcófago solía servir como abrevadero para el lavado ritual antes de la oración.",
+    "s4": "En mil novecientos treinta y tres la mezquita resultó gravemente dañada por el gran terremoto. El exterior permaneció prácticamente intacto, pero el interior fue posteriormente renovado por completo. Hoy ya no es una mezquita activa.",
+    "v1": "Funciona como edificio empresarial. Los beneficios se destinan a la administración de la fundación turca, el vakıf. A primera vista difícilmente se reconoce que se trata de una mezquita.",
+    "v2": "Se encuentra discretamente entre las tiendas y muchas personas simplemente pasan por delante sin darse cuenta. El acceso no es posible. Sólo se puede ver el edificio a través de la tienda.",
+    "v3": "Puedes ver el edificio desde el exterior. Y quién sabe, quizá pronto pases por esta pequeña mezquita e imagines cómo un hombre rico de Mora hizo construir algo aquí hace mucho tiempo. Es curioso cómo algo tan pequeño y modesto lleva más de cien años aquí, en medio del bullicio de la Ciudad Vieja, y casi nadie se da cuenta.",
+    "k1": "Hoy funciona como un edificio comercial que se alquila; Los ingresos se destinan a la administración de la fundación turca (vakıf). Lo que lo hace muy especial es el antiguo sarcófago que se reutilizó como abrevadero en la fuente de lavado para la oración ritual. Esta pieza de mármol de la antigüedad clásica, de unos 2.000 años de antigüedad, es típica de Kos: los otomanos solían construir con materiales antiguos que ya se encontraban en la isla. La Mezquita Moruk es modesta y no tan conocida como las otras mezquitas."
   }
-
-  var langBtn = document.getElementById('langBtn');
-  var langMenu = document.getElementById('langMenu');
-  function openMenu(){ langMenu.classList.add('open'); }
-  function closeMenu(){ langMenu.classList.remove('open'); }
-  langBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    langMenu.classList.contains('open') ? closeMenu() : openMenu();
-  });
-  document.addEventListener('click', function(){ closeMenu(); });
-  document.querySelectorAll('.lang-option').forEach(function(btn){
-    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
-  });
-
-  var saved = localStorage.getItem('hk-lang') || 'nl';
-  setLang(saved);
-
-  /* TTS */
-  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
-  function getLang(){
-    var l = localStorage.getItem('hk-lang') || 'nl';
-    return LANG_VOICE[l] ? l : 'nl';
-  }
-  function pickVoice(code){
-    var voices = speechSynthesis.getVoices() || [];
-    var prefix = code.slice(0,2).toLowerCase();
-    return voices.find(function(v){ return v.lang === code; })
-      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
-      || null;
-  }
-  var btnPlay = document.getElementById('btnPlay');
-  var btnStop = document.getElementById('btnStop');
-  var status = document.getElementById('ttsStatus');
-  function setStatus(t){ if(status) status.textContent = t; }
-  function play(){
-    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
-    speechSynthesis.cancel();
-    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
-    var l = getLang();
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = LANG_VOICE[l];
-    u.rate = 0.92;
-    var v = pickVoice(LANG_VOICE[l]);
-    if(v) u.voice = v;
-    u.onstart = function(){
-      btnPlay.classList.add('playing');
-      btnStop.classList.add('show');
-      setStatus('Voorlezen… ('+l.toUpperCase()+')');
-    };
-    u.onend = u.onerror = function(){
-      btnPlay.classList.remove('playing');
-      btnStop.classList.remove('show');
-      setStatus('');
-    };
-    if(!speechSynthesis.getVoices().length){
-      speechSynthesis.onvoiceschanged = function(){
-        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
-        speechSynthesis.speak(u);
-      };
-      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
-    } else {
-      speechSynthesis.speak(u);
-    }
-  }
-  function stop(){
-    if(window.speechSynthesis) speechSynthesis.cancel();
-    btnPlay.classList.remove('playing');
-    btnStop.classList.remove('show');
-    setStatus('Gestopt.');
-  }
-  btnPlay.addEventListener('click', play);
-  btnStop.addEventListener('click', stop);
-  if(window.speechSynthesis){
-    speechSynthesis.getVoices();
-    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
-  }
-})();
-</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

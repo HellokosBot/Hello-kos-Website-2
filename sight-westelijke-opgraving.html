@@ -1,514 +1,239 @@
 <!DOCTYPE html>
-<html lang="nl" data-hk-own="1" data-hk-tts="1">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0D1F1F">
   <title>Westelijke opgraving – Hello Kos</title>
-  <style>
-    :root {
-      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
-      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
-      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
-      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
-      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text); -webkit-font-smoothing: antialiased;
-      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
-      background: var(--bg); min-height: 100vh; line-height: 1.55;
-    }
-    .app-header {
-      position: sticky; top: 0; z-index: 100;
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-      padding: 14px 16px; background: var(--bg-header);
-      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
-    }
-    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
-    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
-    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
-    .logo-text span { color: var(--gold-dark); font-style: italic; }
-    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
-    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
-    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
-    .lang-menu.open { display: block; }
-    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
-    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
-    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
-    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
-    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .content { padding: 18px 16px 0; }
-    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
-    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-
-    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
-    .btn-audio { background: var(--petrol); color: #fff; }
-    .btn-audio.playing { background: var(--petrol-dark); }
-    .btn-stop { background: #3A4545; color: #fff; display: none; }
-    .btn-stop.show { display: flex; }
-
-    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
-    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
-    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
-    .card p:last-child { margin-bottom: 0; }
-    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
-    .tip strong { color: var(--gold); }
-    .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
-    .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
-    .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
-
-    .hours { margin-top: 8px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
-    .h-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 12px; font-size: 0.88rem; border-bottom: 1px solid var(--border); background: var(--bg-card); }
-    .h-row:nth-child(odd) { background: #182828; }
-    .h-row:last-child { border-bottom: none; }
-    .h-row span:last-child { font-weight: 700; color: var(--petrol); }
-    .h-row.closed span:last-child { color: #e0a040; }
-    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
-    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
-    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
-    .footer a { color: var(--petrol); text-decoration: none; }
-  </style>
-<link rel="stylesheet" href="hello-kos.css">
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body>
+<body class="hk-page hk-guide">
   <header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
   <main class="main">
     <div class="hero-wrap">
-      <img src="img/jwwb/9f87d4da2a-caption-18-standard.jpg" alt="Westelijke opgraving" loading="eager">
-      <div class="hero-title"><h1 data-i18n="title">Westelijke opgraving</h1></div>
+      <img class="hk-zoom" src="img/jwwb/9f87d4da2a-caption-18-standard.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
     </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=36.891%2C27.285" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?ll=36.891,27.285&amp;q=Westelijke%20opgraving" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-westelijke-opgraving-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-westelijke-opgraving-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-westelijke-opgraving-03.jpg" alt=""></figure>
+<p data-i18n="s4"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-westelijke-opgraving-04.jpg" alt=""></figure>
+<p data-i18n="s5"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-westelijke-opgraving-05.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-westelijke-opgraving-06.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-westelijke-opgraving-07.jpg" alt=""></figure>
+<p data-i18n="v3"></p>
 
-    <div class="content">
-<p class="lead" data-i18n="lead">Openluchtterrein met gymnasium, thermen, luxetoilet en het Huis van Europa – blootgelegd na de aardbeving van 1933.</p>
+<p data-i18n="v4"></p>
 
-      
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
 
-      <div class="actions">
-        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
-        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-      </div>
-      
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Western%20Excavation%20Kos%20Town%20archaeological%20site" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Western%20Excavation%20Kos%20Town%20archaeological%20site" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
-      </div>
-      <p class="status" id="ttsStatus"></p>
+<p data-i18n="k2"></p>
 
-      <div id="readText">
-        <div class="card">
-          <h2 data-i18n="hStory">Na de aardbeving van 1933</h2>
-          <p data-i18n="p1">De westelijke opgravingen herbergen een schat aan archeologische vondsten. Die kwamen tevoorschijn tijdens de aardbeving van 1933. De Italianen groeven het terrein verder uit tijdens de wederopbouw van de stad.</p>
-          <p data-i18n="p2">Je loopt tussen resten uit de Hellenistische en Romeinse tijd (ongeveer 300 v.Chr. tot 300 n.Chr.): badhuizen (thermen), een gymnasium, een nymphaeum en meer.</p>
-        </div>
+<p data-i18n="k3"></p>
 
-        
-
-        <div class="card">
-          <h2 data-i18n="hSee">Openingstijden</h2>
-          <p data-i18n="p3">Toegang gratis.</p>
-          <div class="hours">
-            <div class="h-row"><span data-i18n="dMon">Maandag</span><span>08:30 – 15:30</span></div>
-            <div class="h-row closed"><span data-i18n="dTue">Dinsdag</span><span data-i18n="closed">Gesloten</span></div>
-            <div class="h-row"><span data-i18n="dWed">Woensdag</span><span>08:30 – 15:30</span></div>
-            <div class="h-row"><span data-i18n="dThu">Donderdag</span><span>08:30 – 15:30</span></div>
-            <div class="h-row"><span data-i18n="dFri">Vrijdag</span><span>08:30 – 15:30</span></div>
-            <div class="h-row"><span data-i18n="dSat">Zaterdag</span><span>08:30 – 15:30</span></div>
-            <div class="h-row"><span data-i18n="dSun">Zondag</span><span>08:30 – 15:30</span></div>
-          </div>
-        </div>
-
-        <div class="photo-block">
-          <img src="img/jwwb/1877861c50-pelarna-high.jpg" alt="Westelijke opgraving" loading="lazy">
-          <div class="cap" data-i18n="cap1">Zuilen en resten op het terrein</div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2gym">Gymnasium en thermen</h2>
-          <p data-i18n="p4">Delen van een gymnasium waar jongeren sportten en trainden, en de westelijke baden (thermen) zijn hier te zien.</p>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2toilet">De luxe wc (forica)</h2>
-          <p data-i18n="p5">Wat eerst een nymphaeum (heiligdom van de waternimfen) leek – met marmer, geometrische mozaïeken en dolfijnen – bleek een super-luxe openbaar toilet uit de Romeinse tijd.</p>
-          <p data-i18n="p6">Stromend water, marmer en mozaïeken: typisch Romeins om zelfs het toilet chic te maken. Je kon er rustig kletsen. De marmeren vloer en de zitplaatsen zijn nog goed te zien.</p>
-        </div>
-
-        <div class="photo-block">
-          <img src="img/jwwb/b091ad7a5b-caption-20-high.jpg" alt="Mozaïek" loading="lazy">
-          <div class="cap" data-i18n="cap2">Mozaïeken op het terrein</div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2europa">Huis van Europa</h2>
-          <p data-i18n="p7">Het Huis van Europa (Huis van de Ontvoering van Europa) heeft een indrukwekkend mozaïek: Zeus verandert in een witte stier om prinses Europa te ontvoeren en zwemt met haar naar Kreta. Een van de hoogtepunten van het terrein.</p>
-        </div>
-
-        <div class="gallery">
-          <div class="g-item">
-            <img src="img/jwwb/a9b26fd5db-45219c2388023bca334973757b02f1dd-high.jpg" alt="Opgraving" loading="lazy">
-            <span data-i18n="g1">Terrein</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/de37c9cf4a-caption-19-high.jpg" alt="Detail" loading="lazy">
-            <span data-i18n="g2">Detail</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="hKnow">Bezoeken</h2>
-          <p data-i18n="p8">In Kos-stad, openluchtterrein. Gratis; dinsdag gesloten.</p>
-          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: zoek het mozaïek van Europa en de forica – die twee verhalen maken het bezoek extra leuk. Draag stevige schoenen.</p></div>
-        </div>
-      </div>
+</article>
     </div>
   </main>
-
-  <footer class="footer">
-    <div>Hello Kos</div>
-    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
-  </footer>
-
-<script>
-(function(){
-  var I18N = window.HK_DICT = {
-    "nl": {
-      "title": "Westelijke opgraving",
-      "lead": "Openluchtterrein met gymnasium, thermen, luxetoilet en het Huis van Europa – blootgelegd na de aardbeving van 1933.",
-      "btnPlay": "Voorlezen",
-      "p1": "De westelijke opgravingen herbergen een schat aan archeologische vondsten. Die kwamen tevoorschijn tijdens de aardbeving van 1933. De Italianen groeven het terrein verder uit tijdens de wederopbouw van de stad.",
-      "p2": "Je loopt tussen resten uit de Hellenistische en Romeinse tijd (ongeveer 300 v.Chr. tot 300 n.Chr.): badhuizen (thermen), een gymnasium, een nymphaeum en meer.",
-      "p3": "Toegang gratis.",
-      "dMon": "Maandag",
-      "dTue": "Dinsdag",
-      "dWed": "Woensdag",
-      "dThu": "Donderdag",
-      "dFri": "Vrijdag",
-      "dSat": "Zaterdag",
-      "dSun": "Zondag",
-      "closed": "Gesloten",
-      "cap1": "Zuilen en resten op het terrein",
-      "h2gym": "Gymnasium en thermen",
-      "p4": "Delen van een gymnasium waar jongeren sportten en trainden, en de westelijke baden (thermen) zijn hier te zien.",
-      "h2toilet": "De luxe wc (forica)",
-      "p5": "Wat eerst een nymphaeum (heiligdom van de waternimfen) leek – met marmer, geometrische mozaïeken en dolfijnen – bleek een super-luxe openbaar toilet uit de Romeinse tijd.",
-      "p6": "Stromend water, marmer en mozaïeken: typisch Romeins om zelfs het toilet chic te maken. Je kon er rustig kletsen. De marmeren vloer en de zitplaatsen zijn nog goed te zien.",
-      "cap2": "Mozaïeken op het terrein",
-      "h2europa": "Huis van Europa",
-      "p7": "Het Huis van Europa (Huis van de Ontvoering van Europa) heeft een indrukwekkend mozaïek: Zeus verandert in een witte stier om prinses Europa te ontvoeren en zwemt met haar naar Kreta. Een van de hoogtepunten van het terrein.",
-      "g1": "Terrein",
-      "g2": "Detail",
-      "p8": "In Kos-stad, openluchtterrein. Gratis; dinsdag gesloten.",
-      "tip": "zoek het mozaïek van Europa en de forica – die twee verhalen maken het bezoek extra leuk. Draag stevige schoenen.",
-      "hStory": "Het verhaal",
-      "hSee": "Wat je ziet",
-      "hKnow": "Goed om te weten",
-      "tipTitle": "Tip van de gids",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Western Excavation",
-      "lead": "Open-air site with gymnasium, baths, luxury toilet and the House of Europa – uncovered after the 1933 earthquake.",
-      "btnPlay": "Read aloud",
-      "p1": "The western excavations contain a wealth of archaeological finds. They came to light during the 1933 earthquake. The Italians continued excavating the site during the reconstruction of the city.",
-      "p2": "You walk among remains from the Hellenistic and Roman periods (roughly 300 BC to 300 AD): bathhouses (thermae), a gymnasium, a nymphaeum and more.",
-      "p3": "Entry free.",
-      "dMon": "Monday",
-      "dTue": "Tuesday",
-      "dWed": "Wednesday",
-      "dThu": "Thursday",
-      "dFri": "Friday",
-      "dSat": "Saturday",
-      "dSun": "Sunday",
-      "closed": "Closed",
-      "cap1": "Columns and remains on the site",
-      "h2gym": "Gymnasium and baths",
-      "p4": "Parts of a gymnasium where young people exercised and trained, and the western baths (thermae) can be seen here.",
-      "h2toilet": "The luxury toilet (forica)",
-      "p5": "What first looked like a nymphaeum (shrine of the water nymphs) – with marble, geometric mosaics and dolphins – turned out to be a super-luxury public toilet from Roman times.",
-      "p6": "Running water, marble and mosaics: typically Roman to make even the toilet chic. You could chat comfortably. The marble floor and the seats are still clearly visible.",
-      "cap2": "Mosaics on the site",
-      "h2europa": "House of Europa",
-      "p7": "The House of Europa (House of the Abduction of Europa) has an impressive mosaic: Zeus turns into a white bull to abduct Princess Europa and swims with her to Crete. One of the highlights of the site.",
-      "g1": "Site",
-      "g2": "Detail",
-      "p8": "In Kos Town, open-air site. Free; closed on Tuesday.",
-      "tip": "look for the Europa mosaic and the forica – those two stories make the visit extra enjoyable. Wear sturdy shoes.",
-      "hStory": "The story",
-      "hSee": "What you see",
-      "hKnow": "Good to know",
-      "tipTitle": "Guide’s tip",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Westliche Ausgrabung",
-      "lead": "Freilichtgelände mit Gymnasium, Thermen, Luxustoilette und dem Haus der Europa – freigelegt nach dem Erdbeben von 1933.",
-      "btnPlay": "Vorlesen",
-      "p1": "Die westlichen Ausgrabungen bergen eine Fülle archäologischer Funde. Sie kamen beim Erdbeben von 1933 zum Vorschein. Die Italiener gruben das Gelände während des Wiederaufbaus der Stadt weiter aus.",
-      "p2": "Du gehst zwischen Resten aus hellenistischer und römischer Zeit (etwa 300 v.Chr. bis 300 n.Chr.): Badehäuser (Thermen), ein Gymnasium, ein Nymphäum und mehr.",
-      "p3": "Eintritt kostenlos.",
-      "dMon": "Montag",
-      "dTue": "Dienstag",
-      "dWed": "Mittwoch",
-      "dThu": "Donnerstag",
-      "dFri": "Freitag",
-      "dSat": "Samstag",
-      "dSun": "Sonntag",
-      "closed": "Geschlossen",
-      "cap1": "Säulen und Reste auf dem Gelände",
-      "h2gym": "Gymnasium und Thermen",
-      "p4": "Teile eines Gymnasiums, in dem Jugendliche sportelten und trainierten, und die westlichen Bäder (Thermen) sind hier zu sehen.",
-      "h2toilet": "Die Luxustoilette (Forica)",
-      "p5": "Was zuerst wie ein Nymphäum (Heiligtum der Wassernymphen) aussah – mit Marmor, geometrischen Mosaiken und Delfinen – stellte sich als superluxuriöse öffentliche Toilette aus römischer Zeit heraus.",
-      "p6": "Fließendes Wasser, Marmor und Mosaiken: typisch römisch, sogar die Toilette schick zu machen. Man konnte gemütlich plaudern. Der Marmorboden und die Sitze sind noch gut zu sehen.",
-      "cap2": "Mosaiken auf dem Gelände",
-      "h2europa": "Haus der Europa",
-      "p7": "Das Haus der Europa (Haus der Entführung der Europa) hat ein beeindruckendes Mosaik: Zeus verwandelt sich in einen weißen Stier, um Prinzessin Europa zu entführen und schwimmt mit ihr nach Kreta. Einer der Höhepunkte des Geländes.",
-      "g1": "Gelände",
-      "g2": "Detail",
-      "p8": "In Kos-Stadt, Freilichtgelände. Kostenlos; dienstags geschlossen.",
-      "tip": "such das Europa-Mosaik und die Forica – die beiden Geschichten machen den Besuch extra schön. Trag feste Schuhe.",
-      "hStory": "Die Geschichte",
-      "hSee": "Was du siehst",
-      "hKnow": "Gut zu wissen",
-      "tipTitle": "Tipp des Guides",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Scavo occidentale",
-      "lead": "Area all’aperto con ginnasio, terme, toilette di lusso e la Casa di Europa – scoperta dopo il terremoto del 1933.",
-      "btnPlay": "Leggi ad alta voce",
-      "p1": "Gli scavi occidentali custodiscono un tesoro di reperti archeologici. Vennero alla luce durante il terremoto del 1933. Gli italiani continuarono a scavare il sito durante la ricostruzione della città.",
-      "p2": "Cammini tra resti dell’epoca ellenistica e romana (circa 300 a.C. – 300 d.C.): terme, un ginnasio, un ninfeo e altro.",
-      "p3": "Ingresso gratuito.",
-      "dMon": "Lunedì",
-      "dTue": "Martedì",
-      "dWed": "Mercoledì",
-      "dThu": "Giovedì",
-      "dFri": "Venerdì",
-      "dSat": "Sabato",
-      "dSun": "Domenica",
-      "closed": "Chiuso",
-      "cap1": "Colonne e resti sul sito",
-      "h2gym": "Ginnasio e terme",
-      "p4": "Parti di un ginnasio dove i giovani facevano sport e si allenavano, e le terme occidentali sono visibili qui.",
-      "h2toilet": "La toilette di lusso (forica)",
-      "p5": "Quello che all’inizio sembrava un ninfeo (santuario delle ninfe dell’acqua) – con marmo, mosaici geometrici e delfini – si rivelò una toilette pubblica super-lusso dell’epoca romana.",
-      "p6": "Acqua corrente, marmo e mosaici: tipicamente romano rendere chic anche il bagno. Si poteva chiacchierare tranquillamente. Il pavimento di marmo e i sedili sono ancora ben visibili.",
-      "cap2": "Mosaici sul sito",
-      "h2europa": "Casa di Europa",
-      "p7": "La Casa di Europa (Casa del Ratto di Europa) ha un mosaico impressionante: Zeus si trasforma in un toro bianco per rapire la principessa Europa e nuota con lei verso Creta. Uno dei punti forti del sito.",
-      "g1": "Sito",
-      "g2": "Dettaglio",
-      "p8": "A Kos città, area all’aperto. Gratis; chiuso il martedì.",
-      "tip": "cerca il mosaico di Europa e la forica – queste due storie rendono la visita ancora più piacevole. Indossa scarpe robuste.",
-      "hStory": "La storia",
-      "hSee": "Cosa vedi",
-      "hKnow": "Buono a sapersi",
-      "tipTitle": "Consiglio della guida",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Batı Kazısı",
-      "lead": "Gymnasium, hamamlar, lüks tuvalet ve Europa Evi ile açık hava alanı – 1933 depreminden sonra ortaya çıkarıldı.",
-      "btnPlay": "Sesli oku",
-      "p1": "Batı kazıları zengin arkeolojik buluntular barındırır. 1933 depremi sırasında ortaya çıktılar. İtalyanlar şehrin yeniden inşası sırasında alanı kazmaya devam etti.",
-      "p2": "Hellenistik ve Roma döneminden (yaklaşık MÖ 300 – MS 300) kalıntılar arasında yürürsün: hamamlar (thermae), bir gymnasium, bir nymphaeum ve daha fazlası.",
-      "p3": "Giriş ücretsiz.",
-      "dMon": "Pazartesi",
-      "dTue": "Salı",
-      "dWed": "Çarşamba",
-      "dThu": "Perşembe",
-      "dFri": "Cuma",
-      "dSat": "Cumartesi",
-      "dSun": "Pazar",
-      "closed": "Kapalı",
-      "cap1": "Aladaki sütunlar ve kalıntılar",
-      "h2gym": "Gymnasium ve hamamlar",
-      "p4": "Gençlerin spor yaptığı ve antrenman yaptığı bir gymnasiumun parçaları ve batı hamamları (thermae) burada görülebilir.",
-      "h2toilet": "Lüks tuvalet (forica)",
-      "p5": "İlk başta nymphaeum (su perileri tapınağı) gibi görünen – mermer, geometrik mozaikler ve yunuslarla – Roma döneminden süper lüks bir halk tuvaleti olduğu ortaya çıktı.",
-      "p6": "Akan su, mermer ve mozaikler: tuvaleti bile şık yapmak tipik Roma tarzı. Rahatça sohbet edebilirdin. Mermer zemin ve oturma yerleri hâlâ net görülebiliyor.",
-      "cap2": "Aladaki mozaikler",
-      "h2europa": "Europa Evi",
-      "p7": "Europa Evi (Europa’nın Kaçırılması Evi) etkileyici bir mozaiğe sahip: Zeus prenses Europa’yı kaçırmak için beyaz bir boğaya dönüşür ve onunla Girit’e yüzer. Alanın öne çıkan noktalarından biri.",
-      "g1": "Alan",
-      "g2": "Detay",
-      "p8": "Kos şehrinde, açık hava alanı. Ücretsiz; salı kapalı.",
-      "tip": "Europa mozaiğini ve forica’yı ara – bu iki hikâye ziyareti daha keyifli kılar. Sağlam ayakkabı giy.",
-      "hStory": "Hikaye",
-      "hSee": "Ne görürsün",
-      "hKnow": "Bilmekte fayda var",
-      "tipTitle": "Rehberin ipucu",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Excavación occidental",
-      "lead": "Zona al aire libre con gimnasio, termas, aseo de lujo y la Casa de Europa – descubierta tras el terremoto de 1933.",
-      "btnPlay": "Leer en voz alta",
-      "p1": "Las excavaciones occidentales albergan un tesoro de hallazgos arqueológicos. Salieron a la luz durante el terremoto de 1933. Los italianos siguieron excavando el sitio durante la reconstrucción de la ciudad.",
-      "p2": "Caminas entre restos de las épocas helenística y romana (aproximadamente 300 a.C. a 300 d.C.): baños (termas), un gimnasio, un ninfeo y más.",
-      "p3": "Entrada gratuita.",
-      "dMon": "Lunes",
-      "dTue": "Martes",
-      "dWed": "Miércoles",
-      "dThu": "Jueves",
-      "dFri": "Viernes",
-      "dSat": "Sábado",
-      "dSun": "Domingo",
-      "closed": "Cerrado",
-      "cap1": "Columnas y restos en el sitio",
-      "h2gym": "Gimnasio y termas",
-      "p4": "Partes de un gimnasio donde los jóvenes hacían deporte y entrenaban, y los baños occidentales (termas) se pueden ver aquí.",
-      "h2toilet": "El aseo de lujo (forica)",
-      "p5": "Lo que al principio parecía un ninfeo (santuario de las ninfas del agua) – con mármol, mosaicos geométricos y delfines – resultó ser un aseo público de superlujo de la época romana.",
-      "p6": "Agua corriente, mármol y mosaicos: típicamente romano hacer elegante incluso el aseo. Podías charlar cómodamente. El suelo de mármol y los asientos aún se ven bien.",
-      "cap2": "Mosaicos en el sitio",
-      "h2europa": "Casa de Europa",
-      "p7": "La Casa de Europa (Casa del Rapto de Europa) tiene un mosaico impresionante: Zeus se convierte en un toro blanco para raptar a la princesa Europa y nada con ella hasta Creta. Uno de los puntos destacados del sitio.",
-      "g1": "Sitio",
-      "g2": "Detalle",
-      "p8": "En Kos ciudad, zona al aire libre. Gratis; cerrado los martes.",
-      "tip": "busca el mosaico de Europa y la forica – esas dos historias hacen la visita más agradable. Lleva zapatos resistentes.",
-      "hStory": "La historia",
-      "hSee": "Qué ves",
-      "hKnow": "Bueno saberlo",
-      "tipTitle": "Consejo del guía",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };
-
-  function setLang(l) {
-    if (!I18N[l]) l = 'nl';
-    localStorage.setItem('hk-lang', l);
-    document.documentElement.lang = l;
-    var d = I18N[l];
-    document.querySelectorAll('[data-i18n]').forEach(function(el){
-      var k = el.getAttribute('data-i18n');
-      if (d[k]) el.textContent = d[k];
-    });
-    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
-    if (opt) {
-      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
-      document.getElementById('code').textContent = l.toUpperCase();
-    }
-    document.querySelectorAll('.lang-option').forEach(function(o){
-      o.classList.toggle('active', o.getAttribute('data-lang') === l);
-    });
-    closeMenu();
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Kos-stad",
+    "title": "Westelijke opgraving",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "Laten we even een stukje archeologie induiken mensen.",
+    "s1": "Laten we even een stukje archeologie induiken mensen. We staan nu bij de Westelijke Opgraving, een groot openluchtterrein net buiten het drukke centrum van Kos-stad. Dit gebied kwam grotendeels tevoorschijn na de grote aardbeving van negentien drieëndertig.",
+    "s2": "De Italianen die het eiland toen bestuurden, groeven het verder uit tijdens de wederopbouw. Vroeger lag het eeuwenlang verborgen onder de grond. Pas na die aardbeving zagen ze hoe groot en belangrijk dit stuk was.",
+    "s3": "Je loopt hier tussen resten uit de hellenistische tijd en de Romeinse tijd. Er zijn delen van een gymnasium waar jonge mannen vroeger trainden en sportten. Daarnaast liggen de westelijke baden, oftewel thermen, waar mensen kwamen om te baden en te ontspannen.",
+    "s4": "1 van de leukste dingen is het zogenaamde heiligdom van de nimfen. Eerst dachten archeologen dat het een sierlijke fontein of tempeltje was, met mooie marmeren vloeren en mozaïeken met dolfijnen. Later ontdekten ze dat het eigenlijk een super-luxe openbaar toilet was.",
+    "s5": "Het had stromend water, marmer en mozaïeken. De Romeinen maakten zelfs hun wc’s chique, en je kon er gezellig kletsen terwijl je je zaken deed. De zitplaatsen en de vloer zijn nog goed te zien.",
+    "v1": "En wie weet sta jij straks bij dat luxe Romeinse toilet en moet je een beetje glimlachen. De Romeinen wisten zelfs van een wc iets bijzonders te maken. Dat noem ik nog eens stijlvol!",
+    "v2": "Het heiligdom van de nimfen is een opvallend Romeins gebouw de Griekse en Romeinse waternimfen die bij bronnen en fonteinen woonden. Archeologen dachten eerst dat het een sierlijke fontein of tempeltje was, met marmeren vloeren, geometrische mozaïeken en afbeeldingen van dolfijnen. Later bleek het iets heel anders: een super-luxe openbaar toilet (forica of urinoirs) uit de Romeinse tijd!",
+    "v3": "Huis van Silenus herbergt nog gave afbeeldingen van mythische figuren. Het heeft mozaïeken met Silenus, de dronken, vrolijke metgezel van de god Dionysus (god van wijn en feest). Hij zit op een muilezel, en er is ook een paneel met gladiatoren en hun trainer – een mix van mythologie en Romeins entertainment.",
+    "v4": "Een leuk detail: in de Romeinse periode waren deze baden en straten dé plekken om te ontspannen, te sporten en te socializen, net als een moderne gym plus sauna in één. Het hele gebied werd in de middeleeuwen verlaten, dus het bleef eeuwenlang onder de grond liggen tot die aardbeving het weer zichtbaar maakte.",
+    "k1": "Verder is er het Huis van Europa met een prachtig mozaïek dat de mythe laat zien van Zeus die als witte stier de prinses Europa ontvoert naar Kreta. En in het Huis van Silenus zie je mozaïeken van Silenus, de vrolijke metgezel van de god Dionysus, die op een muilezel zit, en zelfs een scène met gladiatoren en hun trainer. Het hele terrein was in de Romeinse tijd een plek om te sporten, te baden en met elkaar te praten.",
+    "k2": "Het voelt een beetje als een oude versie van een gym en sauna in één. Toegang is helemaal gratis. Het is geopend van maandag tot en met zondag, behalve op dinsdag, meestal van half negen ’s ochtends tot half vier ’s middags.",
+    "k3": "Mozaïekvloeren en huizen zoals de Huis van Europa Het Huis van Europa (ook wel Huis van de Ontvoering van Europa) heeft een indrukwekkend mozaïek dat de mythe laat zien van Zeus die zich verandert in een witte stier om de mooie prinses Europa te ontvoeren. Hij lokte haar op zijn rug en zwom met haar naar Kreta. Dat mozaïek is nog goed bewaard en een van de hoogtepunten van het terrein."
+  },
+  "de": {
+    "place": "Kos-Stadt",
+    "title": "Westelijke opgraving",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Lassen Sie uns ein wenig in die Welt der Archäologen eintauchen.",
+    "s1": "Lassen Sie uns ein wenig in die Welt der Archäologen eintauchen. Wir befinden uns jetzt bei der Western Excavation, einem großen Freiluftgelände etwas außerhalb des geschäftigen Zentrums von Kos-Stadt. Dieses Gebiet entstand größtenteils nach dem großen Erdbeben von 1933.",
+    "s2": "Die Italiener, die damals die Insel regierten, gruben sie während des Wiederaufbaus weiter aus. Es war jahrhundertelang unter der Erde verborgen. Erst nach diesem Erdbeben wurde ihnen klar, wie groß und wichtig dieses Stück war.",
+    "s3": "Hier wandern Sie zwischen Überresten aus hellenistischer und römischer Zeit. Es gibt Teile einer Turnhalle, in der früher junge Männer trainierten und Sport trieben. Daneben liegen die Westbäder bzw. Thermalbäder, wo die Menschen zum Baden und Entspannen kamen.",
+    "s4": "Eines der schönsten Dinge ist das sogenannte Heiligtum der Nymphen. Zuerst dachten Archäologen, es handele sich um einen reich verzierten Brunnen oder Tempel mit wunderschönen Marmorböden und Mosaiken mit Delfinen. Später stellten sie fest, dass es sich tatsächlich um eine öffentliche Luxustoilette handelte.",
+    "s5": "Es gab fließendes Wasser, Marmor und Mosaike. Die Römer machten sogar ihre Toiletten schick, und Sie konnten dort plaudern, während Sie Ihren Geschäften nachgingen. Die Sitze und der Boden sind noch gut sichtbar.",
+    "v1": "Und wer weiß, vielleicht stehen Sie neben dieser luxuriösen römischen Toilette und lächeln ein wenig. Den Römern gelang es sogar, eine Toilette zu etwas Besonderem zu machen. Das nenne ich stilvoll!",
+    "v2": "Das Nymphenheiligtum ist ein beeindruckendes römisches Gebäude, in dem griechische und römische Wassernymphen in der Nähe von Quellen und Brunnen lebten. Archäologen dachten zunächst, es handele sich um einen reich verzierten Brunnen oder Tempel mit Marmorböden, geometrischen Mosaiken und Bildern von Delfinen. Später stellte sich heraus, dass es etwas ganz anderes war: eine superluxuriöse öffentliche Toilette (Forica oder Urinale) aus der Römerzeit!",
+    "v3": "Das Haus des Silenus beherbergt noch immer coole Bilder mythischer Figuren. Es gibt Mosaike, die Silenus darstellen, den betrunkenen, fröhlichen Begleiter des Gottes Dionysos (Gott des Weins und der Feierlichkeiten). Er sitzt auf einem Maultier, außerdem gibt es eine Tafel mit Gladiatoren und ihrem Trainer – eine Mischung aus Mythologie und römischer Unterhaltung.",
+    "v4": "Ein schönes Detail: In der Römerzeit waren diese Bäder und Straßen Orte zum Entspannen, Trainieren und geselligen Beisammensein, genau wie ein modernes Fitnessstudio und eine Sauna in einem. Das gesamte Gebiet wurde im Mittelalter verlassen und blieb jahrhundertelang unter der Erde, bis es durch ein Erdbeben wieder sichtbar wurde.",
+    "k1": "Außerdem gibt es das Haus Europa mit einem wunderschönen Mosaik, das den Mythos von Zeus zeigt, der als weißer Stier die Prinzessin Europa nach Kreta entführt. Und im Haus des Silenus sehen Sie Mosaike von Silenus, dem fröhlichen Begleiter des Gottes Dionysos, der auf einem Maultier reitet, und sogar eine Szene mit Gladiatoren und ihrem Trainer. In der Römerzeit war das gesamte Gelände ein Ort zum Trainieren, Baden und für Gespräche.",
+    "k2": "Es fühlt sich ein bisschen wie eine alte Version von Fitnessstudio und Sauna in einem an. Der Eintritt ist völlig frei. Es ist montags bis sonntags, außer dienstags, normalerweise von 8:30 bis 16:30 Uhr geöffnet.",
+    "k3": "Mosaikböden und Häuser wie das Haus Europa. Das Haus Europa (auch Haus der Entführung Europas genannt) verfügt über ein beeindruckendes Mosaik, das den Mythos von Zeus darstellt, der sich in einen weißen Stier verwandelt, um die schöne Prinzessin Europa zu entführen. Er lockte sie auf seinen Rücken und schwamm mit ihr nach Kreta. Dieses Mosaik ist immer noch gut erhalten und eines der Highlights der Stätte."
+  },
+  "en": {
+    "place": "Kos Town",
+    "title": "Westelijke opgraving",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "Let's dive into a bit of archeology folks.",
+    "s1": "Let's dive into a bit of archeology folks. We are now at the Western Excavation, a large open-air site just outside the busy center of Kos Town. This area largely emerged after the great earthquake of nineteen thirty-three.",
+    "s2": "The Italians who governed the island at the time further excavated it during the reconstruction. It used to be hidden underground for centuries. Only after that earthquake did they realize how big and important this piece was.",
+    "s3": "Here you walk among remains from Hellenistic times and Roman times. There are parts of a gymnasium where young men used to train and play sports. Next to it are the western baths, or thermal baths, where people came to bathe and relax.",
+    "s4": "One of the nicest things is the so-called sanctuary of the nymphs. At first archaeologists thought it was an ornate fountain or temple, with beautiful marble floors and mosaics with dolphins. Later they discovered that it was actually a super-luxury public toilet.",
+    "s5": "It had running water, marble and mosaics. The Romans even made their toilets chic, and you could chat there while you did your business. The seats and the floor are still clearly visible.",
+    "v1": "And who knows, maybe you'll be standing next to that luxurious Roman toilet and smiling a little. The Romans even managed to turn a toilet into something special. Now that's what I call stylish!",
+    "v2": "The Shrine of the Nymphs is a striking Roman building where the Greek and Roman water nymphs lived near springs and fountains. Archaeologists first thought it was an ornate fountain or temple, with marble floors, geometric mosaics and images of dolphins. Later it turned out to be something completely different: a super-luxury public toilet (forica or urinals) from Roman times!",
+    "v3": "House of Silenus still houses cool images of mythical figures. It has mosaics depicting Silenus, the drunken, cheerful companion of the god Dionysus (god of wine and celebration). He sits on a mule, and there is also a panel with gladiators and their trainer – a mix of mythology and Roman entertainment.",
+    "v4": "A nice detail: in the Roman period, these baths and streets were the places to relax, exercise and socialize, just like a modern gym plus sauna in one. The whole area was abandoned in the Middle Ages, so it remained underground for centuries until that earthquake made it visible again.",
+    "k1": "There is also the House of Europa with a beautiful mosaic showing the myth of Zeus who, as a white bull, kidnaps the princess Europa to Crete. And in the House of Silenus you will see mosaics of Silenus, the cheerful companion of the god Dionysus, riding on a mule, and even a scene with gladiators and their trainer. In Roman times, the entire site was a place to exercise, bathe and talk to each other.",
+    "k2": "It feels a bit like an old version of a gym and sauna in one. Entry is completely free. It is open Monday to Sunday, except Tuesday, usually from 8:30 am to 4:30 pm.",
+    "k3": "Mosaic floors and houses such as the House of Europa The House of Europa (also called House of the Abduction of Europa) has an impressive mosaic depicting the myth of Zeus turning into a white bull to kidnap the beautiful princess Europa. He lured her onto his back and swam with her to Crete. That mosaic is still well preserved and one of the highlights of the site."
+  },
+  "it": {
+    "place": "Città di Kos",
+    "title": "Westelijke opgraving",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Immergiamoci un po' nell'archeologia, gente.",
+    "s1": "Immergiamoci un po' nell'archeologia, gente. Siamo ora agli scavi occidentali, un grande sito a cielo aperto appena fuori dal vivace centro della città di Kos. Questa zona è emersa in gran parte dopo il grande terremoto del 1933.",
+    "s2": "Gli italiani che all'epoca governavano l'isola la scavarono ulteriormente durante la ricostruzione. Per secoli è rimasto nascosto sotto terra. Solo dopo quel terremoto si resero conto di quanto grande e importante fosse questo pezzo.",
+    "s3": "Qui cammini tra resti di epoca ellenistica e romana. Ci sono parti di una palestra dove i giovani si allenavano e praticavano sport. Accanto si trovano i bagni occidentali, o terme, dove le persone venivano a fare il bagno e rilassarsi.",
+    "s4": "Una delle cose più belle è il cosiddetto santuario delle ninfe. Inizialmente gli archeologi pensarono che si trattasse di una fontana o di un tempio riccamente ornato, con bellissimi pavimenti in marmo e mosaici con delfini. Successivamente scoprirono che in realtà si trattava di una toilette pubblica superlusso.",
+    "s5": "Aveva acqua corrente, marmo e mosaici. I romani hanno addirittura reso chic i loro bagni, dove potevi chiacchierare mentre facevi i tuoi affari. I sedili e il pavimento sono ancora ben visibili.",
+    "v1": "E chissà, forse starai accanto a quella lussuosa toilette romana e sorriderai un po'. I romani riuscirono addirittura a trasformare una toilette in qualcosa di speciale. Questo è ciò che chiamo elegante!",
+    "v2": "Il Santuario delle Ninfe è un suggestivo edificio romano dove vivevano le ninfe acquatiche greche e romane vicino a sorgenti e fontane. Gli archeologi inizialmente pensarono che si trattasse di una fontana o di un tempio ornato, con pavimenti in marmo, mosaici geometrici e immagini di delfini. Successivamente si scoprì essere qualcosa di completamente diverso: una toilette pubblica (forica o orinatoio) superlusso di epoca romana!",
+    "v3": "La Casa di Sileno ospita ancora fantastiche immagini di figure mitiche. Presenta mosaici raffiguranti Sileno, il compagno ubriaco e allegro del dio Dioniso (dio del vino e della celebrazione). È seduto su un mulo e c'è anche un pannello con i gladiatori e il loro allenatore: un mix di mitologia e intrattenimento romano.",
+    "v4": "Un dettaglio carino: in epoca romana, queste terme e queste strade erano luoghi in cui rilassarsi, fare esercizio e socializzare, proprio come una moderna palestra più sauna tutto in uno. Tutta la zona venne abbandonata nel Medioevo, quindi rimase interrata per secoli finché quel terremoto non la rese nuovamente visibile.",
+    "k1": "C'è anche la Casa di Europa con un bellissimo mosaico raffigurante il mito di Zeus che, sotto forma di toro bianco, rapisce a Creta la principessa Europa. E nella Casa di Sileno vedrai i mosaici di Sileno, l'allegro compagno del dio Dioniso, che cavalca un mulo, e persino una scena con i gladiatori e il loro allenatore. In epoca romana, l'intero sito era un luogo dove esercitarsi, fare il bagno e parlare tra loro.",
+    "k2": "Sembra un po' una vecchia versione di palestra e sauna allo stesso tempo. L'ingresso è completamente gratuito. È aperto dal lunedì alla domenica, escluso il martedì, solitamente dalle 8:30 alle 16:30.",
+    "k3": "Pavimenti a mosaico e case come la Casa d'Europa La Casa d'Europa (chiamata anche Casa del Ratto d'Europa) ha un imponente mosaico raffigurante il mito di Zeus che si trasforma in un toro bianco per rapire la bellissima principessa Europa. La attirò sulla sua schiena e nuotò con lei fino a Creta. Quel mosaico è ancora ben conservato e uno dei punti salienti del sito."
+  },
+  "tr": {
+    "place": "Kos şehri",
+    "title": "Westelijke opgraving",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Biraz arkeolojiye dalalım arkadaşlar.",
+    "s1": "Biraz arkeolojiye dalalım arkadaşlar. Şu anda İstanköy'ün hareketli merkezinin hemen dışındaki büyük bir açık hava alanı olan Batı Kazısı'ndayız. Bu bölge büyük ölçüde 1933'teki büyük depremden sonra ortaya çıktı.",
+    "s2": "O dönemde adayı yöneten İtalyanlar, yeniden yapılanma sırasında adayı daha da kazdılar. Yüzyıllar boyunca yeraltında saklanmıştı. Ancak o depremden sonra bu parçanın ne kadar büyük ve önemli olduğunu anladılar.",
+    "s3": "Burada Helenistik ve Roma dönemlerinden kalma kalıntılar arasında yürüyorsunuz. Spor salonunun gençlerin antrenman yaptığı ve spor yaptığı bölümler var. Yanında insanların yıkanmak ve rahatlamak için geldiği batı hamamları veya termal banyolar bulunmaktadır.",
+    "s4": "En güzel şeylerden biri de perilerin kutsal alanıdır. Arkeologlar ilk başta bunun güzel mermer zeminlere ve yunuslu mozaiklere sahip süslü bir çeşme veya tapınak olduğunu düşündüler. Daha sonra bunun aslında süper lüks bir umumi tuvalet olduğunu keşfettiler.",
+    "s5": "Akan suyu, mermeri ve mozaikleri vardı. Romalılar tuvaletlerini bile şık hale getirmişler, orada işlerinizi hallederken sohbet edebiliyorsunuz. Koltuklar ve zemin hala net bir şekilde görülebiliyor.",
+    "v1": "Kim bilir belki de o lüks Roma tuvaletinin yanında durup biraz gülümsersiniz. Romalılar tuvaleti bile özel bir şeye dönüştürmeyi başardılar. İşte şıklık diye buna derim!",
+    "v2": "Periler Tapınağı, Yunan ve Roma su perilerinin pınarların ve çeşmelerin yakınında yaşadığı çarpıcı bir Roma binasıdır. Arkeologlar ilk önce bunun mermer zeminli, geometrik mozaikli ve yunus resimleri olan süslü bir çeşme veya tapınak olduğunu düşündüler. Daha sonra bunun tamamen farklı bir şey olduğu ortaya çıktı: Roma döneminden kalma süper lüks bir umumi tuvalet (forica veya pisuar)!",
+    "v3": "Silenus Evi hâlâ efsanevi figürlerin harika resimlerini barındırıyor. Tanrı Dionysos'un (şarap ve kutlama tanrısı) sarhoş, neşeli arkadaşı Silenus'u tasvir eden mozaikler var. Bir katırın üzerinde oturuyor ve ayrıca gladyatörler ve eğitmenlerinin yer aldığı bir panel var; mitoloji ve Roma eğlencesinin bir karışımı.",
+    "v4": "Güzel bir detay: Roma döneminde bu hamamlar ve sokaklar, tıpkı modern bir spor salonu ve saunanın bir arada olduğu gibi dinlenme, egzersiz yapma ve sosyalleşme yerleriydi. Orta Çağ'da tüm bölge terk edilmiş, bu nedenle deprem tekrar görünür hale gelene kadar yüzyıllarca yer altında kalmıştı.",
+    "k1": "Ayrıca beyaz bir boğa olarak prenses Europa'yı Girit'e kaçıran Zeus efsanesini gösteren güzel bir mozaiğe sahip Europa Evi de bulunmaktadır. Silenus Evi'nde ise tanrı Dionysos'un katırına binmiş neşeli arkadaşı Silenus'un mozaiklerini, hatta gladyatörlerin ve eğitmenlerinin yer aldığı bir sahneyi göreceksiniz. Roma döneminde tüm alan egzersiz yapmak, yıkanmak ve birbirleriyle konuşmak için bir yerdi.",
+    "k2": "Biraz spor salonu ve saunanın eski bir versiyonu gibi geliyor. Giriş tamamen ücretsizdir. Salı hariç pazartesiden pazara, genellikle sabah 8:30'dan akşam 4:30'a kadar açıktır.",
+    "k3": "Europa Evi gibi mozaik zeminler ve evler Europa Evi (Avrupa'nın Kaçırılması Evi olarak da bilinir), Zeus'un güzel prenses Europa'yı kaçırmak için beyaz bir boğaya dönüşmesi efsanesini tasvir eden etkileyici bir mozaik içerir. Onu sırtına aldı ve onunla birlikte Girit'e kadar yüzdü. Bu mozaik hala iyi korunmuş durumda ve sitenin öne çıkanlarından biri."
+  },
+  "es": {
+    "place": "Ciudad de Kos",
+    "title": "Westelijke opgraving",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Vamos a sumergirnos un poco en la arqueología, amigos.",
+    "s1": "Vamos a sumergirnos un poco en la arqueología, amigos. Ahora estamos en la Excavación Occidental, un gran sitio al aire libre en las afueras del concurrido centro de la ciudad de Kos. Esta zona surgió en gran medida tras el gran terremoto de 1933.",
+    "s2": "Los italianos que gobernaban la isla en ese momento la excavaron aún más durante la reconstrucción. Solía ​​estar escondido bajo tierra durante siglos. Sólo después de ese terremoto se dieron cuenta de lo grande e importante que era esta pieza.",
+    "s3": "Aquí caminas entre restos de la época helenística y romana. Hay partes de un gimnasio donde los jóvenes solían entrenar y practicar deportes. Junto a él se encuentran los baños occidentales, o baños termales, donde la gente venía a bañarse y relajarse.",
+    "s4": "Una de las cosas más bonitas es el llamado santuario de las ninfas. Al principio los arqueólogos pensaron que se trataba de una ornamentada fuente o templo, con hermosos suelos de mármol y mosaicos con delfines. Más tarde descubrieron que en realidad se trataba de un baño público de superlujo.",
+    "s5": "Tenía agua corriente, mármol y mosaicos. Los romanos incluso hicieron que sus baños fueran elegantes, y allí podías charlar mientras hacías tus necesidades. Los asientos y el suelo siguen siendo claramente visibles.",
+    "v1": "Y quién sabe, tal vez estés junto a ese lujoso baño romano y sonrías un poco. Los romanos incluso consiguieron convertir un retrete en algo especial. ¡Eso es lo que yo llamo estilo!",
+    "v2": "El Santuario de las Ninfas es un impresionante edificio romano donde las ninfas del agua griegas y romanas vivían cerca de manantiales y fuentes. Los arqueólogos primero pensaron que se trataba de una fuente o templo ornamentado, con pisos de mármol, mosaicos geométricos e imágenes de delfines. Más tarde resultó ser algo completamente diferente: ¡un baño público (forica o urinarios) de súper lujo de la época romana!",
+    "v3": "La Casa de Sileno todavía alberga imágenes interesantes de figuras míticas. Tiene mosaicos que representan a Sileno, el alegre y borracho compañero del dios Dioniso (dios del vino y la celebración). Está sentado sobre una mula y también hay un panel con gladiadores y su entrenador: una mezcla de mitología y entretenimiento romano.",
+    "v4": "Un bonito detalle: en la época romana, estos baños y calles eran lugares para relajarse, hacer ejercicio y socializar, como un moderno gimnasio más sauna en uno. Toda la zona fue abandonada en la Edad Media, por lo que permaneció bajo tierra durante siglos hasta que ese terremoto la hizo visible de nuevo.",
+    "k1": "También está la Casa de Europa con un hermoso mosaico que muestra el mito de Zeus que, convertido en un toro blanco, secuestra a la princesa Europa y la lleva a Creta. Y en la Casa de Sileno verás mosaicos de Sileno, el alegre compañero del dios Dioniso, montado en una mula, e incluso una escena con gladiadores y su entrenador. En la época romana, todo el recinto era un lugar para hacer ejercicio, bañarse y conversar.",
+    "k2": "Se siente un poco como una versión antigua de gimnasio y sauna en uno. La entrada es completamente gratuita. Está abierto de lunes a domingo, excepto los martes, normalmente de 8:30 am a 4:30 pm.",
+    "k3": "Pisos de mosaico y casas como la Casa de Europa La Casa de Europa (también llamada Casa del Rapto de Europa) tiene un impresionante mosaico que representa el mito de Zeus convirtiéndose en un toro blanco para secuestrar a la bella princesa Europa. La atrajo sobre su espalda y nadó con ella hasta Creta. Ese mosaico todavía está bien conservado y es uno de los aspectos más destacados del sitio."
   }
-
-  var langBtn = document.getElementById('langBtn');
-  var langMenu = document.getElementById('langMenu');
-  function openMenu(){ langMenu.classList.add('open'); }
-  function closeMenu(){ langMenu.classList.remove('open'); }
-  langBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    langMenu.classList.contains('open') ? closeMenu() : openMenu();
-  });
-  document.addEventListener('click', function(){ closeMenu(); });
-  document.querySelectorAll('.lang-option').forEach(function(btn){
-    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
-  });
-
-  var saved = localStorage.getItem('hk-lang') || 'nl';
-  setLang(saved);
-
-  /* TTS */
-  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
-  function getLang(){
-    var l = localStorage.getItem('hk-lang') || 'nl';
-    return LANG_VOICE[l] ? l : 'nl';
-  }
-  function pickVoice(code){
-    var voices = speechSynthesis.getVoices() || [];
-    var prefix = code.slice(0,2).toLowerCase();
-    return voices.find(function(v){ return v.lang === code; })
-      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
-      || null;
-  }
-  var btnPlay = document.getElementById('btnPlay');
-  var btnStop = document.getElementById('btnStop');
-  var status = document.getElementById('ttsStatus');
-  function setStatus(t){ if(status) status.textContent = t; }
-  function play(){
-    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
-    speechSynthesis.cancel();
-    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
-    var l = getLang();
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = LANG_VOICE[l];
-    u.rate = 0.92;
-    var v = pickVoice(LANG_VOICE[l]);
-    if(v) u.voice = v;
-    u.onstart = function(){
-      btnPlay.classList.add('playing');
-      btnStop.classList.add('show');
-      setStatus('Voorlezen… ('+l.toUpperCase()+')');
-    };
-    u.onend = u.onerror = function(){
-      btnPlay.classList.remove('playing');
-      btnStop.classList.remove('show');
-      setStatus('');
-    };
-    if(!speechSynthesis.getVoices().length){
-      speechSynthesis.onvoiceschanged = function(){
-        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
-        speechSynthesis.speak(u);
-      };
-      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
-    } else {
-      speechSynthesis.speak(u);
-    }
-  }
-  function stop(){
-    if(window.speechSynthesis) speechSynthesis.cancel();
-    btnPlay.classList.remove('playing');
-    btnStop.classList.remove('show');
-    setStatus('Gestopt.');
-  }
-  btnPlay.addEventListener('click', play);
-  btnStop.addEventListener('click', stop);
-  if(window.speechSynthesis){
-    speechSynthesis.getVoices();
-    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
-  }
-})();
-</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

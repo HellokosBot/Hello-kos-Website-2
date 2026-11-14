@@ -1,113 +1,263 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0D1A1A">
-<title>Therma, warmwaterbron – Hello Kos</title>
-<link rel="stylesheet" href="hello-kos.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Therma – Hello Kos</title>
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body class="hk-page">
-<header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+<body class="hk-page hk-guide">
+  <header class="app-header">
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-<main class="main">
-  <div class="hero-wrap"><img src="img/hk/sight-therma.jpg" alt="">
-      <div class="hero-title"><h1 data-i18n="title">Therma, warmwaterbron</h1></div></div>
-  <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back">← Bezienswaardigheden</a></p>
-<p class="lead" data-i18n="lead">Gratis warmwaterbron aan het strand. Het water komt ondergronds van het vulkanische eiland Nisyros. Italianen vonden de bron in 1934. Het bekken wordt aan het begin van het seizoen in het strand gegraven.</p>
-  
-  <div class="actions">
-    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
-    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
-    
-  </div>
-  
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Embros%20Thermes%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Embros%20Thermes%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
       </div>
-      <p class="status" id="ttsStatus"></p>
-  <div id="readText">
-    <article class="card"><h2 data-i18n="hStory">Bezoek</h2><p data-i18n="p0">Altijd open, geen kassa en geen douche. In de zomer is het midden op de dag heet en druk; ochtend of late middag is rustiger. De laatste klim is steil voor een fiets. Sommige mensen smeren de modder op hun gezicht. Het ziet eruit als een gat in het strand, niet als een spa.</p></article>
-    
-  </div>
-</main>
-<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
-<script>window.HK_DICT = {
-    "nl": {
-      "title": "Therma, warmwaterbron",
-      "lead": "Gratis warmwaterbron aan het strand. Het water komt ondergronds van het vulkanische eiland Nisyros. Italianen vonden de bron in 1934. Het bekken wordt aan het begin van het seizoen in het strand gegraven.",
-      "back": "← Bezienswaardigheden",
-      "p0": "Altijd open, geen kassa en geen douche. In de zomer is het midden op de dag heet en druk; ochtend of late middag is rustiger. De laatste klim is steil voor een fiets. Sommige mensen smeren de modder op hun gezicht. Het ziet eruit als een gat in het strand, niet als een spa.",
-      "hStory": "Het verhaal",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Therma, heiße Quelle",
-      "lead": "Kostenlose heiße Quelle am Strand. Das Wasser kommt unterirdisch von der Vulkaninsel Nisyros. Italiener fanden die Quelle 1934. Das Becken wird zu Saisonbeginn in den Strand gegraben.",
-      "back": "← Sehenswürdigkeiten",
-      "p0": "Immer offen, keine Kasse und keine Dusche. Im Sommer ist es mittags heiß und voll; Morgen oder später Nachmittag ist ruhiger. Die letzte Steigung ist steil fürs Rad. Manche schmieren den Schlamm ins Gesicht. Es sieht aus wie ein Loch im Strand, nicht wie ein Spa.",
-      "hStory": "Die Geschichte",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Therma hot spring",
-      "lead": "Free hot spring on the beach. The water comes underground from the volcanic island of Nisyros. Italians found the spring in 1934. The pool is dug into the beach at the start of the season.",
-      "back": "← Sights",
-      "p0": "Always open, no ticket desk and no shower. In summer midday is hot and busy; morning or late afternoon is calmer. The last climb is steep on a bike. Some people put the mud on their face. It looks like a hole in the beach, not a spa.",
-      "hStory": "The story",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Therma, sorgente calda",
-      "lead": "Sorgente calda gratuita sulla spiaggia. L’acqua arriva sottoterra dall’isola vulcanica di Nisyros. Gli italiani la trovarono nel 1934. La vasca si scava nella spiaggia a inizio stagione.",
-      "back": "← Attrazioni",
-      "p0": "Sempre aperta, senza cassa e senza doccia. D’estate a mezzogiorno è calda e piena; mattina o tardo pomeriggio è più calmo. L’ultima salita è ripida in bici. Qualcuno si mette il fango sul viso. Sembra un buco nella spiaggia, non una spa.",
-      "hStory": "La storia",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Therma sıcak su",
-      "lead": "Plajda ücretsiz sıcak su. Su, yer altından volkanik Nisyros adasından gelir. İtalyanlar kaynağı 1934’te buldu. Havuz sezon başında kuma kazılır.",
-      "back": "← Gezilecek yerler",
-      "p0": "Her zaman açık, gişe ve duş yok. Yazın öğlen sıcak ve kalabalık; sabah veya geç öğleden sonra daha sakin. Son tırmanış bisiklet için dik. Bazıları çamuru yüze sürer. Spa değil, kumda bir çukur gibi durur.",
-      "hStory": "Hikaye",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Therma, fuente caliente",
-      "lead": "Fuente caliente gratis en la playa. El agua llega bajo tierra desde la isla volcánica de Nísiros. Los italianos la hallaron en 1934. La poza se excava en la playa al empezar la temporada.",
-      "back": "← Lugares de interés",
-      "p0": "Siempre abierta, sin taquilla ni ducha. En verano al mediodía hace calor y hay gente; mañana o tarde es más tranquilo. La última cuesta es dura en bici. Algunos se ponen el barro en la cara. Parece un hoyo en la playa, no un spa.",
-      "hStory": "La historia",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
+  <main class="main">
+    <div class="hero-wrap">
+      <img class="hk-zoom" src="img/hk/sight-therma.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
+    </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=36.876%2C27.295" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?ll=36.876,27.295&amp;q=Therma" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-therma-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-therma-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-therma-03.jpg" alt=""></figure>
+<p data-i18n="s4"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-therma-04.jpg" alt=""></figure>
+<p data-i18n="s5"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-therma-05.jpg" alt=""></figure>
+<p data-i18n="s6"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-therma-06.jpg" alt=""></figure>
+<p data-i18n="s7"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-therma-07.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-therma-08.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-therma-09.jpg" alt=""></figure>
+<p data-i18n="v3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-therma-10.jpg" alt=""></figure>
+<p data-i18n="v4"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-therma-11.jpg" alt=""></figure>
+<p data-i18n="v5"></p>
+
+<p data-i18n="v6"></p>
+
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
+
+<p data-i18n="k2"></p>
+
+</article>
+    </div>
+  </main>
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Psalidi",
+    "title": "Therma",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "Voordat we beginnen met de uitleg, is het belangrijk dat u even goed oplet.",
+    "s1": "Voordat we beginnen met de uitleg, is het belangrijk dat u even goed oplet. Doe alle sieraden af wanneer u het water ingaat. Door de samenstelling van het water zullen deze zwart worden of verkleuren.",
+    "s2": "Ook belangrijk, Men kan van bovenaf bij het parkeerterrein naar beneden rijden tot aan de volgende parkeerplaats, en daarna zelfs nog een keer doorrijden tot aan de laatste parkeerplaats. Op die manier hoeft u minder te lopen en kunt u dichter bij de locatie uitstappen. maar doe dit alleen als de weg niet nat is.",
+    "s3": "En na deze Mededeling kunnen we nu beginnen met de uitleg. Hier, aan de kust, ligt een bijzondere natuurlijke attractie, de Therma Heetwaterbron. Het warme water komt van het vulkanische eiland Nisyros.",
+    "s4": "Het stroomt onder de zee door en komt hier aan land, waar het direct uitmondt in wat nu de therma heet. De Italianen ontdekten deze bron in negentien vierendertig. Kort daarna begonnen ze grote hoeveelheden van dit water naar Italië te vervoeren omdat ze de heilzame werking ontdekten.",
+    "s5": "De temperatuur van het water ligt tussen de veertig en vijfenveertig graden. Het is rijk aan mineralen zoals zwavel, calcium, kalium, natrium en magnesium. Veel mensen geloven dat het goed is voor huidproblemen, artritis en reumatische klachten.",
+    "s6": "Als je erin gaat, voelt je huid dan ook daarna vaak zijdezacht aan. De locatie is Therma ziet er zelf niet mooie uit, Wat je ziet is leterlijk eigenlijk niet meer dan een gat in het strand, waar warm water omhoog borrelt. Elk jaar rond mei, als de laatse stormen voorbij zijn graaft de gemeente van kos het gat uit voor het komende seizoen vaak hebben eiland bewoners zelf al kleine gaten gegraven die dan volstromen met het heete water.",
+    "s7": "Het water ruikt sterk naar rotte eieren door de zwavel. Er komen kleine bubbeltjes van de gassen naar boven als een bubbelbad, soms smeren bezoekers de modder op hun gezicht voor een extra behandeling. De Italianen legden een klein bekken aan om het water op te vangen, maar het is verder heel natuurlijk en eenvoudig.",
+    "v1": "Met de fiets is zeer zwaar, Zeker omdat Het laatste stuk na Psalidi zeer steil is, dus fietsen is alleen geschikt voor zeer geoefende fietsers. Het is vooral goed om ’s ochtends vroeg of aan het einde van de dag te gaan, want overdag in de zomer kan het er druk en erg warm worden. Ook leuk is het om ’s Nachts te gaan.",
+    "v2": "Alleen ’s Nachts is het pikke donker, dus het beste is als u een keer in de nacht in het natuurlijke bubbelbad wil zitten, is om overdag. het eerst een keer te bezoeken. om zo de situatie te bekjken, zodat u in het donker weet, waar u zijn moet.in het weekend kan het er druk zijn in de nacht.",
+    "v3": "Alsof de natuur zelf een klein wellnessbad voor je heeft gemaakt, rechtstreeks uit de vulkaan van Nisyros.",
+    "v4": "Zeker in de zomer kan het zeer druk zijn. Met de hete zon en het warme water is het vaak lekkerder om in de ochtend of tegen het eind van de dag te gaan. s' Nachts kan men er nog wel eens verliefde stelletjes vinden. Als u de thermen s'nachts wilt bezoeken is het verstandig om eerst overdag te kijken hoe de situatie ter plekke is. Er is namelijk geen verlichting dus het is er dan pikdonker.",
+    "v5": "Het is er niet mooi en kan het beste omschreven worden als een gat in het strand. Met warm water. Ondanks dit, is een bezoekje zeker de moeite waard door het achterliggende verhaal van de vulkaan.",
+    "v6": "Het bad is ook per fiets bereikbaar. Alleen door de steile klim op het einde is dit alleen aan te raden voor de zeer geoefende fietser. Er wordt daarom geadviseerd om dit liever per scooter, auto, quad of buggy te doen.",
+    "k1": "De bron is vierentwintig uur per dag gratis toegankelijk. Er zijn geen voorzieningen zoals douches of toiletten. Je kunt er het beste met de auto, scooter, quad of buggy naartoe gaan.",
+    "k2": "Toegang is helemaal gratis. Je kunt op elk moment van de dag gewoon in het warme zeewater zitten en ontspannen. Het blijft toch een apart gevoel om hier in warm, borrelend water te zitten terwijl de zee eromheen kabbelt."
+  },
+  "de": {
+    "place": "Psalidi",
+    "title": "Therma",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Bevor wir mit der Erklärung beginnen, ist es wichtig, dass Sie aufmerksam sind.",
+    "s1": "Bevor wir mit der Erklärung beginnen, ist es wichtig, dass Sie aufmerksam sind. Legen Sie beim Betreten des Wassers sämtlichen Schmuck ab. Aufgrund der Zusammensetzung des Wassers werden diese schwarz oder verfärben sich.",
+    "s2": "Wichtig ist auch, dass man vom oberen Ende des Parkplatzes bis zum nächsten Parkplatz hinunterfahren und dann sogar wieder bis zum letzten Parkplatz weiterfahren kann. Auf diese Weise müssen Sie weniger laufen und können näher am Standort aussteigen. Tun Sie dies jedoch nur, wenn die Straße nicht nass ist.",
+    "s3": "Und nach dieser Mitteilung können wir nun mit der Erklärung beginnen. Hier, an der Küste, befindet sich eine besondere Naturattraktion, die Therma Hot Water Spring. Das warme Wasser kommt von der Vulkaninsel Nisyros.",
+    "s4": "Es fließt unter dem Meer und gelangt hier an Land, wo es direkt in das heutige Thermalbad mündet. Die Italiener entdeckten diese Quelle im Jahr 1934. Kurz darauf begannen sie, große Mengen dieses Wassers nach Italien zu transportieren, weil sie seine wohltuende Wirkung entdeckten.",
+    "s5": "Die Wassertemperatur liegt zwischen 40 und 45 Grad. Es ist reich an Mineralien wie Schwefel, Kalzium, Kalium, Natrium und Magnesium. Viele Menschen glauben, es sei gut bei Hautproblemen, Arthritis und rheumatischen Beschwerden.",
+    "s6": "Wenn Sie hineingehen, fühlt sich Ihre Haut danach oft seidig weich an. Der Standort selbst sieht nicht schön aus. Was Sie sehen, ist im wahrsten Sinne des Wortes nichts weiter als ein Loch im Strand, in dem warmes Wasser aufsteigt. Jedes Jahr etwa im Mai, wenn die letzten Stürme vorüber sind, gräbt die Gemeinde Kos das Loch für die kommende Saison aus. Inselbewohner haben oft schon selbst kleine Löcher gegraben, die sich dann mit heißem Wasser füllen.",
+    "s7": "Durch den Schwefel riecht das Wasser stark nach faulen Eiern. Kleine Gasblasen steigen wie bei einem Schaumbad auf, manchmal schmieren sich Besucher den Schlamm für eine zusätzliche Behandlung ins Gesicht. Um das Wasser aufzufangen, haben die Italiener ein kleines Becken gebaut, ansonsten ist es sehr natürlich und einfach.",
+    "v1": "Das Radfahren ist sehr schwierig, insbesondere weil das letzte Stück nach Psalidi sehr steil ist, sodass das Radfahren nur für sehr erfahrene Radfahrer geeignet ist. Es ist besonders gut, früh am Morgen oder am Ende des Tages zu gehen, da es im Sommer tagsüber sehr voll und sehr heiß sein kann. Es macht auch Spaß, nachts dorthin zu gehen.",
+    "v2": "Da es nachts nur stockfinster ist, ist es am besten, wenn Sie tagsüber im Natur-Whirlpool sitzen möchten. zum ersten Mal zu besuchen. um die Situation zu sehen, damit Sie wissen, wohin Sie im Dunkeln gehen müssen. Am Wochenende kann es nachts sehr voll sein.",
+    "v3": "Als hätte die Natur selbst ein kleines Wellnessbad für Sie geschaffen, direkt vom Vulkan Nisyros.",
+    "v4": "Besonders im Sommer kann es sehr voll sein. Bei heißer Sonne und warmem Wasser ist es oft besser, morgens oder gegen Ende des Tages dorthin zu gehen. Nachts kann man dort manchmal verliebte Paare treffen. Wenn Sie die Therme nachts besuchen möchten, ist es ratsam, sich zunächst tagsüber über die Situation dort zu informieren. Es gibt keine Beleuchtung, daher ist es stockdunkel.",
+    "v5": "Es ist nicht schön und kann am besten als Loch im Strand beschrieben werden. Mit warmem Wasser. Dennoch lohnt sich ein Besuch aufgrund der Geschichte des Vulkans auf jeden Fall.",
+    "v6": "Das Bad ist auch mit dem Fahrrad erreichbar. Aufgrund des steilen Anstiegs am Ende ist dies nur für sehr erfahrene Radfahrer zu empfehlen. Daher empfiehlt es sich, dies lieber mit dem Roller, Auto, Quad oder Buggy zu tun.",
+    "k1": "Die Quelle ist rund um die Uhr frei zugänglich. Es gibt keine Einrichtungen wie Duschen oder Toiletten. Am besten fährt man mit dem Auto, Roller, Quad oder Buggy dorthin.",
+    "k2": "Der Eintritt ist völlig frei. Sie können zu jeder Tageszeit einfach im warmen Meerwasser sitzen und entspannen. Es bleibt ein besonderes Gefühl, hier im warmen, sprudelnden Wasser zu sitzen und vom Meer umspült zu werden."
+  },
+  "en": {
+    "place": "Psalidi",
+    "title": "Therma",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "Before we start with the explanation, it is important that you pay attention.",
+    "s1": "Before we start with the explanation, it is important that you pay attention. Remove all jewelry when entering the water. Due to the composition of the water, these will turn black or discolor.",
+    "s2": "Also important, one can drive down from the top of the parking lot to the next parking lot, and then even drive on again to the last parking lot. This way you have to walk less and you can get off closer to the location. but only do this if the road is not wet.",
+    "s3": "And after this Communication, we can now start with the explanation. Here, on the coast, is a special natural attraction, the Therma Hot Water Spring. The warm water comes from the volcanic island of Nisyros.",
+    "s4": "It flows under the sea and comes ashore here, where it flows directly into what is now called the thermal bath. The Italians discovered this source in nineteen thirty-four. Shortly afterwards they began transporting large quantities of this water to Italy because they discovered its beneficial effects.",
+    "s5": "The temperature of the water is between forty and forty-five degrees. It is rich in minerals such as sulphur, calcium, potassium, sodium and magnesium. Many people believe it is good for skin problems, arthritis and rheumatic complaints.",
+    "s6": "When you go in, your skin often feels silky soft afterwards. The location itself does not look nice. What you see is literally nothing more than a hole in the beach, where warm water bubbles up. Every year around May, when the last storms have passed, the municipality of Kos digs out the hole for the coming season. Island residents have often already dug small holes themselves, which then fill with hot water.",
+    "s7": "The water smells strongly of rotten eggs due to the sulphur. Small bubbles of the gases come up like a bubble bath, sometimes visitors smear the mud on their faces for an extra treatment. The Italians built a small basin to collect the water, but it is otherwise very natural and simple.",
+    "v1": "Cycling is very difficult, especially because the last part after Psalidi is very steep, so cycling is only suitable for very experienced cyclists. It is especially good to go early in the morning or at the end of the day, as it can get busy and very hot during the day in summer. It is also fun to go at night.",
+    "v2": "It is only pitch dark at night, so it is best if you want to sit in the natural hot tub at night, during the day. to visit for the first time. to view the situation, so that you know where to go in the dark. During the weekend it can be busy at night.",
+    "v3": "As if nature itself has created a small wellness bath for you, straight from the volcano of Nisyros.",
+    "v4": "It can be very busy, especially in the summer. With the hot sun and warm water, it is often better to go in the morning or towards the end of the day. At night one can sometimes find couples in love there. If you want to visit the thermal baths at night, it is wise to first check the situation there during the day. There is no lighting so it is pitch dark.",
+    "v5": "It is not beautiful and can best be described as a hole in the beach. With warm water. Despite this, a visit is definitely worth it because of the underlying story of the volcano.",
+    "v6": "The bath is also accessible by bicycle. Due to the steep climb at the end, this is only recommended for the very experienced cyclist. It is therefore advised to prefer to do this by scooter, car, quad or buggy.",
+    "k1": "The source is freely accessible twenty-four hours a day. There are no facilities such as showers or toilets. It is best to go there by car, scooter, quad or buggy.",
+    "k2": "Entry is completely free. You can just sit in the warm sea water and relax at any time of the day. It remains a special feeling to sit here in warm, bubbling water while the sea laps around it."
+  },
+  "it": {
+    "place": "Psalidi",
+    "title": "Therma",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Prima di iniziare con la spiegazione è importante prestare attenzione.",
+    "s1": "Prima di iniziare con la spiegazione è importante prestare attenzione. Togliere tutti i gioielli quando si entra in acqua. A causa della composizione dell'acqua, questi diventeranno neri o scoloriranno.",
+    "s2": "Un'altra cosa importante è che si può scendere dall'alto del parcheggio fino al parcheggio successivo e poi proseguire fino all'ultimo parcheggio. In questo modo dovrai camminare meno e potrai scendere più vicino al luogo. ma fatelo solo se la strada non è bagnata.",
+    "s3": "E dopo questa Comunicazione possiamo ora iniziare con la spiegazione. Qui, sulla costa, si trova un'attrazione naturale speciale, la sorgente di acqua calda Therma. L'acqua calda proviene dall'isola vulcanica di Nisyros.",
+    "s4": "Scorre sotto il mare e qui approda, dove sfocia direttamente in quello che oggi viene chiamato il bagno termale. Gli italiani scoprirono questa fonte nel 1934. Poco dopo iniziarono a trasportare grandi quantità di quest'acqua in Italia perché ne scoprirono gli effetti benefici.",
+    "s5": "La temperatura dell'acqua è compresa tra quaranta e quarantacinque gradi. È ricco di minerali come zolfo, calcio, potassio, sodio e magnesio. Molte persone credono che sia utile per i problemi della pelle, l’artrite e i disturbi reumatici.",
+    "s6": "Quando entri, la tua pelle spesso risulta morbida come la seta dopo. La posizione in sé non sembra carina. Quello che vedi non è letteralmente altro che un buco nella spiaggia, dove sgorga acqua calda. Ogni anno intorno a maggio, una volta passati gli ultimi temporali, il comune di Kos scava la fossa per la prossima stagione. Gli abitanti dell'isola spesso hanno già scavato da soli piccole buche, che poi si riempiono di acqua calda.",
+    "s7": "L'acqua ha un forte odore di uova marce a causa dello zolfo. Piccole bolle di gas emergono come un bagnoschiuma, a volte i visitatori si spalmano il fango sul viso per un trattamento extra. Gli italiani costruirono una piccola vasca per raccogliere l'acqua, ma per il resto è molto naturale e semplice.",
+    "v1": "La pedalata è molto difficile, soprattutto perché l'ultimo tratto dopo Psalidi è molto ripido, quindi la pedalata è adatta solo a ciclisti molto esperti. È particolarmente consigliabile andarci la mattina presto o alla fine della giornata, poiché in estate può essere molto affollato e molto caldo durante il giorno. È divertente andarci anche di notte.",
+    "v2": "Di notte è buio pesto, quindi è meglio sedersi nella vasca idromassaggio naturale di notte, durante il giorno. da visitare per la prima volta. per visionare la situazione, in modo da sapere dove andare al buio. Durante il fine settimana può essere occupato di notte.",
+    "v3": "Come se la natura stessa avesse creato per voi un piccolo bagno di benessere, direttamente dal vulcano di Nisyros.",
+    "v4": "Può essere molto affollato, soprattutto in estate. Con il sole caldo e l'acqua calda, spesso è meglio partire la mattina o verso fine giornata. Di notte a volte si possono trovare coppie innamorate. Se volete visitare le terme di notte, è opportuno verificare prima la situazione durante il giorno. Non c'è illuminazione quindi è buio pesto.",
+    "v5": "Non è bellissimo e può essere meglio descritto come un buco nella spiaggia. Con acqua calda. Nonostante ciò, vale sicuramente la pena visitarlo per via della storia di fondo del vulcano.",
+    "v6": "Il bagno è raggiungibile anche in bicicletta. A causa della ripida salita finale, questo è consigliato solo a ciclisti molto esperti. Si consiglia quindi di effettuare l'escursione preferibilmente in scooter, auto, quad o buggy.",
+    "k1": "La fonte è liberamente accessibile ventiquattro ore su ventiquattro. Non ci sono servizi come docce o servizi igienici. È meglio andarci in auto, scooter, quad o buggy.",
+    "k2": "L'ingresso è completamente gratuito. Puoi semplicemente sederti nell'acqua calda del mare e rilassarti in qualsiasi momento della giornata. Resta una sensazione speciale sedersi qui nell'acqua calda e gorgogliante mentre il mare ci lambisce."
+  },
+  "tr": {
+    "place": "Psalidi",
+    "title": "Therma",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Açıklamaya başlamadan önce dikkat etmeniz önemli.",
+    "s1": "Açıklamaya başlamadan önce dikkat etmeniz önemli. Suya girerken tüm takılarınızı çıkarın. Suyun bileşimi nedeniyle bunlar siyaha dönecek veya rengi değişecektir.",
+    "s2": "Ayrıca önemli olan, otoparkın üst kısmından bir sonraki otoparka kadar araçla aşağıya inilebilmesi ve hatta son otoparka kadar tekrar araçla gidilebilmesidir. Bu sayede daha az yürümeniz gerekir ve konuma daha yakın inebilirsiniz. ancak bunu yalnızca yol ıslak değilse yapın.",
+    "s3": "Ve bu Tebliğden sonra artık açıklamaya başlayabiliriz. Burada, sahilde özel bir doğal cazibe merkezi olan Therma Sıcak Su Kaynağı bulunmaktadır. Sıcak su volkanik Nisyros adasından geliyor.",
+    "s4": "Denizin altından akıp buraya karaya çıkıyor ve doğrudan şimdi termal banyo olarak adlandırılan yere akıyor. İtalyanlar bu kaynağı 1934'te keşfettiler. Kısa süre sonra faydalı etkilerini keşfettikleri için bu suyun büyük miktarlarını İtalya'ya taşımaya başladılar.",
+    "s5": "Suyun sıcaklığı kırk ila kırk beş derece arasındadır. Kükürt, kalsiyum, potasyum, sodyum ve magnezyum gibi mineraller bakımından zengindir. Birçok kişi cilt problemlerine, artrit ve romatizmal şikayetlere iyi geldiğine inanıyor.",
+    "s6": "İçeri girdiğinizde cildiniz genellikle daha sonra ipeksi bir yumuşaklık hisseder. Konumun kendisi hoş görünmüyor. Gördüğünüz şey, kelimenin tam anlamıyla, sıcak suyun köpürdüğü kumsaldaki bir delikten başka bir şey değil. Her yıl, son fırtınaların geçtiği mayıs ayı civarında, Kos belediyesi gelecek sezon için çukur kazıyor. Ada sakinleri çoğu zaman kendileri küçük delikler kazdılar ve bu çukurları daha sonra sıcak suyla doldurdular.",
+    "s7": "Su, kükürt nedeniyle yoğun bir şekilde çürük yumurta kokuyor. Gazların küçük kabarcıkları köpük banyosu gibi çıkıyor, bazen ziyaretçiler ekstra bir tedavi için çamuru yüzlerine sürüyorlar. İtalyanlar suyu toplamak için küçük bir havuz inşa ettiler ama bunun dışında bu çok doğal ve basit.",
+    "v1": "Bisiklet sürmek çok zordur, özellikle Psalidi'den sonraki son kısım çok dik olduğundan bisiklet sürmek sadece çok deneyimli bisikletçiler için uygundur. Yaz aylarında gün içerisinde yoğun ve çok sıcak olabileceğinden özellikle sabah erken saatlerde veya günün sonunda gitmekte fayda var. Geceleri gitmek de eğlenceli.",
+    "v2": "Geceleri sadece zifiri karanlık olduğundan, gündüzleri geceleri doğal jakuzide oturmak en iyisidir. ilk kez ziyaret etmek. Durumu görmek için karanlıkta nereye gideceğinizi bilmenizi sağlar. Hafta sonları geceleri yoğunluk olabiliyor.",
+    "v3": "Sanki doğanın kendisi sizin için doğrudan Nisyros yanardağından küçük bir sağlıklı yaşam banyosu yaratmış gibi.",
+    "v4": "Özellikle yaz aylarında çok yoğun olabiliyor. Sıcak güneş ve ılık su nedeniyle genellikle sabahları veya günün sonuna doğru gitmek daha iyidir. Geceleri bazen orada aşık çiftler bulunabilir. Termal banyoları gece ziyaret etmek istiyorsanız öncelikle gündüz oradaki durumu kontrol etmeniz akıllıca olacaktır. Işık yok, bu yüzden zifiri karanlık.",
+    "v5": "Güzel değil ve en iyi şekilde sahildeki bir delik olarak tanımlanabilir. Sıcak su ile. Buna rağmen yanardağın altında yatan hikaye nedeniyle ziyarete kesinlikle değer.",
+    "v6": "Banyoya bisikletle de ulaşılabilir. Sonundaki dik tırmanış nedeniyle bu sadece çok deneyimli bisikletçiler için tavsiye edilir. Bu nedenle scooter, araba, quad veya buggy ile yapmayı tercih etmeniz önerilir.",
+    "k1": "Kaynağa günün yirmi dört saati ücretsiz olarak erişilebilir. Duş, tuvalet gibi olanaklar bulunmamaktadır. Oraya araba, scooter, ATV veya buggy ile gitmek en iyisidir.",
+    "k2": "Giriş tamamen ücretsizdir. Günün her saatinde ılık deniz suyunda oturup dinlenebilirsiniz. Deniz etrafını sararken burada sıcak, köpüren suyun altında oturmak özel bir duygu olmaya devam ediyor."
+  },
+  "es": {
+    "place": "Psalidi",
+    "title": "Therma",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Antes de comenzar con la explicación, es importante que prestes atención.",
+    "s1": "Antes de comenzar con la explicación, es importante que prestes atención. Quítese todas las joyas al entrar al agua. Debido a la composición del agua, estos se volverán negros o decolorarán.",
+    "s2": "También es importante que se pueda bajar desde lo alto del aparcamiento hasta el siguiente aparcamiento e incluso volver a conducir hasta el último aparcamiento. De esta manera tendrás que caminar menos y podrás bajar más cerca del lugar. pero sólo haga esto si el camino no está mojado.",
+    "s3": "Y después de esta Comunicación, ya podemos empezar con la explicación. Aquí, en la costa, se encuentra un atractivo natural especial: el manantial de aguas termales Therma. El agua cálida proviene de la isla volcánica de Nisyros.",
+    "s4": "Fluye bajo el mar y desemboca aquí en la costa, donde desemboca directamente en lo que ahora se llama el baño termal. Los italianos descubrieron esta fuente en 1934. Poco después comenzaron a transportar grandes cantidades de esta agua a Italia porque descubrieron sus efectos beneficiosos.",
+    "s5": "La temperatura del agua oscila entre cuarenta y cuarenta y cinco grados. Es rico en minerales como azufre, calcio, potasio, sodio y magnesio. Mucha gente cree que es bueno para los problemas de la piel, la artritis y las afecciones reumáticas.",
+    "s6": "Cuando entras, tu piel a menudo se siente suave como la seda después. La ubicación en sí no parece agradable. Lo que ves no es literalmente más que un agujero en la playa, donde burbujea agua tibia. Cada año, alrededor de mayo, cuando han pasado las últimas tormentas, el municipio de Kos excava el hoyo para la próxima temporada. Los residentes de la isla a menudo ya han cavado pequeños agujeros que luego se llenan con agua caliente.",
+    "s7": "El agua huele fuertemente a huevos podridos debido al azufre. Pequeñas burbujas de gases surgen como un baño de burbujas, a veces los visitantes se untan la cara con barro para un tratamiento adicional. Los italianos construyeron una pequeña palangana para recoger el agua, pero por lo demás es muy natural y sencilla.",
+    "v1": "El ciclismo es muy difícil, sobre todo porque el último tramo después de Psalidi es muy empinado, por lo que el ciclismo sólo es apto para ciclistas muy experimentados. Es especialmente bueno ir temprano en la mañana o al final del día, ya que en verano puede haber mucha gente y mucho calor durante el día. También es divertido ir de noche.",
+    "v2": "Sólo está completamente oscuro por la noche, por lo que es mejor si desea sentarse en el jacuzzi natural por la noche o durante el día. para visitar por primera vez. para ver la situación, para que sepas adónde ir en la oscuridad. Durante el fin de semana puede haber mucha gente por la noche.",
+    "v3": "Como si la propia naturaleza hubiera creado para usted un pequeño baño de bienestar, directamente desde el volcán de Nisyros.",
+    "v4": "Puede estar muy concurrido, especialmente en verano. Con el sol abrasador y el agua templada, suele ser mejor ir por la mañana o hacia el final del día. Por la noche a veces se pueden encontrar allí parejas enamoradas. Si desea visitar los baños termales por la noche, es aconsejable comprobar primero la situación durante el día. No hay iluminación por lo que está completamente oscuro.",
+    "v5": "No es bonito y se puede describir mejor como un agujero en la playa. Con agua tibia. A pesar de esto, definitivamente vale la pena visitarlo debido a la historia subyacente del volcán.",
+    "v6": "También se puede acceder al baño en bicicleta. Debido a la empinada subida al final, esto sólo se recomienda para ciclistas muy experimentados. Por lo tanto, se recomienda preferir hacerlo en scooter, coche, quad o buggy.",
+    "k1": "La fuente es de libre acceso las veinticuatro horas del día. No hay instalaciones como duchas o baños. Lo mejor es llegar en coche, scooter, quad o buggy.",
+    "k2": "La entrada es completamente gratuita. Puedes simplemente sentarte en el agua tibia del mar y relajarte en cualquier momento del día. Sigue siendo una sensación especial sentarse aquí en agua cálida y burbujeante mientras el mar la rodea."
+  }
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

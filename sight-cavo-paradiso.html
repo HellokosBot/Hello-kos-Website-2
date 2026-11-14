@@ -1,113 +1,215 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0D1A1A">
-<title>Cavo Paradiso – Hello Kos</title>
-<link rel="stylesheet" href="hello-kos.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Cavo Paradiso – Hello Kos</title>
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body class="hk-page">
-<header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+<body class="hk-page hk-guide">
+  <header class="app-header">
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-<main class="main">
-  <div class="hero-wrap"><img src="img/hk/sight-cavo-paradiso.jpg" alt="">
-      <div class="hero-title"><h1 data-i18n="title">Cavo Paradiso</h1></div></div>
-  <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back">← Bezienswaardigheden</a></p>
-<p class="lead" data-i18n="lead">Westpunt bij Kefalos. Kliffen, helder water en weinig hotels. Het laatste stuk is een smalle onverharde weg. Verhuurders verbieden die vaak met een huurauto. Scooter, buggy of quad past beter. Op het strand is een klein barretje met parasols.</p>
-  
-  <div class="actions">
-    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
-    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
-    
-  </div>
-  
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Cavo%20Paradiso%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Cavo%20Paradiso%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
       </div>
-      <p class="status" id="ttsStatus"></p>
-  <div id="readText">
-    <article class="card"><h2 data-i18n="hStory">Strand</h2><p data-i18n="p0">Het strand zelf heeft een aparte pagina: Kavo Parediso.</p></article>
-    
-  </div>
-</main>
-<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
-<script>window.HK_DICT = {
-    "nl": {
-      "title": "Cavo Paradiso",
-      "lead": "Westpunt bij Kefalos. Kliffen, helder water en weinig hotels. Het laatste stuk is een smalle onverharde weg. Verhuurders verbieden die vaak met een huurauto. Scooter, buggy of quad past beter. Op het strand is een klein barretje met parasols.",
-      "back": "← Bezienswaardigheden",
-      "p0": "Het strand zelf heeft een aparte pagina: Kavo Parediso.",
-      "hStory": "Het verhaal",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Cavo Paradiso",
-      "lead": "Westspitze bei Kefalos. Klippen, klares Wasser und wenige Hotels. Das letzte Stück ist eine schmale Schotterpiste. Vermieter verbieten sie oft mit dem Mietwagen. Roller, Buggy oder Quad passt besser. Am Strand ist eine kleine Bar mit Schirmen.",
-      "back": "← Sehenswürdigkeiten",
-      "p0": "Der Strand selbst hat eine eigene Seite: Kavo Parediso.",
-      "hStory": "Die Geschichte",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Cavo Paradiso",
-      "lead": "Western tip near Kefalos. Cliffs, clear water and few hotels. The last stretch is a narrow dirt road. Rental firms often ban it in a hire car. A scooter, buggy or quad fits better. On the beach there is a small bar with umbrellas.",
-      "back": "← Sights",
-      "p0": "The beach itself has its own page: Kavo Parediso.",
-      "hStory": "The story",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Cavo Paradiso",
-      "lead": "Punta ovest vicino a Kefalos. Scogliere, acqua limpida e pochi hotel. L’ultimo tratto è una sterrata stretta. I noleggi spesso la vietano con l’auto a noleggio. Meglio scooter, buggy o quad. In spiaggia c’è un piccolo bar con ombrelloni.",
-      "back": "← Attrazioni",
-      "p0": "La spiaggia ha una pagina: Kavo Parediso.",
-      "hStory": "La storia",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Cavo Paradiso",
-      "lead": "Kefalos yakınında batı ucu. Uçurum, berrak su ve az otel. Son kısım dar toprak yol. Kiralama şirketleri bunu çoğu zaman kiralık arabayla yasaklar. Scooter, buggy veya quad daha uygun. Plajda şemsiyeli küçük bir bar var.",
-      "back": "← Gezilecek yerler",
-      "p0": "Plajın kendi sayfası var: Kavo Parediso.",
-      "hStory": "Hikaye",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Cavo Paradiso",
-      "lead": "Punta oeste cerca de Kéfalos. Acantilados, agua clara y pocos hoteles. El último tramo es una pista estrecha. Los alquileres suelen prohibirla con el coche de alquiler. Mejor scooter, buggy o quad. En la playa hay un bar pequeño con sombrillas.",
-      "back": "← Lugares de interés",
-      "p0": "La playa tiene su página: Kavo Parediso.",
-      "hStory": "La historia",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
+  <main class="main">
+    <div class="hero-wrap">
+      <img class="hk-zoom" src="img/hk/sight-cavo-paradiso.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
+    </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=Cavo%20Paradiso%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?q=Cavo%20Paradiso%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-cavo-paradiso-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-cavo-paradiso-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-cavo-paradiso-03.jpg" alt=""></figure>
+<p data-i18n="s4"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-cavo-paradiso-04.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-cavo-paradiso-05.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
+
+<p data-i18n="v3"></p>
+
+<p data-i18n="v4"></p>
+
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
+
+</article>
+    </div>
+  </main>
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Kefalos",
+    "title": "Cavo Paradiso",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "We rijden nu helemaal naar het uiterste zuidwesten van Kos, bijna tot het einde van het eiland.",
+    "s1": "We rijden nu helemaal naar het uiterste zuidwesten van Kos, bijna tot het einde van het eiland. Hier ligt Kavo Paradiso, oftewel, Kaap Paradijs. niet te verwarren met, Paradise beach.",
+    "s2": "Deze ligt ook bij keffalos maar is zeer toeristisch. Kavo Paradiso is daarintegen een van de mooiste en meest rustige stranden van Kos. Het is een lange, brede baai met fijn goudkleurig zand en kristalhelder water.",
+    "s3": "Het strand is omgeven door lage rotsen en heuvels, waardoor het een beschermde, bijna privé-achtige sfeer heeft. Wat Kavo Paradiso extra bijzonder maakt, is dat je er nog echt het gevoel hebt dat je op een ongerept stukje eiland bent. Er staan geen grote hotels direct aan het strand, alleen een paar eenvoudige strandbars.",
+    "s4": "Je kunt er ligbedden en parasols huren, maar er zijn ook genoeg plekken waar je gewoon je handdoek kunt neerleggen. Het strand is vrij onbekend, en het is alleen bereikbaar via een smalle zandweg, die zeer avontuurlijk is om er heen te rijden. Het stuk gaat over een onverharde weg,hobbelig en met dieope scheuren, dus met een normale auto zal dit niet lukken.",
+    "v1": "Het strand is vooral populair bij mensen die rust zoeken en niet van massatoerisme houden. In de zomer kun je er heerlijk de hele dag in de zon liggen. Omdat het aan de zuidwestkant ligt, heb je hier vaak prachtige zonsondergangen.",
+    "v2": "Een mooi, rustig strand met helder water, omringd door natuur, precies zoals je hoopt dat een Grieks eiland eruitziet.",
+    "v3": "Het voelt bijna ongerept aan, omdat er maar weinig mensen komen. Het laatste stukje naar Kavo Paradiso is een onverharde weg met kuilen en stenen en is dus een uitdaging voor avonturiers.",
+    "v4": "Een goed vervoermiddel is dan ook aan te raden. Om er te komen moet je wel even moeite doen. Auto verhuurbedrijven verbieden dan ook deze smalle en onverhard weg met de auto te rijden daarom is het aan te raden dit met een scooter, buggy of quad te doen, het laatse gedeelte duurt ongeveer een half uur. Juist daardoor blijft het zo rustig.",
+    "k1": "Geen grote hotels of massa's toeristen. Op het strand vind je een klein barretje met eten en drinken, en er staan wat parasols en ligbedden. De rest is puur natuur: kliffen, helder water en een waanzinnig uitzicht. Veel bezoekers zeggen dat het een van de mooiste plekken van heel Kos is."
+  },
+  "de": {
+    "place": "Kefalos",
+    "title": "Cavo Paradiso",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Wir fahren nun bis in den äußersten Südwesten von Kos, fast bis zum Ende der Insel.",
+    "s1": "Wir fahren nun bis in den äußersten Südwesten von Kos, fast bis zum Ende der Insel. Hier liegt Kavo Paradiso oder Kapparadies. Nicht zu verwechseln mit Paradise Beach.",
+    "s2": "Dies liegt ebenfalls in der Nähe von Keffalos, ist aber sehr touristisch. Kavo Paradiso hingegen ist einer der schönsten und ruhigsten Strände auf Kos. Es ist eine lange, weite Bucht mit feinem goldenen Sand und kristallklarem Wasser.",
+    "s3": "Der Strand ist von niedrigen Felsen und Hügeln umgeben, was ihm eine geschützte, fast private Atmosphäre verleiht. Das Besondere an Kavo Paradiso ist, dass man wirklich das Gefühl hat, sich in einem unberührten Teil der Insel zu befinden. Direkt am Strand gibt es keine großen Hotels, sondern nur ein paar einfache Strandbars.",
+    "s4": "Sie können Liegen und Sonnenschirme mieten, aber es gibt auch viele Orte, an denen Sie einfach Ihr Handtuch ablegen können. Der Strand ist recht unbekannt und nur über eine schmale unbefestigte Straße erreichbar, deren Fahrt dorthin sehr abenteuerlich ist. Der Abschnitt verläuft auf einer unbefestigten Straße, holprig und mit tiefen Rissen, sodass dies mit einem normalen Auto nicht möglich ist.",
+    "v1": "Besonders beliebt ist der Strand bei Menschen, die Ruhe suchen und keinen Massentourismus mögen. Im Sommer können Sie den ganzen Tag in der Sonne liegen. Da es auf der Südwestseite liegt, hat man hier oft wunderschöne Sonnenuntergänge.",
+    "v2": "Ein wunderschöner, ruhiger Strand mit klarem Wasser, umgeben von Natur, genau so, wie man es sich von einer griechischen Insel wünscht.",
+    "v3": "Es fühlt sich fast unberührt an, weil nur wenige Leute kommen. Der letzte Teil bis Kavo Paradiso ist eine unbefestigte Straße mit Schlaglöchern und Steinen und daher eine Herausforderung für Abenteurer.",
+    "v4": "Ein gutes Transportmittel ist daher empfehlenswert. Man muss sich etwas anstrengen, um dorthin zu gelangen. Autovermieter verbieten daher das Befahren dieser schmalen und unbefestigten Straße mit dem Auto, daher empfiehlt es sich, dies mit einem Roller, Buggy oder Quad zu tun, das letzte Stück dauert etwa eine halbe Stunde. Gerade deshalb bleibt es so ruhig.",
+    "k1": "Keine großen Hotels oder Touristenmassen. Am Strand finden Sie eine kleine Bar mit Speisen und Getränken sowie einige Sonnenschirme und Sonnenliegen. Der Rest ist Natur pur: Klippen, klares Wasser und eine atemberaubende Aussicht. Viele Besucher sagen, dass es einer der schönsten Orte auf ganz Kos ist."
+  },
+  "en": {
+    "place": "Kefalos",
+    "title": "Cavo Paradiso",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "We now drive all the way to the extreme southwest of Kos, almost to the end of the island.",
+    "s1": "We now drive all the way to the extreme southwest of Kos, almost to the end of the island. Here lies Kavo Paradiso, or Cape Paradise. not to be confused with, Paradise beach.",
+    "s2": "This is also located near keffalos but is very touristy. Kavo Paradiso, on the other hand, is one of the most beautiful and peaceful beaches on Kos. It is a long, wide bay with fine golden sand and crystal clear water.",
+    "s3": "The beach is surrounded by low rocks and hills, giving it a protected, almost private feel. What makes Kavo Paradiso extra special is that you really have the feeling that you are on an unspoilt part of the island. There are no large hotels directly on the beach, only a few simple beach bars.",
+    "s4": "You can rent sunbeds and parasols, but there are also plenty of places where you can simply put down your towel. The beach is quite unknown, and it is only accessible via a narrow dirt road, which is very adventurous to drive there. The section is on an unpaved road, bumpy and with deep cracks, so this will not be possible with a normal car.",
+    "v1": "The beach is especially popular with people who are looking for peace and quiet and do not like mass tourism. In the summer you can lie in the sun all day long. Because it is located on the southwest side, you often have beautiful sunsets here.",
+    "v2": "A beautiful, quiet beach with clear water, surrounded by nature, just what you would hope a Greek island would look like.",
+    "v3": "It feels almost unspoilt because few people come. The last part to Kavo Paradiso is an unpaved road with potholes and stones and is therefore a challenge for adventurers.",
+    "v4": "A good means of transport is therefore recommended. You have to make some effort to get there. Car rental companies therefore prohibit driving this narrow and unpaved road by car, so it is advisable to do this with a scooter, buggy or quad, the last part takes about half an hour. That is precisely why it remains so quiet.",
+    "k1": "No big hotels or crowds of tourists. On the beach you will find a small bar with food and drinks, and there are some umbrellas and sunbeds. The rest is pure nature: cliffs, clear water and an amazing view. Many visitors say it is one of the most beautiful places in all of Kos."
+  },
+  "it": {
+    "place": "Kefalos",
+    "title": "Cavo Paradiso",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Ci dirigeremo ora verso l'estremo sud-ovest di Kos, quasi fino alla fine dell'isola.",
+    "s1": "Ci dirigeremo ora verso l'estremo sud-ovest di Kos, quasi fino alla fine dell'isola. Qui si trova Kavo Paradiso, o Capo Paradiso. da non confondere con Paradise Beach.",
+    "s2": "Anche questo si trova vicino a Keffalos ma è molto turistico. Kavo Paradiso, invece, è una delle spiagge più belle e tranquille di Kos. È una baia lunga e ampia con sabbia fine e dorata e acqua cristallina.",
+    "s3": "La spiaggia è circondata da rocce basse e colline, che le conferiscono un'atmosfera protetta, quasi privata. Ciò che rende Kavo Paradiso davvero speciale è che hai davvero la sensazione di trovarti in una parte incontaminata dell'isola. Non ci sono grandi alberghi direttamente sulla spiaggia, solo alcuni semplici bar sulla spiaggia.",
+    "s4": "È possibile noleggiare lettini e ombrelloni, ma ci sono anche molti posti dove appoggiare semplicemente l'asciugamano. La spiaggia è abbastanza sconosciuta ed è accessibile solo tramite una stretta strada sterrata, che è molto avventurosa da percorrere in auto. Il tratto è su strada sterrata, sconnessa e con profonde crepe, quindi non sarà possibile con un'auto normale.",
+    "v1": "La spiaggia è particolarmente apprezzata da persone che cercano pace e tranquillità e non amano il turismo di massa. In estate puoi sdraiarti al sole tutto il giorno. Poiché si trova sul lato sud-ovest, qui si hanno spesso bellissimi tramonti.",
+    "v2": "Una spiaggia bellissima e tranquilla con acqua limpida, immersa nella natura, proprio come speri che fosse un'isola greca.",
+    "v3": "Sembra quasi incontaminato perché vengono poche persone. L'ultimo tratto fino a Kavo Paradiso è una strada sterrata con buche e pietre ed è quindi una sfida per gli avventurieri.",
+    "v4": "Si consiglia quindi un buon mezzo di trasporto. Devi fare qualche sforzo per arrivarci. Le società di autonoleggio vietano quindi di percorrere questa strada stretta e sterrata in macchina, quindi è consigliabile farlo con uno scooter, un buggy o un quad, l'ultimo tratto dura circa mezz'ora. Questo è proprio il motivo per cui rimane così silenzioso.",
+    "k1": "Nessun grande albergo o folla di turisti. Sulla spiaggia troverete un piccolo bar con cibo e bevande, e ci sono alcuni ombrelloni e lettini. Il resto è natura allo stato puro: scogliere, acqua limpida e un panorama strepitoso. Molti visitatori dicono che è uno dei posti più belli di tutta Kos."
+  },
+  "tr": {
+    "place": "Kefalos",
+    "title": "Cavo Paradiso",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Şimdi Kos'un en güneybatısına, neredeyse adanın sonuna kadar gidiyoruz.",
+    "s1": "Şimdi Kos'un en güneybatısına, neredeyse adanın sonuna kadar gidiyoruz. Burada Kavo Paradiso veya Cape Paradise yatıyor. karıştırılmaması gereken Cennet plajı.",
+    "s2": "Burası aynı zamanda keffalos'un yakınında bulunuyor ancak çok turistik. Kavo Paradiso ise Kos'un en güzel ve huzurlu plajlarından biridir. İnce altın kumu ve kristal berraklığında suyu olan uzun, geniş bir koy.",
+    "s3": "Plaj alçak kayalar ve tepelerle çevrilidir ve bu da ona korunaklı, neredeyse özel bir his verir. Kavo Paradiso'yu özel kılan şey ise gerçekten adanın bozulmamış bir yerinde olduğunuzu hissetmeniz. Doğrudan sahilde büyük oteller yok, sadece birkaç basit plaj barı var.",
+    "s4": "Şezlong ve şemsiye kiralayabileceğiniz gibi havlunuzu bırakabileceğiniz pek çok yer de mevcut. Plaj pek bilinmiyor ve buraya yalnızca dar bir toprak yoldan ulaşılabilir, oraya arabayla gitmek çok maceralı. Bölüm asfaltsız, engebeli ve derin çatlakların olduğu bir yol olduğundan normal bir araçla bu mümkün olmayacaktır.",
+    "v1": "Plaj özellikle huzur ve sessizlik arayan ve kitle turizminden hoşlanmayan kişiler arasında popülerdir. Yaz aylarında gün boyu güneşte uzanabilirsiniz. Güneybatı tarafında yer aldığından burada genellikle güzel gün batımları görülür.",
+    "v2": "Berrak suya sahip, doğayla çevrili, güzel, sakin bir plaj, tıpkı bir Yunan adasının nasıl görünmesini umduğunuz gibi.",
+    "v3": "Çok az insan geldiği için neredeyse bozulmamış hissi veriyor. Kavo Paradiso'nun son bölümü, çukurlar ve taşlarla dolu asfaltsız bir yoldur ve bu nedenle maceracılar için zorlu bir mücadeledir.",
+    "v4": "Bu nedenle iyi bir ulaşım aracı tavsiye edilir. Oraya ulaşmak için biraz çaba sarf etmeniz gerekiyor. Araç kiralama şirketleri bu nedenle bu dar ve asfaltsız yolda araba ile sürüş yapılmasını yasaklıyor, bu nedenle bunu scooter, buggy veya ATV ile yapmanız tavsiye edilir, son kısım yaklaşık yarım saat sürer. Tam da bu yüzden bu kadar sessiz kalıyor.",
+    "k1": "Büyük oteller ya da turist kalabalığı yok. Plajda yiyecek ve içeceklerin sunulduğu küçük bir barın yanı sıra şemsiye ve şezlonglar da bulunmaktadır. Gerisi saf doğadır: kayalıklar, berrak su ve muhteşem bir manzara. Birçok ziyaretçi buranın Kos'un en güzel yerlerinden biri olduğunu söylüyor."
+  },
+  "es": {
+    "place": "Kefalos",
+    "title": "Cavo Paradiso",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Ahora nos dirigimos hasta el extremo suroeste de Kos, casi hasta el final de la isla.",
+    "s1": "Ahora nos dirigimos hasta el extremo suroeste de Kos, casi hasta el final de la isla. Aquí se encuentra Kavo Paradiso o Cabo Paraíso. No confundir con Playa Paraíso.",
+    "s2": "Esto también se encuentra cerca de Keffalos pero es muy turístico. Kavo Paradiso, por otro lado, es una de las playas más bellas y tranquilas de Kos. Es una bahía larga y ancha, de arena fina y dorada y agua cristalina.",
+    "s3": "La playa está rodeada de rocas bajas y colinas, lo que le da una sensación de protección, casi privada. Lo que hace especial a Kavo Paradiso es que realmente tienes la sensación de estar en una parte virgen de la isla. No hay grandes hoteles directamente en la playa, sólo algunos sencillos chiringuitos.",
+    "s4": "Puedes alquilar tumbonas y sombrillas, pero también hay muchos lugares donde simplemente dejar la toalla. La playa es bastante desconocida y solo se puede acceder a ella a través de un estrecho camino de tierra, por lo que resulta muy aventurero conducir hasta allí. El tramo es por camino sin asfaltar, lleno de baches y con profundas grietas, por lo que no será posible con un coche normal.",
+    "v1": "La playa es especialmente popular entre las personas que buscan paz y tranquilidad y no les gusta el turismo de masas. En verano puedes tumbarte al sol todo el día. Debido a que está situado en el lado suroeste, aquí a menudo se pueden contemplar hermosas puestas de sol.",
+    "v2": "Una hermosa y tranquila playa de aguas cristalinas, rodeada de naturaleza, justo lo que uno esperaría que fuera una isla griega.",
+    "v3": "Se siente casi virgen porque viene poca gente. El último tramo hasta Kavo Paradiso es un camino de tierra con baches y piedras, por lo que supone un desafío para los aventureros.",
+    "v4": "Por tanto, se recomienda un buen medio de transporte. Tienes que hacer un esfuerzo para llegar allí. Por ello, las empresas de alquiler de coches prohíben circular en coche por esta estrecha y sin asfaltar carretera, por lo que es recomendable hacerlo con scooter, buggy o quad, el último tramo dura aproximadamente media hora. Precisamente por eso permanece tan silencioso.",
+    "k1": "No hay grandes hoteles ni aglomeraciones de turistas. En la playa encontrarás un pequeño bar con comida y bebidas, y hay algunas sombrillas y tumbonas. El resto es pura naturaleza: acantilados, agua cristalina y una vista espectacular. Muchos visitantes dicen que es uno de los lugares más bellos de todo Kos."
+  }
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>
