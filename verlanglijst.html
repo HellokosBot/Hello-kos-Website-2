@@ -10,8 +10,34 @@
 .wish { margin: 0 0 16px; border: 2px solid #fff; border-radius: 16px; overflow: hidden; background: #152525; }
 .wish img { width: 100%; height: 160px; object-fit: cover; display: block; background: #1a2525; }
 .wish h2 { margin: 0; background: #fff; color: #0d1a1a; padding: 8px 12px; font-size: 1rem; }
-.wish .body { padding: 10px 12px 12px; }
-.wish .body a.page { color: var(--petrol); font-weight: 700; text-decoration: none; }
+.wish .body { padding: 12px; }
+.wish a.open-btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; box-sizing: border-box; min-height: 44px; margin: 0 0 10px;
+  padding: 12px 16px; border-radius: 14px;
+  background: #E0B040; color: #0d1a1a;
+  font-weight: 800; font-size: 1rem; text-decoration: none;
+  border: 2px solid #C4920F;
+  box-shadow: 0 4px 0 #8a6810, 0 6px 14px rgba(0,0,0,.35);
+}
+.wish a.open-btn .book { width: 20px; height: 20px; flex: 0 0 20px; color: inherit; }
+.wish a.open-btn:hover { background: #f2cc55; }
+.wish a.open-btn:hover .book,
+.wish a.open-btn:active .book { animation: hk-book-wiggle 0.45s ease; }
+.wish a.open-btn:active {
+  background: #c4920f;
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #8a6810;
+}
+@keyframes hk-book-wiggle {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  35% { transform: rotate(-8deg) scale(1.08); }
+  70% { transform: rotate(6deg) scale(1.04); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wish a.open-btn:hover .book,
+  .wish a.open-btn:active .book { animation: none; }
+}
 .map-row { display: flex; gap: 8px; margin-top: 8px; }
 .map-row a, .wish .remove {
   flex: 1 1 0; width: 0; min-width: 0; box-sizing: border-box;
@@ -73,6 +99,7 @@ window.HK_DICT = {
     var d = (window.HK_DICT && window.HK_DICT[lang()]) || {};
     return d[k] || (window.HK_DICT.nl[k] || "");
   }
+  var BOOK = '<svg class="book" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 6.1c-1.5-.9-3.3-1.4-5.3-1.4H4.3A1.3 1.3 0 0 0 3 6v11.1c0 .7.6 1.3 1.3 1.3h2.5c1.7 0 3.3.4 5.2 1.4 1.9-1 3.5-1.4 5.2-1.4h2.5c.7 0 1.3-.6 1.3-1.3V6c0-.7-.6-1.3-1.3-1.3h-2.4c-2 0-3.8.5-5.3 1.4zM5 7.1h1.6c1.4 0 2.8.3 4 1v8.4c-1.1-.5-2.5-.8-4-.8H5V7.1zm14 8.6h-1.4c-1.5 0-2.9.3-4 .8V8.1c1.2-.7 2.6-1 4-1H19v8.6z"/></svg>';
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;"); }
   function render() {
     var items = window.HKFav ? HKFav.list() : [];
@@ -86,7 +113,7 @@ window.HK_DICT = {
       html += '<article class="wish">';
       if (p.photo) html += '<img src="' + esc(p.photo) + '" alt="">';
       html += "<h2>" + esc(p.name) + "</h2><div class=\"body\">";
-      if (p.link) html += '<a class="page" href="' + esc(p.link) + '">' + esc(T("open")) + "</a>";
+      if (p.link) html += '<a class="open-btn" href="' + esc(p.link) + '">' + BOOK + "<span>" + esc(T("open")) + "</span></a>";
       if (coords) {
         var g = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(p.lat + "," + p.lon);
         var a = "https://maps.apple.com/?ll=" + p.lat + "," + p.lon + "&q=" + encodeURIComponent(p.name || "");
