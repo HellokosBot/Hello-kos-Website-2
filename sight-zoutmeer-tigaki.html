@@ -1,398 +1,199 @@
 <!DOCTYPE html>
-<html lang="nl" data-hk-own="1" data-hk-tts="1">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0D1F1F">
-  <title>Zoutmeer & flamingo’s (Tigaki) – Hello Kos</title>
-  <style>
-    :root {
-      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
-      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
-      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
-      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
-      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text); -webkit-font-smoothing: antialiased;
-      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
-      background: var(--bg); min-height: 100vh; line-height: 1.55;
-    }
-    .app-header {
-      position: sticky; top: 0; z-index: 100;
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-      padding: 14px 16px; background: var(--bg-header);
-      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
-    }
-    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
-    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
-    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
-    .logo-text span { color: var(--gold-dark); font-style: italic; }
-    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
-    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
-    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
-    .lang-menu.open { display: block; }
-    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
-    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
-    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
-    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
-    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .content { padding: 18px 16px 0; }
-    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
-    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-
-    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
-    .btn-audio { background: var(--petrol); color: #fff; }
-    .btn-audio.playing { background: var(--petrol-dark); }
-    .btn-stop { background: #3A4545; color: #fff; display: none; }
-    .btn-stop.show { display: flex; }
-
-    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
-    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
-    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
-    .card p:last-child { margin-bottom: 0; }
-    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
-    .tip strong { color: var(--gold); }
-
-    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
-    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
-    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
-    .footer a { color: var(--petrol); text-decoration: none; }
-  </style>
-<link rel="stylesheet" href="hello-kos.css">
+  <title>Zoutmeer Alikes – Hello Kos</title>
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body>
+<body class="hk-page hk-guide">
   <header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
   <main class="main">
     <div class="hero-wrap">
-      <img src="img/jwwb/c3329fa715-schermopname_12-3-2026_03240_kos-gr-standard.jpg" alt="Zoutmeer & flamingo’s (Tigaki)" loading="eager">
-      <div class="hero-title"><h1 data-i18n="title">Zoutmeer & flamingo’s (Tigaki)</h1></div>
+      <img class="hk-zoom" src="img/jwwb/c3329fa715-schermopname_12-3-2026_03240_kos-gr-standard.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
     </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=36.89%2C27.185" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?ll=36.89,27.185&amp;q=Zoutmeer%20Alikes" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-zoutmeer-tigaki-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-zoutmeer-tigaki-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-zoutmeer-tigaki-03.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-zoutmeer-tigaki-04.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-zoutmeer-tigaki-05.jpg" alt=""></figure>
+<p data-i18n="v3"></p>
 
-    <div class="content">
-<p class="lead" data-i18n="lead">Oude zoutpannen bij Tigaki – witte zoutlaag in de zomer, flamingo’s (vaak wit) en beschermd natuurgebied. Let op: geen ijsbaan voor auto’s.</p>
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
 
-      
-
-      <div class="actions">
-        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
-        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-      </div>
-      
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Tigaki%20salt%20lake%20flamingos%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Tigaki%20salt%20lake%20flamingos%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
-      </div>
-      <p class="status" id="ttsStatus"></p>
-
-      <div id="readText">
-        <div class="card">
-          <h2 data-i18n="hStory">Zoutpannen van Tigaki</h2>
-          <p data-i18n="p1">De zoutmeren liggen bij Tigaki. Eeuwenlang won men hier zeezout: zeewater in bassins, zon verdampte het water. Tussen 1944 en 1987 zo’n 900–3500 ton per jaar; in 1989 gestopt. Oude gebouwen en pompen staan er nog. Nu beschermd natuurgebied.</p>
-        </div>
-
-        
-
-        <div class="card">
-          <h2 data-i18n="hSee">Flamingo’s en dieren</h2>
-          <p data-i18n="p2">Je kunt flamingo’s, waterschildpadden en waterslangen spotten. De flamingo’s zijn hier vaak wit, niet roze – er zijn geen garnalen die het roze pigment leveren.</p>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2summer">Zomer: “ijsbaan”</h2>
-          <p data-i18n="p3">In de zomer droogt het meer op; er blijft een dikke witte zoutlaag achter, alsof het bevroren is. Let op: het is niet stevig genoeg voor auto’s. Elk jaar raken voertuigen vast in de modder onder de zoutlaag.</p>
-        </div>
-
-        <div class="gallery">
-          <div class="g-item">
-            <img src="img/jwwb/c3329fa715-schermopname_12-3-2026_03240_kos-gr-standard.jpg" alt="" loading="lazy">
-            <span data-i18n="g1">Zoutmeer</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/ec8936e251-yxnzzxrzl2ltywdlcy9wywdlcy9uyxr1cmfsx2jlyxv0es9hbg.jpg" alt="" loading="lazy">
-            <span data-i18n="g2">Zoutmeer</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/b3badb549d-zoutpannen-alikes6-high.jpg" alt="" loading="lazy">
-            <span data-i18n="g3">Zoutmeer</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/8228f02405-schermopname_12-3-2026_03240_kos-gr-high.jpg" alt="" loading="lazy">
-            <span data-i18n="g4">Zoutmeer</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="hKnow">Bezoeken</h2>
-          <p data-i18n="p4">Bij Tigaki. Gratis wandelen of fietsen; blijf van de zoutkorst af met de auto.</p>
-          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: in het voorjaar (rond maart–mei) is er meer water en meer kans op vogels. ’s Zomers is de witte laag spectaculair – alleen te voet of per fiets.</p></div>
-        </div>
-      </div>
+</article>
     </div>
   </main>
-
-  <footer class="footer">
-    <div>Hello Kos</div>
-    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
-  </footer>
-
-<script>
-(function(){
-  var I18N = window.HK_DICT = {
-    "nl": {
-      "title": "Zoutmeer & flamingo’s (Tigaki)",
-      "lead": "Oude zoutpannen bij Tigaki – witte zoutlaag in de zomer, flamingo’s (vaak wit) en beschermd natuurgebied. Let op: geen ijsbaan voor auto’s.",
-      "btnPlay": "Voorlezen",
-      "p1": "De zoutmeren liggen bij Tigaki. Eeuwenlang won men hier zeezout: zeewater in bassins, zon verdampte het water. Tussen 1944 en 1987 zo’n 900–3500 ton per jaar; in 1989 gestopt. Oude gebouwen en pompen staan er nog. Nu beschermd natuurgebied.",
-      "p2": "Je kunt flamingo’s, waterschildpadden en waterslangen spotten. De flamingo’s zijn hier vaak wit, niet roze – er zijn geen garnalen die het roze pigment leveren.",
-      "h2summer": "Zomer: “ijsbaan”",
-      "p3": "In de zomer droogt het meer op; er blijft een dikke witte zoutlaag achter, alsof het bevroren is. Let op: het is niet stevig genoeg voor auto’s. Elk jaar raken voertuigen vast in de modder onder de zoutlaag.",
-      "g1": "Zoutmeer",
-      "g2": "Zoutmeer",
-      "g3": "Zoutmeer",
-      "g4": "Zoutmeer",
-      "p4": "Bij Tigaki. Gratis wandelen of fietsen; blijf van de zoutkorst af met de auto.",
-      "tip": "in het voorjaar (rond maart–mei) is er meer water en meer kans op vogels. ’s Zomers is de witte laag spectaculair – alleen te voet of per fiets.",
-      "hStory": "Het verhaal",
-      "hSee": "Wat je ziet",
-      "hKnow": "Goed om te weten",
-      "tipTitle": "Tip van de gids",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Salt lake & flamingos (Tigaki)",
-      "lead": "Old salt pans near Tigaki – white salt layer in summer, flamingos (often white) and protected nature area. Note: not an ice rink for cars.",
-      "btnPlay": "Read aloud",
-      "p1": "The salt lakes are near Tigaki. For centuries sea salt was harvested here: seawater in basins, the sun evaporated the water. Between 1944 and 1987 about 900–3500 tons per year; stopped in 1989. Old buildings and pumps are still there. Now a protected nature area.",
-      "p2": "You can spot flamingos, water turtles and water snakes. The flamingos here are often white, not pink – there are no shrimp that provide the pink pigment.",
-      "h2summer": "Summer: “ice rink”",
-      "p3": "In summer the lake dries up; a thick white salt layer remains, as if frozen. Note: it is not strong enough for cars. Every year vehicles get stuck in the mud under the salt layer.",
-      "g1": "Salt lake",
-      "g2": "Salt lake",
-      "g3": "Salt lake",
-      "g4": "Salt lake",
-      "p4": "Near Tigaki. Free walking or cycling; stay off the salt crust with the car.",
-      "tip": "in spring (around March–May) there is more water and more chance of birds. In summer the white layer is spectacular – only on foot or by bike.",
-      "hStory": "The story",
-      "hSee": "What you see",
-      "hKnow": "Good to know",
-      "tipTitle": "Guide’s tip",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Salzsee & Flamingos (Tigaki)",
-      "lead": "Alte Salzpfannen bei Tigaki – weiße Salzschicht im Sommer, Flamingos (oft weiß) und geschütztes Naturschutzgebiet. Hinweis: keine Eisbahn für Autos.",
-      "btnPlay": "Vorlesen",
-      "p1": "Die Salzseen liegen bei Tigaki. Jahrhunderte lang gewann man hier Meersalz: Meerwasser in Becken, die Sonne verdunstete das Wasser. Zwischen 1944 und 1987 etwa 900–3500 Tonnen pro Jahr; 1989 eingestellt. Alte Gebäude und Pumpen stehen noch. Jetzt geschütztes Naturschutzgebiet.",
-      "p2": "Du kannst Flamingos, Wasserschildkröten und Wasserschlangen sehen. Die Flamingos sind hier oft weiß, nicht rosa – es gibt keine Garnelen, die das rosa Pigment liefern.",
-      "h2summer": "Sommer: „Eisbahn“",
-      "p3": "Im Sommer trocknet der See aus; eine dicke weiße Salzschicht bleibt zurück, als wäre sie gefroren. Hinweis: sie ist nicht fest genug für Autos. Jedes Jahr bleiben Fahrzeuge im Schlamm unter der Salzschicht stecken.",
-      "g1": "Salzsee",
-      "g2": "Salzsee",
-      "g3": "Salzsee",
-      "g4": "Salzsee",
-      "p4": "Bei Tigaki. Kostenloses Wandern oder Radfahren; bleib mit dem Auto von der Salzkruste weg.",
-      "tip": "im Frühjahr (ca. März–Mai) gibt es mehr Wasser und mehr Chance auf Vögel. Im Sommer ist die weiße Schicht spektakulär – nur zu Fuß oder mit dem Fahrrad.",
-      "hStory": "Die Geschichte",
-      "hSee": "Was du siehst",
-      "hKnow": "Gut zu wissen",
-      "tipTitle": "Tipp des Guides",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Lago salato & fenicotteri (Tigaki)",
-      "lead": "Vecchie saline vicino a Tigaki – strato di sale bianco in estate, fenicotteri (spesso bianchi) e area naturale protetta. Attenzione: non è una pista di ghiaccio per auto.",
-      "btnPlay": "Leggi ad alta voce",
-      "p1": "I laghi salati si trovano vicino a Tigaki. Per secoli si estraeva qui sale marino: acqua di mare in bacini, il sole faceva evaporare l’acqua. Tra il 1944 e il 1987 circa 900–3500 tonnellate all’anno; interrotto nel 1989. Vecchi edifici e pompe ci sono ancora. Ora area naturale protetta.",
-      "p2": "Puoi avvistare fenicotteri, tartarughe d’acqua e serpenti d’acqua. I fenicotteri qui sono spesso bianchi, non rosa – non ci sono gamberi che forniscono il pigmento rosa.",
-      "h2summer": "Estate: “pista di ghiaccio”",
-      "p3": "In estate il lago si secca; rimane uno spesso strato di sale bianco, come se fosse ghiacciato. Attenzione: non è abbastanza solido per le auto. Ogni anno i veicoli rimangono bloccati nel fango sotto lo strato di sale.",
-      "g1": "Lago salato",
-      "g2": "Lago salato",
-      "g3": "Lago salato",
-      "g4": "Lago salato",
-      "p4": "Vicino a Tigaki. Camminata o bici gratuite; stai lontano dalla crosta di sale con l’auto.",
-      "tip": "in primavera (intorno a marzo–maggio) c’è più acqua e più possibilità di uccelli. In estate lo strato bianco è spettacolare – solo a piedi o in bici.",
-      "hStory": "La storia",
-      "hSee": "Cosa vedi",
-      "hKnow": "Buono a sapersi",
-      "tipTitle": "Consiglio della guida",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Tuz gölü & flamingolar (Tigaki)",
-      "lead": "Tigaki yakınlarında eski tuz tavaları – yazın beyaz tuz tabakası, flamingolar (genellikle beyaz) ve korunan doğa alanı. Dikkat: arabalar için buz pisti değil.",
-      "btnPlay": "Sesli oku",
-      "p1": "Tuz gölleri Tigaki yakınlarındadır. Yüzyıllarca burada deniz tuzu çıkarılırdı: havuzlarda deniz suyu, güneş suyu buharlaştırırdı. 1944-1987 arasında yılda yaklaşık 900–3500 ton; 1989’da durduruldu. Eski binalar ve pompalar hâlâ duruyor. Şimdi korunan doğa alanı.",
-      "p2": "Flamingolar, su kaplumbağaları ve su yılanları görebilirsiniz. Buradaki flamingolar genellikle beyazdır, pembe değil – pembe pigmenti sağlayan karides yoktur.",
-      "h2summer": "Yaz: “buz pisti”",
-      "p3": "Yazın göl kurur; kalın beyaz bir tuz tabakası kalır, sanki donmuş gibi. Dikkat: arabalar için yeterince sağlam değildir. Her yıl araçlar tuz tabakasının altındaki çamura saplanır.",
-      "g1": "Tuz gölü",
-      "g2": "Tuz gölü",
-      "g3": "Tuz gölü",
-      "g4": "Tuz gölü",
-      "p4": "Tigaki yakınlarında. Ücretsiz yürüyüş veya bisiklet; arabayla tuz kabuğundan uzak durun.",
-      "tip": "ilkbaharda (Mart–Mayıs civarı) daha fazla su ve kuş şansı vardır. Yazın beyaz tabaka muhteşemdir – sadece yaya veya bisikletle.",
-      "hStory": "Hikaye",
-      "hSee": "Ne görürsün",
-      "hKnow": "Bilmekte fayda var",
-      "tipTitle": "Rehberin ipucu",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Lago salado & flamencos (Tigaki)",
-      "lead": "Antiguas salinas cerca de Tigaki – capa blanca de sal en verano, flamencos (a menudo blancos) y zona natural protegida. Atención: no es una pista de hielo para coches.",
-      "btnPlay": "Leer en voz alta",
-      "p1": "Los lagos salados están cerca de Tigaki. Durante siglos se extrajo sal marina aquí: agua de mar en balsas, el sol evaporaba el agua. Entre 1944 y 1987 unas 900–3500 toneladas al año; se detuvo en 1989. Los edificios y bombas antiguas siguen allí. Ahora zona natural protegida.",
-      "p2": "Puedes ver flamencos, tortugas de agua y serpientes de agua. Los flamencos aquí suelen ser blancos, no rosados – no hay gambas que aporten el pigmento rosa.",
-      "h2summer": "Verano: “pista de hielo”",
-      "p3": "En verano el lago se seca; queda una gruesa capa blanca de sal, como si estuviera congelado. Atención: no es lo bastante sólido para coches. Cada año los vehículos se quedan atascados en el barro bajo la capa de sal.",
-      "g1": "Lago salado",
-      "g2": "Lago salado",
-      "g3": "Lago salado",
-      "g4": "Lago salado",
-      "p4": "Cerca de Tigaki. Caminar o ir en bici gratis; no te subas a la corteza de sal con el coche.",
-      "tip": "en primavera (alrededor de marzo–mayo) hay más agua y más posibilidades de aves. En verano la capa blanca es espectacular – solo a pie o en bici.",
-      "hStory": "La historia",
-      "hSee": "Qué ves",
-      "hKnow": "Bueno saberlo",
-      "tipTitle": "Consejo del guía",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };
-
-  function setLang(l) {
-    if (!I18N[l]) l = 'nl';
-    localStorage.setItem('hk-lang', l);
-    document.documentElement.lang = l;
-    var d = I18N[l];
-    document.querySelectorAll('[data-i18n]').forEach(function(el){
-      var k = el.getAttribute('data-i18n');
-      if (d[k]) el.textContent = d[k];
-    });
-    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
-    if (opt) {
-      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
-      document.getElementById('code').textContent = l.toUpperCase();
-    }
-    document.querySelectorAll('.lang-option').forEach(function(o){
-      o.classList.toggle('active', o.getAttribute('data-lang') === l);
-    });
-    closeMenu();
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Tigaki",
+    "title": "Zoutmeer Alikes",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "Hier ligt het Zoutmeer van Alykes, een groot en bijzonder natuurgebied.",
+    "s1": "Hier ligt het Zoutmeer van Alykes, een groot en bijzonder natuurgebied. Eeuwenlang werd hier zeezout gewonnen. Zeewater werd in ondiepe bassins gepompt en de zon liet het water verdampen.",
+    "s2": "Tussen negentien vierenveertig en negentien zevenentachtig produceerden ze elk jaar tussen de negenhonderd en drieduizendvijfhonderd ton zout. In negentien negenentachtig stopte de zoutwinning helemaal. De oude pompen en gebouwen staan er nog steeds als stille getuigen.Sindsdien is het gebied een beschermd natuurreservaat.",
+    "s3": "In de zomer droogt het meer helemaal op door de hitte en blijft er een dikke witte zoutlaag achter. Het ziet er dan uit als een grote ijsbaan, maar pas op: onder die zoutlaag zit zachte modder. Elk jaar raken er nog auto’s of quads vast die denken dat ze er overheen kunne rijden.",
+    "v1": "In het voorjaar, rond maart tot mei, en in het najaar, van september tot november, vult het meer zich weer met water. Dan komen de flamingo’s. Ze zijn hier meestal wit in plaats van roze, omdat er geen garnalen in het water zitten die de roze kleur geven.",
+    "v2": "Naast flamingo’s kun je ook waterschildpadden en waterslangen spotten. Het is een rustige plek voor een wandeling of fietstocht rondom het meer. Er zijn geen faciliteiten zoals toiletten of cafés, dus neem zelf water en zonnebescherming mee.",
+    "v3": "Midden op een zonnig Grieks eiland vind je ineens een groot wit zoutmeer met flamingo’s die er gracieus doorheen waden. Een mooi voorbeeld van hoe een oude industrieplaats kan veranderen in een rustige natuurplek.",
+    "k1": "Toegang is helemaal gratis. Je kunt er vrij rondlopen, maar blijf op de paden en rijd niet het meer op. Het blijft een verrassende plek."
+  },
+  "de": {
+    "place": "Tigaki",
+    "title": "Zoutmeer Alikes",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Hier liegt der Alykes-Salzsee, ein großes und besonderes Naturschutzgebiet.",
+    "s1": "Hier liegt der Alykes-Salzsee, ein großes und besonderes Naturschutzgebiet. Hier wurde jahrhundertelang Meersalz gewonnen. Meerwasser wurde in flache Becken gepumpt und die Sonne ließ das Wasser verdunsten.",
+    "s2": "Zwischen 1944 und 1987 produzierten sie jedes Jahr zwischen 900 und 3500 Tonnen Salz. Im Jahr 1989 wurde der Salzabbau vollständig eingestellt. Die alten Pumpen und Gebäude stehen noch immer als stumme Zeugen da. Das Gebiet ist seitdem ein geschütztes Naturschutzgebiet.",
+    "s3": "Im Sommer trocknet der See durch die Hitze vollständig aus und hinterlässt eine dicke weiße Salzschicht. Es sieht aus wie eine große Eisbahn, aber Vorsicht: Unter der Salzschicht befindet sich weicher Schlamm. Jedes Jahr bleiben Autos oder Quads stecken und denken, sie könnten darüber fahren.",
+    "v1": "Im Frühjahr, etwa von März bis Mai, und im Herbst, von September bis November, füllt sich der See wieder mit Wasser. Dann kommen die Flamingos. Normalerweise sind sie weiß statt rosa, da es im Wasser keine Garnelen gibt, die die rosa Farbe verleihen.",
+    "v2": "Neben Flamingos können Sie auch Wasserschildkröten und Wasserschlangen beobachten. Es ist ein ruhiger Ort für einen Spaziergang oder eine Radtour rund um den See. Es gibt keine Einrichtungen wie Toiletten oder Cafés. Bringen Sie daher Ihr eigenes Wasser und Sonnenschutz mit.",
+    "v3": "Mitten auf einer sonnigen griechischen Insel finden Sie plötzlich einen großen weißen Salzsee, durch den Flamingos anmutig waten. Ein gutes Beispiel dafür, wie sich ein altes Industriegelände in einen ruhigen Naturort verwandeln kann.",
+    "k1": "Der Eintritt ist völlig frei. Man kann frei herumlaufen, bleibt aber auf den Wegen und fährt nicht auf den See. Es bleibt ein überraschender Ort."
+  },
+  "en": {
+    "place": "Tigaki",
+    "title": "Zoutmeer Alikes",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "This is where the Alykes Salt Lake is located, a large and special nature reserve.",
+    "s1": "This is where the Alykes Salt Lake is located, a large and special nature reserve. Sea salt was extracted here for centuries. Seawater was pumped into shallow basins and the sun allowed the water to evaporate.",
+    "s2": "Between nineteen forty-four and nineteen eighty-seven they produced between nine hundred and three thousand five hundred tons of salt each year. In nineteen eighty-nine, salt mining stopped completely. The old pumps and buildings still stand as silent witnesses. The area has since been a protected nature reserve.",
+    "s3": "In summer the lake dries up completely due to the heat, leaving a thick white salt layer behind. It will look like a large ice rink, but be careful: there is soft mud underneath the salt layer. Every year, cars or quads get stuck thinking they can drive over it.",
+    "v1": "In the spring, around March to May, and in the autumn, from September to November, the lake fills with water again. Then the flamingos come. They are usually white instead of pink, because there are no shrimps in the water that give the pink color.",
+    "v2": "In addition to flamingos, you can also spot water turtles and water snakes. It is a quiet place for a walk or bike ride around the lake. There are no facilities such as toilets or cafes, so bring your own water and sun protection.",
+    "v3": "In the middle of a sunny Greek island you suddenly find a large white salt lake with flamingos gracefully wading through it. A good example of how an old industrial site can transform into a peaceful natural spot.",
+    "k1": "Entry is completely free. You can walk around freely, but stay on the paths and don't drive onto the lake. It remains a surprising place."
+  },
+  "it": {
+    "place": "Tigaki",
+    "title": "Zoutmeer Alikes",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Qui si trova il Lago Salato di Alykes, una grande e speciale riserva naturale.",
+    "s1": "Qui si trova il Lago Salato di Alykes, una grande e speciale riserva naturale. Qui per secoli si estraeva il sale marino. L'acqua di mare veniva pompata in bacini poco profondi e il sole permetteva all'acqua di evaporare.",
+    "s2": "Tra il 1944 e il 1987 si producevano tra le novecento e le tremilacinquecento tonnellate di sale ogni anno. Nel millenovecentottantanove l'estrazione del sale si fermò completamente. Le vecchie pompe e gli edifici sono ancora testimoni silenziosi. Da allora l'area è stata una riserva naturale protetta.",
+    "s3": "In estate il lago si prosciuga completamente a causa del caldo, lasciando dietro di sé uno spesso strato di sale bianco. Sembrerà una grande pista di pattinaggio, ma fai attenzione: sotto lo strato di sale c'è del fango molle. Ogni anno auto o quad rimangono bloccati pensando di poterci passare sopra.",
+    "v1": "In primavera, da marzo a maggio, e in autunno, da settembre a novembre, il lago si riempie nuovamente d'acqua. Poi arrivano i fenicotteri. Di solito sono bianchi invece che rosa, perché nell'acqua non ci sono gamberetti che diano il colore rosa.",
+    "v2": "Oltre ai fenicotteri, potrete avvistare anche tartarughe acquatiche e serpenti acquatici. È un posto tranquillo per una passeggiata o un giro in bicicletta intorno al lago. Non ci sono strutture come servizi igienici o bar, quindi porta la tua acqua e protezione solare.",
+    "v3": "Nel mezzo di una soleggiata isola greca trovi all'improvviso un grande lago salato bianco con fenicotteri che lo attraversano con grazia. Un buon esempio di come un vecchio sito industriale possa trasformarsi in un tranquillo luogo naturale.",
+    "k1": "L'ingresso è completamente gratuito. Puoi passeggiare liberamente, ma rimani sui sentieri e non guidare sul lago. Resta un posto sorprendente."
+  },
+  "tr": {
+    "place": "Tigaki",
+    "title": "Zoutmeer Alikes",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Burası büyük ve özel bir doğa rezervi olan Alykes Tuz Gölü'nün bulunduğu yerdir.",
+    "s1": "Burası büyük ve özel bir doğa rezervi olan Alykes Tuz Gölü'nün bulunduğu yerdir. Yüzyıllardır deniz tuzu buradan çıkarılıyor. Deniz suyu sığ havzalara pompalandı ve güneş, suyun buharlaşmasına izin verdi.",
+    "s2": "Bin dokuz yüz kırk dört ile bin dokuz yüz seksen yedi arasında her yıl dokuz yüz ile üç bin beş yüz ton arasında tuz üretiyorlardı. Bin dokuz yüz seksen dokuzda tuz madenciliği tamamen durduruldu. Eski pompalar ve binalar hâlâ sessiz tanıklar olarak duruyor. Bölge o zamandan beri koruma altındaki bir doğa rezervi olmuştur.",
+    "s3": "Yaz aylarında sıcaktan dolayı göl tamamen kuruyarak arkasında kalın beyaz bir tuz tabakası bırakıyor. Büyük bir buz pateni pistine benzeyecek ama dikkatli olun: Tuz tabakasının altında yumuşak çamur var. Her yıl arabalar veya atlılar üzerinden geçebileceklerini düşünerek sıkışıp kalıyorlar.",
+    "v1": "İlkbaharda mart ayından mayıs ayına kadar, sonbaharda ise eylül ayından kasım ayına kadar göl yeniden suyla dolar. Daha sonra flamingolar geliyor. Genellikle pembe yerine beyaz renktedirler çünkü suda pembe rengi veren karides yoktur.",
+    "v2": "Flamingoların yanı sıra su kaplumbağaları ve su yılanlarını da görebilirsiniz. Göl çevresinde yürüyüş yapmak veya bisiklete binmek için sakin bir yerdir. Tuvalet, kafe gibi olanaklar bulunmadığından kendi suyunuzu ve güneş koruyucunuzu yanınızda getirin.",
+    "v3": "Güneşli bir Yunan adasının ortasında, aniden içinden flamingoların zarafetle geçtiği büyük beyaz bir tuz gölü buluyorsunuz. Eski bir sanayi sitesinin nasıl huzurlu bir doğal noktaya dönüşebileceğinin güzel bir örneği.",
+    "k1": "Giriş tamamen ücretsizdir. Serbestçe dolaşabilirsiniz ancak patikalarda kalın ve göle doğru araç kullanmayın. Şaşırtıcı bir yer olmaya devam ediyor."
+  },
+  "es": {
+    "place": "Tigaki",
+    "title": "Zoutmeer Alikes",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Aquí es donde se encuentra el Lago Salado de Alykes, una gran y especial reserva natural.",
+    "s1": "Aquí es donde se encuentra el Lago Salado de Alykes, una gran y especial reserva natural. Aquí se extrajo sal marina durante siglos. El agua de mar se bombeaba a cuencas poco profundas y el sol permitía que el agua se evaporara.",
+    "s2": "Entre mil novecientos cuarenta y cuatro y mil novecientos ochenta y siete produjeron entre novecientas y tres mil quinientas toneladas de sal cada año. En 1989 la extracción de sal se detuvo por completo. Las antiguas bombas y edificios siguen siendo testigos silenciosos. Desde entonces, la zona ha sido una reserva natural protegida.",
+    "s3": "En verano, el lago se seca completamente debido al calor, dejando una gruesa capa de sal blanca. Parecerá una gran pista de hielo, pero cuidado: debajo de la capa de sal hay barro blando. Cada año, coches o quads se quedan atascados pensando que pueden pasar por encima.",
+    "v1": "En primavera, entre marzo y mayo, y en otoño, de septiembre a noviembre, el lago se vuelve a llenar de agua. Luego vienen los flamencos. Suelen ser blancos en lugar de rosados, porque no hay camarones en el agua que den el color rosado.",
+    "v2": "Además de los flamencos, también podrás observar tortugas acuáticas y serpientes de agua. Es un lugar tranquilo para caminar o andar en bicicleta alrededor del lago. No hay instalaciones como baños o cafeterías, así que traiga su propia agua y protección solar.",
+    "v3": "En medio de una soleada isla griega, de repente te encuentras con un gran lago salado de color blanco y flamencos que lo atraviesan con gracia. Un buen ejemplo de cómo un antiguo recinto industrial puede transformarse en un tranquilo paraje natural.",
+    "k1": "La entrada es completamente gratuita. Puedes caminar libremente, pero mantente en los senderos y no conduzcas hacia el lago. Sigue siendo un lugar sorprendente."
   }
-
-  var langBtn = document.getElementById('langBtn');
-  var langMenu = document.getElementById('langMenu');
-  function openMenu(){ langMenu.classList.add('open'); }
-  function closeMenu(){ langMenu.classList.remove('open'); }
-  langBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    langMenu.classList.contains('open') ? closeMenu() : openMenu();
-  });
-  document.addEventListener('click', function(){ closeMenu(); });
-  document.querySelectorAll('.lang-option').forEach(function(btn){
-    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
-  });
-
-  var saved = localStorage.getItem('hk-lang') || 'nl';
-  setLang(saved);
-
-  /* TTS */
-  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
-  function getLang(){
-    var l = localStorage.getItem('hk-lang') || 'nl';
-    return LANG_VOICE[l] ? l : 'nl';
-  }
-  function pickVoice(code){
-    var voices = speechSynthesis.getVoices() || [];
-    var prefix = code.slice(0,2).toLowerCase();
-    return voices.find(function(v){ return v.lang === code; })
-      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
-      || null;
-  }
-  var btnPlay = document.getElementById('btnPlay');
-  var btnStop = document.getElementById('btnStop');
-  var status = document.getElementById('ttsStatus');
-  function setStatus(t){ if(status) status.textContent = t; }
-  function play(){
-    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
-    speechSynthesis.cancel();
-    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
-    var l = getLang();
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = LANG_VOICE[l];
-    u.rate = 0.92;
-    var v = pickVoice(LANG_VOICE[l]);
-    if(v) u.voice = v;
-    u.onstart = function(){
-      btnPlay.classList.add('playing');
-      btnStop.classList.add('show');
-      setStatus('Voorlezen… ('+l.toUpperCase()+')');
-    };
-    u.onend = u.onerror = function(){
-      btnPlay.classList.remove('playing');
-      btnStop.classList.remove('show');
-      setStatus('');
-    };
-    if(!speechSynthesis.getVoices().length){
-      speechSynthesis.onvoiceschanged = function(){
-        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
-        speechSynthesis.speak(u);
-      };
-      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
-    } else {
-      speechSynthesis.speak(u);
-    }
-  }
-  function stop(){
-    if(window.speechSynthesis) speechSynthesis.cancel();
-    btnPlay.classList.remove('playing');
-    btnStop.classList.remove('show');
-    setStatus('Gestopt.');
-  }
-  btnPlay.addEventListener('click', play);
-  btnStop.addEventListener('click', stop);
-  if(window.speechSynthesis){
-    speechSynthesis.getVoices();
-    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
-  }
-})();
-</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

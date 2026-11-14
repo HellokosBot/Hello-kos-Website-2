@@ -1,246 +1,183 @@
 <!DOCTYPE html>
-<html lang="nl" data-hk-tts="1" class="hk-fix-light"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
-<meta name="theme-color" content="#2A6F6F"><title>Hatzi Pasha Mausoleum – Hello Kos</title>
-<style>
-:root{--petrol:#2A6F6F;--petrol-dark:#1A4A4A;--cream:#f5f2ec;--text:#1A1A1A;--soft:#4A4A4A}
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--cream);color:var(--text);line-height:1.55;padding-bottom:env(safe-area-inset-bottom,0)}
-.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:12px 14px;background:rgba(245,242,236,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(42,111,111,.12)}
-.back-btn{color:var(--petrol-dark);font-weight:600;text-decoration:none;font-size:.9rem}
-.logo{justify-self:center;display:flex;align-items:center;gap:8px;text-decoration:none}
-.logo-icon{width:34px;height:34px;border-radius:50%;background:linear-gradient(145deg,#F0C040,#D4A017);display:flex;align-items:center;justify-content:center;color:#FFFDF5;font-size:20px}
-.logo-text{font-size:1.2rem;font-weight:700;color:#D4A017;font-family:Georgia,serif}
-.logo-text span{color:#C4920F;font-style:italic}
-.main{max-width:480px;margin:0 auto;padding:0 0 40px}
-.hero-wrap{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;background:#d4cfc6}
-.hero-wrap img{width:100%;height:100%;object-fit:cover;display:block}
-.hero-caption{position:absolute;left:0;right:0;bottom:0;padding:28px 16px 14px;background:linear-gradient(to top,rgba(0,0,0,.65),transparent);color:#fff;font-size:.78rem;font-weight:500}
-.content{padding:18px 16px 0}
-h1{font-size:1.45rem;font-weight:800;color:var(--petrol-dark);letter-spacing:-.02em;margin-bottom:8px;line-height:1.2}
-.lead{font-size:.95rem;color:var(--soft);margin-bottom:14px}
-.actions{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
-.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px 16px;border-radius:14px;border:none;cursor:pointer;font-family:inherit;font-weight:700;font-size:.9rem;text-decoration:none}
-.btn-audio{background:var(--petrol);color:#fff}.btn-audio.playing{background:var(--petrol-dark)}
-.btn-stop{background:#6b7280;color:#fff;display:none}.btn-stop.show{display:flex}
-
-.status{text-align:center;font-size:.78rem;color:var(--soft);min-height:1.1em;margin-bottom:8px}
-.card{background:#fff;border-radius:16px;padding:16px 16px 14px;margin-bottom:12px;box-shadow:0 2px 12px rgba(0,0,0,.05)}
-.card h2{font-size:1.02rem;color:var(--petrol-dark);margin-bottom:8px}
-.card p{font-size:.92rem;color:var(--text);margin-bottom:10px}.card p:last-child{margin-bottom:0}
-.tip{background:#fff8e6;border-left:4px solid #e6b422;border-radius:0 12px 12px 0;padding:12px 14px;margin:4px 0 0;font-size:.88rem;color:#3d3420}
-.tip strong{color:#5c4a12}
-.photo-block{margin:8px 0 14px;border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.08)}
-.photo-block img{width:100%;display:block;max-height:240px;object-fit:cover}
-.photo-block .cap{background:#fff;padding:8px 12px;font-size:.75rem;color:var(--soft);text-align:center}
-.hours{margin-top:8px;border-radius:12px;overflow:hidden;border:1px solid rgba(42,111,111,.12)}
-.h-row{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;font-size:.88rem;border-bottom:1px solid rgba(0,0,0,.05);background:#fafafa}
-.h-row:nth-child(odd){background:#fff}.h-row:last-child{border-bottom:none}
-.h-row span:last-child{font-weight:700;color:var(--petrol-dark)}
-.h-row.closed span:last-child{color:#b45309}
-.gallery{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:4px 0 14px}
-.g-item{border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.g-item img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
-.g-item span{display:block;padding:6px 8px;font-size:.7rem;color:var(--soft);text-align:center}
-.footer{text-align:center;padding:20px 16px;font-size:.78rem;color:var(--soft)}.footer a{color:var(--petrol);text-decoration:none}
-</style><link rel="stylesheet" href="hello-kos.css">
-</head><body>
-<header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Hatzi Pasha mausoleum – Hello Kos</title>
+  <link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page hk-guide">
+  <header class="app-header">
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-<main class="main">
-<div class="hero-wrap"><img src="img/jwwb/bf28e9a569-schermopname_7-3-2026_115330_www-google-com-standard.jpg" alt="Hatzi Pasha Mausoleum" loading="eager">
-      <div class="hero-title"><h1 data-i18n="title">Hatzi Pasha Mausoleum</h1></div></div>
-<div class="content">
-<p class="lead" data-i18n="lead">Klein Ottomaans grafmonument met koepeltje – sarcofaag van officier Hatzi Pasha, gesneuveld in 1527 bij een piratenaanval. Bijna 500 jaar op dezelfde plek.</p>
-
-<div class="actions">
-<button type="button" class="btn btn-audio" id="btnPlay">🔊 <span data-i18n="read">Voorlezen</span></button>
-<button type="button" class="btn btn-stop" id="btnStop">⏹ <span data-i18n="stop">Stop</span></button>
-</div>
-
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Hatzi%20Pasha%20Mausoleum%20Kos%20Town" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Hatzi%20Pasha%20Mausoleum%20Kos%20Town" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
       </div>
-      <p class="status" id="ttsStatus"></p>
-<div id="readText">
-<div class="card"><h2 data-i18n="hStory">Onopvallend, bijna 500 jaar</h2>
-<p data-i18n="p1">Een bescheiden, vierkant stenen gebouw in het hart van Kos-stad. Veel mensen lopen er voorbij zonder te weten dat hier de sarcofaag van <strong>Hatzi Pasha</strong> staat – al bijna 500 jaar.</p></div>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
+  <main class="main">
+    <div class="hero-wrap">
+      <img class="hk-zoom" src="img/jwwb/bf28e9a569-schermopname_7-3-2026_115330_www-google-com-standard.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
+    </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=36.8922%2C27.2878" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?ll=36.8922,27.2878&amp;q=Hatzi%20Pasha%20mausoleum" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-hatzi-pasha-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-hatzi-pasha-02.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-hatzi-pasha-03.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-hatzi-pasha-04.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
 
-<div class="card"><h2 data-i18n="hSee">Wie was Hatzi Pasha?</h2>
-<p data-i18n="p2">Ottomaanse officier op het eiland. In <strong>1527</strong> sneuvelde hij tijdens een aanval van <strong>piraten</strong> die de kust onveilig maakten. Zijn lichaam werd begraven in deze marmeren sarcofaag, die nog altijd op dezelfde plek staat – het enige directe spoor van hem.</p></div>
-<div class="card"><h2 data-i18n="h3">Het gebouw</h2>
-<p data-i18n="p3">Eenvoudige, rechthoekige stenen mausoleum met een <strong>klein koepeltje</strong> – typisch Ottomaans grafmonument uit de vroege periode op Kos.</p></div>
-<div class="gallery"><div class="g-item"><img src="img/jwwb/bf28e9a569-schermopname_7-3-2026_115330_www-google-com-standard.jpg" alt="" loading="lazy"><span data-i18n="cap">Mausoleum</span></div><div class="g-item"><img src="img/jwwb/f83ea6a810-schermopname_7-3-2026_115310_www-google-com-high.jpg" alt="" loading="lazy"><span data-i18n="cap">Mausoleum</span></div><div class="g-item"><img src="img/jwwb/f536d09920-whatsapp-image-2026-04-04-at-05-29-21-1-high.jpg" alt="" loading="lazy"><span data-i18n="cap">Mausoleum</span></div><div class="g-item"><img src="img/jwwb/3f84dd0977-whatsapp-image-2026-04-04-at-05-29-21-1-high-eh9aw9.jpg" alt="" loading="lazy"><span data-i18n="cap">Mausoleum</span></div></div>
-<div class="card"><h2 data-i18n="hKnow">Bezoeken</h2>
-<p data-i18n="p4">In het centrum, van buitenaf gratis. Makkelijk te missen.</p>
-<div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip"><strong>Tip:</strong> zoek het kleine gebouwtje met het koepeltje – één keer gezien, herken je het altijd.</p></div></div>
-</div>
-</div></main>
-<footer class="footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
-<script>
-(function(){
-var LANG_VOICE={nl:'nl-NL',de:'de-DE',en:'en-GB',it:'it-IT',tr:'tr-TR',es:'es-ES'};
-function getLang(){var l=localStorage.getItem('hk-lang')||'nl';return LANG_VOICE[l]?l:'nl'}
-function pickVoice(code){var voices=speechSynthesis.getVoices()||[];var p=code.slice(0,2).toLowerCase();return voices.find(function(v){return v.lang===code})||voices.find(function(v){return v.lang&&v.lang.toLowerCase().indexOf(p)===0})||null}
-var btnPlay=document.getElementById('btnPlay'),btnStop=document.getElementById('btnStop'),status=document.getElementById('ttsStatus');
-function setStatus(t){if(status)status.textContent=t}
-function hkMsg(k){var l=localStorage.getItem('hk-lang')||'nl';var T={nl:{play:'Voorlezen…',stop:'Gestopt.',no:'Voorlezen niet ondersteund.'},de:{play:'Vorlesen…',stop:'Gestoppt.',no:'Vorlesen nicht unterstützt.'},en:{play:'Reading…',stop:'Stopped.',no:'Read-aloud is not supported.'},it:{play:'Lettura…',stop:'Interrotto.',no:'Lettura vocale non supportata.'},tr:{play:'Okunuyor…',stop:'Durdu.',no:'Sesli okuma desteklenmiyor.'},es:{play:'Leyendo…',stop:'Parado.',no:'Lectura en voz alta no disponible.'}};return (T[l]||T.nl)[k];}
-function play(){
-if(!window.speechSynthesis){setStatus(hkMsg('no'));return}
-speechSynthesis.cancel();
-var text=document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
-var l=getLang();var u=new SpeechSynthesisUtterance(text);u.lang=LANG_VOICE[l];u.rate=0.92;
-var v=pickVoice(LANG_VOICE[l]);if(v)u.voice=v;
-u.onstart=function(){btnPlay.classList.add('playing');btnStop.classList.add('show');setStatus(hkMsg('play')+' ('+l.toUpperCase()+')')};
-u.onend=u.onerror=function(){btnPlay.classList.remove('playing');btnStop.classList.remove('show');setStatus('')};
-if(!speechSynthesis.getVoices().length){speechSynthesis.onvoiceschanged=function(){var v2=pickVoice(LANG_VOICE[l]);if(v2)u.voice=v2;speechSynthesis.speak(u)};setTimeout(function(){speechSynthesis.speak(u)},250)}
-else speechSynthesis.speak(u);
-}
-function stop(){if(window.speechSynthesis)speechSynthesis.cancel();btnPlay.classList.remove('playing');btnStop.classList.remove('show');setStatus(hkMsg('stop'))}
-btnPlay.addEventListener('click',play);btnStop.addEventListener('click',stop);
-if(window.speechSynthesis){speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=function(){speechSynthesis.getVoices()}}
-})();
-</script><script>window.HK_DICT = {
-    "nl": {
-      "title": "Hatzi Pasha Mausoleum",
-      "lead": "Klein Ottomaans grafmonument met koepeltje – sarcofaag van officier Hatzi Pasha, gesneuveld in 1527 bij een piratenaanval. Bijna 500 jaar op dezelfde plek.",
-      "p1": "Een bescheiden, vierkant stenen gebouw in het hart van Kos-stad. Veel mensen lopen er voorbij zonder te weten dat hier de sarcofaag van <strong>Hatzi Pasha</strong> staat – al bijna 500 jaar.",
-      "p2": "Ottomaanse officier op het eiland. In <strong>1527</strong> sneuvelde hij tijdens een aanval van <strong>piraten</strong> die de kust onveilig maakten. Zijn lichaam werd begraven in deze marmeren sarcofaag, die nog altijd op dezelfde plek staat – het enige directe spoor van hem.",
-      "h3": "Het gebouw",
-      "p3": "Eenvoudige, rechthoekige stenen mausoleum met een <strong>klein koepeltje</strong> – typisch Ottomaans grafmonument uit de vroege periode op Kos.",
-      "p4": "In het centrum, van buitenaf gratis. Makkelijk te missen.",
-      "tip": "<strong>Tip:</strong> zoek het kleine gebouwtje met het koepeltje – één keer gezien, herken je het altijd.",
-      "f1": "gesneuveld",
-      "f2": "Koepeltje",
-      "f3": "Ottomaans graf",
-      "cap": "Mausoleum",
-      "hStory": "Het verhaal",
-      "hSee": "Wat je ziet",
-      "hKnow": "Goed om te weten",
-      "tipTitle": "Tip van de gids",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Hatzi-Pasha-Mausoleum",
-      "lead": "Kleines osmanisches Grabmal mit Kuppel – Sarkophag des Offiziers Hatzi Pasha, 1527 bei einem Piratenangriff gefallen. Fast 500 Jahre am selben Ort.",
-      "p1": "Ein schlichtes, quadratisches Steingebäude im Herzen von Kos-Stadt. Viele gehen vorbei, ohne zu wissen, dass hier der Sarkophag von <strong>Hatzi Pasha</strong> steht – seit fast 500 Jahren.",
-      "p2": "Osmanischer Offizier auf der Insel. <strong>1527</strong> fiel er bei einem Angriff von <strong>Piraten</strong>. Sein Leichnam wurde in diesem Marmorsarkophag bestattet, der noch immer am selben Ort steht – die einzige direkte Spur von ihm.",
-      "h3": "Das Gebäude",
-      "p3": "Einfaches, rechteckiges steinernes Mausoleum mit einer <strong>kleinen Kuppel</strong> – typisches osmanisches Grabmal der frühen Zeit auf Kos.",
-      "p4": "Im Zentrum, von außen kostenlos. Leicht zu übersehen.",
-      "tip": "<strong>Tipp:</strong> such das kleine Gebäude mit der Kuppel – einmal gesehen, erkennst du es immer.",
-      "f1": "gefallen",
-      "f2": "Kuppel",
-      "f3": "Osmanisches Grab",
-      "cap": "Mausoleum",
-      "hStory": "Die Geschichte",
-      "hSee": "Was du siehst",
-      "hKnow": "Gut zu wissen",
-      "tipTitle": "Tipp des Guides",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Hatzi Pasha Mausoleum",
-      "lead": "Small Ottoman tomb with a little dome – the sarcophagus of officer Hatzi Pasha, killed in a pirate attack in 1527. Almost 500 years in the same place.",
-      "p1": "A modest, square stone building in the heart of Kos town. Many people walk past without knowing that <strong>Hatzi Pasha’s</strong> sarcophagus is here – for almost 500 years.",
-      "p2": "An Ottoman officer on the island. In <strong>1527</strong> he was killed in an attack by <strong>pirates</strong>. His body was buried in this marble sarcophagus, still in the same place – the only direct trace of him.",
-      "h3": "The building",
-      "p3": "A simple, rectangular stone mausoleum with a <strong>small dome</strong> – a typical early Ottoman tomb on Kos.",
-      "p4": "In the centre, free to see from outside. Easy to miss.",
-      "tip": "<strong>Tip:</strong> look for the small building with the dome – once you have seen it, you always recognise it.",
-      "f1": "killed",
-      "f2": "Small dome",
-      "f3": "Ottoman tomb",
-      "cap": "Mausoleum",
-      "hStory": "The story",
-      "hSee": "What you see",
-      "hKnow": "Good to know",
-      "tipTitle": "Guide’s tip",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Mausoleo di Hatzi Pasha",
-      "lead": "Piccolo monumento funerario ottomano con cupoletta – sarcofago dell’ufficiale Hatzi Pasha, caduto nel 1527 in un attacco di pirati. Quasi 500 anni nello stesso posto.",
-      "p1": "Un edificio di pietra modesto e quadrato nel cuore della città. Molti passano senza sapere che qui c’è il sarcofago di <strong>Hatzi Pasha</strong> – da quasi 500 anni.",
-      "p2": "Ufficiale ottomano sull’isola. Nel <strong>1527</strong> cadde in un attacco di <strong>pirati</strong>. Il corpo fu sepolto in questo sarcofago di marmo, ancora nello stesso punto – l’unica traccia diretta di lui.",
-      "h3": "L’edificio",
-      "p3": "Mausoleo di pietra semplice e rettangolare con una <strong>piccola cupola</strong> – tipica tomba ottomana del primo periodo a Kos.",
-      "p4": "In centro, gratis da fuori. Facile da non notare.",
-      "tip": "<strong>Consiglio:</strong> cerca l’edificio piccolo con la cupola – una volta visto, lo riconosci sempre.",
-      "f1": "caduto",
-      "f2": "Cupoletta",
-      "f3": "Tomba ottomana",
-      "cap": "Mausoleo",
-      "hStory": "La storia",
-      "hSee": "Cosa vedi",
-      "hKnow": "Buono a sapersi",
-      "tipTitle": "Consiglio della guida",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Hatzi Pasha Türbesi",
-      "lead": "Küçük kubbeli Osmanlı mezarı – 1527’de bir korsan saldırısında ölen subay Hatzi Pasha’nın lahdi. Neredeyse 500 yıldır aynı yerde.",
-      "p1": "Kos şehrinin göbeğinde mütevazı, kare bir taş yapı. Birçok kişi, burada <strong>Hatzi Pasha</strong>’nın lahdinin neredeyse 500 yıldır durduğunu bilmeden geçer.",
-      "p2": "Adada bir Osmanlı subayı. <strong>1527</strong>’de <strong>korsan</strong> saldırısında öldü. Bedeni bu mermer lahde gömüldü ve hâlâ aynı yerde – ondan kalan tek doğrudan iz.",
-      "h3": "Yapı",
-      "p3": "Basit, dikdörtgen taş türbe, <strong>küçük bir kubbe</strong> ile – Kos’taki erken Osmanlı mezar anıtlarına tipik.",
-      "p4": "Merkezde, dışarıdan ücretsiz. Gözden kaçması kolay.",
-      "tip": "<strong>İpucu:</strong> küçük kubbeli yapıyı ara – bir kez görünce hep tanırsın.",
-      "f1": "öldü",
-      "f2": "Küçük kubbe",
-      "f3": "Osmanlı mezarı",
-      "cap": "Türbe",
-      "hStory": "Hikaye",
-      "hSee": "Ne görürsün",
-      "hKnow": "Bilmekte fayda var",
-      "tipTitle": "Rehberin ipucu",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Mausoleo de Hatzi Pasha",
-      "lead": "Pequeño monumento funerario otomano con cúpula – sarcófago del oficial Hatzi Pasha, muerto en 1527 en un ataque de piratas. Casi 500 años en el mismo sitio.",
-      "p1": "Un edificio de piedra modesto y cuadrado en el corazón de la ciudad. Mucha gente pasa sin saber que aquí está el sarcófago de <strong>Hatzi Pasha</strong> – desde hace casi 500 años.",
-      "p2": "Oficial otomano en la isla. En <strong>1527</strong> murió en un ataque de <strong>piratas</strong>. Su cuerpo fue enterrado en este sarcófago de mármol, todavía en el mismo sitio: la única huella directa de él.",
-      "h3": "El edificio",
-      "p3": "Mausoleo de piedra sencillo y rectangular con una <strong>pequeña cúpula</strong>: típica tumba otomana de la época temprana en Kos.",
-      "p4": "En el centro, gratis desde fuera. Fácil de pasar de largo.",
-      "tip": "<strong>Consejo:</strong> busca el edificio pequeño con la cúpula: una vez visto, siempre lo reconoces.",
-      "f1": "muerto",
-      "f2": "Cupulita",
-      "f3": "Tumba otomana",
-      "cap": "Mausoleo",
-      "hStory": "La historia",
-      "hSee": "Qué ves",
-      "hKnow": "Bueno saberlo",
-      "tipTitle": "Consejo del guía",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
-</body></html>
+</article>
+    </div>
+  </main>
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Kos-stad",
+    "title": "Hatzi Pasha mausoleum",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "Welkom bij een klein, onopvallend gebouwtje.",
+    "s1": "Welkom bij een klein, onopvallend gebouwtje. We staan nu voor een Mausoleum, midden in het hart van Kos-stad. Dit kleine mausoleum stamt uit de Ottomaanse tijd en is bijna vijfhonderd jaar oud.",
+    "s2": "Het werd gebouwd om de sarcofaag van Hatzi Pasha te herbergen. Hatzi Pasha was een Ottomaanse officier die in vijftien zevenentwintig sneuvelde tijdens een aanval van piraten op de kust van Kos. Zijn lichaam werd begraven in de marmeren sarcofaag die nog steeds binnenin staat.",
+    "v1": "Het is een eenvoudig, vierkant stenen gebouwtje met een klein koepeltje erbovenop. Van buiten ziet het er vrij bescheiden uit, rechthoekig van vorm. Veel mensen lopen er gewoon voorbij zonder het op te merken, omdat het tussen de andere gebouwen in het centrum staat.",
+    "v2": "Dit mausoleum is het enige directe spoor dat nog over is van Hatzi Pasha. Het herinnert aan de vroege Ottomaanse periode op Kos, toen piraterij nog een groot probleem was langs de kusten. Toegang is helaas bijna niet mogelijk of je moet net geluk hebben dat er iemand aanwezig is.",
+    "k1": "Je kunt het mausoleum dus eigenlijk alleen van buitenaf bekijken en, als je geluk hebt en het open is, ook even snel naar binnen lopen om de sarcofaag te zien. En als jij straks voor dit kleine gebouwtje staat, bedenk dan hoe een Ottomaanse officier met zijn hele verhaal hier al bijna vijfhonderd jaar rustig ligt. Soms zijn de kleinste monumenten juist de meest verrassende."
+  },
+  "de": {
+    "place": "Kos-Stadt",
+    "title": "Hatzi Pasha mausoleum",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Willkommen in einem kleinen, unscheinbaren Gebäude.",
+    "s1": "Willkommen in einem kleinen, unscheinbaren Gebäude. Wir stehen jetzt vor einem Mausoleum, mitten im Herzen der Stadt Kos. Dieses kleine Mausoleum stammt aus der osmanischen Zeit und ist fast fünfhundert Jahre alt.",
+    "s2": "Es wurde gebaut, um den Sarkophag von Hatzi Pascha zu beherbergen. Hatzi Pascha war ein osmanischer Offizier, der im Jahr 1527 bei einem Piratenangriff an der Küste von Kos starb. Sein Körper wurde in dem Marmorsarkophag begraben, der noch heute darin steht.",
+    "v1": "Es ist ein einfaches, quadratisches Steingebäude mit einer kleinen Kuppel an der Spitze. Von außen wirkt es recht bescheiden, rechteckig. Viele Leute gehen einfach daran vorbei, ohne es zu bemerken, weil es zwischen den anderen Gebäuden im Zentrum liegt.",
+    "v2": "Dieses Mausoleum ist die einzige direkte Spur von Hatzi Pascha. Es erinnert an die frühe osmanische Zeit auf Kos, als Piraterie an den Küsten noch ein großes Problem darstellte. Leider ist der Zugang fast unmöglich, es sei denn, man hat Glück, dass jemand anwesend ist.",
+    "k1": "Man kann das Mausoleum also eigentlich nur von außen besichtigen und wenn man Glück hat und es geöffnet ist, kann man auch schnell hineingehen, um den Sarkophag zu besichtigen. Und wenn Sie vor diesem kleinen Gebäude stehen, denken Sie daran, wie ein osmanischer Offizier mit seiner ganzen Geschichte seit fast fünfhundert Jahren still hier liegt. Manchmal sind die kleinsten Denkmäler die überraschendsten."
+  },
+  "en": {
+    "place": "Kos Town",
+    "title": "Hatzi Pasha mausoleum",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "Welcome to a small, inconspicuous building.",
+    "s1": "Welcome to a small, inconspicuous building. We are now standing in front of a Mausoleum, right in the heart of Kos Town. This small mausoleum dates from Ottoman times and is almost five hundred years old.",
+    "s2": "It was built to house the sarcophagus of Hatzi Pasha. Hatzi Pasha was an Ottoman officer who died in fifteen twenty-seven during a pirate attack on the coast of Kos. His body was buried in the marble sarcophagus that still stands inside.",
+    "v1": "It is a simple, square stone building with a small dome on top. From the outside it looks quite modest, rectangular in shape. Many people just walk past it without noticing it, because it is among the other buildings in the center.",
+    "v2": "This mausoleum is the only direct trace left of Hatzi Pasha. It is reminiscent of the early Ottoman period on Kos, when piracy was still a major problem along the coasts. Unfortunately, access is almost impossible unless you are lucky that someone is present.",
+    "k1": "So you can actually only view the mausoleum from the outside and, if you are lucky and it is open, you can also quickly walk inside to see the sarcophagus. And when you stand in front of this small building, think about how an Ottoman officer with his whole story has been lying quietly here for almost five hundred years. Sometimes the smallest monuments are the most surprising."
+  },
+  "it": {
+    "place": "Città di Kos",
+    "title": "Hatzi Pasha mausoleum",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Benvenuti in un edificio piccolo e poco appariscente.",
+    "s1": "Benvenuti in un edificio piccolo e poco appariscente. Ora ci troviamo di fronte a un Mausoleo, proprio nel cuore della città di Kos. Questo piccolo mausoleo risale all'epoca ottomana e ha quasi cinquecento anni.",
+    "s2": "Fu costruito per ospitare il sarcofago di Hatzi Pasha. Hatzi Pasha era un ufficiale ottomano morto nel quindici e ventisette durante un attacco pirata sulla costa di Kos. Il suo corpo fu sepolto nel sarcofago di marmo che ancora si trova all'interno.",
+    "v1": "È un semplice edificio quadrato in pietra con una piccola cupola in cima. Dall'esterno sembra piuttosto modesto, di forma rettangolare. Molte persone ci passano davanti senza accorgersene, perché è in mezzo agli altri edifici del centro.",
+    "v2": "Questo mausoleo è l'unica traccia diretta rimasta di Hatzi Pasha. Ricorda il primo periodo ottomano a Kos, quando la pirateria era ancora un grosso problema lungo le coste. Purtroppo l’accesso è quasi impossibile a meno che non si abbia la fortuna che qualcuno sia presente.",
+    "k1": "Quindi in realtà puoi vedere il mausoleo solo dall'esterno e, se sei fortunato ed è aperto, puoi anche entrare velocemente per vedere il sarcofago. E quando ti trovi di fronte a questo piccolo edificio, pensa a come un ufficiale ottomano con tutta la sua storia giace in silenzio qui da quasi cinquecento anni. A volte i monumenti più piccoli sono i più sorprendenti."
+  },
+  "tr": {
+    "place": "Kos şehri",
+    "title": "Hatzi Pasha mausoleum",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Küçük, göze çarpmayan bir binaya hoş geldiniz.",
+    "s1": "Küçük, göze çarpmayan bir binaya hoş geldiniz. Şu anda Kos şehrinin tam kalbinde bir Anıtkabir'in önünde duruyoruz. Bu küçük türbe Osmanlı döneminden kalmadır ve neredeyse beş yüz yıllıktır.",
+    "s2": "Hatzi Paşa'nın lahdinin barındırılması için yaptırılmıştır. Hatzi Paşa, on beş yirmi yedi yılında Kos sahilinde korsan saldırısında ölen bir Osmanlı subayıdır. Cenazesi halen içeride duran mermer lahit içerisine gömülmüştür.",
+    "v1": "Üstünde küçük bir kubbe bulunan basit, kare taştan bir yapıdır. Dışarıdan oldukça mütevazı görünüyor, dikdörtgen şeklinde. Merkezdeki diğer binaların arasında yer aldığı için pek çok kişi farkına bile varmadan yanından geçip gidiyor.",
+    "v2": "Bu türbe Hatzi Paşa'dan geriye kalan tek doğrudan izdir. Bu durum, korsanlığın kıyılarda hala büyük bir sorun olduğu İstanköy'deki erken Osmanlı dönemini anımsatıyor. Ne yazık ki, birisinin orada olduğu için şanslı olmadığınız sürece erişim neredeyse imkansızdır.",
+    "k1": "Yani aslında mozoleyi sadece dışarıdan görebiliyorsunuz ve eğer şanslıysanız ve açıksa, lahiti görmek için hızlıca içeriye doğru yürüyebilirsiniz. Ve bu küçük binanın önünde durduğunuzda, bir Osmanlı subayının neredeyse beş yüz yıldır burada nasıl sessizce yattığını tüm hikayesiyle düşünün. Bazen en küçük anıtlar en şaşırtıcı olanlardır."
+  },
+  "es": {
+    "place": "Ciudad de Kos",
+    "title": "Hatzi Pasha mausoleum",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Bienvenido a un edificio pequeño y discreto.",
+    "s1": "Bienvenido a un edificio pequeño y discreto. Ahora estamos frente a un mausoleo, justo en el corazón de la ciudad de Kos. Este pequeño mausoleo data de la época otomana y tiene casi quinientos años.",
+    "s2": "Fue construido para albergar el sarcófago de Hatzi Pasha. Hatzi Pasha fue un oficial otomano que murió en quince veintisiete durante un ataque pirata en la costa de Kos. Su cuerpo fue enterrado en el sarcófago de mármol que aún se conserva en su interior.",
+    "v1": "Es un edificio de piedra sencillo y cuadrado con una pequeña cúpula en la parte superior. Desde fuera parece bastante modesto, de forma rectangular. Mucha gente pasa por allí sin darse cuenta, porque se encuentra entre otros edificios del centro.",
+    "v2": "Este mausoleo es el único rastro directo que queda de Hatzi Pasha. Es una reminiscencia del primer período otomano en Kos, cuando la piratería todavía era un problema importante en las costas. Desafortunadamente, el acceso es casi imposible a menos que tengas suerte de que haya alguien presente.",
+    "k1": "Así que en realidad sólo puedes ver el mausoleo desde el exterior y, si tienes suerte y está abierto, también puedes entrar rápidamente para ver el sarcófago. Y cuando te encuentres frente a este pequeño edificio, piensa en cómo un oficial otomano con toda su historia yace aquí tranquilamente durante casi quinientos años. A veces los monumentos más pequeños son los más sorprendentes."
+  }
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
+</body>
+</html>

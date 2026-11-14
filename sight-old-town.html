@@ -1,382 +1,231 @@
 <!DOCTYPE html>
-<html lang="nl" data-hk-own="1" data-hk-tts="1">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0D1F1F">
   <title>Old Town – Hello Kos</title>
-  <style>
-    :root {
-      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
-      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
-      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
-      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
-      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text); -webkit-font-smoothing: antialiased;
-      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
-      background: var(--bg); min-height: 100vh; line-height: 1.55;
-    }
-    .app-header {
-      position: sticky; top: 0; z-index: 100;
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-      padding: 14px 16px; background: var(--bg-header);
-      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
-    }
-    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
-    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
-    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
-    .logo-text span { color: var(--gold-dark); font-style: italic; }
-    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
-    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
-    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
-    .lang-menu.open { display: block; }
-    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
-    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
-    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
-    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
-    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .content { padding: 18px 16px 0; }
-    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
-    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-
-    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
-    .btn-audio { background: var(--petrol); color: #fff; }
-    .btn-audio.playing { background: var(--petrol-dark); }
-    .btn-stop { background: #3A4545; color: #fff; display: none; }
-    .btn-stop.show { display: flex; }
-
-    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
-    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
-    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
-    .card p:last-child { margin-bottom: 0; }
-    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
-    .tip strong { color: var(--gold); }
-    .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
-    .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
-    .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
-
-    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
-    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
-    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
-    .footer a { color: var(--petrol); text-decoration: none; }
-  </style>
-<link rel="stylesheet" href="hello-kos.css">
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body>
+<body class="hk-page hk-guide">
   <header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
   <main class="main">
     <div class="hero-wrap">
-      <img src="img/jwwb/b49a0b3dc0-kos-shopping-tipps-einkaufsmeile-old-town-high.jpg" alt="Old Town" loading="eager">
-      <div class="hero-title"><h1 data-i18n="title">Old Town</h1></div>
+      <img class="hk-zoom" src="img/jwwb/b49a0b3dc0-kos-shopping-tipps-einkaufsmeile-old-town-high.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
     </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=36.891%2C27.2862" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?ll=36.891,27.2862&amp;q=Old%20Town" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-old-town-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-old-town-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-old-town-03.jpg" alt=""></figure>
+<p data-i18n="s4"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-old-town-04.jpg" alt=""></figure>
+<p data-i18n="s5"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-old-town-05.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
 
-    <div class="content">
-<p class="lead" data-i18n="lead">Smalle, autovrije straatjes met souvenirwinkels, terrassen en restaurants – vaak over het hoofd gezien, maar de moeite waard.</p>
+<p data-i18n="v2"></p>
 
-      
+<p data-i18n="v3"></p>
 
-      <div class="actions">
-        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
-        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-      </div>
-      
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Old%20Town%20Kos%20shopping%20street" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Old%20Town%20Kos%20shopping%20street" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
-      </div>
-      <p class="status" id="ttsStatus"></p>
+<p data-i18n="v4"></p>
 
-      <div id="readText">
-        <div class="card">
-          <h2 data-i18n="hStory">Levendige winkelstraat</h2>
-          <p data-i18n="p1">Old Town is een deel van het centrum van Kos-stad: een strook van ongeveer 500 meter met winkels, terrassen en restaurants. Het wordt vaak overgeslagen, omdat je een specifieke straat in moet lopen om er te komen.</p>
-        </div>
+<p data-i18n="v5"></p>
 
-        
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
 
-        <div class="card">
-          <h2 data-i18n="hSee">Smal en autovrij</h2>
-          <p data-i18n="p2">De straten zijn autovrij en smal, met typische beschilderde lijnen op de grond. Er zijn souvenirwinkels, kledingzaken, restaurants en terrassen.</p>
-          <p data-i18n="p3">Winkeliers zetten hun waar buiten; daardoor voelt het soms als een oosterse bazaar.</p>
-        </div>
-
-        <div class="photo-block">
-          <img src="img/jwwb/8528e27eab-1688637552-nik_2570-hdr-high.jpg" alt="Old Town Kos" loading="lazy">
-          <div class="cap" data-i18n="cap1">Smalle straat met winkels</div>
-        </div>
-
-        <div class="gallery">
-          <div class="g-item">
-            <img src="img/jwwb/bab16f8f84-kos-altstadt-einkausmeile-elia-restaurant-jpg-high.webp" alt="Terras" loading="lazy">
-            <span data-i18n="g1">Terrassen</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/52903bd62e-old-town-luxury-apartment-kos-town-photo-4-high-tttbxe.jpg" alt="Straat" loading="lazy">
-            <span data-i18n="g2">Straatbeeld</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="hKnow">Bezoeken</h2>
-          <p data-i18n="p4">Gratis, altijd toegankelijk. Zoek de ingang vanaf het centrum; de straat is makkelijk te missen als je er niet op let.</p>
-          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: ideaal om even te shoppen of op een terras te zitten. ’s Avonds is het vaak sfeervol verlicht.</p></div>
-        </div>
-      </div>
+</article>
     </div>
   </main>
-
-  <footer class="footer">
-    <div>Hello Kos</div>
-    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
-  </footer>
-
-<script>
-(function(){
-  var I18N = window.HK_DICT = {
-    "nl": {
-      "title": "Old Town",
-      "lead": "Smalle, autovrije straatjes met souvenirwinkels, terrassen en restaurants – vaak over het hoofd gezien, maar de moeite waard.",
-      "btnPlay": "Voorlezen",
-      "p1": "Old Town is een deel van het centrum van Kos-stad: een strook van ongeveer 500 meter met winkels, terrassen en restaurants. Het wordt vaak overgeslagen, omdat je een specifieke straat in moet lopen om er te komen.",
-      "p2": "De straten zijn autovrij en smal, met typische beschilderde lijnen op de grond. Er zijn souvenirwinkels, kledingzaken, restaurants en terrassen.",
-      "p3": "Winkeliers zetten hun waar buiten; daardoor voelt het soms als een oosterse bazaar.",
-      "cap1": "Smalle straat met winkels",
-      "g1": "Terrassen",
-      "g2": "Straatbeeld",
-      "p4": "Gratis, altijd toegankelijk. Zoek de ingang vanaf het centrum; de straat is makkelijk te missen als je er niet op let.",
-      "tip": "ideaal om even te shoppen of op een terras te zitten. ’s Avonds is het vaak sfeervol verlicht.",
-      "hStory": "Het verhaal",
-      "hSee": "Wat je ziet",
-      "hKnow": "Goed om te weten",
-      "tipTitle": "Tip van de gids",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Old Town",
-      "lead": "Narrow, car-free streets with souvenir shops, terraces and restaurants – often overlooked, but well worth a visit.",
-      "btnPlay": "Read aloud",
-      "p1": "Old Town is a part of the centre of Kos Town: a stretch of about 500 metres with shops, terraces and restaurants. It is often skipped because you have to walk into a specific street to reach it.",
-      "p2": "The streets are car-free and narrow, with typical painted lines on the ground. There are souvenir shops, clothing stores, restaurants and terraces.",
-      "p3": "Shopkeepers put their goods outside; that sometimes makes it feel like an oriental bazaar.",
-      "cap1": "Narrow street with shops",
-      "g1": "Terraces",
-      "g2": "Street view",
-      "p4": "Free, always accessible. Look for the entrance from the centre; the street is easy to miss if you don’t pay attention.",
-      "tip": "ideal for a bit of shopping or sitting on a terrace. In the evening it is often atmospherically lit.",
-      "hStory": "The story",
-      "hSee": "What you see",
-      "hKnow": "Good to know",
-      "tipTitle": "Guide’s tip",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Old Town",
-      "lead": "Enge, autofreie Gassen mit Souvenirläden, Terrassen und Restaurants – oft übersehen, aber lohnenswert.",
-      "btnPlay": "Vorlesen",
-      "p1": "Old Town ist ein Teil des Zentrums von Kos-Stadt: ein Abschnitt von etwa 500 Metern mit Geschäften, Terrassen und Restaurants. Er wird oft ausgelassen, weil man in eine bestimmte Straße gehen muss, um dorthin zu kommen.",
-      "p2": "Die Straßen sind autofrei und eng, mit typischen bemalten Linien auf dem Boden. Es gibt Souvenirläden, Bekleidungsgeschäfte, Restaurants und Terrassen.",
-      "p3": "Händler stellen ihre Ware draußen aus; dadurch wirkt es manchmal wie ein orientalischer Basar.",
-      "cap1": "Enge Straße mit Geschäften",
-      "g1": "Terrassen",
-      "g2": "Straßenbild",
-      "p4": "Kostenlos, immer zugänglich. Suche den Eingang vom Zentrum aus; die Straße ist leicht zu übersehen, wenn man nicht aufpasst.",
-      "tip": "ideal zum Shoppen oder auf einer Terrasse sitzen. Abends ist es oft stimmungsvoll beleuchtet.",
-      "hStory": "Die Geschichte",
-      "hSee": "Was du siehst",
-      "hKnow": "Gut zu wissen",
-      "tipTitle": "Tipp des Guides",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Old Town",
-      "lead": "Stradine strette e pedonali con negozi di souvenir, terrazze e ristoranti – spesso trascurate, ma vale la pena.",
-      "btnPlay": "Leggi ad alta voce",
-      "p1": "Old Town è una parte del centro di Kos città: un tratto di circa 500 metri con negozi, terrazze e ristoranti. Viene spesso saltata perché bisogna entrare in una strada specifica per arrivarci.",
-      "p2": "Le strade sono pedonali e strette, con tipiche linee dipinte a terra. Ci sono negozi di souvenir, negozi di abbigliamento, ristoranti e terrazze.",
-      "p3": "I negozianti mettono la merce fuori; per questo a volte sembra un bazar orientale.",
-      "cap1": "Strada stretta con negozi",
-      "g1": "Terrazze",
-      "g2": "Vista strada",
-      "p4": "Gratis, sempre accessibile. Cerca l’ingresso dal centro; la strada è facile da mancare se non presti attenzione.",
-      "tip": "ideale per fare un po’ di shopping o sedersi in terrazza. Di sera è spesso illuminata in modo suggestivo.",
-      "hStory": "La storia",
-      "hSee": "Cosa vedi",
-      "hKnow": "Buono a sapersi",
-      "tipTitle": "Consiglio della guida",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Old Town",
-      "lead": "Hediye dükkânları, teraslar ve restoranlarla dar, araçsız sokaklar – çoğu zaman gözden kaçırılır ama ziyaret etmeye değer.",
-      "btnPlay": "Sesli oku",
-      "p1": "Old Town, Kos şehrinin merkezinin bir parçasıdır: yaklaşık 500 metrelik dükkânlar, teraslar ve restoranlarla dolu bir bölüm. Oraya ulaşmak için belirli bir sokağa girmek gerektiği için sık sık atlanır.",
-      "p2": "Sokaklar araçsız ve dardır, yerde tipik boyalı çizgiler vardır. Hediye dükkânları, giyim mağazaları, restoranlar ve teraslar bulunur.",
-      "p3": "Dükkân sahipleri mallarını dışarı koyar; bu yüzden bazen doğu pazarı gibi hissettirir.",
-      "cap1": "Dükkânlı dar sokak",
-      "g1": "Teraslar",
-      "g2": "Sokak görünümü",
-      "p4": "Ücretsiz, her zaman erişilebilir. Merkezden girişi ara; dikkat etmezsen sokağı kolayca kaçırırsın.",
-      "tip": "biraz alışveriş yapmak veya terasta oturmak için ideal. Akşamları genellikle atmosferik şekilde aydınlatılır.",
-      "hStory": "Hikaye",
-      "hSee": "Ne görürsün",
-      "hKnow": "Bilmekte fayda var",
-      "tipTitle": "Rehberin ipucu",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Old Town",
-      "lead": "Calles estrechas y peatonales con tiendas de souvenirs, terrazas y restaurantes – a menudo pasado por alto, pero merece la pena.",
-      "btnPlay": "Leer en voz alta",
-      "p1": "Old Town es una parte del centro de Kos ciudad: un tramo de unos 500 metros con tiendas, terrazas y restaurantes. A menudo se salta porque hay que entrar por una calle concreta para llegar.",
-      "p2": "Las calles son peatonales y estrechas, con típicas líneas pintadas en el suelo. Hay tiendas de souvenirs, tiendas de ropa, restaurantes y terrazas.",
-      "p3": "Los comerciantes sacan su mercancía fuera; por eso a veces parece un bazar oriental.",
-      "cap1": "Calle estrecha con tiendas",
-      "g1": "Terrazas",
-      "g2": "Vista de la calle",
-      "p4": "Gratis, siempre accesible. Busca la entrada desde el centro; la calle es fácil de pasar por alto si no prestas atención.",
-      "tip": "ideal para comprar un poco o sentarse en una terraza. Por la noche suele estar iluminada de forma agradable.",
-      "hStory": "La historia",
-      "hSee": "Qué ves",
-      "hKnow": "Bueno saberlo",
-      "tipTitle": "Consejo del guía",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };
-
-  function setLang(l) {
-    if (!I18N[l]) l = 'nl';
-    localStorage.setItem('hk-lang', l);
-    document.documentElement.lang = l;
-    var d = I18N[l];
-    document.querySelectorAll('[data-i18n]').forEach(function(el){
-      var k = el.getAttribute('data-i18n');
-      if (d[k]) el.textContent = d[k];
-    });
-    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
-    if (opt) {
-      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
-      document.getElementById('code').textContent = l.toUpperCase();
-    }
-    document.querySelectorAll('.lang-option').forEach(function(o){
-      o.classList.toggle('active', o.getAttribute('data-lang') === l);
-    });
-    closeMenu();
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Kos-stad",
+    "title": "Old Town",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "Laten we even een stukje terug in de tijd gaan.",
+    "s1": "Laten we even een stukje terug in de tijd gaan. We gaan nu de Oude Stad van Kos in. De Oude Stad ligt midden in Kos-stad en is een straat die zich uitstekt over ongeveer bijna 1 kilometer.",
+    "s2": "Het is een lange smalle, autovrije straat die typisch zijn voor een oude Griekse stad. Deze straat heeft die herkenbare witte lijnen op de grond, net zoals je in veel Griekse eilanden ziet. De sfeer hier voelt een beetje als een Turkse bazaar.",
+    "s3": "Overal staan kraampjes en stalletjes buiten de winkels. Je vindt er souvenirwinkeltjes, terrasjes, restaurants, kledingzaken en kleine marktkraampjes. Het is er gezellig druk, vooral in de avond als de lichten aan gaan en de mensen flaneren.",
+    "s4": "De Oude Stad is niet heel groot, maar wel levendig. Je kunt er uren rondslenteren en elke keer een nieuwe winkel ontdekken. Sommige bezoekers lopen er gewoon voorbij omdat de ingang niet meteen opvalt.",
+    "s5": "Je moet een bepaalde straat in duiken om erin te komen. Maar als je er eenmaal bent, merk je dat dit het echte winkel hart van de oude stad is. Vroeger was dit gebied veel ouder en had het een heel andere uitstraling.",
+    "v1": "Maar Na de grote aardbeving van negentien drieëndertig werd een groot deel van Kos herbouwd. De Italianen gaven toen ook vorm aan de straten en pleinen die we nu zien. Daardoor heeft de Oude Stad een mix van oud en nieuw.",
+    "v2": "De Oude Stad is klein, maar heeft precies die levendige eiland-sfeer die Kos zo leuk maakt.",
+    "v3": "Old Town is een gedeelte in het centrum van Kos stad en loopt vanaf het centrum tot aan de andere kant van de stad en is ongeveer 500 meter verbazing. Old Town wordt vaak niet ontdekt en daarom vaak vergeten.",
+    "v4": "De straten zijn autovrij en zeer smal en ze zijn beschilderd met typische lijnen. Er zijn volop souvenirwinkels, terrassen, restaurants en kledingwinkels.",
+    "v5": "Doordat de straten zo smal zijn en winkeliers hun waar buiten hebben gestald, krijgt men het gevoel dat men in een Turkse bazaar loopt.",
+    "k1": "Toegang is helemaal gratis. Je kunt er gewoon vrij rondwandelen, winkelen, iets eten of drinken op een terrasje, of gewoon de sfeer opsnuiven. En wie weet ontdek jij straks in 1 van die smalle straatjes een leuk souvenir of een verborgen terrasje waar je even lekker kunt zitten."
+  },
+  "de": {
+    "place": "Kos-Stadt",
+    "title": "Old Town",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Lasst uns ein wenig in der Zeit zurückgehen.",
+    "s1": "Lasst uns ein wenig in der Zeit zurückgehen. Wir betreten nun die Altstadt von Kos. Die Altstadt liegt mitten in der Stadt Kos und ist eine Straße, die sich über etwa einen Kilometer erstreckt.",
+    "s2": "Es ist eine lange, schmale, autofreie Straße, typisch für eine antike griechische Stadt. Diese Straße hat diese erkennbaren weißen Linien auf dem Boden, genau wie man sie auf vielen griechischen Inseln sieht. Die Atmosphäre hier erinnert ein wenig an einen türkischen Basar.",
+    "s3": "Außerhalb der Geschäfte gibt es überall Stände und Buden. Hier finden Sie Souvenirläden, Terrassen, Restaurants, Bekleidungsgeschäfte und kleine Marktstände. Besonders abends, wenn die Lichter angehen und die Leute flanieren, ist es angenehm belebt.",
+    "s4": "Die Altstadt ist zwar nicht sehr groß, aber dennoch lebendig. Sie können stundenlang herumschlendern und jedes Mal ein neues Geschäft entdecken. Manche Besucher gehen einfach vorbei, weil der Eingang nicht sofort auffällt.",
+    "s5": "Um dorthin zu gelangen, muss man sich in eine bestimmte Straße begeben. Aber sobald Sie dort angekommen sind, werden Sie feststellen, dass dies das wahre Einkaufsherz der Altstadt ist. Dieser Bereich war früher viel älter und sah ganz anders aus.",
+    "v1": "Aber nach dem großen Erdbeben von 1933 wurde ein großer Teil von Kos wieder aufgebaut. Die Italiener prägten dann auch die Straßen und Plätze, die wir heute sehen. Dadurch bietet die Altstadt eine Mischung aus Alt und Neu.",
+    "v2": "Die Altstadt ist klein, hat aber genau die lebendige Inselatmosphäre, die Kos so unterhaltsam macht.",
+    "v3": "Die Altstadt ist ein Bereich im Zentrum der Stadt Kos und verläuft vom Zentrum bis zur anderen Seite der Stadt und ist etwa 500 Meter entfernt. Die Altstadt wird oft nicht entdeckt und deshalb oft vergessen.",
+    "v4": "Die Straßen sind autofrei, sehr eng und mit typischen Linien bemalt. Es gibt viele Souvenirläden, Terrassen, Restaurants und Bekleidungsgeschäfte.",
+    "v5": "Da die Straßen so eng sind und die Ladenbesitzer ihre Waren draußen anbieten, hat man das Gefühl, man befinde sich auf einem türkischen Basar.",
+    "k1": "Der Eintritt ist völlig frei. Sie können einfach frei herumlaufen, einkaufen, auf einer Terrasse etwas essen oder trinken oder einfach die Atmosphäre genießen. Und wer weiß, vielleicht entdecken Sie ein schönes Souvenir oder eine versteckte Terrasse, auf der Sie in einer dieser engen Gassen sitzen und entspannen können."
+  },
+  "en": {
+    "place": "Kos Town",
+    "title": "Old Town",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "Let's go back in time a bit.",
+    "s1": "Let's go back in time a bit. We now enter the Old Town of Kos. The Old Town is located in the middle of Kos Town and is a street that extends for approximately almost 1 kilometer.",
+    "s2": "It is a long narrow, car-free street typical of an ancient Greek city. This street has those recognizable white lines on the ground, just like you see in many Greek islands. The atmosphere here feels a bit like a Turkish bazaar.",
+    "s3": "There are stalls and stalls everywhere outside the shops. You will find souvenir shops, terraces, restaurants, clothing stores and small market stalls. It is pleasantly busy, especially in the evening when the lights come on and people stroll.",
+    "s4": "The Old Town is not very big, but it is lively. You can stroll around for hours and discover a new store every time. Some visitors simply walk past because the entrance is not immediately noticeable.",
+    "s5": "You have to duck into a certain street to get to it. But once you get there, you will notice that this is the real shopping heart of the old city. This area used to be much older and had a very different appearance.",
+    "v1": "But After the great earthquake of nineteen thirty-three, a large part of Kos was rebuilt. The Italians then also shaped the streets and squares that we see today. As a result, the Old Town has a mix of old and new.",
+    "v2": "The Old Town is small, but has exactly that lively island atmosphere that makes Kos so much fun.",
+    "v3": "Old Town is an area in the center of Kos town and runs from the center to the other side of the town and is approximately 500 meters away. Old Town is often not discovered and therefore often forgotten.",
+    "v4": "The streets are car-free and very narrow and they are painted with typical lines. There are plenty of souvenir shops, terraces, restaurants and clothing stores.",
+    "v5": "Because the streets are so narrow and shopkeepers have their wares outside, you get the feeling that you are walking in a Turkish bazaar.",
+    "k1": "Entry is completely free. You can just walk around freely, shop, eat or drink something on a terrace, or just soak up the atmosphere. And who knows, you might discover a nice souvenir or a hidden terrace where you can sit and relax in one of those narrow streets."
+  },
+  "it": {
+    "place": "Città di Kos",
+    "title": "Old Town",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Torniamo un po' indietro nel tempo.",
+    "s1": "Torniamo un po' indietro nel tempo. Entriamo ora nel centro storico di Kos. La Città Vecchia si trova nel centro della città di Kos ed è una strada che si estende per circa quasi 1 chilometro.",
+    "s2": "È una strada lunga e stretta, senza auto, tipica di un'antica città greca. Questa strada ha quelle riconoscibili linee bianche sul terreno, proprio come vedi in molte isole greche. L'atmosfera qui sembra un po' quella di un bazar turco.",
+    "s3": "Ci sono bancarelle e bancarelle ovunque fuori dai negozi. Troverai negozi di souvenir, terrazze, ristoranti, negozi di abbigliamento e piccole bancarelle. È piacevolmente affollato, soprattutto la sera, quando le luci si accendono e la gente passeggia.",
+    "s4": "Il centro storico non è molto grande, ma è vivace. Puoi passeggiare per ore e scoprire ogni volta un nuovo negozio. Alcuni visitatori semplicemente passano davanti perché l'ingresso non è immediatamente visibile.",
+    "s5": "Devi infilarti in una certa strada per arrivarci. Ma una volta arrivato lì, noterai che questo è il vero cuore dello shopping della città vecchia. Questa zona era molto più antica e aveva un aspetto molto diverso.",
+    "v1": "Ma dopo il grande terremoto del 1933, gran parte di Kos fu ricostruita. Gli italiani poi hanno plasmato anche le strade e le piazze che vediamo oggi. Di conseguenza, la Città Vecchia presenta un mix di vecchio e nuovo.",
+    "v2": "La città vecchia è piccola, ma ha esattamente quella vivace atmosfera isolana che rende Kos così divertente.",
+    "v3": "La Città Vecchia è un'area nel centro della città di Kos e si estende dal centro all'altro lato della città e dista circa 500 metri. Il centro storico spesso non viene scoperto e quindi spesso dimenticato.",
+    "v4": "Le strade sono pedonali, molto strette e dipinte con linee tipiche. Ci sono molti negozi di souvenir, terrazze, ristoranti e negozi di abbigliamento.",
+    "v5": "Poiché le strade sono così strette e i negozianti hanno le loro merci all'esterno, si ha la sensazione di camminare in un bazar turco.",
+    "k1": "L'ingresso è completamente gratuito. Puoi semplicemente passeggiare liberamente, fare acquisti, mangiare o bere qualcosa su una terrazza o semplicemente immergerti nell'atmosfera. E chissà, potresti scoprire un bel souvenir o una terrazza nascosta dove sederti e rilassarti in una di quelle stradine."
+  },
+  "tr": {
+    "place": "Kos şehri",
+    "title": "Old Town",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Biraz geçmişe gidelim.",
+    "s1": "Biraz geçmişe gidelim. Artık Kos'un Eski Kent'ine giriyoruz. Eski Kent, Kos Kenti'nin ortasında yer alır ve yaklaşık 1 kilometreye yakın uzanan bir caddedir.",
+    "s2": "Antik bir Yunan kentine özgü, uzun, dar ve arabaların giremediği bir caddedir. Bu caddenin zemininde tıpkı birçok Yunan adasında gördüğünüz gibi tanınabilir beyaz çizgiler var. Buradaki atmosfer biraz Türk çarşısını andırıyor.",
+    "s3": "Mağazaların dışında her yerde tezgahlar ve tezgahlar var. Hediyelik eşya dükkanları, teraslar, restoranlar, giyim mağazaları ve küçük pazar tezgahlarını bulacaksınız. Özellikle akşamları ışıklar yandığında ve insanlar dolaşırken ortam oldukça hareketlidir.",
+    "s4": "Eski Şehir çok büyük olmasa da hareketlidir. Saatlerce dolaşabilir ve her seferinde yeni bir mağaza keşfedebilirsiniz. Bazı ziyaretçiler, girişin hemen fark edilememesi nedeniyle geçip gidiyorlar.",
+    "s5": "Oraya ulaşmak için belli bir sokağa dalmanız gerekiyor. Ancak oraya vardığınızda eski şehrin gerçek alışveriş merkezinin burası olduğunu fark edeceksiniz. Bu bölge eskiden çok daha eskiydi ve çok farklı bir görünüme sahipti.",
+    "v1": "Ancak 1933 yılındaki büyük depremden sonra Kos'un büyük bir kısmı yeniden inşa edildi. İtalyanlar o dönemde bugün gördüğümüz cadde ve meydanları da şekillendirdiler. Sonuç olarak, Eski Kent eski ve yeninin bir karışımına sahiptir.",
+    "v2": "Eski Kent küçüktür ancak Kos'u bu kadar eğlenceli kılan canlı ada atmosferine sahiptir.",
+    "v3": "Old Town, Kos ilçesinin merkezinde yer alan ve merkezden şehrin diğer ucuna kadar uzanan ve yaklaşık 500 metre uzaklıktaki bir bölgedir. Eski Şehir çoğu zaman keşfedilmez ve bu nedenle sıklıkla unutulur.",
+    "v4": "Sokaklar araç trafiğine kapalı ve çok dar olup tipik çizgilerle boyanmıştır. Çok sayıda hediyelik eşya dükkanı, teras, restoran ve giyim mağazası bulunmaktadır.",
+    "v5": "Sokaklar çok dar olduğundan ve esnafın malları dışarıda olduğundan sanki bir Türk pazarında yürüyormuşsunuz hissine kapılıyorsunuz.",
+    "k1": "Giriş tamamen ücretsizdir. Serbestçe dolaşabilir, alışveriş yapabilir, terasta bir şeyler yiyip içebilir ya da sadece atmosferi içinize çekebilirsiniz. Kim bilir belki de o dar sokaklardan birinde güzel bir hediyelik eşya ya da oturup dinlenebileceğiniz gizli bir teras keşfedebilirsiniz."
+  },
+  "es": {
+    "place": "Ciudad de Kos",
+    "title": "Old Town",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Retrocedamos un poco en el tiempo.",
+    "s1": "Retrocedamos un poco en el tiempo. Entramos ahora en el casco antiguo de Kos. El casco antiguo está situado en el centro de la ciudad de Kos y es una calle que se extiende a lo largo de aproximadamente casi 1 kilómetro.",
+    "s2": "Es una calle larga, estrecha y sin coches, típica de una antigua ciudad griega. Esta calle tiene esas reconocibles líneas blancas en el suelo, como las que se ven en muchas islas griegas. El ambiente aquí se parece un poco al de un bazar turco.",
+    "s3": "Hay puestos y puestos por todas partes fuera de las tiendas. Encontrarás tiendas de souvenirs, terrazas, restaurantes, tiendas de ropa y pequeños puestos de mercado. Está agradablemente concurrido, especialmente por la noche, cuando se encienden las luces y la gente pasea.",
+    "s4": "El casco antiguo no es muy grande, pero sí animado. Puedes pasear durante horas y descubrir una nueva tienda cada vez. Algunos visitantes simplemente pasan de largo porque la entrada no se nota inmediatamente.",
+    "s5": "Tienes que agacharte en una calle determinada para llegar a ella. Pero una vez que llegue allí, notará que este es el verdadero corazón comercial de la ciudad vieja. Esta zona era mucho más antigua y tenía un aspecto muy diferente.",
+    "v1": "Pero tras el gran terremoto de mil novecientos treinta y tres, gran parte de Kos fue reconstruida. Los italianos también dieron forma a las calles y plazas que vemos hoy. Como resultado, el casco antiguo tiene una mezcla de lo antiguo y lo nuevo.",
+    "v2": "El casco antiguo es pequeño, pero tiene exactamente esa animada atmósfera isleña que hace que Kos sea tan divertido.",
+    "v3": "El casco antiguo es una zona en el centro de la ciudad de Kos y va desde el centro hasta el otro lado de la ciudad y está a aproximadamente 500 metros de distancia. El casco antiguo a menudo no se descubre y, por lo tanto, se olvida.",
+    "v4": "Las calles son muy estrechas y sin coches y están pintadas con líneas típicas. Hay multitud de tiendas de souvenirs, terrazas, restaurantes y tiendas de ropa.",
+    "v5": "Como las calles son tan estrechas y los comerciantes tienen sus productos afuera, uno tiene la sensación de estar caminando en un bazar turco.",
+    "k1": "La entrada es completamente gratuita. Puedes simplemente pasear libremente, comprar, comer o beber algo en una terraza, o simplemente empaparte del ambiente. Y quién sabe, quizá descubras un bonito souvenir o una terraza escondida donde sentarte y relajarte en una de esas calles estrechas."
   }
-
-  var langBtn = document.getElementById('langBtn');
-  var langMenu = document.getElementById('langMenu');
-  function openMenu(){ langMenu.classList.add('open'); }
-  function closeMenu(){ langMenu.classList.remove('open'); }
-  langBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    langMenu.classList.contains('open') ? closeMenu() : openMenu();
-  });
-  document.addEventListener('click', function(){ closeMenu(); });
-  document.querySelectorAll('.lang-option').forEach(function(btn){
-    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
-  });
-
-  var saved = localStorage.getItem('hk-lang') || 'nl';
-  setLang(saved);
-
-  /* TTS */
-  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
-  function getLang(){
-    var l = localStorage.getItem('hk-lang') || 'nl';
-    return LANG_VOICE[l] ? l : 'nl';
-  }
-  function pickVoice(code){
-    var voices = speechSynthesis.getVoices() || [];
-    var prefix = code.slice(0,2).toLowerCase();
-    return voices.find(function(v){ return v.lang === code; })
-      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
-      || null;
-  }
-  var btnPlay = document.getElementById('btnPlay');
-  var btnStop = document.getElementById('btnStop');
-  var status = document.getElementById('ttsStatus');
-  function setStatus(t){ if(status) status.textContent = t; }
-  function play(){
-    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
-    speechSynthesis.cancel();
-    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
-    var l = getLang();
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = LANG_VOICE[l];
-    u.rate = 0.92;
-    var v = pickVoice(LANG_VOICE[l]);
-    if(v) u.voice = v;
-    u.onstart = function(){
-      btnPlay.classList.add('playing');
-      btnStop.classList.add('show');
-      setStatus('Voorlezen… ('+l.toUpperCase()+')');
-    };
-    u.onend = u.onerror = function(){
-      btnPlay.classList.remove('playing');
-      btnStop.classList.remove('show');
-      setStatus('');
-    };
-    if(!speechSynthesis.getVoices().length){
-      speechSynthesis.onvoiceschanged = function(){
-        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
-        speechSynthesis.speak(u);
-      };
-      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
-    } else {
-      speechSynthesis.speak(u);
-    }
-  }
-  function stop(){
-    if(window.speechSynthesis) speechSynthesis.cancel();
-    btnPlay.classList.remove('playing');
-    btnStop.classList.remove('show');
-    setStatus('Gestopt.');
-  }
-  btnPlay.addEventListener('click', play);
-  btnStop.addEventListener('click', stop);
-  if(window.speechSynthesis){
-    speechSynthesis.getVoices();
-    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
-  }
-})();
-</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

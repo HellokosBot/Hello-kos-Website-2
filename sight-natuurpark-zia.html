@@ -1,119 +1,191 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0D1A1A">
-<title>Natuurpark Zia – Hello Kos</title>
-<link rel="stylesheet" href="hello-kos.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Natuurpark Zia – Hello Kos</title>
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body class="hk-page">
-<header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+<body class="hk-page hk-guide">
+  <header class="app-header">
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-<main class="main">
-  <div class="hero-wrap"><img src="img/hk/sight-natuurpark-zia.jpg" alt="">
-      <div class="hero-title"><h1 data-i18n="title">Natuurpark Zia</h1></div></div>
-  <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back">← Bezienswaardigheden</a></p>
-<p class="lead" data-i18n="lead">Klein park in Zia met bankjes, een paar hangmatten en een terrasje. Fijn met kinderen. De gids noemde een dagkaart, zodat je kunt lunchen in het dorp en later terugkomen.</p>
-  
-  <div class="actions">
-    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
-    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
-    
-  </div>
-  
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Zia%20nature%20park%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Zia%20nature%20park%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
       </div>
-      <p class="status" id="ttsStatus"></p>
-  <div id="readText">
-    <article class="card"><h2 data-i18n="hStory">Bezoek</h2><p data-i18n="p0">Het is een korte wandeling, geen grote dierentuin. Hoeveel de kaart kost, staat hier niet.</p></article>
-    <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">De actuele entreeprijs en de openingstijden zijn nog niet ingevuld.</span></div>
-  </div>
-</main>
-<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
-<script>window.HK_DICT = {
-    "nl": {
-      "title": "Natuurpark Zia",
-      "lead": "Klein park in Zia met bankjes, een paar hangmatten en een terrasje. Fijn met kinderen. De gids noemde een dagkaart, zodat je kunt lunchen in het dorp en later terugkomen.",
-      "back": "← Bezienswaardigheden",
-      "note": "De actuele entreeprijs en de openingstijden zijn nog niet ingevuld.",
-      "p0": "Het is een korte wandeling, geen grote dierentuin. Hoeveel de kaart kost, staat hier niet.",
-      "hStory": "Het verhaal",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Naturpark Zia",
-      "lead": "Kleiner Park in Zia mit Bänken, ein paar Hängematten und einer Terrasse. Schön mit Kindern. Der Guide nannte eine Tageskarte, damit du im Dorf essen und später zurückkommen kannst.",
-      "back": "← Sehenswürdigkeiten",
-      "note": "Der aktuelle Eintritt und die Öffnungszeiten sind noch nicht eingetragen.",
-      "p0": "Es ist ein kurzer Spaziergang, kein großer Zoo. Was die Karte kostet, steht hier nicht.",
-      "hStory": "Die Geschichte",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Zia nature park",
-      "lead": "Small park in Zia with benches, a few hammocks and a little terrace. Good with children. The guide mentioned a day ticket, so you can eat in the village and come back later.",
-      "back": "← Sights",
-      "note": "The current ticket price and opening hours are not filled in yet.",
-      "p0": "It is a short walk, not a big zoo. What the ticket costs is not written here.",
-      "hStory": "The story",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Parco naturale di Zia",
-      "lead": "Piccolo parco a Zia con panchine, qualche amaca e un terrazzino. Bello con i bambini. La guida parlava di un biglietto giornaliero, così pranzi in paese e torni dopo.",
-      "back": "← Attrazioni",
-      "note": "Il prezzo del biglietto e gli orari non sono ancora inseriti.",
-      "p0": "È una passeggiata breve, non un grande zoo. Quanto costa il biglietto non è scritto qui.",
-      "hStory": "La storia",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Zia doğa parkı",
-      "lead": "Zia’da banklar, birkaç hamak ve küçük bir teraslı park. Çocuklarla iyi. Rehber, köyde yemek yiyip sonra dönmek için günlük biletten söz etti.",
-      "back": "← Gezilecek yerler",
-      "note": "Güncel bilet fiyatı ve saatler henüz yok.",
-      "p0": "Kısa bir yürüyüş, büyük bir hayvanat bahçesi değil. Biletin fiyatı burada yok.",
-      "hStory": "Hikaye",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Parque natural de Zia",
-      "lead": "Parque pequeño en Zia con bancos, unas hamacas y una terraza. Bien con niños. La guía hablaba de un pase de día, para comer en el pueblo y volver después.",
-      "back": "← Lugares de interés",
-      "note": "El precio de la entrada y los horarios aún no están.",
-      "p0": "Es un paseo corto, no un zoo grande. Lo que cuesta la entrada no está aquí.",
-      "hStory": "La historia",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
+  <main class="main">
+    <div class="hero-wrap">
+      <img class="hk-zoom" src="img/hk/sight-natuurpark-zia.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
+    </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=Natuurpark%20Zia%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?q=Natuurpark%20Zia%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-natuurpark-zia-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-natuurpark-zia-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-natuurpark-zia-03.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-natuurpark-zia-04.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
+
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
+
+</article>
+    </div>
+  </main>
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Zia",
+    "title": "Natuurpark Zia",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "Hier, aan de voet van de berg Dikaios, ligt het Natuurpark Zia.",
+    "s1": "Hier, aan de voet van de berg Dikaios, ligt het Natuurpark Zia. Dit is een klein, goed onderhouden park met eenvoudige wandelpaden die slingeren tussen bomen, struiken en kruiden. Het is vooral een fijne plek om even rustig te wandelen en dieren te bekijken.",
+    "s2": "Je komt er herten, ezels, konijnen, schapen, schildpadden, pauwen, kalkoenen, fazanten en allerlei vogels tegen. Sommige dieren lopen vrij rond in het park, andere zitten in ruime verblijven.Het park ligt op een helling, dus onderweg heb je steeds mooiere uitzichten over de noordkust van Kos. Bovenin kun je op bankjes of in hangmatten ontspannen.",
+    "s3": "Er is ook een klein terrasje waar je iets te drinken kunt halen. Voor kinderen is er een speelplek, dus het is een populaire stop voor families. Het park is open vanaf tien uur ’s ochtends tot een half uur na zonsondergang.",
+    "v1": "Het is een rustige en leuke plek, vooral als je even weg wilt van de drukte en de hitte.Het is een eenvoudige, groene oase waar je even tussen de dieren en de natuur kunt rondlopen. Een fijne plek om even tot rust te komen met uitzicht over het eiland.",
+    "v2": "U kunt kiezen voor een handige dagkaart, waarmee u bijvoorbeeld 's ochtends het park kunt bezoeken. Vervolgens lunchen en winkelen in het charmante dorp Zia en dan later op de dag terug te keren naar het park.",
+    "k1": "De Entree kost vijf euro voor volwassenen en drie euro voor kinderen van drie tot elf jaar. Kinderen onder de drie jaar mogen gratis mee. Met je ticket kun je de hele dag in- en uitlopen, dus je kunt bijvoorbeeld eerst in Zia iets eten en later terugkomen."
+  },
+  "de": {
+    "place": "Zia",
+    "title": "Natuurpark Zia",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Hier, am Fuße des Berges Dikaios, liegt der Naturpark Zia.",
+    "s1": "Hier, am Fuße des Berges Dikaios, liegt der Naturpark Zia. Dies ist ein kleiner, gepflegter Park mit einfachen Spazierwegen, die sich zwischen Bäumen, Sträuchern und Kräutern schlängeln. Es ist besonders ein schöner Ort, um einen ruhigen Spaziergang zu machen und Tiere zu beobachten.",
+    "s2": "Sie werden Hirschen, Eseln, Kaninchen, Schafen, Schildkröten, Pfauen, Truthähnen, Fasanen und allen Arten von Vögeln begegnen. Einige Tiere laufen frei im Park herum, andere leben in großzügigen Gehegen. Der Park liegt an einem Hang, so dass man unterwegs immer schönere Ausblicke über die Nordküste von Kos hat. Oben können Sie auf Bänken oder in Hängematten entspannen.",
+    "s3": "Es gibt auch eine kleine Terrasse, auf der Sie etwas zu trinken bekommen können. Es gibt einen Spielbereich für Kinder und ist daher ein beliebter Anlaufpunkt für Familien. Der Park ist von zehn Uhr morgens bis eine halbe Stunde nach Sonnenuntergang geöffnet.",
+    "v1": "Es ist ein ruhiger und schöner Ort, besonders wenn Sie den Menschenmassen und der Hitze entfliehen möchten. Es ist eine einfache, grüne Oase, in der Sie inmitten der Tiere und der Natur spazieren gehen können. Ein schöner Ort zum Entspannen mit Blick über die Insel.",
+    "v2": "Sie können sich für eine praktische Tageskarte entscheiden, mit der Sie beispielsweise morgens den Park besuchen können. Anschließend essen Sie zu Mittag und kaufen im charmanten Zia-Dorf ein und kehren später am Tag in den Park zurück.",
+    "k1": "Der Eintritt kostet für Erwachsene fünf Euro und für Kinder von drei bis elf Jahren drei Euro. Kinder unter drei Jahren können kostenlos teilnehmen. Mit Ihrem Ticket können Sie den ganzen Tag über ein- und aussteigen, also zum Beispiel zuerst in Zia etwas essen und später wiederkommen."
+  },
+  "en": {
+    "place": "Zia",
+    "title": "Natuurpark Zia",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "Here, at the foot of Mount Dikaios, lies the Zia Natural Park.",
+    "s1": "Here, at the foot of Mount Dikaios, lies the Zia Natural Park. This is a small, well-maintained park with simple walking paths that wind between trees, shrubs and herbs. It is especially a nice place to take a quiet walk and view animals.",
+    "s2": "You will encounter deer, donkeys, rabbits, sheep, turtles, peacocks, turkeys, pheasants and all kinds of birds. Some animals roam freely in the park, others live in spacious enclosures. The park is located on a slope, so along the way you have increasingly beautiful views over the north coast of Kos. At the top you can relax on benches or in hammocks.",
+    "s3": "There is also a small terrace where you can get something to drink. There is a play area for children, so it is a popular stop for families. The park is open from ten in the morning until half an hour after sunset.",
+    "v1": "It is a quiet and nice place, especially if you want to get away from the crowds and the heat. It is a simple, green oasis where you can walk around among the animals and nature. A nice place to relax with a view over the island.",
+    "v2": "You can opt for a handy day ticket, which allows you to visit the park in the morning, for example. Then have lunch and shopping in the charming Zia village and then return to the park later in the day.",
+    "k1": "The entrance costs five euros for adults and three euros for children from three to eleven years old. Children under the age of three can participate for free. With your ticket you can enter and exit all day long, so for example you can first eat something in Zia and come back later."
+  },
+  "it": {
+    "place": "Zia",
+    "title": "Natuurpark Zia",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Qui, ai piedi del monte Dikaios, si trova il Parco Naturale Zia.",
+    "s1": "Qui, ai piedi del monte Dikaios, si trova il Parco Naturale Zia. Si tratta di un piccolo parco ben curato con semplici sentieri che si snodano tra alberi, arbusti ed erbe aromatiche. È soprattutto un bel posto per fare una passeggiata tranquilla e osservare gli animali.",
+    "s2": "Incontrerai cervi, asini, conigli, pecore, tartarughe, pavoni, tacchini, fagiani e tutti i tipi di uccelli. Alcuni animali vagano liberamente nel parco, altri vivono in ampi recinti. Il parco si trova su un pendio, quindi lungo il percorso si hanno viste sempre più belle sulla costa settentrionale di Kos. In cima potrete rilassarvi sulle panchine o sulle amache.",
+    "s3": "C'è anche un terrazzino dove poter prendere qualcosa da bere. C'è un'area giochi per bambini, quindi è una tappa popolare per le famiglie. Il parco è aperto dalle dieci del mattino fino a mezz'ora dopo il tramonto.",
+    "v1": "È un posto tranquillo e carino, soprattutto se vuoi allontanarti dalla folla e dal caldo. È un'oasi semplice e verde dove passeggiare tra gli animali e la natura. Un bel posto per rilassarsi con vista sull'isola.",
+    "v2": "Puoi optare per un comodo biglietto giornaliero, che ti permette di visitare il parco, ad esempio, la mattina. Poi pranzo e shopping nell'incantevole villaggio di Zia e poi ritorno al parco più tardi nel corso della giornata.",
+    "k1": "L'ingresso costa cinque euro per gli adulti e tre euro per i bambini dai tre agli undici anni. I bambini sotto i tre anni possono partecipare gratuitamente. Con il tuo biglietto puoi entrare ed uscire tutto il giorno, quindi ad esempio puoi prima mangiare qualcosa a Zia e tornare più tardi."
+  },
+  "tr": {
+    "place": "Zia",
+    "title": "Natuurpark Zia",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Burada, Dikaios Dağı'nın eteklerinde Zia Tabiat Parkı bulunmaktadır.",
+    "s1": "Burada, Dikaios Dağı'nın eteklerinde Zia Tabiat Parkı bulunmaktadır. Burası ağaçlar, çalılar ve otlar arasında dolanan basit yürüyüş yollarına sahip küçük, bakımlı bir parktır. Özellikle sessiz bir yürüyüş yapmak ve hayvanları izlemek için güzel bir yer.",
+    "s2": "Geyik, eşek, tavşan, koyun, kaplumbağa, tavus kuşu, hindi, sülün ve her türlü kuşla karşılaşacaksınız. Bazı hayvanlar parkta serbestçe dolaşıyor, bazıları ise geniş kapalı alanlarda yaşıyor. Park bir yamaçta yer aldığından yol boyunca Kos'un kuzey kıyısının giderek daha güzel manzaralarını seyredebilirsiniz. Üst kısımda banklarda veya hamaklarda dinlenebilirsiniz.",
+    "s3": "Ayrıca içecek bir şeyler alabileceğiniz küçük bir teras da bulunmaktadır. Çocuklar için oyun alanı mevcut olduğundan aileler için popüler bir duraktır. Park sabah saat ondan gün batımından yarım saat sonrasına kadar açıktır.",
+    "v1": "Özellikle kalabalıktan ve sıcaktan uzaklaşmak istiyorsanız sessiz ve güzel bir yer. Hayvanlar ve doğa arasında dolaşabileceğiniz sade, yemyeşil bir vahadır. Ada manzarası eşliğinde dinlenmek için güzel bir yer.",
+    "v2": "Örneğin sabahları parkı ziyaret etmenize olanak tanıyan kullanışlı bir günlük bileti tercih edebilirsiniz. Daha sonra büyüleyici Zia köyünde öğle yemeği yiyip alışveriş yapın ve günün ilerleyen saatlerinde parka dönün.",
+    "k1": "Giriş ücreti yetişkinler için beş avro, üç ila on bir yaş arası çocuklar için ise üç avro. Üç yaşın altındaki çocuklar ücretsiz olarak katılabilir. Biletinizle gün boyu giriş-çıkış yapabilirsiniz, yani örneğin Zia’da önce bir şeyler yiyip sonra geri gelebilirsiniz."
+  },
+  "es": {
+    "place": "Zia",
+    "title": "Natuurpark Zia",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Aquí, al pie del monte Dikaios, se encuentra el Parque Natural de Zia.",
+    "s1": "Aquí, al pie del monte Dikaios, se encuentra el Parque Natural de Zia. Este es un parque pequeño y bien mantenido con senderos sencillos para caminar que serpentean entre árboles, arbustos y hierbas. Es especialmente un lugar agradable para dar un paseo tranquilo y observar animales.",
+    "s2": "Encontrarás ciervos, burros, conejos, ovejas, tortugas, pavos reales, pavos, faisanes y todo tipo de aves. Algunos animales deambulan libremente por el parque, otros viven en espaciosos recintos. El parque está situado en una pendiente, por lo que a lo largo del camino tendrás unas vistas cada vez más hermosas de la costa norte de Kos. En la cima podrás relajarte en bancos o en hamacas.",
+    "s3": "También hay una pequeña terraza donde tomar algo. Hay una zona de juegos para niños, por lo que es una parada popular para las familias. El parque está abierto desde las diez de la mañana hasta media hora después del atardecer.",
+    "v1": "Es un lugar tranquilo y agradable, sobre todo si quieres alejarte de las multitudes y del calor. Es un oasis verde y sencillo donde pasear entre animales y naturaleza. Un bonito lugar para relajarse con vistas a la isla.",
+    "v2": "Puedes optar por una práctica entrada de un día, que te permitirá visitar el parque, por ejemplo, por la mañana. Luego almuerce y haga compras en el encantador pueblo de Zia y luego regrese al parque más tarde ese día.",
+    "k1": "La entrada cuesta cinco euros para adultos y tres euros para niños de tres a once años. Los niños menores de tres años pueden participar gratis. Con tu billete puedes entrar y salir durante todo el día, así por ejemplo primero puedes comer algo en Zia y volver más tarde."
+  }
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

@@ -1,433 +1,215 @@
 <!DOCTYPE html>
-<html lang="nl" data-hk-own="1" data-hk-tts="1">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0D1F1F">
-  <title>Boom van Hippocrates – Hello Kos</title>
-  <style>
-    :root {
-      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
-      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
-      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
-      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
-      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text); -webkit-font-smoothing: antialiased;
-      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
-      background: var(--bg); min-height: 100vh; line-height: 1.55;
-    }
-    .app-header {
-      position: sticky; top: 0; z-index: 100;
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-      padding: 14px 16px; background: var(--bg-header);
-      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
-    }
-    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
-    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
-    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
-    .logo-text span { color: var(--gold-dark); font-style: italic; }
-    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
-    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
-    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
-    .lang-menu.open { display: block; }
-    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
-    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
-    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
-    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
-    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .content { padding: 18px 16px 0; }
-    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
-    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-
-    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
-    .btn-audio { background: var(--petrol); color: #fff; }
-    .btn-audio.playing { background: var(--petrol-dark); }
-    .btn-stop { background: #3A4545; color: #fff; display: none; }
-    .btn-stop.show { display: flex; }
-
-    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
-    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
-    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
-    .card p:last-child { margin-bottom: 0; }
-    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
-    .tip strong { color: var(--gold); }
-    .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
-    .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
-    .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
-
-    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
-    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
-    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
-    .footer a { color: var(--petrol); text-decoration: none; }
-  </style>
-<link rel="stylesheet" href="hello-kos.css">
+  <title>Boom Hippocrates – Hello Kos</title>
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body>
+<body class="hk-page hk-guide">
   <header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
   <main class="main">
     <div class="hero-wrap">
-      <img src="img/jwwb/fb36883589-plane-tree-of-hippocrates-5-high.jpg" alt="Boom van Hippocrates Kos" loading="eager">
-      <div class="hero-title"><h1 data-i18n="title">Boom van Hippocrates</h1></div>
+      <img class="hk-zoom" src="img/jwwb/fb36883589-plane-tree-of-hippocrates-5-high.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
     </div>
-
-    <div class="content">
-<p class="lead" data-i18n="lead">De legendarische plataan waaronder Hippocrates volgens de overlevering lesgaf – vader van de moderne geneeskunde.</p>
-
-      
-
-      <div class="actions">
-        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
-        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-      </div>
-      
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Plane%20Tree%20of%20Hippocrates%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Plane%20Tree%20of%20Hippocrates%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
-      </div>
-      <p class="status" id="ttsStatus"></p>
-
-      <div id="readText">
-        <div class="card">
-          <h2 data-i18n="hStory">De legende</h2>
-          <p data-i18n="p1">Volgens de legende gaf Hippocrates onder deze boom les aan zijn studenten. Hij wordt gezien als de vader van de moderne geneeskunde: de eerste arts in de westerse wereld die een diagnose stelde op basis van lichamelijke kenmerken, in plaats van bovennatuurlijke oorzaken.</p>
-          <p data-i18n="p2">Hij schreef therapieën voor en ontwierp een artseneed die nog steeds door artsen wordt afgelegd.</p>
-        </div>
-
-        
-
-        <div class="card">
-          <h2 data-i18n="hSee">Niet 2400 jaar oud</h2>
-          <p data-i18n="p3">De boom die je nu ziet is niet dezelfde als in de tijd van Hippocrates – die zou meer dan 2400 jaar oud zijn. Deze plataan is ongeveer 500 jaar oud, waarschijnlijk een nazaat van de oorspronkelijke boom.</p>
-          <p data-i18n="p4">Zaden en delen van de boom zijn over de hele wereld verspreid; diverse medische universiteiten claimen een stuk van de “Hippocrates-boom” te hebben.</p>
-        </div>
-
-        <div class="photo-block">
-          <img src="img/jwwb/fa9754953c-plane-tree-of-hippocrates-3-high.jpg" alt="Plataan van Hippocrates" loading="lazy">
-          <div class="cap" data-i18n="cap1">De holle stam en de steunconstructie</div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2scaffold">Stellage sinds 1975</h2>
-          <p data-i18n="p5">Door ouderdom, insecten en schimmels is de stam uitgehold. Sinds 1975 worden de takken ondersteund door een ijzeren stellage, zodat ze niet bezwijken onder hun eigen gewicht.</p>
-          <p data-i18n="p6">Dit maakt de boom een van de grootste en oudste platanen in Europa. De omtrek van de stam is circa 12 meter, de diameter ongeveer 4 meter, de kroon zo’n 18 meter.</p>
-        </div>
-
-        <div class="gallery">
-          <div class="g-item">
-            <img src="img/jwwb/461c60218b-1520090426144-high.jpg" alt="Boom Hippocrates detail" loading="lazy">
-            <span data-i18n="g1">Detail van de boom</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/e20035e421-600237384_25318005157810679_3678290817117097868_n-high-tyco7q.jpg" alt="Plein bij de boom" loading="lazy">
-            <span data-i18n="g2">Op het plein</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/daae8f3c21-612422451_10233661686665105_4083309464111618681_n-high.jpg" alt="Hippocrates boom Kos" loading="lazy">
-            <span data-i18n="g3">Met steunconstructie</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/fb36883589-plane-tree-of-hippocrates-5-high.jpg" alt="Plataan van boven" loading="lazy">
-            <span data-i18n="g4">De kroon</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="hKnow">Bezoeken</h2>
-          <p data-i18n="p7">Gratis, altijd toegankelijk – op het Hippocratesplein in Kos-stad, dicht bij de haven en de Agora.</p>
-          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: combineer met de Agora, Palm tree lane of het Archeologisch museum. Fijn in de schaduw op een warme dag.</p></div>
-        </div>
-      </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=36.893%2C27.2895" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?ll=36.893,27.2895&amp;q=Boom%20Hippocrates" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-boom-hippocrates-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-boom-hippocrates-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-boom-hippocrates-03.jpg" alt=""></figure>
+<p data-i18n="s4"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-boom-hippocrates-04.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-boom-hippocrates-05.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-boom-hippocrates-06.jpg" alt=""></figure>
+<p data-i18n="v3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-boom-hippocrates-07.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-boom-hippocrates-08.jpg" alt=""></figure>
+<p data-i18n="k2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-boom-hippocrates-09.jpg" alt=""></figure>
+</article>
     </div>
   </main>
-
-  <footer class="footer">
-    <div>Hello Kos</div>
-    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
-  </footer>
-
-<script>
-(function(){
-  var I18N = window.HK_DICT = {
-    "nl": {
-      "title": "Boom van Hippocrates",
-      "lead": "De legendarische plataan waaronder Hippocrates volgens de overlevering lesgaf – vader van de moderne geneeskunde.",
-      "btnPlay": "Voorlezen",
-      "p1": "Volgens de legende gaf Hippocrates onder deze boom les aan zijn studenten. Hij wordt gezien als de vader van de moderne geneeskunde: de eerste arts in de westerse wereld die een diagnose stelde op basis van lichamelijke kenmerken, in plaats van bovennatuurlijke oorzaken.",
-      "p2": "Hij schreef therapieën voor en ontwierp een artseneed die nog steeds door artsen wordt afgelegd.",
-      "p3": "De boom die je nu ziet is niet dezelfde als in de tijd van Hippocrates – die zou meer dan 2400 jaar oud zijn. Deze plataan is ongeveer 500 jaar oud, waarschijnlijk een nazaat van de oorspronkelijke boom.",
-      "p4": "Zaden en delen van de boom zijn over de hele wereld verspreid; diverse medische universiteiten claimen een stuk van de “Hippocrates-boom” te hebben.",
-      "cap1": "De holle stam en de steunconstructie",
-      "h2scaffold": "Stellage sinds 1975",
-      "p5": "Door ouderdom, insecten en schimmels is de stam uitgehold. Sinds 1975 worden de takken ondersteund door een ijzeren stellage, zodat ze niet bezwijken onder hun eigen gewicht.",
-      "p6": "Dit maakt de boom een van de grootste en oudste platanen in Europa. De omtrek van de stam is circa 12 meter, de diameter ongeveer 4 meter, de kroon zo’n 18 meter.",
-      "g1": "Detail van de boom",
-      "g2": "Op het plein",
-      "g3": "Met steunconstructie",
-      "g4": "De kroon",
-      "p7": "Gratis, altijd toegankelijk – op het Hippocratesplein in Kos-stad, dicht bij de haven en de Agora.",
-      "tip": "combineer met de Agora, Palm tree lane of het Archeologisch museum. Fijn in de schaduw op een warme dag.",
-      "hStory": "Het verhaal",
-      "hSee": "Wat je ziet",
-      "hKnow": "Goed om te weten",
-      "tipTitle": "Tip van de gids",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Tree of Hippocrates",
-      "lead": "The legendary plane tree under which Hippocrates is said to have taught – father of modern medicine.",
-      "btnPlay": "Read aloud",
-      "p1": "According to legend, Hippocrates taught his students under this tree. He is regarded as the father of modern medicine: the first doctor in the Western world to make a diagnosis based on physical characteristics instead of supernatural causes.",
-      "p2": "He prescribed therapies and designed a medical oath that is still taken by doctors today.",
-      "p3": "The tree you see now is not the same as in Hippocrates’ time – that one would be more than 2400 years old. This plane tree is about 500 years old, probably a descendant of the original tree.",
-      "p4": "Seeds and parts of the tree have been spread all over the world; various medical universities claim to have a piece of the “Hippocrates tree”.",
-      "cap1": "The hollow trunk and the support structure",
-      "h2scaffold": "Scaffolding since 1975",
-      "p5": "Due to age, insects and fungi the trunk has become hollow. Since 1975 the branches have been supported by an iron scaffolding so they do not collapse under their own weight.",
-      "p6": "This makes the tree one of the largest and oldest plane trees in Europe. The circumference of the trunk is about 12 metres, the diameter about 4 metres, the crown about 18 metres.",
-      "g1": "Detail of the tree",
-      "g2": "On the square",
-      "g3": "With support structure",
-      "g4": "The crown",
-      "p7": "Free, always accessible – on Hippocrates Square in Kos Town, close to the harbour and the Agora.",
-      "tip": "combine with the Agora, Palm tree lane or the Archaeological Museum. Nice in the shade on a hot day.",
-      "hStory": "The story",
-      "hSee": "What you see",
-      "hKnow": "Good to know",
-      "tipTitle": "Guide’s tip",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Baum des Hippokrates",
-      "lead": "Die legendäre Platane, unter der Hippokrates der Überlieferung nach unterrichtete – Vater der modernen Medizin.",
-      "btnPlay": "Vorlesen",
-      "p1": "Der Legende nach unterrichtete Hippokrates unter diesem Baum seine Schüler. Er gilt als Vater der modernen Medizin: der erste Arzt in der westlichen Welt, der eine Diagnose auf der Grundlage körperlicher Merkmale stellte, statt übernatürlicher Ursachen.",
-      "p2": "Er verschrieb Therapien und entwarf einen Ärzteeid, der noch heute von Ärzten abgelegt wird.",
-      "p3": "Der Baum, den du jetzt siehst, ist nicht derselbe wie zu Hippokrates’ Zeit – der wäre über 2400 Jahre alt. Diese Platane ist etwa 500 Jahre alt, wahrscheinlich ein Nachkomme des ursprünglichen Baums.",
-      "p4": "Samen und Teile des Baums wurden in die ganze Welt verbreitet; verschiedene medizinische Universitäten behaupten, ein Stück des „Hippokrates-Baums“ zu haben.",
-      "cap1": "Der hohle Stamm und die Stützkonstruktion",
-      "h2scaffold": "Gerüst seit 1975",
-      "p5": "Durch Alter, Insekten und Pilze ist der Stamm ausgehöhlt. Seit 1975 werden die Äste von einem eisernen Gerüst gestützt, damit sie nicht unter ihrem eigenen Gewicht zusammenbrechen.",
-      "p6": "Das macht den Baum zu einer der größten und ältesten Platanen Europas. Der Umfang des Stamms beträgt etwa 12 Meter, der Durchmesser etwa 4 Meter, die Krone etwa 18 Meter.",
-      "g1": "Detail des Baums",
-      "g2": "Auf dem Platz",
-      "g3": "Mit Stützkonstruktion",
-      "g4": "Die Krone",
-      "p7": "Kostenlos, immer zugänglich – auf dem Hippokratesplatz in Kos-Stadt, nah am Hafen und der Agora.",
-      "tip": "kombiniere mit der Agora, Palm tree lane oder dem Archäologischen Museum. Schön im Schatten an einem heißen Tag.",
-      "hStory": "Die Geschichte",
-      "hSee": "Was du siehst",
-      "hKnow": "Gut zu wissen",
-      "tipTitle": "Tipp des Guides",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Albero di Ippocrate",
-      "lead": "Il leggendario platano sotto il quale Ippocrate avrebbe insegnato – padre della medicina moderna.",
-      "btnPlay": "Leggi ad alta voce",
-      "p1": "Secondo la leggenda Ippocrate insegnava ai suoi studenti sotto questo albero. È considerato il padre della medicina moderna: il primo medico nel mondo occidentale a fare una diagnosi basata su caratteristiche fisiche invece di cause soprannaturali.",
-      "p2": "Prescrisse terapie e ideò un giuramento medico che ancora oggi viene prestato dai medici.",
-      "p3": "L’albero che vedi ora non è lo stesso dell’epoca di Ippocrate – quello avrebbe più di 2400 anni. Questo platano ha circa 500 anni, probabilmente un discendente dell’albero originale.",
-      "p4": "Semi e parti dell’albero sono stati diffusi in tutto il mondo; diverse università mediche affermano di avere un pezzo dell’“albero di Ippocrate”.",
-      "cap1": "Il tronco cavo e la struttura di sostegno",
-      "h2scaffold": "Impalcatura dal 1975",
-      "p5": "Per vecchiaia, insetti e funghi il tronco è diventato cavo. Dal 1975 i rami sono sostenuti da un’impalcatura di ferro in modo che non crollino sotto il proprio peso.",
-      "p6": "Questo rende l’albero uno dei platani più grandi e antichi d’Europa. La circonferenza del tronco è di circa 12 metri, il diametro circa 4 metri, la chioma circa 18 metri.",
-      "g1": "Dettaglio dell’albero",
-      "g2": "Sulla piazza",
-      "g3": "Con struttura di sostegno",
-      "g4": "La chioma",
-      "p7": "Gratis, sempre accessibile – in Piazza Ippocrate a Kos città, vicino al porto e all’Agora.",
-      "tip": "combina con l’Agora, Palm tree lane o il Museo Archeologico. Piacevole all’ombra in una giornata calda.",
-      "hStory": "La storia",
-      "hSee": "Cosa vedi",
-      "hKnow": "Buono a sapersi",
-      "tipTitle": "Consiglio della guida",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Hipokrat Ağacı",
-      "lead": "Hipokrat’ın rivayete göre ders verdiği efsanevi çınar – modern tıbbın babası.",
-      "btnPlay": "Sesli oku",
-      "p1": "Efsaneye göre Hipokrat bu ağacın altında öğrencilerine ders verirdi. Modern tıbbın babası olarak kabul edilir: Batı dünyasında tanıyı doğaüstü nedenler yerine fiziksel özelliklere göre koyan ilk doktordur.",
-      "p2": "Tedaviler yazdı ve bugün hâlâ doktorlar tarafından edilen bir hekim yemini tasarladı.",
-      "p3": "Şimdi gördüğün ağaç Hipokrat dönemindekiyle aynı değil – o 2400 yaşından fazla olurdu. Bu çınar yaklaşık 500 yaşında, muhtemelen orijinal ağacın soyundandır.",
-      "p4": "Ağacın tohumları ve parçaları dünyanın dört bir yanına yayılmıştır; çeşitli tıp üniversiteleri “Hipokrat ağacı”ndan bir parça sahip olduklarını iddia eder.",
-      "cap1": "Oyuk gövde ve destek yapısı",
-      "h2scaffold": "1975’ten beri iskele",
-      "p5": "Yaş, böcekler ve mantarlar nedeniyle gövde oyulmuştur. 1975’ten beri dallar kendi ağırlıkları altında çökmemesi için demir bir iskeleyle desteklenir.",
-      "p6": "Bu, ağacı Avrupa’nın en büyük ve en eski çınarlarından biri yapar. Gövde çevresi yaklaşık 12 metre, çapı yaklaşık 4 metre, taç yaklaşık 18 metredir.",
-      "g1": "Ağaç detayı",
-      "g2": "Meydanda",
-      "g3": "Destek yapısıyla",
-      "g4": "Taç",
-      "p7": "Ücretsiz, her zaman erişilebilir – Kos şehrindeki Hipokrat Meydanı’nda, limana ve Agora’ya yakın.",
-      "tip": "Agora, Palm tree lane veya Arkeoloji Müzesi ile birleştir. Sıcak bir günde gölgede güzel.",
-      "hStory": "Hikaye",
-      "hSee": "Ne görürsün",
-      "hKnow": "Bilmekte fayda var",
-      "tipTitle": "Rehberin ipucu",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Árbol de Hipócrates",
-      "lead": "El legendario plátano bajo el que Hipócrates habría enseñado – padre de la medicina moderna.",
-      "btnPlay": "Leer en voz alta",
-      "p1": "Según la leyenda, Hipócrates enseñaba a sus estudiantes bajo este árbol. Se le considera el padre de la medicina moderna: el primer médico del mundo occidental que hacía un diagnóstico basado en características físicas en lugar de causas sobrenaturales.",
-      "p2": "Prescribió terapias y diseñó un juramento médico que aún hoy prestan los médicos.",
-      "p3": "El árbol que ves ahora no es el mismo de la época de Hipócrates – ese tendría más de 2400 años. Este plátano tiene unos 500 años, probablemente un descendiente del árbol original.",
-      "p4": "Semillas y partes del árbol se han difundido por todo el mundo; varias universidades médicas afirman tener un trozo del “árbol de Hipócrates”.",
-      "cap1": "El tronco hueco y la estructura de soporte",
-      "h2scaffold": "Andamio desde 1975",
-      "p5": "Por la edad, insectos y hongos el tronco se ha ahuecado. Desde 1975 las ramas están sostenidas por un andamio de hierro para que no se derrumben bajo su propio peso.",
-      "p6": "Esto convierte al árbol en uno de los plátanos más grandes y antiguos de Europa. La circunferencia del tronco es de unos 12 metros, el diámetro unos 4 metros, la copa unos 18 metros.",
-      "g1": "Detalle del árbol",
-      "g2": "En la plaza",
-      "g3": "Con estructura de soporte",
-      "g4": "La copa",
-      "p7": "Gratis, siempre accesible – en la Plaza de Hipócrates en Kos ciudad, cerca del puerto y el Ágora.",
-      "tip": "combínalo con el Ágora, Palm tree lane o el Museo Arqueológico. Agradable a la sombra en un día caluroso.",
-      "hStory": "La historia",
-      "hSee": "Qué ves",
-      "hKnow": "Bueno saberlo",
-      "tipTitle": "Consejo del guía",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };
-
-  function setLang(l) {
-    if (!I18N[l]) l = 'nl';
-    localStorage.setItem('hk-lang', l);
-    document.documentElement.lang = l;
-    var d = I18N[l];
-    document.querySelectorAll('[data-i18n]').forEach(function(el){
-      var k = el.getAttribute('data-i18n');
-      if (d[k]) el.textContent = d[k];
-    });
-    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
-    if (opt) {
-      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
-      document.getElementById('code').textContent = l.toUpperCase();
-    }
-    document.querySelectorAll('.lang-option').forEach(function(o){
-      o.classList.toggle('active', o.getAttribute('data-lang') === l);
-    });
-    closeMenu();
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Kos-stad",
+    "title": "Boom Hippocrates",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "Dit is het Plein van de Plataan, recht voor de Boom van Hippocrates.",
+    "s1": "De top is ongeveer achttien meter breed. Vanbinnen is de boom hol, zoals je kunt zien. De huidige boom is ongeveer vijfhonderd jaar oud.",
+    "s2": "Hij is dus eigenlijk niet de echte boom waar Hippocrates zelf onder zat. Volgens de legende plante Hippocrates de boom en gaf hier les aan zijn studenten. De echte boom uit die tijd is allang verdwenen, maar deze boom is een nazaat van die oorspronkelijke plataan.",
+    "s3": "Hippocrates leefde rond vierhonderd zestig voor Christus. Hij wordt gezien als de vader van de moderne geneeskunde. Hij was de eerste die diagnoses stelde op basis van lichamelijke kenmerken in plaats van goden of tovenarij.",
+    "s4": "Hij legde de nadruk op hygiëne, gezonde voeding, frisse lucht en het natuurlijke verloop van ziektes. De Eed van Hippocrates die artsen nog steeds afleggen, komt ook van hem. De boom zelf heeft al heel wat meegemaakt.",
+    "v1": "Sinds negentienhonderd vijfenzeventig worden de takken ondersteund door een ijzeren stellage, omdat hij anders onder zijn eigen gewicht zou bezwijken. Vandaag de dag kun je er gewoon omheen lopen en even kijken. Er staan ook bankjes in de buurt waar je in de schaduw kunt zitten.",
+    "v2": "Net zoals de studenten van Hippocrates dat vroeger deden.",
+    "v3": "De zaden en kleine delen van de boom zijn in de loop der jaren verspreid over de hele wereld, diverse universiteiten (met name universiteiten met een medische faculteit) pretenderen een deel van de oorspronkelijke boom te bezitten.",
+    "k1": "Dit is het Plein van de Plataan, recht voor de Boom van Hippocrates. Dit is een enorme plataan, een van de grootste en oudste platanen in Europa. De stam heeft een omtrek van twaalf meter en een diameter van vier meter.",
+    "k2": "De boom is door ouderdom en de invloed van insecten en schimmels uitgehold. Sinds 1975 worden de takken ondersteund door een ijzeren stellage, om te voorkomen dat ze bezwijken onder hun eigen gewicht. Dit maakt de boom een van de grootste en oudste platanen in Europa. In 2017 heeft de 81-jarige Japanse zakenman Tetsuya Okana, die een grote liefde voor Griekenland en zijn cultuur koestert, een donatie gedaan. Hij wilde bijdragen aan het behoud van deze legendarische boom. Hiervoor stuurde hij een Japans team van experts om te onderzoeken hoe de boom het beste beschermd kon worden. Er werd een plan opgesteld voor de bescherming, maar het is onduidelijk of er uiteindelijk financiële steun is verleend."
+  },
+  "de": {
+    "place": "Kos-Stadt",
+    "title": "Boom Hippocrates",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Dies ist der Platz der Platane, direkt vor dem Baum des Hippokrates.",
+    "s1": "Die Spitze ist etwa achtzehn Meter breit. Der Baum ist innen hohl, wie Sie sehen können. Der aktuelle Baum ist etwa fünfhundert Jahre alt.",
+    "s2": "Es handelt sich also tatsächlich nicht um den echten Baum, unter dem Hippokrates selbst saß. Der Legende nach pflanzte Hippokrates den Baum und unterrichtete hier seine Schüler. Der echte Baum aus dieser Zeit ist längst verschwunden, aber dieser Baum ist ein Nachkomme der ursprünglichen Platane.",
+    "s3": "Hippokrates lebte etwa 460 v. Chr. Er gilt als Vater der modernen Medizin. Er war der erste, der Diagnosen auf der Grundlage körperlicher Merkmale und nicht auf der Grundlage von Göttern oder Zauberei stellte.",
+    "s4": "Er legte Wert auf Hygiene, gesunde Ernährung, frische Luft und den natürlichen Verlauf von Krankheiten. Auch der hippokratische Eid, den Ärzte noch heute leisten, stammt von ihm. Der Baum selbst hat viel durchgemacht.",
+    "v1": "Seit 1975 werden die Äste von einem Eisengerüst gestützt, sonst würde es unter seinem eigenen Gewicht zusammenbrechen. Heute können Sie einfach umhergehen und einen Blick darauf werfen. In der Nähe gibt es auch Bänke, auf denen man im Schatten sitzen kann.",
+    "v2": "So wie es die Schüler des Hippokrates früher taten.",
+    "v3": "Die Samen und kleine Teile des Baumes wurden im Laufe der Jahre auf der ganzen Welt verbreitet, und verschiedene Universitäten (insbesondere Universitäten mit medizinischer Fakultät) behaupten, einen Teil des ursprünglichen Baumes zu besitzen.",
+    "k1": "Dies ist der Platz der Platane, direkt vor dem Baum des Hippokrates. Dies ist eine riesige Platane, eine der größten und ältesten Platanen Europas. Der Stamm hat einen Umfang von zwölf Metern und einen Durchmesser von vier Metern.",
+    "k2": "Durch das Alter und den Einfluss von Insekten und Pilzen ist der Baum ausgehöhlt. Seit 1975 werden die Äste durch ein Eisengerüst gestützt, um zu verhindern, dass sie unter ihrem Eigengewicht einstürzen. Damit ist der Baum einer der größten und ältesten Platanen Europas. Im Jahr 2017 spendete der 81-jährige japanische Geschäftsmann Tetsuya Okana, der Griechenland und seine Kultur sehr liebt. Er wollte zum Erhalt dieses sagenumwobenen Baumes beitragen. Zu diesem Zweck schickte er ein japanisches Expertenteam, um zu untersuchen, wie der Baum am besten geschützt werden könne. Zum Schutz wurde ein Schutzplan erstellt, es ist jedoch unklar, ob letztendlich finanzielle Unterstützung geleistet wurde."
+  },
+  "en": {
+    "place": "Kos Town",
+    "title": "Boom Hippocrates",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "This is the Square of the Plane Tree, right in front of the Tree of Hippocrates.",
+    "s1": "The top is about eighteen meters wide. The tree is hollow on the inside, as you can see. The current tree is about five hundred years old.",
+    "s2": "So it is actually not the real tree that Hippocrates himself sat under. According to legend, Hippocrates planted the tree and taught his students here. The real tree from that time has long since disappeared, but this tree is a descendant of that original plane tree.",
+    "s3": "Hippocrates lived around four hundred and sixty BC. He is considered the father of modern medicine. He was the first to make diagnoses based on physical characteristics rather than gods or sorcery.",
+    "s4": "He emphasized hygiene, healthy food, fresh air and the natural progression of diseases. The Hippocratic Oath that doctors still take also comes from him. The tree itself has been through a lot.",
+    "v1": "Since nineteen seventy-five, the branches have been supported by an iron scaffold, otherwise it would collapse under its own weight. Today you can just walk around it and take a look. There are also benches nearby where you can sit in the shade.",
+    "v2": "Just as the students of Hippocrates used to do.",
+    "v3": "The seeds and small parts of the tree have been spread all over the world over the years, and various universities (particularly universities with a medical faculty) claim to own part of the original tree.",
+    "k1": "This is the Square of the Plane Tree, right in front of the Tree of Hippocrates. This is a huge plane tree, one of the largest and oldest plane trees in Europe. The trunk has a circumference of twelve meters and a diameter of four meters.",
+    "k2": "The tree has been hollowed out by age and the influence of insects and fungi. Since 1975, the branches have been supported by an iron scaffolding to prevent them from collapsing under their own weight. This makes the tree one of the largest and oldest plane trees in Europe. In 2017, 81-year-old Japanese businessman Tetsuya Okana, who has a great love for Greece and its culture, made a donation. He wanted to contribute to the preservation of this legendary tree. To this end, he sent a Japanese team of experts to investigate how the tree could best be protected. A plan was drawn up for protection, but it is unclear whether financial support was ultimately provided."
+  },
+  "it": {
+    "place": "Città di Kos",
+    "title": "Boom Hippocrates",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Questa è la Piazza del Platano, proprio di fronte all'Albero di Ippocrate.",
+    "s1": "La sommità è larga circa diciotto metri. L'albero è cavo all'interno, come puoi vedere. L'albero attuale ha circa cinquecento anni.",
+    "s2": "Quindi in realtà non è il vero albero sotto il quale sedeva Ippocrate stesso. Secondo la leggenda, qui Ippocrate piantò l'albero e insegnò ai suoi studenti. Il vero albero di allora è scomparso da tempo, ma quest'albero è un discendente del platano originale.",
+    "s3": "Ippocrate visse intorno al 460 a.C. È considerato il padre della medicina moderna. Fu il primo a fare diagnosi basate su caratteristiche fisiche piuttosto che su divinità o stregoneria.",
+    "s4": "Ha sottolineato l'igiene, il cibo sano, l'aria fresca e la progressione naturale delle malattie. Da lui deriva anche il giuramento di Ippocrate che i medici ancora prestano. L'albero stesso ne ha passate tante.",
+    "v1": "Dal 1975 i rami sono sostenuti da un'impalcatura di ferro, altrimenti crollerebbe sotto il suo stesso peso. Oggi puoi semplicemente girarci intorno e dare un'occhiata. Nelle vicinanze ci sono anche delle panchine dove è possibile sedersi all'ombra.",
+    "v2": "Proprio come facevano gli studenti di Ippocrate.",
+    "v3": "I semi e le piccole parti dell'albero sono stati sparsi nel corso degli anni in tutto il mondo e diverse università (in particolare quelle con facoltà di medicina) affermano di possedere parte dell'albero originale.",
+    "k1": "Questa è la Piazza del Platano, proprio di fronte all'Albero di Ippocrate. Si tratta di un enorme platano, uno dei platani più grandi e antichi d'Europa. Il tronco ha una circonferenza di dodici metri e un diametro di quattro metri.",
+    "k2": "L'albero è stato scavato dall'età e dall'influenza di insetti e funghi. Dal 1975 i rami sono sostenuti da un'impalcatura in ferro per evitare che crollino sotto il loro stesso peso. Ciò rende l'albero uno dei platani più grandi e antichi d'Europa. Nel 2017, l’imprenditore giapponese Tetsuya Okana, 81 anni, che ha un grande amore per la Grecia e la sua cultura, ha fatto una donazione. Voleva contribuire alla conservazione di questo albero leggendario. A tal fine, ha inviato una squadra di esperti giapponesi per indagare su come proteggere al meglio l’albero. È stato elaborato un piano di protezione, ma non è chiaro se alla fine sia stato fornito un sostegno finanziario."
+  },
+  "tr": {
+    "place": "Kos şehri",
+    "title": "Boom Hippocrates",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Burası Hipokrat Ağacı'nın hemen önündeki Çınar Meydanı.",
+    "s1": "Üst kısım yaklaşık on sekiz metre genişliğindedir. Gördüğünüz gibi ağacın içi boş. Mevcut ağaç yaklaşık beş yüz yaşındadır.",
+    "s2": "Yani bu aslında Hipokrat'ın altında oturduğu gerçek ağaç değil. Efsaneye göre Hipokrat ağacı dikmiş ve öğrencilerine burada eğitim vermiştir. O zamanın gerçek ağacı çoktan yok olmuştur ama bu ağaç, o orijinal çınar ağacının soyundan gelmektedir.",
+    "s3": "Hipokrat M.Ö. dört yüz altmış civarında yaşamıştır. Modern tıbbın babası olarak kabul edilir. Tanrılar veya büyücülük yerine fiziksel özelliklere dayanarak teşhis koyan ilk kişi oydu.",
+    "s4": "Hijyene, sağlıklı beslenmeye, temiz havaya ve hastalıkların doğal seyrine vurgu yaptı. Doktorların hâlâ tuttuğu Hipokrat Yemini de ondan geliyor. Ağacın kendisi çok şey yaşadı.",
+    "v1": "Bin dokuz yüz yetmiş beşten beri dallar demir bir iskeleyle destekleniyor, aksi takdirde kendi ağırlığı altında çökerdi. Bugün etrafta dolaşıp bir göz atabilirsiniz. Yakınlarda gölgede oturabileceğiniz banklar da bulunmaktadır.",
+    "v2": "Tıpkı Hipokrat'ın öğrencilerinin yaptığı gibi.",
+    "v3": "Ağacın tohumları ve küçük kısımları yıllar geçtikçe dünyanın her yerine yayılmış ve çeşitli üniversiteler (özellikle tıp fakültesi olan üniversiteler) orijinal ağacın bir kısmına sahip olduklarını iddia etmektedir.",
+    "k1": "Burası Hipokrat Ağacı'nın hemen önündeki Çınar Meydanı. Bu, Avrupa'nın en büyük ve en eski çınar ağaçlarından biri olan devasa bir çınar ağacıdır. Gövdenin çevresi on iki metre, çapı ise dört metredir.",
+    "k2": "Ağacın içi yaş ve böceklerin ve mantarların etkisiyle oyulmuş. 1975 yılından bu yana dallar kendi ağırlıkları altında çökmelerini önlemek amacıyla demir iskele ile desteklenmektedir. Bu da ağacı Avrupa'nın en büyük ve en eski çınar ağaçlarından biri yapıyor. 2017 yılında Yunanistan'a ve kültürüne büyük bir sevgi besleyen 81 yaşındaki Japon işadamı Tetsuya Okana bir bağışta bulundu. Bu efsanevi ağacın korunmasına katkıda bulunmak istiyordu. Bu amaçla, ağacın en iyi şekilde nasıl korunabileceğini araştırmak üzere Japon uzmanlardan oluşan bir ekip gönderdi. Koruma için bir plan hazırlandı ancak sonuçta mali desteğin sağlanıp sağlanmadığı belli değil."
+  },
+  "es": {
+    "place": "Ciudad de Kos",
+    "title": "Boom Hippocrates",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Esta es la Plaza del Plátano, justo enfrente del Árbol de Hipócrates.",
+    "s1": "La cima tiene unos dieciocho metros de ancho. El árbol está hueco por dentro, como puedes ver. El árbol actual tiene unos quinientos años.",
+    "s2": "Así que en realidad no es el árbol real bajo el cual se sentó el propio Hipócrates. Según la leyenda, Hipócrates plantó el árbol y enseñó aquí a sus alumnos. El árbol real de esa época hace tiempo que desapareció, pero este árbol es un descendiente del plátano original.",
+    "s3": "Hipócrates vivió alrededor del año 460 a.C. Se le considera el padre de la medicina moderna. Fue el primero en hacer diagnósticos basados ​​en características físicas y no en dioses o hechicería.",
+    "s4": "Destacó la higiene, la alimentación sana, el aire fresco y la progresión natural de las enfermedades. De él también proviene el juramento hipocrático que aún hacen los médicos. El árbol en sí ha pasado por mucho.",
+    "v1": "Desde 1975, las ramas están sostenidas por un andamio de hierro, de lo contrario se derrumbaría por su propio peso. Hoy puedes simplemente caminar alrededor de él y echarle un vistazo. También hay bancos cerca donde podrá sentarse a la sombra.",
+    "v2": "Tal como solían hacer los estudiantes de Hipócrates.",
+    "v3": "Las semillas y pequeñas partes del árbol se han esparcido por todo el mundo a lo largo de los años, y varias universidades (particularmente universidades con facultad de medicina) afirman poseer parte del árbol original.",
+    "k1": "Esta es la Plaza del Plátano, justo enfrente del Árbol de Hipócrates. Se trata de un plátano enorme, uno de los plátanos más grandes y antiguos de Europa. El tronco tiene una circunferencia de doce metros y un diámetro de cuatro metros.",
+    "k2": "El árbol ha quedado ahuecado por la edad y la influencia de insectos y hongos. Desde 1975, las ramas están sostenidas por un andamio de hierro para evitar que se derrumben por su propio peso. Esto convierte al árbol en uno de los plátanos más grandes y antiguos de Europa. En 2017, el empresario japonés Tetsuya Okana, de 81 años, que siente un gran amor por Grecia y su cultura, hizo una donación. Quería contribuir a la preservación de este árbol legendario. Con este fin, envió un equipo japonés de expertos para investigar cuál era la mejor manera de proteger el árbol. Se elaboró ​​un plan de protección, pero no está claro si finalmente se proporcionó apoyo financiero."
   }
-
-  var langBtn = document.getElementById('langBtn');
-  var langMenu = document.getElementById('langMenu');
-  function openMenu(){ langMenu.classList.add('open'); }
-  function closeMenu(){ langMenu.classList.remove('open'); }
-  langBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    langMenu.classList.contains('open') ? closeMenu() : openMenu();
-  });
-  document.addEventListener('click', function(){ closeMenu(); });
-  document.querySelectorAll('.lang-option').forEach(function(btn){
-    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
-  });
-
-  var saved = localStorage.getItem('hk-lang') || 'nl';
-  setLang(saved);
-
-  /* TTS */
-  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
-  function getLang(){
-    var l = localStorage.getItem('hk-lang') || 'nl';
-    return LANG_VOICE[l] ? l : 'nl';
-  }
-  function pickVoice(code){
-    var voices = speechSynthesis.getVoices() || [];
-    var prefix = code.slice(0,2).toLowerCase();
-    return voices.find(function(v){ return v.lang === code; })
-      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
-      || null;
-  }
-  var btnPlay = document.getElementById('btnPlay');
-  var btnStop = document.getElementById('btnStop');
-  var status = document.getElementById('ttsStatus');
-  function setStatus(t){ if(status) status.textContent = t; }
-  function play(){
-    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
-    speechSynthesis.cancel();
-    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
-    var l = getLang();
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = LANG_VOICE[l];
-    u.rate = 0.92;
-    var v = pickVoice(LANG_VOICE[l]);
-    if(v) u.voice = v;
-    u.onstart = function(){
-      btnPlay.classList.add('playing');
-      btnStop.classList.add('show');
-      setStatus('Voorlezen… ('+l.toUpperCase()+')');
-    };
-    u.onend = u.onerror = function(){
-      btnPlay.classList.remove('playing');
-      btnStop.classList.remove('show');
-      setStatus('');
-    };
-    if(!speechSynthesis.getVoices().length){
-      speechSynthesis.onvoiceschanged = function(){
-        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
-        speechSynthesis.speak(u);
-      };
-      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
-    } else {
-      speechSynthesis.speak(u);
-    }
-  }
-  function stop(){
-    if(window.speechSynthesis) speechSynthesis.cancel();
-    btnPlay.classList.remove('playing');
-    btnStop.classList.remove('show');
-    setStatus('Gestopt.');
-  }
-  btnPlay.addEventListener('click', play);
-  btnStop.addEventListener('click', stop);
-  if(window.speechSynthesis){
-    speechSynthesis.getVoices();
-    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
-  }
-})();
-</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

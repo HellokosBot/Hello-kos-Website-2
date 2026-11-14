@@ -1,397 +1,223 @@
 <!DOCTYPE html>
-<html lang="nl" data-hk-own="1" data-hk-tts="1">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0D1F1F">
-  <title>Altaar van Dionysos – Hello Kos</title>
-  <style>
-    :root {
-      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
-      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
-      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
-      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
-      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text); -webkit-font-smoothing: antialiased;
-      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
-      background: var(--bg); min-height: 100vh; line-height: 1.55;
-    }
-    .app-header {
-      position: sticky; top: 0; z-index: 100;
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-      padding: 14px 16px; background: var(--bg-header);
-      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
-    }
-    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
-    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
-    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
-    .logo-text span { color: var(--gold-dark); font-style: italic; }
-    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
-    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
-    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
-    .lang-menu.open { display: block; }
-    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
-    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
-    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
-    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
-    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .content { padding: 18px 16px 0; }
-    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
-    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-
-    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
-    .btn-audio { background: var(--petrol); color: #fff; }
-    .btn-audio.playing { background: var(--petrol-dark); }
-    .btn-stop { background: #3A4545; color: #fff; display: none; }
-    .btn-stop.show { display: flex; }
-
-    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
-    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
-    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
-    .card p:last-child { margin-bottom: 0; }
-    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
-    .tip strong { color: var(--gold); }
-    .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
-    .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
-    .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
-
-    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
-    .footer a { color: var(--petrol); text-decoration: none; }
-  </style>
-<link rel="stylesheet" href="hello-kos.css">
+  <title>Altaar Dionysos – Hello Kos</title>
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body>
+<body class="hk-page hk-guide">
   <header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
   <main class="main">
     <div class="hero-wrap">
-      <img src="img/jwwb/1ac278de48-schermopname_2-3-2026_232540_kos-gr-high.jpg" alt="Altaar van Dionysos Kos" loading="eager">
-      <div class="hero-title"><h1 data-i18n="title">Altaar van Dionysos</h1></div>
+      <img class="hk-zoom" src="img/jwwb/1ac278de48-schermopname_2-3-2026_232540_kos-gr-high.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
     </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=36.8907%2C27.2852" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?ll=36.8907,27.2852&amp;q=Altaar%20Dionysos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-altaar-dionysos-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-altaar-dionysos-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-altaar-dionysos-03.jpg" alt=""></figure>
+<p data-i18n="s4"></p>
 
-    <div class="content">
-<p class="lead" data-i18n="lead">Gewijd aan de god van wijn, feesten en vruchtbaarheid – centrum van rituelen en feesten in de oude stad.</p>
+<p data-i18n="s5"></p>
 
-      
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
 
-      <div class="actions">
-        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
-        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-      </div>
-      
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Altar%20of%20Dionysos%20Kos%20Greece" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Altar%20of%20Dionysos%20Kos%20Greece" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
-      </div>
-      <p class="status" id="ttsStatus"></p>
+<p data-i18n="v2"></p>
 
-      <div id="readText">
-        <div class="card">
-          <h2 data-i18n="hStory">God van wijn en feest</h2>
-          <p data-i18n="p1">Het Altaar van Dionysos in Kos-stad is een van de belangrijke archeologische plekken op het eiland. Het is gewijd aan de Griekse god van de wijn, feesten en vruchtbaarheid.</p>
-          <p data-i18n="p2">Hier vonden rituelen en offers plaats voor de inwoners van de stad.</p>
-        </div>
+<p data-i18n="v3"></p>
 
-        
+<p data-i18n="v4"></p>
 
-        <div class="card">
-          <h2 data-i18n="hSee">Feesten en theater</h2>
-          <p data-i18n="p3">Het altaar is waarschijnlijk gebouwd in de 3e eeuw v.Chr. door de Ptolemeïsche heersers, die de invloed van Egypte in de regio versterkten.</p>
-          <p data-i18n="p4">Bijzonder is dat het gebruikt werd voor grootschalige feesten en theatrale voorstellingen – typisch voor de Dionysia, het festival ter ere van Dionysos. Gasten en inwoners verzamelden zich hier voor muziek, dans en religieuze rituelen.</p>
-        </div>
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
 
-        <div class="photo-block">
-          <img src="img/jwwb/332242f909-img-57985808ec5c-de5f-3c52-2218-af750c4b3c25-high.jpg" alt="Restanten Altaar van Dionysos" loading="lazy">
-          <div class="cap" data-i18n="cap1">Restanten van het altaar in Kos-stad</div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2now">Wat je nu nog ziet</h2>
-          <p data-i18n="p5">Het altaar is niet helemaal intact, maar de restanten geven een goed idee van de afmetingen en de betekenis van de plek in de oude stad.</p>
-          <p data-i18n="p6">Het staat symbool voor cultuur en sociaal leven: religie, cultuur en plezier kwamen hier samen – precies zoals het de god van het feest betaamde.</p>
-        </div>
-
-        <div class="photo-block">
-          <img src="img/jwwb/6b9f46e471-img_1882-copy-high.jpg" alt="Altaar Dionysos archeologie Kos" loading="lazy">
-          <div class="cap" data-i18n="cap2">Archeologische resten in de openlucht</div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="hKnow">Bezoeken</h2>
-          <p data-i18n="p7">Je vindt het altaar in Kos-stad, tussen de andere klassieke tempels en ruïnes. Toegang is gratis; het is een openluchtterrein.</p>
-          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: combineer met de Agora, de Westelijke opgraving of het Odeon – allemaal in of vlak bij het centrum.</p></div>
-        </div>
-      </div>
+</article>
     </div>
   </main>
-
-  <footer class="footer">
-    <div>Hello Kos</div>
-    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
-  </footer>
-
-<script>
-(function(){
-  var I18N = window.HK_DICT = {
-    "nl": {
-      "title": "Altaar van Dionysos",
-      "lead": "Gewijd aan de god van wijn, feesten en vruchtbaarheid – centrum van rituelen en feesten in de oude stad.",
-      "btnPlay": "Voorlezen",
-      "p1": "Het Altaar van Dionysos in Kos-stad is een van de belangrijke archeologische plekken op het eiland. Het is gewijd aan de Griekse god van de wijn, feesten en vruchtbaarheid.",
-      "p2": "Hier vonden rituelen en offers plaats voor de inwoners van de stad.",
-      "p3": "Het altaar is waarschijnlijk gebouwd in de 3e eeuw v.Chr. door de Ptolemeïsche heersers, die de invloed van Egypte in de regio versterkten.",
-      "p4": "Bijzonder is dat het gebruikt werd voor grootschalige feesten en theatrale voorstellingen – typisch voor de Dionysia, het festival ter ere van Dionysos. Gasten en inwoners verzamelden zich hier voor muziek, dans en religieuze rituelen.",
-      "cap1": "Restanten van het altaar in Kos-stad",
-      "h2now": "Wat je nu nog ziet",
-      "p5": "Het altaar is niet helemaal intact, maar de restanten geven een goed idee van de afmetingen en de betekenis van de plek in de oude stad.",
-      "p6": "Het staat symbool voor cultuur en sociaal leven: religie, cultuur en plezier kwamen hier samen – precies zoals het de god van het feest betaamde.",
-      "cap2": "Archeologische resten in de openlucht",
-      "p7": "Je vindt het altaar in Kos-stad, tussen de andere klassieke tempels en ruïnes. Toegang is gratis; het is een openluchtterrein.",
-      "tip": "combineer met de Agora, de Westelijke opgraving of het Odeon – allemaal in of vlak bij het centrum.",
-      "hStory": "Het verhaal",
-      "hSee": "Wat je ziet",
-      "hKnow": "Goed om te weten",
-      "tipTitle": "Tip van de gids",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Altar of Dionysos",
-      "lead": "Dedicated to the god of wine, festivals and fertility – centre of rituals and celebrations in the ancient city.",
-      "btnPlay": "Read aloud",
-      "p1": "The Altar of Dionysos in Kos Town is one of the important archaeological sites on the island. It is dedicated to the Greek god of wine, festivals and fertility.",
-      "p2": "Here rituals and offerings took place for the inhabitants of the city.",
-      "p3": "The altar was probably built in the 3rd century BC by the Ptolemaic rulers, who strengthened Egypt’s influence in the region.",
-      "p4": "Special is that it was used for large-scale festivals and theatrical performances – typical of the Dionysia, the festival in honour of Dionysos. Guests and residents gathered here for music, dance and religious rituals.",
-      "cap1": "Remains of the altar in Kos Town",
-      "h2now": "What you still see today",
-      "p5": "The altar is not completely intact, but the remains give a good idea of the size and the importance of the place in the ancient city.",
-      "p6": "It symbolises culture and social life: religion, culture and pleasure came together here – exactly as befitted the god of celebration.",
-      "cap2": "Archaeological remains in the open air",
-      "p7": "You find the altar in Kos Town, among the other classical temples and ruins. Entry is free; it is an open-air site.",
-      "tip": "combine with the Agora, the Western Excavations or the Odeon – all in or near the centre.",
-      "hStory": "The story",
-      "hSee": "What you see",
-      "hKnow": "Good to know",
-      "tipTitle": "Guide’s tip",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Altar des Dionysos",
-      "lead": "Gewidmet dem Gott des Weins, der Feste und der Fruchtbarkeit – Zentrum von Ritualen und Feiern in der antiken Stadt.",
-      "btnPlay": "Vorlesen",
-      "p1": "Das Altar des Dionysos in Kos-Stadt ist einer der wichtigen archäologischen Orte der Insel. Es ist dem griechischen Gott des Weins, der Feste und der Fruchtbarkeit gewidmet.",
-      "p2": "Hier fanden Rituale und Opfer für die Bewohner der Stadt statt.",
-      "p3": "Der Altar wurde wahrscheinlich im 3. Jahrhundert v. Chr. von den ptolemäischen Herrschern erbaut, die den Einfluss Ägyptens in der Region stärkten.",
-      "p4": "Besonders ist, dass er für groß angelegte Feste und theatralische Aufführungen genutzt wurde – typisch für die Dionysia, das Fest zu Ehren des Dionysos. Gäste und Bewohner versammelten sich hier für Musik, Tanz und religiöse Rituale.",
-      "cap1": "Überreste des Altars in Kos-Stadt",
-      "h2now": "Was du heute noch siehst",
-      "p5": "Der Altar ist nicht vollständig erhalten, aber die Reste geben eine gute Vorstellung von den Ausmaßen und der Bedeutung des Ortes in der antiken Stadt.",
-      "p6": "Er steht für Kultur und soziales Leben: Religion, Kultur und Vergnügen kamen hier zusammen – genau wie es dem Gott des Festes gebührte.",
-      "cap2": "Archäologische Reste im Freien",
-      "p7": "Du findest den Altar in Kos-Stadt, zwischen den anderen klassischen Tempeln und Ruinen. Der Eintritt ist frei; es ist ein Freilichtgelände.",
-      "tip": "kombiniere mit der Agora, der Westlichen Grabung oder dem Odeon – alle im oder nahe am Zentrum.",
-      "hStory": "Die Geschichte",
-      "hSee": "Was du siehst",
-      "hKnow": "Gut zu wissen",
-      "tipTitle": "Tipp des Guides",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Altare di Dioniso",
-      "lead": "Dedicato al dio del vino, delle feste e della fertilità – centro di rituali e celebrazioni nella città antica.",
-      "btnPlay": "Leggi ad alta voce",
-      "p1": "L’Altare di Dioniso a Kos città è uno dei luoghi archeologici importanti dell’isola. È dedicato al dio greco del vino, delle feste e della fertilità.",
-      "p2": "Qui si svolgevano rituali e offerte per gli abitanti della città.",
-      "p3": "L’altare fu probabilmente costruito nel III secolo a.C. dai governanti tolemaici, che rafforzarono l’influenza dell’Egitto nella regione.",
-      "p4": "Particolare è che veniva usato per grandi feste e rappresentazioni teatrali – tipico delle Dionisie, il festival in onore di Dioniso. Ospiti e abitanti si radunavano qui per musica, danza e rituali religiosi.",
-      "cap1": "Resti dell’altare a Kos città",
-      "h2now": "Cosa vedi ancora oggi",
-      "p5": "L’altare non è completamente integro, ma i resti danno una buona idea delle dimensioni e del significato del luogo nella città antica.",
-      "p6": "Simboleggia cultura e vita sociale: religione, cultura e piacere si incontravano qui – proprio come si addiceva al dio della festa.",
-      "cap2": "Resti archeologici all’aperto",
-      "p7": "Trovi l’altare a Kos città, tra gli altri templi classici e rovine. L’ingresso è gratuito; è un’area all’aperto.",
-      "tip": "combina con l’Agora, gli Scavi Occidentali o l’Odeon – tutti nel centro o nelle vicinanze.",
-      "hStory": "La storia",
-      "hSee": "Cosa vedi",
-      "hKnow": "Buono a sapersi",
-      "tipTitle": "Consiglio della guida",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Dionysos Sunağı",
-      "lead": "Şarap, festivaller ve bereket tanrısına adanmış – eski şehirde ritüeller ve kutlamaların merkezi.",
-      "btnPlay": "Sesli oku",
-      "p1": "Kos şehrindeki Dionysos Sunağı adanın önemli arkeolojik yerlerinden biridir. Yunan şarap, festivaller ve bereket tanrısına adanmıştır.",
-      "p2": "Burada şehir sakinleri için ritüeller ve kurbanlar yapılırdı.",
-      "p3": "Sunak muhtemelen MÖ 3. yüzyılda Ptolemaios hükümdarları tarafından inşa edildi; bunlar bölgede Mısır’ın etkisini güçlendirdiler.",
-      "p4": "Özel olan, büyük ölçekli festivaller ve tiyatro gösterileri için kullanılmasıydı – Dionysos onuruna düzenlenen Dionysia festivaline tipik. Misafirler ve sakinler burada müzik, dans ve dini ritüeller için toplanırdı.",
-      "cap1": "Kos şehrindeki sunak kalıntıları",
-      "h2now": "Bugün hâlâ ne görüyorsun",
-      "p5": "Sunak tamamen sağlam değil, ancak kalıntılar eski şehirdeki yerin boyutları ve önemi hakkında iyi bir fikir verir.",
-      "p6": "Kültür ve sosyal yaşamın simgesidir: din, kültür ve eğlence burada bir araya gelirdi – şölen tanrısına yakışır şekilde.",
-      "cap2": "Açık havadaki arkeolojik kalıntılar",
-      "p7": "Sunağı Kos şehrinde, diğer klasik tapınaklar ve kalıntılar arasında bulursun. Giriş ücretsizdir; açık hava alanıdır.",
-      "tip": "Agora, Batı Kazıları veya Odeon ile birleştir – hepsi merkezde veya yakınında.",
-      "hStory": "Hikaye",
-      "hSee": "Ne görürsün",
-      "hKnow": "Bilmekte fayda var",
-      "tipTitle": "Rehberin ipucu",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Altar de Dioniso",
-      "lead": "Dedicado al dios del vino, las fiestas y la fertilidad – centro de rituales y celebraciones en la ciudad antigua.",
-      "btnPlay": "Leer en voz alta",
-      "p1": "El Altar de Dioniso en Kos ciudad es uno de los lugares arqueológicos importantes de la isla. Está dedicado al dios griego del vino, las fiestas y la fertilidad.",
-      "p2": "Aquí se realizaban rituales y ofrendas para los habitantes de la ciudad.",
-      "p3": "El altar fue probablemente construido en el siglo III a.C. por los gobernantes ptolemaicos, que reforzaron la influencia de Egipto en la región.",
-      "p4": "Especial es que se usaba para grandes fiestas y representaciones teatrales – típico de las Dionisias, el festival en honor a Dioniso. Huéspedes y habitantes se reunían aquí para música, danza y rituales religiosos.",
-      "cap1": "Restos del altar en Kos ciudad",
-      "h2now": "Lo que aún ves hoy",
-      "p5": "El altar no está completamente intacto, pero los restos dan una buena idea del tamaño y la importancia del lugar en la ciudad antigua.",
-      "p6": "Simboliza cultura y vida social: religión, cultura y placer se reunían aquí – exactamente como correspondía al dios de la fiesta.",
-      "cap2": "Restos arqueológicos al aire libre",
-      "p7": "Encuentras el altar en Kos ciudad, entre los otros templos clásicos y ruinas. La entrada es gratuita; es un terreno al aire libre.",
-      "tip": "combínalo con el Ágora, las Excavaciones Occidentales o el Odeón – todos en el centro o cerca.",
-      "hStory": "La historia",
-      "hSee": "Qué ves",
-      "hKnow": "Bueno saberlo",
-      "tipTitle": "Consejo del guía",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };
-
-  function setLang(l) {
-    if (!I18N[l]) l = 'nl';
-    localStorage.setItem('hk-lang', l);
-    document.documentElement.lang = l;
-    var d = I18N[l];
-    document.querySelectorAll('[data-i18n]').forEach(function(el){
-      var k = el.getAttribute('data-i18n');
-      if (d[k]) el.textContent = d[k];
-    });
-    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
-    if (opt) {
-      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
-      document.getElementById('code').textContent = l.toUpperCase();
-    }
-    document.querySelectorAll('.lang-option').forEach(function(o){
-      o.classList.toggle('active', o.getAttribute('data-lang') === l);
-    });
-    closeMenu();
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Kos-stad",
+    "title": "Altaar Dionysos",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "Oké, we staan nu bij een van de oudere stukken geschiedenis in Kos-stad: het Altaar van Dionysos.",
+    "s1": "Oké, we staan nu bij een van de oudere stukken geschiedenis in Kos-stad: het Altaar van Dionysos. Dit is geen tempel met pilaren en een dak, maar een altaar. Een plek waar de oude Grieken offers brachten en rituelen uitvoerden.",
+    "s2": "Het is gewijd aan Dionysos, de god van de wijn, feesten, theater en een beetje losbandigheid. Kortom: de god waar je naartoe ging als je zin had in een goed feest. Het altaar dateert uit de 2e eeuw voor Christus, de hellenistische periode.",
+    "s3": "Dat was een tijd waarin Kos floreerde. Het is gebouwd met lokaal wit en grijsblauw marmer en het was waarschijnlijk een centraal punt voor de grote Dionysia-feesten. Dan kwamen mensen hier samen voor muziek, dans, theater en natuurlijk offers.",
+    "s4": "En ja, er werd vast ook stevig gedronken. Wat je vandaag ziet zijn de restanten: de fundamenten, een rechthoekige ommuring en de ingang. Het is niet mega indrukwekkend op het eerste gezicht, maar het geeft wel een goed idee hoe groot het ooit was.",
+    "s5": "De fundamenten beslaan zo’n 160 vierkante meter.Interessant detail: delen van dit altaar zijn later hergebruikt. Tijdens de middeleeuwen hebben de Johanniter ridders sommige stenen met reliëfs meegenomen en verwerkt in de bouw van het Kasteel van de Ridders aan de haven. Archeologen hebben het pas in de jaren dertig van de vorige eeuw opgegraven, tijdens de Italiaanse periode.",
+    "v1": "Het ligt hier midden in de stad, vlak bij de Casa Romana en de oude agora. Dus als je hier rondloopt: dit was dé plek waar de Kos-bewoners vroeger hun feesten en religieuze shows hielden. Geen saaie offers, maar echt een combinatie van religie, cultuur en plezier.",
+    "v2": "Precies zoals Dionysos het bedoeld had.",
+    "v3": "Het werd gebouwd in de 3e eeuw v.Chr., waarschijnlijk door de Ptolemeïsche heersers, die de invloed van Egypte in de regio versterkten. Wat het altaar bijzonder maakt, is dat het waarschijnlijk gebruikt werd voor grootschalige feesten en theatrale voorstellingen, typisch voor de Dionysia, het festival ter ere van Dionysos. Gasten en inwoners zouden zich verzamelen rondom dit altaar voor muziek, dans en religieuze rituelen.",
+    "v4": "Het altaar is niet helemaal intact, maar de restanten geven een idee van de afmetingen en de betekenis van de plaats in de oude stad. Het staat symbool voor de cultuur en het sociale leven van Kos in die tijd. Het is een plek waar religie, cultuur en plezier samenkwamen precies zoals het de god van het feest betaamde.",
+    "k1": "Dus, naast de klassieke tempels en ruïnes in de buurt, biedt het altaar van Dionysos een uniek kijkje in de oude rituelen en de feestcultuur van Kos."
+  },
+  "de": {
+    "place": "Kos-Stadt",
+    "title": "Altaar Dionysos",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Okay, wir sind jetzt bei einem der älteren Stücke der Geschichte der Stadt Kos: dem Altar des Dionysos.",
+    "s1": "Okay, wir sind jetzt bei einem der älteren Stücke der Geschichte der Stadt Kos: dem Altar des Dionysos. Dies ist kein Tempel mit Säulen und Dach, sondern ein Altar. Ein Ort, an dem die alten Griechen Opfer brachten und Rituale durchführten.",
+    "s2": "Es ist Dionysos gewidmet, dem Gott des Weins, der Partys, des Theaters und einer kleinen Ausschweifung. Kurz gesagt: der Gott, zu dem du gegangen bist, wenn du eine gute Party haben wolltest. Der Altar stammt aus dem 2. Jahrhundert v. Chr., der hellenistischen Zeit.",
+    "s3": "Das war eine Zeit, in der Kos blühte. Es wurde aus lokalem weißem und graublauem Marmor erbaut und war wahrscheinlich ein Mittelpunkt der großen Dionysien-Feierlichkeiten. Dann würden die Menschen hier zusammenkommen für Musik, Tanz, Theater und natürlich Opfergaben.",
+    "s4": "Und ja, es gab wahrscheinlich auch starken Alkoholkonsum. Was Sie heute sehen, sind die Überreste: die Fundamente, eine rechteckige Mauer und der Eingang. Auf den ersten Blick ist es nicht sehr beeindruckend, aber es vermittelt einen guten Eindruck davon, wie groß es einmal war.",
+    "s5": "Die Fundamente umfassen etwa 160 Quadratmeter. Interessantes Detail: Teile dieses Altars wurden später wiederverwendet. Im Mittelalter nahmen die Johanniterritter einige Steine ​​mit Reliefs und bauten sie in den Bau der Ritterburg am Hafen ein. Archäologen haben es erst in den 1930er Jahren, während der italienischen Zeit, ausgegraben.",
+    "v1": "Es liegt mitten in der Stadt, in der Nähe der Casa Romana und der alten Agora. Wenn Sie also hier herumlaufen: Dies war der Ort, an dem die Einwohner von Kos früher ihre Partys und religiösen Shows abhielten. Keine langweiligen Angebote, sondern eine echte Kombination aus Religion, Kultur und Spaß.",
+    "v2": "Genau wie Dionysos es beabsichtigt hatte.",
+    "v3": "Sie wurde im 3. Jahrhundert v. Chr. erbaut, wahrscheinlich von den ptolemäischen Herrschern, die den Einfluss Ägyptens in der Region stärkten. Das Besondere an dem Altar ist, dass er wahrscheinlich für große Feiern und Theateraufführungen genutzt wurde, typisch für die Dionysia, das Fest zu Ehren des Dionysos. Um diesen Altar versammelten sich Gäste und Bewohner zu Musik, Tanz und religiösen Ritualen.",
+    "v4": "Der Altar ist nicht ganz intakt, die Überreste lassen jedoch die Größe und Bedeutung des Ortes in der Altstadt erahnen. Es symbolisiert die Kultur und das gesellschaftliche Leben von Kos zu dieser Zeit. Es ist ein Ort, an dem Religion, Kultur und Spaß zusammenkamen, so wie es sich für den Gott des Festivals gehörte.",
+    "k1": "Zusätzlich zu den klassischen Tempeln und Ruinen in der Nähe bietet der Altar des Dionysos einen einzigartigen Einblick in die alten Rituale und Partykultur von Kos."
+  },
+  "en": {
+    "place": "Kos Town",
+    "title": "Altaar Dionysos",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "Okay, we are now at one of the older pieces of history in Kos town: the Altar of Dionysos.",
+    "s1": "Okay, we are now at one of the older pieces of history in Kos town: the Altar of Dionysos. This is not a temple with pillars and a roof, but an altar. A place where the ancient Greeks made sacrifices and performed rituals.",
+    "s2": "It is dedicated to Dionysos, the god of wine, parties, theater and a little debauchery. In short: the god you went to when you wanted a good party. The altar dates from the 2nd century BC, the Hellenistic period.",
+    "s3": "That was a time when Kos flourished. Built with local white and grey-blue marble, it was probably a focal point for the great Dionysia celebrations. Then people would come together here for music, dance, theater and of course sacrifices.",
+    "s4": "And yes, there was probably heavy drinking too. What you see today are the remains: the foundations, a rectangular wall and the entrance. It's not very impressive at first glance, but it gives a good idea of ​​how big it once was.",
+    "s5": "The foundations cover approximately 160 square meters. Interesting detail: parts of this altar were later reused. During the Middle Ages, the Johannite knights took some stones with reliefs and incorporated them into the construction of the Castle of the Knights at the harbor. Archaeologists only excavated it in the 1930s, during the Italian period.",
+    "v1": "It is located in the middle of the city, near the Casa Romana and the old agora. So if you walk around here: this was the place where the residents of Kos used to hold their parties and religious shows. No boring offerings, but a real combination of religion, culture and fun.",
+    "v2": "Just as Dionysus intended.",
+    "v3": "It was built in the 3rd century BC, probably by the Ptolemaic rulers, who strengthened Egypt's influence in the region. What makes the altar special is that it was probably used for large-scale celebrations and theatrical performances, typical of the Dionysia, the festival in honor of Dionysos. Guests and residents would gather around this altar for music, dancing and religious rituals.",
+    "v4": "The altar is not completely intact, but the remains give an idea of ​​the size and significance of the place in the old city. It symbolizes the culture and social life of Kos at that time. It is a place where religion, culture and fun came together just as befitted the god of the festival.",
+    "k1": "So, in addition to the classical temples and ruins nearby, the Altar of Dionysos offers a unique glimpse into the ancient rituals and party culture of Kos."
+  },
+  "it": {
+    "place": "Città di Kos",
+    "title": "Altaar Dionysos",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Ok, ora siamo in uno dei pezzi di storia più antichi della città di Kos: l'Altare di Dioniso.",
+    "s1": "Ok, ora siamo in uno dei pezzi di storia più antichi della città di Kos: l'Altare di Dioniso. Questo non è un tempio con colonne e tetto, ma un altare. Un luogo dove gli antichi greci facevano sacrifici ed eseguivano rituali.",
+    "s2": "È dedicato a Dioniso, il dio del vino, delle feste, del teatro e di un po' di dissolutezza. In breve: il dio da cui andavi quando volevi una bella festa. L'altare risale al II secolo aC, periodo ellenistico.",
+    "s3": "Quello era un periodo in cui Kos fioriva. Costruito con marmi locali bianchi e grigio-azzurri, era probabilmente un punto focale per le grandi celebrazioni delle Dionisie. Quindi le persone si riunivano qui per la musica, la danza, il teatro e ovviamente i sacrifici.",
+    "s4": "E sì, probabilmente c'era anche il bere pesante. Ciò che vedi oggi sono i resti: le fondamenta, un muro rettangolare e l'ingresso. A prima vista non impressiona molto, ma rende bene l'idea di quanto fosse grande una volta.",
+    "s5": "Le fondazioni coprono circa 160 mq. Dettaglio interessante: parti di questo altare furono successivamente riutilizzate. Durante il Medioevo i cavalieri giovanniti presero alcune pietre con rilievi e le incorporarono nella costruzione del Castello dei Cavalieri al porto. Gli archeologi lo scavarono solo negli anni '30, durante il periodo italiano.",
+    "v1": "Si trova nel centro della città, vicino alla Casa Romana e all'antica agorà. Quindi se passeggiate da queste parti: questo era il luogo dove gli abitanti di Kos tenevano le loro feste e spettacoli religiosi. Nessuna proposta noiosa, ma un vero e proprio connubio tra religione, cultura e divertimento.",
+    "v2": "Proprio come intendeva Dioniso.",
+    "v3": "Fu costruito nel III secolo a.C., probabilmente dai sovrani tolemaici, che rafforzarono l'influenza dell'Egitto nella regione. Ciò che rende particolare l'altare è che probabilmente veniva utilizzato per grandi celebrazioni e rappresentazioni teatrali, tipiche delle Dionysia, la festa in onore di Dioniso. Ospiti e residenti si riunivano attorno a questo altare per musica, danze e rituali religiosi.",
+    "v4": "L'altare non è del tutto integro, ma i resti danno un'idea della grandezza e del significato del luogo nella città vecchia. Simboleggia la cultura e la vita sociale di Kos in quel momento. È un luogo dove religione, cultura e divertimento si uniscono proprio come si addiceva al dio del festival.",
+    "k1": "Quindi, oltre ai templi classici e alle rovine nelle vicinanze, l'Altare di Dioniso offre uno sguardo unico sugli antichi rituali e sulla cultura della festa di Kos."
+  },
+  "tr": {
+    "place": "Kos şehri",
+    "title": "Altaar Dionysos",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Tamam, şimdi Kos şehrinin en eski tarihi eserlerinden birindeyiz: Dionysos Sunağı.",
+    "s1": "Tamam, şimdi Kos şehrinin en eski tarihi eserlerinden birindeyiz: Dionysos Sunağı. Bu sütunlu ve çatılı bir tapınak değil, bir sunak. Antik Yunanlıların kurban kestikleri ve ritüeller gerçekleştirdikleri yer.",
+    "s2": "Şarap, partiler, tiyatro ve biraz da sefahat tanrısı Dionysos'a adanmıştır. Kısacası: İyi bir parti istediğinde gittiğin tanrı. Sunak M.Ö. 2. yüzyıla yani Helenistik döneme tarihlenmektedir.",
+    "s3": "Bu, Kos'un geliştiği bir dönemdi. Yerel beyaz ve gri-mavi mermerlerle inşa edilmiş olan bu yapı muhtemelen büyük Dionysia kutlamalarının odak noktasıydı. Daha sonra insanlar burada müzik, dans, tiyatro ve tabii ki fedakarlık için bir araya gelirdi.",
+    "s4": "Ve evet, muhtemelen aşırı içki de vardı. Bugün gördüğünüz kalıntılar: temeller, dikdörtgen bir duvar ve giriş. İlk bakışta pek etkileyici değil ama bir zamanlar ne kadar büyük olduğuna dair iyi bir fikir veriyor.",
+    "s5": "Temeller yaklaşık 160 metrekareyi kapsıyor. İlginç detay: Bu sunağın bazı kısımları daha sonra yeniden kullanıldı. Orta Çağ'da Johannite şövalyeleri kabartmalı bazı taşları alıp bunları limandaki Şövalyeler Kalesi'nin inşasına dahil ettiler. Arkeologlar onu ancak 1930'larda, İtalya döneminde kazdılar.",
+    "v1": "Şehrin ortasında, Casa Romana ve eski agoranın yakınında yer alıyor. Yani burada yürürseniz, burası Kos sakinlerinin partilerini ve dini gösterilerini düzenlediği yerdi. Sıkıcı ikramlar yok; din, kültür ve eğlencenin gerçek bir birleşimi.",
+    "v2": "Tam Dionysos'un amaçladığı gibi.",
+    "v3": "MÖ 3. yüzyılda muhtemelen Mısır'ın bölgedeki nüfuzunu güçlendiren Ptolema hükümdarları tarafından inşa edilmiştir. Sunağı özel kılan şey muhtemelen Dionysos onuruna düzenlenen Dionysia festivaline özgü büyük çaplı kutlamalar ve tiyatro gösterileri için kullanılmış olmasıdır. Konuklar ve bölge sakinleri müzik, dans ve dini ritüeller için bu sunağın etrafında toplanırlardı.",
+    "v4": "Sunak tamamen sağlam değil ancak kalıntılar, eski şehirdeki mekanın büyüklüğü ve önemi hakkında fikir veriyor. Kos'un o dönemdeki kültürünü ve sosyal yaşamını simgelemektedir. Festivalin tanrısına yakışır şekilde din, kültür ve eğlencenin bir araya geldiği bir yer.",
+    "k1": "Dionysos Sunağı, yakındaki klasik tapınak ve kalıntıların yanı sıra, Kos'un antik ritüellerine ve parti kültürüne eşsiz bir bakış sunuyor."
+  },
+  "es": {
+    "place": "Ciudad de Kos",
+    "title": "Altaar Dionysos",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Bien, ahora estamos en una de las piezas más antiguas de la historia de la ciudad de Kos: el Altar de Dionisos.",
+    "s1": "Bien, ahora estamos en una de las piezas más antiguas de la historia de la ciudad de Kos: el Altar de Dionisos. Este no es un templo con columnas y techo, sino un altar. Un lugar donde los antiguos griegos hacían sacrificios y realizaban rituales.",
+    "s2": "Está dedicado a Dionisos, el dios del vino, las fiestas, el teatro y un poco de libertinaje. En definitiva: el dios al que acudías cuando querías una buena fiesta. El altar data del siglo II a. C., época helenística.",
+    "s3": "Esa fue una época en la que Kos floreció. Construido con mármol local blanco y gris azulado, probablemente fue un punto focal para las grandes celebraciones de Dionisio. Entonces la gente se reunía aquí para escuchar música, danza, teatro y, por supuesto, sacrificios.",
+    "s4": "Y sí, probablemente también se bebía en exceso. Lo que ves hoy son los restos: los cimientos, un muro rectangular y la entrada. No es muy impresionante a primera vista, pero da una buena idea de lo grande que alguna vez fue.",
+    "s5": "Los cimientos cubren aproximadamente 160 metros cuadrados. Detalle interesante: partes de este altar fueron reutilizadas posteriormente. En la Edad Media, los caballeros juanitas tomaron algunas piedras con relieves y las incorporaron a la construcción del Castillo de los Caballeros en el puerto. Los arqueólogos no lo excavaron hasta los años 30, durante la época italiana.",
+    "v1": "Está situado en el centro de la ciudad, cerca de la Casa Romana y del antiguo ágora. Entonces, si caminas por aquí: este era el lugar donde los residentes de Kos solían celebrar sus fiestas y espectáculos religiosos. Nada de ofertas aburridas, sino una combinación real de religión, cultura y diversión.",
+    "v2": "Tal como pretendía Dioniso.",
+    "v3": "Fue construido en el siglo III a. C., probablemente por los gobernantes ptolemaicos, quienes fortalecieron la influencia de Egipto en la región. Lo que hace especial al altar es que probablemente se utilizaba para celebraciones y representaciones teatrales a gran escala, típicas de Dionysia, la fiesta en honor a Dioniso. Invitados y residentes se reunían alrededor de este altar para escuchar música, bailar y realizar rituales religiosos.",
+    "v4": "El altar no está completamente intacto, pero los restos dan una idea del tamaño y la importancia del lugar en la ciudad vieja. Simboliza la cultura y la vida social de Kos en ese momento. Es un lugar donde se unieron religión, cultura y diversión como correspondía al dios de la fiesta.",
+    "k1": "Entonces, además de los templos clásicos y las ruinas cercanas, el Altar de Dionisos ofrece una visión única de los antiguos rituales y la cultura de fiesta de Kos."
   }
-
-  var langBtn = document.getElementById('langBtn');
-  var langMenu = document.getElementById('langMenu');
-  function openMenu(){ langMenu.classList.add('open'); }
-  function closeMenu(){ langMenu.classList.remove('open'); }
-  langBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    langMenu.classList.contains('open') ? closeMenu() : openMenu();
-  });
-  document.addEventListener('click', function(){ closeMenu(); });
-  document.querySelectorAll('.lang-option').forEach(function(btn){
-    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
-  });
-
-  var saved = localStorage.getItem('hk-lang') || 'nl';
-  setLang(saved);
-
-  /* TTS */
-  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
-  function getLang(){
-    var l = localStorage.getItem('hk-lang') || 'nl';
-    return LANG_VOICE[l] ? l : 'nl';
-  }
-  function pickVoice(code){
-    var voices = speechSynthesis.getVoices() || [];
-    var prefix = code.slice(0,2).toLowerCase();
-    return voices.find(function(v){ return v.lang === code; })
-      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
-      || null;
-  }
-  var btnPlay = document.getElementById('btnPlay');
-  var btnStop = document.getElementById('btnStop');
-  var status = document.getElementById('ttsStatus');
-  function setStatus(t){ if(status) status.textContent = t; }
-  function play(){
-    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
-    speechSynthesis.cancel();
-    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
-    var l = getLang();
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = LANG_VOICE[l];
-    u.rate = 0.92;
-    var v = pickVoice(LANG_VOICE[l]);
-    if(v) u.voice = v;
-    u.onstart = function(){
-      btnPlay.classList.add('playing');
-      btnStop.classList.add('show');
-      setStatus('Voorlezen… ('+l.toUpperCase()+')');
-    };
-    u.onend = u.onerror = function(){
-      btnPlay.classList.remove('playing');
-      btnStop.classList.remove('show');
-      setStatus('');
-    };
-    if(!speechSynthesis.getVoices().length){
-      speechSynthesis.onvoiceschanged = function(){
-        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
-        speechSynthesis.speak(u);
-      };
-      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
-    } else {
-      speechSynthesis.speak(u);
-    }
-  }
-  function stop(){
-    if(window.speechSynthesis) speechSynthesis.cancel();
-    btnPlay.classList.remove('playing');
-    btnStop.classList.remove('show');
-    setStatus('Gestopt.');
-  }
-  btnPlay.addEventListener('click', play);
-  btnStop.addEventListener('click', stop);
-  if(window.speechSynthesis){
-    speechSynthesis.getVoices();
-    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
-  }
-})();
-</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

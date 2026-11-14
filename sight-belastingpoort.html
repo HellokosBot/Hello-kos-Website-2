@@ -1,479 +1,212 @@
 <!DOCTYPE html>
-<html lang="nl" data-hk-own="1" data-hk-tts="1">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0D1F1F">
   <title>Belastingpoort – Hello Kos</title>
-  <style>
-    :root {
-      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
-      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
-      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
-      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
-      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text); -webkit-font-smoothing: antialiased;
-      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
-      background: var(--bg); min-height: 100vh; line-height: 1.55;
-    }
-    .app-header {
-      position: sticky; top: 0; z-index: 100;
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-      padding: 14px 16px; background: var(--bg-header);
-      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
-    }
-    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
-    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
-    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
-    .logo-text span { color: var(--gold-dark); font-style: italic; }
-    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
-    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
-    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
-    .lang-menu.open { display: block; }
-    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
-    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
-    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
-    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
-    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .content { padding: 18px 16px 0; }
-    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
-    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-
-    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
-    .btn-audio { background: var(--petrol); color: #fff; }
-    .btn-audio.playing { background: var(--petrol-dark); }
-    .btn-stop { background: #3A4545; color: #fff; display: none; }
-    .btn-stop.show { display: flex; }
-
-    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
-    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
-    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
-    .card p:last-child { margin-bottom: 0; }
-    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
-    .tip strong { color: var(--gold); }
-
-    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
-    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; line-height: 1.3; }
-    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
-    .footer a { color: var(--petrol); text-decoration: none; }
-  </style>
-<link rel="stylesheet" href="hello-kos.css">
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body>
+<body class="hk-page hk-guide">
   <header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
   <main class="main">
     <div class="hero-wrap">
-      <img src="img/jwwb/109a58a7f2-5975597a203fa-high.jpg" alt="Belastingpoort Kos" loading="eager">
-      <div class="hero-title"><h1 data-i18n="title">Belastingpoort</h1></div>
+      <img class="hk-zoom" src="img/jwwb/109a58a7f2-5975597a203fa-high.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
     </div>
-
-    <div class="content">
-<p class="lead" data-i18n="lead">Middeleeuwse toegangspoort waar handelaars tol betaalden om hun waren binnen de stadsmuren te verkopen.</p>
-
-      
-
-      <div class="actions">
-        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
-        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-      </div>
-      
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Belastingpoort%20Porta%20tou%20Forou%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Belastingpoort%20Porta%20tou%20Forou%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
-      </div>
-      <p class="status" id="ttsStatus"></p>
-
-      <div id="readText">
-        <div class="card">
-          <h2 data-i18n="hStory">Porta tou Forou</h2>
-          <p data-i18n="p1">De Belastingpoort heet in het Grieks Porta tou Forou: porta = poort, tou forou = van de belasting. Handelaars moesten hier tol betalen om hun waren binnen de muren te mogen verkopen.</p>
-        </div>
-
-        
-
-        <div class="card">
-          <h2 data-i18n="hSee">Ridders van Sint-Jan</h2>
-          <p data-i18n="p2">Eind 1300 lieten de Ridders van de Orde van Sint-Jan een verdedigingswerk rond de stad bouwen tegen invallen en piraterij. In die middeleeuwse muur zaten vijf ingangen; vandaag staan er nog twee, waaronder deze Belastingpoort.</p>
-          <p data-i18n="p3">De poort is gebouwd met hergebruikte stenen en zuilen uit de Romeinse tijd – een slimme middeleeuwse gewoonte om snel en voordelig te bouwen.</p>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2agora">Direct bij de Agora</h2>
-          <p data-i18n="p4">Achter de poort ligt het terrein van de oude marktplaats (Agora). Je ziet er nog overblijfselen van zuilengangen, tempels en winkels uit de Hellenistische en Romeinse periode.</p>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2photos">Foto’s van vroeger</h2>
-          <p data-i18n="p5">De Belastingpoort was een geliefde fotospot, met weelderige paarse en roze bougainvillea’s – perfect voor vakantiefoto’s. Hieronder foto’s van hoe de poort er vroeger uitzag.</p>
-        </div>
-
-        <div class="gallery">
-          <div class="g-item">
-            <img src="img/jwwb/62967fe26e-vergi-kapisi-kos-high.jpg" alt="Porta tou Forou" loading="lazy">
-            <span data-i18n="g1">Porta tou Forou</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/ed21a064c3-492096710_9602691669768614_6761475323733982047_n-high.jpg" alt="Met bougainvillea (vroeger)" loading="lazy">
-            <span data-i18n="g2">Met bougainvillea (vroeger)</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/512a530e53-492569758_9602664896437958_763223873701808585_n-high.jpg" alt="Poort in bloei" loading="lazy">
-            <span data-i18n="g3">Poort in bloei</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/dba9fec843-630699234_10241706497222886_2747604150283120172_n-high.jpg" alt="Detail" loading="lazy">
-            <span data-i18n="g4">Detail</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/b6318e4cb9-481255308_1941405432933599_3738128962842557939_n-high.jpg" alt="Historisch" loading="lazy">
-            <span data-i18n="g5">Historisch</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/c85fcde07c-494151317_9628225390548575_5251364955092412295_n-high.jpg" alt="Vroeger" loading="lazy">
-            <span data-i18n="g6">Vroeger</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/a79fe2020c-475336709_581642398111110_5684019785015557917_n-high.jpg" alt="Voor de aardbeving" loading="lazy">
-            <span data-i18n="g7">Voor de aardbeving</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/bb0f2dd66c-schermopname_3-3-2026_172427_www-researchgate-net-high.jpg" alt="Archief" loading="lazy">
-            <span data-i18n="g8">Archief</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2quake">Aardbeving 2017</h2>
-          <p data-i18n="p6">In juli 2017 trof een beving van 6,7 op de schaal van Richter het eiland en richtte schade aan in het oude centrum. De poort en de begroeiing zijn daardoor veranderd, maar de plek blijft historisch en de moeite waard.</p>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="hKnow">Bezoeken</h2>
-          <p data-i18n="p7">Gratis, altijd van buitenaf te zien. Ligt in Kos-stad, bij de Agora en het centrum.</p>
-          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: combineer met de Agora en de Westelijke opgraving – alles op loopafstand.</p></div>
-        </div>
-      </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=36.8919%2C27.2892" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?ll=36.8919,27.2892&amp;q=Belastingpoort" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-belastingpoort-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-belastingpoort-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-belastingpoort-03.jpg" alt=""></figure>
+<p data-i18n="s4"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-belastingpoort-04.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-belastingpoort-05.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-belastingpoort-06.jpg" alt=""></figure>
+<p data-i18n="v3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-belastingpoort-07.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-belastingpoort-08.jpg" alt=""></figure>
+</article>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-belastingpoort-09.jpg" alt=""></figure>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-belastingpoort-10.jpg" alt=""></figure>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-belastingpoort-11.jpg" alt=""></figure>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-belastingpoort-12.jpg" alt=""></figure>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-belastingpoort-13.jpg" alt=""></figure>
     </div>
   </main>
-
-  <footer class="footer">
-    <div>Hello Kos</div>
-    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
-  </footer>
-
-<script>
-(function(){
-  var I18N = window.HK_DICT = {
-    "nl": {
-      "title": "Belastingpoort",
-      "lead": "Middeleeuwse toegangspoort waar handelaars tol betaalden om hun waren binnen de stadsmuren te verkopen.",
-      "btnPlay": "Voorlezen",
-      "p1": "De Belastingpoort heet in het Grieks Porta tou Forou: porta = poort, tou forou = van de belasting. Handelaars moesten hier tol betalen om hun waren binnen de muren te mogen verkopen.",
-      "p2": "Eind 1300 lieten de Ridders van de Orde van Sint-Jan een verdedigingswerk rond de stad bouwen tegen invallen en piraterij. In die middeleeuwse muur zaten vijf ingangen; vandaag staan er nog twee, waaronder deze Belastingpoort.",
-      "p3": "De poort is gebouwd met hergebruikte stenen en zuilen uit de Romeinse tijd – een slimme middeleeuwse gewoonte om snel en voordelig te bouwen.",
-      "h2agora": "Direct bij de Agora",
-      "p4": "Achter de poort ligt het terrein van de oude marktplaats (Agora). Je ziet er nog overblijfselen van zuilengangen, tempels en winkels uit de Hellenistische en Romeinse periode.",
-      "h2photos": "Foto’s van vroeger",
-      "p5": "De Belastingpoort was een geliefde fotospot, met weelderige paarse en roze bougainvillea’s – perfect voor vakantiefoto’s. Hieronder foto’s van hoe de poort er vroeger uitzag.",
-      "g1": "Porta tou Forou",
-      "g2": "Met bougainvillea (vroeger)",
-      "g3": "Poort in bloei",
-      "g4": "Detail",
-      "g5": "Historisch",
-      "g6": "Vroeger",
-      "g7": "Voor de aardbeving",
-      "g8": "Archief",
-      "h2quake": "Aardbeving 2017",
-      "p6": "In juli 2017 trof een beving van 6,7 op de schaal van Richter het eiland en richtte schade aan in het oude centrum. De poort en de begroeiing zijn daardoor veranderd, maar de plek blijft historisch en de moeite waard.",
-      "p7": "Gratis, altijd van buitenaf te zien. Ligt in Kos-stad, bij de Agora en het centrum.",
-      "tip": "combineer met de Agora en de Westelijke opgraving – alles op loopafstand.",
-      "hStory": "Het verhaal",
-      "hSee": "Wat je ziet",
-      "hKnow": "Goed om te weten",
-      "tipTitle": "Tip van de gids",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Tax Gate",
-      "lead": "Medieval entrance gate where traders paid toll to sell their goods inside the city walls.",
-      "btnPlay": "Read aloud",
-      "p1": "The Tax Gate is called Porta tou Forou in Greek: porta = gate, tou forou = of the tax. Traders had to pay toll here to be allowed to sell their goods inside the walls.",
-      "p2": "At the end of the 1300s the Knights of the Order of St John built a defensive wall around the city against raids and piracy. That medieval wall had five entrances; today two remain, including this Tax Gate.",
-      "p3": "The gate was built with reused stones and columns from the Roman period – a smart medieval habit to build quickly and cheaply.",
-      "h2agora": "Right by the Agora",
-      "p4": "Behind the gate lies the area of the old marketplace (Agora). You can still see remains of colonnades, temples and shops from the Hellenistic and Roman periods.",
-      "h2photos": "Photos from the past",
-      "p5": "The Tax Gate was a popular photo spot, with lush purple and pink bougainvilleas – perfect for holiday photos. Below are photos of how the gate used to look.",
-      "g1": "Porta tou Forou",
-      "g2": "With bougainvillea (past)",
-      "g3": "Gate in bloom",
-      "g4": "Detail",
-      "g5": "Historic",
-      "g6": "In the past",
-      "g7": "Before the earthquake",
-      "g8": "Archive",
-      "h2quake": "Earthquake 2017",
-      "p6": "In July 2017 a 6.7 magnitude earthquake hit the island and caused damage in the old centre. The gate and the vegetation changed as a result, but the place remains historic and worth visiting.",
-      "p7": "Free, always visible from the outside. Located in Kos Town, near the Agora and the centre.",
-      "tip": "combine with the Agora and the Western Excavations – all within walking distance.",
-      "hStory": "The story",
-      "hSee": "What you see",
-      "hKnow": "Good to know",
-      "tipTitle": "Guide’s tip",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Zolltor",
-      "lead": "Mittelalterliches Eingangstor, wo Händler Zoll zahlten, um ihre Waren innerhalb der Stadtmauern zu verkaufen.",
-      "btnPlay": "Vorlesen",
-      "p1": "Das Zolltor heißt auf Griechisch Porta tou Forou: porta = Tor, tou forou = der Steuer. Händler mussten hier Zoll zahlen, um ihre Waren innerhalb der Mauern verkaufen zu dürfen.",
-      "p2": "Ende des 14. Jahrhunderts ließen die Ritter des Johanniterordens ein Verteidigungswerk um die Stadt bauen gegen Überfälle und Piraterie. In dieser mittelalterlichen Mauer gab es fünf Eingänge; heute stehen noch zwei, darunter dieses Zolltor.",
-      "p3": "Das Tor wurde mit wiederverwendeten Steinen und Säulen aus der römischen Zeit gebaut – eine clevere mittelalterliche Gewohnheit, um schnell und günstig zu bauen.",
-      "h2agora": "Direkt bei der Agora",
-      "p4": "Hinter dem Tor liegt das Gelände des alten Marktplatzes (Agora). Du siehst noch Überreste von Säulengängen, Tempeln und Läden aus der hellenistischen und römischen Zeit.",
-      "h2photos": "Fotos von früher",
-      "p5": "Das Zolltor war ein beliebter Fotospot mit üppigen lila und rosa Bougainvilleen – perfekt für Urlaubsfotos. Unten Fotos, wie das Tor früher aussah.",
-      "g1": "Porta tou Forou",
-      "g2": "Mit Bougainvillea (früher)",
-      "g3": "Tor in Blüte",
-      "g4": "Detail",
-      "g5": "Historisch",
-      "g6": "Früher",
-      "g7": "Vor dem Erdbeben",
-      "g8": "Archiv",
-      "h2quake": "Erdbeben 2017",
-      "p6": "Im Juli 2017 traf ein Beben der Stärke 6,7 die Insel und richtete Schäden im alten Zentrum an. Tor und Bewuchs haben sich dadurch verändert, aber der Ort bleibt historisch und sehenswert.",
-      "p7": "Kostenlos, immer von außen sichtbar. Liegt in Kos-Stadt, bei der Agora und dem Zentrum.",
-      "tip": "kombiniere mit der Agora und der Westlichen Grabung – alles fußläufig.",
-      "hStory": "Die Geschichte",
-      "hSee": "Was du siehst",
-      "hKnow": "Gut zu wissen",
-      "tipTitle": "Tipp des Guides",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Porta della Tassa",
-      "lead": "Porta d’ingresso medievale dove i mercanti pagavano il pedaggio per vendere le loro merci dentro le mura della città.",
-      "btnPlay": "Leggi ad alta voce",
-      "p1": "La Porta della Tassa si chiama in greco Porta tou Forou: porta = porta, tou forou = della tassa. I mercanti dovevano pagare il pedaggio qui per poter vendere le loro merci dentro le mura.",
-      "p2": "Alla fine del 1300 i Cavalieri dell’Ordine di San Giovanni fecero costruire un’opera difensiva intorno alla città contro incursioni e pirateria. In quel muro medievale c’erano cinque ingressi; oggi ne restano due, tra cui questa Porta della Tassa.",
-      "p3": "La porta è stata costruita con pietre e colonne riutilizzate dell’epoca romana – un’abitudine medievale intelligente per costruire in fretta e a buon mercato.",
-      "h2agora": "Proprio vicino all’Agora",
-      "p4": "Dietro la porta si trova l’area dell’antico mercato (Agora). Si vedono ancora resti di portici, templi e negozi del periodo ellenistico e romano.",
-      "h2photos": "Foto di un tempo",
-      "p5": "La Porta della Tassa era un punto foto amato, con lussureggianti bouganville viola e rosa – perfette per le foto delle vacanze. Qui sotto foto di come appariva la porta un tempo.",
-      "g1": "Porta tou Forou",
-      "g2": "Con bouganville (un tempo)",
-      "g3": "Porta in fiore",
-      "g4": "Dettaglio",
-      "g5": "Storico",
-      "g6": "Un tempo",
-      "g7": "Prima del terremoto",
-      "g8": "Archivio",
-      "h2quake": "Terremoto 2017",
-      "p6": "Nel luglio 2017 un terremoto di magnitudo 6,7 colpì l’isola e causò danni nel centro antico. La porta e la vegetazione sono cambiate, ma il luogo rimane storico e degno di visita.",
-      "p7": "Gratis, sempre visibile dall’esterno. Si trova a Kos città, vicino all’Agora e al centro.",
-      "tip": "combina con l’Agora e gli Scavi Occidentali – tutto a piedi.",
-      "hStory": "La storia",
-      "hSee": "Cosa vedi",
-      "hKnow": "Buono a sapersi",
-      "tipTitle": "Consiglio della guida",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Vergi Kapısı",
-      "lead": "Tüccarların mallarını şehir surları içinde satmak için vergi ödedikleri ortaçağ giriş kapısı.",
-      "btnPlay": "Sesli oku",
-      "p1": "Vergi Kapısı Yunanca Porta tou Forou olarak bilinir: porta = kapı, tou forou = verginin. Tüccarlar mallarını surlar içinde satabilmek için burada vergi ödemek zorundaydı.",
-      "p2": "1300’lerin sonunda Aziz Yuhanna Tarikatı Şövalyeleri şehri akınlara ve korsanlığa karşı savunmak için bir sur inşa ettirdi. Bu ortaçağ duvarında beş giriş vardı; bugün ikisi ayakta, bunlardan biri bu Vergi Kapısı.",
-      "p3": "Kapı Roma döneminden yeniden kullanılan taşlar ve sütunlarla inşa edildi – hızlı ve ucuz inşa etmek için akıllıca bir ortaçağ alışkanlığı.",
-      "h2agora": "Agora’nın hemen yanında",
-      "p4": "Kapının arkasında eski pazar yeri (Agora) alanı yer alır. Helenistik ve Roma döneminden sütunlu galeriler, tapınaklar ve dükkan kalıntıları hâlâ görülebilir.",
-      "h2photos": "Eski fotoğraflar",
-      "p5": "Vergi Kapısı, mor ve pembe bougainvillealarla dolu popüler bir fotoğraf noktasıydı – tatil fotoğrafları için mükemmel. Aşağıda kapının eskiden nasıl göründüğüne dair fotoğraflar var.",
-      "g1": "Porta tou Forou",
-      "g2": "Bougainvillea ile (eski)",
-      "g3": "Çiçek açmış kapı",
-      "g4": "Detay",
-      "g5": "Tarihi",
-      "g6": "Eskiden",
-      "g7": "Depremden önce",
-      "g8": "Arşiv",
-      "h2quake": "2017 depremi",
-      "p6": "Temmuz 2017’de 6,7 büyüklüğünde bir deprem adayı vurdu ve eski merkezde hasara yol açtı. Kapı ve bitki örtüsü bu nedenle değişti, ancak yer hâlâ tarihi ve görülmeye değer.",
-      "p7": "Ücretsiz, her zaman dışarıdan görülebilir. Kos şehrinde, Agora ve merkez yakınında.",
-      "tip": "Agora ve Batı Kazıları ile birleştir – hepsi yürüme mesafesinde.",
-      "hStory": "Hikaye",
-      "hSee": "Ne görürsün",
-      "hKnow": "Bilmekte fayda var",
-      "tipTitle": "Rehberin ipucu",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Puerta del Impuesto",
-      "lead": "Puerta de entrada medieval donde los comerciantes pagaban peaje para vender sus mercancías dentro de las murallas de la ciudad.",
-      "btnPlay": "Leer en voz alta",
-      "p1": "La Puerta del Impuesto se llama en griego Porta tou Forou: porta = puerta, tou forou = del impuesto. Los comerciantes tenían que pagar peaje aquí para poder vender sus mercancías dentro de las murallas.",
-      "p2": "A finales del 1300 los Caballeros de la Orden de San Juan hicieron construir una obra defensiva alrededor de la ciudad contra incursiones y piratería. En esa muralla medieval había cinco entradas; hoy quedan dos, incluida esta Puerta del Impuesto.",
-      "p3": "La puerta se construyó con piedras y columnas reutilizadas de la época romana – un hábito medieval inteligente para construir rápido y barato.",
-      "h2agora": "Justo al lado del Ágora",
-      "p4": "Detrás de la puerta se encuentra el área del antiguo mercado (Ágora). Aún se ven restos de pórticos, templos y tiendas de los periodos helenístico y romano.",
-      "h2photos": "Fotos de antaño",
-      "p5": "La Puerta del Impuesto era un punto fotográfico popular, con exuberantes buganvillas moradas y rosas – perfectas para fotos de vacaciones. Abajo fotos de cómo se veía la puerta antes.",
-      "g1": "Porta tou Forou",
-      "g2": "Con buganvilla (antes)",
-      "g3": "Puerta en flor",
-      "g4": "Detalle",
-      "g5": "Histórico",
-      "g6": "Antes",
-      "g7": "Antes del terremoto",
-      "g8": "Archivo",
-      "h2quake": "Terremoto 2017",
-      "p6": "En julio de 2017 un terremoto de magnitud 6,7 golpeó la isla y causó daños en el centro antiguo. La puerta y la vegetación cambiaron como resultado, pero el lugar sigue siendo histórico y digno de visita.",
-      "p7": "Gratis, siempre visible desde fuera. Se encuentra en Kos ciudad, cerca del Ágora y el centro.",
-      "tip": "combínala con el Ágora y las Excavaciones Occidentales – todo a poca distancia a pie.",
-      "hStory": "La historia",
-      "hSee": "Qué ves",
-      "hKnow": "Bueno saberlo",
-      "tipTitle": "Consejo del guía",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };
-
-  function setLang(l) {
-    if (!I18N[l]) l = 'nl';
-    localStorage.setItem('hk-lang', l);
-    document.documentElement.lang = l;
-    var d = I18N[l];
-    document.querySelectorAll('[data-i18n]').forEach(function(el){
-      var k = el.getAttribute('data-i18n');
-      if (d[k]) el.textContent = d[k];
-    });
-    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
-    if (opt) {
-      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
-      document.getElementById('code').textContent = l.toUpperCase();
-    }
-    document.querySelectorAll('.lang-option').forEach(function(o){
-      o.classList.toggle('active', o.getAttribute('data-lang') === l);
-    });
-    closeMenu();
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Kos-stad",
+    "title": "Belastingpoort",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "We staan nu bij de Belastingspoort.",
+    "s1": "We staan nu bij de Belastingspoort. Dit is een middeleeuwse toegangspoort uit de veertiende eeuw. De Ridders van de Orde van Sint-Jan bouwden hem eind veertiende eeuw.",
+    "s2": "Ze trokken toen een hele verdedigingsmuur rondom de stad op om zich te beschermen tegen invallen en piraterij. In die muur zaten vijf ingangen. Vandaag de dag zijn er nog maar twee poorten overeind gebleven, en dit is er één van.",
+    "s3": "De naam zegt het al: Belastingspoort. Hier moesten handelaars tol betalen, oftewel belasting, voordat ze hun waren binnen de stadsmuren mochten verkopen. Vandaar ook de Griekse naam Porta tou Forou.",
+    "s4": "De ridders bouwden de poort niet helemaal met nieuw matriaal. Ze gebruikten hergebruikte stenen en zuilen uit de Romeinse tijd. Dat was in de middeleeuwen een slimme en goedkope manier om snel te bouwen.",
+    "v1": "Direct achter de poort ligt het terrein van de oude marktplaats, de agora. Daar zie je nog restanten van zuilengangen, tempels en winkels uit de hellenistische periode en de Romeinse periode. De poort heeft ook recentere geschiedenis.",
+    "v2": "In juli tweeduizend zeventien trof een zware aardbeving van zes komma zeven op de schaal van Richter het eiland. De Belastingspoort liep flinke scheuren op en dreigde in te storten. Ze hebben hem toen tijdelijk met ijzeren en houten stutten ondersteund.",
+    "v3": "De restauratie is in tweeduizend vijfentwintig afgerond.Vandaag de dag staat de poort er weer stevig bij en is hij weer te bewonderen. Het is een van de weinige overgebleven middeleeuwse poorten van Kos en een duidelijke herinnering aan de tijd dat de ridders hier de baas waren.",
+    "k1": "De Belastingpoort was een geliefde fotospot in Kos-stad. Met haar weelderige paarse en roze bougainvillea's bood de poort een sprookjesachtig en kleurrijk aanzicht, perfect voor ansichtkaarten en vakantiefoto's. Echter, in juli 2017 veranderde alles door een krachtige aardbeving van 6,7 op de schaal van Richter. Deze beving trof het eiland en richtte vooral verwoesting aan in het oude centrum. De Belastingpoort liep aanzienlijke schade op: er ontstonden scheuren en het instortingsgevaar werd reëel. Om verdere schade te voorkomen, werd de poort tijdelijk ondersteund met ijzeren en houten stutten. De bloemen werden verwijderd, zodat scheuren en kwetsbare plekken beter zichtbaar en toegankelijk waren voor inspectie en herstelwerkzaamheden. Na de voltooiing van de restauratie in 2025, blijft de Belastingpoort een trekpleister voor bezoekers, die deze schitterende poort gratis kunnen bewonderen."
+  },
+  "de": {
+    "place": "Kos-Stadt",
+    "title": "Belastingpoort",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Wir sind jetzt an der Steuerschranke.",
+    "s1": "Wir sind jetzt an der Steuerschranke. Dies ist ein mittelalterliches Tor aus dem 14. Jahrhundert. Die Ritter des Johanniterordens errichteten es Ende des 14. Jahrhunderts.",
+    "s2": "Anschließend bauten sie eine ganze Verteidigungsmauer um die Stadt, um sich vor Überfällen und Piraterie zu schützen. In dieser Mauer befanden sich fünf Eingänge. Heute stehen nur noch zwei Tore, und dieses ist eines davon.",
+    "s3": "Der Name ist Programm: Tax Gate. Hier mussten Händler Zölle oder Steuern zahlen, bevor sie ihre Waren innerhalb der Stadtmauern verkaufen konnten. Daher der griechische Name Porta tou Forou.",
+    "s4": "Die Ritter bauten das Tor nicht vollständig aus neuem Material. Sie verwendeten recycelte Steine ​​und Säulen aus der Römerzeit. Im Mittelalter war dies eine clevere und kostengünstige Möglichkeit, schnell zu bauen.",
+    "v1": "Direkt hinter dem Tor befindet sich der alte Marktplatz, die Agora. Dort sind noch Reste von Kolonnaden, Tempeln und Geschäften aus der hellenistischen und römischen Zeit zu sehen. Das Tor hat auch eine jüngere Geschichte.",
+    "v2": "Im Juli 2017 erschütterte ein schweres Erdbeben der Stärke sechs Komma sieben auf der Richterskala die Insel. Das Steuertor erlitt große Risse und drohte einzustürzen. Anschließend stützten sie es vorübergehend mit Eisen- und Holzstreben ab.",
+    "v3": "Die Restaurierung wurde im Jahr zweitausendfünfundzwanzig abgeschlossen. Heute steht das Tor wieder stabil und kann wieder bewundert werden. Es ist eines der wenigen erhaltenen mittelalterlichen Tore von Kos und eine deutliche Erinnerung an die Zeit, als die Ritter hier herrschten.",
+    "k1": "Das Tax Gate war ein beliebter Fotospot in Kos-Stadt. Mit seinen üppigen violetten und rosafarbenen Bougainvilleen bot das Tor einen märchenhaften und farbenfrohen Anblick, perfekt für Postkarten und Urlaubsfotos. Doch im Juli 2017 änderte sich alles durch ein starkes Erdbeben der Stärke 6,7 auf der Richterskala. Dieses Erdbeben erschütterte die Insel und verursachte vor allem Zerstörungen im alten Zentrum. Das Steuertor wurde erheblich beschädigt: Es traten Risse auf und die Gefahr eines Einsturzes wurde real. Um weitere Schäden zu verhindern, wurde das Tor vorübergehend mit Eisen- und Holzstreben gestützt. Die Blumen wurden entfernt, damit Risse und gefährdete Stellen besser sichtbar und für Inspektions- und Reparaturarbeiten zugänglich sind. Auch nach Abschluss der Restaurierung im Jahr 2025 bleibt das Steuertor eine Attraktion für Besucher, die dieses schöne Tor kostenlos bewundern können."
+  },
+  "en": {
+    "place": "Kos Town",
+    "title": "Belastingpoort",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "We are now at the Tax Gate.",
+    "s1": "We are now at the Tax Gate. This is a medieval gateway from the fourteenth century. The Knights of the Order of Saint John built it at the end of the fourteenth century.",
+    "s2": "They then built an entire defensive wall around the city to protect themselves against raids and piracy. There were five entrances in that wall. Today only two gates remain standing, and this is one of them.",
+    "s3": "The name says it all: Tax Gate. Here, traders had to pay tolls, or taxes, before they could sell their goods within the city walls. Hence the Greek name Porta tou Forou.",
+    "s4": "The knights did not build the gate entirely with new material. They used recycled stones and columns from Roman times. In the Middle Ages, this was a smart and cheap way to build quickly.",
+    "v1": "Directly behind the gate is the site of the old marketplace, the agora. There you can still see remains of colonnades, temples and shops from the Hellenistic period and the Roman period. The gate also has more recent history.",
+    "v2": "In July two thousand and seventeen, a major earthquake measuring six point seven on the Richter scale struck the island. The Tax Gate suffered major cracks and was in danger of collapsing. They then temporarily supported it with iron and wooden struts.",
+    "v3": "The restoration was completed in two thousand and twenty-five. Today the gate stands strong again and can be admired again. It is one of the few remaining medieval gates of Kos and a clear reminder of the time when the knights ruled here.",
+    "k1": "The Tax Gate was a popular photo spot in Kos Town. With its lush purple and pink bougainvilleas, the gate offered a fairytale and colorful sight, perfect for postcards and holiday photos. However, in July 2017, everything changed due to a powerful earthquake measuring 6.7 on the Richter scale. This earthquake struck the island and caused mainly destruction in the old center. The Tax Gate suffered significant damage: cracks appeared and the risk of collapse became real. To prevent further damage, the gate was temporarily supported with iron and wooden struts. The flowers were removed so that cracks and vulnerable areas were more visible and accessible for inspection and repair work. After the completion of the restoration in 2025, the Tax Gate will remain an attraction for visitors, who can admire this beautiful gate for free."
+  },
+  "it": {
+    "place": "Città di Kos",
+    "title": "Belastingpoort",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Ora siamo alla Porta delle Tasse.",
+    "s1": "Ora siamo alla Porta delle Tasse. Si tratta di una porta medievale del XIV secolo. I Cavalieri dell'Ordine di San Giovanni lo costruirono alla fine del XIV secolo.",
+    "s2": "Costruirono quindi un intero muro difensivo attorno alla città per proteggersi dalle incursioni e dalla pirateria. C'erano cinque ingressi in quel muro. Oggi rimangono in piedi solo due porte e questa è una di queste.",
+    "s3": "Il nome dice tutto: Tax Gate. Qui i commercianti dovevano pagare pedaggi, o tasse, prima di poter vendere le loro merci all’interno delle mura della città. Da qui il nome greco Porta tou Forou.",
+    "s4": "I cavalieri non costruirono la porta interamente con nuovo materiale. Hanno usato pietre e colonne riciclate di epoca romana. Nel Medioevo questo era un modo intelligente ed economico per costruire rapidamente.",
+    "v1": "Direttamente dietro il cancello si trova il sito del vecchio mercato, l'agorà. Lì si possono ancora vedere resti di colonnati, templi e botteghe del periodo ellenistico e romano. La porta ha anche una storia più recente.",
+    "v2": "Nel luglio del 2117 un forte terremoto di sei virgola sette della scala Richter colpì l'isola. La Porta delle Tasse presentava gravi crepe e rischiava di crollare. Lo sostenevano temporaneamente con montanti di ferro e legno.",
+    "v3": "Il restauro fu completato nel duemilaventicinque. Oggi la porta è di nuovo solida e può essere nuovamente ammirata. È una delle poche porte medievali rimaste di Kos e un chiaro ricordo del tempo in cui qui governavano i cavalieri.",
+    "k1": "Il Tax Gate era un popolare luogo fotografico nella città di Kos. Con le sue rigogliose bouganville viola e rosa, il cancello offriva uno spettacolo fiabesco e colorato, perfetto per cartoline e foto delle vacanze. Tuttavia, nel luglio 2017, tutto è cambiato a causa di un potente terremoto di magnitudo 6,7 della scala Richter. Questo terremoto colpì l'isola e provocò soprattutto la distruzione del centro storico. La Porta delle Tasse ha subito ingenti danni: sono comparse delle crepe e il rischio di crollo è diventato concreto. Per evitare ulteriori danni, il cancello fu temporaneamente sostenuto con montanti in ferro e legno. I fiori sono stati rimossi in modo che le crepe e le aree vulnerabili fossero più visibili e accessibili per i lavori di ispezione e riparazione. Dopo il completamento del restauro nel 2025, la Porta delle Tasse rimarrà un'attrazione per i visitatori, che potranno ammirare gratuitamente questa bellissima porta."
+  },
+  "tr": {
+    "place": "Kos şehri",
+    "title": "Belastingpoort",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Şu anda Vergi Kapısındayız.",
+    "s1": "Şu anda Vergi Kapısındayız. Bu on dördüncü yüzyıldan kalma bir ortaçağ kapısıdır. Aziz John Tarikatı Şövalyeleri onu on dördüncü yüzyılın sonunda inşa etti.",
+    "s2": "Daha sonra kendilerini baskınlara ve korsanlığa karşı korumak için şehrin etrafına komple bir savunma duvarı inşa ettiler. O duvarda beş giriş vardı. Bugün sadece iki kapısı ayakta kalmıştır, bu da onlardan biri.",
+    "s3": "Adı her şeyi söylüyor: Vergi Kapısı. Burada tüccarlar mallarını surların içinde satmadan önce geçiş ücreti veya vergi ödemek zorundaydı. Bu nedenle Yunanca adı Porta tou Forou'dur.",
+    "s4": "Şövalyeler kapıyı tamamen yeni malzemeyle inşa etmediler. Roma döneminden kalma geri dönüştürülmüş taşlar ve sütunlar kullandılar. Orta Çağ'da bu, hızlı inşa etmenin akıllı ve ucuz bir yoluydu.",
+    "v1": "Kapının hemen arkasında eski pazar yeri olan agora bulunmaktadır. Helenistik dönemden ve Roma döneminden kalma revaklar, tapınaklar ve dükkanların kalıntılarını hala burada görebilirsiniz. Kapının ayrıca daha yakın bir tarihi var.",
+    "v2": "İki bin on yedi Temmuz'da Richter ölçeğine göre altı virgül yedi büyüklüğünde büyük bir deprem adayı vurdu. Vergi Kapısı büyük çatlaklara maruz kaldı ve çökme tehlikesiyle karşı karşıya kaldı. Daha sonra geçici olarak demir ve ahşap payandalarla desteklediler.",
+    "v3": "Restorasyonu iki bin yirmi beşte tamamlandı. Bugün kapı yeniden güçlü bir şekilde duruyor ve yeniden hayranlıkla izlenebilir. Kos'un kalan birkaç ortaçağ kapısından biridir ve şövalyelerin burada hüküm sürdüğü zamanı açık bir şekilde hatırlatır.",
+    "k1": "Vergi Kapısı, İstanköy'de popüler bir fotoğraf noktasıydı. Yemyeşil mor ve pembe begonvillerle dolu kapı, kartpostallar ve tatil fotoğrafları için mükemmel, masalsı ve renkli bir manzara sunuyordu. Ancak Temmuz 2017'de Richter ölçeğine göre 6,7 büyüklüğündeki güçlü deprem nedeniyle her şey değişti. Bu deprem adayı vurdu ve esas olarak eski merkezde yıkıma neden oldu. Vergi Kapısı ciddi hasar gördü: çatlaklar ortaya çıktı ve çökme riski gerçek oldu. Daha fazla hasarı önlemek için kapı geçici olarak demir ve ahşap payandalarla desteklendi. Çatlakların ve hassas alanların daha görünür olması ve inceleme ve onarım çalışmaları için erişilebilir olması amacıyla çiçekler kaldırıldı. Restorasyonun 2025 yılında tamamlanmasının ardından Vergi Kapısı, bu güzel kapıyı ücretsiz olarak görebilecek ziyaretçiler için bir cazibe merkezi olmaya devam edecek."
+  },
+  "es": {
+    "place": "Ciudad de Kos",
+    "title": "Belastingpoort",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Ahora estamos en la puerta de impuestos.",
+    "s1": "Ahora estamos en la puerta de impuestos. Se trata de una puerta medieval del siglo XIV. Los Caballeros de la Orden de San Juan lo construyeron a finales del siglo XIV.",
+    "s2": "Luego construyeron un muro defensivo completo alrededor de la ciudad para protegerse contra las incursiones y la piratería. Había cinco entradas en ese muro. Hoy en día sólo quedan en pie dos puertas, y ésta es una de ellas.",
+    "s3": "El nombre lo dice todo: Tax Gate. Aquí, los comerciantes tenían que pagar peajes o impuestos antes de poder vender sus productos dentro de las murallas de la ciudad. De ahí el nombre griego Porta tou Forou.",
+    "s4": "Los caballeros no construyeron la puerta enteramente con material nuevo. Utilizaron piedras recicladas y columnas de la época romana. En la Edad Media, ésta era una forma inteligente y económica de construir rápidamente.",
+    "v1": "Directamente detrás de la puerta se encuentra el antiguo mercado, el ágora. Allí todavía se pueden ver restos de columnatas, templos y tiendas de la época helenística y romana. La puerta también tiene una historia más reciente.",
+    "v2": "En julio de dos mil diecisiete, un gran terremoto de seis coma siete en la escala de Richter sacudió la isla. La Puerta Fiscal sufrió importantes grietas y estuvo en peligro de derrumbarse. Luego lo sostuvieron temporalmente con puntales de hierro y madera.",
+    "v3": "La restauración se completó en dos mil veinticinco. Hoy la puerta vuelve a mantenerse firme y se puede admirar de nuevo. Es una de las pocas puertas medievales que quedan en Kos y un claro recordatorio de la época en que los caballeros gobernaban aquí.",
+    "k1": "La Puerta de Impuestos era un lugar popular para tomar fotografías en la ciudad de Kos. Con sus exuberantes buganvillas de color púrpura y rosa, la puerta ofrecía una vista colorida y de cuento de hadas, perfecta para postales y fotografías de vacaciones. Sin embargo, en julio de 2017 todo cambió debido a un potente terremoto de magnitud 6,7 en la escala de Richter. Este terremoto azotó la isla y provocó principalmente destrucción en el casco antiguo. La Puerta Fiscal sufrió daños importantes: aparecieron grietas y el riesgo de derrumbe se hizo real. Para evitar mayores daños, la puerta se sostuvo temporalmente con puntales de hierro y madera. Se quitaron las flores para que las grietas y las zonas vulnerables fueran más visibles y accesibles para los trabajos de inspección y reparación. Una vez finalizada la restauración en 2025, la Puerta de Impuestos seguirá siendo una atracción para los visitantes, quienes podrán admirar esta hermosa puerta de forma gratuita."
   }
-
-  var langBtn = document.getElementById('langBtn');
-  var langMenu = document.getElementById('langMenu');
-  function openMenu(){ langMenu.classList.add('open'); }
-  function closeMenu(){ langMenu.classList.remove('open'); }
-  langBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    langMenu.classList.contains('open') ? closeMenu() : openMenu();
-  });
-  document.addEventListener('click', function(){ closeMenu(); });
-  document.querySelectorAll('.lang-option').forEach(function(btn){
-    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
-  });
-
-  var saved = localStorage.getItem('hk-lang') || 'nl';
-  setLang(saved);
-
-  /* TTS */
-  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
-  function getLang(){
-    var l = localStorage.getItem('hk-lang') || 'nl';
-    return LANG_VOICE[l] ? l : 'nl';
-  }
-  function pickVoice(code){
-    var voices = speechSynthesis.getVoices() || [];
-    var prefix = code.slice(0,2).toLowerCase();
-    return voices.find(function(v){ return v.lang === code; })
-      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
-      || null;
-  }
-  var btnPlay = document.getElementById('btnPlay');
-  var btnStop = document.getElementById('btnStop');
-  var status = document.getElementById('ttsStatus');
-  function setStatus(t){ if(status) status.textContent = t; }
-  function play(){
-    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
-    speechSynthesis.cancel();
-    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
-    var l = getLang();
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = LANG_VOICE[l];
-    u.rate = 0.92;
-    var v = pickVoice(LANG_VOICE[l]);
-    if(v) u.voice = v;
-    u.onstart = function(){
-      btnPlay.classList.add('playing');
-      btnStop.classList.add('show');
-      setStatus('Voorlezen… ('+l.toUpperCase()+')');
-    };
-    u.onend = u.onerror = function(){
-      btnPlay.classList.remove('playing');
-      btnStop.classList.remove('show');
-      setStatus('');
-    };
-    if(!speechSynthesis.getVoices().length){
-      speechSynthesis.onvoiceschanged = function(){
-        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
-        speechSynthesis.speak(u);
-      };
-      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
-    } else {
-      speechSynthesis.speak(u);
-    }
-  }
-  function stop(){
-    if(window.speechSynthesis) speechSynthesis.cancel();
-    btnPlay.classList.remove('playing');
-    btnStop.classList.remove('show');
-    setStatus('Gestopt.');
-  }
-  btnPlay.addEventListener('click', play);
-  btnStop.addEventListener('click', stop);
-  if(window.speechSynthesis){
-    speechSynthesis.getVoices();
-    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
-  }
-})();
-</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

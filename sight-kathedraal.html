@@ -1,132 +1,199 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0D1A1A">
-<title>Kathedraal van Kos en Nisyros – Hello Kos</title>
-<link rel="stylesheet" href="hello-kos.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Kathedraal – Hello Kos</title>
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body class="hk-page">
-<header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+<body class="hk-page hk-guide">
+  <header class="app-header">
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-<main class="main">
-  <div class="hero-wrap"><img src="img/hk/sight-kathedraal.jpg" alt="">
-      <div class="hero-title"><h1 data-i18n="title">Kathedraal van Kos en Nisyros</h1></div></div>
-  <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back">← Bezienswaardigheden</a></p>
-<p class="lead" data-i18n="lead">Zetel van de metropool van Kos en Nisyros. Na de Tweede Wereldoorlog werd het gebouw een orthodoxe kathedraal, gewijd aan de Aankondiging (Evangelismos).</p>
-  
-  <div class="actions">
-    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
-    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
-    
-  </div>
-  
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Cathedral%20Kos%20town" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Cathedral%20Kos%20town" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
       </div>
-      <p class="status" id="ttsStatus"></p>
-  <div id="readText">
-    <article class="card"><h2 data-i18n="hStory">Gebouw</h2><p data-i18n="p0">Na de aardbeving van 1933 moesten delen hersteld worden, maar het gebouw bleef grotendeels overeind. Binnen is een houten iconostase uit de jaren 1970 en veel licht door brede ramen, in de trant van de Italiaanse bouw uit die tijd.</p></article>
-    <article class="card"><h2 data-i18n="hSee">Bezoek</h2><p data-i18n="p1">Vaak open, soms dicht wegens onderhoud of een feestdag. Mensen steken een kaars aan of kijken alleen even binnen. De katholieke kerk is een ander gebouw.</p></article>
-    <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">De precieze openingstijden wisselen. Kijk ter plaatse.</span></div>
-  </div>
-</main>
-<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
-<script>window.HK_DICT = {
-    "nl": {
-      "title": "Kathedraal van Kos en Nisyros",
-      "lead": "Zetel van de metropool van Kos en Nisyros. Na de Tweede Wereldoorlog werd het gebouw een orthodoxe kathedraal, gewijd aan de Aankondiging (Evangelismos).",
-      "back": "← Bezienswaardigheden",
-      "note": "De precieze openingstijden wisselen. Kijk ter plaatse.",
-      "p0": "Na de aardbeving van 1933 moesten delen hersteld worden, maar het gebouw bleef grotendeels overeind. Binnen is een houten iconostase uit de jaren 1970 en veel licht door brede ramen, in de trant van de Italiaanse bouw uit die tijd.",
-      "p1": "Vaak open, soms dicht wegens onderhoud of een feestdag. Mensen steken een kaars aan of kijken alleen even binnen. De katholieke kerk is een ander gebouw.",
-      "hStory": "Het verhaal",
-      "hSee": "Wat je ziet",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Kathedrale von Kos und Nisyros",
-      "lead": "Sitz der Metropolie von Kos und Nisyros. Nach dem Zweiten Weltkrieg wurde das Gebäude eine orthodoxe Kathedrale, geweiht der Verkündigung (Evangelismos).",
-      "back": "← Sehenswürdigkeiten",
-      "note": "Die genauen Öffnungszeiten wechseln. Schau vor Ort.",
-      "p0": "Nach dem Beben von 1933 mussten Teile repariert werden, aber das Gebäude blieb weitgehend stehen. Innen eine hölzerne Ikonostase aus den 1970er Jahren und viel Licht durch breite Fenster, im Stil der italienischen Architektur jener Zeit.",
-      "p1": "Oft offen, manchmal zu wegen Wartung oder eines Feiertags. Leute zünden eine Kerze an oder schauen nur kurz hinein. Die katholische Kirche ist ein anderes Gebäude.",
-      "hStory": "Die Geschichte",
-      "hSee": "Was du siehst",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Cathedral of Kos and Nisyros",
-      "lead": "Seat of the metropolis of Kos and Nisyros. After the Second World War the building became an Orthodox cathedral, dedicated to the Annunciation (Evangelismos).",
-      "back": "← Sights",
-      "note": "Exact opening hours change. Check on the spot.",
-      "p0": "After the 1933 earthquake parts had to be repaired, but the building largely stayed standing. Inside there is a wooden iconostasis from the 1970s and a lot of light through wide windows, in the manner of Italian building of that time.",
-      "p1": "Often open, sometimes closed for maintenance or a feast day. People light a candle or just look inside. The Catholic church is a different building.",
-      "hStory": "The story",
-      "hSee": "What you see",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Cattedrale di Kos e Nisyros",
-      "lead": "Sede della metropolia di Kos e Nisyros. Dopo la Seconda guerra mondiale l’edificio divenne cattedrale ortodossa, dedicata all’Annunciazione (Evangelismos).",
-      "back": "← Attrazioni",
-      "note": "Gli orari precisi cambiano. Controlla sul posto.",
-      "p0": "Dopo il terremoto del 1933 alcune parti andarono riparate, ma l’edificio restò in gran parte in piedi. Dentro c’è un’iconostasi di legno degli anni ’70 e molta luce da finestre larghe, nello stile dell’architettura italiana di allora.",
-      "p1": "Spesso aperta, a volte chiusa per lavori o una festa. La gente accende una candela o guarda solo dentro. La chiesa cattolica è un altro edificio.",
-      "hStory": "La storia",
-      "hSee": "Cosa vedi",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Kos ve Nisyros katedrali",
-      "lead": "Kos ve Nisyros metropolitliğinin merkezi. İkinci Dünya Savaşı’ndan sonra bina, Müjde’ye (Evangelismos) adanmış Ortodoks katedral oldu.",
-      "back": "← Gezilecek yerler",
-      "note": "Kesin açılış saatleri değişir. Yerinde bak.",
-      "p0": "1933 depreminden sonra bazı bölümler onarıldı, ama bina büyük ölçüde ayakta kaldı. İçeride 1970’lerden ahşap bir ikonostasis ve o dönemin İtalyan mimarisine uygun geniş pencerelerden çok ışık var.",
-      "p1": "Çoğu zaman açık, bakım veya bir yortu yüzünden bazen kapalı. İnsanlar mum yakar ya da sadece içeri bakar. Katolik kilisesi başka bir yapıdır.",
-      "hStory": "Hikaye",
-      "hSee": "Ne görürsün",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Catedral de Kos y Nisiros",
-      "lead": "Sede de la metrópoli de Kos y Nisiros. Tras la Segunda Guerra Mundial el edificio pasó a ser catedral ortodoxa, dedicada a la Anunciación (Evangelismos).",
-      "back": "← Lugares de interés",
-      "note": "El horario exacto cambia. Mira en el sitio.",
-      "p0": "Tras el terremoto de 1933 hubo que reparar partes, pero el edificio quedó en pie en gran parte. Dentro hay un iconostasio de madera de los años 70 y mucha luz por ventanas anchas, al modo de la arquitectura italiana de entonces.",
-      "p1": "A menudo abierta, a veces cerrada por obras o una fiesta. La gente enciende una vela o solo mira dentro. La iglesia católica es otro edificio.",
-      "hStory": "La historia",
-      "hSee": "Qué ves",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
+  <main class="main">
+    <div class="hero-wrap">
+      <img class="hk-zoom" src="img/hk/sight-kathedraal.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
+    </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=36.8925%2C27.287" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?ll=36.8925,27.287&amp;q=Kathedraal" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-kathedraal-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-kathedraal-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-kathedraal-03.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-kathedraal-04.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-kathedraal-05.jpg" alt=""></figure>
+<p data-i18n="v3"></p>
+
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
+
+</article>
+    </div>
+  </main>
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Kos-stad",
+    "title": "Kathedraal",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "We staan nu bij de Kathedraal van Kos en Nisyros, ook wel de Metropolis genoemd.",
+    "s1": "We staan nu bij de Kathedraal van Kos en Nisyros, ook wel de Metropolis genoemd. Deze kerk ligt aan het Mitropoleosplein, een wat rustiger plek midden in Kos-stad. De kathedraal werd gebouwd in negentien zesentwintig,dat was in de Italiaanse periode.",
+    "s2": "De architect was Florestano Di Fausto. De Italianen noemden de kerk toen Agnus Dei, oftewel Lam Gods. Het is in romaanse stijl gebouwd, met brede ramen die veel licht binnenlaten, typisch voor de Italiaanse architectuur van die tijd.",
+    "s3": "Na de zware aardbeving van negentien drieëndertig raakte de kerk beschadigd. De Italianen voerden toen reparaties uit, zodat het gebouw grotendeels intact bleef. In negentien achtenveertig, toen Kos weer Grieks werd, ging de kerk over naar de Grieks-orthodoxe kerk.",
+    "v1": "De hoge klokkentoren die er oorspronkelijk bij hoorde, werd na die overdracht afgebroken. De kerk kreeg toen de naam Evangelismos tis Theotokou, de Verkondiging aan de Maagd Maria. Sindsdien is het de kathedraal voor de bisschop van Kos en het naburige eiland Nisyros.",
+    "v2": "Binnen zie je een mooie houten iconostase uit negentien zeventig. Door de brede ramen is het er licht en ruim. Veel locals komen hier even een kaarsje aansteken.Vandaag de dag is het nog altijd de hoofdkerk van de Grieks-orthodoxe gemeenschap op Kos.",
+    "v3": "Na de aardbeving van 1933 moesten ze delen herstellen, maar het gebouw bleef grotendeels intact. In de jaren na de Tweede Wereldoorlog werd het omgebouwd tot Orthodoxe kathedraal, gewijd aan de aankondiging van de Maagd Maria (Evangelismos).",
+    "k1": "De kerk is meestal open voor bezoekers, maar check ter plekke even de tijden, want soms is hij gesloten voor onderhoud of feestdagen."
+  },
+  "de": {
+    "place": "Kos-Stadt",
+    "title": "Kathedraal",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Wir sind jetzt bei der Kathedrale von Kos und Nisyros, auch Metropole genannt.",
+    "s1": "Wir sind jetzt bei der Kathedrale von Kos und Nisyros, auch Metropole genannt. Diese Kirche befindet sich am Mitropoleos-Platz, einem ruhigeren Ort mitten in der Stadt Kos. Die Kathedrale wurde im Jahr 1926, also zur italienischen Zeit, erbaut.",
+    "s2": "Der Architekt war Florestano Di Fausto. Die Italiener nannten die Kirche damals Agnus Dei oder Lamm Gottes. Es wurde im romanischen Stil erbaut und verfügt über große Fenster, die viel Licht hereinlassen, typisch für die italienische Architektur dieser Zeit.",
+    "s3": "Nach dem schweren Erdbeben von 1933 wurde die Kirche beschädigt. Anschließend führten die Italiener Reparaturen durch, so dass das Gebäude weitgehend intakt blieb. Im Jahr 1948, als Kos wieder griechisch wurde, ging die Kirche zur griechisch-orthodoxen Kirche über.",
+    "v1": "Der ursprünglich dazugehörende hohe Glockenturm wurde nach dieser Verlegung abgerissen. Die Kirche hieß damals Evangelismos tis Theotokou, die Verkündigung an die Jungfrau Maria. Seitdem ist sie die Kathedrale des Bischofs von Kos und der Nachbarinsel Nisyros.",
+    "v2": "Im Inneren sehen Sie eine wunderschöne hölzerne Ikonostase aus den 1970er Jahren. Die großen Fenster machen es hell und geräumig. Viele Einheimische kommen hierher, um eine Kerze anzuzünden. Noch heute ist sie die Hauptkirche der griechisch-orthodoxen Gemeinde auf Kos.",
+    "v3": "Nach dem Erdbeben von 1933 mussten Teile repariert werden, das Gebäude blieb jedoch weitgehend intakt. In den Jahren nach dem Zweiten Weltkrieg wurde sie in eine orthodoxe Kathedrale umgewandelt, die der Verkündigung der Jungfrau Maria (Evangelismos) geweiht war.",
+    "k1": "Die Kirche ist normalerweise für Besucher geöffnet, informieren Sie sich jedoch vor Ort über die Öffnungszeiten, da sie manchmal wegen Wartungsarbeiten oder an Feiertagen geschlossen ist."
+  },
+  "en": {
+    "place": "Kos Town",
+    "title": "Kathedraal",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "We are now at the Cathedral of Kos and Nisyros, also called the Metropolis.",
+    "s1": "We are now at the Cathedral of Kos and Nisyros, also called the Metropolis. This church is located on Mitropoleos Square, a quieter place in the middle of Kos Town. The cathedral was built in nineteen twenty-six, which was in the Italian period.",
+    "s2": "The architect was Florestano Di Fausto. The Italians then called the church Agnus Dei, or Lamb of God. It was built in Romanesque style, with wide windows that let in a lot of light, typical of the Italian architecture of that time.",
+    "s3": "After the severe earthquake of nineteen thirty-three, the church was damaged. The Italians then made repairs so that the building remained largely intact. In nineteen forty-eight, when Kos became Greek again, the church transitioned to the Greek Orthodox Church.",
+    "v1": "The high bell tower that originally belonged to it was demolished after that transfer. The church was then called Evangelismos tis Theotokou, the Annunciation to the Virgin Mary. Since then it has been the cathedral for the Bishop of Kos and the neighboring island of Nisyros.",
+    "v2": "Inside you will see a beautiful wooden iconostasis from the nineteen seventies. The wide windows make it light and spacious. Many locals come here to light a candle. Today it is still the main church of the Greek Orthodox community on Kos.",
+    "v3": "After the 1933 earthquake they had to repair parts, but the building remained largely intact. In the years after the Second World War it was converted into an Orthodox cathedral, dedicated to the Annunciation of the Virgin Mary (Evangelismos).",
+    "k1": "The church is usually open to visitors, but check the times locally, because it is sometimes closed for maintenance or holidays."
+  },
+  "it": {
+    "place": "Città di Kos",
+    "title": "Kathedraal",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Siamo ora alla Cattedrale di Kos e Nisyros, chiamata anche la Metropoli.",
+    "s1": "Siamo ora alla Cattedrale di Kos e Nisyros, chiamata anche la Metropoli. Questa chiesa si trova in Piazza Mitropoleos, un posto più tranquillo nel centro della città di Kos. La cattedrale fu costruita nel 1926, periodo italiano.",
+    "s2": "L'architetto fu Florestano Di Fausto. Gli italiani allora chiamarono la chiesa Agnus Dei, o Agnello di Dio. Fu costruita in stile romanico, con ampie finestre che lasciavano entrare molta luce, tipica dell'architettura italiana dell'epoca.",
+    "s3": "Dopo il forte terremoto del 1933, la chiesa fu danneggiata. Gli italiani poi effettuarono le riparazioni in modo che l'edificio rimanesse in gran parte intatto. Nel 1948, quando Kos tornò ad essere greca, la chiesa passò alla Chiesa greco-ortodossa.",
+    "v1": "L'alto campanile che in origine le apparteneva venne demolito dopo tale trasferimento. La chiesa allora si chiamava Evangelismos tis Theotokou, l'Annunciazione alla Vergine Maria. Da allora è stata la cattedrale del vescovo di Kos e della vicina isola di Nisyros.",
+    "v2": "All'interno vedrai una bellissima iconostasi in legno degli anni Settanta. Le ampie finestre lo rendono luminoso e spazioso. Molti locali vengono qui per accendere una candela. Ancora oggi è la chiesa principale della comunità greco-ortodossa di Kos.",
+    "v3": "Dopo il terremoto del 1933 si dovette riparare alcune parti, ma l'edificio rimase sostanzialmente intatto. Negli anni successivi alla Seconda Guerra Mondiale fu trasformata in cattedrale ortodossa, dedicata all'Annunciazione della Vergine Maria (Evangelismos).",
+    "k1": "La chiesa è solitamente aperta ai visitatori, ma controlla gli orari in loco, perché a volte è chiusa per manutenzione o ferie."
+  },
+  "tr": {
+    "place": "Kos şehri",
+    "title": "Kathedraal",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Metropolis olarak da adlandırılan Kos ve Nisiros Katedrali'ndeyiz artık.",
+    "s1": "Metropolis olarak da adlandırılan Kos ve Nisiros Katedrali'ndeyiz artık. Bu kilise, Kos şehrinin ortasında daha sakin bir yer olan Mitropoleos Meydanı'nda yer almaktadır. Katedral bin dokuz yüz yirmi altıda, yani İtalyan döneminde inşa edilmiş.",
+    "s2": "Mimarı Florestano Di Fausto'ydu. İtalyanlar daha sonra kiliseye Agnus Dei veya Tanrının Kuzusu adını verdiler. O zamanın İtalyan mimarisine özgü, bol ışık alan geniş pencerelerle Romanesk tarzda inşa edilmiştir.",
+    "s3": "Bin dokuz yüz otuz üçteki şiddetli depremden sonra kilise hasar gördü. İtalyanlar daha sonra binanın büyük ölçüde sağlam kalması için onarımlar yaptılar. 1948 yılında Kos yeniden Yunan olunca kilise Rum Ortodoks Kilisesi'ne geçti.",
+    "v1": "Başlangıçta kendisine ait olan yüksek çan kulesi bu transferden sonra yıkılmıştır. Kiliseye daha sonra Meryem Ana'ya Müjde anlamına gelen Evangelismos tis Theotokou adı verildi. O zamandan beri Kos Piskoposunun ve komşu Nisyros adasının katedrali olmuştur.",
+    "v2": "İçeride 1970'lerden kalma güzel bir ahşap ikonostasis göreceksiniz. Geniş pencereler onu aydınlık ve ferah kılar. Birçok yerli buraya mum yakmaya geliyor. Bugün hala Kos'taki Rum Ortodoks cemaatinin ana kilisesidir.",
+    "v3": "1933 depreminden sonra bazı kısımları onarmak zorunda kaldılar ama bina büyük ölçüde sağlam kaldı. İkinci Dünya Savaşı'ndan sonraki yıllarda Meryem Ana'nın Müjdesi'ne (Evangelismos) adanan bir Ortodoks katedraline dönüştürüldü.",
+    "k1": "Kilise genellikle ziyaretçilere açıktır, ancak bazen bakım veya tatil nedeniyle kapalı olduğundan saatleri yerel olarak kontrol edin."
+  },
+  "es": {
+    "place": "Ciudad de Kos",
+    "title": "Kathedraal",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Ahora estamos en la Catedral de Kos y Nisyros, también llamada Metrópolis.",
+    "s1": "Ahora estamos en la Catedral de Kos y Nisyros, también llamada Metrópolis. Esta iglesia está ubicada en la plaza Mitropoleos, un lugar más tranquilo en el centro de la ciudad de Kos. La catedral fue construida en mil novecientos veintiséis, que correspondía al período italiano.",
+    "s2": "El arquitecto fue Florestano Di Fausto. Los italianos llamaron entonces a la iglesia Agnus Dei, o Cordero de Dios. Fue construido en estilo románico, con amplios ventanales que dejaban entrar mucha luz, típico de la arquitectura italiana de aquella época.",
+    "s3": "Tras el fuerte terremoto de mil novecientos treinta y tres, la iglesia resultó dañada. Luego, los italianos hicieron reparaciones para que el edificio permaneciera prácticamente intacto. En 1948, cuando Kos volvió a ser griega, la iglesia pasó a ser la Iglesia Ortodoxa Griega.",
+    "v1": "El alto campanario que originalmente le pertenecía fue derribado tras ese traslado. La iglesia se llamó entonces Evangelismos tis Theotokou, la Anunciación a la Virgen María. Desde entonces ha sido la catedral del obispo de Kos y de la vecina isla de Nisyros.",
+    "v2": "En su interior verás un precioso iconostasio de madera de los años setenta. Los amplios ventanales lo hacen luminoso y espacioso. Muchos lugareños vienen aquí para encender una vela. Hoy en día sigue siendo la iglesia principal de la comunidad ortodoxa griega en Kos.",
+    "v3": "Después del terremoto de 1933 hubo que reparar algunas piezas, pero el edificio permaneció prácticamente intacto. En los años posteriores a la Segunda Guerra Mundial se convirtió en una catedral ortodoxa, dedicada a la Anunciación de la Virgen María (Evangelismos).",
+    "k1": "La iglesia suele estar abierta a los visitantes, pero consulte los horarios localmente, ya que a veces está cerrada por mantenimiento o días festivos."
+  }
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

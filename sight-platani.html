@@ -1,113 +1,199 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0D1A1A">
-<title>Platani – Hello Kos</title>
-<link rel="stylesheet" href="hello-kos.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Platani – Hello Kos</title>
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body class="hk-page">
-<header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+<body class="hk-page hk-guide">
+  <header class="app-header">
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-<main class="main">
-  <div class="hero-wrap"><img src="img/hk/sight-platani.jpg" alt="">
-      <div class="hero-title"><h1 data-i18n="title">Platani</h1></div></div>
-  <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back">← Bezienswaardigheden</a></p>
-<p class="lead" data-i18n="lead">Dorp net buiten Kos-stad, naast het Asklepion. Christenen en moslims van Turkse afkomst wonen hier al eeuwen naast elkaar. Veel bewoners spreken nog Turks. De tavernes hebben vaak gerechten met die invloed.</p>
-  
-  <div class="actions">
-    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
-    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
-    
-  </div>
-  
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Platani%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Platani%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
       </div>
-      <p class="status" id="ttsStatus"></p>
-  <div id="readText">
-    <article class="card"><h2 data-i18n="hStory">Erfgoed</h2><p data-i18n="p0">Buiten het dorp ligt een Joodse begraafplaats. In 1944 werden de Joden van Kos via het eiland weggevoerd naar Auschwitz. Een kleine waterval ligt ook bij Platani.</p></article>
-    
-  </div>
-</main>
-<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
-<script>window.HK_DICT = {
-    "nl": {
-      "title": "Platani",
-      "lead": "Dorp net buiten Kos-stad, naast het Asklepion. Christenen en moslims van Turkse afkomst wonen hier al eeuwen naast elkaar. Veel bewoners spreken nog Turks. De tavernes hebben vaak gerechten met die invloed.",
-      "back": "← Bezienswaardigheden",
-      "p0": "Buiten het dorp ligt een Joodse begraafplaats. In 1944 werden de Joden van Kos via het eiland weggevoerd naar Auschwitz. Een kleine waterval ligt ook bij Platani.",
-      "hStory": "Het verhaal",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Platani",
-      "lead": "Dorf knapp außerhalb von Kos-Stadt, neben dem Asklepion. Christen und Muslime türkischer Herkunft leben hier seit Jahrhunderten nebeneinander. Viele sprechen noch Türkisch. Die Tavernen haben oft Gerichte mit diesem Einfluss.",
-      "back": "← Sehenswürdigkeiten",
-      "p0": "Außerhalb des Dorfs liegt ein jüdischer Friedhof. 1944 wurden die Juden von Kos über die Insel nach Auschwitz deportiert. Ein kleiner Wasserfall liegt auch bei Platani.",
-      "hStory": "Die Geschichte",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Platani",
-      "lead": "Village just outside Kos town, next to the Asklepion. Christians and Muslims of Turkish origin have lived side by side here for centuries. Many residents still speak Turkish. The tavernas often have dishes with that influence.",
-      "back": "← Sights",
-      "p0": "Outside the village is a Jewish cemetery. In 1944 the Jews of Kos were deported via the island to Auschwitz. A small waterfall is also near Platani.",
-      "hStory": "The story",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Platani",
-      "lead": "Villaggio appena fuori città, accanto all’Asklepion. Cristiani e musulmani di origine turca vivono qui fianco a fianco da secoli. Molti parlano ancora turco. Le taverne hanno spesso piatti con quell’influenza.",
-      "back": "← Attrazioni",
-      "p0": "Fuori dal villaggio c’è un cimitero ebraico. Nel 1944 gli ebrei di Kos furono deportati via l’isola ad Auschwitz. Vicino a Platani c’è anche una piccola cascata.",
-      "hStory": "La storia",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Platani",
-      "lead": "Kos şehrinin hemen dışında, Asklepion’un yanında köy. Hristiyanlar ve Türk kökenli Müslümanlar yüzyıllardır yan yana yaşar. Birçok kişi hâlâ Türkçe konuşur. Tavernelerde çoğu zaman bu etkiden yemekler vardır.",
-      "back": "← Gezilecek yerler",
-      "p0": "Köyün dışında bir Yahudi mezarlığı var. 1944’te Kos Yahudileri ada üzerinden Auschwitz’e sürüldü. Platani yakınında küçük bir şelale de var.",
-      "hStory": "Hikaye",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Platani",
-      "lead": "Pueblo justo fuera de la ciudad, junto al Asklepion. Cristianos y musulmanes de origen turco viven aquí juntos desde hace siglos. Muchos aún hablan turco. Las tabernas suelen tener platos con esa influencia.",
-      "back": "← Lugares de interés",
-      "p0": "Fuera del pueblo hay un cementerio judío. En 1944 los judíos de Kos fueron deportados por la isla a Auschwitz. Cerca de Platani hay también una cascada pequeña.",
-      "hStory": "La historia",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
+  <main class="main">
+    <div class="hero-wrap">
+      <img class="hk-zoom" src="img/hk/sight-platani.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
+    </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=Platani%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?q=Platani%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-platani-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-platani-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-platani-03.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-platani-04.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-platani-05.jpg" alt=""></figure>
+<p data-i18n="v3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-platani-06.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
+
+</article>
+    </div>
+  </main>
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Platani",
+    "title": "Platani",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "We rijden nu een klein stukje de weg op richting het Asklepion.",
+    "s1": "We rijden nu een klein stukje de weg op richting het Asklepion. Na ongeveer drie kilometer bereiken we het dorp Plantaanie, dat vroeger Kermentes heette. In de Ottomaanse periode, vanaf ongeveer vijftienhonderd, heette het dorp Kermentes.",
+    "s2": "In negentien vierenzestig veranderde de Griekse overheid de naam in Plantaanie, naar de grote plataanboom die op het centrale plein staat. De oude naam had een Turkse betekenis, en in die tijd werden veel Turkse plaatsnamen in Griekenland vervangen door Griekse namen. Wat Plantaanie echt bijzonder maakt, is dat hier al eeuwenlang Griekse christenen en Griekse moslims, vaak van Turkse afkomst, vreedzaam naast elkaar wonen.",
+    "s3": "Je ziet het meteen terug in het dorp, een orthodoxe kerk en een moskee staan dicht bij elkaar, de straatjes hebben een mix van Griekse en Turkse invloeden, en veel bewoners spreken nog steeds Turks. Ook in de tavernes op het plein proef je Turkse gerechten en recepten uit Klein-Azië. Op het centrale plein staat een imposante plataanboom die veel schaduw geeft.",
+    "v1": "Rondom het plein vind je traditionele tavernes waar je lekker kunt eten. Buiten het dorp ligt ook een oude Joodse begraafplaats, een stille herinnering aan de Joodse gemeenschap die hier vroeger leefde. Het dorp voelt rustig en authentiek.",
+    "v2": "Veel bezoekers komen hier even langs op weg naar het Asklepion of om de bijzondere mix van culturen te ervaren. Je kunt er rondwandelen, op het plein zitten of iets eten in een van de tavernes.Het is 1 van die plekken waar je even beseft hoe mooi het kan zijn als mensen met verschillende achtergronden al honderden jaren gewoon goed met elkaar kunnen opschieten. Een klein dorp met een groot verhaal over samenleven.",
+    "v3": "De naamswijziging in 1964 kwam na spanningen rond Cyprus, Kermetes betekent in het turks \" kiem\"maar de mensen in Platani bleven prima met elkaar overweg – een mooi voorbeeld van samenleven, dat al sinds de Ottomaanse periode (vanaf ongeveer 1500) standhoudt.",
+    "k1": "Buiten het dorp ligt een Joodse begraafplaats. Tijdens de tweede wereldoorlog zijn de Joden van Kos in 1944 via Kos getransporteerd naar Auschwitz."
+  },
+  "de": {
+    "place": "Platani",
+    "title": "Platani",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Wir fahren nun ein kurzes Stück die Straße hinauf in Richtung Asclepion.",
+    "s1": "Wir fahren nun ein kurzes Stück die Straße hinauf in Richtung Asclepion. Nach etwa drei Kilometern erreichen wir das Dorf Plantaanie, das früher Kermentes hieß. In der osmanischen Zeit, etwa ab dem 15. Jahrhundert, hieß das Dorf Kermentes.",
+    "s2": "Im Jahr 1964 änderte die griechische Regierung den Namen in Plantaanie, nach der großen Platane, die auf dem zentralen Platz steht. Der alte Name hatte eine türkische Bedeutung, und zu dieser Zeit wurden viele türkische Ortsnamen in Griechenland durch griechische Namen ersetzt. Das Besondere an Plantaanie ist, dass griechische Christen und griechische Muslime, oft türkischer Abstammung, hier seit Jahrhunderten friedlich nebeneinander leben.",
+    "s3": "Im Dorf sieht man es sofort, eine orthodoxe Kirche und eine Moschee liegen dicht beieinander, in den Straßen herrscht eine Mischung aus griechischen und türkischen Einflüssen und viele Einwohner sprechen noch immer Türkisch. In den Tavernen am Platz können Sie auch türkische Gerichte und Rezepte aus Kleinasien probieren. Auf dem zentralen Platz steht eine imposante Platane, die viel Schatten spendet.",
+    "v1": "Rund um den Platz finden Sie traditionelle Tavernen, in denen Sie köstliche Speisen genießen können. Außerhalb des Dorfes gibt es auch einen alten jüdischen Friedhof, eine stille Erinnerung an die jüdische Gemeinde, die hier einst lebte. Das Dorf wirkt ruhig und authentisch.",
+    "v2": "Viele Besucher kommen hier auf dem Weg zum Asklepieion vorbei oder um den besonderen Kulturmix zu erleben. Sie können herumlaufen, auf dem Platz sitzen oder in einer der Tavernen etwas essen. Es ist einer dieser Orte, an denen einem für einen Moment klar wird, wie schön es sein kann, wenn Menschen mit unterschiedlichem Hintergrund seit Hunderten von Jahren gut miteinander auskommen. Ein kleines Dorf mit einer großen Geschichte über das Zusammenleben.",
+    "v3": "Die Namensänderung im Jahr 1964 erfolgte nach Spannungen rund um Zypern, Kermetes bedeutet auf Türkisch „Keim“, aber die Menschen in Platani kamen weiterhin gut miteinander aus – ein gutes Beispiel für das Zusammenleben, das seit der osmanischen Zeit (ab etwa 1500) Bestand hat.",
+    "k1": "Außerhalb des Dorfes gibt es einen jüdischen Friedhof. Während des Zweiten Weltkriegs wurden die Juden von Kos 1944 über Kos nach Auschwitz transportiert."
+  },
+  "en": {
+    "place": "Platani",
+    "title": "Platani",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "We now drive a short distance up the road towards the Asclepion.",
+    "s1": "We now drive a short distance up the road towards the Asclepion. After about three kilometers we reach the village of Plantaanie, which used to be called Kermentes. In the Ottoman period, from about fifteen hundred, the village was called Kermentes.",
+    "s2": "In nineteen sixty-four, the Greek government changed the name to Plantaanie, after the large plane tree that stands on the central square. The old name had a Turkish meaning, and at that time many Turkish place names in Greece were replaced by Greek names. What makes Plantaanie really special is that Greek Christians and Greek Muslims, often of Turkish descent, have lived peacefully next to each other here for centuries.",
+    "s3": "You can immediately see it in the village, an Orthodox church and a mosque are close to each other, the streets have a mix of Greek and Turkish influences, and many residents still speak Turkish. You can also taste Turkish dishes and recipes from Asia Minor in the taverns on the square. On the central square there is an imposing plane tree that provides plenty of shade.",
+    "v1": "Around the square you will find traditional taverns where you can enjoy delicious food. Outside the village there is also an old Jewish cemetery, a silent reminder of the Jewish community that used to live here. The village feels quiet and authentic.",
+    "v2": "Many visitors stop by here on their way to the Asclepion or to experience the special mix of cultures. You can walk around, sit on the square or eat something in one of the taverns. It is one of those places where you realize for a moment how beautiful it can be if people from different backgrounds have been getting along well together for hundreds of years. A small village with a big story about living together.",
+    "v3": "The name change in 1964 came after tensions around Cyprus, Kermetes means \"germ\" in Turkish, but the people in Platani continued to get along well with each other - a good example of living together, which has lasted since the Ottoman period (from about 1500).",
+    "k1": "There is a Jewish cemetery outside the village. During the Second World War, the Jews of Kos were transported via Kos to Auschwitz in 1944."
+  },
+  "it": {
+    "place": "Platani",
+    "title": "Platani",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Ora percorriamo un breve tratto lungo la strada verso l'Asclepion.",
+    "s1": "Ora percorriamo un breve tratto lungo la strada verso l'Asclepion. Dopo circa tre chilometri raggiungiamo il villaggio di Plantaanie, che un tempo si chiamava Kermentes. Nel periodo ottomano, a partire dal millecinquecento circa, il villaggio si chiamava Kermentes.",
+    "s2": "Nel 1964, il governo greco cambiò il nome in Plantaanie, dal nome del grande platano che svetta sulla piazza centrale. Il vecchio nome aveva un significato turco, e a quel tempo molti toponimi turchi in Grecia furono sostituiti con nomi greci. Ciò che rende Planaanie davvero speciale è che cristiani greci e musulmani greci, spesso di origine turca, convivono pacificamente qui da secoli.",
+    "s3": "Lo si vede subito nel villaggio, una chiesa ortodossa e una moschea sono vicine l'una all'altra, le strade hanno un mix di influenze greche e turche e molti residenti parlano ancora turco. Nelle taverne della piazza potrete inoltre assaggiare piatti turchi e ricette dell'Asia Minore. Sulla piazza centrale c'è un imponente platano che garantisce molta ombra.",
+    "v1": "Intorno alla piazza troverete taverne tradizionali dove potrete gustare piatti deliziosi. Fuori dal paese c'è anche un vecchio cimitero ebraico, silenzioso ricordo della comunità ebraica che viveva qui. Il villaggio sembra tranquillo e autentico.",
+    "v2": "Molti visitatori si fermano qui mentre si recano all'Asclepion o per sperimentare lo speciale mix di culture. Puoi passeggiare, sederti in piazza o mangiare qualcosa in una delle taverne. È uno di quei posti in cui ti rendi conto per un momento di quanto possa essere bello se persone di diversa estrazione vanno d'accordo per centinaia di anni. Un piccolo villaggio con una grande storia di convivenza.",
+    "v3": "Il cambio di nome nel 1964 avvenne dopo le tensioni intorno a Cipro, Kermetes significa \"germe\" in turco, ma gli abitanti di Platani continuarono ad andare d'accordo tra loro - un buon esempio di convivenza, che dura dal periodo ottomano (dal 1500 circa).",
+    "k1": "C'è un cimitero ebraico fuori dal villaggio. Durante la seconda guerra mondiale, gli ebrei di Kos furono deportati via Kos ad Auschwitz nel 1944."
+  },
+  "tr": {
+    "place": "Platani",
+    "title": "Platani",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Şimdi Asklepion'a doğru kısa bir mesafe katediyoruz.",
+    "s1": "Şimdi Asklepion'a doğru kısa bir mesafe katediyoruz. Yaklaşık üç kilometre sonra Kermentes adı verilen Plantaanie köyüne ulaşıyoruz. Osmanlı döneminde bin beş yüz civarında köye Kermentes adı veriliyordu.",
+    "s2": "1964 yılında Yunan hükümeti, meydanın ortasındaki büyük çınar ağacından esinlenerek adını Plantaanie olarak değiştirdi. Eski ismin Türkçe anlamı vardı ve o dönemde Yunanistan'daki pek çok Türkçe yer isminin yerini Yunanca isimler almıştı. Plantaanie'yi gerçekten özel kılan şey, çoğu Türk kökenli olan Rum Hıristiyanlar ve Rum Müslümanların yüzyıllardır burada barış içinde bir arada yaşamasıdır.",
+    "s3": "Bunu köyde hemen görebilirsiniz, bir Ortodoks kilisesi ile cami birbirine yakın, sokaklarda Rum ve Türk etkilerinin bir karışımı var ve sakinlerin çoğu hala Türkçe konuşuyor. Ayrıca meydandaki meyhanelerde Türk yemeklerini ve Küçük Asya'ya ait tarifleri tadabilirsiniz. Merkez meydanda bol miktarda gölge sağlayan heybetli bir çınar ağacı bulunmaktadır.",
+    "v1": "Meydanın çevresinde lezzetli yemeklerin tadını çıkarabileceğiniz geleneksel tavernalar bulacaksınız. Köyün dışında, burada yaşayan Yahudi cemaatinin sessiz bir hatırlatıcısı olan eski bir Yahudi mezarlığı da bulunmaktadır. Köy sessiz ve otantik hissi veriyor.",
+    "v2": "Pek çok ziyaretçi Asklepion'a giderken ya da kültürlerin özel karışımını deneyimlemek için buraya uğramaktadır. Etrafta dolaşabilir, meydanda oturabilir veya meyhanelerden birinde bir şeyler yiyebilirsiniz. Farklı kökenden gelen insanların yüzlerce yıldır bir arada iyi geçinmesinin ne kadar güzel olabileceğini bir anlığına fark ettiğiniz yerlerden biri. Birlikte yaşamanın büyük bir hikayesi olan küçük bir köy.",
+    "v3": "1964'teki isim değişikliği, Kıbrıs'ta yaşanan gerginliklerin ardından geldi, Kermetes Türkçe'de \"mikrop\" anlamına geliyordu, ancak Platani'deki insanlar birbirleriyle iyi geçinmeye devam etti - Osmanlı döneminden beri (yaklaşık 1500'den beri) süren birlikte yaşamanın güzel bir örneği.",
+    "k1": "Köyün dışında bir Yahudi mezarlığı bulunmaktadır. İkinci Dünya Savaşı sırasında Kos Yahudileri 1944'te Kos üzerinden Auschwitz'e nakledildi."
+  },
+  "es": {
+    "place": "Platani",
+    "title": "Platani",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Ahora conducimos un corto tramo por la carretera hacia Asclepion.",
+    "s1": "Ahora conducimos un corto tramo por la carretera hacia Asclepion. Después de unos tres kilómetros llegamos al pueblo de Plantaanie, que antiguamente se llamaba Kermentes. En el período otomano, alrededor del mil quinientos, el pueblo se llamaba Kermentes.",
+    "s2": "En 1964, el gobierno griego cambió el nombre a Plantaanie, en honor al gran plátano que se alza en la plaza central. El antiguo nombre tenía un significado turco y en aquella época muchos topónimos turcos en Grecia fueron sustituidos por nombres griegos. Lo que hace que Plantaanie sea realmente especial es que los cristianos griegos y los musulmanes griegos, a menudo de ascendencia turca, han vivido aquí pacíficamente uno al lado del otro durante siglos.",
+    "s3": "Se puede ver inmediatamente en el pueblo: una iglesia ortodoxa y una mezquita están cerca una de otra, las calles tienen una mezcla de influencias griegas y turcas y muchos residentes todavía hablan turco. También podrás degustar platos turcos y recetas de Asia Menor en las tabernas de la plaza. En la plaza central hay un imponente plátano que proporciona mucha sombra.",
+    "v1": "Alrededor de la plaza encontrarás tabernas tradicionales donde podrás disfrutar de una deliciosa comida. Fuera del pueblo también hay un antiguo cementerio judío, un recordatorio silencioso de la comunidad judía que vivía aquí. El pueblo parece tranquilo y auténtico.",
+    "v2": "Muchos visitantes pasan por aquí de camino al Asclepion o para experimentar la mezcla especial de culturas. Puedes pasear, sentarte en la plaza o comer algo en alguna de las tabernas. Es uno de esos lugares donde por un momento te das cuenta de lo hermoso que puede ser si personas de diferentes orígenes se llevan bien durante cientos de años. Un pequeño pueblo con una gran historia sobre la convivencia.",
+    "v3": "El cambio de nombre en 1964 se produjo después de las tensiones en torno a Chipre; Kermetes significa \"germen\" en turco, pero los habitantes de Platani siguieron llevándose bien entre sí, un buen ejemplo de convivencia que dura desde la época otomana (desde aproximadamente 1500).",
+    "k1": "Hay un cementerio judío fuera del pueblo. Durante la Segunda Guerra Mundial, los judíos de Kos fueron transportados a través de Kos a Auschwitz en 1944."
+  }
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

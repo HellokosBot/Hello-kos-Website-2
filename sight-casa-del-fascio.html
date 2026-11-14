@@ -1,435 +1,199 @@
 <!DOCTYPE html>
-<html lang="nl" data-hk-own="1" data-hk-tts="1">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0D1F1F">
   <title>Casa del Fascio – Hello Kos</title>
-  <style>
-    :root {
-      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
-      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
-      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
-      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
-      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text); -webkit-font-smoothing: antialiased;
-      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
-      background: var(--bg); min-height: 100vh; line-height: 1.55;
-    }
-    .app-header {
-      position: sticky; top: 0; z-index: 100;
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-      padding: 14px 16px; background: var(--bg-header);
-      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
-    }
-    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
-    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
-    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
-    .logo-text span { color: var(--gold-dark); font-style: italic; }
-    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
-    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
-    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
-    .lang-menu.open { display: block; }
-    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
-    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
-    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
-    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
-    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .content { padding: 18px 16px 0; }
-    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
-    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-
-    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
-    .btn-audio { background: var(--petrol); color: #fff; }
-    .btn-audio.playing { background: var(--petrol-dark); }
-    .btn-stop { background: #3A4545; color: #fff; display: none; }
-    .btn-stop.show { display: flex; }
-
-    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
-    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
-    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
-    .card p:last-child { margin-bottom: 0; }
-    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
-    .tip strong { color: var(--gold); }
-    .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
-    .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
-    .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
-
-    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
-    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
-    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
-    .footer a { color: var(--petrol); text-decoration: none; }
-  </style>
-<link rel="stylesheet" href="hello-kos.css">
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body>
+<body class="hk-page hk-guide">
   <header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
   <main class="main">
     <div class="hero-wrap">
-      <img src="img/jwwb/1b4f1221e9-kos-eleftherias_square_-piazza-orfeas_-former_casa.jpg" alt="Casa del Fascio Kos" loading="eager">
-      <div class="hero-title"><h1 data-i18n="title">Casa del Fascio</h1></div>
+      <img class="hk-zoom" src="img/jwwb/1b4f1221e9-kos-eleftherias_square_-piazza-orfeas_-former_casa.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
     </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=36.8926%2C27.2865" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?ll=36.8926,27.2865&amp;q=Casa%20del%20Fascio" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-casa-del-fascio-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-casa-del-fascio-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-casa-del-fascio-03.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-casa-del-fascio-04.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-casa-del-fascio-05.jpg" alt=""></figure>
+<p data-i18n="v3"></p>
 
-    <div class="content">
-<p class="lead" data-i18n="lead">Imposant Italiaans gebouw met toren en sprekerbalkon – ooit fascistisch hoofdkwartier, nu café-restaurant op het centrale plein.</p>
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
 
-      
-
-      <div class="actions">
-        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
-        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-      </div>
-      
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Casa%20del%20Fascio%20Eleftherias%20Square%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Casa%20del%20Fascio%20Eleftherias%20Square%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
-      </div>
-      <p class="status" id="ttsStatus"></p>
-
-      <div id="readText">
-        <div class="card">
-          <h2 data-i18n="hStory">Op het centrale plein</h2>
-          <p data-i18n="p1">De Casa del Fascio is een groot, imposant gebouw op Eleftherias-plein (Piazza Orfeas) in het centrum van Kos-stad. Het werd gebouwd door de fascistische partij van Mussolini tijdens de Italiaanse bezetting van de Dodekanesos (1912–1947).</p>
-        </div>
-
-        
-
-        <div class="card">
-          <h2 data-i18n="hSee">Na de aardbeving van 1933</h2>
-          <p data-i18n="p2">Na de zware aardbeving van 1933 kregen de Italianen de kans om Kos en het plein opnieuw in te richten. In 1935 bouwden zij de Casa del Fascio als hoofdkwartier voor de fascistische partij.</p>
-          <p data-i18n="p3">Het gebouw heeft een hoge klokkentoren en een balkon erboven, en domineert één kant van het plein. De stijl is strak, modern en symmetrisch – typisch Italiaanse rationalistische architectuur uit die tijd.</p>
-        </div>
-
-        <div class="photo-block">
-          <img src="img/jwwb/c37ca88953-caption-6-high.jpg" alt="Casa del Fascio exterieur" loading="lazy">
-          <div class="cap" data-i18n="cap1">Het gebouw op Eleftherias-plein</div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2after">Na de oorlog</h2>
-          <p data-i18n="p4">Toen de Italianen weg waren en Kos weer Grieks werd, veranderde de functie. Vandaag zit er een café-restaurant in (onder meer Aegli). De buitenkant is nog steeds een duidelijk voorbeeld van de Italiaanse bouwstijl uit de jaren dertig.</p>
-        </div>
-
-        <div class="photo-block">
-          <img src="img/jwwb/243aa436fa-kos_citt-_piazza_eleftherias-_edificio_razionalista-_targa-high.jpg" alt="Plaquette Casa del Fascio" loading="lazy">
-          <div class="cap" data-i18n="cap2">Plaquette met gedicht over “gebroken boten”</div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2plaque">Plaquette “gebroken boten”</h2>
-          <p data-i18n="p5">Aan de voorkant hangt een plaquette met een gedicht over “gebroken boten”. Dat herinnert aan de bevrijding van Kos na de Tweede Wereldoorlog (rond 1945).</p>
-          <p data-i18n="p6">De “gebroken boten” staan symbool voor kapotte schepen, dromen en levens door de oorlog en de bezetting – en voor de hoop daarna.</p>
-        </div>
-
-        <div class="gallery">
-          <div class="g-item">
-            <img src="img/jwwb/352e24616e-1280px-kos_citt-_piazza_eleftherias-_edificio_razi.jpg" alt="Casa del Fascio plein" loading="lazy">
-            <span data-i18n="g1">Op het plein</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/5f0bf17b4c-schermopname_3-3-2026_19283_www-mediastorehouse-com-high.jpg" alt="Historische opname" loading="lazy">
-            <span data-i18n="g2">Historisch</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="hKnow">Bezoeken</h2>
-          <p data-i18n="p7">De buitenkant kun je altijd bekijken vanaf Eleftherias-plein. Binnen is het een café-restaurant – open tijdens horeca-uren.</p>
-          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: perfect te combineren met de Markthal, Defterdar-moskee en het Archeologisch museum – allemaal op of bij dit plein.</p></div>
-        </div>
-      </div>
+</article>
     </div>
   </main>
-
-  <footer class="footer">
-    <div>Hello Kos</div>
-    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
-  </footer>
-
-<script>
-(function(){
-  var I18N = window.HK_DICT = {
-    "nl": {
-      "title": "Casa del Fascio",
-      "lead": "Imposant Italiaans gebouw met toren en sprekerbalkon – ooit fascistisch hoofdkwartier, nu café-restaurant op het centrale plein.",
-      "btnPlay": "Voorlezen",
-      "p1": "De Casa del Fascio is een groot, imposant gebouw op Eleftherias-plein (Piazza Orfeas) in het centrum van Kos-stad. Het werd gebouwd door de fascistische partij van Mussolini tijdens de Italiaanse bezetting van de Dodekanesos (1912–1947).",
-      "p2": "Na de zware aardbeving van 1933 kregen de Italianen de kans om Kos en het plein opnieuw in te richten. In 1935 bouwden zij de Casa del Fascio als hoofdkwartier voor de fascistische partij.",
-      "p3": "Het gebouw heeft een hoge klokkentoren en een balkon erboven, en domineert één kant van het plein. De stijl is strak, modern en symmetrisch – typisch Italiaanse rationalistische architectuur uit die tijd.",
-      "cap1": "Het gebouw op Eleftherias-plein",
-      "h2after": "Na de oorlog",
-      "p4": "Toen de Italianen weg waren en Kos weer Grieks werd, veranderde de functie. Vandaag zit er een café-restaurant in (onder meer Aegli). De buitenkant is nog steeds een duidelijk voorbeeld van de Italiaanse bouwstijl uit de jaren dertig.",
-      "cap2": "Plaquette met gedicht over “gebroken boten”",
-      "h2plaque": "Plaquette “gebroken boten”",
-      "p5": "Aan de voorkant hangt een plaquette met een gedicht over “gebroken boten”. Dat herinnert aan de bevrijding van Kos na de Tweede Wereldoorlog (rond 1945).",
-      "p6": "De “gebroken boten” staan symbool voor kapotte schepen, dromen en levens door de oorlog en de bezetting – en voor de hoop daarna.",
-      "g1": "Op het plein",
-      "g2": "Historisch",
-      "p7": "De buitenkant kun je altijd bekijken vanaf Eleftherias-plein. Binnen is het een café-restaurant – open tijdens horeca-uren.",
-      "tip": "perfect te combineren met de Markthal, Defterdar-moskee en het Archeologisch museum – allemaal op of bij dit plein.",
-      "hStory": "Het verhaal",
-      "hSee": "Wat je ziet",
-      "hKnow": "Goed om te weten",
-      "tipTitle": "Tip van de gids",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Casa del Fascio",
-      "lead": "Imposing Italian building with tower and speaker’s balcony – once fascist headquarters, now café-restaurant on the central square.",
-      "btnPlay": "Read aloud",
-      "p1": "The Casa del Fascio is a large, imposing building on Eleftherias Square (Piazza Orfeas) in the centre of Kos Town. It was built by Mussolini’s fascist party during the Italian occupation of the Dodecanese (1912–1947).",
-      "p2": "After the severe earthquake of 1933 the Italians had the chance to redesign Kos and the square. In 1935 they built the Casa del Fascio as headquarters for the fascist party.",
-      "p3": "The building has a tall clock tower and a balcony above it, and dominates one side of the square. The style is clean, modern and symmetrical – typical Italian rationalist architecture of that period.",
-      "cap1": "The building on Eleftherias Square",
-      "h2after": "After the war",
-      "p4": "When the Italians left and Kos became Greek again, the function changed. Today there is a café-restaurant inside (including Aegli). The exterior is still a clear example of Italian architecture from the 1930s.",
-      "cap2": "Plaque with poem about “broken boats”",
-      "h2plaque": "Plaque “broken boats”",
-      "p5": "On the front hangs a plaque with a poem about “broken boats”. It commemorates the liberation of Kos after the Second World War (around 1945).",
-      "p6": "The “broken boats” symbolise wrecked ships, dreams and lives through the war and occupation – and the hope afterwards.",
-      "g1": "On the square",
-      "g2": "Historic",
-      "p7": "You can always view the exterior from Eleftherias Square. Inside it is a café-restaurant – open during hospitality hours.",
-      "tip": "perfect to combine with the Market Hall, Defterdar Mosque and the Archaeological Museum – all on or near this square.",
-      "hStory": "The story",
-      "hSee": "What you see",
-      "hKnow": "Good to know",
-      "tipTitle": "Guide’s tip",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Casa del Fascio",
-      "lead": "Imposantes italienisches Gebäude mit Turm und Rednerbalkon – einst faschistisches Hauptquartier, heute Café-Restaurant auf dem zentralen Platz.",
-      "btnPlay": "Vorlesen",
-      "p1": "Die Casa del Fascio ist ein großes, imposantes Gebäude am Eleftherias-Platz (Piazza Orfeas) im Zentrum von Kos-Stadt. Es wurde von Mussolinis faschistischer Partei während der italienischen Besetzung der Dodekanes (1912–1947) gebaut.",
-      "p2": "Nach dem schweren Erdbeben von 1933 bekamen die Italiener die Chance, Kos und den Platz neu zu gestalten. 1935 bauten sie die Casa del Fascio als Hauptquartier der faschistischen Partei.",
-      "p3": "Das Gebäude hat einen hohen Uhrenturm und einen Balkon darüber und dominiert eine Seite des Platzes. Der Stil ist klar, modern und symmetrisch – typische italienische rationalistische Architektur jener Zeit.",
-      "cap1": "Das Gebäude am Eleftherias-Platz",
-      "h2after": "Nach dem Krieg",
-      "p4": "Als die Italiener weg waren und Kos wieder griechisch wurde, änderte sich die Funktion. Heute befindet sich darin ein Café-Restaurant (unter anderem Aegli). Die Außenseite ist noch immer ein klares Beispiel italienischer Architektur der 1930er Jahre.",
-      "cap2": "Plakette mit Gedicht über „zerbrochene Boote“",
-      "h2plaque": "Plakette „zerbrochene Boote“",
-      "p5": "An der Vorderseite hängt eine Plakette mit einem Gedicht über „zerbrochene Boote“. Sie erinnert an die Befreiung von Kos nach dem Zweiten Weltkrieg (um 1945).",
-      "p6": "Die „zerbrochenen Boote“ stehen symbolisch für zerstörte Schiffe, Träume und Leben durch Krieg und Besatzung – und für die Hoffnung danach.",
-      "g1": "Auf dem Platz",
-      "g2": "Historisch",
-      "p7": "Die Außenseite kannst du immer vom Eleftherias-Platz aus betrachten. Innen ist es ein Café-Restaurant – geöffnet zu Gastronomiezeiten.",
-      "tip": "perfekt zu kombinieren mit der Markthalle, Defterdar-Moschee und dem Archäologischen Museum – alle auf oder bei diesem Platz.",
-      "hStory": "Die Geschichte",
-      "hSee": "Was du siehst",
-      "hKnow": "Gut zu wissen",
-      "tipTitle": "Tipp des Guides",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Casa del Fascio",
-      "lead": "Imponente edificio italiano con torre e balcone dell’oratore – un tempo quartier generale fascista, ora caffè-ristorante sulla piazza centrale.",
-      "btnPlay": "Leggi ad alta voce",
-      "p1": "La Casa del Fascio è un grande edificio imponente in Piazza Eleftherias (Piazza Orfeas) nel centro di Kos città. Fu costruito dal partito fascista di Mussolini durante l’occupazione italiana del Dodecaneso (1912–1947).",
-      "p2": "Dopo il grave terremoto del 1933 gli italiani ebbero la possibilità di ridisegnare Kos e la piazza. Nel 1935 costruirono la Casa del Fascio come quartier generale del partito fascista.",
-      "p3": "L’edificio ha un’alta torre dell’orologio e un balcone sopra, e domina un lato della piazza. Lo stile è pulito, moderno e simmetrico – tipica architettura razionalista italiana di quel periodo.",
-      "cap1": "L’edificio in Piazza Eleftherias",
-      "h2after": "Dopo la guerra",
-      "p4": "Quando gli italiani se ne andarono e Kos divenne di nuovo greca, la funzione cambiò. Oggi c’è un caffè-ristorante all’interno (tra cui Aegli). L’esterno è ancora un chiaro esempio di architettura italiana degli anni Trenta.",
-      "cap2": "Targa con poesia su “barche rotte”",
-      "h2plaque": "Targa “barche rotte”",
-      "p5": "Sulla facciata c’è una targa con una poesia su “barche rotte”. Ricorda la liberazione di Kos dopo la Seconda guerra mondiale (intorno al 1945).",
-      "p6": "Le “barche rotte” simboleggiano navi, sogni e vite spezzate dalla guerra e dall’occupazione – e la speranza successiva.",
-      "g1": "Sulla piazza",
-      "g2": "Storico",
-      "p7": "L’esterno si può sempre vedere da Piazza Eleftherias. All’interno è un caffè-ristorante – aperto negli orari di ristorazione.",
-      "tip": "perfetto da combinare con il Mercato coperto, la Moschea Defterdar e il Museo Archeologico – tutti su o vicino a questa piazza.",
-      "hStory": "La storia",
-      "hSee": "Cosa vedi",
-      "hKnow": "Buono a sapersi",
-      "tipTitle": "Consiglio della guida",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Casa del Fascio",
-      "lead": "Kule ve konuşmacı balkonlu etkileyici İtalyan binası – bir zamanlar faşist karargah, şimdi merkezi meydanda kafe-restoran.",
-      "btnPlay": "Sesli oku",
-      "p1": "Casa del Fascio, Kos şehrinin merkezindeki Eleftherias Meydanı’nda (Piazza Orfeas) büyük ve etkileyici bir binadır. Mussolini’nin faşist partisi tarafından Oniki Ada’nın İtalyan işgali sırasında (1912–1947) inşa edildi.",
-      "p2": "1933’teki ağır depremden sonra İtalyanlar Kos’u ve meydanı yeniden tasarlama şansı buldu. 1935’te Casa del Fascio’yu faşist partinin karargahı olarak inşa ettiler.",
-      "p3": "Binanın yüksek bir saat kulesi ve üstünde bir balkon vardır ve meydanın bir tarafını domine eder. Stil sade, modern ve simetriktir – o dönemin tipik İtalyan rasyonalist mimarisidir.",
-      "cap1": "Eleftherias Meydanı’ndaki bina",
-      "h2after": "Savaştan sonra",
-      "p4": "İtalyanlar gittikten ve Kos tekrar Yunan olunca işlev değişti. Bugün içinde bir kafe-restoran var (Aegli dahil). Dış cephe hâlâ 1930’ların İtalyan mimarisinin açık bir örneğidir.",
-      "cap2": "“Kırık tekneler” şiiriyle plaket",
-      "h2plaque": "“Kırık tekneler” plaketi",
-      "p5": "Ön cephede “kırık tekneler” hakkında bir şiirle plaket asılıdır. Bu, İkinci Dünya Savaşı’ndan sonra Kos’un kurtuluşunu (yaklaşık 1945) hatırlatır.",
-      "p6": "“Kırık tekneler”, savaş ve işgal nedeniyle parçalanmış gemileri, hayalleri ve hayatları – ve sonrasındaki umudu simgeler.",
-      "g1": "Meydanda",
-      "g2": "Tarihi",
-      "p7": "Dış cepheyi her zaman Eleftherias Meydanı’ndan görebilirsin. İçerisi bir kafe-restorandır – yiyecek-içecek saatlerinde açık.",
-      "tip": "Kapalı Pazar, Defterdar Camii ve Arkeoloji Müzesi ile birleştirmek mükemmel – hepsi bu meydanda veya yakınında.",
-      "hStory": "Hikaye",
-      "hSee": "Ne görürsün",
-      "hKnow": "Bilmekte fayda var",
-      "tipTitle": "Rehberin ipucu",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Casa del Fascio",
-      "lead": "Imponente edificio italiano con torre y balcón del orador – antaño cuartel general fascista, ahora café-restaurante en la plaza central.",
-      "btnPlay": "Leer en voz alta",
-      "p1": "La Casa del Fascio es un gran edificio imponente en la Plaza Eleftherias (Piazza Orfeas) en el centro de Kos ciudad. Fue construido por el partido fascista de Mussolini durante la ocupación italiana del Dodecaneso (1912–1947).",
-      "p2": "Tras el grave terremoto de 1933 los italianos tuvieron la oportunidad de rediseñar Kos y la plaza. En 1935 construyeron la Casa del Fascio como cuartel general del partido fascista.",
-      "p3": "El edificio tiene una alta torre del reloj y un balcón encima, y domina un lado de la plaza. El estilo es limpio, moderno y simétrico – típica arquitectura racionalista italiana de esa época.",
-      "cap1": "El edificio en la Plaza Eleftherias",
-      "h2after": "Después de la guerra",
-      "p4": "Cuando los italianos se fueron y Kos volvió a ser griega, la función cambió. Hoy hay un café-restaurante dentro (incluido Aegli). El exterior sigue siendo un claro ejemplo de la arquitectura italiana de los años treinta.",
-      "cap2": "Placa con poema sobre “barcos rotos”",
-      "h2plaque": "Placa “barcos rotos”",
-      "p5": "En la fachada hay una placa con un poema sobre “barcos rotos”. Recuerda la liberación de Kos después de la Segunda Guerra Mundial (alrededor de 1945).",
-      "p6": "Los “barcos rotos” simbolizan barcos, sueños y vidas destrozados por la guerra y la ocupación – y la esperanza posterior.",
-      "g1": "En la plaza",
-      "g2": "Histórico",
-      "p7": "El exterior se puede ver siempre desde la Plaza Eleftherias. Dentro es un café-restaurante – abierto en horario de hostelería.",
-      "tip": "perfecto para combinar con el Mercado cubierto, la Mezquita Defterdar y el Museo Arqueológico – todos en esta plaza o cerca.",
-      "hStory": "La historia",
-      "hSee": "Qué ves",
-      "hKnow": "Bueno saberlo",
-      "tipTitle": "Consejo del guía",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };
-
-  function setLang(l) {
-    if (!I18N[l]) l = 'nl';
-    localStorage.setItem('hk-lang', l);
-    document.documentElement.lang = l;
-    var d = I18N[l];
-    document.querySelectorAll('[data-i18n]').forEach(function(el){
-      var k = el.getAttribute('data-i18n');
-      if (d[k]) el.textContent = d[k];
-    });
-    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
-    if (opt) {
-      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
-      document.getElementById('code').textContent = l.toUpperCase();
-    }
-    document.querySelectorAll('.lang-option').forEach(function(o){
-      o.classList.toggle('active', o.getAttribute('data-lang') === l);
-    });
-    closeMenu();
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Kos-stad",
+    "title": "Casa del Fascio",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "Dit is het Eleftheriasplein, het centrale plein van Kos-stad.",
+    "s1": "Dit is het Eleftheriasplein, het centrale plein van Kos-stad. Dit grote gebouw aan één kant van het plein is de Casa del Fascio. De naam betekent letterlijk “Huis van het Fascisme”.",
+    "s2": "Het werd gebouwd in negentienhonderd vijfendertig, tijdens de Italiaanse bezetting van de Griekse-eilanden, die duurde van negentienhonderd twaalf tot negentienhonderd zevenenveertig. De Italianen bouwden het na de zware aardbeving van negentienhonderd drieëndertig. Die aardbeving gaf hun de kans om het plein opnieuw in te richten.",
+    "s3": "Het gebouw diende als hoofdkwartier van de fascistische partij van Mussolini. Vanuit het balkon hielden ze toespraken aan de menigte. Er zat ook een bioscoop in, en het hele gebouw werd gebruikt voor propaganda en machtsvertoon.",
+    "v1": "Kijk even naar de stijl: strak, symmetrisch en zonder veel opsmuk. Typisch moderne Italiaanse architectuur uit die tijd, met een hoge klokkentoren en een duidelijk balkon erboven. Het gebouw domineert het plein behoorlijk.Na de Tweede Wereldoorlog, toen Kos weer onder Grieks bestuur kwam, veranderde de functie van het gebouw.",
+    "v2": "Vandaag de dag zit er een café-restaurant in. Aan de voorkant hangt een plaquette met een gedicht dat herinnert aan de Griekse bevrijding en aan alle schade die de oorlog en de bezetting hebben aangericht..",
+    "v3": "Aan de voorkant is een plaquette met een gedicht over \"gebroken boten\". Dit is een gedenktekst die herinnert aan de bevrijding van Kos na de Tweede Wereldoorlog, rond 1945. De Italianen bouwden het gebouw in 1935 als fascistisch hoofdkwartier. Het gedicht \"gebroken boten\" staat symbool voor de kapotte schepen, dromen en levens, door de oorlog en de bezetting. Het vertelt hoe uit puin en ellende weer vrijheid en een nieuw begin onstaat – een poëtisch eerbetoon aan de Griekse herovering en trots.",
+    "k1": "Hier onder Beelden van de bouw en de fashisten in begin jaren van Casa del Fascio"
+  },
+  "de": {
+    "place": "Kos-Stadt",
+    "title": "Casa del Fascio",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Dies ist der Eleftherias-Platz, der zentrale Platz der Stadt Kos.",
+    "s1": "Dies ist der Eleftherias-Platz, der zentrale Platz der Stadt Kos. Dieses große Gebäude auf einer Seite des Platzes ist die Casa del Fascio. Der Name bedeutet wörtlich „Haus des Faschismus“.",
+    "s2": "Es wurde im Jahr 1935 während der italienischen Besetzung der griechischen Inseln erbaut, die von 1912 bis 1947 dauerte. Die Italiener bauten es nach dem schweren Erdbeben von 1933. Das Erdbeben gab ihnen die Gelegenheit, den Platz neu zu gestalten.",
+    "s3": "Das Gebäude diente als Hauptquartier der faschistischen Partei Mussolinis. Sie hielten vom Balkon aus Reden vor der Menge. Es beherbergte auch ein Kino und das gesamte Gebäude wurde für Propaganda und Machtdemonstrationen genutzt.",
+    "v1": "Werfen Sie einen Blick auf den Stil: schlicht, symmetrisch und ohne viel Schnickschnack. Typische moderne italienische Architektur der damaligen Zeit mit einem hohen Glockenturm und einem klaren Balkon darüber. Das Gebäude dominiert den Platz deutlich. Nach dem Zweiten Weltkrieg, als Kos erneut unter griechische Herrschaft kam, änderte sich die Funktion des Gebäudes.",
+    "v2": "Heute beherbergt es ein Café-Restaurant. An der Front hängt eine Gedenktafel mit einem Gedicht, das an die griechische Befreiung und alle durch den Krieg und die Besatzung verursachten Schäden erinnert.",
+    "v3": "Auf der Vorderseite befindet sich eine Plakette mit einem Gedicht über „kaputte Boote“. Dabei handelt es sich um einen Gedenktext, der an die Befreiung von Kos nach dem Zweiten Weltkrieg, etwa 1945, erinnert. Die Italiener bauten das Gebäude 1935 als faschistisches Hauptquartier. Das Gedicht „kaputte Boote“ symbolisiert die durch den Krieg und die Besatzung zerstörten Schiffe, Träume und Leben. Es erzählt, wie aus Trümmern und Elend Freiheit und ein Neuanfang entstehen – eine poetische Hommage an die griechische Rückeroberung und den Stolz.",
+    "k1": "Nachfolgend finden Sie Bilder vom Bau und den Faschisten in den Anfangsjahren der Casa del Fascio"
+  },
+  "en": {
+    "place": "Kos Town",
+    "title": "Casa del Fascio",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "This is Eleftherias Square, the central square of Kos Town.",
+    "s1": "This is Eleftherias Square, the central square of Kos Town. This large building on one side of the square is the Casa del Fascio. The name literally means “House of Fascism”.",
+    "s2": "It was built in nineteen hundred and thirty-five, during the Italian occupation of the Greek Islands, which lasted from nineteen hundred and twelve to nineteen hundred and forty-seven. The Italians built it after the major earthquake of nineteen hundred and thirty-three. The earthquake gave them the opportunity to redesign the square.",
+    "s3": "The building served as the headquarters of Mussolini's fascist party. They gave speeches to the crowd from the balcony. It also housed a cinema, and the entire building was used for propaganda and displays of power.",
+    "v1": "Take a look at the style: sleek, symmetrical and without much frills. Typical modern Italian architecture of the time, with a tall bell tower and a clear balcony above. The building dominates the square considerably. After the Second World War, when Kos came under Greek rule again, the function of the building changed.",
+    "v2": "Today it houses a café-restaurant. At the front hangs a plaque with a poem that commemorates the Greek liberation and all the damage caused by the war and the occupation.",
+    "v3": "On the front is a plaque with a poem about \"broken boats\". This is a memorial text that commemorates the liberation of Kos after the Second World War, around 1945. The Italians built the building in 1935 as a fascist headquarters. The poem \"broken boats\" symbolizes the broken ships, dreams and lives, due to the war and the occupation. It tells how freedom and a new beginning emerge from rubble and misery - a poetic tribute to the Greek reconquest and pride.",
+    "k1": "Below are images of the construction and the fashists in the early years of Casa del Fascio"
+  },
+  "it": {
+    "place": "Città di Kos",
+    "title": "Casa del Fascio",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Questa è Piazza Eleftherias, la piazza centrale della città di Kos.",
+    "s1": "Questa è Piazza Eleftherias, la piazza centrale della città di Kos. Questo grande edificio su un lato della piazza è la Casa del Fascio. Il nome significa letteralmente “Casa del Fascismo”.",
+    "s2": "Fu costruito nel millenovecentotrentacinque, durante l'occupazione italiana delle isole greche, durata dal millenovecentododici al millenovecentoquarantasette. Gli italiani lo costruirono dopo il grande terremoto del millenovecentotrentatré. Il terremoto ha dato loro l'opportunità di ridisegnare la piazza.",
+    "s3": "L'edificio fungeva da quartier generale del partito fascista di Mussolini. Hanno tenuto discorsi alla folla dal balcone. Ospitava anche un cinema e l'intero edificio veniva utilizzato per la propaganda e le manifestazioni di potere.",
+    "v1": "Date un'occhiata allo stile: elegante, simmetrico e senza troppi fronzoli. Tipica architettura moderna italiana dell'epoca, con un alto campanile e un chiaro balcone sovrastante. L'edificio domina notevolmente la piazza. Dopo la seconda guerra mondiale, quando Kos tornò sotto il dominio greco, la funzione dell'edificio cambiò.",
+    "v2": "Oggi ospita un bar-ristorante. Davanti è appesa una targa con una poesia che ricorda la liberazione della Grecia e tutti i danni causati dalla guerra e dall'occupazione.",
+    "v3": "Sulla parte anteriore c'è una targa con una poesia sulle \"barche rotte\". Questo è un testo commemorativo che commemora la liberazione di Kos dopo la seconda guerra mondiale, intorno al 1945. Gli italiani costruirono l'edificio nel 1935 come quartier generale fascista. La poesia \"barche rotte\" simboleggia le navi, i sogni e le vite rotte, a causa della guerra e dell'occupazione. Racconta come la libertà e un nuovo inizio emergono dalle macerie e dalla miseria: un tributo poetico alla riconquista e all'orgoglio greco.",
+    "k1": "Di seguito le immagini della costruzione e dei fashisti nei primi anni della Casa del Fascio"
+  },
+  "tr": {
+    "place": "Kos şehri",
+    "title": "Casa del Fascio",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Burası Kos şehrinin merkezi meydanı olan Eleftherias Meydanı.",
+    "s1": "Burası Kos şehrinin merkezi meydanı olan Eleftherias Meydanı. Meydanın bir tarafındaki bu büyük bina Casa del Fascio'dur. Adı tam anlamıyla “Faşizmin Evi” anlamına geliyor.",
+    "s2": "Bin dokuz yüz otuz beş yılında, İtalyanların Yunan Adaları'nı işgali sırasında, bin dokuz yüz on ikiden bin dokuz yüz kırk yediye kadar süren bir dönemde inşa edilmiştir. İtalyanlar onu bin dokuz yüz otuz üçteki büyük depremden sonra inşa ettiler. Deprem onlara meydanı yeniden tasarlama fırsatı verdi.",
+    "s3": "Bina Mussolini'nin faşist partisinin genel merkezi olarak hizmet veriyordu. Balkondan kalabalığa konuşmalar yaptılar. Aynı zamanda bir sinemaya da ev sahipliği yapıyordu ve binanın tamamı propaganda ve güç gösterileri için kullanılıyordu.",
+    "v1": "Stile bir bakın: şık, simetrik ve fazla gösterişten uzak. Yüksek bir çan kulesi ve üzerinde açık bir balkonu bulunan, dönemin tipik modern İtalyan mimarisi. Bina meydana oldukça hakimdir. İkinci Dünya Savaşı'ndan sonra Kos'un yeniden Yunan egemenliğine girmesiyle binanın işlevi değişti.",
+    "v2": "Bugün bir kafe-restoran barındırıyor. Ön tarafta Yunan kurtuluşunu ve savaş ile işgalin yol açtığı tüm zararları anan bir şiirin yer aldığı bir plaket asılıdır.",
+    "v3": "Ön tarafta \"kırık tekneler\" ile ilgili şiirin yer aldığı bir plaket var. Bu, Kos'un 1945 yılı civarında İkinci Dünya Savaşı'ndan sonra kurtuluşunu anan bir anma metnidir. İtalyanlar binayı 1935 yılında faşist karargah olarak inşa etmişlerdir. \"Kırık tekneler\" şiiri, savaş ve işgal nedeniyle parçalanan gemileri, hayalleri ve yaşamları simgelemektedir. Yıkıntılardan ve sefaletten özgürlüğün ve yeni bir başlangıcın nasıl ortaya çıktığını anlatıyor; Yunanların yeniden fethine ve gururuna şiirsel bir övgü.",
+    "k1": "Aşağıda Casa del Fascio'nun ilk yıllarındaki inşaatın ve faşistlerin görüntüleri yer almaktadır."
+  },
+  "es": {
+    "place": "Ciudad de Kos",
+    "title": "Casa del Fascio",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Esta es la plaza Eleftherias, la plaza central de la ciudad de Kos.",
+    "s1": "Esta es la plaza Eleftherias, la plaza central de la ciudad de Kos. Este gran edificio a un lado de la plaza es la Casa del Fascio. El nombre significa literalmente \"Casa del Fascismo\".",
+    "s2": "Fue construido en mil novecientos treinta y cinco, durante la ocupación italiana de las islas griegas, que duró desde mil novecientos doce hasta mil novecientos cuarenta y siete. Los italianos lo construyeron después del gran terremoto de mil novecientos treinta y tres. El terremoto les dio la oportunidad de rediseñar la plaza.",
+    "s3": "El edificio sirvió como sede del partido fascista de Mussolini. Dieron discursos a la multitud desde el balcón. También albergaba un cine y todo el edificio se utilizaba para propaganda y demostraciones de poder.",
+    "v1": "Echa un vistazo al estilo: elegante, simétrico y sin muchos adornos. Típica arquitectura italiana moderna de la época, con un campanario alto y un balcón despejado en lo alto. El edificio domina considerablemente la plaza. Después de la Segunda Guerra Mundial, cuando Kos volvió a estar bajo dominio griego, la función del edificio cambió.",
+    "v2": "Hoy alberga una cafetería-restaurante. En el frente cuelga una placa con un poema que conmemora la liberación griega y todos los daños causados ​​por la guerra y la ocupación.",
+    "v3": "En el frente hay una placa con un poema sobre \"barcos rotos\". Se trata de un texto conmemorativo que conmemora la liberación de Kos después de la Segunda Guerra Mundial, alrededor de 1945. Los italianos construyeron el edificio en 1935 como cuartel general fascista. El poema \"Barcos rotos\" simboliza los barcos, los sueños y las vidas rotos debido a la guerra y la ocupación. Cuenta cómo la libertad y un nuevo comienzo emergen de los escombros y la miseria: un tributo poético a la reconquista y al orgullo griegos.",
+    "k1": "A continuación se muestran imágenes de la construcción y los fashistas en los primeros años de la Casa del Fascio."
   }
-
-  var langBtn = document.getElementById('langBtn');
-  var langMenu = document.getElementById('langMenu');
-  function openMenu(){ langMenu.classList.add('open'); }
-  function closeMenu(){ langMenu.classList.remove('open'); }
-  langBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    langMenu.classList.contains('open') ? closeMenu() : openMenu();
-  });
-  document.addEventListener('click', function(){ closeMenu(); });
-  document.querySelectorAll('.lang-option').forEach(function(btn){
-    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
-  });
-
-  var saved = localStorage.getItem('hk-lang') || 'nl';
-  setLang(saved);
-
-  /* TTS */
-  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
-  function getLang(){
-    var l = localStorage.getItem('hk-lang') || 'nl';
-    return LANG_VOICE[l] ? l : 'nl';
-  }
-  function pickVoice(code){
-    var voices = speechSynthesis.getVoices() || [];
-    var prefix = code.slice(0,2).toLowerCase();
-    return voices.find(function(v){ return v.lang === code; })
-      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
-      || null;
-  }
-  var btnPlay = document.getElementById('btnPlay');
-  var btnStop = document.getElementById('btnStop');
-  var status = document.getElementById('ttsStatus');
-  function setStatus(t){ if(status) status.textContent = t; }
-  function play(){
-    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
-    speechSynthesis.cancel();
-    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
-    var l = getLang();
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = LANG_VOICE[l];
-    u.rate = 0.92;
-    var v = pickVoice(LANG_VOICE[l]);
-    if(v) u.voice = v;
-    u.onstart = function(){
-      btnPlay.classList.add('playing');
-      btnStop.classList.add('show');
-      setStatus('Voorlezen… ('+l.toUpperCase()+')');
-    };
-    u.onend = u.onerror = function(){
-      btnPlay.classList.remove('playing');
-      btnStop.classList.remove('show');
-      setStatus('');
-    };
-    if(!speechSynthesis.getVoices().length){
-      speechSynthesis.onvoiceschanged = function(){
-        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
-        speechSynthesis.speak(u);
-      };
-      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
-    } else {
-      speechSynthesis.speak(u);
-    }
-  }
-  function stop(){
-    if(window.speechSynthesis) speechSynthesis.cancel();
-    btnPlay.classList.remove('playing');
-    btnStop.classList.remove('show');
-    setStatus('Gestopt.');
-  }
-  btnPlay.addEventListener('click', play);
-  btnStop.addEventListener('click', stop);
-  if(window.speechSynthesis){
-    speechSynthesis.getVoices();
-    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
-  }
-})();
-</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>
-Sla dit 

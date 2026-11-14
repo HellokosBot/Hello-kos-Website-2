@@ -1,398 +1,191 @@
 <!DOCTYPE html>
-<html lang="nl" data-hk-own="1" data-hk-tts="1">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0D1F1F">
-  <title>Aquaduct van Linopotas – Hello Kos</title>
-  <style>
-    :root {
-      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
-      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
-      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
-      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
-      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text); -webkit-font-smoothing: antialiased;
-      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
-      background: var(--bg); min-height: 100vh; line-height: 1.55;
-    }
-    .app-header {
-      position: sticky; top: 0; z-index: 100;
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-      padding: 14px 16px; background: var(--bg-header);
-      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
-    }
-    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
-    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
-    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
-    .logo-text span { color: var(--gold-dark); font-style: italic; }
-    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
-    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
-    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
-    .lang-menu.open { display: block; }
-    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
-    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
-    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
-    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
-    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .content { padding: 18px 16px 0; }
-    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
-    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-
-    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
-    .btn-audio { background: var(--petrol); color: #fff; }
-    .btn-audio.playing { background: var(--petrol-dark); }
-    .btn-stop { background: #3A4545; color: #fff; display: none; }
-    .btn-stop.show { display: flex; }
-
-    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
-    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
-    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
-    .card p:last-child { margin-bottom: 0; }
-    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
-    .tip strong { color: var(--gold); }
-
-    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
-    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
-    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
-    .footer a { color: var(--petrol); text-decoration: none; }
-  </style>
-<link rel="stylesheet" href="hello-kos.css">
+  <title>Aquaduct Linopotas – Hello Kos</title>
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body>
+<body class="hk-page hk-guide">
   <header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
   <main class="main">
     <div class="hero-wrap">
-      <img src="img/jwwb/5ae435b866-img_3394-standard.jpg" alt="Aquaduct van Linopotas" loading="eager">
-      <div class="hero-title"><h1 data-i18n="title">Aquaduct van Linopotas</h1></div>
+      <img class="hk-zoom" src="img/jwwb/5ae435b866-img_3394-standard.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
     </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=Aquaduct%20Linopotas%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?q=Aquaduct%20Linopotas%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-aquaduct-linopotas-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-aquaduct-linopotas-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-aquaduct-linopotas-03.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-aquaduct-linopotas-04.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-aquaduct-linopotas-05.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
 
-    <div class="content">
-<p class="lead" data-i18n="lead">Meer dan 2000 jaar oude Romeinse waterleiding met bogen midden in de weg – later ook een Italiaans aquaduct ernaast.</p>
-
-      
-
-      <div class="actions">
-        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
-        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-      </div>
-      
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Linopoti%20Aqueduct%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Linopoti%20Aqueduct%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
-      </div>
-      <p class="status" id="ttsStatus"></p>
-
-      <div id="readText">
-        <div class="card">
-          <h2 data-i18n="hStory">Romeinse watertechniek</h2>
-          <p data-i18n="p1">Het aquaduct van Linopotas is een overblijfsel van meer dan 2000 jaar oud Romeins waterbeheer. De Romeinen brachten water van de heuvels naar de vruchtbare vlaktes: irrigatie voor boeren en drinkwater, ook in droge zomers.</p>
-        </div>
-
-        
-
-        <div class="card">
-          <h2 data-i18n="hSee">Bogen midden in de weg</h2>
-          <p data-i18n="p2">Wat je nu ziet, zijn vooral resten van de hoge bogen en kanaaldelen die nog overeind staan – deels midden in de weg. De Romeinen lieten het water met een heel lichte helling stromen, zonder pompen: pure watertechniek.</p>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2italian">Italiaans aquaduct ernaast</h2>
-          <p data-i18n="p3">Tegenover het Romeinse deel bouwden de Italianen tijdens hun bezetting (1912–1943) een eigen aquaduct. Beide hadden hetzelfde doel: water naar de akkers leiden. Zo zie je twee tijdperken naast elkaar.</p>
-        </div>
-
-        <div class="gallery">
-          <div class="g-item">
-            <img src="img/jwwb/5ae435b866-img_3394-standard.jpg" alt="" loading="lazy">
-            <span data-i18n="g1">Aquaduct</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/8525009b1a-schermopname_7-3-2026_223219_www-google-com-high.jpg" alt="" loading="lazy">
-            <span data-i18n="g2">Aquaduct</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/e8dbd264cd-img_3405-high.jpg" alt="" loading="lazy">
-            <span data-i18n="g3">Aquaduct</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/4073d00dee-img_3394-high-eej9fz.jpg" alt="" loading="lazy">
-            <span data-i18n="g4">Aquaduct</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="hKnow">Bezoeken</h2>
-          <p data-i18n="p4">Bij Linopotas, gratis in de open lucht.</p>
-          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: let op de bogen die de weg “doorsnijden” – dat is het moment waarop je de Romeinse schaal echt voelt.</p></div>
-        </div>
-      </div>
+</article>
     </div>
   </main>
-
-  <footer class="footer">
-    <div>Hello Kos</div>
-    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
-  </footer>
-
-<script>
-(function(){
-  var I18N = window.HK_DICT = {
-    "nl": {
-      "title": "Aquaduct van Linopotas",
-      "lead": "Meer dan 2000 jaar oude Romeinse waterleiding met bogen midden in de weg – later ook een Italiaans aquaduct ernaast.",
-      "btnPlay": "Voorlezen",
-      "p1": "Het aquaduct van Linopotas is een overblijfsel van meer dan 2000 jaar oud Romeins waterbeheer. De Romeinen brachten water van de heuvels naar de vruchtbare vlaktes: irrigatie voor boeren en drinkwater, ook in droge zomers.",
-      "p2": "Wat je nu ziet, zijn vooral resten van de hoge bogen en kanaaldelen die nog overeind staan – deels midden in de weg. De Romeinen lieten het water met een heel lichte helling stromen, zonder pompen: pure watertechniek.",
-      "h2italian": "Italiaans aquaduct ernaast",
-      "p3": "Tegenover het Romeinse deel bouwden de Italianen tijdens hun bezetting (1912–1943) een eigen aquaduct. Beide hadden hetzelfde doel: water naar de akkers leiden. Zo zie je twee tijdperken naast elkaar.",
-      "g1": "Aquaduct",
-      "g2": "Aquaduct",
-      "g3": "Aquaduct",
-      "g4": "Aquaduct",
-      "p4": "Bij Linopotas, gratis in de open lucht.",
-      "tip": "let op de bogen die de weg “doorsnijden” – dat is het moment waarop je de Romeinse schaal echt voelt.",
-      "hStory": "Het verhaal",
-      "hSee": "Wat je ziet",
-      "hKnow": "Goed om te weten",
-      "tipTitle": "Tip van de gids",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Linopotas Aqueduct",
-      "lead": "More than 2000-year-old Roman water supply with arches in the middle of the road – later also an Italian aqueduct next to it.",
-      "btnPlay": "Read aloud",
-      "p1": "The Linopotas aqueduct is a remnant of more than 2000-year-old Roman water management. The Romans brought water from the hills to the fertile plains: irrigation for farmers and drinking water, even in dry summers.",
-      "p2": "What you see now are mainly remains of the high arches and channel sections that still stand – partly in the middle of the road. The Romans let the water flow with a very slight slope, without pumps: pure water technology.",
-      "h2italian": "Italian aqueduct next to it",
-      "p3": "Opposite the Roman part, the Italians built their own aqueduct during their occupation (1912–1943). Both had the same purpose: to lead water to the fields. So you see two eras side by side.",
-      "g1": "Aqueduct",
-      "g2": "Aqueduct",
-      "g3": "Aqueduct",
-      "g4": "Aqueduct",
-      "p4": "Near Linopotas, free outdoors.",
-      "tip": "notice the arches that “cut through” the road – that’s the moment you really feel the Roman scale.",
-      "hStory": "The story",
-      "hSee": "What you see",
-      "hKnow": "Good to know",
-      "tipTitle": "Guide’s tip",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Aquädukt von Linopotas",
-      "lead": "Mehr als 2000 Jahre alte römische Wasserleitung mit Bögen mitten in der Straße – später auch ein italienisches Aquädukt daneben.",
-      "btnPlay": "Vorlesen",
-      "p1": "Das Aquädukt von Linopotas ist ein Überrest von mehr als 2000 Jahre altem römischem Wassermanagement. Die Römer brachten Wasser von den Hügeln in die fruchtbaren Ebenen: Bewässerung für Bauern und Trinkwasser, auch in trockenen Sommern.",
-      "p2": "Was du jetzt siehst, sind vor allem Reste der hohen Bögen und Kanalteile, die noch stehen – teilweise mitten in der Straße. Die Römer ließen das Wasser mit einem sehr leichten Gefälle fließen, ohne Pumpen: reine Wassertechnik.",
-      "h2italian": "Italienisches Aquädukt daneben",
-      "p3": "Gegenüber dem römischen Teil bauten die Italiener während ihrer Besetzung (1912–1943) ein eigenes Aquädukt. Beide hatten denselben Zweck: Wasser zu den Feldern leiten. So siehst du zwei Epochen nebeneinander.",
-      "g1": "Aquädukt",
-      "g2": "Aquädukt",
-      "g3": "Aquädukt",
-      "g4": "Aquädukt",
-      "p4": "Bei Linopotas, kostenlos im Freien.",
-      "tip": "achte auf die Bögen, die die Straße „durchschneiden“ – das ist der Moment, in dem du die römische Größe wirklich spürst.",
-      "hStory": "Die Geschichte",
-      "hSee": "Was du siehst",
-      "hKnow": "Gut zu wissen",
-      "tipTitle": "Tipp des Guides",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Acquedotto di Linopotas",
-      "lead": "Acquedotto romano di oltre 2000 anni con archi in mezzo alla strada – più tardi anche un acquedotto italiano accanto.",
-      "btnPlay": "Leggi ad alta voce",
-      "p1": "L’acquedotto di Linopotas è un resto di gestione idrica romana di oltre 2000 anni. I Romani portavano l’acqua dalle colline alle pianure fertili: irrigazione per gli agricoltori e acqua potabile, anche nelle estati secche.",
-      "p2": "Quello che vedi ora sono soprattutto resti degli alti archi e parti di canale che ancora stanno in piedi – in parte in mezzo alla strada. I Romani facevano scorrere l’acqua con una pendenza molto leggera, senza pompe: pura tecnica idrica.",
-      "h2italian": "Acquedotto italiano accanto",
-      "p3": "Di fronte alla parte romana gli Italiani costruirono un proprio acquedotto durante l’occupazione (1912–1943). Entrambi avevano lo stesso scopo: portare l’acqua ai campi. Così vedi due epoche affiancate.",
-      "g1": "Acquedotto",
-      "g2": "Acquedotto",
-      "g3": "Acquedotto",
-      "g4": "Acquedotto",
-      "p4": "Vicino a Linopotas, gratis all’aperto.",
-      "tip": "nota gli archi che “attraversano” la strada – è il momento in cui senti davvero la scala romana.",
-      "hStory": "La storia",
-      "hSee": "Cosa vedi",
-      "hKnow": "Buono a sapersi",
-      "tipTitle": "Consiglio della guida",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Linopotas Su Kemeri",
-      "lead": "2000 yıldan fazla eski Roma su kemeri, yolun ortasında kemerlerle – daha sonra yanında İtalyan su kemeri de.",
-      "btnPlay": "Sesli oku",
-      "p1": "Linopotas su kemeri, 2000 yıldan fazla eski Roma su yönetiminin bir kalıntısıdır. Romalılar suyu tepelerden verimli ovalara getirdi: çiftçiler için sulama ve içme suyu, kuru yazlarda bile.",
-      "p2": "Şimdi gördüğünüz şeyler, hâlâ ayakta duran yüksek kemerlerin ve kanal parçalarının kalıntılarıdır – kısmen yolun ortasında. Romalılar suyu pompasız, çok hafif bir eğimle akıttı: saf su tekniği.",
-      "h2italian": "Yanında İtalyan su kemeri",
-      "p3": "Roma kısmının karşısında İtalyanlar işgal sırasında (1912–1943) kendi su kemerlerini inşa etti. İkisinin de amacı aynıydı: suyu tarlalara iletmek. Böylece iki dönemi yan yana görürsünüz.",
-      "g1": "Su kemeri",
-      "g2": "Su kemeri",
-      "g3": "Su kemeri",
-      "g4": "Su kemeri",
-      "p4": "Linopotas yakınlarında, açık havada ücretsiz.",
-      "tip": "yolu “kesen” kemerlere dikkat edin – Roma ölçeğini gerçekten hissettiğiniz an budur.",
-      "hStory": "Hikaye",
-      "hSee": "Ne görürsün",
-      "hKnow": "Bilmekte fayda var",
-      "tipTitle": "Rehberin ipucu",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Acueducto de Linopotas",
-      "lead": "Acueducto romano de más de 2000 años con arcos en medio de la carretera – más tarde también un acueducto italiano al lado.",
-      "btnPlay": "Leer en voz alta",
-      "p1": "El acueducto de Linopotas es un resto de gestión de agua romana de más de 2000 años. Los romanos llevaban agua de las colinas a las llanuras fértiles: riego para agricultores y agua potable, incluso en veranos secos.",
-      "p2": "Lo que ves ahora son principalmente restos de los altos arcos y partes de canal que aún están en pie – en parte en medio de la carretera. Los romanos hacían fluir el agua con una pendiente muy ligera, sin bombas: pura técnica de agua.",
-      "h2italian": "Acueducto italiano al lado",
-      "p3": "Frente a la parte romana, los italianos construyeron su propio acueducto durante la ocupación (1912–1943). Ambos tenían el mismo propósito: llevar agua a los campos. Así ves dos épocas lado a lado.",
-      "g1": "Acueducto",
-      "g2": "Acueducto",
-      "g3": "Acueducto",
-      "g4": "Acueducto",
-      "p4": "Cerca de Linopotas, gratis al aire libre.",
-      "tip": "fíjate en los arcos que “cortan” la carretera – es el momento en que realmente sientes la escala romana.",
-      "hStory": "La historia",
-      "hSee": "Qué ves",
-      "hKnow": "Bueno saberlo",
-      "tipTitle": "Consejo del guía",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };
-
-  function setLang(l) {
-    if (!I18N[l]) l = 'nl';
-    localStorage.setItem('hk-lang', l);
-    document.documentElement.lang = l;
-    var d = I18N[l];
-    document.querySelectorAll('[data-i18n]').forEach(function(el){
-      var k = el.getAttribute('data-i18n');
-      if (d[k]) el.textContent = d[k];
-    });
-    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
-    if (opt) {
-      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
-      document.getElementById('code').textContent = l.toUpperCase();
-    }
-    document.querySelectorAll('.lang-option').forEach(function(o){
-      o.classList.toggle('active', o.getAttribute('data-lang') === l);
-    });
-    closeMenu();
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Kos-stad",
+    "title": "Aquaduct Linopotas",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "We rijden nu even de stad uit over de hoofdweg van kos richting Antimachia.",
+    "s1": "We rijden nu even de stad uit over de hoofdweg van kos richting Antimachia. Na een paar kilometer zie je aan de linkerkant iets opvallends in het landschap, de resten van het Aquaduct van Linopotas. Dit aquaduct stamt uit de Romeinse tijd en werd rond het begin van onze jaartelling gebouwd, meer dan tweeduizend jaar geleden.",
+    "s2": "De Romeinen waren echte meesters in watertechniek. Ze legden dit systeem aan om water van de hoger gelegen heuvels naar de vruchtbare vlaktes beneden te brengen. Het water stroomde vanzelf naar beneden dankzij een heel lichte helling.",
+    "s3": "Zo konden boeren hun akkers irrigeren en hadden de mensen drinkwater, zelfs tijdens droge zomers. De Romeinen rekenden dit soort werken heel precies uit, zonder pompen of moderne machines. Wat je vandaag nog ziet zijn de kleine stenen bogen en delen van het kanaal die midden tussen de weg staan.",
+    "v1": "Het is geen compleet aquaduct meer, maar de resten zijn goed herkenbaar en indrukwekkend als je bedenkt hoe oud ze zijn. Interessant detail, precies tegenover dit oude Romeinse aquaduct bouwden de Italianen tijdens hun bezetting van Kos een nieuw aquaduct. Beide constructies hadden hetzelfde doel: water naar de akkers leiden.",
+    "v2": "Je kunt er gewoon langs de weg stoppen en even kijken, maar kijk uit. Het is in het midden van de weg, en de autos rijden er met volle snelheid langs. En toch blijft bijzonder, om hier te staan, en te beseffen dat dit slimme waterwerk al meer dan tweeduizend jaar oud is en nog steeds in het landschap staat.",
+    "k1": "Niet alleen de nederlanders zijn goed in het temmen van het water."
+  },
+  "de": {
+    "place": "Kos-Stadt",
+    "title": "Aquaduct Linopotas",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Wir fahren nun aus der Stadt heraus auf der Hauptstraße von Kos Richtung Antimachia.",
+    "s1": "Wir fahren nun aus der Stadt heraus auf der Hauptstraße von Kos Richtung Antimachia. Nach ein paar Kilometern sehen Sie links etwas Auffälliges in der Landschaft: die Überreste des Aquädukts von Linopotas. Dieses Aquädukt stammt aus der Römerzeit und wurde zu Beginn unserer Zeitrechnung, vor mehr als zweitausend Jahren, erbaut.",
+    "s2": "Die Römer waren wahre Meister der Wassertechnologie. Sie bauten dieses System, um Wasser von den höheren Hügeln in die fruchtbaren Ebenen darunter zu transportieren. Dank eines sehr geringen Gefälles floss das Wasser auf natürliche Weise nach unten.",
+    "s3": "Dadurch konnten die Bauern ihre Felder bewässern und die Menschen hatten auch in trockenen Sommern Trinkwasser. Die Römer berechneten diese Art von Arbeit sehr genau, ohne Pumpen oder moderne Maschinen. Was man heute noch sieht, sind die kleinen Steinbögen und Teile des Kanals, die mitten auf der Straße stehen.",
+    "v1": "Es handelt sich nicht mehr um ein vollständiges Aquädukt, aber die Überreste sind angesichts ihres Alters leicht zu erkennen und beeindruckend. Interessantes Detail: Genau gegenüber diesem alten römischen Aquädukt bauten die Italiener während ihrer Besetzung von Kos ein neues Aquädukt. Beide Bauwerke hatten den gleichen Zweck: Wasser auf die Felder zu leiten.",
+    "v2": "Sie können einfach an der Straße anhalten und einen Blick darauf werfen, aber seien Sie vorsichtig. Es liegt mitten auf der Straße und die Autos fahren mit voller Geschwindigkeit daran vorbei. And yet it remains special to stand here and realize that this clever waterworks is more than two thousand years old and still stands in the landscape.",
+    "k1": "Nicht nur die Niederländer sind gut darin, das Wasser zu bändigen."
+  },
+  "en": {
+    "place": "Kos Town",
+    "title": "Aquaduct Linopotas",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "We now drive out of the city on the main road from Kos towards Antimachia.",
+    "s1": "We now drive out of the city on the main road from Kos towards Antimachia. After a few kilometers you will see something striking in the landscape on the left, the remains of the Aqueduct of Linopotas. This aqueduct dates from Roman times and was built around the beginning of our era, more than two thousand years ago.",
+    "s2": "The Romans were true masters of water technology. They built this system to bring water from the higher hills to the fertile plains below. The water flowed down naturally thanks to a very slight slope.",
+    "s3": "This allowed farmers to irrigate their fields and people had drinking water, even during dry summers. The Romans calculated this type of work very precisely, without pumps or modern machines. What you still see today are the small stone arches and parts of the canal that stand in the middle of the road.",
+    "v1": "It is no longer a complete aqueduct, but the remains are easily recognizable and impressive considering how old they are. Interesting detail, exactly opposite this old Roman aqueduct, the Italians built a new aqueduct during their occupation of Kos. Both constructions had the same purpose: to direct water to the fields.",
+    "v2": "You can just stop along the road and take a look, but be careful. It's in the middle of the road, and the cars are driving past it at full speed. And yet it remains special to stand here and realize that this clever waterworks is more than two thousand years old and still stands in the landscape.",
+    "k1": "Not only the Dutch are good at taming the water."
+  },
+  "it": {
+    "place": "Città di Kos",
+    "title": "Aquaduct Linopotas",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Ora usciamo dalla città sulla strada principale da Kos verso Antimachia.",
+    "s1": "Ora usciamo dalla città sulla strada principale da Kos verso Antimachia. Dopo pochi chilometri vedrete sulla sinistra qualcosa di suggestivo nel paesaggio, i resti dell'Acquedotto di Linopotas. Questo acquedotto risale all'epoca romana e fu costruito intorno all'inizio della nostra era, più di duemila anni fa.",
+    "s2": "I romani erano veri maestri della tecnologia idrica. Costruirono questo sistema per portare l'acqua dalle colline più alte alle fertili pianure sottostanti. L'acqua scendeva naturalmente grazie ad una leggerissima pendenza.",
+    "s3": "Ciò consentiva agli agricoltori di irrigare i propri campi e alle persone di avere acqua potabile, anche durante le estati secche. I romani calcolavano questo tipo di lavoro in modo molto preciso, senza pompe o macchine moderne. Ciò che si vede ancora oggi sono i piccoli archi in pietra e tratti del canale che si trovano in mezzo alla strada.",
+    "v1": "Non si tratta più dell'acquedotto completo, ma i resti sono facilmente riconoscibili e impressionanti considerando la loro antichità. Dettaglio interessante, esattamente di fronte a questo vecchio acquedotto romano, gli italiani costruirono un nuovo acquedotto durante la loro occupazione di Kos. Entrambe le costruzioni avevano lo stesso scopo: convogliare l'acqua verso i campi.",
+    "v2": "Puoi semplicemente fermarti lungo la strada e dare un'occhiata, ma fai attenzione. È in mezzo alla strada e le macchine lo superano a tutta velocità. Eppure rimane speciale stare qui e rendersi conto che questo intelligente acquedotto ha più di duemila anni e si erge ancora nel paesaggio.",
+    "k1": "Non solo gli olandesi sono bravi a domare l'acqua."
+  },
+  "tr": {
+    "place": "Kos şehri",
+    "title": "Aquaduct Linopotas",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Şimdi Kos'tan Antimachia'ya giden ana yol üzerinden şehrin dışına çıkıyoruz.",
+    "s1": "Şimdi Kos'tan Antimachia'ya giden ana yol üzerinden şehrin dışına çıkıyoruz. Birkaç kilometre sonra sol taraftaki manzarada dikkat çekici bir şey göreceksiniz: Linopotas Su Kemeri'nin kalıntıları. Bu su kemerinin tarihi Roma döneminden kalmadır ve çağımızın başlarında, yani iki bin yıldan fazla bir süre önce inşa edilmiştir.",
+    "s2": "Romalılar su teknolojisinin gerçek ustalarıydı. Suyu yüksek tepelerden aşağıdaki verimli ovalara taşımak için bu sistemi kurdular. Su çok hafif bir eğim sayesinde doğal olarak aşağı doğru akıyordu.",
+    "s3": "Bu, çiftçilerin tarlalarını sulamasına ve kurak yazlarda bile insanların içme suyuna sahip olmasına olanak tanıdı. Romalılar bu tür işleri pompalar veya modern makineler olmadan çok hassas bir şekilde hesapladılar. Bugün hala görmekte olduğunuz şey, yolun ortasında duran küçük taş kemerler ve kanalın bazı kısımlarıdır.",
+    "v1": "Artık tam bir su kemeri değil, ancak kalıntıların yaşı göz önüne alındığında kolayca tanınabilir ve etkileyici. İlginç detay, İtalyanlar Kos'u işgal ederken bu eski Roma su kemerinin tam karşısına yeni bir su kemeri inşa etmişler. Her iki yapının da amacı aynıydı: suyu tarlalara yönlendirmek.",
+    "v2": "Yol kenarında durup bir göz atabilirsiniz ama dikkatli olun. Yolun ortasında ve arabalar oradan son hızla geçiyor. Ancak yine de burada durup bu akıllı su şebekesinin iki bin yıldan daha eski olduğunu ve hala bu manzaranın içinde durduğunu fark etmek çok özel.",
+    "k1": "Suyu evcilleştirmede iyi olan yalnızca Hollandalılar değildir."
+  },
+  "es": {
+    "place": "Ciudad de Kos",
+    "title": "Aquaduct Linopotas",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Ahora salimos de la ciudad por la carretera principal de Kos hacia Antimachia.",
+    "s1": "Ahora salimos de la ciudad por la carretera principal de Kos hacia Antimachia. A los pocos kilómetros verás algo llamativo en el paisaje a la izquierda, los restos del Acueducto de Linopotas. Este acueducto data de la época romana y fue construido a principios de nuestra era, hace más de dos mil años.",
+    "s2": "Los romanos fueron verdaderos maestros de la tecnología del agua. Construyeron este sistema para llevar agua desde las colinas más altas a las fértiles llanuras de abajo. El agua descendía de forma natural gracias a una muy ligera pendiente.",
+    "s3": "Esto permitió a los agricultores regar sus campos y la gente tenía agua potable, incluso durante los veranos secos. Los romanos calculaban este tipo de trabajo con mucha precisión, sin bombas ni máquinas modernas. Lo que todavía se ve hoy son los pequeños arcos de piedra y partes del canal que se encuentran en medio de la carretera.",
+    "v1": "Ya no es un acueducto completo, pero los restos son fácilmente reconocibles e impresionantes teniendo en cuenta la antigüedad que tienen. Detalle interesante, exactamente enfrente de este antiguo acueducto romano, los italianos construyeron un nuevo acueducto durante su ocupación de Kos. Ambas construcciones tenían el mismo fin: dirigir el agua a los campos.",
+    "v2": "Puedes detenerte en el camino y echar un vistazo, pero ten cuidado. Está en medio de la carretera y los coches pasan a toda velocidad. Y, sin embargo, sigue siendo especial estar aquí y darse cuenta de que esta ingeniosa central hidráulica tiene más de dos mil años y todavía se encuentra en el paisaje.",
+    "k1": "No sólo los holandeses saben domar el agua."
   }
-
-  var langBtn = document.getElementById('langBtn');
-  var langMenu = document.getElementById('langMenu');
-  function openMenu(){ langMenu.classList.add('open'); }
-  function closeMenu(){ langMenu.classList.remove('open'); }
-  langBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    langMenu.classList.contains('open') ? closeMenu() : openMenu();
-  });
-  document.addEventListener('click', function(){ closeMenu(); });
-  document.querySelectorAll('.lang-option').forEach(function(btn){
-    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
-  });
-
-  var saved = localStorage.getItem('hk-lang') || 'nl';
-  setLang(saved);
-
-  /* TTS */
-  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
-  function getLang(){
-    var l = localStorage.getItem('hk-lang') || 'nl';
-    return LANG_VOICE[l] ? l : 'nl';
-  }
-  function pickVoice(code){
-    var voices = speechSynthesis.getVoices() || [];
-    var prefix = code.slice(0,2).toLowerCase();
-    return voices.find(function(v){ return v.lang === code; })
-      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
-      || null;
-  }
-  var btnPlay = document.getElementById('btnPlay');
-  var btnStop = document.getElementById('btnStop');
-  var status = document.getElementById('ttsStatus');
-  function setStatus(t){ if(status) status.textContent = t; }
-  function play(){
-    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
-    speechSynthesis.cancel();
-    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
-    var l = getLang();
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = LANG_VOICE[l];
-    u.rate = 0.92;
-    var v = pickVoice(LANG_VOICE[l]);
-    if(v) u.voice = v;
-    u.onstart = function(){
-      btnPlay.classList.add('playing');
-      btnStop.classList.add('show');
-      setStatus('Voorlezen… ('+l.toUpperCase()+')');
-    };
-    u.onend = u.onerror = function(){
-      btnPlay.classList.remove('playing');
-      btnStop.classList.remove('show');
-      setStatus('');
-    };
-    if(!speechSynthesis.getVoices().length){
-      speechSynthesis.onvoiceschanged = function(){
-        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
-        speechSynthesis.speak(u);
-      };
-      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
-    } else {
-      speechSynthesis.speak(u);
-    }
-  }
-  function stop(){
-    if(window.speechSynthesis) speechSynthesis.cancel();
-    btnPlay.classList.remove('playing');
-    btnStop.classList.remove('show');
-    setStatus('Gestopt.');
-  }
-  btnPlay.addEventListener('click', play);
-  btnStop.addEventListener('click', stop);
-  if(window.speechSynthesis){
-    speechSynthesis.getVoices();
-    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
-  }
-})();
-</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

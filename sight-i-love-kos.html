@@ -1,395 +1,184 @@
 <!DOCTYPE html>
-<html lang="nl" data-hk-own="1" data-hk-tts="1">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0D1F1F">
-  <title>I Love Kos – Hello Kos</title>
-  <style>
-    :root {
-      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
-      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
-      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
-      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
-      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text); -webkit-font-smoothing: antialiased;
-      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
-      background: var(--bg); min-height: 100vh; line-height: 1.55;
-    }
-    .app-header {
-      position: sticky; top: 0; z-index: 100;
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-      padding: 14px 16px; background: var(--bg-header);
-      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
-    }
-    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
-    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
-    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
-    .logo-text span { color: var(--gold-dark); font-style: italic; }
-    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
-    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
-    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
-    .lang-menu.open { display: block; }
-    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
-    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
-    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
-    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
-    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .content { padding: 18px 16px 0; }
-    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
-    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-
-    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
-    .btn-audio { background: var(--petrol); color: #fff; }
-    .btn-audio.playing { background: var(--petrol-dark); }
-    .btn-stop { background: #3A4545; color: #fff; display: none; }
-    .btn-stop.show { display: flex; }
-
-    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
-    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
-    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
-    .card p:last-child { margin-bottom: 0; }
-    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
-    .tip strong { color: var(--gold); }
-    .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
-    .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
-    .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
-
-    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
-    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
-    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
-    .footer a { color: var(--petrol); text-decoration: none; }
-  </style>
-<link rel="stylesheet" href="hello-kos.css">
+  <title>I love Kos – Hello Kos</title>
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body>
+<body class="hk-page hk-guide">
   <header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
   <main class="main">
     <div class="hero-wrap">
-      <img src="img/jwwb/77aa42f347-565151116_1552661852852838_1840308219660787866_n-high.jpg" alt="I Love Kos" loading="eager">
-      <div class="hero-title"><h1 data-i18n="title">I Love Kos</h1></div>
+      <img class="hk-zoom" src="img/jwwb/77aa42f347-565151116_1552661852852838_1840308219660787866_n-high.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
     </div>
-
-    <div class="content">
-<p class="lead" data-i18n="lead">Populaire fotospot met de grote “I Love Kos”-letters – er zijn er zelfs twee op het eiland.</p>
-
-      
-
-      <div class="actions">
-        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
-        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-      </div>
-      
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=I%20Love%20Kos%20letters%20harbour%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=I%20Love%20Kos%20letters%20harbour%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
-      </div>
-      <p class="status" id="ttsStatus"></p>
-
-      <div id="readText">
-        <div class="card">
-          <h2 data-i18n="hStory">Twee sets letters</h2>
-          <p data-i18n="p1">Sinds 2021 heeft Kos zijn eigen “I Love Kos”-letters. Er zijn niet één, maar twee sets te bewonderen – onder andere bij de haven van Kos-stad.</p>
-          <p data-i18n="p2">Het is een super populaire fotospot: bijna iedereen op vakantie maakt hier een foto.</p>
-        </div>
-
-        
-
-        <div class="photo-block">
-          <img src="img/jwwb/9d5ce67eaf-images-14-high.jpg" alt="I Love Kos" loading="lazy">
-          <div class="cap" data-i18n="cap1">De letters bij de haven</div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="hSee">Fotospot</h2>
-          <p data-i18n="p3">Bezoek de bekende letters in de haven van Kos-stad. Ideaal voor een vakantiefoto met zee of kasteel op de achtergrond.</p>
-        </div>
-
-        <div class="gallery">
-          <div class="g-item">
-            <img src="img/jwwb/e5ac1df12d-images-15-high.jpg" alt="I Love Kos" loading="lazy">
-            <span data-i18n="g1">Letters</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/072f35db8f-202146901_192392132889389_1331225783528797045_n-high.jpg" alt="Fotospot" loading="lazy">
-            <span data-i18n="g2">Fotospot</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/5ec3673c6c-4761ce5cae4fa08acfaf15d62131e1d7-high.jpg" alt="I Love Kos" loading="lazy">
-            <span data-i18n="g3">Letters</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/07862639b5-huikgi-1024x461-standard.jpg" alt="I Love Kos" loading="lazy">
-            <span data-i18n="g4">Overzicht</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="hKnow">Bezoeken</h2>
-          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: Kom vroeg of later op de dag voor minder wachtrij bij de foto. Kijk of de letters aan de haven of de andere locatie beter in je route past.</p></div>
-        </div>
-      </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=36.8935%2C27.2902" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?ll=36.8935,27.2902&amp;q=I%20love%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-i-love-kos-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-i-love-kos-02.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-i-love-kos-03.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-i-love-kos-04.jpg" alt=""></figure>
+<p data-i18n="k2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-i-love-kos-05.jpg" alt=""></figure>
+</article>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-i-love-kos-06.jpg" alt=""></figure>
     </div>
   </main>
-
-  <footer class="footer">
-    <div>Hello Kos</div>
-    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
-  </footer>
-
-<script>
-(function(){
-  var I18N = window.HK_DICT = {
-    "nl": {
-      "title": "I Love Kos",
-      "lead": "Populaire fotospot met de grote “I Love Kos”-letters – er zijn er zelfs twee op het eiland.",
-      "btnPlay": "Voorlezen",
-      "p1": "Sinds 2021 heeft Kos zijn eigen “I Love Kos”-letters. Er zijn niet één, maar twee sets te bewonderen – onder andere bij de haven van Kos-stad.",
-      "p2": "Het is een super populaire fotospot: bijna iedereen op vakantie maakt hier een foto.",
-      "cap1": "De letters bij de haven",
-      "p3": "Bezoek de bekende letters in de haven van Kos-stad. Ideaal voor een vakantiefoto met zee of kasteel op de achtergrond.",
-      "g1": "Letters",
-      "g2": "Fotospot",
-      "g3": "Letters",
-      "g4": "Overzicht",
-      "tip": "Kom vroeg of later op de dag voor minder wachtrij bij de foto. Kijk of de letters aan de haven of de andere locatie beter in je route past.",
-      "hStory": "Het verhaal",
-      "hSee": "Wat je ziet",
-      "hKnow": "Goed om te weten",
-      "tipTitle": "Tip van de gids",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "I Love Kos",
-      "lead": "Popular photo spot with the big “I Love Kos” letters – there are even two sets on the island.",
-      "btnPlay": "Read aloud",
-      "p1": "Since 2021 Kos has its own “I Love Kos” letters. There are not one, but two sets to admire – among others at the harbour of Kos Town.",
-      "p2": "It is a super popular photo spot: almost everyone on holiday takes a picture here.",
-      "cap1": "The letters at the harbour",
-      "p3": "Visit the well-known letters in the harbour of Kos Town. Ideal for a holiday photo with sea or castle in the background.",
-      "g1": "Letters",
-      "g2": "Photo spot",
-      "g3": "Letters",
-      "g4": "Overview",
-      "tip": "Come early or later in the day for a shorter queue at the photo. See whether the letters at the harbour or the other location fits better in your route.",
-      "hStory": "The story",
-      "hSee": "What you see",
-      "hKnow": "Good to know",
-      "tipTitle": "Guide’s tip",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "I Love Kos",
-      "lead": "Beliebter Fotospot mit den großen „I Love Kos“-Buchstaben – es gibt sogar zwei Sets auf der Insel.",
-      "btnPlay": "Vorlesen",
-      "p1": "Seit 2021 hat Kos seine eigenen „I Love Kos“-Buchstaben. Es gibt nicht eine, sondern zwei Sets zu bewundern – unter anderem am Hafen von Kos-Stadt.",
-      "p2": "Es ist ein super beliebter Fotospot: fast jeder im Urlaub macht hier ein Foto.",
-      "cap1": "Die Buchstaben am Hafen",
-      "p3": "Besuche die bekannten Buchstaben im Hafen von Kos-Stadt. Ideal für ein Urlaubsfoto mit Meer oder Burg im Hintergrund.",
-      "g1": "Buchstaben",
-      "g2": "Fotospot",
-      "g3": "Buchstaben",
-      "g4": "Übersicht",
-      "tip": "Komm früh oder später am Tag für weniger Wartezeit beim Foto. Schau, ob die Buchstaben am Hafen oder der andere Standort besser in deine Route passt.",
-      "hStory": "Die Geschichte",
-      "hSee": "Was du siehst",
-      "hKnow": "Gut zu wissen",
-      "tipTitle": "Tipp des Guides",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "I Love Kos",
-      "lead": "Popolare spot fotografico con le grandi lettere “I Love Kos” – ce ne sono addirittura due sull’isola.",
-      "btnPlay": "Leggi ad alta voce",
-      "p1": "Dal 2021 Kos ha le sue lettere “I Love Kos”. Ce ne sono non una, ma due set da ammirare – tra l’altro al porto di Kos città.",
-      "p2": "È uno spot fotografico super popolare: quasi tutti in vacanza fanno una foto qui.",
-      "cap1": "Le lettere al porto",
-      "p3": "Visita le famose lettere nel porto di Kos città. Ideale per una foto di vacanza con mare o castello sullo sfondo.",
-      "g1": "Lettere",
-      "g2": "Spot foto",
-      "g3": "Lettere",
-      "g4": "Panoramica",
-      "tip": "vieni presto o più tardi nella giornata per meno coda alla foto. Guarda se le lettere al porto o l’altra location si adatta meglio al tuo percorso.",
-      "hStory": "La storia",
-      "hSee": "Cosa vedi",
-      "hKnow": "Buono a sapersi",
-      "tipTitle": "Consiglio della guida",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "I Love Kos",
-      "lead": "Büyük “I Love Kos” harfleriyle popüler fotoğraf noktası – adada hatta iki set var.",
-      "btnPlay": "Sesli oku",
-      "p1": "2021’den beri Kos’un kendi “I Love Kos” harfleri var. Bir değil, iki set var – diğerlerinin yanı sıra Kos şehri limanında.",
-      "p2": "Süper popüler bir fotoğraf noktası: tatildeki neredeyse herkes burada fotoğraf çeker.",
-      "cap1": "Limandaki harfler",
-      "p3": "Kos şehri limanındaki ünlü harfleri ziyaret et. Deniz veya kale arka planlı tatil fotoğrafı için ideal.",
-      "g1": "Harfler",
-      "g2": "Fotoğraf noktası",
-      "g3": "Harfler",
-      "g4": "Genel görünüm",
-      "tip": "Fotoğraf için daha az kuyruk olsun diye günün erken veya geç saatlerinde gel. Limandaki harfler mi yoksa diğer konum mu rotana daha uygun bak.",
-      "hStory": "Hikaye",
-      "hSee": "Ne görürsün",
-      "hKnow": "Bilmekte fayda var",
-      "tipTitle": "Rehberin ipucu",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "I Love Kos",
-      "lead": "Popular punto fotográfico con las grandes letras “I Love Kos” – hay incluso dos sets en la isla.",
-      "btnPlay": "Leer en voz alta",
-      "p1": "Desde 2021 Kos tiene sus propias letras “I Love Kos”. Hay no uno, sino dos sets para admirar – entre otros en el puerto de Kos ciudad.",
-      "p2": "Es un punto fotográfico súper popular: casi todo el mundo de vacaciones se hace una foto aquí.",
-      "cap1": "Las letras en el puerto",
-      "p3": "Visita las famosas letras en el puerto de Kos ciudad. Ideal para una foto de vacaciones con mar o castillo de fondo.",
-      "g1": "Letras",
-      "g2": "Punto foto",
-      "g3": "Letras",
-      "g4": "Vista general",
-      "tip": "ven temprano o más tarde en el día para menos cola en la foto. Mira si las letras del puerto o la otra ubicación encaja mejor en tu ruta.",
-      "hStory": "La historia",
-      "hSee": "Qué ves",
-      "hKnow": "Bueno saberlo",
-      "tipTitle": "Consejo del guía",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };
-
-  function setLang(l) {
-    if (!I18N[l]) l = 'nl';
-    localStorage.setItem('hk-lang', l);
-    document.documentElement.lang = l;
-    var d = I18N[l];
-    document.querySelectorAll('[data-i18n]').forEach(function(el){
-      var k = el.getAttribute('data-i18n');
-      if (d[k]) el.textContent = d[k];
-    });
-    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
-    if (opt) {
-      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
-      document.getElementById('code').textContent = l.toUpperCase();
-    }
-    document.querySelectorAll('.lang-option').forEach(function(o){
-      o.classList.toggle('active', o.getAttribute('data-lang') === l);
-    });
-    closeMenu();
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Kos-stad",
+    "title": "I love Kos",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "I Lof Kos is een super populaire fotospot!",
+    "s1": "I Lof Kos is een super populaire fotospot! Net als elke zichzelf respecterende toeristenplek heeft Kos sinds 2021 z’n eigen grote ‘EI Lof Kos’-letters. bijna iedereen die hier op vakantie is, gaat even poseren voor die dingen.",
+    "s2": "En het mooie is: er zijn er niet één, maar twéé! Dubbel plezier! Eentje staat bij de andere jachthaven.",
+    "v1": "Net als iedere andere gerespecteerde toeristenbestemming, heeft Kos sinds 2021 zijn eigen ‘I Love Kos’-letters. En met trots kan men zeggen dat er niet één, maar liefst twee sets te bewonderen zijn!",
+    "k1": "Die letters staan een beetje op een afgesloten terrein, maar je mag er gewoon heen. Er is bewaking met hefbomen, maar dat is alleen om de dure bootjes te beschermen. Niks om je druk over te maken, je kan er gewoon naartoe.maar voor nu is deze route voor de bekende letters in de haven van Kos-stad.",
+    "k2": "De jachthaven Marina ligt op een afgesloten terrein, maar is vrij toegankelijk voor bezoekers. De bewaking en de hefbomen zijn aangebracht ter bescherming van de boten die hier liggen."
+  },
+  "de": {
+    "place": "Kos-Stadt",
+    "title": "I love Kos",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "I Lof Kos ist ein super beliebter Fotospot!",
+    "s1": "I Lof Kos ist ein super beliebter Fotospot! Wie jeder Touristenort, der etwas auf sich hält, hat Kos seit 2021 seine eigenen großen „EI Praise Kos“-Schriftzüge. Fast jeder, der hier Urlaub macht, wird für diese Dinge posieren.",
+    "s2": "Und das Tolle ist: Es gibt nicht eins, sondern zwei! Doppelter Spaß! Einer liegt am anderen Yachthafen.",
+    "v1": "Wie jedes andere angesehene Touristenziel hat Kos seit 2021 seine eigenen „I Love Kos“-Buchstaben. Und wir können mit Stolz sagen, dass es nicht nur eins, sondern gleich zwei Sets zu bewundern gibt!",
+    "k1": "Diese Briefe befinden sich in einem etwas geschlossenen Bereich, aber Sie können dorthin gehen. Es gibt eine Sicherung mit Hebeln, aber das dient nur dem Schutz der teuren Boote. Kein Grund zur Sorge, Sie können einfach dorthin gehen, aber vorerst ist diese Route für die berühmten Briefe im Hafen von Kos-Stadt gedacht.",
+    "k2": "Die Marina Marina liegt auf einem geschlossenen Gelände, ist aber für Besucher frei zugänglich. Zum Schutz der hier vertäuten Boote wurden Schutzvorrichtungen und Hebel angebracht."
+  },
+  "en": {
+    "place": "Kos Town",
+    "title": "I love Kos",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "I Lof Kos is a super popular photo spot!",
+    "s1": "I Lof Kos is a super popular photo spot! Like any self-respecting tourist spot, Kos has had its own large 'EI Praise Kos' letters since 2021. almost everyone who is on holiday here will pose for those things.",
+    "s2": "And the great thing is: there is not one, but two! Double the fun! One is at the other marina.",
+    "v1": "Like any other respected tourist destination, Kos has its own 'I Love Kos' letters since 2021. And we can proudly say that there is not one, but no less than two sets to admire!",
+    "k1": "Those letters are in a somewhat closed area, but you can go there. There is security with levers, but that is only to protect the expensive boats. Nothing to worry about, you can just go there, but for now this route is for the famous letters in the port of Kos town.",
+    "k2": "The Marina Marina is located on a closed site, but is freely accessible to visitors. The guards and levers have been installed to protect the boats moored here."
+  },
+  "it": {
+    "place": "Città di Kos",
+    "title": "I love Kos",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "I Lof Kos è uno spot fotografico super popolare!",
+    "s1": "I Lof Kos è uno spot fotografico super popolare! Come ogni località turistica che si rispetti, dal 2021 Kos ha le sue grandi lettere 'EI Praise Kos'. Quasi tutti coloro che sono in vacanza qui poseranno per quelle cose.",
+    "s2": "E la cosa bella è: non ce n’è uno, ma due! Raddoppia il divertimento! Uno è nell'altro porto turistico.",
+    "v1": "Come ogni altra destinazione turistica che si rispetti, Kos ha le sue lettere \"I Love Kos\" dal 2021. E possiamo dire con orgoglio che non ce n'è uno, ma ben due set da ammirare!",
+    "k1": "Quelle lettere sono in un'area un po' chiusa, ma puoi andarci. C'è sicurezza con le leve, ma è solo per proteggere le barche costose. Niente di cui preoccuparsi, puoi andarci e basta, ma per ora questo percorso è per le famose lettere nel porto della città di Kos.",
+    "k2": "La Marina Marina si trova in un sito chiuso, ma è liberamente accessibile ai visitatori. Le protezioni e le leve sono state installate per proteggere le barche qui ormeggiate."
+  },
+  "tr": {
+    "place": "Kos şehri",
+    "title": "I love Kos",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "I Lof Kos süper popüler bir fotoğraf noktasıdır!",
+    "s1": "I Lof Kos süper popüler bir fotoğraf noktasıdır! Kendine saygısı olan her turistik yer gibi Kos'un da 2021'den bu yana kendine ait büyük 'EI Kos'a Övgü' mektupları var. Burada tatil yapan hemen hemen herkes bunlar için poz verecek.",
+    "s2": "Ve harika olan şey şu: bir değil iki tane var! Eğlenceyi ikiye katlayın! Biri diğer marinada.",
+    "v1": "Diğer saygın turistik destinasyonlar gibi Kos'un da 2021'den bu yana kendi 'Kos'u Seviyorum' mektupları var. Ve gururla söyleyebiliriz ki, hayran kalacak bir değil en az iki set var!",
+    "k1": "O mektuplar biraz kapalı bir alanda ama oraya gidebilirsiniz. Kaldıraçlarla güvenlik var ama bu sadece pahalı tekneleri korumak için. Endişelenecek bir şey yok, oraya gidebilirsiniz ama şimdilik bu rota Kos kasabasının limanındaki meşhur mektuplar için.",
+    "k2": "Marina Marina kapalı bir alanda yer almaktadır ancak ziyaretçilerin erişimine ücretsizdir. Buraya demirleyen tekneleri korumak için korumalar ve kaldıraçlar yerleştirildi."
+  },
+  "es": {
+    "place": "Ciudad de Kos",
+    "title": "I love Kos",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "¡I Lof Kos es un lugar muy popular para tomar fotografías!",
+    "s1": "¡I Lof Kos es un lugar muy popular para tomar fotografías! Como cualquier lugar turístico que se precie, Kos tiene desde 2021 sus propias letras grandes 'EI Praise Kos'. Casi todos los que están de vacaciones aquí posarán para esas cosas.",
+    "s2": "Y lo bueno es: ¡no hay uno, sino dos! ¡Duplica la diversión! Uno está en el otro puerto deportivo.",
+    "v1": "Como cualquier otro destino turístico respetado, Kos tiene sus propias letras 'I Love Kos' desde 2021. ¡Y podemos decir con orgullo que hay no uno, sino nada menos que dos conjuntos para admirar!",
+    "k1": "Esas cartas están en una zona un tanto cerrada, pero puedes ir allí. Hay seguridad con palancas, pero eso es sólo para proteger los barcos caros. No hay de qué preocuparse, puedes ir allí, pero por ahora esta ruta es para las famosas letras en el puerto de la ciudad de Kos.",
+    "k2": "El puerto deportivo Marina está ubicado en un sitio cerrado, pero es de libre acceso para los visitantes. Se han instalado guardas y palancas para proteger los barcos aquí amarrados."
   }
-
-  var langBtn = document.getElementById('langBtn');
-  var langMenu = document.getElementById('langMenu');
-  function openMenu(){ langMenu.classList.add('open'); }
-  function closeMenu(){ langMenu.classList.remove('open'); }
-  langBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    langMenu.classList.contains('open') ? closeMenu() : openMenu();
-  });
-  document.addEventListener('click', function(){ closeMenu(); });
-  document.querySelectorAll('.lang-option').forEach(function(btn){
-    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
-  });
-
-  var saved = localStorage.getItem('hk-lang') || 'nl';
-  setLang(saved);
-
-  /* TTS */
-  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
-  function getLang(){
-    var l = localStorage.getItem('hk-lang') || 'nl';
-    return LANG_VOICE[l] ? l : 'nl';
-  }
-  function pickVoice(code){
-    var voices = speechSynthesis.getVoices() || [];
-    var prefix = code.slice(0,2).toLowerCase();
-    return voices.find(function(v){ return v.lang === code; })
-      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
-      || null;
-  }
-  var btnPlay = document.getElementById('btnPlay');
-  var btnStop = document.getElementById('btnStop');
-  var status = document.getElementById('ttsStatus');
-  function setStatus(t){ if(status) status.textContent = t; }
-  function play(){
-    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
-    speechSynthesis.cancel();
-    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
-    var l = getLang();
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = LANG_VOICE[l];
-    u.rate = 0.92;
-    var v = pickVoice(LANG_VOICE[l]);
-    if(v) u.voice = v;
-    u.onstart = function(){
-      btnPlay.classList.add('playing');
-      btnStop.classList.add('show');
-      setStatus('Voorlezen… ('+l.toUpperCase()+')');
-    };
-    u.onend = u.onerror = function(){
-      btnPlay.classList.remove('playing');
-      btnStop.classList.remove('show');
-      setStatus('');
-    };
-    if(!speechSynthesis.getVoices().length){
-      speechSynthesis.onvoiceschanged = function(){
-        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
-        speechSynthesis.speak(u);
-      };
-      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
-    } else {
-      speechSynthesis.speak(u);
-    }
-  }
-  function stop(){
-    if(window.speechSynthesis) speechSynthesis.cancel();
-    btnPlay.classList.remove('playing');
-    btnStop.classList.remove('show');
-    setStatus('Gestopt.');
-  }
-  btnPlay.addEventListener('click', play);
-  btnStop.addEventListener('click', stop);
-  if(window.speechSynthesis){
-    speechSynthesis.getVoices();
-    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
-  }
-})();
-</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

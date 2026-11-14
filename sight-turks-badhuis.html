@@ -1,510 +1,207 @@
 <!DOCTYPE html>
-<html lang="nl" data-hk-own="1" data-hk-tts="1">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0D1F1F">
-  <title>Turks badhuis (Hamam) – Hello Kos</title>
-  <style>
-    :root {
-      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
-      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
-      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
-      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
-      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text); -webkit-font-smoothing: antialiased;
-      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
-      background: var(--bg); min-height: 100vh; line-height: 1.55;
-    }
-    .app-header {
-      position: sticky; top: 0; z-index: 100;
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-      padding: 14px 16px; background: var(--bg-header);
-      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
-    }
-    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
-    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
-    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
-    .logo-text span { color: var(--gold-dark); font-style: italic; }
-    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
-    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
-    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
-    .lang-menu.open { display: block; }
-    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
-    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
-    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
-    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
-    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .content { padding: 18px 16px 0; }
-    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
-    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-
-    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
-    .btn-audio { background: var(--petrol); color: #fff; }
-    .btn-audio.playing { background: var(--petrol-dark); }
-    .btn-stop { background: #3A4545; color: #fff; display: none; }
-    .btn-stop.show { display: flex; }
-
-    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
-    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
-    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
-    .card p:last-child { margin-bottom: 0; }
-    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
-    .tip strong { color: var(--gold); }
-    .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
-    .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
-    .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
-
-    .hours { margin-top: 8px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
-    .h-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 12px; font-size: 0.88rem; border-bottom: 1px solid var(--border); background: var(--bg-card); }
-    .h-row:nth-child(odd) { background: #182828; }
-    .h-row:last-child { border-bottom: none; }
-    .h-row span:last-child { font-weight: 700; color: var(--petrol); }
-    .h-row.closed span:last-child { color: #e0a040; }
-    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
-    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
-    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
-    .footer a { color: var(--petrol); text-decoration: none; }
-  </style>
-<link rel="stylesheet" href="hello-kos.css">
+  <title>Turks badhuis – Hello Kos</title>
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body>
+<body class="hk-page hk-guide">
   <header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
   <main class="main">
     <div class="hero-wrap">
-      <img src="img/jwwb/0b2b4d8b72-inside-turkish-bath-house-1-high.jpg" alt="Turks badhuis Hamam" loading="eager">
-      <div class="hero-title"><h1 data-i18n="title">Turks badhuis (Hamam)</h1></div>
+      <img class="hk-zoom" src="img/jwwb/0b2b4d8b72-inside-turkish-bath-house-1-high.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
     </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=36.8928%2C27.2875" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?ll=36.8928,27.2875&amp;q=Turks%20badhuis" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-turks-badhuis-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-turks-badhuis-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-turks-badhuis-03.jpg" alt=""></figure>
+<p data-i18n="s4"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-turks-badhuis-04.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
 
-    <div class="content">
-<p class="lead" data-i18n="lead">Ottomaans badhuis uit ± 1650 in het centrum – ooit ontmoetingsplek voor vrouwen, later zoutmagazijn. Nu te bezoeken.</p>
+<p data-i18n="v2"></p>
 
-      
+<p data-i18n="v3"></p>
 
-      <div class="actions">
-        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
-        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-      </div>
-      
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Turkish%20Bath%20Hamam%20Yahudi%20Kos%20Town" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Turkish%20Bath%20Hamam%20Yahudi%20Kos%20Town" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
-      </div>
-      <p class="status" id="ttsStatus"></p>
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
 
-      <div id="readText">
-        <div class="card">
-          <h2 data-i18n="hStory">Yahudi Hamamı</h2>
-          <p data-i18n="p1">Het Turks badhuis (Hamam) staat pal in het centrum van Kos-stad. Het stamt uit de Ottomaanse tijd en werd gebouwd rond 1650.</p>
-          <p data-i18n="p2">Het heet Yahudi Hamamı (Joods badhuis) omdat het vooral gebruikt werd door de Joodse vrouwen uit de lokale gemeenschap, die al eeuwen op het eiland woonden.</p>
-        </div>
-
-        
-
-        <div class="card">
-          <h2 data-i18n="hSee">Openingstijden</h2>
-          <p data-i18n="p3">Toegang gratis.</p>
-          <div class="hours">
-            <div class="h-row"><span data-i18n="dMon">Maandag</span><span>08:30 – 15:30</span></div>
-            <div class="h-row closed"><span data-i18n="dTue">Dinsdag</span><span data-i18n="closed">Gesloten</span></div>
-            <div class="h-row"><span data-i18n="dWed">Woensdag</span><span>08:30 – 15:30</span></div>
-            <div class="h-row"><span data-i18n="dThu">Donderdag</span><span>08:30 – 15:30</span></div>
-            <div class="h-row"><span data-i18n="dFri">Vrijdag</span><span>08:30 – 15:30</span></div>
-            <div class="h-row"><span data-i18n="dSat">Zaterdag</span><span>08:30 – 15:30</span></div>
-            <div class="h-row"><span data-i18n="dSun">Zondag</span><span>08:30 – 15:30</span></div>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2social">Sociale ontmoetingsplek</h2>
-          <p data-i18n="p4">In die tijd had Kos een bloeiende Joodse bevolking. Het badhuis was speciaal voor vrouwen: hier kwamen ze samen om te baden, te kletsen en het nieuws van de dag te bespreken.</p>
-          <p data-i18n="p5">Met een ronde ruimte en negen baden was het een echte ontmoetingsplek – een soort sociale hub van vroeger.</p>
-        </div>
-
-        <div class="photo-block">
-          <img src="img/jwwb/b1e8ae1870-inside-turkish-bath-house-high.jpg" alt="Hamam interieur" loading="lazy">
-          <div class="cap" data-i18n="cap1">Interieur van het badhuis</div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2history">1933, Italianen en zoutmagazijn</h2>
-          <p data-i18n="p6">Het gebouw werd in 1933 tijdens de grote aardbeving zwaar beschadigd en tijdens de Italiaanse overheersing weer hersteld. Het bleef in gebruik tot 1948.</p>
-          <p data-i18n="p7">Daarna werd het een opslag voor zout uit de zoutpannen van Kos – vandaar de bijnaam “zoutmagazijn” (alatapothíki).</p>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2heritage">Ottomaans erfgoed</h2>
-          <p data-i18n="p8">Een van de weinige overgebleven gebouwen uit de Ottomaanse tijd. De Italianen beschouwden het als Turks en oosters; zij zagen zichzelf als erfgenamen van het Romeinse Rijk en vervingen of restaureerden veel bestaande gebouwen in Italiaanse stijl.</p>
-        </div>
-
-        <div class="gallery">
-          <div class="g-item">
-            <img src="img/jwwb/94ebb90c96-inside-turkish-bath-house-3-high.jpg" alt="Hamam" loading="lazy">
-            <span data-i18n="g1">Binnen</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/72f6499249-schermopname_6-3-2026_203447_www-google-com-high.jpg" alt="Exterieur" loading="lazy">
-            <span data-i18n="g2">Buiten</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="hKnow">Bezoeken</h2>
-          <p data-i18n="p9">In het centrum van Kos-stad. Gratis, dinsdag gesloten.</p>
-          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: let op de ronde vorm en de koepel – typisch voor een Ottomaans hamam. Neem even de tijd om de sfeer van vroeger te voelen.</p></div>
-        </div>
-      </div>
+</article>
     </div>
   </main>
-
-  <footer class="footer">
-    <div>Hello Kos</div>
-    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
-  </footer>
-
-<script>
-(function(){
-  var I18N = window.HK_DICT = {
-    "nl": {
-      "title": "Turks badhuis (Hamam)",
-      "lead": "Ottomaans badhuis uit ± 1650 in het centrum – ooit ontmoetingsplek voor vrouwen, later zoutmagazijn. Nu te bezoeken.",
-      "btnPlay": "Voorlezen",
-      "p1": "Het Turks badhuis (Hamam) staat pal in het centrum van Kos-stad. Het stamt uit de Ottomaanse tijd en werd gebouwd rond 1650.",
-      "p2": "Het heet Yahudi Hamamı (Joods badhuis) omdat het vooral gebruikt werd door de Joodse vrouwen uit de lokale gemeenschap, die al eeuwen op het eiland woonden.",
-      "p3": "Toegang gratis.",
-      "dMon": "Maandag",
-      "dTue": "Dinsdag",
-      "dWed": "Woensdag",
-      "dThu": "Donderdag",
-      "dFri": "Vrijdag",
-      "dSat": "Zaterdag",
-      "dSun": "Zondag",
-      "closed": "Gesloten",
-      "h2social": "Sociale ontmoetingsplek",
-      "p4": "In die tijd had Kos een bloeiende Joodse bevolking. Het badhuis was speciaal voor vrouwen: hier kwamen ze samen om te baden, te kletsen en het nieuws van de dag te bespreken.",
-      "p5": "Met een ronde ruimte en negen baden was het een echte ontmoetingsplek – een soort sociale hub van vroeger.",
-      "cap1": "Interieur van het badhuis",
-      "h2history": "1933, Italianen en zoutmagazijn",
-      "p6": "Het gebouw werd in 1933 tijdens de grote aardbeving zwaar beschadigd en tijdens de Italiaanse overheersing weer hersteld. Het bleef in gebruik tot 1948.",
-      "p7": "Daarna werd het een opslag voor zout uit de zoutpannen van Kos – vandaar de bijnaam “zoutmagazijn” (alatapothíki).",
-      "h2heritage": "Ottomaans erfgoed",
-      "p8": "Een van de weinige overgebleven gebouwen uit de Ottomaanse tijd. De Italianen beschouwden het als Turks en oosters; zij zagen zichzelf als erfgenamen van het Romeinse Rijk en vervingen of restaureerden veel bestaande gebouwen in Italiaanse stijl.",
-      "g1": "Binnen",
-      "g2": "Buiten",
-      "p9": "In het centrum van Kos-stad. Gratis, dinsdag gesloten.",
-      "tip": "let op de ronde vorm en de koepel – typisch voor een Ottomaans hamam. Neem even de tijd om de sfeer van vroeger te voelen.",
-      "hStory": "Het verhaal",
-      "hSee": "Wat je ziet",
-      "hKnow": "Goed om te weten",
-      "tipTitle": "Tip van de gids",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Turkish Bath (Hamam)",
-      "lead": "Ottoman bathhouse from around 1650 in the centre – once a meeting place for women, later a salt warehouse. Now open to visitors.",
-      "btnPlay": "Read aloud",
-      "p1": "The Turkish bath (Hamam) stands right in the centre of Kos Town. It dates from the Ottoman period and was built around 1650.",
-      "p2": "It is called Yahudi Hamamı (Jewish bathhouse) because it was mainly used by the Jewish women from the local community, who had lived on the island for centuries.",
-      "p3": "Entry free.",
-      "dMon": "Monday",
-      "dTue": "Tuesday",
-      "dWed": "Wednesday",
-      "dThu": "Thursday",
-      "dFri": "Friday",
-      "dSat": "Saturday",
-      "dSun": "Sunday",
-      "closed": "Closed",
-      "h2social": "Social meeting place",
-      "p4": "At that time Kos had a flourishing Jewish population. The bathhouse was specially for women: here they came together to bathe, chat and discuss the news of the day.",
-      "p5": "With a round room and nine baths it was a real meeting place – a kind of social hub from the past.",
-      "cap1": "Interior of the bathhouse",
-      "h2history": "1933, Italians and salt warehouse",
-      "p6": "The building was badly damaged in the great earthquake of 1933 and restored during the Italian occupation. It remained in use until 1948.",
-      "p7": "After that it became a storage for salt from the salt pans of Kos – hence the nickname “salt warehouse” (alatapothíki).",
-      "h2heritage": "Ottoman heritage",
-      "p8": "One of the few remaining buildings from the Ottoman period. The Italians considered it Turkish and oriental; they saw themselves as heirs of the Roman Empire and replaced or restored many existing buildings in Italian style.",
-      "g1": "Inside",
-      "g2": "Outside",
-      "p9": "In the centre of Kos Town. Free, closed on Tuesday.",
-      "tip": "notice the round shape and the dome – typical of an Ottoman hamam. Take a moment to feel the atmosphere of the past.",
-      "hStory": "The story",
-      "hSee": "What you see",
-      "hKnow": "Good to know",
-      "tipTitle": "Guide’s tip",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Türkisches Bad (Hamam)",
-      "lead": "Osmanisches Badhaus aus ca. 1650 im Zentrum – einst Treffpunkt für Frauen, später Salzlager. Jetzt zu besichtigen.",
-      "btnPlay": "Vorlesen",
-      "p1": "Das türkische Bad (Hamam) steht mitten im Zentrum von Kos-Stadt. Es stammt aus der osmanischen Zeit und wurde um 1650 gebaut.",
-      "p2": "Es heißt Yahudi Hamamı (jüdisches Badhaus), weil es hauptsächlich von den jüdischen Frauen der lokalen Gemeinschaft genutzt wurde, die seit Jahrhunderten auf der Insel lebten.",
-      "p3": "Eintritt kostenlos.",
-      "dMon": "Montag",
-      "dTue": "Dienstag",
-      "dWed": "Mittwoch",
-      "dThu": "Donnerstag",
-      "dFri": "Freitag",
-      "dSat": "Samstag",
-      "dSun": "Sonntag",
-      "closed": "Geschlossen",
-      "h2social": "Sozialer Treffpunkt",
-      "p4": "Damals hatte Kos eine blühende jüdische Bevölkerung. Das Badhaus war speziell für Frauen: hier kamen sie zusammen, um zu baden, zu plaudern und die Nachrichten des Tages zu besprechen.",
-      "p5": "Mit einem runden Raum und neun Bädern war es ein echter Treffpunkt – eine Art sozialer Hub von früher.",
-      "cap1": "Innenraum des Badhauses",
-      "h2history": "1933, Italiener und Salzlager",
-      "p6": "Das Gebäude wurde 1933 beim großen Erdbeben stark beschädigt und während der italienischen Herrschaft wieder instand gesetzt. Es blieb bis 1948 in Nutzung.",
-      "p7": "Danach wurde es ein Lager für Salz aus den Salzpfannen von Kos – daher der Spitzname „Salzlager“ (alatapothíki).",
-      "h2heritage": "Osmanisches Erbe",
-      "p8": "Eines der wenigen verbliebenen Gebäude aus der osmanischen Zeit. Die Italiener betrachteten es als türkisch und orientalisch; sie sahen sich als Erben des Römischen Reiches und ersetzten oder restaurierten viele bestehende Gebäude im italienischen Stil.",
-      "g1": "Innen",
-      "g2": "Außen",
-      "p9": "Im Zentrum von Kos-Stadt. Kostenlos, dienstags geschlossen.",
-      "tip": "achte auf die runde Form und die Kuppel – typisch für ein osmanisches Hamam. Nimm dir einen Moment, die Atmosphäre von früher zu spüren.",
-      "hStory": "Die Geschichte",
-      "hSee": "Was du siehst",
-      "hKnow": "Gut zu wissen",
-      "tipTitle": "Tipp des Guides",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Bagno turco (Hamam)",
-      "lead": "Bagno ottomano del ± 1650 nel centro – un tempo luogo di incontro per le donne, poi magazzino del sale. Ora visitabile.",
-      "btnPlay": "Leggi ad alta voce",
-      "p1": "Il bagno turco (Hamam) si trova proprio nel centro di Kos città. Risale al periodo ottomano e fu costruito intorno al 1650.",
-      "p2": "Si chiama Yahudi Hamamı (bagno ebraico) perché era usato principalmente dalle donne ebree della comunità locale, che vivevano sull’isola da secoli.",
-      "p3": "Ingresso gratuito.",
-      "dMon": "Lunedì",
-      "dTue": "Martedì",
-      "dWed": "Mercoledì",
-      "dThu": "Giovedì",
-      "dFri": "Venerdì",
-      "dSat": "Sabato",
-      "dSun": "Domenica",
-      "closed": "Chiuso",
-      "h2social": "Luogo di incontro sociale",
-      "p4": "A quel tempo Kos aveva una fiorente popolazione ebraica. Il bagno era speciale per le donne: qui si riunivano per fare il bagno, chiacchierare e discutere le notizie del giorno.",
-      "p5": "Con uno spazio rotondo e nove bagni era un vero luogo di incontro – una specie di hub sociale del passato.",
-      "cap1": "Interno del bagno",
-      "h2history": "1933, italiani e magazzino del sale",
-      "p6": "L’edificio fu gravemente danneggiato nel grande terremoto del 1933 e restaurato durante l’occupazione italiana. Rimase in uso fino al 1948.",
-      "p7": "Poi divenne un deposito per il sale delle saline di Kos – da qui il soprannome “magazzino del sale” (alatapothíki).",
-      "h2heritage": "Patrimonio ottomano",
-      "p8": "Uno dei pochi edifici rimasti del periodo ottomano. Gli italiani lo consideravano turco e orientale; si vedevano come eredi dell’Impero romano e sostituirono o restaurarono molti edifici esistenti in stile italiano.",
-      "g1": "Interno",
-      "g2": "Esterno",
-      "p9": "Nel centro di Kos città. Gratis, chiuso il martedì.",
-      "tip": "nota la forma rotonda e la cupola – tipica di un hamam ottomano. Prenditi un momento per sentire l’atmosfera di un tempo.",
-      "hStory": "La storia",
-      "hSee": "Cosa vedi",
-      "hKnow": "Buono a sapersi",
-      "tipTitle": "Consiglio della guida",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Türk Hamamı",
-      "lead": "Merkezde ± 1650’den Osmanlı hamamı – bir zamanlar kadınlar için buluşma yeri, sonra tuz deposu. Şimdi ziyaret edilebilir.",
-      "btnPlay": "Sesli oku",
-      "p1": "Türk hamamı (Hamam) Kos şehrinin tam merkezinde duruyor. Osmanlı döneminden kalma ve yaklaşık 1650’de inşa edildi.",
-      "p2": "Yahudi Hamamı (Yahudi hamamı) olarak adlandırılır çünkü özellikle yüzyıllardır adada yaşayan yerel topluluktan Yahudi kadınlar tarafından kullanılıyordu.",
-      "p3": "Giriş ücretsiz.",
-      "dMon": "Pazartesi",
-      "dTue": "Salı",
-      "dWed": "Çarşamba",
-      "dThu": "Perşembe",
-      "dFri": "Cuma",
-      "dSat": "Cumartesi",
-      "dSun": "Pazar",
-      "closed": "Kapalı",
-      "h2social": "Sosyal buluşma yeri",
-      "p4": "O dönemde Kos’ta gelişen bir Yahudi nüfusu vardı. Hamam kadınlara özeldi: burada yıkanmak, sohbet etmek ve günün haberlerini konuşmak için bir araya geliyorlardı.",
-      "p5": "Yuvarlak bir oda ve dokuz banyo ile gerçek bir buluşma yeriydi – eski zamanların bir tür sosyal merkezi.",
-      "cap1": "Hamamın içi",
-      "h2history": "1933, İtalyanlar ve tuz deposu",
-      "p6": "Bina 1933’teki büyük depremde ağır hasar gördü ve İtalyan işgali sırasında restore edildi. 1948’e kadar kullanıldı.",
-      "p7": "Sonra Kos’un tuz tavalarından gelen tuz için depo oldu – bu yüzden “tuz deposu” (alatapothíki) lakabı.",
-      "h2heritage": "Osmanlı mirası",
-      "p8": "Osmanlı döneminden kalan az sayıdaki binalardan biri. İtalyanlar onu Türk ve doğulu olarak görüyordu; kendilerini Roma İmparatorluğu’nun mirasçıları olarak görüp birçok mevcut binayı İtalyan tarzında değiştirdiler veya restore ettiler.",
-      "g1": "İçeride",
-      "g2": "Dışarıda",
-      "p9": "Kos şehrinin merkezinde. Ücretsiz, salı günü kapalı.",
-      "tip": "yuvarlak forma ve kubbeye dikkat et – tipik Osmanlı hamamı. Eski zamanların atmosferini hissetmek için biraz zaman ayır.",
-      "hStory": "Hikaye",
-      "hSee": "Ne görürsün",
-      "hKnow": "Bilmekte fayda var",
-      "tipTitle": "Rehberin ipucu",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Baño turco (Hamam)",
-      "lead": "Baño otomano de ± 1650 en el centro – antaño lugar de encuentro para mujeres, luego almacén de sal. Ahora visitable.",
-      "btnPlay": "Leer en voz alta",
-      "p1": "El baño turco (Hamam) está justo en el centro de Kos ciudad. Data del periodo otomano y se construyó alrededor de 1650.",
-      "p2": "Se llama Yahudi Hamamı (baño judío) porque era usado principalmente por las mujeres judías de la comunidad local, que vivían en la isla desde hacía siglos.",
-      "p3": "Entrada gratuita.",
-      "dMon": "Lunes",
-      "dTue": "Martes",
-      "dWed": "Miércoles",
-      "dThu": "Jueves",
-      "dFri": "Viernes",
-      "dSat": "Sábado",
-      "dSun": "Domingo",
-      "closed": "Cerrado",
-      "h2social": "Lugar de encuentro social",
-      "p4": "En esa época Kos tenía una próspera población judía. El baño era especial para mujeres: aquí se reunían para bañarse, charlar y comentar las noticias del día.",
-      "p5": "Con un espacio redondo y nueve baños era un verdadero lugar de encuentro – una especie de centro social del pasado.",
-      "cap1": "Interior del baño",
-      "h2history": "1933, italianos y almacén de sal",
-      "p6": "El edificio fue gravemente dañado en el gran terremoto de 1933 y restaurado durante la ocupación italiana. Permaneció en uso hasta 1948.",
-      "p7": "Después se convirtió en almacén de sal de las salinas de Kos – de ahí el apodo “almacén de sal” (alatapothíki).",
-      "h2heritage": "Patrimonio otomano",
-      "p8": "Uno de los pocos edificios que quedan del periodo otomano. Los italianos lo consideraban turco y oriental; se veían como herederos del Imperio romano y reemplazaron o restauraron muchos edificios existentes en estilo italiano.",
-      "g1": "Interior",
-      "g2": "Exterior",
-      "p9": "En el centro de Kos ciudad. Gratis, cerrado los martes.",
-      "tip": "fíjate en la forma redonda y la cúpula – típico de un hamam otomano. Tómate un momento para sentir la atmósfera de antaño.",
-      "hStory": "La historia",
-      "hSee": "Qué ves",
-      "hKnow": "Bueno saberlo",
-      "tipTitle": "Consejo del guía",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };
-
-  function setLang(l) {
-    if (!I18N[l]) l = 'nl';
-    localStorage.setItem('hk-lang', l);
-    document.documentElement.lang = l;
-    var d = I18N[l];
-    document.querySelectorAll('[data-i18n]').forEach(function(el){
-      var k = el.getAttribute('data-i18n');
-      if (d[k]) el.textContent = d[k];
-    });
-    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
-    if (opt) {
-      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
-      document.getElementById('code').textContent = l.toUpperCase();
-    }
-    document.querySelectorAll('.lang-option').forEach(function(o){
-      o.classList.toggle('active', o.getAttribute('data-lang') === l);
-    });
-    closeMenu();
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Kos-stad",
+    "title": "Turks badhuis",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "Laten we even een kijkje nemen bij een bijzonder oud gebouw.",
+    "s1": "Laten we even een kijkje nemen bij een bijzonder oud gebouw. We staan nu voor het Turks Badhuis. Dit badhuis stamt uit de Ottomaanse tijd en werd gebouwd rond vijftien vijftig.",
+    "s2": "Het heette destijds Yahudi Hamamı, het Joodse badhuis. Het werd vooral gebruikt door Joodse vrouwen uit de lokale gemeenschap. In die tijd woonde er al eeuwen een bloeiende Joodse bevolking op Kos.",
+    "s3": "Vrouwen kwamen hier samen om te baden, te kletsen en het nieuws van de dag te bespreken. Het was een echte sociale ontmoetingsplek. Het gebouw heeft een ronde centrale ruimte met negen baden.",
+    "s4": "Dat maakte het tot een typisch Turks badhuis, of hamam. In negentien drieëndertig werd het zwaar beschadigd door de grote aardbeving. Tijdens de Italiaanse periode werd het daarna weer hersteld.",
+    "v1": "Het bleef in gebruik tot negentien achtenveertig. Daarna veranderde de functie. Het werd een opslagplaats voor zout uit de zoutpannen van Kos bij tigaki.",
+    "v2": "Vandaar dat het ook wel het zoutmagazijn werd genoemd, of alatapothiki in het Grieks. Van negentien tachtig tot het jaar tweeduizend acht stond het leeg. Sinds tweeduizend tien is het grondig gerestaureerd en nu functioneert het als een klein museum.",
+    "v3": "En wie weet sta jij straks in deze ronde ruimte en stel je dan eens voor hoe het er vroeger aan toeging, vrouwen die baden, roddelden en even ontsnapten aan de dagelijkse drukte. Een klein stukje alledaagse Ottomaanse geschiedenis midden in Kos.",
+    "k1": "Het is de enige originele Ottomaanse hamam-gebouw dat bewaard is gebleven in de hele eilanden regio. De Toegang is helemaal gratis. De openinstijden vind je op deze pagina."
+  },
+  "de": {
+    "place": "Kos-Stadt",
+    "title": "Turks badhuis",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Werfen wir einen Blick auf einen besonderen Altbau.",
+    "s1": "Werfen wir einen Blick auf einen besonderen Altbau. Wir stehen jetzt vor dem Türkischen Badehaus. Dieses Badehaus stammt aus osmanischer Zeit und wurde um die 1550er-Jahre erbaut.",
+    "s2": "Damals hieß es Yahudi Hamamı, das jüdische Badehaus. Es wurde hauptsächlich von jüdischen Frauen aus der örtlichen Gemeinde genutzt. Zu dieser Zeit gab es auf Kos schon seit Jahrhunderten eine blühende jüdische Bevölkerung.",
+    "s3": "Hier versammelten sich Frauen, um zu baden, zu plaudern und die Neuigkeiten des Tages zu besprechen. Es war ein echter geselliger Treffpunkt. Das Gebäude verfügt über einen kreisförmigen zentralen Raum mit neun Bädern.",
+    "s4": "Das machte es zu einem typischen türkischen Badehaus oder Hamam. Im Jahr 1933 wurde es durch das große Erdbeben schwer beschädigt. Während der italienischen Zeit wurde es dann erneut restauriert.",
+    "v1": "Es blieb bis 1948 in Gebrauch. Dann änderte sich die Position. Es diente als Lagerstätte für Salz aus den Salzpfannen von Kos in der Nähe von Tigaki.",
+    "v2": "Daher wurde es auch Salzlager oder auf Griechisch Alatapothiki genannt. Von 1980 bis 2008 stand es leer. Seit dem Jahr 2000 wurde es gründlich restauriert und dient heute als kleines Museum.",
+    "v3": "Und wer weiß, vielleicht stehen Sie bald in diesem runden Raum und stellen sich vor, wie es früher war, als Frauen badeten, schwatzten und der Hektik des Alltags entfliehten. Ein kleines Stück osmanischer Alltagsgeschichte mitten auf Kos.",
+    "k1": "Es ist das einzige original erhaltene osmanische Hamam-Gebäude in der gesamten Inselregion. Der Eintritt ist völlig frei. Die Öffnungszeiten finden Sie auf dieser Seite."
+  },
+  "en": {
+    "place": "Kos Town",
+    "title": "Turks badhuis",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "Let's take a look at a special old building.",
+    "s1": "Let's take a look at a special old building. We are now standing in front of the Turkish Bathhouse. This bathhouse dates from Ottoman times and was built around fifteen fifties.",
+    "s2": "It was then called Yahudi Hamamı, the Jewish bathhouse. It was mainly used by Jewish women from the local community. At that time, there had been a thriving Jewish population on Kos for centuries.",
+    "s3": "Women gathered here to bathe, chat and discuss the news of the day. It was a real social meeting place. The building has a circular central space with nine baths.",
+    "s4": "That made it a typical Turkish bathhouse, or hamam. In nineteen thirty-three it was severely damaged by the great earthquake. It was then restored again during the Italian period.",
+    "v1": "It remained in use until nineteen forty-eight. Then the position changed. It became a storage place for salt from the salt pans of Kos near Tigaki.",
+    "v2": "Hence it was also called the salt warehouse, or alatapothiki in Greek. It stood empty from nineteen eighty to the year two thousand and eight. Since two thousand and ten it has been thoroughly restored and now functions as a small museum.",
+    "v3": "And who knows, you might soon stand in this round room and imagine what it was like in the past, women bathing, gossiping and escaping the hustle and bustle of everyday life. A little piece of everyday Ottoman history in the middle of Kos.",
+    "k1": "It is the only original Ottoman hammam building preserved in the entire islands region. Admission is completely free. You can find the opening hours on this page."
+  },
+  "it": {
+    "place": "Città di Kos",
+    "title": "Turks badhuis",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Diamo un'occhiata a un vecchio edificio speciale.",
+    "s1": "Diamo un'occhiata a un vecchio edificio speciale. Ora ci troviamo davanti al bagno turco. Questo stabilimento balneare risale all'epoca ottomana e fu costruito intorno al quindici anni Cinquanta.",
+    "s2": "Allora si chiamava Yahudi Hamamı, lo stabilimento balneare ebraico. Era utilizzato principalmente dalle donne ebree della comunità locale. A quel tempo, a Kos esisteva da secoli una fiorente popolazione ebraica.",
+    "s3": "Le donne si riunivano qui per fare il bagno, chiacchierare e discutere le novità del giorno. Era un vero e proprio luogo di incontro sociale. L'edificio ha uno spazio centrale circolare con nove bagni.",
+    "s4": "Ciò lo rendeva un tipico bagno turco, o hamam. Nel 1933 fu gravemente danneggiata dal grande terremoto. Fu poi nuovamente restaurato in periodo italiano.",
+    "v1": "Rimase in uso fino al 1948. Poi la posizione è cambiata. Divenne un luogo di deposito del sale proveniente dalle saline di Kos vicino a Tigaki.",
+    "v2": "Per questo motivo veniva chiamato anche magazzino del sale, o alatapothiki in greco. Rimase vuoto dal millenovecentottanta all'anno duemilaotto. Dal duemiladieci è stato completamente restaurato e ora funziona come un piccolo museo.",
+    "v3": "E chissà, presto potresti trovarti in questa stanza rotonda e immaginare com'era in passato, le donne che facevano il bagno, spettegolavano e fuggivano dal trambusto della vita quotidiana. Un piccolo pezzo di storia ottomana quotidiana nel centro di Kos.",
+    "k1": "È l'unico edificio originale dell'hammam ottomano conservato nell'intera regione delle isole. L'ingresso è completamente gratuito. Potete trovare gli orari di apertura in questa pagina."
+  },
+  "tr": {
+    "place": "Kos şehri",
+    "title": "Turks badhuis",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Özel bir eski binaya bir göz atalım.",
+    "s1": "Özel bir eski binaya bir göz atalım. Şimdi Türk Hamamı'nın önünde duruyoruz. Bu hamam Osmanlı döneminden kalmadır ve on beş ellili yıllarda inşa edilmiştir.",
+    "s2": "O zamanlar Yahudi Hamamı yani Yahudi Hamamı deniyordu. Çoğunlukla yerel topluluktan Yahudi kadınlar tarafından kullanılıyordu. O zamanlar Kos'ta yüzyıllardır gelişen bir Yahudi nüfusu vardı.",
+    "s3": "Kadınlar burada yıkanmak, sohbet etmek ve günün haberlerini tartışmak için toplandılar. Gerçek bir sosyal buluşma yeriydi. Binanın dokuz banyolu dairesel bir merkezi alanı vardır.",
+    "s4": "Bu onu tipik bir Türk hamamı veya hamamı yapıyordu. 1933 yılındaki büyük depremde ağır hasar gördü. Daha sonra İtalyan döneminde tekrar restore edilmiştir.",
+    "v1": "Bin dokuz yüz kırk sekize kadar kullanımda kaldı. Daha sonra pozisyon değişti. Tigaki yakınlarındaki Kos tuzlalarından elde edilen tuzların depolandığı yer haline geldi.",
+    "v2": "Bu nedenle buraya tuz deposu veya Yunanca'da alatapotiki de deniyordu. Bin dokuz yüz seksenden iki bin sekiz yılına kadar boş duruyordu. İki bin ondan bu yana tamamen restore edilmiş ve şu anda küçük bir müze olarak hizmet veriyor.",
+    "v3": "Kim bilir, belki yakında bu yuvarlak odada durup kadınların banyo yaptığını, dedikodu yaptığını ve günlük yaşamın koşuşturmasından kaçtığını hayal edebilirsiniz. Kos'un ortasında günlük Osmanlı tarihinden küçük bir parça.",
+    "k1": "Adalar bölgesinin tamamında korunmuş tek orijinal Osmanlı hamam yapısıdır. Giriş tamamen ücretsizdir. Açılış saatlerini bu sayfada bulabilirsiniz."
+  },
+  "es": {
+    "place": "Ciudad de Kos",
+    "title": "Turks badhuis",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Echemos un vistazo a un edificio antiguo especial.",
+    "s1": "Echemos un vistazo a un edificio antiguo especial. Ahora nos encontramos frente a los baños turcos. Esta casa de baños data de la época otomana y fue construida alrededor de los años cincuenta.",
+    "s2": "Entonces se llamó Yahudi Hamamı, la casa de baños judía. Fue utilizado principalmente por mujeres judías de la comunidad local. En aquella época, en Kos había una próspera población judía desde hacía siglos.",
+    "s3": "Las mujeres se reunían aquí para bañarse, charlar y comentar las novedades del día. Era un verdadero lugar de encuentro social. El edificio tiene un espacio central circular con nueve baños.",
+    "s4": "Eso lo convertía en una típica casa de baños turcos o hamam. En mil novecientos treinta y tres resultó gravemente dañada por el gran terremoto. Luego fue restaurada nuevamente durante el período italiano.",
+    "v1": "Permaneció en uso hasta mil novecientos cuarenta y ocho. Entonces la posición cambió. Se convirtió en un lugar de almacenamiento de sal de las salinas de Kos, cerca de Tigaki.",
+    "v2": "De ahí que también se le llamara almacén de sal, o alatapothiki en griego. Estuvo vacío desde mil novecientos ochenta hasta el año dos mil ocho. Desde el año 2010 ha sido completamente restaurado y ahora funciona como un pequeño museo.",
+    "v3": "Y quién sabe, tal vez pronto te encuentres en esta sala redonda e imagines cómo era antes, las mujeres bañándose, cotilleando y escapando del ajetreo y el bullicio de la vida cotidiana. Un pedacito de la historia otomana cotidiana en medio de Kos.",
+    "k1": "Es el único edificio de hammam otomano original que se conserva en toda la región de las islas. La entrada es completamente gratuita. Puedes encontrar los horarios de apertura en esta página."
   }
-
-  var langBtn = document.getElementById('langBtn');
-  var langMenu = document.getElementById('langMenu');
-  function openMenu(){ langMenu.classList.add('open'); }
-  function closeMenu(){ langMenu.classList.remove('open'); }
-  langBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    langMenu.classList.contains('open') ? closeMenu() : openMenu();
-  });
-  document.addEventListener('click', function(){ closeMenu(); });
-  document.querySelectorAll('.lang-option').forEach(function(btn){
-    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
-  });
-
-  var saved = localStorage.getItem('hk-lang') || 'nl';
-  setLang(saved);
-
-  /* TTS */
-  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
-  function getLang(){
-    var l = localStorage.getItem('hk-lang') || 'nl';
-    return LANG_VOICE[l] ? l : 'nl';
-  }
-  function pickVoice(code){
-    var voices = speechSynthesis.getVoices() || [];
-    var prefix = code.slice(0,2).toLowerCase();
-    return voices.find(function(v){ return v.lang === code; })
-      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
-      || null;
-  }
-  var btnPlay = document.getElementById('btnPlay');
-  var btnStop = document.getElementById('btnStop');
-  var status = document.getElementById('ttsStatus');
-  function setStatus(t){ if(status) status.textContent = t; }
-  function play(){
-    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
-    speechSynthesis.cancel();
-    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
-    var l = getLang();
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = LANG_VOICE[l];
-    u.rate = 0.92;
-    var v = pickVoice(LANG_VOICE[l]);
-    if(v) u.voice = v;
-    u.onstart = function(){
-      btnPlay.classList.add('playing');
-      btnStop.classList.add('show');
-      setStatus('Voorlezen… ('+l.toUpperCase()+')');
-    };
-    u.onend = u.onerror = function(){
-      btnPlay.classList.remove('playing');
-      btnStop.classList.remove('show');
-      setStatus('');
-    };
-    if(!speechSynthesis.getVoices().length){
-      speechSynthesis.onvoiceschanged = function(){
-        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
-        speechSynthesis.speak(u);
-      };
-      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
-    } else {
-      speechSynthesis.speak(u);
-    }
-  }
-  function stop(){
-    if(window.speechSynthesis) speechSynthesis.cancel();
-    btnPlay.classList.remove('playing');
-    btnStop.classList.remove('show');
-    setStatus('Gestopt.');
-  }
-  btnPlay.addEventListener('click', play);
-  btnStop.addEventListener('click', stop);
-  if(window.speechSynthesis){
-    speechSynthesis.getVoices();
-    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
-  }
-})();
-</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

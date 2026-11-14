@@ -1,422 +1,199 @@
 <!DOCTYPE html>
-<html lang="nl" data-hk-own="1" data-hk-tts="1">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0D1F1F">
-  <title>International Hippocratic Foundation – Hello Kos</title>
-  <style>
-    :root {
-      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
-      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
-      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
-      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
-      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text); -webkit-font-smoothing: antialiased;
-      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
-      background: var(--bg); min-height: 100vh; line-height: 1.55;
-    }
-    .app-header {
-      position: sticky; top: 0; z-index: 100;
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-      padding: 14px 16px; background: var(--bg-header);
-      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
-    }
-    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
-    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
-    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
-    .logo-text span { color: var(--gold-dark); font-style: italic; }
-    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
-    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
-    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
-    .lang-menu.open { display: block; }
-    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
-    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
-    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
-    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
-    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .content { padding: 18px 16px 0; }
-    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
-    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-
-    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
-    .btn-audio { background: var(--petrol); color: #fff; }
-    .btn-audio.playing { background: var(--petrol-dark); }
-    .btn-stop { background: #3A4545; color: #fff; display: none; }
-    .btn-stop.show { display: flex; }
-
-    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
-    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
-    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
-    .card p:last-child { margin-bottom: 0; }
-    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
-    .tip strong { color: var(--gold); }
-
-    .hours { margin-top: 8px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
-    .h-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 12px; font-size: 0.88rem; border-bottom: 1px solid rgba(255,255,255,0.05); background: var(--bg-card); }
-    .h-row:nth-child(odd) { background: #1a2525; }
-    .h-row:last-child { border-bottom: none; }
-    .h-row span:last-child { font-weight: 700; color: var(--petrol); }
-    .h-row.closed span:last-child { color: #e0a040; }
-    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
-    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
-    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
-    .footer a { color: var(--petrol); text-decoration: none; }
-  </style>
-<link rel="stylesheet" href="hello-kos.css">
+  <title>Hippocratic Foundation – Hello Kos</title>
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body>
+<body class="hk-page hk-guide">
   <header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
   <main class="main">
     <div class="hero-wrap">
-      <img src="img/jwwb/7f7def8855-yxnzzxrzl2ltywdlcy9wywdlcy9tb251bwvudhmvzglpay9esk.jpg" alt="International Hippocratic Foundation" loading="eager">
-      <div class="hero-title"><h1 data-i18n="title">International Hippocratic Foundation</h1></div>
+      <img class="hk-zoom" src="img/jwwb/7f7def8855-yxnzzxrzl2ltywdlcy9wywdlcy9tb251bwvudhmvzglpay9esk.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
     </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=36.878%2C27.255" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?ll=36.878,27.255&amp;q=Hippocratic%20Foundation" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-hippocratic-foundation-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-hippocratic-foundation-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-hippocratic-foundation-03.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-hippocratic-foundation-04.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
 
-    <div class="content">
-<p class="lead" data-i18n="lead">Non-profit organisatie op Kos die Hippocrates eert – museum, tuin en educatie over de basis van de geneeskunde.</p>
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
 
-      
+<p data-i18n="k2"></p>
 
-      <div class="actions">
-        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
-        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-      </div>
-      
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=International%20Hippocratic%20Foundation%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=International%20Hippocratic%20Foundation%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
-      </div>
-      <p class="status" id="ttsStatus"></p>
-
-      <div id="readText">
-        <div class="card">
-          <h2 data-i18n="hStory">Eerbetoon aan Hippocrates</h2>
-          <p data-i18n="p1">De International Hippocratic Foundation (IHFK) is een non-profit op Kos. Ze eert Hippocrates (ca. 460–370 v.Chr.), de grondlegger van de rationele geneeskunde.</p>
-          <p data-i18n="p2">Hij keek niet alleen naar klachten, maar ook naar leefstijl en omgeving van de patiënt – iets wat nog steeds centraal staat.</p>
-        </div>
-
-        
-
-        <div class="card">
-          <h2 data-i18n="hSee">Openingstijden</h2>
-          <div class="hours">
-            <div class="h-row">
-              <span data-i18n="hoursMonSat">Maandag t/m zaterdag</span>
-              <span>09:00 – 16:00</span>
-            </div>
-            <div class="h-row closed">
-              <span data-i18n="hoursSun">Zondag</span>
-              <span data-i18n="hoursClosed">Gesloten</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2programs">Museum en programma’s</h2>
-          <p data-i18n="p3">Naast het museum organiseert de foundation lessen en programma’s voor schoolkinderen, studenten en artsen in opleiding – zodat de basis van de geneeskunde wordt doorgegeven.</p>
-        </div>
-
-        <div class="gallery">
-          <div class="g-item">
-            <img src="img/jwwb/25ee0e4668-caption-43-high.jpg" alt="" loading="lazy">
-            <span data-i18n="g1">Foundation</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/2af1b975c3-caption-44-high.jpg" alt="" loading="lazy">
-            <span data-i18n="g2">Foundation</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/31f51c5e8c-caption-45-high.jpg" alt="" loading="lazy">
-            <span data-i18n="g3">Foundation</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="hKnow">Bezoeken</h2>
-          <p data-i18n="p4">Op Kos. Check lokaal de exacte entreeprijs.</p>
-          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: combineer met de Hippocrates Garden en het Asklepion voor een volledige “Hippocrates-dag”.</p></div>
-        </div>
-      </div>
+</article>
     </div>
   </main>
-
-  <footer class="footer">
-    <div>Hello Kos</div>
-    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
-  </footer>
-
-<script>
-(function(){
-  var I18N = window.HK_DICT = {
-    "nl": {
-      "title": "International Hippocratic Foundation",
-      "lead": "Non-profit organisatie op Kos die Hippocrates eert – museum, tuin en educatie over de basis van de geneeskunde.",
-      "btnPlay": "Voorlezen",
-      "p1": "De International Hippocratic Foundation (IHFK) is een non-profit op Kos. Ze eert Hippocrates (ca. 460–370 v.Chr.), de grondlegger van de rationele geneeskunde.",
-      "p2": "Hij keek niet alleen naar klachten, maar ook naar leefstijl en omgeving van de patiënt – iets wat nog steeds centraal staat.",
-      "hoursMonSat": "Maandag t/m zaterdag",
-      "hoursSun": "Zondag",
-      "hoursClosed": "Gesloten",
-      "h2programs": "Museum en programma’s",
-      "p3": "Naast het museum organiseert de foundation lessen en programma’s voor schoolkinderen, studenten en artsen in opleiding – zodat de basis van de geneeskunde wordt doorgegeven.",
-      "g1": "Foundation",
-      "g2": "Foundation",
-      "g3": "Foundation",
-      "p4": "Op Kos. Check lokaal de exacte entreeprijs.",
-      "tip": "combineer met de Hippocrates Garden en het Asklepion voor een volledige “Hippocrates-dag”.",
-      "hStory": "Het verhaal",
-      "hSee": "Wat je ziet",
-      "hKnow": "Goed om te weten",
-      "tipTitle": "Tip van de gids",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "International Hippocratic Foundation",
-      "lead": "Non-profit organisation on Kos honouring Hippocrates – museum, garden and education on the foundations of medicine.",
-      "btnPlay": "Read aloud",
-      "p1": "The International Hippocratic Foundation (IHFK) is a non-profit on Kos. It honours Hippocrates (c. 460–370 BC), the founder of rational medicine.",
-      "p2": "He looked not only at symptoms, but also at the patient’s lifestyle and environment – something that remains central today.",
-      "hoursMonSat": "Monday to Saturday",
-      "hoursSun": "Sunday",
-      "hoursClosed": "Closed",
-      "h2programs": "Museum and programmes",
-      "p3": "Besides the museum, the foundation organises lessons and programmes for schoolchildren, students and trainee doctors – so that the foundations of medicine are passed on.",
-      "g1": "Foundation",
-      "g2": "Foundation",
-      "g3": "Foundation",
-      "p4": "On Kos. Check locally for the exact entrance fee.",
-      "tip": "combine with the Hippocrates Garden and the Asklepion for a full “Hippocrates day”.",
-      "hStory": "The story",
-      "hSee": "What you see",
-      "hKnow": "Good to know",
-      "tipTitle": "Guide’s tip",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "International Hippocratic Foundation",
-      "lead": "Non-Profit-Organisation auf Kos, die Hippokrates ehrt – Museum, Garten und Bildung über die Grundlagen der Medizin.",
-      "btnPlay": "Vorlesen",
-      "p1": "Die International Hippocratic Foundation (IHFK) ist eine Non-Profit-Organisation auf Kos. Sie ehrt Hippokrates (ca. 460–370 v. Chr.), den Begründer der rationalen Medizin.",
-      "p2": "Er betrachtete nicht nur die Beschwerden, sondern auch Lebensstil und Umgebung des Patienten – etwas, das noch immer zentral ist.",
-      "hoursMonSat": "Montag bis Samstag",
-      "hoursSun": "Sonntag",
-      "hoursClosed": "Geschlossen",
-      "h2programs": "Museum und Programme",
-      "p3": "Neben dem Museum organisiert die Foundation Unterricht und Programme für Schulkinder, Studenten und Ärzte in Ausbildung – damit die Grundlagen der Medizin weitergegeben werden.",
-      "g1": "Foundation",
-      "g2": "Foundation",
-      "g3": "Foundation",
-      "p4": "Auf Kos. Prüfe lokal den genauen Eintrittspreis.",
-      "tip": "kombiniere mit dem Hippocrates Garden und dem Asklepion für einen vollständigen „Hippokrates-Tag“.",
-      "hStory": "Die Geschichte",
-      "hSee": "Was du siehst",
-      "hKnow": "Gut zu wissen",
-      "tipTitle": "Tipp des Guides",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "International Hippocratic Foundation",
-      "lead": "Organizzazione non-profit a Kos che onora Ippocrate – museo, giardino e educazione sui fondamenti della medicina.",
-      "btnPlay": "Leggi ad alta voce",
-      "p1": "L’International Hippocratic Foundation (IHFK) è un’organizzazione non-profit a Kos. Onora Ippocrate (ca. 460–370 a.C.), fondatore della medicina razionale.",
-      "p2": "Guardava non solo i sintomi, ma anche lo stile di vita e l’ambiente del paziente – qualcosa che resta centrale ancora oggi.",
-      "hoursMonSat": "Lunedì a sabato",
-      "hoursSun": "Domenica",
-      "hoursClosed": "Chiuso",
-      "h2programs": "Museo e programmi",
-      "p3": "Oltre al museo, la foundation organizza lezioni e programmi per scolari, studenti e medici in formazione – così che i fondamenti della medicina vengano trasmessi.",
-      "g1": "Foundation",
-      "g2": "Foundation",
-      "g3": "Foundation",
-      "p4": "A Kos. Controlla in loco il prezzo esatto d’ingresso.",
-      "tip": "combina con il Giardino di Ippocrate e l’Asklepion per una completa “giornata di Ippocrate”.",
-      "hStory": "La storia",
-      "hSee": "Cosa vedi",
-      "hKnow": "Buono a sapersi",
-      "tipTitle": "Consiglio della guida",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "International Hippocratic Foundation",
-      "lead": "Kos’ta Hipokrat’ı onurlandıran kâr amacı gütmeyen kuruluş – müze, bahçe ve tıbbın temelleri üzerine eğitim.",
-      "btnPlay": "Sesli oku",
-      "p1": "International Hippocratic Foundation (IHFK) Kos’ta kâr amacı gütmeyen bir kuruluştur. Rasyonel tıbbın kurucusu Hipokrat’ı (yaklaşık MÖ 460–370) onurlandırır.",
-      "p2": "Sadece şikayetlere değil, hastanın yaşam tarzına ve çevresine de bakardı – bugün hâlâ merkezi olan bir şey.",
-      "hoursMonSat": "Pazartesi–Cumartesi",
-      "hoursSun": "Pazar",
-      "hoursClosed": "Kapalı",
-      "h2programs": "Müze ve programlar",
-      "p3": "Müzenin yanı sıra vakıf, okul çocukları, öğrenciler ve eğitimdeki doktorlar için dersler ve programlar düzenler – tıbbın temellerinin aktarılması için.",
-      "g1": "Vakıf",
-      "g2": "Vakıf",
-      "g3": "Vakıf",
-      "p4": "Kos’ta. Kesin giriş ücretini yerinde kontrol edin.",
-      "tip": "tam bir “Hipokrat günü” için Hipokrat Bahçesi ve Asklepion ile birleştirin.",
-      "hStory": "Hikaye",
-      "hSee": "Ne görürsün",
-      "hKnow": "Bilmekte fayda var",
-      "tipTitle": "Rehberin ipucu",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "International Hippocratic Foundation",
-      "lead": "Organización sin ánimo de lucro en Kos que honra a Hipócrates – museo, jardín y educación sobre los fundamentos de la medicina.",
-      "btnPlay": "Leer en voz alta",
-      "p1": "La International Hippocratic Foundation (IHFK) es una organización sin ánimo de lucro en Kos. Honra a Hipócrates (c. 460–370 a.C.), fundador de la medicina racional.",
-      "p2": "No solo miraba los síntomas, sino también el estilo de vida y el entorno del paciente – algo que sigue siendo central hoy.",
-      "hoursMonSat": "Lunes a sábado",
-      "hoursSun": "Domingo",
-      "hoursClosed": "Cerrado",
-      "h2programs": "Museo y programas",
-      "p3": "Además del museo, la foundation organiza clases y programas para escolares, estudiantes y médicos en formación – para que se transmitan los fundamentos de la medicina.",
-      "g1": "Foundation",
-      "g2": "Foundation",
-      "g3": "Foundation",
-      "p4": "En Kos. Comprueba en el lugar el precio exacto de entrada.",
-      "tip": "combínalo con el Jardín de Hipócrates y el Asklepion para un “día de Hipócrates” completo.",
-      "hStory": "La historia",
-      "hSee": "Qué ves",
-      "hKnow": "Bueno saberlo",
-      "tipTitle": "Consejo del guía",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };
-
-  function setLang(l) {
-    if (!I18N[l]) l = 'nl';
-    localStorage.setItem('hk-lang', l);
-    document.documentElement.lang = l;
-    var d = I18N[l];
-    document.querySelectorAll('[data-i18n]').forEach(function(el){
-      var k = el.getAttribute('data-i18n');
-      if (d[k]) el.textContent = d[k];
-    });
-    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
-    if (opt) {
-      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
-      document.getElementById('code').textContent = l.toUpperCase();
-    }
-    document.querySelectorAll('.lang-option').forEach(function(o){
-      o.classList.toggle('active', o.getAttribute('data-lang') === l);
-    });
-    closeMenu();
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Platani",
+    "title": "Hippocratic Foundation",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "Hier, op een heuvel met uitzicht over Kos-stad, ligt de International Hippocratic Foundation.",
+    "s1": "Hier, op een heuvel met uitzicht over Kos-stad, ligt de International Hippocratic Foundation. Deze stichting werd opgericht in negentien zestig door professor Spyridon Economou, een bekende uroloog uit Athene. Hij wilde de nalatenschap van Hippocrates levend houden en de basisprincipes van de geneeskunde doorgeven aan nieuwe generaties.",
+    "s2": "De foundation is een non-profit organisatie met een internationaal karakter. Het doel is om te laten zien hoe Hippocrates meer dan tweeduizend vierhonderd jaar geleden de geneeskunde veranderde. Hij haalde bijgeloof en goden uit de geneeskunde en maakte er een echte wetenschap van, gebaseerd op observatie, leefstijl, voeding en de omgeving van de patiënt.",
+    "s3": "In het museum zie je documenten, voorwerpen en uitleg over de geschiedenis van de geneeskunde. In de mooie tuin groeien kruiden en planten die Hippocrates en zijn leerlingen al gebruikten voor behandelingen. Je krijgt er een goed beeld van zijn holistische aanpak, niet alleen de klacht behandelen, maar naar de hele mens kijken.",
+    "v1": "Hier voel je de connectie met Hippocrates nog sterker.",
+    "v2": "De foundation organiseert ook lessen en programma’s voor schoolkinderen, studenten en artsen in opleiding. Zo blijft de kennis over de basis van de geneeskunde doorgegeven. Kortom: een plek waar je leert hoe één man op Kos meer dan 2400 jaar geleden de geneeskunde veranderde in iets wetenschappelijks in plaats van bijgeloof.",
+    "k1": "Het is een rustige, educatieve plek waar veel schoolgroepen en studenten komen, maar ook gewone bezoekers zijn welkom. Je kunt er op je gemak rondwandelen en even stilstaan bij hoe 1 man uit Kos de basis legde voor de moderne geneeskunde. Toegang kost een klein bedrag.",
+    "k2": "Het is geopend van maandag tot en met zaterdag van negen uur ’s ochtends tot vier uur ’s middags. Op zondag is het gesloten. Het is een fijne en leerzame stop, vooral als je al bij het Asklepion bent geweest."
+  },
+  "de": {
+    "place": "Platani",
+    "title": "Hippocratic Foundation",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Hier, auf einem Hügel mit Blick auf Kos-Stadt, befindet sich die International Hippocratic Foundation.",
+    "s1": "Hier, auf einem Hügel mit Blick auf Kos-Stadt, befindet sich die International Hippocratic Foundation. Diese Stiftung wurde im Jahr 1960 von Professor Spyridon Economou, einem bekannten Urologen aus Athen, gegründet. Er wollte das Erbe des Hippokrates am Leben erhalten und die Grundprinzipien der Medizin an neue Generationen weitergeben.",
+    "s2": "Die Stiftung ist eine gemeinnützige Organisation mit internationalem Charakter. Ziel ist es zu zeigen, wie Hippokrates die Medizin vor mehr als zweitausendvierhundert Jahren veränderte. Er nahm Aberglauben und Götter aus der Medizin und verwandelte sie in eine echte Wissenschaft, die auf Beobachtung, Lebensstil, Ernährung und der Umgebung des Patienten basiert.",
+    "s3": "Im Museum sehen Sie Dokumente, Objekte und Erläuterungen zur Geschichte der Medizin. Im wunderschönen Garten wachsen Kräuter und Pflanzen, die bereits Hippokrates und seine Schüler für Behandlungen verwendeten. Man bekommt einen guten Eindruck von seinem ganzheitlichen Ansatz, der nicht nur die Beschwerde behandelt, sondern den ganzen Menschen betrachtet.",
+    "v1": "Hier spürt man die Verbindung zu Hippokrates noch stärker.",
+    "v2": "Darüber hinaus organisiert die Stiftung Kurse und Programme für Schüler, Studenten und Ärzte in der Ausbildung. Auf diese Weise wird weiterhin Wissen über die Grundlagen der Medizin weitergegeben. Kurz gesagt: ein Ort, an dem Sie erfahren, wie ein Mann auf Kos vor mehr als 2.400 Jahren die Medizin in etwas Wissenschaftliches statt in Aberglauben verwandelte.",
+    "k1": "Es ist ein ruhiger, lehrreicher Ort, zu dem viele Schulklassen und Studenten kommen, aber auch regelmäßige Besucher sind willkommen. Sie können in aller Ruhe herumschlendern und sich einen Moment Zeit nehmen, um darüber nachzudenken, wie ein Mann aus Kos den Grundstein für die moderne Medizin legte. Der Eintritt kostet eine geringe Gebühr.",
+    "k2": "Es ist Montag bis Samstag von neun Uhr morgens bis vier Uhr nachmittags geöffnet. Sonntags ist es geschlossen. Es ist ein schöner und lehrreicher Zwischenstopp, besonders wenn Sie bereits im Asclepion waren."
+  },
+  "en": {
+    "place": "Platani",
+    "title": "Hippocratic Foundation",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "Here, on a hill overlooking Kos Town, is the International Hippocratic Foundation.",
+    "s1": "Here, on a hill overlooking Kos Town, is the International Hippocratic Foundation. This foundation was founded in nineteen sixty by Professor Spyridon Economou, a well-known urologist from Athens. He wanted to keep Hippocrates' legacy alive and pass on the basic principles of medicine to new generations.",
+    "s2": "The foundation is a non-profit organization with an international character. The aim is to show how Hippocrates changed medicine more than two thousand four hundred years ago. He took superstition and gods out of medicine and turned it into a real science, based on observation, lifestyle, diet and the patient's environment.",
+    "s3": "In the museum you will see documents, objects and explanations about the history of medicine. The beautiful garden grows herbs and plants that Hippocrates and his students already used for treatments. You get a good idea of ​​his holistic approach, not just treating the complaint, but looking at the whole person.",
+    "v1": "Here you feel the connection with Hippocrates even more strongly.",
+    "v2": "The foundation also organizes classes and programs for schoolchildren, students and doctors in training. In this way, knowledge about the basics of medicine continues to be passed on. In short: a place where you learn how one man on Kos more than 2,400 years ago changed medicine into something scientific instead of superstition.",
+    "k1": "It is a quiet, educational place where many school groups and students come, but regular visitors are also welcome. You can stroll around at your leisure and take a moment to think about how 1 man from Kos laid the foundation for modern medicine. Entrance costs a small fee.",
+    "k2": "It is open Monday to Saturday from nine in the morning to four in the afternoon. It is closed on Sundays. It is a nice and educational stop, especially if you have already been to the Asclepion."
+  },
+  "it": {
+    "place": "Platani",
+    "title": "Hippocratic Foundation",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Qui, su una collina che domina la città di Kos, si trova la Fondazione Ippocratica Internazionale.",
+    "s1": "Qui, su una collina che domina la città di Kos, si trova la Fondazione Ippocratica Internazionale. Questa fondazione è stata fondata nel 1960 dal professor Spyridon Economou, noto urologo di Atene. Voleva mantenere viva l'eredità di Ippocrate e trasmettere i principi fondamentali della medicina alle nuove generazioni.",
+    "s2": "La fondazione è un'organizzazione senza scopo di lucro a carattere internazionale. Lo scopo è mostrare come Ippocrate cambiò la medicina più di duemilaquattrocento anni fa. Tolse la superstizione e gli dei dalla medicina e la trasformò in una vera scienza, basata sull'osservazione, sullo stile di vita, sulla dieta e sull'ambiente del paziente.",
+    "s3": "Nel museo vedrai documenti, oggetti e spiegazioni sulla storia della medicina. Nel bellissimo giardino crescono erbe e piante che già Ippocrate e i suoi studenti utilizzavano per i trattamenti. Hai una buona idea del suo approccio olistico, non solo trattando il disturbo, ma guardando la persona nella sua interezza.",
+    "v1": "Qui senti ancora più forte il legame con Ippocrate.",
+    "v2": "La fondazione organizza anche corsi e programmi per scolari, studenti e medici in formazione. In questo modo si continuano a trasmettere le conoscenze sui fondamenti della medicina. In breve: un luogo dove si impara come un uomo di Kos più di 2.400 anni fa trasformò la medicina in qualcosa di scientifico invece che di superstizione.",
+    "k1": "È un luogo tranquillo ed educativo dove vengono molti gruppi scolastici e studenti, ma sono benvenuti anche i visitatori abituali. Puoi passeggiare a tuo piacimento e prenderti un momento per pensare a come un uomo di Kos ha gettato le basi per la medicina moderna. L'ingresso costa una piccola tassa.",
+    "k2": "È aperto dal lunedì al sabato dalle nove del mattino alle quattro del pomeriggio. È chiuso la domenica. È una tappa simpatica ed educativa, soprattutto se sei già stato all'Asclepion."
+  },
+  "tr": {
+    "place": "Platani",
+    "title": "Hippocratic Foundation",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Burada, İstanköy'e bakan bir tepede Uluslararası Hipokrat Vakfı bulunmaktadır.",
+    "s1": "Burada, İstanköy'e bakan bir tepede Uluslararası Hipokrat Vakfı bulunmaktadır. Bu vakıf bin dokuz yüz altmışta Atina'nın tanınmış ürologlarından Profesör Spyridon Economou tarafından kuruldu. Hipokrat'ın mirasını yaşatmak ve tıbbın temel prensiplerini yeni nesillere aktarmak istiyordu.",
+    "s2": "Vakıf, uluslararası nitelikte, kar amacı gütmeyen bir kuruluştur. Amaç Hipokrat'ın iki bin dört yüz yıl önce tıbbı nasıl değiştirdiğini göstermektir. Batıl inançları ve tanrıları tıptan çıkarıp gözleme, yaşam tarzına, beslenmeye ve hastanın çevresine dayalı gerçek bir bilime dönüştürdü.",
+    "s3": "Müzede tıp tarihine ilişkin belge, obje ve açıklamalar göreceksiniz. Güzel bahçede Hipokrat ve öğrencilerinin tedavi amaçlı kullandığı bitki ve otlar yetişiyor. Onun sadece şikayeti ele almakla kalmayıp, kişiyi bütünüyle ele alan bütünsel yaklaşımı hakkında iyi bir fikir edinirsiniz.",
+    "v1": "Burada Hipokrat'la olan bağınızı daha da güçlü hissediyorsunuz.",
+    "v2": "Vakıf ayrıca eğitim gören okul çocukları, öğrenciler ve doktorlar için sınıflar ve programlar düzenlemektedir. Bu şekilde tıbbın temelleri hakkındaki bilgiler aktarılmaya devam ediyor. Kısacası: 2.400 yıl önce Kos'taki bir adamın tıbbı batıl inanç yerine bilimsel bir şeye nasıl dönüştürdüğünü öğreneceğiniz bir yer.",
+    "k1": "Pek çok okul grubunun ve öğrencinin geldiği sessiz, eğitici bir yerdir, ancak düzenli ziyaretçiler de kabul edilir. Boş zamanınızda etrafta dolaşabilir ve Kos'lu bir adamın modern tıbbın temellerini nasıl attığını düşünmek için biraz zaman ayırabilirsiniz. Giriş küçük bir ücrete tabidir.",
+    "k2": "Pazartesiden cumartesiye sabah dokuzdan öğleden sonra dörde kadar açıktır. Pazar günleri kapalıdır. Güzel ve eğitici bir durak, özellikle de Asklepion'a gittiyseniz."
+  },
+  "es": {
+    "place": "Platani",
+    "title": "Hippocratic Foundation",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Aquí, en una colina que domina la ciudad de Kos, se encuentra la Fundación Hipocrática Internacional.",
+    "s1": "Aquí, en una colina que domina la ciudad de Kos, se encuentra la Fundación Hipocrática Internacional. Esta fundación fue fundada en el año 1960 por el profesor Spyridon Economou, un conocido urólogo de Atenas. Quería mantener vivo el legado de Hipócrates y transmitir los principios básicos de la medicina a las nuevas generaciones.",
+    "s2": "La fundación es una organización sin fines de lucro con carácter internacional. El objetivo es mostrar cómo Hipócrates cambió la medicina hace más de dos mil cuatrocientos años. Sacó las supersticiones y los dioses de la medicina y la convirtió en una ciencia real, basada en la observación, el estilo de vida, la dieta y el entorno del paciente.",
+    "s3": "En el museo verás documentos, objetos y explicaciones sobre la historia de la medicina. En el hermoso jardín se cultivan hierbas y plantas que Hipócrates y sus alumnos ya utilizaban para los tratamientos. Te haces una buena idea de su enfoque holístico, que no sólo trata la dolencia, sino que analiza a la persona en su totalidad.",
+    "v1": "Aquí se siente aún más fuerte la conexión con Hipócrates.",
+    "v2": "La fundación también organiza clases y programas para escolares, estudiantes y médicos en formación. De esta manera se siguen transmitiendo conocimientos sobre los fundamentos de la medicina. En resumen: un lugar donde aprenderás cómo un hombre en Kos hace más de 2.400 años transformó la medicina en algo científico en lugar de superstición.",
+    "k1": "Es un lugar tranquilo y educativo al que acuden muchos grupos escolares y estudiantes, pero los visitantes habituales también son bienvenidos. Podrás pasear tranquilamente y tomarte un momento para pensar en cómo un hombre de Kos sentó las bases de la medicina moderna. La entrada cuesta una pequeña tarifa.",
+    "k2": "Está abierto de lunes a sábado de nueve de la mañana a cuatro de la tarde. Está cerrado los domingos. Es una parada agradable y educativa, especialmente si ya has estado en el Asclepion."
   }
-
-  var langBtn = document.getElementById('langBtn');
-  var langMenu = document.getElementById('langMenu');
-  function openMenu(){ langMenu.classList.add('open'); }
-  function closeMenu(){ langMenu.classList.remove('open'); }
-  langBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    langMenu.classList.contains('open') ? closeMenu() : openMenu();
-  });
-  document.addEventListener('click', function(){ closeMenu(); });
-  document.querySelectorAll('.lang-option').forEach(function(btn){
-    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
-  });
-
-  var saved = localStorage.getItem('hk-lang') || 'nl';
-  setLang(saved);
-
-  /* TTS */
-  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
-  function getLang(){
-    var l = localStorage.getItem('hk-lang') || 'nl';
-    return LANG_VOICE[l] ? l : 'nl';
-  }
-  function pickVoice(code){
-    var voices = speechSynthesis.getVoices() || [];
-    var prefix = code.slice(0,2).toLowerCase();
-    return voices.find(function(v){ return v.lang === code; })
-      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
-      || null;
-  }
-  var btnPlay = document.getElementById('btnPlay');
-  var btnStop = document.getElementById('btnStop');
-  var status = document.getElementById('ttsStatus');
-  function setStatus(t){ if(status) status.textContent = t; }
-  function play(){
-    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
-    speechSynthesis.cancel();
-    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
-    var l = getLang();
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = LANG_VOICE[l];
-    u.rate = 0.92;
-    var v = pickVoice(LANG_VOICE[l]);
-    if(v) u.voice = v;
-    u.onstart = function(){
-      btnPlay.classList.add('playing');
-      btnStop.classList.add('show');
-      setStatus('Voorlezen… ('+l.toUpperCase()+')');
-    };
-    u.onend = u.onerror = function(){
-      btnPlay.classList.remove('playing');
-      btnStop.classList.remove('show');
-      setStatus('');
-    };
-    if(!speechSynthesis.getVoices().length){
-      speechSynthesis.onvoiceschanged = function(){
-        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
-        speechSynthesis.speak(u);
-      };
-      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
-    } else {
-      speechSynthesis.speak(u);
-    }
-  }
-  function stop(){
-    if(window.speechSynthesis) speechSynthesis.cancel();
-    btnPlay.classList.remove('playing');
-    btnStop.classList.remove('show');
-    setStatus('Gestopt.');
-  }
-  btnPlay.addEventListener('click', play);
-  btnStop.addEventListener('click', stop);
-  if(window.speechSynthesis){
-    speechSynthesis.getVoices();
-    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
-  }
-})();
-</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>

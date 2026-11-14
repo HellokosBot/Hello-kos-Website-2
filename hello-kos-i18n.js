@@ -22,12 +22,12 @@
     es: "Hola. Esta es la prueba de sonido de Hello Kos."
   };
   var UI = {
-    nl: { read: "Voorlezen", stop: "Stop", fill: "Nog aan te vullen.", soundOn: "Afspelen…", soundDone: "Klaar", soundStop: "Gestopt", noSpeech: "Voorlezen wordt door deze browser niet ondersteund." },
-    de: { read: "Vorlesen", stop: "Stopp", fill: "Noch auszufüllen.", soundOn: "Wiedergabe…", soundDone: "Fertig", soundStop: "Gestoppt", noSpeech: "Vorlesen wird von diesem Browser nicht unterstützt." },
-    en: { read: "Read aloud", stop: "Stop", fill: "Still to be filled in.", soundOn: "Playing…", soundDone: "Done", soundStop: "Stopped", noSpeech: "Read-aloud is not supported in this browser." },
-    it: { read: "Leggi ad alta voce", stop: "Stop", fill: "Ancora da completare.", soundOn: "Riproduzione…", soundDone: "Fatto", soundStop: "Interrotto", noSpeech: "La lettura vocale non è supportata da questo browser." },
-    tr: { read: "Sesli oku", stop: "Durdur", fill: "Henüz doldurulacak.", soundOn: "Çalıyor…", soundDone: "Bitti", soundStop: "Durdu", noSpeech: "Sesli okuma bu tarayıcıda desteklenmiyor." },
-    es: { read: "Leer en voz alta", stop: "Parar", fill: "Aún por completar.", soundOn: "Reproduciendo…", soundDone: "Listo", soundStop: "Parado", noSpeech: "La lectura en voz alta no está disponible en este navegador." }
+    nl: { read: "Voorlezen", readStop: "Stop voorlezen", stop: "Stop", fill: "Nog aan te vullen.", soundOn: "Afspelen…", soundDone: "Klaar", soundStop: "Gestopt", noSpeech: "Voorlezen wordt door deze browser niet ondersteund." },
+    de: { read: "Vorlesen", readStop: "Vorlesen stoppen", stop: "Stopp", fill: "Noch auszufüllen.", soundOn: "Wiedergabe…", soundDone: "Fertig", soundStop: "Gestoppt", noSpeech: "Vorlesen wird von diesem Browser nicht unterstützt." },
+    en: { read: "Read aloud", readStop: "Stop reading", stop: "Stop", fill: "Still to be filled in.", soundOn: "Playing…", soundDone: "Done", soundStop: "Stopped", noSpeech: "Read-aloud is not supported in this browser." },
+    it: { read: "Leggi ad alta voce", readStop: "Ferma la lettura", stop: "Stop", fill: "Ancora da completare.", soundOn: "Riproduzione…", soundDone: "Fatto", soundStop: "Interrotto", noSpeech: "La lettura vocale non è supportata da questo browser." },
+    tr: { read: "Sesli oku", readStop: "Okumayı durdur", stop: "Durdur", fill: "Henüz doldurulacak.", soundOn: "Çalıyor…", soundDone: "Bitti", soundStop: "Durdu", noSpeech: "Sesli okuma bu tarayıcıda desteklenmiyor." },
+    es: { read: "Leer en voz alta", readStop: "Parar la lectura", stop: "Parar", fill: "Aún por completar.", soundOn: "Reproduciendo…", soundDone: "Listo", soundStop: "Parado", noSpeech: "La lectura en voz alta no está disponible en este navegador." }
   };
 
   function getLang() {
@@ -113,7 +113,9 @@
     u.lang = VOICE[lang] || VOICE.nl;
     u.rate = 0.95;
     var voice = pickVoice(u.lang);
-    if (voice) u.voice = voice;
+    if (voice) {
+      try { u.voice = voice; } catch (err) { /* some browsers reject a voice object */ }
+    }
     speechSynthesis.speak(u);
     return u;
   }
@@ -139,37 +141,6 @@
     apply(getLang());
 
     if (document.documentElement.getAttribute("data-hk-tts") !== "1") {
-      var btnPlay = document.getElementById("btnPlay");
-      var btnStop = document.getElementById("btnStop");
-      var status = document.getElementById("ttsStatus");
-      function setStatus(msg) { if (status) status.textContent = msg; }
-      if (btnPlay) {
-        btnPlay.addEventListener("click", function () {
-          var lang = getLang();
-          var source = document.getElementById("readText");
-          var text = source ? source.innerText.replace(/\s+/g, " ").trim() : "";
-          if (!text) return;
-          if (!window.speechSynthesis) { setStatus(textFor(lang, "noSpeech")); return; }
-          var u = speak(text, lang);
-          if (!u) return;
-          btnPlay.classList.add("playing");
-          if (btnStop) btnStop.classList.add("show");
-          setStatus(textFor(lang, "soundOn") + " " + lang.toUpperCase());
-          u.onend = u.onerror = function () {
-            btnPlay.classList.remove("playing");
-            if (btnStop) btnStop.classList.remove("show");
-            setStatus("");
-          };
-        });
-      }
-      if (btnStop) {
-        btnStop.addEventListener("click", function () {
-          if (window.speechSynthesis) speechSynthesis.cancel();
-          if (btnPlay) btnPlay.classList.remove("playing");
-          btnStop.classList.remove("show");
-          setStatus(textFor(getLang(), "soundStop"));
-        });
-      }
       var btnTest = document.getElementById("btnTestSound");
       var btnTestStop = document.getElementById("btnStopSound");
       if (btnTest) {
@@ -193,6 +164,9 @@
   }
 
   var SPEAKER = '<svg class="spk" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M3 10v4h4l5 5V5L7 10H3zm11.5 2a3.5 3.5 0 0 0-2-3.15v6.3a3.5 3.5 0 0 0 2-3.15zM14 4.07v2.02a6 6 0 0 1 0 11.82v2.02a8 8 0 0 0 0-15.86z"/></svg>';
+  var STOPICON = '<svg class="spk" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M6 6h12v12H6z"/></svg>';
+  var hkSpeaking = false;
+
   function ensureSpeaker(btn) {
     if (!btn || btn.querySelector(".spk")) return;
     var key = btn.getAttribute("data-i18n");
@@ -200,6 +174,7 @@
     if (key) {
       var span = document.createElement("span");
       span.setAttribute("data-i18n", key);
+      span.setAttribute("data-i18n-idle", key);
       span.textContent = label;
       btn.removeAttribute("data-i18n");
       btn.textContent = "";
@@ -209,7 +184,124 @@
       btn.insertAdjacentHTML("afterbegin", SPEAKER);
     }
   }
+
+  function setStatus(msg) {
+    var status = document.getElementById("ttsStatus");
+    if (status) status.textContent = msg || "";
+  }
+
+  function setSpeakUi(on) {
+    hkSpeaking = on;
+    var btn = document.getElementById("btnPlay");
+    if (!btn) return;
+    btn.classList.toggle("playing", on);
+    btn.setAttribute("aria-pressed", on ? "true" : "false");
+    var icon = btn.querySelector(".spk");
+    if (icon) icon.outerHTML = on ? STOPICON : SPEAKER;
+    var span = btn.querySelector("[data-i18n]");
+    if (span) {
+      var idle = span.getAttribute("data-i18n-idle") || span.getAttribute("data-i18n") || "read";
+      var key = on ? "readStop" : idle;
+      span.setAttribute("data-i18n", key);
+      var label = textFor(getLang(), key);
+      if (label) span.textContent = label;
+    }
+    var stop = document.getElementById("btnStop");
+    if (stop) stop.style.display = "none";
+  }
+
+  function onPlayClick() {
+    var lang = getLang();
+    if (hkSpeaking || (window.speechSynthesis && speechSynthesis.speaking)) {
+      if (window.speechSynthesis) speechSynthesis.cancel();
+      setSpeakUi(false);
+      setStatus("");
+      return;
+    }
+    var source = document.getElementById("readText");
+    var text = source ? source.innerText.replace(/\s+/g, " ").trim() : "";
+    if (!text) return;
+    if (!window.speechSynthesis) { setStatus(textFor(lang, "noSpeech")); return; }
+    var u = speak(text, lang);
+    if (!u) return;
+    setSpeakUi(true);
+    setStatus(textFor(lang, "soundOn"));
+    u.onend = u.onerror = function () {
+      setSpeakUi(false);
+      setStatus("");
+    };
+  }
+
+  function bindReadAloud() {
+    var btn = document.getElementById("btnPlay");
+    if (!btn || btn.getAttribute("data-hk-bound") === "1") return;
+    if (document.documentElement.getAttribute("data-hk-tts") === "1" || document.documentElement.getAttribute("data-hk-own") === "1") {
+      var fresh = btn.cloneNode(true);
+      btn.parentNode.replaceChild(fresh, btn);
+      btn = fresh;
+    }
+    btn.setAttribute("data-hk-bound", "1");
+    ensureSpeaker(btn);
+    var stop = document.getElementById("btnStop");
+    if (stop) stop.style.display = "none";
+    btn.addEventListener("click", onPlayClick);
+  }
+
+  function placeForPage() {
+    if (!window.HK_PLACES) return null;
+    var file = ((location.pathname || "").split("/").pop() || "").replace(/\.html$/, "");
+    for (var i = 0; i < window.HK_PLACES.length; i++) {
+      if (window.HK_PLACES[i].id === file) return window.HK_PLACES[i];
+    }
+    return null;
+  }
+
+  function mapsSearch(lat, lon) {
+    return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(String(lat) + "," + String(lon));
+  }
+
+  function fixMapHrefs() {
+    var place = placeForPage();
+    document.querySelectorAll("a[href*='google.com/maps']").forEach(function (a) {
+      var raw = a.getAttribute("href") || "";
+      if (raw.indexOf("/dir") >= 0 || raw.indexOf("destination=") >= 0) return;
+      if (!a.getAttribute("target")) a.setAttribute("target", "_blank");
+      if (!a.getAttribute("rel")) a.setAttribute("rel", "noopener");
+      if (place && place.lat != null && place.lon != null) a.href = mapsSearch(place.lat, place.lon);
+      else if (place && place.name) {
+        var q = "";
+        try { q = new URL(a.href, location.href).searchParams.get("query") || ""; } catch (err) { q = ""; }
+        if (!q) a.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(place.name + " Kos");
+      }
+    });
+    document.querySelectorAll("a[href*='maps.apple.com']").forEach(function (a) {
+      if (!place) return;
+      if (!a.getAttribute("target")) a.setAttribute("target", "_blank");
+      if (!a.getAttribute("rel")) a.setAttribute("rel", "noopener");
+      if (place.lat != null && place.lon != null) {
+        a.href = "https://maps.apple.com/?ll=" + place.lat + "," + place.lon + "&q=" + encodeURIComponent(place.name || "Kos");
+      }
+    });
+  }
+
+  document.addEventListener("click", function (e) {
+    var t = e.target;
+    if (!t || !t.closest) return;
+    var a = t.closest("a[href*='google.com/maps'], a[href*='maps.apple.com']");
+    if (!a) return;
+    var href = a.href || "";
+    if (href.indexOf("http") !== 0) return;
+    if (/[?&](?:query|q)=(?:&|$)/.test(href)) return;
+    e.preventDefault();
+    var opened = null;
+    try { opened = window.open(href, "_blank", "noopener"); } catch (err) { opened = null; }
+    if (!opened) window.location.href = href;
+  }, true);
+
+  bindReadAloud();
   ensureSpeaker(document.getElementById("btnPlay"));
+  if (document.readyState !== "complete") document.addEventListener("DOMContentLoaded", fixMapHrefs);
+  fixMapHrefs();
 
   window.HK_I18N = { setLang: setLang, getLang: getLang, apply: apply, speak: speak, VOICE: VOICE };
 })();

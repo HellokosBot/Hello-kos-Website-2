@@ -1,485 +1,207 @@
 <!DOCTYPE html>
-<html lang="nl" data-hk-own="1" data-hk-tts="1">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0D1F1F">
-  <title>Traditioneel huis van Antimachia – Hello Kos</title>
-  <style>
-    :root {
-      --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
-      --bg: #0D1A1A; --bg-card: #152525; --bg-header: rgba(13, 26, 26, 0.92);
-      --bg-note: #1E2E1E; --text: #E8EDE8; --text-soft: #A0B0A0;
-      --border: rgba(58, 154, 154, 0.18); --gold: #E0B040; --gold-dark: #C4920F;
-      --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text); -webkit-font-smoothing: antialiased;
-      padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
-      background: var(--bg); min-height: 100vh; line-height: 1.55;
-    }
-    .app-header {
-      position: sticky; top: 0; z-index: 100;
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-      padding: 14px 16px; background: var(--bg-header);
-      backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
-    }
-    .back-btn { grid-column: 1; justify-self: start; color: var(--petrol); font-size: 0.9rem; font-weight: 600; text-decoration: none; padding: 6px 8px; }
-    .logo { grid-column: 2; justify-self: center; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-    .logo-icon { width: 36px; height: 36px; background: linear-gradient(145deg, #F0C040, #D4A017); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFDF5; font-size: 20px; }
-    .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--gold); font-family: Georgia, serif; }
-    .logo-text span { color: var(--gold-dark); font-style: italic; }
-    .lang-wrap { grid-column: 3; justify-self: end; position: relative; }
-    .lang-btn { display: flex; align-items: center; gap: 6px; background: rgba(58,154,154,0.15); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 20px; cursor: pointer; }
-    .lang-menu { display: none; position: absolute; right: 0; top: 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; min-width: 140px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 200; overflow: hidden; }
-    .lang-menu.open { display: block; }
-    .lang-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: none; border: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
-    .lang-option:hover, .lang-option.active { background: rgba(58,154,154,0.18); }
-    .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
-    .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
-    .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .content { padding: 18px 16px 0; }
-    h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
-    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-
-    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
-    .btn-audio { background: var(--petrol); color: #fff; }
-    .btn-audio.playing { background: var(--petrol-dark); }
-    .btn-stop { background: #3A4545; color: #fff; display: none; }
-    .btn-stop.show { display: flex; }
-
-    .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
-    .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
-    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
-    .card p:last-child { margin-bottom: 0; }
-    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
-    .tip strong { color: var(--gold); }
-    .hours { margin-top: 8px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
-    .h-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 12px; font-size: 0.88rem; border-bottom: 1px solid rgba(255,255,255,0.06); background: var(--bg); }
-    .h-row:nth-child(odd) { background: var(--bg-card); }
-    .h-row:last-child { border-bottom: none; }
-    .h-row span:last-child { font-weight: 700; color: var(--petrol); }
-    .h-row.closed span:last-child { color: #e0a040; }
-    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
-    .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-    .g-item span { display: block; padding: 6px 8px; font-size: 0.7rem; color: var(--text-soft); text-align: center; }
-    .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
-    .footer a { color: var(--petrol); text-decoration: none; }
-  </style>
-<link rel="stylesheet" href="hello-kos.css">
+  <title>Traditioneel huis – Hello Kos</title>
+  <link rel="stylesheet" href="hello-kos.css">
 </head>
-<body>
+<body class="hk-page hk-guide">
   <header class="app-header">
-  <div class="nav-btns">
-    <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
-  </div>
-  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
-  <div class="lang-wrap">
-    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
-    <div class="lang-menu" id="langMenu">
-      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
-      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
-      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
-      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
-      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
-      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
     </div>
-  </div>
-</header>
-<div class="overlay" id="overlay"></div>
-
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
   <main class="main">
     <div class="hero-wrap">
-      <img src="img/jwwb/cc725e53c5-traditional_house_of_antimachia_kos_001-standard.jpg" alt="Traditioneel huis van Antimachia" loading="eager">
-      <div class="hero-title"><h1 data-i18n="title">Traditioneel huis van Antimachia</h1></div>
+      <img class="hk-zoom" src="img/jwwb/cc725e53c5-traditional_house_of_antimachia_kos_001-standard.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
     </div>
+    <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=Traditioneel%20huis%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?q=Traditioneel%20huis%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+<p data-i18n="s1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-traditioneel-huis-antimachia-01.jpg" alt=""></figure>
+<p data-i18n="s2"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-traditioneel-huis-antimachia-02.jpg" alt=""></figure>
+<p data-i18n="s3"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-traditioneel-huis-antimachia-03.jpg" alt=""></figure>
+</article>
+<article class="card"><h2 data-i18n="hSee"></h2>
+<p data-i18n="v1"></p>
+<figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-traditioneel-huis-antimachia-04.jpg" alt=""></figure>
+<p data-i18n="v2"></p>
 
-    <div class="content">
-<p class="lead" data-i18n="lead">Hoe men vroeger op Kos woonde – traditioneel dorpshuis in Antimachia.</p>
+<p data-i18n="v3"></p>
 
-      
+</article>
+<article class="card"><h2 data-i18n="hKnow"></h2>
+<p data-i18n="k1"></p>
 
-      <div class="actions">
-        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
-        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-      </div>
-      
-      <div class="map-row">
-        <a href="https://www.google.com/maps/search/?api=1&query=Traditional%20House%20Antimachia%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
-        <a href="https://maps.apple.com/?q=Traditional%20House%20Antimachia%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
-      </div>
-      <p class="status" id="ttsStatus"></p>
+<p data-i18n="k2"></p>
 
-      <div id="readText">
-        <div class="card">
-          <h2 data-i18n="hStory">Traditioneel eilandhuis</h2>
-          <p data-i18n="p1">In Antimachia staat een traditioneel huis dat laat zien hoe eilandbewoners vroeger leefden: lokale materialen, eenvoudige indeling en de sfeer van een Grieks dorpshuis.</p>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="hSee">Weetje</h2>
-          <p data-i18n="p2">Het Traditionele Huis van Antimachia op Kos is een klein stenen gebouwtje in het centrum van het dorp Antimachia, precies tegenover de oude windmolen. Het is gebouwd in 1980, maar het is een exacte kopie van hoe een doorsnee familiehuis er rond 1900-1920 uitzag op het eiland. De muren zijn helemaal van steen, soms zelfs met materialen uit oudere huizen hergebruikt.</p>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2fact2">Weetje</h2>
-          <p data-i18n="p3">Het is een huis op de begane grond, met verschillende ruimtes: de woonkamer waar het gezin sliep en leefde (met een verhoogd houten bed), een kleine stal voor dieren, een weefgetouw voor kleding en een stenen oven om brood te bakken. In de kelder bewaarden ze zelfgemaakte wijn, olijfolie en eten voor de hele winter. Je ziet er oude spullen zoals traditionele kleren, keukengerei, landbouwgereedschap en handwerk. Het geeft een goed beeld van hoe mensen toen leefden: simpel, zelfvoorzienend en met het hele gezin onder één dak.</p>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2fact3">Weetje</h2>
-          <p data-i18n="p4">Tegenwoordig is het een soort openluchtmuseum (soms ook folklore museum genoemd). Je loopt er gewoon doorheen en ziet hoe een gezin in de eerste helft van de 20e eeuw woonde – tot ongeveer 1953 leefden mensen in dit soort huizen.</p>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2hours">Openingstijden</h2>
-          <div class="hours">
-            <div class="h-row"><span data-i18n="dayMon">Maandag</span><span>9:30 - 17:30</span></div>
-            <div class="h-row"><span data-i18n="dayTue">Dinsdag</span><span>9:30 - 17:30</span></div>
-            <div class="h-row"><span data-i18n="dayWed">Woensdag</span><span>9:30 - 17:30</span></div>
-            <div class="h-row"><span data-i18n="dayThu">Donderdag</span><span>9:30 - 17:30</span></div>
-            <div class="h-row"><span data-i18n="dayFri">Vrijdag</span><span>9:30 - 17:30</span></div>
-            <div class="h-row"><span data-i18n="daySat">Zaterdag</span><span>9:30 - 17:30</span></div>
-            <div class="h-row closed"><span data-i18n="daySun">Zondag</span><span data-i18n="closed">Gesloten</span></div>
-          </div>
-        </div>
-
-        <div class="gallery">
-          <div class="g-item">
-            <img src="img/jwwb/cc725e53c5-traditional_house_of_antimachia_kos_001-standard.jpg" alt="" loading="lazy">
-            <span data-i18n="g1">Huis</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/e6f00f8da4-traditional_house_of_antimachia_kos_001-high.jpg" alt="" loading="lazy">
-            <span data-i18n="g2">Huis</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/4f01b52f18-antimachia3-high.jpg" alt="" loading="lazy">
-            <span data-i18n="g3">Huis</span>
-          </div>
-          <div class="g-item">
-            <img src="img/jwwb/4211c64886-kws-033-antimahia-spiti-767-high.jpg" alt="" loading="lazy">
-            <span data-i18n="g4">Huis</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="hKnow">Bezoeken</h2>
-          <p data-i18n="p5">In Antimachia. Combineer met molen en kasteel.</p>
-          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: check lokaal of het open is – soms seizoensopeningstijden.</p></div>
-        </div>
-      </div>
+</article>
     </div>
   </main>
-
-  <footer class="footer">
-    <div>Hello Kos</div>
-    <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
-  </footer>
-
-<script>
-(function(){
-  var I18N = window.HK_DICT = {
-    "nl": {
-      "title": "Traditioneel huis van Antimachia",
-      "lead": "Hoe men vroeger op Kos woonde – traditioneel dorpshuis in Antimachia.",
-      "btnPlay": "Voorlezen",
-      "p1": "In Antimachia staat een traditioneel huis dat laat zien hoe eilandbewoners vroeger leefden: lokale materialen, eenvoudige indeling en de sfeer van een Grieks dorpshuis.",
-      "p2": "Het Traditionele Huis van Antimachia op Kos is een klein stenen gebouwtje in het centrum van het dorp Antimachia, precies tegenover de oude windmolen. Het is gebouwd in 1980, maar het is een exacte kopie van hoe een doorsnee familiehuis er rond 1900-1920 uitzag op het eiland. De muren zijn helemaal van steen, soms zelfs met materialen uit oudere huizen hergebruikt.",
-      "h2fact2": "Weetje",
-      "p3": "Het is een huis op de begane grond, met verschillende ruimtes: de woonkamer waar het gezin sliep en leefde (met een verhoogd houten bed), een kleine stal voor dieren, een weefgetouw voor kleding en een stenen oven om brood te bakken. In de kelder bewaarden ze zelfgemaakte wijn, olijfolie en eten voor de hele winter. Je ziet er oude spullen zoals traditionele kleren, keukengerei, landbouwgereedschap en handwerk. Het geeft een goed beeld van hoe mensen toen leefden: simpel, zelfvoorzienend en met het hele gezin onder één dak.",
-      "h2fact3": "Weetje",
-      "p4": "Tegenwoordig is het een soort openluchtmuseum (soms ook folklore museum genoemd). Je loopt er gewoon doorheen en ziet hoe een gezin in de eerste helft van de 20e eeuw woonde – tot ongeveer 1953 leefden mensen in dit soort huizen.",
-      "h2hours": "Openingstijden",
-      "dayMon": "Maandag",
-      "dayTue": "Dinsdag",
-      "dayWed": "Woensdag",
-      "dayThu": "Donderdag",
-      "dayFri": "Vrijdag",
-      "daySat": "Zaterdag",
-      "daySun": "Zondag",
-      "closed": "Gesloten",
-      "g1": "Huis",
-      "g2": "Huis",
-      "g3": "Huis",
-      "g4": "Huis",
-      "p5": "In Antimachia. Combineer met molen en kasteel.",
-      "tip": "check lokaal of het open is – soms seizoensopeningstijden.",
-      "hStory": "Het verhaal",
-      "hSee": "Wat je ziet",
-      "hKnow": "Goed om te weten",
-      "tipTitle": "Tip van de gids",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "en": {
-      "title": "Traditional House of Antimachia",
-      "lead": "How people used to live on Kos – traditional village house in Antimachia.",
-      "btnPlay": "Read aloud",
-      "p1": "In Antimachia stands a traditional house that shows how islanders used to live: local materials, simple layout and the atmosphere of a Greek village house.",
-      "p2": "The Traditional House of Antimachia on Kos is a small stone building in the centre of the village of Antimachia, right opposite the old windmill. It was built in 1980, but it is an exact copy of how an average family home looked around 1900-1920 on the island. The walls are entirely of stone, sometimes even with materials reused from older houses.",
-      "h2fact2": "Did you know",
-      "p3": "It is a ground-floor house with various rooms: the living room where the family slept and lived (with a raised wooden bed), a small stable for animals, a loom for clothing and a stone oven for baking bread. In the cellar they stored homemade wine, olive oil and food for the whole winter. You can see old items such as traditional clothes, kitchen utensils, agricultural tools and handicrafts. It gives a good picture of how people lived then: simply, self-sufficient and with the whole family under one roof.",
-      "h2fact3": "Did you know",
-      "p4": "Today it is a kind of open-air museum (sometimes also called a folklore museum). You simply walk through it and see how a family lived in the first half of the 20th century – until around 1953 people lived in this kind of house.",
-      "h2hours": "Opening hours",
-      "dayMon": "Monday",
-      "dayTue": "Tuesday",
-      "dayWed": "Wednesday",
-      "dayThu": "Thursday",
-      "dayFri": "Friday",
-      "daySat": "Saturday",
-      "daySun": "Sunday",
-      "closed": "Closed",
-      "g1": "House",
-      "g2": "House",
-      "g3": "House",
-      "g4": "House",
-      "p5": "In Antimachia. Combine with the mill and castle.",
-      "tip": "check locally whether it is open – sometimes seasonal opening times.",
-      "hStory": "The story",
-      "hSee": "What you see",
-      "hKnow": "Good to know",
-      "tipTitle": "Guide’s tip",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "de": {
-      "title": "Traditionelles Haus von Antimachia",
-      "lead": "Wie man früher auf Kos lebte – traditionelles Dorfhaus in Antimachia.",
-      "btnPlay": "Vorlesen",
-      "p1": "In Antimachia steht ein traditionelles Haus, das zeigt, wie Inselbewohner früher lebten: lokale Materialien, einfache Aufteilung und die Atmosphäre eines griechischen Dorfhauses.",
-      "p2": "Das Traditionelle Haus von Antimachia auf Kos ist ein kleines Steingebäude im Zentrum des Dorfes Antimachia, genau gegenüber der alten Windmühle. Es wurde 1980 gebaut, ist aber eine genaue Kopie davon, wie ein durchschnittliches Familienhaus um 1900-1920 auf der Insel aussah. Die Wände sind komplett aus Stein, manchmal sogar mit Materialien aus älteren Häusern wiederverwendet.",
-      "h2fact2": "Wusstest du",
-      "p3": "Es ist ein Haus im Erdgeschoss mit verschiedenen Räumen: dem Wohnzimmer, in dem die Familie schlief und lebte (mit einem erhöhten Holzbett), einem kleinen Stall für Tiere, einem Webstuhl für Kleidung und einem Steinofen zum Brotbacken. Im Keller lagerten sie selbstgemachten Wein, Olivenöl und Essen für den ganzen Winter. Man sieht alte Gegenstände wie traditionelle Kleidung, Küchenutensilien, landwirtschaftliche Werkzeuge und Handwerk. Es gibt ein gutes Bild davon, wie Menschen damals lebten: einfach, autark und mit der ganzen Familie unter einem Dach.",
-      "h2fact3": "Wusstest du",
-      "p4": "Heute ist es eine Art Freilichtmuseum (manchmal auch Folkloremuseum genannt). Man läuft einfach hindurch und sieht, wie eine Familie in der ersten Hälfte des 20. Jahrhunderts lebte – bis etwa 1953 lebten Menschen in dieser Art von Häusern.",
-      "h2hours": "Öffnungszeiten",
-      "dayMon": "Montag",
-      "dayTue": "Dienstag",
-      "dayWed": "Mittwoch",
-      "dayThu": "Donnerstag",
-      "dayFri": "Freitag",
-      "daySat": "Samstag",
-      "daySun": "Sonntag",
-      "closed": "Geschlossen",
-      "g1": "Haus",
-      "g2": "Haus",
-      "g3": "Haus",
-      "g4": "Haus",
-      "p5": "In Antimachia. Kombiniere mit Mühle und Burg.",
-      "tip": "vor Ort prüfen, ob es geöffnet ist – manchmal saisonale Öffnungszeiten.",
-      "hStory": "Die Geschichte",
-      "hSee": "Was du siehst",
-      "hKnow": "Gut zu wissen",
-      "tipTitle": "Tipp des Guides",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "it": {
-      "title": "Casa tradizionale di Antimachia",
-      "lead": "Come si viveva una volta a Kos – casa tradizionale di villaggio ad Antimachia.",
-      "btnPlay": "Leggi ad alta voce",
-      "p1": "Ad Antimachia c’è una casa tradizionale che mostra come vivevano un tempo gli isolani: materiali locali, disposizione semplice e l’atmosfera di una casa di villaggio greco.",
-      "p2": "La Casa Tradizionale di Antimachia a Kos è un piccolo edificio in pietra nel centro del villaggio di Antimachia, proprio di fronte al vecchio mulino a vento. È stata costruita nel 1980, ma è una copia esatta di come appariva una tipica casa familiare intorno al 1900-1920 sull’isola. Le pareti sono interamente in pietra, a volte anche con materiali riutilizzati da case più vecchie.",
-      "h2fact2": "Curiosità",
-      "p3": "È una casa a piano terra con varie stanze: il soggiorno dove la famiglia dormiva e viveva (con un letto in legno rialzato), una piccola stalla per gli animali, un telaio per i vestiti e un forno in pietra per cuocere il pane. In cantina conservavano vino fatto in casa, olio d’oliva e cibo per tutto l’inverno. Si vedono oggetti antichi come vestiti tradizionali, utensili da cucina, attrezzi agricoli e artigianato. Dà una buona idea di come vivevano le persone allora: in modo semplice, autosufficiente e con tutta la famiglia sotto lo stesso tetto.",
-      "h2fact3": "Curiosità",
-      "p4": "Oggi è una sorta di museo all’aperto (a volte chiamato anche museo del folklore). Si cammina semplicemente attraverso e si vede come viveva una famiglia nella prima metà del XX secolo – fino al 1953 circa le persone vivevano in questo tipo di case.",
-      "h2hours": "Orari di apertura",
-      "dayMon": "Lunedì",
-      "dayTue": "Martedì",
-      "dayWed": "Mercoledì",
-      "dayThu": "Giovedì",
-      "dayFri": "Venerdì",
-      "daySat": "Sabato",
-      "daySun": "Domenica",
-      "closed": "Chiuso",
-      "g1": "Casa",
-      "g2": "Casa",
-      "g3": "Casa",
-      "g4": "Casa",
-      "p5": "Ad Antimachia. Combina con il mulino e il castello.",
-      "tip": "verifica in loco se è aperto – a volte orari stagionali.",
-      "hStory": "La storia",
-      "hSee": "Cosa vedi",
-      "hKnow": "Buono a sapersi",
-      "tipTitle": "Consiglio della guida",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "tr": {
-      "title": "Antimachia Geleneksel Evi",
-      "lead": "Kos’ta eskiden nasıl yaşanırdı – Antimachia’da geleneksel köy evi.",
-      "btnPlay": "Sesli oku",
-      "p1": "Antimachia’da ada sakinlerinin eskiden nasıl yaşadığını gösteren geleneksel bir ev vardır: yerel malzemeler, basit düzen ve Yunan köy evi atmosferi.",
-      "p2": "Kos’taki Antimachia Geleneksel Evi, Antimachia köyünün merkezinde, eski yel değirmeninin tam karşısında küçük bir taş binadır. 1980’de inşa edilmiştir, ancak adadaki 1900-1920 yılları civarında ortalama bir aile evinin nasıl göründüğünün tam bir kopyasıdır. Duvarlar tamamen taştandır, bazen daha eski evlerden yeniden kullanılan malzemelerle.",
-      "h2fact2": "Biliyor muydun",
-      "p3": "Zemin katlı bir evdir, çeşitli odaları vardır: ailenin uyuduğu ve yaşadığı oturma odası (yükseltilmiş ahşap yatakla), hayvanlar için küçük bir ahır, kıyafet için dokuma tezgâhı ve ekmek pişirmek için taş fırın. Bodrumda ev yapımı şarap, zeytinyağı ve tüm kış için yiyecek saklanırdı. Geleneksel kıyafetler, mutfak eşyaları, tarım aletleri ve el işleri gibi eski eşyalar görürsünüz. O zamanlar insanların nasıl yaşadığına dair iyi bir fikir verir: basit, kendi kendine yeten ve tüm aile tek çatı altında.",
-      "h2fact3": "Biliyor muydun",
-      "p4": "Bugün bir tür açık hava müzesidir (bazen folklor müzesi de denir). İçinden yürürsünüz ve 20. yüzyılın ilk yarısında bir ailenin nasıl yaşadığını görürsünüz – yaklaşık 1953’e kadar insanlar bu tür evlerde yaşardı.",
-      "h2hours": "Açılış saatleri",
-      "dayMon": "Pazartesi",
-      "dayTue": "Salı",
-      "dayWed": "Çarşamba",
-      "dayThu": "Perşembe",
-      "dayFri": "Cuma",
-      "daySat": "Cumartesi",
-      "daySun": "Pazar",
-      "closed": "Kapalı",
-      "g1": "Ev",
-      "g2": "Ev",
-      "g3": "Ev",
-      "g4": "Ev",
-      "p5": "Antimachia’da. Değirmen ve kale ile birleştirin.",
-      "tip": "açık olup olmadığını yerinde kontrol edin – bazen mevsimsel saatler.",
-      "hStory": "Hikaye",
-      "hSee": "Ne görürsün",
-      "hKnow": "Bilmekte fayda var",
-      "tipTitle": "Rehberin ipucu",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    },
-    "es": {
-      "title": "Casa tradicional de Antimachia",
-      "lead": "Cómo se vivía antes en Kos – casa tradicional de pueblo en Antimachia.",
-      "btnPlay": "Leer en voz alta",
-      "p1": "En Antimachia hay una casa tradicional que muestra cómo vivían antes los isleños: materiales locales, disposición sencilla y el ambiente de una casa de pueblo griego.",
-      "p2": "La Casa Tradicional de Antimachia en Kos es un pequeño edificio de piedra en el centro del pueblo de Antimachia, justo enfrente del antiguo molino de viento. Se construyó en 1980, pero es una copia exacta de cómo era una casa familiar típica alrededor de 1900-1920 en la isla. Las paredes son completamente de piedra, a veces incluso con materiales reutilizados de casas más antiguas.",
-      "h2fact2": "Sabías que",
-      "p3": "Es una casa de planta baja con varias estancias: la sala de estar donde la familia dormía y vivía (con una cama de madera elevada), un pequeño establo para animales, un telar para ropa y un horno de piedra para hornear pan. En el sótano guardaban vino casero, aceite de oliva y comida para todo el invierno. Se ven objetos antiguos como ropa tradicional, utensilios de cocina, herramientas agrícolas y artesanía. Da una buena idea de cómo vivía la gente entonces: de forma sencilla, autosuficiente y con toda la familia bajo un mismo techo.",
-      "h2fact3": "Sabías que",
-      "p4": "Hoy es una especie de museo al aire libre (a veces también llamado museo de folclore). Se camina simplemente a través y se ve cómo vivía una familia en la primera mitad del siglo XX – hasta alrededor de 1953 la gente vivía en este tipo de casas.",
-      "h2hours": "Horario de apertura",
-      "dayMon": "Lunes",
-      "dayTue": "Martes",
-      "dayWed": "Miércoles",
-      "dayThu": "Jueves",
-      "dayFri": "Viernes",
-      "daySat": "Sábado",
-      "daySun": "Domingo",
-      "closed": "Cerrado",
-      "g1": "Casa",
-      "g2": "Casa",
-      "g3": "Casa",
-      "g4": "Casa",
-      "p5": "En Antimachia. Combínalo con el molino y el castillo.",
-      "tip": "comprueba localmente si está abierto – a veces horarios estacionales.",
-      "hStory": "La historia",
-      "hSee": "Qué ves",
-      "hKnow": "Bueno saberlo",
-      "tipTitle": "Consejo del guía",
-      "gmaps": "Google Maps",
-      "iphone": "iPhone"
-    }
-  };
-
-  function setLang(l) {
-    if (!I18N[l]) l = 'nl';
-    localStorage.setItem('hk-lang', l);
-    document.documentElement.lang = l;
-    var d = I18N[l];
-    document.querySelectorAll('[data-i18n]').forEach(function(el){
-      var k = el.getAttribute('data-i18n');
-      if (d[k]) el.textContent = d[k];
-    });
-    var opt = document.querySelector('.lang-option[data-lang="'+l+'"]');
-    if (opt) {
-      document.getElementById('flag').textContent = opt.getAttribute('data-flag');
-      document.getElementById('code').textContent = l.toUpperCase();
-    }
-    document.querySelectorAll('.lang-option').forEach(function(o){
-      o.classList.toggle('active', o.getAttribute('data-lang') === l);
-    });
-    closeMenu();
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Antimachia",
+    "title": "Traditioneel huis",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle bezienswaardigheden",
+    "hStory": "Het verhaal",
+    "hSee": "Wat je ziet",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "We blijven nog even in Antimachia.",
+    "s1": "We blijven nog even in Antimachia. Op een klein pleintje in het dorp staat een mooi gerestaureerd traditioneel huis dat je een goed beeld geeft van hoe mensen hier vroeger leefden. Dit huis dateert uit de negentiende eeuw en is helemaal in de oude Dorische stijl van Kos ingericht.",
+    "s2": "Het laat zien hoe een doorsnee gezin op het eiland woonde voordat de moderne tijd begon. Binnen zie je de typische indeling van vroeger. De woonkamer, de slaapkamer en de keuken zijn nog precies zoals ze toen waren.",
+    "s3": "Er staan authentieke meubels, oude kleding, huishoudelijke voorwerpen, weefgetouwen en keukengerei. Alles is met zorg bij elkaar gebracht, zodat je echt het gevoel krijgt dat je even terug in de tijd stapt. Wat vooral opvalt is hoe eenvoudig en praktisch het leven was.",
+    "v1": "De mensen leefden van de landbouw, hielden geiten en schapen, en maakten alles zelf wat ze nodig hadden. Je ziet ook oude foto's en voorwerpen die laten zien hoe hard het dagelijks leven kon zijn.Het huis is klein, maar heel overzichtelijk. Je kunt er in een kwartiertje rustig doorheen lopen.",
+    "v2": "Het is een huis op de begane grond, met verschillende ruimtes: de woonkamer waar het gezin sliep en leefde (met een verhoogd houten bed), een kleine stal voor dieren, een weefgetouw voor kleding en een stenen oven om brood te bakken. In de kelder bewaarden ze zelfgemaakte wijn, olijfolie en eten voor de hele winter. Je ziet er oude spullen zoals traditionele kleren, keukengerei, landbouwgereedschap en handwerk. Het geeft een goed beeld van hoe mensen toen leefden: simpel, zelfvoorzienend en met het hele gezin onder één dak.",
+    "v3": "Tegenwoordig is het een soort openluchtmuseum (soms ook folklore museum genoemd). Je loopt er gewoon doorheen en ziet hoe een gezin in de eerste helft van de 20e eeuw woonde – tot ongeveer 1953 leefden mensen in dit soort huizen.",
+    "k1": "De eigenaar of een gids geeft soms een korte uitleg over de voorwerpen en hoe men vroeger leefde. Toegang kost drie euro. Het is geopend van maandag tot en met zaterdag van half tien ’s ochtends tot half zes ’s middags.",
+    "k2": "Op zondag is het meestal gesloten. Het is een korte en leuke stop, vooral als je wilt begrijpen hoe het alledaagse leven op Kos er honderd jaar geleden uitzag. Het blijft toch leuk om hier even binnen te stappen en te beseffen hoe eenvoudig en tegelijkertijd slim de mensen vroeger hun huis en hun leven hadden ingericht"
+  },
+  "de": {
+    "place": "Antimachia",
+    "title": "Traditioneel huis",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Alle Sehenswürdigkeiten",
+    "hStory": "Die Geschichte",
+    "hSee": "Was du siehst",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Wir werden eine Weile in Antimachia bleiben.",
+    "s1": "Wir werden eine Weile in Antimachia bleiben. Auf einem kleinen Platz im Dorf steht ein wunderschön restauriertes traditionelles Haus, das einen guten Eindruck davon vermittelt, wie die Menschen hier früher lebten. Dieses Haus stammt aus dem 19. Jahrhundert und ist komplett im alten dorischen Stil von Kos eingerichtet.",
+    "s2": "Es zeigt, wie eine durchschnittliche Familie vor Beginn der Neuzeit auf der Insel lebte. Im Inneren sehen Sie die typische Aufteilung der Vergangenheit. Wohnzimmer, Schlafzimmer und Küche sind noch genau so wie damals.",
+    "s3": "Es gibt authentische Möbel, alte Kleidung, Haushaltsgegenstände, Webstühle und Küchenutensilien. Alles wurde sorgfältig zusammengestellt, so dass man wirklich das Gefühl hat, eine Zeitreise in die Vergangenheit zu unternehmen. Besonders auffällig ist, wie einfach und praktisch das Leben war.",
+    "v1": "Die Menschen lebten von der Landwirtschaft, hielten Ziegen und Schafe und stellten alles, was sie brauchten, selbst her. Sie sehen auch alte Fotos und Gegenstände, die zeigen, wie hart der Alltag sein kann. Das Haus ist klein, aber sehr gut organisiert. Sie können es in fünfzehn Minuten ruhig durchqueren.",
+    "v2": "Es ist ein Haus im Erdgeschoss mit mehreren Räumen: dem Wohnzimmer, in dem die Familie schlief und lebte (mit einem erhöhten Holzbett), einem kleinen Stall für Tiere, einem Webstuhl für Kleidung und einem Steinofen zum Brotbacken. Im Keller lagerten sie den ganzen Winter über selbstgemachten Wein, Olivenöl und Lebensmittel. Sie werden alte Dinge wie traditionelle Kleidung, Küchenutensilien, landwirtschaftliche Werkzeuge und Kunsthandwerk sehen. Es vermittelt einen guten Eindruck davon, wie die Menschen damals lebten: einfach, autark und mit der ganzen Familie unter einem Dach.",
+    "v3": "Heutzutage ist es eine Art Freilichtmuseum (manchmal auch Volkskundemuseum genannt). Gehen Sie einfach durch und sehen Sie, wie eine Familie in der ersten Hälfte des 20. Jahrhunderts lebte – bis etwa 1953 lebten Menschen in solchen Häusern.",
+    "k1": "Der Eigentümer oder ein Führer gibt manchmal eine kurze Erklärung zu den Objekten und zur früheren Lebensweise der Menschen. Der Eintritt kostet drei Euro. Es ist von Montag bis Samstag von 9:30 bis 17:30 Uhr geöffnet.",
+    "k2": "Sonntags ist es normalerweise geschlossen. Es ist ein kurzer und unterhaltsamer Zwischenstopp, besonders wenn Sie verstehen möchten, wie das Alltagsleben auf Kos vor hundert Jahren aussah. Es ist immer noch schön, einzutreten und zu erkennen, wie einfach und zugleich elegant die Menschen ihre Häuser und ihr Leben dekoriert haben."
+  },
+  "en": {
+    "place": "Antimachia",
+    "title": "Traditioneel huis",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "All sights",
+    "hStory": "The story",
+    "hSee": "What you see",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "We will stay in Antimachia for a while.",
+    "s1": "We will stay in Antimachia for a while. On a small square in the village there is a beautifully restored traditional house that gives you a good idea of ​​how people used to live here. This house dates from the nineteenth century and is completely decorated in the old Doric style of Kos.",
+    "s2": "It shows how an average family lived on the island before the modern era began. Inside you see the typical layout of the past. The living room, bedroom and kitchen are still exactly as they were then.",
+    "s3": "There are authentic furniture, old clothes, household objects, looms and kitchen utensils. Everything has been brought together with care, so that you really get the feeling that you are stepping back in time. What is especially striking is how simple and practical life was.",
+    "v1": "The people lived from agriculture, kept goats and sheep, and made everything they needed themselves. You also see old photos and objects that show how hard daily life could be. The house is small, but very well organized. You can walk through it quietly in fifteen minutes.",
+    "v2": "It is a house on the ground floor, with several spaces: the living room where the family slept and lived (with a raised wooden bed), a small stable for animals, a loom for clothes and a stone oven for baking bread. In the cellar they kept homemade wine, olive oil and food for the whole winter. You will see old things such as traditional clothes, kitchen utensils, agricultural tools and handicrafts. It gives a good idea of ​​how people lived at that time: simple, self-sufficient and with the whole family under one roof.",
+    "v3": "Nowadays it is a kind of open-air museum (sometimes also called a folklore museum). You just walk through and see how a family lived in the first half of the 20th century – people lived in these types of houses until about 1953.",
+    "k1": "The owner or a guide sometimes gives a short explanation about the objects and how people used to live. Entrance costs three euros. It is open from Monday to Saturday from 9:30 am to 5:30 pm.",
+    "k2": "It is usually closed on Sundays. It's a short and fun stop, especially if you want to understand what everyday life on Kos was like a hundred years ago. It's still nice to step inside and realize how simply and at the same time smartly people used to decorate their homes and their lives."
+  },
+  "it": {
+    "place": "Antimachia",
+    "title": "Traditioneel huis",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tutte le attrazioni",
+    "hStory": "La storia",
+    "hSee": "Cosa vedi",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Resteremo ad Antimachia per un po'.",
+    "s1": "Resteremo ad Antimachia per un po'. In una piccola piazza del paese c'è una casa tradizionale splendidamente restaurata che dà una buona idea di come vivevano le persone qui. Questa casa risale al XIX secolo ed è completamente decorata nell'antico stile dorico di Kos.",
+    "s2": "Mostra come viveva una famiglia media sull'isola prima dell'inizio dell'era moderna. All'interno si vede la disposizione tipica del passato. Il soggiorno, la camera da letto e la cucina sono ancora esattamente come allora.",
+    "s3": "Ci sono mobili autentici, vecchi vestiti, oggetti per la casa, telai e utensili da cucina. Tutto è stato messo insieme con cura, così da avere davvero la sensazione di tornare indietro nel tempo. Ciò che colpisce particolarmente è quanto fosse semplice e pratica la vita.",
+    "v1": "La gente viveva di agricoltura, allevava capre e pecore e produceva da sola tutto ciò di cui aveva bisogno. Vedi anche vecchie foto e oggetti che mostrano quanto potrebbe essere dura la vita quotidiana. La casa è piccola, ma molto ben organizzata. Puoi attraversarlo tranquillamente in quindici minuti.",
+    "v2": "Si tratta di una casa al piano terra, con diversi ambienti: il soggiorno dove dormiva e viveva la famiglia (con un letto rialzato in legno), una piccola stalla per gli animali, un telaio per i panni e un forno in pietra per cuocere il pane. Nella cantina conservavano vino, olio d'oliva e cibo fatti in casa per tutto l'inverno. Vedrai cose antiche come abiti tradizionali, utensili da cucina, attrezzi agricoli e oggetti di artigianato. Dà una buona idea di come si viveva a quel tempo: semplice, autosufficiente e con tutta la famiglia sotto lo stesso tetto.",
+    "v3": "Oggi è una sorta di museo all'aperto (a volte chiamato anche museo del folclore). Basta attraversarlo e vedere come viveva una famiglia nella prima metà del XX secolo: le persone vivevano in questo tipo di case fino al 1953 circa.",
+    "k1": "Il proprietario o una guida a volte forniscono una breve spiegazione sugli oggetti e su come vivevano le persone. L'ingresso costa tre euro. È aperto dal lunedì al sabato dalle 9:30 alle 17:30.",
+    "k2": "Di solito è chiuso la domenica. È una sosta breve e divertente, soprattutto se vuoi capire com'era la vita quotidiana a Kos cento anni fa. È ancora bello entrare e rendersi conto con quanta semplicità e allo stesso tempo intelligenza si arredava la propria casa e la propria vita."
+  },
+  "tr": {
+    "place": "Antimachia",
+    "title": "Traditioneel huis",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Tüm gezilecek yerler",
+    "hStory": "Hikâye",
+    "hSee": "Ne görürsün",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Bir süre Antimachia'da kalacağız.",
+    "s1": "Bir süre Antimachia'da kalacağız. Köyün küçük bir meydanında, insanların burada nasıl yaşadıklarına dair iyi bir fikir veren, güzelce restore edilmiş geleneksel bir ev var. Bu ev on dokuzuncu yüzyıldan kalmadır ve tamamen Kos'un eski Dor tarzında dekore edilmiştir.",
+    "s2": "Modern çağ başlamadan önce adada ortalama bir ailenin nasıl yaşadığını gösteriyor. İçeride geçmişin tipik düzenini görüyorsunuz. Oturma odası, yatak odası ve mutfak hâlâ o zamankiyle aynı.",
+    "s3": "Otantik mobilyalar, eski kıyafetler, ev eşyaları, tezgahlar ve mutfak eşyaları bulunmaktadır. Her şey özenle bir araya getirildi, böylece gerçekten zamanda geriye gittiğinizi hissediyorsunuz. Özellikle çarpıcı olan, hayatın ne kadar basit ve pratik olduğudur.",
+    "v1": "İnsanlar tarımla geçiniyor, keçi ve koyun besliyor ve ihtiyaç duydukları her şeyi kendileri sağlıyorlardı. Ayrıca günlük yaşamın ne kadar zor olabileceğini gösteren eski fotoğraflar ve nesneler de görüyorsunuz. Ev küçük ama çok iyi organize edilmiş. On beş dakika içinde sessizce yürüyebilirsiniz.",
+    "v2": "Zemin katta yer alan ve birkaç alanı olan bir evdir: ailenin uyuduğu ve yaşadığı oturma odası (yükseltilmiş ahşap yataklı), hayvanlar için küçük bir ahır, giysiler için bir dokuma tezgahı ve ekmek pişirmek için bir taş fırın. Bodrumda bütün kış boyunca ev yapımı şarap, zeytinyağı ve yiyecek bulundurdular. Geleneksel kıyafetler, mutfak eşyaları, tarım aletleri, el sanatları gibi eski eşyaları göreceksiniz. O dönemde insanların nasıl yaşadığına dair iyi bir fikir veriyor: basit, kendi kendine yeten ve tüm ailenin tek çatı altında olduğu.",
+    "v3": "Günümüzde bir tür açık hava müzesidir (bazen folklor müzesi olarak da adlandırılır). İçeri girip 20. yüzyılın ilk yarısında bir ailenin nasıl yaşadığını görüyorsunuz; insanlar 1953'e kadar bu tür evlerde yaşıyordu.",
+    "k1": "Sahibi veya rehber bazen nesneler ve insanların nasıl yaşadıkları hakkında kısa bir açıklama yapar. Giriş ücreti üç avro. Pazartesiden cumartesiye 09:30 ile 17:30 saatleri arasında açıktır.",
+    "k2": "Genellikle pazar günleri kapalıdır. Kısa ve eğlenceli bir durak, özellikle de yüz yıl önce Kos'ta günlük yaşamın nasıl olduğunu anlamak istiyorsanız. İçeri adım atmak ve insanların evlerini ve hayatlarını ne kadar basit ve aynı zamanda akıllıca dekore ettiklerini fark etmek hala güzel."
+  },
+  "es": {
+    "place": "Antimachia",
+    "title": "Traditioneel huis",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "Todos los lugares",
+    "hStory": "La historia",
+    "hSee": "Lo que ves",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Nos quedaremos en Antimachia por un tiempo.",
+    "s1": "Nos quedaremos en Antimachia por un tiempo. En una pequeña plaza del pueblo hay una casa tradicional bellamente restaurada que te da una buena idea de cómo vivía la gente aquí. Esta casa data del siglo XIX y está completamente decorada en el antiguo estilo dórico de Kos.",
+    "s2": "Muestra cómo vivía una familia promedio en la isla antes de que comenzara la era moderna. En el interior se ve la distribución típica del pasado. El salón, el dormitorio y la cocina siguen tal como estaban entonces.",
+    "s3": "Hay muebles auténticos, ropa vieja, objetos del hogar, telares y utensilios de cocina. Todo ha sido elaborado con mimo, para que realmente tengas la sensación de estar retrocediendo en el tiempo. Lo que llama especialmente la atención es lo sencilla y práctica que era la vida.",
+    "v1": "La gente vivía de la agricultura, criaba cabras y ovejas y fabricaba todo lo que necesitaba. También ves fotografías y objetos antiguos que muestran lo dura que podía ser la vida cotidiana. La casa es pequeña, pero muy bien organizada. Puedes recorrerlo tranquilamente en quince minutos.",
+    "v2": "Es una casa de planta baja, con varios espacios: el salón donde dormía y vivía la familia (con una cama elevada de madera), un pequeño establo para los animales, un telar para la ropa y un horno de piedra para cocer el pan. En la bodega guardaban vino casero, aceite de oliva y comida para todo el invierno. Verás cosas antiguas como ropa tradicional, utensilios de cocina, herramientas agrícolas y artesanías. Da una buena idea de cómo vivía la gente en aquella época: sencilla, autosuficiente y con toda la familia bajo un mismo techo.",
+    "v3": "Hoy en día es una especie de museo al aire libre (a veces también llamado museo folclórico). Simplemente camina y ve cómo vivía una familia en la primera mitad del siglo XX; la gente vivió en este tipo de casas hasta aproximadamente 1953.",
+    "k1": "El propietario o un guía a veces da una breve explicación sobre los objetos y cómo vivía la gente. La entrada cuesta tres euros. Está abierto de lunes a sábado de 9:30 am a 5:30 pm.",
+    "k2": "Suele estar cerrado los domingos. Es una parada corta y divertida, especialmente si quieres entender cómo era la vida cotidiana en Kos hace cien años. Todavía es agradable entrar y darse cuenta de lo simple y al mismo tiempo inteligente que la gente decoraba sus hogares y sus vidas."
   }
-
-  var langBtn = document.getElementById('langBtn');
-  var langMenu = document.getElementById('langMenu');
-  function openMenu(){ langMenu.classList.add('open'); }
-  function closeMenu(){ langMenu.classList.remove('open'); }
-  langBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    langMenu.classList.contains('open') ? closeMenu() : openMenu();
-  });
-  document.addEventListener('click', function(){ closeMenu(); });
-  document.querySelectorAll('.lang-option').forEach(function(btn){
-    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang')); });
-  });
-
-  var saved = localStorage.getItem('hk-lang') || 'nl';
-  setLang(saved);
-
-  /* TTS */
-  var LANG_VOICE = { nl:'nl-NL', de:'de-DE', en:'en-GB', it:'it-IT', tr:'tr-TR', es:'es-ES' };
-  function getLang(){
-    var l = localStorage.getItem('hk-lang') || 'nl';
-    return LANG_VOICE[l] ? l : 'nl';
-  }
-  function pickVoice(code){
-    var voices = speechSynthesis.getVoices() || [];
-    var prefix = code.slice(0,2).toLowerCase();
-    return voices.find(function(v){ return v.lang === code; })
-      || voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf(prefix)===0; })
-      || null;
-  }
-  var btnPlay = document.getElementById('btnPlay');
-  var btnStop = document.getElementById('btnStop');
-  var status = document.getElementById('ttsStatus');
-  function setStatus(t){ if(status) status.textContent = t; }
-  function play(){
-    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
-    speechSynthesis.cancel();
-    var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
-    var l = getLang();
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = LANG_VOICE[l];
-    u.rate = 0.92;
-    var v = pickVoice(LANG_VOICE[l]);
-    if(v) u.voice = v;
-    u.onstart = function(){
-      btnPlay.classList.add('playing');
-      btnStop.classList.add('show');
-      setStatus('Voorlezen… ('+l.toUpperCase()+')');
-    };
-    u.onend = u.onerror = function(){
-      btnPlay.classList.remove('playing');
-      btnStop.classList.remove('show');
-      setStatus('');
-    };
-    if(!speechSynthesis.getVoices().length){
-      speechSynthesis.onvoiceschanged = function(){
-        var v2 = pickVoice(LANG_VOICE[l]); if(v2) u.voice = v2;
-        speechSynthesis.speak(u);
-      };
-      setTimeout(function(){ speechSynthesis.speak(u); }, 250);
-    } else {
-      speechSynthesis.speak(u);
-    }
-  }
-  function stop(){
-    if(window.speechSynthesis) speechSynthesis.cancel();
-    btnPlay.classList.remove('playing');
-    btnStop.classList.remove('show');
-    setStatus('Gestopt.');
-  }
-  btnPlay.addEventListener('click', play);
-  btnStop.addEventListener('click', stop);
-  if(window.speechSynthesis){
-    speechSynthesis.getVoices();
-    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
-  }
-})();
-</script>
-<script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
+};</script>
+  <script src="hello-kos-places.js"></script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-fav.js"></script>
+  <script src="hello-kos-guide.js"></script>
 </body>
 </html>
