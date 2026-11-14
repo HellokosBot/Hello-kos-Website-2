@@ -64,8 +64,8 @@ body.intro-lock{overflow:hidden}
 .card:nth-child(1){animation-delay:.04s}.card:nth-child(2){animation-delay:.08s}.card:nth-child(3){animation-delay:.12s}.card:nth-child(4){animation-delay:.16s}.card:nth-child(5){animation-delay:.20s}.card:nth-child(6){animation-delay:.24s}.card:nth-child(7){animation-delay:.28s}.card:nth-child(8){animation-delay:.32s}.card:nth-child(9){animation-delay:.36s}.card:nth-child(10){animation-delay:.40s}.card:nth-child(11){animation-delay:.44s}.card:nth-child(12){animation-delay:.48s}
 @keyframes cardIn{to{opacity:1;transform:translateY(0)}}
 .card img{flex:1 1 auto;min-height:0;width:100%;height:100%;object-fit:cover;display:block}
-.card-overlay{position:static;flex:0 0 auto;width:100%;box-sizing:border-box;background:#fff;display:flex;align-items:center;padding:7px 10px}
-.card-title{color:#0d1a1a;font-weight:700;font-size:.88rem;line-height:1.25;text-align:left}
+#tileGrid .card-overlay{position:static;flex:0 0 auto;width:100%;box-sizing:border-box;background:#fff;background-image:none;display:flex;align-items:center;padding:7px 10px}
+#tileGrid .card-title{color:#111;background:none;text-shadow:none;font-weight:700;font-size:.88rem;line-height:1.25;text-align:left}
 .search-results{display:flex;flex-direction:column;gap:8px;margin:0 0 16px}
 .search-results[hidden]{display:none}
 .search-hit{display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:12px 14px;text-decoration:none;color:var(--text)}
@@ -74,10 +74,10 @@ body.intro-lock{overflow:hidden}
 .search-hit mark{background:#E0B040;color:#0d1a1a;border-radius:3px;padding:0 2px}
 .lang-btn.hk-lang-pulse{animation:hkLangPulse .9s ease-in-out infinite}
 @keyframes hkLangPulse{0%,100%{transform:scale(1)}45%{transform:translateY(-3px) scale(1.08)}}
-.lang-hint{position:absolute;top:calc(100% + 10px);right:0;z-index:80;display:flex;align-items:center;gap:6px;background:#E0B040;color:#0d1a1a;font-weight:800;font-size:.82rem;padding:8px 12px 8px 10px;border-radius:12px;white-space:nowrap;box-shadow:0 6px 16px rgba(0,0,0,.35)}
+.lang-hint{position:absolute;top:calc(100% + 2px);right:6px;z-index:80;width:72px;height:88px;padding:0;background:none;border:0;box-shadow:none}
 .lang-hint[hidden]{display:none}
-.lang-hint-arrow{position:absolute;top:-8px;right:22px;width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:8px solid #E0B040;animation:hkArrow .7s ease-in-out infinite}
-@keyframes hkArrow{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.lang-hint-arrow{display:block;width:72px;height:88px;filter:drop-shadow(0 3px 6px rgba(0,0,0,.55));animation:hkArrow .7s ease-in-out infinite}
+@keyframes hkArrow{0%,100%{transform:translateY(12px)}50%{transform:translateY(0)}}
 @media (prefers-reduced-motion:reduce){
   .lang-btn.hk-lang-pulse,.lang-hint-arrow{animation:none}
   .card{animation:none;opacity:1;transform:none}
@@ -88,6 +88,10 @@ body.intro-lock{overflow:hidden}
 .footer .copy{font-size:.72rem;color:var(--text-muted);margin-top:10px}
 </style>
 <link rel="stylesheet" href="hello-kos.css">
+<style>
+#tileGrid a.card .card-overlay{background:#fff !important;background-color:#fff !important;background-image:none !important}
+#tileGrid a.card .card-title{color:#111 !important;background:none !important;text-shadow:none !important}
+</style>
 </head>
 <body class="intro-lock">
 <div id="intro">
@@ -134,9 +138,7 @@ body.intro-lock{overflow:hidden}
       <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
     </div>
     <div class="lang-hint" id="langHint" hidden>
-      <span class="lang-hint-arrow" aria-hidden="true"></span>
-      <span id="langHintFlag" aria-hidden="true">🇳🇱</span>
-      <span id="langHintText"></span>
+      <svg class="lang-hint-arrow" viewBox="0 0 64 80" aria-hidden="true"><path fill="#E0B040" d="M32 2l26 32H42v42H22V34H6z"/></svg>
     </div>
   </div>
 </header>
@@ -240,12 +242,12 @@ body.intro-lock{overflow:hidden}
   },true);
 
   var dict={
-    en:{heroTitle:"All of Kos in your pocket",heroSub:"Choose what you want to do",searchPh:"Search Kos…",noRes:"No results",langHint:"Choose your language",c1:"Did you know…",c2:"Taxi & buses",c3:"Sights & routes",c4:"Excursions & activities",c5:"Best & tastiest",c6:"Beaches & beach bars",c7:"Rentals",c8:"Wellness & care",c9:"Bars & nightlife",c10:"Important shops",c11:"Emergencies & help",c12:"Water & wind"},
-    nl:{heroTitle:"Heel Kos in je broekzak",heroSub:"Kies wat je wilt doen",searchPh:"Zoek in Kos…",noRes:"Geen resultaten",langHint:"Kies je taal",c1:"Wist je dat…",c2:"Taxi & bussen",c3:"Bezienswaardigheden & routes",c4:"Excursies & activiteiten",c5:"Beste & lekkerste",c6:"Stranden en beachbars",c7:"Huren",c8:"Wellness & verzorging",c9:"Bars & nachtleven",c10:"Belangrijke winkels",c11:"Noodgevallen & hulp",c12:"Water & wind"},
-    de:{heroTitle:"Ganz Kos in der Tasche",heroSub:"Wähle, was du tun möchtest",searchPh:"Kos durchsuchen…",noRes:"Keine Ergebnisse",langHint:"Wähle deine Sprache",c1:"Wusstest du…",c2:"Taxi & Bus",c3:"Sehenswürdigkeiten & Routen",c4:"Ausflüge & Aktivitäten",c5:"Beste & Leckerste",c6:"Strände & Beachbars",c7:"Mieten",c8:"Wellness & Pflege",c9:"Bars & Nachtleben",c10:"Wichtige Läden",c11:"Notfälle & Hilfe",c12:"Wasser & Wind"},
-    it:{heroTitle:"Tutta Kos in tasca",heroSub:"Scegli cosa vuoi fare",searchPh:"Cerca a Kos…",noRes:"Nessun risultato",langHint:"Scegli la lingua",c1:"Lo sapevi…",c2:"Taxi e bus",c3:"Attrazioni e percorsi",c4:"Escursioni e attività",c5:"Il meglio e più buono",c6:"Spiagge e beach bar",c7:"Noleggio",c8:"Wellness e cura",c9:"Bar e nightlife",c10:"Negozi importanti",c11:"Emergenze e aiuto",c12:"Acqua e vento"},
-    tr:{heroTitle:"Kos cebinde",heroSub:"Ne yapmak istediğini seç",searchPh:"Kos'ta ara…",noRes:"Sonuç yok",langHint:"Dilini seç",c1:"Biliyor muydun…",c2:"Taksi ve otobüs",c3:"Gezilecek yerler ve rotalar",c4:"Turlar ve aktiviteler",c5:"En iyi ve lezzetli",c6:"Plajlar ve beach barlar",c7:"Kiralama",c8:"Wellness ve bakım",c9:"Barlar ve gece hayatı",c10:"Önemli dükkanlar",c11:"Acil durum ve yardım",c12:"Su ve rüzgar"},
-    es:{heroTitle:"Todo Kos en tu bolsillo",heroSub:"Elige lo que quieres hacer",searchPh:"Buscar en Kos…",noRes:"Sin resultados",langHint:"Elige tu idioma",c1:"¿Sabías que…",c2:"Taxi y buses",c3:"Lugares de interés y rutas",c4:"Excursiones y actividades",c5:"Lo mejor y más rico",c6:"Playas y beach bars",c7:"Alquiler",c8:"Wellness y cuidado",c9:"Bares y nightlife",c10:"Tiendas importantes",c11:"Emergencias y ayuda",c12:"Agua y viento"}
+    en:{heroTitle:"All of Kos in your pocket",heroSub:"Choose what you want to do",searchPh:"Search Kos…",noRes:"No results",c1:"Did you know…",c2:"Taxi & buses",c3:"Sights & routes",c4:"Excursions & activities",c5:"Best & tastiest",c6:"Beaches & beach bars",c7:"Rentals",c8:"Wellness & care",c9:"Bars & nightlife",c10:"Important shops",c11:"Emergencies & help",c12:"Water & wind"},
+    nl:{heroTitle:"Heel Kos in je broekzak",heroSub:"Kies wat je wilt doen",searchPh:"Zoek in Kos…",noRes:"Geen resultaten",c1:"Wist je dat…",c2:"Taxi & bussen",c3:"Bezienswaardigheden & routes",c4:"Excursies & activiteiten",c5:"Beste & lekkerste",c6:"Stranden en beachbars",c7:"Huren",c8:"Wellness & verzorging",c9:"Bars & nachtleven",c10:"Belangrijke winkels",c11:"Noodgevallen & hulp",c12:"Water & wind"},
+    de:{heroTitle:"Ganz Kos in der Tasche",heroSub:"Wähle, was du tun möchtest",searchPh:"Kos durchsuchen…",noRes:"Keine Ergebnisse",c1:"Wusstest du…",c2:"Taxi & Bus",c3:"Sehenswürdigkeiten & Routen",c4:"Ausflüge & Aktivitäten",c5:"Beste & Leckerste",c6:"Strände & Beachbars",c7:"Mieten",c8:"Wellness & Pflege",c9:"Bars & Nachtleben",c10:"Wichtige Läden",c11:"Notfälle & Hilfe",c12:"Wasser & Wind"},
+    it:{heroTitle:"Tutta Kos in tasca",heroSub:"Scegli cosa vuoi fare",searchPh:"Cerca a Kos…",noRes:"Nessun risultato",c1:"Lo sapevi…",c2:"Taxi e bus",c3:"Attrazioni e percorsi",c4:"Escursioni e attività",c5:"Il meglio e più buono",c6:"Spiagge e beach bar",c7:"Noleggio",c8:"Wellness e cura",c9:"Bar e nightlife",c10:"Negozi importanti",c11:"Emergenze e aiuto",c12:"Acqua e vento"},
+    tr:{heroTitle:"Kos cebinde",heroSub:"Ne yapmak istediğini seç",searchPh:"Kos'ta ara…",noRes:"Sonuç yok",c1:"Biliyor muydun…",c2:"Taksi ve otobüs",c3:"Gezilecek yerler ve rotalar",c4:"Turlar ve aktiviteler",c5:"En iyi ve lezzetli",c6:"Plajlar ve beach barlar",c7:"Kiralama",c8:"Wellness ve bakım",c9:"Barlar ve gece hayatı",c10:"Önemli dükkanlar",c11:"Acil durum ve yardım",c12:"Su ve rüzgar"},
+    es:{heroTitle:"Todo Kos en tu bolsillo",heroSub:"Elige lo que quieres hacer",searchPh:"Buscar en Kos…",noRes:"Sin resultados",c1:"¿Sabías que…",c2:"Taxi y buses",c3:"Lugares de interés y rutas",c4:"Excursiones y actividades",c5:"Lo mejor y más rico",c6:"Playas y beach bars",c7:"Alquiler",c8:"Wellness y cuidado",c9:"Bares y nightlife",c10:"Tiendas importantes",c11:"Emergencias y ayuda",c12:"Agua y viento"}
   };
   window.HK_DICT = dict;
   var HINT_KEY = "hk-lang-hint-seen";
@@ -261,11 +263,6 @@ body.intro-lock{overflow:hidden}
   }
   function showLangHint(){
     if (localStorage.getItem(HINT_KEY) === "1") return;
-    var nav = ((navigator.language || "en").slice(0, 2) || "en").toLowerCase();
-    var hl = dict[nav] ? nav : "en";
-    var flags = { nl: "🇳🇱", de: "🇩🇪", en: "🇬🇧", it: "🇮🇹", tr: "🇹🇷", es: "🇪🇸" };
-    document.getElementById("langHintFlag").textContent = flags[hl] || "🇬🇧";
-    document.getElementById("langHintText").textContent = (dict[hl] && dict[hl].langHint) || dict.en.langHint;
     document.getElementById("langHint").hidden = false;
     document.getElementById("langBtn").classList.add("hk-lang-pulse");
     hintTimer = setTimeout(dismissHint, 8000);
