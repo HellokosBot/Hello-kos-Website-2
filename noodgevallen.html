@@ -44,6 +44,10 @@
     .sos .label { font-size: .78rem; opacity: .95; text-transform: uppercase; letter-spacing: .04em; }
     .sos a { display: inline-block; margin-top: 8px; background: #fff; color: #c62828; font-weight: 800; font-size: 1.4rem; padding: 10px 28px; border-radius: 999px; text-decoration: none; }
     .sos p { font-size: .82rem; margin-top: 8px; opacity: .95; }
+    .quake-tile { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; margin-top: 12px; background: linear-gradient(135deg, #c62828, #b71c1c); color: #fff; border-radius: 16px; padding: 16px; text-align: center; text-decoration: none; font-weight: 800; font-size: 1.2rem; box-shadow: 0 4px 14px rgba(198,40,40,.3); animation: quake-pulse 1.8s ease-in-out infinite; }
+    .quake-tile .tri { font-size: 1.15rem; line-height: 1; }
+    @keyframes quake-pulse { 0%, 100% { box-shadow: 0 4px 14px rgba(198,40,40,.28); } 50% { box-shadow: 0 4px 22px rgba(239,83,80,.7); } }
+    @media (prefers-reduced-motion: reduce) { .quake-tile { animation: none; } }
     .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .card { display: flex; align-items: center; justify-content: center; position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 1; background: #fff; text-decoration: none; border: 1px solid var(--border); padding: 12px 12px 46px; }
     .card img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; }
@@ -118,6 +122,7 @@
         <span class="card-overlay"><span class="card-title">Stroomuitval<span class="card-meta" data-i18n="m8">Elektriciteit</span></span></span>
       </a>
     </div>
+    <a class="quake-tile" href="hulp-aardbevingen.html"><span class="tri" aria-hidden="true">⚠️</span><span data-i18n="quake">Aardbevingen</span><span class="tri" aria-hidden="true">⚠️</span></a>
   </main>
   <footer class="footer">Hello Kos</footer>
   <script>
@@ -135,7 +140,8 @@
         m5: "112 / politie",
         m6: "Brand & hulp",
         m7: "Waterproblemen",
-        m8: "Elektriciteit"
+        m8: "Elektriciteit",
+        quake: "Aardbevingen"
       },
       en: {
         title: "Emergencies & help",
@@ -149,7 +155,8 @@
         m5: "112 / police",
         m6: "Fire & help",
         m7: "Water problems",
-        m8: "Electricity"
+        m8: "Electricity",
+        quake: "Earthquakes"
       },
       de: {
         title: "Notfälle & Hilfe",
@@ -163,7 +170,8 @@
         m5: "112 / Polizei",
         m6: "Brand & Hilfe",
         m7: "Wasserprobleme",
-        m8: "Strom"
+        m8: "Strom",
+        quake: "Erdbeben"
       },
       it: {
         title: "Emergenze & aiuto",
@@ -177,7 +185,8 @@
         m5: "112 / polizia",
         m6: "Incendio & aiuto",
         m7: "Problemi idrici",
-        m8: "Elettricità"
+        m8: "Elettricità",
+        quake: "Terremoti"
       },
       tr: {
         title: "Acil durumlar & yardım",
@@ -191,7 +200,8 @@
         m5: "112 / polis",
         m6: "Yangın & yardım",
         m7: "Su sorunları",
-        m8: "Elektrik"
+        m8: "Elektrik",
+        quake: "Depremler"
       },
       es: {
         title: "Emergencias & ayuda",
@@ -205,7 +215,8 @@
         m5: "112 / policía",
         m6: "Incendio & ayuda",
         m7: "Problemas de agua",
-        m8: "Electricidad"
+        m8: "Electricidad",
+        quake: "Terremotos"
       }
     };
 
