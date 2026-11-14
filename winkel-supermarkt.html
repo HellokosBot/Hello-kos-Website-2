@@ -40,9 +40,17 @@ body.hk-page h2.section{font-size:1.05rem;font-weight:800;text-align:center;colo
 .btn-solid{background:var(--petrol);color:#fff}
 .loc-list p{margin:0 0 12px;color:var(--text-soft);font-size:.92rem}
 .loc-list a{color:var(--petrol);font-weight:700}
-.radar-stage{margin:-16px -14px 8px;background:#071410;padding:12px 12px 8px}
+.radar-panel{margin:0 0 14px;background:#071410;border:1px solid rgba(62,174,150,.35);border-radius:18px;overflow:hidden}
+.radar-panel .radar-stage{margin:0;background:transparent;padding:12px 12px 4px}
+.radar-panel .loc-card{margin:0;border:0;border-radius:0;border-top:1px solid rgba(62,174,150,.28);background:#0e1c1b}
+.radar-panel .wait-copy{margin:0 0 8px;color:#d5ece8;font-size:.86rem;line-height:1.35}
 #radar{display:block;width:min(100%,440px);height:auto;aspect-ratio:1;margin:0 auto;border-radius:16px}
-.radar-note{text-align:center;font-size:.75rem;color:#b7e4df;margin:0 0 12px;min-height:1.1em}
+.radar-note{text-align:center;font-size:.75rem;color:#b7e4df;margin:0 0 8px;min-height:1.1em}
+body.hk-page .map-row{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:stretch;gap:8px;width:100%;max-width:100%;margin:10px 0 0;box-sizing:border-box}
+body.hk-page .map-row .btn{flex:1 1 0;width:0;max-width:none;min-width:0;padding:12px 8px;font-size:.82rem}
+body.hk-page .map-row .pin{flex:0 0 16px;width:16px;height:16px}
+body.hk-page .skip-btn{margin-top:8px}
+.loc-item{margin:0 0 12px}
 .loc-name{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
 .dear{display:inline-block;background:rgba(224,176,64,.16);color:var(--gold);border:1px solid var(--gold);border-radius:999px;font-size:.72rem;font-weight:800;padding:1px 8px;letter-spacing:.02em;vertical-align:middle}
 .dear[hidden]{display:none}
@@ -69,28 +77,32 @@ body.hk-page h2.section{font-size:1.05rem;font-weight:800;text-align:center;colo
 </header>
 <div class="overlay" id="overlay"></div>
 <main class="main">
-<div class="radar-stage"><canvas id="radar" width="640" height="640" aria-hidden="true"></canvas></div>
-<p class="radar-note" id="radarNote" data-i18n="radarWait">De radar veegt. Winkelpuntjes komen na je locatie.</p>
 <p class="parent-link"><a href="praktische-winkels.html" data-i18n="back">← Belangrijke winkels</a></p>
 <h1 data-i18n="title">Supermarkten</h1>
-<article class="card">
-<p data-i18n="p0">In Kos zijn in bijna elke straat wel een supermarktje. Deze shops zijn vaak duur maar wel handig (sommige 24h open) waardoor je er snel iets kunt halen wanneer je het nodig hebt. Maar hebben maar beperkt assortiment</p>
-<p data-i18n="p1">Ben je op zoek naar normale, grotere supermarkten met een volledig assortiment en betere prijzen? Dan helpt onze locator je om eenvoudig de dichtstbijzijnde Normale supermarkten te vinden. Het systeem toont je direct welke supermarkt het dichtst bij jouw locatie ligt, zodat je snel kunt zien waar je heen kunt gaan voor je dagelijkse boodschappen.</p>
-<h2 data-i18n="h15">Na 15 seconden verschijnt de Dichtstbijzijnde locatie van een Grote Supermarkt</h2>
-</article>
+<p class="lead" data-i18n="p0">Op Kos is er in bijna elke straat wel een supermarktje. Deze winkels zijn vaak duur, maar wel handig (sommige zijn 24 uur open), zodat je er snel iets kunt halen wanneer je het nodig hebt. Ze hebben wel maar een beperkt assortiment.</p>
+<section class="radar-panel">
+<div class="radar-stage"><canvas id="radar" width="640" height="640" aria-hidden="true"></canvas></div>
 <div class="loc-card" id="loc">
+<p class="radar-note" id="radarNote" data-i18n="radarWait">De radar veegt. Winkelpuntjes komen na je locatie.</p>
+<p class="wait-copy" data-i18n="h15">Na 15 seconden verschijnt de Dichtstbijzijnde locatie van een Grote Supermarkt</p>
 <h2 data-i18n="locH">🛒 Dichtstbijzijnde Supermarkt</h2>
 <p class="status" id="locStatus">Locatie ophalen...</p>
 <div id="locOne" hidden>
 <p class="loc-name"><span id="locName"></span><span id="locDear" class="dear" hidden>duurder</span></p>
 <p id="locCity"></p>
 <p id="locDist"></p>
-<div class="actions">
-<a class="btn btn-map" id="locMap" href="#" target="_blank" rel="noopener" data-i18n="openMap">Open Google Maps</a>
-<button type="button" class="btn btn-solid" id="locSkip" data-i18n="skip">Overslaan</button>
-</div></div>
+<div class="map-row">
+<a class="btn btn-map" id="locMap" href="#" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+<a class="btn btn-map" id="locApple" href="#" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+</div>
+<button type="button" class="btn btn-solid skip-btn" id="locSkip" data-i18n="skip">Overslaan</button>
+</div>
 <div id="locList" class="loc-list" hidden></div>
 </div>
+</section>
+<article class="card">
+<p data-i18n="p1">Ben je op zoek naar normale, grotere supermarkten met een volledig assortiment en betere prijzen? Dan helpt onze locator je om eenvoudig de dichtstbijzijnde Normale supermarkten te vinden. Het systeem toont je direct welke supermarkt het dichtst bij jouw locatie ligt, zodat je snel kunt zien waar je heen kunt gaan voor je dagelijkse boodschappen.</p>
+</article>
 
 <script>
 (function () {
@@ -155,6 +167,10 @@ body.hk-page h2.section{font-size:1.05rem;font-weight:800;text-align:center;colo
   function esc(s) {
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
   }
+  var PIN = '<svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>';
+  function appleUrl(m) {
+    return "https://maps.apple.com/?ll=" + m.lat + "," + m.lon + "&q=" + encodeURIComponent(m.name);
+  }
   function dearMark(d) {
     return " <span class=\"dear\">" + esc(d.dear || "duurder") + "</span>";
   }
@@ -178,6 +194,7 @@ body.hk-page h2.section{font-size:1.05rem;font-weight:800;text-align:center;colo
     dist.hidden = false;
     dist.textContent = (d.distP || "Afstand: ") + m.dist + " m";
     document.getElementById("locMap").href = m.url;
+    document.getElementById("locApple").href = appleUrl(m);
     document.getElementById("locOne").hidden = false;
     document.getElementById("locList").hidden = true;
     document.getElementById("locStatus").textContent = "";
@@ -188,9 +205,10 @@ body.hk-page h2.section{font-size:1.05rem;font-weight:800;text-align:center;colo
     var d = dict();
     var html = "";
     markets.forEach(function (m) {
-      html += "<p><strong>" + esc(m.name) + "</strong>" + (isDear(m.name) ? dearMark(d) : "")
-        + "<br>" + esc(d.cityP || "Stad: ") + esc(m.city)
-        + "<br><a href=\"" + esc(m.url) + "\" target=\"_blank\" rel=\"noopener\">" + esc(d.openMap || "Open Google Maps") + "</a></p>";
+      html += "<div class=\"loc-item\"><p><strong>" + esc(m.name) + "</strong>" + (isDear(m.name) ? dearMark(d) : "")
+        + "<br>" + esc(d.cityP || "Stad: ") + esc(m.city) + "</p>"
+        + "<div class=\"map-row\"><a class=\"btn btn-map\" href=\"" + esc(m.url) + "\" target=\"_blank\" rel=\"noopener\">" + PIN + esc(d.gmaps || "Google Maps") + "</a>"
+        + "<a class=\"btn btn-map\" href=\"" + esc(appleUrl(m)) + "\" target=\"_blank\" rel=\"noopener\">" + PIN + esc(d.iphone || "iPhone") + "</a></div></div>";
     });
     var box = document.getElementById("locList");
     box.innerHTML = html;
@@ -386,7 +404,7 @@ body.hk-page h2.section{font-size:1.05rem;font-weight:800;text-align:center;colo
     }
     unlockAudio();
     sorted = markets.map(function (m) {
-      return { name: m.name, city: m.city, url: m.url, dist: hav(lat, lon, m.lat, m.lon) };
+      return { name: m.name, city: m.city, url: m.url, lat: m.lat, lon: m.lon, dist: hav(lat, lon, m.lat, m.lon) };
     }).sort(function (a, b) { return a.dist - b.dist; });
     if (!armed) {
       armed = true;
@@ -446,7 +464,7 @@ window.HK_DICT = {
     "d5": "Zat.",
     "d6": "Zon.",
     "title": "Supermarkten",
-    "p0": "In Kos zijn in bijna elke straat wel een supermarktje. Deze shops zijn vaak duur maar wel handig (sommige 24h open) waardoor je er snel iets kunt halen wanneer je het nodig hebt. Maar hebben maar beperkt assortiment",
+    "p0": "Op Kos is er in bijna elke straat wel een supermarktje. Deze winkels zijn vaak duur, maar wel handig (sommige zijn 24 uur open), zodat je er snel iets kunt halen wanneer je het nodig hebt. Ze hebben wel maar een beperkt assortiment.",
     "p1": "Ben je op zoek naar normale, grotere supermarkten met een volledig assortiment en betere prijzen? Dan helpt onze locator je om eenvoudig de dichtstbijzijnde Normale supermarkten te vinden. Het systeem toont je direct welke supermarkt het dichtst bij jouw locatie ligt, zodat je snel kunt zien waar je heen kunt gaan voor je dagelijkse boodschappen.",
     "h15": "Na 15 seconden verschijnt de Dichtstbijzijnde locatie van een Grote Supermarkt",
     "locH": "🛒 Dichtstbijzijnde Supermarkt",
@@ -454,7 +472,9 @@ window.HK_DICT = {
     "noLoc": "Locatie niet beschikbaar",
     "cityP": "Stad: ",
     "distP": "Afstand: ",
-    "openMap": "Open Google Maps",
+    "openMap": "Google Maps",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
     "skip": "Overslaan",
     "dear": "duurder",
     "radarWait": "De radar veegt. Winkelpuntjes komen na je locatie.",
@@ -478,7 +498,7 @@ window.HK_DICT = {
     "d5": "Sa.",
     "d6": "So.",
     "title": "Supermärkte",
-    "p0": "Auf Kos gibt es in fast jeder Straße einen kleinen Supermarkt. Diese Läden sind oft teuer, aber praktisch (manche 24 Stunden offen), sodass du schnell etwas holen kannst, wenn du es brauchst. Sie haben aber nur ein begrenztes Sortiment",
+    "p0": "Auf Kos gibt es in fast jeder Straße ein kleines Supermarktchen. Diese Läden sind oft teuer, aber praktisch (manche sind 24 Stunden geöffnet), sodass du schnell etwas holen kannst, wenn du es brauchst. Sie haben aber nur ein begrenztes Sortiment.",
     "p1": "Suchst du normale, größere Supermärkte mit vollem Sortiment und besseren Preisen? Dann hilft dir unser Locator, einfach die nächsten normalen Supermärkte zu finden. Das System zeigt direkt, welcher Supermarkt am nächsten zu deinem Standort liegt, damit du schnell siehst, wohin du für den täglichen Einkauf gehen kannst.",
     "h15": "Nach 15 Sekunden erscheint der nächstgelegene Standort eines großen Supermarkts",
     "locH": "🛒 Nächster Supermarkt",
@@ -486,7 +506,9 @@ window.HK_DICT = {
     "noLoc": "Standort nicht verfügbar",
     "cityP": "Stadt: ",
     "distP": "Entfernung: ",
-    "openMap": "Google Maps öffnen",
+    "openMap": "Google Maps",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
     "skip": "Überspringen",
     "dear": "teurer",
     "radarWait": "Das Radar läuft. Punkte erscheinen nach deinem Standort.",
@@ -510,7 +532,7 @@ window.HK_DICT = {
     "d5": "Sat",
     "d6": "Sun",
     "title": "Supermarkets",
-    "p0": "On Kos there is a little supermarket in almost every street. These shops are often expensive but handy (some open 24 hours), so you can quickly get something when you need it. But they only have a limited range",
+    "p0": "On Kos there is a little supermarket in almost every street. These shops are often expensive, but handy (some are open 24 hours), so you can quickly pick something up when you need it. They only have a limited range.",
     "p1": "Looking for normal, larger supermarkets with a full range and better prices? Our locator helps you find the nearest normal supermarkets. The system shows straight away which supermarket is closest to you, so you can see where to go for everyday shopping.",
     "h15": "After 15 seconds the nearest location of a large supermarket appears",
     "locH": "🛒 Nearest supermarket",
@@ -518,7 +540,9 @@ window.HK_DICT = {
     "noLoc": "Location not available",
     "cityP": "City: ",
     "distP": "Distance: ",
-    "openMap": "Open Google Maps",
+    "openMap": "Google Maps",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
     "skip": "Skip",
     "dear": "pricier",
     "radarWait": "The radar is sweeping. Shop dots appear after your location.",
@@ -542,7 +566,7 @@ window.HK_DICT = {
     "d5": "Sab",
     "d6": "Dom",
     "title": "Supermercati",
-    "p0": "A Kos c’è un piccolo supermercato in quasi ogni strada. Questi negozi sono spesso cari ma comodi (alcuni aperti 24 ore), così prendi in fretta qualcosa quando ti serve. Hanno però un assortimento limitato",
+    "p0": "A Kos c’è un piccolo supermercato in quasi ogni strada. Questi negozi sono spesso cari, ma comodi (alcuni sono aperti 24 ore), così puoi prendere in fretta qualcosa quando ti serve. Hanno però solo un assortimento limitato.",
     "p1": "Cerchi supermercati normali, più grandi, con assortimento completo e prezzi migliori? Il localizzatore ti aiuta a trovare facilmente i supermercati normali più vicini. Il sistema mostra subito quale supermercato è più vicino a te, così vedi in fretta dove fare la spesa di tutti i giorni.",
     "h15": "Dopo 15 secondi compare la sede più vicina di un grande supermercato",
     "locH": "🛒 Supermercato più vicino",
@@ -550,7 +574,9 @@ window.HK_DICT = {
     "noLoc": "Posizione non disponibile",
     "cityP": "Città: ",
     "distP": "Distanza: ",
-    "openMap": "Apri Google Maps",
+    "openMap": "Google Maps",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
     "skip": "Salta",
     "dear": "più caro",
     "radarWait": "Il radar gira. I punti compaiono dopo la tua posizione.",
@@ -574,7 +600,7 @@ window.HK_DICT = {
     "d5": "Cmt",
     "d6": "Paz",
     "title": "Süpermarketler",
-    "p0": "Kos’ta neredeyse her sokakta küçük bir süpermarket vardır. Bu dükkanlar çoğu zaman pahalı ama pratiktir (bazıları 24 saat açık), ihtiyacın olunca çabucak bir şey alırsın. Ama çeşitleri sınırlıdır",
+    "p0": "Kos’ta neredeyse her sokakta küçük bir süpermarket vardır. Bu dükkanlar çoğu zaman pahalıdır, ama pratiktir (bazıları 24 saat açıktır), böylece ihtiyacın olunca çabucak bir şey alabilirsin. Yine de çeşitleri sınırlıdır.",
     "p1": "Tam çeşit ve daha iyi fiyatlı normal, daha büyük süpermarket mi arıyorsun? Konum bulucumuz en yakın normal süpermarketleri kolayca bulmana yardım eder. Sistem, konumuna en yakın süpermarketi hemen gösterir; günlük alışveriş için nereye gideceğini çabucak görürsün.",
     "h15": "15 saniye sonra büyük bir süpermarketin en yakın konumu görünür",
     "locH": "🛒 En yakın süpermarket",
@@ -582,7 +608,9 @@ window.HK_DICT = {
     "noLoc": "Konum kullanılamıyor",
     "cityP": "Şehir: ",
     "distP": "Mesafe: ",
-    "openMap": "Google Maps’i aç",
+    "openMap": "Google Maps",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
     "skip": "Atla",
     "dear": "daha pahalı",
     "radarWait": "Radar dönüyor. Konumundan sonra dükkan noktaları gelir.",
@@ -606,7 +634,7 @@ window.HK_DICT = {
     "d5": "Sáb",
     "d6": "Dom",
     "title": "Supermercados",
-    "p0": "En Kos hay un supermercado pequeño en casi cada calle. Estas tiendas suelen ser caras pero prácticas (algunas abiertas 24 horas), así que coges algo rápido cuando lo necesitas. Pero tienen un surtido limitado",
+    "p0": "En Kos hay un supermercado pequeño en casi cada calle. Estas tiendas suelen ser caras, pero prácticas (algunas están abiertas 24 horas), así que puedes coger algo rápido cuando lo necesitas. Aun así tienen un surtido limitado.",
     "p1": "¿Buscas supermercados normales, más grandes, con surtido completo y mejores precios? El localizador te ayuda a encontrar fácilmente los supermercados normales más cercanos. El sistema muestra enseguida cuál está más cerca de ti, para que veas rápido dónde hacer la compra diaria.",
     "h15": "A los 15 segundos aparece la ubicación más cercana de un gran supermercado",
     "locH": "🛒 Supermercado más cercano",
@@ -614,7 +642,9 @@ window.HK_DICT = {
     "noLoc": "Ubicación no disponible",
     "cityP": "Ciudad: ",
     "distP": "Distancia: ",
-    "openMap": "Abrir Google Maps",
+    "openMap": "Google Maps",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
     "skip": "Omitir",
     "dear": "más caro",
     "radarWait": "El radar gira. Los puntos salen después de tu ubicación.",
