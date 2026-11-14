@@ -11,9 +11,14 @@ body.hk-page .shop-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;marg
 body.hk-page a.shop-card{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;position:relative;border-radius:16px;overflow:hidden;aspect-ratio:1;background:#1a2525;text-decoration:none;border:1px solid var(--border);padding:0;margin:0;color:#fff}
 body.hk-page a.shop-card .pic{flex:1 1 auto;min-height:0;overflow:hidden;background:#1a2525}
 body.hk-page a.shop-card .pic img{width:100%;height:100%;object-fit:cover;display:block}
-body.hk-page a.shop-card .card-bar{flex:0 0 auto;display:flex;align-items:flex-end;box-sizing:border-box;width:100%;padding:7px 10px;background:rgba(13,26,26,.9)}
-body.hk-page a.shop-card .card-title{color:#fff;font-size:.88rem;font-weight:700;line-height:1.25;display:flex;flex-direction:column;gap:2px}
-body.hk-page a.shop-card .card-meta{font-size:.7rem;font-weight:600;opacity:.9;color:#e8f5f3}
+body.hk-page a.shop-card .card-bar{flex:0 0 auto;display:flex;align-items:flex-end;box-sizing:border-box;width:100%;padding:7px 10px;background:#fff}
+body.hk-page a.shop-card .card-title{color:#0d1a1a;font-size:.88rem;font-weight:700;line-height:1.25;display:flex;flex-direction:column;gap:2px}
+body.hk-page a.shop-card .card-meta{font-size:.7rem;font-weight:600;opacity:.9;color:#0d1a1a}
+body.hk-page .hero-wrap.shops-hero{aspect-ratio:auto;min-height:210px;display:flex;align-items:flex-end;overflow:hidden;margin:-16px -14px 12px}
+body.hk-page .hero-wrap.shops-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+body.hk-page .shops-hero-copy{position:relative;z-index:1;width:100%;box-sizing:border-box;padding:36px 16px 14px;background:linear-gradient(to top,rgba(13,26,26,.94) 0%,rgba(13,26,26,.78) 46%,rgba(13,26,26,.28) 78%,rgba(13,26,26,0) 100%)}
+body.hk-page .shops-hero h1{color:#fff;margin:0 0 6px;text-shadow:0 1px 6px rgba(0,0,0,.55)}
+body.hk-page .shops-hero .lead{color:#fff;margin:0;text-shadow:0 1px 6px rgba(0,0,0,.5)}
 body.hk-page h2.section{font-size:1.05rem;font-weight:800;text-align:center;color:var(--gold);margin:2px 0 12px}
 </style>
 </head>
@@ -38,10 +43,14 @@ body.hk-page h2.section{font-size:1.05rem;font-weight:800;text-align:center;colo
 </header>
 <div class="overlay" id="overlay"></div>
 <main class="main">
-<div class="hero-wrap"><img src="img/hk/winkels-hero.jpg" alt=""></div>
 <p class="parent-link"><a href="index.html" data-i18n="back">← Home</a></p>
+<div class="hero-wrap shops-hero">
+<img src="img/hk/winkels-hero.jpg" alt="">
+<div class="shops-hero-copy">
 <h1 data-i18n="title">Belangrijke winkels</h1>
 <p class="lead" data-i18n="lead">Iedereen heeft af en toe iets nodig, maar je weet vaak niet waar je het kan vinden. Daarom hebben we een lijst samengesteld met unieke winkels, die handig zijn tijdens uw vakantie.</p>
+</div>
+</div>
 <h2 class="section" data-i18n="city">Kos stad</h2>
 <div class="shop-grid">
 <a class="shop-card" href="winkel-supermarkt.html"><span class="pic"><img src="img/hk/winkel-tegel-supermarkt.png" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="t0">Supermarkt</span></span></a>
