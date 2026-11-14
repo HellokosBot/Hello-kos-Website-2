@@ -5,6 +5,44 @@
   var WALKS = WALKL.slice(0, 8);
   var DRIVES = ["sight-therma","sight-asklepion","sight-zia","sight-zoutmeer-tigaki","sight-kasteel-antimachia","sight-molen-antimachia","sight-agios-stefanos-kefalos","sight-limnionas"];
   var DRIVEL = ["sight-therma","sight-asklepion","sight-hippocratic-foundation","sight-zia","sight-palio-pyli","sight-zoutmeer-tigaki","sight-marmari","sight-mastichari","sight-kasteel-antimachia","sight-molen-antimachia","sight-agios-stefanos-kefalos","sight-limnionas"];
+  /* Control coordinates come from the old walking route's map links (maps.app.goo.gl), resolved to the published pin. Named stops use hello-kos-places.js. */
+  var CP = {
+    c2: { role: "check", lat: 36.89451, lon: 27.288899 },
+    c10: { role: "check", lat: 36.894756, lon: 27.292042 },
+    inAgora: { role: "in", lat: 36.892962, lon: 27.290238 },
+    outAgora: { role: "out", lat: 36.89378, lon: 27.289835 },
+    c25: { role: "check", lat: 36.892289, lon: 27.287083 },
+    c26: { role: "check", lat: 36.891629, lon: 27.286378 },
+    c29: { role: "check", lat: 36.890837, lon: 27.286127 },
+    c31: { role: "check", lat: 36.890303, lon: 27.284375 }
+  };
+  var WALK_STOPS = [
+    { id: "sight-witte-trappen", after: ["c2"] },
+    { id: "sight-i-love-kos" },
+    { id: "sight-palm-tree-lane" },
+    { id: "sight-palazzo-giustizia" },
+    { id: "sight-turks-badhuis" },
+    { id: "sight-boom-hippocrates" },
+    { id: "sight-gazi-hasan" },
+    { id: "sight-neratzia", after: ["c10"] },
+    { id: "sight-albergo-gelsomino" },
+    { id: "sight-kathedraal" },
+    { id: "sight-hatzi-pasha" },
+    { id: "sight-agora", before: ["inAgora"], after: ["outAgora"] },
+    { id: "sight-belastingpoort" },
+    { id: "sight-archeologisch-museum" },
+    { id: "sight-casa-del-fascio" },
+    { id: "sight-defterdar" },
+    { id: "sight-markthal" },
+    { id: "sight-paraskevi" },
+    { id: "sight-old-town" },
+    { id: "sight-morouk", after: ["c25", "c26"] },
+    { id: "sight-eski-tzami", after: ["c29"] },
+    { id: "sight-odeon", after: ["c31"] },
+    { id: "sight-westelijke-opgraving" },
+    { id: "sight-casa-romana" },
+    { id: "sight-altaar-dionysos" }
+  ];
   var GROUPS = ["kos","psalidi","platani","zia","pyli","tigaki","marmari","mastichari","antimachia","kefalos","limnionas"];
   var mode = null;
   var len = null;
@@ -56,12 +94,13 @@
   function aPoint(lat, lon, name) {
     return "https://maps.apple.com/?ll=" + lat + "," + lon + "&q=" + encodeURIComponent(name);
   }
-  function dirUrl(stops, tm) {
+  function dirUrl(stops, tm, cap) {
     if (stops.length < 2) return null;
     var mid = stops.slice(1, -1);
     var trimmed = false;
-    if (mid.length > 9) {
-      mid = mid.slice(0, 9);
+    var limit = cap == null ? 9 : cap;
+    if (limit && mid.length > limit) {
+      mid = mid.slice(0, limit);
       trimmed = true;
     }
     var url = "https://www.google.com/maps/dir/?api=1&origin=" + encodeURIComponent(stops[0].lat + "," + stops[0].lon) + "&destination=" + encodeURIComponent(stops[stops.length - 1].lat + "," + stops[stops.length - 1].lon) + "&travelmode=" + (tm === "drive" ? "driving" : "walking");
@@ -87,8 +126,73 @@
     }
     return line;
   }
+  function cpLabel(role) {
+    if (role === "in") return T("cpIn");
+    if (role === "out") return T("cpOut");
+    return T("cpCheck");
+  }
+  function cpHtml(key) {
+    var c = CP[key];
+    if (!c) return "";
+    var name = cpLabel(c.role);
+    var html = '<li class="cp ' + c.role + '"><span class="mark" aria-hidden="true"></span><span>' + esc(name) + "</span>";
+    html += '<a href="' + esc(gPoint(c.lat, c.lon)) + '" target="_blank" rel="noopener">' + esc(T("gmaps")) + "</a>";
+    html += "</li>";
+    return html;
+  }
+  function walkPoints() {
+    var pts = [];
+    WALK_STOPS.forEach(function (stop) {
+      (stop.before || []).forEach(function (key) {
+        var c = CP[key];
+        if (c) pts.push({ lat: c.lat, lon: c.lon, name: cpLabel(c.role) });
+      });
+      var p = byId(stop.id);
+      if (p && typeof p.lat === "number") pts.push(p);
+      (stop.after || []).forEach(function (key) {
+        var c = CP[key];
+        if (c) pts.push({ lat: c.lat, lon: c.lon, name: cpLabel(c.role) });
+      });
+    });
+    return pts;
+  }
+  function renderWalk() {
+    var html = "";
+    var cpCount = 0;
+    WALK_STOPS.forEach(function (stop, i) {
+      var p = byId(stop.id);
+      html += '<article class="stop">';
+      if (p && p.photo) html += '<img src="' + esc(p.photo) + '" alt="">';
+      html += "<h2>" + (i + 1) + ". " + esc(p ? p.name : stop.id) + "</h2>";
+      html += "<p>" + esc(stopText(stop.id)) + "</p>";
+      if (p && p.link) html += '<p class="info"><a href="' + esc(p.link) + '">' + esc(T("info")) + "</a></p>";
+      var subs = (stop.before || []).concat(stop.after || []);
+      if (subs.length) {
+        html += '<ul class="cps">';
+        subs.forEach(function (key) { html += cpHtml(key); cpCount++; });
+        html += "</ul>";
+      }
+      if (p && typeof p.lat === "number") html += buttons(p);
+      html += "</article>";
+    });
+    var pts = walkPoints();
+    var info = dirUrl(pts, "walk", 0);
+    if (info) {
+      html += '<div class="map-row"><a id="routeGoogle" href="' + esc(info.url) + '" target="_blank" rel="noopener">' + PIN + esc(T("openG")) + '</a><a id="routeApple" href="' + esc(appleDir(pts, "walk")) + '" target="_blank" rel="noopener">' + PIN + esc(T("iphone")) + "</a></div>";
+      if (info.trimmed) html += '<p class="est">' + esc(T("trim")) + "</p>";
+    }
+    var view = document.getElementById("routeView");
+    if (view) view.innerHTML = html;
+    var blurb = document.getElementById("blurb");
+    if (blurb) blurb.textContent = T("walkOnlyNote");
+    var est = document.getElementById("est");
+    if (est) est.textContent = T("est").replace("{n}", String(WALK_STOPS.length)).replace("{km}", kmStr(crow(pts.filter(function (p) { return typeof p.lat === "number"; }))));
+    view.setAttribute("data-stops", String(WALK_STOPS.length));
+    view.setAttribute("data-cps", String(cpCount));
+  }
   function showRoute(ids, noteKey, tm) {
-    document.getElementById("customView").hidden = true;
+    var custom = document.getElementById("customView");
+    if (custom) custom.hidden = true;
     var stops = ids.map(byId).filter(function (p) { return p && typeof p.lat === "number"; });
     var html = "";
     stops.forEach(function (p, i) {
@@ -188,14 +292,14 @@
   function openCustom() {
     mode = "custom";
     len = null;
-    document.querySelectorAll("#step1 .pick").forEach(function (el) {
-      el.classList.toggle("on", el.getAttribute("data-mode") === "custom");
-    });
-    document.querySelectorAll("#step2 .pick").forEach(function (el) { el.classList.remove("on"); });
-    document.getElementById("step2").hidden = true;
-    document.getElementById("routeView").innerHTML = "";
-    document.getElementById("blurb").textContent = T("customNote");
-    document.getElementById("est").textContent = "";
+    var step2 = document.getElementById("step2");
+    if (step2) step2.hidden = true;
+    var routeView = document.getElementById("routeView");
+    if (routeView) routeView.innerHTML = "";
+    var blurb = document.getElementById("blurb");
+    if (blurb) blurb.textContent = T("customNote");
+    var est = document.getElementById("est");
+    if (est) est.textContent = "";
     document.getElementById("customView").hidden = false;
     renderChecks();
   }
@@ -228,47 +332,48 @@
     note.dataset.lock = "";
   }
 
-  document.getElementById("step1").addEventListener("click", function (e) {
-    var b = e.target.closest("[data-mode]");
-    if (!b) return;
-    mode = b.getAttribute("data-mode");
-    document.querySelectorAll("#step1 .pick").forEach(function (el) { el.classList.toggle("on", el === b); });
-    if (mode === "custom") openCustom();
-    else {
-      document.getElementById("customView").hidden = true;
-      document.getElementById("step2").hidden = false;
-      applyPreset();
+  var page = document.body.getAttribute("data-route") || "";
+  if (page === "walk") renderWalk();
+  if (page === "drive") {
+    mode = "drive";
+    var step2 = document.getElementById("step2");
+    if (step2) {
+      step2.hidden = false;
+      step2.addEventListener("click", function (e) {
+        var b = e.target.closest("[data-len]");
+        if (!b) return;
+        len = b.getAttribute("data-len");
+        document.querySelectorAll("#step2 .pick").forEach(function (el) { el.classList.toggle("on", el === b); });
+        applyPreset();
+      });
     }
-  });
-  document.getElementById("step2").addEventListener("click", function (e) {
-    var b = e.target.closest("[data-len]");
-    if (!b || !mode || mode === "custom") return;
-    len = b.getAttribute("data-len");
-    document.querySelectorAll("#step2 .pick").forEach(function (el) { el.classList.toggle("on", el === b); });
-    applyPreset();
-  });
-  document.getElementById("cWalk").addEventListener("click", function () {
-    document.getElementById("cWalk").classList.add("on");
-    document.getElementById("cDrive").classList.remove("on");
-    savePicks();
-    updateCustom();
-  });
-  document.getElementById("cDrive").addEventListener("click", function () {
-    document.getElementById("cDrive").classList.add("on");
-    document.getElementById("cWalk").classList.remove("on");
-    savePicks();
-    updateCustom();
-  });
-  document.getElementById("checks").addEventListener("change", function () {
-    savePicks();
-    updateCustom();
-  });
-  document.getElementById("fromFav").addEventListener("click", fromFav);
+  }
+  if (page === "custom") {
+    openCustom();
+    document.getElementById("cWalk").addEventListener("click", function () {
+      document.getElementById("cWalk").classList.add("on");
+      document.getElementById("cDrive").classList.remove("on");
+      savePicks();
+      updateCustom();
+    });
+    document.getElementById("cDrive").addEventListener("click", function () {
+      document.getElementById("cDrive").classList.add("on");
+      document.getElementById("cWalk").classList.remove("on");
+      savePicks();
+      updateCustom();
+    });
+    document.getElementById("checks").addEventListener("change", function () {
+      savePicks();
+      updateCustom();
+    });
+    document.getElementById("fromFav").addEventListener("click", fromFav);
+  }
   document.addEventListener("hk-lang", function () {
-    if (mode === "custom") {
+    if (page === "walk") renderWalk();
+    else if (page === "custom") {
       savePicks();
       document.getElementById("blurb").textContent = T("customNote");
       renderChecks();
-    } else applyPreset();
+    } else if (page === "drive") applyPreset();
   });
 })();
