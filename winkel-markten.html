@@ -36,6 +36,12 @@ body.hk-page a.shop-card .card-bar{flex:0 0 auto;display:flex;align-items:flex-e
 body.hk-page a.shop-card .card-title{color:#0d1a1a;font-size:.88rem;font-weight:700;line-height:1.25;display:flex;flex-direction:column;gap:2px}
 body.hk-page a.shop-card .card-meta{font-size:.7rem;font-weight:600;opacity:.9;color:#e8f5f3}
 body.hk-page h2.section{font-size:1.05rem;font-weight:800;text-align:center;color:var(--gold);margin:2px 0 12px}
+body.hk-page .hero-wrap.shops-hero{aspect-ratio:auto;min-height:210px;display:flex;align-items:flex-end;overflow:hidden;margin:-16px -14px 12px}
+body.hk-page .hero-wrap.shops-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+body.hk-page .shops-hero-copy{position:relative;z-index:1;width:100%;box-sizing:border-box;padding:36px 16px 14px;background:linear-gradient(to top,rgba(13,26,26,.94) 0%,rgba(13,26,26,.78) 46%,rgba(13,26,26,.28) 78%,rgba(13,26,26,0) 100%)}
+body.hk-page .shops-hero h1{color:#fff;margin:0 0 6px;text-shadow:0 1px 6px rgba(0,0,0,.55)}
+body.hk-page .shops-hero .sub,body.hk-page .shops-hero .lead{color:#fff;margin:0 0 8px;text-shadow:0 1px 6px rgba(0,0,0,.5)}
+body.hk-page .shops-hero .lead{margin:0}
 
 .btn-solid{background:var(--petrol);color:#fff}
 .loc-list p{margin:0 0 12px;color:var(--text-soft);font-size:.92rem}
@@ -64,18 +70,22 @@ body.hk-page h2.section{font-size:1.05rem;font-weight:800;text-align:center;colo
 <div class="overlay" id="overlay"></div>
 <main class="main">
 <p class="parent-link"><a href="praktische-winkels.html" data-i18n="back">← Belangrijke winkels</a></p>
+<div class="hero-wrap shops-hero">
+<img src="img/hk/winkel-markt-2.jpg" alt="">
+<div class="shops-hero-copy">
 <h1 data-i18n="title">Markten op Kos</h1>
 <p class="sub" data-i18n="sub">Markten op Kos: wat kun je verwachten</p>
-<article class="card"><p data-i18n="p0">Wie als toerist naar Kos reist, denkt vaak aan sfeervolle Griekse markten vol kruiden, olijven, kazen, versgebakken brood en kleurrijke kraampjes. In veel vakantielanden hoort struinen over een lokale markt echt bij de ervaring. Op Kos ligt dat nét iets anders.</p></article>
+<p class="lead" data-i18n="p0">Wie als toerist naar Kos reist, denkt vaak aan sfeervolle Griekse markten vol kruiden, olijven, kazen, versgebakken brood en kleurrijke kraampjes. In veel vakantielanden hoort struinen over een lokale markt echt bij de ervaring. Op Kos ligt dat nét iets anders.</p>
+</div>
+</div>
 <img class="strip" src="img/hk/winkel-markt-1.jpg" alt="">
 <article class="card"><h2 data-i18n="hHal">Markthal</h2><p data-i18n="p1">Hoewel het eiland verschillende markten kent, moet je niet verwachten dat je hier grote traditionele Mediterrane markten vindt zoals in bijvoorbeeld Spanje, Turkije of op sommige andere Griekse eilanden. De bekendste markt van het eiland is de zogenaamde “Markthal” in het centrum van Kos-Stad. Ondanks de naam is dit vooral een toeristische winkelhal waar je souvenirs, sponsen, kruiden, honing en wat fruit kunt kopen. Leuk om even doorheen te lopen, maar het heeft niet de authentieke sfeer van een echte lokale versmarkt.</p></article>
-<img class="strip" src="img/hk/winkel-markt-2.jpg" alt="">
 <div class="shop-grid">
 <a class="shop-card" href="winkel-markthal.html"><span class="pic"><img src="img/hk/winkel-hal-1.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="tHal">Markthal Kos</span></span></a>
 <a class="shop-card" href="winkel-groentemarkt.html"><span class="pic"><img src="img/hk/winkel-markt-3.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="tGro">Groentemarkt</span></span></a>
 </div>
-<img class="strip" src="img/hk/winkel-markt-4.jpg" alt="">
 <article class="card"><h2 data-i18n="hWin">Groente winkels</h2><p data-i18n="p3">Dat betekent overigens niet dat Kos geen charme heeft. Integendeel. Het eiland draait juist meer om gezellige tavernes, kleine familiezaakjes en ontspannen dorpspleinen dan om grote marktculturen. Voor verse lokale producten kun je vaak beter terecht bij kleine winkels langs de weg of bij traditionele supermarktjes in de dorpen.</p></article>
+<img class="strip" src="img/hk/winkel-markt-4.jpg" alt="">
 </main>
 <footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
 <script>
