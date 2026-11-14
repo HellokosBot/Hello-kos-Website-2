@@ -40,20 +40,18 @@
     .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
     .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
     .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+
     .content { padding: 18px 16px 0; }
     h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
     .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+
     .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
     .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
     .btn-audio { background: var(--petrol); color: #fff; }
     .btn-audio.playing { background: var(--petrol-dark); }
     .btn-stop { background: #3A4545; color: #fff; display: none; }
     .btn-stop.show { display: flex; }
-    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
-    .btn-apple { background: #111; color: #fff; }
+
     .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
     .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
     .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
@@ -100,34 +98,33 @@
   <main class="main">
     <div class="hero-wrap">
       <img src="img/jwwb/cc725e53c5-traditional_house_of_antimachia_kos_001-standard.jpg" alt="Traditioneel huis van Antimachia" loading="eager">
-      <div class="hero-caption" data-i18n="heroCap">Traditioneel huis van Antimachia</div>
+      <div class="hero-title"><h1 data-i18n="title">Traditioneel huis van Antimachia</h1></div>
     </div>
 
     <div class="content">
-      <h1 data-i18n="title">Traditioneel huis van Antimachia</h1>
-      <p class="lead" data-i18n="lead">Hoe men vroeger op Kos woonde – traditioneel dorpshuis in Antimachia.</p>
+<p class="lead" data-i18n="lead">Hoe men vroeger op Kos woonde – traditioneel dorpshuis in Antimachia.</p>
 
-      <div class="badges">
-        <span class="badge" data-i18n="badgeAntimachia">Antimachia</span>
-        <span class="badge" data-i18n="badgeCulture">Cultuur</span>
-      </div>
+      
 
       <div class="actions">
         <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
         <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Traditional%20House%20Antimachia%20Kos" target="_blank" rel="noopener">📍 Google Maps</a>
-        <a class="btn btn-apple" href="https://maps.apple.com/?q=Traditional%20House%20Antimachia%20Kos" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      
+      <div class="map-row">
+        <a href="https://www.google.com/maps/search/?api=1&query=Traditional%20House%20Antimachia%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+        <a href="https://maps.apple.com/?q=Traditional%20House%20Antimachia%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
       </div>
       <p class="status" id="ttsStatus"></p>
 
       <div id="readText">
         <div class="card">
-          <h2 data-i18n="h2house">Traditioneel eilandhuis</h2>
+          <h2 data-i18n="hStory">Traditioneel eilandhuis</h2>
           <p data-i18n="p1">In Antimachia staat een traditioneel huis dat laat zien hoe eilandbewoners vroeger leefden: lokale materialen, eenvoudige indeling en de sfeer van een Grieks dorpshuis.</p>
         </div>
 
         <div class="card">
-          <h2 data-i18n="h2fact1">Weetje</h2>
+          <h2 data-i18n="hSee">Weetje</h2>
           <p data-i18n="p2">Het Traditionele Huis van Antimachia op Kos is een klein stenen gebouwtje in het centrum van het dorp Antimachia, precies tegenover de oude windmolen. Het is gebouwd in 1980, maar het is een exacte kopie van hoe een doorsnee familiehuis er rond 1900-1920 uitzag op het eiland. De muren zijn helemaal van steen, soms zelfs met materialen uit oudere huizen hergebruikt.</p>
         </div>
 
@@ -174,9 +171,9 @@
         </div>
 
         <div class="card">
-          <h2 data-i18n="h2visit">Bezoeken</h2>
+          <h2 data-i18n="hKnow">Bezoeken</h2>
           <p data-i18n="p5">In Antimachia. Combineer met molen en kasteel.</p>
-          <div class="tip" data-i18n="tip">Tip: check lokaal of het open is – soms seizoensopeningstijden.</div>
+          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: check lokaal of het open is – soms seizoensopeningstijden.</p></div>
         </div>
       </div>
     </div>
@@ -189,138 +186,198 @@
 
 <script>
 (function(){
-  var I18N = {
-    nl: {
-      title: "Traditioneel huis van Antimachia",
-      lead: "Hoe men vroeger op Kos woonde – traditioneel dorpshuis in Antimachia.",
-      heroCap: "Traditioneel huis van Antimachia",
-      badgeAntimachia: "Antimachia", badgeCulture: "Cultuur",
-      btnPlay: "🔊 Voorlezen",
-      h2house: "Traditioneel eilandhuis",
-      p1: "In Antimachia staat een traditioneel huis dat laat zien hoe eilandbewoners vroeger leefden: lokale materialen, eenvoudige indeling en de sfeer van een Grieks dorpshuis.",
-      h2fact1: "Weetje",
-      p2: "Het Traditionele Huis van Antimachia op Kos is een klein stenen gebouwtje in het centrum van het dorp Antimachia, precies tegenover de oude windmolen. Het is gebouwd in 1980, maar het is een exacte kopie van hoe een doorsnee familiehuis er rond 1900-1920 uitzag op het eiland. De muren zijn helemaal van steen, soms zelfs met materialen uit oudere huizen hergebruikt.",
-      h2fact2: "Weetje",
-      p3: "Het is een huis op de begane grond, met verschillende ruimtes: de woonkamer waar het gezin sliep en leefde (met een verhoogd houten bed), een kleine stal voor dieren, een weefgetouw voor kleding en een stenen oven om brood te bakken. In de kelder bewaarden ze zelfgemaakte wijn, olijfolie en eten voor de hele winter. Je ziet er oude spullen zoals traditionele kleren, keukengerei, landbouwgereedschap en handwerk. Het geeft een goed beeld van hoe mensen toen leefden: simpel, zelfvoorzienend en met het hele gezin onder één dak.",
-      h2fact3: "Weetje",
-      p4: "Tegenwoordig is het een soort openluchtmuseum (soms ook folklore museum genoemd). Je loopt er gewoon doorheen en ziet hoe een gezin in de eerste helft van de 20e eeuw woonde – tot ongeveer 1953 leefden mensen in dit soort huizen.",
-      h2hours: "Openingstijden",
-      dayMon: "Maandag", dayTue: "Dinsdag", dayWed: "Woensdag", dayThu: "Donderdag",
-      dayFri: "Vrijdag", daySat: "Zaterdag", daySun: "Zondag", closed: "Gesloten",
-      g1: "Huis", g2: "Huis", g3: "Huis", g4: "Huis",
-      h2visit: "Bezoeken",
-      p5: "In Antimachia. Combineer met molen en kasteel.",
-      tip: "Tip: check lokaal of het open is – soms seizoensopeningstijden."
+  var I18N = window.HK_DICT = {
+    "nl": {
+      "title": "Traditioneel huis van Antimachia",
+      "lead": "Hoe men vroeger op Kos woonde – traditioneel dorpshuis in Antimachia.",
+      "btnPlay": "Voorlezen",
+      "p1": "In Antimachia staat een traditioneel huis dat laat zien hoe eilandbewoners vroeger leefden: lokale materialen, eenvoudige indeling en de sfeer van een Grieks dorpshuis.",
+      "p2": "Het Traditionele Huis van Antimachia op Kos is een klein stenen gebouwtje in het centrum van het dorp Antimachia, precies tegenover de oude windmolen. Het is gebouwd in 1980, maar het is een exacte kopie van hoe een doorsnee familiehuis er rond 1900-1920 uitzag op het eiland. De muren zijn helemaal van steen, soms zelfs met materialen uit oudere huizen hergebruikt.",
+      "h2fact2": "Weetje",
+      "p3": "Het is een huis op de begane grond, met verschillende ruimtes: de woonkamer waar het gezin sliep en leefde (met een verhoogd houten bed), een kleine stal voor dieren, een weefgetouw voor kleding en een stenen oven om brood te bakken. In de kelder bewaarden ze zelfgemaakte wijn, olijfolie en eten voor de hele winter. Je ziet er oude spullen zoals traditionele kleren, keukengerei, landbouwgereedschap en handwerk. Het geeft een goed beeld van hoe mensen toen leefden: simpel, zelfvoorzienend en met het hele gezin onder één dak.",
+      "h2fact3": "Weetje",
+      "p4": "Tegenwoordig is het een soort openluchtmuseum (soms ook folklore museum genoemd). Je loopt er gewoon doorheen en ziet hoe een gezin in de eerste helft van de 20e eeuw woonde – tot ongeveer 1953 leefden mensen in dit soort huizen.",
+      "h2hours": "Openingstijden",
+      "dayMon": "Maandag",
+      "dayTue": "Dinsdag",
+      "dayWed": "Woensdag",
+      "dayThu": "Donderdag",
+      "dayFri": "Vrijdag",
+      "daySat": "Zaterdag",
+      "daySun": "Zondag",
+      "closed": "Gesloten",
+      "g1": "Huis",
+      "g2": "Huis",
+      "g3": "Huis",
+      "g4": "Huis",
+      "p5": "In Antimachia. Combineer met molen en kasteel.",
+      "tip": "check lokaal of het open is – soms seizoensopeningstijden.",
+      "hStory": "Het verhaal",
+      "hSee": "Wat je ziet",
+      "hKnow": "Goed om te weten",
+      "tipTitle": "Tip van de gids",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    en: {
-      title: "Traditional House of Antimachia",
-      lead: "How people used to live on Kos – traditional village house in Antimachia.",
-      heroCap: "Traditional House of Antimachia",
-      badgeAntimachia: "Antimachia", badgeCulture: "Culture",
-      btnPlay: "🔊 Read aloud",
-      h2house: "Traditional island house",
-      p1: "In Antimachia stands a traditional house that shows how islanders used to live: local materials, simple layout and the atmosphere of a Greek village house.",
-      h2fact1: "Did you know",
-      p2: "The Traditional House of Antimachia on Kos is a small stone building in the centre of the village of Antimachia, right opposite the old windmill. It was built in 1980, but it is an exact copy of how an average family home looked around 1900-1920 on the island. The walls are entirely of stone, sometimes even with materials reused from older houses.",
-      h2fact2: "Did you know",
-      p3: "It is a ground-floor house with various rooms: the living room where the family slept and lived (with a raised wooden bed), a small stable for animals, a loom for clothing and a stone oven for baking bread. In the cellar they stored homemade wine, olive oil and food for the whole winter. You can see old items such as traditional clothes, kitchen utensils, agricultural tools and handicrafts. It gives a good picture of how people lived then: simply, self-sufficient and with the whole family under one roof.",
-      h2fact3: "Did you know",
-      p4: "Today it is a kind of open-air museum (sometimes also called a folklore museum). You simply walk through it and see how a family lived in the first half of the 20th century – until around 1953 people lived in this kind of house.",
-      h2hours: "Opening hours",
-      dayMon: "Monday", dayTue: "Tuesday", dayWed: "Wednesday", dayThu: "Thursday",
-      dayFri: "Friday", daySat: "Saturday", daySun: "Sunday", closed: "Closed",
-      g1: "House", g2: "House", g3: "House", g4: "House",
-      h2visit: "Visiting",
-      p5: "In Antimachia. Combine with the mill and castle.",
-      tip: "Tip: check locally whether it is open – sometimes seasonal opening times."
+    "en": {
+      "title": "Traditional House of Antimachia",
+      "lead": "How people used to live on Kos – traditional village house in Antimachia.",
+      "btnPlay": "Read aloud",
+      "p1": "In Antimachia stands a traditional house that shows how islanders used to live: local materials, simple layout and the atmosphere of a Greek village house.",
+      "p2": "The Traditional House of Antimachia on Kos is a small stone building in the centre of the village of Antimachia, right opposite the old windmill. It was built in 1980, but it is an exact copy of how an average family home looked around 1900-1920 on the island. The walls are entirely of stone, sometimes even with materials reused from older houses.",
+      "h2fact2": "Did you know",
+      "p3": "It is a ground-floor house with various rooms: the living room where the family slept and lived (with a raised wooden bed), a small stable for animals, a loom for clothing and a stone oven for baking bread. In the cellar they stored homemade wine, olive oil and food for the whole winter. You can see old items such as traditional clothes, kitchen utensils, agricultural tools and handicrafts. It gives a good picture of how people lived then: simply, self-sufficient and with the whole family under one roof.",
+      "h2fact3": "Did you know",
+      "p4": "Today it is a kind of open-air museum (sometimes also called a folklore museum). You simply walk through it and see how a family lived in the first half of the 20th century – until around 1953 people lived in this kind of house.",
+      "h2hours": "Opening hours",
+      "dayMon": "Monday",
+      "dayTue": "Tuesday",
+      "dayWed": "Wednesday",
+      "dayThu": "Thursday",
+      "dayFri": "Friday",
+      "daySat": "Saturday",
+      "daySun": "Sunday",
+      "closed": "Closed",
+      "g1": "House",
+      "g2": "House",
+      "g3": "House",
+      "g4": "House",
+      "p5": "In Antimachia. Combine with the mill and castle.",
+      "tip": "check locally whether it is open – sometimes seasonal opening times.",
+      "hStory": "The story",
+      "hSee": "What you see",
+      "hKnow": "Good to know",
+      "tipTitle": "Guide’s tip",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    de: {
-      title: "Traditionelles Haus von Antimachia",
-      lead: "Wie man früher auf Kos lebte – traditionelles Dorfhaus in Antimachia.",
-      heroCap: "Traditionelles Haus von Antimachia",
-      badgeAntimachia: "Antimachia", badgeCulture: "Kultur",
-      btnPlay: "🔊 Vorlesen",
-      h2house: "Traditionelles Inselhaus",
-      p1: "In Antimachia steht ein traditionelles Haus, das zeigt, wie Inselbewohner früher lebten: lokale Materialien, einfache Aufteilung und die Atmosphäre eines griechischen Dorfhauses.",
-      h2fact1: "Wusstest du",
-      p2: "Das Traditionelle Haus von Antimachia auf Kos ist ein kleines Steingebäude im Zentrum des Dorfes Antimachia, genau gegenüber der alten Windmühle. Es wurde 1980 gebaut, ist aber eine genaue Kopie davon, wie ein durchschnittliches Familienhaus um 1900-1920 auf der Insel aussah. Die Wände sind komplett aus Stein, manchmal sogar mit Materialien aus älteren Häusern wiederverwendet.",
-      h2fact2: "Wusstest du",
-      p3: "Es ist ein Haus im Erdgeschoss mit verschiedenen Räumen: dem Wohnzimmer, in dem die Familie schlief und lebte (mit einem erhöhten Holzbett), einem kleinen Stall für Tiere, einem Webstuhl für Kleidung und einem Steinofen zum Brotbacken. Im Keller lagerten sie selbstgemachten Wein, Olivenöl und Essen für den ganzen Winter. Man sieht alte Gegenstände wie traditionelle Kleidung, Küchenutensilien, landwirtschaftliche Werkzeuge und Handwerk. Es gibt ein gutes Bild davon, wie Menschen damals lebten: einfach, autark und mit der ganzen Familie unter einem Dach.",
-      h2fact3: "Wusstest du",
-      p4: "Heute ist es eine Art Freilichtmuseum (manchmal auch Folkloremuseum genannt). Man läuft einfach hindurch und sieht, wie eine Familie in der ersten Hälfte des 20. Jahrhunderts lebte – bis etwa 1953 lebten Menschen in dieser Art von Häusern.",
-      h2hours: "Öffnungszeiten",
-      dayMon: "Montag", dayTue: "Dienstag", dayWed: "Mittwoch", dayThu: "Donnerstag",
-      dayFri: "Freitag", daySat: "Samstag", daySun: "Sonntag", closed: "Geschlossen",
-      g1: "Haus", g2: "Haus", g3: "Haus", g4: "Haus",
-      h2visit: "Besuchen",
-      p5: "In Antimachia. Kombiniere mit Mühle und Burg.",
-      tip: "Tipp: vor Ort prüfen, ob es geöffnet ist – manchmal saisonale Öffnungszeiten."
+    "de": {
+      "title": "Traditionelles Haus von Antimachia",
+      "lead": "Wie man früher auf Kos lebte – traditionelles Dorfhaus in Antimachia.",
+      "btnPlay": "Vorlesen",
+      "p1": "In Antimachia steht ein traditionelles Haus, das zeigt, wie Inselbewohner früher lebten: lokale Materialien, einfache Aufteilung und die Atmosphäre eines griechischen Dorfhauses.",
+      "p2": "Das Traditionelle Haus von Antimachia auf Kos ist ein kleines Steingebäude im Zentrum des Dorfes Antimachia, genau gegenüber der alten Windmühle. Es wurde 1980 gebaut, ist aber eine genaue Kopie davon, wie ein durchschnittliches Familienhaus um 1900-1920 auf der Insel aussah. Die Wände sind komplett aus Stein, manchmal sogar mit Materialien aus älteren Häusern wiederverwendet.",
+      "h2fact2": "Wusstest du",
+      "p3": "Es ist ein Haus im Erdgeschoss mit verschiedenen Räumen: dem Wohnzimmer, in dem die Familie schlief und lebte (mit einem erhöhten Holzbett), einem kleinen Stall für Tiere, einem Webstuhl für Kleidung und einem Steinofen zum Brotbacken. Im Keller lagerten sie selbstgemachten Wein, Olivenöl und Essen für den ganzen Winter. Man sieht alte Gegenstände wie traditionelle Kleidung, Küchenutensilien, landwirtschaftliche Werkzeuge und Handwerk. Es gibt ein gutes Bild davon, wie Menschen damals lebten: einfach, autark und mit der ganzen Familie unter einem Dach.",
+      "h2fact3": "Wusstest du",
+      "p4": "Heute ist es eine Art Freilichtmuseum (manchmal auch Folkloremuseum genannt). Man läuft einfach hindurch und sieht, wie eine Familie in der ersten Hälfte des 20. Jahrhunderts lebte – bis etwa 1953 lebten Menschen in dieser Art von Häusern.",
+      "h2hours": "Öffnungszeiten",
+      "dayMon": "Montag",
+      "dayTue": "Dienstag",
+      "dayWed": "Mittwoch",
+      "dayThu": "Donnerstag",
+      "dayFri": "Freitag",
+      "daySat": "Samstag",
+      "daySun": "Sonntag",
+      "closed": "Geschlossen",
+      "g1": "Haus",
+      "g2": "Haus",
+      "g3": "Haus",
+      "g4": "Haus",
+      "p5": "In Antimachia. Kombiniere mit Mühle und Burg.",
+      "tip": "vor Ort prüfen, ob es geöffnet ist – manchmal saisonale Öffnungszeiten.",
+      "hStory": "Die Geschichte",
+      "hSee": "Was du siehst",
+      "hKnow": "Gut zu wissen",
+      "tipTitle": "Tipp des Guides",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    it: {
-      title: "Casa tradizionale di Antimachia",
-      lead: "Come si viveva una volta a Kos – casa tradizionale di villaggio ad Antimachia.",
-      heroCap: "Casa tradizionale di Antimachia",
-      badgeAntimachia: "Antimachia", badgeCulture: "Cultura",
-      btnPlay: "🔊 Leggi ad alta voce",
-      h2house: "Casa tradizionale dell’isola",
-      p1: "Ad Antimachia c’è una casa tradizionale che mostra come vivevano un tempo gli isolani: materiali locali, disposizione semplice e l’atmosfera di una casa di villaggio greco.",
-      h2fact1: "Curiosità",
-      p2: "La Casa Tradizionale di Antimachia a Kos è un piccolo edificio in pietra nel centro del villaggio di Antimachia, proprio di fronte al vecchio mulino a vento. È stata costruita nel 1980, ma è una copia esatta di come appariva una tipica casa familiare intorno al 1900-1920 sull’isola. Le pareti sono interamente in pietra, a volte anche con materiali riutilizzati da case più vecchie.",
-      h2fact2: "Curiosità",
-      p3: "È una casa a piano terra con varie stanze: il soggiorno dove la famiglia dormiva e viveva (con un letto in legno rialzato), una piccola stalla per gli animali, un telaio per i vestiti e un forno in pietra per cuocere il pane. In cantina conservavano vino fatto in casa, olio d’oliva e cibo per tutto l’inverno. Si vedono oggetti antichi come vestiti tradizionali, utensili da cucina, attrezzi agricoli e artigianato. Dà una buona idea di come vivevano le persone allora: in modo semplice, autosufficiente e con tutta la famiglia sotto lo stesso tetto.",
-      h2fact3: "Curiosità",
-      p4: "Oggi è una sorta di museo all’aperto (a volte chiamato anche museo del folklore). Si cammina semplicemente attraverso e si vede come viveva una famiglia nella prima metà del XX secolo – fino al 1953 circa le persone vivevano in questo tipo di case.",
-      h2hours: "Orari di apertura",
-      dayMon: "Lunedì", dayTue: "Martedì", dayWed: "Mercoledì", dayThu: "Giovedì",
-      dayFri: "Venerdì", daySat: "Sabato", daySun: "Domenica", closed: "Chiuso",
-      g1: "Casa", g2: "Casa", g3: "Casa", g4: "Casa",
-      h2visit: "Visitare",
-      p5: "Ad Antimachia. Combina con il mulino e il castello.",
-      tip: "Consiglio: verifica in loco se è aperto – a volte orari stagionali."
+    "it": {
+      "title": "Casa tradizionale di Antimachia",
+      "lead": "Come si viveva una volta a Kos – casa tradizionale di villaggio ad Antimachia.",
+      "btnPlay": "Leggi ad alta voce",
+      "p1": "Ad Antimachia c’è una casa tradizionale che mostra come vivevano un tempo gli isolani: materiali locali, disposizione semplice e l’atmosfera di una casa di villaggio greco.",
+      "p2": "La Casa Tradizionale di Antimachia a Kos è un piccolo edificio in pietra nel centro del villaggio di Antimachia, proprio di fronte al vecchio mulino a vento. È stata costruita nel 1980, ma è una copia esatta di come appariva una tipica casa familiare intorno al 1900-1920 sull’isola. Le pareti sono interamente in pietra, a volte anche con materiali riutilizzati da case più vecchie.",
+      "h2fact2": "Curiosità",
+      "p3": "È una casa a piano terra con varie stanze: il soggiorno dove la famiglia dormiva e viveva (con un letto in legno rialzato), una piccola stalla per gli animali, un telaio per i vestiti e un forno in pietra per cuocere il pane. In cantina conservavano vino fatto in casa, olio d’oliva e cibo per tutto l’inverno. Si vedono oggetti antichi come vestiti tradizionali, utensili da cucina, attrezzi agricoli e artigianato. Dà una buona idea di come vivevano le persone allora: in modo semplice, autosufficiente e con tutta la famiglia sotto lo stesso tetto.",
+      "h2fact3": "Curiosità",
+      "p4": "Oggi è una sorta di museo all’aperto (a volte chiamato anche museo del folklore). Si cammina semplicemente attraverso e si vede come viveva una famiglia nella prima metà del XX secolo – fino al 1953 circa le persone vivevano in questo tipo di case.",
+      "h2hours": "Orari di apertura",
+      "dayMon": "Lunedì",
+      "dayTue": "Martedì",
+      "dayWed": "Mercoledì",
+      "dayThu": "Giovedì",
+      "dayFri": "Venerdì",
+      "daySat": "Sabato",
+      "daySun": "Domenica",
+      "closed": "Chiuso",
+      "g1": "Casa",
+      "g2": "Casa",
+      "g3": "Casa",
+      "g4": "Casa",
+      "p5": "Ad Antimachia. Combina con il mulino e il castello.",
+      "tip": "verifica in loco se è aperto – a volte orari stagionali.",
+      "hStory": "La storia",
+      "hSee": "Cosa vedi",
+      "hKnow": "Buono a sapersi",
+      "tipTitle": "Consiglio della guida",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    tr: {
-      title: "Antimachia Geleneksel Evi",
-      lead: "Kos’ta eskiden nasıl yaşanırdı – Antimachia’da geleneksel köy evi.",
-      heroCap: "Antimachia Geleneksel Evi",
-      badgeAntimachia: "Antimachia", badgeCulture: "Kültür",
-      btnPlay: "🔊 Sesli oku",
-      h2house: "Geleneksel ada evi",
-      p1: "Antimachia’da ada sakinlerinin eskiden nasıl yaşadığını gösteren geleneksel bir ev vardır: yerel malzemeler, basit düzen ve Yunan köy evi atmosferi.",
-      h2fact1: "Biliyor muydun",
-      p2: "Kos’taki Antimachia Geleneksel Evi, Antimachia köyünün merkezinde, eski yel değirmeninin tam karşısında küçük bir taş binadır. 1980’de inşa edilmiştir, ancak adadaki 1900-1920 yılları civarında ortalama bir aile evinin nasıl göründüğünün tam bir kopyasıdır. Duvarlar tamamen taştandır, bazen daha eski evlerden yeniden kullanılan malzemelerle.",
-      h2fact2: "Biliyor muydun",
-      p3: "Zemin katlı bir evdir, çeşitli odaları vardır: ailenin uyuduğu ve yaşadığı oturma odası (yükseltilmiş ahşap yatakla), hayvanlar için küçük bir ahır, kıyafet için dokuma tezgâhı ve ekmek pişirmek için taş fırın. Bodrumda ev yapımı şarap, zeytinyağı ve tüm kış için yiyecek saklanırdı. Geleneksel kıyafetler, mutfak eşyaları, tarım aletleri ve el işleri gibi eski eşyalar görürsünüz. O zamanlar insanların nasıl yaşadığına dair iyi bir fikir verir: basit, kendi kendine yeten ve tüm aile tek çatı altında.",
-      h2fact3: "Biliyor muydun",
-      p4: "Bugün bir tür açık hava müzesidir (bazen folklor müzesi de denir). İçinden yürürsünüz ve 20. yüzyılın ilk yarısında bir ailenin nasıl yaşadığını görürsünüz – yaklaşık 1953’e kadar insanlar bu tür evlerde yaşardı.",
-      h2hours: "Açılış saatleri",
-      dayMon: "Pazartesi", dayTue: "Salı", dayWed: "Çarşamba", dayThu: "Perşembe",
-      dayFri: "Cuma", daySat: "Cumartesi", daySun: "Pazar", closed: "Kapalı",
-      g1: "Ev", g2: "Ev", g3: "Ev", g4: "Ev",
-      h2visit: "Ziyaret",
-      p5: "Antimachia’da. Değirmen ve kale ile birleştirin.",
-      tip: "İpucu: açık olup olmadığını yerinde kontrol edin – bazen mevsimsel saatler."
+    "tr": {
+      "title": "Antimachia Geleneksel Evi",
+      "lead": "Kos’ta eskiden nasıl yaşanırdı – Antimachia’da geleneksel köy evi.",
+      "btnPlay": "Sesli oku",
+      "p1": "Antimachia’da ada sakinlerinin eskiden nasıl yaşadığını gösteren geleneksel bir ev vardır: yerel malzemeler, basit düzen ve Yunan köy evi atmosferi.",
+      "p2": "Kos’taki Antimachia Geleneksel Evi, Antimachia köyünün merkezinde, eski yel değirmeninin tam karşısında küçük bir taş binadır. 1980’de inşa edilmiştir, ancak adadaki 1900-1920 yılları civarında ortalama bir aile evinin nasıl göründüğünün tam bir kopyasıdır. Duvarlar tamamen taştandır, bazen daha eski evlerden yeniden kullanılan malzemelerle.",
+      "h2fact2": "Biliyor muydun",
+      "p3": "Zemin katlı bir evdir, çeşitli odaları vardır: ailenin uyuduğu ve yaşadığı oturma odası (yükseltilmiş ahşap yatakla), hayvanlar için küçük bir ahır, kıyafet için dokuma tezgâhı ve ekmek pişirmek için taş fırın. Bodrumda ev yapımı şarap, zeytinyağı ve tüm kış için yiyecek saklanırdı. Geleneksel kıyafetler, mutfak eşyaları, tarım aletleri ve el işleri gibi eski eşyalar görürsünüz. O zamanlar insanların nasıl yaşadığına dair iyi bir fikir verir: basit, kendi kendine yeten ve tüm aile tek çatı altında.",
+      "h2fact3": "Biliyor muydun",
+      "p4": "Bugün bir tür açık hava müzesidir (bazen folklor müzesi de denir). İçinden yürürsünüz ve 20. yüzyılın ilk yarısında bir ailenin nasıl yaşadığını görürsünüz – yaklaşık 1953’e kadar insanlar bu tür evlerde yaşardı.",
+      "h2hours": "Açılış saatleri",
+      "dayMon": "Pazartesi",
+      "dayTue": "Salı",
+      "dayWed": "Çarşamba",
+      "dayThu": "Perşembe",
+      "dayFri": "Cuma",
+      "daySat": "Cumartesi",
+      "daySun": "Pazar",
+      "closed": "Kapalı",
+      "g1": "Ev",
+      "g2": "Ev",
+      "g3": "Ev",
+      "g4": "Ev",
+      "p5": "Antimachia’da. Değirmen ve kale ile birleştirin.",
+      "tip": "açık olup olmadığını yerinde kontrol edin – bazen mevsimsel saatler.",
+      "hStory": "Hikaye",
+      "hSee": "Ne görürsün",
+      "hKnow": "Bilmekte fayda var",
+      "tipTitle": "Rehberin ipucu",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    es: {
-      title: "Casa tradicional de Antimachia",
-      lead: "Cómo se vivía antes en Kos – casa tradicional de pueblo en Antimachia.",
-      heroCap: "Casa tradicional de Antimachia",
-      badgeAntimachia: "Antimachia", badgeCulture: "Cultura",
-      btnPlay: "🔊 Leer en voz alta",
-      h2house: "Casa tradicional de la isla",
-      p1: "En Antimachia hay una casa tradicional que muestra cómo vivían antes los isleños: materiales locales, disposición sencilla y el ambiente de una casa de pueblo griego.",
-      h2fact1: "Sabías que",
-      p2: "La Casa Tradicional de Antimachia en Kos es un pequeño edificio de piedra en el centro del pueblo de Antimachia, justo enfrente del antiguo molino de viento. Se construyó en 1980, pero es una copia exacta de cómo era una casa familiar típica alrededor de 1900-1920 en la isla. Las paredes son completamente de piedra, a veces incluso con materiales reutilizados de casas más antiguas.",
-      h2fact2: "Sabías que",
-      p3: "Es una casa de planta baja con varias estancias: la sala de estar donde la familia dormía y vivía (con una cama de madera elevada), un pequeño establo para animales, un telar para ropa y un horno de piedra para hornear pan. En el sótano guardaban vino casero, aceite de oliva y comida para todo el invierno. Se ven objetos antiguos como ropa tradicional, utensilios de cocina, herramientas agrícolas y artesanía. Da una buena idea de cómo vivía la gente entonces: de forma sencilla, autosuficiente y con toda la familia bajo un mismo techo.",
-      h2fact3: "Sabías que",
-      p4: "Hoy es una especie de museo al aire libre (a veces también llamado museo de folclore). Se camina simplemente a través y se ve cómo vivía una familia en la primera mitad del siglo XX – hasta alrededor de 1953 la gente vivía en este tipo de casas.",
-      h2hours: "Horario de apertura",
-      dayMon: "Lunes", dayTue: "Martes", dayWed: "Miércoles", dayThu: "Jueves",
-      dayFri: "Viernes", daySat: "Sábado", daySun: "Domingo", closed: "Cerrado",
-      g1: "Casa", g2: "Casa", g3: "Casa", g4: "Casa",
-      h2visit: "Visitar",
-      p5: "En Antimachia. Combínalo con el molino y el castillo.",
-      tip: "Consejo: comprueba localmente si está abierto – a veces horarios estacionales."
+    "es": {
+      "title": "Casa tradicional de Antimachia",
+      "lead": "Cómo se vivía antes en Kos – casa tradicional de pueblo en Antimachia.",
+      "btnPlay": "Leer en voz alta",
+      "p1": "En Antimachia hay una casa tradicional que muestra cómo vivían antes los isleños: materiales locales, disposición sencilla y el ambiente de una casa de pueblo griego.",
+      "p2": "La Casa Tradicional de Antimachia en Kos es un pequeño edificio de piedra en el centro del pueblo de Antimachia, justo enfrente del antiguo molino de viento. Se construyó en 1980, pero es una copia exacta de cómo era una casa familiar típica alrededor de 1900-1920 en la isla. Las paredes son completamente de piedra, a veces incluso con materiales reutilizados de casas más antiguas.",
+      "h2fact2": "Sabías que",
+      "p3": "Es una casa de planta baja con varias estancias: la sala de estar donde la familia dormía y vivía (con una cama de madera elevada), un pequeño establo para animales, un telar para ropa y un horno de piedra para hornear pan. En el sótano guardaban vino casero, aceite de oliva y comida para todo el invierno. Se ven objetos antiguos como ropa tradicional, utensilios de cocina, herramientas agrícolas y artesanía. Da una buena idea de cómo vivía la gente entonces: de forma sencilla, autosuficiente y con toda la familia bajo un mismo techo.",
+      "h2fact3": "Sabías que",
+      "p4": "Hoy es una especie de museo al aire libre (a veces también llamado museo de folclore). Se camina simplemente a través y se ve cómo vivía una familia en la primera mitad del siglo XX – hasta alrededor de 1953 la gente vivía en este tipo de casas.",
+      "h2hours": "Horario de apertura",
+      "dayMon": "Lunes",
+      "dayTue": "Martes",
+      "dayWed": "Miércoles",
+      "dayThu": "Jueves",
+      "dayFri": "Viernes",
+      "daySat": "Sábado",
+      "daySun": "Domingo",
+      "closed": "Cerrado",
+      "g1": "Casa",
+      "g2": "Casa",
+      "g3": "Casa",
+      "g4": "Casa",
+      "p5": "En Antimachia. Combínalo con el molino y el castillo.",
+      "tip": "comprueba localmente si está abierto – a veces horarios estacionales.",
+      "hStory": "La historia",
+      "hSee": "Qué ves",
+      "hKnow": "Bueno saberlo",
+      "tipTitle": "Consejo del guía",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     }
   };
 

@@ -40,20 +40,18 @@
     .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
     .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
     .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+
     .content { padding: 18px 16px 0; }
     h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
     .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+
     .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
     .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
     .btn-audio { background: var(--petrol); color: #fff; }
     .btn-audio.playing { background: var(--petrol-dark); }
     .btn-stop { background: #3A4545; color: #fff; display: none; }
     .btn-stop.show { display: flex; }
-    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
-    .btn-apple { background: #111; color: #fff; }
+
     .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
     .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
     .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
@@ -64,10 +62,7 @@
     .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
     .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
     .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
-    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-    .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
-    .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
-    .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
+
     .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
     .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
     .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
@@ -105,46 +100,35 @@
   <main class="main">
     <div class="hero-wrap">
       <img src="img/jwwb/7168fd1972-agios-stefanos-high.jpg" alt="Agios Stefanos (Kefalos)" loading="eager">
-      <div class="hero-caption" data-i18n="heroCap">Agios Stefanos (Kefalos)</div>
+      <div class="hero-title"><h1 data-i18n="title">Agios Stefanos (Kefalos)</h1></div>
     </div>
 
     <div class="content">
-      <h1 data-i18n="title">Agios Stefanos (Kefalos)</h1>
-      <p class="lead" data-i18n="lead">Strand met vroeg-christelijke basilieken op het zand, helder ondiep water, en uitzicht op eilandje Kastri met kapel – ooit verbonden door een brug.</p>
+<p class="lead" data-i18n="lead">Strand met vroeg-christelijke basilieken op het zand, helder ondiep water, en uitzicht op eilandje Kastri met kapel – ooit verbonden door een brug.</p>
 
-      <div class="badges">
-        <span class="badge" data-i18n="badgeKefalos">Kefalos</span>
-        <span class="badge" data-i18n="badgeBasilica">Basiliek ± 5e eeuw</span>
-        <span class="badge" data-i18n="badgeBeach">Strand</span>
-      </div>
+      
 
       <div class="actions">
         <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
         <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Agios%20Stefanos%20Basilica%20Kefalos%20Kos" target="_blank" rel="noopener">📍 Google Maps</a>
-        <a class="btn btn-apple" href="https://maps.apple.com/?q=Agios%20Stefanos%20Basilica%20Kefalos%20Kos" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      
+      <div class="map-row">
+        <a href="https://www.google.com/maps/search/?api=1&query=Agios%20Stefanos%20Basilica%20Kefalos%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+        <a href="https://maps.apple.com/?q=Agios%20Stefanos%20Basilica%20Kefalos%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
       </div>
       <p class="status" id="ttsStatus"></p>
 
       <div id="readText">
         <div class="card">
-          <h2 data-i18n="h2beach">Strand én ruïnes</h2>
+          <h2 data-i18n="hStory">Strand én ruïnes</h2>
           <p data-i18n="p1">Agios Stefanos ligt in de baai van Kefalos: fijn zand met wat kiezels, helder ondiep water – ideaal voor families. Je kunt ver de zee in lopen zonder dat het diep wordt. Het water is hier vaak frisser dan elders op Kos.</p>
         </div>
 
-        <div class="facts">
-          <div class="fact">
-            <span class="n" data-i18n="factYears">± 469–554</span>
-            <span class="l" data-i18n="factBasilicas">basilieken</span>
-          </div>
-          <div class="fact">
-            <span class="n" data-i18n="fact1932">1932</span>
-            <span class="l" data-i18n="factExcavated">opgegraven</span>
-          </div>
-        </div>
+        
 
         <div class="card">
-          <h2 data-i18n="h2basilicas">Basilieken op het strand</h2>
+          <h2 data-i18n="hSee">Basilieken op het strand</h2>
           <p data-i18n="p2">Wat dit strand uniek maakt: de resten van vroeg-christelijke basilieken (rond 469 en 554 n.Chr.) liggen gewoon op het strand. Muren en delen van de vloer zijn nog goed te zien – je loopt er tussendoor.</p>
           <p data-i18n="p3">De kerk is gebouwd op de plek van een nog oudere tempel. Eeuwenlang lagen de resten onder het zand. Pas in 1932 vonden Italiaanse archeologen ze terug en groeven ze uit.</p>
         </div>
@@ -179,10 +163,10 @@
         <div class="card">
           <h2 data-i18n="h2visit">Bezoeken</h2>
           <p data-i18n="p6">Bij Kefalos. Strand + ruïnes gratis toegankelijk. Respecteer de archeologische resten.</p>
-          <div class="tip" data-i18n="tip">Tip: kom vroeg voor rust bij de basiliek, en zwem eventueel naar Kastri als het water rustig is.</div>
+          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: kom vroeg voor rust bij de basiliek, en zwem eventueel naar Kastri als het water rustig is.</p></div>
         </div>
 
-        <div class="card"><h2 data-i18n="h2video">Video</h2></div>
+        <div class="card"><h2 data-i18n="hKnow">Video</h2></div>
         <div class="video-block">
           <div class="video-wrap">
             <iframe src="https://www.youtube-nocookie.com/embed/cAQ0bSCnjf4?rel=0&modestbranding=1" title="Agios Stefanos" allowfullscreen loading="lazy"></iframe>
@@ -200,144 +184,156 @@
 
 <script>
 (function(){
-  var I18N = {
-    nl: {
-      title: "Agios Stefanos (Kefalos)",
-      lead: "Strand met vroeg-christelijke basilieken op het zand, helder ondiep water, en uitzicht op eilandje Kastri met kapel – ooit verbonden door een brug.",
-      heroCap: "Agios Stefanos (Kefalos)",
-      badgeKefalos: "Kefalos", badgeBasilica: "Basiliek ± 5e eeuw", badgeBeach: "Strand",
-      btnPlay: "🔊 Voorlezen",
-      h2beach: "Strand én ruïnes",
-      p1: "Agios Stefanos ligt in de baai van Kefalos: fijn zand met wat kiezels, helder ondiep water – ideaal voor families. Je kunt ver de zee in lopen zonder dat het diep wordt. Het water is hier vaak frisser dan elders op Kos.",
-      factYears: "± 469–554", factBasilicas: "basilieken", fact1932: "1932", factExcavated: "opgegraven",
-      h2basilicas: "Basilieken op het strand",
-      p2: "Wat dit strand uniek maakt: de resten van vroeg-christelijke basilieken (rond 469 en 554 n.Chr.) liggen gewoon op het strand. Muren en delen van de vloer zijn nog goed te zien – je loopt er tussendoor.",
-      p3: "De kerk is gebouwd op de plek van een nog oudere tempel. Eeuwenlang lagen de resten onder het zand. Pas in 1932 vonden Italiaanse archeologen ze terug en groeven ze uit.",
-      capBasilica: "Resten van de basiliek op het strand",
-      h2kastri: "Eilandje Kastri",
-      p4: "Recht tegenover het strand ligt het kleine eilandje Kastri, met een wit-blauwe kapel van Agios Nikolaos. Het water ertussen is ondiep: je kunt er naartoe zwemmen.",
-      p5: "Rond 469–554 n.Chr. was er zelfs een bruggetje naar Kastri – dat is door een aardbeving verdwenen.",
-      capKastri: "Baai met Kastri en kapel",
-      g1: "Strand", g2: "Ruïnes",
-      h2visit: "Bezoeken",
-      p6: "Bij Kefalos. Strand + ruïnes gratis toegankelijk. Respecteer de archeologische resten.",
-      tip: "Tip: kom vroeg voor rust bij de basiliek, en zwem eventueel naar Kastri als het water rustig is.",
-      h2video: "Video", videoCap: "Agios Stefanos"
+  var I18N = window.HK_DICT = {
+    "nl": {
+      "title": "Agios Stefanos (Kefalos)",
+      "lead": "Strand met vroeg-christelijke basilieken op het zand, helder ondiep water, en uitzicht op eilandje Kastri met kapel – ooit verbonden door een brug.",
+      "btnPlay": "Voorlezen",
+      "p1": "Agios Stefanos ligt in de baai van Kefalos: fijn zand met wat kiezels, helder ondiep water – ideaal voor families. Je kunt ver de zee in lopen zonder dat het diep wordt. Het water is hier vaak frisser dan elders op Kos.",
+      "p2": "Wat dit strand uniek maakt: de resten van vroeg-christelijke basilieken (rond 469 en 554 n.Chr.) liggen gewoon op het strand. Muren en delen van de vloer zijn nog goed te zien – je loopt er tussendoor.",
+      "p3": "De kerk is gebouwd op de plek van een nog oudere tempel. Eeuwenlang lagen de resten onder het zand. Pas in 1932 vonden Italiaanse archeologen ze terug en groeven ze uit.",
+      "capBasilica": "Resten van de basiliek op het strand",
+      "h2kastri": "Eilandje Kastri",
+      "p4": "Recht tegenover het strand ligt het kleine eilandje Kastri, met een wit-blauwe kapel van Agios Nikolaos. Het water ertussen is ondiep: je kunt er naartoe zwemmen.",
+      "p5": "Rond 469–554 n.Chr. was er zelfs een bruggetje naar Kastri – dat is door een aardbeving verdwenen.",
+      "capKastri": "Baai met Kastri en kapel",
+      "g1": "Strand",
+      "g2": "Ruïnes",
+      "h2visit": "Bezoeken",
+      "p6": "Bij Kefalos. Strand + ruïnes gratis toegankelijk. Respecteer de archeologische resten.",
+      "tip": "kom vroeg voor rust bij de basiliek, en zwem eventueel naar Kastri als het water rustig is.",
+      "videoCap": "Agios Stefanos",
+      "hStory": "Het verhaal",
+      "hSee": "Wat je ziet",
+      "hKnow": "Goed om te weten",
+      "tipTitle": "Tip van de gids",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    en: {
-      title: "Agios Stefanos (Kefalos)",
-      lead: "Beach with early Christian basilicas on the sand, clear shallow water, and view of the islet Kastri with chapel – once connected by a bridge.",
-      heroCap: "Agios Stefanos (Kefalos)",
-      badgeKefalos: "Kefalos", badgeBasilica: "Basilica ± 5th century", badgeBeach: "Beach",
-      btnPlay: "🔊 Read aloud",
-      h2beach: "Beach and ruins",
-      p1: "Agios Stefanos lies in the bay of Kefalos: fine sand with some pebbles, clear shallow water – ideal for families. You can walk far into the sea without it getting deep. The water is often cooler here than elsewhere on Kos.",
-      factYears: "± 469–554", factBasilicas: "basilicas", fact1932: "1932", factExcavated: "excavated",
-      h2basilicas: "Basilicas on the beach",
-      p2: "What makes this beach unique: the remains of early Christian basilicas (around 469 and 554 AD) lie right on the beach. Walls and parts of the floor are still clearly visible – you walk among them.",
-      p3: "The church was built on the site of an even older temple. For centuries the remains lay under the sand. Only in 1932 did Italian archaeologists rediscover and excavate them.",
-      capBasilica: "Remains of the basilica on the beach",
-      h2kastri: "Islet Kastri",
-      p4: "Directly opposite the beach lies the small islet Kastri, with a white-and-blue chapel of Agios Nikolaos. The water between them is shallow: you can swim over.",
-      p5: "Around 469–554 AD there was even a small bridge to Kastri – it disappeared in an earthquake.",
-      capKastri: "Bay with Kastri and chapel",
-      g1: "Beach", g2: "Ruins",
-      h2visit: "Visiting",
-      p6: "Near Kefalos. Beach + ruins free to access. Respect the archaeological remains.",
-      tip: "Tip: come early for peace at the basilica, and swim to Kastri if the water is calm.",
-      h2video: "Video", videoCap: "Agios Stefanos"
+    "en": {
+      "title": "Agios Stefanos (Kefalos)",
+      "lead": "Beach with early Christian basilicas on the sand, clear shallow water, and view of the islet Kastri with chapel – once connected by a bridge.",
+      "btnPlay": "Read aloud",
+      "p1": "Agios Stefanos lies in the bay of Kefalos: fine sand with some pebbles, clear shallow water – ideal for families. You can walk far into the sea without it getting deep. The water is often cooler here than elsewhere on Kos.",
+      "p2": "What makes this beach unique: the remains of early Christian basilicas (around 469 and 554 AD) lie right on the beach. Walls and parts of the floor are still clearly visible – you walk among them.",
+      "p3": "The church was built on the site of an even older temple. For centuries the remains lay under the sand. Only in 1932 did Italian archaeologists rediscover and excavate them.",
+      "capBasilica": "Remains of the basilica on the beach",
+      "h2kastri": "Islet Kastri",
+      "p4": "Directly opposite the beach lies the small islet Kastri, with a white-and-blue chapel of Agios Nikolaos. The water between them is shallow: you can swim over.",
+      "p5": "Around 469–554 AD there was even a small bridge to Kastri – it disappeared in an earthquake.",
+      "capKastri": "Bay with Kastri and chapel",
+      "g1": "Beach",
+      "g2": "Ruins",
+      "h2visit": "Visiting",
+      "p6": "Near Kefalos. Beach + ruins free to access. Respect the archaeological remains.",
+      "tip": "come early for peace at the basilica, and swim to Kastri if the water is calm.",
+      "videoCap": "Agios Stefanos",
+      "hStory": "The story",
+      "hSee": "What you see",
+      "hKnow": "Good to know",
+      "tipTitle": "Guide’s tip",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    de: {
-      title: "Agios Stefanos (Kefalos)",
-      lead: "Strand mit frühchristlichen Basiliken auf dem Sand, klarem flachem Wasser und Blick auf die Insel Kastri mit Kapelle – einst durch eine Brücke verbunden.",
-      heroCap: "Agios Stefanos (Kefalos)",
-      badgeKefalos: "Kefalos", badgeBasilica: "Basilika ± 5. Jh.", badgeBeach: "Strand",
-      btnPlay: "🔊 Vorlesen",
-      h2beach: "Strand und Ruinen",
-      p1: "Agios Stefanos liegt in der Bucht von Kefalos: feiner Sand mit einigen Kieseln, klares flaches Wasser – ideal für Familien. Man kann weit ins Meer laufen, ohne dass es tief wird. Das Wasser ist hier oft kühler als anderswo auf Kos.",
-      factYears: "± 469–554", factBasilicas: "Basiliken", fact1932: "1932", factExcavated: "ausgegraben",
-      h2basilicas: "Basiliken am Strand",
-      p2: "Was diesen Strand einzigartig macht: die Reste frühchristlicher Basiliken (um 469 und 554 n. Chr.) liegen direkt am Strand. Mauern und Teile des Bodens sind noch gut zu sehen – man läuft dazwischen.",
-      p3: "Die Kirche wurde an der Stelle eines noch älteren Tempels gebaut. Jahrhunderte lang lagen die Reste unter dem Sand. Erst 1932 entdeckten italienische Archäologen sie wieder und gruben sie aus.",
-      capBasilica: "Reste der Basilika am Strand",
-      h2kastri: "Inselchen Kastri",
-      p4: "Direkt gegenüber dem Strand liegt die kleine Insel Kastri mit einer weiß-blauen Kapelle des Agios Nikolaos. Das Wasser dazwischen ist flach: man kann hinüberschwimmen.",
-      p5: "Um 469–554 n. Chr. gab es sogar eine kleine Brücke nach Kastri – sie verschwand durch ein Erdbeben.",
-      capKastri: "Bucht mit Kastri und Kapelle",
-      g1: "Strand", g2: "Ruinen",
-      h2visit: "Besuchen",
-      p6: "Bei Kefalos. Strand + Ruinen kostenlos zugänglich. Respektiere die archäologischen Reste.",
-      tip: "Tipp: komm früh für Ruhe bei der Basilika und schwimme eventuell nach Kastri, wenn das Wasser ruhig ist.",
-      h2video: "Video", videoCap: "Agios Stefanos"
+    "de": {
+      "title": "Agios Stefanos (Kefalos)",
+      "lead": "Strand mit frühchristlichen Basiliken auf dem Sand, klarem flachem Wasser und Blick auf die Insel Kastri mit Kapelle – einst durch eine Brücke verbunden.",
+      "btnPlay": "Vorlesen",
+      "p1": "Agios Stefanos liegt in der Bucht von Kefalos: feiner Sand mit einigen Kieseln, klares flaches Wasser – ideal für Familien. Man kann weit ins Meer laufen, ohne dass es tief wird. Das Wasser ist hier oft kühler als anderswo auf Kos.",
+      "p2": "Was diesen Strand einzigartig macht: die Reste frühchristlicher Basiliken (um 469 und 554 n. Chr.) liegen direkt am Strand. Mauern und Teile des Bodens sind noch gut zu sehen – man läuft dazwischen.",
+      "p3": "Die Kirche wurde an der Stelle eines noch älteren Tempels gebaut. Jahrhunderte lang lagen die Reste unter dem Sand. Erst 1932 entdeckten italienische Archäologen sie wieder und gruben sie aus.",
+      "capBasilica": "Reste der Basilika am Strand",
+      "h2kastri": "Inselchen Kastri",
+      "p4": "Direkt gegenüber dem Strand liegt die kleine Insel Kastri mit einer weiß-blauen Kapelle des Agios Nikolaos. Das Wasser dazwischen ist flach: man kann hinüberschwimmen.",
+      "p5": "Um 469–554 n. Chr. gab es sogar eine kleine Brücke nach Kastri – sie verschwand durch ein Erdbeben.",
+      "capKastri": "Bucht mit Kastri und Kapelle",
+      "g1": "Strand",
+      "g2": "Ruinen",
+      "h2visit": "Besuchen",
+      "p6": "Bei Kefalos. Strand + Ruinen kostenlos zugänglich. Respektiere die archäologischen Reste.",
+      "tip": "komm früh für Ruhe bei der Basilika und schwimme eventuell nach Kastri, wenn das Wasser ruhig ist.",
+      "videoCap": "Agios Stefanos",
+      "hStory": "Die Geschichte",
+      "hSee": "Was du siehst",
+      "hKnow": "Gut zu wissen",
+      "tipTitle": "Tipp des Guides",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    it: {
-      title: "Agios Stefanos (Kefalos)",
-      lead: "Spiaggia con basiliche paleocristiane sulla sabbia, acqua limpida e bassa, e vista sull’isolotto Kastri con cappella – un tempo collegato da un ponte.",
-      heroCap: "Agios Stefanos (Kefalos)",
-      badgeKefalos: "Kefalos", badgeBasilica: "Basilica ± V secolo", badgeBeach: "Spiaggia",
-      btnPlay: "🔊 Leggi ad alta voce",
-      h2beach: "Spiaggia e rovine",
-      p1: "Agios Stefanos si trova nella baia di Kefalos: sabbia fine con qualche ciottolo, acqua limpida e bassa – ideale per famiglie. Puoi camminare a lungo nel mare senza che diventi profondo. L’acqua qui è spesso più fresca che altrove a Kos.",
-      factYears: "± 469–554", factBasilicas: "basiliche", fact1932: "1932", factExcavated: "scavato",
-      h2basilicas: "Basiliche sulla spiaggia",
-      p2: "Ciò che rende unica questa spiaggia: i resti di basiliche paleocristiane (intorno al 469 e 554 d.C.) si trovano proprio sulla spiaggia. Muri e parti del pavimento sono ancora ben visibili – ci cammini in mezzo.",
-      p3: "La chiesa fu costruita sul sito di un tempio ancora più antico. Per secoli i resti giacquero sotto la sabbia. Solo nel 1932 gli archeologi italiani li riscoprirono e scavarono.",
-      capBasilica: "Resti della basilica sulla spiaggia",
-      h2kastri: "Isolotto Kastri",
-      p4: "Proprio di fronte alla spiaggia si trova il piccolo isolotto Kastri, con una cappella bianco-azzurra di Agios Nikolaos. L’acqua in mezzo è bassa: puoi nuotare fin lì.",
-      p5: "Intorno al 469–554 d.C. c’era addirittura un piccolo ponte verso Kastri – scomparso a causa di un terremoto.",
-      capKastri: "Baia con Kastri e cappella",
-      g1: "Spiaggia", g2: "Rovine",
-      h2visit: "Visitare",
-      p6: "Vicino a Kefalos. Spiaggia + rovine accessibili gratuitamente. Rispetta i resti archeologici.",
-      tip: "Consiglio: vieni presto per tranquillità alla basilica e nuota eventualmente verso Kastri se l’acqua è calma.",
-      h2video: "Video", videoCap: "Agios Stefanos"
+    "it": {
+      "title": "Agios Stefanos (Kefalos)",
+      "lead": "Spiaggia con basiliche paleocristiane sulla sabbia, acqua limpida e bassa, e vista sull’isolotto Kastri con cappella – un tempo collegato da un ponte.",
+      "btnPlay": "Leggi ad alta voce",
+      "p1": "Agios Stefanos si trova nella baia di Kefalos: sabbia fine con qualche ciottolo, acqua limpida e bassa – ideale per famiglie. Puoi camminare a lungo nel mare senza che diventi profondo. L’acqua qui è spesso più fresca che altrove a Kos.",
+      "p2": "Ciò che rende unica questa spiaggia: i resti di basiliche paleocristiane (intorno al 469 e 554 d.C.) si trovano proprio sulla spiaggia. Muri e parti del pavimento sono ancora ben visibili – ci cammini in mezzo.",
+      "p3": "La chiesa fu costruita sul sito di un tempio ancora più antico. Per secoli i resti giacquero sotto la sabbia. Solo nel 1932 gli archeologi italiani li riscoprirono e scavarono.",
+      "capBasilica": "Resti della basilica sulla spiaggia",
+      "h2kastri": "Isolotto Kastri",
+      "p4": "Proprio di fronte alla spiaggia si trova il piccolo isolotto Kastri, con una cappella bianco-azzurra di Agios Nikolaos. L’acqua in mezzo è bassa: puoi nuotare fin lì.",
+      "p5": "Intorno al 469–554 d.C. c’era addirittura un piccolo ponte verso Kastri – scomparso a causa di un terremoto.",
+      "capKastri": "Baia con Kastri e cappella",
+      "g1": "Spiaggia",
+      "g2": "Rovine",
+      "h2visit": "Visitare",
+      "p6": "Vicino a Kefalos. Spiaggia + rovine accessibili gratuitamente. Rispetta i resti archeologici.",
+      "tip": "vieni presto per tranquillità alla basilica e nuota eventualmente verso Kastri se l’acqua è calma.",
+      "videoCap": "Agios Stefanos",
+      "hStory": "La storia",
+      "hSee": "Cosa vedi",
+      "hKnow": "Buono a sapersi",
+      "tipTitle": "Consiglio della guida",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    tr: {
-      title: "Agios Stefanos (Kefalos)",
-      lead: "Kumda erken Hristiyan bazilikaları, berrak sığ su ve şapel ile Kastri adacığı manzarası olan plaj – bir zamanlar köprüyle bağlıydı.",
-      heroCap: "Agios Stefanos (Kefalos)",
-      badgeKefalos: "Kefalos", badgeBasilica: "Bazilika ± 5. yy", badgeBeach: "Plaj",
-      btnPlay: "🔊 Sesli oku",
-      h2beach: "Plaj ve harabeler",
-      p1: "Agios Stefanos, Kefalos körfezinde yer alır: ince kum ve bazı çakıllar, berrak sığ su – aileler için ideal. Denize uzaklaşmadan derine inmeden yürüyebilirsiniz. Buradaki su Kos’un diğer yerlerinden genellikle daha serindir.",
-      factYears: "± 469–554", factBasilicas: "bazilikalar", fact1932: "1932", factExcavated: "kazıldı",
-      h2basilicas: "Plajdaki bazilikalar",
-      p2: "Bu plajı benzersiz kılan şey: erken Hristiyan bazilikalarının kalıntıları (yaklaşık 469 ve 554) doğrudan plajda yer alır. Duvarlar ve zemin parçaları hâlâ iyi görülür – aralarından yürürsünüz.",
-      p3: "Kilise daha eski bir tapınağın yerinde inşa edilmiştir. Yüzyıllarca kalıntılar kum altında kaldı. Sadece 1932’de İtalyan arkeologlar yeniden keşfedip kazdılar.",
-      capBasilica: "Plajdaki bazilika kalıntıları",
-      h2kastri: "Kastri adacığı",
-      p4: "Plajın tam karşısında Agios Nikolaos’un beyaz-mavi şapeliyle küçük Kastri adacığı yer alır. Aradaki su sığdır: yüzerek gidebilirsiniz.",
-      p5: "Yaklaşık 469–554 yıllarında Kastri’ye küçük bir köprü bile vardı – depremle yok oldu.",
-      capKastri: "Kastri ve şapelli körfez",
-      g1: "Plaj", g2: "Harabeler",
-      h2visit: "Ziyaret",
-      p6: "Kefalos yakınlarında. Plaj + harabeler ücretsiz erişilebilir. Arkeolojik kalıntılara saygı gösterin.",
-      tip: "İpucu: bazilikada huzur için erken gelin ve su sakinsa Kastri’ye yüzün.",
-      h2video: "Video", videoCap: "Agios Stefanos"
+    "tr": {
+      "title": "Agios Stefanos (Kefalos)",
+      "lead": "Kumda erken Hristiyan bazilikaları, berrak sığ su ve şapel ile Kastri adacığı manzarası olan plaj – bir zamanlar köprüyle bağlıydı.",
+      "btnPlay": "Sesli oku",
+      "p1": "Agios Stefanos, Kefalos körfezinde yer alır: ince kum ve bazı çakıllar, berrak sığ su – aileler için ideal. Denize uzaklaşmadan derine inmeden yürüyebilirsiniz. Buradaki su Kos’un diğer yerlerinden genellikle daha serindir.",
+      "p2": "Bu plajı benzersiz kılan şey: erken Hristiyan bazilikalarının kalıntıları (yaklaşık 469 ve 554) doğrudan plajda yer alır. Duvarlar ve zemin parçaları hâlâ iyi görülür – aralarından yürürsünüz.",
+      "p3": "Kilise daha eski bir tapınağın yerinde inşa edilmiştir. Yüzyıllarca kalıntılar kum altında kaldı. Sadece 1932’de İtalyan arkeologlar yeniden keşfedip kazdılar.",
+      "capBasilica": "Plajdaki bazilika kalıntıları",
+      "h2kastri": "Kastri adacığı",
+      "p4": "Plajın tam karşısında Agios Nikolaos’un beyaz-mavi şapeliyle küçük Kastri adacığı yer alır. Aradaki su sığdır: yüzerek gidebilirsiniz.",
+      "p5": "Yaklaşık 469–554 yıllarında Kastri’ye küçük bir köprü bile vardı – depremle yok oldu.",
+      "capKastri": "Kastri ve şapelli körfez",
+      "g1": "Plaj",
+      "g2": "Harabeler",
+      "h2visit": "Ziyaret",
+      "p6": "Kefalos yakınlarında. Plaj + harabeler ücretsiz erişilebilir. Arkeolojik kalıntılara saygı gösterin.",
+      "tip": "bazilikada huzur için erken gelin ve su sakinsa Kastri’ye yüzün.",
+      "videoCap": "Agios Stefanos",
+      "hStory": "Hikaye",
+      "hSee": "Ne görürsün",
+      "hKnow": "Bilmekte fayda var",
+      "tipTitle": "Rehberin ipucu",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    es: {
-      title: "Agios Stefanos (Kefalos)",
-      lead: "Playa con basílicas paleocristianas en la arena, agua clara y poco profunda, y vista al islote Kastri con capilla – antiguamente unido por un puente.",
-      heroCap: "Agios Stefanos (Kefalos)",
-      badgeKefalos: "Kefalos", badgeBasilica: "Basílica ± s. V", badgeBeach: "Playa",
-      btnPlay: "🔊 Leer en voz alta",
-      h2beach: "Playa y ruinas",
-      p1: "Agios Stefanos se encuentra en la bahía de Kefalos: arena fina con algunos guijarros, agua clara y poco profunda – ideal para familias. Puedes caminar lejos en el mar sin que se vuelva profundo. El agua aquí suele ser más fresca que en otros lugares de Kos.",
-      factYears: "± 469–554", factBasilicas: "basílicas", fact1932: "1932", factExcavated: "excavado",
-      h2basilicas: "Basílicas en la playa",
-      p2: "Lo que hace única esta playa: los restos de basílicas paleocristianas (alrededor de 469 y 554 d.C.) están justo en la playa. Muros y partes del suelo aún se ven bien – caminas entre ellos.",
-      p3: "La iglesia se construyó en el lugar de un templo aún más antiguo. Durante siglos los restos estuvieron bajo la arena. Solo en 1932 los arqueólogos italianos los redescubrieron y excavaron.",
-      capBasilica: "Restos de la basílica en la playa",
-      h2kastri: "Islote Kastri",
-      p4: "Justo enfrente de la playa está el pequeño islote Kastri, con una capilla blanco-azul de Agios Nikolaos. El agua entre ellos es poco profunda: puedes nadar hasta allí.",
-      p5: "Alrededor de 469–554 d.C. había incluso un pequeño puente hacia Kastri – desapareció por un terremoto.",
-      capKastri: "Bahía con Kastri y capilla",
-      g1: "Playa", g2: "Ruinas",
-      h2visit: "Visitar",
-      p6: "Cerca de Kefalos. Playa + ruinas de acceso gratuito. Respeta los restos arqueológicos.",
-      tip: "Consejo: ven temprano para tranquilidad en la basílica y nada hasta Kastri si el agua está calmada.",
-      h2video: "Vídeo", videoCap: "Agios Stefanos"
+    "es": {
+      "title": "Agios Stefanos (Kefalos)",
+      "lead": "Playa con basílicas paleocristianas en la arena, agua clara y poco profunda, y vista al islote Kastri con capilla – antiguamente unido por un puente.",
+      "btnPlay": "Leer en voz alta",
+      "p1": "Agios Stefanos se encuentra en la bahía de Kefalos: arena fina con algunos guijarros, agua clara y poco profunda – ideal para familias. Puedes caminar lejos en el mar sin que se vuelva profundo. El agua aquí suele ser más fresca que en otros lugares de Kos.",
+      "p2": "Lo que hace única esta playa: los restos de basílicas paleocristianas (alrededor de 469 y 554 d.C.) están justo en la playa. Muros y partes del suelo aún se ven bien – caminas entre ellos.",
+      "p3": "La iglesia se construyó en el lugar de un templo aún más antiguo. Durante siglos los restos estuvieron bajo la arena. Solo en 1932 los arqueólogos italianos los redescubrieron y excavaron.",
+      "capBasilica": "Restos de la basílica en la playa",
+      "h2kastri": "Islote Kastri",
+      "p4": "Justo enfrente de la playa está el pequeño islote Kastri, con una capilla blanco-azul de Agios Nikolaos. El agua entre ellos es poco profunda: puedes nadar hasta allí.",
+      "p5": "Alrededor de 469–554 d.C. había incluso un pequeño puente hacia Kastri – desapareció por un terremoto.",
+      "capKastri": "Bahía con Kastri y capilla",
+      "g1": "Playa",
+      "g2": "Ruinas",
+      "h2visit": "Visitar",
+      "p6": "Cerca de Kefalos. Playa + ruinas de acceso gratuito. Respeta los restos arqueológicos.",
+      "tip": "ven temprano para tranquilidad en la basílica y nada hasta Kastri si el agua está calmada.",
+      "videoCap": "Agios Stefanos",
+      "hStory": "La historia",
+      "hSee": "Qué ves",
+      "hKnow": "Bueno saberlo",
+      "tipTitle": "Consejo del guía",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     }
   };
 

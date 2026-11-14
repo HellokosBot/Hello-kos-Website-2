@@ -189,6 +189,20 @@ body.hk-page .hero-wrap {
   margin: -16px -14px 16px; position: relative; aspect-ratio: 16/10; overflow: hidden; background: #1a2525;
 }
 body.hk-page .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-title { position: absolute; left: 0; right: 0; bottom: 0; padding: 52px 16px 14px; background: linear-gradient(to top, rgba(13,26,26,0.9), rgba(13,26,26,0.05) 75%, transparent); }
+.hero-title h1 { color: #fff !important; font-family: Georgia, "Times New Roman", serif; font-size: 1.7rem; line-height: 1.15; margin: 0; text-align: left; text-shadow: 0 1px 8px rgba(0,0,0,0.45); }
+.map-row { display: flex; flex-direction: row; flex-wrap: nowrap; gap: 8px; width: 100%; margin: 0 0 16px; }
+.map-row a {
+  flex: 1 1 0; width: 0; min-width: 0; box-sizing: border-box;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  min-height: 40px; padding: 8px 8px; border-radius: 12px;
+  background: var(--bg-card, #152525); color: var(--petrol, #3A9A9A); border: 2px solid var(--petrol, #3A9A9A);
+  font-weight: 700; font-size: 0.8rem; line-height: 1.1; text-decoration: none; white-space: nowrap;
+}
+.map-row a span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.map-row .pin { width: 16px; height: 16px; flex: 0 0 16px; }
+.guide-tip, .tip { border: 1px solid rgba(224,176,64,0.4); border-left: 4px solid var(--gold, #E0B040); border-radius: 14px; }
+.guide-tip strong, .tip strong { display: block; color: var(--gold, #E0B040); margin-bottom: 6px; }
 body.hk-page .badges { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-bottom: 14px; }
 body.hk-page .badge {
   background: rgba(58, 154, 154, 0.15); color: var(--petrol);
@@ -217,6 +231,8 @@ body.hk-page .btn {
   white-space: normal; overflow-wrap: anywhere; text-align: center;
 }
 body.hk-page .btn-audio { background: var(--petrol); color: #fff; }
+#btnPlay, .btn-audio { display: flex; align-items: center; justify-content: center; gap: 8px; }
+#btnPlay .spk, .btn-audio .spk { width: 20px; height: 20px; flex: 0 0 20px; display: block; }
 body.hk-page .btn-stop { background: #3A4545; color: #fff; display: none; }
 body.hk-page .btn-stop.show { display: flex; }
 body.hk-page .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }

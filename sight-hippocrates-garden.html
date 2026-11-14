@@ -40,20 +40,18 @@
     .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
     .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
     .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+
     .content { padding: 18px 16px 0; }
     h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
     .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+
     .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
     .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
     .btn-audio { background: var(--petrol); color: #fff; }
     .btn-audio.playing { background: var(--petrol-dark); }
     .btn-stop { background: #3A4545; color: #fff; display: none; }
     .btn-stop.show { display: flex; }
-    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
-    .btn-apple { background: #111; color: #fff; }
+
     .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
     .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
     .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
@@ -94,29 +92,28 @@
   <main class="main">
     <div class="hero-wrap">
       <img src="img/jwwb/dbdf848b35-replica-of-old-greek-standard.jpg" alt="Hippocrates Garden" loading="eager">
-      <div class="hero-caption" data-i18n="heroCap">Hippocrates Garden</div>
+      <div class="hero-title"><h1 data-i18n="title">Hippocrates Garden</h1></div>
     </div>
 
     <div class="content">
-      <h1 data-i18n="title">Hippocrates Garden</h1>
-      <p class="lead" data-i18n="lead">Botanische tuin en openluchtmuseum over Hippocrates – kruiden en planten uit de oudheid.</p>
+<p class="lead" data-i18n="lead">Botanische tuin en openluchtmuseum over Hippocrates – kruiden en planten uit de oudheid.</p>
 
-      <div class="badges">
-        <span class="badge" data-i18n="badgePark">Park</span>
-        <span class="badge" data-i18n="badgeBotanical">Botanisch</span>
-      </div>
+      
 
       <div class="actions">
         <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
         <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Hippocrates%20Garden%20Kos" target="_blank" rel="noopener">📍 Google Maps</a>
-        <a class="btn btn-apple" href="https://maps.apple.com/?q=Hippocrates%20Garden%20Kos" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      
+      <div class="map-row">
+        <a href="https://www.google.com/maps/search/?api=1&query=Hippocrates%20Garden%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+        <a href="https://maps.apple.com/?q=Hippocrates%20Garden%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
       </div>
       <p class="status" id="ttsStatus"></p>
 
       <div id="readText">
         <div class="card">
-          <h2 data-i18n="h2park">Park over Hippocrates</h2>
+          <h2 data-i18n="hStory">Park over Hippocrates</h2>
           <p data-i18n="p1">Hippocrates Garden is een cultureel en educatief park over het leven, de ideeën en de leefwereld van Hippocrates – deels botanische tuin, deels openluchtmuseum.</p>
         </div>
 
@@ -129,7 +126,7 @@
         </div>
 
         <div class="card">
-          <h2 data-i18n="h2price">Prijzen</h2>
+          <h2 data-i18n="hSee">Prijzen</h2>
           <p data-i18n="p4">Ticket € 6 inclusief herbal tea. Kinderen 5 t/m 10 jaar € 3 inclusief herbal tea. Kinderen 0 t/m 4 Gratis.</p>
         </div>
 
@@ -153,9 +150,9 @@
         </div>
 
         <div class="card">
-          <h2 data-i18n="h2visit">Bezoeken</h2>
+          <h2 data-i18n="hKnow">Bezoeken</h2>
           <p data-i18n="p5">Op Kos. Mooi te combineren met de Hippocratic Foundation en het Asklepion.</p>
-          <div class="tip" data-i18n="tip">Tip: lees de plantenlabels – veel kruiden herken je uit keuken of apotheek.</div>
+          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: lees de plantenlabels – veel kruiden herken je uit keuken of apotheek.</p></div>
         </div>
       </div>
     </div>
@@ -168,108 +165,132 @@
 
 <script>
 (function(){
-  var I18N = {
-    nl: {
-      title: "Hippocrates Garden",
-      lead: "Botanische tuin en openluchtmuseum over Hippocrates – kruiden en planten uit de oudheid.",
-      heroCap: "Hippocrates Garden",
-      badgePark: "Park", badgeBotanical: "Botanisch",
-      btnPlay: "🔊 Voorlezen",
-      h2park: "Park over Hippocrates",
-      p1: "Hippocrates Garden is een cultureel en educatief park over het leven, de ideeën en de leefwereld van Hippocrates – deels botanische tuin, deels openluchtmuseum.",
-      p2: "Hippocrates Garden is een cultureel en educatief park dat zich richt op het leven, de ideeën en de leefwereld van Hippocrates. Het park is deels een botanische tuin en openluchtmuseum. Op het terrein staan reconstructies van historische gebouwen: een Griekse woning, een stenen theater, een kleine tempel en ruimtes waar traditionele werktuigen en technieken worden getoond.",
-      p3: "Je kunt vrij door het park wandelen. De tuinen bevatten bekende kruiden, planten en fruitbomen vanuit de oudheid en planten die een belangrijke rol vervulden in de geneeskunde en het dagelijks leven van die tijd.",
-      h2price: "Prijzen",
-      p4: "Ticket € 6 inclusief herbal tea. Kinderen 5 t/m 10 jaar € 3 inclusief herbal tea. Kinderen 0 t/m 4 Gratis.",
-      g1: "Tuin", g2: "Tuin", g3: "Tuin", g4: "Tuin",
-      h2visit: "Bezoeken",
-      p5: "Op Kos. Mooi te combineren met de Hippocratic Foundation en het Asklepion.",
-      tip: "Tip: lees de plantenlabels – veel kruiden herken je uit keuken of apotheek."
+  var I18N = window.HK_DICT = {
+    "nl": {
+      "title": "Hippocrates Garden",
+      "lead": "Botanische tuin en openluchtmuseum over Hippocrates – kruiden en planten uit de oudheid.",
+      "btnPlay": "Voorlezen",
+      "p1": "Hippocrates Garden is een cultureel en educatief park over het leven, de ideeën en de leefwereld van Hippocrates – deels botanische tuin, deels openluchtmuseum.",
+      "p2": "Hippocrates Garden is een cultureel en educatief park dat zich richt op het leven, de ideeën en de leefwereld van Hippocrates. Het park is deels een botanische tuin en openluchtmuseum. Op het terrein staan reconstructies van historische gebouwen: een Griekse woning, een stenen theater, een kleine tempel en ruimtes waar traditionele werktuigen en technieken worden getoond.",
+      "p3": "Je kunt vrij door het park wandelen. De tuinen bevatten bekende kruiden, planten en fruitbomen vanuit de oudheid en planten die een belangrijke rol vervulden in de geneeskunde en het dagelijks leven van die tijd.",
+      "p4": "Ticket € 6 inclusief herbal tea. Kinderen 5 t/m 10 jaar € 3 inclusief herbal tea. Kinderen 0 t/m 4 Gratis.",
+      "g1": "Tuin",
+      "g2": "Tuin",
+      "g3": "Tuin",
+      "g4": "Tuin",
+      "p5": "Op Kos. Mooi te combineren met de Hippocratic Foundation en het Asklepion.",
+      "tip": "lees de plantenlabels – veel kruiden herken je uit keuken of apotheek.",
+      "hStory": "Het verhaal",
+      "hSee": "Wat je ziet",
+      "hKnow": "Goed om te weten",
+      "tipTitle": "Tip van de gids",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    en: {
-      title: "Hippocrates Garden",
-      lead: "Botanical garden and open-air museum about Hippocrates – herbs and plants from antiquity.",
-      heroCap: "Hippocrates Garden",
-      badgePark: "Park", badgeBotanical: "Botanical",
-      btnPlay: "🔊 Read aloud",
-      h2park: "Park about Hippocrates",
-      p1: "Hippocrates Garden is a cultural and educational park about the life, ideas and world of Hippocrates – part botanical garden, part open-air museum.",
-      p2: "Hippocrates Garden is a cultural and educational park focused on the life, ideas and living world of Hippocrates. The park is partly a botanical garden and open-air museum. On the grounds there are reconstructions of historical buildings: a Greek house, a stone theatre, a small temple and spaces where traditional tools and techniques are shown.",
-      p3: "You can walk freely through the park. The gardens contain well-known herbs, plants and fruit trees from antiquity and plants that played an important role in medicine and daily life of that time.",
-      h2price: "Prices",
-      p4: "Ticket € 6 including herbal tea. Children 5 to 10 years € 3 including herbal tea. Children 0 to 4 Free.",
-      g1: "Garden", g2: "Garden", g3: "Garden", g4: "Garden",
-      h2visit: "Visiting",
-      p5: "On Kos. Nice to combine with the Hippocratic Foundation and the Asklepion.",
-      tip: "Tip: read the plant labels – many herbs you will recognise from the kitchen or pharmacy."
+    "en": {
+      "title": "Hippocrates Garden",
+      "lead": "Botanical garden and open-air museum about Hippocrates – herbs and plants from antiquity.",
+      "btnPlay": "Read aloud",
+      "p1": "Hippocrates Garden is a cultural and educational park about the life, ideas and world of Hippocrates – part botanical garden, part open-air museum.",
+      "p2": "Hippocrates Garden is a cultural and educational park focused on the life, ideas and living world of Hippocrates. The park is partly a botanical garden and open-air museum. On the grounds there are reconstructions of historical buildings: a Greek house, a stone theatre, a small temple and spaces where traditional tools and techniques are shown.",
+      "p3": "You can walk freely through the park. The gardens contain well-known herbs, plants and fruit trees from antiquity and plants that played an important role in medicine and daily life of that time.",
+      "p4": "Ticket € 6 including herbal tea. Children 5 to 10 years € 3 including herbal tea. Children 0 to 4 Free.",
+      "g1": "Garden",
+      "g2": "Garden",
+      "g3": "Garden",
+      "g4": "Garden",
+      "p5": "On Kos. Nice to combine with the Hippocratic Foundation and the Asklepion.",
+      "tip": "read the plant labels – many herbs you will recognise from the kitchen or pharmacy.",
+      "hStory": "The story",
+      "hSee": "What you see",
+      "hKnow": "Good to know",
+      "tipTitle": "Guide’s tip",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    de: {
-      title: "Hippocrates Garden",
-      lead: "Botanischer Garten und Freilichtmuseum über Hippokrates – Kräuter und Pflanzen aus der Antike.",
-      heroCap: "Hippocrates Garden",
-      badgePark: "Park", badgeBotanical: "Botanisch",
-      btnPlay: "🔊 Vorlesen",
-      h2park: "Park über Hippokrates",
-      p1: "Hippocrates Garden ist ein kulturelles und pädagogisches Park über das Leben, die Ideen und die Lebenswelt von Hippokrates – teils botanischer Garten, teils Freilichtmuseum.",
-      p2: "Hippocrates Garden ist ein kulturelles und pädagogisches Park, das sich auf das Leben, die Ideen und die Lebenswelt von Hippokrates konzentriert. Der Park ist teils ein botanischer Garten und Freilichtmuseum. Auf dem Gelände stehen Rekonstruktionen historischer Gebäude: ein griechisches Haus, ein Steintheater, ein kleiner Tempel und Räume, in denen traditionelle Werkzeuge und Techniken gezeigt werden.",
-      p3: "Man kann frei durch den Park wandern. Die Gärten enthalten bekannte Kräuter, Pflanzen und Obstbäume aus der Antike und Pflanzen, die eine wichtige Rolle in der Medizin und im täglichen Leben jener Zeit spielten.",
-      h2price: "Preise",
-      p4: "Ticket € 6 inklusive Kräutertee. Kinder 5 bis 10 Jahre € 3 inklusive Kräutertee. Kinder 0 bis 4 Gratis.",
-      g1: "Garten", g2: "Garten", g3: "Garten", g4: "Garten",
-      h2visit: "Besuchen",
-      p5: "Auf Kos. Schön zu kombinieren mit der Hippocratic Foundation und dem Asklepion.",
-      tip: "Tipp: lies die Pflanzenetiketten – viele Kräuter erkennst du aus der Küche oder Apotheke."
+    "de": {
+      "title": "Hippocrates Garden",
+      "lead": "Botanischer Garten und Freilichtmuseum über Hippokrates – Kräuter und Pflanzen aus der Antike.",
+      "btnPlay": "Vorlesen",
+      "p1": "Hippocrates Garden ist ein kulturelles und pädagogisches Park über das Leben, die Ideen und die Lebenswelt von Hippokrates – teils botanischer Garten, teils Freilichtmuseum.",
+      "p2": "Hippocrates Garden ist ein kulturelles und pädagogisches Park, das sich auf das Leben, die Ideen und die Lebenswelt von Hippokrates konzentriert. Der Park ist teils ein botanischer Garten und Freilichtmuseum. Auf dem Gelände stehen Rekonstruktionen historischer Gebäude: ein griechisches Haus, ein Steintheater, ein kleiner Tempel und Räume, in denen traditionelle Werkzeuge und Techniken gezeigt werden.",
+      "p3": "Man kann frei durch den Park wandern. Die Gärten enthalten bekannte Kräuter, Pflanzen und Obstbäume aus der Antike und Pflanzen, die eine wichtige Rolle in der Medizin und im täglichen Leben jener Zeit spielten.",
+      "p4": "Ticket € 6 inklusive Kräutertee. Kinder 5 bis 10 Jahre € 3 inklusive Kräutertee. Kinder 0 bis 4 Gratis.",
+      "g1": "Garten",
+      "g2": "Garten",
+      "g3": "Garten",
+      "g4": "Garten",
+      "p5": "Auf Kos. Schön zu kombinieren mit der Hippocratic Foundation und dem Asklepion.",
+      "tip": "lies die Pflanzenetiketten – viele Kräuter erkennst du aus der Küche oder Apotheke.",
+      "hStory": "Die Geschichte",
+      "hSee": "Was du siehst",
+      "hKnow": "Gut zu wissen",
+      "tipTitle": "Tipp des Guides",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    it: {
-      title: "Hippocrates Garden",
-      lead: "Giardino botanico e museo all’aperto su Ippocrate – erbe e piante dell’antichità.",
-      heroCap: "Hippocrates Garden",
-      badgePark: "Parco", badgeBotanical: "Botanico",
-      btnPlay: "🔊 Leggi ad alta voce",
-      h2park: "Parco su Ippocrate",
-      p1: "Hippocrates Garden è un parco culturale ed educativo sulla vita, le idee e il mondo di Ippocrate – in parte giardino botanico, in parte museo all’aperto.",
-      p2: "Hippocrates Garden è un parco culturale ed educativo incentrato sulla vita, le idee e il mondo di Ippocrate. Il parco è in parte un giardino botanico e museo all’aperto. Sul terreno ci sono ricostruzioni di edifici storici: una casa greca, un teatro in pietra, un piccolo tempio e spazi dove vengono mostrati strumenti e tecniche tradizionali.",
-      p3: "Si può camminare liberamente nel parco. I giardini contengono erbe, piante e alberi da frutto noti dall’antichità e piante che svolgevano un ruolo importante nella medicina e nella vita quotidiana di quel tempo.",
-      h2price: "Prezzi",
-      p4: "Biglietto € 6 incluso tè alle erbe. Bambini 5-10 anni € 3 incluso tè alle erbe. Bambini 0-4 Gratis.",
-      g1: "Giardino", g2: "Giardino", g3: "Giardino", g4: "Giardino",
-      h2visit: "Visitare",
-      p5: "A Kos. Bello da combinare con la Hippocratic Foundation e l’Asklepion.",
-      tip: "Consiglio: leggi le etichette delle piante – molte erbe le riconosci dalla cucina o dalla farmacia."
+    "it": {
+      "title": "Hippocrates Garden",
+      "lead": "Giardino botanico e museo all’aperto su Ippocrate – erbe e piante dell’antichità.",
+      "btnPlay": "Leggi ad alta voce",
+      "p1": "Hippocrates Garden è un parco culturale ed educativo sulla vita, le idee e il mondo di Ippocrate – in parte giardino botanico, in parte museo all’aperto.",
+      "p2": "Hippocrates Garden è un parco culturale ed educativo incentrato sulla vita, le idee e il mondo di Ippocrate. Il parco è in parte un giardino botanico e museo all’aperto. Sul terreno ci sono ricostruzioni di edifici storici: una casa greca, un teatro in pietra, un piccolo tempio e spazi dove vengono mostrati strumenti e tecniche tradizionali.",
+      "p3": "Si può camminare liberamente nel parco. I giardini contengono erbe, piante e alberi da frutto noti dall’antichità e piante che svolgevano un ruolo importante nella medicina e nella vita quotidiana di quel tempo.",
+      "p4": "Biglietto € 6 incluso tè alle erbe. Bambini 5-10 anni € 3 incluso tè alle erbe. Bambini 0-4 Gratis.",
+      "g1": "Giardino",
+      "g2": "Giardino",
+      "g3": "Giardino",
+      "g4": "Giardino",
+      "p5": "A Kos. Bello da combinare con la Hippocratic Foundation e l’Asklepion.",
+      "tip": "leggi le etichette delle piante – molte erbe le riconosci dalla cucina o dalla farmacia.",
+      "hStory": "La storia",
+      "hSee": "Cosa vedi",
+      "hKnow": "Buono a sapersi",
+      "tipTitle": "Consiglio della guida",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    tr: {
-      title: "Hippocrates Garden",
-      lead: "Hipokrat hakkında botanik bahçe ve açık hava müzesi – antik çağdan otlar ve bitkiler.",
-      heroCap: "Hippocrates Garden",
-      badgePark: "Park", badgeBotanical: "Botanik",
-      btnPlay: "🔊 Sesli oku",
-      h2park: "Hipokrat hakkında park",
-      p1: "Hippocrates Garden, Hipokrat’ın hayatı, fikirleri ve yaşam dünyası üzerine kültürel ve eğitim parkıdır – kısmen botanik bahçe, kısmen açık hava müzesi.",
-      p2: "Hippocrates Garden, Hipokrat’ın hayatı, fikirleri ve yaşam dünyasına odaklanan kültürel ve eğitim parkıdır. Park kısmen botanik bahçe ve açık hava müzesidir. Arazide tarihi binaların rekonstrüksiyonları vardır: bir Yunan evi, taş tiyatro, küçük bir tapınak ve geleneksel aletlerin ve tekniklerin gösterildiği alanlar.",
-      p3: "Parkta özgürce yürüyebilirsiniz. Bahçelerde antik çağdan bilinen otlar, bitkiler ve meyve ağaçları ile o dönemde tıpta ve günlük hayatta önemli rol oynayan bitkiler bulunur.",
-      h2price: "Fiyatlar",
-      p4: "Bilet € 6 bitki çayı dahil. 5-10 yaş çocuklar € 3 bitki çayı dahil. 0-4 yaş çocuklar Ücretsiz.",
-      g1: "Bahçe", g2: "Bahçe", g3: "Bahçe", g4: "Bahçe",
-      h2visit: "Ziyaret",
-      p5: "Kos’ta. Hippocratic Foundation ve Asklepion ile birleştirmek güzel.",
-      tip: "İpucu: bitki etiketlerini okuyun – birçok otu mutfaktan veya eczaneden tanırsınız."
+    "tr": {
+      "title": "Hippocrates Garden",
+      "lead": "Hipokrat hakkında botanik bahçe ve açık hava müzesi – antik çağdan otlar ve bitkiler.",
+      "btnPlay": "Sesli oku",
+      "p1": "Hippocrates Garden, Hipokrat’ın hayatı, fikirleri ve yaşam dünyası üzerine kültürel ve eğitim parkıdır – kısmen botanik bahçe, kısmen açık hava müzesi.",
+      "p2": "Hippocrates Garden, Hipokrat’ın hayatı, fikirleri ve yaşam dünyasına odaklanan kültürel ve eğitim parkıdır. Park kısmen botanik bahçe ve açık hava müzesidir. Arazide tarihi binaların rekonstrüksiyonları vardır: bir Yunan evi, taş tiyatro, küçük bir tapınak ve geleneksel aletlerin ve tekniklerin gösterildiği alanlar.",
+      "p3": "Parkta özgürce yürüyebilirsiniz. Bahçelerde antik çağdan bilinen otlar, bitkiler ve meyve ağaçları ile o dönemde tıpta ve günlük hayatta önemli rol oynayan bitkiler bulunur.",
+      "p4": "Bilet € 6 bitki çayı dahil. 5-10 yaş çocuklar € 3 bitki çayı dahil. 0-4 yaş çocuklar Ücretsiz.",
+      "g1": "Bahçe",
+      "g2": "Bahçe",
+      "g3": "Bahçe",
+      "g4": "Bahçe",
+      "p5": "Kos’ta. Hippocratic Foundation ve Asklepion ile birleştirmek güzel.",
+      "tip": "bitki etiketlerini okuyun – birçok otu mutfaktan veya eczaneden tanırsınız.",
+      "hStory": "Hikaye",
+      "hSee": "Ne görürsün",
+      "hKnow": "Bilmekte fayda var",
+      "tipTitle": "Rehberin ipucu",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    es: {
-      title: "Hippocrates Garden",
-      lead: "Jardín botánico y museo al aire libre sobre Hipócrates – hierbas y plantas de la antigüedad.",
-      heroCap: "Hippocrates Garden",
-      badgePark: "Parque", badgeBotanical: "Botánico",
-      btnPlay: "🔊 Leer en voz alta",
-      h2park: "Parque sobre Hipócrates",
-      p1: "Hippocrates Garden es un parque cultural y educativo sobre la vida, las ideas y el mundo de Hipócrates – en parte jardín botánico, en parte museo al aire libre.",
-      p2: "Hippocrates Garden es un parque cultural y educativo centrado en la vida, las ideas y el mundo de Hipócrates. El parque es en parte un jardín botánico y museo al aire libre. En el terreno hay reconstrucciones de edificios históricos: una casa griega, un teatro de piedra, un pequeño templo y espacios donde se muestran herramientas y técnicas tradicionales.",
-      p3: "Puedes caminar libremente por el parque. Los jardines contienen hierbas, plantas y árboles frutales conocidos de la antigüedad y plantas que desempeñaron un papel importante en la medicina y la vida cotidiana de esa época.",
-      h2price: "Precios",
-      p4: "Entrada € 6 incluida infusión de hierbas. Niños de 5 a 10 años € 3 incluida infusión. Niños de 0 a 4 Gratis.",
-      g1: "Jardín", g2: "Jardín", g3: "Jardín", g4: "Jardín",
-      h2visit: "Visitar",
-      p5: "En Kos. Bonito para combinar con la Hippocratic Foundation y el Asklepion.",
-      tip: "Consejo: lee las etiquetas de las plantas – muchas hierbas las reconocerás de la cocina o la farmacia."
+    "es": {
+      "title": "Hippocrates Garden",
+      "lead": "Jardín botánico y museo al aire libre sobre Hipócrates – hierbas y plantas de la antigüedad.",
+      "btnPlay": "Leer en voz alta",
+      "p1": "Hippocrates Garden es un parque cultural y educativo sobre la vida, las ideas y el mundo de Hipócrates – en parte jardín botánico, en parte museo al aire libre.",
+      "p2": "Hippocrates Garden es un parque cultural y educativo centrado en la vida, las ideas y el mundo de Hipócrates. El parque es en parte un jardín botánico y museo al aire libre. En el terreno hay reconstrucciones de edificios históricos: una casa griega, un teatro de piedra, un pequeño templo y espacios donde se muestran herramientas y técnicas tradicionales.",
+      "p3": "Puedes caminar libremente por el parque. Los jardines contienen hierbas, plantas y árboles frutales conocidos de la antigüedad y plantas que desempeñaron un papel importante en la medicina y la vida cotidiana de esa época.",
+      "p4": "Entrada € 6 incluida infusión de hierbas. Niños de 5 a 10 años € 3 incluida infusión. Niños de 0 a 4 Gratis.",
+      "g1": "Jardín",
+      "g2": "Jardín",
+      "g3": "Jardín",
+      "g4": "Jardín",
+      "p5": "En Kos. Bonito para combinar con la Hippocratic Foundation y el Asklepion.",
+      "tip": "lee las etiquetas de las plantas – muchas hierbas las reconocerás de la cocina o la farmacia.",
+      "hStory": "La historia",
+      "hSee": "Qué ves",
+      "hKnow": "Bueno saberlo",
+      "tipTitle": "Consejo del guía",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     }
   };
 

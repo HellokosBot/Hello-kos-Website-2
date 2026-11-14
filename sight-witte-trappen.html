@@ -40,34 +40,40 @@
     .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
     .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
     .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+    .hero-title { position: absolute; left: 0; right: 0; bottom: 0; padding: 56px 16px 16px; background: linear-gradient(to top, rgba(13,26,26,0.92), rgba(13,26,26,0.2) 72%, transparent); }
+    .hero-title .kicker { color: var(--gold); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+    .hero-title h1 { color: #fff; font-family: Georgia, "Times New Roman", serif; font-size: 1.85rem; font-weight: 700; line-height: 1.15; margin: 0; text-shadow: 0 1px 10px rgba(0,0,0,0.45); }
+    .hero-title .fav-inline { margin-top: 10px; background: rgba(13,26,26,0.45); color: #fff; border-color: rgba(255,255,255,0.85); }
     .content { padding: 18px 16px 0; }
     h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
-    .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
-    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+    .lead { font-size: 1.02rem; line-height: 1.6; color: var(--text); margin-bottom: 16px; }
+    .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
     .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
     .btn-audio { background: var(--petrol); color: #fff; }
     .btn-audio.playing { background: var(--petrol-dark); }
     .btn-stop { background: #3A4545; color: #fff; display: none; }
     .btn-stop.show { display: flex; }
-    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
-    .btn-apple { background: #111; color: #fff; }
+    .map-row { display: flex; flex-direction: row; flex-wrap: nowrap; gap: 8px; width: 100%; margin: 0 0 18px; }
+    .map-row a {
+      flex: 1 1 0; width: 0; min-width: 0; box-sizing: border-box;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      min-height: 40px; padding: 8px 8px; border-radius: 12px;
+      background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol);
+      font-weight: 700; font-size: 0.8rem; line-height: 1.1; text-decoration: none;
+      white-space: nowrap; overflow: hidden;
+    }
+    .map-row a span { overflow: hidden; text-overflow: ellipsis; }
+    .map-row .pin { width: 16px; height: 16px; flex: 0 0 16px; }
     .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
     .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
-    .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
-    .card p { font-size: 0.92rem; color: var(--text); margin-bottom: 10px; }
+    .card h2 { font-family: Georgia, "Times New Roman", serif; font-size: 1.15rem; font-weight: 700; color: var(--gold); margin-bottom: 8px; }
+    .card p { font-size: 0.95rem; line-height: 1.65; color: var(--text); margin-bottom: 10px; }
     .card p:last-child { margin-bottom: 0; }
-    .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 12px; font-size: 0.88rem; color: var(--text); }
-    .tip strong { color: var(--gold); }
-    .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
+    .tip { background: var(--bg-note); border: 1px solid rgba(224,176,64,0.4); border-left: 4px solid var(--gold); border-radius: 14px; padding: 14px 14px 12px; margin: 4px 0 12px; font-size: 0.95rem; line-height: 1.6; color: var(--text); }
+    .tip strong { display: block; font-family: Georgia, "Times New Roman", serif; color: var(--gold); margin-bottom: 6px; font-size: 1.05rem; }
+    .photo-block { margin: 4px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
     .photo-block img { width: 100%; display: block; max-height: 260px; object-fit: cover; }
     .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
-    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-    .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
-    .fact .n { font-size: 1.1rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
-    .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
     .footer { text-align: center; padding: 20px 16px; font-size: 0.78rem; color: var(--text-soft); }
     .footer a { color: var(--petrol); text-decoration: none; }
   </style>
@@ -96,61 +102,52 @@
 
   <main class="main">
     <div class="hero-wrap">
-      <img src="img/jwwb/872a33fb4c-caption-2-high.jpg" alt="Witte trappen Kos-stad" loading="eager">
-      <div class="hero-caption" data-i18n="heroCap">Witte trappen · Kos-stad</div>
+      <img src="img/jwwb/872a33fb4c-caption-2-high.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place">Kos-stad</p>
+        <h1 data-i18n="title">Witte trappen</h1>
+      </div>
     </div>
 
     <div class="content">
-      <h1 data-i18n="title">Witte trappen</h1>
       <p class="lead" data-i18n="lead">Het blauw-witte icoon van Kos-stad – perfect voor de vakantiefoto.</p>
 
-      <div class="badges">
-        <span class="badge" data-i18n="badgeFree">Gratis</span>
-        <span class="badge">Kos-stad</span>
-        <span class="badge" data-i18n="badgeOpen">Altijd open</span>
-      </div>
-
       <div class="actions">
-        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
-        <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=White%20Stairs%20Kos%20Town%20Greece" target="_blank" rel="noopener">📍 Google Maps</a>
-        <a class="btn btn-apple" href="https://maps.apple.com/?q=White%20Stairs%20Kos%20Town%20Greece" target="_blank" rel="noopener">🍎 Apple Maps</a>
+        <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">Voorlezen</button>
+        <button type="button" class="btn btn-stop" id="btnStop" data-i18n="btnStop">Stop</button>
+      </div>
+      <div class="map-row">
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=36.8918%2C27.2885" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+        <a href="https://maps.apple.com/?ll=36.8918,27.2885&amp;q=Witte%20trappen" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
       </div>
       <p class="status" id="ttsStatus"></p>
 
       <div id="readText">
-        <div class="card">
-          <h2 data-i18n="h2photos">Waarom iedereen hier foto’s maakt</h2>
+        <article class="card">
+          <h2 data-i18n="hStory">Het verhaal</h2>
           <p data-i18n="p1">De Witte Trappen in het hart van Kos-stad zijn een van de meest gefotografeerde plekken op het eiland. Met hun schitterende blauw-witte kleuren stralen ze de typische Griekse charme uit.</p>
           <p data-i18n="p2">Ze leiden naar de achterzijde van het gebouw en vormen de iconische toegang tot het populaire restaurant aan de trap – dé achtergrond voor je vakantiefoto.</p>
-        </div>
+        </article>
 
         <div class="photo-block">
-          <img src="img/jwwb/45aefd5764-caption-4-standard-yt2zib.jpg" alt="Detail witte trappen Kos" loading="lazy">
+          <img src="img/jwwb/45aefd5764-caption-4-standard-yt2zib.jpg" alt="" loading="lazy">
           <div class="cap" data-i18n="capPhoto">De trappen worden elke dag opnieuw wit geschilderd</div>
         </div>
 
-        <div class="facts">
-          <div class="fact">
-            <span class="n">3×</span>
-            <span class="l" data-i18n="factPaint">per dag wit geverfd</span>
-          </div>
-          <div class="fact">
-            <span class="n" data-i18n="factFree">Gratis</span>
-            <span class="l" data-i18n="factPublic">openbare doorgang</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 data-i18n="h2paint">Elke dag opnieuw wit</h2>
+        <article class="card">
+          <h2 data-i18n="hSee">Wat je ziet</h2>
           <p data-i18n="p3">De witte verf op de treden wordt maar liefst drie keer per dag aangebracht. Zo blijft de stralende, constante witte kleur behouden – precies die look die zo kenmerkend is voor de Griekse eilanden.</p>
-        </div>
+        </article>
 
-        <div class="card">
-          <h2 data-i18n="h2where">Waar vind je ze?</h2>
+        <aside class="tip">
+          <strong data-i18n="tipTitle">Tip van de gids</strong>
+          <p data-i18n="tip">Vooral ’s ochtends of laat in de middag is het rustiger. Overdag kan er een rij staan voor de perfecte foto.</p>
+        </aside>
+
+        <article class="card">
+          <h2 data-i18n="hKnow">Goed om te weten</h2>
           <p data-i18n="p4">Midden in Kos-stad, dicht bij de haven en de winkelstraten. Geen openingstijden: het is een openbare doorgang.</p>
-          <div class="tip" data-i18n="tip">Tip: vooral ’s ochtends of laat in de middag is het rustiger. Overdag kan er een rij staan voor de perfecte foto.</div>
-        </div>
+        </article>
       </div>
     </div>
   </main>
@@ -162,122 +159,146 @@
 
 <script>
 (function(){
-  var I18N = {
+  var I18N = window.HK_DICT = {
     nl: {
       title: "Witte trappen",
+      place: "Kos-stad",
       lead: "Het blauw-witte icoon van Kos-stad – perfect voor de vakantiefoto.",
-      heroCap: "Witte trappen · Kos-stad",
-      badgeFree: "Gratis", badgeOpen: "Altijd open",
-      btnPlay: "🔊 Voorlezen",
-      h2photos: "Waarom iedereen hier foto’s maakt",
+      btnPlay: "Voorlezen",
+      btnStop: "Stop",
+      gmaps: "Google Maps",
+      iphone: "iPhone",
+      hStory: "Het verhaal",
       p1: "De Witte Trappen in het hart van Kos-stad zijn een van de meest gefotografeerde plekken op het eiland. Met hun schitterende blauw-witte kleuren stralen ze de typische Griekse charme uit.",
       p2: "Ze leiden naar de achterzijde van het gebouw en vormen de iconische toegang tot het populaire restaurant aan de trap – dé achtergrond voor je vakantiefoto.",
       capPhoto: "De trappen worden elke dag opnieuw wit geschilderd",
-      factPaint: "per dag wit geverfd",
-      factFree: "Gratis", factPublic: "openbare doorgang",
-      h2paint: "Elke dag opnieuw wit",
+      hSee: "Wat je ziet",
       p3: "De witte verf op de treden wordt maar liefst drie keer per dag aangebracht. Zo blijft de stralende, constante witte kleur behouden – precies die look die zo kenmerkend is voor de Griekse eilanden.",
-      h2where: "Waar vind je ze?",
+      tipTitle: "Tip van de gids",
+      tip: "Vooral ’s ochtends of laat in de middag is het rustiger. Overdag kan er een rij staan voor de perfecte foto.",
+      hKnow: "Goed om te weten",
       p4: "Midden in Kos-stad, dicht bij de haven en de winkelstraten. Geen openingstijden: het is een openbare doorgang.",
-      tip: "Tip: vooral ’s ochtends of laat in de middag is het rustiger. Overdag kan er een rij staan voor de perfecte foto."
+      ttsNo: "Voorlezen wordt door deze browser niet ondersteund.",
+      ttsOn: "Voorlezen…",
+      ttsStop: "Gestopt."
     },
     en: {
       title: "White Stairs",
+      place: "Kos Town",
       lead: "The blue-and-white icon of Kos Town – perfect for your holiday photo.",
-      heroCap: "White Stairs · Kos Town",
-      badgeFree: "Free", badgeOpen: "Always open",
-      btnPlay: "🔊 Read aloud",
-      h2photos: "Why everyone takes photos here",
+      btnPlay: "Read aloud",
+      btnStop: "Stop",
+      gmaps: "Google Maps",
+      iphone: "iPhone",
+      hStory: "The story",
       p1: "The White Stairs in the heart of Kos Town are one of the most photographed spots on the island. With their brilliant blue-and-white colours they radiate classic Greek charm.",
       p2: "They lead to the back of the building and form the iconic entrance to the popular restaurant at the stairs – the perfect backdrop for your holiday photo.",
       capPhoto: "The stairs are painted white again every day",
-      factPaint: "times a day painted white",
-      factFree: "Free", factPublic: "public passage",
-      h2paint: "Fresh white every day",
+      hSee: "What you see",
       p3: "The white paint on the steps is applied no fewer than three times a day. This keeps the bright, constant white colour – exactly the look that is so characteristic of the Greek islands.",
-      h2where: "Where to find them?",
+      tipTitle: "Guide’s tip",
+      tip: "Especially in the morning or late afternoon it is quieter. During the day there can be a queue for the perfect photo.",
+      hKnow: "Good to know",
       p4: "In the centre of Kos Town, close to the harbour and the shopping streets. No opening hours: it is a public passage.",
-      tip: "Tip: especially in the morning or late afternoon it is quieter. During the day there can be a queue for the perfect photo."
+      ttsNo: "Read-aloud is not supported in this browser.",
+      ttsOn: "Reading…",
+      ttsStop: "Stopped."
     },
     de: {
       title: "Weiße Treppen",
+      place: "Kos-Stadt",
       lead: "Das blau-weiße Wahrzeichen von Kos-Stadt – perfekt für dein Urlaubsfoto.",
-      heroCap: "Weiße Treppen · Kos-Stadt",
-      badgeFree: "Kostenlos", badgeOpen: "Immer geöffnet",
-      btnPlay: "🔊 Vorlesen",
-      h2photos: "Warum hier alle Fotos machen",
+      btnPlay: "Vorlesen",
+      btnStop: "Stopp",
+      gmaps: "Google Maps",
+      iphone: "iPhone",
+      hStory: "Die Geschichte",
       p1: "Die Weißen Treppen im Herzen von Kos-Stadt sind einer der meistfotografierten Orte der Insel. Mit ihren strahlenden Blau-Weiß-Farben verströmen sie typischen griechischen Charme.",
       p2: "Sie führen zur Rückseite des Gebäudes und bilden den ikonischen Eingang zum beliebten Restaurant an der Treppe – der perfekte Hintergrund für dein Urlaubsfoto.",
       capPhoto: "Die Treppen werden jeden Tag neu weiß gestrichen",
-      factPaint: "mal pro Tag weiß gestrichen",
-      factFree: "Kostenlos", factPublic: "öffentlicher Durchgang",
-      h2paint: "Jeden Tag frisch weiß",
+      hSee: "Was du siehst",
       p3: "Die weiße Farbe auf den Stufen wird nicht weniger als dreimal am Tag aufgetragen. So bleibt die strahlende, konstante weiße Farbe erhalten – genau der Look, der für die griechischen Inseln so charakteristisch ist.",
-      h2where: "Wo findest du sie?",
+      tipTitle: "Tipp des Guides",
+      tip: "Besonders morgens oder spätnachmittags ist es ruhiger. Tagsüber kann eine Schlange für das perfekte Foto stehen.",
+      hKnow: "Gut zu wissen",
       p4: "Mitten in Kos-Stadt, nah am Hafen und den Einkaufsstraßen. Keine Öffnungszeiten: es ist ein öffentlicher Durchgang.",
-      tip: "Tipp: besonders morgens oder spätnachmittags ist es ruhiger. Tagsüber kann eine Schlange für das perfekte Foto stehen."
+      ttsNo: "Vorlesen wird von diesem Browser nicht unterstützt.",
+      ttsOn: "Vorlesen…",
+      ttsStop: "Gestoppt."
     },
     it: {
       title: "Scale bianche",
+      place: "Kos città",
       lead: "L’icona blu e bianca di Kos città – perfetta per la foto delle vacanze.",
-      heroCap: "Scale bianche · Kos città",
-      badgeFree: "Gratis", badgeOpen: "Sempre aperto",
-      btnPlay: "🔊 Leggi ad alta voce",
-      h2photos: "Perché tutti fanno foto qui",
+      btnPlay: "Leggi ad alta voce",
+      btnStop: "Stop",
+      gmaps: "Google Maps",
+      iphone: "iPhone",
+      hStory: "La storia",
       p1: "Le Scale Bianche nel cuore di Kos città sono uno dei luoghi più fotografati dell’isola. Con i loro splendidi colori blu e bianchi irradiano il tipico fascino greco.",
       p2: "Portano sul retro dell’edificio e formano l’ingresso iconico del popolare ristorante sulla scala – lo sfondo perfetto per la tua foto delle vacanze.",
       capPhoto: "Le scale vengono ridipinte di bianco ogni giorno",
-      factPaint: "volte al giorno dipinte di bianco",
-      factFree: "Gratis", factPublic: "passaggio pubblico",
-      h2paint: "Bianche ogni giorno",
+      hSee: "Cosa vedi",
       p3: "La vernice bianca sui gradini viene applicata non meno di tre volte al giorno. Così si mantiene il colore bianco brillante e costante – esattamente il look tipico delle isole greche.",
-      h2where: "Dove le trovi?",
+      tipTitle: "Consiglio della guida",
+      tip: "Soprattutto la mattina o nel tardo pomeriggio è più tranquillo. Di giorno può esserci la fila per la foto perfetta.",
+      hKnow: "Buono a sapersi",
       p4: "Nel centro di Kos città, vicino al porto e alle vie dello shopping. Nessun orario: è un passaggio pubblico.",
-      tip: "Consiglio: soprattutto la mattina o nel tardo pomeriggio è più tranquillo. Di giorno può esserci la fila per la foto perfetta."
+      ttsNo: "La lettura vocale non è supportata da questo browser.",
+      ttsOn: "Lettura…",
+      ttsStop: "Interrotto."
     },
     tr: {
       title: "Beyaz merdivenler",
+      place: "Kos şehri",
       lead: "Kos şehrinin mavi-beyaz simgesi – tatil fotoğrafın için mükemmel.",
-      heroCap: "Beyaz merdivenler · Kos şehri",
-      badgeFree: "Ücretsiz", badgeOpen: "Her zaman açık",
-      btnPlay: "🔊 Sesli oku",
-      h2photos: "Neden herkes burada fotoğraf çekiyor",
+      btnPlay: "Sesli oku",
+      btnStop: "Durdur",
+      gmaps: "Google Maps",
+      iphone: "iPhone",
+      hStory: "Hikaye",
       p1: "Kos şehrinin kalbindeki Beyaz Merdivenler adanın en çok fotoğraflanan yerlerinden biridir. Parlak mavi-beyaz renkleriyle tipik Yunan cazibesini yansıtırlar.",
       p2: "Binanın arkasına çıkarlar ve merdivenlerdeki popüler restoranın ikonik girişini oluştururlar – tatil fotoğrafın için mükemmel arka plan.",
       capPhoto: "Merdivenler her gün yeniden beyaza boyanır",
-      factPaint: "günde beyaza boyanır",
-      factFree: "Ücretsiz", factPublic: "herkese açık geçit",
-      h2paint: "Her gün yeniden beyaz",
+      hSee: "Ne görürsün",
       p3: "Basamaklardaki beyaz boya günde en az üç kez uygulanır. Böylece parlak, sürekli beyaz renk korunur – Yunan adalarının karakteristik görünümü.",
-      h2where: "Nerede bulunur?",
+      tipTitle: "Rehberin ipucu",
+      tip: "Özellikle sabahları veya akşamüstü daha sakin. Gündüz mükemmel fotoğraf için kuyruk olabilir.",
+      hKnow: "Bilmekte fayda var",
       p4: "Kos şehrinin merkezinde, limana ve alışveriş caddelerine yakın. Açılış saati yok: herkese açık bir geçittir.",
-      tip: "İpucu: özellikle sabahları veya akşamüstü daha sakin. Gündüz mükemmel fotoğraf için kuyruk olabilir."
+      ttsNo: "Sesli okuma bu tarayıcıda desteklenmiyor.",
+      ttsOn: "Okunuyor…",
+      ttsStop: "Durdu."
     },
     es: {
       title: "Escaleras blancas",
+      place: "Kos ciudad",
       lead: "El icono azul y blanco de Kos ciudad – perfecto para tu foto de vacaciones.",
-      heroCap: "Escaleras blancas · Kos ciudad",
-      badgeFree: "Gratis", badgeOpen: "Siempre abierto",
-      btnPlay: "🔊 Leer en voz alta",
-      h2photos: "Por qué todo el mundo hace fotos aquí",
+      btnPlay: "Leer en voz alta",
+      btnStop: "Parar",
+      gmaps: "Google Maps",
+      iphone: "iPhone",
+      hStory: "La historia",
       p1: "Las Escaleras Blancas en el corazón de Kos ciudad son uno de los lugares más fotografiados de la isla. Con sus brillantes colores azul y blanco irradian el típico encanto griego.",
       p2: "Conducen a la parte trasera del edificio y forman la entrada icónica del popular restaurante de la escalera – el fondo perfecto para tu foto de vacaciones.",
       capPhoto: "Las escaleras se pintan de blanco de nuevo cada día",
-      factPaint: "veces al día pintadas de blanco",
-      factFree: "Gratis", factPublic: "paso público",
-      h2paint: "Blancas cada día",
+      hSee: "Qué ves",
       p3: "La pintura blanca de los escalones se aplica no menos de tres veces al día. Así se mantiene el color blanco brillante y constante – exactamente el look característico de las islas griegas.",
-      h2where: "¿Dónde las encuentras?",
+      tipTitle: "Consejo del guía",
+      tip: "Especialmente por la mañana o al final de la tarde está más tranquilo. Durante el día puede haber cola para la foto perfecta.",
+      hKnow: "Bueno saberlo",
       p4: "En el centro de Kos ciudad, cerca del puerto y las calles comerciales. Sin horarios: es un paso público.",
-      tip: "Consejo: especialmente por la mañana o al final de la tarde está más tranquilo. Durante el día puede haber cola para la foto perfecta."
+      ttsNo: "La lectura en voz alta no está disponible en este navegador.",
+      ttsOn: "Leyendo…",
+      ttsStop: "Parado."
     }
   };
 
   function setLang(l) {
-    if (!I18N[l]) l = 'nl';
+    if (!window.HK_DICT[l]) l = 'nl';
     localStorage.setItem('hk-lang', l);
     document.documentElement.lang = l;
-    var d = I18N[l];
+    var d = window.HK_DICT[l];
     document.querySelectorAll('[data-i18n]').forEach(function(el){
       var k = el.getAttribute('data-i18n');
       if (d[k]) el.textContent = d[k];
@@ -327,7 +348,8 @@
   var status = document.getElementById('ttsStatus');
   function setStatus(t){ if(status) status.textContent = t; }
   function play(){
-    if(!window.speechSynthesis){ setStatus('Voorlezen niet ondersteund.'); return; }
+    var pack = window.HK_DICT[getLang()] || window.HK_DICT.nl;
+    if(!window.speechSynthesis){ setStatus(pack.ttsNo); return; }
     speechSynthesis.cancel();
     var text = document.getElementById('readText').innerText.replace(/\s+/g,' ').trim();
     var l = getLang();
@@ -339,7 +361,7 @@
     u.onstart = function(){
       btnPlay.classList.add('playing');
       btnStop.classList.add('show');
-      setStatus('Voorlezen… ('+l.toUpperCase()+')');
+      setStatus((window.HK_DICT[l] || window.HK_DICT.nl).ttsOn);
     };
     u.onend = u.onerror = function(){
       btnPlay.classList.remove('playing');
@@ -360,7 +382,7 @@
     if(window.speechSynthesis) speechSynthesis.cancel();
     btnPlay.classList.remove('playing');
     btnStop.classList.remove('show');
-    setStatus('Gestopt.');
+    setStatus((window.HK_DICT[getLang()] || window.HK_DICT.nl).ttsStop);
   }
   btnPlay.addEventListener('click', play);
   btnStop.addEventListener('click', stop);

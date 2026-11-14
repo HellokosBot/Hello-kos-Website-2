@@ -40,20 +40,18 @@
     .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
     .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
     .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+
     .content { padding: 18px 16px 0; }
     h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
     .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+
     .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
     .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
     .btn-audio { background: var(--petrol); color: #fff; }
     .btn-audio.playing { background: var(--petrol-dark); }
     .btn-stop { background: #3A4545; color: #fff; display: none; }
     .btn-stop.show { display: flex; }
-    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
-    .btn-apple { background: #111; color: #fff; }
+
     .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
     .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
     .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
@@ -64,10 +62,7 @@
     .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
     .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
     .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
-    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-    .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
-    .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
-    .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
+
     .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
     .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
     .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
@@ -101,46 +96,35 @@
   <main class="main">
     <div class="hero-wrap">
       <img src="img/jwwb/ec2f162347-kos-stadt-palazzo-di-giustizia-standard.jpg" alt="Palazzo di Giustizia" loading="eager">
-      <div class="hero-caption" data-i18n="heroCap">Palazzo di Giustizia</div>
+      <div class="hero-title"><h1 data-i18n="title">Palazzo di Giustizia</h1></div>
     </div>
 
     <div class="content">
-      <h1 data-i18n="title">Palazzo di Giustizia</h1>
-      <p class="lead" data-i18n="lead">Italiaans gerechtshof uit 1928 – nog steeds rechtbank en politie, met de Latijnse spreuk “we zijn allen slaven van de wet”.</p>
+<p class="lead" data-i18n="lead">Italiaans gerechtshof uit 1928 – nog steeds rechtbank en politie, met de Latijnse spreuk “we zijn allen slaven van de wet”.</p>
 
-      <div class="badges">
-        <span class="badge" data-i18n="badgeFree">Gratis</span>
-        <span class="badge">Kos-stad</span>
-        <span class="badge">1928</span>
-      </div>
+      
 
       <div class="actions">
         <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
         <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Palazzo%20di%20Giustizia%20Kos%20Plateia%20Platanou" target="_blank" rel="noopener">📍 Google Maps</a>
-        <a class="btn btn-apple" href="https://maps.apple.com/?q=Palazzo%20di%20Giustizia%20Kos%20Plateia%20Platanou" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      
+      <div class="map-row">
+        <a href="https://www.google.com/maps/search/?api=1&query=Palazzo%20di%20Giustizia%20Kos%20Plateia%20Platanou" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+        <a href="https://maps.apple.com/?q=Palazzo%20di%20Giustizia%20Kos%20Plateia%20Platanou" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
       </div>
       <p class="status" id="ttsStatus"></p>
 
       <div id="readText">
         <div class="card">
-          <h2 data-i18n="h2court">Gerechtshof</h2>
+          <h2 data-i18n="hStory">Gerechtshof</h2>
           <p data-i18n="p1">Palazzo di Giustizia betekent Gerechtshof of Justice Palace. De Italianen bouwden het in 1928 tijdens hun bezetting. Het diende als residentie voor gouverneurs en huisvestte het gerechtshof.</p>
         </div>
 
-        <div class="facts">
-          <div class="fact">
-            <span class="n">1928</span>
-            <span class="l" data-i18n="factBuilt">gebouwd</span>
-          </div>
-          <div class="fact">
-            <span class="n" data-i18n="factUse">Nog in gebruik</span>
-            <span class="l" data-i18n="factPolice">rechtbank &amp; politie</span>
-          </div>
-        </div>
+        
 
         <div class="card">
-          <h2 data-i18n="h2latin">“Legum servi sumus omnes”</h2>
+          <h2 data-i18n="hSee">“Legum servi sumus omnes”</h2>
           <p data-i18n="p2">Aan de achterkant, gericht op Plateia Platanou, staat de inscriptie: Legum servi sumus omnes – “We zijn allen slaven van de wet”. Een symbool van Italiaanse macht uit die tijd.</p>
         </div>
 
@@ -179,9 +163,9 @@
         </div>
 
         <div class="card">
-          <h2 data-i18n="h2visit">Bezoeken</h2>
+          <h2 data-i18n="hKnow">Bezoeken</h2>
           <p data-i18n="p5">Van buitenaf altijd te zien. Binnen is het een werkend gerechts- en politiegebouw – niet bedoeld als museum.</p>
-          <div class="tip" data-i18n="tip">Tip: lees de Latijnse spreuk aan de achterkant. Op zondag kun je de vlagceremonie meemaken bij zonsopgang of zonsondergang.</div>
+          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: lees de Latijnse spreuk aan de achterkant. Op zondag kun je de vlagceremonie meemaken bij zonsopgang of zonsondergang.</p></div>
         </div>
       </div>
     </div>
@@ -194,132 +178,150 @@
 
 <script>
 (function(){
-  var I18N = {
-    nl: {
-      title: "Palazzo di Giustizia",
-      lead: "Italiaans gerechtshof uit 1928 – nog steeds rechtbank en politie, met de Latijnse spreuk “we zijn allen slaven van de wet”.",
-      heroCap: "Palazzo di Giustizia",
-      badgeFree: "Gratis",
-      btnPlay: "🔊 Voorlezen",
-      h2court: "Gerechtshof",
-      p1: "Palazzo di Giustizia betekent Gerechtshof of Justice Palace. De Italianen bouwden het in 1928 tijdens hun bezetting. Het diende als residentie voor gouverneurs en huisvestte het gerechtshof.",
-      factBuilt: "gebouwd", factUse: "Nog in gebruik", factPolice: "rechtbank & politie",
-      h2latin: "“Legum servi sumus omnes”",
-      p2: "Aan de achterkant, gericht op Plateia Platanou, staat de inscriptie: Legum servi sumus omnes – “We zijn allen slaven van de wet”. Een symbool van Italiaanse macht uit die tijd.",
-      cap1: "Het gebouw in Kos-stad",
-      h2after: "Na 1933 en 1947",
-      p3: "Na de aardbeving van 1933 bleef het grotendeels intact. Na de overdracht aan Griekenland in 1947 werd het de zetel van het huidige gerechtshof. Vandaag zitten er nog steeds het gerechtshof en de politie.",
-      h2flag: "Vlagceremonie",
-      p4: "Elke zondag hijst het leger de Griekse vlag bij zonsopgang en zonsondergang: soldaten in uniform, vlag hijsen en het volkslied. Een kort, formeel ritueel van nationale trots.",
-      g1: "Gevel", g2: "Detail", g3: "Omgeving", g4: "Gebouw",
-      h2visit: "Bezoeken",
-      p5: "Van buitenaf altijd te zien. Binnen is het een werkend gerechts- en politiegebouw – niet bedoeld als museum.",
-      tip: "Tip: lees de Latijnse spreuk aan de achterkant. Op zondag kun je de vlagceremonie meemaken bij zonsopgang of zonsondergang."
+  var I18N = window.HK_DICT = {
+    "nl": {
+      "title": "Palazzo di Giustizia",
+      "lead": "Italiaans gerechtshof uit 1928 – nog steeds rechtbank en politie, met de Latijnse spreuk “we zijn allen slaven van de wet”.",
+      "btnPlay": "Voorlezen",
+      "p1": "Palazzo di Giustizia betekent Gerechtshof of Justice Palace. De Italianen bouwden het in 1928 tijdens hun bezetting. Het diende als residentie voor gouverneurs en huisvestte het gerechtshof.",
+      "p2": "Aan de achterkant, gericht op Plateia Platanou, staat de inscriptie: Legum servi sumus omnes – “We zijn allen slaven van de wet”. Een symbool van Italiaanse macht uit die tijd.",
+      "cap1": "Het gebouw in Kos-stad",
+      "h2after": "Na 1933 en 1947",
+      "p3": "Na de aardbeving van 1933 bleef het grotendeels intact. Na de overdracht aan Griekenland in 1947 werd het de zetel van het huidige gerechtshof. Vandaag zitten er nog steeds het gerechtshof en de politie.",
+      "h2flag": "Vlagceremonie",
+      "p4": "Elke zondag hijst het leger de Griekse vlag bij zonsopgang en zonsondergang: soldaten in uniform, vlag hijsen en het volkslied. Een kort, formeel ritueel van nationale trots.",
+      "g1": "Gevel",
+      "g2": "Detail",
+      "g3": "Omgeving",
+      "g4": "Gebouw",
+      "p5": "Van buitenaf altijd te zien. Binnen is het een werkend gerechts- en politiegebouw – niet bedoeld als museum.",
+      "tip": "lees de Latijnse spreuk aan de achterkant. Op zondag kun je de vlagceremonie meemaken bij zonsopgang of zonsondergang.",
+      "hStory": "Het verhaal",
+      "hSee": "Wat je ziet",
+      "hKnow": "Goed om te weten",
+      "tipTitle": "Tip van de gids",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    en: {
-      title: "Palazzo di Giustizia",
-      lead: "Italian courthouse from 1928 – still a court and police station, with the Latin motto “we are all slaves of the law”.",
-      heroCap: "Palazzo di Giustizia",
-      badgeFree: "Free",
-      btnPlay: "🔊 Read aloud",
-      h2court: "Courthouse",
-      p1: "Palazzo di Giustizia means Courthouse or Justice Palace. The Italians built it in 1928 during their occupation. It served as a residence for governors and housed the courthouse.",
-      factBuilt: "built", factUse: "Still in use", factPolice: "court & police",
-      h2latin: "“Legum servi sumus omnes”",
-      p2: "On the back, facing Plateia Platanou, is the inscription: Legum servi sumus omnes – “We are all slaves of the law”. A symbol of Italian power from that time.",
-      cap1: "The building in Kos Town",
-      h2after: "After 1933 and 1947",
-      p3: "After the 1933 earthquake it remained largely intact. After the transfer to Greece in 1947 it became the seat of the current courthouse. Today it still houses the court and the police.",
-      h2flag: "Flag ceremony",
-      p4: "Every Sunday the army raises the Greek flag at sunrise and sunset: soldiers in uniform, flag raising and the national anthem. A short, formal ritual of national pride.",
-      g1: "Façade", g2: "Detail", g3: "Surroundings", g4: "Building",
-      h2visit: "Visiting",
-      p5: "Always visible from the outside. Inside it is a working court and police building – not intended as a museum.",
-      tip: "Tip: read the Latin motto on the back. On Sunday you can watch the flag ceremony at sunrise or sunset."
+    "en": {
+      "title": "Palazzo di Giustizia",
+      "lead": "Italian courthouse from 1928 – still a court and police station, with the Latin motto “we are all slaves of the law”.",
+      "btnPlay": "Read aloud",
+      "p1": "Palazzo di Giustizia means Courthouse or Justice Palace. The Italians built it in 1928 during their occupation. It served as a residence for governors and housed the courthouse.",
+      "p2": "On the back, facing Plateia Platanou, is the inscription: Legum servi sumus omnes – “We are all slaves of the law”. A symbol of Italian power from that time.",
+      "cap1": "The building in Kos Town",
+      "h2after": "After 1933 and 1947",
+      "p3": "After the 1933 earthquake it remained largely intact. After the transfer to Greece in 1947 it became the seat of the current courthouse. Today it still houses the court and the police.",
+      "h2flag": "Flag ceremony",
+      "p4": "Every Sunday the army raises the Greek flag at sunrise and sunset: soldiers in uniform, flag raising and the national anthem. A short, formal ritual of national pride.",
+      "g1": "Façade",
+      "g2": "Detail",
+      "g3": "Surroundings",
+      "g4": "Building",
+      "p5": "Always visible from the outside. Inside it is a working court and police building – not intended as a museum.",
+      "tip": "read the Latin motto on the back. On Sunday you can watch the flag ceremony at sunrise or sunset.",
+      "hStory": "The story",
+      "hSee": "What you see",
+      "hKnow": "Good to know",
+      "tipTitle": "Guide’s tip",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    de: {
-      title: "Palazzo di Giustizia",
-      lead: "Italienisches Gericht aus 1928 – immer noch Gericht und Polizei, mit dem lateinischen Spruch “wir sind alle Sklaven des Gesetzes”.",
-      heroCap: "Palazzo di Giustizia",
-      badgeFree: "Kostenlos",
-      btnPlay: "🔊 Vorlesen",
-      h2court: "Gerichtshof",
-      p1: "Palazzo di Giustizia bedeutet Gerichtshof oder Justizpalast. Die Italiener bauten es 1928 während ihrer Besatzung. Es diente als Residenz für Gouverneure und beherbergte das Gericht.",
-      factBuilt: "gebaut", factUse: "Noch in Nutzung", factPolice: "Gericht & Polizei",
-      h2latin: "“Legum servi sumus omnes”",
-      p2: "Auf der Rückseite, zur Plateia Platanou hin, steht die Inschrift: Legum servi sumus omnes – “Wir sind alle Sklaven des Gesetzes”. Ein Symbol italienischer Macht aus jener Zeit.",
-      cap1: "Das Gebäude in Kos-Stadt",
-      h2after: "Nach 1933 und 1947",
-      p3: "Nach dem Erdbeben von 1933 blieb es größtenteils intakt. Nach der Übergabe an Griechenland 1947 wurde es Sitz des heutigen Gerichts. Heute befinden sich dort immer noch Gericht und Polizei.",
-      h2flag: "Flaggenzeremonie",
-      p4: "Jeden Sonntag hisst die Armee die griechische Flagge bei Sonnenaufgang und Sonnenuntergang: Soldaten in Uniform, Flaggenhissen und die Nationalhymne. Ein kurzes, formelles Ritual nationalen Stolzes.",
-      g1: "Fassade", g2: "Detail", g3: "Umgebung", g4: "Gebäude",
-      h2visit: "Besuchen",
-      p5: "Von außen immer sichtbar. Innen ist es ein funktionierendes Gerichts- und Polizeigebäude – nicht als Museum gedacht.",
-      tip: "Tipp: lies den lateinischen Spruch auf der Rückseite. Am Sonntag kannst du die Flaggenzeremonie bei Sonnenaufgang oder Sonnenuntergang erleben."
+    "de": {
+      "title": "Palazzo di Giustizia",
+      "lead": "Italienisches Gericht aus 1928 – immer noch Gericht und Polizei, mit dem lateinischen Spruch “wir sind alle Sklaven des Gesetzes”.",
+      "btnPlay": "Vorlesen",
+      "p1": "Palazzo di Giustizia bedeutet Gerichtshof oder Justizpalast. Die Italiener bauten es 1928 während ihrer Besatzung. Es diente als Residenz für Gouverneure und beherbergte das Gericht.",
+      "p2": "Auf der Rückseite, zur Plateia Platanou hin, steht die Inschrift: Legum servi sumus omnes – “Wir sind alle Sklaven des Gesetzes”. Ein Symbol italienischer Macht aus jener Zeit.",
+      "cap1": "Das Gebäude in Kos-Stadt",
+      "h2after": "Nach 1933 und 1947",
+      "p3": "Nach dem Erdbeben von 1933 blieb es größtenteils intakt. Nach der Übergabe an Griechenland 1947 wurde es Sitz des heutigen Gerichts. Heute befinden sich dort immer noch Gericht und Polizei.",
+      "h2flag": "Flaggenzeremonie",
+      "p4": "Jeden Sonntag hisst die Armee die griechische Flagge bei Sonnenaufgang und Sonnenuntergang: Soldaten in Uniform, Flaggenhissen und die Nationalhymne. Ein kurzes, formelles Ritual nationalen Stolzes.",
+      "g1": "Fassade",
+      "g2": "Detail",
+      "g3": "Umgebung",
+      "g4": "Gebäude",
+      "p5": "Von außen immer sichtbar. Innen ist es ein funktionierendes Gerichts- und Polizeigebäude – nicht als Museum gedacht.",
+      "tip": "lies den lateinischen Spruch auf der Rückseite. Am Sonntag kannst du die Flaggenzeremonie bei Sonnenaufgang oder Sonnenuntergang erleben.",
+      "hStory": "Die Geschichte",
+      "hSee": "Was du siehst",
+      "hKnow": "Gut zu wissen",
+      "tipTitle": "Tipp des Guides",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    it: {
-      title: "Palazzo di Giustizia",
-      lead: "Tribunale italiano del 1928 – ancora tribunale e polizia, con il motto latino “siamo tutti schiavi della legge”.",
-      heroCap: "Palazzo di Giustizia",
-      badgeFree: "Gratis",
-      btnPlay: "🔊 Leggi ad alta voce",
-      h2court: "Tribunale",
-      p1: "Palazzo di Giustizia significa Tribunale o Palazzo di Giustizia. Gli italiani lo costruirono nel 1928 durante l’occupazione. Serviva come residenza per i governatori e ospitava il tribunale.",
-      factBuilt: "costruito", factUse: "Ancora in uso", factPolice: "tribunale & polizia",
-      h2latin: "“Legum servi sumus omnes”",
-      p2: "Sul retro, rivolto verso Plateia Platanou, c’è l’iscrizione: Legum servi sumus omnes – “Siamo tutti schiavi della legge”. Un simbolo del potere italiano di quel tempo.",
-      cap1: "L’edificio a Kos città",
-      h2after: "Dopo il 1933 e il 1947",
-      p3: "Dopo il terremoto del 1933 rimase in gran parte intatto. Dopo il trasferimento alla Grecia nel 1947 divenne sede del tribunale attuale. Oggi ospita ancora il tribunale e la polizia.",
-      h2flag: "Cerimonia della bandiera",
-      p4: "Ogni domenica l’esercito alza la bandiera greca all’alba e al tramonto: soldati in uniforme, alzabandiera e l’inno nazionale. Un breve rituale formale di orgoglio nazionale.",
-      g1: "Facciata", g2: "Dettaglio", g3: "Dintorni", g4: "Edificio",
-      h2visit: "Visitare",
-      p5: "Sempre visibile dall’esterno. All’interno è un edificio giudiziario e di polizia funzionante – non pensato come museo.",
-      tip: "Consiglio: leggi il motto latino sul retro. La domenica puoi assistere alla cerimonia della bandiera all’alba o al tramonto."
+    "it": {
+      "title": "Palazzo di Giustizia",
+      "lead": "Tribunale italiano del 1928 – ancora tribunale e polizia, con il motto latino “siamo tutti schiavi della legge”.",
+      "btnPlay": "Leggi ad alta voce",
+      "p1": "Palazzo di Giustizia significa Tribunale o Palazzo di Giustizia. Gli italiani lo costruirono nel 1928 durante l’occupazione. Serviva come residenza per i governatori e ospitava il tribunale.",
+      "p2": "Sul retro, rivolto verso Plateia Platanou, c’è l’iscrizione: Legum servi sumus omnes – “Siamo tutti schiavi della legge”. Un simbolo del potere italiano di quel tempo.",
+      "cap1": "L’edificio a Kos città",
+      "h2after": "Dopo il 1933 e il 1947",
+      "p3": "Dopo il terremoto del 1933 rimase in gran parte intatto. Dopo il trasferimento alla Grecia nel 1947 divenne sede del tribunale attuale. Oggi ospita ancora il tribunale e la polizia.",
+      "h2flag": "Cerimonia della bandiera",
+      "p4": "Ogni domenica l’esercito alza la bandiera greca all’alba e al tramonto: soldati in uniforme, alzabandiera e l’inno nazionale. Un breve rituale formale di orgoglio nazionale.",
+      "g1": "Facciata",
+      "g2": "Dettaglio",
+      "g3": "Dintorni",
+      "g4": "Edificio",
+      "p5": "Sempre visibile dall’esterno. All’interno è un edificio giudiziario e di polizia funzionante – non pensato come museo.",
+      "tip": "leggi il motto latino sul retro. La domenica puoi assistere alla cerimonia della bandiera all’alba o al tramonto.",
+      "hStory": "La storia",
+      "hSee": "Cosa vedi",
+      "hKnow": "Buono a sapersi",
+      "tipTitle": "Consiglio della guida",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    tr: {
-      title: "Palazzo di Giustizia",
-      lead: "1928’den İtalyan adliye binası – hâlâ mahkeme ve polis, Latince “hepimiz yasanın kölesiyiz” sloganıyla.",
-      heroCap: "Palazzo di Giustizia",
-      badgeFree: "Ücretsiz",
-      btnPlay: "🔊 Sesli oku",
-      h2court: "Adliye",
-      p1: "Palazzo di Giustizia Adliye veya Adalet Sarayı anlamına gelir. İtalyanlar işgal sırasında 1928’de inşa etti. Valiler için konut olarak hizmet etti ve adliyeyi barındırdı.",
-      factBuilt: "inşa edildi", factUse: "Hâlâ kullanılıyor", factPolice: "mahkeme & polis",
-      h2latin: "“Legum servi sumus omnes”",
-      p2: "Arka tarafta, Plateia Platanou’ya bakan kısımda yazı var: Legum servi sumus omnes – “Hepimiz yasanın kölesiyiz”. O dönemin İtalyan gücünün sembolü.",
-      cap1: "Kos şehrindeki bina",
-      h2after: "1933 ve 1947’den sonra",
-      p3: "1933 depreminden sonra büyük ölçüde sağlam kaldı. 1947’de Yunanistan’a devredildikten sonra mevcut adliyenin merkezi oldu. Bugün hâlâ mahkeme ve polis burada.",
-      h2flag: "Bayrak töreni",
-      p4: "Her pazar ordu Yunan bayrağını gün doğumu ve gün batımında çeker: üniformalı askerler, bayrak çekme ve milli marş. Ulusal gururun kısa, resmi bir ritüeli.",
-      g1: "Cephe", g2: "Detay", g3: "Çevre", g4: "Bina",
-      h2visit: "Ziyaret",
-      p5: "Dışarıdan her zaman görülebilir. İçeride çalışan bir adliye ve polis binasıdır – müze olarak tasarlanmamıştır.",
-      tip: "İpucu: arka taraftaki Latince sloganı oku. Pazar günü gün doğumu veya gün batımında bayrak törenini izleyebilirsin."
+    "tr": {
+      "title": "Palazzo di Giustizia",
+      "lead": "1928’den İtalyan adliye binası – hâlâ mahkeme ve polis, Latince “hepimiz yasanın kölesiyiz” sloganıyla.",
+      "btnPlay": "Sesli oku",
+      "p1": "Palazzo di Giustizia Adliye veya Adalet Sarayı anlamına gelir. İtalyanlar işgal sırasında 1928’de inşa etti. Valiler için konut olarak hizmet etti ve adliyeyi barındırdı.",
+      "p2": "Arka tarafta, Plateia Platanou’ya bakan kısımda yazı var: Legum servi sumus omnes – “Hepimiz yasanın kölesiyiz”. O dönemin İtalyan gücünün sembolü.",
+      "cap1": "Kos şehrindeki bina",
+      "h2after": "1933 ve 1947’den sonra",
+      "p3": "1933 depreminden sonra büyük ölçüde sağlam kaldı. 1947’de Yunanistan’a devredildikten sonra mevcut adliyenin merkezi oldu. Bugün hâlâ mahkeme ve polis burada.",
+      "h2flag": "Bayrak töreni",
+      "p4": "Her pazar ordu Yunan bayrağını gün doğumu ve gün batımında çeker: üniformalı askerler, bayrak çekme ve milli marş. Ulusal gururun kısa, resmi bir ritüeli.",
+      "g1": "Cephe",
+      "g2": "Detay",
+      "g3": "Çevre",
+      "g4": "Bina",
+      "p5": "Dışarıdan her zaman görülebilir. İçeride çalışan bir adliye ve polis binasıdır – müze olarak tasarlanmamıştır.",
+      "tip": "arka taraftaki Latince sloganı oku. Pazar günü gün doğumu veya gün batımında bayrak törenini izleyebilirsin.",
+      "hStory": "Hikaye",
+      "hSee": "Ne görürsün",
+      "hKnow": "Bilmekte fayda var",
+      "tipTitle": "Rehberin ipucu",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    es: {
-      title: "Palazzo di Giustizia",
-      lead: "Tribunal italiano de 1928 – todavía tribunal y policía, con el lema latino “todos somos esclavos de la ley”.",
-      heroCap: "Palazzo di Giustizia",
-      badgeFree: "Gratis",
-      btnPlay: "🔊 Leer en voz alta",
-      h2court: "Tribunal",
-      p1: "Palazzo di Giustizia significa Tribunal o Palacio de Justicia. Los italianos lo construyeron en 1928 durante su ocupación. Servía como residencia de gobernadores y albergaba el tribunal.",
-      factBuilt: "construido", factUse: "Todavía en uso", factPolice: "tribunal & policía",
-      h2latin: "“Legum servi sumus omnes”",
-      p2: "En la parte trasera, orientada a Plateia Platanou, está la inscripción: Legum servi sumus omnes – “Todos somos esclavos de la ley”. Un símbolo del poder italiano de aquella época.",
-      cap1: "El edificio en Kos ciudad",
-      h2after: "Después de 1933 y 1947",
-      p3: "Tras el terremoto de 1933 permaneció en gran parte intacto. Tras la transferencia a Grecia en 1947 se convirtió en sede del tribunal actual. Hoy todavía alberga el tribunal y la policía.",
-      h2flag: "Ceremonia de la bandera",
-      p4: "Cada domingo el ejército iza la bandera griega al amanecer y al atardecer: soldados de uniforme, izado de bandera y el himno nacional. Un breve ritual formal de orgullo nacional.",
-      g1: "Fachada", g2: "Detalle", g3: "Entorno", g4: "Edificio",
-      h2visit: "Visitar",
-      p5: "Siempre visible desde fuera. Dentro es un edificio judicial y policial en funcionamiento – no pensado como museo.",
-      tip: "Consejo: lee el lema latino en la parte trasera. El domingo puedes ver la ceremonia de la bandera al amanecer o al atardecer."
+    "es": {
+      "title": "Palazzo di Giustizia",
+      "lead": "Tribunal italiano de 1928 – todavía tribunal y policía, con el lema latino “todos somos esclavos de la ley”.",
+      "btnPlay": "Leer en voz alta",
+      "p1": "Palazzo di Giustizia significa Tribunal o Palacio de Justicia. Los italianos lo construyeron en 1928 durante su ocupación. Servía como residencia de gobernadores y albergaba el tribunal.",
+      "p2": "En la parte trasera, orientada a Plateia Platanou, está la inscripción: Legum servi sumus omnes – “Todos somos esclavos de la ley”. Un símbolo del poder italiano de aquella época.",
+      "cap1": "El edificio en Kos ciudad",
+      "h2after": "Después de 1933 y 1947",
+      "p3": "Tras el terremoto de 1933 permaneció en gran parte intacto. Tras la transferencia a Grecia en 1947 se convirtió en sede del tribunal actual. Hoy todavía alberga el tribunal y la policía.",
+      "h2flag": "Ceremonia de la bandera",
+      "p4": "Cada domingo el ejército iza la bandera griega al amanecer y al atardecer: soldados de uniforme, izado de bandera y el himno nacional. Un breve ritual formal de orgullo nacional.",
+      "g1": "Fachada",
+      "g2": "Detalle",
+      "g3": "Entorno",
+      "g4": "Edificio",
+      "p5": "Siempre visible desde fuera. Dentro es un edificio judicial y policial en funcionamiento – no pensado como museo.",
+      "tip": "lee el lema latino en la parte trasera. El domingo puedes ver la ceremonia de la bandera al amanecer o al atardecer.",
+      "hStory": "La historia",
+      "hSee": "Qué ves",
+      "hKnow": "Bueno saberlo",
+      "tipTitle": "Consejo del guía",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     }
   };
 

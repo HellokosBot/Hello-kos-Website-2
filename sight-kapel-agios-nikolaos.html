@@ -40,20 +40,18 @@
     .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
     .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
     .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+
     .content { padding: 18px 16px 0; }
     h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
     .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+
     .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
     .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
     .btn-audio { background: var(--petrol); color: #fff; }
     .btn-audio.playing { background: var(--petrol-dark); }
     .btn-stop { background: #3A4545; color: #fff; display: none; }
     .btn-stop.show { display: flex; }
-    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
-    .btn-apple { background: #111; color: #fff; }
+
     .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
     .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
     .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
@@ -94,29 +92,28 @@
   <main class="main">
     <div class="hero-wrap">
       <img src="img/jwwb/58e639e0d7-agios-stefanos-beach-kos-griechenland-urlaub-jpg-standard.webp" alt="Kapel Agios Nikolaos" loading="eager">
-      <div class="hero-caption" data-i18n="heroCap">Kapel Agios Nikolaos</div>
+      <div class="hero-title"><h1 data-i18n="title">Kapel Agios Nikolaos</h1></div>
     </div>
 
     <div class="content">
-      <h1 data-i18n="title">Kapel Agios Nikolaos</h1>
-      <p class="lead" data-i18n="lead">Kleine orthodoxe kapel op Kos – rustige plek, typisch voor de eilandkapellen.</p>
+<p class="lead" data-i18n="lead">Kleine orthodoxe kapel op Kos – rustige plek, typisch voor de eilandkapellen.</p>
 
-      <div class="badges">
-        <span class="badge" data-i18n="badgeChapel">Kapel</span>
-        <span class="badge" data-i18n="badgeFree">Gratis</span>
-      </div>
+      
 
       <div class="actions">
         <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
         <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Agios%20Nikolaos%20Chapel%20Kos" target="_blank" rel="noopener">📍 Google Maps</a>
-        <a class="btn btn-apple" href="https://maps.apple.com/?q=Agios%20Nikolaos%20Chapel%20Kos" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      
+      <div class="map-row">
+        <a href="https://www.google.com/maps/search/?api=1&query=Agios%20Nikolaos%20Chapel%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+        <a href="https://maps.apple.com/?q=Agios%20Nikolaos%20Chapel%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
       </div>
       <p class="status" id="ttsStatus"></p>
 
       <div id="readText">
         <div class="card">
-          <h2 data-i18n="h2chapel">Kleine eilandkapel</h2>
+          <h2 data-i18n="hStory">Kleine eilandkapel</h2>
           <p data-i18n="p1">De kapel van Agios Nikolaos is een van de vele kleine orthodoxe kapellen op Kos – eenvoudig, vaak wit of steen, en belangrijk voor lokale gelovigen.</p>
         </div>
 
@@ -160,9 +157,9 @@
         </div>
 
         <div class="card">
-          <h2 data-i18n="h2visit">Bezoeken</h2>
+          <h2 data-i18n="hSee">Bezoeken</h2>
           <p data-i18n="p7">Gratis van buitenaf; bij open deur stil en respectvol.</p>
-          <div class="tip" data-i18n="tip">Tip: steek eventueel een kaarsje aan als de kapel open is.</div>
+          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: steek eventueel een kaarsje aan als de kapel open is.</p></div>
         </div>
       </div>
     </div>
@@ -175,114 +172,138 @@
 
 <script>
 (function(){
-  var I18N = {
-    nl: {
-      title: "Kapel Agios Nikolaos",
-      lead: "Kleine orthodoxe kapel op Kos – rustige plek, typisch voor de eilandkapellen.",
-      heroCap: "Kapel Agios Nikolaos",
-      badgeChapel: "Kapel", badgeFree: "Gratis",
-      btnPlay: "🔊 Voorlezen",
-      h2chapel: "Kleine eilandkapel",
-      p1: "De kapel van Agios Nikolaos is een van de vele kleine orthodoxe kapellen op Kos – eenvoudig, vaak wit of steen, en belangrijk voor lokale gelovigen.",
-      p2: "De kleine kapel van Agios Nikolaos ligt op een piepklein eilandje genaamd Kastri, vlak voor de kust. Dit witte kerkje met blauwe koepel is een van de bekendste en meest gefotografeerde plekjes van het eiland. Het staat helemaal alleen op het rotseilandje.",
-      p3: "Er ligt een klein steigertje en dan loop je via stenen traptreden omhoog naar de kapel. In de zomer is de uitdaging vanaf de kant naar de overkant te zwemmen en daar de bel te luiden.",
-      p4: "De kapel stamt waarschijnlijk uit de Byzantijnse tijd, uit de jaren 469-554 na Christus, en is gewijd aan Sint-Nicolaas, de beschermheilige van zeelieden.",
-      p5: "Op het eilandje zelf zie je nog wat resten van een middeleeuws kasteel liggen, vandaar de bijnaam Paleokastro (oud kasteel).",
-      p6: "Bijna iedereen die op Kos komt maakt er wel een foto. Kortom: een romantisch, rustig en fotogeniek plekje.",
-      g1: "Kapel", g2: "Kapel", g3: "Kapel", g4: "Kapel",
-      h2visit: "Bezoeken",
-      p7: "Gratis van buitenaf; bij open deur stil en respectvol.",
-      tip: "Tip: steek eventueel een kaarsje aan als de kapel open is."
+  var I18N = window.HK_DICT = {
+    "nl": {
+      "title": "Kapel Agios Nikolaos",
+      "lead": "Kleine orthodoxe kapel op Kos – rustige plek, typisch voor de eilandkapellen.",
+      "btnPlay": "Voorlezen",
+      "p1": "De kapel van Agios Nikolaos is een van de vele kleine orthodoxe kapellen op Kos – eenvoudig, vaak wit of steen, en belangrijk voor lokale gelovigen.",
+      "p2": "De kleine kapel van Agios Nikolaos ligt op een piepklein eilandje genaamd Kastri, vlak voor de kust. Dit witte kerkje met blauwe koepel is een van de bekendste en meest gefotografeerde plekjes van het eiland. Het staat helemaal alleen op het rotseilandje.",
+      "p3": "Er ligt een klein steigertje en dan loop je via stenen traptreden omhoog naar de kapel. In de zomer is de uitdaging vanaf de kant naar de overkant te zwemmen en daar de bel te luiden.",
+      "p4": "De kapel stamt waarschijnlijk uit de Byzantijnse tijd, uit de jaren 469-554 na Christus, en is gewijd aan Sint-Nicolaas, de beschermheilige van zeelieden.",
+      "p5": "Op het eilandje zelf zie je nog wat resten van een middeleeuws kasteel liggen, vandaar de bijnaam Paleokastro (oud kasteel).",
+      "p6": "Bijna iedereen die op Kos komt maakt er wel een foto. Kortom: een romantisch, rustig en fotogeniek plekje.",
+      "g1": "Kapel",
+      "g2": "Kapel",
+      "g3": "Kapel",
+      "g4": "Kapel",
+      "p7": "Gratis van buitenaf; bij open deur stil en respectvol.",
+      "tip": "steek eventueel een kaarsje aan als de kapel open is.",
+      "hStory": "Het verhaal",
+      "hSee": "Wat je ziet",
+      "tipTitle": "Tip van de gids",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    en: {
-      title: "Chapel of Agios Nikolaos",
-      lead: "Small Orthodox chapel on Kos – quiet spot, typical of the island chapels.",
-      heroCap: "Chapel of Agios Nikolaos",
-      badgeChapel: "Chapel", badgeFree: "Free",
-      btnPlay: "🔊 Read aloud",
-      h2chapel: "Small island chapel",
-      p1: "The chapel of Agios Nikolaos is one of the many small Orthodox chapels on Kos – simple, often white or stone, and important for local believers.",
-      p2: "The small chapel of Agios Nikolaos stands on a tiny islet called Kastri, just off the coast. This white church with a blue dome is one of the best-known and most photographed spots on the island. It stands completely alone on the rocky islet.",
-      p3: "There is a small jetty and then you walk up stone steps to the chapel. In summer the challenge is to swim from the shore to the other side and ring the bell there.",
-      p4: "The chapel probably dates from Byzantine times, from the years 469-554 AD, and is dedicated to Saint Nicholas, the patron saint of sailors.",
-      p5: "On the islet itself you can still see remains of a medieval castle, hence the nickname Paleokastro (old castle).",
-      p6: "Almost everyone who comes to Kos takes a photo of it. In short: a romantic, quiet and photogenic spot.",
-      g1: "Chapel", g2: "Chapel", g3: "Chapel", g4: "Chapel",
-      h2visit: "Visiting",
-      p7: "Free from the outside; if the door is open, be quiet and respectful.",
-      tip: "Tip: light a candle if the chapel is open."
+    "en": {
+      "title": "Chapel of Agios Nikolaos",
+      "lead": "Small Orthodox chapel on Kos – quiet spot, typical of the island chapels.",
+      "btnPlay": "Read aloud",
+      "p1": "The chapel of Agios Nikolaos is one of the many small Orthodox chapels on Kos – simple, often white or stone, and important for local believers.",
+      "p2": "The small chapel of Agios Nikolaos stands on a tiny islet called Kastri, just off the coast. This white church with a blue dome is one of the best-known and most photographed spots on the island. It stands completely alone on the rocky islet.",
+      "p3": "There is a small jetty and then you walk up stone steps to the chapel. In summer the challenge is to swim from the shore to the other side and ring the bell there.",
+      "p4": "The chapel probably dates from Byzantine times, from the years 469-554 AD, and is dedicated to Saint Nicholas, the patron saint of sailors.",
+      "p5": "On the islet itself you can still see remains of a medieval castle, hence the nickname Paleokastro (old castle).",
+      "p6": "Almost everyone who comes to Kos takes a photo of it. In short: a romantic, quiet and photogenic spot.",
+      "g1": "Chapel",
+      "g2": "Chapel",
+      "g3": "Chapel",
+      "g4": "Chapel",
+      "p7": "Free from the outside; if the door is open, be quiet and respectful.",
+      "tip": "light a candle if the chapel is open.",
+      "hStory": "The story",
+      "hSee": "What you see",
+      "tipTitle": "Guide’s tip",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    de: {
-      title: "Kapelle Agios Nikolaos",
-      lead: "Kleine orthodoxe Kapelle auf Kos – ruhiger Ort, typisch für die Inselkapellen.",
-      heroCap: "Kapelle Agios Nikolaos",
-      badgeChapel: "Kapelle", badgeFree: "Kostenlos",
-      btnPlay: "🔊 Vorlesen",
-      h2chapel: "Kleine Inselkapelle",
-      p1: "Die Kapelle von Agios Nikolaos ist eine der vielen kleinen orthodoxen Kapellen auf Kos – einfach, oft weiß oder aus Stein, und wichtig für die lokalen Gläubigen.",
-      p2: "Die kleine Kapelle von Agios Nikolaos liegt auf einem winzigen Inselchen namens Kastri, direkt vor der Küste. Dieses weiße Kirchlein mit blauer Kuppel ist einer der bekanntesten und am meisten fotografierten Orte der Insel. Es steht ganz allein auf dem Felsinselchen.",
-      p3: "Es gibt einen kleinen Steg und dann geht man über Steintreppen zur Kapelle hinauf. Im Sommer ist die Herausforderung, vom Ufer zur anderen Seite zu schwimmen und dort die Glocke zu läuten.",
-      p4: "Die Kapelle stammt wahrscheinlich aus byzantinischer Zeit, aus den Jahren 469-554 n. Chr., und ist dem Heiligen Nikolaus, dem Schutzpatron der Seefahrer, geweiht.",
-      p5: "Auf dem Inselchen selbst sieht man noch Reste einer mittelalterlichen Burg, daher der Beiname Paleokastro (alte Burg).",
-      p6: "Fast jeder, der nach Kos kommt, macht ein Foto davon. Kurz gesagt: ein romantischer, ruhiger und fotogener Ort.",
-      g1: "Kapelle", g2: "Kapelle", g3: "Kapelle", g4: "Kapelle",
-      h2visit: "Besuchen",
-      p7: "Kostenlos von außen; bei offener Tür still und respektvoll sein.",
-      tip: "Tipp: stecke eventuell eine Kerze an, wenn die Kapelle offen ist."
+    "de": {
+      "title": "Kapelle Agios Nikolaos",
+      "lead": "Kleine orthodoxe Kapelle auf Kos – ruhiger Ort, typisch für die Inselkapellen.",
+      "btnPlay": "Vorlesen",
+      "p1": "Die Kapelle von Agios Nikolaos ist eine der vielen kleinen orthodoxen Kapellen auf Kos – einfach, oft weiß oder aus Stein, und wichtig für die lokalen Gläubigen.",
+      "p2": "Die kleine Kapelle von Agios Nikolaos liegt auf einem winzigen Inselchen namens Kastri, direkt vor der Küste. Dieses weiße Kirchlein mit blauer Kuppel ist einer der bekanntesten und am meisten fotografierten Orte der Insel. Es steht ganz allein auf dem Felsinselchen.",
+      "p3": "Es gibt einen kleinen Steg und dann geht man über Steintreppen zur Kapelle hinauf. Im Sommer ist die Herausforderung, vom Ufer zur anderen Seite zu schwimmen und dort die Glocke zu läuten.",
+      "p4": "Die Kapelle stammt wahrscheinlich aus byzantinischer Zeit, aus den Jahren 469-554 n. Chr., und ist dem Heiligen Nikolaus, dem Schutzpatron der Seefahrer, geweiht.",
+      "p5": "Auf dem Inselchen selbst sieht man noch Reste einer mittelalterlichen Burg, daher der Beiname Paleokastro (alte Burg).",
+      "p6": "Fast jeder, der nach Kos kommt, macht ein Foto davon. Kurz gesagt: ein romantischer, ruhiger und fotogener Ort.",
+      "g1": "Kapelle",
+      "g2": "Kapelle",
+      "g3": "Kapelle",
+      "g4": "Kapelle",
+      "p7": "Kostenlos von außen; bei offener Tür still und respektvoll sein.",
+      "tip": "stecke eventuell eine Kerze an, wenn die Kapelle offen ist.",
+      "hStory": "Die Geschichte",
+      "hSee": "Was du siehst",
+      "tipTitle": "Tipp des Guides",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    it: {
-      title: "Cappella di Agios Nikolaos",
-      lead: "Piccola cappella ortodossa a Kos – luogo tranquillo, tipico delle cappelle dell’isola.",
-      heroCap: "Cappella di Agios Nikolaos",
-      badgeChapel: "Cappella", badgeFree: "Gratis",
-      btnPlay: "🔊 Leggi ad alta voce",
-      h2chapel: "Piccola cappella dell’isola",
-      p1: "La cappella di Agios Nikolaos è una delle tante piccole cappelle ortodosse di Kos – semplice, spesso bianca o in pietra, e importante per i fedeli locali.",
-      p2: "La piccola cappella di Agios Nikolaos si trova su un isolotto piccolissimo chiamato Kastri, proprio davanti alla costa. Questa chiesetta bianca con cupola blu è uno dei luoghi più conosciuti e fotografati dell’isola. Si erge completamente sola sull’isolotto roccioso.",
-      p3: "C’è un piccolo pontile e poi si sale alla cappella tramite gradini di pietra. In estate la sfida è nuotare dalla riva all’altra sponda e suonare la campana lì.",
-      p4: "La cappella risale probabilmente all’epoca bizantina, agli anni 469-554 d.C., ed è dedicata a San Nicola, il patrono dei marinai.",
-      p5: "Sull’isolotto stesso si vedono ancora resti di un castello medievale, da cui il soprannome Paleokastro (vecchio castello).",
-      p6: "Quasi tutti quelli che vengono a Kos ne fanno una foto. In breve: un luogo romantico, tranquillo e fotogenico.",
-      g1: "Cappella", g2: "Cappella", g3: "Cappella", g4: "Cappella",
-      h2visit: "Visitare",
-      p7: "Gratis dall’esterno; se la porta è aperta, siate silenziosi e rispettosi.",
-      tip: "Consiglio: accendete eventualmente una candela se la cappella è aperta."
+    "it": {
+      "title": "Cappella di Agios Nikolaos",
+      "lead": "Piccola cappella ortodossa a Kos – luogo tranquillo, tipico delle cappelle dell’isola.",
+      "btnPlay": "Leggi ad alta voce",
+      "p1": "La cappella di Agios Nikolaos è una delle tante piccole cappelle ortodosse di Kos – semplice, spesso bianca o in pietra, e importante per i fedeli locali.",
+      "p2": "La piccola cappella di Agios Nikolaos si trova su un isolotto piccolissimo chiamato Kastri, proprio davanti alla costa. Questa chiesetta bianca con cupola blu è uno dei luoghi più conosciuti e fotografati dell’isola. Si erge completamente sola sull’isolotto roccioso.",
+      "p3": "C’è un piccolo pontile e poi si sale alla cappella tramite gradini di pietra. In estate la sfida è nuotare dalla riva all’altra sponda e suonare la campana lì.",
+      "p4": "La cappella risale probabilmente all’epoca bizantina, agli anni 469-554 d.C., ed è dedicata a San Nicola, il patrono dei marinai.",
+      "p5": "Sull’isolotto stesso si vedono ancora resti di un castello medievale, da cui il soprannome Paleokastro (vecchio castello).",
+      "p6": "Quasi tutti quelli che vengono a Kos ne fanno una foto. In breve: un luogo romantico, tranquillo e fotogenico.",
+      "g1": "Cappella",
+      "g2": "Cappella",
+      "g3": "Cappella",
+      "g4": "Cappella",
+      "p7": "Gratis dall’esterno; se la porta è aperta, siate silenziosi e rispettosi.",
+      "tip": "accendete eventualmente una candela se la cappella è aperta.",
+      "hStory": "La storia",
+      "hSee": "Cosa vedi",
+      "tipTitle": "Consiglio della guida",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    tr: {
-      title: "Agios Nikolaos Şapeli",
-      lead: "Kos’ta küçük Ortodoks şapeli – sakin yer, ada şapellerine tipik.",
-      heroCap: "Agios Nikolaos Şapeli",
-      badgeChapel: "Şapel", badgeFree: "Ücretsiz",
-      btnPlay: "🔊 Sesli oku",
-      h2chapel: "Küçük ada şapeli",
-      p1: "Agios Nikolaos şapeli Kos’taki birçok küçük Ortodoks şapelinden biridir – sade, genellikle beyaz veya taş, yerel inananlar için önemlidir.",
-      p2: "Küçük Agios Nikolaos şapeli, kıyının hemen önünde Kastri adlı minik bir adacıkta bulunur. Mavi kubbeli bu beyaz kilise adanın en bilinen ve en çok fotoğraflanan yerlerinden biridir. Tamamen yalnız durur kayalık adacıkta.",
-      p3: "Küçük bir iskele vardır ve sonra taş basamaklarla şapele çıkılır. Yazın meydan okuma kıyıdan karşıya yüzüp orada çanı çalmaktır.",
-      p4: "Şapel muhtemelen Bizans döneminden, MS 469-554 yıllarından kalmadır ve denizcilerin koruyucu azizi Aziz Nikolaos’a adanmıştır.",
-      p5: "Adacığın kendisinde hâlâ bir ortaçağ kalesinin kalıntıları görülür, bu yüzden Paleokastro (eski kale) lakabı vardır.",
-      p6: "Kos’a gelen neredeyse herkes bir fotoğrafını çeker. Kısaca: romantik, sakin ve fotogenik bir yer.",
-      g1: "Şapel", g2: "Şapel", g3: "Şapel", g4: "Şapel",
-      h2visit: "Ziyaret",
-      p7: "Dışarıdan ücretsiz; kapı açıksa sessiz ve saygılı olun.",
-      tip: "İpucu: şapel açıksa bir mum yakabilirsiniz."
+    "tr": {
+      "title": "Agios Nikolaos Şapeli",
+      "lead": "Kos’ta küçük Ortodoks şapeli – sakin yer, ada şapellerine tipik.",
+      "btnPlay": "Sesli oku",
+      "p1": "Agios Nikolaos şapeli Kos’taki birçok küçük Ortodoks şapelinden biridir – sade, genellikle beyaz veya taş, yerel inananlar için önemlidir.",
+      "p2": "Küçük Agios Nikolaos şapeli, kıyının hemen önünde Kastri adlı minik bir adacıkta bulunur. Mavi kubbeli bu beyaz kilise adanın en bilinen ve en çok fotoğraflanan yerlerinden biridir. Tamamen yalnız durur kayalık adacıkta.",
+      "p3": "Küçük bir iskele vardır ve sonra taş basamaklarla şapele çıkılır. Yazın meydan okuma kıyıdan karşıya yüzüp orada çanı çalmaktır.",
+      "p4": "Şapel muhtemelen Bizans döneminden, MS 469-554 yıllarından kalmadır ve denizcilerin koruyucu azizi Aziz Nikolaos’a adanmıştır.",
+      "p5": "Adacığın kendisinde hâlâ bir ortaçağ kalesinin kalıntıları görülür, bu yüzden Paleokastro (eski kale) lakabı vardır.",
+      "p6": "Kos’a gelen neredeyse herkes bir fotoğrafını çeker. Kısaca: romantik, sakin ve fotogenik bir yer.",
+      "g1": "Şapel",
+      "g2": "Şapel",
+      "g3": "Şapel",
+      "g4": "Şapel",
+      "p7": "Dışarıdan ücretsiz; kapı açıksa sessiz ve saygılı olun.",
+      "tip": "şapel açıksa bir mum yakabilirsiniz.",
+      "hStory": "Hikaye",
+      "hSee": "Ne görürsün",
+      "tipTitle": "Rehberin ipucu",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    es: {
-      title: "Capilla de Agios Nikolaos",
-      lead: "Pequeña capilla ortodoxa en Kos – lugar tranquilo, típico de las capillas de la isla.",
-      heroCap: "Capilla de Agios Nikolaos",
-      badgeChapel: "Capilla", badgeFree: "Gratis",
-      btnPlay: "🔊 Leer en voz alta",
-      h2chapel: "Pequeña capilla de la isla",
-      p1: "La capilla de Agios Nikolaos es una de las muchas pequeñas capillas ortodoxas de Kos – sencilla, a menudo blanca o de piedra, e importante para los creyentes locales.",
-      p2: "La pequeña capilla de Agios Nikolaos se encuentra en un islote diminuto llamado Kastri, justo frente a la costa. Esta iglesita blanca con cúpula azul es uno de los lugares más conocidos y fotografiados de la isla. Está completamente sola en el islote rocoso.",
-      p3: "Hay un pequeño muelle y luego se sube a la capilla por escalones de piedra. En verano el reto es nadar desde la orilla hasta el otro lado y tocar la campana allí.",
-      p4: "La capilla data probablemente de la época bizantina, de los años 469-554 d.C., y está dedicada a San Nicolás, el patrón de los marineros.",
-      p5: "En el propio islote se ven aún restos de un castillo medieval, de ahí el apodo Paleokastro (castillo viejo).",
-      p6: "Casi todo el que viene a Kos le hace una foto. En resumen: un lugar romántico, tranquilo y fotogénico.",
-      g1: "Capilla", g2: "Capilla", g3: "Capilla", g4: "Capilla",
-      h2visit: "Visitar",
-      p7: "Gratis desde fuera; si la puerta está abierta, sé silencioso y respetuoso.",
-      tip: "Consejo: enciende una vela si la capilla está abierta."
+    "es": {
+      "title": "Capilla de Agios Nikolaos",
+      "lead": "Pequeña capilla ortodoxa en Kos – lugar tranquilo, típico de las capillas de la isla.",
+      "btnPlay": "Leer en voz alta",
+      "p1": "La capilla de Agios Nikolaos es una de las muchas pequeñas capillas ortodoxas de Kos – sencilla, a menudo blanca o de piedra, e importante para los creyentes locales.",
+      "p2": "La pequeña capilla de Agios Nikolaos se encuentra en un islote diminuto llamado Kastri, justo frente a la costa. Esta iglesita blanca con cúpula azul es uno de los lugares más conocidos y fotografiados de la isla. Está completamente sola en el islote rocoso.",
+      "p3": "Hay un pequeño muelle y luego se sube a la capilla por escalones de piedra. En verano el reto es nadar desde la orilla hasta el otro lado y tocar la campana allí.",
+      "p4": "La capilla data probablemente de la época bizantina, de los años 469-554 d.C., y está dedicada a San Nicolás, el patrón de los marineros.",
+      "p5": "En el propio islote se ven aún restos de un castillo medieval, de ahí el apodo Paleokastro (castillo viejo).",
+      "p6": "Casi todo el que viene a Kos le hace una foto. En resumen: un lugar romántico, tranquilo y fotogénico.",
+      "g1": "Capilla",
+      "g2": "Capilla",
+      "g3": "Capilla",
+      "g4": "Capilla",
+      "p7": "Gratis desde fuera; si la puerta está abierta, sé silencioso y respetuoso.",
+      "tip": "enciende una vela si la capilla está abierta.",
+      "hStory": "La historia",
+      "hSee": "Qué ves",
+      "tipTitle": "Consejo del guía",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     }
   };
 

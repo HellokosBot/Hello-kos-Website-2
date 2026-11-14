@@ -40,21 +40,18 @@
     .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
     .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
     .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+
     .content { padding: 18px 16px 0; }
     h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
     .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
-    .badge.open { background: rgba(16,185,129,0.2); color: #6ee7b7; }
+
     .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
     .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
     .btn-audio { background: var(--petrol); color: #fff; }
     .btn-audio.playing { background: var(--petrol-dark); }
     .btn-stop { background: #3A4545; color: #fff; display: none; }
     .btn-stop.show { display: flex; }
-    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
-    .btn-apple { background: #111; color: #fff; }
+
     .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
     .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
     .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
@@ -65,10 +62,7 @@
     .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
     .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
     .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
-    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-    .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
-    .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
-    .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
+
     .hours { margin-top: 8px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
     .h-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 12px; font-size: 0.88rem; border-bottom: 1px solid var(--border); background: #1a2525; }
     .h-row:nth-child(odd) { background: #152525; }
@@ -108,46 +102,35 @@
   <main class="main">
     <div class="hero-wrap">
       <img src="img/jwwb/ec4f9ab2d3-neratziakasteel2-standard.jpg" alt="Kasteel van Neratzia" loading="eager">
-      <div class="hero-caption" data-i18n="heroCap">Kasteel van Neratzia · Johannieter-burcht aan de haven</div>
+      <div class="hero-title"><h1 data-i18n="title">Kasteel van Neratzia</h1></div>
     </div>
 
     <div class="content">
-      <h1 data-i18n="title">Kasteel van Neratzia</h1>
-      <p class="lead" data-i18n="lead">Kasteel van de Ridders van Sint-Jan – bittere sinaasappels, een eiland met brug, en eeuwen verdediging van de haven.</p>
+<p class="lead" data-i18n="lead">Kasteel van de Ridders van Sint-Jan – bittere sinaasappels, een eiland met brug, en eeuwen verdediging van de haven.</p>
 
-      <div class="badges">
-        <span class="badge open" data-i18n="badgeOpen">Weer open</span>
-        <span class="badge">Kos-stad</span>
-        <span class="badge" data-i18n="badgeTue">Dinsdag dicht</span>
-      </div>
+      
 
       <div class="actions">
         <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
         <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Neratzia%20Castle%20Kos%20harbour" target="_blank" rel="noopener">📍 Google Maps</a>
-        <a class="btn btn-apple" href="https://maps.apple.com/?q=Neratzia%20Castle%20Kos%20harbour" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      
+      <div class="map-row">
+        <a href="https://www.google.com/maps/search/?api=1&query=Neratzia%20Castle%20Kos%20harbour" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+        <a href="https://maps.apple.com/?q=Neratzia%20Castle%20Kos%20harbour" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
       </div>
       <p class="status" id="ttsStatus"></p>
 
       <div id="readText">
         <div class="card">
-          <h2 data-i18n="h2name">Waarom “Neratzia”?</h2>
+          <h2 data-i18n="hStory">Waarom “Neratzia”?</h2>
           <p data-i18n="p1">De naam komt van de bittere sinaasappelbomen (nerantzia) die de ridders in de late 14e en vroege 15e eeuw overal op Kos plantten. Het eiland rook er toen heerlijk naar citrus.</p>
         </div>
 
-        <div class="facts">
-          <div class="fact">
-            <span class="n" data-i18n="factCentury">14e eeuw</span>
-            <span class="l" data-i18n="factKnights">Johannieters</span>
-          </div>
-          <div class="fact">
-            <span class="n">08:30–15:30</span>
-            <span class="l" data-i18n="factExcept">behalve dinsdag</span>
-          </div>
-        </div>
+        
 
         <div class="card">
-          <h2 data-i18n="h2hours">Openingstijden</h2>
+          <h2 data-i18n="hSee">Openingstijden</h2>
           <div class="hours">
             <div class="h-row"><span data-i18n="mon">Maandag</span><span>08:30 – 15:30</span></div>
             <div class="h-row closed"><span data-i18n="tue">Dinsdag</span><span data-i18n="closed">Gesloten</span></div>
@@ -206,9 +189,9 @@
         </div>
 
         <div class="card">
-          <h2 data-i18n="h2visit">Bezoeken</h2>
+          <h2 data-i18n="hKnow">Bezoeken</h2>
           <p data-i18n="p10">Direct aan de haven van Kos-stad, via de brug bij Palm Tree Lane.</p>
-          <div class="tip" data-i18n="tip">Tip: loop over de brug en de muren voor uitzicht op haven en zee. Let op oneffen stenen en trappen zonder leuning.</div>
+          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: loop over de brug en de muren voor uitzicht op haven en zee. Let op oneffen stenen en trappen zonder leuning.</p></div>
         </div>
       </div>
     </div>
@@ -221,198 +204,258 @@
 
 <script>
 (function(){
-  var I18N = {
-    nl: {
-      title: "Kasteel van Neratzia",
-      lead: "Kasteel van de Ridders van Sint-Jan – bittere sinaasappels, een eiland met brug, en eeuwen verdediging van de haven.",
-      heroCap: "Kasteel van Neratzia · Johannieter-burcht aan de haven",
-      badgeOpen: "Weer open", badgeTue: "Dinsdag dicht",
-      btnPlay: "🔊 Voorlezen",
-      h2name: "Waarom “Neratzia”?",
-      p1: "De naam komt van de bittere sinaasappelbomen (nerantzia) die de ridders in de late 14e en vroege 15e eeuw overal op Kos plantten. Het eiland rook er toen heerlijk naar citrus.",
-      factCentury: "14e eeuw", factKnights: "Johannieters", factExcept: "behalve dinsdag",
-      h2hours: "Openingstijden",
-      mon: "Maandag", tue: "Dinsdag", wed: "Woensdag", thu: "Donderdag", fri: "Vrijdag", sat: "Zaterdag", sun: "Zondag", closed: "Gesloten",
-      hoursNote: "Entree volgens Hello Kos gratis; officieel kan er een ticketprijs gelden (circa € 5). Check ter plaatse.",
-      h2bridge: "Eiland met brug",
-      p2: "Het kasteel lag vroeger op een klein eiland en was via een boogbrug met Kos verbonden. Die brug staat er nog steeds – hij overspant nu de bekende Palm Tree Lane. De laan is aangelegd nadat het water tussen eiland en stad was gedempt.",
-      p3: "Bij aankomst in de haven is het kasteel meteen herkenbaar.",
-      cap1: "Dubbele muren en torens aan de haven",
-      h2knights: "Ridders van Sint-Jan",
-      p4: "Voor de Johannieters was er al een kleine Venetiaanse vesting. In 1315 nam grootmeester Foulques de Villaret Kos in. Onder Juan Fernandez de Heredia begon de bouw van het huidige kasteel – met stenen van de ruïne van het Asklepion.",
-      h2wars: "Oorlogen en uitbreiding",
-      p5: "Door gevechten met Ottomanen en Egyptische Mammelukken werd het fort uitgebreid: dubbele muren met ronde torens. In 1457 viel een Ottomaanse vloot het eiland aan. Na het beleg van Rhodos (1480) en de aardbeving van 1493 liet Pierre d’Aubusson het buitenfort bouwen – ook omdat buskruit de oorlogsvoering veranderde.",
-      p6: "Na de nederlaag bij Rhodos verlieten de Johannieters in 1523 de eilanden.",
-      cap2: "Ingangspoort",
-      h2ott: "Ottomanen en Italianen",
-      p7: "Onder de Ottomanen zat er een Turks garnizoen en de gouverneur. In 1816 vernielde een ontploffing van het kruitmagazijn een groot deel van het kasteel.",
-      p8: "Tijdens de Italiaanse periode werd het gerestaureerd en kregen Turkse toevoegingen plaats voor het middeleeuwse karakter.",
-      h2quake: "Aardbeving 2017 – weer open",
-      p9: "In 2017 liep het kasteel schade op en was het ongeveer vier jaar gesloten. Na restauratie is het weer toegankelijk voor bezoekers.",
-      g1: "Kasteel", g2: "Aan de haven", g3: "Muren", g4: "Detail",
-      h2visit: "Bezoeken",
-      p10: "Direct aan de haven van Kos-stad, via de brug bij Palm Tree Lane.",
-      tip: "Tip: loop over de brug en de muren voor uitzicht op haven en zee. Let op oneffen stenen en trappen zonder leuning."
+  var I18N = window.HK_DICT = {
+    "nl": {
+      "title": "Kasteel van Neratzia",
+      "lead": "Kasteel van de Ridders van Sint-Jan – bittere sinaasappels, een eiland met brug, en eeuwen verdediging van de haven.",
+      "btnPlay": "Voorlezen",
+      "p1": "De naam komt van de bittere sinaasappelbomen (nerantzia) die de ridders in de late 14e en vroege 15e eeuw overal op Kos plantten. Het eiland rook er toen heerlijk naar citrus.",
+      "mon": "Maandag",
+      "tue": "Dinsdag",
+      "wed": "Woensdag",
+      "thu": "Donderdag",
+      "fri": "Vrijdag",
+      "sat": "Zaterdag",
+      "sun": "Zondag",
+      "closed": "Gesloten",
+      "hoursNote": "Entree volgens Hello Kos gratis; officieel kan er een ticketprijs gelden (circa € 5). Check ter plaatse.",
+      "h2bridge": "Eiland met brug",
+      "p2": "Het kasteel lag vroeger op een klein eiland en was via een boogbrug met Kos verbonden. Die brug staat er nog steeds – hij overspant nu de bekende Palm Tree Lane. De laan is aangelegd nadat het water tussen eiland en stad was gedempt.",
+      "p3": "Bij aankomst in de haven is het kasteel meteen herkenbaar.",
+      "cap1": "Dubbele muren en torens aan de haven",
+      "h2knights": "Ridders van Sint-Jan",
+      "p4": "Voor de Johannieters was er al een kleine Venetiaanse vesting. In 1315 nam grootmeester Foulques de Villaret Kos in. Onder Juan Fernandez de Heredia begon de bouw van het huidige kasteel – met stenen van de ruïne van het Asklepion.",
+      "h2wars": "Oorlogen en uitbreiding",
+      "p5": "Door gevechten met Ottomanen en Egyptische Mammelukken werd het fort uitgebreid: dubbele muren met ronde torens. In 1457 viel een Ottomaanse vloot het eiland aan. Na het beleg van Rhodos (1480) en de aardbeving van 1493 liet Pierre d’Aubusson het buitenfort bouwen – ook omdat buskruit de oorlogsvoering veranderde.",
+      "p6": "Na de nederlaag bij Rhodos verlieten de Johannieters in 1523 de eilanden.",
+      "cap2": "Ingangspoort",
+      "h2ott": "Ottomanen en Italianen",
+      "p7": "Onder de Ottomanen zat er een Turks garnizoen en de gouverneur. In 1816 vernielde een ontploffing van het kruitmagazijn een groot deel van het kasteel.",
+      "p8": "Tijdens de Italiaanse periode werd het gerestaureerd en kregen Turkse toevoegingen plaats voor het middeleeuwse karakter.",
+      "h2quake": "Aardbeving 2017 – weer open",
+      "p9": "In 2017 liep het kasteel schade op en was het ongeveer vier jaar gesloten. Na restauratie is het weer toegankelijk voor bezoekers.",
+      "g1": "Kasteel",
+      "g2": "Aan de haven",
+      "g3": "Muren",
+      "g4": "Detail",
+      "p10": "Direct aan de haven van Kos-stad, via de brug bij Palm Tree Lane.",
+      "tip": "loop over de brug en de muren voor uitzicht op haven en zee. Let op oneffen stenen en trappen zonder leuning.",
+      "hStory": "Het verhaal",
+      "hSee": "Wat je ziet",
+      "hKnow": "Goed om te weten",
+      "tipTitle": "Tip van de gids",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    en: {
-      title: "Neratzia Castle",
-      lead: "Castle of the Knights of St John – bitter oranges, an island with a bridge, and centuries of defending the harbour.",
-      heroCap: "Neratzia Castle · Hospitaller fortress at the harbour",
-      badgeOpen: "Open again", badgeTue: "Closed Tuesday",
-      btnPlay: "🔊 Read aloud",
-      h2name: "Why “Neratzia”?",
-      p1: "The name comes from the bitter orange trees (nerantzia) that the knights planted all over Kos in the late 14th and early 15th century. The island then smelled wonderfully of citrus.",
-      factCentury: "14th century", factKnights: "Hospitallers", factExcept: "except Tuesday",
-      h2hours: "Opening hours",
-      mon: "Monday", tue: "Tuesday", wed: "Wednesday", thu: "Thursday", fri: "Friday", sat: "Saturday", sun: "Sunday", closed: "Closed",
-      hoursNote: "According to Hello Kos entry is free; officially a ticket price may apply (about € 5). Check on site.",
-      h2bridge: "Island with bridge",
-      p2: "The castle used to stand on a small island and was connected to Kos by an arched bridge. That bridge is still there – it now spans the well-known Palm Tree Lane. The lane was built after the water between island and town was filled in.",
-      p3: "On arrival in the harbour the castle is immediately recognisable.",
-      cap1: "Double walls and towers at the harbour",
-      h2knights: "Knights of St John",
-      p4: "Before the Hospitallers there was already a small Venetian fort. In 1315 Grand Master Foulques de Villaret took Kos. Under Juan Fernandez de Heredia construction of the present castle began – using stones from the ruins of the Asklepion.",
-      h2wars: "Wars and expansion",
-      p5: "Through fighting with Ottomans and Egyptian Mamluks the fort was enlarged: double walls with round towers. In 1457 an Ottoman fleet attacked the island. After the siege of Rhodes (1480) and the earthquake of 1493 Pierre d’Aubusson had the outer fort built – also because gunpowder changed warfare.",
-      p6: "After the defeat at Rhodes the Hospitallers left the islands in 1523.",
-      cap2: "Entrance gate",
-      h2ott: "Ottomans and Italians",
-      p7: "Under the Ottomans there was a Turkish garrison and the governor. In 1816 an explosion of the powder magazine destroyed a large part of the castle.",
-      p8: "During the Italian period it was restored and Turkish additions made way for the medieval character.",
-      h2quake: "2017 earthquake – open again",
-      p9: "In 2017 the castle suffered damage and was closed for about four years. After restoration it is accessible to visitors again.",
-      g1: "Castle", g2: "At the harbour", g3: "Walls", g4: "Detail",
-      h2visit: "Visiting",
-      p10: "Directly at the harbour of Kos Town, via the bridge at Palm Tree Lane.",
-      tip: "Tip: walk across the bridge and the walls for views of the harbour and sea. Watch for uneven stones and stairs without railings."
+    "en": {
+      "title": "Neratzia Castle",
+      "lead": "Castle of the Knights of St John – bitter oranges, an island with a bridge, and centuries of defending the harbour.",
+      "btnPlay": "Read aloud",
+      "p1": "The name comes from the bitter orange trees (nerantzia) that the knights planted all over Kos in the late 14th and early 15th century. The island then smelled wonderfully of citrus.",
+      "mon": "Monday",
+      "tue": "Tuesday",
+      "wed": "Wednesday",
+      "thu": "Thursday",
+      "fri": "Friday",
+      "sat": "Saturday",
+      "sun": "Sunday",
+      "closed": "Closed",
+      "hoursNote": "According to Hello Kos entry is free; officially a ticket price may apply (about € 5). Check on site.",
+      "h2bridge": "Island with bridge",
+      "p2": "The castle used to stand on a small island and was connected to Kos by an arched bridge. That bridge is still there – it now spans the well-known Palm Tree Lane. The lane was built after the water between island and town was filled in.",
+      "p3": "On arrival in the harbour the castle is immediately recognisable.",
+      "cap1": "Double walls and towers at the harbour",
+      "h2knights": "Knights of St John",
+      "p4": "Before the Hospitallers there was already a small Venetian fort. In 1315 Grand Master Foulques de Villaret took Kos. Under Juan Fernandez de Heredia construction of the present castle began – using stones from the ruins of the Asklepion.",
+      "h2wars": "Wars and expansion",
+      "p5": "Through fighting with Ottomans and Egyptian Mamluks the fort was enlarged: double walls with round towers. In 1457 an Ottoman fleet attacked the island. After the siege of Rhodes (1480) and the earthquake of 1493 Pierre d’Aubusson had the outer fort built – also because gunpowder changed warfare.",
+      "p6": "After the defeat at Rhodes the Hospitallers left the islands in 1523.",
+      "cap2": "Entrance gate",
+      "h2ott": "Ottomans and Italians",
+      "p7": "Under the Ottomans there was a Turkish garrison and the governor. In 1816 an explosion of the powder magazine destroyed a large part of the castle.",
+      "p8": "During the Italian period it was restored and Turkish additions made way for the medieval character.",
+      "h2quake": "2017 earthquake – open again",
+      "p9": "In 2017 the castle suffered damage and was closed for about four years. After restoration it is accessible to visitors again.",
+      "g1": "Castle",
+      "g2": "At the harbour",
+      "g3": "Walls",
+      "g4": "Detail",
+      "p10": "Directly at the harbour of Kos Town, via the bridge at Palm Tree Lane.",
+      "tip": "walk across the bridge and the walls for views of the harbour and sea. Watch for uneven stones and stairs without railings.",
+      "hStory": "The story",
+      "hSee": "What you see",
+      "hKnow": "Good to know",
+      "tipTitle": "Guide’s tip",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    de: {
-      title: "Kasteel van Neratzia",
-      lead: "Kasteel der Ritter vom Heiligen Johannes – bittere Orangen, eine Insel mit Brücke und jahrhundertelange Verteidigung des Hafens.",
-      heroCap: "Kasteel van Neratzia · Johanniter-Burg am Hafen",
-      badgeOpen: "Wieder offen", badgeTue: "Dienstag geschlossen",
-      btnPlay: "🔊 Vorlesen",
-      h2name: "Warum „Neratzia“?",
-      p1: "Der Name kommt von den bitteren Orangenbäumen (nerantzia), die die Ritter im späten 14. und frühen 15. Jahrhundert überall auf Kos pflanzten. Die Insel roch damals herrlich nach Zitrus.",
-      factCentury: "14. Jahrhundert", factKnights: "Johanniter", factExcept: "außer Dienstag",
-      h2hours: "Öffnungszeiten",
-      mon: "Montag", tue: "Dienstag", wed: "Mittwoch", thu: "Donnerstag", fri: "Freitag", sat: "Samstag", sun: "Sonntag", closed: "Geschlossen",
-      hoursNote: "Eintritt laut Hello Kos kostenlos; offiziell kann ein Ticketpreis gelten (ca. € 5). Vor Ort prüfen.",
-      h2bridge: "Insel mit Brücke",
-      p2: "Das Kasteel lag früher auf einer kleinen Insel und war über eine Bogenbrücke mit Kos verbunden. Diese Brücke steht noch – sie überspannt jetzt die bekannte Palm Tree Lane. Die Allee wurde angelegt, nachdem das Wasser zwischen Insel und Stadt aufgefüllt war.",
-      p3: "Bei Ankunft im Hafen ist das Kasteel sofort erkennbar.",
-      cap1: "Doppelte Mauern und Türme am Hafen",
-      h2knights: "Ritter vom Heiligen Johannes",
-      p4: "Vor den Johannitern gab es schon eine kleine venezianische Festung. 1315 nahm Großmeister Foulques de Villaret Kos ein. Unter Juan Fernandez de Heredia begann der Bau des heutigen Kasteels – mit Steinen aus der Ruine des Asklepion.",
-      h2wars: "Kriege und Erweiterung",
-      p5: "Durch Kämpfe mit Osmanen und ägyptischen Mamluken wurde die Festung erweitert: doppelte Mauern mit runden Türmen. 1457 griff eine osmanische Flotte die Insel an. Nach der Belagerung von Rhodos (1480) und dem Erdbeben von 1493 ließ Pierre d’Aubusson das Außenfort bauen – auch weil Schießpulver die Kriegsführung veränderte.",
-      p6: "Nach der Niederlage bei Rhodos verließen die Johanniter 1523 die Inseln.",
-      cap2: "Eingangstor",
-      h2ott: "Osmanen und Italiener",
-      p7: "Unter den Osmanen gab es eine türkische Garnison und den Gouverneur. 1816 zerstörte eine Explosion des Pulvermagazins einen großen Teil des Kasteels.",
-      p8: "Während der italienischen Zeit wurde es restauriert und türkische Anbauten machten dem mittelalterlichen Charakter Platz.",
-      h2quake: "Erdbeben 2017 – wieder offen",
-      p9: "2017 erlitt das Kasteel Schaden und war etwa vier Jahre geschlossen. Nach der Restaurierung ist es wieder für Besucher zugänglich.",
-      g1: "Kasteel", g2: "Am Hafen", g3: "Mauern", g4: "Detail",
-      h2visit: "Besuchen",
-      p10: "Direkt am Hafen von Kos-Stadt, über die Brücke bei Palm Tree Lane.",
-      tip: "Tipp: gehe über die Brücke und die Mauern für Ausblick auf Hafen und Meer. Achte auf unebene Steine und Treppen ohne Geländer."
+    "de": {
+      "title": "Kasteel van Neratzia",
+      "lead": "Kasteel der Ritter vom Heiligen Johannes – bittere Orangen, eine Insel mit Brücke und jahrhundertelange Verteidigung des Hafens.",
+      "btnPlay": "Vorlesen",
+      "p1": "Der Name kommt von den bitteren Orangenbäumen (nerantzia), die die Ritter im späten 14. und frühen 15. Jahrhundert überall auf Kos pflanzten. Die Insel roch damals herrlich nach Zitrus.",
+      "mon": "Montag",
+      "tue": "Dienstag",
+      "wed": "Mittwoch",
+      "thu": "Donnerstag",
+      "fri": "Freitag",
+      "sat": "Samstag",
+      "sun": "Sonntag",
+      "closed": "Geschlossen",
+      "hoursNote": "Eintritt laut Hello Kos kostenlos; offiziell kann ein Ticketpreis gelten (ca. € 5). Vor Ort prüfen.",
+      "h2bridge": "Insel mit Brücke",
+      "p2": "Das Kasteel lag früher auf einer kleinen Insel und war über eine Bogenbrücke mit Kos verbunden. Diese Brücke steht noch – sie überspannt jetzt die bekannte Palm Tree Lane. Die Allee wurde angelegt, nachdem das Wasser zwischen Insel und Stadt aufgefüllt war.",
+      "p3": "Bei Ankunft im Hafen ist das Kasteel sofort erkennbar.",
+      "cap1": "Doppelte Mauern und Türme am Hafen",
+      "h2knights": "Ritter vom Heiligen Johannes",
+      "p4": "Vor den Johannitern gab es schon eine kleine venezianische Festung. 1315 nahm Großmeister Foulques de Villaret Kos ein. Unter Juan Fernandez de Heredia begann der Bau des heutigen Kasteels – mit Steinen aus der Ruine des Asklepion.",
+      "h2wars": "Kriege und Erweiterung",
+      "p5": "Durch Kämpfe mit Osmanen und ägyptischen Mamluken wurde die Festung erweitert: doppelte Mauern mit runden Türmen. 1457 griff eine osmanische Flotte die Insel an. Nach der Belagerung von Rhodos (1480) und dem Erdbeben von 1493 ließ Pierre d’Aubusson das Außenfort bauen – auch weil Schießpulver die Kriegsführung veränderte.",
+      "p6": "Nach der Niederlage bei Rhodos verließen die Johanniter 1523 die Inseln.",
+      "cap2": "Eingangstor",
+      "h2ott": "Osmanen und Italiener",
+      "p7": "Unter den Osmanen gab es eine türkische Garnison und den Gouverneur. 1816 zerstörte eine Explosion des Pulvermagazins einen großen Teil des Kasteels.",
+      "p8": "Während der italienischen Zeit wurde es restauriert und türkische Anbauten machten dem mittelalterlichen Charakter Platz.",
+      "h2quake": "Erdbeben 2017 – wieder offen",
+      "p9": "2017 erlitt das Kasteel Schaden und war etwa vier Jahre geschlossen. Nach der Restaurierung ist es wieder für Besucher zugänglich.",
+      "g1": "Kasteel",
+      "g2": "Am Hafen",
+      "g3": "Mauern",
+      "g4": "Detail",
+      "p10": "Direkt am Hafen von Kos-Stadt, über die Brücke bei Palm Tree Lane.",
+      "tip": "gehe über die Brücke und die Mauern für Ausblick auf Hafen und Meer. Achte auf unebene Steine und Treppen ohne Geländer.",
+      "hStory": "Die Geschichte",
+      "hSee": "Was du siehst",
+      "hKnow": "Gut zu wissen",
+      "tipTitle": "Tipp des Guides",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    it: {
-      title: "Castello di Neratzia",
-      lead: "Castello dei Cavalieri di San Giovanni – arance amare, un’isola con ponte e secoli di difesa del porto.",
-      heroCap: "Castello di Neratzia · fortezza ospedaliera al porto",
-      badgeOpen: "Di nuovo aperto", badgeTue: "Chiuso martedì",
-      btnPlay: "🔊 Leggi ad alta voce",
-      h2name: "Perché “Neratzia”?",
-      p1: "Il nome deriva dagli alberi di arance amare (nerantzia) che i cavalieri piantarono ovunque a Kos alla fine del XIV e inizio del XV secolo. L’isola profumava allora meravigliosamente di agrumi.",
-      factCentury: "XIV secolo", factKnights: "Ospedalieri", factExcept: "tranne martedì",
-      h2hours: "Orari di apertura",
-      mon: "Lunedì", tue: "Martedì", wed: "Mercoledì", thu: "Giovedì", fri: "Venerdì", sat: "Sabato", sun: "Domenica", closed: "Chiuso",
-      hoursNote: "Ingresso secondo Hello Kos gratuito; ufficialmente può esserci un prezzo del biglietto (circa € 5). Controlla sul posto.",
-      h2bridge: "Isola con ponte",
-      p2: "Il castello si trovava un tempo su una piccola isola ed era collegato a Kos da un ponte ad arco. Quel ponte c’è ancora – ora scavalca la famosa Palm Tree Lane. Il viale fu costruito dopo che l’acqua tra isola e città fu riempita.",
-      p3: "All’arrivo al porto il castello è subito riconoscibile.",
-      cap1: "Doppie mura e torri al porto",
-      h2knights: "Cavalieri di San Giovanni",
-      p4: "Prima degli Ospedalieri c’era già una piccola fortezza veneziana. Nel 1315 il Gran Maestro Foulques de Villaret prese Kos. Sotto Juan Fernandez de Heredia iniziò la costruzione del castello attuale – con pietre delle rovine dell’Asklepion.",
-      h2wars: "Guerre ed espansione",
-      p5: "A causa di combattimenti con Ottomani e Mamelucchi egiziani il forte fu ampliato: doppie mura con torri rotonde. Nel 1457 una flotta ottomana attaccò l’isola. Dopo l’assedio di Rodi (1480) e il terremoto del 1493 Pierre d’Aubusson fece costruire il forte esterno – anche perché la polvere da sparo cambiò la guerra.",
-      p6: "Dopo la sconfitta a Rodi gli Ospedalieri lasciarono le isole nel 1523.",
-      cap2: "Porta d’ingresso",
-      h2ott: "Ottomani e Italiani",
-      p7: "Sotto gli Ottomani c’era una guarnigione turca e il governatore. Nel 1816 un’esplosione del magazzino di polvere distrusse gran parte del castello.",
-      p8: "Durante il periodo italiano fu restaurato e le aggiunte turche lasciarono spazio al carattere medievale.",
-      h2quake: "Terremoto 2017 – di nuovo aperto",
-      p9: "Nel 2017 il castello subì danni e rimase chiuso per circa quattro anni. Dopo il restauro è di nuovo accessibile ai visitatori.",
-      g1: "Castello", g2: "Al porto", g3: "Mura", g4: "Dettaglio",
-      h2visit: "Visitare",
-      p10: "Direttamente al porto di Kos città, tramite il ponte a Palm Tree Lane.",
-      tip: "Consiglio: cammina sul ponte e sulle mura per la vista su porto e mare. Fai attenzione a pietre irregolari e scale senza ringhiera."
+    "it": {
+      "title": "Castello di Neratzia",
+      "lead": "Castello dei Cavalieri di San Giovanni – arance amare, un’isola con ponte e secoli di difesa del porto.",
+      "btnPlay": "Leggi ad alta voce",
+      "p1": "Il nome deriva dagli alberi di arance amare (nerantzia) che i cavalieri piantarono ovunque a Kos alla fine del XIV e inizio del XV secolo. L’isola profumava allora meravigliosamente di agrumi.",
+      "mon": "Lunedì",
+      "tue": "Martedì",
+      "wed": "Mercoledì",
+      "thu": "Giovedì",
+      "fri": "Venerdì",
+      "sat": "Sabato",
+      "sun": "Domenica",
+      "closed": "Chiuso",
+      "hoursNote": "Ingresso secondo Hello Kos gratuito; ufficialmente può esserci un prezzo del biglietto (circa € 5). Controlla sul posto.",
+      "h2bridge": "Isola con ponte",
+      "p2": "Il castello si trovava un tempo su una piccola isola ed era collegato a Kos da un ponte ad arco. Quel ponte c’è ancora – ora scavalca la famosa Palm Tree Lane. Il viale fu costruito dopo che l’acqua tra isola e città fu riempita.",
+      "p3": "All’arrivo al porto il castello è subito riconoscibile.",
+      "cap1": "Doppie mura e torri al porto",
+      "h2knights": "Cavalieri di San Giovanni",
+      "p4": "Prima degli Ospedalieri c’era già una piccola fortezza veneziana. Nel 1315 il Gran Maestro Foulques de Villaret prese Kos. Sotto Juan Fernandez de Heredia iniziò la costruzione del castello attuale – con pietre delle rovine dell’Asklepion.",
+      "h2wars": "Guerre ed espansione",
+      "p5": "A causa di combattimenti con Ottomani e Mamelucchi egiziani il forte fu ampliato: doppie mura con torri rotonde. Nel 1457 una flotta ottomana attaccò l’isola. Dopo l’assedio di Rodi (1480) e il terremoto del 1493 Pierre d’Aubusson fece costruire il forte esterno – anche perché la polvere da sparo cambiò la guerra.",
+      "p6": "Dopo la sconfitta a Rodi gli Ospedalieri lasciarono le isole nel 1523.",
+      "cap2": "Porta d’ingresso",
+      "h2ott": "Ottomani e Italiani",
+      "p7": "Sotto gli Ottomani c’era una guarnigione turca e il governatore. Nel 1816 un’esplosione del magazzino di polvere distrusse gran parte del castello.",
+      "p8": "Durante il periodo italiano fu restaurato e le aggiunte turche lasciarono spazio al carattere medievale.",
+      "h2quake": "Terremoto 2017 – di nuovo aperto",
+      "p9": "Nel 2017 il castello subì danni e rimase chiuso per circa quattro anni. Dopo il restauro è di nuovo accessibile ai visitatori.",
+      "g1": "Castello",
+      "g2": "Al porto",
+      "g3": "Mura",
+      "g4": "Dettaglio",
+      "p10": "Direttamente al porto di Kos città, tramite il ponte a Palm Tree Lane.",
+      "tip": "cammina sul ponte e sulle mura per la vista su porto e mare. Fai attenzione a pietre irregolari e scale senza ringhiera.",
+      "hStory": "La storia",
+      "hSee": "Cosa vedi",
+      "hKnow": "Buono a sapersi",
+      "tipTitle": "Consiglio della guida",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    tr: {
-      title: "Neratzia Kalesi",
-      lead: "Aziz Yuhanna Şövalyeleri kalesi – acı portakallar, köprülü bir ada ve limanı yüzyıllarca savunma.",
-      heroCap: "Neratzia Kalesi · limandaki Hospitaller kalesi",
-      badgeOpen: "Tekrar açık", badgeTue: "Salı kapalı",
-      btnPlay: "🔊 Sesli oku",
-      h2name: "Neden “Neratzia”?",
-      p1: "İsim, şövalyelerin 14. yüzyıl sonu ve 15. yüzyıl başında Kos’un her yerine diktiği acı portakal ağaçlarından (nerantzia) gelir. Ada o zaman narenciye kokardı.",
-      factCentury: "14. yüzyıl", factKnights: "Hospitaller", factExcept: "Salı hariç",
-      h2hours: "Açılış saatleri",
-      mon: "Pazartesi", tue: "Salı", wed: "Çarşamba", thu: "Perşembe", fri: "Cuma", sat: "Cumartesi", sun: "Pazar", closed: "Kapalı",
-      hoursNote: "Hello Kos’a göre giriş ücretsiz; resmi olarak bilet ücreti olabilir (yaklaşık € 5). Yerinde kontrol et.",
-      h2bridge: "Köprülü ada",
-      p2: "Kale eskiden küçük bir adadaydı ve kemerli bir köprüyle Kos’a bağlıydı. O köprü hâlâ duruyor – şimdi ünlü Palm Tree Lane’i aşıyor. Cadde, ada ile şehir arasındaki su doldurulduktan sonra yapıldı.",
-      p3: "Limana varınca kale hemen tanınır.",
-      cap1: "Limandaki çift duvarlar ve kuleler",
-      h2knights: "Aziz Yuhanna Şövalyeleri",
-      p4: "Hospitaller’lerden önce küçük bir Venedik kalesi vardı. 1315’te Büyük Üstat Foulques de Villaret Kos’u aldı. Juan Fernandez de Heredia altında bugünkü kalenin inşası başladı – Asklepion kalıntılarından taşlarla.",
-      h2wars: "Savaşlar ve genişleme",
-      p5: "Osmanlılar ve Mısır Memlükleriyle çarpışmalar nedeniyle kale genişletildi: yuvarlak kuleli çift duvarlar. 1457’de Osmanlı filosu adaya saldırdı. Rodos kuşatmasından (1480) ve 1493 depreminden sonra Pierre d’Aubusson dış kaleyi yaptırdı – barut savaşları değiştirdiği için de.",
-      p6: "Rodos’taki yenilgiden sonra Hospitaller’ler 1523’te adaları terk etti.",
-      cap2: "Giriş kapısı",
-      h2ott: "Osmanlılar ve İtalyanlar",
-      p7: "Osmanlılar döneminde Türk garnizonu ve vali vardı. 1816’da barut deposunun patlaması kalenin büyük kısmını yıktı.",
-      p8: "İtalyan döneminde restore edildi ve Türk ekleri yerini ortaçağ karakterine bıraktı.",
-      h2quake: "2017 depremi – tekrar açık",
-      p9: "2017’de kale hasar gördü ve yaklaşık dört yıl kapalı kaldı. Restorasyondan sonra ziyaretçilere yeniden açık.",
-      g1: "Kale", g2: "Limanda", g3: "Duvarlar", g4: "Detay",
-      h2visit: "Ziyaret",
-      p10: "Doğrudan Kos şehri limanında, Palm Tree Lane’deki köprü üzerinden.",
-      tip: "İpucu: liman ve deniz manzarası için köprüden ve duvarlardan yürü. Düzensiz taşlara ve korkuluksuz merdivenlere dikkat et."
+    "tr": {
+      "title": "Neratzia Kalesi",
+      "lead": "Aziz Yuhanna Şövalyeleri kalesi – acı portakallar, köprülü bir ada ve limanı yüzyıllarca savunma.",
+      "btnPlay": "Sesli oku",
+      "p1": "İsim, şövalyelerin 14. yüzyıl sonu ve 15. yüzyıl başında Kos’un her yerine diktiği acı portakal ağaçlarından (nerantzia) gelir. Ada o zaman narenciye kokardı.",
+      "mon": "Pazartesi",
+      "tue": "Salı",
+      "wed": "Çarşamba",
+      "thu": "Perşembe",
+      "fri": "Cuma",
+      "sat": "Cumartesi",
+      "sun": "Pazar",
+      "closed": "Kapalı",
+      "hoursNote": "Hello Kos’a göre giriş ücretsiz; resmi olarak bilet ücreti olabilir (yaklaşık € 5). Yerinde kontrol et.",
+      "h2bridge": "Köprülü ada",
+      "p2": "Kale eskiden küçük bir adadaydı ve kemerli bir köprüyle Kos’a bağlıydı. O köprü hâlâ duruyor – şimdi ünlü Palm Tree Lane’i aşıyor. Cadde, ada ile şehir arasındaki su doldurulduktan sonra yapıldı.",
+      "p3": "Limana varınca kale hemen tanınır.",
+      "cap1": "Limandaki çift duvarlar ve kuleler",
+      "h2knights": "Aziz Yuhanna Şövalyeleri",
+      "p4": "Hospitaller’lerden önce küçük bir Venedik kalesi vardı. 1315’te Büyük Üstat Foulques de Villaret Kos’u aldı. Juan Fernandez de Heredia altında bugünkü kalenin inşası başladı – Asklepion kalıntılarından taşlarla.",
+      "h2wars": "Savaşlar ve genişleme",
+      "p5": "Osmanlılar ve Mısır Memlükleriyle çarpışmalar nedeniyle kale genişletildi: yuvarlak kuleli çift duvarlar. 1457’de Osmanlı filosu adaya saldırdı. Rodos kuşatmasından (1480) ve 1493 depreminden sonra Pierre d’Aubusson dış kaleyi yaptırdı – barut savaşları değiştirdiği için de.",
+      "p6": "Rodos’taki yenilgiden sonra Hospitaller’ler 1523’te adaları terk etti.",
+      "cap2": "Giriş kapısı",
+      "h2ott": "Osmanlılar ve İtalyanlar",
+      "p7": "Osmanlılar döneminde Türk garnizonu ve vali vardı. 1816’da barut deposunun patlaması kalenin büyük kısmını yıktı.",
+      "p8": "İtalyan döneminde restore edildi ve Türk ekleri yerini ortaçağ karakterine bıraktı.",
+      "h2quake": "2017 depremi – tekrar açık",
+      "p9": "2017’de kale hasar gördü ve yaklaşık dört yıl kapalı kaldı. Restorasyondan sonra ziyaretçilere yeniden açık.",
+      "g1": "Kale",
+      "g2": "Limanda",
+      "g3": "Duvarlar",
+      "g4": "Detay",
+      "p10": "Doğrudan Kos şehri limanında, Palm Tree Lane’deki köprü üzerinden.",
+      "tip": "liman ve deniz manzarası için köprüden ve duvarlardan yürü. Düzensiz taşlara ve korkuluksuz merdivenlere dikkat et.",
+      "hStory": "Hikaye",
+      "hSee": "Ne görürsün",
+      "hKnow": "Bilmekte fayda var",
+      "tipTitle": "Rehberin ipucu",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    es: {
-      title: "Castillo de Neratzia",
-      lead: "Castillo de los Caballeros de San Juan – naranjas amargas, una isla con puente y siglos de defensa del puerto.",
-      heroCap: "Castillo de Neratzia · fortaleza hospitalaria en el puerto",
-      badgeOpen: "Abierto de nuevo", badgeTue: "Cerrado martes",
-      btnPlay: "🔊 Leer en voz alta",
-      h2name: "¿Por qué “Neratzia”?",
-      p1: "El nombre viene de los árboles de naranja amarga (nerantzia) que los caballeros plantaron por todo Kos a finales del siglo XIV y principios del XV. La isla olía entonces maravillosamente a cítricos.",
-      factCentury: "siglo XIV", factKnights: "Hospitalarios", factExcept: "excepto martes",
-      h2hours: "Horarios de apertura",
-      mon: "Lunes", tue: "Martes", wed: "Miércoles", thu: "Jueves", fri: "Viernes", sat: "Sábado", sun: "Domingo", closed: "Cerrado",
-      hoursNote: "Según Hello Kos la entrada es gratuita; oficialmente puede haber un precio de entrada (unos € 5). Comprueba in situ.",
-      h2bridge: "Isla con puente",
-      p2: "El castillo estaba antes en una pequeña isla y estaba conectado a Kos por un puente de arco. Ese puente sigue ahí – ahora cruza la conocida Palm Tree Lane. El paseo se construyó después de rellenar el agua entre isla y ciudad.",
-      p3: "Al llegar al puerto el castillo se reconoce de inmediato.",
-      cap1: "Doble muralla y torres en el puerto",
-      h2knights: "Caballeros de San Juan",
-      p4: "Antes de los Hospitalarios ya había una pequeña fortaleza veneciana. En 1315 el Gran Maestre Foulques de Villaret tomó Kos. Bajo Juan Fernandez de Heredia comenzó la construcción del castillo actual – con piedras de las ruinas del Asklepion.",
-      h2wars: "Guerras y ampliación",
-      p5: "Por combates con otomanos y mamelucos egipcios el fuerte se amplió: doble muralla con torres redondas. En 1457 una flota otomana atacó la isla. Tras el asedio de Rodas (1480) y el terremoto de 1493 Pierre d’Aubusson mandó construir el fuerte exterior – también porque la pólvora cambió la guerra.",
-      p6: "Tras la derrota en Rodas los Hospitalarios abandonaron las islas en 1523.",
-      cap2: "Puerta de entrada",
-      h2ott: "Otomanos e Italianos",
-      p7: "Bajo los otomanos había una guarnición turca y el gobernador. En 1816 una explosión del almacén de pólvora destruyó gran parte del castillo.",
-      p8: "Durante el periodo italiano se restauró y las adiciones turcas dejaron paso al carácter medieval.",
-      h2quake: "Terremoto 2017 – abierto de nuevo",
-      p9: "En 2017 el castillo sufrió daños y estuvo cerrado unos cuatro años. Tras la restauración vuelve a estar accesible a los visitantes.",
-      g1: "Castillo", g2: "En el puerto", g3: "Murallas", g4: "Detalle",
-      h2visit: "Visitar",
-      p10: "Directamente en el puerto de Kos ciudad, a través del puente en Palm Tree Lane.",
-      tip: "Consejo: camina por el puente y las murallas para vistas del puerto y el mar. Cuidado con piedras irregulares y escaleras sin barandilla."
+    "es": {
+      "title": "Castillo de Neratzia",
+      "lead": "Castillo de los Caballeros de San Juan – naranjas amargas, una isla con puente y siglos de defensa del puerto.",
+      "btnPlay": "Leer en voz alta",
+      "p1": "El nombre viene de los árboles de naranja amarga (nerantzia) que los caballeros plantaron por todo Kos a finales del siglo XIV y principios del XV. La isla olía entonces maravillosamente a cítricos.",
+      "mon": "Lunes",
+      "tue": "Martes",
+      "wed": "Miércoles",
+      "thu": "Jueves",
+      "fri": "Viernes",
+      "sat": "Sábado",
+      "sun": "Domingo",
+      "closed": "Cerrado",
+      "hoursNote": "Según Hello Kos la entrada es gratuita; oficialmente puede haber un precio de entrada (unos € 5). Comprueba in situ.",
+      "h2bridge": "Isla con puente",
+      "p2": "El castillo estaba antes en una pequeña isla y estaba conectado a Kos por un puente de arco. Ese puente sigue ahí – ahora cruza la conocida Palm Tree Lane. El paseo se construyó después de rellenar el agua entre isla y ciudad.",
+      "p3": "Al llegar al puerto el castillo se reconoce de inmediato.",
+      "cap1": "Doble muralla y torres en el puerto",
+      "h2knights": "Caballeros de San Juan",
+      "p4": "Antes de los Hospitalarios ya había una pequeña fortaleza veneciana. En 1315 el Gran Maestre Foulques de Villaret tomó Kos. Bajo Juan Fernandez de Heredia comenzó la construcción del castillo actual – con piedras de las ruinas del Asklepion.",
+      "h2wars": "Guerras y ampliación",
+      "p5": "Por combates con otomanos y mamelucos egipcios el fuerte se amplió: doble muralla con torres redondas. En 1457 una flota otomana atacó la isla. Tras el asedio de Rodas (1480) y el terremoto de 1493 Pierre d’Aubusson mandó construir el fuerte exterior – también porque la pólvora cambió la guerra.",
+      "p6": "Tras la derrota en Rodas los Hospitalarios abandonaron las islas en 1523.",
+      "cap2": "Puerta de entrada",
+      "h2ott": "Otomanos e Italianos",
+      "p7": "Bajo los otomanos había una guarnición turca y el gobernador. En 1816 una explosión del almacén de pólvora destruyó gran parte del castillo.",
+      "p8": "Durante el periodo italiano se restauró y las adiciones turcas dejaron paso al carácter medieval.",
+      "h2quake": "Terremoto 2017 – abierto de nuevo",
+      "p9": "En 2017 el castillo sufrió daños y estuvo cerrado unos cuatro años. Tras la restauración vuelve a estar accesible a los visitantes.",
+      "g1": "Castillo",
+      "g2": "En el puerto",
+      "g3": "Murallas",
+      "g4": "Detalle",
+      "p10": "Directamente en el puerto de Kos ciudad, a través del puente en Palm Tree Lane.",
+      "tip": "camina por el puente y las murallas para vistas del puerto y el mar. Cuidado con piedras irregulares y escaleras sin barandilla.",
+      "hStory": "La historia",
+      "hSee": "Qué ves",
+      "hKnow": "Bueno saberlo",
+      "tipTitle": "Consejo del guía",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     }
   };
 

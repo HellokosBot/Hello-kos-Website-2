@@ -40,20 +40,18 @@
     .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
     .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
     .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+
     .content { padding: 18px 16px 0; }
     h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
     .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+
     .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
     .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
     .btn-audio { background: var(--petrol); color: #fff; }
     .btn-audio.playing { background: var(--petrol-dark); }
     .btn-stop { background: #3A4545; color: #fff; display: none; }
     .btn-stop.show { display: flex; }
-    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
-    .btn-apple { background: #111; color: #fff; }
+
     .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
     .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
     .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
@@ -64,10 +62,7 @@
     .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
     .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
     .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
-    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-    .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
-    .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
-    .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
+
     .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
     .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
     .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
@@ -105,46 +100,35 @@
   <main class="main">
     <div class="hero-wrap">
       <img src="img/jwwb/21ae2867a6-biking_by_the_famous_bridge_in_the_avenue_of_palm_.jpg" alt="Palm Tree Lane" loading="eager">
-      <div class="hero-caption" data-i18n="heroCap">Palm Tree Lane · Finikon Avenue</div>
+      <div class="hero-title"><h1 data-i18n="title">Palm Tree Lane</h1></div>
     </div>
 
     <div class="content">
-      <h1 data-i18n="title">Palm Tree Lane</h1>
-      <p class="lead" data-i18n="lead">Brede laan met palmen en de oude boogbrug – vroeger water tussen kasteel-eiland en stad, nu een van de bekendste straten van Kos-stad.</p>
+<p class="lead" data-i18n="lead">Brede laan met palmen en de oude boogbrug – vroeger water tussen kasteel-eiland en stad, nu een van de bekendste straten van Kos-stad.</p>
 
-      <div class="badges">
-        <span class="badge" data-i18n="badgeFree">Gratis</span>
-        <span class="badge">Kos-stad</span>
-        <span class="badge" data-i18n="badgeHarbor">Haven</span>
-      </div>
+      
 
       <div class="actions">
         <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
         <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Palm%20Tree%20Lane%20Finikon%20Avenue%20Kos%20Castle%20bridge" target="_blank" rel="noopener">📍 Google Maps</a>
-        <a class="btn btn-apple" href="https://maps.apple.com/?q=Palm%20Tree%20Lane%20Finikon%20Avenue%20Kos%20Castle%20bridge" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      
+      <div class="map-row">
+        <a href="https://www.google.com/maps/search/?api=1&query=Palm%20Tree%20Lane%20Finikon%20Avenue%20Kos%20Castle%20bridge" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+        <a href="https://maps.apple.com/?q=Palm%20Tree%20Lane%20Finikon%20Avenue%20Kos%20Castle%20bridge" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
       </div>
       <p class="status" id="ttsStatus"></p>
 
       <div id="readText">
         <div class="card">
-          <h2 data-i18n="h2landmark">Herkenningspunt van Kos-stad</h2>
+          <h2 data-i18n="hStory">Herkenningspunt van Kos-stad</h2>
           <p data-i18n="p1">Palm Tree Lane (Finikon / Phoinikon Avenue) is een van de meest herkenbare plekken van Kos-stad: een brede laan met de oude stenen boogbrug en uitzicht op het kasteel van Neratzia.</p>
         </div>
 
-        <div class="facts">
-          <div class="fact">
-            <span class="n" data-i18n="factBridge">Brug</span>
-            <span class="l" data-i18n="factToCastle">naar het kasteel</span>
-          </div>
-          <div class="fact">
-            <span class="n" data-i18n="factFree">Gratis</span>
-            <span class="l" data-i18n="factPublic">openbaar</span>
-          </div>
-        </div>
+        
 
         <div class="card">
-          <h2 data-i18n="h2island">Van eiland naar laan</h2>
+          <h2 data-i18n="hSee">Van eiland naar laan</h2>
           <p data-i18n="p2">Het kasteel van Neratzia stond vroeger op een klein eiland, gescheiden van het vasteland door water. Tijdens de Italiaanse bezetting (rond 1912–1943) vulden ze de gracht op met aarde, zodat het eilandje vast kwam te liggen aan de stad.</p>
           <p data-i18n="p3">Ze maakten er een brede laan van, met de oude stenen boogbrug die er nog steeds ligt. De Italianen plantten hoge palmen langs beide kanten, voor schaduw en een mooi beeld.</p>
         </div>
@@ -195,9 +179,9 @@
         </div>
 
         <div class="card">
-          <h2 data-i18n="h2visit">Bezoeken</h2>
+          <h2 data-i18n="hKnow">Bezoeken</h2>
           <p data-i18n="p6">Gratis, altijd toegankelijk – tussen haven, kasteel en centrum.</p>
-          <div class="tip" data-i18n="tip">Tip: mooi om te wandelen of te fietsen, vooral tegen zonsondergang met het kasteel op de achtergrond.</div>
+          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: mooi om te wandelen of te fietsen, vooral tegen zonsondergang met het kasteel op de achtergrond.</p></div>
         </div>
       </div>
     </div>
@@ -210,144 +194,162 @@
 
 <script>
 (function(){
-  var I18N = {
-    nl: {
-      title: "Palm Tree Lane",
-      lead: "Brede laan met palmen en de oude boogbrug – vroeger water tussen kasteel-eiland en stad, nu een van de bekendste straten van Kos-stad.",
-      heroCap: "Palm Tree Lane · Finikon Avenue",
-      badgeFree: "Gratis", badgeHarbor: "Haven",
-      btnPlay: "🔊 Voorlezen",
-      h2landmark: "Herkenningspunt van Kos-stad",
-      p1: "Palm Tree Lane (Finikon / Phoinikon Avenue) is een van de meest herkenbare plekken van Kos-stad: een brede laan met de oude stenen boogbrug en uitzicht op het kasteel van Neratzia.",
-      factBridge: "Brug", factToCastle: "naar het kasteel", factFree: "Gratis", factPublic: "openbaar",
-      h2island: "Van eiland naar laan",
-      p2: "Het kasteel van Neratzia stond vroeger op een klein eiland, gescheiden van het vasteland door water. Tijdens de Italiaanse bezetting (rond 1912–1943) vulden ze de gracht op met aarde, zodat het eilandje vast kwam te liggen aan de stad.",
-      p3: "Ze maakten er een brede laan van, met de oude stenen boogbrug die er nog steeds ligt. De Italianen plantten hoge palmen langs beide kanten, voor schaduw en een mooi beeld.",
-      cap1: "Laan met zicht op het kasteel",
-      h2palms: "Palmen gekapt",
-      p4: "Enkele jaren geleden moesten alle palmen worden gekapt door een invasieve keversoort die de bomen aantastte en zich kon verspreiden. Er staan weer (nieuwe) palmen; de laan blijft een centrale wandel- en fietsroute bij de haven.",
-      h2videos: "Video’s",
-      p5: "Beelden van Palm Tree Lane en de omgeving:",
-      v1: "Palm Tree Lane", v2: "De laan en de brug", v3: "Rondom Palm Tree Lane",
-      g1: "De laan", g2: "Brug",
-      h2visit: "Bezoeken",
-      p6: "Gratis, altijd toegankelijk – tussen haven, kasteel en centrum.",
-      tip: "Tip: mooi om te wandelen of te fietsen, vooral tegen zonsondergang met het kasteel op de achtergrond."
+  var I18N = window.HK_DICT = {
+    "nl": {
+      "title": "Palm Tree Lane",
+      "lead": "Brede laan met palmen en de oude boogbrug – vroeger water tussen kasteel-eiland en stad, nu een van de bekendste straten van Kos-stad.",
+      "btnPlay": "Voorlezen",
+      "p1": "Palm Tree Lane (Finikon / Phoinikon Avenue) is een van de meest herkenbare plekken van Kos-stad: een brede laan met de oude stenen boogbrug en uitzicht op het kasteel van Neratzia.",
+      "p2": "Het kasteel van Neratzia stond vroeger op een klein eiland, gescheiden van het vasteland door water. Tijdens de Italiaanse bezetting (rond 1912–1943) vulden ze de gracht op met aarde, zodat het eilandje vast kwam te liggen aan de stad.",
+      "p3": "Ze maakten er een brede laan van, met de oude stenen boogbrug die er nog steeds ligt. De Italianen plantten hoge palmen langs beide kanten, voor schaduw en een mooi beeld.",
+      "cap1": "Laan met zicht op het kasteel",
+      "h2palms": "Palmen gekapt",
+      "p4": "Enkele jaren geleden moesten alle palmen worden gekapt door een invasieve keversoort die de bomen aantastte en zich kon verspreiden. Er staan weer (nieuwe) palmen; de laan blijft een centrale wandel- en fietsroute bij de haven.",
+      "h2videos": "Video’s",
+      "p5": "Beelden van Palm Tree Lane en de omgeving:",
+      "v1": "Palm Tree Lane",
+      "v2": "De laan en de brug",
+      "v3": "Rondom Palm Tree Lane",
+      "g1": "De laan",
+      "g2": "Brug",
+      "p6": "Gratis, altijd toegankelijk – tussen haven, kasteel en centrum.",
+      "tip": "mooi om te wandelen of te fietsen, vooral tegen zonsondergang met het kasteel op de achtergrond.",
+      "hStory": "Het verhaal",
+      "hSee": "Wat je ziet",
+      "hKnow": "Goed om te weten",
+      "tipTitle": "Tip van de gids",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    en: {
-      title: "Palm Tree Lane",
-      lead: "Wide avenue with palms and the old arch bridge – once water between the castle island and the town, now one of the best-known streets of Kos Town.",
-      heroCap: "Palm Tree Lane · Finikon Avenue",
-      badgeFree: "Free", badgeHarbor: "Harbour",
-      btnPlay: "🔊 Read aloud",
-      h2landmark: "Landmark of Kos Town",
-      p1: "Palm Tree Lane (Finikon / Phoinikon Avenue) is one of the most recognisable places in Kos Town: a wide avenue with the old stone arch bridge and a view of Neratzia Castle.",
-      factBridge: "Bridge", factToCastle: "to the castle", factFree: "Free", factPublic: "public",
-      h2island: "From island to avenue",
-      p2: "Neratzia Castle used to stand on a small island, separated from the mainland by water. During the Italian occupation (around 1912–1943) they filled the moat with earth so the islet became connected to the town.",
-      p3: "They turned it into a wide avenue, with the old stone arch bridge that is still there. The Italians planted tall palms on both sides for shade and a nice view.",
-      cap1: "Avenue with view of the castle",
-      h2palms: "Palms cut down",
-      p4: "A few years ago all the palms had to be cut down because of an invasive beetle that attacked the trees and could spread. New palms have been planted again; the avenue remains a central walking and cycling route by the harbour.",
-      h2videos: "Videos",
-      p5: "Footage of Palm Tree Lane and the surroundings:",
-      v1: "Palm Tree Lane", v2: "The avenue and the bridge", v3: "Around Palm Tree Lane",
-      g1: "The avenue", g2: "Bridge",
-      h2visit: "Visiting",
-      p6: "Free, always accessible – between harbour, castle and centre.",
-      tip: "Tip: nice for walking or cycling, especially at sunset with the castle in the background."
+    "en": {
+      "title": "Palm Tree Lane",
+      "lead": "Wide avenue with palms and the old arch bridge – once water between the castle island and the town, now one of the best-known streets of Kos Town.",
+      "btnPlay": "Read aloud",
+      "p1": "Palm Tree Lane (Finikon / Phoinikon Avenue) is one of the most recognisable places in Kos Town: a wide avenue with the old stone arch bridge and a view of Neratzia Castle.",
+      "p2": "Neratzia Castle used to stand on a small island, separated from the mainland by water. During the Italian occupation (around 1912–1943) they filled the moat with earth so the islet became connected to the town.",
+      "p3": "They turned it into a wide avenue, with the old stone arch bridge that is still there. The Italians planted tall palms on both sides for shade and a nice view.",
+      "cap1": "Avenue with view of the castle",
+      "h2palms": "Palms cut down",
+      "p4": "A few years ago all the palms had to be cut down because of an invasive beetle that attacked the trees and could spread. New palms have been planted again; the avenue remains a central walking and cycling route by the harbour.",
+      "h2videos": "Videos",
+      "p5": "Footage of Palm Tree Lane and the surroundings:",
+      "v1": "Palm Tree Lane",
+      "v2": "The avenue and the bridge",
+      "v3": "Around Palm Tree Lane",
+      "g1": "The avenue",
+      "g2": "Bridge",
+      "p6": "Free, always accessible – between harbour, castle and centre.",
+      "tip": "nice for walking or cycling, especially at sunset with the castle in the background.",
+      "hStory": "The story",
+      "hSee": "What you see",
+      "hKnow": "Good to know",
+      "tipTitle": "Guide’s tip",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    de: {
-      title: "Palm Tree Lane",
-      lead: "Breite Allee mit Palmen und der alten Bogenbrücke – früher Wasser zwischen Schlossinsel und Stadt, heute eine der bekanntesten Straßen von Kos-Stadt.",
-      heroCap: "Palm Tree Lane · Finikon Avenue",
-      badgeFree: "Kostenlos", badgeHarbor: "Hafen",
-      btnPlay: "🔊 Vorlesen",
-      h2landmark: "Wahrzeichen von Kos-Stadt",
-      p1: "Palm Tree Lane (Finikon / Phoinikon Avenue) ist einer der erkennbarsten Orte von Kos-Stadt: eine breite Allee mit der alten Steinbogenbrücke und Blick auf das Neratzia-Schloss.",
-      factBridge: "Brücke", factToCastle: "zum Schloss", factFree: "Kostenlos", factPublic: "öffentlich",
-      h2island: "Von der Insel zur Allee",
-      p2: "Das Neratzia-Schloss stand früher auf einer kleinen Insel, vom Festland durch Wasser getrennt. Während der italienischen Besatzung (ca. 1912–1943) füllten sie den Graben mit Erde, sodass die Inselchen mit der Stadt verbunden wurde.",
-      p3: "Sie machten daraus eine breite Allee mit der alten Steinbogenbrücke, die noch immer da ist. Die Italiener pflanzten hohe Palmen auf beiden Seiten für Schatten und ein schönes Bild.",
-      cap1: "Allee mit Blick auf das Schloss",
-      h2palms: "Palmen gefällt",
-      p4: "Vor einigen Jahren mussten alle Palmen gefällt werden wegen einer invasiven Käferart, die die Bäume befiel und sich ausbreiten konnte. Es stehen wieder (neue) Palmen; die Allee bleibt eine zentrale Wander- und Radroute am Hafen.",
-      h2videos: "Videos",
-      p5: "Aufnahmen von Palm Tree Lane und der Umgebung:",
-      v1: "Palm Tree Lane", v2: "Die Allee und die Brücke", v3: "Rund um Palm Tree Lane",
-      g1: "Die Allee", g2: "Brücke",
-      h2visit: "Besuchen",
-      p6: "Kostenlos, immer zugänglich – zwischen Hafen, Schloss und Zentrum.",
-      tip: "Tipp: schön zum Spazieren oder Radfahren, besonders bei Sonnenuntergang mit dem Schloss im Hintergrund."
+    "de": {
+      "title": "Palm Tree Lane",
+      "lead": "Breite Allee mit Palmen und der alten Bogenbrücke – früher Wasser zwischen Schlossinsel und Stadt, heute eine der bekanntesten Straßen von Kos-Stadt.",
+      "btnPlay": "Vorlesen",
+      "p1": "Palm Tree Lane (Finikon / Phoinikon Avenue) ist einer der erkennbarsten Orte von Kos-Stadt: eine breite Allee mit der alten Steinbogenbrücke und Blick auf das Neratzia-Schloss.",
+      "p2": "Das Neratzia-Schloss stand früher auf einer kleinen Insel, vom Festland durch Wasser getrennt. Während der italienischen Besatzung (ca. 1912–1943) füllten sie den Graben mit Erde, sodass die Inselchen mit der Stadt verbunden wurde.",
+      "p3": "Sie machten daraus eine breite Allee mit der alten Steinbogenbrücke, die noch immer da ist. Die Italiener pflanzten hohe Palmen auf beiden Seiten für Schatten und ein schönes Bild.",
+      "cap1": "Allee mit Blick auf das Schloss",
+      "h2palms": "Palmen gefällt",
+      "p4": "Vor einigen Jahren mussten alle Palmen gefällt werden wegen einer invasiven Käferart, die die Bäume befiel und sich ausbreiten konnte. Es stehen wieder (neue) Palmen; die Allee bleibt eine zentrale Wander- und Radroute am Hafen.",
+      "h2videos": "Videos",
+      "p5": "Aufnahmen von Palm Tree Lane und der Umgebung:",
+      "v1": "Palm Tree Lane",
+      "v2": "Die Allee und die Brücke",
+      "v3": "Rund um Palm Tree Lane",
+      "g1": "Die Allee",
+      "g2": "Brücke",
+      "p6": "Kostenlos, immer zugänglich – zwischen Hafen, Schloss und Zentrum.",
+      "tip": "schön zum Spazieren oder Radfahren, besonders bei Sonnenuntergang mit dem Schloss im Hintergrund.",
+      "hStory": "Die Geschichte",
+      "hSee": "Was du siehst",
+      "hKnow": "Gut zu wissen",
+      "tipTitle": "Tipp des Guides",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    it: {
-      title: "Palm Tree Lane",
-      lead: "Ampio viale con palme e il vecchio ponte ad arco – un tempo acqua tra l’isola del castello e la città, ora una delle strade più note di Kos città.",
-      heroCap: "Palm Tree Lane · Finikon Avenue",
-      badgeFree: "Gratis", badgeHarbor: "Porto",
-      btnPlay: "🔊 Leggi ad alta voce",
-      h2landmark: "Punto di riferimento di Kos città",
-      p1: "Palm Tree Lane (Finikon / Phoinikon Avenue) è uno dei luoghi più riconoscibili di Kos città: un ampio viale con il vecchio ponte ad arco in pietra e vista sul castello di Neratzia.",
-      factBridge: "Ponte", factToCastle: "verso il castello", factFree: "Gratis", factPublic: "pubblico",
-      h2island: "Da isola a viale",
-      p2: "Il castello di Neratzia sorgeva un tempo su una piccola isola, separata dalla terraferma dall’acqua. Durante l’occupazione italiana (circa 1912–1943) riempirono il fossato di terra, così l’isolotto si unì alla città.",
-      p3: "Ne fecero un ampio viale, con il vecchio ponte ad arco in pietra che è ancora lì. Gli italiani piantarono alte palme su entrambi i lati, per ombra e una bella vista.",
-      cap1: "Viale con vista sul castello",
-      h2palms: "Palme tagliate",
-      p4: "Alcuni anni fa tutte le palme dovettero essere tagliate a causa di una specie di coleottero invasivo che attaccava gli alberi e poteva diffondersi. Sono state ripiantate (nuove) palme; il viale resta un percorso centrale a piedi e in bici vicino al porto.",
-      h2videos: "Video",
-      p5: "Immagini di Palm Tree Lane e dintorni:",
-      v1: "Palm Tree Lane", v2: "Il viale e il ponte", v3: "Intorno a Palm Tree Lane",
-      g1: "Il viale", g2: "Ponte",
-      h2visit: "Visitare",
-      p6: "Gratis, sempre accessibile – tra porto, castello e centro.",
-      tip: "Consiglio: bello per camminare o andare in bici, soprattutto al tramonto con il castello sullo sfondo."
+    "it": {
+      "title": "Palm Tree Lane",
+      "lead": "Ampio viale con palme e il vecchio ponte ad arco – un tempo acqua tra l’isola del castello e la città, ora una delle strade più note di Kos città.",
+      "btnPlay": "Leggi ad alta voce",
+      "p1": "Palm Tree Lane (Finikon / Phoinikon Avenue) è uno dei luoghi più riconoscibili di Kos città: un ampio viale con il vecchio ponte ad arco in pietra e vista sul castello di Neratzia.",
+      "p2": "Il castello di Neratzia sorgeva un tempo su una piccola isola, separata dalla terraferma dall’acqua. Durante l’occupazione italiana (circa 1912–1943) riempirono il fossato di terra, così l’isolotto si unì alla città.",
+      "p3": "Ne fecero un ampio viale, con il vecchio ponte ad arco in pietra che è ancora lì. Gli italiani piantarono alte palme su entrambi i lati, per ombra e una bella vista.",
+      "cap1": "Viale con vista sul castello",
+      "h2palms": "Palme tagliate",
+      "p4": "Alcuni anni fa tutte le palme dovettero essere tagliate a causa di una specie di coleottero invasivo che attaccava gli alberi e poteva diffondersi. Sono state ripiantate (nuove) palme; il viale resta un percorso centrale a piedi e in bici vicino al porto.",
+      "h2videos": "Video",
+      "p5": "Immagini di Palm Tree Lane e dintorni:",
+      "v1": "Palm Tree Lane",
+      "v2": "Il viale e il ponte",
+      "v3": "Intorno a Palm Tree Lane",
+      "g1": "Il viale",
+      "g2": "Ponte",
+      "p6": "Gratis, sempre accessibile – tra porto, castello e centro.",
+      "tip": "bello per camminare o andare in bici, soprattutto al tramonto con il castello sullo sfondo.",
+      "hStory": "La storia",
+      "hSee": "Cosa vedi",
+      "hKnow": "Buono a sapersi",
+      "tipTitle": "Consiglio della guida",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    tr: {
-      title: "Palm Tree Lane",
-      lead: "Palmiyeler ve eski kemer köprüyle geniş cadde – eskiden kale adası ile şehir arasında su vardı, şimdi Kos şehrinin en bilinen caddelerinden biri.",
-      heroCap: "Palm Tree Lane · Finikon Avenue",
-      badgeFree: "Ücretsiz", badgeHarbor: "Liman",
-      btnPlay: "🔊 Sesli oku",
-      h2landmark: "Kos şehrinin simgesi",
-      p1: "Palm Tree Lane (Finikon / Phoinikon Avenue), Kos şehrinin en tanınan yerlerinden biridir: eski taş kemer köprü ve Neratzia Kalesi manzaralı geniş bir cadde.",
-      factBridge: "Köprü", factToCastle: "kaleye doğru", factFree: "Ücretsiz", factPublic: "halka açık",
-      h2island: "Adadan caddeye",
-      p2: "Neratzia Kalesi eskiden küçük bir adada duruyordu, anakaradan suyla ayrılmıştı. İtalyan işgali sırasında (yaklaşık 1912–1943) hendek toprağa dolduruldu, böylece ada şehirle birleşti.",
-      p3: "Geniş bir cadde yaptılar, hâlâ duran eski taş kemer köprüyle. İtalyanlar her iki yana yüksek palmiyeler dikti, gölge ve güzel görüntü için.",
-      cap1: "Kale manzaralı cadde",
-      h2palms: "Palmiyeler kesildi",
-      p4: "Birkaç yıl önce istilacı bir böcek türü ağaçları etkilediği ve yayılacağı için tüm palmiyeler kesilmek zorunda kaldı. Yeniden (yeni) palmiyeler dikildi; cadde liman yanında merkezi yürüyüş ve bisiklet rotası olmaya devam ediyor.",
-      h2videos: "Videolar",
-      p5: "Palm Tree Lane ve çevresinden görüntüler:",
-      v1: "Palm Tree Lane", v2: "Cadde ve köprü", v3: "Palm Tree Lane çevresi",
-      g1: "Cadde", g2: "Köprü",
-      h2visit: "Ziyaret",
-      p6: "Ücretsiz, her zaman erişilebilir – liman, kale ve merkez arasında.",
-      tip: "İpucu: yürüyüş veya bisiklet için güzel, özellikle gün batımında kale arka planda."
+    "tr": {
+      "title": "Palm Tree Lane",
+      "lead": "Palmiyeler ve eski kemer köprüyle geniş cadde – eskiden kale adası ile şehir arasında su vardı, şimdi Kos şehrinin en bilinen caddelerinden biri.",
+      "btnPlay": "Sesli oku",
+      "p1": "Palm Tree Lane (Finikon / Phoinikon Avenue), Kos şehrinin en tanınan yerlerinden biridir: eski taş kemer köprü ve Neratzia Kalesi manzaralı geniş bir cadde.",
+      "p2": "Neratzia Kalesi eskiden küçük bir adada duruyordu, anakaradan suyla ayrılmıştı. İtalyan işgali sırasında (yaklaşık 1912–1943) hendek toprağa dolduruldu, böylece ada şehirle birleşti.",
+      "p3": "Geniş bir cadde yaptılar, hâlâ duran eski taş kemer köprüyle. İtalyanlar her iki yana yüksek palmiyeler dikti, gölge ve güzel görüntü için.",
+      "cap1": "Kale manzaralı cadde",
+      "h2palms": "Palmiyeler kesildi",
+      "p4": "Birkaç yıl önce istilacı bir böcek türü ağaçları etkilediği ve yayılacağı için tüm palmiyeler kesilmek zorunda kaldı. Yeniden (yeni) palmiyeler dikildi; cadde liman yanında merkezi yürüyüş ve bisiklet rotası olmaya devam ediyor.",
+      "h2videos": "Videolar",
+      "p5": "Palm Tree Lane ve çevresinden görüntüler:",
+      "v1": "Palm Tree Lane",
+      "v2": "Cadde ve köprü",
+      "v3": "Palm Tree Lane çevresi",
+      "g1": "Cadde",
+      "g2": "Köprü",
+      "p6": "Ücretsiz, her zaman erişilebilir – liman, kale ve merkez arasında.",
+      "tip": "yürüyüş veya bisiklet için güzel, özellikle gün batımında kale arka planda.",
+      "hStory": "Hikaye",
+      "hSee": "Ne görürsün",
+      "hKnow": "Bilmekte fayda var",
+      "tipTitle": "Rehberin ipucu",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    es: {
-      title: "Palm Tree Lane",
-      lead: "Amplia avenida con palmeras y el viejo puente de arco – antes agua entre la isla del castillo y la ciudad, ahora una de las calles más conocidas de Kos ciudad.",
-      heroCap: "Palm Tree Lane · Finikon Avenue",
-      badgeFree: "Gratis", badgeHarbor: "Puerto",
-      btnPlay: "🔊 Leer en voz alta",
-      h2landmark: "Punto de referencia de Kos ciudad",
-      p1: "Palm Tree Lane (Finikon / Phoinikon Avenue) es uno de los lugares más reconocibles de Kos ciudad: una amplia avenida con el viejo puente de arco de piedra y vistas al castillo de Neratzia.",
-      factBridge: "Puente", factToCastle: "hacia el castillo", factFree: "Gratis", factPublic: "público",
-      h2island: "De isla a avenida",
-      p2: "El castillo de Neratzia estaba antes en una pequeña isla, separada del continente por el agua. Durante la ocupación italiana (alrededor de 1912–1943) rellenaron el foso con tierra, de modo que la islita quedó unida a la ciudad.",
-      p3: "Hicieron una amplia avenida, con el viejo puente de arco de piedra que aún está ahí. Los italianos plantaron altas palmeras a ambos lados, para sombra y una bonita vista.",
-      cap1: "Avenida con vistas al castillo",
-      h2palms: "Palmeras taladas",
-      p4: "Hace unos años todas las palmeras tuvieron que ser taladas por una especie de escarabajo invasivo que atacaba los árboles y podía propagarse. Se han plantado de nuevo (nuevas) palmeras; la avenida sigue siendo una ruta central para caminar y ir en bici junto al puerto.",
-      h2videos: "Vídeos",
-      p5: "Imágenes de Palm Tree Lane y alrededores:",
-      v1: "Palm Tree Lane", v2: "La avenida y el puente", v3: "Alrededor de Palm Tree Lane",
-      g1: "La avenida", g2: "Puente",
-      h2visit: "Visitar",
-      p6: "Gratis, siempre accesible – entre el puerto, el castillo y el centro.",
-      tip: "Consejo: bonito para caminar o ir en bici, especialmente al atardecer con el castillo de fondo."
+    "es": {
+      "title": "Palm Tree Lane",
+      "lead": "Amplia avenida con palmeras y el viejo puente de arco – antes agua entre la isla del castillo y la ciudad, ahora una de las calles más conocidas de Kos ciudad.",
+      "btnPlay": "Leer en voz alta",
+      "p1": "Palm Tree Lane (Finikon / Phoinikon Avenue) es uno de los lugares más reconocibles de Kos ciudad: una amplia avenida con el viejo puente de arco de piedra y vistas al castillo de Neratzia.",
+      "p2": "El castillo de Neratzia estaba antes en una pequeña isla, separada del continente por el agua. Durante la ocupación italiana (alrededor de 1912–1943) rellenaron el foso con tierra, de modo que la islita quedó unida a la ciudad.",
+      "p3": "Hicieron una amplia avenida, con el viejo puente de arco de piedra que aún está ahí. Los italianos plantaron altas palmeras a ambos lados, para sombra y una bonita vista.",
+      "cap1": "Avenida con vistas al castillo",
+      "h2palms": "Palmeras taladas",
+      "p4": "Hace unos años todas las palmeras tuvieron que ser taladas por una especie de escarabajo invasivo que atacaba los árboles y podía propagarse. Se han plantado de nuevo (nuevas) palmeras; la avenida sigue siendo una ruta central para caminar y ir en bici junto al puerto.",
+      "h2videos": "Vídeos",
+      "p5": "Imágenes de Palm Tree Lane y alrededores:",
+      "v1": "Palm Tree Lane",
+      "v2": "La avenida y el puente",
+      "v3": "Alrededor de Palm Tree Lane",
+      "g1": "La avenida",
+      "g2": "Puente",
+      "p6": "Gratis, siempre accesible – entre el puerto, el castillo y el centro.",
+      "tip": "bonito para caminar o ir en bici, especialmente al atardecer con el castillo de fondo.",
+      "hStory": "La historia",
+      "hSee": "Qué ves",
+      "hKnow": "Bueno saberlo",
+      "tipTitle": "Consejo del guía",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     }
   };
 

@@ -40,21 +40,18 @@
     .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
     .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
     .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+
     .content { padding: 18px 16px 0; }
     h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
     .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
-    .badge.paid { background: rgba(224,176,64,0.2); color: var(--gold); }
+
     .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
     .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
     .btn-audio { background: var(--petrol); color: #fff; }
     .btn-audio.playing { background: var(--petrol-dark); }
     .btn-stop { background: #3A4545; color: #fff; display: none; }
     .btn-stop.show { display: flex; }
-    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
-    .btn-apple { background: #111; color: #fff; }
+
     .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
     .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
     .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
@@ -65,10 +62,7 @@
     .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
     .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
     .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
-    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-    .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
-    .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
-    .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
+
     .hours { margin-top: 8px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
     .h-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 12px; font-size: 0.88rem; border-bottom: 1px solid var(--border); background: #1a2525; }
     .h-row:nth-child(odd) { background: #152525; }
@@ -108,46 +102,35 @@
   <main class="main">
     <div class="hero-wrap">
       <img src="img/jwwb/d2127b14fd-yxnzzxrzl2ltywdlcy9wywdlcy9tb251bwvudhmvy2fzyxjvbw.jpg" alt="Casa Romana Kos" loading="eager">
-      <div class="hero-caption" data-i18n="heroCap">Casa Romana · Romeinse villa</div>
+      <div class="hero-title"><h1 data-i18n="title">Casa Romana</h1></div>
     </div>
 
     <div class="content">
-      <h1 data-i18n="title">Casa Romana</h1>
-      <p class="lead" data-i18n="lead">Gerestaureerde Romeinse villa met atria, zuilen en mozaïeken – zo woonde een rijke familie zo’n 1800 jaar geleden.</p>
+<p class="lead" data-i18n="lead">Gerestaureerde Romeinse villa met atria, zuilen en mozaïeken – zo woonde een rijke familie zo’n 1800 jaar geleden.</p>
 
-      <div class="badges">
-        <span class="badge paid" data-i18n="badgePaid">Entree € 10</span>
-        <span class="badge">Kos-stad</span>
-        <span class="badge" data-i18n="badgeTue">Dinsdag dicht</span>
-      </div>
+      
 
       <div class="actions">
         <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
         <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Casa%20Romana%20Kos%20Grigoriou" target="_blank" rel="noopener">📍 Google Maps</a>
-        <a class="btn btn-apple" href="https://maps.apple.com/?q=Casa%20Romana%20Kos%20Grigoriou" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      
+      <div class="map-row">
+        <a href="https://www.google.com/maps/search/?api=1&query=Casa%20Romana%20Kos%20Grigoriou" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+        <a href="https://maps.apple.com/?q=Casa%20Romana%20Kos%20Grigoriou" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
       </div>
       <p class="status" id="ttsStatus"></p>
 
       <div id="readText">
         <div class="card">
-          <h2 data-i18n="h2villa">Romeinse villa</h2>
+          <h2 data-i18n="hStory">Romeinse villa</h2>
           <p data-i18n="p1">Casa Romana is een gerestaureerde Romeinse villa. Het huis is gebouwd rond 170–200 na Christus en staat op de resten van een ouder huis uit de Hellenistische tijd (rond 300–100 v.Chr.).</p>
         </div>
 
-        <div class="facts">
-          <div class="fact">
-            <span class="n">36</span>
-            <span class="l" data-i18n="factRooms">kamers</span>
-          </div>
-          <div class="fact">
-            <span class="n">3</span>
-            <span class="l" data-i18n="factCourts">binnenplaatsen</span>
-          </div>
-        </div>
+        
 
         <div class="card">
-          <h2 data-i18n="h2hours">Openingstijden</h2>
+          <h2 data-i18n="hSee">Openingstijden</h2>
           <p data-i18n="summer"><strong>Zomer</strong> (1 april – 31 oktober)</p>
           <div class="hours">
             <div class="h-row"><span data-i18n="monSun">Ma – Zo</span><span>08:00 – 19:00</span></div>
@@ -198,9 +181,9 @@
         </div>
 
         <div class="card">
-          <h2 data-i18n="h2visit">Bezoeken</h2>
+          <h2 data-i18n="hKnow">Bezoeken</h2>
           <p data-i18n="p6">In Kos-stad, Grigoriou E’-straat. Binnen is het indrukwekkender dan de buitenkant doet vermoeden.</p>
-          <div class="tip" data-i18n="tip">Tip: let op de mozaïeken van de panter en de zeebodem – die maken de villa uniek. Neem rustig de tijd; er is veel te zien in de kamers.</div>
+          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: let op de mozaïeken van de panter en de zeebodem – die maken de villa uniek. Neem rustig de tijd; er is veel te zien in de kamers.</p></div>
         </div>
       </div>
     </div>
@@ -213,162 +196,192 @@
 
 <script>
 (function(){
-  var I18N = {
-    nl: {
-      title: "Casa Romana",
-      lead: "Gerestaureerde Romeinse villa met atria, zuilen en mozaïeken – zo woonde een rijke familie zo’n 1800 jaar geleden.",
-      heroCap: "Casa Romana · Romeinse villa",
-      badgePaid: "Entree € 10", badgeTue: "Dinsdag dicht",
-      btnPlay: "🔊 Voorlezen",
-      h2villa: "Romeinse villa",
-      p1: "Casa Romana is een gerestaureerde Romeinse villa. Het huis is gebouwd rond 170–200 na Christus en staat op de resten van een ouder huis uit de Hellenistische tijd (rond 300–100 v.Chr.).",
-      factRooms: "kamers", factCourts: "binnenplaatsen",
-      h2hours: "Openingstijden",
-      summer: "Zomer (1 april – 31 oktober)",
-      winter: "Winter (1 november – 31 maart)",
-      monSun: "Ma – Zo", tue: "Dinsdag", closed: "Gesloten",
-      hoursNote: "Entree circa € 10. Er is vaak een combinatiekaart met het Archeologisch Museum en/of Asklepion. Controleer ter plaatse de actuele prijs.",
-      cap1: "Binnenplaatsen en zuilengalerijen",
-      h2disc: "Ontdekt na 1933",
-      p2: "De resten kwamen naar boven door de zware aardbeving op Kos in 1933. De Italianen restaureerden het huis volledig in 1940. Na jarenlange werkzaamheden ging het in 2015 weer open voor publiek.",
-      p3: "Je loopt er tussendoor en ziet hoe rijk en comfortabel een welgestelde familie hier zo’n 1800–1900 jaar geleden woonde.",
-      h2atria: "Atria en mozaïeken",
-      p4: "De villa heeft drie binnenplaatsen (atria), waarvan twee omringd door zuilengalerijen. In totaal zo’n 36 kamers.",
-      p5: "Opvallend zijn de mozaïekvloeren uit de 3e eeuw n.Chr.: bijvoorbeeld een panter die een hert verslindt, en een zeebodem vol vissen. Sommige beelden en mozaïeken zijn Hellenistisch en ouder dan 2000 jaar.",
-      g1: "Mozaïeken", g2: "Interieur", g3: "Zuilen", g4: "Atrium",
-      h2visit: "Bezoeken",
-      p6: "In Kos-stad, Grigoriou E’-straat. Binnen is het indrukwekkender dan de buitenkant doet vermoeden.",
-      tip: "Tip: let op de mozaïeken van de panter en de zeebodem – die maken de villa uniek. Neem rustig de tijd; er is veel te zien in de kamers."
+  var I18N = window.HK_DICT = {
+    "nl": {
+      "title": "Casa Romana",
+      "lead": "Gerestaureerde Romeinse villa met atria, zuilen en mozaïeken – zo woonde een rijke familie zo’n 1800 jaar geleden.",
+      "btnPlay": "Voorlezen",
+      "p1": "Casa Romana is een gerestaureerde Romeinse villa. Het huis is gebouwd rond 170–200 na Christus en staat op de resten van een ouder huis uit de Hellenistische tijd (rond 300–100 v.Chr.).",
+      "summer": "Zomer (1 april – 31 oktober)",
+      "winter": "Winter (1 november – 31 maart)",
+      "monSun": "Ma – Zo",
+      "tue": "Dinsdag",
+      "closed": "Gesloten",
+      "hoursNote": "Entree circa € 10. Er is vaak een combinatiekaart met het Archeologisch Museum en/of Asklepion. Controleer ter plaatse de actuele prijs.",
+      "cap1": "Binnenplaatsen en zuilengalerijen",
+      "h2disc": "Ontdekt na 1933",
+      "p2": "De resten kwamen naar boven door de zware aardbeving op Kos in 1933. De Italianen restaureerden het huis volledig in 1940. Na jarenlange werkzaamheden ging het in 2015 weer open voor publiek.",
+      "p3": "Je loopt er tussendoor en ziet hoe rijk en comfortabel een welgestelde familie hier zo’n 1800–1900 jaar geleden woonde.",
+      "h2atria": "Atria en mozaïeken",
+      "p4": "De villa heeft drie binnenplaatsen (atria), waarvan twee omringd door zuilengalerijen. In totaal zo’n 36 kamers.",
+      "p5": "Opvallend zijn de mozaïekvloeren uit de 3e eeuw n.Chr.: bijvoorbeeld een panter die een hert verslindt, en een zeebodem vol vissen. Sommige beelden en mozaïeken zijn Hellenistisch en ouder dan 2000 jaar.",
+      "g1": "Mozaïeken",
+      "g2": "Interieur",
+      "g3": "Zuilen",
+      "g4": "Atrium",
+      "p6": "In Kos-stad, Grigoriou E’-straat. Binnen is het indrukwekkender dan de buitenkant doet vermoeden.",
+      "tip": "let op de mozaïeken van de panter en de zeebodem – die maken de villa uniek. Neem rustig de tijd; er is veel te zien in de kamers.",
+      "hStory": "Het verhaal",
+      "hSee": "Wat je ziet",
+      "hKnow": "Goed om te weten",
+      "tipTitle": "Tip van de gids",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    en: {
-      title: "Casa Romana",
-      lead: "Restored Roman villa with atria, columns and mosaics – this is how a wealthy family lived about 1800 years ago.",
-      heroCap: "Casa Romana · Roman villa",
-      badgePaid: "Entry € 10", badgeTue: "Closed Tuesday",
-      btnPlay: "🔊 Read aloud",
-      h2villa: "Roman villa",
-      p1: "Casa Romana is a restored Roman villa. The house was built around 170–200 AD and stands on the remains of an older house from the Hellenistic period (around 300–100 BC).",
-      factRooms: "rooms", factCourts: "courtyards",
-      h2hours: "Opening hours",
-      summer: "Summer (1 April – 31 October)",
-      winter: "Winter (1 November – 31 March)",
-      monSun: "Mon – Sun", tue: "Tuesday", closed: "Closed",
-      hoursNote: "Entry about € 10. There is often a combination ticket with the Archaeological Museum and/or Asklepion. Check the current price on site.",
-      cap1: "Courtyards and colonnades",
-      h2disc: "Discovered after 1933",
-      p2: "The remains came to light through the severe earthquake on Kos in 1933. The Italians fully restored the house in 1940. After years of work it reopened to the public in 2015.",
-      p3: "You walk through it and see how richly and comfortably a wealthy family lived here some 1800–1900 years ago.",
-      h2atria: "Atria and mosaics",
-      p4: "The villa has three courtyards (atria), two of which are surrounded by colonnades. In total about 36 rooms.",
-      p5: "Notable are the mosaic floors from the 3rd century AD: for example a panther devouring a deer, and a seabed full of fish. Some statues and mosaics are Hellenistic and older than 2000 years.",
-      g1: "Mosaics", g2: "Interior", g3: "Columns", g4: "Atrium",
-      h2visit: "Visiting",
-      p6: "In Kos Town, Grigoriou E’ street. Inside it is more impressive than the exterior suggests.",
-      tip: "Tip: look for the mosaics of the panther and the seabed – they make the villa unique. Take your time; there is a lot to see in the rooms."
+    "en": {
+      "title": "Casa Romana",
+      "lead": "Restored Roman villa with atria, columns and mosaics – this is how a wealthy family lived about 1800 years ago.",
+      "btnPlay": "Read aloud",
+      "p1": "Casa Romana is a restored Roman villa. The house was built around 170–200 AD and stands on the remains of an older house from the Hellenistic period (around 300–100 BC).",
+      "summer": "Summer (1 April – 31 October)",
+      "winter": "Winter (1 November – 31 March)",
+      "monSun": "Mon – Sun",
+      "tue": "Tuesday",
+      "closed": "Closed",
+      "hoursNote": "Entry about € 10. There is often a combination ticket with the Archaeological Museum and/or Asklepion. Check the current price on site.",
+      "cap1": "Courtyards and colonnades",
+      "h2disc": "Discovered after 1933",
+      "p2": "The remains came to light through the severe earthquake on Kos in 1933. The Italians fully restored the house in 1940. After years of work it reopened to the public in 2015.",
+      "p3": "You walk through it and see how richly and comfortably a wealthy family lived here some 1800–1900 years ago.",
+      "h2atria": "Atria and mosaics",
+      "p4": "The villa has three courtyards (atria), two of which are surrounded by colonnades. In total about 36 rooms.",
+      "p5": "Notable are the mosaic floors from the 3rd century AD: for example a panther devouring a deer, and a seabed full of fish. Some statues and mosaics are Hellenistic and older than 2000 years.",
+      "g1": "Mosaics",
+      "g2": "Interior",
+      "g3": "Columns",
+      "g4": "Atrium",
+      "p6": "In Kos Town, Grigoriou E’ street. Inside it is more impressive than the exterior suggests.",
+      "tip": "look for the mosaics of the panther and the seabed – they make the villa unique. Take your time; there is a lot to see in the rooms.",
+      "hStory": "The story",
+      "hSee": "What you see",
+      "hKnow": "Good to know",
+      "tipTitle": "Guide’s tip",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    de: {
-      title: "Casa Romana",
-      lead: "Restaurierte römische Villa mit Atrien, Säulen und Mosaiken – so lebte eine reiche Familie vor etwa 1800 Jahren.",
-      heroCap: "Casa Romana · römische Villa",
-      badgePaid: "Eintritt € 10", badgeTue: "Dienstag geschlossen",
-      btnPlay: "🔊 Vorlesen",
-      h2villa: "Römische Villa",
-      p1: "Casa Romana ist eine restaurierte römische Villa. Das Haus wurde um 170–200 n. Chr. gebaut und steht auf den Resten eines älteren Hauses aus der hellenistischen Zeit (ca. 300–100 v. Chr.).",
-      factRooms: "Zimmer", factCourts: "Innenhöfe",
-      h2hours: "Öffnungszeiten",
-      summer: "Sommer (1. April – 31. Oktober)",
-      winter: "Winter (1. November – 31. März)",
-      monSun: "Mo – So", tue: "Dienstag", closed: "Geschlossen",
-      hoursNote: "Eintritt ca. € 10. Es gibt oft eine Kombi-Karte mit dem Archäologischen Museum und/oder Asklepion. Aktuellen Preis vor Ort prüfen.",
-      cap1: "Innenhöfe und Säulengalerien",
-      h2disc: "Entdeckt nach 1933",
-      p2: "Die Reste kamen durch das schwere Erdbeben auf Kos 1933 zum Vorschein. Die Italiener restaurierten das Haus vollständig 1940. Nach jahrelangen Arbeiten öffnete es 2015 wieder für die Öffentlichkeit.",
-      p3: "Du gehst hindurch und siehst, wie reich und komfortabel eine wohlhabende Familie hier vor etwa 1800–1900 Jahren lebte.",
-      h2atria: "Atrien und Mosaike",
-      p4: "Die Villa hat drei Innenhöfe (Atrien), von denen zwei von Säulengalerien umgeben sind. Insgesamt etwa 36 Zimmer.",
-      p5: "Auffällig sind die Mosaikböden aus dem 3. Jahrhundert n. Chr.: zum Beispiel ein Panther, der ein Reh verschlingt, und ein Meeresboden voller Fische. Einige Statuen und Mosaike sind hellenistisch und älter als 2000 Jahre.",
-      g1: "Mosaike", g2: "Innenraum", g3: "Säulen", g4: "Atrium",
-      h2visit: "Besuchen",
-      p6: "In Kos-Stadt, Grigoriou E’-Straße. Innen ist es beeindruckender, als die Außenseite vermuten lässt.",
-      tip: "Tipp: achte auf die Mosaike des Panthers und des Meeresbodens – die machen die Villa einzigartig. Nimm dir Zeit; es gibt viel zu sehen in den Zimmern."
+    "de": {
+      "title": "Casa Romana",
+      "lead": "Restaurierte römische Villa mit Atrien, Säulen und Mosaiken – so lebte eine reiche Familie vor etwa 1800 Jahren.",
+      "btnPlay": "Vorlesen",
+      "p1": "Casa Romana ist eine restaurierte römische Villa. Das Haus wurde um 170–200 n. Chr. gebaut und steht auf den Resten eines älteren Hauses aus der hellenistischen Zeit (ca. 300–100 v. Chr.).",
+      "summer": "Sommer (1. April – 31. Oktober)",
+      "winter": "Winter (1. November – 31. März)",
+      "monSun": "Mo – So",
+      "tue": "Dienstag",
+      "closed": "Geschlossen",
+      "hoursNote": "Eintritt ca. € 10. Es gibt oft eine Kombi-Karte mit dem Archäologischen Museum und/oder Asklepion. Aktuellen Preis vor Ort prüfen.",
+      "cap1": "Innenhöfe und Säulengalerien",
+      "h2disc": "Entdeckt nach 1933",
+      "p2": "Die Reste kamen durch das schwere Erdbeben auf Kos 1933 zum Vorschein. Die Italiener restaurierten das Haus vollständig 1940. Nach jahrelangen Arbeiten öffnete es 2015 wieder für die Öffentlichkeit.",
+      "p3": "Du gehst hindurch und siehst, wie reich und komfortabel eine wohlhabende Familie hier vor etwa 1800–1900 Jahren lebte.",
+      "h2atria": "Atrien und Mosaike",
+      "p4": "Die Villa hat drei Innenhöfe (Atrien), von denen zwei von Säulengalerien umgeben sind. Insgesamt etwa 36 Zimmer.",
+      "p5": "Auffällig sind die Mosaikböden aus dem 3. Jahrhundert n. Chr.: zum Beispiel ein Panther, der ein Reh verschlingt, und ein Meeresboden voller Fische. Einige Statuen und Mosaike sind hellenistisch und älter als 2000 Jahre.",
+      "g1": "Mosaike",
+      "g2": "Innenraum",
+      "g3": "Säulen",
+      "g4": "Atrium",
+      "p6": "In Kos-Stadt, Grigoriou E’-Straße. Innen ist es beeindruckender, als die Außenseite vermuten lässt.",
+      "tip": "achte auf die Mosaike des Panthers und des Meeresbodens – die machen die Villa einzigartig. Nimm dir Zeit; es gibt viel zu sehen in den Zimmern.",
+      "hStory": "Die Geschichte",
+      "hSee": "Was du siehst",
+      "hKnow": "Gut zu wissen",
+      "tipTitle": "Tipp des Guides",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    it: {
-      title: "Casa Romana",
-      lead: "Villa romana restaurata con atri, colonne e mosaici – così viveva una famiglia ricca circa 1800 anni fa.",
-      heroCap: "Casa Romana · villa romana",
-      badgePaid: "Ingresso € 10", badgeTue: "Chiuso martedì",
-      btnPlay: "🔊 Leggi ad alta voce",
-      h2villa: "Villa romana",
-      p1: "Casa Romana è una villa romana restaurata. La casa fu costruita intorno al 170–200 d.C. e sorge sui resti di una casa più antica del periodo ellenistico (intorno al 300–100 a.C.).",
-      factRooms: "stanze", factCourts: "cortili",
-      h2hours: "Orari di apertura",
-      summer: "Estate (1 aprile – 31 ottobre)",
-      winter: "Inverno (1 novembre – 31 marzo)",
-      monSun: "Lun – Dom", tue: "Martedì", closed: "Chiuso",
-      hoursNote: "Ingresso circa € 10. Spesso c’è un biglietto combinato con il Museo Archeologico e/o Asklepion. Controlla il prezzo attuale sul posto.",
-      cap1: "Cortili e colonnati",
-      h2disc: "Scoperta dopo il 1933",
-      p2: "I resti vennero alla luce con il grave terremoto di Kos del 1933. Gli italiani restaurarono completamente la casa nel 1940. Dopo anni di lavori riaprì al pubblico nel 2015.",
-      p3: "Ci cammini attraverso e vedi quanto riccamente e comodamente viveva una famiglia benestante qui circa 1800–1900 anni fa.",
-      h2atria: "Atri e mosaici",
-      p4: "La villa ha tre cortili (atri), di cui due circondati da colonnati. In totale circa 36 stanze.",
-      p5: "Notevoli sono i pavimenti a mosaico del III secolo d.C.: per esempio una pantera che divora un cervo, e un fondale marino pieno di pesci. Alcune statue e mosaici sono ellenistici e hanno più di 2000 anni.",
-      g1: "Mosaici", g2: "Interno", g3: "Colonne", g4: "Atrio",
-      h2visit: "Visitare",
-      p6: "A Kos città, via Grigoriou E’. All’interno è più impressionante di quanto l’esterno faccia pensare.",
-      tip: "Consiglio: cerca i mosaici della pantera e del fondale marino – rendono la villa unica. Prenditi tempo; c’è molto da vedere nelle stanze."
+    "it": {
+      "title": "Casa Romana",
+      "lead": "Villa romana restaurata con atri, colonne e mosaici – così viveva una famiglia ricca circa 1800 anni fa.",
+      "btnPlay": "Leggi ad alta voce",
+      "p1": "Casa Romana è una villa romana restaurata. La casa fu costruita intorno al 170–200 d.C. e sorge sui resti di una casa più antica del periodo ellenistico (intorno al 300–100 a.C.).",
+      "summer": "Estate (1 aprile – 31 ottobre)",
+      "winter": "Inverno (1 novembre – 31 marzo)",
+      "monSun": "Lun – Dom",
+      "tue": "Martedì",
+      "closed": "Chiuso",
+      "hoursNote": "Ingresso circa € 10. Spesso c’è un biglietto combinato con il Museo Archeologico e/o Asklepion. Controlla il prezzo attuale sul posto.",
+      "cap1": "Cortili e colonnati",
+      "h2disc": "Scoperta dopo il 1933",
+      "p2": "I resti vennero alla luce con il grave terremoto di Kos del 1933. Gli italiani restaurarono completamente la casa nel 1940. Dopo anni di lavori riaprì al pubblico nel 2015.",
+      "p3": "Ci cammini attraverso e vedi quanto riccamente e comodamente viveva una famiglia benestante qui circa 1800–1900 anni fa.",
+      "h2atria": "Atri e mosaici",
+      "p4": "La villa ha tre cortili (atri), di cui due circondati da colonnati. In totale circa 36 stanze.",
+      "p5": "Notevoli sono i pavimenti a mosaico del III secolo d.C.: per esempio una pantera che divora un cervo, e un fondale marino pieno di pesci. Alcune statue e mosaici sono ellenistici e hanno più di 2000 anni.",
+      "g1": "Mosaici",
+      "g2": "Interno",
+      "g3": "Colonne",
+      "g4": "Atrio",
+      "p6": "A Kos città, via Grigoriou E’. All’interno è più impressionante di quanto l’esterno faccia pensare.",
+      "tip": "cerca i mosaici della pantera e del fondale marino – rendono la villa unica. Prenditi tempo; c’è molto da vedere nelle stanze.",
+      "hStory": "La storia",
+      "hSee": "Cosa vedi",
+      "hKnow": "Buono a sapersi",
+      "tipTitle": "Consiglio della guida",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    tr: {
-      title: "Casa Romana",
-      lead: "Atria, sütunlar ve mozaiklerle restore edilmiş Roma villası – zengin bir ailenin yaklaşık 1800 yıl önce nasıl yaşadığını gösterir.",
-      heroCap: "Casa Romana · Roma villası",
-      badgePaid: "Giriş € 10", badgeTue: "Salı kapalı",
-      btnPlay: "🔊 Sesli oku",
-      h2villa: "Roma villası",
-      p1: "Casa Romana restore edilmiş bir Roma villasıdır. Ev MS 170–200 civarında inşa edilmiş ve Helenistik dönemden (yaklaşık MÖ 300–100) daha eski bir evin kalıntıları üzerine kuruludur.",
-      factRooms: "oda", factCourts: "avlu",
-      h2hours: "Açılış saatleri",
-      summer: "Yaz (1 Nisan – 31 Ekim)",
-      winter: "Kış (1 Kasım – 31 Mart)",
-      monSun: "Pzt – Paz", tue: "Salı", closed: "Kapalı",
-      hoursNote: "Giriş yaklaşık € 10. Genellikle Arkeoloji Müzesi ve/veya Asklepion ile kombine bilet vardır. Güncel fiyatı yerinde kontrol et.",
-      cap1: "Avlular ve sütunlu galeriler",
-      h2disc: "1933’ten sonra keşfedildi",
-      p2: "Kalıntılar 1933’teki ağır Kos depremiyle ortaya çıktı. İtalyanlar evi 1940’ta tamamen restore etti. Yıllarca süren çalışmalardan sonra 2015’te yeniden halka açıldı.",
-      p3: "İçinden geçerken zengin bir ailenin yaklaşık 1800–1900 yıl önce burada ne kadar rahat ve lüks yaşadığını görürsün.",
-      h2atria: "Atria ve mozaikler",
-      p4: "Villanın üç avlusu (atria) vardır, ikisi sütunlu galerilerle çevrilidir. Toplamda yaklaşık 36 oda.",
-      p5: "Dikkat çekenler MS 3. yüzyıldan mozaik zeminlerdir: örneğin bir geyiği yutan panter ve balıklarla dolu deniz dibi. Bazı heykeller ve mozaikler Helenistiktir ve 2000 yaşından fazladır.",
-      g1: "Mozaikler", g2: "İç mekân", g3: "Sütunlar", g4: "Atrium",
-      h2visit: "Ziyaret",
-      p6: "Kos şehrinde, Grigoriou E’ caddesinde. İçerisi dışarıdan göründüğünden daha etkileyicidir.",
-      tip: "İpucu: panter ve deniz dibi mozaiklerine dikkat et – villayı benzersiz kılan onlardır. Acele etme; odalarda çok şey var."
+    "tr": {
+      "title": "Casa Romana",
+      "lead": "Atria, sütunlar ve mozaiklerle restore edilmiş Roma villası – zengin bir ailenin yaklaşık 1800 yıl önce nasıl yaşadığını gösterir.",
+      "btnPlay": "Sesli oku",
+      "p1": "Casa Romana restore edilmiş bir Roma villasıdır. Ev MS 170–200 civarında inşa edilmiş ve Helenistik dönemden (yaklaşık MÖ 300–100) daha eski bir evin kalıntıları üzerine kuruludur.",
+      "summer": "Yaz (1 Nisan – 31 Ekim)",
+      "winter": "Kış (1 Kasım – 31 Mart)",
+      "monSun": "Pzt – Paz",
+      "tue": "Salı",
+      "closed": "Kapalı",
+      "hoursNote": "Giriş yaklaşık € 10. Genellikle Arkeoloji Müzesi ve/veya Asklepion ile kombine bilet vardır. Güncel fiyatı yerinde kontrol et.",
+      "cap1": "Avlular ve sütunlu galeriler",
+      "h2disc": "1933’ten sonra keşfedildi",
+      "p2": "Kalıntılar 1933’teki ağır Kos depremiyle ortaya çıktı. İtalyanlar evi 1940’ta tamamen restore etti. Yıllarca süren çalışmalardan sonra 2015’te yeniden halka açıldı.",
+      "p3": "İçinden geçerken zengin bir ailenin yaklaşık 1800–1900 yıl önce burada ne kadar rahat ve lüks yaşadığını görürsün.",
+      "h2atria": "Atria ve mozaikler",
+      "p4": "Villanın üç avlusu (atria) vardır, ikisi sütunlu galerilerle çevrilidir. Toplamda yaklaşık 36 oda.",
+      "p5": "Dikkat çekenler MS 3. yüzyıldan mozaik zeminlerdir: örneğin bir geyiği yutan panter ve balıklarla dolu deniz dibi. Bazı heykeller ve mozaikler Helenistiktir ve 2000 yaşından fazladır.",
+      "g1": "Mozaikler",
+      "g2": "İç mekân",
+      "g3": "Sütunlar",
+      "g4": "Atrium",
+      "p6": "Kos şehrinde, Grigoriou E’ caddesinde. İçerisi dışarıdan göründüğünden daha etkileyicidir.",
+      "tip": "panter ve deniz dibi mozaiklerine dikkat et – villayı benzersiz kılan onlardır. Acele etme; odalarda çok şey var.",
+      "hStory": "Hikaye",
+      "hSee": "Ne görürsün",
+      "hKnow": "Bilmekte fayda var",
+      "tipTitle": "Rehberin ipucu",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    es: {
-      title: "Casa Romana",
-      lead: "Villa romana restaurada con atrios, columnas y mosaicos – así vivía una familia rica hace unos 1800 años.",
-      heroCap: "Casa Romana · villa romana",
-      badgePaid: "Entrada € 10", badgeTue: "Cerrado martes",
-      btnPlay: "🔊 Leer en voz alta",
-      h2villa: "Villa romana",
-      p1: "Casa Romana es una villa romana restaurada. La casa se construyó alrededor del 170–200 d.C. y se levanta sobre los restos de una casa más antigua del periodo helenístico (alrededor del 300–100 a.C.).",
-      factRooms: "habitaciones", factCourts: "patios",
-      h2hours: "Horarios de apertura",
-      summer: "Verano (1 abril – 31 octubre)",
-      winter: "Invierno (1 noviembre – 31 marzo)",
-      monSun: "Lun – Dom", tue: "Martes", closed: "Cerrado",
-      hoursNote: "Entrada aproximadamente € 10. A menudo hay un billete combinado con el Museo Arqueológico y/o Asklepion. Comprueba el precio actual in situ.",
-      cap1: "Patios y columnatas",
-      h2disc: "Descubierta después de 1933",
-      p2: "Los restos salieron a la luz con el grave terremoto de Kos de 1933. Los italianos restauraron completamente la casa en 1940. Tras años de trabajos se reabrió al público en 2015.",
-      p3: "Caminas por ella y ves lo rica y cómodamente que vivía una familia acomodada aquí hace unos 1800–1900 años.",
-      h2atria: "Atrios y mosaicos",
-      p4: "La villa tiene tres patios (atrios), de los cuales dos están rodeados por columnatas. En total unas 36 habitaciones.",
-      p5: "Destacan los suelos de mosaico del siglo III d.C.: por ejemplo una pantera devorando un ciervo, y un fondo marino lleno de peces. Algunas estatuas y mosaicos son helenísticos y tienen más de 2000 años.",
-      g1: "Mosaicos", g2: "Interior", g3: "Columnas", g4: "Atrio",
-      h2visit: "Visitar",
-      p6: "En Kos ciudad, calle Grigoriou E’. Dentro es más impresionante de lo que sugiere el exterior.",
-      tip: "Consejo: fíjate en los mosaicos de la pantera y el fondo marino – hacen única la villa. Tómate tu tiempo; hay mucho que ver en las habitaciones."
+    "es": {
+      "title": "Casa Romana",
+      "lead": "Villa romana restaurada con atrios, columnas y mosaicos – así vivía una familia rica hace unos 1800 años.",
+      "btnPlay": "Leer en voz alta",
+      "p1": "Casa Romana es una villa romana restaurada. La casa se construyó alrededor del 170–200 d.C. y se levanta sobre los restos de una casa más antigua del periodo helenístico (alrededor del 300–100 a.C.).",
+      "summer": "Verano (1 abril – 31 octubre)",
+      "winter": "Invierno (1 noviembre – 31 marzo)",
+      "monSun": "Lun – Dom",
+      "tue": "Martes",
+      "closed": "Cerrado",
+      "hoursNote": "Entrada aproximadamente € 10. A menudo hay un billete combinado con el Museo Arqueológico y/o Asklepion. Comprueba el precio actual in situ.",
+      "cap1": "Patios y columnatas",
+      "h2disc": "Descubierta después de 1933",
+      "p2": "Los restos salieron a la luz con el grave terremoto de Kos de 1933. Los italianos restauraron completamente la casa en 1940. Tras años de trabajos se reabrió al público en 2015.",
+      "p3": "Caminas por ella y ves lo rica y cómodamente que vivía una familia acomodada aquí hace unos 1800–1900 años.",
+      "h2atria": "Atrios y mosaicos",
+      "p4": "La villa tiene tres patios (atrios), de los cuales dos están rodeados por columnatas. En total unas 36 habitaciones.",
+      "p5": "Destacan los suelos de mosaico del siglo III d.C.: por ejemplo una pantera devorando un ciervo, y un fondo marino lleno de peces. Algunas estatuas y mosaicos son helenísticos y tienen más de 2000 años.",
+      "g1": "Mosaicos",
+      "g2": "Interior",
+      "g3": "Columnas",
+      "g4": "Atrio",
+      "p6": "En Kos ciudad, calle Grigoriou E’. Dentro es más impresionante de lo que sugiere el exterior.",
+      "tip": "fíjate en los mosaicos de la pantera y el fondo marino – hacen única la villa. Tómate tu tiempo; hay mucho que ver en las habitaciones.",
+      "hStory": "La historia",
+      "hSee": "Qué ves",
+      "hKnow": "Bueno saberlo",
+      "tipTitle": "Consejo del guía",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     }
   };
 

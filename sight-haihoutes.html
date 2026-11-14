@@ -40,20 +40,18 @@
     .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
     .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
     .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+
     .content { padding: 18px 16px 0; }
     h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
     .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+
     .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
     .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
     .btn-audio { background: var(--petrol); color: #fff; }
     .btn-audio.playing { background: var(--petrol-dark); }
     .btn-stop { background: #3A4545; color: #fff; display: none; }
     .btn-stop.show { display: flex; }
-    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
-    .btn-apple { background: #111; color: #fff; }
+
     .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
     .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
     .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
@@ -61,10 +59,7 @@
     .card p:last-child { margin-bottom: 0; }
     .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
     .tip strong { color: var(--gold); }
-    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-    .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
-    .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
-    .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
+
     .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
     .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
     .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
@@ -101,46 +96,35 @@
   <main class="main">
     <div class="hero-wrap">
       <img src="img/jwwb/d854284ccc-yxnzzxrzl2ltywdlcy9wywdlcy9zzxr0bgvtzw50cy9oywlob3.jpg" alt="Haihoutes" loading="eager">
-      <div class="hero-caption" data-i18n="heroCap">Haihoutes</div>
+      <div class="hero-title"><h1 data-i18n="title">Haihoutes</h1></div>
     </div>
 
     <div class="content">
-      <h1 data-i18n="title">Haihoutes</h1>
-      <p class="lead" data-i18n="lead">Voormalig bergdorp (± 1780) – eerste school van Kos, schuilplaats in WO II, nu weer levend met kafeneio en sfeer van een openluchtmuseum.</p>
+<p class="lead" data-i18n="lead">Voormalig bergdorp (± 1780) – eerste school van Kos, schuilplaats in WO II, nu weer levend met kafeneio en sfeer van een openluchtmuseum.</p>
 
-      <div class="badges">
-        <span class="badge" data-i18n="badgeVillage">Bergdorp</span>
-        <span class="badge" data-i18n="badgeKafeneio">Kafeneio</span>
-        <span class="badge" data-i18n="badgeFree">Gratis</span>
-      </div>
+      
 
       <div class="actions">
         <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
         <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Haihoutes%20village%20Kos" target="_blank" rel="noopener">📍 Google Maps</a>
-        <a class="btn btn-apple" href="https://maps.apple.com/?q=Haihoutes%20village%20Kos" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      
+      <div class="map-row">
+        <a href="https://www.google.com/maps/search/?api=1&query=Haihoutes%20village%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+        <a href="https://maps.apple.com/?q=Haihoutes%20village%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
       </div>
       <p class="status" id="ttsStatus"></p>
 
       <div id="readText">
         <div class="card">
-          <h2 data-i18n="h2history">Bergdorp met geschiedenis</h2>
+          <h2 data-i18n="hStory">Bergdorp met geschiedenis</h2>
           <p data-i18n="p1">Haihoutes is een klein, voormalig bergdorp. Rond 1780 vestigden zich hier de eerste bewoners, onder wie een Armeense familie Haihoudes.</p>
         </div>
 
-        <div class="facts">
-          <div class="fact">
-            <span class="n">± 1780</span>
-            <span class="l" data-i18n="factFirst">eerste bewoners</span>
-          </div>
-          <div class="fact">
-            <span class="n" data-i18n="factSchool">1e school</span>
-            <span class="l" data-i18n="factIsland">van heel Kos</span>
-          </div>
-        </div>
+        
 
         <div class="card">
-          <h2 data-i18n="h2school">Eerste school van Kos</h2>
+          <h2 data-i18n="hSee">Eerste school van Kos</h2>
           <p data-i18n="p2">De allereerste school van het eiland begon hier, in de kerk van Agios Dimitrios (nog steeds op de berg). Toen zo’n 40 tot 50 leerlingen.</p>
         </div>
 
@@ -176,11 +160,11 @@
         <div class="card">
           <h2 data-i18n="h2visit">Bezoeken</h2>
           <p data-i18n="p5">Gratis. Ideaal voor rust en sfeer.</p>
-          <div class="tip" data-i18n="tip">Tip: drink iets in het kafeneio en geniet van de stilte – het voelt als een filmset.</div>
+          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: drink iets in het kafeneio en geniet van de stilte – het voelt als een filmset.</p></div>
         </div>
 
         <div class="card">
-          <h2 data-i18n="h2video">Video</h2>
+          <h2 data-i18n="hKnow">Video</h2>
         </div>
         <div class="video-block">
           <div class="video-wrap">
@@ -198,132 +182,150 @@
 
 <script>
 (function(){
-  var I18N = {
-    nl: {
-      title: "Haihoutes",
-      lead: "Voormalig bergdorp (± 1780) – eerste school van Kos, schuilplaats in WO II, nu weer levend met kafeneio en sfeer van een openluchtmuseum.",
-      heroCap: "Haihoutes",
-      badgeVillage: "Bergdorp", badgeKafeneio: "Kafeneio", badgeFree: "Gratis",
-      btnPlay: "🔊 Voorlezen",
-      h2history: "Bergdorp met geschiedenis",
-      p1: "Haihoutes is een klein, voormalig bergdorp. Rond 1780 vestigden zich hier de eerste bewoners, onder wie een Armeense familie Haihoudes.",
-      factFirst: "eerste bewoners", factSchool: "1e school", factIsland: "van heel Kos",
-      h2school: "Eerste school van Kos",
-      p2: "De allereerste school van het eiland begon hier, in de kerk van Agios Dimitrios (nog steeds op de berg). Toen zo’n 40 tot 50 leerlingen.",
-      h2ww2: "WO II en leegloop",
-      p3: "Tijdens de Tweede Wereldoorlog vonden veel mensen uit Kos-stad hier een schuilplaats. In de jaren 1960–1970 vertrokken de laatste inwoners; het dorp werd een spookdorp.",
-      h2alive: "Weer tot leven",
-      p4: "Sinds enkele jaren is Haihoutes weer levend: een traditioneel kafeneio, smalle paadjes, oude stenen huizen en overal groen – bijna als een openluchtmuseum.",
-      g1: "Haihoutes", g2: "Haihoutes", g3: "Haihoutes", g4: "Haihoutes",
-      h2visit: "Bezoeken",
-      p5: "Gratis. Ideaal voor rust en sfeer.",
-      tip: "Tip: drink iets in het kafeneio en geniet van de stilte – het voelt als een filmset.",
-      h2video: "Video"
+  var I18N = window.HK_DICT = {
+    "nl": {
+      "title": "Haihoutes",
+      "lead": "Voormalig bergdorp (± 1780) – eerste school van Kos, schuilplaats in WO II, nu weer levend met kafeneio en sfeer van een openluchtmuseum.",
+      "btnPlay": "Voorlezen",
+      "p1": "Haihoutes is een klein, voormalig bergdorp. Rond 1780 vestigden zich hier de eerste bewoners, onder wie een Armeense familie Haihoudes.",
+      "p2": "De allereerste school van het eiland begon hier, in de kerk van Agios Dimitrios (nog steeds op de berg). Toen zo’n 40 tot 50 leerlingen.",
+      "h2ww2": "WO II en leegloop",
+      "p3": "Tijdens de Tweede Wereldoorlog vonden veel mensen uit Kos-stad hier een schuilplaats. In de jaren 1960–1970 vertrokken de laatste inwoners; het dorp werd een spookdorp.",
+      "h2alive": "Weer tot leven",
+      "p4": "Sinds enkele jaren is Haihoutes weer levend: een traditioneel kafeneio, smalle paadjes, oude stenen huizen en overal groen – bijna als een openluchtmuseum.",
+      "g1": "Haihoutes",
+      "g2": "Haihoutes",
+      "g3": "Haihoutes",
+      "g4": "Haihoutes",
+      "h2visit": "Bezoeken",
+      "p5": "Gratis. Ideaal voor rust en sfeer.",
+      "tip": "drink iets in het kafeneio en geniet van de stilte – het voelt als een filmset.",
+      "hStory": "Het verhaal",
+      "hSee": "Wat je ziet",
+      "hKnow": "Goed om te weten",
+      "tipTitle": "Tip van de gids",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    en: {
-      title: "Haihoutes",
-      lead: "Former mountain village (± 1780) – first school of Kos, shelter in WWII, now alive again with kafeneio and the atmosphere of an open-air museum.",
-      heroCap: "Haihoutes",
-      badgeVillage: "Mountain village", badgeKafeneio: "Kafeneio", badgeFree: "Free",
-      btnPlay: "🔊 Read aloud",
-      h2history: "Mountain village with history",
-      p1: "Haihoutes is a small, former mountain village. Around 1780 the first residents settled here, including an Armenian family Haihoudes.",
-      factFirst: "first residents", factSchool: "1st school", factIsland: "of all Kos",
-      h2school: "First school of Kos",
-      p2: "The very first school of the island started here, in the church of Agios Dimitrios (still on the mountain). Then about 40 to 50 pupils.",
-      h2ww2: "WWII and depopulation",
-      p3: "During the Second World War many people from Kos town found shelter here. In the 1960s–1970s the last inhabitants left; the village became a ghost village.",
-      h2alive: "Alive again",
-      p4: "For several years Haihoutes has been alive again: a traditional kafeneio, narrow paths, old stone houses and greenery everywhere – almost like an open-air museum.",
-      g1: "Haihoutes", g2: "Haihoutes", g3: "Haihoutes", g4: "Haihoutes",
-      h2visit: "Visiting",
-      p5: "Free. Ideal for peace and atmosphere.",
-      tip: "Tip: have a drink in the kafeneio and enjoy the silence – it feels like a film set.",
-      h2video: "Video"
+    "en": {
+      "title": "Haihoutes",
+      "lead": "Former mountain village (± 1780) – first school of Kos, shelter in WWII, now alive again with kafeneio and the atmosphere of an open-air museum.",
+      "btnPlay": "Read aloud",
+      "p1": "Haihoutes is a small, former mountain village. Around 1780 the first residents settled here, including an Armenian family Haihoudes.",
+      "p2": "The very first school of the island started here, in the church of Agios Dimitrios (still on the mountain). Then about 40 to 50 pupils.",
+      "h2ww2": "WWII and depopulation",
+      "p3": "During the Second World War many people from Kos town found shelter here. In the 1960s–1970s the last inhabitants left; the village became a ghost village.",
+      "h2alive": "Alive again",
+      "p4": "For several years Haihoutes has been alive again: a traditional kafeneio, narrow paths, old stone houses and greenery everywhere – almost like an open-air museum.",
+      "g1": "Haihoutes",
+      "g2": "Haihoutes",
+      "g3": "Haihoutes",
+      "g4": "Haihoutes",
+      "h2visit": "Visiting",
+      "p5": "Free. Ideal for peace and atmosphere.",
+      "tip": "have a drink in the kafeneio and enjoy the silence – it feels like a film set.",
+      "hStory": "The story",
+      "hSee": "What you see",
+      "hKnow": "Good to know",
+      "tipTitle": "Guide’s tip",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    de: {
-      title: "Haihoutes",
-      lead: "Ehemaliges Bergdorf (± 1780) – erste Schule von Kos, Zufluchtsort im Zweiten Weltkrieg, jetzt wieder lebendig mit Kafeneio und Atmosphäre eines Freilichtmuseums.",
-      heroCap: "Haihoutes",
-      badgeVillage: "Bergdorf", badgeKafeneio: "Kafeneio", badgeFree: "Kostenlos",
-      btnPlay: "🔊 Vorlesen",
-      h2history: "Bergdorf mit Geschichte",
-      p1: "Haihoutes ist ein kleines, ehemaliges Bergdorf. Um 1780 siedelten sich hier die ersten Bewohner an, darunter eine armenische Familie Haihoudes.",
-      factFirst: "erste Bewohner", factSchool: "1. Schule", factIsland: "von ganz Kos",
-      h2school: "Erste Schule von Kos",
-      p2: "Die allererste Schule der Insel begann hier, in der Kirche von Agios Dimitrios (noch immer auf dem Berg). Damals etwa 40 bis 50 Schüler.",
-      h2ww2: "Zweiter Weltkrieg und Entvölkerung",
-      p3: "Während des Zweiten Weltkriegs fanden viele Menschen aus Kos-Stadt hier Schutz. In den 1960er–1970er Jahren zogen die letzten Bewohner weg; das Dorf wurde zum Geisterdorf.",
-      h2alive: "Wieder lebendig",
-      p4: "Seit einigen Jahren ist Haihoutes wieder lebendig: ein traditionelles Kafeneio, enge Pfade, alte Steinhäuser und überall Grün – fast wie ein Freilichtmuseum.",
-      g1: "Haihoutes", g2: "Haihoutes", g3: "Haihoutes", g4: "Haihoutes",
-      h2visit: "Besuchen",
-      p5: "Kostenlos. Ideal für Ruhe und Atmosphäre.",
-      tip: "Tipp: trink etwas im Kafeneio und genieße die Stille – es fühlt sich an wie ein Filmset.",
-      h2video: "Video"
+    "de": {
+      "title": "Haihoutes",
+      "lead": "Ehemaliges Bergdorf (± 1780) – erste Schule von Kos, Zufluchtsort im Zweiten Weltkrieg, jetzt wieder lebendig mit Kafeneio und Atmosphäre eines Freilichtmuseums.",
+      "btnPlay": "Vorlesen",
+      "p1": "Haihoutes ist ein kleines, ehemaliges Bergdorf. Um 1780 siedelten sich hier die ersten Bewohner an, darunter eine armenische Familie Haihoudes.",
+      "p2": "Die allererste Schule der Insel begann hier, in der Kirche von Agios Dimitrios (noch immer auf dem Berg). Damals etwa 40 bis 50 Schüler.",
+      "h2ww2": "Zweiter Weltkrieg und Entvölkerung",
+      "p3": "Während des Zweiten Weltkriegs fanden viele Menschen aus Kos-Stadt hier Schutz. In den 1960er–1970er Jahren zogen die letzten Bewohner weg; das Dorf wurde zum Geisterdorf.",
+      "h2alive": "Wieder lebendig",
+      "p4": "Seit einigen Jahren ist Haihoutes wieder lebendig: ein traditionelles Kafeneio, enge Pfade, alte Steinhäuser und überall Grün – fast wie ein Freilichtmuseum.",
+      "g1": "Haihoutes",
+      "g2": "Haihoutes",
+      "g3": "Haihoutes",
+      "g4": "Haihoutes",
+      "h2visit": "Besuchen",
+      "p5": "Kostenlos. Ideal für Ruhe und Atmosphäre.",
+      "tip": "trink etwas im Kafeneio und genieße die Stille – es fühlt sich an wie ein Filmset.",
+      "hStory": "Die Geschichte",
+      "hSee": "Was du siehst",
+      "hKnow": "Gut zu wissen",
+      "tipTitle": "Tipp des Guides",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    it: {
-      title: "Haihoutes",
-      lead: "Ex villaggio di montagna (± 1780) – prima scuola di Kos, rifugio nella Seconda guerra mondiale, ora di nuovo vivo con kafeneio e atmosfera di museo all’aperto.",
-      heroCap: "Haihoutes",
-      badgeVillage: "Villaggio di montagna", badgeKafeneio: "Kafeneio", badgeFree: "Gratis",
-      btnPlay: "🔊 Leggi ad alta voce",
-      h2history: "Villaggio di montagna con storia",
-      p1: "Haihoutes è un piccolo ex villaggio di montagna. Intorno al 1780 si stabilirono qui i primi abitanti, tra cui una famiglia armena Haihoudes.",
-      factFirst: "primi abitanti", factSchool: "1ª scuola", factIsland: "di tutta Kos",
-      h2school: "Prima scuola di Kos",
-      p2: "La primissima scuola dell’isola iniziò qui, nella chiesa di Agios Dimitrios (ancora sulla montagna). Allora circa 40-50 alunni.",
-      h2ww2: "Seconda guerra mondiale e spopolamento",
-      p3: "Durante la Seconda guerra mondiale molte persone da Kos città trovarono rifugio qui. Negli anni ’60-’70 gli ultimi abitanti se ne andarono; il villaggio divenne un villaggio fantasma.",
-      h2alive: "Di nuovo vivo",
-      p4: "Da alcuni anni Haihoutes è di nuovo vivo: un kafeneio tradizionale, sentieri stretti, vecchie case in pietra e verde ovunque – quasi come un museo all’aperto.",
-      g1: "Haihoutes", g2: "Haihoutes", g3: "Haihoutes", g4: "Haihoutes",
-      h2visit: "Visitare",
-      p5: "Gratis. Ideale per pace e atmosfera.",
-      tip: "Consiglio: bevi qualcosa nel kafeneio e goditi il silenzio – sembra un set cinematografico.",
-      h2video: "Video"
+    "it": {
+      "title": "Haihoutes",
+      "lead": "Ex villaggio di montagna (± 1780) – prima scuola di Kos, rifugio nella Seconda guerra mondiale, ora di nuovo vivo con kafeneio e atmosfera di museo all’aperto.",
+      "btnPlay": "Leggi ad alta voce",
+      "p1": "Haihoutes è un piccolo ex villaggio di montagna. Intorno al 1780 si stabilirono qui i primi abitanti, tra cui una famiglia armena Haihoudes.",
+      "p2": "La primissima scuola dell’isola iniziò qui, nella chiesa di Agios Dimitrios (ancora sulla montagna). Allora circa 40-50 alunni.",
+      "h2ww2": "Seconda guerra mondiale e spopolamento",
+      "p3": "Durante la Seconda guerra mondiale molte persone da Kos città trovarono rifugio qui. Negli anni ’60-’70 gli ultimi abitanti se ne andarono; il villaggio divenne un villaggio fantasma.",
+      "h2alive": "Di nuovo vivo",
+      "p4": "Da alcuni anni Haihoutes è di nuovo vivo: un kafeneio tradizionale, sentieri stretti, vecchie case in pietra e verde ovunque – quasi come un museo all’aperto.",
+      "g1": "Haihoutes",
+      "g2": "Haihoutes",
+      "g3": "Haihoutes",
+      "g4": "Haihoutes",
+      "h2visit": "Visitare",
+      "p5": "Gratis. Ideale per pace e atmosfera.",
+      "tip": "bevi qualcosa nel kafeneio e goditi il silenzio – sembra un set cinematografico.",
+      "hStory": "La storia",
+      "hSee": "Cosa vedi",
+      "hKnow": "Buono a sapersi",
+      "tipTitle": "Consiglio della guida",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    tr: {
-      title: "Haihoutes",
-      lead: "Eski dağ köyü (± 1780) – Kos’un ilk okulu, II. Dünya Savaşı’nda sığınak, şimdi kafeneio ve açık hava müzesi atmosferiyle yeniden canlı.",
-      heroCap: "Haihoutes",
-      badgeVillage: "Dağ köyü", badgeKafeneio: "Kafeneio", badgeFree: "Ücretsiz",
-      btnPlay: "🔊 Sesli oku",
-      h2history: "Tarihli dağ köyü",
-      p1: "Haihoutes küçük, eski bir dağ köyüdür. 1780 civarında ilk sakinler buraya yerleşti, aralarında Ermeni Haihoudes ailesi de vardı.",
-      factFirst: "ilk sakinler", factSchool: "1. okul", factIsland: "tüm Kos’un",
-      h2school: "Kos’un ilk okulu",
-      p2: "Adanın ilk okulu burada, Agios Dimitrios kilisesinde (hâlâ dağda) başladı. O zaman yaklaşık 40-50 öğrenci vardı.",
-      h2ww2: "II. Dünya Savaşı ve boşalma",
-      p3: "İkinci Dünya Savaşı sırasında Kos kentinden birçok kişi burada sığınak buldu. 1960-1970’lerde son sakinler ayrıldı; köy hayalet köy oldu.",
-      h2alive: "Yeniden canlı",
-      p4: "Birkaç yıldır Haihoutes yeniden canlı: geleneksel bir kafeneio, dar yollar, eski taş evler ve her yerde yeşillik – neredeyse açık hava müzesi gibi.",
-      g1: "Haihoutes", g2: "Haihoutes", g3: "Haihoutes", g4: "Haihoutes",
-      h2visit: "Ziyaret",
-      p5: "Ücretsiz. Huzur ve atmosfer için ideal.",
-      tip: "İpucu: kafeneio’da bir şey için ve sessizliğin tadını çıkarın – film seti gibi hissettirir.",
-      h2video: "Video"
+    "tr": {
+      "title": "Haihoutes",
+      "lead": "Eski dağ köyü (± 1780) – Kos’un ilk okulu, II. Dünya Savaşı’nda sığınak, şimdi kafeneio ve açık hava müzesi atmosferiyle yeniden canlı.",
+      "btnPlay": "Sesli oku",
+      "p1": "Haihoutes küçük, eski bir dağ köyüdür. 1780 civarında ilk sakinler buraya yerleşti, aralarında Ermeni Haihoudes ailesi de vardı.",
+      "p2": "Adanın ilk okulu burada, Agios Dimitrios kilisesinde (hâlâ dağda) başladı. O zaman yaklaşık 40-50 öğrenci vardı.",
+      "h2ww2": "II. Dünya Savaşı ve boşalma",
+      "p3": "İkinci Dünya Savaşı sırasında Kos kentinden birçok kişi burada sığınak buldu. 1960-1970’lerde son sakinler ayrıldı; köy hayalet köy oldu.",
+      "h2alive": "Yeniden canlı",
+      "p4": "Birkaç yıldır Haihoutes yeniden canlı: geleneksel bir kafeneio, dar yollar, eski taş evler ve her yerde yeşillik – neredeyse açık hava müzesi gibi.",
+      "g1": "Haihoutes",
+      "g2": "Haihoutes",
+      "g3": "Haihoutes",
+      "g4": "Haihoutes",
+      "h2visit": "Ziyaret",
+      "p5": "Ücretsiz. Huzur ve atmosfer için ideal.",
+      "tip": "kafeneio’da bir şey için ve sessizliğin tadını çıkarın – film seti gibi hissettirir.",
+      "hStory": "Hikaye",
+      "hSee": "Ne görürsün",
+      "hKnow": "Bilmekte fayda var",
+      "tipTitle": "Rehberin ipucu",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    es: {
-      title: "Haihoutes",
-      lead: "Antiguo pueblo de montaña (± 1780) – primera escuela de Kos, refugio en la Segunda Guerra Mundial, ahora vivo de nuevo con kafeneio y ambiente de museo al aire libre.",
-      heroCap: "Haihoutes",
-      badgeVillage: "Pueblo de montaña", badgeKafeneio: "Kafeneio", badgeFree: "Gratis",
-      btnPlay: "🔊 Leer en voz alta",
-      h2history: "Pueblo de montaña con historia",
-      p1: "Haihoutes es un pequeño antiguo pueblo de montaña. Alrededor de 1780 se establecieron aquí los primeros habitantes, entre ellos una familia armenia Haihoudes.",
-      factFirst: "primeros habitantes", factSchool: "1ª escuela", factIsland: "de toda Kos",
-      h2school: "Primera escuela de Kos",
-      p2: "La primera escuela de la isla empezó aquí, en la iglesia de Agios Dimitrios (aún en la montaña). Entonces unos 40 a 50 alumnos.",
-      h2ww2: "Segunda Guerra Mundial y despoblación",
-      p3: "Durante la Segunda Guerra Mundial muchas personas de la ciudad de Kos encontraron refugio aquí. En los años 1960-1970 los últimos habitantes se marcharon; el pueblo se convirtió en un pueblo fantasma.",
-      h2alive: "Vivo de nuevo",
-      p4: "Desde hace varios años Haihoutes está vivo de nuevo: un kafeneio tradicional, senderos estrechos, viejas casas de piedra y verdor por todas partes – casi como un museo al aire libre.",
-      g1: "Haihoutes", g2: "Haihoutes", g3: "Haihoutes", g4: "Haihoutes",
-      h2visit: "Visitar",
-      p5: "Gratis. Ideal para paz y ambiente.",
-      tip: "Consejo: toma algo en el kafeneio y disfruta del silencio – se siente como un plató de cine.",
-      h2video: "Vídeo"
+    "es": {
+      "title": "Haihoutes",
+      "lead": "Antiguo pueblo de montaña (± 1780) – primera escuela de Kos, refugio en la Segunda Guerra Mundial, ahora vivo de nuevo con kafeneio y ambiente de museo al aire libre.",
+      "btnPlay": "Leer en voz alta",
+      "p1": "Haihoutes es un pequeño antiguo pueblo de montaña. Alrededor de 1780 se establecieron aquí los primeros habitantes, entre ellos una familia armenia Haihoudes.",
+      "p2": "La primera escuela de la isla empezó aquí, en la iglesia de Agios Dimitrios (aún en la montaña). Entonces unos 40 a 50 alumnos.",
+      "h2ww2": "Segunda Guerra Mundial y despoblación",
+      "p3": "Durante la Segunda Guerra Mundial muchas personas de la ciudad de Kos encontraron refugio aquí. En los años 1960-1970 los últimos habitantes se marcharon; el pueblo se convirtió en un pueblo fantasma.",
+      "h2alive": "Vivo de nuevo",
+      "p4": "Desde hace varios años Haihoutes está vivo de nuevo: un kafeneio tradicional, senderos estrechos, viejas casas de piedra y verdor por todas partes – casi como un museo al aire libre.",
+      "g1": "Haihoutes",
+      "g2": "Haihoutes",
+      "g3": "Haihoutes",
+      "g4": "Haihoutes",
+      "h2visit": "Visitar",
+      "p5": "Gratis. Ideal para paz y ambiente.",
+      "tip": "toma algo en el kafeneio y disfruta del silencio – se siente como un plató de cine.",
+      "hStory": "La historia",
+      "hSee": "Qué ves",
+      "hKnow": "Bueno saberlo",
+      "tipTitle": "Consejo del guía",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     }
   };
 
