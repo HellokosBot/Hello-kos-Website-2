@@ -68,6 +68,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
 .eq-row{display:flex;flex-direction:row;flex-wrap:nowrap;gap:8px;width:100%;margin-top:6px}
 .eq-row a{flex:1 1 0;width:0;min-width:0;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 8px;border-radius:12px;border:2px solid var(--petrol);background:var(--bg-card);color:var(--petrol);font-weight:700;font-size:.82rem;text-decoration:none;text-align:center}
 .eq-row .pin{flex:0 0 16px;width:16px;height:16px}
+.eq-more{display:block;width:100%;margin:8px 0 0;padding:12px 10px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-weight:800;font-family:inherit;font-size:.9rem;cursor:pointer}
 #eqSource a{color:#7ecfcf}
 </style>
 <link rel="stylesheet" href="hello-kos.css">
@@ -106,7 +107,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
   <div class="live-box">
     <div class="live-label">🔴 Live – laatste 24 uur (regio Kos)</div>
     <a class="live-btn" href="http://www.geophysics.geol.uoa.gr/stations/maps/recent.html" target="_blank" rel="noopener">
-      <span class="main-line">⚠️ Actuele aardbevingen</span>
       <span class="sub">Kaart Universiteit van Athene</span>
     </a>
   </div>
@@ -155,7 +155,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
   <div class="live-box">
     <div class="live-label">🔴 Live – last 24 hours (Kos region)</div>
     <a class="live-btn" href="http://www.geophysics.geol.uoa.gr/stations/maps/recent.html" target="_blank" rel="noopener">
-      <span class="main-line">⚠️ Current earthquakes</span>
       <span class="sub">University of Athens map</span>
     </a>
   </div>
@@ -200,7 +199,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
   <div class="live-box">
     <div class="live-label">🔴 Live – letzte 24 Stunden (Region Kos)</div>
     <a class="live-btn" href="http://www.geophysics.geol.uoa.gr/stations/maps/recent.html" target="_blank" rel="noopener">
-      <span class="main-line">⚠️ Aktuelle Erdbeben</span>
       <span class="sub">Karte Universität Athen</span>
     </a>
   </div>
@@ -231,7 +229,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
   <div class="live-box">
     <div class="live-label">🔴 Live – ultime 24 ore (regione Kos)</div>
     <a class="live-btn" href="http://www.geophysics.geol.uoa.gr/stations/maps/recent.html" target="_blank" rel="noopener">
-      <span class="main-line">⚠️ Terremoti attuali</span>
       <span class="sub">Mappa Università di Atene</span>
     </a>
   </div>
@@ -262,7 +259,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
   <div class="live-box">
     <div class="live-label">🔴 Canlı – son 24 saat (Kos bölgesi)</div>
     <a class="live-btn" href="http://www.geophysics.geol.uoa.gr/stations/maps/recent.html" target="_blank" rel="noopener">
-      <span class="main-line">⚠️ Güncel depremler</span>
       <span class="sub">Atina Üniversitesi haritası</span>
     </a>
   </div>
@@ -293,7 +289,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
   <div class="live-box">
     <div class="live-label">🔴 En vivo – últimas 24 horas (región de Kos)</div>
     <a class="live-btn" href="http://www.geophysics.geol.uoa.gr/stations/maps/recent.html" target="_blank" rel="noopener">
-      <span class="main-line">⚠️ Terremotos actuales</span>
       <span class="sub">Mapa Universidad de Atenas</span>
     </a>
   </div>
@@ -349,15 +344,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
   var KOS={lat:36.85,lon:27.2};
   var eqState='loading', eqItems=[], eqUpdated=null;
   var EQ={
-    nl:{eqTitle:'Aardbevingen rond Kos',eqLoading:'De lijst wordt geladen…',eqNone:'Geen aardbevingen gevonden.',eqFail:'Gegevens konden niet worden opgehaald, probeer het later opnieuw.',eqOne:'1 aardbeving in de laatste 7 dagen rond Kos.',eqMany:'{n} aardbevingen in de laatste 7 dagen rond Kos.',time:'Tijd',mag:'Magnitude',place:'Plaats',depth:'Diepte',dist:'Afstand tot Kos',epi:'Epicentrum',gmaps:'Google Maps',iphone:'iPhone',checked:'Bijgewerkt: {time}. Elke 90 seconden ververst.',source:'Bron: EMSC'},
-    de:{eqTitle:'Erdbeben rund um Kos',eqLoading:'Die Liste wird geladen…',eqNone:'Keine Erdbeben gefunden.',eqFail:'Daten konnten nicht abgerufen werden, versuch es später noch einmal.',eqOne:'1 Erdbeben in den letzten 7 Tagen rund um Kos.',eqMany:'{n} Erdbeben in den letzten 7 Tagen rund um Kos.',time:'Zeit',mag:'Magnitude',place:'Ort',depth:'Tiefe',dist:'Entfernung nach Kos',epi:'Epizentrum',gmaps:'Google Maps',iphone:'iPhone',checked:'Aktualisiert: {time}. Wird alle 90 Sekunden erneuert.',source:'Quelle: EMSC'},
-    en:{eqTitle:'Earthquakes around Kos',eqLoading:'Loading the list…',eqNone:'No earthquakes found.',eqFail:'Data could not be retrieved, try again later.',eqOne:'1 earthquake in the last 7 days around Kos.',eqMany:'{n} earthquakes in the last 7 days around Kos.',time:'Time',mag:'Magnitude',place:'Place',depth:'Depth',dist:'Distance to Kos',epi:'Epicentre',gmaps:'Google Maps',iphone:'iPhone',checked:'Updated: {time}. Refreshed every 90 seconds.',source:'Source: EMSC'},
-    it:{eqTitle:'Terremoti intorno a Kos',eqLoading:'Caricamento dell’elenco…',eqNone:'Nessun terremoto trovato.',eqFail:'Impossibile recuperare i dati, riprova più tardi.',eqOne:'1 terremoto negli ultimi 7 giorni intorno a Kos.',eqMany:'{n} terremoti negli ultimi 7 giorni intorno a Kos.',time:'Ora',mag:'Magnitudo',place:'Luogo',depth:'Profondità',dist:'Distanza da Kos',epi:'Epicentro',gmaps:'Google Maps',iphone:'iPhone',checked:'Aggiornato: {time}. Si aggiorna ogni 90 secondi.',source:'Fonte: EMSC'},
-    tr:{eqTitle:'Kos çevresinde depremler',eqLoading:'Liste yükleniyor…',eqNone:'Deprem bulunamadı.',eqFail:'Veriler alınamadı, daha sonra yeniden dene.',eqOne:'Son 7 günde Kos çevresinde 1 deprem.',eqMany:'Son 7 günde Kos çevresinde {n} deprem.',time:'Zaman',mag:'Büyüklük',place:'Yer',depth:'Derinlik',dist:'Kos’a uzaklık',epi:'Merkez üssü',gmaps:'Google Maps',iphone:'iPhone',checked:'Güncellendi: {time}. Her 90 saniyede bir yenilenir.',source:'Kaynak: EMSC'},
-    es:{eqTitle:'Terremotos alrededor de Kos',eqLoading:'Cargando la lista…',eqNone:'No se han encontrado terremotos.',eqFail:'No se han podido obtener los datos, inténtalo más tarde.',eqOne:'1 terremoto en los últimos 7 días alrededor de Kos.',eqMany:'{n} terremotos en los últimos 7 días alrededor de Kos.',time:'Hora',mag:'Magnitud',place:'Lugar',depth:'Profundidad',dist:'Distancia a Kos',epi:'Epicentro',gmaps:'Google Maps',iphone:'iPhone',checked:'Actualizado: {time}. Se actualiza cada 90 segundos.',source:'Fuente: EMSC'}
+    nl:{eqTitle:'Aardbevingen rond Kos',eqLoading:'De lijst wordt geladen…',eqNone:'Geen aardbevingen gevonden.',eqFail:'Gegevens konden niet worden opgehaald, probeer het later opnieuw.',eqOne:'1 aardbeving in de laatste 7 dagen, binnen 100 km.',eqMany:'{n} aardbevingen in de laatste 7 dagen, binnen 100 km.',time:'Tijd',mag:'Magnitude',place:'Plaats',depth:'Diepte',dist:'Afstand tot Kos',epi:'Epicentrum',gmaps:'Google Maps',iphone:'iPhone',more:'Meer aardbevingen tonen ({n})',less:'Minder tonen',checked:'Bijgewerkt: {time}. Elke 90 seconden ververst.',source:'Bron: EMSC'},
+    de:{eqTitle:'Erdbeben rund um Kos',eqLoading:'Die Liste wird geladen…',eqNone:'Keine Erdbeben gefunden.',eqFail:'Daten konnten nicht abgerufen werden, versuch es später noch einmal.',eqOne:'1 Erdbeben in den letzten 7 Tagen, innerhalb von 100 km.',eqMany:'{n} Erdbeben in den letzten 7 Tagen, innerhalb von 100 km.',time:'Zeit',mag:'Magnitude',place:'Ort',depth:'Tiefe',dist:'Entfernung nach Kos',epi:'Epizentrum',gmaps:'Google Maps',iphone:'iPhone',more:'Mehr Erdbeben anzeigen ({n})',less:'Weniger anzeigen',checked:'Aktualisiert: {time}. Wird alle 90 Sekunden erneuert.',source:'Quelle: EMSC'},
+    en:{eqTitle:'Earthquakes around Kos',eqLoading:'Loading the list…',eqNone:'No earthquakes found.',eqFail:'Data could not be retrieved, try again later.',eqOne:'1 earthquake in the last 7 days, within 100 km.',eqMany:'{n} earthquakes in the last 7 days, within 100 km.',time:'Time',mag:'Magnitude',place:'Place',depth:'Depth',dist:'Distance to Kos',epi:'Epicentre',gmaps:'Google Maps',iphone:'iPhone',more:'Show more earthquakes ({n})',less:'Show less',checked:'Updated: {time}. Refreshed every 90 seconds.',source:'Source: EMSC'},
+    it:{eqTitle:'Terremoti intorno a Kos',eqLoading:'Caricamento dell’elenco…',eqNone:'Nessun terremoto trovato.',eqFail:'Impossibile recuperare i dati, riprova più tardi.',eqOne:'1 terremoto negli ultimi 7 giorni, entro 100 km.',eqMany:'{n} terremoti negli ultimi 7 giorni, entro 100 km.',time:'Ora',mag:'Magnitudo',place:'Luogo',depth:'Profondità',dist:'Distanza da Kos',epi:'Epicentro',gmaps:'Google Maps',iphone:'iPhone',more:'Mostra altri terremoti ({n})',less:'Mostra meno',checked:'Aggiornato: {time}. Si aggiorna ogni 90 secondi.',source:'Fonte: EMSC'},
+    tr:{eqTitle:'Kos çevresinde depremler',eqLoading:'Liste yükleniyor…',eqNone:'Deprem bulunamadı.',eqFail:'Veriler alınamadı, daha sonra yeniden dene.',eqOne:'Son 7 günde, 100 km içinde 1 deprem.',eqMany:'Son 7 günde, 100 km içinde {n} deprem.',time:'Zaman',mag:'Büyüklük',place:'Yer',depth:'Derinlik',dist:'Kos’a uzaklık',epi:'Merkez üssü',gmaps:'Google Maps',iphone:'iPhone',more:'Daha fazla deprem göster ({n})',less:'Daha az göster',checked:'Güncellendi: {time}. Her 90 saniyede bir yenilenir.',source:'Kaynak: EMSC'},
+    es:{eqTitle:'Terremotos alrededor de Kos',eqLoading:'Cargando la lista…',eqNone:'No se han encontrado terremotos.',eqFail:'No se han podido obtener los datos, inténtalo más tarde.',eqOne:'1 terremoto en los últimos 7 días, en 100 km.',eqMany:'{n} terremotos en los últimos 7 días, en 100 km.',time:'Hora',mag:'Magnitud',place:'Lugar',depth:'Profundidad',dist:'Distancia a Kos',epi:'Epicentro',gmaps:'Google Maps',iphone:'iPhone',more:'Mostrar más terremotos ({n})',less:'Mostrar menos',checked:'Actualizado: {time}. Se actualiza cada 90 segundos.',source:'Fuente: EMSC'}
   };
   var LOCALES={nl:'nl-NL',de:'de-DE',en:'en-GB',it:'it-IT',tr:'tr-TR',es:'es-ES'};
   var PIN='<svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>';
+  var eqOpen=false;
   function eqText(){return EQ[lang]||EQ.nl;}
   function applyEq(){
     var pack=eqText();
@@ -384,10 +380,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
     else if(!eqItems.length){sum.textContent=pack.eqNone;list.innerHTML='';}
     else{
       sum.textContent=(eqItems.length===1?pack.eqOne:pack.eqMany).replace('{n}',String(eqItems.length));
-      list.innerHTML=eqItems.map(function(q){
+      var shown=eqOpen?eqItems:eqItems.slice(0,2);
+      list.innerHTML=shown.map(function(q){
         var when=q.time?new Date(q.time).toLocaleString(LOCALES[lang]||'en-GB',{timeZone:'Europe/Athens',day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}):'—';
         var strong=q.magNum>=3?' eq-strong':'';
-        var g='https://www.google.com/maps/search/?api=1&query='+q.lat+','+q.lon;
+        var pair=encodeURIComponent(q.lat+','+q.lon);
+        var g='https://www.google.com/maps/search/?api=1&query='+pair;
         var apple='https://maps.apple.com/?ll='+q.lat+','+q.lon+'&q='+encodeURIComponent(q.place||'Epicentre');
         return '<article class="eq-item'+strong+'"><p class="eq-mag">M '+esc(q.mag)+'</p>'
           +'<p><strong>'+esc(pack.time)+':</strong> '+esc(when)+'</p>'
@@ -398,6 +396,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
           +'<div class="eq-row"><a href="'+esc(g)+'" target="_blank" rel="noopener">'+PIN+esc(pack.gmaps)+'</a>'
           +'<a href="'+esc(apple)+'" target="_blank" rel="noopener">'+PIN+esc(pack.iphone)+'</a></div></article>';
       }).join('');
+      if(eqItems.length>2){
+        var extra=eqItems.length-2;
+        var label=eqOpen?pack.less:pack.more.replace('{n}',String(extra));
+        list.insertAdjacentHTML('beforeend','<button type="button" class="eq-more" id="eqMore">'+esc(label)+'</button>');
+        document.getElementById('eqMore').addEventListener('click',function(){eqOpen=!eqOpen;renderEq();});
+      }
     }
     if(checked) checked.textContent=eqUpdated?pack.checked.replace('{time}',eqUpdated):'';
     if(source) source.innerHTML='<a href="https://www.seismicportal.eu/" target="_blank" rel="noopener">'+esc(pack.source)+'</a>';
@@ -418,6 +422,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
         }
         if(!isFinite(lat)||!isFinite(lon)) return;
         var km=hav(KOS.lat,KOS.lon,lat,lon);
+        if(km>100) return;
         var depthNum=props.depth!=null?Number(props.depth):null;
         var depth=depthNum!=null&&isFinite(depthNum)? (Math.round(Math.abs(depthNum)*10)/10)+' km' : '—';
         var magNum=props.mag==null?null:Number(props.mag);
