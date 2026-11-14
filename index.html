@@ -58,14 +58,30 @@ body.intro-lock{overflow:hidden}
 .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);opacity:.55;font-size:1rem;pointer-events:none}
 .search-empty{display:none;text-align:center;color:var(--text-muted);font-size:.9rem;padding:20px 10px}
 .search-empty.show{display:block}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.card{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:.95;text-decoration:none;color:#fff;box-shadow:0 2px 12px rgba(0,0,0,.22);border:1px solid var(--border);opacity:0;transform:translateY(14px);animation:cardIn .45s ease forwards}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid[hidden]{display:none !important}
+.card{position:relative;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;aspect-ratio:1;text-decoration:none;color:#0d1a1a;background:#1a2525;box-shadow:0 4px 18px rgba(0,0,0,.45);border:2px solid #fff;opacity:0;transform:translateY(14px);animation:cardIn .45s ease forwards}
 .card:nth-child(1){animation-delay:.04s}.card:nth-child(2){animation-delay:.08s}.card:nth-child(3){animation-delay:.12s}.card:nth-child(4){animation-delay:.16s}.card:nth-child(5){animation-delay:.20s}.card:nth-child(6){animation-delay:.24s}.card:nth-child(7){animation-delay:.28s}.card:nth-child(8){animation-delay:.32s}.card:nth-child(9){animation-delay:.36s}.card:nth-child(10){animation-delay:.40s}.card:nth-child(11){animation-delay:.44s}.card:nth-child(12){animation-delay:.48s}
 @keyframes cardIn{to{opacity:1;transform:translateY(0)}}
-.card.hidden{display:none}
-.card img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.82)}
-.card-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.72) 0%,rgba(0,0,0,.25) 40%,transparent 55%);display:flex;align-items:flex-start;justify-content:center;padding:12px 10px;text-align:center}
-.card-title{font-size:.9rem;font-weight:800;line-height:1.3;text-shadow:0 1px 8px rgba(0,0,0,.9);text-align:center;width:100%;background:rgba(0,0,0,.35);backdrop-filter:blur(6px);border-radius:10px;padding:6px 8px}
+.card img{flex:1 1 auto;min-height:0;width:100%;height:100%;object-fit:cover;display:block}
+.card-overlay{position:static;flex:0 0 auto;width:100%;box-sizing:border-box;background:#fff;display:flex;align-items:center;padding:7px 10px}
+.card-title{color:#0d1a1a;font-weight:700;font-size:.88rem;line-height:1.25;text-align:left}
+.search-results{display:flex;flex-direction:column;gap:8px;margin:0 0 16px}
+.search-results[hidden]{display:none}
+.search-hit{display:block;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:12px 14px;text-decoration:none;color:var(--text)}
+.search-hit strong{display:block;color:var(--gold);margin-bottom:4px;font-size:.95rem}
+.search-hit span{display:block;color:var(--text-soft);font-size:.84rem;line-height:1.4}
+.search-hit mark{background:#E0B040;color:#0d1a1a;border-radius:3px;padding:0 2px}
+.lang-btn.hk-lang-pulse{animation:hkLangPulse .9s ease-in-out infinite}
+@keyframes hkLangPulse{0%,100%{transform:scale(1)}45%{transform:translateY(-3px) scale(1.08)}}
+.lang-hint{position:absolute;top:calc(100% + 10px);right:0;z-index:80;display:flex;align-items:center;gap:6px;background:#E0B040;color:#0d1a1a;font-weight:800;font-size:.82rem;padding:8px 12px 8px 10px;border-radius:12px;white-space:nowrap;box-shadow:0 6px 16px rgba(0,0,0,.35)}
+.lang-hint[hidden]{display:none}
+.lang-hint-arrow{position:absolute;top:-8px;right:22px;width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:8px solid #E0B040;animation:hkArrow .7s ease-in-out infinite}
+@keyframes hkArrow{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@media (prefers-reduced-motion:reduce){
+  .lang-btn.hk-lang-pulse,.lang-hint-arrow{animation:none}
+  .card{animation:none;opacity:1;transform:none}
+}
 .footer{text-align:center;padding:20px 16px 28px;background:var(--bg-elevated);border-top:1px solid var(--border)}
 .footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700;font-size:1.05rem}
 .footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
@@ -117,6 +133,11 @@ body.intro-lock{overflow:hidden}
       <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
       <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
     </div>
+    <div class="lang-hint" id="langHint" hidden>
+      <span class="lang-hint-arrow" aria-hidden="true"></span>
+      <span id="langHintFlag" aria-hidden="true">🇳🇱</span>
+      <span id="langHintText"></span>
+    </div>
   </div>
 </header>
 <div class="overlay" id="overlay"></div>
@@ -130,54 +151,55 @@ body.intro-lock{overflow:hidden}
     <input type="search" id="searchInput" placeholder="Search Kos…" autocomplete="off" enterkeyhint="search">
   </div>
   <div class="search-empty" id="searchEmpty">No results</div>
+  <div class="search-results" id="searchResults" hidden></div>
   <div class="grid" id="tileGrid">
-      <a href="wist-je-dat.html" class="card" data-search="did you know facts myths wist je dat fabels">
+      <a href="wist-je-dat.html" class="card">
         <img src="wist-je-dat.jpg" alt="" loading="lazy">
-        <div class="card-overlay"><div class="card-title" data-i18n="c1">Did you know…</div></div>
+        <span class="card-overlay"><span class="card-title" data-i18n="c1">Did you know…</span></span>
       </a>
-      <a href="taxi-bussen.html" class="card" data-search="taxi bus buses transfer prices prijzen bussen">
+      <a href="taxi-bussen.html" class="card">
         <img src="taxi-bussen.jpg" alt="" loading="lazy">
-        <div class="card-overlay"><div class="card-title" data-i18n="c2">Taxi & buses<br>Transfer & prices</div></div>
+        <span class="card-overlay"><span class="card-title" data-i18n="c2">Taxi & buses</span></span>
       </a>
-      <a href="bezienswaardigheden.html" class="card" data-search="sights routes bezienswaardigheden routes map">
+      <a href="bezienswaardigheden.html" class="card">
         <img src="bezienswaardigheden.jpg" alt="" loading="lazy">
-        <div class="card-overlay"><div class="card-title" data-i18n="c3">Sights &<br>routes</div></div>
+        <span class="card-overlay"><span class="card-title" data-i18n="c3">Sights & routes</span></span>
       </a>
-      <a href="excursies.html" class="card" data-search="excursions activities tours excursies activiteiten">
+      <a href="excursies.html" class="card">
         <img src="excursies.jpg" alt="" loading="lazy">
-        <div class="card-overlay"><div class="card-title" data-i18n="c4">Excursions &<br>activities</div></div>
+        <span class="card-overlay"><span class="card-title" data-i18n="c4">Excursions & activities</span></span>
       </a>
-      <a href="beste-lekkerste.html" class="card" data-search="best tastiest food restaurant beste lekkerste">
+      <a href="beste-lekkerste.html" class="card">
         <img src="beste-lekkerste.jpg" alt="" loading="lazy">
-        <div class="card-overlay"><div class="card-title" data-i18n="c5">Best &<br>tastiest</div></div>
+        <span class="card-overlay"><span class="card-title" data-i18n="c5">Best & tastiest</span></span>
       </a>
-      <a href="stranden.html" class="card" data-search="beaches beach bars stranden beachbars">
+      <a href="stranden.html" class="card">
         <img src="stranden.jpg" alt="" loading="lazy">
-        <div class="card-overlay"><div class="card-title" data-i18n="c6">Beaches &<br>beach bars</div></div>
+        <span class="card-overlay"><span class="card-title" data-i18n="c6">Beaches & beach bars</span></span>
       </a>
-      <a href="rentals.html" class="card" data-search="rentals rent car scooter huren auto">
+      <a href="rentals.html" class="card">
         <img src="rentals.jpg" alt="" loading="lazy">
-        <div class="card-overlay"><div class="card-title" data-i18n="c7">Rentals</div></div>
+        <span class="card-overlay"><span class="card-title" data-i18n="c7">Rentals</span></span>
       </a>
-      <a href="wellness.html" class="card" data-search="wellness care massage spa verzorging">
+      <a href="wellness.html" class="card">
         <img src="wellness.jpg" alt="" loading="lazy">
-        <div class="card-overlay"><div class="card-title" data-i18n="c8">Wellness &<br>care</div></div>
+        <span class="card-overlay"><span class="card-title" data-i18n="c8">Wellness & care</span></span>
       </a>
-      <a href="bars-nightlife.html" class="card" data-search="bars nightlife night bar nachtleven">
+      <a href="bars-nightlife.html" class="card">
         <img src="bars-nightlife.jpg" alt="" loading="lazy">
-        <div class="card-overlay"><div class="card-title" data-i18n="c9">Bars &<br>nightlife</div></div>
+        <span class="card-overlay"><span class="card-title" data-i18n="c9">Bars & nightlife</span></span>
       </a>
-      <a href="praktische-winkels.html" class="card" data-search="belangrijke winkels important shops supermarket supermarkt">
+      <a href="praktische-winkels.html" class="card">
         <img src="praktische-winkels.jpg" alt="" loading="lazy">
-        <div class="card-overlay"><div class="card-title" data-i18n="c10">Important<br>shops</div></div>
+        <span class="card-overlay"><span class="card-title" data-i18n="c10">Important shops</span></span>
       </a>
-      <a href="noodgevallen.html" class="card" data-search="emergencies help hospital police noodgevallen hulp">
+      <a href="noodgevallen.html" class="card">
         <img src="noodgevallen.jpg" alt="" loading="lazy">
-        <div class="card-overlay"><div class="card-title" data-i18n="c11">Emergencies &<br>help</div></div>
+        <span class="card-overlay"><span class="card-title" data-i18n="c11">Emergencies & help</span></span>
       </a>
-      <a href="water-wind.html" class="card" data-search="water wind sea temperature watertemperatuur wind zwemmen meltemi warm koud">
+      <a href="water-wind.html" class="card">
         <img src="water-wind.jpg" alt="" loading="lazy">
-        <div class="card-overlay"><div class="card-title" data-i18n="c12">Water &<br>wind</div></div>
+        <span class="card-overlay"><span class="card-title" data-i18n="c12">Water & wind</span></span>
       </a>
   </div>
 </main>
@@ -204,7 +226,7 @@ body.intro-lock{overflow:hidden}
 
   var intro=document.getElementById('intro'),gate=document.getElementById('desktopGate'),introDone=false,introSoundPlayed=false;
   function isDesktop(){return window.innerWidth>=900&&!(window.matchMedia&&window.matchMedia('(pointer: coarse)').matches)}
-  function finishIntro(){if(introDone)return;introDone=true;intro.classList.add('done');document.body.classList.remove('intro-lock');setTimeout(function(){intro.style.display='none'},950);if(isDesktop()&&sessionStorage.getItem('hk-desktop-ok')!=='1')gate.classList.add('show')}
+  function finishIntro(){if(introDone)return;introDone=true;intro.classList.add('done');document.body.classList.remove('intro-lock');setTimeout(function(){intro.style.display='none'},950);if(isDesktop()&&sessionStorage.getItem('hk-desktop-ok')!=='1')gate.classList.add('show');if(typeof showLangHint==='function')showLangHint()}
   function tryIntroSound(){if(introSoundPlayed)return;introSoundPlayed=true;playIntroSound()}
   document.addEventListener('touchstart',tryIntroSound,{once:true,passive:true});
   document.addEventListener('click',tryIntroSound,{once:true});
@@ -217,57 +239,73 @@ body.intro-lock{overflow:hidden}
     if(e.target.closest('button,.lang-btn,.lang-option'))playClick();
   },true);
 
-  var searchInput=document.getElementById('searchInput');
-  var searchEmpty=document.getElementById('searchEmpty');
-  var cardsEl=document.querySelectorAll('#tileGrid .card');
-  searchInput.addEventListener('input',function(){
-    var q=searchInput.value.trim().toLowerCase();
-    var shown=0;
-    cardsEl.forEach(function(c){
-      var hay=((c.getAttribute('data-search')||'')+' '+(c.querySelector('.card-title')?c.querySelector('.card-title').textContent:'')).toLowerCase();
-      var ok=!q||hay.indexOf(q)!==-1;
-      c.classList.toggle('hidden',!ok);
-      if(ok)shown++;
-    });
-    searchEmpty.classList.toggle('show',shown===0);
-  });
   var dict={
-    en:{heroTitle:"All of Kos in your pocket",heroSub:"Choose what you want to do",searchPh:"Search Kos…",noRes:"No results",c1:"Did you know…",c2:"Taxi & buses<br>Transfer & prices",c3:"Sights &<br>routes",c4:"Excursions &<br>activities",c5:"Best &<br>tastiest",c6:"Beaches &<br>beach bars",c7:"Rentals",c8:"Wellness &<br>care",c9:"Bars &<br>nightlife",c10:"Important<br>shops",c11:"Emergencies &<br>help",c12:"Water &<br>wind"},
-    nl:{heroTitle:"Heel Kos in je broekzak",heroSub:"Kies wat je wilt doen",searchPh:"Zoek in Kos…",noRes:"Geen resultaten",c1:"Wist je dat…",c2:"Taxi & bussen<br>Transfer en prijzen",c3:"Bezienswaardigheden<br>& routes",c4:"Excursies &<br>activiteiten",c5:"Beste &<br>lekkerste",c6:"Stranden en<br>beachbars",c7:"Huren",c8:"Wellness &<br>verzorging",c9:"Bars &<br>nachtleven",c10:"Belangrijke<br>winkels",c11:"Noodgevallen &<br>hulp",c12:"Water &<br>wind"},
-    de:{heroTitle:"Ganz Kos in der Tasche",heroSub:"Wähle, was du tun möchtest",searchPh:"Kos durchsuchen…",noRes:"Keine Ergebnisse",c1:"Wusstest du…",c2:"Taxi & Bus<br>Transfer & Preise",c3:"Sehenswürdigkeiten<br>& Routen",c4:"Ausflüge &<br>Aktivitäten",c5:"Beste &<br>Leckerste",c6:"Strände &<br>Beachbars",c7:"Mieten",c8:"Wellness &<br>Pflege",c9:"Bars &<br>Nachtleben",c10:"Wichtige<br>Läden",c11:"Notfälle &<br>Hilfe",c12:"Wasser &<br>Wind"},
-    it:{heroTitle:"Tutta Kos in tasca",heroSub:"Scegli cosa vuoi fare",searchPh:"Cerca a Kos…",noRes:"Nessun risultato",c1:"Lo sapevi…",c2:"Taxi & bus<br>Transfer e prezzi",c3:"Attrazioni<br>& percorsi",c4:"Escursioni &<br>attività",c5:"Il meglio &<br>più buono",c6:"Spiagge e<br>beach bar",c7:"Noleggio",c8:"Wellness &<br>cura",c9:"Bar &<br>nightlife",c10:"Negozi<br>importanti",c11:"Emergenze &<br>aiuto",c12:"Acqua &<br>vento"},
-    tr:{heroTitle:"Kos cebinde",heroSub:"Ne yapmak istediğini seç",searchPh:"Kos'ta ara…",noRes:"Sonuç yok",c1:"Biliyor muydun…",c2:"Taksi & otobüs<br>Transfer ve fiyatlar",c3:"Gezilecek yerler<br>& rotalar",c4:"Turlar &<br>aktiviteler",c5:"En iyi &<br>lezzetli",c6:"Plajlar ve<br>beach barlar",c7:"Kiralama",c8:"Wellness &<br>bakım",c9:"Barlar &<br>gece hayatı",c10:"Önemli<br>dükkanlar",c11:"Acil durum &<br>yardım",c12:"Su &<br>rüzgar"},
-    es:{heroTitle:"Todo Kos en tu bolsillo",heroSub:"Elige lo que quieres hacer",searchPh:"Buscar en Kos…",noRes:"Sin resultados",c1:"¿Sabías que…",c2:"Taxi y buses<br>Transfer y precios",c3:"Lugares de interés<br>& rutas",c4:"Excursiones &<br>actividades",c5:"Lo mejor &<br>más rico",c6:"Playas y<br>beach bars",c7:"Alquiler",c8:"Wellness &<br>cuidado",c9:"Bares &<br>nightlife",c10:"Tiendas<br>importantes",c11:"Emergencias &<br>ayuda",c12:"Agua y<br>viento"}
+    en:{heroTitle:"All of Kos in your pocket",heroSub:"Choose what you want to do",searchPh:"Search Kos…",noRes:"No results",langHint:"Choose your language",c1:"Did you know…",c2:"Taxi & buses",c3:"Sights & routes",c4:"Excursions & activities",c5:"Best & tastiest",c6:"Beaches & beach bars",c7:"Rentals",c8:"Wellness & care",c9:"Bars & nightlife",c10:"Important shops",c11:"Emergencies & help",c12:"Water & wind"},
+    nl:{heroTitle:"Heel Kos in je broekzak",heroSub:"Kies wat je wilt doen",searchPh:"Zoek in Kos…",noRes:"Geen resultaten",langHint:"Kies je taal",c1:"Wist je dat…",c2:"Taxi & bussen",c3:"Bezienswaardigheden & routes",c4:"Excursies & activiteiten",c5:"Beste & lekkerste",c6:"Stranden en beachbars",c7:"Huren",c8:"Wellness & verzorging",c9:"Bars & nachtleven",c10:"Belangrijke winkels",c11:"Noodgevallen & hulp",c12:"Water & wind"},
+    de:{heroTitle:"Ganz Kos in der Tasche",heroSub:"Wähle, was du tun möchtest",searchPh:"Kos durchsuchen…",noRes:"Keine Ergebnisse",langHint:"Wähle deine Sprache",c1:"Wusstest du…",c2:"Taxi & Bus",c3:"Sehenswürdigkeiten & Routen",c4:"Ausflüge & Aktivitäten",c5:"Beste & Leckerste",c6:"Strände & Beachbars",c7:"Mieten",c8:"Wellness & Pflege",c9:"Bars & Nachtleben",c10:"Wichtige Läden",c11:"Notfälle & Hilfe",c12:"Wasser & Wind"},
+    it:{heroTitle:"Tutta Kos in tasca",heroSub:"Scegli cosa vuoi fare",searchPh:"Cerca a Kos…",noRes:"Nessun risultato",langHint:"Scegli la lingua",c1:"Lo sapevi…",c2:"Taxi e bus",c3:"Attrazioni e percorsi",c4:"Escursioni e attività",c5:"Il meglio e più buono",c6:"Spiagge e beach bar",c7:"Noleggio",c8:"Wellness e cura",c9:"Bar e nightlife",c10:"Negozi importanti",c11:"Emergenze e aiuto",c12:"Acqua e vento"},
+    tr:{heroTitle:"Kos cebinde",heroSub:"Ne yapmak istediğini seç",searchPh:"Kos'ta ara…",noRes:"Sonuç yok",langHint:"Dilini seç",c1:"Biliyor muydun…",c2:"Taksi ve otobüs",c3:"Gezilecek yerler ve rotalar",c4:"Turlar ve aktiviteler",c5:"En iyi ve lezzetli",c6:"Plajlar ve beach barlar",c7:"Kiralama",c8:"Wellness ve bakım",c9:"Barlar ve gece hayatı",c10:"Önemli dükkanlar",c11:"Acil durum ve yardım",c12:"Su ve rüzgar"},
+    es:{heroTitle:"Todo Kos en tu bolsillo",heroSub:"Elige lo que quieres hacer",searchPh:"Buscar en Kos…",noRes:"Sin resultados",langHint:"Elige tu idioma",c1:"¿Sabías que…",c2:"Taxi y buses",c3:"Lugares de interés y rutas",c4:"Excursiones y actividades",c5:"Lo mejor y más rico",c6:"Playas y beach bars",c7:"Alquiler",c8:"Wellness y cuidado",c9:"Bares y nightlife",c10:"Tiendas importantes",c11:"Emergencias y ayuda",c12:"Agua y viento"}
   };
+  window.HK_DICT = dict;
+  var HINT_KEY = "hk-lang-hint-seen";
+  var hintTimer = null;
   var lang=localStorage.getItem('hk-lang')||'nl';
-  function setLang(l){
+  function dismissHint(){
+    try { localStorage.setItem(HINT_KEY, "1"); } catch (e) {}
+    var hint = document.getElementById("langHint");
+    var btn = document.getElementById("langBtn");
+    if (hint) hint.hidden = true;
+    if (btn) btn.classList.remove("hk-lang-pulse");
+    if (hintTimer) { clearTimeout(hintTimer); hintTimer = null; }
+  }
+  function showLangHint(){
+    if (localStorage.getItem(HINT_KEY) === "1") return;
+    var nav = ((navigator.language || "en").slice(0, 2) || "en").toLowerCase();
+    var hl = dict[nav] ? nav : "en";
+    var flags = { nl: "🇳🇱", de: "🇩🇪", en: "🇬🇧", it: "🇮🇹", tr: "🇹🇷", es: "🇪🇸" };
+    document.getElementById("langHintFlag").textContent = flags[hl] || "🇬🇧";
+    document.getElementById("langHintText").textContent = (dict[hl] && dict[hl].langHint) || dict.en.langHint;
+    document.getElementById("langHint").hidden = false;
+    document.getElementById("langBtn").classList.add("hk-lang-pulse");
+    hintTimer = setTimeout(dismissHint, 8000);
+  }
+  function setLang(l, fromUser){
     lang=l;localStorage.setItem('hk-lang',l);
     var d=dict[l]||dict.en;
     document.getElementById('heroTitle').textContent=d.heroTitle;
     document.getElementById('heroSub').textContent=d.heroSub;
     document.getElementById('searchInput').placeholder=d.searchPh||'Search Kos…';
     document.getElementById('searchEmpty').textContent=d.noRes||'No results';
-    document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(d[k])el.innerHTML=d[k]});
+    document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(d[k])el.textContent=d[k]});
     var opt=document.querySelector('.lang-option[data-lang="'+l+'"]');
     if(opt){document.getElementById('flag').textContent=opt.getAttribute('data-flag');document.getElementById('code').textContent=l.toUpperCase()}
     document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===l)});
     document.documentElement.lang=l;closeMenu();
+    if (fromUser) dismissHint();
+    if (window.HKSearch) window.HKSearch.setLang(l);
+    document.dispatchEvent(new CustomEvent("hk-lang", { detail: l }));
   }
   var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu'),overlay=document.getElementById('overlay');
   function openMenu(){langMenu.classList.add('open');overlay.classList.add('open')}
   function closeMenu(){langMenu.classList.remove('open');overlay.classList.remove('open')}
   langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.contains('open')?closeMenu():openMenu()});
   overlay.addEventListener('click',closeMenu);
-  document.querySelectorAll('.lang-option').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'))})});
+  document.querySelectorAll('.lang-option').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'), true)})});
   document.getElementById('introFlags').addEventListener('click',function(e){
     var b=e.target.closest('button[data-lang]');
     if(!b)return;
-    setLang(b.getAttribute('data-lang'));
+    setLang(b.getAttribute('data-lang'), true);
     playClick();
   });
-  setLang(lang);
+  document.getElementById('langHint').addEventListener('click', dismissHint);
+  document.getElementById('langBtn').addEventListener('click', dismissHint);
+  setLang(lang, false);
+  if (introDone) showLangHint();
 })();
 </script>
+<script src="search-index.js"></script>
+<script src="hello-kos-search.js"></script>
 <script src="hello-kos-i18n.js"></script>
 </body>
 </html>
