@@ -40,6 +40,12 @@ body.hk-page h2.section{font-size:1.05rem;font-weight:800;text-align:center;colo
 .btn-solid{background:var(--petrol);color:#fff}
 .loc-list p{margin:0 0 12px;color:var(--text-soft);font-size:.92rem}
 .loc-list a{color:var(--petrol);font-weight:700}
+.radar-stage{margin:-16px -14px 8px;background:#071410;padding:12px 12px 8px}
+#radar{display:block;width:min(100%,440px);height:auto;aspect-ratio:1;margin:0 auto;border-radius:16px}
+.radar-note{text-align:center;font-size:.75rem;color:#b7e4df;margin:0 0 12px;min-height:1.1em}
+.loc-name{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.dear{display:inline-block;background:rgba(224,176,64,.16);color:var(--gold);border:1px solid var(--gold);border-radius:999px;font-size:.72rem;font-weight:800;padding:1px 8px;letter-spacing:.02em;vertical-align:middle}
+.dear[hidden]{display:none}
 </style>
 </head>
 <body class="hk-page">
@@ -63,7 +69,8 @@ body.hk-page h2.section{font-size:1.05rem;font-weight:800;text-align:center;colo
 </header>
 <div class="overlay" id="overlay"></div>
 <main class="main">
-<div class="hero-wrap"><img src="img/hk/winkel-super-hero.jpg" alt=""></div>
+<div class="radar-stage"><canvas id="radar" width="640" height="640" aria-hidden="true"></canvas></div>
+<p class="radar-note" id="radarNote" data-i18n="radarWait">De radar veegt. Winkelpuntjes komen na je locatie.</p>
 <p class="parent-link"><a href="praktische-winkels.html" data-i18n="back">← Belangrijke winkels</a></p>
 <h1 data-i18n="title">Supermarkten</h1>
 <article class="card">
@@ -75,7 +82,7 @@ body.hk-page h2.section{font-size:1.05rem;font-weight:800;text-align:center;colo
 <h2 data-i18n="locH">🛒 Dichtstbijzijnde Supermarkt</h2>
 <p class="status" id="locStatus">Locatie ophalen...</p>
 <div id="locOne" hidden>
-<p class="loc-name" id="locName"></p>
+<p class="loc-name"><span id="locName"></span><span id="locDear" class="dear" hidden>duurder</span></p>
 <p id="locCity"></p>
 <p id="locDist"></p>
 <div class="actions">
@@ -110,6 +117,17 @@ body.hk-page h2.section{font-size:1.05rem;font-weight:800;text-align:center;colo
   var mode = "wait";
   var sorted = [];
   var idx = 0;
+  var user = null;
+  var heading = null;
+  var shownUrl = "";
+  var armed = false;
+  var revealed = false;
+  var noteKey = "";
+  var audioCtx = null;
+  var audioReady = false;
+  var prevSweep = 0;
+  var canvas = document.getElementById("radar");
+  var ctx = canvas.getContext("2d");
   function dict() {
     var lang = document.documentElement.lang || "nl";
     var all = window.HK_DICT || {};
@@ -121,14 +139,40 @@ body.hk-page h2.section{font-size:1.05rem;font-weight:800;text-align:center;colo
     var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1 * p) * Math.cos(lat2 * p) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
     return Math.round(2 * R * Math.asin(Math.min(1, Math.sqrt(a))));
   }
+  function bearing(lat1, lon1, lat2, lon2) {
+    var p = Math.PI / 180;
+    var y = Math.sin((lon2 - lon1) * p) * Math.cos(lat2 * p);
+    var x = Math.cos(lat1 * p) * Math.sin(lat2 * p) - Math.sin(lat1 * p) * Math.cos(lat2 * p) * Math.cos((lon2 - lon1) * p);
+    return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
+  }
+  function angDiff(a, b) {
+    var d = Math.abs(a - b) % (Math.PI * 2);
+    return d > Math.PI ? Math.PI * 2 - d : d;
+  }
+  function isDear(name) {
+    return String(name).indexOf("(duurder)") !== -1;
+  }
   function esc(s) {
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+  }
+  function dearMark(d) {
+    return " <span class=\"dear\">" + esc(d.dear || "duurder") + "</span>";
   }
   function showOne() {
     mode = "one";
     var m = sorted[idx];
+    if (!m) return;
     var d = dict();
+    shownUrl = m.url;
     document.getElementById("locName").textContent = m.name;
+    var dear = document.getElementById("locDear");
+    if (isDear(m.name)) {
+      dear.hidden = false;
+      dear.textContent = d.dear || "duurder";
+    } else {
+      dear.hidden = true;
+      dear.textContent = "";
+    }
     document.getElementById("locCity").textContent = (d.cityP || "Stad: ") + m.city;
     var dist = document.getElementById("locDist");
     dist.hidden = false;
@@ -140,10 +184,12 @@ body.hk-page h2.section{font-size:1.05rem;font-weight:800;text-align:center;colo
   }
   function showList() {
     mode = "list";
+    shownUrl = "";
     var d = dict();
     var html = "";
     markets.forEach(function (m) {
-      html += "<p><strong>" + esc(m.name) + "</strong><br>" + esc(d.cityP || "Stad: ") + esc(m.city)
+      html += "<p><strong>" + esc(m.name) + "</strong>" + (isDear(m.name) ? dearMark(d) : "")
+        + "<br>" + esc(d.cityP || "Stad: ") + esc(m.city)
         + "<br><a href=\"" + esc(m.url) + "\" target=\"_blank\" rel=\"noopener\">" + esc(d.openMap || "Open Google Maps") + "</a></p>";
     });
     var box = document.getElementById("locList");
@@ -156,24 +202,225 @@ body.hk-page h2.section{font-size:1.05rem;font-weight:800;text-align:center;colo
     if (mode === "one" && sorted.length) showOne();
     else if (mode === "list") showList();
     else document.getElementById("locStatus").textContent = dict().getting || "Locatie ophalen...";
+    noteKey = "";
+    updateRadarNote();
+  }
+  function updateRadarNote() {
+    var d = dict();
+    var key = !user ? "radarWait" : (heading == null ? "radarNorth" : "radarHead");
+    var text = d[key] || "";
+    if (key === noteKey) return;
+    noteKey = key;
+    var note = document.getElementById("radarNote");
+    if (note) note.textContent = text;
+  }
+  function ping() {
+    if (!audioCtx || audioCtx.state !== "running") return;
+    var t = audioCtx.currentTime;
+    var osc = audioCtx.createOscillator();
+    var gain = audioCtx.createGain();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(920, t);
+    osc.frequency.exponentialRampToValueAtTime(170, t + 0.16);
+    gain.gain.setValueAtTime(0.0001, t);
+    gain.gain.exponentialRampToValueAtTime(0.06, t + 0.012);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.2);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(t);
+    osc.stop(t + 0.21);
+  }
+  function unlockAudio() {
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    if (!audioCtx) audioCtx = new AC();
+    var done = function () {
+      if (audioCtx.state === "running" && !audioReady) {
+        audioReady = true;
+        ping();
+      } else if (audioCtx.state === "running") {
+        audioReady = true;
+      }
+    };
+    if (audioCtx.state === "running") done();
+    else audioCtx.resume().then(done).catch(function () {});
+  }
+  function onOrient(e) {
+    var h = null;
+    if (typeof e.webkitCompassHeading === "number" && isFinite(e.webkitCompassHeading)) h = e.webkitCompassHeading;
+    else if (e.absolute === true && typeof e.alpha === "number" && isFinite(e.alpha)) h = (360 - e.alpha) % 360;
+    if (h == null) return;
+    heading = (h % 360 + 360) % 360;
+    noteKey = "";
+    updateRadarNote();
+  }
+  var orientOn = false;
+  function listenOrient() {
+    if (orientOn) return;
+    orientOn = true;
+    window.addEventListener("deviceorientationabsolute", onOrient, true);
+    window.addEventListener("deviceorientation", onOrient, true);
+  }
+  var compassAsked = false;
+  function askCompass() {
+    var DOE = window.DeviceOrientationEvent;
+    if (!DOE || typeof DOE.requestPermission !== "function") {
+      listenOrient();
+      return;
+    }
+    if (compassAsked) return;
+    compassAsked = true;
+    DOE.requestPermission().then(function (s) {
+      if (s === "granted") listenOrient();
+    }).catch(function () {});
+  }
+  function sizeCanvas() {
+    var css = canvas.clientWidth || 0;
+    if (!css) return;
+    var px = Math.round(css * Math.min(window.devicePixelRatio || 1, 2));
+    if (canvas.width !== px || canvas.height !== px) {
+      canvas.width = px;
+      canvas.height = px;
+    }
+  }
+  function draw(sweep) {
+    sizeCanvas();
+    var w = canvas.width;
+    if (!w) return;
+    var cx = w / 2, cy = w / 2, radius = w * 0.46;
+    ctx.clearRect(0, 0, w, w);
+    ctx.fillStyle = "#071410";
+    ctx.fillRect(0, 0, w, w);
+    var disc = ctx.createRadialGradient(cx, cy, radius * 0.08, cx, cy, radius);
+    disc.addColorStop(0, "#164038");
+    disc.addColorStop(1, "#06110f");
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+    ctx.fillStyle = disc;
+    ctx.fill();
+    ctx.strokeStyle = "rgba(62, 174, 150, 0.38)";
+    ctx.lineWidth = Math.max(1, w * 0.004);
+    for (var i = 1; i <= 4; i++) {
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius * i / 4, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - radius);
+    ctx.lineTo(cx, cy + radius);
+    ctx.moveTo(cx - radius, cy);
+    ctx.lineTo(cx + radius, cy);
+    ctx.stroke();
+    var steps = 32, trail = 1.15;
+    for (var s = steps; s >= 1; s--) {
+      var a1 = sweep - (s - 1) * (trail / steps);
+      var a0 = sweep - s * (trail / steps);
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.arc(cx, cy, radius, a0 - Math.PI / 2, a1 - Math.PI / 2, false);
+      ctx.closePath();
+      ctx.fillStyle = "rgba(90, 230, 150, " + (0.015 + 0.22 * (1 - s / steps)) + ")";
+      ctx.fill();
+    }
+    ctx.strokeStyle = "rgba(214, 255, 226, 0.95)";
+    ctx.lineWidth = Math.max(2, w * 0.008);
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + Math.sin(sweep) * radius, cy - Math.cos(sweep) * radius);
+    ctx.stroke();
+    var head = heading == null ? 0 : heading;
+    if (user) {
+      var maxD = 1, pts = [], k;
+      for (k = 0; k < markets.length; k++) {
+        var m = markets[k];
+        var dist = hav(user.lat, user.lon, m.lat, m.lon);
+        if (dist > maxD) maxD = dist;
+        pts.push({ m: m, dist: dist, brg: bearing(user.lat, user.lon, m.lat, m.lon) });
+      }
+      for (k = 0; k < pts.length; k++) {
+        var pt = pts[k];
+        var screen = (pt.brg - head) * Math.PI / 180;
+        var rr = (pt.dist / maxD) * radius * 0.92;
+        var x = cx + Math.sin(screen) * rr;
+        var y = cy - Math.cos(screen) * rr;
+        var dearDot = isDear(pt.m.name);
+        var lit = angDiff(screen, sweep) < 0.4 ? 1 : 0.62;
+        ctx.beginPath();
+        ctx.fillStyle = dearDot ? "rgba(224, 176, 64, " + lit + ")" : "rgba(150, 255, 196, " + lit + ")";
+        ctx.arc(x, y, (dearDot ? 0.016 : 0.012) * w, 0, Math.PI * 2);
+        ctx.fill();
+        if (mode === "one" && pt.m.url === shownUrl) {
+          ctx.lineWidth = Math.max(1, w * 0.004);
+          ctx.strokeStyle = "rgba(255,255,255,0.92)";
+          ctx.stroke();
+        }
+      }
+      ctx.beginPath();
+      ctx.fillStyle = "#e8f5f3";
+      ctx.arc(cx, cy, w * 0.012, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    var nr = (0 - head) * Math.PI / 180;
+    ctx.fillStyle = "rgba(183, 228, 223, 0.9)";
+    ctx.font = "700 " + Math.round(w * 0.04) + "px sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("N", cx + Math.sin(nr) * radius * 0.78, cy - Math.cos(nr) * radius * 0.78);
+  }
+  function frame(now) {
+    var sweep = ((now / 4000) % 1) * Math.PI * 2;
+    if (audioReady && sweep < prevSweep) ping();
+    prevSweep = sweep;
+    draw(sweep);
+    requestAnimationFrame(frame);
+  }
+  function onPos(pos) {
+    var lat = pos.coords.latitude, lon = pos.coords.longitude;
+    if (!isFinite(lat) || !isFinite(lon)) return;
+    user = { lat: lat, lon: lon };
+    if (!revealed && mode === "list") {
+      mode = "wait";
+      document.getElementById("locList").hidden = true;
+      document.getElementById("locOne").hidden = true;
+      document.getElementById("locStatus").textContent = dict().getting || "Locatie ophalen...";
+    }
+    unlockAudio();
+    sorted = markets.map(function (m) {
+      return { name: m.name, city: m.city, url: m.url, dist: hav(lat, lon, m.lat, m.lon) };
+    }).sort(function (a, b) { return a.dist - b.dist; });
+    if (!armed) {
+      armed = true;
+      idx = 0;
+      setTimeout(function () {
+        revealed = true;
+        if (user && sorted.length) showOne();
+      }, 15000);
+    } else if (revealed && mode === "one") {
+      showOne();
+    }
+    noteKey = "";
+    updateRadarNote();
+  }
+  function onErr() {
+    if (user || mode === "list") return;
+    showList();
   }
   document.getElementById("locSkip").addEventListener("click", function () {
     if (mode !== "one" || !sorted.length) return;
     idx = (idx + 1) % sorted.length;
     showOne();
   });
+  document.addEventListener("pointerdown", function () {
+    unlockAudio();
+    askCompass();
+  });
   document.addEventListener("hk-lang", render);
+  if (!(window.DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission === "function")) listenOrient();
+  requestAnimationFrame(frame);
   document.addEventListener("DOMContentLoaded", function () {
     render();
     if (!navigator.geolocation) { showList(); return; }
-    navigator.geolocation.getCurrentPosition(function (pos) {
-      var lat = pos.coords.latitude, lon = pos.coords.longitude;
-      sorted = markets.map(function (m) {
-        return { name: m.name, city: m.city, url: m.url, dist: hav(lat, lon, m.lat, m.lon) };
-      }).sort(function (a, b) { return a.dist - b.dist; });
-      idx = 0;
-      setTimeout(showOne, 15000);
-    }, function () { showList(); });
+    navigator.geolocation.watchPosition(onPos, onErr, { enableHighAccuracy: true, maximumAge: 0, timeout: 20000 });
   });
 })();
 </script>
@@ -208,7 +455,11 @@ window.HK_DICT = {
     "cityP": "Stad: ",
     "distP": "Afstand: ",
     "openMap": "Open Google Maps",
-    "skip": "Overslaan"
+    "skip": "Overslaan",
+    "dear": "duurder",
+    "radarWait": "De radar veegt. Winkelpuntjes komen na je locatie.",
+    "radarNorth": "Noord boven",
+    "radarHead": "Kijkrichting boven"
   },
   "de": {
     "back": "← Wichtige Läden",
@@ -236,7 +487,11 @@ window.HK_DICT = {
     "cityP": "Stadt: ",
     "distP": "Entfernung: ",
     "openMap": "Google Maps öffnen",
-    "skip": "Überspringen"
+    "skip": "Überspringen",
+    "dear": "teurer",
+    "radarWait": "Das Radar läuft. Punkte erscheinen nach deinem Standort.",
+    "radarNorth": "Norden oben",
+    "radarHead": "Blickrichtung oben"
   },
   "en": {
     "back": "← Important shops",
@@ -264,7 +519,11 @@ window.HK_DICT = {
     "cityP": "City: ",
     "distP": "Distance: ",
     "openMap": "Open Google Maps",
-    "skip": "Skip"
+    "skip": "Skip",
+    "dear": "pricier",
+    "radarWait": "The radar is sweeping. Shop dots appear after your location.",
+    "radarNorth": "North up",
+    "radarHead": "Facing direction up"
   },
   "it": {
     "back": "← Negozi importanti",
@@ -292,7 +551,11 @@ window.HK_DICT = {
     "cityP": "Città: ",
     "distP": "Distanza: ",
     "openMap": "Apri Google Maps",
-    "skip": "Salta"
+    "skip": "Salta",
+    "dear": "più caro",
+    "radarWait": "Il radar gira. I punti compaiono dopo la tua posizione.",
+    "radarNorth": "Nord in alto",
+    "radarHead": "Direzione dello sguardo in alto"
   },
   "tr": {
     "back": "← Önemli dükkanlar",
@@ -320,7 +583,11 @@ window.HK_DICT = {
     "cityP": "Şehir: ",
     "distP": "Mesafe: ",
     "openMap": "Google Maps’i aç",
-    "skip": "Atla"
+    "skip": "Atla",
+    "dear": "daha pahalı",
+    "radarWait": "Radar dönüyor. Konumundan sonra dükkan noktaları gelir.",
+    "radarNorth": "Kuzey yukarıda",
+    "radarHead": "Bakış yönü yukarıda"
   },
   "es": {
     "back": "← Tiendas importantes",
@@ -348,7 +615,11 @@ window.HK_DICT = {
     "cityP": "Ciudad: ",
     "distP": "Distancia: ",
     "openMap": "Abrir Google Maps",
-    "skip": "Omitir"
+    "skip": "Omitir",
+    "dear": "más caro",
+    "radarWait": "El radar gira. Los puntos salen después de tu ubicación.",
+    "radarNorth": "Norte arriba",
+    "radarHead": "Dirección de la mirada arriba"
   }
 };
 </script>
