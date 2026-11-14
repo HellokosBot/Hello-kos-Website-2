@@ -9,7 +9,7 @@
 <style>
 .step-label { font-size: 0.78rem; font-weight: 700; color: var(--petrol); text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 8px; }
 .choices { display: flex; flex-direction: column; gap: 10px; margin: 0 0 14px; }
-.pick { display: flex; flex-direction: column; width: 100%; padding: 0; border: 2px solid #fff; border-radius: 16px; overflow: hidden; background: #1a2525; cursor: pointer; font-family: inherit; text-align: left; }
+.pick { display: flex; flex-direction: column; width: 100%; padding: 0; border: 2px solid #fff; border-radius: 16px; overflow: hidden; background: #1a2525; cursor: pointer; font-family: inherit; text-align: left; text-decoration: none; }
 .pick img { width: 100%; height: 120px; object-fit: cover; display: block; }
 .pick-bar { background: #fff; color: #0d1a1a; font-weight: 800; padding: 8px 12px; font-size: 1rem; }
 .pick.on { box-shadow: 0 0 0 3px #3A9A9A; }
@@ -60,41 +60,14 @@
 <main class="main">
   <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back">← Bezienswaardigheden</a></p>
   <h1 data-i18n="title">Route</h1>
-  <p class="step-label" data-i18n="s1">Stap 1</p>
   <div class="choices" id="step1">
-    <button type="button" class="pick" data-mode="walk"><img src="img/hk/sight-witte-trappen-card.jpg" alt=""><span class="pick-bar" data-i18n="walk">Wandelen</span></button>
-    <button type="button" class="pick" data-mode="drive"><img src="img/hk/sight-asklepion.jpg" alt=""><span class="pick-bar" data-i18n="drive">Rijden (auto/scooter)</span></button>
-    <button type="button" class="pick" data-mode="custom"><img src="img/hk/sight-old-town-card.jpg" alt=""><span class="pick-bar" data-i18n="custom">Zelf samenstellen</span></button>
-  </div>
-  <div id="step2" hidden>
-    <p class="step-label" data-i18n="s2">Stap 2</p>
-    <div class="choices">
-      <button type="button" class="pick" data-len="short"><img src="img/hk/sight-i-love-kos-card.jpg" alt=""><span class="pick-bar" data-i18n="shortR">Korte route</span></button>
-      <button type="button" class="pick" data-len="long"><img src="img/hk/sight-zia.jpg" alt=""><span class="pick-bar" data-i18n="longR">Lange route</span></button>
-    </div>
-  </div>
-  <p class="lead" id="blurb"></p>
-  <p class="est" id="est"></p>
-  <div id="routeView"></div>
-  <div id="customView" hidden>
-    <div class="mode-row">
-      <button type="button" class="choice" id="cWalk" data-i18n="walk">Wandelen</button>
-      <button type="button" class="choice" id="cDrive" data-i18n="drive">Rijden (auto/scooter)</button>
-    </div>
-    <button type="button" class="choice" id="fromFav" data-i18n="fromFav">Route maken van mijn verlanglijst</button>
-    <p class="est" id="favNote"></p>
-    <div id="checks"></div>
-    <p class="est" id="cest"></p>
-    <p class="est" id="cTrim" hidden></p>
-    <div class="map-row" id="cBtns" hidden></div>
+    <a class="pick" href="route-lopen.html"><img src="img/hk/sight-witte-trappen-card.jpg" alt=""><span class="pick-bar" data-i18n="walk">Wandelen</span></a>
+    <a class="pick" href="route-rijden.html"><img src="img/hk/sight-asklepion.jpg" alt=""><span class="pick-bar" data-i18n="drive">Rijden (auto/scooter)</span></a>
+    <a class="pick" href="route-samenstellen.html"><img src="img/hk/sight-old-town-card.jpg" alt=""><span class="pick-bar" data-i18n="custom">Zelf samenstellen</span></a>
   </div>
 </main>
 <footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
 <script src="hello-kos-route-dict.js"></script>
 <script src="hello-kos-i18n.js"></script>
-<script src="hello-kos-places.js"></script>
-<script src="hello-kos-fav.js"></script>
-<script src="hello-kos-route-text.js"></script>
-<script src="hello-kos-route.js"></script>
 </body>
 </html>
