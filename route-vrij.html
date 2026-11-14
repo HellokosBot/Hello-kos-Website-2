@@ -136,6 +136,40 @@
     }
     .start-btn:disabled { opacity: 0.5; cursor: not-allowed; }
     .start-btn.stop { background: linear-gradient(145deg, #f87171, #ef4444); color: #fff; }
+    .pocket-btn {
+      width: 100%; padding: 16px; border-radius: 14px; border: 2px solid #2dd4bf;
+      background: #0f2a2a; color: #99f6e4; font-weight: 800; font-size: 1.05rem;
+      cursor: pointer; font-family: inherit; margin: 0 0 8px;
+    }
+    .pocket-btn:active { background: #134040; }
+    .hint { font-size: 0.78rem; color: #94a3b8; margin: 6px 0 0; line-height: 1.4; }
+    .hint.warn { color: #fecaca; }
+    .switch { position: relative; display: flex; align-items: center; gap: 12px; min-height: 44px; cursor: pointer; color: #e8f5f3; font-weight: 700; }
+    .switch input { position: absolute; opacity: 0; width: 48px; height: 28px; margin: 0; }
+    .switch .knob { width: 48px; height: 28px; border-radius: 999px; background: #1f3a3a; border: 1px solid rgba(45,212,191,0.4); position: relative; flex: 0 0 48px; }
+    .switch .knob::after { content: ""; position: absolute; top: 2px; left: 2px; width: 22px; height: 22px; border-radius: 50%; background: #94a3b8; }
+    .switch input:checked + .knob { background: #0f766e; }
+    .switch input:checked + .knob::after { transform: translateX(20px); background: #2dd4bf; }
+    input[type="range"] { width: 100%; accent-color: #2dd4bf; }
+    .pocket {
+      position: fixed; inset: 0; z-index: 5000; background: #000; color: #d8d8d8;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      padding: 28px 22px; touch-action: none; user-select: none;
+    }
+    .pocket[hidden] { display: none !important; }
+    .pocket-hold { position: relative; width: 200px; height: 200px; margin: 0 auto 18px; }
+    .pocket .ring { width: 200px; height: 200px; display: block; transform: rotate(-90deg); }
+    .ring-bg { fill: none; stroke: #2a2a2a; stroke-width: 8; }
+    .ring-fg { fill: none; stroke: #d0d0d0; stroke-width: 8; stroke-linecap: round; stroke-dasharray: 326.73; stroke-dashoffset: 326.73; }
+    .finger { position: absolute; left: 50%; top: 52%; width: 78px; height: 96px; transform: translate(-50%, -50%); color: #e6e6e6; }
+    .pocket-hint { font-size: 1.35rem; font-weight: 700; line-height: 1.35; color: #e4e4e4; max-width: 18rem; margin: 0 auto; }
+    .pocket-live { margin: 18px 0 0; color: #8d8d8d; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .pulse { width: 10px; height: 10px; border-radius: 50%; background: #6fbf8a; display: inline-block; animation: hk-pulse 1.6s ease-out infinite; }
+    @keyframes hk-pulse { 0% { box-shadow: 0 0 0 0 rgba(111,191,138,0.7); } 100% { box-shadow: 0 0 0 12px rgba(111,191,138,0); } }
+    @media (prefers-reduced-motion: reduce) {
+      .pulse { animation: none; }
+      .switch .knob::after { transition: none; }
+    }
     .list-title { font-size: 0.78rem; font-weight: 700; color: #5eead4; text-transform: uppercase; letter-spacing: 0.04em; margin: 8px 0 8px; }
     .loc {
       display: flex; align-items: center; gap: 10px;
@@ -205,6 +239,8 @@
     </div>
 
     <button type="button" class="start-btn" id="startBtn" data-i18n="start">▶ Start radar</button>
+    <button type="button" class="pocket-btn" id="pocketBtn" data-i18n="pocketBtn">Broekzakmodus</button>
+    <p class="hint" data-i18n="pocketExplain">Het scherm blijft aan, maar zwart en vergrendeld. Druk niet op de aan/uit-knop, want dan stopt de radar.</p>
 
     <div class="settings">
       <h2 data-i18n="settingsTitle">Waarschuwing instellen</h2>
@@ -228,14 +264,47 @@
         </select>
       </div>
       <div class="row">
-        <label data-i18n="testLbl">Test geluid</label>
-        <button type="button" class="btn-ghost" id="testSound" style="width:100%" data-i18n="testBtn">▶ Afspelen</button>
+        <label class="switch">
+          <input type="checkbox" id="vibeToggle" checked>
+          <span class="knob"></span>
+          <span id="vibeState" data-i18n="vibeLbl">Trillen aan</span>
+        </label>
+        <p class="hint" id="vibeIos" data-i18n="vibeIos" hidden>Trillen werkt niet op iPhone in de browser. Gebruik geluid.</p>
+        <p class="hint warn" id="vibeBlocked" data-i18n="vibeBlocked" hidden>Trillen geblokkeerd: controleer of trillen aan staat in je telefooninstellingen en of niet-storen uit staat.</p>
+      </div>
+      <div class="row">
+        <label for="volSlider" data-i18n="volLbl">Volume</label>
+        <input id="volSlider" type="range" min="0" max="100" value="90">
+        <p class="hint" data-i18n="volHint">Zet ook het telefoonvolume omhoog. Op iPhone moet de stille schakelaar uit.</p>
+      </div>
+      <div class="row">
+        <label data-i18n="testLbl">Test geluid en trillen</label>
+        <button type="button" class="btn-ghost" id="testSound" style="width:100%" data-i18n="testBtn">▶ Test</button>
       </div>
     </div>
 
     <div class="list-title" data-i18n="nearbyTitle">In de buurt</div>
     <div id="nearbyList"></div>
   </main>
+
+  <div id="pocket" class="pocket" hidden>
+    <div>
+      <div class="pocket-hold" id="pocketHold">
+        <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="ring-bg" cx="60" cy="60" r="52"></circle>
+          <circle class="ring-fg" id="pocketRing" cx="60" cy="60" r="52"></circle>
+        </svg>
+        <svg class="finger" viewBox="0 0 64 80" aria-hidden="true">
+          <ellipse cx="32" cy="74" rx="16" ry="4" fill="currentColor" opacity="0.35"></ellipse>
+          <path fill="currentColor" d="M24 8h16c6 0 10 4 10 10v34c0 8-6 14-14 14h-8c-8 0-14-6-14-14V18c0-6 4-10 10-10z"></path>
+          <rect x="30" y="16" width="6" height="16" rx="3" fill="#000" opacity="0.2"></rect>
+        </svg>
+      </div>
+      <p class="pocket-hint" data-i18n="pocketHold">Houd 2 seconden ingedrukt om te ontgrendelen</p>
+      <p class="pocket-live"><span class="pulse"></span><span data-i18n="pocketLive">Radar actief</span></p>
+      <p class="hint" id="pocketNoWake" data-i18n="pocketNoWake" hidden>Deze browser houdt het scherm niet vanzelf aan. Druk niet op de aan/uit-knop.</p>
+    </div>
+  </div>
 
   <footer class="footer">
     <div data-i18n="footerTitle">Hello Kos Radar</div>
@@ -270,8 +339,19 @@
       soundSoft: "Zachte toon",
       soundDouble: "Dubbele piep",
       soundOff: "Geen geluid (alleen trillen)",
-      testLbl: "Test geluid",
-      testBtn: "▶ Afspelen",
+      testLbl: "Test geluid en trillen",
+      testBtn: "▶ Test",
+      vibeLbl: "Trillen aan",
+      vibeOff: "Trillen uit",
+      vibeIos: "Trillen werkt niet op iPhone in de browser. Gebruik geluid.",
+      vibeBlocked: "Trillen geblokkeerd: controleer of trillen aan staat in je telefooninstellingen en of niet-storen uit staat.",
+      volLbl: "Volume",
+      volHint: "Zet ook het telefoonvolume omhoog. Op iPhone moet de stille schakelaar uit.",
+      pocketBtn: "Broekzakmodus",
+      pocketExplain: "Het scherm blijft aan, maar zwart en vergrendeld. Druk niet op de aan/uit-knop, want dan stopt de radar.",
+      pocketHold: "Houd 2 seconden ingedrukt om te ontgrendelen",
+      pocketLive: "Radar actief",
+      pocketNoWake: "Deze browser houdt het scherm niet vanzelf aan. Druk niet op de aan/uit-knop.",
       nearbyTitle: "In de buurt",
       footerTitle: "Hello Kos Radar",
       footerGps: "GPS werkt het best buiten, met locatietoestemming aan.",
@@ -302,8 +382,19 @@
       soundSoft: "Soft tone",
       soundDouble: "Double beep",
       soundOff: "No sound (vibrate only)",
-      testLbl: "Test sound",
-      testBtn: "▶ Play",
+      testLbl: "Test sound and vibration",
+      testBtn: "▶ Test",
+      vibeLbl: "Vibration on",
+      vibeOff: "Vibration off",
+      vibeIos: "Vibration does not work on iPhone in the browser. Use sound.",
+      vibeBlocked: "Vibration blocked: check that vibration is on in your phone settings and that Do Not Disturb is off.",
+      volLbl: "Volume",
+      volHint: "Turn the phone volume up as well. On iPhone the silent switch must be off.",
+      pocketBtn: "Pocket mode",
+      pocketExplain: "The screen stays on, but black and locked. Do not press the power button, or the radar stops.",
+      pocketHold: "Hold for 2 seconds to unlock",
+      pocketLive: "Radar active",
+      pocketNoWake: "This browser does not keep the screen on by itself. Do not press the power button.",
       nearbyTitle: "Nearby",
       footerTitle: "Hello Kos Radar",
       footerGps: "GPS works best outdoors with location permission on.",
@@ -334,8 +425,19 @@
       soundSoft: "Sanfter Ton",
       soundDouble: "Doppelter Piep",
       soundOff: "Kein Ton (nur Vibration)",
-      testLbl: "Ton testen",
-      testBtn: "▶ Abspielen",
+      testLbl: "Ton und Vibration testen",
+      testBtn: "▶ Test",
+      vibeLbl: "Vibrieren an",
+      vibeOff: "Vibrieren aus",
+      vibeIos: "Vibrieren funktioniert auf dem iPhone im Browser nicht. Nutze den Ton.",
+      vibeBlocked: "Vibrieren blockiert: prüfe, ob Vibrieren in den Telefoneinstellungen an ist und ob Nicht stören aus ist.",
+      volLbl: "Lautstärke",
+      volHint: "Dreh auch die Telefonlautstärke auf. Am iPhone muss der Stummschalter aus sein.",
+      pocketBtn: "Hosentaschenmodus",
+      pocketExplain: "Der Bildschirm bleibt an, aber schwarz und gesperrt. Drück nicht auf den Ein-/Aus-Knopf, sonst stoppt das Radar.",
+      pocketHold: "2 Sekunden gedrückt halten zum Entsperren",
+      pocketLive: "Radar aktiv",
+      pocketNoWake: "Dieser Browser hält den Bildschirm nicht von selbst an. Drück nicht auf den Ein-/Aus-Knopf.",
       nearbyTitle: "In der Nähe",
       footerTitle: "Hello Kos Radar",
       footerGps: "GPS funktioniert am besten draußen mit Standortberechtigung.",
@@ -366,8 +468,19 @@
       soundSoft: "Tono morbido",
       soundDouble: "Doppio beep",
       soundOff: "Nessun suono (solo vibrazione)",
-      testLbl: "Prova suono",
-      testBtn: "▶ Riproduci",
+      testLbl: "Prova suono e vibrazione",
+      testBtn: "▶ Test",
+      vibeLbl: "Vibrazione attiva",
+      vibeOff: "Vibrazione disattivata",
+      vibeIos: "La vibrazione non funziona su iPhone nel browser. Usa il suono.",
+      vibeBlocked: "Vibrazione bloccata: controlla che la vibrazione sia attiva nelle impostazioni del telefono e che Non disturbare sia spento.",
+      volLbl: "Volume",
+      volHint: "Alza anche il volume del telefono. Su iPhone l’interruttore del silenzioso deve essere spento.",
+      pocketBtn: "Modalità tasca",
+      pocketExplain: "Lo schermo resta acceso, ma nero e bloccato. Non premere il tasto di accensione, altrimenti il radar si ferma.",
+      pocketHold: "Tieni premuto per 2 secondi per sbloccare",
+      pocketLive: "Radar attivo",
+      pocketNoWake: "Questo browser non tiene lo schermo acceso da solo. Non premere il tasto di accensione.",
       nearbyTitle: "Nelle vicinanze",
       footerTitle: "Hello Kos Radar",
       footerGps: "Il GPS funziona meglio all’aperto con il permesso posizione attivo.",
@@ -398,8 +511,19 @@
       soundSoft: "Yumuşak ton",
       soundDouble: "Çift bip",
       soundOff: "Ses yok (sadece titreşim)",
-      testLbl: "Sesi test et",
-      testBtn: "▶ Çal",
+      testLbl: "Sesi ve titreşimi dene",
+      testBtn: "▶ Test",
+      vibeLbl: "Titreşim açık",
+      vibeOff: "Titreşim kapalı",
+      vibeIos: "Titreşim iPhone’da tarayıcıda çalışmaz. Sesi kullan.",
+      vibeBlocked: "Titreşim engellendi: telefon ayarlarında titreşimin açık olduğunu ve rahatsız etme modunun kapalı olduğunu kontrol et.",
+      volLbl: "Ses düzeyi",
+      volHint: "Telefonun sesini de aç. iPhone’da sessiz anahtarı kapalı olmalı.",
+      pocketBtn: "Cep modu",
+      pocketExplain: "Ekran açık kalır, ama siyah ve kilitli. Güç düğmesine basma, yoksa radar durur.",
+      pocketHold: "Açmak için 2 saniye basılı tut",
+      pocketLive: "Radar aktif",
+      pocketNoWake: "Bu tarayıcı ekranı kendiliğinden açık tutmaz. Güç düğmesine basma.",
       nearbyTitle: "Yakında",
       footerTitle: "Hello Kos Radar",
       footerGps: "GPS en iyi dışarıda ve konum izni açıkken çalışır.",
@@ -430,8 +554,19 @@
       soundSoft: "Tono suave",
       soundDouble: "Doble pitido",
       soundOff: "Sin sonido (solo vibrar)",
-      testLbl: "Probar sonido",
-      testBtn: "▶ Reproducir",
+      testLbl: "Probar sonido y vibración",
+      testBtn: "▶ Test",
+      vibeLbl: "Vibración activada",
+      vibeOff: "Vibración desactivada",
+      vibeIos: "La vibración no funciona en el iPhone dentro del navegador. Usa el sonido.",
+      vibeBlocked: "Vibración bloqueada: comprueba que la vibración esté activada en los ajustes del teléfono y que No molestar esté desactivado.",
+      volLbl: "Volumen",
+      volHint: "Sube también el volumen del teléfono. En el iPhone el interruptor de silencio debe estar desactivado.",
+      pocketBtn: "Modo bolsillo",
+      pocketExplain: "La pantalla sigue encendida, pero negra y bloqueada. No pulses el botón de encendido, porque entonces el radar se para.",
+      pocketHold: "Mantén pulsado 2 segundos para desbloquear",
+      pocketLive: "Radar activo",
+      pocketNoWake: "Este navegador no mantiene la pantalla encendida por sí solo. No pulses el botón de encendido.",
       nearbyTitle: "Cerca",
       footerTitle: "Hello Kos Radar",
       footerGps: "El GPS funciona mejor al aire libre con el permiso de ubicación activado.",
@@ -440,13 +575,20 @@
     }
   };
 
+  window.HK_DICT = I18N;
+
   function getLang() { return localStorage.getItem('hk-lang') || 'nl'; }
 
   function setLang(l) {
-    if (!I18N[l]) l = 'nl';
+    if (!window.HK_DICT[l]) l = 'nl';
     localStorage.setItem('hk-lang', l);
     document.documentElement.lang = l;
-    var d = I18N[l];
+    var d = window.HK_DICT[l];
+    var vibeToggleEarly = document.getElementById('vibeToggle');
+    var vibeStateEarly = document.getElementById('vibeState');
+    if (vibeToggleEarly && vibeStateEarly) {
+      vibeStateEarly.setAttribute('data-i18n', vibeToggleEarly.checked ? 'vibeLbl' : 'vibeOff');
+    }
     document.querySelectorAll('[data-i18n]').forEach(function(el){
       var k = el.getAttribute('data-i18n');
       if (d[k]) el.textContent = d[k];
@@ -509,11 +651,25 @@
   var RADAR_RANGE = 150;
   var alertRadius = 10;
   var soundType = 'beep';
+  var vibeOn = true;
+  var volume = 90;
+  var userActivated = false;
   var watching = false;
   var watchId = null;
   var lastAlertId = null;
   var lastAlertAt = 0;
   var audioCtx = null;
+  var master = null;
+  var compressor = null;
+  var pocketOn = false;
+  var holding = false;
+  var holdStart = 0;
+  var holdRaf = 0;
+  var holdTimer = 0;
+  var wakeSentinel = null;
+  var VIBE = [400, 200, 400, 200, 400];
+  var HOLD_MS = 2000;
+  var RING_LEN = 2 * Math.PI * 52;
 
   var gpsDot = document.getElementById('gpsDot');
   var statusText = document.getElementById('statusText');
@@ -539,8 +695,23 @@
     soundType = this.value;
     try { localStorage.setItem('hk-radar-sound', soundType); } catch (e) {}
   });
+  document.getElementById('vibeToggle').addEventListener('change', function () {
+    vibeOn = this.checked;
+    try { localStorage.setItem('hk-radar-vibe', vibeOn ? '1' : '0'); } catch (e) {}
+    setLang(getLang());
+  });
+  document.getElementById('volSlider').addEventListener('input', function () {
+    volume = parseInt(this.value, 10);
+    if (isNaN(volume)) volume = 90;
+    try { localStorage.setItem('hk-radar-volume', String(volume)); } catch (e) {}
+    if (master && audioCtx) master.gain.setValueAtTime(sliderToGain(volume), audioCtx.currentTime);
+  });
   document.getElementById('testSound').addEventListener('click', function () {
-    playAlert();
+    userActivated = true;
+    var vibeResult = fireVibrate();
+    ensureAudio();
+    noteVibrate(vibeResult);
+    if (soundType !== 'off') playLoud();
   });
 
   try {
@@ -556,7 +727,22 @@
       soundType = s;
       document.getElementById('soundSelect').value = s;
     }
+    var vb = localStorage.getItem('hk-radar-vibe');
+    if (vb === '0' || vb === '1') {
+      vibeOn = vb === '1';
+      document.getElementById('vibeToggle').checked = vibeOn;
+    }
+    var volSaved = localStorage.getItem('hk-radar-volume');
+    if (volSaved != null && volSaved !== '') {
+      var parsed = parseInt(volSaved, 10);
+      if (!isNaN(parsed)) {
+        volume = Math.max(0, Math.min(100, parsed));
+        document.getElementById('volSlider').value = String(volume);
+      }
+    }
   } catch (e) {}
+  setLang(getLang());
+  if (vibrateMissing()) document.getElementById('vibeIos').hidden = false;
 
   function haversine(lat1, lon1, lat2, lon2) {
     var R = 6371000;
@@ -578,46 +764,87 @@
     return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
   }
 
-  function ensureAudio() {
-    if (!audioCtx) {
-      var AC = window.AudioContext || window.webkitAudioContext;
-      if (AC) audioCtx = new AC();
+  function vibrateMissing() {
+    var ua = navigator.userAgent || '';
+    var iOS = /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    return iOS || typeof navigator.vibrate !== 'function';
+  }
+
+  function sliderToGain(v) {
+    return Math.max(0.0001, (v / 100) * 2.4);
+  }
+
+  function dict() {
+    return (window.HK_DICT && window.HK_DICT[getLang()]) || window.HK_DICT.nl;
+  }
+
+  function fireVibrate() {
+    if (!vibeOn || typeof navigator.vibrate !== 'function') return null;
+    try { return navigator.vibrate(VIBE); } catch (e) { return false; }
+  }
+
+  function noteVibrate(result) {
+    var el = document.getElementById('vibeBlocked');
+    if (!el) return;
+    if (result === false) {
+      el.hidden = false;
+      el.textContent = dict().vibeBlocked;
+    } else if (result === true) {
+      el.hidden = true;
     }
+  }
+
+  function ensureAudio() {
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if (!audioCtx && AC) {
+      audioCtx = new AC();
+      master = audioCtx.createGain();
+      compressor = audioCtx.createDynamicsCompressor();
+      compressor.threshold.setValueAtTime(-14, audioCtx.currentTime);
+      compressor.knee.setValueAtTime(8, audioCtx.currentTime);
+      compressor.ratio.setValueAtTime(12, audioCtx.currentTime);
+      compressor.attack.setValueAtTime(0.003, audioCtx.currentTime);
+      compressor.release.setValueAtTime(0.18, audioCtx.currentTime);
+      master.connect(compressor);
+      compressor.connect(audioCtx.destination);
+    }
+    if (master && audioCtx) master.gain.setValueAtTime(sliderToGain(volume), audioCtx.currentTime);
     if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
   }
 
-  function tone(freq, dur, type, gain) {
-    if (!audioCtx) return;
-    var o = audioCtx.createOscillator();
-    var g = audioCtx.createGain();
-    o.type = type || 'sine';
-    o.frequency.value = freq;
-    g.gain.value = gain || 0.15;
-    o.connect(g); g.connect(audioCtx.destination);
-    o.start();
-    g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
-    o.stop(audioCtx.currentTime + dur + 0.02);
+  function scheduleBurst(t0, scale) {
+    var mix = soundType === 'chime'
+      ? [{ type: 'square', freq: 988 }, { type: 'sawtooth', freq: 1568 }]
+      : [{ type: 'square', freq: 1400 }, { type: 'sawtooth', freq: 1800 }];
+    mix.forEach(function (part) {
+      var o = audioCtx.createOscillator();
+      var g = audioCtx.createGain();
+      o.type = part.type;
+      o.frequency.setValueAtTime(part.freq, t0);
+      var peak = Math.max(0.0001, 0.55 * scale);
+      g.gain.setValueAtTime(0.0001, t0);
+      g.gain.exponentialRampToValueAtTime(peak, t0 + 0.015);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.2);
+      o.connect(g);
+      g.connect(master);
+      o.start(t0);
+      o.stop(t0 + 0.22);
+    });
+  }
+
+  function playLoud() {
+    ensureAudio();
+    if (!audioCtx || !master || soundType === 'off') return;
+    var scale = soundType === 'soft' ? 0.55 : 1;
+    var now = audioCtx.currentTime;
+    scheduleBurst(now, scale);
+    scheduleBurst(now + 0.34, scale);
+    scheduleBurst(now + 0.68, scale);
   }
 
   function playAlert() {
-    ensureAudio();
-    if (soundType === 'off') {
-      if (navigator.vibrate) navigator.vibrate([80, 40, 80]);
-      return;
-    }
-    if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
-    if (!audioCtx) return;
-    if (soundType === 'beep') {
-      tone(880, 0.12, 'square', 0.12);
-    } else if (soundType === 'chime') {
-      tone(523, 0.2, 'sine', 0.15);
-      setTimeout(function () { tone(784, 0.35, 'sine', 0.12); }, 120);
-    } else if (soundType === 'soft') {
-      tone(440, 0.4, 'sine', 0.08);
-    } else if (soundType === 'double') {
-      tone(660, 0.1, 'square', 0.12);
-      setTimeout(function () { tone(660, 0.1, 'square', 0.12); }, 150);
-    }
+    if (userActivated) noteVibrate(fireVibrate());
+    if (soundType !== 'off') playLoud();
   }
 
   function setStatus(ok, text, kind) {
@@ -726,8 +953,95 @@
   }
 
   startBtn.addEventListener('click', function () {
+    userActivated = true;
     if (watching) stopWatch();
     else startWatch();
+  });
+
+  document.addEventListener('pointerdown', function () {
+    userActivated = true;
+    ensureAudio();
+  }, true);
+
+  var pocketEl = document.getElementById('pocket');
+  var pocketRing = document.getElementById('pocketRing');
+
+  function setRing(p) {
+    pocketRing.style.strokeDasharray = String(RING_LEN);
+    pocketRing.style.strokeDashoffset = String(RING_LEN * (1 - p));
+  }
+
+  function askWake() {
+    var note = document.getElementById('pocketNoWake');
+    if (!navigator.wakeLock || !navigator.wakeLock.request) {
+      if (note) note.hidden = false;
+      return;
+    }
+    navigator.wakeLock.request('screen').then(function (sentinel) {
+      wakeSentinel = sentinel;
+      if (note) note.hidden = true;
+    }).catch(function () {
+      if (note) note.hidden = false;
+    });
+  }
+
+  function enterPocket() {
+    pocketOn = true;
+    pocketEl.hidden = false;
+    setRing(0);
+    askWake();
+  }
+
+  function exitPocket() {
+    holding = false;
+    clearTimeout(holdTimer);
+    cancelAnimationFrame(holdRaf);
+    pocketOn = false;
+    pocketEl.hidden = true;
+    setRing(0);
+    if (wakeSentinel && wakeSentinel.release) {
+      var sentinel = wakeSentinel;
+      wakeSentinel = null;
+      sentinel.release().catch(function () {});
+    }
+  }
+
+  function tickHold() {
+    if (!holding) return;
+    var p = Math.min(1, (performance.now() - holdStart) / HOLD_MS);
+    setRing(p);
+    if (p >= 1) { exitPocket(); return; }
+    holdRaf = requestAnimationFrame(tickHold);
+  }
+
+  function startHold(e) {
+    if (!pocketOn) return;
+    if (e.cancelable) e.preventDefault();
+    holding = true;
+    holdStart = performance.now();
+    if (e.pointerId != null && pocketEl.setPointerCapture) {
+      try { pocketEl.setPointerCapture(e.pointerId); } catch (err) {}
+    }
+    clearTimeout(holdTimer);
+    holdTimer = setTimeout(function () { if (holding) exitPocket(); }, HOLD_MS);
+    tickHold();
+  }
+
+  function cancelHold() {
+    if (!holding) return;
+    holding = false;
+    clearTimeout(holdTimer);
+    cancelAnimationFrame(holdRaf);
+    setRing(0);
+  }
+
+  document.getElementById('pocketBtn').addEventListener('click', enterPocket);
+  pocketEl.addEventListener('pointerdown', startHold);
+  pocketEl.addEventListener('pointerup', cancelHold);
+  pocketEl.addEventListener('pointercancel', cancelHold);
+  pocketEl.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+  document.addEventListener('visibilitychange', function () {
+    if (pocketOn && document.visibilityState === 'visible') askWake();
   });
 })();
 </script>
