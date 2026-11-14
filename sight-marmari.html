@@ -28,24 +28,84 @@
 </header>
 <div class="overlay" id="overlay"></div>
 <main class="main">
-  <div class="hero-wrap"><img src="img/hk/sight-marmari.jpg" alt=""></div>
+  <div class="hero-wrap"><img src="img/hk/sight-marmari.jpg" alt="">
+      <div class="hero-title"><h1 data-i18n="title">Marmari</h1></div></div>
   <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back">← Bezienswaardigheden</a></p>
-  <h1 data-i18n="title">Marmari</h1>
-  <p class="lead" data-i18n="lead">Zandstrand en dorp aan de noordkust, tussen Tigaki en Mastichari. Paardrijden op het strand en rond het zoutmeer vertrekt hier in de buurt.</p>
-  <div class="badges"><span class="badge" data-i18n="b0">Gratis</span><span class="badge" data-i18n="b1">Noordkust</span></div>
+<p class="lead" data-i18n="lead">Zandstrand en dorp aan de noordkust, tussen Tigaki en Mastichari. Paardrijden op het strand en rond het zoutmeer vertrekt hier in de buurt.</p>
+  
   <div class="actions">
     <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
     <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
-    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Marmari%20Kos" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=Marmari%20Kos" target="_blank" rel="noopener">Apple Maps</a>
+    
   </div>
-  <p class="status" id="ttsStatus"></p>
+  
+      <div class="map-row">
+        <a href="https://www.google.com/maps/search/?api=1&query=Marmari%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+        <a href="https://maps.apple.com/?q=Marmari%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+      </div>
+      <p class="status" id="ttsStatus"></p>
   <div id="readText">
-    <article class="card"><h2 data-i18n="h0">Strand</h2><p data-i18n="p0">Het strand heeft een eigen pagina.</p></article>
+    <article class="card"><h2 data-i18n="hStory">Strand</h2><p data-i18n="p0">Het strand heeft een eigen pagina.</p></article>
     
   </div>
 </main>
 <footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
-<script>window.HK_DICT = {"nl": {"title": "Marmari", "lead": "Zandstrand en dorp aan de noordkust, tussen Tigaki en Mastichari. Paardrijden op het strand en rond het zoutmeer vertrekt hier in de buurt.", "back": "← Bezienswaardigheden", "h0": "Strand", "p0": "Het strand heeft een eigen pagina.", "b0": "Gratis", "b1": "Noordkust"}, "de": {"title": "Marmari", "lead": "Sandstrand und Dorf an der Nordküste, zwischen Tigaki und Mastichari. Ausritte am Strand und um den Salzsee starten hier in der Nähe.", "back": "← Sehenswürdigkeiten", "h0": "Strand", "p0": "Der Strand hat eine eigene Seite.", "b0": "Kostenlos", "b1": "Nordküste"}, "en": {"title": "Marmari", "lead": "Sandy beach and village on the north coast, between Tigaki and Mastichari. Horse riding on the beach and around the salt lake starts near here.", "back": "← Sights", "h0": "Beach", "p0": "The beach has its own page.", "b0": "Free", "b1": "North coast"}, "it": {"title": "Marmari", "lead": "Spiaggia di sabbia e villaggio sulla costa nord, tra Tigaki e Mastichari. Le passeggiate a cavallo sulla spiaggia e intorno al lago salato partono qui vicino.", "back": "← Attrazioni", "h0": "Spiaggia", "p0": "La spiaggia ha una pagina.", "b0": "Gratis", "b1": "Costa nord"}, "tr": {"title": "Marmari", "lead": "Tigaki ile Mastichari arasında kuzey kıyıda kumsal ve köy. Plajda ve tuz gölü çevresinde at binme buradan başlar.", "back": "← Gezilecek yerler", "h0": "Plaj", "p0": "Plajın sayfası var.", "b0": "Ücretsiz", "b1": "Kuzey kıyı"}, "es": {"title": "Marmari", "lead": "Playa de arena y pueblo en la costa norte, entre Tigaki y Mastichari. Los paseos a caballo por la playa y el lago salado salen cerca de aquí.", "back": "← Lugares de interés", "h0": "Playa", "p0": "La playa tiene página.", "b0": "Gratis", "b1": "Costa norte"}};</script>
+<script>window.HK_DICT = {
+    "nl": {
+      "title": "Marmari",
+      "lead": "Zandstrand en dorp aan de noordkust, tussen Tigaki en Mastichari. Paardrijden op het strand en rond het zoutmeer vertrekt hier in de buurt.",
+      "back": "← Bezienswaardigheden",
+      "p0": "Het strand heeft een eigen pagina.",
+      "hStory": "Het verhaal",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
+    },
+    "de": {
+      "title": "Marmari",
+      "lead": "Sandstrand und Dorf an der Nordküste, zwischen Tigaki und Mastichari. Ausritte am Strand und um den Salzsee starten hier in der Nähe.",
+      "back": "← Sehenswürdigkeiten",
+      "p0": "Der Strand hat eine eigene Seite.",
+      "hStory": "Die Geschichte",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
+    },
+    "en": {
+      "title": "Marmari",
+      "lead": "Sandy beach and village on the north coast, between Tigaki and Mastichari. Horse riding on the beach and around the salt lake starts near here.",
+      "back": "← Sights",
+      "p0": "The beach has its own page.",
+      "hStory": "The story",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
+    },
+    "it": {
+      "title": "Marmari",
+      "lead": "Spiaggia di sabbia e villaggio sulla costa nord, tra Tigaki e Mastichari. Le passeggiate a cavallo sulla spiaggia e intorno al lago salato partono qui vicino.",
+      "back": "← Attrazioni",
+      "p0": "La spiaggia ha una pagina.",
+      "hStory": "La storia",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
+    },
+    "tr": {
+      "title": "Marmari",
+      "lead": "Tigaki ile Mastichari arasında kuzey kıyıda kumsal ve köy. Plajda ve tuz gölü çevresinde at binme buradan başlar.",
+      "back": "← Gezilecek yerler",
+      "p0": "Plajın sayfası var.",
+      "hStory": "Hikaye",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
+    },
+    "es": {
+      "title": "Marmari",
+      "lead": "Playa de arena y pueblo en la costa norte, entre Tigaki y Mastichari. Los paseos a caballo por la playa y el lago salado salen cerca de aquí.",
+      "back": "← Lugares de interés",
+      "p0": "La playa tiene página.",
+      "hStory": "La historia",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
+    }
+  };</script>
 <script src="hello-kos-i18n.js"></script>
 <script src="hello-kos-places.js"></script>
 <script src="hello-kos-fav.js"></script>

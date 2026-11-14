@@ -40,20 +40,18 @@
     .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
     .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
     .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+
     .content { padding: 18px 16px 0; }
     h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
     .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+
     .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
     .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
     .btn-audio { background: var(--petrol); color: #fff; }
     .btn-audio.playing { background: var(--petrol-dark); }
     .btn-stop { background: #3A4545; color: #fff; display: none; }
     .btn-stop.show { display: flex; }
-    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
-    .btn-apple { background: #111; color: #fff; }
+
     .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
     .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
     .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
@@ -64,10 +62,7 @@
     .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
     .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
     .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
-    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-    .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
-    .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
-    .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
+
     .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
     .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
     .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
@@ -101,46 +96,35 @@
   <main class="main">
     <div class="hero-wrap">
       <img src="img/jwwb/593adc8aaa-kos-stad-winkels-agora-markt-high-4neznf.jpg" alt="Markthal" loading="eager">
-      <div class="hero-caption" data-i18n="heroCap">Markthal</div>
+      <div class="hero-title"><h1 data-i18n="title">Markthal</h1></div>
     </div>
 
     <div class="content">
-      <h1 data-i18n="title">Markthal</h1>
-      <p class="lead" data-i18n="lead">Italiaanse markthal aan Eleftherias-plein – vroeger echte markt, nu souvenirs, kruiden en lokale producten.</p>
+<p class="lead" data-i18n="lead">Italiaanse markthal aan Eleftherias-plein – vroeger echte markt, nu souvenirs, kruiden en lokale producten.</p>
 
-      <div class="badges">
-        <span class="badge" data-i18n="badgeFree">Gratis</span>
-        <span class="badge">Kos-stad</span>
-        <span class="badge">Eleftherias-plein</span>
-      </div>
+      
 
       <div class="actions">
         <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
         <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Municipal%20Market%20Markthal%20Eleftherias%20Square%20Kos" target="_blank" rel="noopener">📍 Google Maps</a>
-        <a class="btn btn-apple" href="https://maps.apple.com/?q=Municipal%20Market%20Markthal%20Eleftherias%20Square%20Kos" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      
+      <div class="map-row">
+        <a href="https://www.google.com/maps/search/?api=1&query=Municipal%20Market%20Markthal%20Eleftherias%20Square%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+        <a href="https://maps.apple.com/?q=Municipal%20Market%20Markthal%20Eleftherias%20Square%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
       </div>
       <p class="status" id="ttsStatus"></p>
 
       <div id="readText">
         <div class="card">
-          <h2 data-i18n="h2square">Aan Eleftherias-plein</h2>
+          <h2 data-i18n="hStory">Aan Eleftherias-plein</h2>
           <p data-i18n="p1">De markthal (Municipal Market / Mercato delle Erbe) ligt aan het grote Eleftherias-plein in het centrum. Gebouwd door de Italianen na de aardbeving van 1933, in Italiaanse stijl met brede bogen.</p>
         </div>
 
-        <div class="facts">
-          <div class="fact">
-            <span class="n">1933+</span>
-            <span class="l" data-i18n="factIt">Italiaans</span>
-          </div>
-          <div class="fact">
-            <span class="n" data-i18n="factFree">Gratis</span>
-            <span class="l" data-i18n="factWalk">binnenlopen</span>
-          </div>
-        </div>
+        
 
         <div class="card">
-          <h2 data-i18n="h2nomarket">Geen grote verse markt</h2>
+          <h2 data-i18n="hSee">Geen grote verse markt</h2>
           <p data-i18n="p2">Kos-stad heeft geen grote openluchtmarkt met veel kraampjes en luidruchtige handelaren. De echte groente-/fruitmarkt telt maar een handvol kraampjes (vaak meloenen en tomaten). De markthal zelf was jaren een echte markthal; nu is het vooral een toeristenwinkel.</p>
         </div>
 
@@ -167,9 +151,9 @@
         </div>
 
         <div class="card">
-          <h2 data-i18n="h2visit">Bezoeken</h2>
+          <h2 data-i18n="hKnow">Bezoeken</h2>
           <p data-i18n="p5">Eleftherias-plein, Kos-stad. Open tijdens winkeltijden.</p>
-          <div class="tip" data-i18n="tip">Tip: handig voor een snelle souvenir of een potje honing. Verwacht hier geen grote verse markt met veel kraampjes.</div>
+          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: handig voor een snelle souvenir of een potje honing. Verwacht hier geen grote verse markt met veel kraampjes.</p></div>
         </div>
       </div>
     </div>
@@ -182,126 +166,132 @@
 
 <script>
 (function(){
-  var I18N = {
-    nl: {
-      title: "Markthal",
-      lead: "Italiaanse markthal aan Eleftherias-plein – vroeger echte markt, nu souvenirs, kruiden en lokale producten.",
-      heroCap: "Markthal",
-      badgeFree: "Gratis",
-      btnPlay: "🔊 Voorlezen",
-      h2square: "Aan Eleftherias-plein",
-      p1: "De markthal (Municipal Market / Mercato delle Erbe) ligt aan het grote Eleftherias-plein in het centrum. Gebouwd door de Italianen na de aardbeving van 1933, in Italiaanse stijl met brede bogen.",
-      factIt: "Italiaans", factFree: "Gratis", factWalk: "binnenlopen",
-      h2nomarket: "Geen grote verse markt",
-      p2: "Kos-stad heeft geen grote openluchtmarkt met veel kraampjes en luidruchtige handelaren. De echte groente-/fruitmarkt telt maar een handvol kraampjes (vaak meloenen en tomaten). De markthal zelf was jaren een echte markthal; nu is het vooral een toeristenwinkel.",
-      cap1: "Binnen: kruiden, honing, souvenirs",
-      h2buy: "Wat kun je er kopen?",
-      p3: "Lokale producten zoals honing, olijfolie, kruiden, zoetigheden en souvenirs. Compact en druk, met alles dicht op elkaar.",
-      p4: "Lokalen kopen hier meestal geen dagelijkse groente of fruit meer – dat gebeurt elders.",
-      g1: "Hal", g2: "Op het plein",
-      h2visit: "Bezoeken",
-      p5: "Eleftherias-plein, Kos-stad. Open tijdens winkeltijden.",
-      tip: "Tip: handig voor een snelle souvenir of een potje honing. Verwacht hier geen grote verse markt met veel kraampjes."
+  var I18N = window.HK_DICT = {
+    "nl": {
+      "title": "Markthal",
+      "lead": "Italiaanse markthal aan Eleftherias-plein – vroeger echte markt, nu souvenirs, kruiden en lokale producten.",
+      "btnPlay": "Voorlezen",
+      "p1": "De markthal (Municipal Market / Mercato delle Erbe) ligt aan het grote Eleftherias-plein in het centrum. Gebouwd door de Italianen na de aardbeving van 1933, in Italiaanse stijl met brede bogen.",
+      "p2": "Kos-stad heeft geen grote openluchtmarkt met veel kraampjes en luidruchtige handelaren. De echte groente-/fruitmarkt telt maar een handvol kraampjes (vaak meloenen en tomaten). De markthal zelf was jaren een echte markthal; nu is het vooral een toeristenwinkel.",
+      "cap1": "Binnen: kruiden, honing, souvenirs",
+      "h2buy": "Wat kun je er kopen?",
+      "p3": "Lokale producten zoals honing, olijfolie, kruiden, zoetigheden en souvenirs. Compact en druk, met alles dicht op elkaar.",
+      "p4": "Lokalen kopen hier meestal geen dagelijkse groente of fruit meer – dat gebeurt elders.",
+      "g1": "Hal",
+      "g2": "Op het plein",
+      "p5": "Eleftherias-plein, Kos-stad. Open tijdens winkeltijden.",
+      "tip": "handig voor een snelle souvenir of een potje honing. Verwacht hier geen grote verse markt met veel kraampjes.",
+      "hStory": "Het verhaal",
+      "hSee": "Wat je ziet",
+      "hKnow": "Goed om te weten",
+      "tipTitle": "Tip van de gids",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    en: {
-      title: "Market Hall",
-      lead: "Italian market hall on Eleftherias Square – once a real market, now souvenirs, herbs and local products.",
-      heroCap: "Market Hall",
-      badgeFree: "Free",
-      btnPlay: "🔊 Read aloud",
-      h2square: "On Eleftherias Square",
-      p1: "The market hall (Municipal Market / Mercato delle Erbe) is located on the large Eleftherias Square in the centre. Built by the Italians after the 1933 earthquake, in Italian style with wide arches.",
-      factIt: "Italian", factFree: "Free", factWalk: "walk in",
-      h2nomarket: "No big fresh market",
-      p2: "Kos Town has no large open-air market with many stalls and noisy traders. The real vegetable/fruit market has only a handful of stalls (often melons and tomatoes). The market hall itself was a real market for years; now it is mainly a tourist shop.",
-      cap1: "Inside: herbs, honey, souvenirs",
-      h2buy: "What can you buy?",
-      p3: "Local products such as honey, olive oil, herbs, sweets and souvenirs. Compact and busy, with everything close together.",
-      p4: "Locals usually no longer buy daily vegetables or fruit here – that happens elsewhere.",
-      g1: "Hall", g2: "On the square",
-      h2visit: "Visiting",
-      p5: "Eleftherias Square, Kos Town. Open during shop hours.",
-      tip: "Tip: handy for a quick souvenir or a jar of honey. Do not expect a large fresh market with many stalls here."
+    "en": {
+      "title": "Market Hall",
+      "lead": "Italian market hall on Eleftherias Square – once a real market, now souvenirs, herbs and local products.",
+      "btnPlay": "Read aloud",
+      "p1": "The market hall (Municipal Market / Mercato delle Erbe) is located on the large Eleftherias Square in the centre. Built by the Italians after the 1933 earthquake, in Italian style with wide arches.",
+      "p2": "Kos Town has no large open-air market with many stalls and noisy traders. The real vegetable/fruit market has only a handful of stalls (often melons and tomatoes). The market hall itself was a real market for years; now it is mainly a tourist shop.",
+      "cap1": "Inside: herbs, honey, souvenirs",
+      "h2buy": "What can you buy?",
+      "p3": "Local products such as honey, olive oil, herbs, sweets and souvenirs. Compact and busy, with everything close together.",
+      "p4": "Locals usually no longer buy daily vegetables or fruit here – that happens elsewhere.",
+      "g1": "Hall",
+      "g2": "On the square",
+      "p5": "Eleftherias Square, Kos Town. Open during shop hours.",
+      "tip": "handy for a quick souvenir or a jar of honey. Do not expect a large fresh market with many stalls here.",
+      "hStory": "The story",
+      "hSee": "What you see",
+      "hKnow": "Good to know",
+      "tipTitle": "Guide’s tip",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    de: {
-      title: "Markthalle",
-      lead: "Italienische Markthalle am Eleftherias-Platz – früher echter Markt, jetzt Souvenirs, Kräuter und lokale Produkte.",
-      heroCap: "Markthalle",
-      badgeFree: "Kostenlos",
-      btnPlay: "🔊 Vorlesen",
-      h2square: "Am Eleftherias-Platz",
-      p1: "Die Markthalle (Municipal Market / Mercato delle Erbe) liegt am großen Eleftherias-Platz im Zentrum. Nach dem Erdbeben von 1933 von den Italienern im italienischen Stil mit breiten Bögen erbaut.",
-      factIt: "Italienisch", factFree: "Kostenlos", factWalk: "hineinlaufen",
-      h2nomarket: "Kein großer Frischmarkt",
-      p2: "Kos-Stadt hat keinen großen Open-Air-Markt mit vielen Ständen und lauten Händlern. Der echte Obst-/Gemüsemarkt hat nur eine Handvoll Stände (oft Melonen und Tomaten). Die Markthalle selbst war jahrelang ein echter Markt; jetzt ist sie hauptsächlich ein Touristenladen.",
-      cap1: "Innen: Kräuter, Honig, Souvenirs",
-      h2buy: "Was kann man kaufen?",
-      p3: "Lokale Produkte wie Honig, Olivenöl, Kräuter, Süßigkeiten und Souvenirs. Kompakt und voll, alles dicht beieinander.",
-      p4: "Einheimische kaufen hier meist kein tägliches Gemüse oder Obst mehr – das geschieht woanders.",
-      g1: "Halle", g2: "Auf dem Platz",
-      h2visit: "Besuchen",
-      p5: "Eleftherias-Platz, Kos-Stadt. Während der Ladenöffnungszeiten geöffnet.",
-      tip: "Tipp: praktisch für ein schnelles Souvenir oder ein Glas Honig. Erwarte hier keinen großen Frischmarkt mit vielen Ständen."
+    "de": {
+      "title": "Markthalle",
+      "lead": "Italienische Markthalle am Eleftherias-Platz – früher echter Markt, jetzt Souvenirs, Kräuter und lokale Produkte.",
+      "btnPlay": "Vorlesen",
+      "p1": "Die Markthalle (Municipal Market / Mercato delle Erbe) liegt am großen Eleftherias-Platz im Zentrum. Nach dem Erdbeben von 1933 von den Italienern im italienischen Stil mit breiten Bögen erbaut.",
+      "p2": "Kos-Stadt hat keinen großen Open-Air-Markt mit vielen Ständen und lauten Händlern. Der echte Obst-/Gemüsemarkt hat nur eine Handvoll Stände (oft Melonen und Tomaten). Die Markthalle selbst war jahrelang ein echter Markt; jetzt ist sie hauptsächlich ein Touristenladen.",
+      "cap1": "Innen: Kräuter, Honig, Souvenirs",
+      "h2buy": "Was kann man kaufen?",
+      "p3": "Lokale Produkte wie Honig, Olivenöl, Kräuter, Süßigkeiten und Souvenirs. Kompakt und voll, alles dicht beieinander.",
+      "p4": "Einheimische kaufen hier meist kein tägliches Gemüse oder Obst mehr – das geschieht woanders.",
+      "g1": "Halle",
+      "g2": "Auf dem Platz",
+      "p5": "Eleftherias-Platz, Kos-Stadt. Während der Ladenöffnungszeiten geöffnet.",
+      "tip": "praktisch für ein schnelles Souvenir oder ein Glas Honig. Erwarte hier keinen großen Frischmarkt mit vielen Ständen.",
+      "hStory": "Die Geschichte",
+      "hSee": "Was du siehst",
+      "hKnow": "Gut zu wissen",
+      "tipTitle": "Tipp des Guides",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    it: {
-      title: "Mercato Coperto",
-      lead: "Mercato coperto italiano in Piazza Eleftherias – un tempo vero mercato, ora souvenir, erbe e prodotti locali.",
-      heroCap: "Mercato Coperto",
-      badgeFree: "Gratis",
-      btnPlay: "🔊 Leggi ad alta voce",
-      h2square: "In Piazza Eleftherias",
-      p1: "Il mercato coperto (Municipal Market / Mercato delle Erbe) si trova nella grande Piazza Eleftherias nel centro. Costruito dagli italiani dopo il terremoto del 1933, in stile italiano con ampi archi.",
-      factIt: "Italiano", factFree: "Gratis", factWalk: "entrare",
-      h2nomarket: "Nessun grande mercato fresco",
-      p2: "Kos città non ha un grande mercato all’aperto con tanti banchi e commercianti rumorosi. Il vero mercato di frutta/verdura ha solo una manciata di banchi (spesso meloni e pomodori). Il mercato coperto stesso è stato per anni un vero mercato; ora è soprattutto un negozio per turisti.",
-      cap1: "Interno: erbe, miele, souvenir",
-      h2buy: "Cosa si può comprare?",
-      p3: "Prodotti locali come miele, olio d’oliva, erbe, dolci e souvenir. Compatto e affollato, tutto stretto insieme.",
-      p4: "I locali di solito non comprano più qui verdura o frutta quotidiana – succede altrove.",
-      g1: "Sala", g2: "Sulla piazza",
-      h2visit: "Visitare",
-      p5: "Piazza Eleftherias, Kos città. Aperto negli orari dei negozi.",
-      tip: "Consiglio: utile per un souvenir veloce o un vasetto di miele. Non aspettarti qui un grande mercato fresco con tanti banchi."
+    "it": {
+      "title": "Mercato Coperto",
+      "lead": "Mercato coperto italiano in Piazza Eleftherias – un tempo vero mercato, ora souvenir, erbe e prodotti locali.",
+      "btnPlay": "Leggi ad alta voce",
+      "p1": "Il mercato coperto (Municipal Market / Mercato delle Erbe) si trova nella grande Piazza Eleftherias nel centro. Costruito dagli italiani dopo il terremoto del 1933, in stile italiano con ampi archi.",
+      "p2": "Kos città non ha un grande mercato all’aperto con tanti banchi e commercianti rumorosi. Il vero mercato di frutta/verdura ha solo una manciata di banchi (spesso meloni e pomodori). Il mercato coperto stesso è stato per anni un vero mercato; ora è soprattutto un negozio per turisti.",
+      "cap1": "Interno: erbe, miele, souvenir",
+      "h2buy": "Cosa si può comprare?",
+      "p3": "Prodotti locali come miele, olio d’oliva, erbe, dolci e souvenir. Compatto e affollato, tutto stretto insieme.",
+      "p4": "I locali di solito non comprano più qui verdura o frutta quotidiana – succede altrove.",
+      "g1": "Sala",
+      "g2": "Sulla piazza",
+      "p5": "Piazza Eleftherias, Kos città. Aperto negli orari dei negozi.",
+      "tip": "utile per un souvenir veloce o un vasetto di miele. Non aspettarti qui un grande mercato fresco con tanti banchi.",
+      "hStory": "La storia",
+      "hSee": "Cosa vedi",
+      "hKnow": "Buono a sapersi",
+      "tipTitle": "Consiglio della guida",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    tr: {
-      title: "Pazar Salonu",
-      lead: "Eleftherias Meydanı’ndaki İtalyan pazar salonu – eskiden gerçek pazar, şimdi hediyelik, baharat ve yerel ürünler.",
-      heroCap: "Pazar Salonu",
-      badgeFree: "Ücretsiz",
-      btnPlay: "🔊 Sesli oku",
-      h2square: "Eleftherias Meydanı’nda",
-      p1: "Pazar salonu (Municipal Market / Mercato delle Erbe) merkezdeki büyük Eleftherias Meydanı’nda yer alır. 1933 depreminden sonra İtalyanlar tarafından geniş kemerli İtalyan tarzında inşa edildi.",
-      factIt: "İtalyan", factFree: "Ücretsiz", factWalk: "içeri gir",
-      h2nomarket: "Büyük taze pazar yok",
-      p2: "Kos şehrinde çok tezgâhlı ve gürültülü satıcılı büyük açık hava pazarı yok. Gerçek sebze/meyve pazarı sadece bir avuç tezgâhtan oluşur (çoğunlukla karpuz ve domates). Pazar salonu kendisi yıllarca gerçek pazardı; şimdi daha çok turist dükkânı.",
-      cap1: "İçeride: baharat, bal, hediyelik",
-      h2buy: "Ne alabilirsin?",
-      p3: "Bal, zeytinyağı, baharat, tatlılar ve hediyelik gibi yerel ürünler. Kompakt ve kalabalık, her şey birbirine yakın.",
-      p4: "Yerliler genellikle günlük sebze veya meyveyi artık burada almıyor – başka yerde oluyor.",
-      g1: "Salon", g2: "Meydanda",
-      h2visit: "Ziyaret",
-      p5: "Eleftherias Meydanı, Kos şehri. Mağaza saatlerinde açık.",
-      tip: "İpucu: hızlı bir hediyelik veya bir kavanoz bal için pratik. Burada çok tezgâhlı büyük taze pazar bekleme."
+    "tr": {
+      "title": "Pazar Salonu",
+      "lead": "Eleftherias Meydanı’ndaki İtalyan pazar salonu – eskiden gerçek pazar, şimdi hediyelik, baharat ve yerel ürünler.",
+      "btnPlay": "Sesli oku",
+      "p1": "Pazar salonu (Municipal Market / Mercato delle Erbe) merkezdeki büyük Eleftherias Meydanı’nda yer alır. 1933 depreminden sonra İtalyanlar tarafından geniş kemerli İtalyan tarzında inşa edildi.",
+      "p2": "Kos şehrinde çok tezgâhlı ve gürültülü satıcılı büyük açık hava pazarı yok. Gerçek sebze/meyve pazarı sadece bir avuç tezgâhtan oluşur (çoğunlukla karpuz ve domates). Pazar salonu kendisi yıllarca gerçek pazardı; şimdi daha çok turist dükkânı.",
+      "cap1": "İçeride: baharat, bal, hediyelik",
+      "h2buy": "Ne alabilirsin?",
+      "p3": "Bal, zeytinyağı, baharat, tatlılar ve hediyelik gibi yerel ürünler. Kompakt ve kalabalık, her şey birbirine yakın.",
+      "p4": "Yerliler genellikle günlük sebze veya meyveyi artık burada almıyor – başka yerde oluyor.",
+      "g1": "Salon",
+      "g2": "Meydanda",
+      "p5": "Eleftherias Meydanı, Kos şehri. Mağaza saatlerinde açık.",
+      "tip": "hızlı bir hediyelik veya bir kavanoz bal için pratik. Burada çok tezgâhlı büyük taze pazar bekleme.",
+      "hStory": "Hikaye",
+      "hSee": "Ne görürsün",
+      "hKnow": "Bilmekte fayda var",
+      "tipTitle": "Rehberin ipucu",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    es: {
-      title: "Mercado Cubierto",
-      lead: "Mercado cubierto italiano en la Plaza Eleftherias – antes mercado real, ahora souvenirs, hierbas y productos locales.",
-      heroCap: "Mercado Cubierto",
-      badgeFree: "Gratis",
-      btnPlay: "🔊 Leer en voz alta",
-      h2square: "En la Plaza Eleftherias",
-      p1: "El mercado cubierto (Municipal Market / Mercato delle Erbe) está en la gran Plaza Eleftherias del centro. Construido por los italianos tras el terremoto de 1933, en estilo italiano con amplios arcos.",
-      factIt: "Italiano", factFree: "Gratis", factWalk: "entrar",
-      h2nomarket: "Sin gran mercado fresco",
-      p2: "Kos ciudad no tiene un gran mercado al aire libre con muchos puestos y vendedores ruidosos. El verdadero mercado de frutas/verduras tiene solo un puñado de puestos (a menudo melones y tomates). El mercado cubierto fue durante años un mercado real; ahora es sobre todo una tienda turística.",
-      cap1: "Interior: hierbas, miel, souvenirs",
-      h2buy: "¿Qué se puede comprar?",
-      p3: "Productos locales como miel, aceite de oliva, hierbas, dulces y souvenirs. Compacto y concurrido, todo junto.",
-      p4: "Los locales normalmente ya no compran aquí verdura o fruta diaria – eso ocurre en otro sitio.",
-      g1: "Sala", g2: "En la plaza",
-      h2visit: "Visitar",
-      p5: "Plaza Eleftherias, Kos ciudad. Abierto en horario de tiendas.",
-      tip: "Consejo: práctico para un souvenir rápido o un tarro de miel. No esperes aquí un gran mercado fresco con muchos puestos."
+    "es": {
+      "title": "Mercado Cubierto",
+      "lead": "Mercado cubierto italiano en la Plaza Eleftherias – antes mercado real, ahora souvenirs, hierbas y productos locales.",
+      "btnPlay": "Leer en voz alta",
+      "p1": "El mercado cubierto (Municipal Market / Mercato delle Erbe) está en la gran Plaza Eleftherias del centro. Construido por los italianos tras el terremoto de 1933, en estilo italiano con amplios arcos.",
+      "p2": "Kos ciudad no tiene un gran mercado al aire libre con muchos puestos y vendedores ruidosos. El verdadero mercado de frutas/verduras tiene solo un puñado de puestos (a menudo melones y tomates). El mercado cubierto fue durante años un mercado real; ahora es sobre todo una tienda turística.",
+      "cap1": "Interior: hierbas, miel, souvenirs",
+      "h2buy": "¿Qué se puede comprar?",
+      "p3": "Productos locales como miel, aceite de oliva, hierbas, dulces y souvenirs. Compacto y concurrido, todo junto.",
+      "p4": "Los locales normalmente ya no compran aquí verdura o fruta diaria – eso ocurre en otro sitio.",
+      "g1": "Sala",
+      "g2": "En la plaza",
+      "p5": "Plaza Eleftherias, Kos ciudad. Abierto en horario de tiendas.",
+      "tip": "práctico para un souvenir rápido o un tarro de miel. No esperes aquí un gran mercado fresco con muchos puestos.",
+      "hStory": "La historia",
+      "hSee": "Qué ves",
+      "hKnow": "Bueno saberlo",
+      "tipTitle": "Consejo del guía",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     }
   };
 

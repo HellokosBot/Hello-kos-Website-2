@@ -192,5 +192,24 @@
     }
   }
 
+  var SPEAKER = '<svg class="spk" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M3 10v4h4l5 5V5L7 10H3zm11.5 2a3.5 3.5 0 0 0-2-3.15v6.3a3.5 3.5 0 0 0 2-3.15zM14 4.07v2.02a6 6 0 0 1 0 11.82v2.02a8 8 0 0 0 0-15.86z"/></svg>';
+  function ensureSpeaker(btn) {
+    if (!btn || btn.querySelector(".spk")) return;
+    var key = btn.getAttribute("data-i18n");
+    var label = (btn.textContent || "").replace(/^🔊\s*/, "").trim();
+    if (key) {
+      var span = document.createElement("span");
+      span.setAttribute("data-i18n", key);
+      span.textContent = label;
+      btn.removeAttribute("data-i18n");
+      btn.textContent = "";
+      btn.insertAdjacentHTML("afterbegin", SPEAKER);
+      btn.appendChild(span);
+    } else {
+      btn.insertAdjacentHTML("afterbegin", SPEAKER);
+    }
+  }
+  ensureSpeaker(document.getElementById("btnPlay"));
+
   window.HK_I18N = { setLang: setLang, getLang: getLang, apply: apply, speak: speak, VOICE: VOICE };
 })();

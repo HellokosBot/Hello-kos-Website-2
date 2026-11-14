@@ -40,20 +40,18 @@
     .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
     .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
     .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+
     .content { padding: 18px 16px 0; }
     h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
     .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+
     .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
     .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
     .btn-audio { background: var(--petrol); color: #fff; }
     .btn-audio.playing { background: var(--petrol-dark); }
     .btn-stop { background: #3A4545; color: #fff; display: none; }
     .btn-stop.show { display: flex; }
-    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
-    .btn-apple { background: #111; color: #fff; }
+
     .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
     .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
     .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
@@ -61,10 +59,7 @@
     .card p:last-child { margin-bottom: 0; }
     .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
     .tip strong { color: var(--gold); }
-    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-    .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
-    .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
-    .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
+
     .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
     .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
     .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
@@ -98,46 +93,35 @@
   <main class="main">
     <div class="hero-wrap">
       <img src="img/jwwb/7c0e0ff4d1-caption-29-standard.jpg" alt="Odeon" loading="eager">
-      <div class="hero-caption" data-i18n="heroCap">Odeon</div>
+      <div class="hero-title"><h1 data-i18n="title">Odeon</h1></div>
     </div>
 
     <div class="content">
-      <h1 data-i18n="title">Odeon</h1>
-      <p class="lead" data-i18n="lead">Romeins overdekt theater (± 200 n.Chr.) voor ± 750 toeschouwers – marmer voor de elite, nog steeds sterke akoestiek.</p>
+<p class="lead" data-i18n="lead">Romeins overdekt theater (± 200 n.Chr.) voor ± 750 toeschouwers – marmer voor de elite, nog steeds sterke akoestiek.</p>
 
-      <div class="badges">
-        <span class="badge" data-i18n="badgeFree">Gratis</span>
-        <span class="badge" data-i18n="badgeRoman">Romeins</span>
-        <span class="badge" data-i18n="badgeTown">Kos-stad</span>
-      </div>
+      
 
       <div class="actions">
         <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
         <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Roman%20Odeon%20Kos%20Town" target="_blank" rel="noopener">📍 Google Maps</a>
-        <a class="btn btn-apple" href="https://maps.apple.com/?q=Roman%20Odeon%20Kos%20Town" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      
+      <div class="map-row">
+        <a href="https://www.google.com/maps/search/?api=1&query=Roman%20Odeon%20Kos%20Town" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+        <a href="https://maps.apple.com/?q=Roman%20Odeon%20Kos%20Town" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
       </div>
       <p class="status" id="ttsStatus"></p>
 
       <div id="readText">
         <div class="card">
-          <h2 data-i18n="h2built">Gebouwd ± 200 n.Chr.</h2>
+          <h2 data-i18n="hStory">Gebouwd ± 200 n.Chr.</h2>
           <p data-i18n="p1">Het Odeon dateert uit de Romeinse periode. Kos was welvarend dankzij het Asklepios-heiligdom. Het verving waarschijnlijk een ouder bouleuterion (raadzaal). Na de aardbeving van 142 n.Chr. financierde keizer Antoninus Pius het herstel.</p>
         </div>
 
-        <div class="facts">
-          <div class="fact">
-            <span class="n" data-i18n="fact750">± 750</span>
-            <span class="l" data-i18n="factAudience">toeschouwers</span>
-          </div>
-          <div class="fact">
-            <span class="n" data-i18n="factRows">14 rijen</span>
-            <span class="l" data-i18n="factMarble">9 marmer (elite)</span>
-          </div>
-        </div>
+        
 
         <div class="card">
-          <h2 data-i18n="h2covered">Overdekt en intiem</h2>
+          <h2 data-i18n="hSee">Overdekt en intiem</h2>
           <p data-i18n="p2">Compact en overdekt – ideaal voor muziek, poëzie en zang het hele jaar. Ongeveer 12 m hoog. Cavea in halve cirkel: eerste negen rijen wit marmer (rijk en elite), hogere rijen eenvoudiger steen.</p>
         </div>
 
@@ -167,9 +151,9 @@
         </div>
 
         <div class="card">
-          <h2 data-i18n="h2visit">Bezoeken</h2>
+          <h2 data-i18n="hKnow">Bezoeken</h2>
           <p data-i18n="p5">In Kos-stad.</p>
-          <div class="tip" data-i18n="tip">Tip: fluister of klap in je handen vanuit de cavea – de akoestiek hoor je meteen.</div>
+          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: fluister of klap in je handen vanuit de cavea – de akoestiek hoor je meteen.</p></div>
         </div>
       </div>
     </div>
@@ -182,120 +166,138 @@
 
 <script>
 (function(){
-  var I18N = {
-    nl: {
-      title: "Odeon",
-      lead: "Romeins overdekt theater (± 200 n.Chr.) voor ± 750 toeschouwers – marmer voor de elite, nog steeds sterke akoestiek.",
-      heroCap: "Odeon",
-      badgeFree: "Gratis", badgeRoman: "Romeins", badgeTown: "Kos-stad",
-      btnPlay: "🔊 Voorlezen",
-      h2built: "Gebouwd ± 200 n.Chr.",
-      p1: "Het Odeon dateert uit de Romeinse periode. Kos was welvarend dankzij het Asklepios-heiligdom. Het verving waarschijnlijk een ouder bouleuterion (raadzaal). Na de aardbeving van 142 n.Chr. financierde keizer Antoninus Pius het herstel.",
-      fact750: "± 750", factAudience: "toeschouwers", factRows: "14 rijen", factMarble: "9 marmer (elite)",
-      h2covered: "Overdekt en intiem",
-      p2: "Compact en overdekt – ideaal voor muziek, poëzie en zang het hele jaar. Ongeveer 12 m hoog. Cavea in halve cirkel: eerste negen rijen wit marmer (rijk en elite), hogere rijen eenvoudiger steen.",
-      h2acoustics: "Opgraving en akoestiek",
-      p3: "Opgegraven vanaf 1929 door Luciano Laurenzi (Italiaanse periode), later gerestaureerd (1994–1999). Je kunt door de gangen lopen; de akoestiek is nog steeds opvallend goed.",
-      p4: "Toegang gratis; check lokaal de tijden.",
-      g1: "Odeon", g2: "Odeon", g3: "Odeon", g4: "Odeon",
-      h2visit: "Bezoeken",
-      p5: "In Kos-stad.",
-      tip: "Tip: fluister of klap in je handen vanuit de cavea – de akoestiek hoor je meteen."
+  var I18N = window.HK_DICT = {
+    "nl": {
+      "title": "Odeon",
+      "lead": "Romeins overdekt theater (± 200 n.Chr.) voor ± 750 toeschouwers – marmer voor de elite, nog steeds sterke akoestiek.",
+      "btnPlay": "Voorlezen",
+      "p1": "Het Odeon dateert uit de Romeinse periode. Kos was welvarend dankzij het Asklepios-heiligdom. Het verving waarschijnlijk een ouder bouleuterion (raadzaal). Na de aardbeving van 142 n.Chr. financierde keizer Antoninus Pius het herstel.",
+      "p2": "Compact en overdekt – ideaal voor muziek, poëzie en zang het hele jaar. Ongeveer 12 m hoog. Cavea in halve cirkel: eerste negen rijen wit marmer (rijk en elite), hogere rijen eenvoudiger steen.",
+      "h2acoustics": "Opgraving en akoestiek",
+      "p3": "Opgegraven vanaf 1929 door Luciano Laurenzi (Italiaanse periode), later gerestaureerd (1994–1999). Je kunt door de gangen lopen; de akoestiek is nog steeds opvallend goed.",
+      "p4": "Toegang gratis; check lokaal de tijden.",
+      "g1": "Odeon",
+      "g2": "Odeon",
+      "g3": "Odeon",
+      "g4": "Odeon",
+      "p5": "In Kos-stad.",
+      "tip": "fluister of klap in je handen vanuit de cavea – de akoestiek hoor je meteen.",
+      "hStory": "Het verhaal",
+      "hSee": "Wat je ziet",
+      "hKnow": "Goed om te weten",
+      "tipTitle": "Tip van de gids",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    en: {
-      title: "Odeon",
-      lead: "Roman covered theatre (± 200 AD) for ± 750 spectators – marble for the elite, still strong acoustics.",
-      heroCap: "Odeon",
-      badgeFree: "Free", badgeRoman: "Roman", badgeTown: "Kos Town",
-      btnPlay: "🔊 Read aloud",
-      h2built: "Built ± 200 AD",
-      p1: "The Odeon dates from the Roman period. Kos was prosperous thanks to the Asklepios sanctuary. It probably replaced an older bouleuterion (council hall). After the earthquake of 142 AD, Emperor Antoninus Pius financed the restoration.",
-      fact750: "± 750", factAudience: "spectators", factRows: "14 rows", factMarble: "9 marble (elite)",
-      h2covered: "Covered and intimate",
-      p2: "Compact and covered – ideal for music, poetry and singing all year round. About 12 m high. Cavea in a semicircle: first nine rows white marble (rich and elite), higher rows simpler stone.",
-      h2acoustics: "Excavation and acoustics",
-      p3: "Excavated from 1929 by Luciano Laurenzi (Italian period), later restored (1994–1999). You can walk through the corridors; the acoustics are still remarkably good.",
-      p4: "Entry free; check locally for times.",
-      g1: "Odeon", g2: "Odeon", g3: "Odeon", g4: "Odeon",
-      h2visit: "Visiting",
-      p5: "In Kos Town.",
-      tip: "Tip: whisper or clap your hands from the cavea – you hear the acoustics immediately."
+    "en": {
+      "title": "Odeon",
+      "lead": "Roman covered theatre (± 200 AD) for ± 750 spectators – marble for the elite, still strong acoustics.",
+      "btnPlay": "Read aloud",
+      "p1": "The Odeon dates from the Roman period. Kos was prosperous thanks to the Asklepios sanctuary. It probably replaced an older bouleuterion (council hall). After the earthquake of 142 AD, Emperor Antoninus Pius financed the restoration.",
+      "p2": "Compact and covered – ideal for music, poetry and singing all year round. About 12 m high. Cavea in a semicircle: first nine rows white marble (rich and elite), higher rows simpler stone.",
+      "h2acoustics": "Excavation and acoustics",
+      "p3": "Excavated from 1929 by Luciano Laurenzi (Italian period), later restored (1994–1999). You can walk through the corridors; the acoustics are still remarkably good.",
+      "p4": "Entry free; check locally for times.",
+      "g1": "Odeon",
+      "g2": "Odeon",
+      "g3": "Odeon",
+      "g4": "Odeon",
+      "p5": "In Kos Town.",
+      "tip": "whisper or clap your hands from the cavea – you hear the acoustics immediately.",
+      "hStory": "The story",
+      "hSee": "What you see",
+      "hKnow": "Good to know",
+      "tipTitle": "Guide’s tip",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    de: {
-      title: "Odeon",
-      lead: "Römisches überdachtes Theater (± 200 n. Chr.) für ± 750 Zuschauer – Marmor für die Elite, noch immer starke Akustik.",
-      heroCap: "Odeon",
-      badgeFree: "Kostenlos", badgeRoman: "Römisch", badgeTown: "Kos-Stadt",
-      btnPlay: "🔊 Vorlesen",
-      h2built: "Gebaut ± 200 n. Chr.",
-      p1: "Das Odeon stammt aus der römischen Zeit. Kos war dank des Asklepios-Heiligtums wohlhabend. Es ersetzte wahrscheinlich ein älteres Bouleuterion (Rathaus). Nach dem Erdbeben von 142 n. Chr. finanzierte Kaiser Antoninus Pius die Wiederherstellung.",
-      fact750: "± 750", factAudience: "Zuschauer", factRows: "14 Reihen", factMarble: "9 Marmor (Elite)",
-      h2covered: "Überdacht und intim",
-      p2: "Kompakt und überdacht – ideal für Musik, Poesie und Gesang das ganze Jahr. Etwa 12 m hoch. Cavea im Halbkreis: erste neun Reihen weißer Marmor (reich und Elite), höhere Reihen einfacherer Stein.",
-      h2acoustics: "Ausgrabung und Akustik",
-      p3: "Ab 1929 von Luciano Laurenzi (italienische Periode) ausgegraben, später restauriert (1994–1999). Du kannst durch die Gänge gehen; die Akustik ist immer noch bemerkenswert gut.",
-      p4: "Eintritt kostenlos; Zeiten lokal prüfen.",
-      g1: "Odeon", g2: "Odeon", g3: "Odeon", g4: "Odeon",
-      h2visit: "Besuchen",
-      p5: "In Kos-Stadt.",
-      tip: "Tipp: flüstere oder klatsche aus der Cavea – die Akustik hörst du sofort."
+    "de": {
+      "title": "Odeon",
+      "lead": "Römisches überdachtes Theater (± 200 n. Chr.) für ± 750 Zuschauer – Marmor für die Elite, noch immer starke Akustik.",
+      "btnPlay": "Vorlesen",
+      "p1": "Das Odeon stammt aus der römischen Zeit. Kos war dank des Asklepios-Heiligtums wohlhabend. Es ersetzte wahrscheinlich ein älteres Bouleuterion (Rathaus). Nach dem Erdbeben von 142 n. Chr. finanzierte Kaiser Antoninus Pius die Wiederherstellung.",
+      "p2": "Kompakt und überdacht – ideal für Musik, Poesie und Gesang das ganze Jahr. Etwa 12 m hoch. Cavea im Halbkreis: erste neun Reihen weißer Marmor (reich und Elite), höhere Reihen einfacherer Stein.",
+      "h2acoustics": "Ausgrabung und Akustik",
+      "p3": "Ab 1929 von Luciano Laurenzi (italienische Periode) ausgegraben, später restauriert (1994–1999). Du kannst durch die Gänge gehen; die Akustik ist immer noch bemerkenswert gut.",
+      "p4": "Eintritt kostenlos; Zeiten lokal prüfen.",
+      "g1": "Odeon",
+      "g2": "Odeon",
+      "g3": "Odeon",
+      "g4": "Odeon",
+      "p5": "In Kos-Stadt.",
+      "tip": "flüstere oder klatsche aus der Cavea – die Akustik hörst du sofort.",
+      "hStory": "Die Geschichte",
+      "hSee": "Was du siehst",
+      "hKnow": "Gut zu wissen",
+      "tipTitle": "Tipp des Guides",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    it: {
-      title: "Odeon",
-      lead: "Teatro romano coperto (± 200 d.C.) per ± 750 spettatori – marmo per l’élite, ancora forte acustica.",
-      heroCap: "Odeon",
-      badgeFree: "Gratis", badgeRoman: "Romano", badgeTown: "Kos città",
-      btnPlay: "🔊 Leggi ad alta voce",
-      h2built: "Costruito ± 200 d.C.",
-      p1: "L’Odeon risale al periodo romano. Kos era prosperosa grazie al santuario di Asclepio. Probabilmente sostituì un più antico bouleuterion (sala del consiglio). Dopo il terremoto del 142 d.C. l’imperatore Antonino Pio finanziò il restauro.",
-      fact750: "± 750", factAudience: "spettatori", factRows: "14 file", factMarble: "9 marmo (élite)",
-      h2covered: "Coperto e intimo",
-      p2: "Compatto e coperto – ideale per musica, poesia e canto tutto l’anno. Alto circa 12 m. Cavea a semicerchio: prime nove file di marmo bianco (ricchi ed élite), file superiori pietra più semplice.",
-      h2acoustics: "Scavo e acustica",
-      p3: "Scavato dal 1929 da Luciano Laurenzi (periodo italiano), poi restaurato (1994–1999). Puoi camminare nei corridoi; l’acustica è ancora notevolmente buona.",
-      p4: "Ingresso gratuito; controlla localmente gli orari.",
-      g1: "Odeon", g2: "Odeon", g3: "Odeon", g4: "Odeon",
-      h2visit: "Visitare",
-      p5: "A Kos città.",
-      tip: "Consiglio: sussurra o batti le mani dalla cavea – senti subito l’acustica."
+    "it": {
+      "title": "Odeon",
+      "lead": "Teatro romano coperto (± 200 d.C.) per ± 750 spettatori – marmo per l’élite, ancora forte acustica.",
+      "btnPlay": "Leggi ad alta voce",
+      "p1": "L’Odeon risale al periodo romano. Kos era prosperosa grazie al santuario di Asclepio. Probabilmente sostituì un più antico bouleuterion (sala del consiglio). Dopo il terremoto del 142 d.C. l’imperatore Antonino Pio finanziò il restauro.",
+      "p2": "Compatto e coperto – ideale per musica, poesia e canto tutto l’anno. Alto circa 12 m. Cavea a semicerchio: prime nove file di marmo bianco (ricchi ed élite), file superiori pietra più semplice.",
+      "h2acoustics": "Scavo e acustica",
+      "p3": "Scavato dal 1929 da Luciano Laurenzi (periodo italiano), poi restaurato (1994–1999). Puoi camminare nei corridoi; l’acustica è ancora notevolmente buona.",
+      "p4": "Ingresso gratuito; controlla localmente gli orari.",
+      "g1": "Odeon",
+      "g2": "Odeon",
+      "g3": "Odeon",
+      "g4": "Odeon",
+      "p5": "A Kos città.",
+      "tip": "sussurra o batti le mani dalla cavea – senti subito l’acustica.",
+      "hStory": "La storia",
+      "hSee": "Cosa vedi",
+      "hKnow": "Buono a sapersi",
+      "tipTitle": "Consiglio della guida",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    tr: {
-      title: "Odeon",
-      lead: "Roma kapalı tiyatrosu (± 200 MS) ± 750 seyirci için – elit için mermer, hâlâ güçlü akustik.",
-      heroCap: "Odeon",
-      badgeFree: "Ücretsiz", badgeRoman: "Roma", badgeTown: "Kos kasabası",
-      btnPlay: "🔊 Sesli oku",
-      h2built: "Yaklaşık 200 MS inşa edildi",
-      p1: "Odeon Roma döneminden kalmadır. Kos, Asklepios tapınağı sayesinde zengindi. Muhtemelen daha eski bir bouleuterion (meclis salonu) yerine geçti. 142 MS depreminden sonra İmparator Antoninus Pius restorasyonu finanse etti.",
-      fact750: "± 750", factAudience: "seyirci", factRows: "14 sıra", factMarble: "9 mermer (elit)",
-      h2covered: "Kapalı ve samimi",
-      p2: "Kompakt ve kapalı – yıl boyunca müzik, şiir ve şarkı için ideal. Yaklaşık 12 m yüksek. Yarım daire cavea: ilk dokuz sıra beyaz mermer (zengin ve elit), üst sıralar daha basit taş.",
-      h2acoustics: "Kazı ve akustik",
-      p3: "1929’dan itibaren Luciano Laurenzi (İtalyan dönemi) tarafından kazıldı, daha sonra restore edildi (1994–1999). Koridorlardan yürüyebilirsiniz; akustik hâlâ oldukça iyidir.",
-      p4: "Giriş ücretsiz; saatleri yerel kontrol edin.",
-      g1: "Odeon", g2: "Odeon", g3: "Odeon", g4: "Odeon",
-      h2visit: "Ziyaret",
-      p5: "Kos kasabasında.",
-      tip: "İpucu: cavea’dan fısıldayın veya alkışlayın – akustiği hemen duyarsınız."
+    "tr": {
+      "title": "Odeon",
+      "lead": "Roma kapalı tiyatrosu (± 200 MS) ± 750 seyirci için – elit için mermer, hâlâ güçlü akustik.",
+      "btnPlay": "Sesli oku",
+      "p1": "Odeon Roma döneminden kalmadır. Kos, Asklepios tapınağı sayesinde zengindi. Muhtemelen daha eski bir bouleuterion (meclis salonu) yerine geçti. 142 MS depreminden sonra İmparator Antoninus Pius restorasyonu finanse etti.",
+      "p2": "Kompakt ve kapalı – yıl boyunca müzik, şiir ve şarkı için ideal. Yaklaşık 12 m yüksek. Yarım daire cavea: ilk dokuz sıra beyaz mermer (zengin ve elit), üst sıralar daha basit taş.",
+      "h2acoustics": "Kazı ve akustik",
+      "p3": "1929’dan itibaren Luciano Laurenzi (İtalyan dönemi) tarafından kazıldı, daha sonra restore edildi (1994–1999). Koridorlardan yürüyebilirsiniz; akustik hâlâ oldukça iyidir.",
+      "p4": "Giriş ücretsiz; saatleri yerel kontrol edin.",
+      "g1": "Odeon",
+      "g2": "Odeon",
+      "g3": "Odeon",
+      "g4": "Odeon",
+      "p5": "Kos kasabasında.",
+      "tip": "cavea’dan fısıldayın veya alkışlayın – akustiği hemen duyarsınız.",
+      "hStory": "Hikaye",
+      "hSee": "Ne görürsün",
+      "hKnow": "Bilmekte fayda var",
+      "tipTitle": "Rehberin ipucu",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    es: {
-      title: "Odeón",
-      lead: "Teatro romano cubierto (± 200 d.C.) para ± 750 espectadores – mármol para la élite, acústica aún fuerte.",
-      heroCap: "Odeón",
-      badgeFree: "Gratis", badgeRoman: "Romano", badgeTown: "Ciudad de Kos",
-      btnPlay: "🔊 Leer en voz alta",
-      h2built: "Construido ± 200 d.C.",
-      p1: "El Odeón data del período romano. Kos era próspera gracias al santuario de Asclepio. Probablemente reemplazó un bouleuterion más antiguo (sala del consejo). Tras el terremoto de 142 d.C., el emperador Antonino Pío financió la restauración.",
-      fact750: "± 750", factAudience: "espectadores", factRows: "14 filas", factMarble: "9 mármol (élite)",
-      h2covered: "Cubierto e íntimo",
-      p2: "Compacto y cubierto – ideal para música, poesía y canto todo el año. Unos 12 m de alto. Cavea en semicírculo: primeras nueve filas de mármol blanco (ricos y élite), filas superiores de piedra más simple.",
-      h2acoustics: "Excavación y acústica",
-      p3: "Excavado desde 1929 por Luciano Laurenzi (período italiano), luego restaurado (1994–1999). Puedes caminar por los pasillos; la acústica sigue siendo notablemente buena.",
-      p4: "Entrada gratuita; comprueba los horarios localmente.",
-      g1: "Odeón", g2: "Odeón", g3: "Odeón", g4: "Odeón",
-      h2visit: "Visitar",
-      p5: "En la ciudad de Kos.",
-      tip: "Consejo: susurra o aplaude desde la cavea – oyes la acústica de inmediato."
+    "es": {
+      "title": "Odeón",
+      "lead": "Teatro romano cubierto (± 200 d.C.) para ± 750 espectadores – mármol para la élite, acústica aún fuerte.",
+      "btnPlay": "Leer en voz alta",
+      "p1": "El Odeón data del período romano. Kos era próspera gracias al santuario de Asclepio. Probablemente reemplazó un bouleuterion más antiguo (sala del consejo). Tras el terremoto de 142 d.C., el emperador Antonino Pío financió la restauración.",
+      "p2": "Compacto y cubierto – ideal para música, poesía y canto todo el año. Unos 12 m de alto. Cavea en semicírculo: primeras nueve filas de mármol blanco (ricos y élite), filas superiores de piedra más simple.",
+      "h2acoustics": "Excavación y acústica",
+      "p3": "Excavado desde 1929 por Luciano Laurenzi (período italiano), luego restaurado (1994–1999). Puedes caminar por los pasillos; la acústica sigue siendo notablemente buena.",
+      "p4": "Entrada gratuita; comprueba los horarios localmente.",
+      "g1": "Odeón",
+      "g2": "Odeón",
+      "g3": "Odeón",
+      "g4": "Odeón",
+      "p5": "En la ciudad de Kos.",
+      "tip": "susurra o aplaude desde la cavea – oyes la acústica de inmediato.",
+      "hStory": "La historia",
+      "hSee": "Qué ves",
+      "hKnow": "Bueno saberlo",
+      "tipTitle": "Consejo del guía",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     }
   };
 

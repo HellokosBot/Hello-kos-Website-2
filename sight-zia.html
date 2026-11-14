@@ -28,24 +28,84 @@
 </header>
 <div class="overlay" id="overlay"></div>
 <main class="main">
-  <div class="hero-wrap"><img src="img/hk/sight-zia.jpg" alt=""></div>
+  <div class="hero-wrap"><img src="img/hk/sight-zia.jpg" alt="">
+      <div class="hero-title"><h1 data-i18n="title">Zia</h1></div></div>
   <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back">← Bezienswaardigheden</a></p>
-  <h1 data-i18n="title">Zia</h1>
-  <p class="lead" data-i18n="lead">Bergdorp met ongeveer 150 inwoners. Steegjes met olijfolie, kruiden, zeep en handwerk. ’s Avonds komen mensen voor de zonsondergang, met zicht op zee, Kalymnos en Pserimos.</p>
-  <div class="badges"><span class="badge" data-i18n="b0">Gratis</span><span class="badge" data-i18n="b1">Berg</span></div>
+<p class="lead" data-i18n="lead">Bergdorp met ongeveer 150 inwoners. Steegjes met olijfolie, kruiden, zeep en handwerk. ’s Avonds komen mensen voor de zonsondergang, met zicht op zee, Kalymnos en Pserimos.</p>
+  
   <div class="actions">
     <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
     <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
-    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Zia%20Kos" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=Zia%20Kos" target="_blank" rel="noopener">Apple Maps</a>
+    
   </div>
-  <p class="status" id="ttsStatus"></p>
+  
+      <div class="map-row">
+        <a href="https://www.google.com/maps/search/?api=1&query=Zia%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+        <a href="https://maps.apple.com/?q=Zia%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+      </div>
+      <p class="status" id="ttsStatus"></p>
   <div id="readText">
-    <article class="card"><h2 data-i18n="h0">Drukte</h2><p data-i18n="p0">Rond zonsondergang is de weg vol. Er is een aparte pagina over die zonsondergang en een over fietsen naar Zia. Het natuurpark ligt in hetzelfde dorp.</p></article>
+    <article class="card"><h2 data-i18n="hStory">Drukte</h2><p data-i18n="p0">Rond zonsondergang is de weg vol. Er is een aparte pagina over die zonsondergang en een over fietsen naar Zia. Het natuurpark ligt in hetzelfde dorp.</p></article>
     
   </div>
 </main>
 <footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
-<script>window.HK_DICT = {"nl": {"title": "Zia", "lead": "Bergdorp met ongeveer 150 inwoners. Steegjes met olijfolie, kruiden, zeep en handwerk. ’s Avonds komen mensen voor de zonsondergang, met zicht op zee, Kalymnos en Pserimos.", "back": "← Bezienswaardigheden", "h0": "Drukte", "p0": "Rond zonsondergang is de weg vol. Er is een aparte pagina over die zonsondergang en een over fietsen naar Zia. Het natuurpark ligt in hetzelfde dorp.", "b0": "Gratis", "b1": "Berg"}, "de": {"title": "Zia", "lead": "Bergdorf mit etwa 150 Einwohnern. Gassen mit Olivenöl, Kräutern, Seife und Handwerk. Abends kommen Leute zum Sonnenuntergang, mit Blick aufs Meer, Kalymnos und Pserimos.", "back": "← Sehenswürdigkeiten", "h0": "Andrang", "p0": "Zum Sonnenuntergang ist die Straße voll. Es gibt eine eigene Seite dazu und eine über das Radfahren nach Zia. Der Naturpark liegt im selben Dorf.", "b0": "Kostenlos", "b1": "Berg"}, "en": {"title": "Zia", "lead": "Mountain village of about 150 people. Lanes with olive oil, herbs, soap and crafts. In the evening people come for the sunset, looking over the sea, Kalymnos and Pserimos.", "back": "← Sights", "h0": "Crowds", "p0": "Around sunset the road is full. There is a separate page about that sunset and one about cycling to Zia. The nature park is in the same village.", "b0": "Free", "b1": "Mountain"}, "it": {"title": "Zia", "lead": "Villaggio di montagna con circa 150 abitanti. Vicoli con olio, erbe, sapone e artigianato. La sera si viene per il tramonto, sul mare, Kalymnos e Pserimos.", "back": "← Attrazioni", "h0": "Folla", "p0": "Al tramonto la strada è piena. C’è una pagina sul tramonto e una sul pedalare fino a Zia. Il parco naturale è nello stesso villaggio.", "b0": "Gratis", "b1": "Montagna"}, "tr": {"title": "Zia", "lead": "Yaklaşık 150 kişilik dağ köyü. Zeytinyağı, ot, sabun ve el işi sokakları. Akşam gün batımı için gelinir; deniz, Kalymnos ve Pserimos görünür.", "back": "← Gezilecek yerler", "h0": "Kalabalık", "p0": "Gün batımında yol dolar. Gün batımı ve Zia’ya bisiklet için ayrı sayfalar var. Doğa parkı aynı köyde.", "b0": "Ücretsiz", "b1": "Dağ"}, "es": {"title": "Zia", "lead": "Pueblo de montaña de unos 150 habitantes. Callejones con aceite, hierbas, jabón y artesanía. Por la tarde se viene al atardecer, con mar, Kálimnos y Pserimos.", "back": "← Lugares de interés", "h0": "Gente", "p0": "Al atardecer la carretera se llena. Hay una página del atardecer y otra de ir en bici a Zia. El parque natural está en el mismo pueblo.", "b0": "Gratis", "b1": "Montaña"}};</script>
+<script>window.HK_DICT = {
+    "nl": {
+      "title": "Zia",
+      "lead": "Bergdorp met ongeveer 150 inwoners. Steegjes met olijfolie, kruiden, zeep en handwerk. ’s Avonds komen mensen voor de zonsondergang, met zicht op zee, Kalymnos en Pserimos.",
+      "back": "← Bezienswaardigheden",
+      "p0": "Rond zonsondergang is de weg vol. Er is een aparte pagina over die zonsondergang en een over fietsen naar Zia. Het natuurpark ligt in hetzelfde dorp.",
+      "hStory": "Het verhaal",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
+    },
+    "de": {
+      "title": "Zia",
+      "lead": "Bergdorf mit etwa 150 Einwohnern. Gassen mit Olivenöl, Kräutern, Seife und Handwerk. Abends kommen Leute zum Sonnenuntergang, mit Blick aufs Meer, Kalymnos und Pserimos.",
+      "back": "← Sehenswürdigkeiten",
+      "p0": "Zum Sonnenuntergang ist die Straße voll. Es gibt eine eigene Seite dazu und eine über das Radfahren nach Zia. Der Naturpark liegt im selben Dorf.",
+      "hStory": "Die Geschichte",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
+    },
+    "en": {
+      "title": "Zia",
+      "lead": "Mountain village of about 150 people. Lanes with olive oil, herbs, soap and crafts. In the evening people come for the sunset, looking over the sea, Kalymnos and Pserimos.",
+      "back": "← Sights",
+      "p0": "Around sunset the road is full. There is a separate page about that sunset and one about cycling to Zia. The nature park is in the same village.",
+      "hStory": "The story",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
+    },
+    "it": {
+      "title": "Zia",
+      "lead": "Villaggio di montagna con circa 150 abitanti. Vicoli con olio, erbe, sapone e artigianato. La sera si viene per il tramonto, sul mare, Kalymnos e Pserimos.",
+      "back": "← Attrazioni",
+      "p0": "Al tramonto la strada è piena. C’è una pagina sul tramonto e una sul pedalare fino a Zia. Il parco naturale è nello stesso villaggio.",
+      "hStory": "La storia",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
+    },
+    "tr": {
+      "title": "Zia",
+      "lead": "Yaklaşık 150 kişilik dağ köyü. Zeytinyağı, ot, sabun ve el işi sokakları. Akşam gün batımı için gelinir; deniz, Kalymnos ve Pserimos görünür.",
+      "back": "← Gezilecek yerler",
+      "p0": "Gün batımında yol dolar. Gün batımı ve Zia’ya bisiklet için ayrı sayfalar var. Doğa parkı aynı köyde.",
+      "hStory": "Hikaye",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
+    },
+    "es": {
+      "title": "Zia",
+      "lead": "Pueblo de montaña de unos 150 habitantes. Callejones con aceite, hierbas, jabón y artesanía. Por la tarde se viene al atardecer, con mar, Kálimnos y Pserimos.",
+      "back": "← Lugares de interés",
+      "p0": "Al atardecer la carretera se llena. Hay una página del atardecer y otra de ir en bici a Zia. El parque natural está en el mismo pueblo.",
+      "hStory": "La historia",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
+    }
+  };</script>
 <script src="hello-kos-i18n.js"></script>
 <script src="hello-kos-places.js"></script>
 <script src="hello-kos-fav.js"></script>

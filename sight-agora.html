@@ -40,20 +40,18 @@
     .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
     .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
     .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+
     .content { padding: 18px 16px 0; }
     h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
     .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+
     .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
     .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
     .btn-audio { background: var(--petrol); color: #fff; }
     .btn-audio.playing { background: var(--petrol-dark); }
     .btn-stop { background: #3A4545; color: #fff; display: none; }
     .btn-stop.show { display: flex; }
-    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
-    .btn-apple { background: #111; color: #fff; }
+
     .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
     .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
     .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
@@ -64,10 +62,7 @@
     .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
     .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
     .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
-    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-    .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
-    .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
-    .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
+
     .hours { margin-top: 8px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
     .h-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 12px; font-size: 0.88rem; border-bottom: 1px solid var(--border); background: #1a2525; }
     .h-row:nth-child(odd) { background: #152525; }
@@ -103,47 +98,36 @@
   <main class="main">
     <div class="hero-wrap">
       <img src="img/jwwb/165be352ac-untitled_snapshot_02-22-2026_17_33_32-high.jpg" alt="Agora oude markt Kos" loading="eager">
-      <div class="hero-caption" data-i18n="heroCap">Agora · oude markt · Kos-stad</div>
+      <div class="hero-title"><h1 data-i18n="title">Agora – oude markt</h1></div>
     </div>
 
     <div class="content">
-      <h1 data-i18n="title">Agora – oude markt</h1>
-      <p class="lead" data-i18n="lead">Het oude hart van Kos-stad: restanten van de grootste marktplaats van de regio.</p>
+<p class="lead" data-i18n="lead">Het oude hart van Kos-stad: restanten van de grootste marktplaats van de regio.</p>
 
-      <div class="badges">
-        <span class="badge" data-i18n="badgeFree">Gratis</span>
-        <span class="badge">Kos-stad</span>
-        <span class="badge" data-i18n="badgeOpen">Openlucht</span>
-      </div>
+      
 
       <div class="actions">
         <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
         <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Ancient%20Agora%20Kos%20Town%20Greece" target="_blank" rel="noopener">📍 Google Maps</a>
-        <a class="btn btn-apple" href="https://maps.apple.com/?q=Ancient%20Agora%20Kos%20Town%20Greece" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      
+      <div class="map-row">
+        <a href="https://www.google.com/maps/search/?api=1&query=Ancient%20Agora%20Kos%20Town%20Greece" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+        <a href="https://maps.apple.com/?q=Ancient%20Agora%20Kos%20Town%20Greece" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
       </div>
       <p class="status" id="ttsStatus"></p>
 
       <div id="readText">
         <div class="card">
-          <h2 data-i18n="h2what">Wat was de Agora?</h2>
+          <h2 data-i18n="hStory">Wat was de Agora?</h2>
           <p data-i18n="p1">Midden in Kos-stad liggen de restanten van de oude Agora – de marktplaats die ooit de grootste van de omgeving was. Agora betekent letterlijk verzamelplaats.</p>
           <p data-i18n="p2">Hier speelde het sociale leven zich af: handel, gesprekken en vergaderingen van vrije burgers.</p>
         </div>
 
-        <div class="facts">
-          <div class="fact">
-            <span class="n" data-i18n="factBiggest">Grootste</span>
-            <span class="l" data-i18n="factMarket">markt van de regio</span>
-          </div>
-          <div class="fact">
-            <span class="n" data-i18n="factFree">Gratis</span>
-            <span class="l" data-i18n="factOpen">openlucht-terrein</span>
-          </div>
-        </div>
+        
 
         <div class="card">
-          <h2 data-i18n="h2meet">Van ontmoetingsplaats tot markt</h2>
+          <h2 data-i18n="hSee">Van ontmoetingsplaats tot markt</h2>
           <p data-i18n="p3">In eerste instantie was de Agora een ontmoetings- en vergaderplaats. Hier kwam ook de Ekklèsia (volksvergadering) bijeen. Later werd het steeds meer de plek voor handel en dagelijks leven.</p>
           <p data-i18n="p4">Rondom stonden vaak tempels. Mannen ontmoetten elkaar op het plein of in de schaduw van de stoai (zuilenhallen) – vooral om te praten.</p>
         </div>
@@ -180,9 +164,9 @@
         </div>
 
         <div class="card">
-          <h2 data-i18n="h2visit">Bezoeken</h2>
+          <h2 data-i18n="hKnow">Bezoeken</h2>
           <p data-i18n="p8">Je loopt er zo naartoe: centraal in Kos-stad, dicht bij de haven en de winkelstraten. Geen ticket nodig – het is een openluchtterrein.</p>
-          <div class="tip" data-i18n="tip">Tip: combineer met de Witte trappen, Palm tree lane of het Archeologisch museum – allemaal op loopafstand.</div>
+          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: combineer met de Witte trappen, Palm tree lane of het Archeologisch museum – allemaal op loopafstand.</p></div>
         </div>
       </div>
     </div>
@@ -195,174 +179,204 @@
 
 <script>
 (function(){
-  var I18N = {
-    nl: {
-      title: "Agora – oude markt",
-      lead: "Het oude hart van Kos-stad: restanten van de grootste marktplaats van de regio.",
-      heroCap: "Agora · oude markt · Kos-stad",
-      badgeFree: "Gratis", badgeOpen: "Openlucht",
-      btnPlay: "🔊 Voorlezen",
-      h2what: "Wat was de Agora?",
-      p1: "Midden in Kos-stad liggen de restanten van de oude Agora – de marktplaats die ooit de grootste van de omgeving was. Agora betekent letterlijk verzamelplaats.",
-      p2: "Hier speelde het sociale leven zich af: handel, gesprekken en vergaderingen van vrije burgers.",
-      factBiggest: "Grootste", factMarket: "markt van de regio",
-      factFree: "Gratis", factOpen: "openlucht-terrein",
-      h2meet: "Van ontmoetingsplaats tot markt",
-      p3: "In eerste instantie was de Agora een ontmoetings- en vergaderplaats. Hier kwam ook de Ekklèsia (volksvergadering) bijeen. Later werd het steeds meer de plek voor handel en dagelijks leven.",
-      p4: "Rondom stonden vaak tempels. Mannen ontmoetten elkaar op het plein of in de schaduw van de stoai (zuilenhallen) – vooral om te praten.",
-      cap1: "Restanten van zuilen en straten in de Agora",
-      h2quake: "Aardbevingen en herontdekking",
-      p5: "Grote delen van de Agora gingen verloren bij aardbevingen in de 5e en 6e eeuw na Christus. Na de zware aardbeving van 1933 kwamen veel resten weer bloot te liggen.",
-      p6: "Italiaanse archeologen (Kos stond toen onder Italiaans bestuur) groeven verder. Zo zie je vandaag nog winkels, zuilen en straten uit de oudheid – midden in de moderne stad.",
-      cap2: "Archeologische resten midden in Kos-stad",
-      h2hours: "Openingstijden",
-      p7: "Toegang is gratis. Meestal gelden deze tijden (controleer lokaal bij de ingang):",
-      mon: "Maandag", tue: "Dinsdag", wed: "Woensdag", thu: "Donderdag", fri: "Vrijdag", sat: "Zaterdag", sun: "Zondag",
-      closed: "Gesloten",
-      hoursNote: "Tijden kunnen wisselen per seizoen. Dinsdag is de vaste sluitingsdag van veel archeologische sites op Kos.",
-      h2visit: "Bezoeken",
-      p8: "Je loopt er zo naartoe: centraal in Kos-stad, dicht bij de haven en de winkelstraten. Geen ticket nodig – het is een openluchtterrein.",
-      tip: "Tip: combineer met de Witte trappen, Palm tree lane of het Archeologisch museum – allemaal op loopafstand."
+  var I18N = window.HK_DICT = {
+    "nl": {
+      "title": "Agora – oude markt",
+      "lead": "Het oude hart van Kos-stad: restanten van de grootste marktplaats van de regio.",
+      "btnPlay": "Voorlezen",
+      "p1": "Midden in Kos-stad liggen de restanten van de oude Agora – de marktplaats die ooit de grootste van de omgeving was. Agora betekent letterlijk verzamelplaats.",
+      "p2": "Hier speelde het sociale leven zich af: handel, gesprekken en vergaderingen van vrije burgers.",
+      "p3": "In eerste instantie was de Agora een ontmoetings- en vergaderplaats. Hier kwam ook de Ekklèsia (volksvergadering) bijeen. Later werd het steeds meer de plek voor handel en dagelijks leven.",
+      "p4": "Rondom stonden vaak tempels. Mannen ontmoetten elkaar op het plein of in de schaduw van de stoai (zuilenhallen) – vooral om te praten.",
+      "cap1": "Restanten van zuilen en straten in de Agora",
+      "h2quake": "Aardbevingen en herontdekking",
+      "p5": "Grote delen van de Agora gingen verloren bij aardbevingen in de 5e en 6e eeuw na Christus. Na de zware aardbeving van 1933 kwamen veel resten weer bloot te liggen.",
+      "p6": "Italiaanse archeologen (Kos stond toen onder Italiaans bestuur) groeven verder. Zo zie je vandaag nog winkels, zuilen en straten uit de oudheid – midden in de moderne stad.",
+      "cap2": "Archeologische resten midden in Kos-stad",
+      "h2hours": "Openingstijden",
+      "p7": "Toegang is gratis. Meestal gelden deze tijden (controleer lokaal bij de ingang):",
+      "mon": "Maandag",
+      "tue": "Dinsdag",
+      "wed": "Woensdag",
+      "thu": "Donderdag",
+      "fri": "Vrijdag",
+      "sat": "Zaterdag",
+      "sun": "Zondag",
+      "closed": "Gesloten",
+      "hoursNote": "Tijden kunnen wisselen per seizoen. Dinsdag is de vaste sluitingsdag van veel archeologische sites op Kos.",
+      "p8": "Je loopt er zo naartoe: centraal in Kos-stad, dicht bij de haven en de winkelstraten. Geen ticket nodig – het is een openluchtterrein.",
+      "tip": "combineer met de Witte trappen, Palm tree lane of het Archeologisch museum – allemaal op loopafstand.",
+      "hStory": "Het verhaal",
+      "hSee": "Wat je ziet",
+      "hKnow": "Goed om te weten",
+      "tipTitle": "Tip van de gids",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    en: {
-      title: "Agora – ancient market",
-      lead: "The old heart of Kos Town: remains of the largest marketplace in the region.",
-      heroCap: "Agora · ancient market · Kos Town",
-      badgeFree: "Free", badgeOpen: "Open air",
-      btnPlay: "🔊 Read aloud",
-      h2what: "What was the Agora?",
-      p1: "In the centre of Kos Town lie the remains of the ancient Agora – the marketplace that was once the largest in the area. Agora literally means gathering place.",
-      p2: "This is where social life took place: trade, conversations and meetings of free citizens.",
-      factBiggest: "Largest", factMarket: "market in the region",
-      factFree: "Free", factOpen: "open-air site",
-      h2meet: "From meeting place to market",
-      p3: "Originally the Agora was a meeting and assembly place. The Ekklèsia (people’s assembly) also met here. Later it became more and more the place for trade and daily life.",
-      p4: "Temples often stood around it. Men met in the square or in the shade of the stoai (colonnades) – mainly to talk.",
-      cap1: "Remains of columns and streets in the Agora",
-      h2quake: "Earthquakes and rediscovery",
-      p5: "Large parts of the Agora were lost in earthquakes in the 5th and 6th centuries AD. After the severe earthquake of 1933 many remains came to light again.",
-      p6: "Italian archaeologists (Kos was then under Italian rule) excavated further. So today you still see shops, columns and streets from antiquity – right in the middle of the modern town.",
-      cap2: "Archaeological remains in the centre of Kos Town",
-      h2hours: "Opening hours",
-      p7: "Entry is free. These times usually apply (check locally at the entrance):",
-      mon: "Monday", tue: "Tuesday", wed: "Wednesday", thu: "Thursday", fri: "Friday", sat: "Saturday", sun: "Sunday",
-      closed: "Closed",
-      hoursNote: "Times may vary by season. Tuesday is the regular closing day of many archaeological sites on Kos.",
-      h2visit: "Visiting",
-      p8: "You can walk there easily: central in Kos Town, close to the harbour and shopping streets. No ticket needed – it is an open-air site.",
-      tip: "Tip: combine with the White Stairs, Palm tree lane or the Archaeological Museum – all within walking distance."
+    "en": {
+      "title": "Agora – ancient market",
+      "lead": "The old heart of Kos Town: remains of the largest marketplace in the region.",
+      "btnPlay": "Read aloud",
+      "p1": "In the centre of Kos Town lie the remains of the ancient Agora – the marketplace that was once the largest in the area. Agora literally means gathering place.",
+      "p2": "This is where social life took place: trade, conversations and meetings of free citizens.",
+      "p3": "Originally the Agora was a meeting and assembly place. The Ekklèsia (people’s assembly) also met here. Later it became more and more the place for trade and daily life.",
+      "p4": "Temples often stood around it. Men met in the square or in the shade of the stoai (colonnades) – mainly to talk.",
+      "cap1": "Remains of columns and streets in the Agora",
+      "h2quake": "Earthquakes and rediscovery",
+      "p5": "Large parts of the Agora were lost in earthquakes in the 5th and 6th centuries AD. After the severe earthquake of 1933 many remains came to light again.",
+      "p6": "Italian archaeologists (Kos was then under Italian rule) excavated further. So today you still see shops, columns and streets from antiquity – right in the middle of the modern town.",
+      "cap2": "Archaeological remains in the centre of Kos Town",
+      "h2hours": "Opening hours",
+      "p7": "Entry is free. These times usually apply (check locally at the entrance):",
+      "mon": "Monday",
+      "tue": "Tuesday",
+      "wed": "Wednesday",
+      "thu": "Thursday",
+      "fri": "Friday",
+      "sat": "Saturday",
+      "sun": "Sunday",
+      "closed": "Closed",
+      "hoursNote": "Times may vary by season. Tuesday is the regular closing day of many archaeological sites on Kos.",
+      "p8": "You can walk there easily: central in Kos Town, close to the harbour and shopping streets. No ticket needed – it is an open-air site.",
+      "tip": "combine with the White Stairs, Palm tree lane or the Archaeological Museum – all within walking distance.",
+      "hStory": "The story",
+      "hSee": "What you see",
+      "hKnow": "Good to know",
+      "tipTitle": "Guide’s tip",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    de: {
-      title: "Agora – antiker Markt",
-      lead: "Das alte Herz von Kos-Stadt: Überreste des größten Marktplatzes der Region.",
-      heroCap: "Agora · antiker Markt · Kos-Stadt",
-      badgeFree: "Kostenlos", badgeOpen: "Freilicht",
-      btnPlay: "🔊 Vorlesen",
-      h2what: "Was war die Agora?",
-      p1: "Mitten in Kos-Stadt liegen die Überreste der antiken Agora – des Marktplatzes, der einst der größte der Umgebung war. Agora bedeutet wörtlich Versammlungsort.",
-      p2: "Hier spielte sich das soziale Leben ab: Handel, Gespräche und Versammlungen freier Bürger.",
-      factBiggest: "Größter", factMarket: "Markt der Region",
-      factFree: "Kostenlos", factOpen: "Freilichtgelände",
-      h2meet: "Vom Treffpunkt zum Markt",
-      p3: "Ursprünglich war die Agora ein Treff- und Versammlungsort. Hier traf sich auch die Ekklèsia (Volksversammlung). Später wurde sie immer mehr zum Ort für Handel und Alltag.",
-      p4: "Rundherum standen oft Tempel. Männer trafen sich auf dem Platz oder im Schatten der Stoai (Säulenhallen) – vor allem zum Reden.",
-      cap1: "Überreste von Säulen und Straßen in der Agora",
-      h2quake: "Erdbeben und Wiederentdeckung",
-      p5: "Große Teile der Agora gingen bei Erdbeben im 5. und 6. Jahrhundert n. Chr. verloren. Nach dem schweren Erdbeben von 1933 kamen viele Reste wieder ans Licht.",
-      p6: "Italienische Archäologen (Kos stand damals unter italienischer Verwaltung) gruben weiter. So siehst du heute noch Läden, Säulen und Straßen aus der Antike – mitten in der modernen Stadt.",
-      cap2: "Archäologische Reste mitten in Kos-Stadt",
-      h2hours: "Öffnungszeiten",
-      p7: "Der Eintritt ist kostenlos. Meist gelten diese Zeiten (vor Ort am Eingang prüfen):",
-      mon: "Montag", tue: "Dienstag", wed: "Mittwoch", thu: "Donnerstag", fri: "Freitag", sat: "Samstag", sun: "Sonntag",
-      closed: "Geschlossen",
-      hoursNote: "Zeiten können je nach Saison variieren. Dienstag ist der feste Schließtag vieler archäologischer Stätten auf Kos.",
-      h2visit: "Besuchen",
-      p8: "Du läufst einfach hin: zentral in Kos-Stadt, nah am Hafen und den Einkaufsstraßen. Kein Ticket nötig – es ist ein Freilichtgelände.",
-      tip: "Tipp: kombiniere mit den Weißen Treppen, der Palm tree lane oder dem Archäologischen Museum – alles fußläufig."
+    "de": {
+      "title": "Agora – antiker Markt",
+      "lead": "Das alte Herz von Kos-Stadt: Überreste des größten Marktplatzes der Region.",
+      "btnPlay": "Vorlesen",
+      "p1": "Mitten in Kos-Stadt liegen die Überreste der antiken Agora – des Marktplatzes, der einst der größte der Umgebung war. Agora bedeutet wörtlich Versammlungsort.",
+      "p2": "Hier spielte sich das soziale Leben ab: Handel, Gespräche und Versammlungen freier Bürger.",
+      "p3": "Ursprünglich war die Agora ein Treff- und Versammlungsort. Hier traf sich auch die Ekklèsia (Volksversammlung). Später wurde sie immer mehr zum Ort für Handel und Alltag.",
+      "p4": "Rundherum standen oft Tempel. Männer trafen sich auf dem Platz oder im Schatten der Stoai (Säulenhallen) – vor allem zum Reden.",
+      "cap1": "Überreste von Säulen und Straßen in der Agora",
+      "h2quake": "Erdbeben und Wiederentdeckung",
+      "p5": "Große Teile der Agora gingen bei Erdbeben im 5. und 6. Jahrhundert n. Chr. verloren. Nach dem schweren Erdbeben von 1933 kamen viele Reste wieder ans Licht.",
+      "p6": "Italienische Archäologen (Kos stand damals unter italienischer Verwaltung) gruben weiter. So siehst du heute noch Läden, Säulen und Straßen aus der Antike – mitten in der modernen Stadt.",
+      "cap2": "Archäologische Reste mitten in Kos-Stadt",
+      "h2hours": "Öffnungszeiten",
+      "p7": "Der Eintritt ist kostenlos. Meist gelten diese Zeiten (vor Ort am Eingang prüfen):",
+      "mon": "Montag",
+      "tue": "Dienstag",
+      "wed": "Mittwoch",
+      "thu": "Donnerstag",
+      "fri": "Freitag",
+      "sat": "Samstag",
+      "sun": "Sonntag",
+      "closed": "Geschlossen",
+      "hoursNote": "Zeiten können je nach Saison variieren. Dienstag ist der feste Schließtag vieler archäologischer Stätten auf Kos.",
+      "p8": "Du läufst einfach hin: zentral in Kos-Stadt, nah am Hafen und den Einkaufsstraßen. Kein Ticket nötig – es ist ein Freilichtgelände.",
+      "tip": "kombiniere mit den Weißen Treppen, der Palm tree lane oder dem Archäologischen Museum – alles fußläufig.",
+      "hStory": "Die Geschichte",
+      "hSee": "Was du siehst",
+      "hKnow": "Gut zu wissen",
+      "tipTitle": "Tipp des Guides",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    it: {
-      title: "Agora – antico mercato",
-      lead: "Il vecchio cuore di Kos città: resti del più grande mercato della regione.",
-      heroCap: "Agora · antico mercato · Kos città",
-      badgeFree: "Gratis", badgeOpen: "All’aperto",
-      btnPlay: "🔊 Leggi ad alta voce",
-      h2what: "Cos’era l’Agora?",
-      p1: "Nel centro di Kos città si trovano i resti dell’antica Agora – il mercato che un tempo era il più grande della zona. Agora significa letteralmente luogo di incontro.",
-      p2: "Qui si svolgeva la vita sociale: commercio, conversazioni e riunioni di cittadini liberi.",
-      factBiggest: "Più grande", factMarket: "mercato della regione",
-      factFree: "Gratis", factOpen: "area all’aperto",
-      h2meet: "Da luogo d’incontro a mercato",
-      p3: "Inizialmente l’Agora era un luogo di incontro e assemblea. Qui si riuniva anche l’Ekklèsia (assemblea del popolo). In seguito divenne sempre più il posto per il commercio e la vita quotidiana.",
-      p4: "Intorno c’erano spesso templi. Gli uomini si incontravano nella piazza o all’ombra delle stoai (portici colonnati) – soprattutto per parlare.",
-      cap1: "Resti di colonne e strade nell’Agora",
-      h2quake: "Terremoti e riscoperta",
-      p5: "Grandi parti dell’Agora andarono perse nei terremoti del V e VI secolo d.C. Dopo il grave terremoto del 1933 molti resti tornarono alla luce.",
-      p6: "Gli archeologi italiani (Kos era allora sotto amministrazione italiana) scavarono ulteriormente. Così oggi vedi ancora negozi, colonne e strade dell’antichità – nel mezzo della città moderna.",
-      cap2: "Resti archeologici nel centro di Kos città",
-      h2hours: "Orari di apertura",
-      p7: "L’ingresso è gratuito. Di solito valgono questi orari (controlla sul posto all’ingresso):",
-      mon: "Lunedì", tue: "Martedì", wed: "Mercoledì", thu: "Giovedì", fri: "Venerdì", sat: "Sabato", sun: "Domenica",
-      closed: "Chiuso",
-      hoursNote: "Gli orari possono variare in base alla stagione. Il martedì è il giorno di chiusura fisso di molti siti archeologici di Kos.",
-      h2visit: "Visitare",
-      p8: "Ci arrivi a piedi: centrale a Kos città, vicino al porto e alle vie dello shopping. Nessun biglietto necessario – è un’area all’aperto.",
-      tip: "Consiglio: combina con le Scale bianche, Palm tree lane o il Museo Archeologico – tutti a piedi."
+    "it": {
+      "title": "Agora – antico mercato",
+      "lead": "Il vecchio cuore di Kos città: resti del più grande mercato della regione.",
+      "btnPlay": "Leggi ad alta voce",
+      "p1": "Nel centro di Kos città si trovano i resti dell’antica Agora – il mercato che un tempo era il più grande della zona. Agora significa letteralmente luogo di incontro.",
+      "p2": "Qui si svolgeva la vita sociale: commercio, conversazioni e riunioni di cittadini liberi.",
+      "p3": "Inizialmente l’Agora era un luogo di incontro e assemblea. Qui si riuniva anche l’Ekklèsia (assemblea del popolo). In seguito divenne sempre più il posto per il commercio e la vita quotidiana.",
+      "p4": "Intorno c’erano spesso templi. Gli uomini si incontravano nella piazza o all’ombra delle stoai (portici colonnati) – soprattutto per parlare.",
+      "cap1": "Resti di colonne e strade nell’Agora",
+      "h2quake": "Terremoti e riscoperta",
+      "p5": "Grandi parti dell’Agora andarono perse nei terremoti del V e VI secolo d.C. Dopo il grave terremoto del 1933 molti resti tornarono alla luce.",
+      "p6": "Gli archeologi italiani (Kos era allora sotto amministrazione italiana) scavarono ulteriormente. Così oggi vedi ancora negozi, colonne e strade dell’antichità – nel mezzo della città moderna.",
+      "cap2": "Resti archeologici nel centro di Kos città",
+      "h2hours": "Orari di apertura",
+      "p7": "L’ingresso è gratuito. Di solito valgono questi orari (controlla sul posto all’ingresso):",
+      "mon": "Lunedì",
+      "tue": "Martedì",
+      "wed": "Mercoledì",
+      "thu": "Giovedì",
+      "fri": "Venerdì",
+      "sat": "Sabato",
+      "sun": "Domenica",
+      "closed": "Chiuso",
+      "hoursNote": "Gli orari possono variare in base alla stagione. Il martedì è il giorno di chiusura fisso di molti siti archeologici di Kos.",
+      "p8": "Ci arrivi a piedi: centrale a Kos città, vicino al porto e alle vie dello shopping. Nessun biglietto necessario – è un’area all’aperto.",
+      "tip": "combina con le Scale bianche, Palm tree lane o il Museo Archeologico – tutti a piedi.",
+      "hStory": "La storia",
+      "hSee": "Cosa vedi",
+      "hKnow": "Buono a sapersi",
+      "tipTitle": "Consiglio della guida",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    tr: {
-      title: "Agora – eski pazar",
-      lead: "Kos şehrinin eski kalbi: bölgenin en büyük pazarının kalıntıları.",
-      heroCap: "Agora · eski pazar · Kos şehri",
-      badgeFree: "Ücretsiz", badgeOpen: "Açık hava",
-      btnPlay: "🔊 Sesli oku",
-      h2what: "Agora neydi?",
-      p1: "Kos şehrinin merkezinde eski Agora’nın kalıntıları yatıyor – bir zamanlar bölgenin en büyük pazarı olan yer. Agora kelime anlamıyla toplanma yeri demektir.",
-      p2: "Sosyal yaşam burada geçerdi: ticaret, sohbetler ve özgür vatandaşların toplantıları.",
-      factBiggest: "En büyük", factMarket: "bölge pazarı",
-      factFree: "Ücretsiz", factOpen: "açık hava alanı",
-      h2meet: "Buluşma yerinden pazara",
-      p3: "Başlangıçta Agora bir buluşma ve toplantı yeriydi. Ekklèsia (halk meclisi) da burada toplanırdı. Daha sonra giderek ticaret ve günlük yaşam yeri haline geldi.",
-      p4: "Etrafında sık sık tapınaklar bulunurdu. Erkekler meydanda veya stoai (sütunlu galeriler) gölgesinde buluşurdu – özellikle konuşmak için.",
-      cap1: "Agora’daki sütun ve sokak kalıntıları",
-      h2quake: "Depremler ve yeniden keşif",
-      p5: "Agora’nın büyük kısımları MS 5. ve 6. yüzyıllardaki depremlerde kayboldu. 1933’teki ağır depremden sonra birçok kalıntı yeniden ortaya çıktı.",
-      p6: "İtalyan arkeologlar (Kos o zaman İtalyan yönetimindeydi) kazılara devam etti. Böylece bugün hâlâ antik çağdan dükkanlar, sütunlar ve sokaklar görüyorsun – modern şehrin tam ortasında.",
-      cap2: "Kos şehrinin merkezindeki arkeolojik kalıntılar",
-      h2hours: "Açılış saatleri",
-      p7: "Giriş ücretsizdir. Genellikle bu saatler geçerlidir (girişte yerel olarak kontrol et):",
-      mon: "Pazartesi", tue: "Salı", wed: "Çarşamba", thu: "Perşembe", fri: "Cuma", sat: "Cumartesi", sun: "Pazar",
-      closed: "Kapalı",
-      hoursNote: "Saatler mevsime göre değişebilir. Salı günü Kos’taki birçok arkeolojik alanın sabit kapalı günüdür.",
-      h2visit: "Ziyaret",
-      p8: "Yürüyerek gidebilirsin: Kos şehrinin merkezinde, limana ve alışveriş caddelerine yakın. Bilet gerekmez – açık hava alanıdır.",
-      tip: "İpucu: Beyaz Merdivenler, Palm tree lane veya Arkeoloji Müzesi ile birleştir – hepsi yürüme mesafesinde."
+    "tr": {
+      "title": "Agora – eski pazar",
+      "lead": "Kos şehrinin eski kalbi: bölgenin en büyük pazarının kalıntıları.",
+      "btnPlay": "Sesli oku",
+      "p1": "Kos şehrinin merkezinde eski Agora’nın kalıntıları yatıyor – bir zamanlar bölgenin en büyük pazarı olan yer. Agora kelime anlamıyla toplanma yeri demektir.",
+      "p2": "Sosyal yaşam burada geçerdi: ticaret, sohbetler ve özgür vatandaşların toplantıları.",
+      "p3": "Başlangıçta Agora bir buluşma ve toplantı yeriydi. Ekklèsia (halk meclisi) da burada toplanırdı. Daha sonra giderek ticaret ve günlük yaşam yeri haline geldi.",
+      "p4": "Etrafında sık sık tapınaklar bulunurdu. Erkekler meydanda veya stoai (sütunlu galeriler) gölgesinde buluşurdu – özellikle konuşmak için.",
+      "cap1": "Agora’daki sütun ve sokak kalıntıları",
+      "h2quake": "Depremler ve yeniden keşif",
+      "p5": "Agora’nın büyük kısımları MS 5. ve 6. yüzyıllardaki depremlerde kayboldu. 1933’teki ağır depremden sonra birçok kalıntı yeniden ortaya çıktı.",
+      "p6": "İtalyan arkeologlar (Kos o zaman İtalyan yönetimindeydi) kazılara devam etti. Böylece bugün hâlâ antik çağdan dükkanlar, sütunlar ve sokaklar görüyorsun – modern şehrin tam ortasında.",
+      "cap2": "Kos şehrinin merkezindeki arkeolojik kalıntılar",
+      "h2hours": "Açılış saatleri",
+      "p7": "Giriş ücretsizdir. Genellikle bu saatler geçerlidir (girişte yerel olarak kontrol et):",
+      "mon": "Pazartesi",
+      "tue": "Salı",
+      "wed": "Çarşamba",
+      "thu": "Perşembe",
+      "fri": "Cuma",
+      "sat": "Cumartesi",
+      "sun": "Pazar",
+      "closed": "Kapalı",
+      "hoursNote": "Saatler mevsime göre değişebilir. Salı günü Kos’taki birçok arkeolojik alanın sabit kapalı günüdür.",
+      "p8": "Yürüyerek gidebilirsin: Kos şehrinin merkezinde, limana ve alışveriş caddelerine yakın. Bilet gerekmez – açık hava alanıdır.",
+      "tip": "Beyaz Merdivenler, Palm tree lane veya Arkeoloji Müzesi ile birleştir – hepsi yürüme mesafesinde.",
+      "hStory": "Hikaye",
+      "hSee": "Ne görürsün",
+      "hKnow": "Bilmekte fayda var",
+      "tipTitle": "Rehberin ipucu",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    es: {
-      title: "Ágora – mercado antiguo",
-      lead: "El antiguo corazón de Kos ciudad: restos del mayor mercado de la región.",
-      heroCap: "Ágora · mercado antiguo · Kos ciudad",
-      badgeFree: "Gratis", badgeOpen: "Al aire libre",
-      btnPlay: "🔊 Leer en voz alta",
-      h2what: "¿Qué era el Ágora?",
-      p1: "En el centro de Kos ciudad se encuentran los restos del antiguo Ágora – el mercado que alguna vez fue el más grande de la zona. Ágora significa literalmente lugar de reunión.",
-      p2: "Aquí se desarrollaba la vida social: comercio, conversaciones y reuniones de ciudadanos libres.",
-      factBiggest: "Más grande", factMarket: "mercado de la región",
-      factFree: "Gratis", factOpen: "terreno al aire libre",
-      h2meet: "De lugar de encuentro a mercado",
-      p3: "Al principio el Ágora era un lugar de encuentro y asamblea. Aquí se reunía también la Ekklèsia (asamblea del pueblo). Más tarde se convirtió cada vez más en el lugar del comercio y la vida diaria.",
-      p4: "Alrededor había a menudo templos. Los hombres se reunían en la plaza o a la sombra de las stoai (pórticos) – sobre todo para hablar.",
-      cap1: "Restos de columnas y calles en el Ágora",
-      h2quake: "Terremotos y redescubrimiento",
-      p5: "Grandes partes del Ágora se perdieron en terremotos de los siglos V y VI d.C. Tras el grave terremoto de 1933 muchos restos volvieron a salir a la luz.",
-      p6: "Arqueólogos italianos (Kos estaba entonces bajo administración italiana) excavaron más. Así hoy aún ves tiendas, columnas y calles de la antigüedad – en medio de la ciudad moderna.",
-      cap2: "Restos arqueológicos en el centro de Kos ciudad",
-      h2hours: "Horarios de apertura",
-      p7: "La entrada es gratuita. Normalmente rigen estos horarios (comprueba localmente en la entrada):",
-      mon: "Lunes", tue: "Martes", wed: "Miércoles", thu: "Jueves", fri: "Viernes", sat: "Sábado", sun: "Domingo",
-      closed: "Cerrado",
-      hoursNote: "Los horarios pueden variar según la temporada. El martes es el día de cierre fijo de muchos sitios arqueológicos de Kos.",
-      h2visit: "Visitar",
-      p8: "Puedes llegar andando: central en Kos ciudad, cerca del puerto y las calles comerciales. No hace falta entrada – es un terreno al aire libre.",
-      tip: "Consejo: combínalo con las Escaleras blancas, Palm tree lane o el Museo Arqueológico – todos a poca distancia a pie."
+    "es": {
+      "title": "Ágora – mercado antiguo",
+      "lead": "El antiguo corazón de Kos ciudad: restos del mayor mercado de la región.",
+      "btnPlay": "Leer en voz alta",
+      "p1": "En el centro de Kos ciudad se encuentran los restos del antiguo Ágora – el mercado que alguna vez fue el más grande de la zona. Ágora significa literalmente lugar de reunión.",
+      "p2": "Aquí se desarrollaba la vida social: comercio, conversaciones y reuniones de ciudadanos libres.",
+      "p3": "Al principio el Ágora era un lugar de encuentro y asamblea. Aquí se reunía también la Ekklèsia (asamblea del pueblo). Más tarde se convirtió cada vez más en el lugar del comercio y la vida diaria.",
+      "p4": "Alrededor había a menudo templos. Los hombres se reunían en la plaza o a la sombra de las stoai (pórticos) – sobre todo para hablar.",
+      "cap1": "Restos de columnas y calles en el Ágora",
+      "h2quake": "Terremotos y redescubrimiento",
+      "p5": "Grandes partes del Ágora se perdieron en terremotos de los siglos V y VI d.C. Tras el grave terremoto de 1933 muchos restos volvieron a salir a la luz.",
+      "p6": "Arqueólogos italianos (Kos estaba entonces bajo administración italiana) excavaron más. Así hoy aún ves tiendas, columnas y calles de la antigüedad – en medio de la ciudad moderna.",
+      "cap2": "Restos arqueológicos en el centro de Kos ciudad",
+      "h2hours": "Horarios de apertura",
+      "p7": "La entrada es gratuita. Normalmente rigen estos horarios (comprueba localmente en la entrada):",
+      "mon": "Lunes",
+      "tue": "Martes",
+      "wed": "Miércoles",
+      "thu": "Jueves",
+      "fri": "Viernes",
+      "sat": "Sábado",
+      "sun": "Domingo",
+      "closed": "Cerrado",
+      "hoursNote": "Los horarios pueden variar según la temporada. El martes es el día de cierre fijo de muchos sitios arqueológicos de Kos.",
+      "p8": "Puedes llegar andando: central en Kos ciudad, cerca del puerto y las calles comerciales. No hace falta entrada – es un terreno al aire libre.",
+      "tip": "combínalo con las Escaleras blancas, Palm tree lane o el Museo Arqueológico – todos a poca distancia a pie.",
+      "hStory": "La historia",
+      "hSee": "Qué ves",
+      "hKnow": "Bueno saberlo",
+      "tipTitle": "Consejo del guía",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     }
   };
 

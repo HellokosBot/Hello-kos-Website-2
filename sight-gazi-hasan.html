@@ -40,20 +40,18 @@
     .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
     .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
     .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+
     .content { padding: 18px 16px 0; }
     h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
     .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+
     .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
     .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
     .btn-audio { background: var(--petrol); color: #fff; }
     .btn-audio.playing { background: var(--petrol-dark); }
     .btn-stop { background: #3A4545; color: #fff; display: none; }
     .btn-stop.show { display: flex; }
-    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
-    .btn-apple { background: #111; color: #fff; }
+
     .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
     .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
     .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
@@ -64,10 +62,7 @@
     .photo-block { margin: 8px 0 14px; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.3); border: 1px solid var(--border); }
     .photo-block img { width: 100%; display: block; max-height: 240px; object-fit: cover; }
     .photo-block .cap { background: var(--bg-card); padding: 8px 12px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
-    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-    .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
-    .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
-    .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
+
     .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
     .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
     .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
@@ -101,46 +96,35 @@
   <main class="main">
     <div class="hero-wrap">
       <img src="img/jwwb/443dffc406-750xhaci-hasan-mosque-4416-high.jpg" alt="Gazi Hasan-moskee" loading="eager">
-      <div class="hero-caption" data-i18n="heroCap">Gazi Hasan-moskee</div>
+      <div class="hero-title"><h1 data-i18n="title">Gazi Hasan-moskee</h1></div>
     </div>
 
     <div class="content">
-      <h1 data-i18n="title">Gazi Hasan-moskee</h1>
-      <p class="lead" data-i18n="lead">Moskee uit 1786 van admiraal Gazi Hasan Pasha – de “Leeuwenpasha” – bij de Boom van Hippocrates, met marmeren fontein en leeuwenbeelden.</p>
+<p class="lead" data-i18n="lead">Moskee uit 1786 van admiraal Gazi Hasan Pasha – de “Leeuwenpasha” – bij de Boom van Hippocrates, met marmeren fontein en leeuwenbeelden.</p>
 
-      <div class="badges">
-        <span class="badge" data-i18n="badgeFree">Gratis</span>
-        <span class="badge">Kos-stad</span>
-        <span class="badge">1786</span>
-      </div>
+      
 
       <div class="actions">
         <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
         <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Gazi%20Hasan%20Pasha%20Mosque%20Hippocrates%20Tree%20Kos" target="_blank" rel="noopener">📍 Google Maps</a>
-        <a class="btn btn-apple" href="https://maps.apple.com/?q=Gazi%20Hasan%20Pasha%20Mosque%20Hippocrates%20Tree%20Kos" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      
+      <div class="map-row">
+        <a href="https://www.google.com/maps/search/?api=1&query=Gazi%20Hasan%20Pasha%20Mosque%20Hippocrates%20Tree%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+        <a href="https://maps.apple.com/?q=Gazi%20Hasan%20Pasha%20Mosque%20Hippocrates%20Tree%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
       </div>
       <p class="status" id="ttsStatus"></p>
 
       <div id="readText">
         <div class="card">
-          <h2 data-i18n="h2lion">De Leeuwenpasha</h2>
+          <h2 data-i18n="hStory">De Leeuwenpasha</h2>
           <p data-i18n="p1">De Gazi Hasan-moskee in Kos-stad is gebouwd in 1786 door de Ottomaanse admiraal Gazi Hasan Pasha, bijgenaamd de Leeuwenpasha: hij had een tamme leeuw als metgezel die hem overal volgde, zelfs in veldslagen.</p>
         </div>
 
-        <div class="facts">
-          <div class="fact">
-            <span class="n">1786</span>
-            <span class="l" data-i18n="factBuilt">gebouwd</span>
-          </div>
-          <div class="fact">
-            <span class="n">2 verdiepingen</span>
-            <span class="l" data-i18n="factMinaret">+ minaret</span>
-          </div>
-        </div>
+        
 
         <div class="card">
-          <h2 data-i18n="h2tree">Bij de Boom van Hippocrates</h2>
+          <h2 data-i18n="hSee">Bij de Boom van Hippocrates</h2>
           <p data-i18n="p2">Het bouwwerk staat op het centrale plein bij de legendarische plataan (Boom van Hippocrates). Het is twee verdiepingen hoog, op de plek van een oude Byzantijnse kerk (waarschijnlijk Sint-Joris). De bouwers hergebruikten stenen en marmer uit antieke gebouwen.</p>
         </div>
 
@@ -185,9 +169,9 @@
         </div>
 
         <div class="card">
-          <h2 data-i18n="h2visit">Bezoeken</h2>
+          <h2 data-i18n="hKnow">Bezoeken</h2>
           <p data-i18n="p7">Op het plein bij de Boom van Hippocrates. Van buitenaf altijd te zien; niet in gebruik als gebedshuis.</p>
-          <div class="tip" data-i18n="tip">Tip: bekijk de fontein, de leeuwenbeelden bij de minaret en de plataan ernaast – alles op een steenworp afstand.</div>
+          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: bekijk de fontein, de leeuwenbeelden bij de minaret en de plataan ernaast – alles op een steenworp afstand.</p></div>
         </div>
       </div>
     </div>
@@ -200,150 +184,168 @@
 
 <script>
 (function(){
-  var I18N = {
-    nl: {
-      title: "Gazi Hasan-moskee",
-      lead: "Moskee uit 1786 van admiraal Gazi Hasan Pasha – de “Leeuwenpasha” – bij de Boom van Hippocrates, met marmeren fontein en leeuwenbeelden.",
-      heroCap: "Gazi Hasan-moskee",
-      badgeFree: "Gratis",
-      btnPlay: "🔊 Voorlezen",
-      h2lion: "De Leeuwenpasha",
-      p1: "De Gazi Hasan-moskee in Kos-stad is gebouwd in 1786 door de Ottomaanse admiraal Gazi Hasan Pasha, bijgenaamd de Leeuwenpasha: hij had een tamme leeuw als metgezel die hem overal volgde, zelfs in veldslagen.",
-      factBuilt: "gebouwd", factMinaret: "+ minaret",
-      h2tree: "Bij de Boom van Hippocrates",
-      p2: "Het bouwwerk staat op het centrale plein bij de legendarische plataan (Boom van Hippocrates). Het is twee verdiepingen hoog, op de plek van een oude Byzantijnse kerk (waarschijnlijk Sint-Joris). De bouwers hergebruikten stenen en marmer uit antieke gebouwen.",
-      cap1: "Marmeren fontein naast de moskee",
-      h2fountain: "Fontein “Water van Hippocrates”",
-      p3: "Naast de moskee ligt een prachtige 14-zijdige witte marmeren fontein met koepel. De inscriptie verwijst naar “Water van Hippocrates” – een knipoog naar de beroemde arts. Vroeger wasten gelovigen zich hier voor het gebed.",
-      h2hanging: "1821 – ophanging",
-      p4: "In 1821, tijdens de Griekse opstand tegen de Ottomanen, werden hier 90 Grieken opgehangen aan de Boom van Hippocrates door de Ottomaanse gouverneur, als vergelding.",
-      h2minaret: "Minaret en leeuwen",
-      p5: "De moskee was in gebruik tot ongeveer 1933, daarna in verval (Italiaanse periode en aardbeving). Bij de basis van de minaret staan leeuwenbeelden (onder meer een leeuw zonder kop en een marmeren leeuwenhuid), geplaatst na 1933 als eerbetoon aan de leeuw van Hasan Pasha.",
-      p6: "Na schade door de aardbeving van 2017 is de moskee niet meer in gebruik voor gebeden; de buitenkant is wel te zien.",
-      g1: "Moskee", g2: "Leeuwenbeeld", g3: "Detail", g4: "Op het plein",
-      h2visit: "Bezoeken",
-      p7: "Op het plein bij de Boom van Hippocrates. Van buitenaf altijd te zien; niet in gebruik als gebedshuis.",
-      tip: "Tip: bekijk de fontein, de leeuwenbeelden bij de minaret en de plataan ernaast – alles op een steenworp afstand."
+  var I18N = window.HK_DICT = {
+    "nl": {
+      "title": "Gazi Hasan-moskee",
+      "lead": "Moskee uit 1786 van admiraal Gazi Hasan Pasha – de “Leeuwenpasha” – bij de Boom van Hippocrates, met marmeren fontein en leeuwenbeelden.",
+      "btnPlay": "Voorlezen",
+      "p1": "De Gazi Hasan-moskee in Kos-stad is gebouwd in 1786 door de Ottomaanse admiraal Gazi Hasan Pasha, bijgenaamd de Leeuwenpasha: hij had een tamme leeuw als metgezel die hem overal volgde, zelfs in veldslagen.",
+      "p2": "Het bouwwerk staat op het centrale plein bij de legendarische plataan (Boom van Hippocrates). Het is twee verdiepingen hoog, op de plek van een oude Byzantijnse kerk (waarschijnlijk Sint-Joris). De bouwers hergebruikten stenen en marmer uit antieke gebouwen.",
+      "cap1": "Marmeren fontein naast de moskee",
+      "h2fountain": "Fontein “Water van Hippocrates”",
+      "p3": "Naast de moskee ligt een prachtige 14-zijdige witte marmeren fontein met koepel. De inscriptie verwijst naar “Water van Hippocrates” – een knipoog naar de beroemde arts. Vroeger wasten gelovigen zich hier voor het gebed.",
+      "h2hanging": "1821 – ophanging",
+      "p4": "In 1821, tijdens de Griekse opstand tegen de Ottomanen, werden hier 90 Grieken opgehangen aan de Boom van Hippocrates door de Ottomaanse gouverneur, als vergelding.",
+      "h2minaret": "Minaret en leeuwen",
+      "p5": "De moskee was in gebruik tot ongeveer 1933, daarna in verval (Italiaanse periode en aardbeving). Bij de basis van de minaret staan leeuwenbeelden (onder meer een leeuw zonder kop en een marmeren leeuwenhuid), geplaatst na 1933 als eerbetoon aan de leeuw van Hasan Pasha.",
+      "p6": "Na schade door de aardbeving van 2017 is de moskee niet meer in gebruik voor gebeden; de buitenkant is wel te zien.",
+      "g1": "Moskee",
+      "g2": "Leeuwenbeeld",
+      "g3": "Detail",
+      "g4": "Op het plein",
+      "p7": "Op het plein bij de Boom van Hippocrates. Van buitenaf altijd te zien; niet in gebruik als gebedshuis.",
+      "tip": "bekijk de fontein, de leeuwenbeelden bij de minaret en de plataan ernaast – alles op een steenworp afstand.",
+      "hStory": "Het verhaal",
+      "hSee": "Wat je ziet",
+      "hKnow": "Goed om te weten",
+      "tipTitle": "Tip van de gids",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    en: {
-      title: "Gazi Hasan Mosque",
-      lead: "Mosque from 1786 by admiral Gazi Hasan Pasha – the “Lion Pasha” – next to the Tree of Hippocrates, with marble fountain and lion statues.",
-      heroCap: "Gazi Hasan Mosque",
-      badgeFree: "Free",
-      btnPlay: "🔊 Read aloud",
-      h2lion: "The Lion Pasha",
-      p1: "The Gazi Hasan Mosque in Kos Town was built in 1786 by the Ottoman admiral Gazi Hasan Pasha, nicknamed the Lion Pasha: he had a tame lion as a companion that followed him everywhere, even in battles.",
-      factBuilt: "built", factMinaret: "+ minaret",
-      h2tree: "By the Tree of Hippocrates",
-      p2: "The building stands on the central square by the legendary plane tree (Tree of Hippocrates). It is two storeys high, on the site of an old Byzantine church (probably Saint George). The builders reused stones and marble from ancient buildings.",
-      cap1: "Marble fountain next to the mosque",
-      h2fountain: "Fountain “Water of Hippocrates”",
-      p3: "Next to the mosque is a beautiful 14-sided white marble fountain with a dome. The inscription refers to “Water of Hippocrates” – a nod to the famous physician. In the past believers washed themselves here before prayer.",
-      h2hanging: "1821 – hanging",
-      p4: "In 1821, during the Greek uprising against the Ottomans, 90 Greeks were hanged here on the Tree of Hippocrates by the Ottoman governor, as retaliation.",
-      h2minaret: "Minaret and lions",
-      p5: "The mosque was in use until about 1933, then fell into disrepair (Italian period and earthquake). At the base of the minaret stand lion statues (including a headless lion and a marble lion skin), placed after 1933 as a tribute to Hasan Pasha’s lion.",
-      p6: "After damage from the 2017 earthquake the mosque is no longer used for prayers; the exterior can still be seen.",
-      g1: "Mosque", g2: "Lion statue", g3: "Detail", g4: "On the square",
-      h2visit: "Visiting",
-      p7: "On the square by the Tree of Hippocrates. Always visible from the outside; not in use as a place of worship.",
-      tip: "Tip: look at the fountain, the lion statues by the minaret and the plane tree next to it – everything is within a stone’s throw."
+    "en": {
+      "title": "Gazi Hasan Mosque",
+      "lead": "Mosque from 1786 by admiral Gazi Hasan Pasha – the “Lion Pasha” – next to the Tree of Hippocrates, with marble fountain and lion statues.",
+      "btnPlay": "Read aloud",
+      "p1": "The Gazi Hasan Mosque in Kos Town was built in 1786 by the Ottoman admiral Gazi Hasan Pasha, nicknamed the Lion Pasha: he had a tame lion as a companion that followed him everywhere, even in battles.",
+      "p2": "The building stands on the central square by the legendary plane tree (Tree of Hippocrates). It is two storeys high, on the site of an old Byzantine church (probably Saint George). The builders reused stones and marble from ancient buildings.",
+      "cap1": "Marble fountain next to the mosque",
+      "h2fountain": "Fountain “Water of Hippocrates”",
+      "p3": "Next to the mosque is a beautiful 14-sided white marble fountain with a dome. The inscription refers to “Water of Hippocrates” – a nod to the famous physician. In the past believers washed themselves here before prayer.",
+      "h2hanging": "1821 – hanging",
+      "p4": "In 1821, during the Greek uprising against the Ottomans, 90 Greeks were hanged here on the Tree of Hippocrates by the Ottoman governor, as retaliation.",
+      "h2minaret": "Minaret and lions",
+      "p5": "The mosque was in use until about 1933, then fell into disrepair (Italian period and earthquake). At the base of the minaret stand lion statues (including a headless lion and a marble lion skin), placed after 1933 as a tribute to Hasan Pasha’s lion.",
+      "p6": "After damage from the 2017 earthquake the mosque is no longer used for prayers; the exterior can still be seen.",
+      "g1": "Mosque",
+      "g2": "Lion statue",
+      "g3": "Detail",
+      "g4": "On the square",
+      "p7": "On the square by the Tree of Hippocrates. Always visible from the outside; not in use as a place of worship.",
+      "tip": "look at the fountain, the lion statues by the minaret and the plane tree next to it – everything is within a stone’s throw.",
+      "hStory": "The story",
+      "hSee": "What you see",
+      "hKnow": "Good to know",
+      "tipTitle": "Guide’s tip",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    de: {
-      title: "Gazi-Hasan-Moschee",
-      lead: "Moschee aus 1786 von Admiral Gazi Hasan Pasha – dem „Löwenpascha“ – bei der Platane des Hippokrates, mit Marmorb runnen und Löwenstatuen.",
-      heroCap: "Gazi-Hasan-Moschee",
-      badgeFree: "Kostenlos",
-      btnPlay: "🔊 Vorlesen",
-      h2lion: "Der Löwenpascha",
-      p1: "Die Gazi-Hasan-Moschee in Kos-Stadt wurde 1786 von dem osmanischen Admiral Gazi Hasan Pasha erbaut, genannt der Löwenpascha: Er hatte einen zahmen Löwen als Begleiter, der ihm überallhin folgte, sogar in Schlachten.",
-      factBuilt: "gebaut", factMinaret: "+ Minarett",
-      h2tree: "Bei der Platane des Hippokrates",
-      p2: "Das Gebäude steht auf dem zentralen Platz bei der legendären Platane (Baum des Hippokrates). Es ist zwei Stockwerke hoch, an der Stelle einer alten byzantinischen Kirche (wahrscheinlich St. Georg). Die Erbauer verwendeten Steine und Marmor aus antiken Gebäuden wieder.",
-      cap1: "Marmorbrunnen neben der Moschee",
-      h2fountain: "Brunnen „Wasser des Hippokrates“",
-      p3: "Neben der Moschee liegt ein schöner 14-seitiger weißer Marmorbrunnen mit Kuppel. Die Inschrift verweist auf „Wasser des Hippokrates“ – eine Anspielung auf den berühmten Arzt. Früher wuschen sich Gläubige hier vor dem Gebet.",
-      h2hanging: "1821 – Erhängung",
-      p4: "1821, während des griechischen Aufstands gegen die Osmanen, wurden hier 90 Griechen an der Platane des Hippokrates vom osmanischen Gouverneur erhängt, als Vergeltung.",
-      h2minaret: "Minarett und Löwen",
-      p5: "Die Moschee war bis etwa 1933 in Nutzung, danach verfiel sie (italienische Zeit und Erdbeben). Am Fuß des Minaretts stehen Löwenstatuen (unter anderem ein kopfloser Löwe und ein marmorner Löwenfell), nach 1933 als Tribut an den Löwen von Hasan Pasha aufgestellt.",
-      p6: "Nach Schäden durch das Erdbeben von 2017 wird die Moschee nicht mehr für Gebete genutzt; die Außenseite ist noch zu sehen.",
-      g1: "Moschee", g2: "Löwenstatue", g3: "Detail", g4: "Auf dem Platz",
-      h2visit: "Besuchen",
-      p7: "Auf dem Platz bei der Platane des Hippokrates. Von außen immer sichtbar; nicht als Gebetshaus in Nutzung.",
-      tip: "Tipp: schau dir den Brunnen, die Löwenstatuen am Minarett und die Platane daneben an – alles ist nur einen Steinwurf entfernt."
+    "de": {
+      "title": "Gazi-Hasan-Moschee",
+      "lead": "Moschee aus 1786 von Admiral Gazi Hasan Pasha – dem „Löwenpascha“ – bei der Platane des Hippokrates, mit Marmorb runnen und Löwenstatuen.",
+      "btnPlay": "Vorlesen",
+      "p1": "Die Gazi-Hasan-Moschee in Kos-Stadt wurde 1786 von dem osmanischen Admiral Gazi Hasan Pasha erbaut, genannt der Löwenpascha: Er hatte einen zahmen Löwen als Begleiter, der ihm überallhin folgte, sogar in Schlachten.",
+      "p2": "Das Gebäude steht auf dem zentralen Platz bei der legendären Platane (Baum des Hippokrates). Es ist zwei Stockwerke hoch, an der Stelle einer alten byzantinischen Kirche (wahrscheinlich St. Georg). Die Erbauer verwendeten Steine und Marmor aus antiken Gebäuden wieder.",
+      "cap1": "Marmorbrunnen neben der Moschee",
+      "h2fountain": "Brunnen „Wasser des Hippokrates“",
+      "p3": "Neben der Moschee liegt ein schöner 14-seitiger weißer Marmorbrunnen mit Kuppel. Die Inschrift verweist auf „Wasser des Hippokrates“ – eine Anspielung auf den berühmten Arzt. Früher wuschen sich Gläubige hier vor dem Gebet.",
+      "h2hanging": "1821 – Erhängung",
+      "p4": "1821, während des griechischen Aufstands gegen die Osmanen, wurden hier 90 Griechen an der Platane des Hippokrates vom osmanischen Gouverneur erhängt, als Vergeltung.",
+      "h2minaret": "Minarett und Löwen",
+      "p5": "Die Moschee war bis etwa 1933 in Nutzung, danach verfiel sie (italienische Zeit und Erdbeben). Am Fuß des Minaretts stehen Löwenstatuen (unter anderem ein kopfloser Löwe und ein marmorner Löwenfell), nach 1933 als Tribut an den Löwen von Hasan Pasha aufgestellt.",
+      "p6": "Nach Schäden durch das Erdbeben von 2017 wird die Moschee nicht mehr für Gebete genutzt; die Außenseite ist noch zu sehen.",
+      "g1": "Moschee",
+      "g2": "Löwenstatue",
+      "g3": "Detail",
+      "g4": "Auf dem Platz",
+      "p7": "Auf dem Platz bei der Platane des Hippokrates. Von außen immer sichtbar; nicht als Gebetshaus in Nutzung.",
+      "tip": "schau dir den Brunnen, die Löwenstatuen am Minarett und die Platane daneben an – alles ist nur einen Steinwurf entfernt.",
+      "hStory": "Die Geschichte",
+      "hSee": "Was du siehst",
+      "hKnow": "Gut zu wissen",
+      "tipTitle": "Tipp des Guides",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    it: {
-      title: "Moschea di Gazi Hasan",
-      lead: "Moschea del 1786 dell’ammiraglio Gazi Hasan Pasha – il “Pascià dei Leoni” – presso l’Albero di Ippocrate, con fontana di marmo e statue di leoni.",
-      heroCap: "Moschea di Gazi Hasan",
-      badgeFree: "Gratis",
-      btnPlay: "🔊 Leggi ad alta voce",
-      h2lion: "Il Pascià dei Leoni",
-      p1: "La Moschea di Gazi Hasan a Kos città fu costruita nel 1786 dall’ammiraglio ottomano Gazi Hasan Pasha, soprannominato il Pascià dei Leoni: aveva un leone addomesticato come compagno che lo seguiva ovunque, anche in battaglia.",
-      factBuilt: "costruita", factMinaret: "+ minareto",
-      h2tree: "Presso l’Albero di Ippocrate",
-      p2: "L’edificio si trova nella piazza centrale presso il leggendario platano (Albero di Ippocrate). È alto due piani, sul sito di un’antica chiesa bizantina (probabilmente San Giorgio). I costruttori riutilizzarono pietre e marmo da edifici antichi.",
-      cap1: "Fontana di marmo accanto alla moschea",
-      h2fountain: "Fontana “Acqua di Ippocrate”",
-      p3: "Accanto alla moschea c’è una bella fontana di marmo bianco a 14 lati con cupola. L’iscrizione fa riferimento all’“Acqua di Ippocrate” – un cenno al famoso medico. Un tempo i fedeli si lavavano qui prima della preghiera.",
-      h2hanging: "1821 – impiccagione",
-      p4: "Nel 1821, durante la rivolta greca contro gli Ottomani, 90 greci furono impiccati qui sull’Albero di Ippocrate dal governatore ottomano, come rappresaglia.",
-      h2minaret: "Minareto e leoni",
-      p5: "La moschea fu in uso fino a circa il 1933, poi cadde in rovina (periodo italiano e terremoto). Alla base del minareto ci sono statue di leoni (tra cui un leone senza testa e una pelle di leone in marmo), collocate dopo il 1933 come tributo al leone di Hasan Pasha.",
-      p6: "Dopo i danni del terremoto del 2017 la moschea non è più usata per le preghiere; l’esterno è ancora visibile.",
-      g1: "Moschea", g2: "Statua di leone", g3: "Dettaglio", g4: "Sulla piazza",
-      h2visit: "Visitare",
-      p7: "Sulla piazza presso l’Albero di Ippocrate. Sempre visibile dall’esterno; non in uso come luogo di culto.",
-      tip: "Consiglio: guarda la fontana, le statue di leoni al minareto e il platano accanto – tutto a un tiro di schioppo."
+    "it": {
+      "title": "Moschea di Gazi Hasan",
+      "lead": "Moschea del 1786 dell’ammiraglio Gazi Hasan Pasha – il “Pascià dei Leoni” – presso l’Albero di Ippocrate, con fontana di marmo e statue di leoni.",
+      "btnPlay": "Leggi ad alta voce",
+      "p1": "La Moschea di Gazi Hasan a Kos città fu costruita nel 1786 dall’ammiraglio ottomano Gazi Hasan Pasha, soprannominato il Pascià dei Leoni: aveva un leone addomesticato come compagno che lo seguiva ovunque, anche in battaglia.",
+      "p2": "L’edificio si trova nella piazza centrale presso il leggendario platano (Albero di Ippocrate). È alto due piani, sul sito di un’antica chiesa bizantina (probabilmente San Giorgio). I costruttori riutilizzarono pietre e marmo da edifici antichi.",
+      "cap1": "Fontana di marmo accanto alla moschea",
+      "h2fountain": "Fontana “Acqua di Ippocrate”",
+      "p3": "Accanto alla moschea c’è una bella fontana di marmo bianco a 14 lati con cupola. L’iscrizione fa riferimento all’“Acqua di Ippocrate” – un cenno al famoso medico. Un tempo i fedeli si lavavano qui prima della preghiera.",
+      "h2hanging": "1821 – impiccagione",
+      "p4": "Nel 1821, durante la rivolta greca contro gli Ottomani, 90 greci furono impiccati qui sull’Albero di Ippocrate dal governatore ottomano, come rappresaglia.",
+      "h2minaret": "Minareto e leoni",
+      "p5": "La moschea fu in uso fino a circa il 1933, poi cadde in rovina (periodo italiano e terremoto). Alla base del minareto ci sono statue di leoni (tra cui un leone senza testa e una pelle di leone in marmo), collocate dopo il 1933 come tributo al leone di Hasan Pasha.",
+      "p6": "Dopo i danni del terremoto del 2017 la moschea non è più usata per le preghiere; l’esterno è ancora visibile.",
+      "g1": "Moschea",
+      "g2": "Statua di leone",
+      "g3": "Dettaglio",
+      "g4": "Sulla piazza",
+      "p7": "Sulla piazza presso l’Albero di Ippocrate. Sempre visibile dall’esterno; non in uso come luogo di culto.",
+      "tip": "guarda la fontana, le statue di leoni al minareto e il platano accanto – tutto a un tiro di schioppo.",
+      "hStory": "La storia",
+      "hSee": "Cosa vedi",
+      "hKnow": "Buono a sapersi",
+      "tipTitle": "Consiglio della guida",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    tr: {
-      title: "Gazi Hasan Camii",
-      lead: "1786’da amiral Gazi Hasan Paşa – “Aslan Paşa” – tarafından inşa edilen cami, Hipokrat Ağacı yanında, mermer çeşme ve aslan heykelleriyle.",
-      heroCap: "Gazi Hasan Camii",
-      badgeFree: "Ücretsiz",
-      btnPlay: "🔊 Sesli oku",
-      h2lion: "Aslan Paşa",
-      p1: "Kos şehrindeki Gazi Hasan Camii 1786’da Osmanlı amirali Gazi Hasan Paşa tarafından inşa edildi, lakabı Aslan Paşa: evcil bir aslanı vardı ve onu her yere, savaşlara bile takip ederdi.",
-      factBuilt: "inşa edildi", factMinaret: "+ minare",
-      h2tree: "Hipokrat Ağacı yanında",
-      p2: "Yapı efsanevi çınar ağacının (Hipokrat Ağacı) bulunduğu merkezi meydanda duruyor. İki katlı, eski bir Bizans kilisesinin (muhtemelen Aziz Georgios) yerinde. İnşaatçılar antik yapılardan taş ve mermer yeniden kullandı.",
-      cap1: "Caminin yanındaki mermer çeşme",
-      h2fountain: "Çeşme “Hipokrat’ın Suyu”",
-      p3: "Caminin yanında kubbeli güzel 14 kenarlı beyaz mermer çeşme var. Yazıt “Hipokrat’ın Suyu”na atıfta bulunuyor – ünlü hekime bir gönderme. Eskiden müminler namazdan önce burada yıkanırdı.",
-      h2hanging: "1821 – asılma",
-      p4: "1821’de Osmanlılara karşı Yunan ayaklanması sırasında Osmanlı valisi tarafından intikam olarak burada Hipokrat Ağacı’na 90 Yunan asıldı.",
-      h2minaret: "Minare ve aslanlar",
-      p5: "Cami yaklaşık 1933’e kadar kullanıldı, sonra harap oldu (İtalyan dönemi ve deprem). Minarenin dibinde aslan heykelleri duruyor (başsız bir aslan ve mermer aslan derisi dahil), 1933’ten sonra Hasan Paşa’nın aslanına saygı olarak yerleştirildi.",
-      p6: "2017 depreminden sonra cami artık namaz için kullanılmıyor; dışarıdan görülebilir.",
-      g1: "Cami", g2: "Aslan heykeli", g3: "Detay", g4: "Meydanda",
-      h2visit: "Ziyaret",
-      p7: "Hipokrat Ağacı’nın bulunduğu meydanda. Dışarıdan her zaman görülebilir; ibadet yeri olarak kullanılmıyor.",
-      tip: "İpucu: çeşmeye, minarenin yanındaki aslan heykellerine ve yanındaki çınara bak – hepsi bir taş atımı mesafede."
+    "tr": {
+      "title": "Gazi Hasan Camii",
+      "lead": "1786’da amiral Gazi Hasan Paşa – “Aslan Paşa” – tarafından inşa edilen cami, Hipokrat Ağacı yanında, mermer çeşme ve aslan heykelleriyle.",
+      "btnPlay": "Sesli oku",
+      "p1": "Kos şehrindeki Gazi Hasan Camii 1786’da Osmanlı amirali Gazi Hasan Paşa tarafından inşa edildi, lakabı Aslan Paşa: evcil bir aslanı vardı ve onu her yere, savaşlara bile takip ederdi.",
+      "p2": "Yapı efsanevi çınar ağacının (Hipokrat Ağacı) bulunduğu merkezi meydanda duruyor. İki katlı, eski bir Bizans kilisesinin (muhtemelen Aziz Georgios) yerinde. İnşaatçılar antik yapılardan taş ve mermer yeniden kullandı.",
+      "cap1": "Caminin yanındaki mermer çeşme",
+      "h2fountain": "Çeşme “Hipokrat’ın Suyu”",
+      "p3": "Caminin yanında kubbeli güzel 14 kenarlı beyaz mermer çeşme var. Yazıt “Hipokrat’ın Suyu”na atıfta bulunuyor – ünlü hekime bir gönderme. Eskiden müminler namazdan önce burada yıkanırdı.",
+      "h2hanging": "1821 – asılma",
+      "p4": "1821’de Osmanlılara karşı Yunan ayaklanması sırasında Osmanlı valisi tarafından intikam olarak burada Hipokrat Ağacı’na 90 Yunan asıldı.",
+      "h2minaret": "Minare ve aslanlar",
+      "p5": "Cami yaklaşık 1933’e kadar kullanıldı, sonra harap oldu (İtalyan dönemi ve deprem). Minarenin dibinde aslan heykelleri duruyor (başsız bir aslan ve mermer aslan derisi dahil), 1933’ten sonra Hasan Paşa’nın aslanına saygı olarak yerleştirildi.",
+      "p6": "2017 depreminden sonra cami artık namaz için kullanılmıyor; dışarıdan görülebilir.",
+      "g1": "Cami",
+      "g2": "Aslan heykeli",
+      "g3": "Detay",
+      "g4": "Meydanda",
+      "p7": "Hipokrat Ağacı’nın bulunduğu meydanda. Dışarıdan her zaman görülebilir; ibadet yeri olarak kullanılmıyor.",
+      "tip": "çeşmeye, minarenin yanındaki aslan heykellerine ve yanındaki çınara bak – hepsi bir taş atımı mesafede.",
+      "hStory": "Hikaye",
+      "hSee": "Ne görürsün",
+      "hKnow": "Bilmekte fayda var",
+      "tipTitle": "Rehberin ipucu",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    es: {
-      title: "Mezquita de Gazi Hasan",
-      lead: "Mezquita de 1786 del almirante Gazi Hasan Pasha – el “Pachá de los Leones” – junto al Árbol de Hipócrates, con fuente de mármol y estatuas de leones.",
-      heroCap: "Mezquita de Gazi Hasan",
-      badgeFree: "Gratis",
-      btnPlay: "🔊 Leer en voz alta",
-      h2lion: "El Pachá de los Leones",
-      p1: "La Mezquita de Gazi Hasan en Kos ciudad fue construida en 1786 por el almirante otomano Gazi Hasan Pasha, apodado el Pachá de los Leones: tenía un león domesticado como compañero que lo seguía a todas partes, incluso en las batallas.",
-      factBuilt: "construida", factMinaret: "+ minarete",
-      h2tree: "Junto al Árbol de Hipócrates",
-      p2: "El edificio se encuentra en la plaza central junto al legendario plátano (Árbol de Hipócrates). Tiene dos plantas, en el sitio de una antigua iglesia bizantina (probablemente San Jorge). Los constructores reutilizaron piedras y mármol de edificios antiguos.",
-      cap1: "Fuente de mármol junto a la mezquita",
-      h2fountain: "Fuente “Agua de Hipócrates”",
-      p3: "Junto a la mezquita hay una hermosa fuente de mármol blanco de 14 lados con cúpula. La inscripción hace referencia al “Agua de Hipócrates” – un guiño al famoso médico. Antiguamente los fieles se lavaban aquí antes de la oración.",
-      h2hanging: "1821 – ahorcamiento",
-      p4: "En 1821, durante el levantamiento griego contra los otomanos, 90 griegos fueron ahorcados aquí en el Árbol de Hipócrates por el gobernador otomano, como represalia.",
-      h2minaret: "Minarete y leones",
-      p5: "La mezquita estuvo en uso hasta aproximadamente 1933, luego cayó en ruina (periodo italiano y terremoto). En la base del minarete hay estatuas de leones (entre ellas un león sin cabeza y una piel de león de mármol), colocadas después de 1933 como tributo al león de Hasan Pasha.",
-      p6: "Tras los daños del terremoto de 2017 la mezquita ya no se usa para oraciones; el exterior sigue siendo visible.",
-      g1: "Mezquita", g2: "Estatua de león", g3: "Detalle", g4: "En la plaza",
-      h2visit: "Visitar",
-      p7: "En la plaza junto al Árbol de Hipócrates. Siempre visible desde fuera; no se usa como lugar de culto.",
-      tip: "Consejo: mira la fuente, las estatuas de leones junto al minarete y el plátano al lado – todo está a un tiro de piedra."
+    "es": {
+      "title": "Mezquita de Gazi Hasan",
+      "lead": "Mezquita de 1786 del almirante Gazi Hasan Pasha – el “Pachá de los Leones” – junto al Árbol de Hipócrates, con fuente de mármol y estatuas de leones.",
+      "btnPlay": "Leer en voz alta",
+      "p1": "La Mezquita de Gazi Hasan en Kos ciudad fue construida en 1786 por el almirante otomano Gazi Hasan Pasha, apodado el Pachá de los Leones: tenía un león domesticado como compañero que lo seguía a todas partes, incluso en las batallas.",
+      "p2": "El edificio se encuentra en la plaza central junto al legendario plátano (Árbol de Hipócrates). Tiene dos plantas, en el sitio de una antigua iglesia bizantina (probablemente San Jorge). Los constructores reutilizaron piedras y mármol de edificios antiguos.",
+      "cap1": "Fuente de mármol junto a la mezquita",
+      "h2fountain": "Fuente “Agua de Hipócrates”",
+      "p3": "Junto a la mezquita hay una hermosa fuente de mármol blanco de 14 lados con cúpula. La inscripción hace referencia al “Agua de Hipócrates” – un guiño al famoso médico. Antiguamente los fieles se lavaban aquí antes de la oración.",
+      "h2hanging": "1821 – ahorcamiento",
+      "p4": "En 1821, durante el levantamiento griego contra los otomanos, 90 griegos fueron ahorcados aquí en el Árbol de Hipócrates por el gobernador otomano, como represalia.",
+      "h2minaret": "Minarete y leones",
+      "p5": "La mezquita estuvo en uso hasta aproximadamente 1933, luego cayó en ruina (periodo italiano y terremoto). En la base del minarete hay estatuas de leones (entre ellas un león sin cabeza y una piel de león de mármol), colocadas después de 1933 como tributo al león de Hasan Pasha.",
+      "p6": "Tras los daños del terremoto de 2017 la mezquita ya no se usa para oraciones; el exterior sigue siendo visible.",
+      "g1": "Mezquita",
+      "g2": "Estatua de león",
+      "g3": "Detalle",
+      "g4": "En la plaza",
+      "p7": "En la plaza junto al Árbol de Hipócrates. Siempre visible desde fuera; no se usa como lugar de culto.",
+      "tip": "mira la fuente, las estatuas de leones junto al minarete y el plátano al lado – todo está a un tiro de piedra.",
+      "hStory": "La historia",
+      "hSee": "Qué ves",
+      "hKnow": "Bueno saberlo",
+      "tipTitle": "Consejo del guía",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     }
   };
 

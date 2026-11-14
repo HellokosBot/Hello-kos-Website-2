@@ -40,20 +40,18 @@
     .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
     .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
     .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+
     .content { padding: 18px 16px 0; }
     h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
     .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+
     .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
     .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
     .btn-audio { background: var(--petrol); color: #fff; }
     .btn-audio.playing { background: var(--petrol-dark); }
     .btn-stop { background: #3A4545; color: #fff; display: none; }
     .btn-stop.show { display: flex; }
-    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
-    .btn-apple { background: #111; color: #fff; }
+
     .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
     .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
     .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
@@ -61,10 +59,7 @@
     .card p:last-child { margin-bottom: 0; }
     .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
     .tip strong { color: var(--gold); }
-    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-    .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
-    .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
-    .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
+
     .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
     .g-item { border-radius: 12px; overflow: hidden; background: var(--bg-card); box-shadow: 0 2px 8px rgba(0,0,0,0.25); border: 1px solid var(--border); }
     .g-item img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
@@ -98,46 +93,35 @@
   <main class="main">
     <div class="hero-wrap">
       <img src="img/jwwb/109a58a7f2-5975597a203fa-high.jpg" alt="Belastingpoort Kos" loading="eager">
-      <div class="hero-caption" data-i18n="heroCap">Belastingpoort · Porta tou Forou</div>
+      <div class="hero-title"><h1 data-i18n="title">Belastingpoort</h1></div>
     </div>
 
     <div class="content">
-      <h1 data-i18n="title">Belastingpoort</h1>
-      <p class="lead" data-i18n="lead">Middeleeuwse toegangspoort waar handelaars tol betaalden om hun waren binnen de stadsmuren te verkopen.</p>
+<p class="lead" data-i18n="lead">Middeleeuwse toegangspoort waar handelaars tol betaalden om hun waren binnen de stadsmuren te verkopen.</p>
 
-      <div class="badges">
-        <span class="badge" data-i18n="badgeFree">Gratis</span>
-        <span class="badge">Kos-stad</span>
-        <span class="badge" data-i18n="badgeCentury">14e eeuw</span>
-      </div>
+      
 
       <div class="actions">
         <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
         <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Belastingpoort%20Porta%20tou%20Forou%20Kos" target="_blank" rel="noopener">📍 Google Maps</a>
-        <a class="btn btn-apple" href="https://maps.apple.com/?q=Belastingpoort%20Porta%20tou%20Forou%20Kos" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      
+      <div class="map-row">
+        <a href="https://www.google.com/maps/search/?api=1&query=Belastingpoort%20Porta%20tou%20Forou%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+        <a href="https://maps.apple.com/?q=Belastingpoort%20Porta%20tou%20Forou%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
       </div>
       <p class="status" id="ttsStatus"></p>
 
       <div id="readText">
         <div class="card">
-          <h2 data-i18n="h2porta">Porta tou Forou</h2>
+          <h2 data-i18n="hStory">Porta tou Forou</h2>
           <p data-i18n="p1">De Belastingpoort heet in het Grieks Porta tou Forou: porta = poort, tou forou = van de belasting. Handelaars moesten hier tol betalen om hun waren binnen de muren te mogen verkopen.</p>
         </div>
 
-        <div class="facts">
-          <div class="fact">
-            <span class="n" data-i18n="factCentury">14e eeuw</span>
-            <span class="l" data-i18n="factBuilt">gebouwd</span>
-          </div>
-          <div class="fact">
-            <span class="n" data-i18n="factGates">2 van 5</span>
-            <span class="l" data-i18n="factLeft">poorten over</span>
-          </div>
-        </div>
+        
 
         <div class="card">
-          <h2 data-i18n="h2knights">Ridders van Sint-Jan</h2>
+          <h2 data-i18n="hSee">Ridders van Sint-Jan</h2>
           <p data-i18n="p2">Eind 1300 lieten de Ridders van de Orde van Sint-Jan een verdedigingswerk rond de stad bouwen tegen invallen en piraterij. In die middeleeuwse muur zaten vijf ingangen; vandaag staan er nog twee, waaronder deze Belastingpoort.</p>
           <p data-i18n="p3">De poort is gebouwd met hergebruikte stenen en zuilen uit de Romeinse tijd – een slimme middeleeuwse gewoonte om snel en voordelig te bouwen.</p>
         </div>
@@ -193,9 +177,9 @@
         </div>
 
         <div class="card">
-          <h2 data-i18n="h2visit">Bezoeken</h2>
+          <h2 data-i18n="hKnow">Bezoeken</h2>
           <p data-i18n="p7">Gratis, altijd van buitenaf te zien. Ligt in Kos-stad, bij de Agora en het centrum.</p>
-          <div class="tip" data-i18n="tip">Tip: combineer met de Agora en de Westelijke opgraving – alles op loopafstand.</div>
+          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: combineer met de Agora en de Westelijke opgraving – alles op loopafstand.</p></div>
         </div>
       </div>
     </div>
@@ -208,156 +192,186 @@
 
 <script>
 (function(){
-  var I18N = {
-    nl: {
-      title: "Belastingpoort",
-      lead: "Middeleeuwse toegangspoort waar handelaars tol betaalden om hun waren binnen de stadsmuren te verkopen.",
-      heroCap: "Belastingpoort · Porta tou Forou",
-      badgeFree: "Gratis", badgeCentury: "14e eeuw",
-      btnPlay: "🔊 Voorlezen",
-      h2porta: "Porta tou Forou",
-      p1: "De Belastingpoort heet in het Grieks Porta tou Forou: porta = poort, tou forou = van de belasting. Handelaars moesten hier tol betalen om hun waren binnen de muren te mogen verkopen.",
-      factCentury: "14e eeuw", factBuilt: "gebouwd",
-      factGates: "2 van 5", factLeft: "poorten over",
-      h2knights: "Ridders van Sint-Jan",
-      p2: "Eind 1300 lieten de Ridders van de Orde van Sint-Jan een verdedigingswerk rond de stad bouwen tegen invallen en piraterij. In die middeleeuwse muur zaten vijf ingangen; vandaag staan er nog twee, waaronder deze Belastingpoort.",
-      p3: "De poort is gebouwd met hergebruikte stenen en zuilen uit de Romeinse tijd – een slimme middeleeuwse gewoonte om snel en voordelig te bouwen.",
-      h2agora: "Direct bij de Agora",
-      p4: "Achter de poort ligt het terrein van de oude marktplaats (Agora). Je ziet er nog overblijfselen van zuilengangen, tempels en winkels uit de Hellenistische en Romeinse periode.",
-      h2photos: "Foto’s van vroeger",
-      p5: "De Belastingpoort was een geliefde fotospot, met weelderige paarse en roze bougainvillea’s – perfect voor vakantiefoto’s. Hieronder foto’s van hoe de poort er vroeger uitzag.",
-      g1: "Porta tou Forou", g2: "Met bougainvillea (vroeger)", g3: "Poort in bloei", g4: "Detail",
-      g5: "Historisch", g6: "Vroeger", g7: "Voor de aardbeving", g8: "Archief",
-      h2quake: "Aardbeving 2017",
-      p6: "In juli 2017 trof een beving van 6,7 op de schaal van Richter het eiland en richtte schade aan in het oude centrum. De poort en de begroeiing zijn daardoor veranderd, maar de plek blijft historisch en de moeite waard.",
-      h2visit: "Bezoeken",
-      p7: "Gratis, altijd van buitenaf te zien. Ligt in Kos-stad, bij de Agora en het centrum.",
-      tip: "Tip: combineer met de Agora en de Westelijke opgraving – alles op loopafstand."
+  var I18N = window.HK_DICT = {
+    "nl": {
+      "title": "Belastingpoort",
+      "lead": "Middeleeuwse toegangspoort waar handelaars tol betaalden om hun waren binnen de stadsmuren te verkopen.",
+      "btnPlay": "Voorlezen",
+      "p1": "De Belastingpoort heet in het Grieks Porta tou Forou: porta = poort, tou forou = van de belasting. Handelaars moesten hier tol betalen om hun waren binnen de muren te mogen verkopen.",
+      "p2": "Eind 1300 lieten de Ridders van de Orde van Sint-Jan een verdedigingswerk rond de stad bouwen tegen invallen en piraterij. In die middeleeuwse muur zaten vijf ingangen; vandaag staan er nog twee, waaronder deze Belastingpoort.",
+      "p3": "De poort is gebouwd met hergebruikte stenen en zuilen uit de Romeinse tijd – een slimme middeleeuwse gewoonte om snel en voordelig te bouwen.",
+      "h2agora": "Direct bij de Agora",
+      "p4": "Achter de poort ligt het terrein van de oude marktplaats (Agora). Je ziet er nog overblijfselen van zuilengangen, tempels en winkels uit de Hellenistische en Romeinse periode.",
+      "h2photos": "Foto’s van vroeger",
+      "p5": "De Belastingpoort was een geliefde fotospot, met weelderige paarse en roze bougainvillea’s – perfect voor vakantiefoto’s. Hieronder foto’s van hoe de poort er vroeger uitzag.",
+      "g1": "Porta tou Forou",
+      "g2": "Met bougainvillea (vroeger)",
+      "g3": "Poort in bloei",
+      "g4": "Detail",
+      "g5": "Historisch",
+      "g6": "Vroeger",
+      "g7": "Voor de aardbeving",
+      "g8": "Archief",
+      "h2quake": "Aardbeving 2017",
+      "p6": "In juli 2017 trof een beving van 6,7 op de schaal van Richter het eiland en richtte schade aan in het oude centrum. De poort en de begroeiing zijn daardoor veranderd, maar de plek blijft historisch en de moeite waard.",
+      "p7": "Gratis, altijd van buitenaf te zien. Ligt in Kos-stad, bij de Agora en het centrum.",
+      "tip": "combineer met de Agora en de Westelijke opgraving – alles op loopafstand.",
+      "hStory": "Het verhaal",
+      "hSee": "Wat je ziet",
+      "hKnow": "Goed om te weten",
+      "tipTitle": "Tip van de gids",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    en: {
-      title: "Tax Gate",
-      lead: "Medieval entrance gate where traders paid toll to sell their goods inside the city walls.",
-      heroCap: "Tax Gate · Porta tou Forou",
-      badgeFree: "Free", badgeCentury: "14th century",
-      btnPlay: "🔊 Read aloud",
-      h2porta: "Porta tou Forou",
-      p1: "The Tax Gate is called Porta tou Forou in Greek: porta = gate, tou forou = of the tax. Traders had to pay toll here to be allowed to sell their goods inside the walls.",
-      factCentury: "14th century", factBuilt: "built",
-      factGates: "2 of 5", factLeft: "gates remaining",
-      h2knights: "Knights of St John",
-      p2: "At the end of the 1300s the Knights of the Order of St John built a defensive wall around the city against raids and piracy. That medieval wall had five entrances; today two remain, including this Tax Gate.",
-      p3: "The gate was built with reused stones and columns from the Roman period – a smart medieval habit to build quickly and cheaply.",
-      h2agora: "Right by the Agora",
-      p4: "Behind the gate lies the area of the old marketplace (Agora). You can still see remains of colonnades, temples and shops from the Hellenistic and Roman periods.",
-      h2photos: "Photos from the past",
-      p5: "The Tax Gate was a popular photo spot, with lush purple and pink bougainvilleas – perfect for holiday photos. Below are photos of how the gate used to look.",
-      g1: "Porta tou Forou", g2: "With bougainvillea (past)", g3: "Gate in bloom", g4: "Detail",
-      g5: "Historic", g6: "In the past", g7: "Before the earthquake", g8: "Archive",
-      h2quake: "Earthquake 2017",
-      p6: "In July 2017 a 6.7 magnitude earthquake hit the island and caused damage in the old centre. The gate and the vegetation changed as a result, but the place remains historic and worth visiting.",
-      h2visit: "Visiting",
-      p7: "Free, always visible from the outside. Located in Kos Town, near the Agora and the centre.",
-      tip: "Tip: combine with the Agora and the Western Excavations – all within walking distance."
+    "en": {
+      "title": "Tax Gate",
+      "lead": "Medieval entrance gate where traders paid toll to sell their goods inside the city walls.",
+      "btnPlay": "Read aloud",
+      "p1": "The Tax Gate is called Porta tou Forou in Greek: porta = gate, tou forou = of the tax. Traders had to pay toll here to be allowed to sell their goods inside the walls.",
+      "p2": "At the end of the 1300s the Knights of the Order of St John built a defensive wall around the city against raids and piracy. That medieval wall had five entrances; today two remain, including this Tax Gate.",
+      "p3": "The gate was built with reused stones and columns from the Roman period – a smart medieval habit to build quickly and cheaply.",
+      "h2agora": "Right by the Agora",
+      "p4": "Behind the gate lies the area of the old marketplace (Agora). You can still see remains of colonnades, temples and shops from the Hellenistic and Roman periods.",
+      "h2photos": "Photos from the past",
+      "p5": "The Tax Gate was a popular photo spot, with lush purple and pink bougainvilleas – perfect for holiday photos. Below are photos of how the gate used to look.",
+      "g1": "Porta tou Forou",
+      "g2": "With bougainvillea (past)",
+      "g3": "Gate in bloom",
+      "g4": "Detail",
+      "g5": "Historic",
+      "g6": "In the past",
+      "g7": "Before the earthquake",
+      "g8": "Archive",
+      "h2quake": "Earthquake 2017",
+      "p6": "In July 2017 a 6.7 magnitude earthquake hit the island and caused damage in the old centre. The gate and the vegetation changed as a result, but the place remains historic and worth visiting.",
+      "p7": "Free, always visible from the outside. Located in Kos Town, near the Agora and the centre.",
+      "tip": "combine with the Agora and the Western Excavations – all within walking distance.",
+      "hStory": "The story",
+      "hSee": "What you see",
+      "hKnow": "Good to know",
+      "tipTitle": "Guide’s tip",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    de: {
-      title: "Zolltor",
-      lead: "Mittelalterliches Eingangstor, wo Händler Zoll zahlten, um ihre Waren innerhalb der Stadtmauern zu verkaufen.",
-      heroCap: "Zolltor · Porta tou Forou",
-      badgeFree: "Kostenlos", badgeCentury: "14. Jahrhundert",
-      btnPlay: "🔊 Vorlesen",
-      h2porta: "Porta tou Forou",
-      p1: "Das Zolltor heißt auf Griechisch Porta tou Forou: porta = Tor, tou forou = der Steuer. Händler mussten hier Zoll zahlen, um ihre Waren innerhalb der Mauern verkaufen zu dürfen.",
-      factCentury: "14. Jh.", factBuilt: "gebaut",
-      factGates: "2 von 5", factLeft: "Tore übrig",
-      h2knights: "Ritter von St. Johann",
-      p2: "Ende des 14. Jahrhunderts ließen die Ritter des Johanniterordens ein Verteidigungswerk um die Stadt bauen gegen Überfälle und Piraterie. In dieser mittelalterlichen Mauer gab es fünf Eingänge; heute stehen noch zwei, darunter dieses Zolltor.",
-      p3: "Das Tor wurde mit wiederverwendeten Steinen und Säulen aus der römischen Zeit gebaut – eine clevere mittelalterliche Gewohnheit, um schnell und günstig zu bauen.",
-      h2agora: "Direkt bei der Agora",
-      p4: "Hinter dem Tor liegt das Gelände des alten Marktplatzes (Agora). Du siehst noch Überreste von Säulengängen, Tempeln und Läden aus der hellenistischen und römischen Zeit.",
-      h2photos: "Fotos von früher",
-      p5: "Das Zolltor war ein beliebter Fotospot mit üppigen lila und rosa Bougainvilleen – perfekt für Urlaubsfotos. Unten Fotos, wie das Tor früher aussah.",
-      g1: "Porta tou Forou", g2: "Mit Bougainvillea (früher)", g3: "Tor in Blüte", g4: "Detail",
-      g5: "Historisch", g6: "Früher", g7: "Vor dem Erdbeben", g8: "Archiv",
-      h2quake: "Erdbeben 2017",
-      p6: "Im Juli 2017 traf ein Beben der Stärke 6,7 die Insel und richtete Schäden im alten Zentrum an. Tor und Bewuchs haben sich dadurch verändert, aber der Ort bleibt historisch und sehenswert.",
-      h2visit: "Besuchen",
-      p7: "Kostenlos, immer von außen sichtbar. Liegt in Kos-Stadt, bei der Agora und dem Zentrum.",
-      tip: "Tipp: kombiniere mit der Agora und der Westlichen Grabung – alles fußläufig."
+    "de": {
+      "title": "Zolltor",
+      "lead": "Mittelalterliches Eingangstor, wo Händler Zoll zahlten, um ihre Waren innerhalb der Stadtmauern zu verkaufen.",
+      "btnPlay": "Vorlesen",
+      "p1": "Das Zolltor heißt auf Griechisch Porta tou Forou: porta = Tor, tou forou = der Steuer. Händler mussten hier Zoll zahlen, um ihre Waren innerhalb der Mauern verkaufen zu dürfen.",
+      "p2": "Ende des 14. Jahrhunderts ließen die Ritter des Johanniterordens ein Verteidigungswerk um die Stadt bauen gegen Überfälle und Piraterie. In dieser mittelalterlichen Mauer gab es fünf Eingänge; heute stehen noch zwei, darunter dieses Zolltor.",
+      "p3": "Das Tor wurde mit wiederverwendeten Steinen und Säulen aus der römischen Zeit gebaut – eine clevere mittelalterliche Gewohnheit, um schnell und günstig zu bauen.",
+      "h2agora": "Direkt bei der Agora",
+      "p4": "Hinter dem Tor liegt das Gelände des alten Marktplatzes (Agora). Du siehst noch Überreste von Säulengängen, Tempeln und Läden aus der hellenistischen und römischen Zeit.",
+      "h2photos": "Fotos von früher",
+      "p5": "Das Zolltor war ein beliebter Fotospot mit üppigen lila und rosa Bougainvilleen – perfekt für Urlaubsfotos. Unten Fotos, wie das Tor früher aussah.",
+      "g1": "Porta tou Forou",
+      "g2": "Mit Bougainvillea (früher)",
+      "g3": "Tor in Blüte",
+      "g4": "Detail",
+      "g5": "Historisch",
+      "g6": "Früher",
+      "g7": "Vor dem Erdbeben",
+      "g8": "Archiv",
+      "h2quake": "Erdbeben 2017",
+      "p6": "Im Juli 2017 traf ein Beben der Stärke 6,7 die Insel und richtete Schäden im alten Zentrum an. Tor und Bewuchs haben sich dadurch verändert, aber der Ort bleibt historisch und sehenswert.",
+      "p7": "Kostenlos, immer von außen sichtbar. Liegt in Kos-Stadt, bei der Agora und dem Zentrum.",
+      "tip": "kombiniere mit der Agora und der Westlichen Grabung – alles fußläufig.",
+      "hStory": "Die Geschichte",
+      "hSee": "Was du siehst",
+      "hKnow": "Gut zu wissen",
+      "tipTitle": "Tipp des Guides",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    it: {
-      title: "Porta della Tassa",
-      lead: "Porta d’ingresso medievale dove i mercanti pagavano il pedaggio per vendere le loro merci dentro le mura della città.",
-      heroCap: "Porta della Tassa · Porta tou Forou",
-      badgeFree: "Gratis", badgeCentury: "XIV secolo",
-      btnPlay: "🔊 Leggi ad alta voce",
-      h2porta: "Porta tou Forou",
-      p1: "La Porta della Tassa si chiama in greco Porta tou Forou: porta = porta, tou forou = della tassa. I mercanti dovevano pagare il pedaggio qui per poter vendere le loro merci dentro le mura.",
-      factCentury: "XIV sec.", factBuilt: "costruita",
-      factGates: "2 di 5", factLeft: "porte rimaste",
-      h2knights: "Cavalieri di San Giovanni",
-      p2: "Alla fine del 1300 i Cavalieri dell’Ordine di San Giovanni fecero costruire un’opera difensiva intorno alla città contro incursioni e pirateria. In quel muro medievale c’erano cinque ingressi; oggi ne restano due, tra cui questa Porta della Tassa.",
-      p3: "La porta è stata costruita con pietre e colonne riutilizzate dell’epoca romana – un’abitudine medievale intelligente per costruire in fretta e a buon mercato.",
-      h2agora: "Proprio vicino all’Agora",
-      p4: "Dietro la porta si trova l’area dell’antico mercato (Agora). Si vedono ancora resti di portici, templi e negozi del periodo ellenistico e romano.",
-      h2photos: "Foto di un tempo",
-      p5: "La Porta della Tassa era un punto foto amato, con lussureggianti bouganville viola e rosa – perfette per le foto delle vacanze. Qui sotto foto di come appariva la porta un tempo.",
-      g1: "Porta tou Forou", g2: "Con bouganville (un tempo)", g3: "Porta in fiore", g4: "Dettaglio",
-      g5: "Storico", g6: "Un tempo", g7: "Prima del terremoto", g8: "Archivio",
-      h2quake: "Terremoto 2017",
-      p6: "Nel luglio 2017 un terremoto di magnitudo 6,7 colpì l’isola e causò danni nel centro antico. La porta e la vegetazione sono cambiate, ma il luogo rimane storico e degno di visita.",
-      h2visit: "Visitare",
-      p7: "Gratis, sempre visibile dall’esterno. Si trova a Kos città, vicino all’Agora e al centro.",
-      tip: "Consiglio: combina con l’Agora e gli Scavi Occidentali – tutto a piedi."
+    "it": {
+      "title": "Porta della Tassa",
+      "lead": "Porta d’ingresso medievale dove i mercanti pagavano il pedaggio per vendere le loro merci dentro le mura della città.",
+      "btnPlay": "Leggi ad alta voce",
+      "p1": "La Porta della Tassa si chiama in greco Porta tou Forou: porta = porta, tou forou = della tassa. I mercanti dovevano pagare il pedaggio qui per poter vendere le loro merci dentro le mura.",
+      "p2": "Alla fine del 1300 i Cavalieri dell’Ordine di San Giovanni fecero costruire un’opera difensiva intorno alla città contro incursioni e pirateria. In quel muro medievale c’erano cinque ingressi; oggi ne restano due, tra cui questa Porta della Tassa.",
+      "p3": "La porta è stata costruita con pietre e colonne riutilizzate dell’epoca romana – un’abitudine medievale intelligente per costruire in fretta e a buon mercato.",
+      "h2agora": "Proprio vicino all’Agora",
+      "p4": "Dietro la porta si trova l’area dell’antico mercato (Agora). Si vedono ancora resti di portici, templi e negozi del periodo ellenistico e romano.",
+      "h2photos": "Foto di un tempo",
+      "p5": "La Porta della Tassa era un punto foto amato, con lussureggianti bouganville viola e rosa – perfette per le foto delle vacanze. Qui sotto foto di come appariva la porta un tempo.",
+      "g1": "Porta tou Forou",
+      "g2": "Con bouganville (un tempo)",
+      "g3": "Porta in fiore",
+      "g4": "Dettaglio",
+      "g5": "Storico",
+      "g6": "Un tempo",
+      "g7": "Prima del terremoto",
+      "g8": "Archivio",
+      "h2quake": "Terremoto 2017",
+      "p6": "Nel luglio 2017 un terremoto di magnitudo 6,7 colpì l’isola e causò danni nel centro antico. La porta e la vegetazione sono cambiate, ma il luogo rimane storico e degno di visita.",
+      "p7": "Gratis, sempre visibile dall’esterno. Si trova a Kos città, vicino all’Agora e al centro.",
+      "tip": "combina con l’Agora e gli Scavi Occidentali – tutto a piedi.",
+      "hStory": "La storia",
+      "hSee": "Cosa vedi",
+      "hKnow": "Buono a sapersi",
+      "tipTitle": "Consiglio della guida",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    tr: {
-      title: "Vergi Kapısı",
-      lead: "Tüccarların mallarını şehir surları içinde satmak için vergi ödedikleri ortaçağ giriş kapısı.",
-      heroCap: "Vergi Kapısı · Porta tou Forou",
-      badgeFree: "Ücretsiz", badgeCentury: "14. yüzyıl",
-      btnPlay: "🔊 Sesli oku",
-      h2porta: "Porta tou Forou",
-      p1: "Vergi Kapısı Yunanca Porta tou Forou olarak bilinir: porta = kapı, tou forou = verginin. Tüccarlar mallarını surlar içinde satabilmek için burada vergi ödemek zorundaydı.",
-      factCentury: "14. yy", factBuilt: "inşa edildi",
-      factGates: "5’ten 2’si", factLeft: "kapı kaldı",
-      h2knights: "Aziz Yuhanna Şövalyeleri",
-      p2: "1300’lerin sonunda Aziz Yuhanna Tarikatı Şövalyeleri şehri akınlara ve korsanlığa karşı savunmak için bir sur inşa ettirdi. Bu ortaçağ duvarında beş giriş vardı; bugün ikisi ayakta, bunlardan biri bu Vergi Kapısı.",
-      p3: "Kapı Roma döneminden yeniden kullanılan taşlar ve sütunlarla inşa edildi – hızlı ve ucuz inşa etmek için akıllıca bir ortaçağ alışkanlığı.",
-      h2agora: "Agora’nın hemen yanında",
-      p4: "Kapının arkasında eski pazar yeri (Agora) alanı yer alır. Helenistik ve Roma döneminden sütunlu galeriler, tapınaklar ve dükkan kalıntıları hâlâ görülebilir.",
-      h2photos: "Eski fotoğraflar",
-      p5: "Vergi Kapısı, mor ve pembe bougainvillealarla dolu popüler bir fotoğraf noktasıydı – tatil fotoğrafları için mükemmel. Aşağıda kapının eskiden nasıl göründüğüne dair fotoğraflar var.",
-      g1: "Porta tou Forou", g2: "Bougainvillea ile (eski)", g3: "Çiçek açmış kapı", g4: "Detay",
-      g5: "Tarihi", g6: "Eskiden", g7: "Depremden önce", g8: "Arşiv",
-      h2quake: "2017 depremi",
-      p6: "Temmuz 2017’de 6,7 büyüklüğünde bir deprem adayı vurdu ve eski merkezde hasara yol açtı. Kapı ve bitki örtüsü bu nedenle değişti, ancak yer hâlâ tarihi ve görülmeye değer.",
-      h2visit: "Ziyaret",
-      p7: "Ücretsiz, her zaman dışarıdan görülebilir. Kos şehrinde, Agora ve merkez yakınında.",
-      tip: "İpucu: Agora ve Batı Kazıları ile birleştir – hepsi yürüme mesafesinde."
+    "tr": {
+      "title": "Vergi Kapısı",
+      "lead": "Tüccarların mallarını şehir surları içinde satmak için vergi ödedikleri ortaçağ giriş kapısı.",
+      "btnPlay": "Sesli oku",
+      "p1": "Vergi Kapısı Yunanca Porta tou Forou olarak bilinir: porta = kapı, tou forou = verginin. Tüccarlar mallarını surlar içinde satabilmek için burada vergi ödemek zorundaydı.",
+      "p2": "1300’lerin sonunda Aziz Yuhanna Tarikatı Şövalyeleri şehri akınlara ve korsanlığa karşı savunmak için bir sur inşa ettirdi. Bu ortaçağ duvarında beş giriş vardı; bugün ikisi ayakta, bunlardan biri bu Vergi Kapısı.",
+      "p3": "Kapı Roma döneminden yeniden kullanılan taşlar ve sütunlarla inşa edildi – hızlı ve ucuz inşa etmek için akıllıca bir ortaçağ alışkanlığı.",
+      "h2agora": "Agora’nın hemen yanında",
+      "p4": "Kapının arkasında eski pazar yeri (Agora) alanı yer alır. Helenistik ve Roma döneminden sütunlu galeriler, tapınaklar ve dükkan kalıntıları hâlâ görülebilir.",
+      "h2photos": "Eski fotoğraflar",
+      "p5": "Vergi Kapısı, mor ve pembe bougainvillealarla dolu popüler bir fotoğraf noktasıydı – tatil fotoğrafları için mükemmel. Aşağıda kapının eskiden nasıl göründüğüne dair fotoğraflar var.",
+      "g1": "Porta tou Forou",
+      "g2": "Bougainvillea ile (eski)",
+      "g3": "Çiçek açmış kapı",
+      "g4": "Detay",
+      "g5": "Tarihi",
+      "g6": "Eskiden",
+      "g7": "Depremden önce",
+      "g8": "Arşiv",
+      "h2quake": "2017 depremi",
+      "p6": "Temmuz 2017’de 6,7 büyüklüğünde bir deprem adayı vurdu ve eski merkezde hasara yol açtı. Kapı ve bitki örtüsü bu nedenle değişti, ancak yer hâlâ tarihi ve görülmeye değer.",
+      "p7": "Ücretsiz, her zaman dışarıdan görülebilir. Kos şehrinde, Agora ve merkez yakınında.",
+      "tip": "Agora ve Batı Kazıları ile birleştir – hepsi yürüme mesafesinde.",
+      "hStory": "Hikaye",
+      "hSee": "Ne görürsün",
+      "hKnow": "Bilmekte fayda var",
+      "tipTitle": "Rehberin ipucu",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    es: {
-      title: "Puerta del Impuesto",
-      lead: "Puerta de entrada medieval donde los comerciantes pagaban peaje para vender sus mercancías dentro de las murallas de la ciudad.",
-      heroCap: "Puerta del Impuesto · Porta tou Forou",
-      badgeFree: "Gratis", badgeCentury: "siglo XIV",
-      btnPlay: "🔊 Leer en voz alta",
-      h2porta: "Porta tou Forou",
-      p1: "La Puerta del Impuesto se llama en griego Porta tou Forou: porta = puerta, tou forou = del impuesto. Los comerciantes tenían que pagar peaje aquí para poder vender sus mercancías dentro de las murallas.",
-      factCentury: "siglo XIV", factBuilt: "construida",
-      factGates: "2 de 5", factLeft: "puertas restantes",
-      h2knights: "Caballeros de San Juan",
-      p2: "A finales del 1300 los Caballeros de la Orden de San Juan hicieron construir una obra defensiva alrededor de la ciudad contra incursiones y piratería. En esa muralla medieval había cinco entradas; hoy quedan dos, incluida esta Puerta del Impuesto.",
-      p3: "La puerta se construyó con piedras y columnas reutilizadas de la época romana – un hábito medieval inteligente para construir rápido y barato.",
-      h2agora: "Justo al lado del Ágora",
-      p4: "Detrás de la puerta se encuentra el área del antiguo mercado (Ágora). Aún se ven restos de pórticos, templos y tiendas de los periodos helenístico y romano.",
-      h2photos: "Fotos de antaño",
-      p5: "La Puerta del Impuesto era un punto fotográfico popular, con exuberantes buganvillas moradas y rosas – perfectas para fotos de vacaciones. Abajo fotos de cómo se veía la puerta antes.",
-      g1: "Porta tou Forou", g2: "Con buganvilla (antes)", g3: "Puerta en flor", g4: "Detalle",
-      g5: "Histórico", g6: "Antes", g7: "Antes del terremoto", g8: "Archivo",
-      h2quake: "Terremoto 2017",
-      p6: "En julio de 2017 un terremoto de magnitud 6,7 golpeó la isla y causó daños en el centro antiguo. La puerta y la vegetación cambiaron como resultado, pero el lugar sigue siendo histórico y digno de visita.",
-      h2visit: "Visitar",
-      p7: "Gratis, siempre visible desde fuera. Se encuentra en Kos ciudad, cerca del Ágora y el centro.",
-      tip: "Consejo: combínala con el Ágora y las Excavaciones Occidentales – todo a poca distancia a pie."
+    "es": {
+      "title": "Puerta del Impuesto",
+      "lead": "Puerta de entrada medieval donde los comerciantes pagaban peaje para vender sus mercancías dentro de las murallas de la ciudad.",
+      "btnPlay": "Leer en voz alta",
+      "p1": "La Puerta del Impuesto se llama en griego Porta tou Forou: porta = puerta, tou forou = del impuesto. Los comerciantes tenían que pagar peaje aquí para poder vender sus mercancías dentro de las murallas.",
+      "p2": "A finales del 1300 los Caballeros de la Orden de San Juan hicieron construir una obra defensiva alrededor de la ciudad contra incursiones y piratería. En esa muralla medieval había cinco entradas; hoy quedan dos, incluida esta Puerta del Impuesto.",
+      "p3": "La puerta se construyó con piedras y columnas reutilizadas de la época romana – un hábito medieval inteligente para construir rápido y barato.",
+      "h2agora": "Justo al lado del Ágora",
+      "p4": "Detrás de la puerta se encuentra el área del antiguo mercado (Ágora). Aún se ven restos de pórticos, templos y tiendas de los periodos helenístico y romano.",
+      "h2photos": "Fotos de antaño",
+      "p5": "La Puerta del Impuesto era un punto fotográfico popular, con exuberantes buganvillas moradas y rosas – perfectas para fotos de vacaciones. Abajo fotos de cómo se veía la puerta antes.",
+      "g1": "Porta tou Forou",
+      "g2": "Con buganvilla (antes)",
+      "g3": "Puerta en flor",
+      "g4": "Detalle",
+      "g5": "Histórico",
+      "g6": "Antes",
+      "g7": "Antes del terremoto",
+      "g8": "Archivo",
+      "h2quake": "Terremoto 2017",
+      "p6": "En julio de 2017 un terremoto de magnitud 6,7 golpeó la isla y causó daños en el centro antiguo. La puerta y la vegetación cambiaron como resultado, pero el lugar sigue siendo histórico y digno de visita.",
+      "p7": "Gratis, siempre visible desde fuera. Se encuentra en Kos ciudad, cerca del Ágora y el centro.",
+      "tip": "combínala con el Ágora y las Excavaciones Occidentales – todo a poca distancia a pie.",
+      "hStory": "La historia",
+      "hSee": "Qué ves",
+      "hKnow": "Bueno saberlo",
+      "tipTitle": "Consejo del guía",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     }
   };
 

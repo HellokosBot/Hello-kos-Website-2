@@ -40,20 +40,18 @@
     .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
     .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
     .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+
     .content { padding: 18px 16px 0; }
     h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
     .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
+
     .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
     .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
     .btn-audio { background: var(--petrol); color: #fff; }
     .btn-audio.playing { background: var(--petrol-dark); }
     .btn-stop { background: #3A4545; color: #fff; display: none; }
     .btn-stop.show { display: flex; }
-    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
-    .btn-apple { background: #111; color: #fff; }
+
     .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
     .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
     .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
@@ -61,10 +59,7 @@
     .card p:last-child { margin-bottom: 0; }
     .tip { background: var(--bg-note); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 12px 14px; margin: 4px 0 0; font-size: 0.88rem; color: var(--text); }
     .tip strong { color: var(--gold); }
-    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-    .fact { background: var(--bg-card); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.2); border: 1px solid var(--border); }
-    .fact .n { font-size: 1.05rem; font-weight: 800; color: var(--petrol); display: block; margin-bottom: 2px; }
-    .fact .l { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
+
     .hours { margin-top: 8px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
     .h-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 12px; font-size: 0.88rem; border-bottom: 1px solid rgba(255,255,255,0.05); background: var(--bg-card); }
     .h-row:nth-child(odd) { background: #1a2525; }
@@ -104,47 +99,36 @@
   <main class="main">
     <div class="hero-wrap">
       <img src="img/jwwb/7f7def8855-yxnzzxrzl2ltywdlcy9wywdlcy9tb251bwvudhmvzglpay9esk.jpg" alt="International Hippocratic Foundation" loading="eager">
-      <div class="hero-caption" data-i18n="heroCap">International Hippocratic Foundation</div>
+      <div class="hero-title"><h1 data-i18n="title">International Hippocratic Foundation</h1></div>
     </div>
 
     <div class="content">
-      <h1 data-i18n="title">International Hippocratic Foundation</h1>
-      <p class="lead" data-i18n="lead">Non-profit organisatie op Kos die Hippocrates eert – museum, tuin en educatie over de basis van de geneeskunde.</p>
+<p class="lead" data-i18n="lead">Non-profit organisatie op Kos die Hippocrates eert – museum, tuin en educatie over de basis van de geneeskunde.</p>
 
-      <div class="badges">
-        <span class="badge" data-i18n="badgeMuseum">Museum</span>
-        <span class="badge" data-i18n="badgeEducation">Educatie</span>
-        <span class="badge">ma–za</span>
-      </div>
+      
 
       <div class="actions">
         <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
         <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=International%20Hippocratic%20Foundation%20Kos" target="_blank" rel="noopener">📍 Google Maps</a>
-        <a class="btn btn-apple" href="https://maps.apple.com/?q=International%20Hippocratic%20Foundation%20Kos" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      
+      <div class="map-row">
+        <a href="https://www.google.com/maps/search/?api=1&query=International%20Hippocratic%20Foundation%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+        <a href="https://maps.apple.com/?q=International%20Hippocratic%20Foundation%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
       </div>
       <p class="status" id="ttsStatus"></p>
 
       <div id="readText">
         <div class="card">
-          <h2 data-i18n="h2tribute">Eerbetoon aan Hippocrates</h2>
+          <h2 data-i18n="hStory">Eerbetoon aan Hippocrates</h2>
           <p data-i18n="p1">De International Hippocratic Foundation (IHFK) is een non-profit op Kos. Ze eert Hippocrates (ca. 460–370 v.Chr.), de grondlegger van de rationele geneeskunde.</p>
           <p data-i18n="p2">Hij keek niet alleen naar klachten, maar ook naar leefstijl en omgeving van de patiënt – iets wat nog steeds centraal staat.</p>
         </div>
 
-        <div class="facts">
-          <div class="fact">
-            <span class="n">09:00–16:00</span>
-            <span class="l" data-i18n="factDays">ma–za</span>
-          </div>
-          <div class="fact">
-            <span class="n" data-i18n="factSunday">Zondag</span>
-            <span class="l" data-i18n="factClosed">gesloten</span>
-          </div>
-        </div>
+        
 
         <div class="card">
-          <h2 data-i18n="h2hours">Openingstijden</h2>
+          <h2 data-i18n="hSee">Openingstijden</h2>
           <div class="hours">
             <div class="h-row">
               <span data-i18n="hoursMonSat">Maandag t/m zaterdag</span>
@@ -178,9 +162,9 @@
         </div>
 
         <div class="card">
-          <h2 data-i18n="h2visit">Bezoeken</h2>
+          <h2 data-i18n="hKnow">Bezoeken</h2>
           <p data-i18n="p4">Op Kos. Check lokaal de exacte entreeprijs.</p>
-          <div class="tip" data-i18n="tip">Tip: combineer met de Hippocrates Garden en het Asklepion voor een volledige “Hippocrates-dag”.</div>
+          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: combineer met de Hippocrates Garden en het Asklepion voor een volledige “Hippocrates-dag”.</p></div>
         </div>
       </div>
     </div>
@@ -193,120 +177,144 @@
 
 <script>
 (function(){
-  var I18N = {
-    nl: {
-      title: "International Hippocratic Foundation",
-      lead: "Non-profit organisatie op Kos die Hippocrates eert – museum, tuin en educatie over de basis van de geneeskunde.",
-      heroCap: "International Hippocratic Foundation",
-      badgeMuseum: "Museum", badgeEducation: "Educatie",
-      btnPlay: "🔊 Voorlezen",
-      h2tribute: "Eerbetoon aan Hippocrates",
-      p1: "De International Hippocratic Foundation (IHFK) is een non-profit op Kos. Ze eert Hippocrates (ca. 460–370 v.Chr.), de grondlegger van de rationele geneeskunde.",
-      p2: "Hij keek niet alleen naar klachten, maar ook naar leefstijl en omgeving van de patiënt – iets wat nog steeds centraal staat.",
-      factDays: "ma–za", factSunday: "Zondag", factClosed: "gesloten",
-      h2hours: "Openingstijden",
-      hoursMonSat: "Maandag t/m zaterdag", hoursSun: "Zondag", hoursClosed: "Gesloten",
-      h2programs: "Museum en programma’s",
-      p3: "Naast het museum organiseert de foundation lessen en programma’s voor schoolkinderen, studenten en artsen in opleiding – zodat de basis van de geneeskunde wordt doorgegeven.",
-      g1: "Foundation", g2: "Foundation", g3: "Foundation",
-      h2visit: "Bezoeken",
-      p4: "Op Kos. Check lokaal de exacte entreeprijs.",
-      tip: "Tip: combineer met de Hippocrates Garden en het Asklepion voor een volledige “Hippocrates-dag”."
+  var I18N = window.HK_DICT = {
+    "nl": {
+      "title": "International Hippocratic Foundation",
+      "lead": "Non-profit organisatie op Kos die Hippocrates eert – museum, tuin en educatie over de basis van de geneeskunde.",
+      "btnPlay": "Voorlezen",
+      "p1": "De International Hippocratic Foundation (IHFK) is een non-profit op Kos. Ze eert Hippocrates (ca. 460–370 v.Chr.), de grondlegger van de rationele geneeskunde.",
+      "p2": "Hij keek niet alleen naar klachten, maar ook naar leefstijl en omgeving van de patiënt – iets wat nog steeds centraal staat.",
+      "hoursMonSat": "Maandag t/m zaterdag",
+      "hoursSun": "Zondag",
+      "hoursClosed": "Gesloten",
+      "h2programs": "Museum en programma’s",
+      "p3": "Naast het museum organiseert de foundation lessen en programma’s voor schoolkinderen, studenten en artsen in opleiding – zodat de basis van de geneeskunde wordt doorgegeven.",
+      "g1": "Foundation",
+      "g2": "Foundation",
+      "g3": "Foundation",
+      "p4": "Op Kos. Check lokaal de exacte entreeprijs.",
+      "tip": "combineer met de Hippocrates Garden en het Asklepion voor een volledige “Hippocrates-dag”.",
+      "hStory": "Het verhaal",
+      "hSee": "Wat je ziet",
+      "hKnow": "Goed om te weten",
+      "tipTitle": "Tip van de gids",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    en: {
-      title: "International Hippocratic Foundation",
-      lead: "Non-profit organisation on Kos honouring Hippocrates – museum, garden and education on the foundations of medicine.",
-      heroCap: "International Hippocratic Foundation",
-      badgeMuseum: "Museum", badgeEducation: "Education",
-      btnPlay: "🔊 Read aloud",
-      h2tribute: "Tribute to Hippocrates",
-      p1: "The International Hippocratic Foundation (IHFK) is a non-profit on Kos. It honours Hippocrates (c. 460–370 BC), the founder of rational medicine.",
-      p2: "He looked not only at symptoms, but also at the patient’s lifestyle and environment – something that remains central today.",
-      factDays: "Mon–Sat", factSunday: "Sunday", factClosed: "closed",
-      h2hours: "Opening hours",
-      hoursMonSat: "Monday to Saturday", hoursSun: "Sunday", hoursClosed: "Closed",
-      h2programs: "Museum and programmes",
-      p3: "Besides the museum, the foundation organises lessons and programmes for schoolchildren, students and trainee doctors – so that the foundations of medicine are passed on.",
-      g1: "Foundation", g2: "Foundation", g3: "Foundation",
-      h2visit: "Visiting",
-      p4: "On Kos. Check locally for the exact entrance fee.",
-      tip: "Tip: combine with the Hippocrates Garden and the Asklepion for a full “Hippocrates day”."
+    "en": {
+      "title": "International Hippocratic Foundation",
+      "lead": "Non-profit organisation on Kos honouring Hippocrates – museum, garden and education on the foundations of medicine.",
+      "btnPlay": "Read aloud",
+      "p1": "The International Hippocratic Foundation (IHFK) is a non-profit on Kos. It honours Hippocrates (c. 460–370 BC), the founder of rational medicine.",
+      "p2": "He looked not only at symptoms, but also at the patient’s lifestyle and environment – something that remains central today.",
+      "hoursMonSat": "Monday to Saturday",
+      "hoursSun": "Sunday",
+      "hoursClosed": "Closed",
+      "h2programs": "Museum and programmes",
+      "p3": "Besides the museum, the foundation organises lessons and programmes for schoolchildren, students and trainee doctors – so that the foundations of medicine are passed on.",
+      "g1": "Foundation",
+      "g2": "Foundation",
+      "g3": "Foundation",
+      "p4": "On Kos. Check locally for the exact entrance fee.",
+      "tip": "combine with the Hippocrates Garden and the Asklepion for a full “Hippocrates day”.",
+      "hStory": "The story",
+      "hSee": "What you see",
+      "hKnow": "Good to know",
+      "tipTitle": "Guide’s tip",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    de: {
-      title: "International Hippocratic Foundation",
-      lead: "Non-Profit-Organisation auf Kos, die Hippokrates ehrt – Museum, Garten und Bildung über die Grundlagen der Medizin.",
-      heroCap: "International Hippocratic Foundation",
-      badgeMuseum: "Museum", badgeEducation: "Bildung",
-      btnPlay: "🔊 Vorlesen",
-      h2tribute: "Ehrung an Hippokrates",
-      p1: "Die International Hippocratic Foundation (IHFK) ist eine Non-Profit-Organisation auf Kos. Sie ehrt Hippokrates (ca. 460–370 v. Chr.), den Begründer der rationalen Medizin.",
-      p2: "Er betrachtete nicht nur die Beschwerden, sondern auch Lebensstil und Umgebung des Patienten – etwas, das noch immer zentral ist.",
-      factDays: "Mo–Sa", factSunday: "Sonntag", factClosed: "geschlossen",
-      h2hours: "Öffnungszeiten",
-      hoursMonSat: "Montag bis Samstag", hoursSun: "Sonntag", hoursClosed: "Geschlossen",
-      h2programs: "Museum und Programme",
-      p3: "Neben dem Museum organisiert die Foundation Unterricht und Programme für Schulkinder, Studenten und Ärzte in Ausbildung – damit die Grundlagen der Medizin weitergegeben werden.",
-      g1: "Foundation", g2: "Foundation", g3: "Foundation",
-      h2visit: "Besuchen",
-      p4: "Auf Kos. Prüfe lokal den genauen Eintrittspreis.",
-      tip: "Tipp: kombiniere mit dem Hippocrates Garden und dem Asklepion für einen vollständigen „Hippokrates-Tag“."
+    "de": {
+      "title": "International Hippocratic Foundation",
+      "lead": "Non-Profit-Organisation auf Kos, die Hippokrates ehrt – Museum, Garten und Bildung über die Grundlagen der Medizin.",
+      "btnPlay": "Vorlesen",
+      "p1": "Die International Hippocratic Foundation (IHFK) ist eine Non-Profit-Organisation auf Kos. Sie ehrt Hippokrates (ca. 460–370 v. Chr.), den Begründer der rationalen Medizin.",
+      "p2": "Er betrachtete nicht nur die Beschwerden, sondern auch Lebensstil und Umgebung des Patienten – etwas, das noch immer zentral ist.",
+      "hoursMonSat": "Montag bis Samstag",
+      "hoursSun": "Sonntag",
+      "hoursClosed": "Geschlossen",
+      "h2programs": "Museum und Programme",
+      "p3": "Neben dem Museum organisiert die Foundation Unterricht und Programme für Schulkinder, Studenten und Ärzte in Ausbildung – damit die Grundlagen der Medizin weitergegeben werden.",
+      "g1": "Foundation",
+      "g2": "Foundation",
+      "g3": "Foundation",
+      "p4": "Auf Kos. Prüfe lokal den genauen Eintrittspreis.",
+      "tip": "kombiniere mit dem Hippocrates Garden und dem Asklepion für einen vollständigen „Hippokrates-Tag“.",
+      "hStory": "Die Geschichte",
+      "hSee": "Was du siehst",
+      "hKnow": "Gut zu wissen",
+      "tipTitle": "Tipp des Guides",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    it: {
-      title: "International Hippocratic Foundation",
-      lead: "Organizzazione non-profit a Kos che onora Ippocrate – museo, giardino e educazione sui fondamenti della medicina.",
-      heroCap: "International Hippocratic Foundation",
-      badgeMuseum: "Museo", badgeEducation: "Educazione",
-      btnPlay: "🔊 Leggi ad alta voce",
-      h2tribute: "Omaggio a Ippocrate",
-      p1: "L’International Hippocratic Foundation (IHFK) è un’organizzazione non-profit a Kos. Onora Ippocrate (ca. 460–370 a.C.), fondatore della medicina razionale.",
-      p2: "Guardava non solo i sintomi, ma anche lo stile di vita e l’ambiente del paziente – qualcosa che resta centrale ancora oggi.",
-      factDays: "lun–sab", factSunday: "Domenica", factClosed: "chiuso",
-      h2hours: "Orari di apertura",
-      hoursMonSat: "Lunedì a sabato", hoursSun: "Domenica", hoursClosed: "Chiuso",
-      h2programs: "Museo e programmi",
-      p3: "Oltre al museo, la foundation organizza lezioni e programmi per scolari, studenti e medici in formazione – così che i fondamenti della medicina vengano trasmessi.",
-      g1: "Foundation", g2: "Foundation", g3: "Foundation",
-      h2visit: "Visitare",
-      p4: "A Kos. Controlla in loco il prezzo esatto d’ingresso.",
-      tip: "Consiglio: combina con il Giardino di Ippocrate e l’Asklepion per una completa “giornata di Ippocrate”."
+    "it": {
+      "title": "International Hippocratic Foundation",
+      "lead": "Organizzazione non-profit a Kos che onora Ippocrate – museo, giardino e educazione sui fondamenti della medicina.",
+      "btnPlay": "Leggi ad alta voce",
+      "p1": "L’International Hippocratic Foundation (IHFK) è un’organizzazione non-profit a Kos. Onora Ippocrate (ca. 460–370 a.C.), fondatore della medicina razionale.",
+      "p2": "Guardava non solo i sintomi, ma anche lo stile di vita e l’ambiente del paziente – qualcosa che resta centrale ancora oggi.",
+      "hoursMonSat": "Lunedì a sabato",
+      "hoursSun": "Domenica",
+      "hoursClosed": "Chiuso",
+      "h2programs": "Museo e programmi",
+      "p3": "Oltre al museo, la foundation organizza lezioni e programmi per scolari, studenti e medici in formazione – così che i fondamenti della medicina vengano trasmessi.",
+      "g1": "Foundation",
+      "g2": "Foundation",
+      "g3": "Foundation",
+      "p4": "A Kos. Controlla in loco il prezzo esatto d’ingresso.",
+      "tip": "combina con il Giardino di Ippocrate e l’Asklepion per una completa “giornata di Ippocrate”.",
+      "hStory": "La storia",
+      "hSee": "Cosa vedi",
+      "hKnow": "Buono a sapersi",
+      "tipTitle": "Consiglio della guida",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    tr: {
-      title: "International Hippocratic Foundation",
-      lead: "Kos’ta Hipokrat’ı onurlandıran kâr amacı gütmeyen kuruluş – müze, bahçe ve tıbbın temelleri üzerine eğitim.",
-      heroCap: "International Hippocratic Foundation",
-      badgeMuseum: "Müze", badgeEducation: "Eğitim",
-      btnPlay: "🔊 Sesli oku",
-      h2tribute: "Hipokrat’a saygı",
-      p1: "International Hippocratic Foundation (IHFK) Kos’ta kâr amacı gütmeyen bir kuruluştur. Rasyonel tıbbın kurucusu Hipokrat’ı (yaklaşık MÖ 460–370) onurlandırır.",
-      p2: "Sadece şikayetlere değil, hastanın yaşam tarzına ve çevresine de bakardı – bugün hâlâ merkezi olan bir şey.",
-      factDays: "Pzt–Cmt", factSunday: "Pazar", factClosed: "kapalı",
-      h2hours: "Açılış saatleri",
-      hoursMonSat: "Pazartesi–Cumartesi", hoursSun: "Pazar", hoursClosed: "Kapalı",
-      h2programs: "Müze ve programlar",
-      p3: "Müzenin yanı sıra vakıf, okul çocukları, öğrenciler ve eğitimdeki doktorlar için dersler ve programlar düzenler – tıbbın temellerinin aktarılması için.",
-      g1: "Vakıf", g2: "Vakıf", g3: "Vakıf",
-      h2visit: "Ziyaret",
-      p4: "Kos’ta. Kesin giriş ücretini yerinde kontrol edin.",
-      tip: "İpucu: tam bir “Hipokrat günü” için Hipokrat Bahçesi ve Asklepion ile birleştirin."
+    "tr": {
+      "title": "International Hippocratic Foundation",
+      "lead": "Kos’ta Hipokrat’ı onurlandıran kâr amacı gütmeyen kuruluş – müze, bahçe ve tıbbın temelleri üzerine eğitim.",
+      "btnPlay": "Sesli oku",
+      "p1": "International Hippocratic Foundation (IHFK) Kos’ta kâr amacı gütmeyen bir kuruluştur. Rasyonel tıbbın kurucusu Hipokrat’ı (yaklaşık MÖ 460–370) onurlandırır.",
+      "p2": "Sadece şikayetlere değil, hastanın yaşam tarzına ve çevresine de bakardı – bugün hâlâ merkezi olan bir şey.",
+      "hoursMonSat": "Pazartesi–Cumartesi",
+      "hoursSun": "Pazar",
+      "hoursClosed": "Kapalı",
+      "h2programs": "Müze ve programlar",
+      "p3": "Müzenin yanı sıra vakıf, okul çocukları, öğrenciler ve eğitimdeki doktorlar için dersler ve programlar düzenler – tıbbın temellerinin aktarılması için.",
+      "g1": "Vakıf",
+      "g2": "Vakıf",
+      "g3": "Vakıf",
+      "p4": "Kos’ta. Kesin giriş ücretini yerinde kontrol edin.",
+      "tip": "tam bir “Hipokrat günü” için Hipokrat Bahçesi ve Asklepion ile birleştirin.",
+      "hStory": "Hikaye",
+      "hSee": "Ne görürsün",
+      "hKnow": "Bilmekte fayda var",
+      "tipTitle": "Rehberin ipucu",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    es: {
-      title: "International Hippocratic Foundation",
-      lead: "Organización sin ánimo de lucro en Kos que honra a Hipócrates – museo, jardín y educación sobre los fundamentos de la medicina.",
-      heroCap: "International Hippocratic Foundation",
-      badgeMuseum: "Museo", badgeEducation: "Educación",
-      btnPlay: "🔊 Leer en voz alta",
-      h2tribute: "Homenaje a Hipócrates",
-      p1: "La International Hippocratic Foundation (IHFK) es una organización sin ánimo de lucro en Kos. Honra a Hipócrates (c. 460–370 a.C.), fundador de la medicina racional.",
-      p2: "No solo miraba los síntomas, sino también el estilo de vida y el entorno del paciente – algo que sigue siendo central hoy.",
-      factDays: "lun–sáb", factSunday: "Domingo", factClosed: "cerrado",
-      h2hours: "Horario de apertura",
-      hoursMonSat: "Lunes a sábado", hoursSun: "Domingo", hoursClosed: "Cerrado",
-      h2programs: "Museo y programas",
-      p3: "Además del museo, la foundation organiza clases y programas para escolares, estudiantes y médicos en formación – para que se transmitan los fundamentos de la medicina.",
-      g1: "Foundation", g2: "Foundation", g3: "Foundation",
-      h2visit: "Visitar",
-      p4: "En Kos. Comprueba en el lugar el precio exacto de entrada.",
-      tip: "Consejo: combínalo con el Jardín de Hipócrates y el Asklepion para un “día de Hipócrates” completo."
+    "es": {
+      "title": "International Hippocratic Foundation",
+      "lead": "Organización sin ánimo de lucro en Kos que honra a Hipócrates – museo, jardín y educación sobre los fundamentos de la medicina.",
+      "btnPlay": "Leer en voz alta",
+      "p1": "La International Hippocratic Foundation (IHFK) es una organización sin ánimo de lucro en Kos. Honra a Hipócrates (c. 460–370 a.C.), fundador de la medicina racional.",
+      "p2": "No solo miraba los síntomas, sino también el estilo de vida y el entorno del paciente – algo que sigue siendo central hoy.",
+      "hoursMonSat": "Lunes a sábado",
+      "hoursSun": "Domingo",
+      "hoursClosed": "Cerrado",
+      "h2programs": "Museo y programas",
+      "p3": "Además del museo, la foundation organiza clases y programas para escolares, estudiantes y médicos en formación – para que se transmitan los fundamentos de la medicina.",
+      "g1": "Foundation",
+      "g2": "Foundation",
+      "g3": "Foundation",
+      "p4": "En Kos. Comprueba en el lugar el precio exacto de entrada.",
+      "tip": "combínalo con el Jardín de Hipócrates y el Asklepion para un “día de Hipócrates” completo.",
+      "hStory": "La historia",
+      "hSee": "Qué ves",
+      "hKnow": "Bueno saberlo",
+      "tipTitle": "Consejo del guía",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     }
   };
 

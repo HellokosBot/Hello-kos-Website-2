@@ -40,21 +40,18 @@
     .main { max-width: 480px; margin: 0 auto; padding: 0 0 40px; }
     .hero-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #1a2525; }
     .hero-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 16px 14px; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: #fff; font-size: 0.78rem; font-weight: 500; }
+
     .content { padding: 18px 16px 0; }
     h1 { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
     .lead { font-size: 0.95rem; color: var(--text-soft); margin-bottom: 14px; }
-    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-    .badge { background: rgba(58,154,154,0.15); color: var(--petrol); font-size: 0.72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); }
-    .badge.warn { background: rgba(224,160,64,0.2); color: var(--gold); border-color: rgba(224,176,64,0.4); }
+
     .actions { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
     .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 14px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
     .btn-audio { background: var(--petrol); color: #fff; }
     .btn-audio.playing { background: var(--petrol-dark); }
     .btn-stop { background: #3A4545; color: #fff; display: none; }
     .btn-stop.show { display: flex; }
-    .btn-map { background: var(--bg-card); color: var(--petrol); border: 2px solid var(--petrol); }
-    .btn-apple { background: #111; color: #fff; }
+
     .status { text-align: center; font-size: 0.78rem; color: var(--text-soft); min-height: 1.1em; margin-bottom: 8px; }
     .card { background: var(--bg-card); border-radius: 16px; padding: 16px 16px 14px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); border: 1px solid var(--border); }
     .card h2 { font-size: 1.02rem; color: var(--petrol); margin-bottom: 8px; }
@@ -95,30 +92,28 @@
   <main class="main">
     <div class="hero-wrap">
       <img src="img/jwwb/e9b481eecb-schermopname_12-3-2026_0841_kos-gr-standard.jpg" alt="Kasteel van Palio Pyli" loading="eager">
-      <div class="hero-caption" data-i18n="heroCap">Kasteel van Palio Pyli</div>
+      <div class="hero-title"><h1 data-i18n="title">Kasteel van Palio Pyli</h1></div>
     </div>
 
     <div class="content">
-      <h1 data-i18n="title">Kasteel van Palio Pyli</h1>
-      <p class="lead" data-i18n="lead">Middeleeuws fort boven Palio Pyli – Johannieters, Ottomanen, deels nog overeind met uitzicht.</p>
+<p class="lead" data-i18n="lead">Middeleeuws fort boven Palio Pyli – Johannieters, Ottomanen, deels nog overeind met uitzicht.</p>
 
-      <div class="badges">
-        <span class="badge" data-i18n="badgeFort">Fort</span>
-        <span class="badge" data-i18n="badgeFree">Gratis</span>
-        <span class="badge" data-i18n="badgePyli">Palio Pyli</span>
-      </div>
+      
 
       <div class="actions">
         <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="btnPlay">🔊 Voorlezen</button>
         <button type="button" class="btn btn-stop" id="btnStop">⏹ Stop</button>
-        <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Palio%20Pyli%20Castle%20Kos" target="_blank" rel="noopener">📍 Google Maps</a>
-        <a class="btn btn-apple" href="https://maps.apple.com/?q=Palio%20Pyli%20Castle%20Kos" target="_blank" rel="noopener">🍎 Apple Maps</a>
+      </div>
+      
+      <div class="map-row">
+        <a href="https://www.google.com/maps/search/?api=1&query=Palio%20Pyli%20Castle%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+        <a href="https://maps.apple.com/?q=Palio%20Pyli%20Castle%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
       </div>
       <p class="status" id="ttsStatus"></p>
 
       <div id="readText">
         <div class="card">
-          <h2 data-i18n="h2fort">Fort boven het spookdorp</h2>
+          <h2 data-i18n="hStory">Fort boven het spookdorp</h2>
           <p data-i18n="p1">Het kasteel van Palio Pyli ligt boven het verlaten dorp. Rond 1315 namen de Ridders van Sint-Jan (Johannieters) het over en versterkten muren en torens. Vanaf 1523 boden de Ottomanen er bescherming aan de bewoners.</p>
         </div>
 
@@ -166,9 +161,9 @@
         </div>
 
         <div class="card">
-          <h2 data-i18n="h2visit">Bezoeken</h2>
+          <h2 data-i18n="hSee">Bezoeken</h2>
           <p data-i18n="p8">Gratis. Klim is de moeite voor het uitzicht. Combineer met het spookdorp eronder.</p>
-          <div class="tip" data-i18n="tip">Tip: neem water mee; weinig schaduw op de muren.</div>
+          <div class="tip"><strong data-i18n="tipTitle">Tip van de gids</strong><p data-i18n="tip">Tip: neem water mee; weinig schaduw op de muren.</p></div>
         </div>
       </div>
     </div>
@@ -181,120 +176,144 @@
 
 <script>
 (function(){
-  var I18N = {
-    nl: {
-      title: "Kasteel van Palio Pyli",
-      lead: "Middeleeuws fort boven Palio Pyli – Johannieters, Ottomanen, deels nog overeind met uitzicht.",
-      heroCap: "Kasteel van Palio Pyli",
-      badgeFort: "Fort", badgeFree: "Gratis", badgePyli: "Palio Pyli",
-      btnPlay: "🔊 Voorlezen",
-      h2fort: "Fort boven het spookdorp",
-      p1: "Het kasteel van Palio Pyli ligt boven het verlaten dorp. Rond 1315 namen de Ridders van Sint-Jan (Johannieters) het over en versterkten muren en torens. Vanaf 1523 boden de Ottomanen er bescherming aan de bewoners.",
-      p2: "Let op!! Houd er rekening mee dat de locatie alleen te voet via een klim bereikbaar is. Zorg dat je goed ter been bent en draag geen slippers of flipflops.",
-      p3: "Palio Pyli is een verlaten dorp met een kasteel op Kos. Het ligt op een heuvel en is nu een ruïne. In Palio Pyli is een verlaten middeleeuws kasteel en dorp op het Griekse eiland Kos. Het ligt op een heuvel van ongeveer 300 meter hoog. Van hier heb je een prachtig uitzicht over de zee, met de eilanden Kalymnos en Pserimos in de verte. Het verhaal begint rond het jaar 1080.",
-      p4: "Een monnik genaamd Christodoulos (dezelfde die later het beroemde klooster op Patmos stichtte) kwam naar deze plek. Het gebied was toen leeg en onbewoond. Hij bouwde er een klein klooster en een kasteel om alles te beschermen. Al snel groeide er een heel dorp omheen.",
-      p5: "In de eeuwen daarna werd het kasteel sterker gemaakt. Rond 1315 namen de Ridders van Sint-Jan (ook wel Johannieters genoemd) het eiland over. Zij verbeterden de muren en torens, zodat het een veilige schuilplaats werd tegen piraten die de kust onveilig maakten.",
-      p6: "Later, vanaf 1523 toen de Ottomanen het eiland veroverden, bood het kasteel nog steeds bescherming aan de bewoners tijdens aanvallen en onrust. Het dorp bleef bewoond tot ongeveer 1830. Toen brak er een ernstige epidemie uit (cholera), waardoor bijna iedereen overleed of vluchtte.",
-      p7: "De natuur nam de huizen over, maar het kasteel staat er nog deels.",
-      g1: "Kasteel", g2: "Kasteel", g3: "Kasteel", g4: "Kasteel",
-      h2visit: "Bezoeken",
-      p8: "Gratis. Klim is de moeite voor het uitzicht. Combineer met het spookdorp eronder.",
-      tip: "Tip: neem water mee; weinig schaduw op de muren."
+  var I18N = window.HK_DICT = {
+    "nl": {
+      "title": "Kasteel van Palio Pyli",
+      "lead": "Middeleeuws fort boven Palio Pyli – Johannieters, Ottomanen, deels nog overeind met uitzicht.",
+      "btnPlay": "Voorlezen",
+      "p1": "Het kasteel van Palio Pyli ligt boven het verlaten dorp. Rond 1315 namen de Ridders van Sint-Jan (Johannieters) het over en versterkten muren en torens. Vanaf 1523 boden de Ottomanen er bescherming aan de bewoners.",
+      "p2": "Let op!! Houd er rekening mee dat de locatie alleen te voet via een klim bereikbaar is. Zorg dat je goed ter been bent en draag geen slippers of flipflops.",
+      "p3": "Palio Pyli is een verlaten dorp met een kasteel op Kos. Het ligt op een heuvel en is nu een ruïne. In Palio Pyli is een verlaten middeleeuws kasteel en dorp op het Griekse eiland Kos. Het ligt op een heuvel van ongeveer 300 meter hoog. Van hier heb je een prachtig uitzicht over de zee, met de eilanden Kalymnos en Pserimos in de verte. Het verhaal begint rond het jaar 1080.",
+      "p4": "Een monnik genaamd Christodoulos (dezelfde die later het beroemde klooster op Patmos stichtte) kwam naar deze plek. Het gebied was toen leeg en onbewoond. Hij bouwde er een klein klooster en een kasteel om alles te beschermen. Al snel groeide er een heel dorp omheen.",
+      "p5": "In de eeuwen daarna werd het kasteel sterker gemaakt. Rond 1315 namen de Ridders van Sint-Jan (ook wel Johannieters genoemd) het eiland over. Zij verbeterden de muren en torens, zodat het een veilige schuilplaats werd tegen piraten die de kust onveilig maakten.",
+      "p6": "Later, vanaf 1523 toen de Ottomanen het eiland veroverden, bood het kasteel nog steeds bescherming aan de bewoners tijdens aanvallen en onrust. Het dorp bleef bewoond tot ongeveer 1830. Toen brak er een ernstige epidemie uit (cholera), waardoor bijna iedereen overleed of vluchtte.",
+      "p7": "De natuur nam de huizen over, maar het kasteel staat er nog deels.",
+      "g1": "Kasteel",
+      "g2": "Kasteel",
+      "g3": "Kasteel",
+      "g4": "Kasteel",
+      "p8": "Gratis. Klim is de moeite voor het uitzicht. Combineer met het spookdorp eronder.",
+      "tip": "neem water mee; weinig schaduw op de muren.",
+      "hStory": "Het verhaal",
+      "hSee": "Wat je ziet",
+      "tipTitle": "Tip van de gids",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    en: {
-      title: "Castle of Palio Pyli",
-      lead: "Medieval fort above Palio Pyli – Knights of St John, Ottomans, partly still standing with views.",
-      heroCap: "Castle of Palio Pyli",
-      badgeFort: "Fort", badgeFree: "Free", badgePyli: "Palio Pyli",
-      btnPlay: "🔊 Read aloud",
-      h2fort: "Fort above the ghost village",
-      p1: "The castle of Palio Pyli stands above the abandoned village. Around 1315 the Knights of St John took it over and strengthened the walls and towers. From 1523 the Ottomans offered protection to the inhabitants.",
-      p2: "Attention!! Please note that the location is only reachable on foot via a climb. Make sure you are fit and do not wear slippers or flip-flops.",
-      p3: "Palio Pyli is an abandoned village with a castle on Kos. It lies on a hill and is now a ruin. In Palio Pyli there is an abandoned medieval castle and village on the Greek island of Kos. It is on a hill about 300 metres high. From here you have a beautiful view over the sea, with the islands of Kalymnos and Pserimos in the distance. The story begins around the year 1080.",
-      p4: "A monk named Christodoulos (the same one who later founded the famous monastery on Patmos) came to this place. The area was then empty and uninhabited. He built a small monastery and a castle to protect everything. Soon a whole village grew around it.",
-      p5: "In the centuries that followed the castle was strengthened. Around 1315 the Knights of St John (also called Hospitallers) took over the island. They improved the walls and towers so that it became a safe refuge against pirates who made the coast unsafe.",
-      p6: "Later, from 1523 when the Ottomans conquered the island, the castle still offered protection to the inhabitants during attacks and unrest. The village remained inhabited until about 1830. Then a serious epidemic broke out (cholera), causing almost everyone to die or flee.",
-      p7: "Nature took over the houses, but the castle still stands in part.",
-      g1: "Castle", g2: "Castle", g3: "Castle", g4: "Castle",
-      h2visit: "Visiting",
-      p8: "Free. The climb is worth it for the view. Combine with the ghost village below.",
-      tip: "Tip: bring water; little shade on the walls."
+    "en": {
+      "title": "Castle of Palio Pyli",
+      "lead": "Medieval fort above Palio Pyli – Knights of St John, Ottomans, partly still standing with views.",
+      "btnPlay": "Read aloud",
+      "p1": "The castle of Palio Pyli stands above the abandoned village. Around 1315 the Knights of St John took it over and strengthened the walls and towers. From 1523 the Ottomans offered protection to the inhabitants.",
+      "p2": "Attention!! Please note that the location is only reachable on foot via a climb. Make sure you are fit and do not wear slippers or flip-flops.",
+      "p3": "Palio Pyli is an abandoned village with a castle on Kos. It lies on a hill and is now a ruin. In Palio Pyli there is an abandoned medieval castle and village on the Greek island of Kos. It is on a hill about 300 metres high. From here you have a beautiful view over the sea, with the islands of Kalymnos and Pserimos in the distance. The story begins around the year 1080.",
+      "p4": "A monk named Christodoulos (the same one who later founded the famous monastery on Patmos) came to this place. The area was then empty and uninhabited. He built a small monastery and a castle to protect everything. Soon a whole village grew around it.",
+      "p5": "In the centuries that followed the castle was strengthened. Around 1315 the Knights of St John (also called Hospitallers) took over the island. They improved the walls and towers so that it became a safe refuge against pirates who made the coast unsafe.",
+      "p6": "Later, from 1523 when the Ottomans conquered the island, the castle still offered protection to the inhabitants during attacks and unrest. The village remained inhabited until about 1830. Then a serious epidemic broke out (cholera), causing almost everyone to die or flee.",
+      "p7": "Nature took over the houses, but the castle still stands in part.",
+      "g1": "Castle",
+      "g2": "Castle",
+      "g3": "Castle",
+      "g4": "Castle",
+      "p8": "Free. The climb is worth it for the view. Combine with the ghost village below.",
+      "tip": "bring water; little shade on the walls.",
+      "hStory": "The story",
+      "hSee": "What you see",
+      "tipTitle": "Guide’s tip",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    de: {
-      title: "Burg von Palio Pyli",
-      lead: "Mittelalterliche Festung über Palio Pyli – Johanniter, Osmanen, teilweise noch stehend mit Aussicht.",
-      heroCap: "Burg von Palio Pyli",
-      badgeFort: "Festung", badgeFree: "Kostenlos", badgePyli: "Palio Pyli",
-      btnPlay: "🔊 Vorlesen",
-      h2fort: "Festung über dem Geisterdorf",
-      p1: "Die Burg von Palio Pyli liegt über dem verlassenen Dorf. Um 1315 übernahmen die Ritter des Heiligen Johannes (Johanniter) sie und verstärkten Mauern und Türme. Ab 1523 boten die Osmanen den Bewohnern Schutz.",
-      p2: "Achtung!! Bitte beachten Sie, dass der Ort nur zu Fuß über einen Aufstieg erreichbar ist. Achten Sie darauf, gut zu Fuß zu sein und tragen Sie keine Slipper oder Flipflops.",
-      p3: "Palio Pyli ist ein verlassenes Dorf mit einer Burg auf Kos. Es liegt auf einem Hügel und ist heute eine Ruine. In Palio Pyli gibt es eine verlassene mittelalterliche Burg und ein Dorf auf der griechischen Insel Kos. Es liegt auf einem etwa 300 Meter hohen Hügel. Von hier hat man einen schönen Blick auf das Meer, mit den Inseln Kalymnos und Pserimos in der Ferne. Die Geschichte beginnt um das Jahr 1080.",
-      p4: "Ein Mönch namens Christodoulos (derselbe, der später das berühmte Kloster auf Patmos gründete) kam an diesen Ort. Das Gebiet war damals leer und unbewohnt. Er baute ein kleines Kloster und eine Burg, um alles zu schützen. Bald wuchs ein ganzes Dorf darum herum.",
-      p5: "In den folgenden Jahrhunderten wurde die Burg verstärkt. Um 1315 übernahmen die Ritter des Heiligen Johannes (auch Johanniter genannt) die Insel. Sie verbesserten Mauern und Türme, sodass sie ein sicherer Zufluchtsort gegen Piraten wurde, die die Küste unsicher machten.",
-      p6: "Später, ab 1523 als die Osmanen die Insel eroberten, bot die Burg den Bewohnern weiterhin Schutz bei Angriffen und Unruhen. Das Dorf blieb bis etwa 1830 bewohnt. Dann brach eine schwere Epidemie aus (Cholera), wodurch fast alle starben oder flohen.",
-      p7: "Die Natur übernahm die Häuser, aber die Burg steht noch teilweise.",
-      g1: "Burg", g2: "Burg", g3: "Burg", g4: "Burg",
-      h2visit: "Besuchen",
-      p8: "Kostenlos. Der Aufstieg lohnt sich für die Aussicht. Kombiniere mit dem Geisterdorf darunter.",
-      tip: "Tipp: nimm Wasser mit; wenig Schatten auf den Mauern."
+    "de": {
+      "title": "Burg von Palio Pyli",
+      "lead": "Mittelalterliche Festung über Palio Pyli – Johanniter, Osmanen, teilweise noch stehend mit Aussicht.",
+      "btnPlay": "Vorlesen",
+      "p1": "Die Burg von Palio Pyli liegt über dem verlassenen Dorf. Um 1315 übernahmen die Ritter des Heiligen Johannes (Johanniter) sie und verstärkten Mauern und Türme. Ab 1523 boten die Osmanen den Bewohnern Schutz.",
+      "p2": "Achtung!! Bitte beachten Sie, dass der Ort nur zu Fuß über einen Aufstieg erreichbar ist. Achten Sie darauf, gut zu Fuß zu sein und tragen Sie keine Slipper oder Flipflops.",
+      "p3": "Palio Pyli ist ein verlassenes Dorf mit einer Burg auf Kos. Es liegt auf einem Hügel und ist heute eine Ruine. In Palio Pyli gibt es eine verlassene mittelalterliche Burg und ein Dorf auf der griechischen Insel Kos. Es liegt auf einem etwa 300 Meter hohen Hügel. Von hier hat man einen schönen Blick auf das Meer, mit den Inseln Kalymnos und Pserimos in der Ferne. Die Geschichte beginnt um das Jahr 1080.",
+      "p4": "Ein Mönch namens Christodoulos (derselbe, der später das berühmte Kloster auf Patmos gründete) kam an diesen Ort. Das Gebiet war damals leer und unbewohnt. Er baute ein kleines Kloster und eine Burg, um alles zu schützen. Bald wuchs ein ganzes Dorf darum herum.",
+      "p5": "In den folgenden Jahrhunderten wurde die Burg verstärkt. Um 1315 übernahmen die Ritter des Heiligen Johannes (auch Johanniter genannt) die Insel. Sie verbesserten Mauern und Türme, sodass sie ein sicherer Zufluchtsort gegen Piraten wurde, die die Küste unsicher machten.",
+      "p6": "Später, ab 1523 als die Osmanen die Insel eroberten, bot die Burg den Bewohnern weiterhin Schutz bei Angriffen und Unruhen. Das Dorf blieb bis etwa 1830 bewohnt. Dann brach eine schwere Epidemie aus (Cholera), wodurch fast alle starben oder flohen.",
+      "p7": "Die Natur übernahm die Häuser, aber die Burg steht noch teilweise.",
+      "g1": "Burg",
+      "g2": "Burg",
+      "g3": "Burg",
+      "g4": "Burg",
+      "p8": "Kostenlos. Der Aufstieg lohnt sich für die Aussicht. Kombiniere mit dem Geisterdorf darunter.",
+      "tip": "nimm Wasser mit; wenig Schatten auf den Mauern.",
+      "hStory": "Die Geschichte",
+      "hSee": "Was du siehst",
+      "tipTitle": "Tipp des Guides",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    it: {
-      title: "Castello di Palio Pyli",
-      lead: "Fortezza medievale sopra Palio Pyli – Cavalieri di San Giovanni, Ottomani, in parte ancora in piedi con vista.",
-      heroCap: "Castello di Palio Pyli",
-      badgeFort: "Forte", badgeFree: "Gratis", badgePyli: "Palio Pyli",
-      btnPlay: "🔊 Leggi ad alta voce",
-      h2fort: "Forte sopra il villaggio fantasma",
-      p1: "Il castello di Palio Pyli si trova sopra il villaggio abbandonato. Intorno al 1315 i Cavalieri di San Giovanni lo presero e rafforzarono mura e torri. Dal 1523 gli Ottomani offrirono protezione agli abitanti.",
-      p2: "Attenzione!! Tieni presente che la location è raggiungibile solo a piedi tramite una salita. Assicurati di essere in forma e non indossare ciabatte o infradito.",
-      p3: "Palio Pyli è un villaggio abbandonato con un castello a Kos. Si trova su una collina ed è ora una rovina. A Palio Pyli c’è un castello e un villaggio medievale abbandonato sull’isola greca di Kos. Si trova su una collina di circa 300 metri di altezza. Da qui hai una bella vista sul mare, con le isole di Kalymnos e Pserimos in lontananza. La storia inizia intorno all’anno 1080.",
-      p4: "Un monaco di nome Christodoulos (lo stesso che in seguito fondò il famoso monastero di Patmos) venne in questo luogo. L’area era allora vuota e disabitata. Costruì un piccolo monastero e un castello per proteggere tutto. Presto crebbe un intero villaggio intorno.",
-      p5: "Nei secoli successivi il castello fu rafforzato. Intorno al 1315 i Cavalieri di San Giovanni (chiamati anche Ospitalieri) presero l’isola. Migliorarono mura e torri in modo che diventasse un rifugio sicuro contro i pirati che rendevano insicura la costa.",
-      p6: "Più tardi, dal 1523 quando gli Ottomani conquistarono l’isola, il castello offrì ancora protezione agli abitanti durante attacchi e disordini. Il villaggio rimase abitato fino a circa il 1830. Poi scoppiò una grave epidemia (colera), causando la morte o la fuga di quasi tutti.",
-      p7: "La natura ha preso le case, ma il castello è ancora in parte in piedi.",
-      g1: "Castello", g2: "Castello", g3: "Castello", g4: "Castello",
-      h2visit: "Visitare",
-      p8: "Gratis. La salita vale la pena per la vista. Combina con il villaggio fantasma sotto.",
-      tip: "Consiglio: porta acqua; poca ombra sulle mura."
+    "it": {
+      "title": "Castello di Palio Pyli",
+      "lead": "Fortezza medievale sopra Palio Pyli – Cavalieri di San Giovanni, Ottomani, in parte ancora in piedi con vista.",
+      "btnPlay": "Leggi ad alta voce",
+      "p1": "Il castello di Palio Pyli si trova sopra il villaggio abbandonato. Intorno al 1315 i Cavalieri di San Giovanni lo presero e rafforzarono mura e torri. Dal 1523 gli Ottomani offrirono protezione agli abitanti.",
+      "p2": "Attenzione!! Tieni presente che la location è raggiungibile solo a piedi tramite una salita. Assicurati di essere in forma e non indossare ciabatte o infradito.",
+      "p3": "Palio Pyli è un villaggio abbandonato con un castello a Kos. Si trova su una collina ed è ora una rovina. A Palio Pyli c’è un castello e un villaggio medievale abbandonato sull’isola greca di Kos. Si trova su una collina di circa 300 metri di altezza. Da qui hai una bella vista sul mare, con le isole di Kalymnos e Pserimos in lontananza. La storia inizia intorno all’anno 1080.",
+      "p4": "Un monaco di nome Christodoulos (lo stesso che in seguito fondò il famoso monastero di Patmos) venne in questo luogo. L’area era allora vuota e disabitata. Costruì un piccolo monastero e un castello per proteggere tutto. Presto crebbe un intero villaggio intorno.",
+      "p5": "Nei secoli successivi il castello fu rafforzato. Intorno al 1315 i Cavalieri di San Giovanni (chiamati anche Ospitalieri) presero l’isola. Migliorarono mura e torri in modo che diventasse un rifugio sicuro contro i pirati che rendevano insicura la costa.",
+      "p6": "Più tardi, dal 1523 quando gli Ottomani conquistarono l’isola, il castello offrì ancora protezione agli abitanti durante attacchi e disordini. Il villaggio rimase abitato fino a circa il 1830. Poi scoppiò una grave epidemia (colera), causando la morte o la fuga di quasi tutti.",
+      "p7": "La natura ha preso le case, ma il castello è ancora in parte in piedi.",
+      "g1": "Castello",
+      "g2": "Castello",
+      "g3": "Castello",
+      "g4": "Castello",
+      "p8": "Gratis. La salita vale la pena per la vista. Combina con il villaggio fantasma sotto.",
+      "tip": "porta acqua; poca ombra sulle mura.",
+      "hStory": "La storia",
+      "hSee": "Cosa vedi",
+      "tipTitle": "Consiglio della guida",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    tr: {
-      title: "Palio Pyli Kalesi",
-      lead: "Palio Pyli üzerinde ortaçağ kalesi – Aziz John Şövalyeleri, Osmanlılar, kısmen ayakta manzaralı.",
-      heroCap: "Palio Pyli Kalesi",
-      badgeFort: "Kale", badgeFree: "Ücretsiz", badgePyli: "Palio Pyli",
-      btnPlay: "🔊 Sesli oku",
-      h2fort: "Hayalet köyün üzerindeki kale",
-      p1: "Palio Pyli Kalesi terk edilmiş köyün üzerinde yer alır. 1315 civarında Aziz John Şövalyeleri (Hospitalierler) devraldı ve duvarları ile kuleleri güçlendirdi. 1523’ten itibaren Osmanlılar sakinlere koruma sundu.",
-      p2: "Dikkat!! Yer yalnızca yürüyerek tırmanışla ulaşılabilir. İyi yürüyebildiğinizden emin olun ve terlik veya flip-flop giymeyin.",
-      p3: "Palio Pyli Kos’ta terk edilmiş bir köy ve kaledir. Bir tepede bulunur ve şimdi bir harabedir. Palio Pyli’de Yunan adası Kos’ta terk edilmiş ortaçağ kalesi ve köyü vardır. Yaklaşık 300 metre yükseklikte bir tepededir. Buradan denize, uzakta Kalymnos ve Pserimos adalarına güzel manzara vardır. Hikâye 1080 yılı civarında başlar.",
-      p4: "Christodoulos adında bir keşiş (daha sonra Patmos’taki ünlü manastırı kuran kişi) bu yere geldi. Bölge o zaman boş ve yerleşimsizdi. Her şeyi korumak için küçük bir manastır ve kale inşa etti. Kısa sürede etrafında bir köy büyüdü.",
-      p5: "Sonraki yüzyıllarda kale güçlendirildi. 1315 civarında Aziz John Şövalyeleri (Hospitalierler) adayı devraldı. Duvarları ve kuleleri iyileştirerek kıyıyı güvensiz kılan korsanlara karşı güvenli bir sığınak haline getirdiler.",
-      p6: "Daha sonra 1523’te Osmanlılar adayı fethettiğinde kale saldırılar ve huzursuzluk sırasında sakinlere hâlâ koruma sundu. Köy yaklaşık 1830’a kadar yerleşim kaldı. Sonra ciddi bir salgın (kolera) çıktı, neredeyse herkes öldü veya kaçtı.",
-      p7: "Doğa evleri devraldı ama kale hâlâ kısmen ayakta.",
-      g1: "Kale", g2: "Kale", g3: "Kale", g4: "Kale",
-      h2visit: "Ziyaret",
-      p8: "Ücretsiz. Manzara için tırmanışa değer. Altındaki hayalet köy ile birleştirin.",
-      tip: "İpucu: su alın; duvarlarda az gölge var."
+    "tr": {
+      "title": "Palio Pyli Kalesi",
+      "lead": "Palio Pyli üzerinde ortaçağ kalesi – Aziz John Şövalyeleri, Osmanlılar, kısmen ayakta manzaralı.",
+      "btnPlay": "Sesli oku",
+      "p1": "Palio Pyli Kalesi terk edilmiş köyün üzerinde yer alır. 1315 civarında Aziz John Şövalyeleri (Hospitalierler) devraldı ve duvarları ile kuleleri güçlendirdi. 1523’ten itibaren Osmanlılar sakinlere koruma sundu.",
+      "p2": "Dikkat!! Yer yalnızca yürüyerek tırmanışla ulaşılabilir. İyi yürüyebildiğinizden emin olun ve terlik veya flip-flop giymeyin.",
+      "p3": "Palio Pyli Kos’ta terk edilmiş bir köy ve kaledir. Bir tepede bulunur ve şimdi bir harabedir. Palio Pyli’de Yunan adası Kos’ta terk edilmiş ortaçağ kalesi ve köyü vardır. Yaklaşık 300 metre yükseklikte bir tepededir. Buradan denize, uzakta Kalymnos ve Pserimos adalarına güzel manzara vardır. Hikâye 1080 yılı civarında başlar.",
+      "p4": "Christodoulos adında bir keşiş (daha sonra Patmos’taki ünlü manastırı kuran kişi) bu yere geldi. Bölge o zaman boş ve yerleşimsizdi. Her şeyi korumak için küçük bir manastır ve kale inşa etti. Kısa sürede etrafında bir köy büyüdü.",
+      "p5": "Sonraki yüzyıllarda kale güçlendirildi. 1315 civarında Aziz John Şövalyeleri (Hospitalierler) adayı devraldı. Duvarları ve kuleleri iyileştirerek kıyıyı güvensiz kılan korsanlara karşı güvenli bir sığınak haline getirdiler.",
+      "p6": "Daha sonra 1523’te Osmanlılar adayı fethettiğinde kale saldırılar ve huzursuzluk sırasında sakinlere hâlâ koruma sundu. Köy yaklaşık 1830’a kadar yerleşim kaldı. Sonra ciddi bir salgın (kolera) çıktı, neredeyse herkes öldü veya kaçtı.",
+      "p7": "Doğa evleri devraldı ama kale hâlâ kısmen ayakta.",
+      "g1": "Kale",
+      "g2": "Kale",
+      "g3": "Kale",
+      "g4": "Kale",
+      "p8": "Ücretsiz. Manzara için tırmanışa değer. Altındaki hayalet köy ile birleştirin.",
+      "tip": "su alın; duvarlarda az gölge var.",
+      "hStory": "Hikaye",
+      "hSee": "Ne görürsün",
+      "tipTitle": "Rehberin ipucu",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     },
-    es: {
-      title: "Castillo de Palio Pyli",
-      lead: "Fuerte medieval sobre Palio Pyli – Caballeros de San Juan, otomanos, en parte aún en pie con vistas.",
-      heroCap: "Castillo de Palio Pyli",
-      badgeFort: "Fuerte", badgeFree: "Gratis", badgePyli: "Palio Pyli",
-      btnPlay: "🔊 Leer en voz alta",
-      h2fort: "Fuerte sobre el pueblo fantasma",
-      p1: "El castillo de Palio Pyli está sobre el pueblo abandonado. Alrededor de 1315 los Caballeros de San Juan lo tomaron y reforzaron murallas y torres. Desde 1523 los otomanos ofrecieron protección a los habitantes.",
-      p2: "¡Atención!! Ten en cuenta que el lugar solo es accesible a pie mediante una subida. Asegúrate de estar en forma y no lleves chanclas o sandalias.",
-      p3: "Palio Pyli es un pueblo abandonado con un castillo en Kos. Está en una colina y ahora es una ruina. En Palio Pyli hay un castillo y pueblo medieval abandonado en la isla griega de Kos. Está en una colina de unos 300 metros de altura. Desde aquí tienes una hermosa vista al mar, con las islas de Kalymnos y Pserimos a lo lejos. La historia comienza alrededor del año 1080.",
-      p4: "Un monje llamado Christodoulos (el mismo que más tarde fundó el famoso monasterio de Patmos) llegó a este lugar. La zona estaba entonces vacía y deshabitada. Construyó un pequeño monasterio y un castillo para protegerlo todo. Pronto creció un pueblo entero alrededor.",
-      p5: "En los siglos siguientes el castillo se fortaleció. Alrededor de 1315 los Caballeros de San Juan (también llamados Hospitalarios) tomaron la isla. Mejoraron murallas y torres para que se convirtiera en un refugio seguro contra piratas que hacían insegura la costa.",
-      p6: "Más tarde, desde 1523 cuando los otomanos conquistaron la isla, el castillo siguió ofreciendo protección a los habitantes durante ataques y disturbios. El pueblo permaneció habitado hasta aproximadamente 1830. Entonces estalló una grave epidemia (cólera), causando que casi todos murieran o huyeran.",
-      p7: "La naturaleza se apoderó de las casas, pero el castillo aún permanece en parte.",
-      g1: "Castillo", g2: "Castillo", g3: "Castillo", g4: "Castillo",
-      h2visit: "Visitar",
-      p8: "Gratis. La subida merece la pena por la vista. Combínalo con el pueblo fantasma de abajo.",
-      tip: "Consejo: lleva agua; poca sombra en las murallas."
+    "es": {
+      "title": "Castillo de Palio Pyli",
+      "lead": "Fuerte medieval sobre Palio Pyli – Caballeros de San Juan, otomanos, en parte aún en pie con vistas.",
+      "btnPlay": "Leer en voz alta",
+      "p1": "El castillo de Palio Pyli está sobre el pueblo abandonado. Alrededor de 1315 los Caballeros de San Juan lo tomaron y reforzaron murallas y torres. Desde 1523 los otomanos ofrecieron protección a los habitantes.",
+      "p2": "¡Atención!! Ten en cuenta que el lugar solo es accesible a pie mediante una subida. Asegúrate de estar en forma y no lleves chanclas o sandalias.",
+      "p3": "Palio Pyli es un pueblo abandonado con un castillo en Kos. Está en una colina y ahora es una ruina. En Palio Pyli hay un castillo y pueblo medieval abandonado en la isla griega de Kos. Está en una colina de unos 300 metros de altura. Desde aquí tienes una hermosa vista al mar, con las islas de Kalymnos y Pserimos a lo lejos. La historia comienza alrededor del año 1080.",
+      "p4": "Un monje llamado Christodoulos (el mismo que más tarde fundó el famoso monasterio de Patmos) llegó a este lugar. La zona estaba entonces vacía y deshabitada. Construyó un pequeño monasterio y un castillo para protegerlo todo. Pronto creció un pueblo entero alrededor.",
+      "p5": "En los siglos siguientes el castillo se fortaleció. Alrededor de 1315 los Caballeros de San Juan (también llamados Hospitalarios) tomaron la isla. Mejoraron murallas y torres para que se convirtiera en un refugio seguro contra piratas que hacían insegura la costa.",
+      "p6": "Más tarde, desde 1523 cuando los otomanos conquistaron la isla, el castillo siguió ofreciendo protección a los habitantes durante ataques y disturbios. El pueblo permaneció habitado hasta aproximadamente 1830. Entonces estalló una grave epidemia (cólera), causando que casi todos murieran o huyeran.",
+      "p7": "La naturaleza se apoderó de las casas, pero el castillo aún permanece en parte.",
+      "g1": "Castillo",
+      "g2": "Castillo",
+      "g3": "Castillo",
+      "g4": "Castillo",
+      "p8": "Gratis. La subida merece la pena por la vista. Combínalo con el pueblo fantasma de abajo.",
+      "tip": "lleva agua; poca sombra en las murallas.",
+      "hStory": "La historia",
+      "hSee": "Qué ves",
+      "tipTitle": "Consejo del guía",
+      "gmaps": "Google Maps",
+      "iphone": "iPhone"
     }
   };
 
