@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Mijn verlanglijst – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+<style>
+.wish { margin: 0 0 16px; border: 2px solid #fff; border-radius: 16px; overflow: hidden; background: #152525; }
+.wish img { width: 100%; height: 160px; object-fit: cover; display: block; background: #1a2525; }
+.wish h2 { margin: 0; background: #fff; color: #0d1a1a; padding: 8px 12px; font-size: 1rem; }
+.wish .body { padding: 10px 12px 12px; }
+.wish .body a.page { color: var(--petrol); font-weight: 700; text-decoration: none; }
+.map-row { display: flex; gap: 8px; margin-top: 8px; }
+.map-row a, .wish .remove {
+  flex: 1 1 0; width: 0; min-width: 0; box-sizing: border-box;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 10px 8px; border-radius: 12px; border: 2px solid var(--petrol);
+  background: var(--bg-card); color: var(--petrol); font-weight: 700; font-size: 0.82rem;
+  text-decoration: none; font-family: inherit; cursor: pointer;
+}
+.wish .remove { width: 100%; margin-top: 8px; color: #e8a0a0; border-color: #e8a0a0; }
+.map-row .pin { width: 16px; height: 16px; flex: 0 0 16px; }
+.empty { background: #1e2e1e; border-left: 4px solid var(--gold); border-radius: 12px; padding: 14px; }
+</style>
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="bezienswaardigheden.html" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back">← Bezienswaardigheden</a></p>
+  <h1 data-i18n="title">Mijn verlanglijst</h1>
+  <p class="lead empty" id="empty" data-i18n="empty">Nog niets bewaard. Tik op het hartje bij een bezienswaardigheid. Het hartje wordt gevuld. Tik nog eens om de plek weer te verwijderen.</p>
+  <div id="list"></div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>
+window.HK_DICT = {
+  nl: { title: "Mijn verlanglijst", back: "← Bezienswaardigheden", empty: "Nog niets bewaard. Tik op het hartje bij een bezienswaardigheid. Het hartje wordt gevuld. Tik nog eens om de plek weer te verwijderen.", remove: "Verwijderen", open: "Bekijk de pagina", gmaps: "Google Maps", iphone: "iPhone", noCoord: "Geen coördinaten bekend, daarom geen kaartknop." },
+  de: { title: "Meine Merkliste", back: "← Sehenswürdigkeiten", empty: "Noch nichts gespeichert. Tippe auf das Herz bei einer Sehenswürdigkeit. Das Herz wird gefüllt. Nochmal tippen nimmt den Ort wieder weg.", remove: "Entfernen", open: "Seite ansehen", gmaps: "Google Maps", iphone: "iPhone", noCoord: "Keine Koordinaten bekannt, darum kein Kartenknopf." },
+  en: { title: "My wishlist", back: "← Sights", empty: "Nothing saved yet. Tap the heart on a sight. The heart fills in. Tap it again to remove the place.", remove: "Remove", open: "Open the page", gmaps: "Google Maps", iphone: "iPhone", noCoord: "No coordinates are known, so there is no map button." },
+  it: { title: "La mia lista", back: "← Attrazioni", empty: "Niente di salvato. Tocca il cuore su un luogo. Il cuore si riempie. Tocca di nuovo per toglierlo.", remove: "Rimuovi", open: "Apri la pagina", gmaps: "Google Maps", iphone: "iPhone", noCoord: "Coordinate sconosciute, quindi nessun pulsante mappa." },
+  tr: { title: "Listem", back: "← Gezilecek yerler", empty: "Henüz bir şey kayıtlı değil. Bir yerdeki kalbe dokun. Kalp dolar. Tekrar dokununca yer silinir.", remove: "Kaldır", open: "Sayfayı aç", gmaps: "Google Maps", iphone: "iPhone", noCoord: "Koordinat yok, bu yüzden harita düğmesi yok." },
+  es: { title: "Mi lista", back: "← Lugares de interés", empty: "Aún no hay nada guardado. Toca el corazón en un lugar. El corazón se rellena. Tócalo otra vez para quitar el lugar.", remove: "Quitar", open: "Ver la página", gmaps: "Google Maps", iphone: "iPhone", noCoord: "No hay coordenadas conocidas, así que no hay botón de mapa." }
+};
+</script>
+<script src="hello-kos-i18n.js"></script>
+<script src="hello-kos-places.js"></script>
+<script src="hello-kos-fav.js"></script>
+<script>
+(function () {
+  var PIN = '<svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>';
+  function lang() { return (window.HK_I18N && HK_I18N.getLang) ? HK_I18N.getLang() : (localStorage.getItem("hk-lang") || "nl"); }
+  function T(k) {
+    var d = (window.HK_DICT && window.HK_DICT[lang()]) || {};
+    return d[k] || (window.HK_DICT.nl[k] || "");
+  }
+  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;"); }
+  function render() {
+    var items = window.HKFav ? HKFav.list() : [];
+    var empty = document.getElementById("empty");
+    var list = document.getElementById("list");
+    empty.hidden = items.length > 0;
+    if (!items.length) { list.innerHTML = ""; return; }
+    var html = "";
+    items.forEach(function (p) {
+      var coords = typeof p.lat === "number" && typeof p.lon === "number";
+      html += '<article class="wish">';
+      if (p.photo) html += '<img src="' + esc(p.photo) + '" alt="">';
+      html += "<h2>" + esc(p.name) + "</h2><div class=\"body\">";
+      if (p.link) html += '<a class="page" href="' + esc(p.link) + '">' + esc(T("open")) + "</a>";
+      if (coords) {
+        var g = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(p.lat + "," + p.lon);
+        var a = "https://maps.apple.com/?ll=" + p.lat + "," + p.lon + "&q=" + encodeURIComponent(p.name || "");
+        html += '<div class="map-row"><a href="' + esc(g) + '" target="_blank" rel="noopener">' + PIN + esc(T("gmaps")) + '</a><a href="' + esc(a) + '" target="_blank" rel="noopener">' + PIN + esc(T("iphone")) + "</a></div>";
+      } else {
+        html += "<p>" + esc(T("noCoord")) + "</p>";
+      }
+      html += '<button type="button" class="remove" data-id="' + esc(p.id) + '">' + esc(T("remove")) + "</button></div></article>";
+    });
+    list.innerHTML = html;
+  }
+  document.getElementById("list").addEventListener("click", function (e) {
+    var b = e.target.closest(".remove");
+    if (!b || !window.HKFav) return;
+    HKFav.remove(b.getAttribute("data-id"));
+  });
+  document.addEventListener("hk-fav", render);
+  document.addEventListener("hk-lang", render);
+  render();
+})();
+</script>
+</body>
+</html>

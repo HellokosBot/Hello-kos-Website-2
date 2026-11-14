@@ -4,14 +4,44 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0D1A1A">
-<title>Wandelroute Kos-stad – Hello Kos</title>
+<title>Route – Hello Kos</title>
 <link rel="stylesheet" href="hello-kos.css">
+<style>
+.step-label { font-size: 0.78rem; font-weight: 700; color: var(--petrol); text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 8px; }
+.choices { display: flex; flex-direction: column; gap: 10px; margin: 0 0 14px; }
+.pick { display: flex; flex-direction: column; width: 100%; padding: 0; border: 2px solid #fff; border-radius: 16px; overflow: hidden; background: #1a2525; cursor: pointer; font-family: inherit; text-align: left; }
+.pick img { width: 100%; height: 120px; object-fit: cover; display: block; }
+.pick-bar { background: #fff; color: #0d1a1a; font-weight: 800; padding: 8px 12px; font-size: 1rem; }
+.pick.on { box-shadow: 0 0 0 3px #3A9A9A; }
+.choice { display: block; width: 100%; box-sizing: border-box; text-align: center; background: #152525; color: var(--text); border: 2px solid var(--petrol); border-radius: 14px; padding: 12px; font-weight: 800; cursor: pointer; font-family: inherit; }
+.choice.on { background: var(--petrol); color: #041212; }
+.mode-row { display: flex; gap: 8px; margin: 0 0 10px; }
+.mode-row .choice { flex: 1; }
+#fromFav { margin: 0 0 12px; }
+.est { font-size: 0.84rem; color: var(--text-soft); margin: 0 0 12px; }
+.stop { margin: 0 0 14px; border: 2px solid #fff; border-radius: 16px; overflow: hidden; background: #152525; }
+.stop img { width: 100%; height: 150px; object-fit: cover; display: block; }
+.stop h2 { margin: 0; background: #fff; color: #0d1a1a; padding: 8px 12px; font-size: 1rem; }
+.stop p { margin: 0; padding: 10px 12px 0; }
+.stop .info a { color: var(--petrol); font-weight: 700; text-decoration: none; }
+.map-row { display: flex; gap: 8px; margin-top: 8px; }
+.stop .map-row, #routeView > .map-row { padding: 0 12px 12px; }
+.map-row a {
+  flex: 1 1 0; width: 0; min-width: 0; box-sizing: border-box;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 10px 8px; border-radius: 12px; border: 2px solid var(--petrol);
+  background: var(--bg-card); color: var(--petrol); font-weight: 700; font-size: 0.82rem; text-decoration: none;
+}
+.map-row .pin { width: 16px; height: 16px; flex: 0 0 16px; }
+.group h3 { color: var(--gold); font-size: 0.95rem; margin: 12px 0 6px; }
+.group label { display: flex; gap: 8px; align-items: flex-start; margin: 0 0 6px; }
+</style>
 </head>
 <body class="hk-page">
 <header class="app-header">
   <div class="nav-btns">
     <a class="nav-btn" href="index.html" title="Home">🏠</a>
-    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+    <a class="nav-btn" href="bezienswaardigheden.html" title="Terug">←</a>
   </div>
   <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
   <div class="lang-wrap">
@@ -28,25 +58,43 @@
 </header>
 <div class="overlay" id="overlay"></div>
 <main class="main">
-  <div class="hero-wrap"><img src="img/hk/sight-witte-trappen-card.jpg" alt=""></div>
   <p class="parent-link"><a href="bezienswaardigheden.html" data-i18n="back">← Bezienswaardigheden</a></p>
-  <h1 data-i18n="title">Wandelroute Kos-stad</h1>
-  <p class="lead" data-i18n="lead">Een wandeling door Kos-stad, van de haven naar het centrum. Het Asklepion ligt buiten de stad en is een stuk verder. Doe het in de ochtend of laat op de dag, niet in de volle zon.</p>
-  <div class="badges"><span class="badge" data-i18n="b0">Gratis</span><span class="badge" data-i18n="b1">Kos-stad</span></div>
-  <div class="actions">
-    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
-    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
-    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Kos%20town%20harbour" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=Kos%20town%20harbour" target="_blank" rel="noopener">Apple Maps</a>
+  <h1 data-i18n="title">Route</h1>
+  <p class="step-label" data-i18n="s1">Stap 1</p>
+  <div class="choices" id="step1">
+    <button type="button" class="pick" data-mode="walk"><img src="img/hk/sight-witte-trappen-card.jpg" alt=""><span class="pick-bar" data-i18n="walk">Wandelen</span></button>
+    <button type="button" class="pick" data-mode="drive"><img src="img/hk/sight-asklepion.jpg" alt=""><span class="pick-bar" data-i18n="drive">Rijden (auto/scooter)</span></button>
+    <button type="button" class="pick" data-mode="custom"><img src="img/hk/sight-old-town-card.jpg" alt=""><span class="pick-bar" data-i18n="custom">Zelf samenstellen</span></button>
   </div>
-  <p class="status" id="ttsStatus"></p>
-  <div id="readText">
-    <article class="card"><h2 data-i18n="h0">De haltepunten</h2><p data-i18n="p0"><a href="sight-neratzia.html">1. Kasteel Neratzia</a><br><a href="sight-palm-tree-lane.html">2. Palm Tree Lane</a><br><a href="sight-i-love-kos.html">3. I love Kos</a><br><a href="sight-witte-trappen.html">4. Witte trappen</a><br><a href="sight-old-town.html">5. Oude stad</a><br><a href="sight-agora.html">6. Agora</a><br><a href="sight-paraskevi.html">7. Agia Paraskevi</a><br><a href="sight-odeon.html">8. Odeon</a><br><a href="sight-boom-hippocrates.html">9. Boom van Hippocrates</a><br><a href="sight-asklepion.html">10. Asklepion (buiten de stad)</a></p></article>
-    <article class="card"><h2 data-i18n="h1">Zelf kiezen</h2><p data-i18n="p1">Op de pagina Radar Kos-stad (vrije route) staan dezelfde plekken als losse punten. Met de auto is er een route van 1 dag en van 2 dagen.</p></article>
-    
+  <div id="step2" hidden>
+    <p class="step-label" data-i18n="s2">Stap 2</p>
+    <div class="choices">
+      <button type="button" class="pick" data-len="short"><img src="img/hk/sight-i-love-kos-card.jpg" alt=""><span class="pick-bar" data-i18n="shortR">Korte route</span></button>
+      <button type="button" class="pick" data-len="long"><img src="img/hk/sight-zia.jpg" alt=""><span class="pick-bar" data-i18n="longR">Lange route</span></button>
+    </div>
+  </div>
+  <p class="lead" id="blurb"></p>
+  <p class="est" id="est"></p>
+  <div id="routeView"></div>
+  <div id="customView" hidden>
+    <div class="mode-row">
+      <button type="button" class="choice" id="cWalk" data-i18n="walk">Wandelen</button>
+      <button type="button" class="choice" id="cDrive" data-i18n="drive">Rijden (auto/scooter)</button>
+    </div>
+    <button type="button" class="choice" id="fromFav" data-i18n="fromFav">Route maken van mijn verlanglijst</button>
+    <p class="est" id="favNote"></p>
+    <div id="checks"></div>
+    <p class="est" id="cest"></p>
+    <p class="est" id="cTrim" hidden></p>
+    <div class="map-row" id="cBtns" hidden></div>
   </div>
 </main>
 <footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
-<script>window.HK_DICT = {"nl": {"title": "Wandelroute Kos-stad", "lead": "Een wandeling door Kos-stad, van de haven naar het centrum. Het Asklepion ligt buiten de stad en is een stuk verder. Doe het in de ochtend of laat op de dag, niet in de volle zon.", "back": "← Bezienswaardigheden", "h0": "De haltepunten", "p0": "<a href=\"sight-neratzia.html\">1. Kasteel Neratzia</a><br><a href=\"sight-palm-tree-lane.html\">2. Palm Tree Lane</a><br><a href=\"sight-i-love-kos.html\">3. I love Kos</a><br><a href=\"sight-witte-trappen.html\">4. Witte trappen</a><br><a href=\"sight-old-town.html\">5. Oude stad</a><br><a href=\"sight-agora.html\">6. Agora</a><br><a href=\"sight-paraskevi.html\">7. Agia Paraskevi</a><br><a href=\"sight-odeon.html\">8. Odeon</a><br><a href=\"sight-boom-hippocrates.html\">9. Boom van Hippocrates</a><br><a href=\"sight-asklepion.html\">10. Asklepion (buiten de stad)</a>", "h1": "Zelf kiezen", "p1": "Op de pagina Radar Kos-stad (vrije route) staan dezelfde plekken als losse punten. Met de auto is er een route van 1 dag en van 2 dagen.", "b0": "Gratis", "b1": "Kos-stad"}, "de": {"title": "Spaziergang Kos-Stadt", "lead": "Ein Spaziergang durch Kos-Stadt, vom Hafen ins Zentrum. Das Asklepion liegt außerhalb und ist ein Stück weiter. Mach es morgens oder spät am Tag, nicht in der prallen Sonne.", "back": "← Sehenswürdigkeiten", "h0": "Die Stopps", "p0": "<a href=\"sight-neratzia.html\">1. Burg Neratzia</a><br><a href=\"sight-palm-tree-lane.html\">2. Palm Tree Lane</a><br><a href=\"sight-i-love-kos.html\">3. I love Kos</a><br><a href=\"sight-witte-trappen.html\">4. Weiße Treppe</a><br><a href=\"sight-old-town.html\">5. Altstadt</a><br><a href=\"sight-agora.html\">6. Agora</a><br><a href=\"sight-paraskevi.html\">7. Agia Paraskevi</a><br><a href=\"sight-odeon.html\">8. Odeon</a><br><a href=\"sight-boom-hippocrates.html\">9. Baum des Hippokrates</a><br><a href=\"sight-asklepion.html\">10. Asklepion (außerhalb)</a>", "h1": "Selbst wählen", "p1": "Auf der Seite Radar Kos-Stadt (freie Route) stehen dieselben Orte als einzelne Punkte. Mit dem Auto gibt es eine Route für 1 Tag und für 2 Tage.", "b0": "Kostenlos", "b1": "Kos-Stadt"}, "en": {"title": "Kos town walk", "lead": "A walk through Kos town, from the harbour to the centre. The Asklepion is outside town and a good bit further. Do it in the morning or late in the day, not in full sun.", "back": "← Sights", "h0": "The stops", "p0": "<a href=\"sight-neratzia.html\">1. Neratzia castle</a><br><a href=\"sight-palm-tree-lane.html\">2. Palm Tree Lane</a><br><a href=\"sight-i-love-kos.html\">3. I love Kos</a><br><a href=\"sight-witte-trappen.html\">4. White steps</a><br><a href=\"sight-old-town.html\">5. Old town</a><br><a href=\"sight-agora.html\">6. Agora</a><br><a href=\"sight-paraskevi.html\">7. Agia Paraskevi</a><br><a href=\"sight-odeon.html\">8. Odeon</a><br><a href=\"sight-boom-hippocrates.html\">9. Hippocrates’ tree</a><br><a href=\"sight-asklepion.html\">10. Asklepion (outside town)</a>", "h1": "Choose yourself", "p1": "On the Kos town radar page (free route) the same places are separate points. By car there is a 1-day route and a 2-day route.", "b0": "Free", "b1": "Kos town"}, "it": {"title": "Passeggiata Kos città", "lead": "Una passeggiata per la città, dal porto al centro. L’Asklepion è fuori città ed è più lontano. Fallo al mattino o a fine giornata, non sotto il sole pieno.", "back": "← Attrazioni", "h0": "Le tappe", "p0": "<a href=\"sight-neratzia.html\">1. Castello di Neratzia</a><br><a href=\"sight-palm-tree-lane.html\">2. Palm Tree Lane</a><br><a href=\"sight-i-love-kos.html\">3. I love Kos</a><br><a href=\"sight-witte-trappen.html\">4. Scale bianche</a><br><a href=\"sight-old-town.html\">5. Città vecchia</a><br><a href=\"sight-agora.html\">6. Agorà</a><br><a href=\"sight-paraskevi.html\">7. Agia Paraskevi</a><br><a href=\"sight-odeon.html\">8. Odeon</a><br><a href=\"sight-boom-hippocrates.html\">9. Albero di Ippocrate</a><br><a href=\"sight-asklepion.html\">10. Asklepion (fuori città)</a>", "h1": "Scegli tu", "p1": "Nella pagina radar di Kos città (percorso libero) gli stessi luoghi sono punti separati. In auto c’è un percorso di 1 giorno e uno di 2.", "b0": "Gratis", "b1": "Città di Kos"}, "tr": {"title": "Kos şehri yürüyüşü", "lead": "Kos şehrinde limandan merkeze bir yürüyüş. Asklepion şehir dışındadır ve daha uzaktır. Sabah ya da günün sonunda yap, tam güneşte değil.", "back": "← Gezilecek yerler", "h0": "Duraklar", "p0": "<a href=\"sight-neratzia.html\">1. Neratzia kalesi</a><br><a href=\"sight-palm-tree-lane.html\">2. Palm Tree Lane</a><br><a href=\"sight-i-love-kos.html\">3. I love Kos</a><br><a href=\"sight-witte-trappen.html\">4. Beyaz merdiven</a><br><a href=\"sight-old-town.html\">5. Eski şehir</a><br><a href=\"sight-agora.html\">6. Agora</a><br><a href=\"sight-paraskevi.html\">7. Agia Paraskevi</a><br><a href=\"sight-odeon.html\">8. Odeon</a><br><a href=\"sight-boom-hippocrates.html\">9. Hipokrat ağacı</a><br><a href=\"sight-asklepion.html\">10. Asklepion (şehir dışı)</a>", "h1": "Kendin seç", "p1": "Kos şehri radar sayfasında (serbest rota) aynı yerler ayrı noktalar. Arabayla 1 günlük ve 2 günlük rota var.", "b0": "Ücretsiz", "b1": "Kos şehri"}, "es": {"title": "Paseo por la ciudad de Kos", "lead": "Un paseo por la ciudad, del puerto al centro. El Asklepion está fuera y queda más lejos. Hazlo por la mañana o al final del día, no a pleno sol.", "back": "← Lugares de interés", "h0": "Las paradas", "p0": "<a href=\"sight-neratzia.html\">1. Castillo de Neratzia</a><br><a href=\"sight-palm-tree-lane.html\">2. Palm Tree Lane</a><br><a href=\"sight-i-love-kos.html\">3. I love Kos</a><br><a href=\"sight-witte-trappen.html\">4. Escaleras blancas</a><br><a href=\"sight-old-town.html\">5. Casco antiguo</a><br><a href=\"sight-agora.html\">6. Ágora</a><br><a href=\"sight-paraskevi.html\">7. Agia Paraskevi</a><br><a href=\"sight-odeon.html\">8. Odeón</a><br><a href=\"sight-boom-hippocrates.html\">9. Árbol de Hipócrates</a><br><a href=\"sight-asklepion.html\">10. Asklepion (fuera)</a>", "h1": "Elige tú", "p1": "En la página radar de la ciudad (ruta libre) los mismos sitios son puntos sueltos. En coche hay una ruta de 1 día y una de 2.", "b0": "Gratis", "b1": "Ciudad de Kos"}};</script>
+<script src="hello-kos-route-dict.js"></script>
 <script src="hello-kos-i18n.js"></script>
+<script src="hello-kos-places.js"></script>
+<script src="hello-kos-fav.js"></script>
+<script src="hello-kos-route-text.js"></script>
+<script src="hello-kos-route.js"></script>
 </body>
 </html>
