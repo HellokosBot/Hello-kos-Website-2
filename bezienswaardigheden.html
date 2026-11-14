@@ -74,14 +74,21 @@
       color: var(--text); border: 1px solid rgba(224, 176, 64, 0.25);
     }
     .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .wide-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 8px; }
+    .wide-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 8px; }
     .card {
       position: relative; display: flex; flex-direction: column; border-radius: 16px; overflow: hidden;
       aspect-ratio: 1; text-decoration: none; box-shadow: 0 4px 18px rgba(0,0,0,0.45);
       border: 2px solid #fff; background: #1a2525; color: #0d1a1a;
     }
-    .card.wide { aspect-ratio: 16 / 9; }
+    /* Full-width banner: about half the height of the old 16/9 tile. */
+    .card.banner { aspect-ratio: auto; width: 100%; }
     .card img { flex: 1 1 auto; min-height: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+    .card.banner img { flex: 0 0 auto; width: 100%; height: auto; aspect-ratio: 4.2 / 1; object-fit: cover; }
+    .card.banner.radar img { aspect-ratio: 2.6 / 1; object-fit: cover; object-position: center 50%; }
+    .card.banner.route img { object-position: center 46%; }
+    .card.banner.wish img { object-position: center 62%; }
+    .card.banner .card-overlay { padding: 6px 10px; }
+    .card.banner .card-title { font-size: 0.84rem; }
     .card-overlay {
       position: static; flex: 0 0 auto; width: 100%; box-sizing: border-box;
       background: #fff; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 7px 10px;
@@ -143,21 +150,9 @@
     <h1 data-i18n="title">Bezienswaardigheden &amp; routes</h1>
     <p class="sub" data-i18n="sub">Audiogidsen · gratis of met entree</p>
     <div class="wide-grid">
-      <a class="card wide" href="route-vrij.html"><img src="img/hk/sight-neratzia-card.jpg" alt=""><div class="card-overlay"><span class="card-title" data-i18n="tileRadar">Wandelradar</span></div></a>
-      <a class="card wide" href="route-wandel.html"><img src="img/hk/sight-witte-trappen-card.jpg" alt=""><div class="card-overlay"><span class="card-title" data-i18n="tileRoute">Route</span></div></a>
-      <a class="card wide" href="verlanglijst.html"><img src="img/hk/sight-boom-hippocrates-card.jpg" alt=""><div class="card-overlay"><span class="card-title" data-i18n="tileWish">Mijn verlanglijst</span><span class="card-meta" id="wishCount"></span></div></a>
-    </div>
-
-    <div class="section-label" data-i18n="routesLabel">Routes – tik om uit te klappen</div>
-    <div class="acc open">
-      <button type="button" class="acc-btn" onclick="this.parentElement.classList.toggle('open')">
-        <span>Routes</span>
-        <span style="display:flex;align-items:center;gap:8px"><span class="count">2 routes</span><span class="chevron">▼</span></span>
-      </button>
-      <div class="acc-panel"><div class="grid">
-        <a class="card" href="route-auto-1dag.html"><img src="img/hk/sight-asklepion.jpg" alt="Rij 1 dag" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Rij 1 dag<span class="card-meta">Auto / scooter</span></span></div></a>
-        <a class="card" href="route-auto-2dagen.html"><img src="img/hk/sight-zia.jpg" alt="Rij 2 dagen" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Rij 2 dagen<span class="card-meta">Auto / scooter</span></span></div></a>
-      </div></div>
+      <a class="card banner radar" href="route-vrij.html"><img src="img/hk/tegel-wandelradar.jpg" alt=""><div class="card-overlay"><span class="card-title" data-i18n="tileRadar">Wandelradar</span></div></a>
+      <a class="card banner route" href="route-wandel.html"><img src="img/hk/tegel-route.jpg" alt=""><div class="card-overlay"><span class="card-title" data-i18n="tileRoute">Route</span></div></a>
+      <a class="card banner wish" href="verlanglijst.html"><img src="img/hk/tegel-verlanglijst.jpg" alt=""><div class="card-overlay"><span class="card-title" data-i18n="tileWish">Mijn verlanglijst</span><span class="card-meta" id="wishCount"></span></div></a>
     </div>
 
     <div class="section-label" data-i18n="locsLabel">Locaties – tik om uit te klappen</div>
@@ -331,12 +326,12 @@
 <script>
 (function(){
   var I18N = {
-    nl: { title: "Bezienswaardigheden & routes", sub: "Audiogidsen · gratis of met entree", routesLabel: "Routes – tik om uit te klappen", locsLabel: "Locaties – tik om uit te klappen", tileRadar: "Wandelradar", tileRoute: "Route", tileWish: "Mijn verlanglijst" },
-    en: { title: "Sights & routes", sub: "Audio guides · free or with entrance", routesLabel: "Routes – tap to expand", locsLabel: "Locations – tap to expand", tileRadar: "Walking radar", tileRoute: "Route", tileWish: "My wishlist" },
-    de: { title: "Sehenswürdigkeiten & Routen", sub: "Audioguides · kostenlos oder mit Eintritt", routesLabel: "Routen – tippen zum Aufklappen", locsLabel: "Orte – tippen zum Aufklappen", tileRadar: "Wanderradar", tileRoute: "Route", tileWish: "Meine Merkliste" },
-    it: { title: "Attrazioni & percorsi", sub: "Audioguide · gratis o a pagamento", routesLabel: "Percorsi – tocca per espandere", locsLabel: "Luoghi – tocca per espandere", tileRadar: "Radar a piedi", tileRoute: "Percorso", tileWish: "La mia lista" },
-    tr: { title: "Gezilecek yerler & rotalar", sub: "Sesli rehberler · ücretsiz veya giriş ücretli", routesLabel: "Rotalar – açmak için dokunun", locsLabel: "Yerler – açmak için dokunun", tileRadar: "Yürüyüş radarı", tileRoute: "Rota", tileWish: "Listem" },
-    es: { title: "Lugares de interés y rutas", sub: "Audioguías · gratis o con entrada", routesLabel: "Rutas – toca para desplegar", locsLabel: "Lugares – toca para desplegar", tileRadar: "Radar a pie", tileRoute: "Ruta", tileWish: "Mi lista" }
+    nl: { title: "Bezienswaardigheden & routes", sub: "Audiogidsen · gratis of met entree", locsLabel: "Locaties – tik om uit te klappen", tileRadar: "Wandelradar", tileRoute: "Route", tileWish: "Mijn verlanglijst" },
+    en: { title: "Sights & routes", sub: "Audio guides · free or with entrance", locsLabel: "Locations – tap to expand", tileRadar: "Walking radar", tileRoute: "Route", tileWish: "My wishlist" },
+    de: { title: "Sehenswürdigkeiten & Routen", sub: "Audioguides · kostenlos oder mit Eintritt", locsLabel: "Orte – tippen zum Aufklappen", tileRadar: "Wanderradar", tileRoute: "Route", tileWish: "Meine Merkliste" },
+    it: { title: "Attrazioni & percorsi", sub: "Audioguide · gratis o a pagamento", locsLabel: "Luoghi – tocca per espandere", tileRadar: "Radar a piedi", tileRoute: "Percorso", tileWish: "La mia lista" },
+    tr: { title: "Gezilecek yerler & rotalar", sub: "Sesli rehberler · ücretsiz veya giriş ücretli", locsLabel: "Yerler – açmak için dokunun", tileRadar: "Yürüyüş radarı", tileRoute: "Rota", tileWish: "Listem" },
+    es: { title: "Lugares de interés y rutas", sub: "Audioguías · gratis o con entrada", locsLabel: "Lugares – toca para desplegar", tileRadar: "Radar a pie", tileRoute: "Ruta", tileWish: "Mi lista" }
   };
 
   function setLang(l) {
