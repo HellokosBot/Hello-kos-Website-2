@@ -74,22 +74,22 @@
       color: var(--text); border: 1px solid rgba(224, 176, 64, 0.25);
     }
     .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .wide-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 8px; }
     .card {
-      position: relative; display: block; border-radius: 16px; overflow: hidden;
+      position: relative; display: flex; flex-direction: column; border-radius: 16px; overflow: hidden;
       aspect-ratio: 1; text-decoration: none; box-shadow: 0 4px 18px rgba(0,0,0,0.45);
-      border: 1px solid var(--border);
+      border: 2px solid #fff; background: #1a2525; color: #0d1a1a;
     }
-    .card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .card.wide { aspect-ratio: 16 / 9; }
+    .card img { flex: 1 1 auto; min-height: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
     .card-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.25) 50%, transparent 100%);
-      display: flex; align-items: flex-end; justify-content: center; padding: 12px 8px;
+      position: static; flex: 0 0 auto; width: 100%; box-sizing: border-box;
+      background: #fff; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 7px 10px;
     }
     .card-title {
-      color: white; font-weight: 700; font-size: 0.85rem; text-align: center; line-height: 1.25;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+      color: #0d1a1a; font-weight: 700; font-size: 0.88rem; line-height: 1.25;
     }
-    .card-meta { display: block; font-size: 0.7rem; font-weight: 600; opacity: 0.9; margin-top: 2px; }
+    .card-meta { display: block; font-size: 0.7rem; font-weight: 600; color: #0d1a1a; opacity: 0.9; margin-top: 2px; }
     .acc {
       background: var(--bg-card); border-radius: 14px; margin-bottom: 10px;
       box-shadow: 0 2px 12px rgba(0,0,0,0.3); overflow: hidden; border: 1px solid var(--border);
@@ -115,14 +115,6 @@
     .footer-logo { font-weight: 700; color: var(--petrol); margin-bottom: 4px; }
     .footer p { font-size: 0.78rem; color: var(--text-soft); }
     .footer a { color: var(--petrol); text-decoration: none; }
-    .sound-btn {
-      appearance: none; border: none; cursor: pointer;
-      background: var(--petrol-deep); color: white; font-weight: 700;
-      font-size: 0.88rem; padding: 10px 16px; border-radius: 12px;
-    }
-    .sound-btn.secondary { background: #3A4545; }
-    .sound-btn:active { opacity: 0.85; transform: scale(0.98); }
-    #soundStatus { color: var(--text-soft) !important; }
   </style>
 <link rel="stylesheet" href="hello-kos.css">
 </head>
@@ -150,25 +142,19 @@
   <main class="main">
     <h1 data-i18n="title">Bezienswaardigheden &amp; routes</h1>
     <p class="sub" data-i18n="sub">Audiogidsen · gratis of met entree</p>
-    <div class="note" id="soundNote">
-      <strong>🔊 Geluidstest</strong><br>
-      <span data-i18n="soundText">Druk op de knop. Je hoort een korte zin in de taal die je hebt gekozen.</span>
-      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
-        <button type="button" class="sound-btn" id="btnTestSound">▶ Test geluid</button>
-        <button type="button" class="sound-btn secondary" id="btnStopSound">⏹ Stop</button>
-      </div>
-      <p id="soundStatus" style="margin-top:8px;font-size:0.8rem"></p>
+    <div class="wide-grid">
+      <a class="card wide" href="route-vrij.html"><img src="img/hk/sight-neratzia-card.jpg" alt=""><div class="card-overlay"><span class="card-title" data-i18n="tileRadar">Wandelradar</span></div></a>
+      <a class="card wide" href="route-wandel.html"><img src="img/hk/sight-witte-trappen-card.jpg" alt=""><div class="card-overlay"><span class="card-title" data-i18n="tileRoute">Route</span></div></a>
+      <a class="card wide" href="verlanglijst.html"><img src="img/hk/sight-boom-hippocrates-card.jpg" alt=""><div class="card-overlay"><span class="card-title" data-i18n="tileWish">Mijn verlanglijst</span><span class="card-meta" id="wishCount"></span></div></a>
     </div>
 
     <div class="section-label" data-i18n="routesLabel">Routes – tik om uit te klappen</div>
     <div class="acc open">
       <button type="button" class="acc-btn" onclick="this.parentElement.classList.toggle('open')">
         <span>Routes</span>
-        <span style="display:flex;align-items:center;gap:8px"><span class="count">4 routes</span><span class="chevron">▼</span></span>
+        <span style="display:flex;align-items:center;gap:8px"><span class="count">2 routes</span><span class="chevron">▼</span></span>
       </button>
       <div class="acc-panel"><div class="grid">
-        <a class="card" href="route-wandel.html"><img src="img/hk/sight-witte-trappen-card.jpg" alt="Wandelroute Kos-stad" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Wandelroute Kos-stad<span class="card-meta">Te voet</span></span></div></a>
-        <a class="card" href="route-vrij.html"><img src="img/hk/sight-neratzia-card.jpg" alt="Radar tourguide" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Radar tourguide<span class="card-meta">Vrije route</span></span></div></a>
         <a class="card" href="route-auto-1dag.html"><img src="img/hk/sight-asklepion.jpg" alt="Rij 1 dag" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Rij 1 dag<span class="card-meta">Auto / scooter</span></span></div></a>
         <a class="card" href="route-auto-2dagen.html"><img src="img/hk/sight-zia.jpg" alt="Rij 2 dagen" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Rij 2 dagen<span class="card-meta">Auto / scooter</span></span></div></a>
       </div></div>
@@ -215,21 +201,31 @@
 
     <div class="acc">
       <button type="button" class="acc-btn" onclick="this.parentElement.classList.toggle('open')">
-        <span>Rondom Kos-stad</span>
-        <span style="display:flex;align-items:center;gap:8px"><span class="count">5 plekken</span><span class="chevron">▼</span></span>
+        <span>Psalidi</span>
+        <span style="display:flex;align-items:center;gap:8px"><span class="count">1 plek</span><span class="chevron">▼</span></span>
       </button>
       <div class="acc-panel"><div class="grid">
-        <a class="card" href="sight-asklepion.html"><img src="img/hk/sight-asklepion.jpg" alt="Asklepion" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Asklepion<span class="card-meta">Entree</span></span></div></a>
-        <a class="card" href="sight-platani.html"><img src="img/hk/sight-platani.jpg" alt="Platani" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Platani<span class="card-meta">Gratis</span></span></div></a>
-        <a class="card" href="sight-waterval-platani.html"><img src="img/hk/sight-waterval-platani.jpg" alt="Waterval Platani" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Waterval Platani<span class="card-meta">Gratis</span></span></div></a>
-        <a class="card" href="sight-therma.html"><img src="img/hk/sight-therma.jpg" alt="Therma Hot Springs" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Therma Hot Springs<span class="card-meta">Gratis</span></span></div></a>
-        <a class="card" href="sight-hippocratic-foundation.html"><img src="img/hk/sight-hippocratic-foundation-card.jpg" alt="Hippocratic Foundation" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Hippocratic Foundation<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-therma.html"><img src="img/hk/sight-therma.jpg" alt="Therma Hot Springs" loading="lazy"><div class="card-overlay"><span class="card-title">Therma Hot Springs<span class="card-meta">Psalidi</span></span></div></a>
       </div></div>
     </div>
 
     <div class="acc">
       <button type="button" class="acc-btn" onclick="this.parentElement.classList.toggle('open')">
-        <span>Antimachia & omgeving</span>
+        <span>Platani</span>
+        <span style="display:flex;align-items:center;gap:8px"><span class="count">5 plekken</span><span class="chevron">▼</span></span>
+      </button>
+      <div class="acc-panel"><div class="grid">
+        <a class="card" href="sight-platani.html"><img src="img/hk/sight-platani.jpg" alt="Platani" loading="lazy"><div class="card-overlay"><span class="card-title">Platani<span class="card-meta">Dorp</span></span></div></a>
+        <a class="card" href="sight-waterval-platani.html"><img src="img/hk/sight-waterval-platani.jpg" alt="Waterval Platani" loading="lazy"><div class="card-overlay"><span class="card-title">Waterval Platani<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-hippocratic-foundation.html"><img src="img/hk/sight-hippocratic-foundation-card.jpg" alt="Hippocratic Foundation" loading="lazy"><div class="card-overlay"><span class="card-title">Hippocratic Foundation<span class="card-meta">Platani</span></span></div></a>
+        <a class="card" href="sight-asklepion.html"><img src="img/hk/sight-asklepion.jpg" alt="Asklepion" loading="lazy"><div class="card-overlay"><span class="card-title">Asklepion<span class="card-meta">Entree</span></span></div></a>
+        <a class="card" href="sight-haihoutes.html"><img src="img/hk/sight-haihoutes-card.jpg" alt="Haihoutes" loading="lazy"><div class="card-overlay"><span class="card-title">Haihoutes<span class="card-meta">Bergdorp</span></span></div></a>
+      </div></div>
+    </div>
+
+    <div class="acc">
+      <button type="button" class="acc-btn" onclick="this.parentElement.classList.toggle('open')">
+        <span>Antimachia</span>
         <span style="display:flex;align-items:center;gap:8px"><span class="count">4 plekken</span><span class="chevron">▼</span></span>
       </button>
       <div class="acc-panel"><div class="grid">
@@ -242,19 +238,18 @@
 
     <div class="acc">
       <button type="button" class="acc-btn" onclick="this.parentElement.classList.toggle('open')">
-        <span>Zia & bergen</span>
-        <span style="display:flex;align-items:center;gap:8px"><span class="count">3 plekken</span><span class="chevron">▼</span></span>
+        <span>Zia</span>
+        <span style="display:flex;align-items:center;gap:8px"><span class="count">2 plekken</span><span class="chevron">▼</span></span>
       </button>
       <div class="acc-panel"><div class="grid">
-        <a class="card" href="sight-zia.html"><img src="img/hk/sight-zia.jpg" alt="Zia" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Zia<span class="card-meta">Gratis</span></span></div></a>
-        <a class="card" href="sight-natuurpark-zia.html"><img src="img/hk/sight-natuurpark-zia.jpg" alt="Natuurpark Zia" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Natuurpark Zia<span class="card-meta">Entree</span></span></div></a>
-        <a class="card" href="sight-haihoutes.html"><img src="img/hk/sight-haihoutes-card.jpg" alt="Haihoutes" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Haihoutes<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-zia.html"><img src="img/hk/sight-zia.jpg" alt="Zia" loading="lazy"><div class="card-overlay"><span class="card-title">Zia<span class="card-meta">Dorp</span></span></div></a>
+        <a class="card" href="sight-natuurpark-zia.html"><img src="img/hk/sight-natuurpark-zia.jpg" alt="Natuurpark Zia" loading="lazy"><div class="card-overlay"><span class="card-title">Natuurpark Zia<span class="card-meta">Entree</span></span></div></a>
       </div></div>
     </div>
 
     <div class="acc">
       <button type="button" class="acc-btn" onclick="this.parentElement.classList.toggle('open')">
-        <span>Palio Pyli</span>
+        <span>Pyli</span>
         <span style="display:flex;align-items:center;gap:8px"><span class="count">2 plekken</span><span class="chevron">▼</span></span>
       </button>
       <div class="acc-panel"><div class="grid">
@@ -265,29 +260,65 @@
 
     <div class="acc">
       <button type="button" class="acc-btn" onclick="this.parentElement.classList.toggle('open')">
-        <span>Noordkust</span>
-        <span style="display:flex;align-items:center;gap:8px"><span class="count">5 plekken</span><span class="chevron">▼</span></span>
+        <span>Tigaki</span>
+        <span style="display:flex;align-items:center;gap:8px"><span class="count">2 plekken</span><span class="chevron">▼</span></span>
       </button>
       <div class="acc-panel"><div class="grid">
-        <a class="card" href="sight-tigaki.html"><img src="img/hk/sight-tigaki.jpg" alt="Tigaki" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Tigaki<span class="card-meta">Gratis</span></span></div></a>
-        <a class="card" href="sight-zoutmeer-tigaki.html"><img src="img/hk/sight-zoutmeer-tigaki-card.jpg" alt="Zoutmeer & flamingo’s" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Zoutmeer & flamingo’s<span class="card-meta">Gratis</span></span></div></a>
-        <a class="card" href="sight-marmari.html"><img src="img/hk/sight-marmari.jpg" alt="Marmari" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Marmari<span class="card-meta">Gratis</span></span></div></a>
-        <a class="card" href="sight-mastichari.html"><img src="img/hk/sight-mastichari.jpg" alt="Mastichari" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Mastichari<span class="card-meta">Gratis</span></span></div></a>
-        <a class="card" href="sight-hippocrates-garden.html"><img src="img/hk/sight-hippocrates-garden-card.jpg" alt="Hippocrates Garden" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Hippocrates Garden<span class="card-meta">Entree</span></span></div></a>
+        <a class="card" href="sight-tigaki.html"><img src="img/hk/sight-tigaki.jpg" alt="Tigaki" loading="lazy"><div class="card-overlay"><span class="card-title">Tigaki<span class="card-meta">Strand</span></span></div></a>
+        <a class="card" href="sight-zoutmeer-tigaki.html"><img src="img/hk/sight-zoutmeer-tigaki-card.jpg" alt="Zoutmeer" loading="lazy"><div class="card-overlay"><span class="card-title">Zoutmeer Alikes<span class="card-meta">Flamingo’s</span></span></div></a>
       </div></div>
     </div>
 
     <div class="acc">
       <button type="button" class="acc-btn" onclick="this.parentElement.classList.toggle('open')">
-        <span>Kefalos & west</span>
-        <span style="display:flex;align-items:center;gap:8px"><span class="count">5 plekken</span><span class="chevron">▼</span></span>
+        <span>Marmari</span>
+        <span style="display:flex;align-items:center;gap:8px"><span class="count">1 plek</span><span class="chevron">▼</span></span>
       </button>
       <div class="acc-panel"><div class="grid">
-        <a class="card" href="sight-agios-stefanos-kefalos.html"><img src="img/hk/sight-agios-stefanos-kefalos-card.jpg" alt="Agios Stefanos" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Agios Stefanos<span class="card-meta">Gratis</span></span></div></a>
-        <a class="card" href="sight-kapel-agios-nikolaos.html"><img src="img/hk/sight-kapel-agios-nikolaos-card.jpg" alt="Agios Nikolaos" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1548013146-72479768bada?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Agios Nikolaos<span class="card-meta">Gratis</span></span></div></a>
-        <a class="card" href="sight-cavo-paradiso.html"><img src="img/hk/sight-cavo-paradiso.jpg" alt="Cavo Paradiso" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Cavo Paradiso<span class="card-meta">Gratis</span></span></div></a>
-        <a class="card" href="sight-kardamena.html"><img src="img/hk/sight-kardamena.jpg" alt="Kardamena" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Kardamena<span class="card-meta">Gratis</span></span></div></a>
-        <a class="card" href="sight-limnionas.html"><img src="img/hk/sight-limnionas.jpg" alt="Limnionas" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop&q=80'"><div class="card-overlay"><span class="card-title">Limnionas<span class="card-meta">Gratis</span></span></div></a>
+        <a class="card" href="sight-marmari.html"><img src="img/hk/sight-marmari.jpg" alt="Marmari" loading="lazy"><div class="card-overlay"><span class="card-title">Marmari<span class="card-meta">Kust</span></span></div></a>
+      </div></div>
+    </div>
+
+    <div class="acc">
+      <button type="button" class="acc-btn" onclick="this.parentElement.classList.toggle('open')">
+        <span>Mastichari</span>
+        <span style="display:flex;align-items:center;gap:8px"><span class="count">2 plekken</span><span class="chevron">▼</span></span>
+      </button>
+      <div class="acc-panel"><div class="grid">
+        <a class="card" href="sight-mastichari.html"><img src="img/hk/sight-mastichari.jpg" alt="Mastichari" loading="lazy"><div class="card-overlay"><span class="card-title">Mastichari<span class="card-meta">Dorp</span></span></div></a>
+        <a class="card" href="sight-hippocrates-garden.html"><img src="img/hk/sight-hippocrates-garden-card.jpg" alt="Hippocrates Garden" loading="lazy"><div class="card-overlay"><span class="card-title">Hippocrates Garden<span class="card-meta">Entree</span></span></div></a>
+      </div></div>
+    </div>
+
+    <div class="acc">
+      <button type="button" class="acc-btn" onclick="this.parentElement.classList.toggle('open')">
+        <span>Kefalos</span>
+        <span style="display:flex;align-items:center;gap:8px"><span class="count">3 plekken</span><span class="chevron">▼</span></span>
+      </button>
+      <div class="acc-panel"><div class="grid">
+        <a class="card" href="sight-agios-stefanos-kefalos.html"><img src="img/hk/sight-agios-stefanos-kefalos-card.jpg" alt="Agios Stefanos" loading="lazy"><div class="card-overlay"><span class="card-title">Agios Stefanos<span class="card-meta">Kefalos</span></span></div></a>
+        <a class="card" href="sight-kapel-agios-nikolaos.html"><img src="img/hk/sight-kapel-agios-nikolaos-card.jpg" alt="Agios Nikolaos" loading="lazy"><div class="card-overlay"><span class="card-title">Agios Nikolaos<span class="card-meta">Kastri</span></span></div></a>
+        <a class="card" href="sight-cavo-paradiso.html"><img src="img/hk/sight-cavo-paradiso.jpg" alt="Cavo Paradiso" loading="lazy"><div class="card-overlay"><span class="card-title">Cavo Paradiso<span class="card-meta">Kefalos</span></span></div></a>
+      </div></div>
+    </div>
+
+    <div class="acc">
+      <button type="button" class="acc-btn" onclick="this.parentElement.classList.toggle('open')">
+        <span>Kardamena</span>
+        <span style="display:flex;align-items:center;gap:8px"><span class="count">1 plek</span><span class="chevron">▼</span></span>
+      </button>
+      <div class="acc-panel"><div class="grid">
+        <a class="card" href="sight-kardamena.html"><img src="img/hk/sight-kardamena.jpg" alt="Kardamena" loading="lazy"><div class="card-overlay"><span class="card-title">Kardamena<span class="card-meta">Badplaats</span></span></div></a>
+      </div></div>
+    </div>
+
+    <div class="acc">
+      <button type="button" class="acc-btn" onclick="this.parentElement.classList.toggle('open')">
+        <span>Limnionas</span>
+        <span style="display:flex;align-items:center;gap:8px"><span class="count">1 plek</span><span class="chevron">▼</span></span>
+      </button>
+      <div class="acc-panel"><div class="grid">
+        <a class="card" href="sight-limnionas.html"><img src="img/hk/sight-limnionas.jpg" alt="Limnionas" loading="lazy"><div class="card-overlay"><span class="card-title">Limnionas<span class="card-meta">Baai</span></span></div></a>
       </div></div>
     </div>
   </main>
@@ -300,12 +331,12 @@
 <script>
 (function(){
   var I18N = {
-    nl: { title: "Bezienswaardigheden & routes", sub: "Audiogidsen · gratis of met entree", soundText: "Druk op de knop. Je hoort een korte zin in de taal die je hebt gekozen.", routesLabel: "Routes – tik om uit te klappen", locsLabel: "Locaties – tik om uit te klappen" },
-    en: { title: "Sights & routes", sub: "Audio guides · free or with entrance", soundText: "Press the button. You will hear a short sentence in the language you selected.", routesLabel: "Routes – tap to expand", locsLabel: "Locations – tap to expand" },
-    de: { title: "Sehenswürdigkeiten & Routen", sub: "Audioguides · kostenlos oder mit Eintritt", soundText: "Drücke die Taste. Du hörst einen kurzen Satz in der gewählten Sprache.", routesLabel: "Routen – tippen zum Aufklappen", locsLabel: "Orte – tippen zum Aufklappen" },
-    it: { title: "Attrazioni & percorsi", sub: "Audioguide · gratis o a pagamento", soundText: "Premi il pulsante. Sentirai una breve frase nella lingua scelta.", routesLabel: "Percorsi – tocca per espandere", locsLabel: "Luoghi – tocca per espandere" },
-    tr: { title: "Gezilecek yerler & rotalar", sub: "Sesli rehberler · ücretsiz veya giriş ücretli", soundText: "Düğmeye basın. Seçtiğiniz dilde kısa bir cümle duyacaksınız.", routesLabel: "Rotalar – açmak için dokunun", locsLabel: "Yerler – açmak için dokunun" },
-    es: { title: "Lugares de interés y rutas", sub: "Audioguías · gratis o con entrada", soundText: "Pulsa el botón. Oirás una frase corta en el idioma elegido.", routesLabel: "Rutas – toca para desplegar", locsLabel: "Lugares – toca para desplegar" }
+    nl: { title: "Bezienswaardigheden & routes", sub: "Audiogidsen · gratis of met entree", routesLabel: "Routes – tik om uit te klappen", locsLabel: "Locaties – tik om uit te klappen", tileRadar: "Wandelradar", tileRoute: "Route", tileWish: "Mijn verlanglijst" },
+    en: { title: "Sights & routes", sub: "Audio guides · free or with entrance", routesLabel: "Routes – tap to expand", locsLabel: "Locations – tap to expand", tileRadar: "Walking radar", tileRoute: "Route", tileWish: "My wishlist" },
+    de: { title: "Sehenswürdigkeiten & Routen", sub: "Audioguides · kostenlos oder mit Eintritt", routesLabel: "Routen – tippen zum Aufklappen", locsLabel: "Orte – tippen zum Aufklappen", tileRadar: "Wanderradar", tileRoute: "Route", tileWish: "Meine Merkliste" },
+    it: { title: "Attrazioni & percorsi", sub: "Audioguide · gratis o a pagamento", routesLabel: "Percorsi – tocca per espandere", locsLabel: "Luoghi – tocca per espandere", tileRadar: "Radar a piedi", tileRoute: "Percorso", tileWish: "La mia lista" },
+    tr: { title: "Gezilecek yerler & rotalar", sub: "Sesli rehberler · ücretsiz veya giriş ücretli", routesLabel: "Rotalar – açmak için dokunun", locsLabel: "Yerler – açmak için dokunun", tileRadar: "Yürüyüş radarı", tileRoute: "Rota", tileWish: "Listem" },
+    es: { title: "Lugares de interés y rutas", sub: "Audioguías · gratis o con entrada", routesLabel: "Rutas – toca para desplegar", locsLabel: "Lugares – toca para desplegar", tileRadar: "Radar a pie", tileRoute: "Ruta", tileWish: "Mi lista" }
   };
 
   function setLang(l) {
@@ -326,6 +357,7 @@
       o.classList.toggle('active', o.getAttribute('data-lang') === l);
     });
     closeMenu();
+    document.dispatchEvent(new CustomEvent('hk-lang', { detail: l }));
   }
 
   var langBtn = document.getElementById('langBtn');
@@ -343,33 +375,10 @@
 
   var saved = localStorage.getItem('hk-lang') || 'nl';
   setLang(saved);
-
-  var LANG_MAP = {
-    nl: { code: 'nl-NL', text: 'Hallo. Dit is de geluidstest van Hello Kos.' },
-    de: { code: 'de-DE', text: 'Hallo. Das ist der Soundtest von Hello Kos.' },
-    en: { code: 'en-GB', text: 'Hello. This is the Hello Kos sound test.' },
-    it: { code: 'it-IT', text: 'Ciao. Questo è il test audio di Hello Kos.' },
-    tr: { code: 'tr-TR', text: 'Merhaba. Bu Hello Kos ses testidir.' },
-    es: { code: 'es-ES', text: 'Hola. Esta es la prueba de sonido de Hello Kos.' }
-  };
-  function getLang(){ return localStorage.getItem('hk-lang') || 'nl'; }
-  function setStatus(msg){ var el = document.getElementById('soundStatus'); if(el) el.textContent = msg; }
-  function testSound(){
-    if (!window.speechSynthesis){ setStatus('Spraak niet ondersteund'); return; }
-    speechSynthesis.cancel();
-    var l = getLang();
-    var info = LANG_MAP[l] || LANG_MAP.nl;
-    var u = new SpeechSynthesisUtterance(info.text);
-    u.lang = info.code; u.rate = 0.95;
-    u.onstart = function(){ setStatus('Afspelen…'); };
-    u.onend = function(){ setStatus('Klaar'); };
-    speechSynthesis.speak(u);
-  }
-  function stopSound(){ if(window.speechSynthesis) speechSynthesis.cancel(); setStatus('Gestopt'); }
-  document.getElementById('btnTestSound').addEventListener('click', testSound);
-  document.getElementById('btnStopSound').addEventListener('click', stopSound);
 })();
 </script>
 <script src="hello-kos-i18n.js"></script>
+<script src="hello-kos-places.js"></script>
+<script src="hello-kos-fav.js"></script>
 </body>
 </html>

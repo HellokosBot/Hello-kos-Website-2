@@ -255,3 +255,23 @@ body.hk-page .call-list { min-width: 0; }
 body.hk-page a.call-btn .call-copy,
 body.hk-page a.call-btn .call-main,
 body.hk-page a.call-btn .call-sub { min-width: 0; overflow-wrap: anywhere; }
+
+/* Heart on a sight tile or detail page. The button sits on the photo, the title stays in the bar. */
+.card-slot { position: relative; min-width: 0; }
+.fav-btn {
+  position: absolute; top: 8px; right: 8px; z-index: 5;
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 2px solid #fff; background: rgba(13, 26, 26, 0.78);
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; padding: 0;
+}
+.fav-btn svg { width: 18px; height: 18px; display: block; }
+.fav-btn.on { background: #fff; color: #c62828; }
+.fav-inline {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin: 0 0 12px; padding: 8px 14px; border-radius: 999px;
+  border: 2px solid #fff; background: #152525; color: #fff;
+  font-weight: 700; font-size: 0.92rem; cursor: pointer; font-family: inherit;
+}
+.fav-inline svg { width: 18px; height: 18px; display: block; }
+.fav-inline.on { background: #fff; color: #c62828; }
