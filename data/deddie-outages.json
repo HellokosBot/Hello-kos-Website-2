@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-19T06:14:36.817475+02:00",
+  "fetchedAt": "2026-11-19T07:26:05.552145+02:00",
   "sourceName": "ΔΕΔΔΗΕ",
   "sourceUrl": "https://siteapps.deddie.gr/Outages2Public/",
   "listType": "planned",
@@ -20,6 +20,19 @@
       "noteNumber": "",
       "purpose": "Κατασκευές",
       "onKos": true
+    },
+    {
+      "from": "2026-11-19T08:00:00+02:00",
+      "to": "2026-11-19T14:00:00+02:00",
+      "fromRaw": "19/11/2026 8:00:00 πμ",
+      "toRaw": "19/11/2026 2:00:00 μμ",
+      "places": [
+        "ΛΕΡΟΥ"
+      ],
+      "area": "ΠΕΡΙΟΧΗ ΛΑΚΚΙ.",
+      "noteNumber": "147",
+      "purpose": "Κατασκευές",
+      "onKos": false
     }
   ]
 }
