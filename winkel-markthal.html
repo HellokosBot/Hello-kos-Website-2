@@ -40,6 +40,10 @@ body.hk-page h2.section{font-size:1.05rem;font-weight:800;text-align:center;colo
 .btn-solid{background:var(--petrol);color:#fff}
 .loc-list p{margin:0 0 12px;color:var(--text-soft);font-size:.92rem}
 .loc-list a{color:var(--petrol);font-weight:700}
+
+body.hk-page .map-row{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:stretch;gap:8px;width:100%;max-width:100%;margin:12px 0 0;box-sizing:border-box}
+body.hk-page .map-row .btn{flex:1 1 0;width:0;max-width:none;min-width:0;padding:12px 8px;font-size:.82rem}
+body.hk-page .map-row .pin{flex:0 0 16px;width:16px;height:16px}
 </style>
 </head>
 <body class="hk-page">
@@ -67,11 +71,11 @@ body.hk-page h2.section{font-size:1.05rem;font-weight:800;text-align:center;colo
 <h1 data-i18n="title">Markthal</h1>
 <img class="strip" src="img/hk/winkel-hal-1.jpg" alt="">
 <article class="card">
-<p data-i18n="p0">Kos stad heeft geen markt zoals wij die kennen. Er is wel een markt in Kos stad, maar daar verkoopt men echt letterlijk alleen meloenen en tomaten. De markt telt misschien achtkraampjes, en absoluut niet wat de meeste toeristen verwachten zoals schreeuwende marktkooplui die hun Griekse specialiteiten aan de man proberen te brengen.</p>
+<p data-i18n="p0">Kos heeft geen markten zoals wij die kennen. Er zijn twee markten. De eerste ligt aan de rand van Kos-stad, maar daar verkoopt men echt letterlijk alleen meloenen, tomaten en uien. Er is wel een markt in Kos stad, maar daar verkoopt men echt letterlijk alleen meloenen en tomaten. De markt telt misschien achtkraampjes, en absoluut niet wat de meeste toeristen verwachten zoals schreeuwende marktkooplui die hun Griekse specialiteiten aan de man proberen te brengen.</p>
 </article>
 <img class="strip" src="img/hk/winkel-hal-2.jpg" alt="">
 <article class="card">
-<p data-i18n="p1">De markthal in het centrum van Kos stad werd na de grote aardbeving van 1933 gebouwd door de Italianen tijdens de Italiaanse overheersing (1922 - 1945.) en is jaren als markthal gebruikt. De markthal is nu een toeristenwinkel met souvenirs en kruiden waar de lokale bevolking zelf hun groente of fruit niet koopt.</p>
+<p data-i18n="p1">De tweede markt is de Markthal in het centrum van Kos-stad. De markthal in het centrum van Kos stad werd na de grote aardbeving van 1933 gebouwd door de Italianen tijdens de Italiaanse overheersing (1922 - 1945.) en is jaren als markthal gebruikt. De markthal is nu een toeristenwinkel met souvenirs en kruiden waar de lokale bevolking zelf hun groente of fruit niet koopt.</p>
 </article>
 <img class="strip" src="img/hk/winkel-hal-3.jpg" alt="">
 <article class="card">
@@ -81,7 +85,10 @@ body.hk-page h2.section{font-size:1.05rem;font-weight:800;text-align:center;colo
 <article class="card">
 <p data-i18n="p3">Binnen vind je een mix van lokale producten zoals honing, olijfolie, kruiden, traditionele zoetigheden en souvenirs. Het is compact en druk, met alles dicht op elkaar om zoveel mogelijk in de ruimte te proppen.</p>
 <p data-i18n="p4">Het is een levendige plek waar toeristen herinneringen of een cadeautje kopen</p>
-<div class="actions"><a class="btn btn-map" href="https://maps.app.goo.gl/UrCdvttCMvF5j9Dh8" target="_blank" rel="noopener" data-i18n="map">Google locatie</a></div>
+<div class="map-row">
+<a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&amp;query=36.8928987,27.2886799" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+<a class="btn btn-map" href="https://maps.apple.com/?ll=36.8928987,27.2886799&amp;q=Markthal%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+</div>
 </article>
 </main>
 <footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
@@ -104,8 +111,10 @@ window.HK_DICT = {
     "d5": "Zat.",
     "d6": "Zon.",
     "title": "Markthal",
-    "p0": "Kos stad heeft geen markt zoals wij die kennen. Er is wel een markt in Kos stad, maar daar verkoopt men echt letterlijk alleen meloenen en tomaten. De markt telt misschien achtkraampjes, en absoluut niet wat de meeste toeristen verwachten zoals schreeuwende marktkooplui die hun Griekse specialiteiten aan de man proberen te brengen.",
-    "p1": "De markthal in het centrum van Kos stad werd na de grote aardbeving van 1933 gebouwd door de Italianen tijdens de Italiaanse overheersing (1922 - 1945.) en is jaren als markthal gebruikt. De markthal is nu een toeristenwinkel met souvenirs en kruiden waar de lokale bevolking zelf hun groente of fruit niet koopt.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Kos heeft geen markten zoals wij die kennen. Er zijn twee markten. De eerste ligt aan de rand van Kos-stad, maar daar verkoopt men echt letterlijk alleen meloenen, tomaten en uien. Er is wel een markt in Kos stad, maar daar verkoopt men echt letterlijk alleen meloenen en tomaten. De markt telt misschien achtkraampjes, en absoluut niet wat de meeste toeristen verwachten zoals schreeuwende marktkooplui die hun Griekse specialiteiten aan de man proberen te brengen.",
+    "p1": "De tweede markt is de Markthal in het centrum van Kos-stad. De markthal in het centrum van Kos stad werd na de grote aardbeving van 1933 gebouwd door de Italianen tijdens de Italiaanse overheersing (1922 - 1945.) en is jaren als markthal gebruikt. De markthal is nu een toeristenwinkel met souvenirs en kruiden waar de lokale bevolking zelf hun groente of fruit niet koopt.",
     "p2": "Markthal Kos-stad (ook wel Municipal Market of Kos of Mercato delle Erbe genoemd) ligt aan grote Eleftherias Square, het centrale plein in het centrum van Kos-stad. Door at de Italianen dit gebouw ontworpen en gebouwd hebben is het gebouw in Italiaanse stijl met brede bogen en een stevige structuur.",
     "p3": "Binnen vind je een mix van lokale producten zoals honing, olijfolie, kruiden, traditionele zoetigheden en souvenirs. Het is compact en druk, met alles dicht op elkaar om zoveel mogelijk in de ruimte te proppen.",
     "p4": "Het is een levendige plek waar toeristen herinneringen of een cadeautje kopen"
@@ -127,8 +136,10 @@ window.HK_DICT = {
     "d5": "Sa.",
     "d6": "So.",
     "title": "Markthalle",
-    "p0": "Kos-Stadt hat keinen Markt, wie wir ihn kennen. Es gibt wohl einen Markt in Kos-Stadt, aber dort verkauft man wirklich buchstäblich nur Melonen und Tomaten. Der Markt hat vielleicht acht Stände und absolut nicht das, was die meisten Touristen erwarten, wie rufende Marktleute, die ihre griechischen Spezialitäten an den Mann bringen wollen.",
-    "p1": "Die Markthalle im Zentrum von Kos-Stadt wurde nach dem großen Erdbeben von 1933 von den Italienern während der italienischen Herrschaft (1922–1945) gebaut und jahrelang als Markthalle genutzt. Die Markthalle ist jetzt ein Touristenladen mit Souvenirs und Kräutern, wo die Einheimischen ihr Gemüse oder Obst selbst nicht kaufen.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Kos hat keine Märkte, wie wir sie kennen. Es gibt zwei Märkte. Der erste liegt am Rand von Kos-Stadt, aber dort verkauft man wirklich buchstäblich nur Melonen, Tomaten und Zwiebeln. Es gibt wohl einen Markt in Kos-Stadt, aber dort verkauft man wirklich buchstäblich nur Melonen und Tomaten. Der Markt hat vielleicht acht Stände und absolut nicht das, was die meisten Touristen erwarten, wie rufende Marktleute, die ihre griechischen Spezialitäten an den Mann bringen wollen.",
+    "p1": "Der zweite Markt ist die Markthalle im Zentrum von Kos-Stadt. Die Markthalle im Zentrum von Kos-Stadt wurde nach dem großen Erdbeben von 1933 von den Italienern während der italienischen Herrschaft (1922–1945) gebaut und jahrelang als Markthalle genutzt. Die Markthalle ist jetzt ein Touristenladen mit Souvenirs und Kräutern, wo die Einheimischen ihr Gemüse oder Obst selbst nicht kaufen.",
     "p2": "Die Markthalle Kos-Stadt (auch Municipal Market of Kos oder Mercato delle Erbe genannt) liegt am großen Eleftherias Square, dem zentralen Platz im Zentrum von Kos-Stadt. Weil die Italiener dieses Gebäude entworfen und gebaut haben, ist es im italienischen Stil mit breiten Bögen und einer festen Struktur.",
     "p3": "Drinnen findest du eine Mischung aus lokalen Produkten wie Honig, Olivenöl, Kräutern, traditionellen Süßigkeiten und Souvenirs. Es ist kompakt und voll, alles dicht beieinander, um so viel wie möglich in den Raum zu stopfen.",
     "p4": "Es ist ein lebendiger Ort, wo Touristen Erinnerungen oder ein Geschenk kaufen"
@@ -150,8 +161,10 @@ window.HK_DICT = {
     "d5": "Sat",
     "d6": "Sun",
     "title": "Market hall",
-    "p0": "Kos town does not have a market as we know it. There is a market in Kos town, but they really sell literally only melons and tomatoes. The market has maybe eight stalls, and absolutely not what most tourists expect, such as stallholders shouting to sell their Greek specialities.",
-    "p1": "The market hall in the centre of Kos town was built after the great earthquake of 1933 by the Italians during the Italian occupation (1922–1945) and was used as a market hall for years. The market hall is now a tourist shop with souvenirs and herbs where local people do not buy their own vegetables or fruit.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Kos does not have markets as we know them. There are two markets. The first is on the edge of Kos town, but there they really sell literally only melons, tomatoes and onions. There is a market in Kos town, but they really sell literally only melons and tomatoes. The market has maybe eight stalls, and absolutely not what most tourists expect, such as stallholders shouting to sell their Greek specialities.",
+    "p1": "The second market is the market hall in the centre of Kos town. The market hall in the centre of Kos town was built after the great earthquake of 1933 by the Italians during the Italian occupation (1922–1945) and was used as a market hall for years. The market hall is now a tourist shop with souvenirs and herbs where local people do not buy their own vegetables or fruit.",
     "p2": "Markthal Kos town (also called Municipal Market of Kos or Mercato delle Erbe) is on the large Eleftherias Square, the central square in the centre of Kos town. Because the Italians designed and built this building, it is in an Italian style with wide arches and a solid structure.",
     "p3": "Inside you find a mix of local products such as honey, olive oil, herbs, traditional sweets and souvenirs. It is compact and busy, with everything close together to pack as much as possible into the space.",
     "p4": "It is a lively place where tourists buy memories or a small gift"
@@ -173,8 +186,10 @@ window.HK_DICT = {
     "d5": "Sab",
     "d6": "Dom",
     "title": "Mercato coperto",
-    "p0": "Kos città non ha un mercato come lo conosciamo noi. C’è un mercato a Kos città, ma lì vendono davvero letteralmente solo meloni e pomodori. Il mercato ha forse otto banchi, e per niente quello che la maggior parte dei turisti si aspetta, come venditori che gridano per proporre le specialità greche.",
-    "p1": "Il mercato coperto nel centro di Kos città fu costruito dopo il grande terremoto del 1933 dagli italiani durante l’occupazione italiana (1922–1945) ed è stato usato per anni come mercato. Ora è un negozio per turisti con souvenir ed erbe, dove la gente del posto non compra la propria verdura o frutta.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Kos non ha mercati come li conosciamo noi. Ci sono due mercati. Il primo è ai margini della città di Kos, ma lì vendono davvero letteralmente solo meloni, pomodori e cipolle. C’è un mercato a Kos città, ma lì vendono davvero letteralmente solo meloni e pomodori. Il mercato ha forse otto banchi, e per niente quello che la maggior parte dei turisti si aspetta, come venditori che gridano per proporre le specialità greche.",
+    "p1": "Il secondo mercato è il mercato coperto nel centro della città di Kos. Il mercato coperto nel centro di Kos città fu costruito dopo il grande terremoto del 1933 dagli italiani durante l’occupazione italiana (1922–1945) ed è stato usato per anni come mercato. Ora è un negozio per turisti con souvenir ed erbe, dove la gente del posto non compra la propria verdura o frutta.",
     "p2": "Il mercato coperto di Kos città (chiamato anche Municipal Market of Kos o Mercato delle Erbe) si trova sulla grande piazza Eleftherias, la piazza centrale di Kos città. Poiché gli italiani hanno progettato e costruito questo edificio, è in stile italiano con ampi archi e una struttura solida.",
     "p3": "Dentro trovi un mix di prodotti locali come miele, olio d’oliva, erbe, dolci tradizionali e souvenir. È compatto e affollato, con tutto vicino per stipare il più possibile nello spazio.",
     "p4": "È un posto vivace dove i turisti comprano ricordi o un regalino"
@@ -196,8 +211,10 @@ window.HK_DICT = {
     "d5": "Cmt",
     "d6": "Paz",
     "title": "Kapalı çarşı",
-    "p0": "Kos şehrinin bizim bildiğimiz gibi bir pazarı yoktur. Kos şehrinde bir pazar vardır ama orada gerçekten yalnızca kavun ve domates satılır. Pazar belki sekiz tezgahtır ve çoğu turistin beklediği, Yunan spesiyallerini bağırarak satan satıcılar hiç yoktur.",
-    "p1": "Kos şehri merkezindeki kapalı çarşı, 1933 depreminden sonra İtalyan yönetimi sırasında (1922-1945) İtalyanlarca yapıldı ve yıllarca kapalı çarşı olarak kullanıldı. Şimdi hediyelik ve ot satılan bir turist dükkanıdır; yereller sebze veya meyvesini burada almaz.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Kos’ta bizim bildiğimiz gibi pazarlar yoktur. İki pazar vardır. Birincisi Kos şehrinin kenarındadır, ama orada gerçekten yalnızca kavun, domates ve soğan satılır. Kos şehrinde bir pazar vardır ama orada gerçekten yalnızca kavun ve domates satılır. Pazar belki sekiz tezgahtır ve çoğu turistin beklediği, Yunan spesiyallerini bağırarak satan satıcılar hiç yoktur.",
+    "p1": "İkinci pazar, Kos şehrinin merkezindeki kapalı çarşıdır. Kos şehri merkezindeki kapalı çarşı, 1933 depreminden sonra İtalyan yönetimi sırasında (1922-1945) İtalyanlarca yapıldı ve yıllarca kapalı çarşı olarak kullanıldı. Şimdi hediyelik ve ot satılan bir turist dükkanıdır; yereller sebze veya meyvesini burada almaz.",
     "p2": "Kos şehri kapalı çarşısı (Municipal Market of Kos veya Mercato delle Erbe de denir) Kos şehrinin merkezindeki büyük Eleftherias Meydanı’ndadır. Bu binayı İtalyanlar tasarlayıp yaptığı için geniş kemerli, sağlam, İtalyan üslubundadır.",
     "p3": "İçeride bal, zeytinyağı, ot, geleneksel tatlı ve hediyelik gibi yerel ürünler karışıktır. Kompakt ve kalabalıktır; alana olabildiğince çok şey sığdırmak için her şey birbirine yakındır.",
     "p4": "Turistlerin hatıra veya küçük bir hediye aldığı canlı bir yerdir"
@@ -219,8 +236,10 @@ window.HK_DICT = {
     "d5": "Sáb",
     "d6": "Dom",
     "title": "Mercado cubierto",
-    "p0": "La ciudad de Kos no tiene un mercado como los que conocemos. Sí hay un mercado en la ciudad de Kos, pero allí venden de verdad solo melones y tomates. El mercado tiene quizá ocho puestos, y nada de lo que la mayoría de los turistas espera, como vendedores que gritan para colocar sus especialidades griegas.",
-    "p1": "El mercado cubierto del centro de la ciudad de Kos se construyó tras el gran terremoto de 1933 por los italianos durante la ocupación italiana (1922-1945) y se usó años como mercado. Ahora es una tienda turística de recuerdos y hierbas donde la gente local no compra su verdura o fruta.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Kos no tiene mercados como los que conocemos. Hay dos mercados. El primero está en el borde de la ciudad de Kos, pero allí venden de verdad solo melones, tomates y cebollas. Sí hay un mercado en la ciudad de Kos, pero allí venden de verdad solo melones y tomates. El mercado tiene quizá ocho puestos, y nada de lo que la mayoría de los turistas espera, como vendedores que gritan para colocar sus especialidades griegas.",
+    "p1": "El segundo mercado es el mercado cubierto del centro de la ciudad de Kos. El mercado cubierto del centro de la ciudad de Kos se construyó tras el gran terremoto de 1933 por los italianos durante la ocupación italiana (1922-1945) y se usó años como mercado. Ahora es una tienda turística de recuerdos y hierbas donde la gente local no compra su verdura o fruta.",
     "p2": "El mercado cubierto de la ciudad de Kos (también Municipal Market of Kos o Mercato delle Erbe) está en la gran plaza Eleftherias, la plaza central de la ciudad de Kos. Como los italianos diseñaron y construyeron este edificio, es de estilo italiano con arcos anchos y una estructura sólida.",
     "p3": "Dentro hay una mezcla de productos locales como miel, aceite de oliva, hierbas, dulces tradicionales y recuerdos. Es compacto y lleno, con todo junto para meter lo máximo en el espacio.",
     "p4": "Es un sitio animado donde los turistas compran recuerdos o un regalito"
