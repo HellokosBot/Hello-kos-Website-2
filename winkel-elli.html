@@ -27,6 +27,14 @@ a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba
 .loc-card h2{font-size:1.05rem;margin:0 0 8px}
 .loc-name{font-weight:800;font-size:1.05rem}
 .loc-list a{color:var(--petrol);font-weight:700}
+.photo{display:block;width:100%;height:auto;border-radius:14px;margin:0 0 12px}
+body.hk-page .hero-wrap.shops-hero{aspect-ratio:auto;min-height:220px;display:flex;align-items:flex-end;overflow:hidden;margin:-16px -14px 12px}
+body.hk-page .hero-wrap.shops-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 18%}
+body.hk-page .shops-hero-copy{position:relative;z-index:1;width:100%;box-sizing:border-box;padding:36px 16px 14px;background:linear-gradient(to top,rgba(13,26,26,.94) 0%,rgba(13,26,26,.78) 46%,rgba(13,26,26,.28) 78%,rgba(13,26,26,0) 100%)}
+body.hk-page .shops-hero h1{color:#fff;margin:0;text-shadow:0 1px 6px rgba(0,0,0,.55);font-size:1.4rem}
+body.hk-page .map-row{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:stretch;gap:8px;width:100%;max-width:100%;margin:12px 0 0;box-sizing:border-box}
+body.hk-page .map-row .btn{flex:1 1 0;width:0;max-width:none;min-width:0;padding:12px 8px;font-size:.82rem}
+body.hk-page .map-row .pin{flex:0 0 16px;width:16px;height:16px}
 </style>
 </head>
 <body class="hk-page">
@@ -50,11 +58,17 @@ a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba
 </header>
 <div class="overlay" id="overlay"></div>
 <main class="main">
-<img class="strip" src="img/hk/winkel-elli-1.jpg" alt="">
 <p class="parent-link"><a href="praktische-winkels.html" data-i18n="back">← Belangrijke winkels</a></p>
+<div class="hero-wrap shops-hero">
+<img src="img/hk/winkel-elli-2.jpg" alt="">
+<div class="shops-hero-copy">
 <h1 data-i18n="title">Elli Handmade Sandals</h1>
+</div>
+</div>
 <article class="card">
-<p data-i18n="p0">Elli Handmade Sandals is een kleine, authentieke winkel in het centrum van Kos-stad waar je echte handgemaakte sandalen kunt kopen. Elli maakt al jaren zelf mooie, comfortabele leren sandalen in traditionele Griekse stijl. Elke sandaal wordt met de hand vervaardigd, waardoor ze niet alleen mooi zijn, maar ook heerlijk om te dragen tijdens je vakantie. Je kunt kiezen uit verschillende modellen, kleuren en maten – van eenvoudige klassieke sandalen tot wat opvallendere designs. Veel toeristen komen hier speciaal naartoe omdat de sandalen van goede kwaliteit zijn, lekker zitten en een leuk aandenken vormen aan Kos. De winkel heeft een warme, persoonlijke sfeer en Elli zelf helpt je graag met het vinden van het juiste paar. De winkel ligt centraal in de oude stad, dus je loopt er makkelijk even binnen tijdens een wandeling door de smalle straatjes.</p>
+<p data-i18n="p0">Elli Handmade Sandals is een kleine, authentieke winkel in het centrum van Kos-stad waar je echte handgemaakte sandalen kunt kopen. Elli maakt al jaren zelf mooie, comfortabele leren sandalen in traditionele Griekse stijl. Elke sandaal wordt met de hand vervaardigd, waardoor ze niet alleen mooi zijn, maar ook heerlijk om te dragen tijdens je vakantie.</p>
+<img class="photo" src="img/hk/winkel-elli-1.jpg" alt="">
+<p data-i18n="p1">Je kunt kiezen uit verschillende modellen, kleuren en maten – van eenvoudige klassieke sandalen tot wat opvallendere designs. Veel toeristen komen hier speciaal naartoe omdat de sandalen van goede kwaliteit zijn, lekker zitten en een leuk aandenken vormen aan Kos. De winkel heeft een warme, persoonlijke sfeer en Elli zelf helpt je graag met het vinden van het juiste paar. De winkel ligt centraal in de oude stad, dus je loopt er makkelijk even binnen tijdens een wandeling door de smalle straatjes.</p>
 <h3 data-i18n="addrH">Adres</h3>
 <p class="addr"><strong>Vasileos Pavlou 9, Kos 853 00</strong></p>
 <h3 data-i18n="hoursH">Openingstijden</h3><div class="hours">
@@ -69,9 +83,11 @@ a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba
 <div class="call-list">
 <a class="call-btn" href="tel:+302242028852"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="call-copy"><span class="call-main"><span data-i18n="call">Bel</span> +30 22420 28852</span><span class="call-sub" data-i18n="phoneL">Telefoon</span></span></a>
 </div>
-<div class="actions"><a class="btn btn-map" href="https://maps.app.goo.gl/SaNYwNdvrSCwkvP58" target="_blank" rel="noopener" data-i18n="map">Google locatie</a></div>
+<div class="map-row">
+<a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&amp;query=36.892821,27.288974" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+<a class="btn btn-map" href="https://maps.apple.com/?ll=36.892821,27.288974&amp;q=Elli%20Handmade%20Sandals%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+</div>
 </article>
-<img class="strip" src="img/hk/winkel-elli-2.jpg" alt="">
 </main>
 <footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
 <script>
@@ -93,7 +109,10 @@ window.HK_DICT = {
     "d5": "Zat.",
     "d6": "Zon.",
     "title": "Elli Handmade Sandals",
-    "p0": "Elli Handmade Sandals is een kleine, authentieke winkel in het centrum van Kos-stad waar je echte handgemaakte sandalen kunt kopen. Elli maakt al jaren zelf mooie, comfortabele leren sandalen in traditionele Griekse stijl. Elke sandaal wordt met de hand vervaardigd, waardoor ze niet alleen mooi zijn, maar ook heerlijk om te dragen tijdens je vakantie. Je kunt kiezen uit verschillende modellen, kleuren en maten – van eenvoudige klassieke sandalen tot wat opvallendere designs. Veel toeristen komen hier speciaal naartoe omdat de sandalen van goede kwaliteit zijn, lekker zitten en een leuk aandenken vormen aan Kos. De winkel heeft een warme, persoonlijke sfeer en Elli zelf helpt je graag met het vinden van het juiste paar. De winkel ligt centraal in de oude stad, dus je loopt er makkelijk even binnen tijdens een wandeling door de smalle straatjes."
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Elli Handmade Sandals is een kleine, authentieke winkel in het centrum van Kos-stad waar je echte handgemaakte sandalen kunt kopen. Elli maakt al jaren zelf mooie, comfortabele leren sandalen in traditionele Griekse stijl. Elke sandaal wordt met de hand vervaardigd, waardoor ze niet alleen mooi zijn, maar ook heerlijk om te dragen tijdens je vakantie.",
+    "p1": "Je kunt kiezen uit verschillende modellen, kleuren en maten – van eenvoudige klassieke sandalen tot wat opvallendere designs. Veel toeristen komen hier speciaal naartoe omdat de sandalen van goede kwaliteit zijn, lekker zitten en een leuk aandenken vormen aan Kos. De winkel heeft een warme, persoonlijke sfeer en Elli zelf helpt je graag met het vinden van het juiste paar. De winkel ligt centraal in de oude stad, dus je loopt er makkelijk even binnen tijdens een wandeling door de smalle straatjes."
   },
   "de": {
     "back": "← Wichtige Läden",
@@ -112,7 +131,10 @@ window.HK_DICT = {
     "d5": "Sa.",
     "d6": "So.",
     "title": "Elli Handmade Sandals",
-    "p0": "Elli Handmade Sandals ist ein kleiner, authentischer Laden im Zentrum von Kos-Stadt, wo du echte handgemachte Sandalen kaufen kannst. Elli macht seit Jahren selbst schöne, bequeme Ledersandalen im traditionellen griechischen Stil. Jede Sandale wird von Hand gefertigt, deshalb ist sie nicht nur schön, sondern auch angenehm im Urlaub. Du kannst aus verschiedenen Modellen, Farben und Größen wählen – von einfachen klassischen Sandalen bis zu auffälligeren Designs. Viele Touristen kommen extra her, weil die Sandalen gute Qualität haben, bequem sitzen und eine schöne Erinnerung an Kos sind. Der Laden hat eine warme, persönliche Atmosphäre und Elli selbst hilft gern, das richtige Paar zu finden. Der Laden liegt zentral in der Altstadt, du gehst auf einem Spaziergang durch die engen Gassen leicht hinein."
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Elli Handmade Sandals ist ein kleiner, authentischer Laden im Zentrum von Kos-Stadt, wo du echte handgemachte Sandalen kaufen kannst. Elli macht seit Jahren selbst schöne, bequeme Ledersandalen im traditionellen griechischen Stil. Jede Sandale wird von Hand gefertigt, deshalb ist sie nicht nur schön, sondern auch angenehm im Urlaub.",
+    "p1": "Du kannst aus verschiedenen Modellen, Farben und Größen wählen – von einfachen klassischen Sandalen bis zu auffälligeren Designs. Viele Touristen kommen extra her, weil die Sandalen gute Qualität haben, bequem sitzen und eine schöne Erinnerung an Kos sind. Der Laden hat eine warme, persönliche Atmosphäre und Elli selbst hilft gern, das richtige Paar zu finden. Der Laden liegt zentral in der Altstadt, du gehst auf einem Spaziergang durch die engen Gassen leicht hinein."
   },
   "en": {
     "back": "← Important shops",
@@ -131,7 +153,10 @@ window.HK_DICT = {
     "d5": "Sat",
     "d6": "Sun",
     "title": "Elli Handmade Sandals",
-    "p0": "Elli Handmade Sandals is a small, authentic shop in the centre of Kos town where you can buy real handmade sandals. Elli has been making beautiful, comfortable leather sandals in a traditional Greek style for years. Each sandal is made by hand, so they are not only beautiful but also lovely to wear on holiday. You can choose from different models, colours and sizes – from simple classic sandals to more striking designs. Many tourists come specially because the sandals are good quality, comfortable and a nice keepsake of Kos. The shop has a warm, personal feel and Elli herself is happy to help you find the right pair. The shop is central in the old town, so you can easily step in while walking the narrow streets."
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Elli Handmade Sandals is a small, authentic shop in the centre of Kos town where you can buy real handmade sandals. Elli has been making beautiful, comfortable leather sandals in a traditional Greek style for years. Each sandal is made by hand, so they are not only beautiful but also lovely to wear on holiday.",
+    "p1": "You can choose from different models, colours and sizes – from simple classic sandals to more striking designs. Many tourists come specially because the sandals are good quality, comfortable and a nice keepsake of Kos. The shop has a warm, personal feel and Elli herself is happy to help you find the right pair. The shop is central in the old town, so you can easily step in while walking the narrow streets."
   },
   "it": {
     "back": "← Negozi importanti",
@@ -150,7 +175,10 @@ window.HK_DICT = {
     "d5": "Sab",
     "d6": "Dom",
     "title": "Elli Handmade Sandals",
-    "p0": "Elli Handmade Sandals è un piccolo negozio autentico nel centro della città di Kos dove puoi comprare veri sandali fatti a mano. Elli realizza da anni bei sandali di pelle comodi in stile greco tradizionale. Ogni sandalo è fatto a mano, quindi non è solo bello ma anche piacevole in vacanza. Puoi scegliere modelli, colori e misure – dai sandali classici semplici a design più vistosi. Molti turisti vengono apposta perché i sandali sono di buona qualità, comodi e un bel ricordo di Kos. Il negozio ha un’atmosfera calda e personale e Elli stessa ti aiuta a trovare il paio giusto. Il negozio è centrale nella città vecchia, quindi ci entri facilmente passeggiando nei vicoli."
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Elli Handmade Sandals è un piccolo negozio autentico nel centro della città di Kos dove puoi comprare veri sandali fatti a mano. Elli realizza da anni bei sandali di pelle comodi in stile greco tradizionale. Ogni sandalo è fatto a mano, quindi non è solo bello ma anche piacevole in vacanza.",
+    "p1": "Puoi scegliere modelli, colori e misure – dai sandali classici semplici a design più vistosi. Molti turisti vengono apposta perché i sandali sono di buona qualità, comodi e un bel ricordo di Kos. Il negozio ha un’atmosfera calda e personale e Elli stessa ti aiuta a trovare il paio giusto. Il negozio è centrale nella città vecchia, quindi ci entri facilmente passeggiando nei vicoli."
   },
   "tr": {
     "back": "← Önemli dükkanlar",
@@ -169,7 +197,10 @@ window.HK_DICT = {
     "d5": "Cmt",
     "d6": "Paz",
     "title": "Elli Handmade Sandals",
-    "p0": "Elli Handmade Sandals, Kos şehrinin merkezinde gerçek el yapımı sandalet alınan küçük ve otantik bir dükkandır. Elli yıllardır geleneksel Yunan tarzında güzel, rahat deri sandaletleri kendisi yapar. Her sandalet elle yapılır; güzeldir ve tatilde giymek keyiflidir. Sade klasiklerden daha dikkat çekici modellere kadar model, renk ve numara seçebilirsin. Birçok turist özellikle gelir çünkü sandaletler kalitelidir, rahattır ve Kos’tan hoş bir hatıradır. Dükkanın sıcak, kişisel bir havası vardır ve Elli doğru çifti bulmana seve seve yardım eder. Dükkan eski kentin merkezindedir; dar sokaklarda yürürken kolayca girersin."
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Elli Handmade Sandals, Kos şehrinin merkezinde gerçek el yapımı sandalet alınan küçük ve otantik bir dükkandır. Elli yıllardır geleneksel Yunan tarzında güzel, rahat deri sandaletleri kendisi yapar. Her sandalet elle yapılır; güzeldir ve tatilde giymek keyiflidir.",
+    "p1": "Sade klasiklerden daha dikkat çekici modellere kadar model, renk ve numara seçebilirsin. Birçok turist özellikle gelir çünkü sandaletler kalitelidir, rahattır ve Kos’tan hoş bir hatıradır. Dükkanın sıcak, kişisel bir havası vardır ve Elli doğru çifti bulmana seve seve yardım eder. Dükkan eski kentin merkezindedir; dar sokaklarda yürürken kolayca girersin."
   },
   "es": {
     "back": "← Tiendas importantes",
@@ -188,7 +219,10 @@ window.HK_DICT = {
     "d5": "Sáb",
     "d6": "Dom",
     "title": "Elli Handmade Sandals",
-    "p0": "Elli Handmade Sandals es una tienda pequeña y auténtica en el centro de la ciudad de Kos donde puedes comprar sandalias hechas a mano de verdad. Elli lleva años haciendo ella misma sandalias de piel bonitas y cómodas al estilo griego tradicional. Cada sandalia se hace a mano, así que no solo es bonita sino agradable de llevar en vacaciones. Puedes elegir modelos, colores y tallas, desde sandalias clásicas sencillas hasta diseños más llamativos. Muchos turistas vienen a propósito porque las sandalias son de buena calidad, cómodas y un bonito recuerdo de Kos. La tienda tiene un ambiente cálido y personal y la propia Elli te ayuda a encontrar el par adecuado. Está en el centro del casco antiguo, así que entras fácil al pasear por las callejuelas."
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Elli Handmade Sandals es una tienda pequeña y auténtica en el centro de la ciudad de Kos donde puedes comprar sandalias hechas a mano de verdad. Elli lleva años haciendo ella misma sandalias de piel bonitas y cómodas al estilo griego tradicional. Cada sandalia se hace a mano, así que no solo es bonita sino agradable de llevar en vacaciones.",
+    "p1": "Puedes elegir modelos, colores y tallas, desde sandalias clásicas sencillas hasta diseños más llamativos. Muchos turistas vienen a propósito porque las sandalias son de buena calidad, cómodas y un bonito recuerdo de Kos. La tienda tiene un ambiente cálido y personal y la propia Elli te ayuda a encontrar el par adecuado. Está en el centro del casco antiguo, así que entras fácil al pasear por las callejuelas."
   }
 };
 </script>
