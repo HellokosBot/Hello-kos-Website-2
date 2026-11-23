@@ -36,6 +36,8 @@ window.HK_ROUTE_TEXT = {
     "sight-kasteel-antimachia": "Kasteel van Antimachia, een fort van de johannieters.",
     "sight-molen-antimachia": "Molen van Antimachia, de laatste windmolen, nu een museum.",
     "sight-agios-stefanos-kefalos": "Agios Stefanos bij Kefalos: een basiliek bij het strand, met het eilandje Kastri erbij.",
+    "sight-kapel-agios-nikolaos": "Het witte kerkje van Agios Nikolaos op het eilandje Kastri, vlak voor de kust bij Agios Stefanos.",
+    "sight-cavo-paradiso": "Cavo Paradiso, een rustig strand bij Kefalos. Het laatste stuk is een onverharde weg.",
     "sight-limnionas": "Limnionas, een baai. De bestaande route noemt de plek bereikbaar met de auto."
   },
   "de": {
@@ -75,6 +77,8 @@ window.HK_ROUTE_TEXT = {
     "sight-kasteel-antimachia": "Burg von Antimachia, ein Fort der Johanniter.",
     "sight-molen-antimachia": "Mühle von Antimachia, die letzte Windmühle, heute ein Museum.",
     "sight-agios-stefanos-kefalos": "Agios Stefanos bei Kefalos: eine Basilika am Strand, mit der kleinen Insel Kastri.",
+    "sight-kapel-agios-nikolaos": "Die weiße Kapelle Agios Nikolaos auf der kleinen Insel Kastri, direkt vor der Küste bei Agios Stefanos.",
+    "sight-cavo-paradiso": "Cavo Paradiso, ein ruhiger Strand bei Kefalos. Das letzte Stück ist eine unbefestigte Straße.",
     "sight-limnionas": "Limnionas, eine Bucht. Die bestehende Route nennt den Ort mit dem Auto erreichbar."
   },
   "en": {
@@ -114,6 +118,8 @@ window.HK_ROUTE_TEXT = {
     "sight-kasteel-antimachia": "Antimachia castle, a fortress of the Knights Hospitaller.",
     "sight-molen-antimachia": "Antimachia windmill, the last windmill, now a museum.",
     "sight-agios-stefanos-kefalos": "Agios Stefanos near Kefalos: a basilica by the beach, with the islet of Kastri.",
+    "sight-kapel-agios-nikolaos": "The white chapel of Agios Nikolaos on the islet of Kastri, just off the shore at Agios Stefanos.",
+    "sight-cavo-paradiso": "Cavo Paradiso, a quiet beach near Kefalos. The last stretch is an unpaved road.",
     "sight-limnionas": "Limnionas, a bay. The existing route calls the place reachable by car."
   },
   "it": {
@@ -153,6 +159,8 @@ window.HK_ROUTE_TEXT = {
     "sight-kasteel-antimachia": "Castello di Antimachia, una fortezza degli Ospitalieri.",
     "sight-molen-antimachia": "Mulino di Antimachia, l’ultimo mulino a vento, oggi un museo.",
     "sight-agios-stefanos-kefalos": "Agios Stefanos presso Kefalos: una basilica sulla spiaggia, con l’isoletta Kastri.",
+    "sight-kapel-agios-nikolaos": "La cappella bianca di Agios Nikolaos sull’isoletta Kastri, proprio davanti alla costa di Agios Stefanos.",
+    "sight-cavo-paradiso": "Cavo Paradiso, una spiaggia tranquilla vicino a Kefalos. L’ultimo tratto è una strada sterrata.",
     "sight-limnionas": "Limnionas, una baia. Il percorso già presente lo indica raggiungibile in auto."
   },
   "tr": {
@@ -192,6 +200,8 @@ window.HK_ROUTE_TEXT = {
     "sight-kasteel-antimachia": "Antimachia kalesi, Hospitalier şövalyelerinin kalesi.",
     "sight-molen-antimachia": "Antimachia değirmeni, son yel değirmeni, şimdi müze.",
     "sight-agios-stefanos-kefalos": "Kefalos’ta Agios Stefanos: plaj kenarında bir bazilika, yanında Kastri adacığı.",
+    "sight-kapel-agios-nikolaos": "Agios Stefanos kıyısının hemen açığındaki Kastri adacığında beyaz Agios Nikolaos şapeli.",
+    "sight-cavo-paradiso": "Cavo Paradiso, Kefalos yakınında sakin bir plaj. Son bölüm toprak yol.",
     "sight-limnionas": "Limnionas, bir koy. Sitedeki rota buraya arabayla gidilebildiğini söyler."
   },
   "es": {
@@ -231,6 +241,8 @@ window.HK_ROUTE_TEXT = {
     "sight-kasteel-antimachia": "Castillo de Antimachia, una fortaleza de los hospitalarios.",
     "sight-molen-antimachia": "Molino de Antimachia, el último molino de viento, ahora un museo.",
     "sight-agios-stefanos-kefalos": "Agios Stefanos junto a Kefalos: una basílica en la playa, con el islote Kastri.",
+    "sight-kapel-agios-nikolaos": "La capilla blanca de Agios Nikolaos en el islote Kastri, justo frente a la costa de Agios Stefanos.",
+    "sight-cavo-paradiso": "Cavo Paradiso, una playa tranquila cerca de Kefalos. El último tramo es un camino sin asfaltar.",
     "sight-limnionas": "Limnionas, una bahía. La ruta que ya está la llama accesible en coche."
   }
 };

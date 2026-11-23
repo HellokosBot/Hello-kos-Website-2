@@ -479,7 +479,7 @@ window.HK_PLACES = [
   },
   {
     "id": "sight-kapel-agios-nikolaos",
-    "name": "Agios Nikolaos",
+    "name": "Kastri / Agios Nikolaos",
     "group": "kefalos",
     "link": "sight-kapel-agios-nikolaos.html",
     "photo": "img/hk/sight-kapel-agios-nikolaos-card.jpg",
