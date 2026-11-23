@@ -11,12 +11,6 @@ window.HK_DICT = {
     "longR": "Lange route",
     "gmaps": "Google Maps",
     "iphone": "iPhone",
-    "openG": "Start route in Google Maps",
-    "trim": "Google Maps neemt in deze link hoogstens 9 tussenstops mee. De extra stops blijven in de lijst staan.",
-    "est": "Schatting: {n} stops, ongeveer {km} km in vogelvlucht. Geen reistijd. Google Maps toont de afstand en de tijd.",
-    "estKind": "Indicatie: {kind} (schatting).",
-    "estShort": "korte route",
-    "estLong": "lange route",
     "walkShortNote": "Korte wandeling: het begin van de wandelroute van de oude Hello Kos, van de witte trappen tot het kasteel. De oude site had geen aparte korte variant. Er staat geen verzonnen tijd bij.",
     "walkLongNote": "De wandelroute van de oude Hello Kos, in dezelfde volgorde. Alleen lopend. Een controlepunt volg je in Google Maps in volgorde. De oude route had ook naamloze controlepunten zonder coördinaten. Die krijgen hier geen kaartknop. Van de Defterdar-moskee is geen eigen foto; de overzichtsfoto staat ervoor.",
     "walkTitle": "Wandelroute",
@@ -58,7 +52,6 @@ window.HK_DICT = {
     "wishEmptyDrive": "Nog geen plekken voor je rijroute. Geef een hartje bij Bezienswaardigheden.",
     "wishSee": "Naar Bezienswaardigheden",
     "wishRemove": "Uit de route",
-    "wishCount": "{n} plekken in deze route"
   },
   "de": {
     "title": "Route",
@@ -72,12 +65,6 @@ window.HK_DICT = {
     "longR": "Lange Route",
     "gmaps": "Google Maps",
     "iphone": "iPhone",
-    "openG": "Route in Google Maps starten",
-    "trim": "Google Maps übernimmt in diesem Link höchstens 9 Zwischenstopps. Die weiteren Stopps bleiben in der Liste.",
-    "est": "Schätzung: {n} Stopps, etwa {km} km Luftlinie. Keine Fahrzeit. Google Maps zeigt Entfernung und Zeit.",
-    "estKind": "Hinweis: {kind} (Schätzung).",
-    "estShort": "kurze Route",
-    "estLong": "lange Route",
     "walkShortNote": "Kurzer Spaziergang: der Anfang der Wanderroute der alten Hello Kos, von der weißen Treppe bis zur Burg. Die alte Website hatte keine eigene kurze Variante. Keine erfundene Zeit.",
     "walkLongNote": "Die Wanderroute der alten Hello Kos, in derselben Reihenfolge. Nur zu Fuß. Einen Kontrollpunkt folgst du in Google Maps der Reihe nach. Die alte Route hatte auch namenlose Kontrollpunkte ohne Koordinaten. Die bekommen hier keinen Kartenknopf. Von der Defterdar-Moschee gibt es kein eigenes Foto; das Übersichtsfoto steht dafür.",
     "walkTitle": "Wanderroute",
@@ -119,7 +106,6 @@ window.HK_DICT = {
     "wishEmptyDrive": "Noch keine Orte für deine Fahrroute. Vergib ein Herz bei den Sehenswürdigkeiten.",
     "wishSee": "Zu den Sehenswürdigkeiten",
     "wishRemove": "Aus der Route",
-    "wishCount": "{n} Orte in dieser Route"
   },
   "en": {
     "title": "Route",
@@ -133,12 +119,6 @@ window.HK_DICT = {
     "longR": "Long route",
     "gmaps": "Google Maps",
     "iphone": "iPhone",
-    "openG": "Start route in Google Maps",
-    "trim": "This Google Maps link keeps at most 9 stops in between. The extra stops stay in the list.",
-    "est": "Estimate: {n} stops, about {km} km in a straight line. No travel time. Google Maps shows the distance and the time.",
-    "estKind": "Indication: {kind} (estimate).",
-    "estShort": "short route",
-    "estLong": "long route",
     "walkShortNote": "Short walk: the start of the old Hello Kos walking route, from the white steps to the castle. The old site had no separate short version. No invented time.",
     "walkLongNote": "The walking route from the old Hello Kos, in the same order. On foot only. Follow each control point in order in Google Maps. The old route also had unnamed control points without coordinates. Those have no map button here. There is no photo of the Defterdar mosque; the overview photo stands in for it.",
     "walkTitle": "Walking route",
@@ -180,7 +160,6 @@ window.HK_DICT = {
     "wishEmptyDrive": "No places on your driving route yet. Tap a heart on the sights.",
     "wishSee": "Browse the sights",
     "wishRemove": "Remove from route",
-    "wishCount": "{n} places on this route"
   },
   "it": {
     "title": "Percorso",
@@ -194,12 +173,6 @@ window.HK_DICT = {
     "longR": "Percorso lungo",
     "gmaps": "Google Maps",
     "iphone": "iPhone",
-    "openG": "Avvia il percorso in Google Maps",
-    "trim": "Questo link di Google Maps tiene al massimo 9 tappe intermedie. Le altre restano nell’elenco.",
-    "est": "Stima: {n} tappe, circa {km} km in linea d’aria. Nessun tempo di viaggio. Google Maps mostra distanza e tempo.",
-    "estKind": "Indicazione: {kind} (stima).",
-    "estShort": "percorso breve",
-    "estLong": "percorso lungo",
     "walkShortNote": "Passeggiata breve: l’inizio del percorso a piedi della vecchia Hello Kos, dalle scale bianche al castello. Il vecchio sito non aveva una variante breve separata. Nessun tempo inventato.",
     "walkLongNote": "Il percorso a piedi della vecchia Hello Kos, nello stesso ordine. Solo a piedi. Un punto di controllo si segue in ordine in Google Maps. Il vecchio percorso aveva anche punti senza nome e senza coordinate. Qui non hanno un pulsante mappa. Non c’è una foto della moschea Defterdar; al suo posto c’è la foto d’insieme.",
     "walkTitle": "Percorso a piedi",
@@ -241,7 +214,6 @@ window.HK_DICT = {
     "wishEmptyDrive": "Ancora nessun luogo nel percorso in auto. Metti un cuore alle attrazioni.",
     "wishSee": "Alle attrazioni",
     "wishRemove": "Togli dal percorso",
-    "wishCount": "{n} luoghi in questo percorso"
   },
   "tr": {
     "title": "Rota",
@@ -255,12 +227,6 @@ window.HK_DICT = {
     "longR": "Uzun rota",
     "gmaps": "Google Maps",
     "iphone": "iPhone",
-    "openG": "Rotayı Google Maps’te başlat",
-    "trim": "Bu Google Maps bağlantısı en fazla 9 ara durak alır. Fazla duraklar listede kalır.",
-    "est": "Tahmin: {n} durak, kuş uçuşu yaklaşık {km} km. Yol süresi yok. Mesafe ve süreyi Google Maps gösterir.",
-    "estKind": "Gösterge: {kind} (tahmin).",
-    "estShort": "kısa rota",
-    "estLong": "uzun rota",
     "walkShortNote": "Kısa yürüyüş: eski Hello Kos yürüyüş rotasının başı, beyaz merdivenlerden kaleye. Eski sitede ayrı bir kısa seçenek yoktu. Uydurma süre yok.",
     "walkLongNote": "Eski Hello Kos yürüyüş rotası, aynı sırayla. Yalnızca yürüyerek. Bir kontrol noktasını Google Maps’te sırayla izlersin. Eski rotada koordinatsız, adsız kontrol noktaları da vardı. Onların harita düğmesi yok. Defterdar camisinin kendi fotoğrafı yok; yerine genel fotoğraf duruyor.",
     "walkTitle": "Yürüyüş rotası",
@@ -302,7 +268,6 @@ window.HK_DICT = {
     "wishEmptyDrive": "Araç rotanda henüz yer yok. Gezilecek yerlere kalp ver.",
     "wishSee": "Gezilecek yerlere",
     "wishRemove": "Rotadan çıkar",
-    "wishCount": "Bu rotada {n} yer"
   },
   "es": {
     "title": "Ruta",
@@ -316,12 +281,6 @@ window.HK_DICT = {
     "longR": "Ruta larga",
     "gmaps": "Google Maps",
     "iphone": "iPhone",
-    "openG": "Empezar ruta en Google Maps",
-    "trim": "Este enlace de Google Maps admite como máximo 9 paradas intermedias. Las demás siguen en la lista.",
-    "est": "Estimación: {n} paradas, unos {km} km en línea recta. Sin tiempo de viaje. Google Maps muestra la distancia y el tiempo.",
-    "estKind": "Indicación: {kind} (estimación).",
-    "estShort": "ruta corta",
-    "estLong": "ruta larga",
     "walkShortNote": "Paseo corto: el inicio de la ruta a pie de la antigua Hello Kos, desde las escaleras blancas hasta el castillo. La web antigua no tenía una variante corta aparte. Sin un tiempo inventado.",
     "walkLongNote": "La ruta a pie de la antigua Hello Kos, en el mismo orden. Solo a pie. Un punto de control se sigue en orden en Google Maps. La ruta antigua también tenía puntos sin nombre y sin coordenadas. Esos no tienen botón de mapa. No hay foto propia de la mezquita Defterdar; está la foto general.",
     "walkTitle": "Ruta a pie",
@@ -363,6 +322,5 @@ window.HK_DICT = {
     "wishEmptyDrive": "Aún no hay lugares en tu ruta en coche. Pon un corazón en los sitios.",
     "wishSee": "Ver los lugares",
     "wishRemove": "Quitar de la ruta",
-    "wishCount": "{n} lugares en esta ruta"
   }
 };
