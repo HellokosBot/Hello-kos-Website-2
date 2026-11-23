@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Marina Café – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+<style>
+.call-list{display:flex;flex-direction:column;gap:10px;margin:12px 0 0}
+a.call-btn{display:flex;align-items:center;gap:12px;text-decoration:none;background:linear-gradient(180deg,#3eaeae 0%,#2b7e7e 100%);color:#fff;border:0;border-radius:16px;padding:14px 16px;box-shadow:0 6px 16px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.25);cursor:pointer;box-sizing:border-box;max-width:100%}
+a.call-btn:active{transform:translateY(1px)}
+a.call-btn .ico{flex:0 0 44px;width:44px;height:44px;border-radius:14px;background:var(--gold);color:#1c1404;display:flex;align-items:center;justify-content:center}
+a.call-btn .call-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
+a.call-btn .call-main{font-weight:800;font-size:1.05rem;line-height:1.25}
+a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba(255,255,255,.9)}
+.card h3{font-size:.95rem;margin:12px 0 8px;color:var(--text)}
+.hours{margin:4px 0 8px}
+.h-row{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:.86rem;color:var(--text-soft)}
+.h-row span:last-child{font-weight:700;color:var(--text);text-align:right}
+.photo{display:block;width:100%;height:auto;border-radius:14px;margin:0 0 12px}
+body.hk-page .hero-wrap.shops-hero{aspect-ratio:auto;min-height:210px;display:flex;align-items:flex-end;overflow:hidden;margin:-16px -14px 12px}
+body.hk-page .hero-wrap.shops-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%}
+body.hk-page .shops-hero-copy{position:relative;z-index:1;width:100%;box-sizing:border-box;padding:36px 16px 14px;background:linear-gradient(to top,rgba(13,26,26,.94) 0%,rgba(13,26,26,.78) 46%,rgba(13,26,26,.28) 78%,rgba(13,26,26,0) 100%)}
+body.hk-page .shops-hero h1{color:#fff;margin:0;text-shadow:0 1px 6px rgba(0,0,0,.55)}
+body.hk-page .map-row{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:stretch;gap:8px;width:100%;max-width:100%;margin:12px 0 0;box-sizing:border-box}
+body.hk-page .map-row .btn{flex:1 1 0;width:0;max-width:none;min-width:0;padding:12px 8px;font-size:.82rem}
+body.hk-page .map-row .pin{flex:0 0 16px;width:16px;height:16px}
+</style>
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+<p class="parent-link"><a href="bars-cocktailbars.html" data-i18n="back">← Bars & cocktailbars</a></p>
+<div class="hero-wrap shops-hero">
+<img src="img/hk/marina-cafe-hero.jpg" alt="">
+<div class="shops-hero-copy">
+<h1 data-i18n="title">Marina Café</h1>
+</div>
+</div>
+<article class="card">
+<h3 data-i18n="loc">Kos - Stad</h3>
+<p data-i18n="p0">Marina Yacht Cafe, pal in de Kos Marina (jachthaven), is vooral een relaxte all-day spot met uitzicht op jachten en het water, ideaal voor cocktails, drankjes en een chill avondje. 's Avonds wordt het een fijne plek voor sunset drinks en nachtelijke vibes.</p>
+<p data-i18n="pTone">Het is vooral een plek voor een relaxed drankje en goede cocktails, met ook veel lokale mensen. Op sommige avonden is er live muziek. Alleen af en toe in het weekend is er een feest met een DJ, niet elke avond.</p>
+<img class="photo" src="img/hk/marina-cafe-uitzicht.jpg" alt="">
+<h3 data-i18n="hLaid">Laid-back</h3>
+<p data-i18n="p1">Exquisite cocktails (vaak geserveerd 'the marina way'), lekkere bites en een laid-back sfeer met live muziek. Speciale events op sommige avonden en op donderdag meestal live optredens. Het is geen hardcore club of dancefloor-plek, maar wel een gezellige hangout, waar je rustig kunt stappen met een drankje, mensen kijken en genieten van de havenverlichting.</p>
+<img class="photo" src="img/hk/marina-cafe-haven-nacht.jpg" alt="">
+<h3 data-i18n="hAmb">Marina-ambiance</h3>
+<p data-i18n="p2">Perfect voor een ontspannen start van de nacht of als tussenstop tijdens barhoppen in Kos-stad. De crowd is een mix van locals, zeilers en mensen die er als toerist zijn; het voelt elegant maar niet te stijf, met een focus op goede cocktails en een serene marina-ambiance tot laat in de avond. Ideaal als je van classy drinks met uitzicht houdt in plaats van wilde clubnachten!</p>
+<img class="photo" src="img/hk/marina-cafe-lounge.jpg" alt="">
+<h3 data-i18n="hParty">Intieme feesten</h3>
+<p data-i18n="p3">Alleen af en toe in het weekend worden er gezellige en intieme feesten georganiseerd met een DJ, niet elke avond. Die feesten trekken niet alleen veel lokale Grieken, maar ook bezoekers van buiten de deur. Deze feesten zijn vaak een uitstekende gelegenheid voor mensen om samen te komen, te dansen en te genieten van de levendige sfeer die zulke evenementen met zich meebrengen.</p>
+<img class="photo" src="img/hk/marina-cafe-zetels.jpg" alt="">
+<h3 data-i18n="hCoffee">Koffie</h3>
+<p data-i18n="p4">De beste koffie in Kos vind je bij Marina Yacht Cafe, gelegen in de prachtige jachthaven van Kos-stad. Hier geniet je van een rijke espresso of perfecte cappuccino met uitzicht op luxe jachten en het kalme water. De ideale start van je dag op het eiland!</p>
+<img class="photo" src="img/hk/marina-cafe-binnen.jpg" alt="">
+<h3 data-i18n="hSand">Broodjes</h3>
+<p data-i18n="p5">Marina Yacht Cafe serveert verse lekkere belegde broodjes, zoals club sandwiches, toasted baguettes en ham-kaas croissants, vaak groot en goed deelbaar. Met verse ingrediënten en een mooi uitzicht op de haven.</p>
+<h3 data-i18n="hLunch">Lunch aan het water</h3>
+<p data-i18n="p6">Het is een relaxte all-day spot waar je dit combineert met koffie of een drankje, ideaal voor een snelle lunch of snack aan het water. De plek waar je verse baguettes en belegde broodjes kunt krijgen, net zoals je dat als toerist een beetje gewend bent.</p>
+<img class="photo" src="img/hk/marina-cafe-broodje.jpg" alt="">
+<h3 data-i18n="hBreak">Uitgebreid menu</h3>
+<p data-i18n="p7">Als je zin hebt om de dag rustig te starten met uitzicht op de jachthaven, zit je bij Marina Cafe goed. Je hoort het zachte klotsen van het water tegen de boten, je ziet de masten licht wiegen en je ruikt de verse koffie terwijl je ontbijt. Het menu is opvallend uitgebreid voor Kos-stad: van simpele Griekse yoghurt met honing en walnoten, vers brood met olijfolie en feta, tot scrambled eggs met bacon, avocado-toast, pancakes, omeletten en verse fruitsalades.</p>
+<img class="photo" src="img/hk/marina-cafe-ontbijt.jpg" alt="">
+<h3 data-i18n="hPrice">Redelijke prijs</h3>
+<p data-i18n="p8">Je kunt eigenlijk alles mixen zoals je wilt. Wat opvalt is dat de prijzen heel redelijk blijven, ontbijten begint rond de €2,50 en het uitgebreidste bord kost niet meer dan €8,50. Het terras is ruim, de bediening relaxed en het voelt alsof je even echt vakantie viert, zonder dat het overdreven luxe of toeristisch wordt.</p>
+<img class="photo" src="img/hk/marina-cafe-eieren.jpg" alt="">
+<h3 data-i18n="hSat">Zaterdag druk</h3>
+<p data-i18n="p9">Houd er rekening mee dat veel boten op zaterdag arriveren en weer vertrekken. Hierdoor zijn de zaterdagen bijzonder druk. Het is daarom niet aan te raden om 's ochtends bij Marina Café te ontbijten, als je chaos en drukte wilt vermijden.</p>
+<img class="photo" src="img/hk/marina-cafe-haven.jpg" alt="">
+<h3 data-i18n="hoursH">Openingstijden</h3>
+<div class="hours">
+<div class="h-row"><span data-i18n="d0">Ma.</span><span>08:00–00:00</span></div>
+<div class="h-row"><span data-i18n="d1">Di.</span><span>08:00–00:00</span></div>
+<div class="h-row"><span data-i18n="d2">Woe.</span><span>08:00–00:00</span></div>
+<div class="h-row"><span data-i18n="d3">Don.</span><span>08:00–00:00</span></div>
+<div class="h-row"><span data-i18n="d4">Vrij.</span><span>08:00–00:00</span></div>
+<div class="h-row"><span data-i18n="d5">Zat.</span><span>08:00–01:00</span></div>
+<div class="h-row"><span data-i18n="d6">Zon.</span><span>08:00–01:30</span></div>
+</div>
+<div class="call-list">
+<a class="call-btn" href="tel:+302242048480"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="call-copy"><span class="call-main"><span data-i18n="call">Bel</span> +30 22420 48480</span><span class="call-sub" data-i18n="phoneL">Telefoon</span></span></a>
+</div>
+<div class="map-row">
+<a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&amp;query=36.8907921,27.3021426" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+<a class="btn btn-map" href="https://maps.apple.com/?ll=36.8907921,27.3021426&amp;q=Marina%20Cafe%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+</div>
+</article>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>
+window.HK_DICT = {
+  "nl": {
+    "back": "← Bars & cocktailbars",
+    "title": "Marina Café",
+    "loc": "Kos - Stad",
+    "hLaid": "Laid-back",
+    "hAmb": "Marina-ambiance",
+    "hParty": "Intieme feesten",
+    "hCoffee": "Koffie",
+    "hSand": "Broodjes",
+    "hLunch": "Lunch aan het water",
+    "hBreak": "Uitgebreid menu",
+    "hPrice": "Redelijke prijs",
+    "hSat": "Zaterdag druk",
+    "hoursH": "Openingstijden",
+    "d0": "Ma.", "d1": "Di.", "d2": "Woe.", "d3": "Don.", "d4": "Vrij.", "d5": "Zat.", "d6": "Zon.",
+    "call": "Bel", "phoneL": "Telefoon", "gmaps": "Google Maps", "iphone": "iPhone",
+    "p0": "Marina Yacht Cafe, pal in de Kos Marina (jachthaven), is vooral een relaxte all-day spot met uitzicht op jachten en het water, ideaal voor cocktails, drankjes en een chill avondje. 's Avonds wordt het een fijne plek voor sunset drinks en nachtelijke vibes.",
+    "pTone": "Het is vooral een plek voor een relaxed drankje en goede cocktails, met ook veel lokale mensen. Op sommige avonden is er live muziek. Alleen af en toe in het weekend is er een feest met een DJ, niet elke avond.",
+    "p1": "Exquisite cocktails (vaak geserveerd 'the marina way'), lekkere bites en een laid-back sfeer met live muziek. Speciale events op sommige avonden en op donderdag meestal live optredens. Het is geen hardcore club of dancefloor-plek, maar wel een gezellige hangout, waar je rustig kunt stappen met een drankje, mensen kijken en genieten van de havenverlichting.",
+    "p2": "Perfect voor een ontspannen start van de nacht of als tussenstop tijdens barhoppen in Kos-stad. De crowd is een mix van locals, zeilers en mensen die er als toerist zijn; het voelt elegant maar niet te stijf, met een focus op goede cocktails en een serene marina-ambiance tot laat in de avond. Ideaal als je van classy drinks met uitzicht houdt in plaats van wilde clubnachten!",
+    "p3": "Alleen af en toe in het weekend worden er gezellige en intieme feesten georganiseerd met een DJ, niet elke avond. Die feesten trekken niet alleen veel lokale Grieken, maar ook bezoekers van buiten de deur. Deze feesten zijn vaak een uitstekende gelegenheid voor mensen om samen te komen, te dansen en te genieten van de levendige sfeer die zulke evenementen met zich meebrengen.",
+    "p4": "De beste koffie in Kos vind je bij Marina Yacht Cafe, gelegen in de prachtige jachthaven van Kos-stad. Hier geniet je van een rijke espresso of perfecte cappuccino met uitzicht op luxe jachten en het kalme water. De ideale start van je dag op het eiland!",
+    "p5": "Marina Yacht Cafe serveert verse lekkere belegde broodjes, zoals club sandwiches, toasted baguettes en ham-kaas croissants, vaak groot en goed deelbaar. Met verse ingrediënten en een mooi uitzicht op de haven.",
+    "p6": "Het is een relaxte all-day spot waar je dit combineert met koffie of een drankje, ideaal voor een snelle lunch of snack aan het water. De plek waar je verse baguettes en belegde broodjes kunt krijgen, net zoals je dat als toerist een beetje gewend bent.",
+    "p7": "Als je zin hebt om de dag rustig te starten met uitzicht op de jachthaven, zit je bij Marina Cafe goed. Je hoort het zachte klotsen van het water tegen de boten, je ziet de masten licht wiegen en je ruikt de verse koffie terwijl je ontbijt. Het menu is opvallend uitgebreid voor Kos-stad: van simpele Griekse yoghurt met honing en walnoten, vers brood met olijfolie en feta, tot scrambled eggs met bacon, avocado-toast, pancakes, omeletten en verse fruitsalades.",
+    "p8": "Je kunt eigenlijk alles mixen zoals je wilt. Wat opvalt is dat de prijzen heel redelijk blijven, ontbijten begint rond de €2,50 en het uitgebreidste bord kost niet meer dan €8,50. Het terras is ruim, de bediening relaxed en het voelt alsof je even echt vakantie viert, zonder dat het overdreven luxe of toeristisch wordt.",
+    "p9": "Houd er rekening mee dat veel boten op zaterdag arriveren en weer vertrekken. Hierdoor zijn de zaterdagen bijzonder druk. Het is daarom niet aan te raden om 's ochtends bij Marina Café te ontbijten, als je chaos en drukte wilt vermijden."
+  },
+  "de": {
+    "back": "← Bars & Cocktailbars",
+    "title": "Marina Café",
+    "loc": "Kos - Stadt",
+    "hLaid": "Laid-back",
+    "hAmb": "Marina-Ambiente",
+    "hParty": "Intime Feste",
+    "hCoffee": "Kaffee",
+    "hSand": "Belegte Brote",
+    "hLunch": "Mittagessen am Wasser",
+    "hBreak": "Umfangreiche Karte",
+    "hPrice": "Fairer Preis",
+    "hSat": "Samstag voll",
+    "hoursH": "Öffnungszeiten",
+    "d0": "Mo.", "d1": "Di.", "d2": "Mi.", "d3": "Do.", "d4": "Fr.", "d5": "Sa.", "d6": "So.",
+    "call": "Anrufen", "phoneL": "Telefon", "gmaps": "Google Maps", "iphone": "iPhone",
+    "p0": "Marina Yacht Cafe, mitten in der Kos Marina (Yachthafen), ist vor allem ein entspannter All-day-Spot mit Blick auf Yachten und das Wasser, ideal für Cocktails, Getränke und einen ruhigen Abend. Abends wird es ein schöner Ort für Sunset-Drinks und nächtliche Stimmung.",
+    "pTone": "Es ist vor allem ein Ort für ein entspanntes Getränk und gute Cocktails, auch mit vielen Einheimischen. An manchen Abenden gibt es Live-Musik. Nur ab und zu am Wochenende gibt es eine Party mit DJ, nicht jeden Abend.",
+    "p1": "Exquisite Cocktails (oft serviert 'the marina way'), leckere Bites und eine laid-back Atmosphäre mit Live-Musik. Besondere Events an manchen Abenden und donnerstags meist Live-Auftritte. Es ist kein Hardcore-Club und keine Dancefloor-Location, sondern ein gemütlicher Treffpunkt, wo du in Ruhe mit einem Drink unterwegs sein, Leute beobachten und die Hafenbeleuchtung genießen kannst.",
+    "p2": "Perfekt für einen entspannten Start in die Nacht oder als Zwischenstopp beim Barhopping in Kos-Stadt. Das Publikum ist eine Mischung aus Locals, Seglern und Menschen, die als Tourist da sind; es fühlt sich elegant an, aber nicht steif, mit dem Schwerpunkt auf guten Cocktails und einer ruhigen Marina-Atmosphäre bis spät am Abend. Ideal, wenn du stilvolle Drinks mit Aussicht magst statt wilder Clubnächte!",
+    "p3": "Nur ab und zu am Wochenende werden gemütliche und intime Feste mit einem DJ organisiert, nicht jeden Abend. Diese Feste ziehen nicht nur viele lokale Griechen an, sondern auch Besucher von außerhalb. Sie sind oft eine ausgezeichnete Gelegenheit, zusammenzukommen, zu tanzen und die lebendige Stimmung zu genießen, die solche Abende mit sich bringen.",
+    "p4": "Den besten Kaffee in Kos findest du im Marina Yacht Cafe, in der schönen Marina von Kos-Stadt. Hier genießt du einen kräftigen Espresso oder einen perfekten Cappuccino mit Blick auf Luxusyachten und das ruhige Wasser. Der ideale Start in deinen Tag auf der Insel!",
+    "p5": "Marina Yacht Cafe serviert frische, leckere belegte Brote, wie Club-Sandwiches, getoastete Baguettes und Schinken-Käse-Croissants, oft groß und gut zum Teilen. Mit frischen Zutaten und einer schönen Aussicht auf den Hafen.",
+    "p6": "Es ist ein entspannter All-day-Spot, wo du das mit Kaffee oder einem Drink kombinierst, ideal für ein schnelles Mittagessen oder einen Snack am Wasser. Der Ort, an dem du frische Baguettes und belegte Brote bekommst, so wie du es als Tourist ein bisschen gewohnt bist.",
+    "p7": "Wenn du den Tag ruhig mit Blick auf die Marina beginnen willst, bist du im Marina Cafe richtig. Du hörst das leise Plätschern des Wassers an den Booten, siehst die Masten leicht schwanken und riechst den frischen Kaffee, während du frühstückst. Die Karte ist für Kos-Stadt auffallend umfangreich: von einfachem griechischem Joghurt mit Honig und Walnüssen, frischem Brot mit Olivenöl und Feta, bis zu scrambled eggs mit Bacon, Avocado-Toast, Pancakes, Omeletts und frischen Obstsalaten.",
+    "p8": "Du kannst eigentlich alles mischen, wie du magst. Auffällig ist, dass die Preise sehr vernünftig bleiben: Frühstück beginnt bei etwa 2,50 € und das umfangreichste Brett kostet nicht mehr als 8,50 €. Die Terrasse ist groß, der Service entspannt, und es fühlt sich an, als würdest du wirklich Urlaub machen, ohne dass es übertrieben luxuriös oder touristisch wird.",
+    "p9": "Bedenke, dass am Samstag viele Boote ankommen und wieder ablegen. Dadurch sind die Samstage besonders voll. Es ist deshalb nicht zu empfehlen, morgens im Marina Café zu frühstücken, wenn du Chaos und Gedränge vermeiden willst."
+  },
+  "en": {
+    "back": "← Bars & cocktail bars",
+    "title": "Marina Café",
+    "loc": "Kos town",
+    "hLaid": "Laid-back",
+    "hAmb": "Marina ambiance",
+    "hParty": "Intimate parties",
+    "hCoffee": "Coffee",
+    "hSand": "Sandwiches",
+    "hLunch": "Lunch by the water",
+    "hBreak": "Extensive menu",
+    "hPrice": "Fair prices",
+    "hSat": "Busy on Saturday",
+    "hoursH": "Opening hours",
+    "d0": "Mon.", "d1": "Tue.", "d2": "Wed.", "d3": "Thu.", "d4": "Fri.", "d5": "Sat.", "d6": "Sun.",
+    "call": "Call", "phoneL": "Phone", "gmaps": "Google Maps", "iphone": "iPhone",
+    "p0": "Marina Yacht Cafe, right in Kos Marina, is above all a relaxed all-day spot with views of yachts and the water, ideal for cocktails, drinks and a chilled evening. In the evening it becomes a nice place for sunset drinks and a night-time atmosphere.",
+    "pTone": "It is mainly a place for a relaxed drink and good cocktails, with many local people as well. On some evenings there is live music. Only occasionally at the weekend is there a party with a DJ, not every night.",
+    "p1": "Exquisite cocktails (often served 'the marina way'), tasty bites and a laid-back mood with live music. Special events on some evenings, and on Thursday usually live performances. It is not a hardcore club or a dancefloor place, but a cosy hangout where you can take it easy with a drink, people-watch and enjoy the harbour lights.",
+    "p2": "Perfect for a relaxed start to the night or as a stop while bar-hopping in Kos town. The crowd is a mix of locals, sailors and people who are there as a tourist; it feels elegant but not stiff, with a focus on good cocktails and a serene marina ambiance late into the evening. Ideal if you like classy drinks with a view rather than wild club nights!",
+    "p3": "Only occasionally at the weekend are there cosy, intimate parties with a DJ, not every night. Those parties draw not only many local Greeks, but also visitors from elsewhere. They are often an excellent chance for people to come together, dance and enjoy the lively atmosphere that such evenings bring.",
+    "p4": "The best coffee in Kos is at Marina Yacht Cafe, in the beautiful marina of Kos town. Here you enjoy a rich espresso or a perfect cappuccino with a view of luxury yachts and the calm water. The ideal start to your day on the island!",
+    "p5": "Marina Yacht Cafe serves fresh, tasty filled sandwiches, such as club sandwiches, toasted baguettes and ham-and-cheese croissants, often large and easy to share. With fresh ingredients and a lovely view of the harbour.",
+    "p6": "It is a relaxed all-day spot where you combine this with coffee or a drink, ideal for a quick lunch or a snack by the water. The place where you can get fresh baguettes and filled sandwiches, much as you are a little used to as a tourist.",
+    "p7": "If you want to start the day quietly with a view of the marina, Marina Cafe is a good place. You hear the soft lapping of the water against the boats, you see the masts sway gently and you smell the fresh coffee while you have breakfast. The menu is strikingly extensive for Kos town: from simple Greek yoghurt with honey and walnuts, fresh bread with olive oil and feta, to scrambled eggs with bacon, avocado toast, pancakes, omelettes and fresh fruit salads.",
+    "p8": "You can basically mix everything the way you like. What stands out is that the prices stay very reasonable: breakfast starts around €2.50 and the most extensive plate costs no more than €8.50. The terrace is spacious, the service relaxed, and it feels as if you are really on holiday, without it becoming overly luxurious or touristy.",
+    "p9": "Keep in mind that many boats arrive and leave again on Saturday. That makes Saturdays especially busy. It is therefore not advisable to have breakfast at Marina Café in the morning if you want to avoid chaos and crowds."
+  },
+  "it": {
+    "back": "← Bar e cocktail bar",
+    "title": "Marina Café",
+    "loc": "Kos città",
+    "hLaid": "Laid-back",
+    "hAmb": "Atmosfera della marina",
+    "hParty": "Feste intime",
+    "hCoffee": "Caffè",
+    "hSand": "Panini",
+    "hLunch": "Pranzo sull'acqua",
+    "hBreak": "Menu ampio",
+    "hPrice": "Prezzo ragionevole",
+    "hSat": "Sabato affollato",
+    "hoursH": "Orari di apertura",
+    "d0": "Lun.", "d1": "Mar.", "d2": "Mer.", "d3": "Gio.", "d4": "Ven.", "d5": "Sab.", "d6": "Dom.",
+    "call": "Chiama", "phoneL": "Telefono", "gmaps": "Google Maps", "iphone": "iPhone",
+    "p0": "Marina Yacht Cafe, proprio nella Kos Marina (porto turistico), è soprattutto un posto all-day rilassato con vista su yacht e sull'acqua, ideale per cocktail, drink e una serata tranquilla. La sera diventa un bel posto per drink al tramonto e un'atmosfera notturna.",
+    "pTone": "È soprattutto un posto per un drink rilassato e buoni cocktail, anche con molte persone del posto. In alcune sere c'è musica dal vivo. Solo ogni tanto nel weekend c'è una festa con DJ, non ogni sera.",
+    "p1": "Cocktail raffinati (spesso serviti 'the marina way'), bocconcini buoni e un'atmosfera laid-back con musica dal vivo. Eventi speciali in alcune sere e di solito esibizioni dal vivo il giovedì. Non è un club hardcore né una pista da ballo, ma un ritrovo accogliente, dove puoi stare tranquillo con un drink, guardare la gente e goderti le luci del porto.",
+    "p2": "Perfetto per un inizio di serata rilassato o come tappa mentre passi da un bar all'altro a Kos città. Il pubblico è un mix di gente del posto, velisti e persone che sono lì come turista; si sente elegante ma non rigido, con attenzione ai buoni cocktail e a un'atmosfera serena da marina fino a tardi. Ideale se ti piacciono drink curati con vista, invece di notti selvagge in club!",
+    "p3": "Solo ogni tanto nel weekend si organizzano feste accoglienti e intime con un DJ, non ogni sera. Quelle feste attirano non solo molti greci del posto, ma anche visitatori da fuori. Sono spesso un'ottima occasione per stare insieme, ballare e godersi l'atmosfera vivace che queste serate portano.",
+    "p4": "Il caffè migliore a Kos lo trovi al Marina Yacht Cafe, nella bella marina di Kos città. Qui gusti un espresso ricco o un cappuccino perfetto con vista su yacht di lusso e sull'acqua calma. L'inizio ideale della giornata sull'isola!",
+    "p5": "Marina Yacht Cafe serve panini freschi e buoni, come club sandwich, baguette tostate e croissant prosciutto e formaggio, spesso grandi e facili da condividere. Con ingredienti freschi e una bella vista sul porto.",
+    "p6": "È un posto all-day rilassato dove lo abbini a un caffè o a un drink, ideale per un pranzo veloce o uno snack sull'acqua. Il posto dove trovi baguette fresche e panini farciti, un po' come sei abituato come turista.",
+    "p7": "Se hai voglia di iniziare la giornata con calma e con vista sulla marina, al Marina Cafe stai bene. Senti il leggero sciabordio dell'acqua contro le barche, vedi gli alberi oscillare piano e senti il profumo del caffè fresco mentre fai colazione. Il menu è sorprendentemente ampio per Kos città: dallo yogurt greco semplice con miele e noci, pane fresco con olio d'oliva e feta, fino a scrambled eggs con bacon, avocado toast, pancakes, omelette e macedonie fresche.",
+    "p8": "Puoi mescolare praticamente tutto come vuoi. Quello che colpisce è che i prezzi restano molto ragionevoli: la colazione parte da circa 2,50 € e il piatto più ricco non costa più di 8,50 €. La terrazza è ampia, il servizio rilassato, e sembra di essere davvero in vacanza, senza che diventi troppo lussuoso o turistico.",
+    "p9": "Tieni presente che il sabato arrivano molte barche e ripartono. Per questo i sabati sono particolarmente affollati. Non è quindi consigliabile fare colazione al mattino al Marina Café, se vuoi evitare caos e ressa."
+  },
+  "tr": {
+    "back": "← Barlar ve kokteyl barlar",
+    "title": "Marina Café",
+    "loc": "Kos şehir",
+    "hLaid": "Laid-back",
+    "hAmb": "Marina havası",
+    "hParty": "Samimi partiler",
+    "hCoffee": "Kahve",
+    "hSand": "Sandviçler",
+    "hLunch": "Suyun kenarında öğle yemeği",
+    "hBreak": "Geniş menü",
+    "hPrice": "Makul fiyat",
+    "hSat": "Cumartesi kalabalık",
+    "hoursH": "Açılış saatleri",
+    "d0": "Pzt.", "d1": "Sal.", "d2": "Çar.", "d3": "Per.", "d4": "Cum.", "d5": "Cmt.", "d6": "Paz.",
+    "call": "Ara", "phoneL": "Telefon", "gmaps": "Google Maps", "iphone": "iPhone",
+    "p0": "Marina Yacht Cafe, Kos Marina'nın (yat limanı) tam içinde, yatlar ve su manzaralı, rahat bir tüm gün mekanıdır; kokteyller, içecekler ve sakin bir akşam için idealdir. Akşamları gün batımı içecekleri ve gece havası için güzel bir yer olur.",
+    "pTone": "Burası öncelikle rahat bir içki ve iyi kokteyller için bir yerdir, yerli insanlar da çok gelir. Bazı akşamlar canlı müzik olur. Yalnızca ara sıra hafta sonunda DJ'li bir parti vardır, her gece değil.",
+    "p1": "Özenli kokteyller (sık sık 'the marina way' servis edilir), lezzetli atıştırmalıklar ve canlı müzikli laid-back bir hava. Bazı akşamlar özel etkinlikler olur, perşembe günleri genellikle canlı performans vardır. Burası sert bir kulüp ya da dans pisti değildir; içkinle sakin vakit geçirdiğin, insanları izlediğin ve liman ışıklarının keyfini çıkardığın sıcak bir buluşma yeridir.",
+    "p2": "Gecenin rahat bir başlangıcı ya da Kos şehirde bar bar dolaşırken bir ara durak için birebir. Kalabalık yerliler, denizciler ve turist olarak orada olan insanların karışımıdır; zarif ama katı değildir, iyi kokteyllere ve akşam geç saatlere kadar sakin bir marina havasına odaklanır. Vahşi kulüp geceleri yerine manzaralı şık içecekleri seviyorsan ideal!",
+    "p3": "Yalnızca ara sıra hafta sonunda DJ'li samimi ve sıcak partiler düzenlenir, her gece değil. Bu partiler yalnızca çok sayıda yerli Yunanı değil, dışarıdan gelen ziyaretçileri de çeker. Bu partiler, insanların bir araya gelmesi, dans etmesi ve böyle akşamların canlı havasının tadını çıkarması için çoğu zaman iyi bir fırsattır.",
+    "p4": "Kos'taki en iyi kahveyi, Kos şehrin güzel yat limanındaki Marina Yacht Cafe'de bulursun. Burada lüks yatlar ve sakin su manzarasıyla dolu bir espresso ya da tam kıvamında bir cappuccino içersin. Adada günün ideal başlangıcı!",
+    "p5": "Marina Yacht Cafe taze ve lezzetli dolgulu sandviçler sunar: club sandwich, kızarmış baget ve jambon-peynirli kruvasan gibi, çoğu büyük ve paylaşmaya uygun. Taze malzemelerle ve limana güzel bir bakışla.",
+    "p6": "Bunu kahve ya da bir içecekle birleştirdiğin rahat bir tüm gün mekandır; su kenarında hızlı bir öğle yemeği ya da atıştırmalık için idealdir. Turist olarak biraz alışık olduğun gibi taze baget ve dolgulu sandviç bulduğun yer.",
+    "p7": "Güne yat limanı manzarasıyla sakin başlamak istersen Marina Cafe iyi bir seçimdir. Kahvaltı ederken suyun teknelere çarparken çıkardığı hafif sesi duyarsın, direklerin usulca sallandığını görürsün ve taze kahvenin kokusunu alırsın. Menü Kos şehir için dikkat çekici ölçüde geniştir: bal ve cevizli sade Yunan yoğurdundan, zeytinyağlı ve fetalı taze ekmeğe, pastırmalı scrambled eggs, avokado tostu, pankek, omlet ve taze meyve salatalarına kadar.",
+    "p8": "Aslında her şeyi istediğin gibi karıştırabilirsin. Dikkat çeken, fiyatların oldukça makul kalmasıdır: kahvaltı yaklaşık 2,50 €'dan başlar ve en dolu tabak 8,50 €'yu geçmez. Teras geniştir, servis rahattır ve aşırı lüks ya da turistik olmadan gerçekten tatildesin gibi hissedersin.",
+    "p9": "Cumartesi günü birçok teknenin gelip tekrar ayrıldığını unutma. Bu yüzden cumartesiler özellikle kalabalıktır. Karmaşa ve kalabalıktan kaçınmak istiyorsan sabah Marina Café'de kahvaltı etmen önerilmez."
+  },
+  "es": {
+    "back": "← Bares y coctelerías",
+    "title": "Marina Café",
+    "loc": "Kos ciudad",
+    "hLaid": "Laid-back",
+    "hAmb": "Ambiente de marina",
+    "hParty": "Fiestas íntimas",
+    "hCoffee": "Café",
+    "hSand": "Bocadillos",
+    "hLunch": "Comida junto al agua",
+    "hBreak": "Carta amplia",
+    "hPrice": "Precio razonable",
+    "hSat": "Sábado concurrido",
+    "hoursH": "Horario",
+    "d0": "Lun.", "d1": "Mar.", "d2": "Mié.", "d3": "Jue.", "d4": "Vie.", "d5": "Sáb.", "d6": "Dom.",
+    "call": "Llamar", "phoneL": "Teléfono", "gmaps": "Google Maps", "iphone": "iPhone",
+    "p0": "Marina Yacht Cafe, justo en la Kos Marina (puerto deportivo), es sobre todo un sitio all-day relajado con vistas a los yates y al agua, ideal para cócteles, bebidas y una noche tranquila. Por la tarde se convierte en un buen lugar para bebidas al atardecer y un ambiente nocturno.",
+    "pTone": "Es sobre todo un sitio para una copa tranquila y buenos cócteles, también con mucha gente local. Algunas noches hay música en vivo. Solo de vez en cuando, el fin de semana, hay una fiesta con DJ, no cada noche.",
+    "p1": "Cócteles exquisitos (a menudo servidos 'the marina way'), bocados ricos y un ambiente laid-back con música en vivo. Eventos especiales algunas noches y, los jueves, normalmente actuaciones en vivo. No es un club hardcore ni una pista de baile, sino un sitio acogedor donde puedes tomarte una copa con calma, mirar a la gente y disfrutar de las luces del puerto.",
+    "p2": "Perfecto para un inicio de noche relajado o como parada mientras vas de bar en bar en Kos ciudad. El público es una mezcla de gente local, navegantes y personas que están allí como turista; se siente elegante pero no rígido, con atención a los buenos cócteles y a un ambiente sereno de marina hasta tarde. Ideal si te gustan las copas con estilo y con vistas, en lugar de noches salvajes de club.",
+    "p3": "Solo de vez en cuando, el fin de semana, se organizan fiestas acogedoras e íntimas con un DJ, no cada noche. Esas fiestas atraen no solo a muchos griegos locales, sino también a visitantes de fuera. Suelen ser una excelente ocasión para reunirse, bailar y disfrutar del ambiente animado que traen esas veladas.",
+    "p4": "El mejor café de Kos está en Marina Yacht Cafe, en la bonita marina de Kos ciudad. Aquí disfrutas de un espresso intenso o de un cappuccino perfecto con vistas a yates de lujo y al agua en calma. El inicio ideal de tu día en la isla.",
+    "p5": "Marina Yacht Cafe sirve bocadillos frescos y ricos, como club sandwiches, baguettes tostadas y cruasanes de jamón y queso, a menudo grandes y fáciles de compartir. Con ingredientes frescos y una bonita vista al puerto.",
+    "p6": "Es un sitio all-day relajado donde lo combinas con un café o una copa, ideal para una comida rápida o un tentempié junto al agua. El lugar donde encuentras baguettes frescas y bocadillos, un poco como estás acostumbrado como turista.",
+    "p7": "Si te apetece empezar el día con calma y con vistas a la marina, en Marina Cafe estás bien. Oyes el suave chapoteo del agua contra los barcos, ves los mástiles balancearse un poco y hueles el café recién hecho mientras desayunas. La carta es llamativamente amplia para Kos ciudad: desde un yogur griego sencillo con miel y nueces, pan fresco con aceite de oliva y feta, hasta scrambled eggs con bacon, tostada de aguacate, pancakes, tortillas y ensaladas de fruta fresca.",
+    "p8": "En realidad puedes mezclarlo todo como quieras. Lo que llama la atención es que los precios se mantienen muy razonables: el desayuno empieza alrededor de 2,50 € y el plato más completo no cuesta más de 8,50 €. La terraza es amplia, el servicio relajado, y se siente como unas vacaciones de verdad, sin volverse demasiado lujoso ni turístico.",
+    "p9": "Ten en cuenta que el sábado llegan muchos barcos y vuelven a salir. Por eso los sábados están especialmente llenos. No es aconsejable desayunar por la mañana en Marina Café si quieres evitar el caos y las aglomeraciones."
+  }
+};
+</script>
+<script src="hello-kos-i18n.js?v=20261123r"></script>
+</body>
+</html>
