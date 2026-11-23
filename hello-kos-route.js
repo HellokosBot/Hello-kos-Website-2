@@ -6,7 +6,7 @@
   var WALKS = ["sight-witte-trappen","sight-i-love-kos","sight-palm-tree-lane","sight-palazzo-giustizia","sight-turks-badhuis","sight-boom-hippocrates","sight-gazi-hasan","sight-neratzia"];
   var DRIVES = ["sight-therma","sight-asklepion","sight-zia","sight-zoutmeer-tigaki","sight-kasteel-antimachia","sight-molen-antimachia","sight-agios-stefanos-kefalos","sight-limnionas"];
   var DRIVEL = ["sight-therma","sight-platani","sight-hippocratic-foundation","sight-asklepion","sight-waterval-platani","sight-haihoutes","sight-zia","sight-palio-pyli","sight-kasteel-palio-pyli","sight-tigaki","sight-zoutmeer-tigaki","sight-aquaduct-linopotas","sight-marmari","sight-mastichari","sight-kasteel-antimachia","sight-kardamena","sight-traditioneel-huis-antimachia","sight-molen-antimachia","sight-hippocrates-garden","sight-plaka","sight-kapel-agios-nikolaos","sight-agios-stefanos-kefalos","sight-cavo-paradiso","sight-limnionas"];
-  var DRIVE_OPT = { "sight-hippocratic-foundation": 1, "sight-waterval-platani": 1, "sight-aquaduct-linopotas": 1, "sight-kardamena": 1, "sight-cavo-paradiso": 1 };
+  var DRIVE_OPT = { "sight-hippocratic-foundation": 1, "sight-waterval-platani": 1, "sight-haihoutes": 1, "sight-aquaduct-linopotas": 1, "sight-kardamena": 1, "sight-cavo-paradiso": 1 };
   var ZIA_CPS = [{ lat: "36.8750770", lon: "27.2480940" }, { lat: "36.8631110", lon: "27.2376780" }, { lat: "36.8505510", lon: "27.2132630" }];
   var ZIA_KEY = "hk-zia-via";
   var GROUPS = ["kos","psalidi","platani","zia","pyli","tigaki","marmari","mastichari","antimachia","kefalos","limnionas"];
@@ -33,8 +33,14 @@
   function toggleZia() {
     try { localStorage.setItem(ZIA_KEY, ziaOn() ? "direct" : "scenic"); } catch (e) {}
   }
+  function hidesZiaView(stops) {
+    for (var i = 0; i < stops.length; i++) {
+      if (stops[i] && stops[i].id === "sight-haihoutes") return true;
+    }
+    return false;
+  }
   function withZiaView(stops) {
-    if (!ziaOn()) return stops;
+    if (!ziaOn() || hidesZiaView(stops)) return stops;
     var out = [];
     stops.forEach(function (p) {
       if (p && p.id === "sight-zia") ZIA_CPS.forEach(function (c) { out.push(c); });
@@ -66,12 +72,15 @@
   }
   function ziaBefore(n) {
     var letters = ["a", "b", "c"];
-    var html = ziaGateCard();
+    var html = '<section class="zia-group" data-zia-group="1">';
+    html += '<p class="zia-label">' + esc(T("ziaTile")) + "</p>";
+    html += ziaGateCard();
     if (ziaOn()) {
       ZIA_CPS.forEach(function (c, i) {
         html += ziaPointCard(n + letters[i], c, i);
       });
     }
+    html += "</section>";
     return html;
   }
   function T(key) {
@@ -175,7 +184,7 @@
     var n = 0;
     stops.forEach(function (p) {
       n += 1;
-      if (tm === "drive" && p.id === "sight-zia") html += ziaBefore(n);
+      if (tm === "drive" && p.id === "sight-zia" && !hidesZiaView(stops)) html += ziaBefore(n);
       html += '<article class="stop">';
       if (p.photo) html += '<img src="' + esc(p.photo) + '" alt="">';
       html += '<h2>' + n + ". " + esc(placeName(p)) + "</h2>";
@@ -377,7 +386,7 @@
     var n = 0;
     stops.forEach(function (p) {
       n += 1;
-      if (!town && p.id === "sight-zia") html += ziaBefore(n);
+      if (!town && p.id === "sight-zia" && !hidesZiaView(stops)) html += ziaBefore(n);
       html += '<article class="stop">';
       html += '<div class="stop-top">';
       if (p.photo) html += '<img src="' + esc(p.photo) + '" alt="">';
