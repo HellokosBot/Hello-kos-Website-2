@@ -7,8 +7,7 @@
   var DRIVES = ["sight-therma","sight-asklepion","sight-zia","sight-zoutmeer-tigaki","sight-kasteel-antimachia","sight-molen-antimachia","sight-agios-stefanos-kefalos","sight-limnionas"];
   var DRIVEL = ["sight-therma","sight-platani","sight-hippocratic-foundation","sight-asklepion","sight-waterval-platani","sight-haihoutes","sight-zia","sight-palio-pyli","sight-kasteel-palio-pyli","sight-tigaki","sight-zoutmeer-tigaki","sight-aquaduct-linopotas","sight-marmari","sight-mastichari","sight-kasteel-antimachia","sight-kardamena","sight-traditioneel-huis-antimachia","sight-molen-antimachia","sight-hippocrates-garden","sight-plaka","sight-kapel-agios-nikolaos","sight-agios-stefanos-kefalos","sight-cavo-paradiso","sight-limnionas"];
   var DRIVE_OPT = { "sight-hippocratic-foundation": 1, "sight-waterval-platani": 1, "sight-aquaduct-linopotas": 1, "sight-kardamena": 1, "sight-cavo-paradiso": 1 };
-  /* Old long-route checkpoints 6, 7 and 8, the mountain road before Zia. */
-  var ZIA_CPS = [{ lat: 36.863111, lon: 27.237678 }, { lat: 36.850551, lon: 27.213263 }, { lat: 36.8470935, lon: 27.2041145 }];
+  var ZIA_CPS = [{ lat: "36.8750770", lon: "27.2480940" }, { lat: "36.8631110", lon: "27.2376780" }, { lat: "36.8505510", lon: "27.2132630" }];
   var ZIA_KEY = "hk-zia-via";
   var GROUPS = ["kos","psalidi","platani","zia","pyli","tigaki","marmari","mastichari","antimachia","kefalos","limnionas"];
   var mode = null;
@@ -28,14 +27,14 @@
   function driveLongIds() {
     return DRIVEL.filter(function (id) { return !DRIVE_OPT[id]; });
   }
-  function ziaScenic() {
+  function ziaOn() {
     try { return localStorage.getItem(ZIA_KEY) === "scenic"; } catch (e) { return false; }
   }
-  function setZiaVia(mode) {
-    try { localStorage.setItem(ZIA_KEY, mode === "scenic" ? "scenic" : "direct"); } catch (e) {}
+  function toggleZia() {
+    try { localStorage.setItem(ZIA_KEY, ziaOn() ? "direct" : "scenic"); } catch (e) {}
   }
   function withZiaView(stops) {
-    if (!ziaScenic()) return stops;
+    if (!ziaOn()) return stops;
     var out = [];
     stops.forEach(function (p) {
       if (p && p.id === "sight-zia") ZIA_CPS.forEach(function (c) { out.push(c); });
@@ -43,18 +42,35 @@
     });
     return out;
   }
-  function ziaChoiceHtml() {
-    var scenic = ziaScenic();
-    var html = '<div class="zia-choice">';
-    html += '<button type="button" data-zia="direct"' + (scenic ? "" : ' class="on"') + ">" + esc(T("ziaDirect")) + "</button>";
-    html += '<button type="button" data-zia="scenic"' + (scenic ? ' class="on"' : "") + ">" + esc(T("ziaScenic")) + "</button>";
-    html += "</div>";
-    if (scenic) {
-      html += '<div class="zia-view" data-zia-block="1">';
-      html += '<img src="img/gids/route-zia-uitzicht.jpg" alt="">';
-      html += "<p>" + esc(T("ziaViewText")) + "</p>";
-      html += '<a class="open-btn" href="route-zia-uitzicht.html">' + BOOK + "<span>" + esc(T("open")) + "</span></a>";
-      html += "</div>";
+  function ziaGateCard() {
+    var on = ziaOn();
+    var html = '<article class="stop" data-zia-gate="1">';
+    html += '<img src="img/gids/route-zia-uitzicht.jpg" alt="">';
+    html += "<h2>" + esc(T("ziaTile")) + "</h2>";
+    html += '<div class="body"><p>' + esc(T("ziaTileText")) + "</p>";
+    html += '<button type="button" class="open-btn" data-zia="toggle">' + esc(on ? T("ziaRemove") : T("ziaAdd")) + "</button>";
+    html += "</div></article>";
+    return html;
+  }
+  function ziaPointCard(num, c, i) {
+    var name = T("ziaPoint").replace("{n}", String(i + 1));
+    var fake = { lat: c.lat, lon: c.lon, name: name, link: "route-zia-uitzicht.html" };
+    var html = '<article class="stop" data-zia-point="' + (i + 1) + '">';
+    html += '<img src="img/gids/route-zia-uitzicht.jpg" alt="">';
+    html += "<h2>" + esc(num) + ". " + esc(name) + "</h2>";
+    html += '<div class="body"><p>' + esc(T("ziaPointText")) + "</p>";
+    html += openBtn(fake);
+    html += buttons(fake);
+    html += "</div></article>";
+    return html;
+  }
+  function ziaBefore(n) {
+    var letters = ["a", "b", "c"];
+    var html = ziaGateCard();
+    if (ziaOn()) {
+      ZIA_CPS.forEach(function (c, i) {
+        html += ziaPointCard(n + letters[i], c, i);
+      });
     }
     return html;
   }
@@ -126,9 +142,12 @@
     var rest = stops.slice(1).map(function (p) { return encodeURIComponent(p.lat + "," + p.lon); }).join("+to:");
     return "https://maps.apple.com/?saddr=" + encodeURIComponent(stops[0].lat + "," + stops[0].lon) + "&daddr=" + rest + "&dirflg=" + (tm === "drive" ? "d" : "w");
   }
+  function hasCoord(p) {
+    return p && p.lat != null && p.lon != null && p.lat !== "" && !isNaN(Number(p.lat)) && !isNaN(Number(p.lon));
+  }
   function buttons(p) {
-    var g = typeof p.lat === "number" ? gPoint(p.lat, p.lon) : gName(p.name);
-    var a = typeof p.lat === "number" ? aPoint(p.lat, p.lon, placeName(p)) : aName(p.name);
+    var g = hasCoord(p) ? gPoint(p.lat, p.lon) : gName(p.name);
+    var a = hasCoord(p) ? aPoint(p.lat, p.lon, placeName(p) || p.name) : aName(p.name);
     return '<div class="map-row"><a href="' + esc(g) + '" target="_blank" rel="noopener">' + PIN + esc(T("gmaps")) + '</a><a href="' + esc(a) + '" target="_blank" rel="noopener">' + PIN + esc(T("iphone")) + '</a></div>';
   }
   function openBtn(p) {
@@ -146,19 +165,21 @@
   function renderWalk() {
     showRoute(WALKL, "walkOnlyNote", "walk");
   }
-  function showRoute(ids, noteKey, tm, ziaChoice) {
+  function showRoute(ids, noteKey, tm) {
     var custom = document.getElementById("customView");
     if (custom) custom.hidden = true;
     var stops = ids.map(byId).filter(Boolean);
     var mapped = stops.filter(function (p) { return typeof p.lat === "number"; });
-    var forMap = ziaChoice ? withZiaView(mapped) : mapped;
+    var forMap = tm === "drive" ? withZiaView(mapped) : mapped;
     var html = "";
-    stops.forEach(function (p, i) {
+    var n = 0;
+    stops.forEach(function (p) {
+      n += 1;
+      if (tm === "drive" && p.id === "sight-zia") html += ziaBefore(n);
       html += '<article class="stop">';
       if (p.photo) html += '<img src="' + esc(p.photo) + '" alt="">';
-      html += '<h2>' + (i + 1) + ". " + esc(placeName(p)) + "</h2>";
+      html += '<h2>' + n + ". " + esc(placeName(p)) + "</h2>";
       html += '<div class="body"><p>' + esc(stopText(p.id)) + "</p>";
-      if (ziaChoice && p.id === "sight-zia") html += ziaChoiceHtml();
       html += openBtn(p);
       html += buttons(p);
       html += "</div></article>";
@@ -266,10 +287,9 @@
   }
   function applyPreset() {
     if (!mode || mode === "custom" || !len) return;
-    var longDrive = mode === "drive" && len === "long";
     var ids = mode === "walk" ? (len === "short" ? WALKS : WALKL) : (len === "short" ? DRIVES : driveLongIds());
     var note = mode === "walk" ? (len === "short" ? "walkShortNote" : "walkLongNote") : (len === "short" ? "driveShortNote" : "driveLongNote");
-    showRoute(ids, note, mode === "drive" ? "drive" : "walk", longDrive);
+    showRoute(ids, note, mode === "drive" ? "drive" : "walk");
   }
   function fromFav() {
     openCustom();
@@ -354,16 +374,18 @@
       return;
     }
     var html = '<p class="est">' + esc(T("wishCount").replace("{n}", String(stops.length))) + "</p>";
-    stops.forEach(function (p, i) {
+    var n = 0;
+    stops.forEach(function (p) {
+      n += 1;
+      if (!town && p.id === "sight-zia") html += ziaBefore(n);
       html += '<article class="stop">';
       html += '<div class="stop-top">';
       if (p.photo) html += '<img src="' + esc(p.photo) + '" alt="">';
       else html += '<div class="ph"></div>';
       html += '<button type="button" class="drop" data-drop="' + esc(p.id) + '" aria-label="' + esc(T("wishRemove")) + '">' + TRASH + "</button>";
       html += "</div>";
-      html += "<h2>" + (i + 1) + ". " + esc(placeName(p)) + "</h2>";
+      html += "<h2>" + n + ". " + esc(placeName(p)) + "</h2>";
       html += '<div class="body"><p>' + esc(stopText(p.id)) + "</p>";
-      if (!town && p.id === "sight-zia") html += ziaChoiceHtml();
       html += openBtn(p);
       html += buttons(p);
       html += "</div></article>";
@@ -410,7 +432,7 @@
     if (driveView) driveView.addEventListener("click", function (e) {
       var via = e.target.closest("[data-zia]");
       if (!via) return;
-      setZiaVia(via.getAttribute("data-zia"));
+      toggleZia();
       applyPreset();
     });
   }
@@ -425,7 +447,7 @@
     });
     document.getElementById("routeView").addEventListener("click", function (e) {
       var via = e.target.closest("[data-zia]");
-      if (via) { setZiaVia(via.getAttribute("data-zia")); renderWish(); return; }
+      if (via) { toggleZia(); renderWish(); return; }
       var btn = e.target.closest("[data-drop]");
       if (!btn) return;
       dropWish(btn.getAttribute("data-drop"));
