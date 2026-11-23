@@ -4,8 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0D1A1A">
-<title>Kaseta Café – Hello Kos</title>
+<title>Kaseta Café Bar | Kos-stad – Hello Kos</title>
 <link rel="stylesheet" href="hello-kos.css">
+<style>
+.call-list{display:flex;flex-direction:column;gap:10px;margin:12px 0 0}
+a.call-btn{display:flex;align-items:center;gap:12px;text-decoration:none;background:linear-gradient(180deg,#3eaeae 0%,#2b7e7e 100%);color:#fff;border:0;border-radius:16px;padding:14px 16px;box-shadow:0 6px 16px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.25);cursor:pointer;box-sizing:border-box;max-width:100%}
+a.call-btn:active{transform:translateY(1px)}
+a.call-btn .ico{flex:0 0 44px;width:44px;height:44px;border-radius:14px;background:var(--gold);color:#1c1404;display:flex;align-items:center;justify-content:center}
+a.call-btn .call-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
+a.call-btn .call-main{font-weight:800;font-size:1.05rem;line-height:1.25}
+a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba(255,255,255,.9)}
+.card h3{font-size:.95rem;margin:12px 0 8px;color:var(--text)}
+.hours{margin:4px 0 8px}
+.h-row{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:.86rem;color:var(--text-soft)}
+.h-row span:last-child{font-weight:700;color:var(--text);text-align:right}
+.note{margin:8px 0 0;font-size:.86rem;color:var(--text-soft)}
+.photo{display:block;width:100%;height:auto;border-radius:14px;margin:0 0 12px}
+body.hk-page .hero-wrap.shops-hero{aspect-ratio:auto;min-height:210px;display:flex;align-items:flex-end;overflow:hidden;margin:-16px -14px 12px}
+body.hk-page .hero-wrap.shops-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%}
+body.hk-page .shops-hero-copy{position:relative;z-index:1;width:100%;box-sizing:border-box;padding:36px 16px 14px;background:linear-gradient(to top,rgba(13,26,26,.94) 0%,rgba(13,26,26,.78) 46%,rgba(13,26,26,.28) 78%,rgba(13,26,26,0) 100%)}
+body.hk-page .shops-hero h1{color:#fff;margin:0;text-shadow:0 1px 6px rgba(0,0,0,.55)}
+body.hk-page .map-row{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:stretch;gap:8px;width:100%;max-width:100%;margin:12px 0 0;box-sizing:border-box}
+body.hk-page .map-row .btn{flex:1 1 0;width:0;max-width:none;min-width:0;padding:12px 8px;font-size:.82rem}
+body.hk-page .map-row .pin{flex:0 0 16px;width:16px;height:16px}
+</style>
 </head>
 <body class="hk-page">
 <header class="app-header">
@@ -28,24 +50,163 @@
 </header>
 <div class="overlay" id="overlay"></div>
 <main class="main">
-  <div class="hero-wrap"><img src="img/hk/cocktail-kaseta-caf.jpg" alt=""></div>
-  <p class="parent-link"><a href="beste-cocktails.html" data-i18n="back">← Cocktails</a></p>
-  <h1 data-i18n="title">Kaseta Café</h1>
-  <p class="lead" data-i18n="lead">De gids zette Kaseta bij de cocktails. Het precieze adres is nog niet ingevuld.</p>
-  <div class="badges"><span class="badge" data-i18n="b0">Prijs ter plaatse</span></div>
-  <div class="actions">
-    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
-    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
-    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Kaseta%20Café%20Kos" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=Kaseta%20Café%20Kos" target="_blank" rel="noopener">Apple Maps</a>
-  </div>
-  <p class="status" id="ttsStatus"></p>
-  <div id="readText">
-    <article class="card"><h2 data-i18n="h0">Bestellen</h2><p data-i18n="p0">Vraag wat er in het glas zit als je geen alcohol wilt. Prijzen wisselen.</p></article>
-    <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.</span></div>
-  </div>
+<p class="parent-link"><a href="bars-cocktailbars.html" data-i18n="back">← Bars & cocktailbars</a></p>
+<div class="hero-wrap shops-hero">
+<img src="img/hk/kaseta-terras.jpg" alt="">
+<div class="shops-hero-copy">
+<h1 data-i18n="heroTitle">Kaseta Café Bar</h1>
+</div>
+</div>
+<article class="card">
+<h3 data-i18n="loc">Kos-stad</h3>
+<p data-i18n="p0">Direct aan de haven van Kos-stad, aan de boulevard, vind je Kaseta Café Bar. Een gezellige plek met een ruim terras en uitzicht op de haven, waar het vooral later op de dag goed toeven is met een cocktail.</p>
+<img class="photo" src="img/hk/kaseta-cocktail.jpg" alt="">
+<p data-i18n="p1">De cocktailkaart biedt een ruime keuze aan verschillende smaken en combinaties. Van verfrissende klassiekers tot fruitige cocktails en kleurrijke mixen. Met de haven op de achtergrond is het een fijne plek om rustig van een drankje te genieten, af te spreken met vrienden of de avond in Kos-stad door te brengen.</p>
+<img class="photo" src="img/hk/kaseta-cocktail-2.jpg" alt="">
+<p data-i18n="p2">Naast de cocktails kun je bij Kaseta ook terecht voor koffie, ontbijt, brunch en andere drankjes. De combinatie van de ligging aan het water, het terras en de uitgebreide drankkaart maakt het een bekende ontmoetingsplek aan de haven.</p>
+<img class="photo" src="img/hk/kaseta-cocktail-3.jpg" alt="">
+<h3 data-i18n="addrL">Adres</h3>
+<p data-i18n="addr">Akti Miaouli 4, Kos-stad</p>
+<h3 data-i18n="phoneH">Telefoon</h3>
+<div class="call-list">
+<a class="call-btn" href="tel:+302242022352"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="call-copy"><span class="call-main"><span data-i18n="call">Bel</span> +30 22420 22352</span><span class="call-sub" data-i18n="phoneL">Telefoon</span></span></a>
+</div>
+<h3 data-i18n="hoursH">Openingstijden</h3>
+<div class="hours">
+<div class="h-row"><span data-i18n="daily">Dagelijks</span><span data-i18n="hours">circa 08:00–23:45</span></div>
+</div>
+<p class="note" data-i18n="hoursNote">Openingstijden kunnen per seizoen wijzigen.</p>
+<div class="map-row">
+<a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&amp;query=36.8943447,27.2900842" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+<a class="btn btn-map" href="https://maps.apple.com/?ll=36.8943447,27.2900842&amp;q=Kaseta%20Cafe%20Bar%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+</div>
+</article>
 </main>
 <footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
-<script>window.HK_DICT = {"nl": {"title": "Kaseta Café", "lead": "De gids zette Kaseta bij de cocktails. Het precieze adres is nog niet ingevuld.", "back": "← Cocktails", "note": "Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.", "h0": "Bestellen", "p0": "Vraag wat er in het glas zit als je geen alcohol wilt. Prijzen wisselen.", "b0": "Prijs ter plaatse"}, "de": {"title": "Kaseta Café", "lead": "Der Guide setzte Kaseta bei die Cocktails. Die genaue Adresse fehlt noch.", "back": "← Cocktails", "note": "Preise und Öffnungszeiten stehen hier nicht fest, sie ändern sich. Frag vor Ort nach.", "h0": "Bestellen", "p0": "Frag, was im Glas ist, wenn du keinen Alkohol willst. Preise wechseln.", "b0": "Preis vor Ort"}, "en": {"title": "Kaseta Café", "lead": "The guide put Kaseta with the cocktails. The exact address is not filled in yet.", "back": "← Cocktails", "note": "Prices and opening hours are not fixed here: they change. Ask on the spot.", "h0": "Order", "p0": "Ask what is in the glass if you do not want alcohol. Prices change.", "b0": "Price on site"}, "it": {"title": "Kaseta Café", "lead": "La guida metteva Kaseta tra i cocktail. L’indirizzo esatto non c’è ancora.", "back": "← Cocktail", "note": "Prezzi e orari non sono fissi: cambiano. Chiedi sul posto.", "h0": "Ordinare", "p0": "Chiedi cosa c’è nel bicchiere se non vuoi alcol. I prezzi cambiano.", "b0": "Prezzo sul posto"}, "tr": {"title": "Kaseta Café", "lead": "Rehber Kaseta’yı kokteyllere koydu. Tam adres henüz yok.", "back": "← Kokteyller", "note": "Fiyat ve açılış saatleri burada sabit değil, değişir. Yerinde sorun.", "h0": "Sipariş", "p0": "Alkol istemezsen bardakta ne olduğuna sor. Fiyatlar değişir.", "b0": "Fiyat yerinde"}, "es": {"title": "Kaseta Café", "lead": "La guía ponía Kaseta entre los cócteles. La dirección exacta aún no está.", "back": "← Cócteles", "note": "Los precios y horarios no están fijos: cambian. Pregunta en el sitio.", "h0": "Pedir", "p0": "Pregunta qué lleva el vaso si no quieres alcohol. Los precios cambian.", "b0": "Precio en el sitio"}};</script>
+<script>
+window.HK_DICT = {
+  "nl": {
+    "back": "← Bars & cocktailbars",
+    "title": "Kaseta Café Bar | Kos-stad",
+    "heroTitle": "Kaseta Café Bar",
+    "loc": "Kos-stad",
+    "addrL": "Adres",
+    "addr": "Akti Miaouli 4, Kos-stad",
+    "phoneH": "Telefoon",
+    "phoneL": "Telefoon",
+    "call": "Bel",
+    "hoursH": "Openingstijden",
+    "daily": "Dagelijks",
+    "hours": "circa 08:00–23:45",
+    "hoursNote": "Openingstijden kunnen per seizoen wijzigen.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Direct aan de haven van Kos-stad, aan de boulevard, vind je Kaseta Café Bar. Een gezellige plek met een ruim terras en uitzicht op de haven, waar het vooral later op de dag goed toeven is met een cocktail.",
+    "p1": "De cocktailkaart biedt een ruime keuze aan verschillende smaken en combinaties. Van verfrissende klassiekers tot fruitige cocktails en kleurrijke mixen. Met de haven op de achtergrond is het een fijne plek om rustig van een drankje te genieten, af te spreken met vrienden of de avond in Kos-stad door te brengen.",
+    "p2": "Naast de cocktails kun je bij Kaseta ook terecht voor koffie, ontbijt, brunch en andere drankjes. De combinatie van de ligging aan het water, het terras en de uitgebreide drankkaart maakt het een bekende ontmoetingsplek aan de haven."
+  },
+  "de": {
+    "back": "← Bars & Cocktailbars",
+    "title": "Kaseta Café Bar | Kos-Stadt",
+    "heroTitle": "Kaseta Café Bar",
+    "loc": "Kos-Stadt",
+    "addrL": "Adresse",
+    "addr": "Akti Miaouli 4, Kos-Stadt",
+    "phoneH": "Telefon",
+    "phoneL": "Telefon",
+    "call": "Anrufen",
+    "hoursH": "Öffnungszeiten",
+    "daily": "Täglich",
+    "hours": "etwa 08:00–23:45",
+    "hoursNote": "Die Öffnungszeiten können sich je nach Saison ändern.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Direkt am Hafen von Kos-Stadt, an der Uferpromenade, findest du Kaseta Café Bar. Ein gemütlicher Ort mit einer großen Terrasse und Blick auf den Hafen, wo es vor allem später am Tag schön ist, einen Cocktail zu trinken.",
+    "p1": "Die Cocktailkarte bietet eine große Auswahl an verschiedenen Geschmäckern und Kombinationen. Von erfrischenden Klassikern bis zu fruchtigen Cocktails und farbenfrohen Mixen. Mit dem Hafen im Hintergrund ist es ein schöner Ort, um in Ruhe ein Getränk zu genießen, sich mit Freunden zu verabreden oder den Abend in Kos-Stadt zu verbringen.",
+    "p2": "Neben den Cocktails kannst du bei Kaseta auch für Kaffee, Frühstück, Brunch und andere Getränke vorbeikommen. Die Lage am Wasser, die Terrasse und die umfangreiche Getränkekarte machen es zu einem bekannten Treffpunkt am Hafen."
+  },
+  "en": {
+    "back": "← Bars & cocktail bars",
+    "title": "Kaseta Café Bar | Kos town",
+    "heroTitle": "Kaseta Café Bar",
+    "loc": "Kos town",
+    "addrL": "Address",
+    "addr": "Akti Miaouli 4, Kos town",
+    "phoneH": "Phone",
+    "phoneL": "Phone",
+    "call": "Call",
+    "hoursH": "Opening hours",
+    "daily": "Daily",
+    "hours": "around 08:00–23:45",
+    "hoursNote": "Opening hours can change with the season.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Right on the harbour of Kos town, on the boulevard, you find Kaseta Café Bar. A cosy place with a spacious terrace and a view of the harbour, where it is especially pleasant later in the day with a cocktail.",
+    "p1": "The cocktail menu offers a wide choice of different flavours and combinations. From refreshing classics to fruity cocktails and colourful mixes. With the harbour in the background it is a nice place to quietly enjoy a drink, meet friends or spend the evening in Kos town.",
+    "p2": "Besides the cocktails you can also come to Kaseta for coffee, breakfast, brunch and other drinks. The location by the water, the terrace and the extensive drinks menu make it a well-known meeting place on the harbour."
+  },
+  "it": {
+    "back": "← Bar e cocktail bar",
+    "title": "Kaseta Café Bar | Kos città",
+    "heroTitle": "Kaseta Café Bar",
+    "loc": "Kos città",
+    "addrL": "Indirizzo",
+    "addr": "Akti Miaouli 4, Kos città",
+    "phoneH": "Telefono",
+    "phoneL": "Telefono",
+    "call": "Chiama",
+    "hoursH": "Orari di apertura",
+    "daily": "Ogni giorno",
+    "hours": "circa 08:00–23:45",
+    "hoursNote": "Gli orari possono cambiare a seconda della stagione.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Proprio sul porto di Kos città, sul lungomare, trovi Kaseta Café Bar. Un posto accogliente con un'ampia terrazza e vista sul porto, dove soprattutto più tardi nella giornata si sta bene con un cocktail.",
+    "p1": "La carta dei cocktail offre un'ampia scelta di sapori e combinazioni. Dai classici rinfrescanti ai cocktail fruttati e ai mix colorati. Con il porto sullo sfondo è un bel posto per godersi con calma un drink, darsi appuntamento con gli amici o passare la serata a Kos città.",
+    "p2": "Oltre ai cocktail da Kaseta puoi venire anche per un caffè, la colazione, il brunch e altre bevande. La posizione sull'acqua, la terrazza e la carta delle bevande ampia ne fanno un punto di incontro conosciuto sul porto."
+  },
+  "tr": {
+    "back": "← Barlar ve kokteyl barlar",
+    "title": "Kaseta Café Bar | Kos şehir",
+    "heroTitle": "Kaseta Café Bar",
+    "loc": "Kos şehir",
+    "addrL": "Adres",
+    "addr": "Akti Miaouli 4, Kos şehir",
+    "phoneH": "Telefon",
+    "phoneL": "Telefon",
+    "call": "Ara",
+    "hoursH": "Açılış saatleri",
+    "daily": "Her gün",
+    "hours": "yaklaşık 08:00–23:45",
+    "hoursNote": "Açılış saatleri mevsime göre değişebilir.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Kos şehrin limanının hemen yanında, sahil yolunda Kaseta Café Bar'ı bulursun. Geniş bir terası ve liman manzarası olan samimi bir yer; özellikle günün ilerleyen saatlerinde bir kokteylle keyifli.",
+    "p1": "Kokteyl kartı farklı tatlar ve karışımlar için geniş bir seçenek sunar. Ferahlatıcı klasiklerden meyveli kokteyllere ve renkli karışımlara kadar. Liman arka plandayken sakin bir içkinin tadını çıkarmak, arkadaşlarınla buluşmak ya da akşamı Kos şehirde geçirmek için güzel bir yer.",
+    "p2": "Kokteyllerin yanında Kaseta'da kahve, kahvaltı, brunch ve başka içecekler için de uğrayabilirsin. Suyun kenarındaki konumu, teras ve geniş içecek kartı burayı limanda bilinen bir buluşma yeri yapar."
+  },
+  "es": {
+    "back": "← Bares y coctelerías",
+    "title": "Kaseta Café Bar | Kos ciudad",
+    "heroTitle": "Kaseta Café Bar",
+    "loc": "Kos ciudad",
+    "addrL": "Dirección",
+    "addr": "Akti Miaouli 4, Kos ciudad",
+    "phoneH": "Teléfono",
+    "phoneL": "Teléfono",
+    "call": "Llamar",
+    "hoursH": "Horario",
+    "daily": "Todos los días",
+    "hours": "sobre las 08:00–23:45",
+    "hoursNote": "El horario puede cambiar según la temporada.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Justo en el puerto de Kos ciudad, en el paseo, está Kaseta Café Bar. Un sitio acogedor con una terraza amplia y vistas al puerto, donde sobre todo más tarde en el día se está bien con un cóctel.",
+    "p1": "La carta de cócteles ofrece una amplia elección de sabores y combinaciones. Desde clásicos refrescantes hasta cócteles afrutados y mezclas coloridas. Con el puerto de fondo es un buen sitio para disfrutar tranquilo de una copa, quedar con amigos o pasar la noche en Kos ciudad.",
+    "p2": "Además de los cócteles, en Kaseta también puedes venir a tomar un café, desayunar, un brunch y otras bebidas. La ubicación junto al agua, la terraza y la carta amplia de bebidas lo convierten en un punto de encuentro conocido en el puerto."
+  }
+};
+</script>
 <script src="hello-kos-i18n.js?v=20261123r"></script>
 </body>
 </html>
