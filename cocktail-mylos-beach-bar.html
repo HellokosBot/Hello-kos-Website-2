@@ -6,6 +6,20 @@
 <meta name="theme-color" content="#0D1A1A">
 <title>Mylos Beach Bar – Hello Kos</title>
 <link rel="stylesheet" href="hello-kos.css">
+<style>
+.card h3{font-size:.95rem;margin:12px 0 8px;color:var(--text)}
+.hours{margin:4px 0 8px}
+.h-row{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:.86rem;color:var(--text-soft)}
+.h-row span:last-child{font-weight:700;color:var(--text);text-align:right}
+.photo{display:block;width:100%;height:auto;border-radius:14px;margin:0 0 12px}
+body.hk-page .hero-wrap.shops-hero{aspect-ratio:auto;min-height:210px;display:flex;align-items:flex-end;overflow:hidden;margin:-16px -14px 12px}
+body.hk-page .hero-wrap.shops-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:32% 46%}
+body.hk-page .shops-hero-copy{position:relative;z-index:1;width:100%;box-sizing:border-box;padding:36px 16px 14px;background:linear-gradient(to top,rgba(13,26,26,.94) 0%,rgba(13,26,26,.78) 46%,rgba(13,26,26,.28) 78%,rgba(13,26,26,0) 100%)}
+body.hk-page .shops-hero h1{color:#fff;margin:0;text-shadow:0 1px 6px rgba(0,0,0,.55)}
+body.hk-page .map-row{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:stretch;gap:8px;width:100%;max-width:100%;margin:12px 0 0;box-sizing:border-box}
+body.hk-page .map-row .btn{flex:1 1 0;width:0;max-width:none;min-width:0;padding:12px 8px;font-size:.82rem}
+body.hk-page .map-row .pin{flex:0 0 16px;width:16px;height:16px}
+</style>
 </head>
 <body class="hk-page">
 <header class="app-header">
@@ -28,24 +42,244 @@
 </header>
 <div class="overlay" id="overlay"></div>
 <main class="main">
-  <div class="hero-wrap"><img src="img/hk/cocktail-mylos-beach-bar.jpg" alt=""></div>
-  <p class="parent-link"><a href="beste-cocktails.html" data-i18n="back">← Cocktails</a></p>
-  <h1 data-i18n="title">Mylos Beach Bar</h1>
-  <p class="lead" data-i18n="lead">Beachbar bij Mylos, met cocktails en soms een feest. Het strand heeft een eigen pagina.</p>
-  <div class="badges"><span class="badge" data-i18n="b0">Prijs ter plaatse</span></div>
-  <div class="actions">
-    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
-    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
-    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Mylos%20Beach%20Bar%20Kos" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=Mylos%20Beach%20Bar%20Kos" target="_blank" rel="noopener">Apple Maps</a>
-  </div>
-  <p class="status" id="ttsStatus"></p>
-  <div id="readText">
-    <article class="card"><h2 data-i18n="h0">Bestellen</h2><p data-i18n="p0">Vraag wat er in het glas zit als je geen alcohol wilt. Prijzen wisselen.</p></article>
-    <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.</span></div>
-  </div>
+<p class="parent-link"><a href="bars-cocktailbars.html" data-i18n="back">← Bars & cocktailbars</a></p>
+<div class="hero-wrap shops-hero">
+<img src="img/hk/mylos-hero.jpg" alt="">
+<div class="shops-hero-copy">
+<h1 data-i18n="title">Mylos Beach Bar</h1>
+</div>
+</div>
+<article class="card">
+<h3 data-i18n="loc">Kos - Rand Centrum</h3>
+<p data-i18n="p0">Mylos Beach Bar ligt aan het strand bij Kos-stad en is een beachbar waar cocktails een belangrijk onderdeel van de kaart zijn. Overdag is het een plek voor drankjes en strandbezoek, terwijl het in de avond drukker wordt voor cocktails en muziek. De bar trekt je als toerist aan, en ook locals, door de ligging aan zee.</p>
+<img class="photo" src="img/hk/mylos-cocktail.jpg" alt="">
+<p data-i18n="p1">Wat veel mensen hier speciaal komen doen, zijn de cocktails. Ze staan bekend om hun creatieve en energizing cocktails. De mixologen maken frisse, goed gebalanceerde drankjes met mooie presentatie. Of je nu kiest voor een klassieke mojito, een sprankelende gin-tonic of een van hun signature cocktails – ze zijn meestal lekker sterk en smaakvol.</p>
+<img class="photo" src="img/hk/mylos-zon.jpg" alt="">
+<p data-i18n="p2">Mylos Beach Bar op Lambi Beach, vlakbij Kos-stad is één van de iconische spots voor stappen en feesten op het eiland.</p>
+<h3 data-i18n="hDay">Overdag</h3>
+<p data-i18n="p3">Overdag een relaxte boho-chic beach hangout met sunbeds, cocktails en chill muziek</p>
+<p data-i18n="p4">overdag chill je er met cocktails en boho-vibes op sunbeds aan het strand,</p>
+<p data-i18n="p5">De beste stranden in Kos? Bezoek zeker Mylos Beach Bar, gelegen op het idyllische Lambi Beach vlakbij Kos-stad. Een echte trendy en hippe strandtent boho-chic hotspot. Het strand bestaat uit zand en kiezelstenen. is het water helder turquoise en een heerst er een relaxte vibe.</p>
+<img class="photo" src="img/hk/mylos-ligbedden.jpg" alt="">
+<p data-i18n="p6">Overdag is het perfect voor zonnebaden, zwemmen en cocktails drinken met uitzicht op zee. 's Avonds tovert Mylos zich om tot een bruisende beach bar, waar veel locals samenkomen voor een levendige sfeer. De zaak wordt dan een echte party spot met goede muziek, chill-out beats, die overgaan in energieke sets. Er zijn regelmatig optredens van bekende DJ's, wereldberoemde namen, populaire Griekse artiesten of alternatieve bands.</p>
+<img class="photo" src="img/hk/mylos-deck.jpg" alt="">
+<img class="photo" src="img/hk/mylos-terras.jpg" alt="">
+<h3 data-i18n="hEve">'s avonds</h3>
+<p data-i18n="p7">Maar 's avonds transformeert het in een levendige lounge/club-vibe. Met ethnic chill-out beats overdag die overgaan in clubmuziek, live DJ's (internationaal en Grieks), bands en een diverse crowd van locals en van mensen die er als toerist zijn, wordt het een hotspot voor dansen onder de sterren tot in de vroege uurtjes.</p>
+<img class="photo" src="img/hk/mylos-dj.jpg" alt="">
+<img class="photo" src="img/hk/mylos-dak.jpg" alt="">
+<h3 data-i18n="hMoon">Full Moon Party</h3>
+<p data-i18n="p8">Bekend om speciale events zoals de maandelijkse Full Moon Party (de grootste beach party op Kos met bekende DJ's en bands), themafeesten en avonden vol energie. Perfect als je zin hebt in een mix van strandfeest en nachtleven zonder ver te hoeven lopen van de stad.</p>
+<img class="photo" src="img/hk/mylos-concert.jpg" alt="">
+<p data-i18n="p9">Bezoekers en locals dansen tot diep in de nacht onder de sterren, vooral tijdens speciale events, zoals de maandelijkse Full Moon Party. De grootste beach party van het eiland! lekkere bites en die unieke see-and-be-seen energie.</p>
+<img class="photo" src="img/hk/mylos-strand.jpg" alt="">
+<h3 data-i18n="hStyle">Stylish en Relaxed</h3>
+<p data-i18n="p10">De sfeer is stylish en relaxed, met fairy lights, zeezicht en een fijne mix van mensen – ideaal voor een avond die begint met cocktails bij zonsondergang en eindigt met dansen op het zand. Ga erheen als je van een unieke, party-ervaring houdt!</p>
+<img class="photo" src="img/hk/mylos-interieur.jpg" alt="">
+<img class="photo" src="img/hk/mylos-zon-wijd.jpg" alt="">
+<img class="photo" src="img/hk/mylos-avond.jpg" alt="">
+<img class="photo" src="img/hk/mylos-nacht.jpg" alt="">
+<h3 data-i18n="hoursH">Openingstijden</h3>
+<div class="hours">
+<div class="h-row"><span data-i18n="d0">Ma.</span><span>09:00–02:00</span></div>
+<div class="h-row"><span data-i18n="d1">Di.</span><span>09:00–02:00</span></div>
+<div class="h-row"><span data-i18n="d2">Woe.</span><span>09:00–02:00</span></div>
+<div class="h-row"><span data-i18n="d3">Don.</span><span>09:00–02:00</span></div>
+<div class="h-row"><span data-i18n="d4">Vrij.</span><span>09:00–02:30</span></div>
+<div class="h-row"><span data-i18n="d5">Zat.</span><span>09:00–03:00</span></div>
+<div class="h-row"><span data-i18n="d6">Zon.</span><span>10:00–01:00</span></div>
+</div>
+<div class="map-row">
+<a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&amp;query=36.9103368,27.2822905" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+<a class="btn btn-map" href="https://maps.apple.com/?ll=36.9103368,27.2822905&amp;q=Mylos%20Beach%20Bar%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+</div>
+</article>
 </main>
 <footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
-<script>window.HK_DICT = {"nl": {"title": "Mylos Beach Bar", "lead": "Beachbar bij Mylos, met cocktails en soms een feest. Het strand heeft een eigen pagina.", "back": "← Cocktails", "note": "Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.", "h0": "Bestellen", "p0": "Vraag wat er in het glas zit als je geen alcohol wilt. Prijzen wisselen.", "b0": "Prijs ter plaatse"}, "de": {"title": "Mylos Beach Bar", "lead": "Beachbar bei Mylos, mit Cocktails und manchmal einer Party. Der Strand hat eine eigene Seite.", "back": "← Cocktails", "note": "Preise und Öffnungszeiten stehen hier nicht fest, sie ändern sich. Frag vor Ort nach.", "h0": "Bestellen", "p0": "Frag, was im Glas ist, wenn du keinen Alkohol willst. Preise wechseln.", "b0": "Preis vor Ort"}, "en": {"title": "Mylos Beach Bar", "lead": "Beach bar at Mylos, with cocktails and sometimes a party. The beach has its own page.", "back": "← Cocktails", "note": "Prices and opening hours are not fixed here: they change. Ask on the spot.", "h0": "Order", "p0": "Ask what is in the glass if you do not want alcohol. Prices change.", "b0": "Price on site"}, "it": {"title": "Mylos Beach Bar", "lead": "Beach bar a Mylos, con cocktail e a volte una festa. La spiaggia ha una pagina.", "back": "← Cocktail", "note": "Prezzi e orari non sono fissi: cambiano. Chiedi sul posto.", "h0": "Ordinare", "p0": "Chiedi cosa c’è nel bicchiere se non vuoi alcol. I prezzi cambiano.", "b0": "Prezzo sul posto"}, "tr": {"title": "Mylos Beach Bar", "lead": "Mylos’ta beach bar, kokteyl ve bazen parti. Plajın sayfası var.", "back": "← Kokteyller", "note": "Fiyat ve açılış saatleri burada sabit değil, değişir. Yerinde sorun.", "h0": "Sipariş", "p0": "Alkol istemezsen bardakta ne olduğuna sor. Fiyatlar değişir.", "b0": "Fiyat yerinde"}, "es": {"title": "Mylos Beach Bar", "lead": "Beach bar en Mylos, con cócteles y a veces fiesta. La playa tiene página.", "back": "← Cócteles", "note": "Los precios y horarios no están fijos: cambian. Pregunta en el sitio.", "h0": "Pedir", "p0": "Pregunta qué lleva el vaso si no quieres alcohol. Los precios cambian.", "b0": "Precio en el sitio"}};</script>
+<script>
+window.HK_DICT = {
+  "nl": {
+    "back": "← Bars & cocktailbars",
+    "title": "Mylos Beach Bar",
+    "loc": "Kos - Rand Centrum",
+    "hDay": "Overdag",
+    "hEve": "'s avonds",
+    "hMoon": "Full Moon Party",
+    "hStyle": "Stylish en Relaxed",
+    "hoursH": "Openingstijden",
+    "d0": "Ma.",
+    "d1": "Di.",
+    "d2": "Woe.",
+    "d3": "Don.",
+    "d4": "Vrij.",
+    "d5": "Zat.",
+    "d6": "Zon.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Mylos Beach Bar ligt aan het strand bij Kos-stad en is een beachbar waar cocktails een belangrijk onderdeel van de kaart zijn. Overdag is het een plek voor drankjes en strandbezoek, terwijl het in de avond drukker wordt voor cocktails en muziek. De bar trekt je als toerist aan, en ook locals, door de ligging aan zee.",
+    "p1": "Wat veel mensen hier speciaal komen doen, zijn de cocktails. Ze staan bekend om hun creatieve en energizing cocktails. De mixologen maken frisse, goed gebalanceerde drankjes met mooie presentatie. Of je nu kiest voor een klassieke mojito, een sprankelende gin-tonic of een van hun signature cocktails – ze zijn meestal lekker sterk en smaakvol.",
+    "p2": "Mylos Beach Bar op Lambi Beach, vlakbij Kos-stad is één van de iconische spots voor stappen en feesten op het eiland.",
+    "p3": "Overdag een relaxte boho-chic beach hangout met sunbeds, cocktails en chill muziek",
+    "p4": "overdag chill je er met cocktails en boho-vibes op sunbeds aan het strand,",
+    "p5": "De beste stranden in Kos? Bezoek zeker Mylos Beach Bar, gelegen op het idyllische Lambi Beach vlakbij Kos-stad. Een echte trendy en hippe strandtent boho-chic hotspot. Het strand bestaat uit zand en kiezelstenen. is het water helder turquoise en een heerst er een relaxte vibe.",
+    "p6": "Overdag is het perfect voor zonnebaden, zwemmen en cocktails drinken met uitzicht op zee. 's Avonds tovert Mylos zich om tot een bruisende beach bar, waar veel locals samenkomen voor een levendige sfeer. De zaak wordt dan een echte party spot met goede muziek, chill-out beats, die overgaan in energieke sets. Er zijn regelmatig optredens van bekende DJ's, wereldberoemde namen, populaire Griekse artiesten of alternatieve bands.",
+    "p7": "Maar 's avonds transformeert het in een levendige lounge/club-vibe. Met ethnic chill-out beats overdag die overgaan in clubmuziek, live DJ's (internationaal en Grieks), bands en een diverse crowd van locals en van mensen die er als toerist zijn, wordt het een hotspot voor dansen onder de sterren tot in de vroege uurtjes.",
+    "p8": "Bekend om speciale events zoals de maandelijkse Full Moon Party (de grootste beach party op Kos met bekende DJ's en bands), themafeesten en avonden vol energie. Perfect als je zin hebt in een mix van strandfeest en nachtleven zonder ver te hoeven lopen van de stad.",
+    "p9": "Bezoekers en locals dansen tot diep in de nacht onder de sterren, vooral tijdens speciale events, zoals de maandelijkse Full Moon Party. De grootste beach party van het eiland! lekkere bites en die unieke see-and-be-seen energie.",
+    "p10": "De sfeer is stylish en relaxed, met fairy lights, zeezicht en een fijne mix van mensen – ideaal voor een avond die begint met cocktails bij zonsondergang en eindigt met dansen op het zand. Ga erheen als je van een unieke, party-ervaring houdt!"
+  },
+  "de": {
+    "back": "← Bars & Cocktailbars",
+    "title": "Mylos Beach Bar",
+    "loc": "Kos – Rand vom Zentrum",
+    "hDay": "Tagsüber",
+    "hEve": "Abends",
+    "hMoon": "Full Moon Party",
+    "hStyle": "Stylish en Relaxed",
+    "hoursH": "Öffnungszeiten",
+    "d0": "Mo.",
+    "d1": "Di.",
+    "d2": "Mi.",
+    "d3": "Do.",
+    "d4": "Fr.",
+    "d5": "Sa.",
+    "d6": "So.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Mylos Beach Bar liegt am Strand bei Kos-Stadt und ist eine Beachbar, bei der Cocktails ein wichtiger Teil der Karte sind. Tagsüber ist es ein Ort für Getränke und einen Strandbesuch, abends wird es voller, für Cocktails und Musik. Die Bar zieht dich als Tourist an, und auch Locals, durch die Lage am Meer.",
+    "p1": "Was viele Leute hier extra machen kommen, sind die Cocktails. Sie sind bekannt für ihre kreativen und energizing Cocktails. Die Mixologen machen frische, gut ausbalancierte Drinks mit schöner Präsentation. Ob du einen klassischen Mojito nimmst, einen spritzigen Gin Tonic oder einen ihrer Signature-Cocktails – sie sind meist richtig stark und geschmackvoll.",
+    "p2": "Mylos Beach Bar am Lambi Beach, nah bei Kos-Stadt, ist einer der ikonischen Orte zum Ausgehen und Feiern auf der Insel.",
+    "p3": "Tagsüber ein entspannter boho-chic Beach-Hangout mit Sunbeds, Cocktails und Chill-Musik",
+    "p4": "tagsüber chillst du hier mit Cocktails und Boho-Vibes auf Sunbeds am Strand,",
+    "p5": "Die besten Strände auf Kos? Besuch auf jeden Fall Mylos Beach Bar, am idyllischen Lambi Beach nah bei Kos-Stadt. Ein richtig trendiges und hippes Strandlokal, ein Boho-chic-Hotspot. Der Strand besteht aus Sand und Kieseln. ist das Wasser klar türkis und es herrscht eine entspannte Atmosphäre.",
+    "p6": "Tagsüber ist es perfekt zum Sonnenbaden, Schwimmen und Cocktails trinken mit Blick aufs Meer. Abends verwandelt sich Mylos in eine lebendige Beachbar, wo viele Locals für eine lebhafte Stimmung zusammenkommen. Der Laden wird dann ein echter Party-Spot mit guter Musik, Chill-out-Beats, die in energiegeladene Sets übergehen. Es gibt regelmäßig Auftritte bekannter DJs, weltberühmter Namen, populärer griechischer Künstler oder alternativer Bands.",
+    "p7": "Aber abends verwandelt es sich in eine lebendige Lounge-/Club-Atmosphäre. Mit ethnic Chill-out-Beats tagsüber, die in Clubmusik übergehen, Live-DJs (international und griechisch), Bands und einer bunten Menge aus Locals und Menschen, die als Tourist da sind, wird es ein Hotspot zum Tanzen unter den Sternen bis in die frühen Stunden.",
+    "p8": "Bekannt für besondere Events wie die monatliche Full Moon Party (die größte Beachparty auf Kos mit bekannten DJs und Bands), Themenfeiern und Abende voller Energie. Perfekt, wenn du Lust auf eine Mischung aus Strandfest und Nachtleben hast, ohne weit von der Stadt laufen zu müssen.",
+    "p9": "Besucher und Locals tanzen bis tief in die Nacht unter den Sternen, vor allem bei besonderen Events, wie der monatlichen Full Moon Party. Die größte Beachparty der Insel! leckere Bites und diese einzigartige See-and-be-seen-Energie.",
+    "p10": "Die Atmosphäre ist stylish und relaxed, mit Lichterketten, Meerblick und einer feinen Mischung von Menschen – ideal für einen Abend, der mit Cocktails bei Sonnenuntergang beginnt und mit Tanzen auf dem Sand endet. Geh hin, wenn du eine einzigartige Party-Erfahrung willst!"
+  },
+  "en": {
+    "back": "← Bars & cocktail bars",
+    "title": "Mylos Beach Bar",
+    "loc": "Kos – edge of the centre",
+    "hDay": "By day",
+    "hEve": "In the evening",
+    "hMoon": "Full Moon Party",
+    "hStyle": "Stylish and relaxed",
+    "hoursH": "Opening hours",
+    "d0": "Mon",
+    "d1": "Tue",
+    "d2": "Wed",
+    "d3": "Thu",
+    "d4": "Fri",
+    "d5": "Sat",
+    "d6": "Sun",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Mylos Beach Bar is on the beach by Kos town and is a beach bar where cocktails are an important part of the menu. By day it is a place for drinks and a visit to the beach, while in the evening it gets busier for cocktails and music. The bar draws you in as a tourist, and locals too, because it sits by the sea.",
+    "p1": "What a lot of people come here specially for is the cocktails. They are known for their creative and energizing cocktails. The mixologists make fresh, well-balanced drinks with a beautiful presentation. Whether you choose a classic mojito, a sparkling gin and tonic or one of their signature cocktails – they are usually nicely strong and full of flavour.",
+    "p2": "Mylos Beach Bar on Lambi Beach, close to Kos town, is one of the iconic spots for a night out and for parties on the island.",
+    "p3": "By day a relaxed boho-chic beach hangout with sunbeds, cocktails and chill music",
+    "p4": "by day you chill here with cocktails and boho vibes on sunbeds on the beach,",
+    "p5": "The best beaches on Kos? Be sure to visit Mylos Beach Bar, on the idyllic Lambi Beach close to Kos town. A real trendy and hip beach spot, a boho-chic hotspot. The beach is sand and pebbles. the water is clear turquoise and there is a relaxed vibe.",
+    "p6": "By day it is perfect for sunbathing, swimming and drinking cocktails with a view of the sea. In the evening Mylos turns into a lively beach bar, where many locals come together for a lively atmosphere. The place then becomes a real party spot with good music, chill-out beats that turn into energetic sets. There are regular performances by well-known DJs, world-famous names, popular Greek artists or alternative bands.",
+    "p7": "But in the evening it transforms into a lively lounge/club vibe. With ethnic chill-out beats by day that turn into club music, live DJs (international and Greek), bands and a diverse crowd of locals and of people who are there as a tourist, it becomes a hotspot for dancing under the stars into the early hours.",
+    "p8": "Known for special events such as the monthly Full Moon Party (the biggest beach party on Kos with well-known DJs and bands), theme parties and evenings full of energy. Perfect if you feel like a mix of a beach party and nightlife without having to walk far from town.",
+    "p9": "Visitors and locals dance deep into the night under the stars, especially during special events, such as the monthly Full Moon Party. The biggest beach party on the island! tasty bites and that unique see-and-be-seen energy.",
+    "p10": "The atmosphere is stylish and relaxed, with fairy lights, a sea view and a nice mix of people – ideal for an evening that starts with cocktails at sunset and ends with dancing on the sand. Go if you like a unique party experience!"
+  },
+  "it": {
+    "back": "← Bar e cocktail bar",
+    "title": "Mylos Beach Bar",
+    "loc": "Kos – bordo del centro",
+    "hDay": "Di giorno",
+    "hEve": "La sera",
+    "hMoon": "Full Moon Party",
+    "hStyle": "Stylish e relaxed",
+    "hoursH": "Orari",
+    "d0": "Lun",
+    "d1": "Mar",
+    "d2": "Mer",
+    "d3": "Gio",
+    "d4": "Ven",
+    "d5": "Sab",
+    "d6": "Dom",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Mylos Beach Bar è sulla spiaggia vicino alla città di Kos ed è un beach bar dove i cocktail sono una parte importante della carta. Di giorno è un posto per bere e per una visita in spiaggia, la sera si riempie per i cocktail e la musica. Il bar attira te come turista, e anche chi vive qui, per la posizione sul mare.",
+    "p1": "Quello per cui molta gente viene apposta sono i cocktail. Sono noti per i loro cocktail creativi ed energizing. I mixologist fanno drink freschi, ben bilanciati, con una bella presentazione. Che tu scelga un mojito classico, un gin tonic frizzante o uno dei loro signature cocktail – di solito sono belli forti e saporiti.",
+    "p2": "Mylos Beach Bar a Lambi Beach, vicino alla città di Kos, è uno dei posti iconici per uscire e per le feste sull’isola.",
+    "p3": "Di giorno un beach hangout rilassato boho-chic con sunbed, cocktail e musica chill",
+    "p4": "di giorno ti rilassi qui con cocktail e vibes boho sui sunbed in spiaggia,",
+    "p5": "Le spiagge migliori a Kos? Visita di sicuro Mylos Beach Bar, sull’idilliaca Lambi Beach vicino alla città di Kos. Un vero chiosco di spiaggia trendy e hip, un hotspot boho-chic. La spiaggia è di sabbia e ciottoli. l’acqua è turchese limpida e c’è un’atmosfera rilassata.",
+    "p6": "Di giorno è perfetto per prendere il sole, nuotare e bere cocktail con vista sul mare. La sera Mylos si trasforma in un beach bar vivace, dove molti del posto si incontrano per un’atmosfera animata. Il locale diventa allora un vero party spot con buona musica, chill-out beats che passano a set energici. Ci sono spesso esibizioni di DJ noti, nomi famosi nel mondo, artisti greci popolari o band alternative.",
+    "p7": "Ma la sera si trasforma in un’atmosfera lounge/club vivace. Con ethnic chill-out beats di giorno che passano a musica da club, DJ dal vivo (internazionali e greci), band e una folla diversa di gente del posto e di persone che ci sono come turista, diventa un hotspot per ballare sotto le stelle fino alle ore piccole.",
+    "p8": "Noto per eventi speciali come la Full Moon Party mensile (la beach party più grande di Kos con DJ e band noti), feste a tema e serate piene di energia. Perfetto se ti va un mix di festa in spiaggia e vita notturna senza dover camminare lontano dalla città.",
+    "p9": "Visitatori e gente del posto ballano fino a notte fonda sotto le stelle, soprattutto durante eventi speciali, come la Full Moon Party mensile. La beach party più grande dell’isola! bocconi buoni e quell’energia unica da see-and-be-seen.",
+    "p10": "L’atmosfera è stylish e relaxed, con lucine, vista mare e un bel mix di persone – ideale per una sera che inizia con cocktail al tramonto e finisce ballando sulla sabbia. Vacci se ti piace un’esperienza di festa unica!"
+  },
+  "tr": {
+    "back": "← Barlar ve kokteyl barlar",
+    "title": "Mylos Beach Bar",
+    "loc": "Kos – merkezin kıyısı",
+    "hDay": "Gündüz",
+    "hEve": "Akşam",
+    "hMoon": "Full Moon Party",
+    "hStyle": "Stylish ve rahat",
+    "hoursH": "Açılış saatleri",
+    "d0": "Pzt",
+    "d1": "Sal",
+    "d2": "Çar",
+    "d3": "Per",
+    "d4": "Cum",
+    "d5": "Cmt",
+    "d6": "Paz",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Mylos Beach Bar, Kos kentinin yanındaki sahildedir ve kokteyllerin menünün önemli bir parçası olduğu bir beach bardır. Gündüz içecek ve sahil için bir yerdir, akşam kokteyl ve müzik için daha kalabalık olur. Bar, deniz kenarındaki yeriyle seni turist olarak çeker, burada yaşayanları da.",
+    "p1": "Birçok kişinin buraya özellikle geldiği şey kokteyllerdir. Yaratıcı ve energizing kokteylleriyle bilinirler. Miksologlar taze, dengeli, güzel sunumlu içkiler yapar. Klasik bir mojito, köpüklü bir cin-tonik ya da imza kokteyllerinden birini seçsen de, çoğu zaman güzel güçlü ve lezzetlidirler.",
+    "p2": "Lambi Beach’te, Kos kentine yakın Mylos Beach Bar, adada çıkmak ve eğlenmek için ikonik yerlerden biridir.",
+    "p3": "Gündüz sunbed’ler, kokteyller ve chill müzikle rahat bir boho-chic beach hangout",
+    "p4": "gündüz sahilde sunbed’lerde kokteyl ve boho vibe ile takılırsın,",
+    "p5": "Kos’taki en iyi sahiller? Mutlaka Mylos Beach Bar’a uğra, Kos kentine yakın çok güzel Lambi Beach’te. Gerçekten trend ve hip bir sahil mekanı, boho-chic bir buluşma noktası. Sahil kum ve çakıldan oluşur. su berrak turkuazdır ve rahat bir hava vardır.",
+    "p6": "Gündüz güneşlenmek, yüzmek ve denize karşı kokteyl içmek için birebirdir. Akşam Mylos canlı bir beach bara dönüşür; burada yaşayanların çoğu canlı bir hava için toplanır. Mekan o zaman iyi müzik, chill-out beat’lerden enerjik setlere geçen gerçek bir parti noktası olur. Tanınmış DJ’ler, dünyaca ünlü isimler, popüler Yunan sanatçılar ya da alternatif gruplar düzenli olarak çıkar.",
+    "p7": "Ama akşam canlı bir lounge/kulüp havasına dönüşür. Gündüzün ethnic chill-out beat’leri kulüp müziğine geçer, canlı DJ’ler (uluslararası ve Yunan), gruplar ve burada yaşayanlarla turist olarak gelenlerden oluşan karışık bir kalabalıkla, yıldızların altında sabahın ilk saatlerine kadar dans için bir buluşma noktası olur.",
+    "p8": "Aylık Full Moon Party (tanınmış DJ’ler ve gruplarla Kos’taki en büyük beach party), tema geceleri ve enerji dolu akşamlar gibi özel etkinliklerle bilinir. Kentten uzağa yürümeden sahil partisi ile gece hayatını bir arada istiyorsan birebir.",
+    "p9": "Gelenler ve burada yaşayanlar yıldızların altında gecenin içine kadar dans eder, özellikle aylık Full Moon Party gibi özel etkinliklerde. Adanın en büyük beach party’si! lezzetli atıştırmalıklar ve o kendine özgü see-and-be-seen enerjisi.",
+    "p10": "Hava stylish ve rahattır, peri ışıkları, deniz manzarası ve hoş bir insan karışımı vardır – gün batımında kokteylle başlayıp kumda dansla biten bir akşam için ideal. Eşsiz bir parti deneyimi istiyorsan git!"
+  },
+  "es": {
+    "back": "← Bares y coctelerías",
+    "title": "Mylos Beach Bar",
+    "loc": "Kos – borde del centro",
+    "hDay": "De día",
+    "hEve": "Por la noche",
+    "hMoon": "Full Moon Party",
+    "hStyle": "Stylish y relajado",
+    "hoursH": "Horario",
+    "d0": "Lun",
+    "d1": "Mar",
+    "d2": "Mié",
+    "d3": "Jue",
+    "d4": "Vie",
+    "d5": "Sáb",
+    "d6": "Dom",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Mylos Beach Bar está en la playa junto a la ciudad de Kos y es un beach bar donde los cócteles son una parte importante de la carta. De día es un sitio para bebidas y una visita a la playa, y por la noche se llena más para cócteles y música. El bar te atrae como turista, y también a quien vive aquí, por estar junto al mar.",
+    "p1": "Lo que mucha gente viene a hacer aquí a propósito son los cócteles. Son conocidos por sus cócteles creativos y energizing. Los mixólogos hacen bebidas frescas, bien equilibradas, con una presentación bonita. Tanto si eliges un mojito clásico, un gin-tonic con burbujas o uno de sus cócteles de la casa, suelen estar bien fuertes y sabrosos.",
+    "p2": "Mylos Beach Bar en Lambi Beach, cerca de la ciudad de Kos, es uno de los sitios icónicos para salir y para las fiestas en la isla.",
+    "p3": "De día un beach hangout relajado boho-chic con sunbeds, cócteles y música chill",
+    "p4": "de día te quedas aquí con cócteles y vibras boho en sunbeds en la playa,",
+    "p5": "¿Las mejores playas de Kos? Visita sin falta Mylos Beach Bar, en la idílica Lambi Beach cerca de la ciudad de Kos. Un chiringuito de verdad trendy y hip, un hotspot boho-chic. La playa es de arena y guijarros. el agua es turquesa clara y hay un ambiente relajado.",
+    "p6": "De día es perfecto para tomar el sol, nadar y beber cócteles con vistas al mar. Por la noche Mylos se convierte en un beach bar animado, donde se junta mucha gente de aquí para un ambiente vivo. El local se vuelve entonces un auténtico punto de fiesta con buena música, chill-out beats que pasan a sets enérgicos. Hay actuaciones regulares de DJ conocidos, nombres mundialmente famosos, artistas griegos populares o bandas alternativas.",
+    "p7": "Pero por la noche se transforma en un ambiente lounge/club animado. Con ethnic chill-out beats de día que pasan a música de club, DJ en directo (internacionales y griegos), bandas y un público variado de gente de aquí y de personas que están como turista, se vuelve un punto de encuentro para bailar bajo las estrellas hasta las primeras horas.",
+    "p8": "Conocido por eventos especiales como la Full Moon Party mensual (la beach party más grande de Kos con DJ y bandas conocidos), fiestas temáticas y noches llenas de energía. Perfecto si te apetece una mezcla de fiesta de playa y vida nocturna sin tener que caminar lejos de la ciudad.",
+    "p9": "Quien visita y la gente de aquí bailan hasta bien entrada la noche bajo las estrellas, sobre todo en eventos especiales, como la Full Moon Party mensual. ¡La beach party más grande de la isla! bocados ricos y esa energía única de see-and-be-seen.",
+    "p10": "El ambiente es stylish y relaxed, con luces de hadas, vista al mar y una mezcla agradable de gente: ideal para una noche que empieza con cócteles al atardecer y acaba bailando en la arena. Ve si te gusta una experiencia de fiesta única."
+  }
+};
+</script>
 <script src="hello-kos-i18n.js?v=20261123r"></script>
 </body>
 </html>
