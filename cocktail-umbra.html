@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Umbra Café & Cocktail Bar | Kos-stad – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+<style>
+.call-list{display:flex;flex-direction:column;gap:10px;margin:12px 0 0}
+a.call-btn{display:flex;align-items:center;gap:12px;text-decoration:none;background:linear-gradient(180deg,#3eaeae 0%,#2b7e7e 100%);color:#fff;border:0;border-radius:16px;padding:14px 16px;box-shadow:0 6px 16px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.25);cursor:pointer;box-sizing:border-box;max-width:100%}
+a.call-btn:active{transform:translateY(1px)}
+a.call-btn .ico{flex:0 0 44px;width:44px;height:44px;border-radius:14px;background:var(--gold);color:#1c1404;display:flex;align-items:center;justify-content:center}
+a.call-btn .call-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
+a.call-btn .call-main{font-weight:800;font-size:1.05rem;line-height:1.25}
+a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba(255,255,255,.9)}
+.card h3{font-size:.95rem;margin:12px 0 8px;color:var(--text)}
+.hours{margin:4px 0 8px}
+.h-row{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:.86rem;color:var(--text-soft)}
+.h-row span:last-child{font-weight:700;color:var(--text);text-align:right}
+.note{margin:8px 0 0;font-size:.86rem;color:var(--text-soft)}
+.photo{display:block;width:100%;height:auto;border-radius:14px;margin:0 0 12px}
+body.hk-page .hero-wrap.shops-hero{aspect-ratio:auto;min-height:210px;display:flex;align-items:flex-end;overflow:hidden;margin:-16px -14px 12px}
+body.hk-page .hero-wrap.shops-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%}
+body.hk-page .shops-hero-copy{position:relative;z-index:1;width:100%;box-sizing:border-box;padding:36px 16px 14px;background:linear-gradient(to top,rgba(13,26,26,.94) 0%,rgba(13,26,26,.78) 46%,rgba(13,26,26,.28) 78%,rgba(13,26,26,0) 100%)}
+body.hk-page .shops-hero h1{color:#fff;margin:0;text-shadow:0 1px 6px rgba(0,0,0,.55)}
+body.hk-page .map-row{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:stretch;gap:8px;width:100%;max-width:100%;margin:12px 0 0;box-sizing:border-box}
+body.hk-page .map-row .btn{flex:1 1 0;width:0;max-width:none;min-width:0;padding:12px 8px;font-size:.82rem}
+body.hk-page .map-row .pin{flex:0 0 16px;width:16px;height:16px}
+</style>
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+<p class="parent-link"><a href="bars-cocktailbars.html" data-i18n="back">← Bars & cocktailbars</a></p>
+<div class="hero-wrap shops-hero">
+<img src="img/hk/umbra-terras.jpg" alt="">
+<div class="shops-hero-copy">
+<h1 data-i18n="heroTitle">Umbra Café & Cocktail Bar</h1>
+</div>
+</div>
+<article class="card">
+<h3 data-i18n="loc">Kos-stad</h3>
+<p data-i18n="p0">Midden in het centrum van Kos-stad vind je Umbra Café & Cocktail Bar, een all-day café waar je overdag terechtkunt voor koffie, brunch of een hapje eten en waar het later op de dag tijd is voor een drankje of cocktail.</p>
+<p data-i18n="pOut">Het leven bij Umbra speelt zich vooral buiten af, op het terras.</p>
+<img class="photo" src="img/hk/umbra-drank.jpg" alt="">
+<p data-i18n="p1">Umbra is niet alleen populair bij toeristen, maar ook bij veel lokale inwoners van Kos, wat zorgt voor een gezellige, levendige sfeer. Op de cocktailkaart staan verschillende cocktails, van bekende klassiekers tot kleurrijke en fruitige varianten. Een leuke plek om met vrienden af te spreken, even bij te praten of je avond in Kos-stad te beginnen.</p>
+<img class="photo" src="img/hk/umbra-bar.jpg" alt="">
+<p data-i18n="p2">In het weekend is er af en toe een DJ, waardoor de sfeer net wat extra's krijgt, zonder dat het meteen een nachtclub wordt. Door de centrale ligging is Umbra bovendien een mooie tussenstop tijdens een avondje uit in het centrum.</p>
+<h3 data-i18n="addrL">Adres</h3>
+<p data-i18n="addr">Vasileos Pavlou 15A, Kos-stad</p>
+<h3 data-i18n="phoneH">Telefoon</h3>
+<div class="call-list">
+<a class="call-btn" href="tel:+302242029249"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="call-copy"><span class="call-main"><span data-i18n="call">Bel</span> +30 22420 29249</span><span class="call-sub" data-i18n="phoneL">Telefoon</span></span></a>
+</div>
+<h3 data-i18n="hoursH">Openingstijden</h3>
+<div class="hours">
+<div class="h-row"><span data-i18n="daily">Dagelijks</span><span>07:00–02:00</span></div>
+</div>
+<p class="note" data-i18n="hoursNote">Openingstijden kunnen seizoensgebonden wijzigen.</p>
+<div class="map-row">
+<a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&amp;query=36.892614,27.289002&amp;query_place_id=ChIJab7U67MPvhQRBmDd1M3_aaY" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+<a class="btn btn-map" href="https://maps.apple.com/?ll=36.892614,27.289002&amp;q=Umbra%20Cafe%20%26%20Cocktail%20Bar%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+</div>
+</article>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>
+window.HK_DICT = {
+  "nl": {
+    "back": "← Bars & cocktailbars",
+    "title": "Umbra Café & Cocktail Bar | Kos-stad",
+    "heroTitle": "Umbra Café & Cocktail Bar",
+    "loc": "Kos-stad",
+    "addrL": "Adres",
+    "addr": "Vasileos Pavlou 15A, Kos-stad",
+    "phoneH": "Telefoon",
+    "phoneL": "Telefoon",
+    "call": "Bel",
+    "hoursH": "Openingstijden",
+    "daily": "Dagelijks",
+    "hoursNote": "Openingstijden kunnen seizoensgebonden wijzigen.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Midden in het centrum van Kos-stad vind je Umbra Café & Cocktail Bar, een all-day café waar je overdag terechtkunt voor koffie, brunch of een hapje eten en waar het later op de dag tijd is voor een drankje of cocktail.",
+    "pOut": "Het leven bij Umbra speelt zich vooral buiten af, op het terras.",
+    "p1": "Umbra is niet alleen populair bij toeristen, maar ook bij veel lokale inwoners van Kos, wat zorgt voor een gezellige, levendige sfeer. Op de cocktailkaart staan verschillende cocktails, van bekende klassiekers tot kleurrijke en fruitige varianten. Een leuke plek om met vrienden af te spreken, even bij te praten of je avond in Kos-stad te beginnen.",
+    "p2": "In het weekend is er af en toe een DJ, waardoor de sfeer net wat extra's krijgt, zonder dat het meteen een nachtclub wordt. Door de centrale ligging is Umbra bovendien een mooie tussenstop tijdens een avondje uit in het centrum."
+  },
+  "de": {
+    "back": "← Bars & Cocktailbars",
+    "title": "Umbra Café & Cocktail Bar | Kos-Stadt",
+    "heroTitle": "Umbra Café & Cocktail Bar",
+    "loc": "Kos-Stadt",
+    "addrL": "Adresse",
+    "addr": "Vasileos Pavlou 15A, Kos-Stadt",
+    "phoneH": "Telefon",
+    "phoneL": "Telefon",
+    "call": "Anrufen",
+    "hoursH": "Öffnungszeiten",
+    "daily": "Täglich",
+    "hoursNote": "Die Öffnungszeiten können sich je nach Saison ändern.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Mitten im Zentrum von Kos-Stadt findest du Umbra Café & Cocktail Bar, ein All-day-Café, wo du tagsüber für Kaffee, Brunch oder einen kleinen Happen essen kannst und wo es später am Tag Zeit für ein Getränk oder einen Cocktail ist.",
+    "pOut": "Das Leben bei Umbra spielt sich vor allem draußen ab, auf der Terrasse.",
+    "p1": "Umbra ist nicht nur bei Touristen beliebt, sondern auch bei vielen Einwohnern von Kos, was für eine gesellige, lebhafte Atmosphäre sorgt. Auf der Cocktailkarte stehen verschiedene Cocktails, von bekannten Klassikern bis zu farbenfrohen und fruchtigen Varianten. Ein schöner Ort, um sich mit Freunden zu verabreden, kurz zu plaudern oder deinen Abend in Kos-Stadt zu beginnen.",
+    "p2": "Am Wochenende ist ab und zu ein DJ da, wodurch die Stimmung etwas extra bekommt, ohne dass es gleich ein Nachtclub wird. Durch die zentrale Lage ist Umbra außerdem ein schöner Zwischenstopp bei einem Abend in der Innenstadt."
+  },
+  "en": {
+    "back": "← Bars & cocktail bars",
+    "title": "Umbra Café & Cocktail Bar | Kos town",
+    "heroTitle": "Umbra Café & Cocktail Bar",
+    "loc": "Kos town",
+    "addrL": "Address",
+    "addr": "Vasileos Pavlou 15A, Kos town",
+    "phoneH": "Phone",
+    "phoneL": "Phone",
+    "call": "Call",
+    "hoursH": "Opening hours",
+    "daily": "Daily",
+    "hoursNote": "Opening hours can change with the season.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "In the centre of Kos town you find Umbra Café & Cocktail Bar, an all-day café where during the day you can come for coffee, brunch or a bite to eat, and later in the day it is time for a drink or a cocktail.",
+    "pOut": "Life at Umbra mainly takes place outside, on the terrace.",
+    "p1": "Umbra is popular not only with tourists, but also with many local residents of Kos, which makes for a cosy, lively atmosphere. The cocktail menu has various cocktails, from well-known classics to colourful and fruity ones. A nice place to meet friends, catch up or start your evening in Kos town.",
+    "p2": "At the weekend there is a DJ now and then, which gives the atmosphere a little extra, without it immediately becoming a nightclub. Because of the central location, Umbra is also a good stop during a night out in the centre."
+  },
+  "it": {
+    "back": "← Bar e cocktail bar",
+    "title": "Umbra Café & Cocktail Bar | Kos città",
+    "heroTitle": "Umbra Café & Cocktail Bar",
+    "loc": "Kos città",
+    "addrL": "Indirizzo",
+    "addr": "Vasileos Pavlou 15A, Kos città",
+    "phoneH": "Telefono",
+    "phoneL": "Telefono",
+    "call": "Chiama",
+    "hoursH": "Orari di apertura",
+    "daily": "Ogni giorno",
+    "hoursNote": "Gli orari possono cambiare a seconda della stagione.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Nel centro di Kos città trovi Umbra Café & Cocktail Bar, un café all-day dove di giorno puoi venire per un caffè, un brunch o un boccone, e più tardi nella giornata è il momento di un drink o di un cocktail.",
+    "pOut": "La vita da Umbra si svolge soprattutto fuori, sulla terrazza.",
+    "p1": "Umbra non è popolare solo tra i turisti, ma anche tra molti abitanti di Kos, e questo crea un'atmosfera conviviale e vivace. Sulla carta dei cocktail ci sono vari cocktail, dai classici conosciuti alle varianti colorate e fruttate. Un bel posto per darsi appuntamento con gli amici, fare due chiacchiere o iniziare la serata a Kos città.",
+    "p2": "Nel weekend ogni tanto c'è un DJ, e l'atmosfera prende qualcosa in più, senza diventare subito una discoteca. Grazie alla posizione centrale, Umbra è anche una bella tappa durante una serata in centro."
+  },
+  "tr": {
+    "back": "← Barlar ve kokteyl barlar",
+    "title": "Umbra Café & Cocktail Bar | Kos şehir",
+    "heroTitle": "Umbra Café & Cocktail Bar",
+    "loc": "Kos şehir",
+    "addrL": "Adres",
+    "addr": "Vasileos Pavlou 15A, Kos şehir",
+    "phoneH": "Telefon",
+    "phoneL": "Telefon",
+    "call": "Ara",
+    "hoursH": "Açılış saatleri",
+    "daily": "Her gün",
+    "hoursNote": "Açılış saatleri mevsime göre değişebilir.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Kos şehrin tam merkezinde Umbra Café & Cocktail Bar'ı bulursun: gündüz kahve, brunch ya da bir şeyler yemek için uğrayabileceğin, günün ilerleyen saatlerinde ise bir içki ya da kokteyl zamanı olan tüm gün açık bir kafe.",
+    "pOut": "Umbra'da hayat çoğunlukla dışarıda, terasta geçer.",
+    "p1": "Umbra yalnızca turistler arasında değil, Kos'un birçok yerli sakini arasında da popülerdir; bu da samimi, canlı bir hava yaratır. Kokteyl kartında bilinen klasiklerden renkli ve meyveli çeşitlere kadar çeşitli kokteyller vardır. Arkadaşlarınla buluşmak, biraz sohbet etmek ya da Kos şehirde akşamına başlamak için güzel bir yer.",
+    "p2": "Hafta sonu ara sıra bir DJ olur; hava biraz daha canlanır, ama mekan hemen bir gece kulübüne dönüşmez. Merkezi konumu sayesinde Umbra, merkezde bir akşam çıkışında güzel bir ara duraktır."
+  },
+  "es": {
+    "back": "← Bares y coctelerías",
+    "title": "Umbra Café & Cocktail Bar | Kos ciudad",
+    "heroTitle": "Umbra Café & Cocktail Bar",
+    "loc": "Kos ciudad",
+    "addrL": "Dirección",
+    "addr": "Vasileos Pavlou 15A, Kos ciudad",
+    "phoneH": "Teléfono",
+    "phoneL": "Teléfono",
+    "call": "Llamar",
+    "hoursH": "Horario",
+    "daily": "Todos los días",
+    "hoursNote": "El horario puede cambiar según la temporada.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "En pleno centro de Kos ciudad está Umbra Café & Cocktail Bar, un café all-day donde de día puedes venir a tomar un café, un brunch o un bocado, y más tarde es el momento de una copa o un cóctel.",
+    "pOut": "La vida en Umbra transcurre sobre todo fuera, en la terraza.",
+    "p1": "Umbra no solo es popular entre los turistas, sino también entre muchos habitantes de Kos, lo que crea un ambiente acogedor y animado. En la carta de cócteles hay varios cócteles, desde clásicos conocidos hasta variantes coloridas y afrutadas. Un buen sitio para quedar con amigos, charlar un rato o empezar la noche en Kos ciudad.",
+    "p2": "El fin de semana hay de vez en cuando un DJ, y el ambiente gana un poco más, sin convertirse enseguida en una discoteca. Por su ubicación céntrica, Umbra es además una buena parada durante una noche por el centro."
+  }
+};
+</script>
+<script src="hello-kos-i18n.js?v=20261123r"></script>
+</body>
+</html>
