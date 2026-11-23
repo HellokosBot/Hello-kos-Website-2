@@ -77,7 +77,7 @@
     var fake = { lat: c.lat, lon: c.lon, name: name, link: "route-zia-uitzicht.html" };
     var html = '<article class="stop" data-zia-point="' + (i + 1) + '">';
     html += '<img src="img/gids/route-zia-uitzicht.jpg" alt="">';
-    html += "<h2>" + esc(num) + ". " + esc(name) + "</h2>";
+    html += "<h2>" + (num ? esc(num) + ". " : "") + esc(name) + "</h2>";
     html += '<div class="body"><p>' + esc(T("ziaPointText")) + "</p>";
     html += openBtn(fake);
     html += buttons(fake);
@@ -279,6 +279,8 @@
   }
 
   var wishMode = null;
+  /* Eigen rijroute only. Starts folded and not in the route on every page open. */
+  var eigenZia = "shut";
   var TRASH = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 3h6l1 2h5v2H3V5h5l1-2zm1 6h2v9h-2V9zm4 0h2v9h-2V9zM6 9h2v9H6V9zm-1 12h14l1-12H4l1 12z"/></svg>';
   function onList(id, list) {
     for (var i = 0; i < list.length; i++) if (list[i] === id) return true;
@@ -341,7 +343,7 @@
     var n = 0;
     stops.forEach(function (p) {
       n += 1;
-      if (!town && p.id === "sight-zia" && !hidesZiaView(stops)) html += ziaBefore(n);
+      if (!town && p.id === "sight-zia" && !hidesZiaView(stops)) html += ziaEigen(n);
       html += '<article class="stop">';
       html += '<div class="stop-top">';
       if (p.photo) html += '<img src="' + esc(p.photo) + '" alt="">';
@@ -357,6 +359,23 @@
     view.innerHTML = html;
     view.setAttribute("data-stops", String(stops.length));
     view.setAttribute("data-mode", wishMode);
+  }
+  function ziaBar(open) {
+    return '<button type="button" class="zia-bar" data-zia="fold" aria-expanded="' + (open ? "true" : "false") + '"><span>' + esc(T("ziaTile")) + '</span><span class="zia-arrow" aria-hidden="true">' + (open ? "▴" : "▾") + "</span></button>";
+  }
+  function ziaEigen(n) {
+    if (eigenZia === "shut") return ziaBar(false);
+    var letters = ["a", "b", "c"];
+    var added = eigenZia === "in";
+    var html = '<section class="zia-group" data-zia-group="1"' + (added ? ' data-zia-in="1"' : ' data-zia-preview="1"') + ">";
+    if (added) html += '<p class="zia-label">' + esc(T("ziaTile")) + "</p>";
+    else html += ziaBar(true) + '<p class="zia-note">' + esc(T("ziaPreview")) + "</p>";
+    ZIA_CPS.forEach(function (c, i) {
+      html += ziaPointCard(added ? n + letters[i] : "", c, i);
+    });
+    html += '<button type="button" class="open-btn zia-act" data-zia="' + (added ? "remove" : "add") + '">' + esc(added ? T("ziaRemove") : T("ziaMine")) + "</button>";
+    html += "</section>";
+    return html;
   }
   function dropWish(id) {
     if (window.HKFav && HKFav.remove) HKFav.remove(id);
@@ -395,7 +414,14 @@
     });
     document.getElementById("routeView").addEventListener("click", function (e) {
       var via = e.target.closest("[data-zia]");
-      if (via) { toggleZia(); renderWish(); return; }
+      if (via) {
+        var act = via.getAttribute("data-zia");
+        if (act === "fold") eigenZia = eigenZia === "open" ? "shut" : "open";
+        else if (act === "add") eigenZia = "in";
+        else if (act === "remove") eigenZia = "shut";
+        renderWish();
+        return;
+      }
       var btn = e.target.closest("[data-drop]");
       if (!btn) return;
       dropWish(btn.getAttribute("data-drop"));
