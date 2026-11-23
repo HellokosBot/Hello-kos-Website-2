@@ -5,7 +5,11 @@
   var WALKL = ["sight-witte-trappen","sight-i-love-kos","sight-palm-tree-lane","vlag-hijsen","sight-palazzo-giustizia","sight-turks-badhuis","sight-boom-hippocrates","sight-gazi-hasan","sight-neratzia","sight-albergo-gelsomino","sight-kathedraal","sight-hatzi-pasha","sight-agora","sight-belastingpoort","sight-archeologisch-museum","sight-casa-del-fascio","sight-defterdar","sight-markthal","sight-paraskevi","sight-old-town","sight-morouk","sight-eski-tzami","sight-katholieke-kerk","sight-odeon","sight-westelijke-opgraving","sight-casa-romana","sight-altaar-dionysos"];
   var WALKS = ["sight-witte-trappen","sight-i-love-kos","sight-palm-tree-lane","sight-palazzo-giustizia","sight-turks-badhuis","sight-boom-hippocrates","sight-gazi-hasan","sight-neratzia"];
   var DRIVES = ["sight-therma","sight-asklepion","sight-zia","sight-zoutmeer-tigaki","sight-kasteel-antimachia","sight-molen-antimachia","sight-agios-stefanos-kefalos","sight-limnionas"];
-  var DRIVEL = ["sight-therma","sight-platani","sight-asklepion","sight-waterval-platani","sight-haihoutes","sight-hippocratic-foundation","sight-zia","sight-palio-pyli","sight-kasteel-palio-pyli","sight-tigaki","sight-zoutmeer-tigaki","sight-aquaduct-linopotas","sight-marmari","sight-mastichari","sight-kasteel-antimachia","sight-kardamena","sight-traditioneel-huis-antimachia","sight-molen-antimachia","sight-hippocrates-garden","sight-plaka","sight-kapel-agios-nikolaos","sight-agios-stefanos-kefalos","sight-cavo-paradiso","sight-limnionas"];
+  var DRIVEL = ["sight-therma","sight-platani","sight-hippocratic-foundation","sight-asklepion","sight-waterval-platani","sight-haihoutes","sight-zia","sight-palio-pyli","sight-kasteel-palio-pyli","sight-tigaki","sight-zoutmeer-tigaki","sight-aquaduct-linopotas","sight-marmari","sight-mastichari","sight-kasteel-antimachia","sight-kardamena","sight-traditioneel-huis-antimachia","sight-molen-antimachia","sight-hippocrates-garden","sight-plaka","sight-kapel-agios-nikolaos","sight-agios-stefanos-kefalos","sight-cavo-paradiso","sight-limnionas"];
+  var DRIVE_OPT = { "sight-hippocratic-foundation": 1, "sight-waterval-platani": 1, "sight-aquaduct-linopotas": 1, "sight-kardamena": 1, "sight-cavo-paradiso": 1 };
+  /* Old long-route checkpoints 6, 7 and 8, the mountain road before Zia. */
+  var ZIA_CPS = [{ lat: 36.863111, lon: 27.237678 }, { lat: 36.850551, lon: 27.213263 }, { lat: 36.8470935, lon: 27.2041145 }];
+  var ZIA_KEY = "hk-zia-via";
   var GROUPS = ["kos","psalidi","platani","zia","pyli","tigaki","marmari","mastichari","antimachia","kefalos","limnionas"];
   var mode = null;
   var len = null;
@@ -20,6 +24,39 @@
   function placeName(p) {
     var pack = (window.HK_NAMES && HK_NAMES[lang()]) || {};
     return (p && pack[p.id]) || (p && p.name) || "";
+  }
+  function driveLongIds() {
+    return DRIVEL.filter(function (id) { return !DRIVE_OPT[id]; });
+  }
+  function ziaScenic() {
+    try { return localStorage.getItem(ZIA_KEY) === "scenic"; } catch (e) { return false; }
+  }
+  function setZiaVia(mode) {
+    try { localStorage.setItem(ZIA_KEY, mode === "scenic" ? "scenic" : "direct"); } catch (e) {}
+  }
+  function withZiaView(stops) {
+    if (!ziaScenic()) return stops;
+    var out = [];
+    stops.forEach(function (p) {
+      if (p && p.id === "sight-zia") ZIA_CPS.forEach(function (c) { out.push(c); });
+      out.push(p);
+    });
+    return out;
+  }
+  function ziaChoiceHtml() {
+    var scenic = ziaScenic();
+    var html = '<div class="zia-choice">';
+    html += '<button type="button" data-zia="direct"' + (scenic ? "" : ' class="on"') + ">" + esc(T("ziaDirect")) + "</button>";
+    html += '<button type="button" data-zia="scenic"' + (scenic ? ' class="on"' : "") + ">" + esc(T("ziaScenic")) + "</button>";
+    html += "</div>";
+    if (scenic) {
+      html += '<div class="zia-view" data-zia-block="1">';
+      html += '<img src="img/gids/route-zia-uitzicht.jpg" alt="">';
+      html += "<p>" + esc(T("ziaViewText")) + "</p>";
+      html += '<a class="open-btn" href="route-zia-uitzicht.html">' + BOOK + "<span>" + esc(T("open")) + "</span></a>";
+      html += "</div>";
+    }
+    return html;
   }
   function T(key) {
     var pack = (window.HK_DICT && window.HK_DICT[lang()]) || {};
@@ -109,24 +146,26 @@
   function renderWalk() {
     showRoute(WALKL, "walkOnlyNote", "walk");
   }
-  function showRoute(ids, noteKey, tm) {
+  function showRoute(ids, noteKey, tm, ziaChoice) {
     var custom = document.getElementById("customView");
     if (custom) custom.hidden = true;
     var stops = ids.map(byId).filter(Boolean);
     var mapped = stops.filter(function (p) { return typeof p.lat === "number"; });
+    var forMap = ziaChoice ? withZiaView(mapped) : mapped;
     var html = "";
     stops.forEach(function (p, i) {
       html += '<article class="stop">';
       if (p.photo) html += '<img src="' + esc(p.photo) + '" alt="">';
       html += '<h2>' + (i + 1) + ". " + esc(placeName(p)) + "</h2>";
       html += '<div class="body"><p>' + esc(stopText(p.id)) + "</p>";
+      if (ziaChoice && p.id === "sight-zia") html += ziaChoiceHtml();
       html += openBtn(p);
       html += buttons(p);
       html += "</div></article>";
     });
-    var info = dirUrl(mapped, tm);
+    var info = dirUrl(forMap, tm);
     if (info) {
-      html += '<div class="map-row"><a id="routeGoogle" href="' + esc(info.url) + '" target="_blank" rel="noopener">' + PIN + esc(T("openG")) + '</a><a id="routeApple" href="' + esc(appleDir(mapped, tm)) + '" target="_blank" rel="noopener">' + PIN + esc(T("iphone")) + "</a></div>";
+      html += '<div class="map-row"><a id="routeGoogle" href="' + esc(info.url) + '" target="_blank" rel="noopener">' + PIN + esc(T("openG")) + '</a><a id="routeApple" href="' + esc(appleDir(forMap, tm)) + '" target="_blank" rel="noopener">' + PIN + esc(T("iphone")) + "</a></div>";
       if (info.trimmed) html += '<p class="est">' + esc(T("trim")) + "</p>";
     }
     var view = document.getElementById("routeView");
@@ -227,9 +266,10 @@
   }
   function applyPreset() {
     if (!mode || mode === "custom" || !len) return;
-    var ids = mode === "walk" ? (len === "short" ? WALKS : WALKL) : (len === "short" ? DRIVES : DRIVEL);
+    var longDrive = mode === "drive" && len === "long";
+    var ids = mode === "walk" ? (len === "short" ? WALKS : WALKL) : (len === "short" ? DRIVES : driveLongIds());
     var note = mode === "walk" ? (len === "short" ? "walkShortNote" : "walkLongNote") : (len === "short" ? "driveShortNote" : "driveLongNote");
-    showRoute(ids, note, mode === "drive" ? "drive" : "walk");
+    showRoute(ids, note, mode === "drive" ? "drive" : "walk", longDrive);
   }
   function fromFav() {
     openCustom();
@@ -323,15 +363,17 @@
       html += "</div>";
       html += "<h2>" + (i + 1) + ". " + esc(placeName(p)) + "</h2>";
       html += '<div class="body"><p>' + esc(stopText(p.id)) + "</p>";
+      if (!town && p.id === "sight-zia") html += ziaChoiceHtml();
       html += openBtn(p);
       html += buttons(p);
       html += "</div></article>";
     });
     var mapped = stops.filter(function (p) { return typeof p.lat === "number"; });
+    var forMap = town ? mapped : withZiaView(mapped);
     var tm = town ? "walk" : "drive";
-    var info = dirUrl(mapped, tm);
+    var info = dirUrl(forMap, tm);
     if (info) {
-      html += '<div class="map-row route-all"><a id="routeGoogle" href="' + esc(info.url) + '" target="_blank" rel="noopener">' + PIN + esc(T("openG")) + '</a><a id="routeApple" href="' + esc(appleDir(mapped, tm)) + '" target="_blank" rel="noopener">' + PIN + esc(T("iphone")) + "</a></div>";
+      html += '<div class="map-row route-all"><a id="routeGoogle" href="' + esc(info.url) + '" target="_blank" rel="noopener">' + PIN + esc(T("openG")) + '</a><a id="routeApple" href="' + esc(appleDir(forMap, tm)) + '" target="_blank" rel="noopener">' + PIN + esc(T("iphone")) + "</a></div>";
       if (info.trimmed) html += '<p class="est">' + esc(T("trim")) + "</p>";
     }
     view.innerHTML = html;
@@ -364,6 +406,13 @@
         applyPreset();
       });
     }
+    var driveView = document.getElementById("routeView");
+    if (driveView) driveView.addEventListener("click", function (e) {
+      var via = e.target.closest("[data-zia]");
+      if (!via) return;
+      setZiaVia(via.getAttribute("data-zia"));
+      applyPreset();
+    });
   }
   if (page === "custom") {
     document.getElementById("ownWalk").addEventListener("click", function () {
@@ -375,6 +424,8 @@
       renderWish();
     });
     document.getElementById("routeView").addEventListener("click", function (e) {
+      var via = e.target.closest("[data-zia]");
+      if (via) { setZiaVia(via.getAttribute("data-zia")); renderWish(); return; }
       var btn = e.target.closest("[data-drop]");
       if (!btn) return;
       dropWish(btn.getAttribute("data-drop"));

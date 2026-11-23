@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0D1F1F">
+  <title>Toeristische uitzichtroute naar Zia – Hello Kos</title>
+  <link rel="stylesheet" href="hello-kos.css">
+</head>
+<body class="hk-page hk-guide">
+  <header class="app-header">
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html" title="Home">🏠</a>
+      <a class="nav-btn" href="route-rijden.html" title="Terug">←</a>
+    </div>
+    <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+      <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+        <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+        <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+        <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+        <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+        <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+      </div>
+    </div>
+  </header>
+  <div class="overlay" id="overlay"></div>
+  <main class="main">
+    <div class="hero-wrap">
+      <img class="hk-zoom" src="img/gids/route-zia-uitzicht.jpg" alt="" loading="eager">
+      <div class="hero-title">
+        <p class="kicker" data-i18n="place"></p>
+        <h1 data-i18n="title"></h1>
+      </div>
+    </div>
+    <p class="parent-link"><a href="route-rijden.html" data-i18n="back"></a></p>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read"></button>
+    </div>
+    <p class="status" id="ttsStatus"></p>
+    <div class="map-row">
+      <a href="https://www.google.com/maps/dir/?api=1&amp;origin=36.863111,27.237678&amp;destination=36.846236,27.20486&amp;travelmode=driving&amp;waypoints=36.850551%2C27.213263%7C36.8470935%2C27.2041145" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps"></span></a>
+      <a href="https://maps.apple.com/?saddr=36.863111,27.237678&amp;daddr=36.850551,27.213263+to:36.8470935,27.2041145+to:36.846236,27.20486&amp;dirflg=d" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone"></span></a>
+    </div>
+    <div id="readText">
+      <article class="card"><h2 data-i18n="hStory"></h2>
+        <p data-i18n="s1"></p>
+        <figure class="photo-block"><img class="hk-zoom" src="img/gids/sight-zia-02.jpg" alt=""></figure>
+        <p data-i18n="s2"></p>
+      </article>
+      <article class="card"><h2 data-i18n="hKnow"></h2>
+        <p data-i18n="k1"></p>
+      </article>
+    </div>
+  </main>
+  <footer class="footer"><a href="mailto:info@hellokos.com">info@hellokos.com</a></footer>
+  <script>window.HK_DICT = {
+  "nl": {
+    "place": "Zia",
+    "title": "Toeristische uitzichtroute naar Zia",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "← Rijroute",
+    "hStory": "Het verhaal",
+    "hKnow": "Goed om te weten",
+    "read": "Voorlezen",
+    "readStop": "Stop voorlezen",
+    "lead": "Een steile weg omhoog door de bergen, met een schitterend uitzicht.",
+    "s1": "Dit is de toeristische uitzichtroute naar Zia. De weg is smal en heel steil. Onderweg kijk je ver uit over zee, bos en de berg.",
+    "s2": "Je rijdt langs een Romakamp. Rij daar voorzichtig en langzaam. Kinderen en baby's spelen vaak op straat.",
+    "k1": "De navigatie volgt de controlepunten van de oude route, zodat je echt door de bergen naar Zia gaat."
+  },
+  "de": {
+    "place": "Zia",
+    "title": "Touristische Aussichtsroute nach Zia",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "← Fahrroute",
+    "hStory": "Die Geschichte",
+    "hKnow": "Gut zu wissen",
+    "read": "Vorlesen",
+    "readStop": "Vorlesen stoppen",
+    "lead": "Eine steile Straße hinauf durch die Berge, mit einer großartigen Aussicht.",
+    "s1": "Das ist die touristische Aussichtsroute nach Zia. Die Straße ist schmal und sehr steil. Unterwegs schaust du weit über Meer, Wald und den Berg.",
+    "s2": "Du fährst an einem Roma-Lager vorbei. Fahr dort vorsichtig und langsam. Kinder und Babys spielen oft auf der Straße.",
+    "k1": "Die Navigation folgt den Kontrollpunkten der alten Route, damit du wirklich durch die Berge nach Zia fährst."
+  },
+  "en": {
+    "place": "Zia",
+    "title": "Tourist viewpoint route to Zia",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "← Driving route",
+    "hStory": "The story",
+    "hKnow": "Good to know",
+    "read": "Read aloud",
+    "readStop": "Stop reading",
+    "lead": "A steep road up through the mountains, with a wonderful view.",
+    "s1": "This is the tourist viewpoint route to Zia. The road is narrow and very steep. On the way you look far out over the sea, the forest and the mountain.",
+    "s2": "You drive past a Roma camp. Drive carefully and slowly there. Children and babies often play in the street.",
+    "k1": "Navigation follows the checkpoints of the old route, so you really go through the mountains to Zia."
+  },
+  "it": {
+    "place": "Zia",
+    "title": "Percorso panoramico turistico per Zia",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "← Percorso in auto",
+    "hStory": "La storia",
+    "hKnow": "Buono a sapersi",
+    "read": "Leggi ad alta voce",
+    "readStop": "Ferma la lettura",
+    "lead": "Una strada ripida su per le montagne, con una vista splendida.",
+    "s1": "Questo è il percorso panoramico turistico per Zia. La strada è stretta e molto ripida. Lungo il percorso guardi lontano sul mare, sul bosco e sulla montagna.",
+    "s2": "Passi accanto a un campo rom. Guida con prudenza e piano. Bambini e neonati giocano spesso in strada.",
+    "k1": "La navigazione segue i punti di controllo del vecchio percorso, così vai davvero tra le montagne fino a Zia."
+  },
+  "tr": {
+    "place": "Zia",
+    "title": "Zia’ya turistik manzara rotası",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "← Araç rotası",
+    "hStory": "Hikâye",
+    "hKnow": "Bilmekte fayda var",
+    "read": "Sesli oku",
+    "readStop": "Okumayı durdur",
+    "lead": "Dağların arasında yukarı çıkan dik bir yol, muhteşem bir manzara.",
+    "s1": "Bu, Zia’ya giden turistik manzara rotası. Yol dar ve çok dik. Yol boyunca denize, ormana ve dağa doğru uzaklara bakarsın.",
+    "s2": "Bir Roman kampının yanından geçersin. Orada dikkatli ve yavaş sür. Çocuklar ve bebekler sık sık sokakta oynar.",
+    "k1": "Navigasyon eski rotanın kontrol noktalarını izler, böylece gerçekten dağların içinden Zia’ya gidersin."
+  },
+  "es": {
+    "place": "Zia",
+    "title": "Ruta turística de miradores a Zia",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "back": "← Ruta en coche",
+    "hStory": "La historia",
+    "hKnow": "Conviene saber",
+    "read": "Leer en voz alta",
+    "readStop": "Parar la lectura",
+    "lead": "Una carretera empinada que sube por las montañas, con una vista preciosa.",
+    "s1": "Esta es la ruta turística de miradores hacia Zia. La carretera es estrecha y muy empinada. De camino miras lejos, sobre el mar, el bosque y la montaña.",
+    "s2": "Pasas junto a un campamento romaní. Conduce con cuidado y despacio. Niños y bebés juegan a menudo en la calle.",
+    "k1": "La navegación sigue los puntos de control de la ruta antigua, así que de verdad vas por las montañas hasta Zia."
+  }
+};</script>
+  <script src="hello-kos-i18n.js"></script>
+  <script src="hello-kos-guide.js"></script>
+</body>
+</html>
