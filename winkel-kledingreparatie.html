@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0D1A1A">
-<title>Κλωστή μεταποίηση ενδυμάτων – Hello Kos</title>
+<title>Κλωστή – Hello Kos</title>
 <link rel="stylesheet" href="hello-kos.css">
 <style>
 .call-list{display:flex;flex-direction:column;gap:10px;margin:12px 0 0}
@@ -27,6 +27,16 @@ a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba
 .loc-card h2{font-size:1.05rem;margin:0 0 8px}
 .loc-name{font-weight:800;font-size:1.05rem}
 .loc-list a{color:var(--petrol);font-weight:700}
+
+.photo{display:block;width:100%;height:auto;border-radius:14px;margin:0 0 12px}
+.card h2{font-size:1.05rem;margin:0 0 8px;color:var(--text)}
+body.hk-page .hero-wrap.shops-hero{aspect-ratio:auto;min-height:210px;display:flex;align-items:flex-end;overflow:hidden;margin:-16px -14px 12px}
+body.hk-page .hero-wrap.shops-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 62%}
+body.hk-page .shops-hero-copy{position:relative;z-index:1;width:100%;box-sizing:border-box;padding:36px 16px 14px;background:linear-gradient(to top,rgba(13,26,26,.94) 0%,rgba(13,26,26,.78) 46%,rgba(13,26,26,.28) 78%,rgba(13,26,26,0) 100%)}
+body.hk-page .shops-hero h1{color:#fff;margin:0;text-shadow:0 1px 6px rgba(0,0,0,.55);font-size:1.7rem}
+body.hk-page .map-row{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:stretch;gap:8px;width:100%;max-width:100%;margin:12px 0 0;box-sizing:border-box}
+body.hk-page .map-row .btn{flex:1 1 0;width:0;max-width:none;min-width:0;padding:12px 8px;font-size:.82rem}
+body.hk-page .map-row .pin{flex:0 0 16px;width:16px;height:16px}
 </style>
 </head>
 <body class="hk-page">
@@ -50,10 +60,30 @@ a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba
 </header>
 <div class="overlay" id="overlay"></div>
 <main class="main">
-<img class="strip" src="img/hk/winkel-naai-1.jpg" alt="">
 <p class="parent-link"><a href="praktische-winkels.html" data-i18n="back">← Belangrijke winkels</a></p>
-<h1 data-i18n="title">Κλωστή μεταποίηση ενδυμάτων</h1>
+<div class="hero-wrap shops-hero">
+<img src="img/hk/klosti-gevel.jpg" alt="">
+<div class="shops-hero-copy">
+<h1 data-i18n="title">Κλωστή</h1>
+</div>
+</div>
 <article class="card">
+<h2 data-i18n="h2">Κλωστή – Kledingreparatie in Kos</h2>
+<p data-i18n="p0">Een losse naad in je favoriete vakantiekleding, een knoop die ontbreekt of een broek die toch iets te lang blijkt te zijn? Of heb je tijdens het winkelen in Kos iets leuks gekocht dat nog een kleine aanpassing nodig heeft? Bij Κλωστή kun je terecht voor kledingreparaties en verstelwerk.</p>
+<img class="photo" src="img/hk/winkel-naai-1.jpg" alt="">
+<p data-i18n="p1">Of je nu kleding van thuis hebt meegenomen of iets nieuws hebt gekocht tijdens je vakantie, soms is een kleine reparatie of aanpassing precies wat nodig is.</p>
+<h3 data-i18n="hDo">Wat kun je er laten doen?</h3>
+<ul>
+<li data-i18n="li0">Gaatjes en scheurtjes in kleding herstellen.</li>
+<li data-i18n="li1">Losse naden opnieuw vastnaaien.</li>
+<li data-i18n="li2">Ontbrekende of losgeraakte knopen aannaaien.</li>
+<li data-i18n="li3">Kapotte ritsen repareren of vervangen.</li>
+<li data-i18n="li4">Jeans en broeken inkorten.</li>
+<li data-i18n="li5">Broeken, rokken en jurken innemen.</li>
+<li data-i18n="li6">Kleding aanpassen die net niet goed past.</li>
+</ul>
+<img class="photo" src="img/hk/naald-draad.jpg" alt="">
+<p data-i18n="p2">Zo kun je ook tijdens je vakantie in Kos je favoriete kleding blijven dragen. Loop gerust even binnen met je kledingstuk en informeer naar de mogelijkheden, de kosten en de benodigde tijd.</p>
 <h3 data-i18n="addrH">Adres</h3>
 <p class="addr"><strong>Zervou 8, Kos 853 00</strong></p>
 <h3 data-i18n="hoursH">Openingstijden</h3><div class="hours">
@@ -68,7 +98,10 @@ a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba
 <div class="call-list">
 <a class="call-btn" href="tel:+302242020238"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="call-copy"><span class="call-main"><span data-i18n="call">Bel</span> +30 22420 20238</span><span class="call-sub" data-i18n="phoneL">Telefoon</span></span></a>
 </div>
-<div class="actions"><a class="btn btn-map" href="https://maps.app.goo.gl/2EHRYCu1Y57Uig2L8" target="_blank" rel="noopener" data-i18n="map">Google locatie</a></div>
+<div class="map-row">
+<a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&amp;query=36.8910424,27.2812659" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+<a class="btn btn-map" href="https://maps.apple.com/?ll=36.8910424,27.2812659&amp;q=%CE%9A%CE%BB%CF%89%CF%83%CF%84%CE%AE%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+</div>
 </article>
 </main>
 <footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
@@ -90,7 +123,21 @@ window.HK_DICT = {
     "d4": "Vrij.",
     "d5": "Zat.",
     "d6": "Zon.",
-    "title": "Κλωστή μεταποίηση ενδυμάτων"
+    "title": "Κλωστή",
+    "h2": "Κλωστή – Kledingreparatie in Kos",
+    "p0": "Een losse naad in je favoriete vakantiekleding, een knoop die ontbreekt of een broek die toch iets te lang blijkt te zijn? Of heb je tijdens het winkelen in Kos iets leuks gekocht dat nog een kleine aanpassing nodig heeft? Bij Κλωστή kun je terecht voor kledingreparaties en verstelwerk.",
+    "p1": "Of je nu kleding van thuis hebt meegenomen of iets nieuws hebt gekocht tijdens je vakantie, soms is een kleine reparatie of aanpassing precies wat nodig is.",
+    "hDo": "Wat kun je er laten doen?",
+    "li0": "Gaatjes en scheurtjes in kleding herstellen.",
+    "li1": "Losse naden opnieuw vastnaaien.",
+    "li2": "Ontbrekende of losgeraakte knopen aannaaien.",
+    "li3": "Kapotte ritsen repareren of vervangen.",
+    "li4": "Jeans en broeken inkorten.",
+    "li5": "Broeken, rokken en jurken innemen.",
+    "li6": "Kleding aanpassen die net niet goed past.",
+    "p2": "Zo kun je ook tijdens je vakantie in Kos je favoriete kleding blijven dragen. Loop gerust even binnen met je kledingstuk en informeer naar de mogelijkheden, de kosten en de benodigde tijd.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
   },
   "de": {
     "back": "← Wichtige Läden",
@@ -108,7 +155,21 @@ window.HK_DICT = {
     "d4": "Fr.",
     "d5": "Sa.",
     "d6": "So.",
-    "title": "Κλωστή μεταποίηση ενδυμάτων"
+    "title": "Κλωστή",
+    "h2": "Κλωστή – Kleidungsreparatur in Kos",
+    "p0": "Eine offene Naht in deiner liebsten Urlaubskleidung, ein Knopf, der fehlt, oder eine Hose, die doch etwas zu lang ist? Oder hast du beim Einkaufen auf Kos etwas Schönes gekauft, das noch eine kleine Änderung braucht? Bei Κλωστή kannst du Kleidung reparieren und ändern lassen.",
+    "p1": "Ob du Kleidung von zu Hause mitgenommen oder im Urlaub etwas Neues gekauft hast: manchmal ist eine kleine Reparatur oder Änderung genau das, was nötig ist.",
+    "hDo": "Was kann man dort machen lassen?",
+    "li0": "Löcher und Risse in Kleidung reparieren.",
+    "li1": "Lose Nähte wieder festnähen.",
+    "li2": "Fehlende oder lose Knöpfe annähen.",
+    "li3": "Kaputte Reißverschlüsse reparieren oder ersetzen.",
+    "li4": "Jeans und Hosen kürzen.",
+    "li5": "Hosen, Röcke und Kleider enger machen.",
+    "li6": "Kleidung anpassen, die nicht ganz richtig sitzt.",
+    "p2": "So kannst du auch im Urlaub auf Kos deine liebste Kleidung weiter tragen. Komm einfach mit deinem Kleidungsstück vorbei und frag nach den Möglichkeiten, den Kosten und der nötigen Zeit.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
   },
   "en": {
     "back": "← Important shops",
@@ -126,7 +187,21 @@ window.HK_DICT = {
     "d4": "Fri",
     "d5": "Sat",
     "d6": "Sun",
-    "title": "Κλωστή μεταποίηση ενδυμάτων"
+    "title": "Κλωστή",
+    "h2": "Κλωστή – Clothing repairs in Kos",
+    "p0": "A loose seam in your favourite holiday clothes, a missing button, or trousers that turn out a little too long? Or did you buy something nice while shopping in Kos that still needs a small alteration? At Κλωστή you can have clothes repaired and altered.",
+    "p1": "Whether you brought clothes from home or bought something new on holiday, sometimes a small repair or alteration is exactly what you need.",
+    "hDo": "What can you have done there?",
+    "li0": "Mend holes and tears in clothes.",
+    "li1": "Sew loose seams back together.",
+    "li2": "Sew on missing or loose buttons.",
+    "li3": "Repair or replace broken zips.",
+    "li4": "Shorten jeans and trousers.",
+    "li5": "Take in trousers, skirts and dresses.",
+    "li6": "Alter clothes that do not quite fit.",
+    "p2": "That way you can keep wearing your favourite clothes on holiday in Kos. Just step in with your garment and ask about the options, the cost and the time it will take.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
   },
   "it": {
     "back": "← Negozi importanti",
@@ -144,7 +219,21 @@ window.HK_DICT = {
     "d4": "Ven",
     "d5": "Sab",
     "d6": "Dom",
-    "title": "Κλωστή μεταποίηση ενδυμάτων"
+    "title": "Κλωστή",
+    "h2": "Κλωστή – Riparazione abiti a Kos",
+    "p0": "Una cucitura aperta nel tuo vestito preferito da vacanza, un bottone che manca o un pantalone un po’ troppo lungo? Oppure hai comprato qualcosa di bello facendo shopping a Kos che ha ancora bisogno di una piccola modifica? Da Κλωστή puoi far riparare e aggiustare i vestiti.",
+    "p1": "Che tu abbia portato i vestiti da casa o comprato qualcosa di nuovo in vacanza, a volte una piccola riparazione o modifica è proprio quello che serve.",
+    "hDo": "Che cosa puoi far fare?",
+    "li0": "Riparare buchi e strappi nei vestiti.",
+    "li1": "Ricucire cuciture che si sono aperte.",
+    "li2": "Cucire bottoni mancanti o staccati.",
+    "li3": "Riparare o sostituire cerniere rotte.",
+    "li4": "Accorciare jeans e pantaloni.",
+    "li5": "Stringere pantaloni, gonne e vestiti.",
+    "li6": "Adattare abiti che non calzano bene.",
+    "p2": "Così anche in vacanza a Kos puoi continuare a indossare i tuoi vestiti preferiti. Entra pure con il capo e chiedi le possibilità, il costo e il tempo necessario.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
   },
   "tr": {
     "back": "← Önemli dükkanlar",
@@ -162,7 +251,21 @@ window.HK_DICT = {
     "d4": "Cum",
     "d5": "Cmt",
     "d6": "Paz",
-    "title": "Κλωστή μεταποίηση ενδυμάτων"
+    "title": "Κλωστή",
+    "h2": "Κλωστή – Kos’ta giysi tamiri",
+    "p0": "Tatil kıyafetinde açılmış bir dikiş, eksik bir düğme ya da biraz uzun gelen bir pantolon mu? Yoksa Kos’ta alışverişte aldığın güzel bir şeyin küçük bir düzeltmeye mi ihtiyacı var? Κλωστή’de giysi tamiri ve tadilat yaptırabilirsin.",
+    "p1": "Giysileri evden getirmiş olsan da tatilde yeni almış olsan da bazen küçük bir tamir ya da düzeltme tam da gereken şeydir.",
+    "hDo": "Neler yaptırabilirsin?",
+    "li0": "Giyside delik ve yırtıkları onarmak.",
+    "li1": "Açılmış dikişleri yeniden dikmek.",
+    "li2": "Eksik ya da gevşek düğmeleri dikmek.",
+    "li3": "Bozuk fermuarları onarmak ya da değiştirmek.",
+    "li4": "Kot ve pantolonları kısaltmak.",
+    "li5": "Pantolon, etek ve elbiseleri daraltmak.",
+    "li6": "Tam oturmayan giysileri ayarlamak.",
+    "p2": "Böylece Kos tatilinde de en sevdiğin giysileri giymeye devam edersin. Giysinle içeri gir, neler yapılabildiğini, ücreti ve süreyi sor.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
   },
   "es": {
     "back": "← Tiendas importantes",
@@ -180,7 +283,21 @@ window.HK_DICT = {
     "d4": "Vie",
     "d5": "Sáb",
     "d6": "Dom",
-    "title": "Κλωστή μεταποίηση ενδυμάτων"
+    "title": "Κλωστή",
+    "h2": "Κλωστή – Arreglo de ropa en Kos",
+    "p0": "¿Una costura suelta en tu ropa favorita de vacaciones, un botón que falta o un pantalón que resulta un poco largo? ¿O compraste algo bonito de compras en Kos que aún necesita un pequeño arreglo? En Κλωστή puedes encargar reparaciones y ajustes de ropa.",
+    "p1": "Hayas traído ropa de casa o hayas comprado algo nuevo en vacaciones, a veces una pequeña reparación o un ajuste es justo lo que hace falta.",
+    "hDo": "¿Qué puedes encargar?",
+    "li0": "Reparar agujeros y desgarros en la ropa.",
+    "li1": "Volver a coser costuras sueltas.",
+    "li2": "Coser botones que faltan o se han soltado.",
+    "li3": "Reparar o cambiar cremalleras rotas.",
+    "li4": "Acortar vaqueros y pantalones.",
+    "li5": "Entallar pantalones, faldas y vestidos.",
+    "li6": "Ajustar ropa que no queda bien.",
+    "p2": "Así también en vacaciones en Kos puedes seguir llevando tu ropa favorita. Entra con la prenda y pregunta por las opciones, el precio y el tiempo necesario.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
   }
 };
 </script>
