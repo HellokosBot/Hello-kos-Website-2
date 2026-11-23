@@ -27,6 +27,15 @@ a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba
 .loc-card h2{font-size:1.05rem;margin:0 0 8px}
 .loc-name{font-weight:800;font-size:1.05rem}
 .loc-list a{color:var(--petrol);font-weight:700}
+
+body.hk-page .hero-wrap.shops-hero{aspect-ratio:auto;min-height:210px;display:flex;align-items:flex-end;overflow:hidden;margin:-16px -14px 12px}
+body.hk-page .hero-wrap.shops-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%}
+body.hk-page .shops-hero-copy{position:relative;z-index:1;width:100%;box-sizing:border-box;padding:36px 16px 14px;background:linear-gradient(to top,rgba(13,26,26,.94) 0%,rgba(13,26,26,.78) 46%,rgba(13,26,26,.28) 78%,rgba(13,26,26,0) 100%)}
+body.hk-page .shops-hero h1{color:#fff;margin:0;text-shadow:0 1px 6px rgba(0,0,0,.55);font-size:1.3rem}
+
+body.hk-page .map-row{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:stretch;gap:8px;width:100%;max-width:100%;margin:12px 0 0;box-sizing:border-box}
+body.hk-page .map-row .btn{flex:1 1 0;width:0;max-width:none;min-width:0;padding:12px 8px;font-size:.82rem}
+body.hk-page .map-row .pin{flex:0 0 16px;width:16px;height:16px}
 </style>
 </head>
 <body class="hk-page">
@@ -50,9 +59,13 @@ a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba
 </header>
 <div class="overlay" id="overlay"></div>
 <main class="main">
-<img class="strip" src="img/hk/winkel-salty-1.jpg" alt="">
 <p class="parent-link"><a href="praktische-winkels.html" data-i18n="back">← Belangrijke winkels</a></p>
+<div class="hero-wrap shops-hero">
+<img src="img/hk/winkel-salty-1.jpg" alt="">
+<div class="shops-hero-copy">
 <h1 data-i18n="title">Saltylife Fishing Equipment</h1>
+</div>
+</div>
 <article class="card">
 <p data-i18n="p0">Saltylife Fishing Equipment is de beste winkel op Kos voor iedereen die graag vist. Of je nu serieus vist of gewoon een keer wilt proberen tijdens je vakantie, hier vind je alles wat je nodig hebt: hengels, molens, lijnen, aas, kunstaas, netten en allerlei andere visspullen. De winkel heeft zowel spullen voor beginners als voor ervaren vissers. De eigenaren weten veel over de beste visplekken rondom Kos en geven graag tips over waar en wanneer je het beste kunt vissen. Ze spreken goed Engels, dus ook als toerist word je vriendelijk geholpen. De winkel ligt in Kos-stad, niet ver van de haven, en is makkelijk te bereiken</p>
 <h3 data-i18n="addrH">Adres</h3>
@@ -69,7 +82,10 @@ a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba
 <div class="call-list">
 <a class="call-btn" href="tel:+302242302990"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="call-copy"><span class="call-main"><span data-i18n="call">Bel</span> +30 2242 302990</span><span class="call-sub" data-i18n="phoneL">Telefoon</span></span></a>
 </div>
-<div class="actions"><a class="btn btn-map" href="https://maps.app.goo.gl/NMQ4eJ7zFtqbWZzEA" target="_blank" rel="noopener" data-i18n="map">Google locatie</a></div>
+<div class="map-row">
+<a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&amp;query=36.8889683,27.300708" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+<a class="btn btn-map" href="https://maps.apple.com/?ll=36.8889683,27.300708&amp;q=Saltylife%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+</div>
 </article>
 <img class="strip" src="img/hk/winkel-salty-2.jpg" alt="">
 <img class="strip" src="img/hk/winkel-salty-3.jpg" alt="">
@@ -86,6 +102,8 @@ window.HK_DICT = {
     "phoneL": "Telefoon",
     "emergL": "Nood Telefoon",
     "map": "Google locatie",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
     "closed": "Gesloten",
     "d0": "Ma.",
     "d1": "Di.",
@@ -105,6 +123,8 @@ window.HK_DICT = {
     "phoneL": "Telefon",
     "emergL": "Nottelefon",
     "map": "Google-Standort",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
     "closed": "Geschlossen",
     "d0": "Mo.",
     "d1": "Di.",
@@ -124,6 +144,8 @@ window.HK_DICT = {
     "phoneL": "Phone",
     "emergL": "Emergency phone",
     "map": "Google location",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
     "closed": "Closed",
     "d0": "Mon",
     "d1": "Tue",
@@ -143,6 +165,8 @@ window.HK_DICT = {
     "phoneL": "Telefono",
     "emergL": "Telefono di emergenza",
     "map": "Posizione Google",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
     "closed": "Chiuso",
     "d0": "Lun",
     "d1": "Mar",
@@ -162,6 +186,8 @@ window.HK_DICT = {
     "phoneL": "Telefon",
     "emergL": "Acil telefon",
     "map": "Google konumu",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
     "closed": "Kapalı",
     "d0": "Pzt",
     "d1": "Sal",
@@ -181,6 +207,8 @@ window.HK_DICT = {
     "phoneL": "Teléfono",
     "emergL": "Teléfono de urgencia",
     "map": "Ubicación en Google",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
     "closed": "Cerrado",
     "d0": "Lun",
     "d1": "Mar",
