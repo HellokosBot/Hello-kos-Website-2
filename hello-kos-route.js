@@ -1,6 +1,7 @@
 /* Choice screen on route-wandel.html: walk, drive, or build your own. */
 (function () {
   var PICK_KEY = "hk-route-picks";
+  /* Fixed app order. The wishlist follows these lists and never sorts by distance. */
   var WALKL = ["sight-witte-trappen","sight-i-love-kos","sight-palm-tree-lane","sight-palazzo-giustizia","sight-turks-badhuis","sight-boom-hippocrates","sight-gazi-hasan","sight-neratzia","sight-albergo-gelsomino","sight-kathedraal","sight-hatzi-pasha","sight-agora","sight-belastingpoort","sight-archeologisch-museum","sight-casa-del-fascio","sight-defterdar","sight-markthal","sight-paraskevi","sight-old-town","sight-morouk","sight-eski-tzami","sight-odeon","sight-westelijke-opgraving","sight-casa-romana","sight-altaar-dionysos"];
   var WALKS = WALKL.slice(0, 8);
   var DRIVES = ["sight-therma","sight-asklepion","sight-zia","sight-zoutmeer-tigaki","sight-kasteel-antimachia","sight-molen-antimachia","sight-agios-stefanos-kefalos","sight-limnionas"];
@@ -262,36 +263,30 @@
     });
     return out;
   }
-  function orderNearest(stops) {
-    var withCoord = [];
-    var without = [];
-    stops.forEach(function (p) {
-      if (typeof p.lat === "number" && typeof p.lon === "number") withCoord.push(p);
-      else without.push(p);
-    });
-    if (withCoord.length < 2) return withCoord.concat(without);
-    var start = withCoord.slice().sort(function (a, b) {
-      return a.lon - b.lon || a.lat - b.lat;
-    })[0];
-    var rest = withCoord.filter(function (p) { return p !== start; });
-    var ordered = [start];
-    while (rest.length) {
-      var cur = ordered[ordered.length - 1];
-      var best = 0;
-      var bestD = Infinity;
-      for (var i = 0; i < rest.length; i++) {
-        var d = hav(cur, rest[i]);
-        if (d < bestD) { bestD = d; best = i; }
+  function orderFixed(stops, template) {
+    var want = {};
+    stops.forEach(function (p) { want[p.id] = p; });
+    var ordered = [];
+    var used = {};
+    template.forEach(function (id) {
+      if (want[id]) {
+        ordered.push(want[id]);
+        used[id] = true;
       }
-      ordered.push(rest.splice(best, 1)[0]);
-    }
-    return ordered.concat(without);
+    });
+    (window.HK_PLACES || []).forEach(function (p) {
+      if (want[p.id] && !used[p.id]) {
+        ordered.push(want[p.id]);
+        used[p.id] = true;
+      }
+    });
+    return ordered;
   }
   function renderWish() {
     var view = document.getElementById("routeView");
     if (!view || !wishMode) return;
     var town = wishMode === "walk";
-    var stops = orderNearest(favPlaces(town));
+    var stops = orderFixed(favPlaces(town), town ? WALKL : DRIVEL);
     document.getElementById("ownWalk").classList.toggle("on", town);
     document.getElementById("ownDrive").classList.toggle("on", !town);
     if (!stops.length) {
