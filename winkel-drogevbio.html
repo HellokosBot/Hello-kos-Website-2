@@ -27,6 +27,14 @@ a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba
 .loc-card h2{font-size:1.05rem;margin:0 0 8px}
 .loc-name{font-weight:800;font-size:1.05rem}
 .loc-list a{color:var(--petrol);font-weight:700}
+.photo{display:block;width:100%;height:auto;border-radius:14px;margin:0 0 12px}
+body.hk-page .hero-wrap.shops-hero{aspect-ratio:auto;min-height:240px;display:flex;align-items:flex-end;overflow:hidden;margin:-16px -14px 12px}
+body.hk-page .hero-wrap.shops-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%}
+body.hk-page .shops-hero-copy{position:relative;z-index:1;width:100%;box-sizing:border-box;padding:36px 16px 14px;background:linear-gradient(to top,rgba(13,26,26,.94) 0%,rgba(13,26,26,.78) 46%,rgba(13,26,26,.28) 78%,rgba(13,26,26,0) 100%)}
+body.hk-page .shops-hero h1{color:#fff;margin:0;text-shadow:0 1px 6px rgba(0,0,0,.55);font-size:1.55rem}
+body.hk-page .map-row{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:stretch;gap:8px;width:100%;max-width:100%;margin:12px 0 0;box-sizing:border-box}
+body.hk-page .map-row .btn{flex:1 1 0;width:0;max-width:none;min-width:0;padding:12px 8px;font-size:.82rem}
+body.hk-page .map-row .pin{flex:0 0 16px;width:16px;height:16px}
 </style>
 </head>
 <body class="hk-page">
@@ -50,13 +58,19 @@ a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba
 </header>
 <div class="overlay" id="overlay"></div>
 <main class="main">
-<img class="strip" src="img/hk/winkel-bio-1b.jpg" alt="">
 <p class="parent-link"><a href="praktische-winkels.html" data-i18n="back">← Belangrijke winkels</a></p>
+<div class="hero-wrap shops-hero">
+<img src="img/hk/biowinkel-gevel.jpg" alt="">
+<div class="shops-hero-copy">
 <h1 data-i18n="title">Drogēv Bio – Kos</h1>
+</div>
+</div>
 <article class="card">
-<p data-i18n="p0">Drogēv Bio is een biologische winkel in het centrum van Kos-stad. Je vindt er alles wat je nodig hebt als je tijdens je vakantie graag gezond en natuurlijk wilt eten. De winkel is vol met biologische producten, vegan alternatieven, gezonde snacks, noten, thee, kruiden en natuurlijke verzorgingsproducten. Veel toeristen komen hier om verse en pure ingrediënten te halen of om iets lekkers en gezonds mee naar huis te nemen.</p>
+<p data-i18n="p0">Drogēv Bio is een biologische winkel in het centrum van Kos-stad. Je vindt er alles wat je nodig hebt als je tijdens je vakantie graag gezond en natuurlijk wilt eten.</p>
+<img class="photo" src="img/hk/winkel-bio-2.jpg" alt="">
+<p data-i18n="p1">De winkel is vol met biologische producten, vegan alternatieven, gezonde snacks, noten, thee, kruiden en natuurlijke verzorgingsproducten. Veel toeristen komen hier om verse en pure ingrediënten te halen of om iets lekkers en gezonds mee naar huis te nemen.</p>
 <h3 data-i18n="addrH">Adres</h3>
-<p class="addr"><strong>Leof. Ippokratous, Kos 853 00</strong></p>
+<p class="addr"><strong>Leof. Ippokratous 7, Kos 853 00</strong></p>
 <h3 data-i18n="hoursH">Openingstijden</h3><div class="hours">
 <div class="h-row"><span data-i18n="d0">Ma.</span><span>09:00–14:00</span></div>
 <div class="h-row"><span data-i18n="d1">Di.</span><span>09:00–14:00 17:00–20:30</span></div>
@@ -69,9 +83,11 @@ a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba
 <div class="call-list">
 <a class="call-btn" href="tel:+302242020009"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="call-copy"><span class="call-main"><span data-i18n="call">Bel</span> +30 22420 20009</span><span class="call-sub" data-i18n="phoneL">Telefoon</span></span></a>
 </div>
-<div class="actions"><a class="btn btn-map" href="https://maps.app.goo.gl/836UnsAJN53MT42JA" target="_blank" rel="noopener" data-i18n="map">Google locatie</a></div>
+<div class="map-row">
+<a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&amp;query=36.89298,27.29049" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+<a class="btn btn-map" href="https://maps.apple.com/?ll=36.89298,27.29049&amp;q=Dros%C4%93%20Bio%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+</div>
 </article>
-<img class="strip" src="img/hk/winkel-bio-2.jpg" alt="">
 </main>
 <footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
 <script>
@@ -93,7 +109,10 @@ window.HK_DICT = {
     "d5": "Zat.",
     "d6": "Zon.",
     "title": "Drogēv Bio – Kos",
-    "p0": "Drogēv Bio is een biologische winkel in het centrum van Kos-stad. Je vindt er alles wat je nodig hebt als je tijdens je vakantie graag gezond en natuurlijk wilt eten. De winkel is vol met biologische producten, vegan alternatieven, gezonde snacks, noten, thee, kruiden en natuurlijke verzorgingsproducten. Veel toeristen komen hier om verse en pure ingrediënten te halen of om iets lekkers en gezonds mee naar huis te nemen."
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Drogēv Bio is een biologische winkel in het centrum van Kos-stad. Je vindt er alles wat je nodig hebt als je tijdens je vakantie graag gezond en natuurlijk wilt eten.",
+    "p1": "De winkel is vol met biologische producten, vegan alternatieven, gezonde snacks, noten, thee, kruiden en natuurlijke verzorgingsproducten. Veel toeristen komen hier om verse en pure ingrediënten te halen of om iets lekkers en gezonds mee naar huis te nemen."
   },
   "de": {
     "back": "← Wichtige Läden",
@@ -112,7 +131,10 @@ window.HK_DICT = {
     "d5": "Sa.",
     "d6": "So.",
     "title": "Drogēv Bio – Kos",
-    "p0": "Drogēv Bio ist ein Bioladen im Zentrum von Kos-Stadt. Hier findest du alles, wenn du im Urlaub gern gesund und natürlich essen willst. Der Laden ist voll mit Bioprodukten, veganen Alternativen, gesunden Snacks, Nüssen, Tee, Kräutern und natürlicher Pflege. Viele Touristen holen hier frische und reine Zutaten oder nehmen etwas Leckeres und Gesundes mit nach Hause."
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Drogēv Bio ist ein Bioladen im Zentrum von Kos-Stadt. Hier findest du alles, wenn du im Urlaub gern gesund und natürlich essen willst.",
+    "p1": "Der Laden ist voll mit Bioprodukten, veganen Alternativen, gesunden Snacks, Nüssen, Tee, Kräutern und natürlicher Pflege. Viele Touristen holen hier frische und reine Zutaten oder nehmen etwas Leckeres und Gesundes mit nach Hause."
   },
   "en": {
     "back": "← Important shops",
@@ -131,7 +153,10 @@ window.HK_DICT = {
     "d5": "Sat",
     "d6": "Sun",
     "title": "Drogēv Bio – Kos",
-    "p0": "Drogēv Bio is an organic shop in the centre of Kos town. You will find what you need if you like to eat healthily and naturally on holiday. The shop is full of organic products, vegan alternatives, healthy snacks, nuts, tea, herbs and natural care products. Many tourists come for fresh, pure ingredients or to take something tasty and healthy home."
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Drogēv Bio is an organic shop in the centre of Kos town. You will find what you need if you like to eat healthily and naturally on holiday.",
+    "p1": "The shop is full of organic products, vegan alternatives, healthy snacks, nuts, tea, herbs and natural care products. Many tourists come for fresh, pure ingredients or to take something tasty and healthy home."
   },
   "it": {
     "back": "← Negozi importanti",
@@ -150,7 +175,10 @@ window.HK_DICT = {
     "d5": "Sab",
     "d6": "Dom",
     "title": "Drogēv Bio – Kos",
-    "p0": "Drogēv Bio è un negozio biologico nel centro della città di Kos. Trovi ciò che serve se in vacanza vuoi mangiare in modo sano e naturale. Il negozio è pieno di prodotti bio, alternative vegane, snack sani, frutta secca, tè, erbe e cura naturale. Molti turisti vengono per ingredienti freschi e puri o per portare a casa qualcosa di buono e sano."
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Drogēv Bio è un negozio biologico nel centro della città di Kos. Trovi ciò che serve se in vacanza vuoi mangiare in modo sano e naturale.",
+    "p1": "Il negozio è pieno di prodotti bio, alternative vegane, snack sani, frutta secca, tè, erbe e cura naturale. Molti turisti vengono per ingredienti freschi e puri o per portare a casa qualcosa di buono e sano."
   },
   "tr": {
     "back": "← Önemli dükkanlar",
@@ -169,7 +197,10 @@ window.HK_DICT = {
     "d5": "Cmt",
     "d6": "Paz",
     "title": "Drogēv Bio – Kos",
-    "p0": "Drogēv Bio, Kos şehrinin merkezinde organik bir dükkandır. Tatilde sağlıklı ve doğal yemek istiyorsan ihtiyacın olanlar burada. Dükkan organik ürünler, vegan alternatifler, sağlıklı atıştırmalıklar, kuruyemiş, çay, otlar ve doğal bakım ürünleriyle dolu. Birçok turist taze ve saf malzeme veya eve götürmek için lezzetli ve sağlıklı bir şey için gelir."
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Drogēv Bio, Kos şehrinin merkezinde organik bir dükkandır. Tatilde sağlıklı ve doğal yemek istiyorsan ihtiyacın olanlar burada.",
+    "p1": "Dükkan organik ürünler, vegan alternatifler, sağlıklı atıştırmalıklar, kuruyemiş, çay, otlar ve doğal bakım ürünleriyle dolu. Birçok turist taze ve saf malzeme veya eve götürmek için lezzetli ve sağlıklı bir şey için gelir."
   },
   "es": {
     "back": "← Tiendas importantes",
@@ -188,7 +219,10 @@ window.HK_DICT = {
     "d5": "Sáb",
     "d6": "Dom",
     "title": "Drogēv Bio – Kos",
-    "p0": "Drogēv Bio es una tienda ecológica en el centro de la ciudad de Kos. Encuentras lo que necesitas si en vacaciones quieres comer sano y natural. La tienda está llena de productos bio, alternativas veganas, snacks sanos, frutos secos, té, hierbas y cuidado natural. Muchos turistas vienen por ingredientes frescos y puros o para llevarse algo rico y sano."
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Drogēv Bio es una tienda ecológica en el centro de la ciudad de Kos. Encuentras lo que necesitas si en vacaciones quieres comer sano y natural.",
+    "p1": "La tienda está llena de productos bio, alternativas veganas, snacks sanos, frutos secos, té, hierbas y cuidado natural. Muchos turistas vienen por ingredientes frescos y puros o para llevarse algo rico y sano."
   }
 };
 </script>
