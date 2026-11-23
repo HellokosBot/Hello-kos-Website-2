@@ -6,6 +6,20 @@
 <meta name="theme-color" content="#0D1A1A">
 <title>Sitar – Hello Kos</title>
 <link rel="stylesheet" href="hello-kos.css">
+<style>
+.card h3{font-size:.95rem;margin:12px 0 8px;color:var(--text)}
+.hours{margin:4px 0 8px}
+.h-row{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:.86rem;color:var(--text-soft)}
+.h-row span:last-child{font-weight:700;color:var(--text);text-align:right}
+.photo{display:block;width:100%;height:auto;border-radius:14px;margin:0 0 12px}
+body.hk-page .hero-wrap.shops-hero{aspect-ratio:auto;min-height:210px;display:flex;align-items:flex-end;overflow:hidden;margin:-16px -14px 12px}
+body.hk-page .hero-wrap.shops-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%}
+body.hk-page .shops-hero-copy{position:relative;z-index:1;width:100%;box-sizing:border-box;padding:36px 16px 14px;background:linear-gradient(to top,rgba(13,26,26,.94) 0%,rgba(13,26,26,.78) 46%,rgba(13,26,26,.28) 78%,rgba(13,26,26,0) 100%)}
+body.hk-page .shops-hero h1{color:#fff;margin:0;text-shadow:0 1px 6px rgba(0,0,0,.55)}
+body.hk-page .map-row{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:stretch;gap:8px;width:100%;max-width:100%;margin:12px 0 0;box-sizing:border-box}
+body.hk-page .map-row .btn{flex:1 1 0;width:0;max-width:none;min-width:0;padding:12px 8px;font-size:.82rem}
+body.hk-page .map-row .pin{flex:0 0 16px;width:16px;height:16px}
+</style>
 </head>
 <body class="hk-page">
 <header class="app-header">
@@ -28,24 +42,197 @@
 </header>
 <div class="overlay" id="overlay"></div>
 <main class="main">
-  <div class="hero-wrap"><img src="img/hk/cocktail-sitar.jpg" alt=""></div>
-  <p class="parent-link"><a href="beste-cocktails.html" data-i18n="back">← Cocktails</a></p>
-  <h1 data-i18n="title">Sitar</h1>
-  <p class="lead" data-i18n="lead">Sitar staat in de gids bij cocktails én bij de clubs.</p>
-  <div class="badges"><span class="badge" data-i18n="b0">Prijs ter plaatse</span></div>
-  <div class="actions">
-    <button type="button" class="btn btn-audio" id="btnPlay" data-i18n="read">Voorlezen</button>
-    <button type="button" class="btn btn-stop" id="btnStop" data-i18n="stop">Stop</button>
-    <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&query=Sitar%20Kos" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-map" href="https://maps.apple.com/?q=Sitar%20Kos" target="_blank" rel="noopener">Apple Maps</a>
-  </div>
-  <p class="status" id="ttsStatus"></p>
-  <div id="readText">
-    <article class="card"><h2 data-i18n="h0">Bestellen</h2><p data-i18n="p0">Vraag wat er in het glas zit als je geen alcohol wilt. Prijzen wisselen.</p></article>
-    <div class="placeholder"><strong data-i18n="fill">Nog aan te vullen.</strong> <span data-i18n="note">Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.</span></div>
-  </div>
+<p class="parent-link"><a href="bars-cocktailbars.html" data-i18n="back">← Bars & cocktailbars</a></p>
+<div class="hero-wrap shops-hero">
+<img src="img/hk/sitar-hero.jpg" alt="">
+<div class="shops-hero-copy">
+<h1 data-i18n="title">Sitar</h1>
+</div>
+</div>
+<article class="card">
+<h3 data-i18n="loc">Kos - Centrum</h3>
+<p data-i18n="p0">Sitar Cocktail Bar is gevestigd in het hart van Kos-stad, dicht bij de haven, en wordt vaak geprezen als een van de beste cocktailbars van het eiland. Deze bar is uitsluitend 's avonds geopend en trekt je als toerist aan, en ook lokale bewoners, die komen genieten van de uitgebreide cocktailkaart. Het is een hotspot in Kos.</p>
+<img class="photo" src="img/hk/sitar-cocktail-1.jpg" alt="">
+<h3 data-i18n="hNight">Nachtleven</h3>
+<p data-i18n="p1">Sitar Cocktail Bar is een stijlvolle en chique cocktailbar in het centrum van Kos-stad (vlakbij de haven, die puur gericht is op avond- en nachtleven. Het gaat open rond 19:00 uur en draait door tot 03:00–04:00 uur, afhankelijk van het seizoen en events,</p>
+<img class="photo" src="img/hk/sitar-cocktail-2.jpg" alt="">
+<h3 data-i18n="hStart">Starten</h3>
+<p data-i18n="p2">Buiten staan veel hoge tafels waar mensen met een drankje bij elkaar staan. Er wordt soms gedanst, maar op een rustige manier en zonder dat het een echte dansclub wordt. Daardoor is het een plek waar veel mensen eerst samenkomen voordat ze later op de avond ergens anders naartoe gaan</p>
+<img class="photo" src="img/hk/sitar-bar-1.jpg" alt="">
+<h3 data-i18n="hLocals">Veel Locals</h3>
+<p data-i18n="p3">In de loop van de avond wordt het er vaak erg druk, vooral met gasten die later op de avond nog verder de stad in gaan.</p>
+<img class="photo" src="img/hk/sitar-cocktail-3.jpg" alt="">
+<p data-i18n="p4">Het publiek bestaat voor een groot deel uit lokale bewoners, waardoor de sfeer anders is dan in de Barstreet.</p>
+<img class="photo" src="img/hk/sitar-tekst-terras.jpg" alt="">
+<p data-i18n="p5">Over het algemeen komen hier 25+ bezoekers en is de omgeving harde muziek maar wel gericht op praten en drinken dan op uitbundig feesten. Als toerist zie je dat er meestal niet snel uitbundig in het openbaar gedanst wordt, maar er wordt wel muziek gedraaid, vaak een mix van jaren-80- en jaren-90-hits, house en techno.</p>
+<img class="photo" src="img/hk/sitar-cocktail-4.jpg" alt="">
+<img class="photo" src="img/hk/sitar-bar-2.jpg" alt="">
+<img class="photo" src="img/hk/sitar-bar-3.jpg" alt="">
+<h3 data-i18n="hoursH">Openingstijden</h3>
+<div class="hours">
+<div class="h-row"><span data-i18n="d0">Ma.</span><span>19:00–04:00</span></div>
+<div class="h-row"><span data-i18n="d1">Di.</span><span>19:00–04:00</span></div>
+<div class="h-row"><span data-i18n="d2">Woe.</span><span>19:00–04:00</span></div>
+<div class="h-row"><span data-i18n="d3">Don.</span><span>19:00–04:00</span></div>
+<div class="h-row"><span data-i18n="d4">Vrij.</span><span>19:00–04:00</span></div>
+<div class="h-row"><span data-i18n="d5">Zat.</span><span>19:00–04:00</span></div>
+<div class="h-row"><span data-i18n="d6">Zon.</span><span>19:00–04:00</span></div>
+</div>
+<div class="map-row">
+<a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&amp;query=36.8943319,27.2872321" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+<a class="btn btn-map" href="https://maps.apple.com/?ll=36.8943319,27.2872321&amp;q=Sitar%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+</div>
+</article>
 </main>
 <footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
-<script>window.HK_DICT = {"nl": {"title": "Sitar", "lead": "Sitar staat in de gids bij cocktails én bij de clubs.", "back": "← Cocktails", "note": "Prijzen en openingstijden staan hier niet vast: die veranderen. Vraag het ter plaatse.", "h0": "Bestellen", "p0": "Vraag wat er in het glas zit als je geen alcohol wilt. Prijzen wisselen.", "b0": "Prijs ter plaatse"}, "de": {"title": "Sitar", "lead": "Sitar steht im Guide bei Cocktails und bei den Clubs.", "back": "← Cocktails", "note": "Preise und Öffnungszeiten stehen hier nicht fest, sie ändern sich. Frag vor Ort nach.", "h0": "Bestellen", "p0": "Frag, was im Glas ist, wenn du keinen Alkohol willst. Preise wechseln.", "b0": "Preis vor Ort"}, "en": {"title": "Sitar", "lead": "Sitar is in the guide under cocktails and under the clubs.", "back": "← Cocktails", "note": "Prices and opening hours are not fixed here: they change. Ask on the spot.", "h0": "Order", "p0": "Ask what is in the glass if you do not want alcohol. Prices change.", "b0": "Price on site"}, "it": {"title": "Sitar", "lead": "Sitar è nella guida sotto i cocktail e sotto i club.", "back": "← Cocktail", "note": "Prezzi e orari non sono fissi: cambiano. Chiedi sul posto.", "h0": "Ordinare", "p0": "Chiedi cosa c’è nel bicchiere se non vuoi alcol. I prezzi cambiano.", "b0": "Prezzo sul posto"}, "tr": {"title": "Sitar", "lead": "Sitar rehberde hem kokteyllerde hem kulüplerde.", "back": "← Kokteyller", "note": "Fiyat ve açılış saatleri burada sabit değil, değişir. Yerinde sorun.", "h0": "Sipariş", "p0": "Alkol istemezsen bardakta ne olduğuna sor. Fiyatlar değişir.", "b0": "Fiyat yerinde"}, "es": {"title": "Sitar", "lead": "Sitar está en la guía en cócteles y en clubs.", "back": "← Cócteles", "note": "Los precios y horarios no están fijos: cambian. Pregunta en el sitio.", "h0": "Pedir", "p0": "Pregunta qué lleva el vaso si no quieres alcohol. Los precios cambian.", "b0": "Precio en el sitio"}};</script>
+<script>
+window.HK_DICT = {
+  "nl": {
+    "back": "← Bars & cocktailbars",
+    "title": "Sitar",
+    "loc": "Kos - Centrum",
+    "hNight": "Nachtleven",
+    "hStart": "Starten",
+    "hLocals": "Veel Locals",
+    "hoursH": "Openingstijden",
+    "d0": "Ma.",
+    "d1": "Di.",
+    "d2": "Woe.",
+    "d3": "Don.",
+    "d4": "Vrij.",
+    "d5": "Zat.",
+    "d6": "Zon.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Sitar Cocktail Bar is gevestigd in het hart van Kos-stad, dicht bij de haven, en wordt vaak geprezen als een van de beste cocktailbars van het eiland. Deze bar is uitsluitend 's avonds geopend en trekt je als toerist aan, en ook lokale bewoners, die komen genieten van de uitgebreide cocktailkaart. Het is een hotspot in Kos.",
+    "p1": "Sitar Cocktail Bar is een stijlvolle en chique cocktailbar in het centrum van Kos-stad (vlakbij de haven, die puur gericht is op avond- en nachtleven. Het gaat open rond 19:00 uur en draait door tot 03:00–04:00 uur, afhankelijk van het seizoen en events,",
+    "p2": "Buiten staan veel hoge tafels waar mensen met een drankje bij elkaar staan. Er wordt soms gedanst, maar op een rustige manier en zonder dat het een echte dansclub wordt. Daardoor is het een plek waar veel mensen eerst samenkomen voordat ze later op de avond ergens anders naartoe gaan",
+    "p3": "In de loop van de avond wordt het er vaak erg druk, vooral met gasten die later op de avond nog verder de stad in gaan.",
+    "p4": "Het publiek bestaat voor een groot deel uit lokale bewoners, waardoor de sfeer anders is dan in de Barstreet.",
+    "p5": "Over het algemeen komen hier 25+ bezoekers en is de omgeving harde muziek maar wel gericht op praten en drinken dan op uitbundig feesten. Als toerist zie je dat er meestal niet snel uitbundig in het openbaar gedanst wordt, maar er wordt wel muziek gedraaid, vaak een mix van jaren-80- en jaren-90-hits, house en techno."
+  },
+  "de": {
+    "back": "← Bars & Cocktailbars",
+    "title": "Sitar",
+    "loc": "Kos – Zentrum",
+    "hNight": "Nachtleben",
+    "hStart": "Starten",
+    "hLocals": "Viele Locals",
+    "hoursH": "Öffnungszeiten",
+    "d0": "Mo.",
+    "d1": "Di.",
+    "d2": "Mi.",
+    "d3": "Do.",
+    "d4": "Fr.",
+    "d5": "Sa.",
+    "d6": "So.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Sitar Cocktail Bar liegt im Herzen von Kos-Stadt, dicht am Hafen, und wird oft als eine der besten Cocktailbars der Insel gelobt. Diese Bar hat ausschließlich abends geöffnet und zieht dich als Tourist an, und auch Menschen, die hier wohnen, die kommen, um die große Cocktailkarte zu genießen. Es ist ein Hotspot auf Kos.",
+    "p1": "Sitar Cocktail Bar ist eine stilvolle und schicke Cocktailbar im Zentrum von Kos-Stadt, direkt am Hafen, und ganz auf Abend- und Nachtleben ausgerichtet. Sie öffnet gegen 19:00 Uhr und läuft bis 03:00–04:00 Uhr, je nach Saison und Events,",
+    "p2": "Draußen stehen viele hohe Tische, an denen Menschen mit einem Getränk zusammenstehen. Manchmal wird getanzt, aber auf eine ruhige Art und ohne dass es ein echter Tanzclub wird. Deshalb ist es ein Ort, an dem viele Leute zuerst zusammenkommen, bevor sie später am Abend woanders hingehen",
+    "p3": "Im Lauf des Abends wird es oft sehr voll, vor allem mit Gästen, die später am Abend noch weiter in die Stadt gehen.",
+    "p4": "Das Publikum besteht zu einem großen Teil aus Menschen, die hier wohnen, wodurch die Stimmung anders ist als in der Barstreet.",
+    "p5": "Im Allgemeinen kommen hier Besucher ab 25, und die Umgebung ist laute Musik, aber eher auf Reden und Trinken ausgerichtet als auf ausgelassenes Feiern. Als Tourist siehst du, dass hier meist nicht schnell ausgelassen in der Öffentlichkeit getanzt wird, aber es wird Musik gespielt, oft ein Mix aus Hits der 80er- und 90er-Jahre, House und Techno."
+  },
+  "en": {
+    "back": "← Bars & cocktail bars",
+    "title": "Sitar",
+    "loc": "Kos – centre",
+    "hNight": "Nightlife",
+    "hStart": "Starting out",
+    "hLocals": "Lots of locals",
+    "hoursH": "Opening hours",
+    "d0": "Mon",
+    "d1": "Tue",
+    "d2": "Wed",
+    "d3": "Thu",
+    "d4": "Fri",
+    "d5": "Sat",
+    "d6": "Sun",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Sitar Cocktail Bar is in the heart of Kos town, close to the harbour, and is often praised as one of the best cocktail bars on the island. This bar is open in the evening only and draws you in as a tourist, and people who live here as well, who come to enjoy the long cocktail list. It is a hotspot on Kos.",
+    "p1": "Sitar Cocktail Bar is a stylish and chic cocktail bar in the centre of Kos town, right by the harbour, aimed purely at the evening and the night. It opens around 19:00 and runs on until 03:00–04:00, depending on the season and events,",
+    "p2": "Outside there are many high tables where people stand together with a drink. Sometimes people dance, but in a quiet way and without it becoming a real dance club. That makes it a place where many people meet first before they go somewhere else later in the evening",
+    "p3": "As the evening goes on it often gets very busy, especially with guests who go further into town later at night.",
+    "p4": "A large part of the crowd is people who live here, so the atmosphere is different from Barstreet.",
+    "p5": "In general the visitors here are 25+ and the setting is loud music, but aimed at talking and drinking rather than wild partying. As a tourist you see that people here do not usually dance wildly out in the open, but there is music, often a mix of 80s and 90s hits, house and techno."
+  },
+  "it": {
+    "back": "← Bar e cocktail bar",
+    "title": "Sitar",
+    "loc": "Kos – centro",
+    "hNight": "Vita notturna",
+    "hStart": "Si inizia",
+    "hLocals": "Tanti del posto",
+    "hoursH": "Orari",
+    "d0": "Lun",
+    "d1": "Mar",
+    "d2": "Mer",
+    "d3": "Gio",
+    "d4": "Ven",
+    "d5": "Sab",
+    "d6": "Dom",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Sitar Cocktail Bar si trova nel cuore della città di Kos, vicino al porto, ed è spesso citato come uno dei migliori cocktail bar dell’isola. Questo bar è aperto solo la sera e attira te come turista, e anche chi vive qui, che viene a godersi la carta dei cocktail ampia. È un punto di ritrovo a Kos.",
+    "p1": "Sitar Cocktail Bar è un cocktail bar elegante e chic nel centro della città di Kos, proprio vicino al porto, pensato solo per la sera e la notte. Apre verso le 19:00 e va avanti fino alle 03:00–04:00, a seconda della stagione e degli eventi,",
+    "p2": "Fuori ci sono molti tavoli alti dove le persone stanno insieme con un drink. A volte si balla, ma in modo tranquillo e senza che diventi un vero club da ballo. Per questo è un posto dove molte persone si incontrano prima, per poi andare altrove più tardi la sera",
+    "p3": "Nel corso della serata diventa spesso molto pieno, soprattutto con ospiti che più tardi vanno ancora più in città.",
+    "p4": "Il pubblico è in gran parte chi vive qui, e per questo l’atmosfera è diversa dalla Barstreet.",
+    "p5": "In generale qui vengono visitatori dai 25 anni in su e l’ambiente è musica alta, ma più orientato a parlare e bere che a fare festa in modo sfrenato. Come turista vedi che di solito non si balla in modo sfrenato allo scoperto, ma c’è musica, spesso un mix di hit degli anni ’80 e ’90, house e techno."
+  },
+  "tr": {
+    "back": "← Barlar ve kokteyl barlar",
+    "title": "Sitar",
+    "loc": "Kos – merkez",
+    "hNight": "Gece hayatı",
+    "hStart": "Başlangıç",
+    "hLocals": "Çok sayıda yerli",
+    "hoursH": "Açılış saatleri",
+    "d0": "Pzt",
+    "d1": "Sal",
+    "d2": "Çar",
+    "d3": "Per",
+    "d4": "Cum",
+    "d5": "Cmt",
+    "d6": "Paz",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Sitar Cocktail Bar, Kos kentinin kalbinde, limana yakın bir yerdedir ve adanın en iyi kokteyl barlarından biri olarak sık anılır. Bu bar yalnızca akşamları açıktır ve seni turist olarak çeker; burada yaşayanlar da geniş kokteyl listesinin keyfini çıkarmak için gelir. Kos’ta bir buluşma noktasıdır.",
+    "p1": "Sitar Cocktail Bar, Kos kentinin merkezinde, limanın hemen yanında, şık bir kokteyl barıdır ve yalnızca akşam ile gece hayatına yöneliktir. Yaklaşık 19:00’da açılır ve sezona ve etkinliklere göre 03:00–04:00’e kadar sürer,",
+    "p2": "Dışarıda yüksek masalar vardır; insanlar bir içkiyle bir arada durur. Bazen dans edilir, ama sakin bir şekilde ve gerçek bir dans kulübüne dönüşmeden. Bu yüzden birçok kişi akşamın ilerleyen saatlerinde başka bir yere gitmeden önce burada buluşur",
+    "p3": "Akşam ilerledikçe çoğu zaman çok kalabalık olur, özellikle daha sonra kentin içine devam edecek konuklarla.",
+    "p4": "Kalabalığın büyük bölümü burada yaşayanlardır, bu yüzden hava Barstreet’ten farklıdır.",
+    "p5": "Genelde buraya 25 yaş üstü gelir ve ortam yüksek müziktir, ama coşkulu bir eğlenceden çok konuşmaya ve içmeye yöneliktir. Turist olarak görürsün ki burada genelde herkesin önünde coşkulu dans edilmez, ama müzik vardır, çoğu zaman 80’ler ve 90’lar hitleri, house ve techno karışımı."
+  },
+  "es": {
+    "back": "← Bares y coctelerías",
+    "title": "Sitar",
+    "loc": "Kos – centro",
+    "hNight": "Vida nocturna",
+    "hStart": "Para empezar",
+    "hLocals": "Mucha gente de aquí",
+    "hoursH": "Horario",
+    "d0": "Lun",
+    "d1": "Mar",
+    "d2": "Mié",
+    "d3": "Jue",
+    "d4": "Vie",
+    "d5": "Sáb",
+    "d6": "Dom",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Sitar Cocktail Bar está en el corazón de la ciudad de Kos, cerca del puerto, y a menudo se cita como uno de los mejores bares de cócteles de la isla. Este bar abre solo por la tarde-noche y te atrae como turista, y también a quien vive aquí, que viene a disfrutar de la carta amplia de cócteles. Es un punto de encuentro en Kos.",
+    "p1": "Sitar Cocktail Bar es un bar de cócteles elegante y chic en el centro de la ciudad de Kos, justo junto al puerto, orientado solo a la tarde-noche y a la noche. Abre alrededor de las 19:00 y sigue hasta las 03:00–04:00, según la temporada y los eventos,",
+    "p2": "Fuera hay muchas mesas altas donde la gente se queda de pie con una copa. A veces se baila, pero de forma tranquila y sin que se convierta en un club de baile de verdad. Por eso es un sitio donde mucha gente se reúne primero antes de ir a otro lugar más tarde",
+    "p3": "A lo largo de la noche suele llenarse mucho, sobre todo con gente que más tarde sigue hacia el centro.",
+    "p4": "Gran parte del público es gente que vive aquí, y por eso el ambiente es distinto al de Barstreet.",
+    "p5": "En general aquí viene gente de 25 años en adelante y el ambiente es música alta, pero más pensado para hablar y beber que para una fiesta desbordada. Como turista ves que aquí normalmente no se baila de forma desbordada al aire libre, pero sí hay música, a menudo una mezcla de éxitos de los 80 y los 90, house y techno."
+  }
+};
+</script>
 <script src="hello-kos-i18n.js?v=20261123r"></script>
 </body>
 </html>
