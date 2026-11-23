@@ -27,6 +27,13 @@ a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba
 .loc-card h2{font-size:1.05rem;margin:0 0 8px}
 .loc-name{font-weight:800;font-size:1.05rem}
 .loc-list a{color:var(--petrol);font-weight:700}
+.jeans-hero{position:relative;margin:-16px -14px 12px;min-height:230px;aspect-ratio:16/10;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.jeans-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 32%}
+.jeans-hero h1{position:relative;z-index:1;margin:0;color:#fff !important;text-align:center;text-shadow:0 2px 12px rgba(0,0,0,.75);font-size:1.8rem}
+.photo{display:block;width:100%;height:auto;border-radius:14px;margin:0 0 12px}
+body.hk-page .map-row{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:stretch;gap:8px;width:100%;max-width:100%;margin:12px 0 0;box-sizing:border-box}
+body.hk-page .map-row .btn{flex:1 1 0;width:0;max-width:none;min-width:0;padding:12px 8px;font-size:.82rem}
+body.hk-page .map-row .pin{flex:0 0 16px;width:16px;height:16px}
 </style>
 </head>
 <body class="hk-page">
@@ -50,11 +57,15 @@ a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba
 </header>
 <div class="overlay" id="overlay"></div>
 <main class="main">
-<img class="strip" src="img/hk/winkel-jeans-1.jpg" alt="">
 <p class="parent-link"><a href="praktische-winkels.html" data-i18n="back">← Belangrijke winkels</a></p>
+<div class="jeans-hero">
+<img src="img/hk/winkel-jeans-2.jpg" alt="">
 <h1 data-i18n="title">Jeans Center</h1>
+</div>
 <article class="card">
-<p data-i18n="p0">Jeans Center is een populaire en voordelige kledingwinkel in het hart van Kos-stad. Hier ontdek je een uitgebreide collectie casual kleding voor mannen, vrouwen en kinderen. Van jeans en T-shirts tot shorts, zomerjurken en andere dagelijkse outfits alles is beschikbaar tegen aantrekkelijke prijzen. Dit is vooral handig, aangezien veel All-Inclusive restaurants een lange broek vereisen tijdens het diner.</p>
+<p data-i18n="p0">Veel all-inclusive hotels willen bij het diner een lange broek, vooral voor mannen. Vergeten mee te nemen, of geen zin om een broek in de koffer te proppen? Hier koop je er voordelig een.</p>
+<img class="photo" src="img/hk/winkel-jeans-1.jpg" alt="">
+<p data-i18n="p1">Jeans Center is een populaire kledingwinkel in het hart van Kos-stad. Het draait om jeans, en er is meer: T-shirts, shorts, zomerjurken en andere dagelijkse kleding, voor mannen, vrouwen en kinderen. De prijzen zijn vriendelijk.</p>
 <h3 data-i18n="addrH">Adres</h3>
 <p class="addr"><strong>25is Martiou 13, Kos 853 00</strong></p>
 <h3 data-i18n="hoursH">Openingstijden</h3><div class="hours">
@@ -66,9 +77,11 @@ a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba
 <div class="h-row"><span data-i18n="d5">Zat.</span><span>09:00–14:00</span></div>
 <div class="h-row"><span data-i18n="d6">Zon.</span><span data-i18n="closed">Gesloten</span></div>
 </div>
-<div class="actions"><a class="btn btn-map" href="https://maps.app.goo.gl/HtgF6E92MMqDHmPL8" target="_blank" rel="noopener" data-i18n="map">Google locatie</a></div>
+<div class="map-row">
+<a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&amp;query=36.893275,27.287346" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+<a class="btn btn-map" href="https://maps.apple.com/?ll=36.893275,27.287346&amp;q=Jeans%20Center%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+</div>
 </article>
-<img class="strip" src="img/hk/winkel-jeans-2.jpg" alt="">
 </main>
 <footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
 <script>
@@ -90,7 +103,10 @@ window.HK_DICT = {
     "d5": "Zat.",
     "d6": "Zon.",
     "title": "Jeans Center",
-    "p0": "Jeans Center is een populaire en voordelige kledingwinkel in het hart van Kos-stad. Hier ontdek je een uitgebreide collectie casual kleding voor mannen, vrouwen en kinderen. Van jeans en T-shirts tot shorts, zomerjurken en andere dagelijkse outfits alles is beschikbaar tegen aantrekkelijke prijzen. Dit is vooral handig, aangezien veel All-Inclusive restaurants een lange broek vereisen tijdens het diner."
+    "p0": "Veel all-inclusive hotels willen bij het diner een lange broek, vooral voor mannen. Vergeten mee te nemen, of geen zin om een broek in de koffer te proppen? Hier koop je er voordelig een.",
+    "p1": "Jeans Center is een populaire kledingwinkel in het hart van Kos-stad. Het draait om jeans, en er is meer: T-shirts, shorts, zomerjurken en andere dagelijkse kleding, voor mannen, vrouwen en kinderen. De prijzen zijn vriendelijk.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone"
   },
   "de": {
     "back": "← Wichtige Läden",
@@ -109,7 +125,10 @@ window.HK_DICT = {
     "d5": "Sa.",
     "d6": "So.",
     "title": "Jeans Center",
-    "p0": "Jeans Center ist ein beliebter und günstiger Kleiderladen im Herzen von Kos-Stadt. Hier gibt es eine große Auswahl an Freizeitkleidung für Männer, Frauen und Kinder. Von Jeans und T-Shirts bis zu Shorts, Sommerkleidern und anderer Alltagskleidung ist alles zu attraktiven Preisen da. Das ist besonders praktisch, weil viele All-inclusive-Restaurants beim Abendessen eine lange Hose verlangen."
+    "p0": "Viele All-inclusive-Hotels wollen beim Abendessen eine lange Hose, vor allem für Männer. Vergessen mitzunehmen, oder keine Lust, eine Hose in den Koffer zu stopfen? Hier kaufst du günstig eine.",
+    "p1": "Jeans Center ist ein beliebter Kleiderladen im Herzen von Kos-Stadt. Es dreht sich um Jeans, und es gibt mehr: T-Shirts, Shorts, Sommerkleider und andere Alltagskleidung, für Männer, Frauen und Kinder. Die Preise sind freundlich.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone"
   },
   "en": {
     "back": "← Important shops",
@@ -128,7 +147,10 @@ window.HK_DICT = {
     "d5": "Sat",
     "d6": "Sun",
     "title": "Jeans Center",
-    "p0": "Jeans Center is a popular and affordable clothes shop in the heart of Kos town. You will find a wide range of casual clothes for men, women and children. From jeans and T-shirts to shorts, summer dresses and other everyday outfits, everything is available at attractive prices. This is especially useful, because many all-inclusive restaurants require long trousers at dinner."
+    "p0": "Many all-inclusive hotels want long trousers at dinner, especially for men. Forgot to pack a pair, or you just did not want one in the suitcase? You can buy one here without spending much.",
+    "p1": "Jeans Center is a popular clothes shop in the heart of Kos town. It is about jeans, and there is more: T-shirts, shorts, summer dresses and other everyday clothes, for men, women and children. The prices are friendly.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone"
   },
   "it": {
     "back": "← Negozi importanti",
@@ -147,7 +169,10 @@ window.HK_DICT = {
     "d5": "Sab",
     "d6": "Dom",
     "title": "Jeans Center",
-    "p0": "Jeans Center è un negozio di abbigliamento popolare e conveniente nel cuore della città di Kos. C’è un’ampia collezione casual per uomini, donne e bambini. Dai jeans e le magliette ai pantaloncini, ai vestiti estivi e ad altri outfit di tutti i giorni, tutto a prezzi interessanti. È utile perché molti ristoranti all-inclusive chiedono pantaloni lunghi a cena."
+    "p0": "Molti hotel all-inclusive vogliono pantaloni lunghi a cena, soprattutto per gli uomini. Dimenticati, o nessuna voglia di infilarne un paio in valigia? Qui ne compri un paio a poco.",
+    "p1": "Jeans Center è un negozio di abbigliamento popolare nel cuore della città di Kos. Gira tutto intorno ai jeans, e c’è di più: magliette, pantaloncini, vestiti estivi e altri abiti di tutti i giorni, per uomini, donne e bambini. I prezzi sono gentili.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone"
   },
   "tr": {
     "back": "← Önemli dükkanlar",
@@ -166,7 +191,10 @@ window.HK_DICT = {
     "d5": "Cmt",
     "d6": "Paz",
     "title": "Jeans Center",
-    "p0": "Jeans Center, Kos şehrinin merkezinde popüler ve uygun fiyatlı bir giyim dükkanıdır. Erkek, kadın ve çocuklar için geniş bir günlük koleksiyon vardır. Kot ve tişörtten şort, yazlık elbise ve diğer günlük kıyafetlere kadar her şey uygun fiyata bulunur. Birçok her şey dahil restoran akşam yemeğinde uzun pantolon istediği için bu özellikle işe yarar."
+    "p0": "Birçok her şey dahil otel akşam yemeğinde uzun pantolon ister, özellikle erkeklerden. Yanına almayı unuttun ya da valize koymak istemedin mi? Burada uygun fiyata bir tane alırsın.",
+    "p1": "Jeans Center, Kos şehrinin merkezinde popüler bir giyim dükkanıdır. İş kot pantolonda, ama daha fazlası da var: tişört, şort, yazlık elbise ve diğer günlük kıyafetler, erkek, kadın ve çocuklar için. Fiyatlar uygun.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone"
   },
   "es": {
     "back": "← Tiendas importantes",
@@ -185,7 +213,10 @@ window.HK_DICT = {
     "d5": "Sáb",
     "d6": "Dom",
     "title": "Jeans Center",
-    "p0": "Jeans Center es una tienda de ropa popular y a buen precio en el corazón de la ciudad de Kos. Hay una amplia colección casual para hombres, mujeres y niños. Desde vaqueros y camisetas hasta pantalones cortos, vestidos de verano y otra ropa de diario, todo a precios atractivos. Es práctico porque muchos restaurantes de todo incluido piden pantalón largo en la cena."
+    "p0": "Muchos hoteles de todo incluido piden pantalón largo en la cena, sobre todo a los hombres. ¿Se te olvidó, o no te apetecía meter uno en la maleta? Aquí compras uno a buen precio.",
+    "p1": "Jeans Center es una tienda de ropa popular en el corazón de la ciudad de Kos. Va de vaqueros, y hay más: camisetas, pantalones cortos, vestidos de verano y otra ropa de diario, para hombres, mujeres y niños. Los precios son amables.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone"
   }
 };
 </script>
