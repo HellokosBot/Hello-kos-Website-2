@@ -40,15 +40,6 @@
     }
     return false;
   }
-  function withZiaView(stops) {
-    if (!ziaOn() || hidesZiaView(stops)) return stops;
-    var out = [];
-    stops.forEach(function (p) {
-      if (p && p.id === "sight-zia") ZIA_CPS.forEach(function (c) { out.push(c); });
-      out.push(p);
-    });
-    return out;
-  }
   function ziaGateCard() {
     var on = ziaOn();
     var html = '<article class="stop" data-zia-gate="1">';
@@ -104,21 +95,6 @@
   function esc(s) {
     return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
   }
-  function hav(a, b) {
-    var R = 6371, p = Math.PI / 180;
-    var dLa = (b.lat - a.lat) * p, dLo = (b.lon - a.lon) * p;
-    var x = Math.sin(dLa / 2) * Math.sin(dLa / 2) + Math.cos(a.lat * p) * Math.cos(b.lat * p) * Math.sin(dLo / 2) * Math.sin(dLo / 2);
-    return 2 * R * Math.asin(Math.min(1, Math.sqrt(x)));
-  }
-  function crow(stops) {
-    var sum = 0;
-    for (var i = 1; i < stops.length; i++) sum += hav(stops[i - 1], stops[i]);
-    return Math.round(sum * 10) / 10;
-  }
-  function kmStr(n) {
-    var s = n.toFixed(1);
-    return lang() === "en" ? s : s.replace(".", ",");
-  }
   function gPoint(lat, lon) {
     return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(lat + "," + lon);
   }
@@ -130,27 +106,6 @@
   }
   function aName(name) {
     return "https://maps.apple.com/?q=" + encodeURIComponent(name + " Kos");
-  }
-  function dirUrl(stops, tm, cap) {
-    if (stops.length < 2) return null;
-    var mid = stops.slice(1, -1);
-    var trimmed = false;
-    var limit = cap == null ? 9 : cap;
-    if (limit && mid.length > limit) {
-      mid = mid.slice(0, limit);
-      trimmed = true;
-    }
-    var url = "https://www.google.com/maps/dir/?api=1&origin=" + encodeURIComponent(stops[0].lat + "," + stops[0].lon) + "&destination=" + encodeURIComponent(stops[stops.length - 1].lat + "," + stops[stops.length - 1].lon) + "&travelmode=" + (tm === "drive" ? "driving" : "walking");
-    if (mid.length) {
-      url += "&waypoints=" + mid.map(function (p) { return encodeURIComponent(p.lat + "," + p.lon); }).join("%7C");
-    }
-    return { url: url, trimmed: trimmed };
-  }
-  function appleDir(stops, tm) {
-    if (!stops.length) return "";
-    if (stops.length === 1) return aPoint(stops[0].lat, stops[0].lon, stops[0].name);
-    var rest = stops.slice(1).map(function (p) { return encodeURIComponent(p.lat + "," + p.lon); }).join("+to:");
-    return "https://maps.apple.com/?saddr=" + encodeURIComponent(stops[0].lat + "," + stops[0].lon) + "&daddr=" + rest + "&dirflg=" + (tm === "drive" ? "d" : "w");
   }
   function hasCoord(p) {
     return p && p.lat != null && p.lon != null && p.lat !== "" && !isNaN(Number(p.lat)) && !isNaN(Number(p.lon));
@@ -164,14 +119,6 @@
     if (!p.link) return "";
     return '<a class="open-btn" href="' + esc(p.link) + '">' + BOOK + "<span>" + esc(T("open")) + "</span></a>";
   }
-  function estLine(stops, withKind) {
-    var line = T("est").replace("{n}", String(stops.length)).replace("{km}", kmStr(crow(stops)));
-    if (withKind) {
-      var kind = (stops.length <= 8 && crow(stops) < 8) ? T("estShort") : T("estLong");
-      line += " " + T("estKind").replace("{kind}", kind);
-    }
-    return line;
-  }
   function renderWalk() {
     showRoute(WALKL, "walkOnlyNote", "walk");
   }
@@ -179,8 +126,6 @@
     var custom = document.getElementById("customView");
     if (custom) custom.hidden = true;
     var stops = ids.map(byId).filter(Boolean);
-    var mapped = stops.filter(function (p) { return typeof p.lat === "number"; });
-    var forMap = tm === "drive" ? withZiaView(mapped) : mapped;
     var html = "";
     var n = 0;
     stops.forEach(function (p) {
@@ -194,16 +139,10 @@
       html += buttons(p);
       html += "</div></article>";
     });
-    var info = dirUrl(forMap, tm);
-    if (info) {
-      html += '<div class="map-row"><a id="routeGoogle" href="' + esc(info.url) + '" target="_blank" rel="noopener">' + PIN + esc(T("openG")) + '</a><a id="routeApple" href="' + esc(appleDir(forMap, tm)) + '" target="_blank" rel="noopener">' + PIN + esc(T("iphone")) + "</a></div>";
-      if (info.trimmed) html += '<p class="est">' + esc(T("trim")) + "</p>";
-    }
     var view = document.getElementById("routeView");
     view.innerHTML = html;
     view.setAttribute("data-stops", String(stops.length));
     document.getElementById("blurb").textContent = T(noteKey);
-    document.getElementById("est").textContent = mapped.length > 1 ? estLine(mapped, false) : "";
   }
   function loadPicks() {
     try {
@@ -223,9 +162,6 @@
     var travel = document.getElementById("cDrive").classList.contains("on") ? "drive" : "walk";
     if (!document.getElementById("cDrive").classList.contains("on") && !document.getElementById("cWalk").classList.contains("on")) travel = prev.travel;
     localStorage.setItem(PICK_KEY, JSON.stringify({ ids: selectedIds(), travel: travel }));
-  }
-  function currentTravel() {
-    return document.getElementById("cDrive").classList.contains("on") ? "drive" : "walk";
   }
   function renderChecks() {
     var picks = loadPicks();
@@ -264,22 +200,11 @@
     var box = document.getElementById("cBtns");
     var note = document.getElementById("favNote");
     if (note && !note.dataset.lock) note.textContent = "";
+    if (box) { box.hidden = true; box.innerHTML = ""; }
     var trim = document.getElementById("cTrim");
-    if (stops.length < 2) {
-      box.hidden = true;
-      if (trim) trim.hidden = true;
-      document.getElementById("cest").textContent = stops.length ? T("need2") : "";
-      return;
-    }
-    var tm = currentTravel();
-    document.getElementById("cest").textContent = estLine(stops, true);
-    var info = dirUrl(stops, tm);
-    box.hidden = false;
-    box.innerHTML = '<a id="customGoogle" href="' + esc(info.url) + '" target="_blank" rel="noopener">' + PIN + esc(T("openG")) + '</a><a id="customApple" href="' + esc(appleDir(stops, tm)) + '" target="_blank" rel="noopener">' + PIN + esc(T("iphone")) + "</a>";
-    if (trim) {
-      trim.hidden = !info.trimmed;
-      trim.textContent = info.trimmed ? T("trim") : "";
-    }
+    if (trim) { trim.hidden = true; trim.textContent = ""; }
+    var cest = document.getElementById("cest");
+    if (cest) cest.textContent = stops.length === 1 ? T("need2") : "";
   }
   function openCustom() {
     mode = "custom";
@@ -290,8 +215,6 @@
     if (routeView) routeView.innerHTML = "";
     var blurb = document.getElementById("blurb");
     if (blurb) blurb.textContent = T("customNote");
-    var est = document.getElementById("est");
-    if (est) est.textContent = "";
     document.getElementById("customView").hidden = false;
     renderChecks();
   }
@@ -383,7 +306,7 @@
       view.setAttribute("data-stops", "0");
       return;
     }
-    var html = '<p class="est">' + esc(T("wishCount").replace("{n}", String(stops.length))) + "</p>";
+    var html = "";
     var n = 0;
     stops.forEach(function (p) {
       n += 1;
@@ -400,14 +323,6 @@
       html += buttons(p);
       html += "</div></article>";
     });
-    var mapped = stops.filter(function (p) { return typeof p.lat === "number"; });
-    var forMap = town ? mapped : withZiaView(mapped);
-    var tm = town ? "walk" : "drive";
-    var info = dirUrl(forMap, tm);
-    if (info) {
-      html += '<div class="map-row route-all"><a id="routeGoogle" href="' + esc(info.url) + '" target="_blank" rel="noopener">' + PIN + esc(T("openG")) + '</a><a id="routeApple" href="' + esc(appleDir(forMap, tm)) + '" target="_blank" rel="noopener">' + PIN + esc(T("iphone")) + "</a></div>";
-      if (info.trimmed) html += '<p class="est">' + esc(T("trim")) + "</p>";
-    }
     view.innerHTML = html;
     view.setAttribute("data-stops", String(stops.length));
     view.setAttribute("data-mode", wishMode);
