@@ -360,25 +360,25 @@
     view.setAttribute("data-stops", String(stops.length));
     view.setAttribute("data-mode", wishMode);
   }
-  function ziaFoldCard(open) {
-    var html = '<article class="stop zia-fold">';
+  function ziaOffer() {
+    var html = '<section class="zia-group" data-zia-group="1" data-zia-offer="1">';
+    html += '<article class="stop" data-zia-gate="1">';
     html += '<img src="img/gids/route-zia-uitzicht.jpg" alt="">';
-    html += "<h2>" + esc(T("ziaTile")) + "</h2>";
-    html += '<div class="body"><button type="button" class="open-btn" data-zia="fold">' + esc(open ? T("ziaFold") : T("ziaUnfold")) + "</button></div>";
-    html += "</article>";
+    html += "<h2>" + esc(T("ziaOffer")) + "</h2>";
+    html += '<div class="body"><p>' + esc(T("ziaTileText")) + "</p>";
+    html += '<button type="button" class="open-btn" data-zia="add">' + esc(T("ziaPut")) + "</button>";
+    html += "</div></article></section>";
     return html;
   }
   function ziaEigen(n) {
-    if (eigenZia === "shut") return ziaFoldCard(false);
+    if (eigenZia !== "in") return ziaOffer();
     var letters = ["a", "b", "c"];
-    var added = eigenZia === "in";
-    var html = '<section class="zia-group" data-zia-group="1"' + (added ? ' data-zia-in="1"' : ' data-zia-preview="1"') + ">";
-    if (added) html += '<p class="zia-label">' + esc(T("ziaTile")) + "</p>";
-    else html += ziaFoldCard(true) + '<p class="zia-note">' + esc(T("ziaPreview")) + "</p>";
+    var html = '<section class="zia-group" data-zia-group="1" data-zia-in="1">';
+    html += '<p class="zia-label">' + esc(T("ziaOffer")) + "</p>";
     ZIA_CPS.forEach(function (c, i) {
-      html += ziaPointCard(added ? n + letters[i] : "", c, i);
+      html += ziaPointCard(n + letters[i], c, i);
     });
-    html += '<button type="button" class="open-btn zia-act" data-zia="' + (added ? "remove" : "add") + '">' + esc(added ? T("ziaRemove") : T("ziaMine")) + "</button>";
+    html += '<button type="button" class="open-btn zia-act" data-zia="remove">' + esc(T("ziaRemove")) + "</button>";
     html += "</section>";
     return html;
   }
