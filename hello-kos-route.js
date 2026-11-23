@@ -142,7 +142,10 @@
     var view = document.getElementById("routeView");
     view.innerHTML = html;
     view.setAttribute("data-stops", String(stops.length));
-    document.getElementById("blurb").textContent = T(noteKey);
+    var blurb = document.getElementById("blurb");
+    var note = T(noteKey);
+    blurb.hidden = !note;
+    blurb.textContent = note;
   }
   function loadPicks() {
     try {
@@ -214,7 +217,11 @@
     var routeView = document.getElementById("routeView");
     if (routeView) routeView.innerHTML = "";
     var blurb = document.getElementById("blurb");
-    if (blurb) blurb.textContent = T("customNote");
+    if (blurb) {
+      var note = T("customNote");
+      blurb.hidden = !note;
+      blurb.textContent = note;
+    }
     document.getElementById("customView").hidden = false;
     renderChecks();
   }

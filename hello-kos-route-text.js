@@ -25,8 +25,8 @@ window.HK_ROUTE_TEXT = {
     "sight-westelijke-opgraving": "Westelijke opgravingen. Een middeleeuwse wijk met Romeinse straten, baden en mozaïeken.",
     "sight-casa-romana": "Casa Romana, de best bewaarde Romeinse huizen. Opgegraven in 1933, gerestaureerd in 1940.",
     "sight-altaar-dionysos": "Altaar van Dionysos, 2e eeuw v.Chr., de god van wijn en feest.",
-    "sight-therma": "Natuurlijke hete bron aan zee, bij Psalidi. Op de oude site heet de plek Embros Thermes.",
-    "sight-asklepion": "Asklepion, de archeologische site die met Hippocrates verbonden is. Op de oude site bij Platani.",
+    "sight-therma": "Natuurlijke hete bron aan zee, bij Psalidi. De plek heet ook Embros Thermes.",
+    "sight-asklepion": "Asklepion, de archeologische site die met Hippocrates verbonden is, bij Platani.",
     "sight-hippocratic-foundation": "International Hippocratic Foundation, een museum bij het Asklepion in Platani.",
     "sight-zia": "Bergdorp Zia.",
     "sight-palio-pyli": "Palio Pyli, het verlaten dorp. De bestaande tekst noemt cholera rond 1830.",
@@ -38,7 +38,7 @@ window.HK_ROUTE_TEXT = {
     "sight-agios-stefanos-kefalos": "Agios Stefanos bij Kefalos: een basiliek bij het strand, met het eilandje Kastri erbij.",
     "sight-kapel-agios-nikolaos": "Het witte kerkje van Agios Nikolaos op het eilandje Kastri, vlak voor de kust bij Agios Stefanos.",
     "sight-cavo-paradiso": "Cavo Paradiso, een rustig strand bij Kefalos. Het laatste stuk is een onverharde weg.",
-    "sight-limnionas": "Limnionas, een baai. De bestaande route noemt de plek bereikbaar met de auto."
+    "sight-limnionas": "Limnionas, een baai. Je kunt er met de auto komen."
   },
   "de": {
     "sight-witte-trappen": "Weiße Treppe mit blauen Akzenten. Sie führt zu einer Fischtaverne und ist ein Fotostopp.",
@@ -66,8 +66,8 @@ window.HK_ROUTE_TEXT = {
     "sight-westelijke-opgraving": "Westliche Ausgrabungen. Ein mittelalterliches Viertel mit römischen Straßen, Bädern und Mosaiken.",
     "sight-casa-romana": "Casa Romana, die am besten erhaltenen römischen Häuser. Ausgegraben 1933, restauriert 1940.",
     "sight-altaar-dionysos": "Altar des Dionysos, 2. Jahrhundert v. Chr., Gott von Wein und Fest.",
-    "sight-therma": "Natürliche heiße Quelle am Meer, bei Psalidi. Auf der alten Website heißt der Ort Embros Thermes.",
-    "sight-asklepion": "Asklepion, die archäologische Stätte, die mit Hippokrates verbunden ist. Auf der alten Website bei Platani.",
+    "sight-therma": "Natürliche heiße Quelle am Meer, bei Psalidi. Der Ort heißt auch Embros Thermes.",
+    "sight-asklepion": "Asklepion, die archäologische Stätte, die mit Hippokrates verbunden ist, bei Platani.",
     "sight-hippocratic-foundation": "International Hippocratic Foundation, ein Museum beim Asklepion in Platani.",
     "sight-zia": "Bergdorf Zia.",
     "sight-palio-pyli": "Palio Pyli, das verlassene Dorf. Der vorhandene Text nennt die Cholera um 1830.",
@@ -79,7 +79,7 @@ window.HK_ROUTE_TEXT = {
     "sight-agios-stefanos-kefalos": "Agios Stefanos bei Kefalos: eine Basilika am Strand, mit der kleinen Insel Kastri.",
     "sight-kapel-agios-nikolaos": "Die weiße Kapelle Agios Nikolaos auf der kleinen Insel Kastri, direkt vor der Küste bei Agios Stefanos.",
     "sight-cavo-paradiso": "Cavo Paradiso, ein ruhiger Strand bei Kefalos. Das letzte Stück ist eine unbefestigte Straße.",
-    "sight-limnionas": "Limnionas, eine Bucht. Die bestehende Route nennt den Ort mit dem Auto erreichbar."
+    "sight-limnionas": "Limnionas, eine Bucht. Du kannst mit dem Auto hinkommen."
   },
   "en": {
     "sight-witte-trappen": "White steps with blue accents. They lead to a fish taverna and are a photo stop.",
@@ -107,8 +107,8 @@ window.HK_ROUTE_TEXT = {
     "sight-westelijke-opgraving": "Western excavations. A medieval quarter with Roman streets, baths and mosaics.",
     "sight-casa-romana": "Casa Romana, the best preserved Roman houses. Excavated in 1933, restored in 1940.",
     "sight-altaar-dionysos": "Altar of Dionysos, 2nd century BC, the god of wine and feasting.",
-    "sight-therma": "Natural hot spring by the sea, at Psalidi. On the old site the place is called Embros Thermes.",
-    "sight-asklepion": "Asklepion, the archaeological site linked with Hippocrates. On the old site it is at Platani.",
+    "sight-therma": "Natural hot spring by the sea, at Psalidi. The place is also called Embros Thermes.",
+    "sight-asklepion": "Asklepion, the archaeological site linked with Hippocrates, at Platani.",
     "sight-hippocratic-foundation": "International Hippocratic Foundation, a museum by the Asklepion in Platani.",
     "sight-zia": "The mountain village of Zia.",
     "sight-palio-pyli": "Palio Pyli, the abandoned village. The existing text mentions cholera around 1830.",
@@ -120,7 +120,7 @@ window.HK_ROUTE_TEXT = {
     "sight-agios-stefanos-kefalos": "Agios Stefanos near Kefalos: a basilica by the beach, with the islet of Kastri.",
     "sight-kapel-agios-nikolaos": "The white chapel of Agios Nikolaos on the islet of Kastri, just off the shore at Agios Stefanos.",
     "sight-cavo-paradiso": "Cavo Paradiso, a quiet beach near Kefalos. The last stretch is an unpaved road.",
-    "sight-limnionas": "Limnionas, a bay. The existing route calls the place reachable by car."
+    "sight-limnionas": "Limnionas, a bay. You can get there by car."
   },
   "it": {
     "sight-witte-trappen": "Scale bianche con dettagli blu. Portano a una taverna di pesce e sono una tappa foto.",
@@ -148,8 +148,8 @@ window.HK_ROUTE_TEXT = {
     "sight-westelijke-opgraving": "Scavi occidentali. Un quartiere medievale con strade romane, terme e mosaici.",
     "sight-casa-romana": "Casa Romana, le case romane meglio conservate. Scavate nel 1933, restaurate nel 1940.",
     "sight-altaar-dionysos": "Altare di Dioniso, II secolo a.C., dio del vino e della festa.",
-    "sight-therma": "Sorgente calda naturale sul mare, a Psalidi. Sul vecchio sito il luogo si chiama Embros Thermes.",
-    "sight-asklepion": "Asklepion, il sito archeologico legato a Ippocrate. Sul vecchio sito sta a Platani.",
+    "sight-therma": "Sorgente calda naturale sul mare, a Psalidi. Il luogo si chiama anche Embros Thermes.",
+    "sight-asklepion": "Asklepion, il sito archeologico legato a Ippocrate, a Platani.",
     "sight-hippocratic-foundation": "International Hippocratic Foundation, un museo presso l’Asklepion a Platani.",
     "sight-zia": "Il villaggio di montagna di Zia.",
     "sight-palio-pyli": "Palio Pyli, il villaggio abbandonato. Il testo già presente cita il colera intorno al 1830.",
@@ -161,7 +161,7 @@ window.HK_ROUTE_TEXT = {
     "sight-agios-stefanos-kefalos": "Agios Stefanos presso Kefalos: una basilica sulla spiaggia, con l’isoletta Kastri.",
     "sight-kapel-agios-nikolaos": "La cappella bianca di Agios Nikolaos sull’isoletta Kastri, proprio davanti alla costa di Agios Stefanos.",
     "sight-cavo-paradiso": "Cavo Paradiso, una spiaggia tranquilla vicino a Kefalos. L’ultimo tratto è una strada sterrata.",
-    "sight-limnionas": "Limnionas, una baia. Il percorso già presente lo indica raggiungibile in auto."
+    "sight-limnionas": "Limnionas, una baia. Ci arrivi in auto."
   },
   "tr": {
     "sight-witte-trappen": "Mavi ayrıntılı beyaz merdivenler. Bir balık tavernasına çıkar ve fotoğraf yeridir.",
@@ -189,8 +189,8 @@ window.HK_ROUTE_TEXT = {
     "sight-westelijke-opgraving": "Batı kazıları. Roma sokakları, hamamlar ve mozaikler olan bir orta çağ mahallesi.",
     "sight-casa-romana": "Casa Romana, en iyi korunan Roma evleri. 1933’te kazıldı, 1940’ta onarıldı.",
     "sight-altaar-dionysos": "Dionysos sunağı, MÖ 2. yüzyıl, şarap ve şölen tanrısı.",
-    "sight-therma": "Psalidi’de deniz kenarında doğal sıcak su. Eski sitede adı Embros Thermes.",
-    "sight-asklepion": "Asklepion, Hipokrat ile bağlantılı arkeolojik alan. Eski sitede Platani’de.",
+    "sight-therma": "Psalidi’de deniz kenarında doğal sıcak su. Yerin adı Embros Thermes olarak da geçer.",
+    "sight-asklepion": "Asklepion, Hipokrat ile bağlantılı arkeolojik alan, Platani’de.",
     "sight-hippocratic-foundation": "International Hippocratic Foundation, Platani’de Asklepion yanındaki müze.",
     "sight-zia": "Dağ köyü Zia.",
     "sight-palio-pyli": "Palio Pyli, terk edilmiş köy. Sitedeki metin 1830 civarında kolerayı anar.",
@@ -202,7 +202,7 @@ window.HK_ROUTE_TEXT = {
     "sight-agios-stefanos-kefalos": "Kefalos’ta Agios Stefanos: plaj kenarında bir bazilika, yanında Kastri adacığı.",
     "sight-kapel-agios-nikolaos": "Agios Stefanos kıyısının hemen açığındaki Kastri adacığında beyaz Agios Nikolaos şapeli.",
     "sight-cavo-paradiso": "Cavo Paradiso, Kefalos yakınında sakin bir plaj. Son bölüm toprak yol.",
-    "sight-limnionas": "Limnionas, bir koy. Sitedeki rota buraya arabayla gidilebildiğini söyler."
+    "sight-limnionas": "Limnionas, bir koy. Arabayla gidebilirsin."
   },
   "es": {
     "sight-witte-trappen": "Escaleras blancas con detalles azules. Llevan a una taberna de pescado y son una parada para fotos.",
@@ -230,8 +230,8 @@ window.HK_ROUTE_TEXT = {
     "sight-westelijke-opgraving": "Excavaciones del oeste. Un barrio medieval con calles romanas, baños y mosaicos.",
     "sight-casa-romana": "Casa Romana, las casas romanas mejor conservadas. Excavadas en 1933, restauradas en 1940.",
     "sight-altaar-dionysos": "Altar de Dioniso, siglo II a. C., dios del vino y de la fiesta.",
-    "sight-therma": "Fuente caliente natural junto al mar, en Psalidi. En la web antigua el lugar se llama Embros Thermes.",
-    "sight-asklepion": "Asklepion, el sitio arqueológico ligado a Hipócrates. En la web antigua está en Platani.",
+    "sight-therma": "Fuente caliente natural junto al mar, en Psalidi. El lugar también se llama Embros Thermes.",
+    "sight-asklepion": "Asklepion, el sitio arqueológico ligado a Hipócrates, en Platani.",
     "sight-hippocratic-foundation": "International Hippocratic Foundation, un museo junto al Asklepion en Platani.",
     "sight-zia": "El pueblo de montaña de Zia.",
     "sight-palio-pyli": "Palio Pyli, el pueblo abandonado. El texto que ya está cita el cólera hacia 1830.",
@@ -243,6 +243,6 @@ window.HK_ROUTE_TEXT = {
     "sight-agios-stefanos-kefalos": "Agios Stefanos junto a Kefalos: una basílica en la playa, con el islote Kastri.",
     "sight-kapel-agios-nikolaos": "La capilla blanca de Agios Nikolaos en el islote Kastri, justo frente a la costa de Agios Stefanos.",
     "sight-cavo-paradiso": "Cavo Paradiso, una playa tranquila cerca de Kefalos. El último tramo es un camino sin asfaltar.",
-    "sight-limnionas": "Limnionas, una bahía. La ruta que ya está la llama accesible en coche."
+    "sight-limnionas": "Limnionas, una bahía. Se llega en coche."
   }
 };
