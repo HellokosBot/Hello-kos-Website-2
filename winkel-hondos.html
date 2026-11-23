@@ -27,7 +27,11 @@ a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba
 .loc-card h2{font-size:1.05rem;margin:0 0 8px}
 .loc-name{font-weight:800;font-size:1.05rem}
 .loc-list a{color:var(--petrol);font-weight:700}
-.cap{margin:-6px 0 12px;font-size:.78rem;color:var(--text-soft)}
+.photo{display:block;width:100%;height:auto;border-radius:14px;margin:0 0 12px}
+body.hk-page .hero-wrap.shops-hero{aspect-ratio:auto;min-height:210px;display:flex;align-items:flex-end;overflow:hidden;margin:-16px -14px 12px}
+body.hk-page .hero-wrap.shops-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%}
+body.hk-page .shops-hero-copy{position:relative;z-index:1;width:100%;box-sizing:border-box;padding:36px 16px 14px;background:linear-gradient(to top,rgba(13,26,26,.94) 0%,rgba(13,26,26,.78) 46%,rgba(13,26,26,.28) 78%,rgba(13,26,26,0) 100%)}
+body.hk-page .shops-hero h1{color:#fff;margin:0;text-shadow:0 1px 6px rgba(0,0,0,.55)}
 body.hk-page .map-row{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:stretch;gap:8px;width:100%;max-width:100%;margin:12px 0 0;box-sizing:border-box}
 body.hk-page .map-row .btn{flex:1 1 0;width:0;max-width:none;min-width:0;padding:12px 8px;font-size:.82rem}
 body.hk-page .map-row .pin{flex:0 0 16px;width:16px;height:16px}
@@ -55,21 +59,17 @@ body.hk-page .map-row .pin{flex:0 0 16px;width:16px;height:16px}
 <div class="overlay" id="overlay"></div>
 <main class="main">
 <p class="parent-link"><a href="winkel-drogisterij.html" data-i18n="back">← Drogisterij</a></p>
+<div class="hero-wrap shops-hero">
+<img src="img/hk/hondos-gevel-kos.jpg" alt="">
+<div class="shops-hero-copy">
 <h1 data-i18n="title">Hondos Center</h1>
+</div>
+</div>
 <article class="card">
 <p data-i18n="p0">Hondos Center op Kos is een Grieks warenhuis van een bekende keten. Het is vooral een winkel voor beauty, cosmetica, parfum en verzorging, en er is ook kleding en accessoires. De meeste mensen komen voor parfum.</p>
 <p data-i18n="p1">Je vindt er make-up van bekende merken, zoals Dior en MAC, en een ruim aanbod dames- en herenparfum, ook van duurdere merken. Daarnaast crèmes, serums en dagelijkse huidverzorging, en producten voor je haar.</p>
-<img class="strip" src="img/hk/winkel-hondos-parfum.jpg" alt="">
-<p class="cap" data-i18n="capShelf">Parfumflesjes in een winkel. De foto is een voorbeeld en is niet op Kos gemaakt.</p>
-<p class="cap" data-i18n="capCredit">Foto: Dev Jadiya, Wikimedia Commons, CC BY-SA 4.0</p>
+<img class="photo" src="img/hk/hondos-interieur.jpg" alt="">
 <p data-i18n="p2">Het voelt meer als een compact warenhuis dan als alleen een cosmeticawinkel. In het centrum van Kos-stad is het een van de grotere winkels op het eiland voor cosmetica, parfum en beauty.</p>
-<!-- Gevel van een echte Hondos Center-winkel, al in de repo. Niet gecontroleerd als de vestiging op Kos. -->
-<img class="strip" src="img/hk/winkel-hondos.jpg" alt="">
-<p class="cap" data-i18n="capShop">Een winkel van de keten Hondos Center. Deze foto is niet van de vestiging op Kos.</p>
-<img class="strip" src="img/hk/winkel-hondos-flessen.jpg" alt="">
-<!-- Flessen in een oude winkel: Edvinas Bruzas, CC0, Wikimedia Commons. -->
-<p data-i18n="p3">De winkel is meestal ’s ochtends open, en op maandag, dinsdag, donderdag en vrijdag ook ’s avonds. Woensdag en zaterdag meestal alleen de ochtend. Zondag is de winkel dicht.</p>
-<p data-i18n="p4">Bezoekers geven de winkel ongeveer 4,3 van 5, uit zo’n 379 beoordelingen.</p>
 <h3 data-i18n="addrH">Adres</h3>
 <p class="addr"><strong>Eleftheriou Venizelou 17, Kos-stad</strong></p>
 <h3 data-i18n="hoursH">Openingstijden</h3><div class="hours">
@@ -113,61 +113,31 @@ window.HK_DICT = {
     "p0": "Hondos Center en Kos es un gran almacén griego de una cadena conocida. La tienda se centra en belleza, cosmética, perfume y cuidado, y también vende ropa y complementos. La mayoría viene por el perfume.",
     "p1": "Hay maquillaje de marcas conocidas, como Dior y MAC, y mucha oferta de perfume de mujer y de hombre, también de marcas más caras. Además cremas, sérums y cuidado diario de la piel, y productos para el pelo.",
     "p2": "Se parece más a unos grandes almacenes compactos que a una tienda solo de cosmética. En el centro de la ciudad de Kos es una de las tiendas más grandes de la isla para cosmética, perfume y belleza.",
-    "p3": "Suele abrir por la mañana y, los lunes, martes, jueves y viernes, también por la tarde-noche. Miércoles y sábado normalmente solo por la mañana. El domingo está cerrada.",
-    "p4": "Quien la visita la valora con unos 4,3 de 5, a partir de unas 379 opiniones.",
-    "capShelf": "Frascos de perfume en una tienda. La foto es un ejemplo y no está hecha en Kos.",
-    "capCredit": "Foto: Dev Jadiya, Wikimedia Commons, CC BY-SA 4.0",
-    "capShop": "Una tienda de la cadena Hondos Center. Esta foto no es la de Kos.",
     "gmaps": "Google Maps",
     "iphone": "iPhone",
     "p0": "Kos’taki Hondos Center, tanınmış bir zincirin Yunan mağazasıdır. Ağırlık beauty, kozmetik, parfüm ve bakım ürünlerindedir; giyim ve aksesuar da vardır. İnsanların çoğu parfüm için gelir.",
     "p1": "Dior ve MAC gibi bilinen markaların makyajı vardır, kadın ve erkek parfümünde geniş bir seçki, daha pahalı markalar da. Ayrıca krem, serum, günlük cilt bakımı ve saç ürünleri bulunur.",
     "p2": "Yalnızca bir kozmetik dükkanından çok, kompakt bir mağaza gibidir. Kos şehir merkezinde, ada üzerinde kozmetik, parfüm ve beauty için daha büyük dükkanlardan biridir.",
-    "p3": "Genellikle sabah açıktır; pazartesi, salı, perşembe ve cuma akşam da açıktır. Çarşamba ve cumartesi çoğunlukla yalnız sabahtır. Pazar kapalıdır.",
-    "p4": "Ziyaretçiler dükkana yaklaşık 5 üzerinden 4,3 veriyor, yaklaşık 379 değerlendirmeden.",
-    "capShelf": "Bir dükkanda parfüm şişeleri. Fotoğraf bir örnektir ve Kos’ta çekilmedi.",
-    "capCredit": "Foto: Dev Jadiya, Wikimedia Commons, CC BY-SA 4.0",
-    "capShop": "Hondos Center zincirinden bir dükkan. Bu fotoğraf Kos şubesine ait değil.",
     "gmaps": "Google Maps",
     "iphone": "iPhone",
     "p0": "Hondos Center a Kos è un grande magazzino greco di una catena nota. Il negozio è soprattutto per beauty, cosmetici, profumo e cura della persona, e vende anche abiti e accessori. La maggior parte della gente viene per il profumo.",
     "p1": "Ci sono trucchi di marchi noti, come Dior e MAC, e un’ampia scelta di profumi da donna e da uomo, anche di marche più care. Poi creme, sieri e cura quotidiana della pelle, e prodotti per i capelli.",
     "p2": "Sembra più un grande magazzino compatto che solo un negozio di cosmetici. Nel centro di Kos città è uno dei negozi più grandi dell’isola per cosmetici, profumo e beauty.",
-    "p3": "Di solito è aperto la mattina e, lunedì, martedì, giovedì e venerdì, anche la sera. Mercoledì e sabato di solito solo la mattina. Domenica è chiuso.",
-    "p4": "I visitatori danno al negozio circa 4,3 su 5, da circa 379 recensioni.",
-    "capShelf": "Boccette di profumo in un negozio. La foto è un esempio e non è stata scattata a Kos.",
-    "capCredit": "Foto: Dev Jadiya, Wikimedia Commons, CC BY-SA 4.0",
-    "capShop": "Un negozio della catena Hondos Center. Questa foto non è la sede di Kos.",
     "gmaps": "Google Maps",
     "iphone": "iPhone",
     "p0": "Hondos Center on Kos is a Greek department store from a well-known chain. The shop is mainly for beauty, cosmetics, perfume and care products, and it also sells clothes and accessories. Most people come for the perfume.",
     "p1": "You will find make-up from well-known brands, such as Dior and MAC, and a wide range of women’s and men’s perfume, including pricier brands. There are also creams, serums and everyday skin care, and hair products.",
     "p2": "It feels more like a compact department store than just a cosmetics shop. In the centre of Kos town it is one of the larger shops on the island for cosmetics, perfume and beauty.",
-    "p3": "The shop is usually open in the morning, and on Monday, Tuesday, Thursday and Friday also in the evening. Wednesday and Saturday are usually morning only. Sunday it is closed.",
-    "p4": "Visitors rate the shop about 4.3 out of 5, from around 379 reviews.",
-    "capShelf": "Perfume bottles in a shop. The photo is an example and was not taken on Kos.",
-    "capCredit": "Photo: Dev Jadiya, Wikimedia Commons, CC BY-SA 4.0",
-    "capShop": "A shop of the Hondos Center chain. This photo is not the branch on Kos.",
     "gmaps": "Google Maps",
     "iphone": "iPhone",
     "p0": "Hondos Center auf Kos ist ein griechisches Kaufhaus einer bekannten Kette. Der Laden ist vor allem für Beauty, Kosmetik, Parfum und Pflege da und hat auch Kleidung und Accessoires. Die meisten Leute kommen wegen des Parfums.",
     "p1": "Es gibt Make-up bekannter Marken, etwa Dior und MAC, und eine große Auswahl an Damen- und Herrenparfum, auch von teureren Marken. Dazu Cremes, Seren und tägliche Hautpflege, und Produkte für die Haare.",
     "p2": "Es ist eher ein kompaktes Kaufhaus als nur ein Kosmetikladen. Im Zentrum von Kos-Stadt ist es einer der größeren Läden auf der Insel für Kosmetik, Parfum und Beauty.",
-    "p3": "Der Laden ist meistens morgens offen und montags, dienstags, donnerstags und freitags auch abends. Mittwoch und Samstag meistens nur der Vormittag. Sonntag ist zu.",
-    "p4": "Besucher geben dem Laden etwa 4,3 von 5, aus rund 379 Bewertungen.",
-    "capShelf": "Parfumflaschen in einem Laden. Das Foto ist ein Beispiel und nicht auf Kos entstanden.",
-    "capCredit": "Foto: Dev Jadiya, Wikimedia Commons, CC BY-SA 4.0",
-    "capShop": "Ein Laden der Kette Hondos Center. Dieses Foto ist nicht die Filiale auf Kos.",
     "gmaps": "Google Maps",
     "iphone": "iPhone",
     "p0": "Hondos Center op Kos is een Grieks warenhuis van een bekende keten. Het is vooral een winkel voor beauty, cosmetica, parfum en verzorging, en er is ook kleding en accessoires. De meeste mensen komen voor parfum.",
     "p1": "Je vindt er make-up van bekende merken, zoals Dior en MAC, en een ruim aanbod dames- en herenparfum, ook van duurdere merken. Daarnaast crèmes, serums en dagelijkse huidverzorging, en producten voor je haar.",
     "p2": "Het voelt meer als een compact warenhuis dan als alleen een cosmeticawinkel. In het centrum van Kos-stad is het een van de grotere winkels op het eiland voor cosmetica, parfum en beauty.",
-    "p3": "De winkel is meestal ’s ochtends open, en op maandag, dinsdag, donderdag en vrijdag ook ’s avonds. Woensdag en zaterdag meestal alleen de ochtend. Zondag is de winkel dicht.",
-    "p4": "Bezoekers geven de winkel ongeveer 4,3 van 5, uit zo’n 379 beoordelingen.",
-    "capShelf": "Parfumflesjes in een winkel. De foto is een voorbeeld en is niet op Kos gemaakt.",
-    "capCredit": "Foto: Dev Jadiya, Wikimedia Commons, CC BY-SA 4.0",
-    "capShop": "Een winkel van de keten Hondos Center. Deze foto is niet van de vestiging op Kos.",
     "gmaps": "Google Maps",
     "iphone": "iPhone"
   },
