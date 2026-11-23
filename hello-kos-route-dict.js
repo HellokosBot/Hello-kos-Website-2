@@ -12,7 +12,6 @@ window.HK_DICT = {
     "gmaps": "Google Maps",
     "iphone": "iPhone",
     "openG": "Start route in Google Maps",
-    "info": "Info",
     "trim": "Google Maps neemt in deze link hoogstens 9 tussenstops mee. De extra stops blijven in de lijst staan.",
     "est": "Schatting: {n} stops, ongeveer {km} km in vogelvlucht. Geen reistijd. Google Maps toont de afstand en de tijd.",
     "estKind": "Indicatie: {kind} (schatting).",
@@ -24,10 +23,7 @@ window.HK_DICT = {
     "driveTitle": "Rijroute",
     "makeTitle": "Zelf samenstellen",
     "backRoute": "← Route",
-    "cpIn": "Ingang",
-    "cpOut": "Uitgang",
-    "cpCheck": "Controlepunt",
-    "walkOnlyNote": "Eén wandelroute, de lange route. Ingang, uitgang en controlepunten staan onder de bijbehorende stop, zonder eigen nummer. Ze tellen in de kaartlink mee, in volgorde.",
+    "walkOnlyNote": "Eén wandelroute, de lange route, in de volgorde van de oude route.",
     "driveShortNote": "Korte rijroute met de stops van de bestaande route voor 1 dag, in die volgorde. De oude site noemde autoroutes, maar zonder een volledige stoppenlijst om over te nemen. Geen verzonnen tijd: Google Maps toont afstand en tijd.",
     "driveLongNote": "Lange rijroute met de stops van de bestaande route voor 2 dagen, inclusief de extra stops. Zelfde bron als de korte rijroute. Google Maps toont afstand en tijd.",
     "customNote": "Vink plekken aan, per dorp. Alleen plekken met bekende coördinaten staan in de lijst. Kies lopen of rijden. De route volgt de volgorde van de lijst.",
@@ -46,7 +42,8 @@ window.HK_DICT = {
     "g_antimachia": "Antimachia",
     "g_kefalos": "Kefalos",
     "g_limnionas": "Limnionas",
-    "g_kardamena": "Kardamena"
+    "g_kardamena": "Kardamena",
+    "open": "Bekijk de pagina"
   },
   "de": {
     "title": "Route",
@@ -61,7 +58,6 @@ window.HK_DICT = {
     "gmaps": "Google Maps",
     "iphone": "iPhone",
     "openG": "Route in Google Maps starten",
-    "info": "Info",
     "trim": "Google Maps übernimmt in diesem Link höchstens 9 Zwischenstopps. Die weiteren Stopps bleiben in der Liste.",
     "est": "Schätzung: {n} Stopps, etwa {km} km Luftlinie. Keine Fahrzeit. Google Maps zeigt Entfernung und Zeit.",
     "estKind": "Hinweis: {kind} (Schätzung).",
@@ -73,10 +69,7 @@ window.HK_DICT = {
     "driveTitle": "Fahrroute",
     "makeTitle": "Selbst zusammenstellen",
     "backRoute": "← Route",
-    "cpIn": "Eingang",
-    "cpOut": "Ausgang",
-    "cpCheck": "Kontrollpunkt",
-    "walkOnlyNote": "Eine Wanderroute, die lange Route. Eingang, Ausgang und Kontrollpunkte stehen unter dem zugehörigen Stopp, ohne eigene Nummer. Sie zählen im Kartenlink mit, in der Reihenfolge.",
+    "walkOnlyNote": "Eine Wanderroute, die lange Route, in der Reihenfolge der alten Route.",
     "driveShortNote": "Kurze Fahrroute mit den Stopps der bestehenden 1-Tages-Route, in dieser Reihenfolge. Die alte Website nannte Autorouten, aber ohne vollständige Stoppliste zum Übernehmen. Keine erfundene Zeit: Google Maps zeigt Entfernung und Zeit.",
     "driveLongNote": "Lange Fahrroute mit den Stopps der bestehenden 2-Tages-Route, inklusive der zusätzlichen Stopps. Dieselbe Quelle wie die kurze Fahrroute. Google Maps zeigt Entfernung und Zeit.",
     "customNote": "Orte anhaken, nach Dorf. Nur Orte mit bekannten Koordinaten stehen in der Liste. Wähle zu Fuß oder fahren. Die Route folgt der Reihenfolge der Liste.",
@@ -95,7 +88,8 @@ window.HK_DICT = {
     "g_antimachia": "Antimachia",
     "g_kefalos": "Kefalos",
     "g_limnionas": "Limnionas",
-    "g_kardamena": "Kardamena"
+    "g_kardamena": "Kardamena",
+    "open": "Seite ansehen"
   },
   "en": {
     "title": "Route",
@@ -110,7 +104,6 @@ window.HK_DICT = {
     "gmaps": "Google Maps",
     "iphone": "iPhone",
     "openG": "Start route in Google Maps",
-    "info": "Info",
     "trim": "This Google Maps link keeps at most 9 stops in between. The extra stops stay in the list.",
     "est": "Estimate: {n} stops, about {km} km in a straight line. No travel time. Google Maps shows the distance and the time.",
     "estKind": "Indication: {kind} (estimate).",
@@ -122,10 +115,7 @@ window.HK_DICT = {
     "driveTitle": "Driving route",
     "makeTitle": "Build your own",
     "backRoute": "← Route",
-    "cpIn": "Entrance",
-    "cpOut": "Exit",
-    "cpCheck": "Control point",
-    "walkOnlyNote": "One walking route, the long one. Entrance, exit and control points sit under the matching stop, without their own number. They stay in the map link, in order.",
+    "walkOnlyNote": "One walking route, the long one, in the old route's order.",
     "driveShortNote": "Short driving route with the stops of the existing 1-day route, in that order. The old site named driving routes, but without a full stop list to copy. No invented time: Google Maps shows distance and time.",
     "driveLongNote": "Long driving route with the stops of the existing 2-day route, including the extra stops. Same source as the short drive. Google Maps shows distance and time.",
     "customNote": "Tick places, grouped by village. Only places with known coordinates are in the list. Choose walking or driving. The route follows the list order.",
@@ -144,7 +134,8 @@ window.HK_DICT = {
     "g_antimachia": "Antimachia",
     "g_kefalos": "Kefalos",
     "g_limnionas": "Limnionas",
-    "g_kardamena": "Kardamena"
+    "g_kardamena": "Kardamena",
+    "open": "View the page"
   },
   "it": {
     "title": "Percorso",
@@ -159,7 +150,6 @@ window.HK_DICT = {
     "gmaps": "Google Maps",
     "iphone": "iPhone",
     "openG": "Avvia il percorso in Google Maps",
-    "info": "Info",
     "trim": "Questo link di Google Maps tiene al massimo 9 tappe intermedie. Le altre restano nell’elenco.",
     "est": "Stima: {n} tappe, circa {km} km in linea d’aria. Nessun tempo di viaggio. Google Maps mostra distanza e tempo.",
     "estKind": "Indicazione: {kind} (stima).",
@@ -171,10 +161,7 @@ window.HK_DICT = {
     "driveTitle": "Percorso in auto",
     "makeTitle": "Componi da solo",
     "backRoute": "← Percorso",
-    "cpIn": "Ingresso",
-    "cpOut": "Uscita",
-    "cpCheck": "Punto di controllo",
-    "walkOnlyNote": "Un solo percorso a piedi, quello lungo. Ingresso, uscita e punti di controllo stanno sotto la tappa, senza un numero proprio. Restano nel link della mappa, in ordine.",
+    "walkOnlyNote": "Un solo percorso a piedi, quello lungo, nell'ordine del vecchio percorso.",
     "driveShortNote": "Percorso breve in veicolo con le tappe del percorso di 1 giorno già presente, in quell’ordine. Il vecchio sito nominava percorsi in auto, senza un elenco completo da copiare. Nessun tempo inventato: Google Maps mostra distanza e tempo.",
     "driveLongNote": "Percorso lungo in veicolo con le tappe del percorso di 2 giorni, comprese le tappe in più. Stessa fonte del percorso breve. Google Maps mostra distanza e tempo.",
     "customNote": "Spunta i luoghi, per villaggio. Nell’elenco ci sono solo luoghi con coordinate note. Scegli a piedi o in veicolo. Il percorso segue l’ordine dell’elenco.",
@@ -193,7 +180,8 @@ window.HK_DICT = {
     "g_antimachia": "Antimachia",
     "g_kefalos": "Kefalos",
     "g_limnionas": "Limnionas",
-    "g_kardamena": "Kardamena"
+    "g_kardamena": "Kardamena",
+    "open": "Vedi la pagina"
   },
   "tr": {
     "title": "Rota",
@@ -208,7 +196,6 @@ window.HK_DICT = {
     "gmaps": "Google Maps",
     "iphone": "iPhone",
     "openG": "Rotayı Google Maps’te başlat",
-    "info": "Bilgi",
     "trim": "Bu Google Maps bağlantısı en fazla 9 ara durak alır. Fazla duraklar listede kalır.",
     "est": "Tahmin: {n} durak, kuş uçuşu yaklaşık {km} km. Yol süresi yok. Mesafe ve süreyi Google Maps gösterir.",
     "estKind": "Gösterge: {kind} (tahmin).",
@@ -220,10 +207,7 @@ window.HK_DICT = {
     "driveTitle": "Araç rotası",
     "makeTitle": "Kendin oluştur",
     "backRoute": "← Rota",
-    "cpIn": "Giriş",
-    "cpOut": "Çıkış",
-    "cpCheck": "Kontrol noktası",
-    "walkOnlyNote": "Tek yürüyüş rotası, uzun olan. Giriş, çıkış ve kontrol noktaları durağın altında durur, kendi numaraları yoktur. Harita bağlantısında sırayla yer alırlar.",
+    "walkOnlyNote": "Tek yürüyüş rotası, uzun olan, eski rotanın sırasında.",
     "driveShortNote": "Kısa araç rotası, sitedeki 1 günlük rotanın duraklarıyla, aynı sırada. Eski site araç rotalarını anıyordu ama kopyalanacak tam bir durak listesi yoktu. Uydurma süre yok: mesafeyi ve süreyi Google Maps gösterir.",
     "driveLongNote": "Uzun araç rotası, sitedeki 2 günlük rotanın duraklarıyla, ek duraklar dahil. Kısa rota ile aynı kaynak. Google Maps mesafe ve süreyi gösterir.",
     "customNote": "Yerleri köye göre işaretle. Listede yalnızca koordinatı bilinen yerler var. Yürüme veya araç seç. Rota listenin sırasını izler.",
@@ -242,7 +226,8 @@ window.HK_DICT = {
     "g_antimachia": "Antimachia",
     "g_kefalos": "Kefalos",
     "g_limnionas": "Limnionas",
-    "g_kardamena": "Kardamena"
+    "g_kardamena": "Kardamena",
+    "open": "Sayfayı aç"
   },
   "es": {
     "title": "Ruta",
@@ -257,7 +242,6 @@ window.HK_DICT = {
     "gmaps": "Google Maps",
     "iphone": "iPhone",
     "openG": "Empezar ruta en Google Maps",
-    "info": "Info",
     "trim": "Este enlace de Google Maps admite como máximo 9 paradas intermedias. Las demás siguen en la lista.",
     "est": "Estimación: {n} paradas, unos {km} km en línea recta. Sin tiempo de viaje. Google Maps muestra la distancia y el tiempo.",
     "estKind": "Indicación: {kind} (estimación).",
@@ -269,10 +253,7 @@ window.HK_DICT = {
     "driveTitle": "Ruta en coche",
     "makeTitle": "Crear la tuya",
     "backRoute": "← Ruta",
-    "cpIn": "Entrada",
-    "cpOut": "Salida",
-    "cpCheck": "Punto de control",
-    "walkOnlyNote": "Una sola ruta a pie, la larga. Entrada, salida y puntos de control van bajo la parada, sin número propio. Siguen en el enlace del mapa, en orden.",
+    "walkOnlyNote": "Una sola ruta a pie, la larga, en el orden de la ruta antigua.",
     "driveShortNote": "Ruta corta en vehículo con las paradas de la ruta de 1 día que ya está en la web, en ese orden. La web antigua nombraba rutas en coche, sin una lista completa para copiar. Sin un tiempo inventado: Google Maps muestra distancia y tiempo.",
     "driveLongNote": "Ruta larga en vehículo con las paradas de la ruta de 2 días, incluidas las paradas extra. La misma fuente que la ruta corta. Google Maps muestra distancia y tiempo.",
     "customNote": "Marca lugares, por pueblo. En la lista solo hay lugares con coordenadas conocidas. Elige a pie o en vehículo. La ruta sigue el orden de la lista.",
@@ -291,6 +272,7 @@ window.HK_DICT = {
     "g_antimachia": "Antimachia",
     "g_kefalos": "Kefalos",
     "g_limnionas": "Limnionas",
-    "g_kardamena": "Kardamena"
+    "g_kardamena": "Kardamena",
+    "open": "Ver la página"
   }
 };

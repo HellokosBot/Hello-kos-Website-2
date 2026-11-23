@@ -5,48 +5,11 @@
   var WALKS = WALKL.slice(0, 8);
   var DRIVES = ["sight-therma","sight-asklepion","sight-zia","sight-zoutmeer-tigaki","sight-kasteel-antimachia","sight-molen-antimachia","sight-agios-stefanos-kefalos","sight-limnionas"];
   var DRIVEL = ["sight-therma","sight-asklepion","sight-hippocratic-foundation","sight-zia","sight-palio-pyli","sight-zoutmeer-tigaki","sight-marmari","sight-mastichari","sight-kasteel-antimachia","sight-molen-antimachia","sight-agios-stefanos-kefalos","sight-limnionas"];
-  /* Control coordinates come from the old walking route's map links (maps.app.goo.gl), resolved to the published pin. Named stops use hello-kos-places.js. */
-  var CP = {
-    c2: { role: "check", lat: 36.89451, lon: 27.288899 },
-    c10: { role: "check", lat: 36.894756, lon: 27.292042 },
-    inAgora: { role: "in", lat: 36.892962, lon: 27.290238 },
-    outAgora: { role: "out", lat: 36.89378, lon: 27.289835 },
-    c25: { role: "check", lat: 36.892289, lon: 27.287083 },
-    c26: { role: "check", lat: 36.891629, lon: 27.286378 },
-    c29: { role: "check", lat: 36.890837, lon: 27.286127 },
-    c31: { role: "check", lat: 36.890303, lon: 27.284375 }
-  };
-  var WALK_STOPS = [
-    { id: "sight-witte-trappen", after: ["c2"] },
-    { id: "sight-i-love-kos" },
-    { id: "sight-palm-tree-lane" },
-    { id: "sight-palazzo-giustizia" },
-    { id: "sight-turks-badhuis" },
-    { id: "sight-boom-hippocrates" },
-    { id: "sight-gazi-hasan" },
-    { id: "sight-neratzia", after: ["c10"] },
-    { id: "sight-albergo-gelsomino" },
-    { id: "sight-kathedraal" },
-    { id: "sight-hatzi-pasha" },
-    { id: "sight-agora", before: ["inAgora"], after: ["outAgora"] },
-    { id: "sight-belastingpoort" },
-    { id: "sight-archeologisch-museum" },
-    { id: "sight-casa-del-fascio" },
-    { id: "sight-defterdar" },
-    { id: "sight-markthal" },
-    { id: "sight-paraskevi" },
-    { id: "sight-old-town" },
-    { id: "sight-morouk", after: ["c25", "c26"] },
-    { id: "sight-eski-tzami", after: ["c29"] },
-    { id: "sight-odeon", after: ["c31"] },
-    { id: "sight-westelijke-opgraving" },
-    { id: "sight-casa-romana" },
-    { id: "sight-altaar-dionysos" }
-  ];
   var GROUPS = ["kos","psalidi","platani","zia","pyli","tigaki","marmari","mastichari","antimachia","kefalos","limnionas"];
   var mode = null;
   var len = null;
   var PIN = '<svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>';
+  var BOOK = '<svg class="book" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 6.1c-1.5-.9-3.3-1.4-5.3-1.4H4.3A1.3 1.3 0 0 0 3 6v11.1c0 .7.6 1.3 1.3 1.3h2.5c1.7 0 3.3.4 5.2 1.4 1.9-1 3.5-1.4 5.2-1.4h2.5c.7 0 1.3-.6 1.3-1.3V6c0-.7-.6-1.3-1.3-1.3h-2.4c-2 0-3.8.5-5.3 1.4zM5 7.1h1.6c1.4 0 2.8.3 4 1v8.4c-1.1-.5-2.5-.8-4-.8H5V7.1zm14 8.6h-1.4c-1.5 0-2.9.3-4 .8V8.1c1.2-.7 2.6-1 4-1H19v8.6z"/></svg>';
 
   function lang() {
     if (window.HK_I18N && HK_I18N.getLang) return HK_I18N.getLang();
@@ -94,6 +57,12 @@
   function aPoint(lat, lon, name) {
     return "https://maps.apple.com/?ll=" + lat + "," + lon + "&q=" + encodeURIComponent(name);
   }
+  function gName(name) {
+    return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(name + " Kos");
+  }
+  function aName(name) {
+    return "https://maps.apple.com/?q=" + encodeURIComponent(name + " Kos");
+  }
   function dirUrl(stops, tm, cap) {
     if (stops.length < 2) return null;
     var mid = stops.slice(1, -1);
@@ -116,7 +85,13 @@
     return "https://maps.apple.com/?saddr=" + encodeURIComponent(stops[0].lat + "," + stops[0].lon) + "&daddr=" + rest + "&dirflg=" + (tm === "drive" ? "d" : "w");
   }
   function buttons(p) {
-    return '<div class="map-row"><a href="' + esc(gPoint(p.lat, p.lon)) + '" target="_blank" rel="noopener">' + PIN + esc(T("gmaps")) + '</a><a href="' + esc(aPoint(p.lat, p.lon, p.name)) + '" target="_blank" rel="noopener">' + PIN + esc(T("iphone")) + '</a></div>';
+    var g = typeof p.lat === "number" ? gPoint(p.lat, p.lon) : gName(p.name);
+    var a = typeof p.lat === "number" ? aPoint(p.lat, p.lon, p.name) : aName(p.name);
+    return '<div class="map-row"><a href="' + esc(g) + '" target="_blank" rel="noopener">' + PIN + esc(T("gmaps")) + '</a><a href="' + esc(a) + '" target="_blank" rel="noopener">' + PIN + esc(T("iphone")) + '</a></div>';
+  }
+  function openBtn(p) {
+    if (!p.link) return "";
+    return '<a class="open-btn" href="' + esc(p.link) + '">' + BOOK + "<span>" + esc(T("open")) + "</span></a>";
   }
   function estLine(stops, withKind) {
     var line = T("est").replace("{n}", String(stops.length)).replace("{km}", kmStr(crow(stops)));
@@ -126,92 +101,34 @@
     }
     return line;
   }
-  function cpLabel(role) {
-    if (role === "in") return T("cpIn");
-    if (role === "out") return T("cpOut");
-    return T("cpCheck");
-  }
-  function cpHtml(key) {
-    var c = CP[key];
-    if (!c) return "";
-    var name = cpLabel(c.role);
-    var html = '<li class="cp ' + c.role + '"><span class="mark" aria-hidden="true"></span><span>' + esc(name) + "</span>";
-    html += '<a href="' + esc(gPoint(c.lat, c.lon)) + '" target="_blank" rel="noopener">' + esc(T("gmaps")) + "</a>";
-    html += "</li>";
-    return html;
-  }
-  function walkPoints() {
-    var pts = [];
-    WALK_STOPS.forEach(function (stop) {
-      (stop.before || []).forEach(function (key) {
-        var c = CP[key];
-        if (c) pts.push({ lat: c.lat, lon: c.lon, name: cpLabel(c.role) });
-      });
-      var p = byId(stop.id);
-      if (p && typeof p.lat === "number") pts.push(p);
-      (stop.after || []).forEach(function (key) {
-        var c = CP[key];
-        if (c) pts.push({ lat: c.lat, lon: c.lon, name: cpLabel(c.role) });
-      });
-    });
-    return pts;
-  }
   function renderWalk() {
-    var html = "";
-    var cpCount = 0;
-    WALK_STOPS.forEach(function (stop, i) {
-      var p = byId(stop.id);
-      html += '<article class="stop">';
-      if (p && p.photo) html += '<img src="' + esc(p.photo) + '" alt="">';
-      html += "<h2>" + (i + 1) + ". " + esc(p ? p.name : stop.id) + "</h2>";
-      html += "<p>" + esc(stopText(stop.id)) + "</p>";
-      if (p && p.link) html += '<p class="info"><a href="' + esc(p.link) + '">' + esc(T("info")) + "</a></p>";
-      var subs = (stop.before || []).concat(stop.after || []);
-      if (subs.length) {
-        html += '<ul class="cps">';
-        subs.forEach(function (key) { html += cpHtml(key); cpCount++; });
-        html += "</ul>";
-      }
-      if (p && typeof p.lat === "number") html += buttons(p);
-      html += "</article>";
-    });
-    var pts = walkPoints();
-    var info = dirUrl(pts, "walk", 0);
-    if (info) {
-      html += '<div class="map-row"><a id="routeGoogle" href="' + esc(info.url) + '" target="_blank" rel="noopener">' + PIN + esc(T("openG")) + '</a><a id="routeApple" href="' + esc(appleDir(pts, "walk")) + '" target="_blank" rel="noopener">' + PIN + esc(T("iphone")) + "</a></div>";
-      if (info.trimmed) html += '<p class="est">' + esc(T("trim")) + "</p>";
-    }
-    var view = document.getElementById("routeView");
-    if (view) view.innerHTML = html;
-    var blurb = document.getElementById("blurb");
-    if (blurb) blurb.textContent = T("walkOnlyNote");
-    var est = document.getElementById("est");
-    if (est) est.textContent = T("est").replace("{n}", String(WALK_STOPS.length)).replace("{km}", kmStr(crow(pts.filter(function (p) { return typeof p.lat === "number"; }))));
-    view.setAttribute("data-stops", String(WALK_STOPS.length));
-    view.setAttribute("data-cps", String(cpCount));
+    showRoute(WALKL, "walkOnlyNote", "walk");
   }
   function showRoute(ids, noteKey, tm) {
     var custom = document.getElementById("customView");
     if (custom) custom.hidden = true;
-    var stops = ids.map(byId).filter(function (p) { return p && typeof p.lat === "number"; });
+    var stops = ids.map(byId).filter(Boolean);
+    var mapped = stops.filter(function (p) { return typeof p.lat === "number"; });
     var html = "";
     stops.forEach(function (p, i) {
       html += '<article class="stop">';
       if (p.photo) html += '<img src="' + esc(p.photo) + '" alt="">';
       html += '<h2>' + (i + 1) + ". " + esc(p.name) + "</h2>";
-      html += "<p>" + esc(stopText(p.id)) + "</p>";
-      html += '<p class="info"><a href="' + esc(p.link) + '">' + esc(T("info")) + "</a></p>";
+      html += '<div class="body"><p>' + esc(stopText(p.id)) + "</p>";
+      html += openBtn(p);
       html += buttons(p);
-      html += "</article>";
+      html += "</div></article>";
     });
-    var info = dirUrl(stops, tm);
+    var info = dirUrl(mapped, tm);
     if (info) {
-      html += '<div class="map-row"><a id="routeGoogle" href="' + esc(info.url) + '" target="_blank" rel="noopener">' + PIN + esc(T("openG")) + '</a><a id="routeApple" href="' + esc(appleDir(stops, tm)) + '" target="_blank" rel="noopener">' + PIN + esc(T("iphone")) + "</a></div>";
+      html += '<div class="map-row"><a id="routeGoogle" href="' + esc(info.url) + '" target="_blank" rel="noopener">' + PIN + esc(T("openG")) + '</a><a id="routeApple" href="' + esc(appleDir(mapped, tm)) + '" target="_blank" rel="noopener">' + PIN + esc(T("iphone")) + "</a></div>";
       if (info.trimmed) html += '<p class="est">' + esc(T("trim")) + "</p>";
     }
-    document.getElementById("routeView").innerHTML = html;
+    var view = document.getElementById("routeView");
+    view.innerHTML = html;
+    view.setAttribute("data-stops", String(stops.length));
     document.getElementById("blurb").textContent = T(noteKey);
-    document.getElementById("est").textContent = stops.length > 1 ? estLine(stops, false) : "";
+    document.getElementById("est").textContent = mapped.length > 1 ? estLine(mapped, false) : "";
   }
   function loadPicks() {
     try {
