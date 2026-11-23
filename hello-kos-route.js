@@ -2,10 +2,10 @@
 (function () {
   var PICK_KEY = "hk-route-picks";
   /* Fixed app order. The wishlist follows these lists and never sorts by distance. */
-  var WALKL = ["sight-witte-trappen","sight-i-love-kos","sight-palm-tree-lane","sight-palazzo-giustizia","sight-turks-badhuis","sight-boom-hippocrates","sight-gazi-hasan","sight-neratzia","sight-albergo-gelsomino","sight-kathedraal","sight-hatzi-pasha","sight-agora","sight-belastingpoort","sight-archeologisch-museum","sight-casa-del-fascio","sight-defterdar","sight-markthal","sight-paraskevi","sight-old-town","sight-morouk","sight-eski-tzami","sight-odeon","sight-westelijke-opgraving","sight-casa-romana","sight-altaar-dionysos"];
-  var WALKS = WALKL.slice(0, 8);
+  var WALKL = ["sight-witte-trappen","sight-i-love-kos","sight-palm-tree-lane","vlag-hijsen","sight-palazzo-giustizia","sight-turks-badhuis","sight-boom-hippocrates","sight-gazi-hasan","sight-neratzia","sight-albergo-gelsomino","sight-kathedraal","sight-hatzi-pasha","sight-agora","sight-belastingpoort","sight-archeologisch-museum","sight-casa-del-fascio","sight-defterdar","sight-markthal","sight-paraskevi","sight-old-town","sight-morouk","sight-eski-tzami","sight-katholieke-kerk","sight-odeon","sight-westelijke-opgraving","sight-casa-romana","sight-altaar-dionysos"];
+  var WALKS = ["sight-witte-trappen","sight-i-love-kos","sight-palm-tree-lane","sight-palazzo-giustizia","sight-turks-badhuis","sight-boom-hippocrates","sight-gazi-hasan","sight-neratzia"];
   var DRIVES = ["sight-therma","sight-asklepion","sight-zia","sight-zoutmeer-tigaki","sight-kasteel-antimachia","sight-molen-antimachia","sight-agios-stefanos-kefalos","sight-limnionas"];
-  var DRIVEL = ["sight-therma","sight-asklepion","sight-hippocratic-foundation","sight-zia","sight-palio-pyli","sight-zoutmeer-tigaki","sight-marmari","sight-mastichari","sight-kasteel-antimachia","sight-molen-antimachia","sight-agios-stefanos-kefalos","sight-limnionas"];
+  var DRIVEL = ["sight-therma","sight-platani","sight-asklepion","sight-waterval-platani","sight-haihoutes","sight-hippocratic-foundation","sight-zia","sight-palio-pyli","sight-kasteel-palio-pyli","sight-tigaki","sight-zoutmeer-tigaki","sight-aquaduct-linopotas","sight-marmari","sight-mastichari","sight-kasteel-antimachia","sight-kardamena","sight-traditioneel-huis-antimachia","sight-molen-antimachia","sight-hippocrates-garden","sight-plaka","sight-kapel-agios-nikolaos","sight-agios-stefanos-kefalos","sight-cavo-paradiso","sight-limnionas"];
   var GROUPS = ["kos","psalidi","platani","zia","pyli","tigaki","marmari","mastichari","antimachia","kefalos","limnionas"];
   var mode = null;
   var len = null;
@@ -252,14 +252,21 @@
 
   var wishMode = null;
   var TRASH = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 3h6l1 2h5v2H3V5h5l1-2zm1 6h2v9h-2V9zm4 0h2v9h-2V9zM6 9h2v9H6V9zm-1 12h14l1-12H4l1 12z"/></svg>';
+  function onList(id, list) {
+    for (var i = 0; i < list.length; i++) if (list[i] === id) return true;
+    return false;
+  }
   function favPlaces(town) {
     var favs = (window.HKFav && HKFav.list) ? HKFav.list() : [];
     var out = [];
     favs.forEach(function (f) {
       var p = byId(f.id);
       if (!p || !p.group) return;
-      var inTown = p.group === "kos";
-      if (town ? inTown : !inTown) out.push(p);
+      var walkStop = onList(p.id, WALKL);
+      var driveStop = onList(p.id, DRIVEL);
+      if (town) {
+        if (walkStop || (!driveStop && p.group === "kos")) out.push(p);
+      } else if (driveStop || (!walkStop && p.group !== "kos")) out.push(p);
     });
     return out;
   }
