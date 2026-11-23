@@ -360,16 +360,21 @@
     view.setAttribute("data-stops", String(stops.length));
     view.setAttribute("data-mode", wishMode);
   }
-  function ziaBar(open) {
-    return '<button type="button" class="zia-bar" data-zia="fold" aria-expanded="' + (open ? "true" : "false") + '"><span>' + esc(T("ziaTile")) + '</span><span class="zia-arrow" aria-hidden="true">' + (open ? "▴" : "▾") + "</span></button>";
+  function ziaFoldCard(open) {
+    var html = '<article class="stop zia-fold">';
+    html += '<img src="img/gids/route-zia-uitzicht.jpg" alt="">';
+    html += "<h2>" + esc(T("ziaTile")) + "</h2>";
+    html += '<div class="body"><button type="button" class="open-btn" data-zia="fold">' + esc(open ? T("ziaFold") : T("ziaUnfold")) + "</button></div>";
+    html += "</article>";
+    return html;
   }
   function ziaEigen(n) {
-    if (eigenZia === "shut") return ziaBar(false);
+    if (eigenZia === "shut") return ziaFoldCard(false);
     var letters = ["a", "b", "c"];
     var added = eigenZia === "in";
     var html = '<section class="zia-group" data-zia-group="1"' + (added ? ' data-zia-in="1"' : ' data-zia-preview="1"') + ">";
     if (added) html += '<p class="zia-label">' + esc(T("ziaTile")) + "</p>";
-    else html += ziaBar(true) + '<p class="zia-note">' + esc(T("ziaPreview")) + "</p>";
+    else html += ziaFoldCard(true) + '<p class="zia-note">' + esc(T("ziaPreview")) + "</p>";
     ZIA_CPS.forEach(function (c, i) {
       html += ziaPointCard(added ? n + letters[i] : "", c, i);
     });
