@@ -36,6 +36,11 @@ body.hk-page a.shop-card .card-bar{flex:0 0 auto;display:flex;align-items:flex-e
 body.hk-page a.shop-card .card-title{color:#fff;font-size:.88rem;font-weight:700;line-height:1.25;display:flex;flex-direction:column;gap:2px}
 body.hk-page a.shop-card .card-meta{font-size:.7rem;font-weight:600;opacity:.9;color:#e8f5f3}
 body.hk-page h2.section{font-size:1.05rem;font-weight:800;text-align:center;color:var(--gold);margin:2px 0 12px}
+body.hk-page .hero-wrap.shops-hero{aspect-ratio:auto;min-height:210px;display:flex;align-items:flex-end;overflow:hidden;margin:-16px -14px 12px}
+body.hk-page .hero-wrap.shops-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+body.hk-page .shops-hero-copy{position:relative;z-index:1;width:100%;box-sizing:border-box;padding:36px 16px 14px;background:linear-gradient(to top,rgba(13,26,26,.94) 0%,rgba(13,26,26,.78) 46%,rgba(13,26,26,.28) 78%,rgba(13,26,26,0) 100%)}
+body.hk-page .shops-hero h1{color:#fff;margin:0 0 6px;text-shadow:0 1px 6px rgba(0,0,0,.55)}
+body.hk-page .shops-hero .lead{color:#fff;margin:0;text-shadow:0 1px 6px rgba(0,0,0,.5)}
 
 .btn-solid{background:var(--petrol);color:#fff}
 .loc-list p{margin:0 0 12px;color:var(--text-soft);font-size:.92rem}
@@ -64,15 +69,18 @@ body.hk-page h2.section{font-size:1.05rem;font-weight:800;text-align:center;colo
 <div class="overlay" id="overlay"></div>
 <main class="main">
 <p class="parent-link"><a href="praktische-winkels.html" data-i18n="back">← Belangrijke winkels</a></p>
+<div class="hero-wrap shops-hero">
+<img src="img/hk/winkel-drog-1.jpg" alt="">
+<div class="shops-hero-copy">
 <h1 data-i18n="title">Drogisterij</h1>
-<p class="sub" data-i18n="sub">Kos-stad</p>
+<p class="lead" data-i18n="sub">Kos-stad</p>
+</div>
+</div>
 <div class="shop-grid">
 <a class="shop-card" href="winkel-hondos.html"><span class="pic"><img src="img/hk/winkel-hondos.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="t0">Hondos Center</span></span></a>
 <a class="shop-card" href="winkel-milva.html"><span class="pic"><img src="img/hk/winkel-milva.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="t1">Milva Galerie de Beaute</span></span></a>
-<a class="shop-card" href="winkel-myrenia.html"><span class="pic"><img src="img/hk/winkel-myrenia-hero.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="t2">Myrenia Parfume shop</span></span></a>
+<a class="shop-card" href="winkel-myrenia.html"><span class="pic"><img src="img/hk/winkel-myrenia-hero.jpg" alt=""></span><span class="card-bar"><span class="card-title"><span data-i18n="t2">Myrenia Parfume shop</span><span class="card-meta" data-i18n="t2sub">Kloonparfum</span></span></span></a>
 </div>
-<img class="strip" src="img/hk/winkel-drog-1.jpg" alt="">
-<img class="strip" src="img/hk/winkel-drog-2.jpg" alt="">
 </main>
 <footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
 <script>
@@ -97,7 +105,8 @@ window.HK_DICT = {
     "sub": "Kos-stad",
     "t0": "Hondos Center",
     "t1": "Milva Galerie de Beaute",
-    "t2": "Myrenia Parfume shop"
+    "t2": "Myrenia Parfume shop",
+    "t2sub": "Kloonparfum"
   },
   "de": {
     "back": "← Wichtige Läden",
@@ -119,7 +128,8 @@ window.HK_DICT = {
     "sub": "Kos-Stadt",
     "t0": "Hondos Center",
     "t1": "Milva Galerie de Beaute",
-    "t2": "Myrenia Parfume shop"
+    "t2": "Myrenia Parfume shop",
+    "t2sub": "Duftzwilling"
   },
   "en": {
     "back": "← Important shops",
@@ -141,7 +151,8 @@ window.HK_DICT = {
     "sub": "Kos town",
     "t0": "Hondos Center",
     "t1": "Milva Galerie de Beaute",
-    "t2": "Myrenia Parfume shop"
+    "t2": "Myrenia Parfume shop",
+    "t2sub": "Clone perfume"
   },
   "it": {
     "back": "← Negozi importanti",
@@ -163,7 +174,8 @@ window.HK_DICT = {
     "sub": "Kos città",
     "t0": "Hondos Center",
     "t1": "Milva Galerie de Beaute",
-    "t2": "Myrenia Parfume shop"
+    "t2": "Myrenia Parfume shop",
+    "t2sub": "Profumo clone"
   },
   "tr": {
     "back": "← Önemli dükkanlar",
@@ -185,7 +197,8 @@ window.HK_DICT = {
     "sub": "Kos şehri",
     "t0": "Hondos Center",
     "t1": "Milva Galerie de Beaute",
-    "t2": "Myrenia Parfume shop"
+    "t2": "Myrenia Parfume shop",
+    "t2sub": "Klon parfüm"
   },
   "es": {
     "back": "← Tiendas importantes",
@@ -207,7 +220,8 @@ window.HK_DICT = {
     "sub": "Kos ciudad",
     "t0": "Hondos Center",
     "t1": "Milva Galerie de Beaute",
-    "t2": "Myrenia Parfume shop"
+    "t2": "Myrenia Parfume shop",
+    "t2sub": "Perfume clon"
   }
 };
 </script>
