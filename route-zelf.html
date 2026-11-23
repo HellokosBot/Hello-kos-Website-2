@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
   <meta name="theme-color" content="#0D1F1F">
-  <title>Maak je eigen route – Hello Kos</title>
+  <title>Route zelf samenstellen – Hello Kos</title>
   <style>
     :root {
       --petrol: #3A9A9A; --petrol-dark: #2A7A7A; --petrol-deep: #1A4A4A;
@@ -98,11 +98,11 @@
 <div class="overlay" id="overlay"></div>
 
   <main class="main">
-    <h1 data-i18n="title">Maak je eigen route</h1>
+    <h1 data-i18n="title">Route zelf samenstellen</h1>
     <p class="lead" data-i18n="lead">Tik de plekken aan die je wilt bezoeken. Wij zetten ze in een slimme volgorde met controlepunten voor Google Maps.</p>
 
     <div class="mode">
-      <label><input type="radio" name="mode" value="drive" checked> <span data-i18n="modeDrive">Rijden</span></label>
+      <label><input type="radio" name="mode" value="drive" checked> <span data-i18n="modeDrive">Rijroute (auto en scooter)</span></label>
       <label><input type="radio" name="mode" value="walk"> <span data-i18n="modeWalk">Lopen (Kos-stad)</span></label>
     </div>
 
@@ -139,9 +139,9 @@
 (function(){
   var I18N = {
     nl: {
-      title: "Maak je eigen route",
+      title: "Route zelf samenstellen",
       lead: "Tik de plekken aan die je wilt bezoeken. Wij zetten ze in een slimme volgorde met controlepunten voor Google Maps.",
-      modeDrive: "Rijden", modeWalk: "Lopen (Kos-stad)",
+      modeDrive: "Rijroute (auto en scooter)", modeWalk: "Wandelroute",
       tabAll: "Alles", tabCity: "Kos-stad", tabIsland: "Eiland",
       clear: "Wis", build: "Maak route →",
       sheetTitle: "Jouw route",
@@ -150,9 +150,9 @@
       count: "0 gekozen"
     },
     en: {
-      title: "Create your own route",
+      title: "Build your own route",
       lead: "Tap the places you want to visit. We put them in a smart order with checkpoints for Google Maps.",
-      modeDrive: "Drive", modeWalk: "Walk (Kos town)",
+      modeDrive: "Driving route (car and scooter)", modeWalk: "Walking route",
       tabAll: "All", tabCity: "Kos town", tabIsland: "Island",
       clear: "Clear", build: "Create route →",
       sheetTitle: "Your route",
@@ -161,9 +161,9 @@
       count: "0 selected"
     },
     de: {
-      title: "Eigene Route erstellen",
+      title: "Route selbst zusammenstellen",
       lead: "Tippe die Orte an, die du besuchen möchtest. Wir ordnen sie intelligent mit Kontrollpunkten für Google Maps.",
-      modeDrive: "Fahren", modeWalk: "Gehen (Kos-Stadt)",
+      modeDrive: "Fahrroute (Auto und Roller)", modeWalk: "Wanderroute",
       tabAll: "Alles", tabCity: "Kos-Stadt", tabIsland: "Insel",
       clear: "Löschen", build: "Route erstellen →",
       sheetTitle: "Deine Route",
@@ -172,9 +172,9 @@
       count: "0 ausgewählt"
     },
     it: {
-      title: "Crea il tuo itinerario",
+      title: "Componi da solo il percorso",
       lead: "Tocca i luoghi che vuoi visitare. Li mettiamo in un ordine intelligente con punti di controllo per Google Maps.",
-      modeDrive: "Guidare", modeWalk: "Camminare (città di Kos)",
+      modeDrive: "Percorso in auto e scooter", modeWalk: "Percorso a piedi",
       tabAll: "Tutto", tabCity: "Città di Kos", tabIsland: "Isola",
       clear: "Cancella", build: "Crea itinerario →",
       sheetTitle: "Il tuo itinerario",
@@ -183,9 +183,9 @@
       count: "0 selezionati"
     },
     tr: {
-      title: "Kendi rotanı oluştur",
+      title: "Rotayı kendin oluştur",
       lead: "Ziyaret etmek istediğin yerlere dokun. Google Maps için akıllı sırayla kontrol noktalarıyla sıralıyoruz.",
-      modeDrive: "Sürüş", modeWalk: "Yürüme (Kos şehri)",
+      modeDrive: "Araç rotası (araba ve scooter)", modeWalk: "Yürüyüş rotası",
       tabAll: "Hepsi", tabCity: "Kos şehri", tabIsland: "Ada",
       clear: "Temizle", build: "Rota oluştur →",
       sheetTitle: "Rotan",
@@ -194,9 +194,9 @@
       count: "0 seçildi"
     },
     es: {
-      title: "Crea tu propia ruta",
+      title: "Crear tu propia ruta",
       lead: "Toca los lugares que quieres visitar. Los ponemos en un orden inteligente con puntos de control para Google Maps.",
-      modeDrive: "Conducir", modeWalk: "Caminar (ciudad de Kos)",
+      modeDrive: "Ruta en coche y scooter", modeWalk: "Ruta a pie",
       tabAll: "Todo", tabCity: "Ciudad de Kos", tabIsland: "Isla",
       clear: "Borrar", build: "Crear ruta →",
       sheetTitle: "Tu ruta",
