@@ -27,6 +27,13 @@ a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba
 .loc-card h2{font-size:1.05rem;margin:0 0 8px}
 .loc-name{font-weight:800;font-size:1.05rem}
 .loc-list a{color:var(--petrol);font-weight:700}
+body.hk-page .hero-wrap.shops-hero{aspect-ratio:auto;min-height:210px;display:flex;align-items:flex-end;overflow:hidden;margin:-16px -14px 12px}
+body.hk-page .hero-wrap.shops-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%}
+body.hk-page .shops-hero-copy{position:relative;z-index:1;width:100%;box-sizing:border-box;padding:36px 16px 14px;background:linear-gradient(to top,rgba(13,26,26,.94) 0%,rgba(13,26,26,.78) 46%,rgba(13,26,26,.28) 78%,rgba(13,26,26,0) 100%)}
+body.hk-page .shops-hero h1{color:#fff;margin:0;text-shadow:0 1px 6px rgba(0,0,0,.55);font-size:1.45rem}
+body.hk-page .map-row{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:stretch;gap:8px;width:100%;max-width:100%;margin:12px 0 0;box-sizing:border-box}
+body.hk-page .map-row .btn{flex:1 1 0;width:0;max-width:none;min-width:0;padding:12px 8px;font-size:.82rem}
+body.hk-page .map-row .pin{flex:0 0 16px;width:16px;height:16px}
 </style>
 </head>
 <body class="hk-page">
@@ -50,11 +57,17 @@ a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba
 </header>
 <div class="overlay" id="overlay"></div>
 <main class="main">
-<img class="strip" src="img/hk/winkel-milva.jpg" alt="">
 <p class="parent-link"><a href="winkel-drogisterij.html" data-i18n="back">← Drogisterij</a></p>
-<h1 data-i18n="title">Milva</h1>
-<p class="lead" data-i18n="lead">(Galerie de Beaute)</p>
+<div class="hero-wrap shops-hero">
+<img src="img/hk/winkel-milva.jpg" alt="">
+<div class="shops-hero-copy">
+<h1 data-i18n="title">Milva – Galerie de Beauté</h1>
+</div>
+</div>
 <article class="card">
+<p data-i18n="p0">Milva – Galerie de Beauté is een cosmeticazaak in Kos-stad. Het is een parfumerie en een beautywarenhuis in één, met een breed aanbod cosmetica, parfum en verzorging.</p>
+<p data-i18n="p1">Je vindt er make-up van uiteenlopende merken, van betaalbaar tot luxer, en parfum voor dames en heren. Ook huidverzorging, zoals gezichtsverzorging, serums en crèmes, en haarverzorging met shampoos en styling. Daarnaast verzorgingsproducten en accessoires voor beauty en het lichaam.</p>
+<p data-i18n="p2">Het is een brede beautywinkel, niet alleen een parfumerie. In het centrum van Kos is het een van de grotere beautywinkels, en een directe concurrent van Hondos Center voor parfum, make-up en verzorging.</p>
 <h3 data-i18n="addrH">Adres</h3>
 <p class="addr"><strong>Meropidos 2, Kos 853 00</strong></p>
 <h3 data-i18n="hoursH">Openingstijden</h3><div class="hours">
@@ -69,7 +82,10 @@ a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba
 <div class="call-list">
 <a class="call-btn" href="tel:+302242302895"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="call-copy"><span class="call-main"><span data-i18n="call">Bel</span> +30 2242 302895</span><span class="call-sub" data-i18n="phoneL">Telefoon</span></span></a>
 </div>
-<div class="actions"><a class="btn btn-map" href="https://maps.app.goo.gl/YGScVjpqWSm32cvR8" target="_blank" rel="noopener" data-i18n="map">Google locatie</a></div>
+<div class="map-row">
+<a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&amp;query=36.892279,27.289545" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+<a class="btn btn-map" href="https://maps.apple.com/?ll=36.892279,27.289545&amp;q=Milva%20Galerie%20de%20Beaute%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+</div>
 </article>
 </main>
 <footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
@@ -91,8 +107,12 @@ window.HK_DICT = {
     "d4": "Vrij.",
     "d5": "Zat.",
     "d6": "Zon.",
-    "title": "Milva",
-    "lead": "(Galerie de Beaute)"
+    "title": "Milva – Galerie de Beauté",
+    "p0": "Milva – Galerie de Beauté is een cosmeticazaak in Kos-stad. Het is een parfumerie en een beautywarenhuis in één, met een breed aanbod cosmetica, parfum en verzorging.",
+    "p1": "Je vindt er make-up van uiteenlopende merken, van betaalbaar tot luxer, en parfum voor dames en heren. Ook huidverzorging, zoals gezichtsverzorging, serums en crèmes, en haarverzorging met shampoos en styling. Daarnaast verzorgingsproducten en accessoires voor beauty en het lichaam.",
+    "p2": "Het is een brede beautywinkel, niet alleen een parfumerie. In het centrum van Kos is het een van de grotere beautywinkels, en een directe concurrent van Hondos Center voor parfum, make-up en verzorging.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone"
   },
   "de": {
     "back": "← Drogerie",
@@ -110,8 +130,12 @@ window.HK_DICT = {
     "d4": "Fr.",
     "d5": "Sa.",
     "d6": "So.",
-    "title": "Milva",
-    "lead": "(Galerie de Beaute)"
+    "title": "Milva – Galerie de Beauté",
+    "p0": "Milva – Galerie de Beauté ist ein Kosmetikgeschäft in Kos-Stadt. Es ist Parfümerie und Beauty-Kaufhaus in einem, mit einem breiten Angebot an Kosmetik, Parfum und Pflege.",
+    "p1": "Es gibt Make-up verschiedener Marken, von günstig bis luxuriöser, und Parfum für Damen und Herren. Dazu Hautpflege wie Gesichtspflege, Seren und Cremes, und Haarpflege mit Shampoos und Styling. Außerdem Pflegeprodukte und Accessoires für Beauty und den Körper.",
+    "p2": "Es ist ein breites Beauty-Geschäft, nicht nur eine Parfümerie. Im Zentrum von Kos ist es einer der größeren Beautyläden und ein direkter Konkurrent von Hondos Center für Parfum, Make-up und Pflege.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone"
   },
   "en": {
     "back": "← Drugstore",
@@ -129,8 +153,12 @@ window.HK_DICT = {
     "d4": "Fri",
     "d5": "Sat",
     "d6": "Sun",
-    "title": "Milva",
-    "lead": "(Galerie de Beaute)"
+    "title": "Milva – Galerie de Beauté",
+    "p0": "Milva – Galerie de Beauté is a cosmetics shop in Kos town. It is a perfumery and a beauty department store in one, with a wide range of cosmetics, perfume and care products.",
+    "p1": "You will find make-up from many brands, from affordable to more luxurious, and perfume for women and men. There is also skin care, such as face care, serums and creams, and hair care with shampoos and styling. Plus care products and accessories for beauty and the body.",
+    "p2": "It is a broad beauty shop, not only a perfumery. In the centre of Kos it is one of the larger beauty shops, and a direct rival of Hondos Center for perfume, make-up and care products.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone"
   },
   "it": {
     "back": "← Profumeria",
@@ -148,8 +176,12 @@ window.HK_DICT = {
     "d4": "Ven",
     "d5": "Sab",
     "d6": "Dom",
-    "title": "Milva",
-    "lead": "(Galerie de Beaute)"
+    "title": "Milva – Galerie de Beauté",
+    "p0": "Milva – Galerie de Beauté è un negozio di cosmetici a Kos città. È profumeria e grande magazzino beauty insieme, con un’ampia scelta di cosmetici, profumo e cura.",
+    "p1": "C’è trucco di marche diverse, da convenienti a più lussuose, e profumo da donna e da uomo. Anche cura della pelle, come viso, sieri e creme, e cura dei capelli con shampoo e styling. Poi prodotti e accessori per beauty e corpo.",
+    "p2": "È un negozio beauty ampio, non solo una profumeria. Nel centro di Kos è uno dei negozi beauty più grandi, e un concorrente diretto di Hondos Center per profumo, trucco e cura.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone"
   },
   "tr": {
     "back": "← Drogeri",
@@ -167,8 +199,12 @@ window.HK_DICT = {
     "d4": "Cum",
     "d5": "Cmt",
     "d6": "Paz",
-    "title": "Milva",
-    "lead": "(Galerie de Beaute)"
+    "title": "Milva – Galerie de Beauté",
+    "p0": "Milva – Galerie de Beauté, Kos şehrinde bir kozmetik dükkanıdır. Parfümeri ve beauty mağazası bir arada, geniş bir kozmetik, parfüm ve bakım seçkisiyle.",
+    "p1": "Uygun fiyattan daha lükse kadar değişen markaların makyajı ve kadın ile erkek parfümü vardır. Cilt bakımı da vardır: yüz bakımı, serum ve krem. Saç için şampuan ve şekillendirme. Ayrıca vücut bakımı ve aksesuarlar.",
+    "p2": "Yalnız bir parfümeri değil, geniş bir beauty dükkanıdır. Kos merkezinde daha büyük beauty dükkanlarından biridir ve parfüm, makyaj ve bakım için Hondos Center’ın doğrudan rakibidir.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone"
   },
   "es": {
     "back": "← Droguería",
@@ -186,8 +222,12 @@ window.HK_DICT = {
     "d4": "Vie",
     "d5": "Sáb",
     "d6": "Dom",
-    "title": "Milva",
-    "lead": "(Galerie de Beaute)"
+    "title": "Milva – Galerie de Beauté",
+    "p0": "Milva – Galerie de Beauté es una tienda de cosmética en la ciudad de Kos. Es perfumería y gran almacén de belleza a la vez, con mucha cosmética, perfume y cuidado.",
+    "p1": "Hay maquillaje de marcas distintas, de asequible a más lujoso, y perfume de mujer y de hombre. También cuidado de la piel, como rostro, sérums y cremas, y cuidado del pelo con champús y peinado. Además productos y complementos de belleza y para el cuerpo.",
+    "p2": "Es una tienda de belleza amplia, no solo una perfumería. En el centro de Kos es una de las tiendas de belleza más grandes, y un rival directo de Hondos Center en perfume, maquillaje y cuidado.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone"
   }
 };
 </script>
