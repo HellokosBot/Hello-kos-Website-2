@@ -41,6 +41,10 @@ body.hk-page h2.section{font-size:1.05rem;font-weight:800;text-align:center;colo
 .loc-list p{margin:0 0 12px;color:var(--text-soft);font-size:.92rem}
 .loc-list a{color:var(--petrol);font-weight:700}
 
+body.hk-page .hero-wrap.shops-hero{aspect-ratio:auto;min-height:210px;display:flex;align-items:flex-end;overflow:hidden;margin:-16px -14px 12px}
+body.hk-page .hero-wrap.shops-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%}
+body.hk-page .shops-hero-copy{position:relative;z-index:1;width:100%;box-sizing:border-box;padding:36px 16px 14px;background:linear-gradient(to top,rgba(13,26,26,.94) 0%,rgba(13,26,26,.78) 46%,rgba(13,26,26,.28) 78%,rgba(13,26,26,0) 100%)}
+body.hk-page .shops-hero h1{color:#fff;margin:0;text-shadow:0 1px 6px rgba(0,0,0,.55)}
 body.hk-page .map-row{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:stretch;gap:8px;width:100%;max-width:100%;margin:12px 0 0;box-sizing:border-box}
 body.hk-page .map-row .btn{flex:1 1 0;width:0;max-width:none;min-width:0;padding:12px 8px;font-size:.82rem}
 body.hk-page .map-row .pin{flex:0 0 16px;width:16px;height:16px}
@@ -68,8 +72,12 @@ body.hk-page .map-row .pin{flex:0 0 16px;width:16px;height:16px}
 <div class="overlay" id="overlay"></div>
 <main class="main">
 <p class="parent-link"><a href="praktische-winkels.html" data-i18n="back">← Belangrijke winkels</a></p>
+<div class="hero-wrap shops-hero">
+<img src="img/hk/winkel-hal-1.jpg" alt="">
+<div class="shops-hero-copy">
 <h1 data-i18n="title">Markthal</h1>
-<img class="strip" src="img/hk/winkel-hal-1.jpg" alt="">
+</div>
+</div>
 <article class="card">
 <p data-i18n="p0">Kos heeft geen markten zoals wij die kennen. Er zijn twee markten. De eerste ligt aan de rand van Kos-stad, maar daar verkoopt men echt letterlijk alleen meloenen, tomaten en uien. De markt telt misschien acht kraampjes, en absoluut niet wat de meeste toeristen verwachten zoals schreeuwende marktkooplui die hun Griekse specialiteiten aan de man proberen te brengen.</p>
 </article>
@@ -85,6 +93,18 @@ body.hk-page .map-row .pin{flex:0 0 16px;width:16px;height:16px}
 <article class="card">
 <p data-i18n="p3">Binnen vind je een mix van lokale producten zoals honing, olijfolie, kruiden, traditionele zoetigheden en souvenirs. Het is compact en druk, met alles dicht op elkaar om zoveel mogelijk in de ruimte te proppen.</p>
 <p data-i18n="p4">Het is een levendige plek waar toeristen herinneringen of een cadeautje kopen</p>
+<h3 data-i18n="hoursH">Openingstijden</h3><div class="hours">
+<div class="h-row"><span data-i18n="d0">Ma.</span><span>08:30–22:30</span></div>
+<div class="h-row"><span data-i18n="d1">Di.</span><span>08:30–22:30</span></div>
+<div class="h-row"><span data-i18n="d2">Woe.</span><span>08:30–22:30</span></div>
+<div class="h-row"><span data-i18n="d3">Don.</span><span>08:30–22:30</span></div>
+<div class="h-row"><span data-i18n="d4">Vrij.</span><span>08:30–22:30</span></div>
+<div class="h-row"><span data-i18n="d5">Zat.</span><span>08:30–22:30</span></div>
+<div class="h-row"><span data-i18n="d6">Zon.</span><span>10:00–22:30</span></div>
+</div>
+<div class="call-list">
+<a class="call-btn" href="tel:+302242022900"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="call-copy"><span class="call-main"><span data-i18n="call">Bel</span> +30 22420 22900</span><span class="call-sub" data-i18n="phoneL">Telefoon</span></span></a>
+</div>
 <div class="map-row">
 <a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&amp;query=36.8928987,27.2886799" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
 <a class="btn btn-map" href="https://maps.apple.com/?ll=36.8928987,27.2886799&amp;q=Markthal%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
