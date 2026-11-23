@@ -270,12 +270,19 @@
     });
     return out;
   }
-  function orderFixed(stops, template) {
+  function orderFixed(stops, template, optional) {
     var want = {};
     stops.forEach(function (p) { want[p.id] = p; });
     var ordered = [];
     var used = {};
+    var extras = optional || [];
     template.forEach(function (id) {
+      extras.forEach(function (opt) {
+        if (opt.before === id && want[opt.id] && !used[opt.id]) {
+          ordered.push(want[opt.id]);
+          used[opt.id] = true;
+        }
+      });
       if (want[id]) {
         ordered.push(want[id]);
         used[id] = true;
@@ -293,7 +300,8 @@
     var view = document.getElementById("routeView");
     if (!view || !wishMode) return;
     var town = wishMode === "walk";
-    var stops = orderFixed(favPlaces(town), town ? WALKL : DRIVEL);
+    var optional = town ? [] : [{ id: "sight-natuurpark-zia", before: "sight-zia" }];
+    var stops = orderFixed(favPlaces(town), town ? WALKL : DRIVEL, optional);
     document.getElementById("ownWalk").classList.toggle("on", town);
     document.getElementById("ownDrive").classList.toggle("on", !town);
     if (!stops.length) {
