@@ -8,7 +8,8 @@
   var DRIVEL = ["sight-therma","sight-platani","sight-hippocratic-foundation","sight-asklepion","sight-waterval-platani","sight-haihoutes","sight-zia","sight-palio-pyli","sight-kasteel-palio-pyli","sight-tigaki","sight-zoutmeer-tigaki","sight-aquaduct-linopotas","sight-marmari","sight-mastichari","sight-kasteel-antimachia","sight-kardamena","sight-traditioneel-huis-antimachia","sight-molen-antimachia","sight-hippocrates-garden","sight-plaka","sight-kapel-agios-nikolaos","sight-agios-stefanos-kefalos","sight-cavo-paradiso","sight-limnionas"];
   var DRIVE_OPT = { "sight-hippocratic-foundation": 1, "sight-waterval-platani": 1, "sight-haihoutes": 1, "sight-aquaduct-linopotas": 1, "sight-kardamena": 1, "sight-cavo-paradiso": 1 };
   var ZIA_CPS = [{ lat: "36.8750770", lon: "27.2480940" }, { lat: "36.8631110", lon: "27.2376780" }, { lat: "36.8505510", lon: "27.2132630" }];
-  var ZIA_KEY = "hk-zia-via";
+  var ZIA_KEY = "hk-zia-open";
+  try { localStorage.removeItem("hk-zia-via"); } catch (e) {}
   var GROUPS = ["kos","psalidi","platani","zia","pyli","tigaki","marmari","mastichari","antimachia","kefalos","limnionas"];
   var mode = null;
   var len = null;
@@ -28,10 +29,10 @@
     return DRIVEL.filter(function (id) { return !DRIVE_OPT[id]; });
   }
   function ziaOn() {
-    try { return localStorage.getItem(ZIA_KEY) === "scenic"; } catch (e) { return false; }
+    try { return localStorage.getItem(ZIA_KEY) === "1"; } catch (e) { return false; }
   }
   function toggleZia() {
-    try { localStorage.setItem(ZIA_KEY, ziaOn() ? "direct" : "scenic"); } catch (e) {}
+    try { localStorage.setItem(ZIA_KEY, ziaOn() ? "0" : "1"); } catch (e) {}
   }
   function hidesZiaView(stops) {
     for (var i = 0; i < stops.length; i++) {
