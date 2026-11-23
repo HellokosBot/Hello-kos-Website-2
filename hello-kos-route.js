@@ -28,6 +28,28 @@
   function driveLongIds() {
     return DRIVEL.filter(function (id) { return !DRIVE_OPT[id]; });
   }
+  function savedIds() {
+    var set = {};
+    var favs = [];
+    try { favs = JSON.parse(localStorage.getItem("hk-favorites") || "[]"); } catch (e) { favs = []; }
+    if (!Array.isArray(favs)) favs = [];
+    favs.forEach(function (f) { if (f && f.id) set[f.id] = true; });
+    return set;
+  }
+  function driveIds(which) {
+    var base = which === "short" ? DRIVES : driveLongIds();
+    var want = {};
+    base.forEach(function (id) { want[id] = true; });
+    var saved = savedIds();
+    Object.keys(DRIVE_OPT).forEach(function (id) {
+      if (saved[id]) want[id] = true;
+    });
+    var ordered = [];
+    DRIVEL.forEach(function (id) {
+      if (want[id]) ordered.push(id);
+    });
+    return ordered;
+  }
   function ziaOn() {
     try { return localStorage.getItem(ZIA_KEY) === "1"; } catch (e) { return false; }
   }
@@ -143,9 +165,11 @@
     view.innerHTML = html;
     view.setAttribute("data-stops", String(stops.length));
     var blurb = document.getElementById("blurb");
-    var note = T(noteKey);
-    blurb.hidden = !note;
-    blurb.textContent = note;
+    if (blurb) {
+      var note = T(noteKey);
+      blurb.hidden = !note;
+      blurb.textContent = note;
+    }
   }
   function loadPicks() {
     try {
@@ -227,7 +251,7 @@
   }
   function applyPreset() {
     if (!mode || mode === "custom" || !len) return;
-    var ids = mode === "walk" ? (len === "short" ? WALKS : WALKL) : (len === "short" ? DRIVES : driveLongIds());
+    var ids = mode === "walk" ? (len === "short" ? WALKS : WALKL) : driveIds(len);
     var note = mode === "walk" ? (len === "short" ? "walkShortNote" : "walkLongNote") : (len === "short" ? "driveShortNote" : "driveLongNote");
     showRoute(ids, note, mode === "drive" ? "drive" : "walk");
   }
@@ -349,17 +373,8 @@
   if (page === "walk") renderWalk();
   if (page === "drive") {
     mode = "drive";
-    var step2 = document.getElementById("step2");
-    if (step2) {
-      step2.hidden = false;
-      step2.addEventListener("click", function (e) {
-        var b = e.target.closest("[data-len]");
-        if (!b) return;
-        len = b.getAttribute("data-len");
-        document.querySelectorAll("#step2 .pick").forEach(function (el) { el.classList.toggle("on", el === b); });
-        applyPreset();
-      });
-    }
+    len = document.body.getAttribute("data-len");
+    if (len !== "short" && len !== "long") len = null;
     var driveView = document.getElementById("routeView");
     if (driveView) driveView.addEventListener("click", function (e) {
       var via = e.target.closest("[data-zia]");
@@ -367,6 +382,7 @@
       toggleZia();
       applyPreset();
     });
+    if (len) applyPreset();
   }
   if (page === "custom") {
     document.getElementById("ownWalk").addEventListener("click", function () {

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Lange rijroute – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css?v=20261123">
+<style>
+.route-hero img { object-position: center 75%; }
+.stop { margin: 0 0 14px; border: 2px solid #fff; border-radius: 16px; overflow: hidden; background: #152525; }
+.stop img { width: 100%; height: 150px; object-fit: cover; display: block; }
+.stop h2 { margin: 0; background: #fff; color: #111; padding: 8px 12px; font-size: 1rem; }
+.stop p { margin: 0; padding: 10px 12px 0; }
+.stop .body { padding: 12px; }
+.stop .body p { margin: 0 0 10px; padding: 0; }
+.stop a.open-btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; box-sizing: border-box; min-height: 44px; margin: 0 0 10px;
+  padding: 12px 16px; border-radius: 14px;
+  background: #E0B040; color: #0d1a1a;
+  font-weight: 800; font-size: 1rem; text-decoration: none;
+  border: 2px solid #C4920F;
+  box-shadow: 0 4px 0 #8a6810, 0 6px 14px rgba(0,0,0,.35);
+}
+.stop a.open-btn .book { width: 20px; height: 20px; flex: 0 0 20px; color: inherit; }
+.stop a.open-btn:hover { background: #f2cc55; }
+.stop a.open-btn:hover .book,
+.stop a.open-btn:active .book { animation: hk-book-wiggle 0.45s ease; }
+.stop a.open-btn:active { background: #c4920f; transform: translateY(3px); box-shadow: 0 1px 0 #8a6810; }
+@keyframes hk-book-wiggle {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  35% { transform: rotate(-8deg) scale(1.08); }
+  70% { transform: rotate(6deg) scale(1.04); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stop a.open-btn:hover .book,
+  .stop a.open-btn:active .book { animation: none; }
+}
+.map-row { display: flex; gap: 8px; margin-top: 0; }
+.stop .map-row { padding: 0; }
+.map-row a {
+  flex: 1 1 0; width: 0; min-width: 0; box-sizing: border-box;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 10px 8px; border-radius: 12px; border: 2px solid var(--petrol);
+  background: var(--bg-card); color: var(--petrol); font-weight: 700; font-size: 0.82rem; text-decoration: none;
+}
+.map-row .pin { width: 16px; height: 16px; flex: 0 0 16px; }
+.stop button.open-btn {
+  display: flex; align-items: center; justify-content: center; width: 100%; box-sizing: border-box;
+  min-height: 44px; margin: 0 0 10px; padding: 12px 16px; border-radius: 14px;
+  background: #E0B040; color: #0d1a1a; font-weight: 800; font-size: 1rem; font-family: inherit; cursor: pointer;
+  border: 2px solid #C4920F; box-shadow: 0 4px 0 #8a6810, 0 6px 14px rgba(0,0,0,.35);
+}
+.stop button.open-btn:active { background: #c4920f; transform: translateY(3px); box-shadow: 0 1px 0 #8a6810; }
+.zia-group { margin: 0 0 14px; padding: 10px; border: 2px solid #3A9A9A; border-radius: 18px; background: #123232; }
+.zia-label { margin: 0 0 8px; padding: 6px 10px; border-radius: 10px; background: #3A9A9A; color: #fff; font-weight: 800; }
+.zia-group .stop { border-color: #7ec8c8; }
+.zia-group .stop a.open-btn,
+.zia-group .stop button.open-btn { background: #3A9A9A; color: #fff; border-color: #2A7A7A; box-shadow: 0 4px 0 #1a5555, 0 6px 14px rgba(0,0,0,.35); }
+.zia-group .stop button.open-btn:active,
+.zia-group .stop a.open-btn:active { background: #2A7A7A; box-shadow: 0 1px 0 #1a5555; }
+.zia-group .map-row a { border-color: #3A9A9A; color: #d7f3f3; }
+</style>
+</head>
+<body class="hk-page" data-route="drive" data-len="long">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="route-rijden.html" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+  <div class="hero-wrap route-hero">
+    <img src="img/hk/rijroute-kos.jpg" alt="">
+    <div class="hero-title">
+      <h1 data-i18n="longDriveTitle">Lange rijroute</h1>
+    </div>
+  </div>
+  <p class="parent-link"><a href="route-rijden.html" data-i18n="backDrive">← Rijroute</a></p>
+  <div id="routeView"></div>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script src="hello-kos-route-dict.js?v=20261123p"></script>
+<script src="hello-kos-i18n.js?v=20261123"></script>
+<script src="hello-kos-places.js?v=20261123f"></script>
+<script src="hello-kos-names.js?v=20261123g"></script>
+<script src="hello-kos-route-text.js?v=20261123o"></script>
+<script src="hello-kos-route.js?v=20261123p"></script>
+</body>
+</html>
