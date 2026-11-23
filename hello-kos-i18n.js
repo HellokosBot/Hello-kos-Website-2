@@ -284,53 +284,14 @@
     });
   }
 
-  function isAndroid() {
-    return /Android/i.test(navigator.userAgent || "");
-  }
-
-  function googleMapsIntent(href) {
-    var url;
-    try { url = new URL(href, location.href); } catch (err) { return ""; }
-    var host = url.hostname.toLowerCase();
-    var fallback = encodeURIComponent(url.href);
-    var tail = "#Intent;scheme=https;package=com.google.android.apps.maps;S.browser_fallback_url=" + fallback + ";end";
-    if (host === "maps.app.goo.gl" || host === "goo.gl") {
-      return "intent://" + host + url.pathname + url.search + tail;
-    }
-    if (host !== "www.google.com" && host !== "google.com" && host !== "maps.google.com") return "";
-    if (url.pathname.indexOf("/maps") !== 0) return "";
-    var dir = url.pathname.indexOf("/maps/dir") === 0;
-    if (dir) {
-      var dest = url.searchParams.get("destination") || "";
-      if (!dest) return "";
-      return "intent://maps.google.com/maps?daddr=" + encodeURIComponent(dest) + tail;
-    }
-    var query = url.searchParams.get("query");
-    if (query == null) query = url.searchParams.get("q") || "";
-    if (!query) return "";
-    return "intent://maps.google.com/maps?q=" + encodeURIComponent(query) + tail;
-  }
-
   document.addEventListener("click", function (e) {
     var t = e.target;
     if (!t || !t.closest) return;
-    var a = t.closest("a");
+    var a = t.closest("a[href*='google.com/maps'], a[href*='maps.apple.com']");
     if (!a) return;
     var href = a.href || "";
     if (href.indexOf("http") !== 0) return;
-    var google = /google\.com\/maps|maps\.google\.com|maps\.app\.goo\.gl|goo\.gl\/maps/i.test(href);
-    var apple = href.indexOf("maps.apple.com") >= 0;
-    if (!google && !apple) return;
     if (/[?&](?:query|q)=(?:&|$)/.test(href)) return;
-    if (isAndroid() && google) {
-      var intent = googleMapsIntent(href);
-      if (intent) {
-        e.preventDefault();
-        window.location.href = intent;
-        return;
-      }
-    }
-    if (!apple && href.indexOf("google.com/maps") < 0 && href.indexOf("maps.google.com") < 0) return;
     e.preventDefault();
     var opened = null;
     try { opened = window.open(href, "_blank", "noopener"); } catch (err) { opened = null; }
