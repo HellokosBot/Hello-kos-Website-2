@@ -6,8 +6,8 @@ window.HK_PLACES = [
     "link": "sight-witte-trappen.html",
     "photo": "img/hk/sight-witte-trappen-card.jpg",
     "order": 1,
-    "lat": 36.8918,
-    "lon": 27.2885
+    "lat": 36.8942411,
+    "lon": 27.2873933
   },
   {
     "id": "sight-i-love-kos",
@@ -16,8 +16,8 @@ window.HK_PLACES = [
     "link": "sight-i-love-kos.html",
     "photo": "img/hk/sight-i-love-kos-card.jpg",
     "order": 2,
-    "lat": 36.8935,
-    "lon": 27.2902
+    "lat": 36.894614,
+    "lon": 27.289224
   },
   {
     "id": "sight-palm-tree-lane",
@@ -26,8 +26,8 @@ window.HK_PLACES = [
     "link": "sight-palm-tree-lane.html",
     "photo": "img/hk/sight-palm-tree-lane-card.jpg",
     "order": 3,
-    "lat": 36.8939,
-    "lon": 27.2908
+    "lat": 36.8949551,
+    "lon": 27.2904592
   },
   {
     "id": "sight-palazzo-giustizia",
@@ -36,8 +36,8 @@ window.HK_PLACES = [
     "link": "sight-palazzo-giustizia.html",
     "photo": "img/hk/sight-palazzo-giustizia-card.jpg",
     "order": 4,
-    "lat": 36.8932,
-    "lon": 27.288
+    "lat": 36.8946829,
+    "lon": 27.2917818
   },
   {
     "id": "sight-turks-badhuis",
@@ -46,8 +46,8 @@ window.HK_PLACES = [
     "link": "sight-turks-badhuis.html",
     "photo": "img/hk/sight-turks-badhuis-card.jpg",
     "order": 5,
-    "lat": 36.8928,
-    "lon": 27.2875
+    "lat": 36.8944349,
+    "lon": 27.2917443
   },
   {
     "id": "sight-boom-hippocrates",
@@ -56,8 +56,8 @@ window.HK_PLACES = [
     "link": "sight-boom-hippocrates.html",
     "photo": "img/hk/sight-boom-hippocrates-card.jpg",
     "order": 6,
-    "lat": 36.893,
-    "lon": 27.2895
+    "lat": 36.8947229,
+    "lon": 27.2909721
   },
   {
     "id": "sight-gazi-hasan",
@@ -66,8 +66,8 @@ window.HK_PLACES = [
     "link": "sight-gazi-hasan.html",
     "photo": "img/hk/sight-gazi-hasan-card.jpg",
     "order": 7,
-    "lat": 36.8931,
-    "lon": 27.2893
+    "lat": 36.8946022,
+    "lon": 27.2908903
   },
   {
     "id": "sight-neratzia",
@@ -76,8 +76,8 @@ window.HK_PLACES = [
     "link": "sight-neratzia.html",
     "photo": "img/hk/sight-neratzia-card.jpg",
     "order": 8,
-    "lat": 36.8945,
-    "lon": 27.2905
+    "lat": 36.8962997,
+    "lon": 27.2903831
   },
   {
     "id": "sight-albergo-gelsomino",
@@ -86,8 +86,8 @@ window.HK_PLACES = [
     "link": "sight-albergo-gelsomino.html",
     "photo": "img/hk/sight-albergo-gelsomino-card.jpg",
     "order": 9,
-    "lat": 36.8942,
-    "lon": 27.2912
+    "lat": 36.8937479,
+    "lon": 27.2930417
   },
   {
     "id": "sight-kathedraal",
@@ -96,8 +96,8 @@ window.HK_PLACES = [
     "link": "sight-kathedraal.html",
     "photo": "img/hk/sight-kathedraal.jpg",
     "order": 10,
-    "lat": 36.8925,
-    "lon": 27.287
+    "lat": 36.8930511,
+    "lon": 27.2930376
   },
   {
     "id": "sight-hatzi-pasha",
@@ -106,8 +106,8 @@ window.HK_PLACES = [
     "link": "sight-hatzi-pasha.html",
     "photo": "img/hk/sight-hatzi-pasha-card.jpg",
     "order": 11,
-    "lat": 36.8922,
-    "lon": 27.2878
+    "lat": 36.892766,
+    "lon": 27.291118
   },
   {
     "id": "sight-agora",
@@ -116,8 +116,8 @@ window.HK_PLACES = [
     "link": "sight-agora.html",
     "photo": "img/hk/sight-agora-card.jpg",
     "order": 12,
-    "lat": 36.8915,
-    "lon": 27.2888
+    "lat": 36.8931649,
+    "lon": 27.2899855
   },
   {
     "id": "sight-belastingpoort",
@@ -126,8 +126,8 @@ window.HK_PLACES = [
     "link": "sight-belastingpoort.html",
     "photo": "img/hk/sight-belastingpoort-card.jpg",
     "order": 13,
-    "lat": 36.8919,
-    "lon": 27.2892
+    "lat": 36.8935704,
+    "lon": 27.289111
   },
   {
     "id": "sight-archeologisch-museum",
@@ -136,8 +136,8 @@ window.HK_PLACES = [
     "link": "sight-archeologisch-museum.html",
     "photo": "img/hk/sight-archeologisch-museum-card.jpg",
     "order": 14,
-    "lat": 36.892,
-    "lon": 27.2872
+    "lat": 36.8935929,
+    "lon": 27.2886041
   },
   {
     "id": "sight-casa-del-fascio",
@@ -146,8 +146,8 @@ window.HK_PLACES = [
     "link": "sight-casa-del-fascio.html",
     "photo": "img/hk/sight-casa-del-fascio-card.jpg",
     "order": 15,
-    "lat": 36.8926,
-    "lon": 27.2865
+    "lat": 36.8931859,
+    "lon": 27.288244
   },
   {
     "id": "sight-defterdar",
@@ -156,8 +156,8 @@ window.HK_PLACES = [
     "link": "sight-defterdar.html",
     "photo": "bezienswaardigheden.jpg",
     "order": 16,
-    "lat": 36.8924,
-    "lon": 27.2876
+    "lat": 36.8933213,
+    "lon": 27.2888746
   },
   {
     "id": "sight-markthal",
@@ -166,8 +166,8 @@ window.HK_PLACES = [
     "link": "sight-markthal.html",
     "photo": "img/hk/sight-markthal-card.jpg",
     "order": 17,
-    "lat": 36.8927,
-    "lon": 27.2879
+    "lat": 36.8928987,
+    "lon": 27.2886799
   },
   {
     "id": "sight-paraskevi",
@@ -176,8 +176,8 @@ window.HK_PLACES = [
     "link": "sight-paraskevi.html",
     "photo": "img/hk/sight-paraskevi.jpg",
     "order": 18,
-    "lat": 36.8912,
-    "lon": 27.2868
+    "lat": 36.8926486,
+    "lon": 27.2882625
   },
   {
     "id": "sight-old-town",
@@ -186,8 +186,8 @@ window.HK_PLACES = [
     "link": "sight-old-town.html",
     "photo": "img/hk/sight-old-town-card.jpg",
     "order": 19,
-    "lat": 36.891,
-    "lon": 27.2862
+    "lat": 36.892982,
+    "lon": 27.288004
   },
   {
     "id": "sight-morouk",
@@ -196,8 +196,8 @@ window.HK_PLACES = [
     "link": "sight-morouk.html",
     "photo": "img/hk/sight-morouk-card.jpg",
     "order": 20,
-    "lat": 36.8908,
-    "lon": 27.286
+    "lat": 36.892808,
+    "lon": 27.287592
   },
   {
     "id": "sight-eski-tzami",
@@ -206,8 +206,8 @@ window.HK_PLACES = [
     "link": "sight-eski-tzami.html",
     "photo": "img/hk/sight-eski-tzami-card.jpg",
     "order": 21,
-    "lat": 36.8923,
-    "lon": 27.2882
+    "lat": 36.8911518,
+    "lon": 27.28612
   },
   {
     "id": "sight-odeon",
@@ -216,8 +216,8 @@ window.HK_PLACES = [
     "link": "sight-odeon.html",
     "photo": "img/hk/sight-odeon-card.jpg",
     "order": 22,
-    "lat": 36.8914,
-    "lon": 27.2855
+    "lat": 36.8895778,
+    "lon": 27.2847775
   },
   {
     "id": "sight-westelijke-opgraving",
@@ -226,8 +226,8 @@ window.HK_PLACES = [
     "link": "sight-westelijke-opgraving.html",
     "photo": "img/hk/sight-westelijke-opgraving-card.jpg",
     "order": 23,
-    "lat": 36.891,
-    "lon": 27.285
+    "lat": 36.890291,
+    "lon": 27.284461
   },
   {
     "id": "sight-casa-romana",
@@ -236,8 +236,8 @@ window.HK_PLACES = [
     "link": "sight-casa-romana.html",
     "photo": "img/hk/sight-casa-romana-card.jpg",
     "order": 24,
-    "lat": 36.8905,
-    "lon": 27.2848
+    "lat": 36.8899234,
+    "lon": 27.288418
   },
   {
     "id": "sight-altaar-dionysos",
@@ -246,8 +246,8 @@ window.HK_PLACES = [
     "link": "sight-altaar-dionysos.html",
     "photo": "img/hk/sight-altaar-dionysos-card.jpg",
     "order": 25,
-    "lat": 36.8907,
-    "lon": 27.2852
+    "lat": 36.8907246,
+    "lon": 27.289403
   },
   {
     "id": "sight-katholieke-kerk",
@@ -255,7 +255,9 @@ window.HK_PLACES = [
     "group": "kos",
     "link": "sight-katholieke-kerk.html",
     "photo": "img/hk/sight-katholieke-kerk-card.jpg",
-    "order": 26
+    "order": 26,
+    "lat": 36.8883072,
+    "lon": 27.2857191
   },
   {
     "id": "vlag-hijsen",
@@ -263,7 +265,9 @@ window.HK_PLACES = [
     "group": "kos",
     "link": "vlag-hijsen.html",
     "photo": "wjd-vlag-ceremonie.jpg",
-    "order": 27
+    "order": 27,
+    "lat": 36.8948481,
+    "lon": 27.2916055
   },
   {
     "id": "sight-aquaduct-linopotas",
@@ -271,7 +275,9 @@ window.HK_PLACES = [
     "group": "kos",
     "link": "sight-aquaduct-linopotas.html",
     "photo": "img/hk/sight-aquaduct-linopotas-card.jpg",
-    "order": 28
+    "order": 28,
+    "lat": 36.868747,
+    "lon": 27.171514
   },
   {
     "id": "sight-therma",
@@ -280,8 +286,8 @@ window.HK_PLACES = [
     "link": "sight-therma.html",
     "photo": "img/hk/sight-therma.jpg",
     "order": 1,
-    "lat": 36.876,
-    "lon": 27.295
+    "lat": 36.8452839,
+    "lon": 27.3195524
   },
   {
     "id": "sight-platani",
@@ -289,7 +295,9 @@ window.HK_PLACES = [
     "group": "platani",
     "link": "sight-platani.html",
     "photo": "img/hk/sight-platani.jpg",
-    "order": 1
+    "order": 1,
+    "lat": 36.8533873,
+    "lon": 27.2289296
   },
   {
     "id": "sight-waterval-platani",
@@ -297,7 +305,9 @@ window.HK_PLACES = [
     "group": "platani",
     "link": "sight-waterval-platani.html",
     "photo": "img/hk/sight-waterval-platani.jpg",
-    "order": 2
+    "order": 2,
+    "lat": 36.8533873,
+    "lon": 27.2289296
   },
   {
     "id": "sight-asklepion",
@@ -306,8 +316,8 @@ window.HK_PLACES = [
     "link": "sight-asklepion.html",
     "photo": "img/hk/sight-asklepion.jpg",
     "order": 3,
-    "lat": 36.8765,
-    "lon": 27.257
+    "lat": 36.8763106,
+    "lon": 27.2592862
   },
   {
     "id": "sight-hippocratic-foundation",
@@ -316,8 +326,8 @@ window.HK_PLACES = [
     "link": "sight-hippocratic-foundation.html",
     "photo": "img/hk/sight-hippocratic-foundation-card.jpg",
     "order": 4,
-    "lat": 36.878,
-    "lon": 27.255
+    "lat": 36.8746295,
+    "lon": 27.2665516
   },
   {
     "id": "sight-haihoutes",
@@ -325,7 +335,9 @@ window.HK_PLACES = [
     "group": "platani",
     "link": "sight-haihoutes.html",
     "photo": "img/hk/sight-haihoutes-card.jpg",
-    "order": 5
+    "order": 5,
+    "lat": 36.8533873,
+    "lon": 27.2289296
   },
   {
     "id": "sight-zia",
@@ -334,8 +346,8 @@ window.HK_PLACES = [
     "link": "sight-zia.html",
     "photo": "img/hk/sight-zia.jpg",
     "order": 1,
-    "lat": 36.847,
-    "lon": 27.208
+    "lat": 36.846236,
+    "lon": 27.20486
   },
   {
     "id": "sight-natuurpark-zia",
@@ -352,8 +364,8 @@ window.HK_PLACES = [
     "link": "sight-palio-pyli.html",
     "photo": "img/hk/sight-palio-pyli-card.jpg",
     "order": 1,
-    "lat": 36.84,
-    "lon": 27.155
+    "lat": 36.8383825,
+    "lon": 27.1851318
   },
   {
     "id": "sight-kasteel-palio-pyli",
@@ -361,7 +373,9 @@ window.HK_PLACES = [
     "group": "pyli",
     "link": "sight-kasteel-palio-pyli.html",
     "photo": "img/hk/sight-kasteel-palio-pyli-card.jpg",
-    "order": 2
+    "order": 2,
+    "lat": 36.8383825,
+    "lon": 27.1851318
   },
   {
     "id": "sight-tigaki",
@@ -369,7 +383,9 @@ window.HK_PLACES = [
     "group": "tigaki",
     "link": "sight-tigaki.html",
     "photo": "img/hk/sight-tigaki.jpg",
-    "order": 1
+    "order": 1,
+    "lat": 36.889274,
+    "lon": 27.183299
   },
   {
     "id": "sight-zoutmeer-tigaki",
@@ -378,8 +394,8 @@ window.HK_PLACES = [
     "link": "sight-zoutmeer-tigaki.html",
     "photo": "img/hk/sight-zoutmeer-tigaki-card.jpg",
     "order": 2,
-    "lat": 36.89,
-    "lon": 27.185
+    "lat": 36.8888846,
+    "lon": 27.1748298
   },
   {
     "id": "sight-marmari",
@@ -388,8 +404,8 @@ window.HK_PLACES = [
     "link": "sight-marmari.html",
     "photo": "img/hk/sight-marmari.jpg",
     "order": 1,
-    "lat": 36.885,
-    "lon": 27.145
+    "lat": 36.879402,
+    "lon": 27.1434928
   },
   {
     "id": "sight-mastichari",
@@ -398,8 +414,8 @@ window.HK_PLACES = [
     "link": "sight-mastichari.html",
     "photo": "img/hk/sight-mastichari.jpg",
     "order": 1,
-    "lat": 36.852,
-    "lon": 27.075
+    "lat": 36.8479163,
+    "lon": 27.0741794
   },
   {
     "id": "sight-hippocrates-garden",
@@ -407,7 +423,9 @@ window.HK_PLACES = [
     "group": "mastichari",
     "link": "sight-hippocrates-garden.html",
     "photo": "img/hk/sight-hippocrates-garden-card.jpg",
-    "order": 2
+    "order": 2,
+    "lat": 36.8108172,
+    "lon": 27.0557816
   },
   {
     "id": "sight-kasteel-antimachia",
@@ -416,8 +434,8 @@ window.HK_PLACES = [
     "link": "sight-kasteel-antimachia.html",
     "photo": "img/hk/sight-kasteel-antimachia-card.jpg",
     "order": 1,
-    "lat": 36.807,
-    "lon": 27.098
+    "lat": 36.8028654,
+    "lon": 27.1280434
   },
   {
     "id": "sight-molen-antimachia",
@@ -426,8 +444,8 @@ window.HK_PLACES = [
     "link": "sight-molen-antimachia.html",
     "photo": "img/hk/sight-molen-antimachia-card.jpg",
     "order": 2,
-    "lat": 36.8105,
-    "lon": 27.103
+    "lat": 36.8078671,
+    "lon": 27.0960394
   },
   {
     "id": "sight-traditioneel-huis-antimachia",
@@ -435,7 +453,9 @@ window.HK_PLACES = [
     "group": "antimachia",
     "link": "sight-traditioneel-huis-antimachia.html",
     "photo": "img/hk/sight-traditioneel-huis-antimachia-card.jpg",
-    "order": 3
+    "order": 3,
+    "lat": 36.8084185,
+    "lon": 27.095753
   },
   {
     "id": "sight-plaka",
@@ -443,7 +463,9 @@ window.HK_PLACES = [
     "group": "antimachia",
     "link": "sight-plaka.html",
     "photo": "img/hk/sight-plaka.jpg",
-    "order": 4
+    "order": 4,
+    "lat": 36.7892304,
+    "lon": 27.0672551
   },
   {
     "id": "sight-agios-stefanos-kefalos",
@@ -452,8 +474,8 @@ window.HK_PLACES = [
     "link": "sight-agios-stefanos-kefalos.html",
     "photo": "img/hk/sight-agios-stefanos-kefalos-card.jpg",
     "order": 1,
-    "lat": 36.745,
-    "lon": 26.963
+    "lat": 36.7525814,
+    "lon": 26.9887865
   },
   {
     "id": "sight-kapel-agios-nikolaos",
@@ -461,7 +483,9 @@ window.HK_PLACES = [
     "group": "kefalos",
     "link": "sight-kapel-agios-nikolaos.html",
     "photo": "img/hk/sight-kapel-agios-nikolaos-card.jpg",
-    "order": 2
+    "order": 2,
+    "lat": 36.7502611,
+    "lon": 26.9877853
   },
   {
     "id": "sight-cavo-paradiso",
@@ -469,7 +493,9 @@ window.HK_PLACES = [
     "group": "kefalos",
     "link": "sight-cavo-paradiso.html",
     "photo": "img/hk/sight-cavo-paradiso.jpg",
-    "order": 3
+    "order": 3,
+    "lat": 36.6839132,
+    "lon": 26.949015
   },
   {
     "id": "sight-kardamena",
@@ -477,7 +503,9 @@ window.HK_PLACES = [
     "group": "kardamena",
     "link": "sight-kardamena.html",
     "photo": "img/hk/sight-kardamena.jpg",
-    "order": 1
+    "order": 1,
+    "lat": 36.783135,
+    "lon": 27.142865
   },
   {
     "id": "sight-limnionas",
@@ -485,8 +513,6 @@ window.HK_PLACES = [
     "group": "limnionas",
     "link": "sight-limnionas.html",
     "photo": "img/hk/sight-limnionas.jpg",
-    "order": 1,
-    "lat": 36.738,
-    "lon": 26.958
+    "order": 1
   }
 ];
