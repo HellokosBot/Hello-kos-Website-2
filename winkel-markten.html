@@ -46,6 +46,10 @@ body.hk-page .shops-hero .lead{margin:0}
 .btn-solid{background:var(--petrol);color:#fff}
 .loc-list p{margin:0 0 12px;color:var(--text-soft);font-size:.92rem}
 .loc-list a{color:var(--petrol);font-weight:700}
+
+body.hk-page .map-row{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:stretch;gap:8px;width:100%;max-width:100%;margin:12px 0 0;box-sizing:border-box}
+body.hk-page .map-row .btn{flex:1 1 0;width:0;max-width:none;min-width:0;padding:12px 8px;font-size:.82rem}
+body.hk-page .map-row .pin{flex:0 0 16px;width:16px;height:16px}
 </style>
 </head>
 <body class="hk-page">
@@ -79,11 +83,22 @@ body.hk-page .shops-hero .lead{margin:0}
 </div>
 </div>
 <img class="strip" src="img/hk/winkel-markt-1.jpg" alt="">
-<article class="card"><h2 data-i18n="hHal">Markthal</h2><p data-i18n="p1">Hoewel het eiland verschillende markten kent, moet je niet verwachten dat je hier grote traditionele Mediterrane markten vindt zoals in bijvoorbeeld Spanje, Turkije of op sommige andere Griekse eilanden. De bekendste markt van het eiland is de zogenaamde “Markthal” in het centrum van Kos-Stad. Ondanks de naam is dit vooral een toeristische winkelhal waar je souvenirs, sponsen, kruiden, honing en wat fruit kunt kopen. Leuk om even doorheen te lopen, maar het heeft niet de authentieke sfeer van een echte lokale versmarkt.</p></article>
+<article class="card"><h2 data-i18n="hHal">Markthal</h2><p data-i18n="p1">Hoewel het eiland verschillende markten kent, moet je niet verwachten dat je hier grote traditionele Mediterrane markten vindt zoals in bijvoorbeeld Spanje, Turkije of op sommige andere Griekse eilanden. De bekendste markt van het eiland is de zogenaamde “Markthal” in het centrum van Kos-Stad. Ondanks de naam is dit vooral een toeristische winkelhal waar je souvenirs, sponsen, kruiden, honing en wat fruit kunt kopen. Leuk om even doorheen te lopen, maar het heeft niet de authentieke sfeer van een echte lokale versmarkt.</p>
+<div class="map-row">
+<a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&amp;query=36.8928987,27.2886799" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+<a class="btn btn-map" href="https://maps.apple.com/?ll=36.8928987,27.2886799&amp;q=Markthal%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+</div>
+</article>
 <div class="shop-grid">
 <a class="shop-card" href="winkel-markthal.html"><span class="pic"><img src="img/hk/winkel-hal-1.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="tHal">Markthal Kos</span></span></a>
 <a class="shop-card" href="winkel-groentemarkt.html"><span class="pic"><img src="img/hk/winkel-markt-3.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="tGro">Groentemarkt</span></span></a>
 </div>
+<article class="card"><h2 data-i18n="tGro">Groentemarkt</h2>
+<div class="map-row">
+<a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&amp;query=36.892821,27.2805575" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+<a class="btn btn-map" href="https://maps.apple.com/?ll=36.892821,27.2805575&amp;q=Groentemarkt%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+</div>
+</article>
 <article class="card"><h2 data-i18n="hWin">Groente winkels</h2><p data-i18n="p3">Dat betekent overigens niet dat Kos geen charme heeft. Integendeel. Het eiland draait juist meer om gezellige tavernes, kleine familiezaakjes en ontspannen dorpspleinen dan om grote marktculturen. Voor verse lokale producten kun je vaak beter terecht bij kleine winkels langs de weg of bij traditionele supermarktjes in de dorpen.</p></article>
 <img class="strip" src="img/hk/winkel-markt-4.jpg" alt="">
 </main>
@@ -98,6 +113,8 @@ window.HK_DICT = {
     "phoneL": "Telefoon",
     "emergL": "Nood Telefoon",
     "map": "Google locatie",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
     "closed": "Gesloten",
     "d0": "Ma.",
     "d1": "Di.",
@@ -124,6 +141,8 @@ window.HK_DICT = {
     "phoneL": "Telefon",
     "emergL": "Nottelefon",
     "map": "Google-Standort",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
     "closed": "Geschlossen",
     "d0": "Mo.",
     "d1": "Di.",
@@ -150,6 +169,8 @@ window.HK_DICT = {
     "phoneL": "Phone",
     "emergL": "Emergency phone",
     "map": "Google location",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
     "closed": "Closed",
     "d0": "Mon",
     "d1": "Tue",
@@ -176,6 +197,8 @@ window.HK_DICT = {
     "phoneL": "Telefono",
     "emergL": "Telefono di emergenza",
     "map": "Posizione Google",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
     "closed": "Chiuso",
     "d0": "Lun",
     "d1": "Mar",
@@ -202,6 +225,8 @@ window.HK_DICT = {
     "phoneL": "Telefon",
     "emergL": "Acil telefon",
     "map": "Google konumu",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
     "closed": "Kapalı",
     "d0": "Pzt",
     "d1": "Sal",
@@ -228,6 +253,8 @@ window.HK_DICT = {
     "phoneL": "Teléfono",
     "emergL": "Teléfono de urgencia",
     "map": "Ubicación en Google",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
     "closed": "Cerrado",
     "d0": "Lun",
     "d1": "Mar",
