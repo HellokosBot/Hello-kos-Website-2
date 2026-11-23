@@ -27,6 +27,14 @@ a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba
 .loc-card h2{font-size:1.05rem;margin:0 0 8px}
 .loc-name{font-weight:800;font-size:1.05rem}
 .loc-list a{color:var(--petrol);font-weight:700}
+.photo{display:block;width:100%;height:auto;border-radius:14px;margin:0 0 12px}
+body.hk-page .hero-wrap.shops-hero{aspect-ratio:auto;min-height:210px;display:flex;align-items:flex-end;overflow:hidden;margin:-16px -14px 12px}
+body.hk-page .hero-wrap.shops-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 36%}
+body.hk-page .shops-hero-copy{position:relative;z-index:1;width:100%;box-sizing:border-box;padding:36px 16px 14px;background:linear-gradient(to top,rgba(13,26,26,.94) 0%,rgba(13,26,26,.78) 46%,rgba(13,26,26,.28) 78%,rgba(13,26,26,0) 100%)}
+body.hk-page .shops-hero h1{color:#fff;margin:0;text-shadow:0 1px 6px rgba(0,0,0,.55);font-size:1.45rem}
+body.hk-page .map-row{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:stretch;gap:8px;width:100%;max-width:100%;margin:12px 0 0;box-sizing:border-box}
+body.hk-page .map-row .btn{flex:1 1 0;width:0;max-width:none;min-width:0;padding:12px 8px;font-size:.82rem}
+body.hk-page .map-row .pin{flex:0 0 16px;width:16px;height:16px}
 </style>
 </head>
 <body class="hk-page">
@@ -50,13 +58,17 @@ a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba
 </header>
 <div class="overlay" id="overlay"></div>
 <main class="main">
-<img class="strip" src="img/hk/winkel-print-1.jpg" alt="">
 <p class="parent-link"><a href="praktische-winkels.html" data-i18n="back">← Belangrijke winkels</a></p>
+<div class="hero-wrap shops-hero">
+<img src="img/hk/ekfrasi-gevel.jpg" alt="">
+<div class="shops-hero-copy">
 <h1 data-i18n="title">Expressie Boekhandel</h1>
-<p class="lead" data-i18n="lead">Printen</p>
+</div>
+</div>
 <article class="card">
-<p data-i18n="p0">Expressie Boekhandel is een leuke en goed gesorteerde boekwinkel in het centrum van Kos-stad. Je vindt er een ruime keuze aan Engelse boeken (thrillers, romans, reisboeken en non-fictie), tijdschriften, puzzels en wat Nederlandse titels. Ideaal als je tijdens je vakantie iets leuks wilt lezen of een boek zoekt om mee naar huis te nemen.</p>
-<p data-i18n="p1">Daarnaast biedt de winkel handige print- en kopieerservices aan . Je kunt er documenten, tickets, boarding passes, formulieren of foto’s printen en kopiëren – erg praktisch als je iets nodig hebt voor je vlucht, huurauto of een reservering.</p>
+<p data-i18n="p0">Dit is een boekhandel, en meteen een handige plek om te printen en te kopiëren. Op het bord staat het erbij: boekhandel en drukwerk. Als toerist print of kopieer je hier een vliegticket, een boardingpass, de bevestiging van je huurauto, of een reservering voor je hotel of een excursie.</p>
+<img class="photo" src="img/hk/winkel-print-1.jpg" alt="">
+<p data-i18n="p1">Daarnaast liggen er Engelse boeken, tijdschriften en puzzelboekjes, en vaak ook kleurboeken en dat soort kleine dingen. Er liggen ook wat Nederlandse titels.</p>
 <h3 data-i18n="addrH">Adres</h3>
 <p class="addr"><strong>Leof. El. Venizelou 18, Kos 853 00</strong></p>
 <h3 data-i18n="hoursH">Openingstijden</h3><div class="hours">
@@ -71,7 +83,10 @@ a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba
 <div class="call-list">
 <a class="call-btn" href="tel:+302242024351"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="call-copy"><span class="call-main"><span data-i18n="call">Bel</span> +30 22420 24351</span><span class="call-sub" data-i18n="phoneL">Telefoon</span></span></a>
 </div>
-<div class="actions"><a class="btn btn-map" href="https://maps.app.goo.gl/xfZR46ncPBQqBsqt5" target="_blank" rel="noopener" data-i18n="map">Google locatie</a></div>
+<div class="map-row">
+<a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&amp;query=36.8922006,27.2897407" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+<a class="btn btn-map" href="https://maps.apple.com/?ll=36.8922006,27.2897407&amp;q=Ekfrasi%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+</div>
 </article>
 </main>
 <footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
@@ -94,8 +109,10 @@ window.HK_DICT = {
     "d5": "Zat.",
     "d6": "Zon.",
     "title": "Expressie Boekhandel",
-    "p0": "Expressie Boekhandel is een leuke en goed gesorteerde boekwinkel in het centrum van Kos-stad. Je vindt er een ruime keuze aan Engelse boeken (thrillers, romans, reisboeken en non-fictie), tijdschriften, puzzels en wat Nederlandse titels. Ideaal als je tijdens je vakantie iets leuks wilt lezen of een boek zoekt om mee naar huis te nemen.",
-    "p1": "Daarnaast biedt de winkel handige print- en kopieerservices aan . Je kunt er documenten, tickets, boarding passes, formulieren of foto’s printen en kopiëren – erg praktisch als je iets nodig hebt voor je vlucht, huurauto of een reservering.",
+    "p0": "Dit is een boekhandel, en meteen een handige plek om te printen en te kopiëren. Op het bord staat het erbij: boekhandel en drukwerk. Als toerist print of kopieer je hier een vliegticket, een boardingpass, de bevestiging van je huurauto, of een reservering voor je hotel of een excursie.",
+    "p1": "Daarnaast liggen er Engelse boeken, tijdschriften en puzzelboekjes, en vaak ook kleurboeken en dat soort kleine dingen. Er liggen ook wat Nederlandse titels.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
     "lead": "Printen"
   },
   "de": {
@@ -115,8 +132,10 @@ window.HK_DICT = {
     "d5": "Sa.",
     "d6": "So.",
     "title": "Expressie Boekhandel",
-    "p0": "Expressie Boekhandel ist eine nette und gut sortierte Buchhandlung im Zentrum von Kos-Stadt. Es gibt eine große Auswahl an englischen Büchern (Thriller, Romane, Reiseführer und Sachbücher), Zeitschriften, Rätsel und einige niederländische Titel. Ideal, wenn du im Urlaub etwas Schönes lesen oder ein Buch mit nach Hause nehmen willst.",
-    "p1": "Außerdem bietet der Laden praktische Druck- und Kopierdienste. Du kannst Dokumente, Tickets, Bordkarten, Formulare oder Fotos drucken und kopieren – sehr praktisch für Flug, Mietwagen oder eine Reservierung.",
+    "p0": "Das ist eine Buchhandlung und zugleich eine praktische Stelle zum Drucken und Kopieren. Auf dem Schild steht es dabei: Buchhandlung und Druckarbeiten. Als Gast druckst oder kopierst du hier ein Flugticket, eine Bordkarte, die Bestätigung für den Mietwagen oder eine Reservierung für Hotel oder Ausflug.",
+    "p1": "Daneben liegen englische Bücher, Zeitschriften und Rätselbücher, und oft auch Malbücher und solche kleinen Sachen. Es gibt auch ein paar niederländische Titel.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
     "lead": "Drucken"
   },
   "en": {
@@ -136,8 +155,10 @@ window.HK_DICT = {
     "d5": "Sat",
     "d6": "Sun",
     "title": "Expressie Boekhandel",
-    "p0": "Expressie Boekhandel is a pleasant and well-stocked bookshop in the centre of Kos town. You will find a wide choice of English books (thrillers, novels, travel books and non-fiction), magazines, puzzles and some Dutch titles. Ideal if you want something good to read on holiday or a book to take home.",
-    "p1": "The shop also offers handy printing and copying. You can print and copy documents, tickets, boarding passes, forms or photos – very practical if you need something for your flight, hire car or a booking.",
+    "p0": "This is a bookshop, and also a handy place to print and copy. The sign says so: bookshop and printing. As a visitor you can print or copy a flight ticket, a boarding pass, your car-hire confirmation, or a booking for your hotel or a trip.",
+    "p1": "There are English books as well, plus magazines and puzzle books, and often colouring books and that kind of small thing. There are also a few Dutch titles.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
     "lead": "Printing"
   },
   "it": {
@@ -157,8 +178,10 @@ window.HK_DICT = {
     "d5": "Sab",
     "d6": "Dom",
     "title": "Expressie Boekhandel",
-    "p0": "Expressie Boekhandel è una libreria piacevole e ben fornita nel centro della città di Kos. C’è un’ampia scelta di libri inglesi (thriller, romanzi, guide e saggistica), riviste, puzzle e qualche titolo olandese. Ideale se in vacanza vuoi leggere qualcosa o portare a casa un libro.",
-    "p1": "Il negozio offre anche stampa e copie pratiche. Puoi stampare e copiare documenti, biglietti, carte d’imbarco, moduli o foto: utile per il volo, l’auto a noleggio o una prenotazione.",
+    "p0": "È una libreria e insieme un posto comodo per stampare e fotocopiare. Sul cartello c’è scritto: libreria e lavori di stampa. Da turista stampi o fotocopi qui un biglietto aereo, una carta d’imbarco, la conferma del noleggio auto, o una prenotazione di hotel o escursione.",
+    "p1": "Poi ci sono libri in inglese, riviste e libri di enigmi, e spesso album da colorare e quelle cosine. Ci sono anche alcuni titoli olandesi.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
     "lead": "Stampa"
   },
   "tr": {
@@ -178,8 +201,10 @@ window.HK_DICT = {
     "d5": "Cmt",
     "d6": "Paz",
     "title": "Expressie Boekhandel",
-    "p0": "Expressie Boekhandel, Kos şehrinin merkezinde hoş ve dolu bir kitapçıdır. İngilizce kitaplar (gerilim, roman, gezi ve kurgu dışı), dergiler, bulmacalar ve bazı Felemenkçe kitaplar vardır. Tatilde okumak veya eve kitap götürmek için uygundur.",
-    "p1": "Dükkan ayrıca pratik baskı ve fotokopi sunar. Belge, bilet, biniş kartı, form veya fotoğraf bastırıp kopyalayabilirsin; uçuş, kiralık araba veya rezervasyon için çok işe yarar.",
+    "p0": "Burası bir kitapçı ve aynı zamanda yazdırmak ve fotokopi çekmek için pratik bir yer. Tabelada da yazıyor: kitapçı ve basım işleri. Turist olarak burada uçak bileti, biniş kartı, araç kiralama onayı ya da otel veya gezi rezervasyonunu yazdırır veya kopyalarsın.",
+    "p1": "Bir de İngilizce kitaplar, dergiler ve bulmaca kitapları var, çoğu zaman boyama kitapları ve bu tür küçük şeyler de. Birkaç Felemenkçe kitap da duruyor.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
     "lead": "Baskı"
   },
   "es": {
@@ -199,8 +224,10 @@ window.HK_DICT = {
     "d5": "Sáb",
     "d6": "Dom",
     "title": "Expressie Boekhandel",
-    "p0": "Expressie Boekhandel es una librería agradable y bien surtida en el centro de la ciudad de Kos. Hay muchos libros en inglés (thriller, novelas, viajes y no ficción), revistas, puzles y algunos títulos en neerlandés. Ideal si en vacaciones quieres leer algo o llevarte un libro.",
-    "p1": "La tienda también ofrece impresión y copias prácticas. Puedes imprimir y copiar documentos, billetes, tarjetas de embarque, formularios o fotos: muy útil para el vuelo, el coche de alquiler o una reserva.",
+    "p0": "Es una librería y a la vez un sitio práctico para imprimir y fotocopiar. El letrero lo dice: librería y trabajos de imprenta. Como turista imprimes o copias aquí un billete de avión, una tarjeta de embarque, la confirmación del coche de alquiler, o una reserva de hotel o excursión.",
+    "p1": "Además hay libros en inglés, revistas y libros de pasatiempos, y a menudo libros para colorear y esas cosas pequeñas. También hay algunos títulos en neerlandés.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
     "lead": "Imprimir"
   }
 };
