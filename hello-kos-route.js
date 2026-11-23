@@ -249,6 +249,92 @@
     note.dataset.lock = "";
   }
 
+  var wishMode = null;
+  var TRASH = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 3h6l1 2h5v2H3V5h5l1-2zm1 6h2v9h-2V9zm4 0h2v9h-2V9zM6 9h2v9H6V9zm-1 12h14l1-12H4l1 12z"/></svg>';
+  function favPlaces(town) {
+    var favs = (window.HKFav && HKFav.list) ? HKFav.list() : [];
+    var out = [];
+    favs.forEach(function (f) {
+      var p = byId(f.id);
+      if (!p || !p.group) return;
+      var inTown = p.group === "kos";
+      if (town ? inTown : !inTown) out.push(p);
+    });
+    return out;
+  }
+  function orderNearest(stops) {
+    var withCoord = [];
+    var without = [];
+    stops.forEach(function (p) {
+      if (typeof p.lat === "number" && typeof p.lon === "number") withCoord.push(p);
+      else without.push(p);
+    });
+    if (withCoord.length < 2) return withCoord.concat(without);
+    var start = withCoord.slice().sort(function (a, b) {
+      return a.lon - b.lon || a.lat - b.lat;
+    })[0];
+    var rest = withCoord.filter(function (p) { return p !== start; });
+    var ordered = [start];
+    while (rest.length) {
+      var cur = ordered[ordered.length - 1];
+      var best = 0;
+      var bestD = Infinity;
+      for (var i = 0; i < rest.length; i++) {
+        var d = hav(cur, rest[i]);
+        if (d < bestD) { bestD = d; best = i; }
+      }
+      ordered.push(rest.splice(best, 1)[0]);
+    }
+    return ordered.concat(without);
+  }
+  function renderWish() {
+    var view = document.getElementById("routeView");
+    if (!view || !wishMode) return;
+    var town = wishMode === "walk";
+    var stops = orderNearest(favPlaces(town));
+    document.getElementById("ownWalk").classList.toggle("on", town);
+    document.getElementById("ownDrive").classList.toggle("on", !town);
+    if (!stops.length) {
+      view.innerHTML = '<div class="empty-route"><p>' + esc(T(town ? "wishEmptyWalk" : "wishEmptyDrive")) + '</p><a class="wish-go" href="bezienswaardigheden.html">' + esc(T("wishSee")) + "</a></div>";
+      view.setAttribute("data-stops", "0");
+      return;
+    }
+    var html = '<p class="est">' + esc(T("wishCount").replace("{n}", String(stops.length))) + "</p>";
+    stops.forEach(function (p, i) {
+      html += '<article class="stop">';
+      html += '<div class="stop-top">';
+      if (p.photo) html += '<img src="' + esc(p.photo) + '" alt="">';
+      else html += '<div class="ph"></div>';
+      html += '<button type="button" class="drop" data-drop="' + esc(p.id) + '" aria-label="' + esc(T("wishRemove")) + '">' + TRASH + "</button>";
+      html += "</div>";
+      html += "<h2>" + (i + 1) + ". " + esc(p.name) + "</h2>";
+      html += '<div class="body"><p>' + esc(stopText(p.id)) + "</p>";
+      html += openBtn(p);
+      html += buttons(p);
+      html += "</div></article>";
+    });
+    var mapped = stops.filter(function (p) { return typeof p.lat === "number"; });
+    var tm = town ? "walk" : "drive";
+    var info = dirUrl(mapped, tm);
+    if (info) {
+      html += '<div class="map-row route-all"><a id="routeGoogle" href="' + esc(info.url) + '" target="_blank" rel="noopener">' + PIN + esc(T("openG")) + '</a><a id="routeApple" href="' + esc(appleDir(mapped, tm)) + '" target="_blank" rel="noopener">' + PIN + esc(T("iphone")) + "</a></div>";
+      if (info.trimmed) html += '<p class="est">' + esc(T("trim")) + "</p>";
+    }
+    view.innerHTML = html;
+    view.setAttribute("data-stops", String(stops.length));
+    view.setAttribute("data-mode", wishMode);
+  }
+  function dropWish(id) {
+    if (window.HKFav && HKFav.remove) HKFav.remove(id);
+    else {
+      try {
+        var items = JSON.parse(localStorage.getItem("hk-favorites") || "[]");
+        localStorage.setItem("hk-favorites", JSON.stringify(items.filter(function (x) { return x && x.id !== id; })));
+      } catch (e) {}
+    }
+    renderWish();
+  }
+
   var page = document.body.getAttribute("data-route") || "";
   if (page === "walk") renderWalk();
   if (page === "drive") {
@@ -266,31 +352,23 @@
     }
   }
   if (page === "custom") {
-    openCustom();
-    document.getElementById("cWalk").addEventListener("click", function () {
-      document.getElementById("cWalk").classList.add("on");
-      document.getElementById("cDrive").classList.remove("on");
-      savePicks();
-      updateCustom();
+    document.getElementById("ownWalk").addEventListener("click", function () {
+      wishMode = "walk";
+      renderWish();
     });
-    document.getElementById("cDrive").addEventListener("click", function () {
-      document.getElementById("cDrive").classList.add("on");
-      document.getElementById("cWalk").classList.remove("on");
-      savePicks();
-      updateCustom();
+    document.getElementById("ownDrive").addEventListener("click", function () {
+      wishMode = "drive";
+      renderWish();
     });
-    document.getElementById("checks").addEventListener("change", function () {
-      savePicks();
-      updateCustom();
+    document.getElementById("routeView").addEventListener("click", function (e) {
+      var btn = e.target.closest("[data-drop]");
+      if (!btn) return;
+      dropWish(btn.getAttribute("data-drop"));
     });
-    document.getElementById("fromFav").addEventListener("click", fromFav);
   }
   document.addEventListener("hk-lang", function () {
     if (page === "walk") renderWalk();
-    else if (page === "custom") {
-      savePicks();
-      document.getElementById("blurb").textContent = T("customNote");
-      renderChecks();
-    } else if (page === "drive") applyPreset();
+    else if (page === "custom") renderWish();
+    else if (page === "drive") applyPreset();
   });
 })();

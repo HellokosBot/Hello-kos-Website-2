@@ -43,7 +43,16 @@ window.HK_DICT = {
     "g_kefalos": "Kefalos",
     "g_limnionas": "Limnionas",
     "g_kardamena": "Kardamena",
-    "open": "Bekijk de pagina"
+    "open": "Bekijk de pagina",
+    "wishLead": "Geef locaties een hartje bij Bezienswaardigheden. Die komen hier in je eigen route.",
+    "wishGo": "Hartjes geven",
+    "ownWalk": "Eigen wandelroute",
+    "ownDrive": "Eigen rijroute",
+    "wishEmptyWalk": "Nog geen plekken voor je wandelroute. Geef een hartje bij Bezienswaardigheden.",
+    "wishEmptyDrive": "Nog geen plekken voor je rijroute. Geef een hartje bij Bezienswaardigheden.",
+    "wishSee": "Naar Bezienswaardigheden",
+    "wishRemove": "Uit de route",
+    "wishCount": "{n} plekken in deze route"
   },
   "de": {
     "title": "Route",
@@ -89,7 +98,16 @@ window.HK_DICT = {
     "g_kefalos": "Kefalos",
     "g_limnionas": "Limnionas",
     "g_kardamena": "Kardamena",
-    "open": "Seite ansehen"
+    "open": "Seite ansehen",
+    "wishLead": "Gib Orten bei den Sehenswürdigkeiten ein Herz. Sie erscheinen hier in deiner eigenen Route.",
+    "wishGo": "Herzen vergeben",
+    "ownWalk": "Eigene Wanderroute",
+    "ownDrive": "Eigene Fahrroute",
+    "wishEmptyWalk": "Noch keine Orte für deine Wanderroute. Vergib ein Herz bei den Sehenswürdigkeiten.",
+    "wishEmptyDrive": "Noch keine Orte für deine Fahrroute. Vergib ein Herz bei den Sehenswürdigkeiten.",
+    "wishSee": "Zu den Sehenswürdigkeiten",
+    "wishRemove": "Aus der Route",
+    "wishCount": "{n} Orte in dieser Route"
   },
   "en": {
     "title": "Route",
@@ -135,7 +153,16 @@ window.HK_DICT = {
     "g_kefalos": "Kefalos",
     "g_limnionas": "Limnionas",
     "g_kardamena": "Kardamena",
-    "open": "View the page"
+    "open": "View the page",
+    "wishLead": "Tap the heart on a sight. Those places show up here in your own route.",
+    "wishGo": "Add hearts",
+    "ownWalk": "My walking route",
+    "ownDrive": "My driving route",
+    "wishEmptyWalk": "No places on your walking route yet. Tap a heart on the sights.",
+    "wishEmptyDrive": "No places on your driving route yet. Tap a heart on the sights.",
+    "wishSee": "Browse the sights",
+    "wishRemove": "Remove from route",
+    "wishCount": "{n} places on this route"
   },
   "it": {
     "title": "Percorso",
@@ -181,7 +208,16 @@ window.HK_DICT = {
     "g_kefalos": "Kefalos",
     "g_limnionas": "Limnionas",
     "g_kardamena": "Kardamena",
-    "open": "Vedi la pagina"
+    "open": "Vedi la pagina",
+    "wishLead": "Metti un cuoricino alle attrazioni. Quei luoghi arrivano qui nel tuo percorso.",
+    "wishGo": "Metti i cuori",
+    "ownWalk": "Il mio percorso a piedi",
+    "ownDrive": "Il mio percorso in auto",
+    "wishEmptyWalk": "Ancora nessun luogo nel percorso a piedi. Metti un cuore alle attrazioni.",
+    "wishEmptyDrive": "Ancora nessun luogo nel percorso in auto. Metti un cuore alle attrazioni.",
+    "wishSee": "Alle attrazioni",
+    "wishRemove": "Togli dal percorso",
+    "wishCount": "{n} luoghi in questo percorso"
   },
   "tr": {
     "title": "Rota",
@@ -227,7 +263,16 @@ window.HK_DICT = {
     "g_kefalos": "Kefalos",
     "g_limnionas": "Limnionas",
     "g_kardamena": "Kardamena",
-    "open": "Sayfayı aç"
+    "open": "Sayfayı aç",
+    "wishLead": "Gezilecek yerlere kalp ver. Onlar burada kendi rotanda görünür.",
+    "wishGo": "Kalp ver",
+    "ownWalk": "Kendi yürüyüş rotam",
+    "ownDrive": "Kendi araç rotam",
+    "wishEmptyWalk": "Yürüyüş rotanda henüz yer yok. Gezilecek yerlere kalp ver.",
+    "wishEmptyDrive": "Araç rotanda henüz yer yok. Gezilecek yerlere kalp ver.",
+    "wishSee": "Gezilecek yerlere",
+    "wishRemove": "Rotadan çıkar",
+    "wishCount": "Bu rotada {n} yer"
   },
   "es": {
     "title": "Ruta",
@@ -273,6 +318,15 @@ window.HK_DICT = {
     "g_kefalos": "Kefalos",
     "g_limnionas": "Limnionas",
     "g_kardamena": "Kardamena",
-    "open": "Ver la página"
+    "open": "Ver la página",
+    "wishLead": "Pon un corazón en los lugares. Aparecen aquí en tu propia ruta.",
+    "wishGo": "Poner corazones",
+    "ownWalk": "Mi ruta a pie",
+    "ownDrive": "Mi ruta en coche",
+    "wishEmptyWalk": "Aún no hay lugares en tu ruta a pie. Pon un corazón en los sitios.",
+    "wishEmptyDrive": "Aún no hay lugares en tu ruta en coche. Pon un corazón en los sitios.",
+    "wishSee": "Ver los lugares",
+    "wishRemove": "Quitar de la ruta",
+    "wishCount": "{n} lugares en esta ruta"
   }
 };
