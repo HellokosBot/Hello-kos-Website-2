@@ -312,6 +312,8 @@
     <p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p>
   </footer>
 
+<script src="hello-kos-names.js?v=20261123g"></script>
+<script src="hello-kos-route-text.js?v=20261123f"></script>
 <script>
 (function () {
   var I18N = {
@@ -321,6 +323,7 @@
       statusIdle: "GPS nog niet gestart",
       statusGetting: "GPS ophalen…",
       statusActive: "GPS actief",
+      inRange: "in bereik",
       statusDenied: "Locatie geweigerd – zet toestemming aan",
       statusError: "GPS-fout",
       statusUnsupported: "GPS niet ondersteund op dit apparaat",
@@ -364,6 +367,7 @@
       statusIdle: "GPS not started yet",
       statusGetting: "Getting GPS…",
       statusActive: "GPS active",
+      inRange: "in range",
       statusDenied: "Location denied – enable permission",
       statusError: "GPS error",
       statusUnsupported: "GPS not supported on this device",
@@ -407,6 +411,7 @@
       statusIdle: "GPS noch nicht gestartet",
       statusGetting: "GPS wird ermittelt…",
       statusActive: "GPS aktiv",
+      inRange: "in Reichweite",
       statusDenied: "Standort abgelehnt – Berechtigung aktivieren",
       statusError: "GPS-Fehler",
       statusUnsupported: "GPS wird auf diesem Gerät nicht unterstützt",
@@ -450,6 +455,7 @@
       statusIdle: "GPS non ancora avviato",
       statusGetting: "Recupero GPS…",
       statusActive: "GPS attivo",
+      inRange: "a portata",
       statusDenied: "Posizione negata – attiva il permesso",
       statusError: "Errore GPS",
       statusUnsupported: "GPS non supportato su questo dispositivo",
@@ -493,6 +499,7 @@
       statusIdle: "GPS henüz başlatılmadı",
       statusGetting: "GPS alınıyor…",
       statusActive: "GPS aktif",
+      inRange: "menzilde",
       statusDenied: "Konum reddedildi – izni aç",
       statusError: "GPS hatası",
       statusUnsupported: "Bu cihazda GPS desteklenmiyor",
@@ -536,6 +543,7 @@
       statusIdle: "GPS aún no iniciado",
       statusGetting: "Obteniendo GPS…",
       statusActive: "GPS activo",
+      inRange: "al alcance",
       statusDenied: "Ubicación denegada – activa el permiso",
       statusError: "Error de GPS",
       statusUnsupported: "GPS no compatible en este dispositivo",
@@ -602,6 +610,7 @@
       o.classList.toggle('active', o.getAttribute('data-lang') === l);
     });
     closeMenu();
+    if (lastFix) updateUI(lastFix.lat, lastFix.lng, lastFix.accuracy);
   }
 
   var langBtn = document.getElementById('langBtn');
@@ -620,32 +629,42 @@
   setLang(getLang());
 
   /* === RADAR LOGIC (unchanged) === */
+  var lastFix = null;
+  function locName(loc) {
+    var pack = (window.HK_NAMES && HK_NAMES[getLang()]) || {};
+    return (loc.id && pack[loc.id]) || loc.name;
+  }
+  function locStory(loc) {
+    var all = window.HK_ROUTE_TEXT || {};
+    var pack = all[getLang()] || all.nl || {};
+    return (loc.id && pack[loc.id]) || loc.story;
+  }
   var LOCATIONS = [
-    { name: 'Witte trappen', lat: 36.8942411, lng: 27.2873933, href: 'sight-witte-trappen.html', story: 'Meest fotogenieke trappetjes van Kos-stad – blauwe accenten, richting de vis-taverne.' },
-    { name: 'I Love Kos', lat: 36.894614, lng: 27.289224, href: 'sight-i-love-kos.html', story: 'Populaire fotospot met de letters bij de haven.' },
-    { name: 'Palm Tree Lane', lat: 36.8949551, lng: 27.2904592, href: 'sight-palm-tree-lane.html', story: 'Palmenlaan onder de stenen brug van het ridderkasteel.' },
-    { name: 'Palazzo di Giustizia', lat: 36.8946829, lng: 27.2917818, href: 'sight-palazzo-giustizia.html', story: 'Gerechtshof uit 1928 – nu rechtbank en politie.' },
-    { name: 'Turks badhuis', lat: 36.8944349, lng: 27.2917443, href: 'sight-turks-badhuis.html', story: 'Ottomaanse hamam (± 1650), later zoutmagazijn.' },
-    { name: 'Boom van Hippocrates', lat: 36.8947229, lng: 27.2909721, href: 'sight-boom-hippocrates.html', story: 'Plataan ± 500 jaar – nazaat uit de tijd van Hippocrates.' },
-    { name: 'Gazi Hasan-moskee', lat: 36.8946022, lng: 27.2908903, href: 'sight-gazi-hasan.html', story: 'Moskee 1786 van de Leeuwenpasha, bij de plataan.' },
-    { name: 'Kasteel van Neratzia', lat: 36.8962997, lng: 27.2903831, href: 'sight-neratzia.html', story: 'Johannieter-kasteel aan de haven – dubbele muren en brug.' },
-    { name: 'Albergo Gelsomino', lat: 36.8942, lng: 27.2912, href: 'sight-albergo.html', story: 'Iconisch gastenverblijf 1927–28 aan de boulevard.' },
-    { name: 'Kathedraal', lat: 36.8930511, lng: 27.2930376, href: 'sight-kathedraal.html', story: 'Zetel van de Metropolis van Kos en Nisyros.' },
-    { name: 'Hatzi Pasha', lat: 36.892766, lng: 27.291118, href: 'sight-hatzi-pasha.html', story: 'Klein Ottomaans graf (1527) – piratenaanval.' },
-    { name: 'Agora', lat: 36.8931649, lng: 27.2899855, href: 'sight-agora.html', story: 'Oude markt – zuilen, baden, tempelresten (gratis).' },
-    { name: 'Belastingpoort', lat: 36.8935704, lng: 27.289111, href: 'sight-belastingpoort.html', story: 'Poort uit 1396 van de Ridders van Sint-Jan.' },
-    { name: 'Museum', lat: 36.8920, lng: 27.2872, href: 'sight-museum.html', story: 'Archeologisch museum 1935 – mozaïeken en beelden.' },
-    { name: 'Casa del Fascio', lat: 36.8931859, lng: 27.288244, href: 'sight-casa-del-fascio.html', story: 'Italiaans partijgebouw 1935 / propagandacinema.' },
-    { name: 'Defterdar-moskee', lat: 36.8933213, lng: 27.2888746, href: 'sight-defterdar.html', story: 'Moskee 1786 – weer te bezoeken.' },
-    { name: 'Markthal', lat: 36.8928987, lng: 27.2886799, href: 'sight-markthal.html', story: 'Markthal 1934 aan Eleftherias-plein.' },
-    { name: 'Agia Paraskevi', lat: 36.8926486, lng: 27.2882625, href: 'sight-paraskevi.html', story: 'Grote orthodoxe parochiekerk.' },
-    { name: 'Old Town', lat: 36.892982, lng: 27.288004, href: 'sight-old-town.html', story: 'Smalle autovrije winkelstraatjes.' },
-    { name: 'Morouk-moskee', lat: 36.892808, lng: 27.287592, href: 'sight-morouk.html', story: 'Zonder minaret – antieke sarcofaag als wasbak.' },
-    { name: 'Eski Tzami', lat: 36.8911518, lng: 27.28612, href: 'sight-eski-tzami.html', story: 'Vooral de minaret blijft overeind.' },
-    { name: 'Odeon', lat: 36.8895778, lng: 27.2847775, href: 'sight-odeon.html', story: 'Klein overdekt Romeins theater.' },
-    { name: 'Westelijke opgraving', lat: 36.890291, lng: 27.284461, href: 'sight-westelijke-opgraving.html', story: 'Gymnasium, thermen, forica, Huis van Europa.' },
-    { name: 'Casa Romana', lat: 36.8899234, lng: 27.288418, href: 'sight-casa-romana.html', story: 'Best bewaarde Romeinse huizen.' },
-    { name: 'Altaar Dionysos', lat: 36.8907246, lng: 27.289403, href: 'sight-altaar-dionysos.html', story: 'Altaar 2e eeuw v.Chr. – god van wijn en feest.' }
+    { id: 'sight-witte-trappen', name: 'Witte trappen', lat: 36.8942411, lng: 27.2873933, href: 'sight-witte-trappen.html', story: 'Meest fotogenieke trappetjes van Kos-stad – blauwe accenten, richting de vis-taverne.' },
+    { id: 'sight-i-love-kos', name: 'I Love Kos', lat: 36.894614, lng: 27.289224, href: 'sight-i-love-kos.html', story: 'Populaire fotospot met de letters bij de haven.' },
+    { id: 'sight-palm-tree-lane', name: 'Palm Tree Lane', lat: 36.8949551, lng: 27.2904592, href: 'sight-palm-tree-lane.html', story: 'Palmenlaan onder de stenen brug van het ridderkasteel.' },
+    { id: 'sight-palazzo-giustizia', name: 'Palazzo di Giustizia', lat: 36.8946829, lng: 27.2917818, href: 'sight-palazzo-giustizia.html', story: 'Gerechtshof uit 1928 – nu rechtbank en politie.' },
+    { id: 'sight-turks-badhuis', name: 'Turks badhuis', lat: 36.8944349, lng: 27.2917443, href: 'sight-turks-badhuis.html', story: 'Ottomaanse hamam (± 1650), later zoutmagazijn.' },
+    { id: 'sight-boom-hippocrates', name: 'Boom van Hippocrates', lat: 36.8947229, lng: 27.2909721, href: 'sight-boom-hippocrates.html', story: 'Plataan ± 500 jaar – nazaat uit de tijd van Hippocrates.' },
+    { id: 'sight-gazi-hasan', name: 'Gazi Hasan-moskee', lat: 36.8946022, lng: 27.2908903, href: 'sight-gazi-hasan.html', story: 'Moskee 1786 van de Leeuwenpasha, bij de plataan.' },
+    { id: 'sight-neratzia', name: 'Kasteel van Neratzia', lat: 36.8962997, lng: 27.2903831, href: 'sight-neratzia.html', story: 'Johannieter-kasteel aan de haven – dubbele muren en brug.' },
+    { id: 'sight-albergo-gelsomino', name: 'Albergo Gelsomino', lat: 36.8942, lng: 27.2912, href: 'sight-albergo.html', story: 'Iconisch gastenverblijf 1927–28 aan de boulevard.' },
+    { id: 'sight-kathedraal', name: 'Kathedraal', lat: 36.8930511, lng: 27.2930376, href: 'sight-kathedraal.html', story: 'Zetel van de Metropolis van Kos en Nisyros.' },
+    { id: 'sight-hatzi-pasha', name: 'Hatzi Pasha', lat: 36.892766, lng: 27.291118, href: 'sight-hatzi-pasha.html', story: 'Klein Ottomaans graf (1527) – piratenaanval.' },
+    { id: 'sight-agora', name: 'Agora', lat: 36.8931649, lng: 27.2899855, href: 'sight-agora.html', story: 'Oude markt – zuilen, baden, tempelresten (gratis).' },
+    { id: 'sight-belastingpoort', name: 'Belastingpoort', lat: 36.8935704, lng: 27.289111, href: 'sight-belastingpoort.html', story: 'Poort uit 1396 van de Ridders van Sint-Jan.' },
+    { id: 'sight-archeologisch-museum', name: 'Museum', lat: 36.8920, lng: 27.2872, href: 'sight-museum.html', story: 'Archeologisch museum 1935 – mozaïeken en beelden.' },
+    { id: 'sight-casa-del-fascio', name: 'Casa del Fascio', lat: 36.8931859, lng: 27.288244, href: 'sight-casa-del-fascio.html', story: 'Italiaans partijgebouw 1935 / propagandacinema.' },
+    { id: 'sight-defterdar', name: 'Defterdar-moskee', lat: 36.8933213, lng: 27.2888746, href: 'sight-defterdar.html', story: 'Moskee 1786 – weer te bezoeken.' },
+    { id: 'sight-markthal', name: 'Markthal', lat: 36.8928987, lng: 27.2886799, href: 'sight-markthal.html', story: 'Markthal 1934 aan Eleftherias-plein.' },
+    { id: 'sight-paraskevi', name: 'Agia Paraskevi', lat: 36.8926486, lng: 27.2882625, href: 'sight-paraskevi.html', story: 'Grote orthodoxe parochiekerk.' },
+    { id: 'sight-old-town', name: 'Old Town', lat: 36.892982, lng: 27.288004, href: 'sight-old-town.html', story: 'Smalle autovrije winkelstraatjes.' },
+    { id: 'sight-morouk', name: 'Morouk-moskee', lat: 36.892808, lng: 27.287592, href: 'sight-morouk.html', story: 'Zonder minaret – antieke sarcofaag als wasbak.' },
+    { id: 'sight-eski-tzami', name: 'Eski Tzami', lat: 36.8911518, lng: 27.28612, href: 'sight-eski-tzami.html', story: 'Vooral de minaret blijft overeind.' },
+    { id: 'sight-odeon', name: 'Odeon', lat: 36.8895778, lng: 27.2847775, href: 'sight-odeon.html', story: 'Klein overdekt Romeins theater.' },
+    { id: 'sight-westelijke-opgraving', name: 'Westelijke opgraving', lat: 36.890291, lng: 27.284461, href: 'sight-westelijke-opgraving.html', story: 'Gymnasium, thermen, forica, Huis van Europa.' },
+    { id: 'sight-casa-romana', name: 'Casa Romana', lat: 36.8899234, lng: 27.288418, href: 'sight-casa-romana.html', story: 'Best bewaarde Romeinse huizen.' },
+    { id: 'sight-altaar-dionysos', name: 'Altaar Dionysos', lat: 36.8907246, lng: 27.289403, href: 'sight-altaar-dionysos.html', story: 'Altaar 2e eeuw v.Chr. – god van wijn en feest.' }
   ];
 
   var RADAR_RANGE = 150;
@@ -855,6 +874,7 @@
   function updateUI(lat, lng, accuracy) {
     var lang = getLang();
     var d = I18N[lang] || I18N.nl;
+    lastFix = { lat: lat, lng: lng, accuracy: accuracy };
 
     var ranked = LOCATIONS.map(function (loc) {
       var dist = haversine(lat, lng, loc.lat, loc.lng);
@@ -862,9 +882,9 @@
     }).sort(function (a, b) { return a.d - b.d; });
 
     var nearest = ranked[0];
-    nearName.textContent = nearest.loc.name;
+    nearName.textContent = locName(nearest.loc);
     nearDist.innerHTML = Math.round(nearest.d) + ' <span>' + d.meter + '</span>';
-    nearStory.textContent = nearest.loc.story;
+    nearStory.textContent = locStory(nearest.loc);
     nearLink.href = nearest.loc.href;
     nearLink.style.display = 'inline-flex';
     nearMaps.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(nearest.loc.lat + ',' + nearest.loc.lng);
@@ -872,7 +892,7 @@
 
     if (nearest.d <= alertRadius) {
       alertBanner.classList.add('show');
-      alertBanner.textContent = (d.alertDist || 'Je bent {d} m van {n}!').replace('{d}', Math.round(nearest.d)).replace('{n}', nearest.loc.name);
+      alertBanner.textContent = (d.alertDist || 'Je bent {d} m van {n}!').replace('{d}', Math.round(nearest.d)).replace('{n}', locName(nearest.loc));
       var now = Date.now();
       if (lastAlertId !== nearest.loc.name || now - lastAlertAt > 45000) {
         lastAlertId = nearest.loc.name;
@@ -895,7 +915,7 @@
       blip.className = 'blip' + (item.d <= alertRadius ? ' alert' : (item.d <= 40 ? ' near' : ''));
       blip.style.left = x + '%';
       blip.style.top = y + '%';
-      blip.title = item.loc.name + ' · ' + Math.round(item.d) + ' m';
+      blip.title = locName(item.loc) + ' · ' + Math.round(item.d) + ' m';
       radar.appendChild(blip);
     });
 
@@ -904,12 +924,13 @@
       var a = document.createElement('a');
       a.className = 'loc' + (item.d <= alertRadius ? ' hot' : '');
       a.href = item.loc.href;
-      a.innerHTML = '<span class="m">' + Math.round(item.d) + ' m</span><span class="n">' + item.loc.name + '</span>';
+      a.innerHTML = '<span class="m">' + Math.round(item.d) + ' m</span><span class="n"></span>';
+      a.querySelector('.n').textContent = locName(item.loc);
       nearbyList.appendChild(a);
     });
 
     var acc = accuracy ? ' (±' + Math.round(accuracy) + ' m)' : '';
-    setStatus(true, (d.statusActive || 'GPS actief') + acc + ' · ' + ranked.filter(function (x) { return x.d <= RADAR_RANGE; }).length + ' in bereik', 'on');
+    setStatus(true, (d.statusActive || 'GPS actief') + acc + ' · ' + ranked.filter(function (x) { return x.d <= RADAR_RANGE; }).length + ' ' + (d.inRange || 'in bereik'), 'on');
   }
 
   function onPos(pos) {

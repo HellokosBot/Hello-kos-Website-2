@@ -17,6 +17,10 @@
     var l = localStorage.getItem("hk-lang") || "nl";
     return l;
   }
+  function placeName(p) {
+    var pack = (window.HK_NAMES && HK_NAMES[lang()]) || {};
+    return (p && pack[p.id]) || (p && p.name) || "";
+  }
   function T(key) {
     var pack = (window.HK_DICT && window.HK_DICT[lang()]) || {};
     if (pack[key]) return pack[key];
@@ -87,7 +91,7 @@
   }
   function buttons(p) {
     var g = typeof p.lat === "number" ? gPoint(p.lat, p.lon) : gName(p.name);
-    var a = typeof p.lat === "number" ? aPoint(p.lat, p.lon, p.name) : aName(p.name);
+    var a = typeof p.lat === "number" ? aPoint(p.lat, p.lon, placeName(p)) : aName(p.name);
     return '<div class="map-row"><a href="' + esc(g) + '" target="_blank" rel="noopener">' + PIN + esc(T("gmaps")) + '</a><a href="' + esc(a) + '" target="_blank" rel="noopener">' + PIN + esc(T("iphone")) + '</a></div>';
   }
   function openBtn(p) {
@@ -114,7 +118,7 @@
     stops.forEach(function (p, i) {
       html += '<article class="stop">';
       if (p.photo) html += '<img src="' + esc(p.photo) + '" alt="">';
-      html += '<h2>' + (i + 1) + ". " + esc(p.name) + "</h2>";
+      html += '<h2>' + (i + 1) + ". " + esc(placeName(p)) + "</h2>";
       html += '<div class="body"><p>' + esc(stopText(p.id)) + "</p>";
       html += openBtn(p);
       html += buttons(p);
@@ -168,7 +172,7 @@
       html += '<div class="group"><h3>' + esc(T("g_" + g)) + "</h3>";
       rows.forEach(function (p) {
         var on = picks.ids.indexOf(p.id) >= 0 ? " checked" : "";
-        html += '<label><input type="checkbox" data-id="' + esc(p.id) + '"' + on + "> " + esc(p.name) + "</label>";
+        html += '<label><input type="checkbox" data-id="' + esc(p.id) + '"' + on + "> " + esc(placeName(p)) + "</label>";
       });
       html += "</div>";
     });
@@ -317,7 +321,7 @@
       else html += '<div class="ph"></div>';
       html += '<button type="button" class="drop" data-drop="' + esc(p.id) + '" aria-label="' + esc(T("wishRemove")) + '">' + TRASH + "</button>";
       html += "</div>";
-      html += "<h2>" + (i + 1) + ". " + esc(p.name) + "</h2>";
+      html += "<h2>" + (i + 1) + ". " + esc(placeName(p)) + "</h2>";
       html += '<div class="body"><p>' + esc(stopText(p.id)) + "</p>";
       html += openBtn(p);
       html += buttons(p);
