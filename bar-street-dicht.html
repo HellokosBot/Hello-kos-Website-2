@@ -1,51 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" data-hk-own="1">
+<html lang="nl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
-<meta name="theme-color" content="#0a0c0c">
-<title>Bar Street closes early? – Hello Kos</title>
-<style>
-:root{--bg:#0a0c0c;--bg-elevated:#141818;--bg-card:#1a1f1f;--border:rgba(255,255,255,0.08);--text:#e8e8e8;--text-soft:#a0a8a8;--petrol:#3d9a9a;--gold:#e0b84a;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);line-height:1.5}
-.app-header{position:sticky;top:0;z-index:100;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:12px 14px;background:rgba(10,12,12,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
-.nav-btns{display:flex;gap:6px}
-.nav-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);text-decoration:none;font-size:1.15rem}
-.nav-btn:active{transform:scale(.94)}
-.logo{justify-self:center;display:flex;align-items:center;gap:6px;text-decoration:none}
-.logo-icon{font-size:22px}
-.logo-text{font-size:1.1rem;font-weight:700;color:var(--gold);font-family:Georgia,serif}
-.logo-text span{color:#f0c85a;font-style:italic}
-.lang-wrap{justify-self:end;position:relative}
-.lang-btn{display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-soft)}
-.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:8px;min-width:160px;z-index:50}
-.lang-menu.open{display:block}
-.lang-option{display:block;width:100%;text-align:left;border:none;background:transparent;padding:10px 12px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;color:var(--text)}
-.lang-option.active{background:rgba(61,154,154,.15);color:var(--petrol)}
-.overlay{display:none;position:fixed;inset:0;z-index:40}.overlay.open{display:block}
-.main{max-width:480px;margin:0 auto;padding:16px 14px 48px}
-.page-head{text-align:center;margin-bottom:14px}
-.page-head h1{font-size:1.25rem;font-weight:800}
-.page-head .intro{color:var(--text-soft);font-size:.92rem;margin-top:6px}
-.tip-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:16px;box-shadow:0 4px 20px rgba(0,0,0,.25)}
-.tip-photo{height:140px;overflow:hidden;background:linear-gradient(135deg,#1a2a2a,#0d1515)}
-.tip-photo img{width:100%;height:100%;object-fit:cover;display:block}
-.tip-photo.no-img{height:0}
-.tip-body{padding:16px 16px 18px;position:relative}
-.tip-icon{position:absolute;top:-22px;right:14px;width:40px;height:40px;border-radius:12px;background:var(--bg-elevated);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 12px rgba(0,0,0,.3)}
-.tip-body h2{font-size:1.05rem;font-weight:800;color:var(--gold);margin-bottom:8px;padding-right:36px}
-.tip-body p{font-size:.92rem;color:var(--text-soft);line-height:1.55;margin-bottom:10px}
-.tip-body p:last-child{margin-bottom:0}
-.tip-body strong{color:var(--text)}
-.note{background:rgba(61,154,154,.12);border:1px solid rgba(61,154,154,.3);border-radius:12px;padding:12px 14px;margin-top:10px;font-size:.9rem;color:#b8e0e0;line-height:1.5}
-.footer{text-align:center;padding:20px 16px;background:var(--bg-elevated);border-top:1px solid var(--border)}
-.footer-logo{font-family:Georgia,serif;color:var(--gold);font-weight:700}
-.footer a{color:var(--petrol);text-decoration:none;font-size:.9rem}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Bar Street – Hello Kos</title>
 <link rel="stylesheet" href="hello-kos.css">
+<style>
+.card h3{font-size:.95rem;margin:12px 0 8px;color:var(--text)}
+.hours{margin:4px 0 8px}
+.h-row{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:.86rem;color:var(--text-soft)}
+.h-row span:last-child{font-weight:700;color:var(--text);text-align:right}
+.photo{display:block;width:100%;height:auto;border-radius:14px;margin:0 0 12px}
+body.hk-page .hero-wrap.shops-hero{aspect-ratio:auto;min-height:210px;display:flex;align-items:flex-end;overflow:hidden;margin:-16px -14px 12px}
+body.hk-page .hero-wrap.shops-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%}
+body.hk-page .shops-hero-copy{position:relative;z-index:1;width:100%;box-sizing:border-box;padding:36px 16px 14px;background:linear-gradient(to top,rgba(13,26,26,.94) 0%,rgba(13,26,26,.78) 46%,rgba(13,26,26,.28) 78%,rgba(13,26,26,0) 100%)}
+body.hk-page .shops-hero h1{color:#fff;margin:0;text-shadow:0 1px 6px rgba(0,0,0,.55)}
+body.hk-page .map-row{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:stretch;gap:8px;width:100%;max-width:100%;margin:12px 0 0;box-sizing:border-box}
+body.hk-page .map-row .btn{flex:1 1 0;width:0;max-width:none;min-width:0;padding:12px 8px;font-size:.82rem}
+body.hk-page .map-row .pin{flex:0 0 16px;width:16px;height:16px}
+</style>
 </head>
-<body>
+<body class="hk-page">
 <header class="app-header">
   <div class="nav-btns">
     <a class="nav-btn" href="index.html" title="Home">🏠</a>
@@ -66,121 +42,168 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
 </header>
 <div class="overlay" id="overlay"></div>
 <main class="main">
-
-<div data-lang-block="nl" style="display:none">
-  <header class="page-head"><h1>🍸 Bar Street vroeg dicht?</h1><p class="intro">Nee – in hoogseizoen gaat het door tot diep in de ochtend.</p></header>
-  <article class="tip-card">
-    <div class="tip-photo"><img src="wjd-barstreet-dicht.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
-    <div class="tip-body">
-      <div class="tip-icon">❌</div>
-      <h2>Bars om 02:00 al dicht?</h2>
-      <p>Wat je vaak hoort of leest: de bars in Barstreet zijn geopend tot 02.00 uur. Dit geldt <strong>zeker niet</strong> voor de Barstreet van Kos-stad.</p>
-    </div>
-  </article>
-  <article class="tip-card">
-    <div class="tip-photo"><img src="wjd-barstreet-ochtend.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
-    <div class="tip-body">
-      <div class="tip-icon">🌙</div>
-      <h2>Tot diep in de ochtend</h2>
-      <p>Sommige bars en clubs zijn in het hoogseizoen open tot <strong>08:00 / 8:00 am</strong> in de ochtend – en in het weekend soms nog langer.</p>
-      <div class="note">Kortom: Bar Street in Kos-stad sluit niet vroeg. In de zomer loopt het nachtleven door tot in de vroege ochtend.</div>
-    </div>
-  </article>
+<p class="parent-link"><a href="clubs-hotspots.html" data-i18n="back">← Clubnights & hotspots</a></p>
+<div class="hero-wrap shops-hero">
+<img src="img/hk/barstreet-hero.jpg" alt="">
+<div class="shops-hero-copy">
+<h1 data-i18n="title">Bar Street</h1>
 </div>
-
-<div data-lang-block="en" style="display:none">
-  <header class="page-head"><h1>🍸 Bar Street closes early?</h1><p class="intro">No – in high season it runs deep into the morning.</p></header>
-  <article class="tip-card">
-    <div class="tip-photo"><img src="wjd-barstreet-dicht.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
-    <div class="tip-body">
-      <div class="tip-icon">❌</div>
-      <h2>Bars shut at 02:00 already?</h2>
-      <p>What you often hear or read: the bars on Bar Street are open until 2:00 am. That is <strong>definitely not</strong> true for Bar Street in Kos Town.</p>
-    </div>
-  </article>
-  <article class="tip-card">
-    <div class="tip-photo"><img src="wjd-barstreet-ochtend.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
-    <div class="tip-body">
-      <div class="tip-icon">🌙</div>
-      <h2>Until deep into the morning</h2>
-      <p>Some bars and clubs in high season stay open until <strong>08:00 / 8:00 am</strong> – and at weekends sometimes even longer.</p>
-      <div class="note">In short: Bar Street in Kos Town does not close early. In summer the nightlife runs into the early morning.</div>
-    </div>
-  </article>
 </div>
-
-<div data-lang-block="de" style="display:none">
-  <header class="page-head"><h1>🍸 Bar Street schließt früh?</h1><p class="intro">Nein – in der Hochsaison geht’s bis tief in den Morgen.</p></header>
-  <article class="tip-card"><div class="tip-photo"><img src="wjd-barstreet-dicht.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
-  <div class="tip-body"><div class="tip-icon">❌</div><h2>Bars schon um 02:00 zu?</h2>
-  <p>Oft liest man, die Bars in der Bar Street seien bis 2 Uhr offen. Das gilt <strong>nicht</strong> für die Bar Street in Kos-Stadt.</p></div></article>
-  <article class="tip-card"><div class="tip-photo"><img src="wjd-barstreet-ochtend.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
-  <div class="tip-body"><div class="tip-icon">🌙</div><h2>Bis tief in den Morgen</h2>
-  <p>Manche Bars und Clubs haben in der Hochsaison bis <strong>08:00 / 8:00 am</strong> geöffnet – am Wochenende manchmal noch länger.</p>
-  <div class="note">Kurz: Die Bar Street in Kos-Stadt schließt nicht früh. Im Sommer läuft das Nachtleben bis in den frühen Morgen.</div></div></article>
+<article class="card">
+<h3 data-i18n="loc">Kos - Rand Centrum</h3>
+<h3 data-i18n="hNight">'s Nachts open</h3>
+<p data-i18n="p0">Barstreet is dé legendarische uitgaansstrip in het hart van Kos-stad, vlakbij de haven en de oude stad. Een kleine, bruisende straat die 's avonds verandert in een kloppend feestgebied.</p>
+<img class="photo" src="img/hk/barstreet-fakkel.jpg" alt="">
+<h3 data-i18n="hNight">'s Nachts open</h3>
+<p data-i18n="p1">Vanaf zonsondergang barst het los met bars, pubs en clubs die tot diep in de nacht openblijven vaak tot 04:00–06:00 uur,</p>
+<img class="photo" src="img/hk/barstreet-terras.jpg" alt="">
+<p data-i18n="p2">vol met DJ's die mainstream hits, EDM of Griekse remixes draaien, shots, cocktails. Het publiek is vooral jong en met veel mensen die er als toerist zijn, vooral jongeren, met een energieke, feestelijke sfeer.</p>
+<img class="photo" src="img/hk/barstreet-charisma.jpg" alt="">
+<h3 data-i18n="hHop">Barhoppen</h3>
+<p data-i18n="p3">Barhoppen is makkelijk, omdat alles op loopafstand ligt. Alle plekken hebben terrasjes. In het hoogseizoen is het het wildst en het drukst; het is betaalbaar en toegankelijk.</p>
+<img class="photo" src="img/hk/barstreet-west-dans.jpg" alt="">
+<h3 data-i18n="hVibe">Uitbundige vibe</h3>
+<p data-i18n="p4">Verwacht een levendige, uitbundige vibe. Perfect voor wie zin heeft in shots, dansen en een nacht die doorgaat tot de ochtend!</p>
+<img class="photo" src="img/hk/barstreet-dans.jpg" alt="">
+<h3 data-i18n="hEarly">Bars in Kos om 02:00 al dicht?</h3>
+<h3 data-i18n="hMorning">Tot diep in de ochtend</h3>
+<p data-i18n="p5">Wat je vaak hoort of zelfs leest op internet, is dat de bars in Barstreet geopend zijn tot 02.00 uur 's nachts. Dit geldt zeker niet voor de Barstreet van Kos-stad. Sommige bars / clubs zijn in het hoogseizoen wel tot 08:00 uur in de ochtend geopend en af en toe in het weekend zelfs nog langer.</p>
+<img class="photo" src="img/hk/barstreet-west-terras.jpg" alt="">
+<img class="photo" src="img/hk/barstreet-west-dag.jpg" alt="">
+<h3 data-i18n="hoursH">Openingstijden</h3>
+<div class="hours">
+<div class="h-row"><span data-i18n="d0">Ma.</span><span>23:00–04:00</span></div>
+<div class="h-row"><span data-i18n="d1">Di.</span><span>23:00–04:00</span></div>
+<div class="h-row"><span data-i18n="d2">Woe.</span><span>23:00–04:00</span></div>
+<div class="h-row"><span data-i18n="d3">Don.</span><span>23:00–04:00</span></div>
+<div class="h-row"><span data-i18n="d4">Vrij.</span><span>23:00–06:00</span></div>
+<div class="h-row"><span data-i18n="d5">Zat.</span><span>23:00–06:00</span></div>
+<div class="h-row"><span data-i18n="d6">Zon.</span><span>23:00–04:00</span></div>
 </div>
-
-<div data-lang-block="it" style="display:none">
-  <header class="page-head"><h1>🍸 Bar Street chiude presto?</h1><p class="intro">No – in alta stagione si va fino a tarda mattina.</p></header>
-  <article class="tip-card"><div class="tip-photo"><img src="wjd-barstreet-dicht.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
-  <div class="tip-body"><div class="tip-icon">❌</div><h2>I bar chiudono già alle 02:00?</h2>
-  <p>Si sente spesso che i bar di Bar Street chiudono alle 2. <strong>Non è vero</strong> per Bar Street a Kos Town.</p></div></article>
-  <article class="tip-card"><div class="tip-photo"><img src="wjd-barstreet-ochtend.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
-  <div class="tip-body"><div class="tip-icon">🌙</div><h2>Fino a tarda mattina</h2>
-  <p>Alcuni bar e club in alta stagione restano aperti fino alle <strong>08:00 / 8:00 am</strong> – e nel weekend a volte anche di più.</p>
-  <div class="note">In breve: Bar Street a Kos Town non chiude presto. In estate la movida va avanti fino al mattino.</div></div></article>
+<div class="map-row">
+<a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&amp;query=36.894353,27.289692" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+<a class="btn btn-map" href="https://maps.apple.com/?ll=36.894353,27.289692&amp;q=Bar%20Street%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
 </div>
-
-<div data-lang-block="tr" style="display:none">
-  <header class="page-head"><h1>🍸 Bar Street erken kapanır mı?</h1><p class="intro">Hayır – yüksek sezonda sabaha kadar sürer.</p></header>
-  <article class="tip-card"><div class="tip-photo"><img src="wjd-barstreet-dicht.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
-  <div class="tip-body"><div class="tip-icon">❌</div><h2>Barlar 02:00’de mi kapanıyor?</h2>
-  <p>Sıkça duyulan: Bar Street barları 02:00’ye kadar açık. Bu, Kos Town Bar Street için <strong>geçerli değil</strong>.</p></div></article>
-  <article class="tip-card"><div class="tip-photo"><img src="wjd-barstreet-ochtend.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
-  <div class="tip-body"><div class="tip-icon">🌙</div><h2>Sabaha kadar</h2>
-  <p>Bazı bar ve kulüpler yüksek sezonda <strong>08:00 / 8:00 am</strong>’e kadar açık – hafta sonu bazen daha da uzun.</p>
-  <div class="note">Kısaca: Kos Town Bar Street erken kapanmaz. Yazın gece hayatı sabaha kadar devam eder.</div></div></article>
-</div>
-
-<div data-lang-block="es" style="display:none">
-  <header class="page-head"><h1>🍸 ¿Bar Street cierra pronto?</h1><p class="intro">No – en temporada alta sigue hasta la madrugada.</p></header>
-  <article class="tip-card"><div class="tip-photo"><img src="wjd-barstreet-dicht.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
-  <div class="tip-body"><div class="tip-icon">❌</div><h2>¿Los bares cierran ya a las 02:00?</h2>
-  <p>Se oye a menudo que los bares de Bar Street cierran a las 2. Eso <strong>no es cierto</strong> para Bar Street en Kos Town.</p></div></article>
-  <article class="tip-card"><div class="tip-photo"><img src="wjd-barstreet-ochtend.jpg" alt="" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
-  <div class="tip-body"><div class="tip-icon">🌙</div><h2>Hasta bien entrada la mañana</h2>
-  <p>Algunos bares y clubs en temporada alta están abiertos hasta las <strong>08:00 / 8:00 am</strong> – y el fin de semana a veces más.</p>
-  <div class="note">En resumen: Bar Street en Kos Town no cierra temprano. En verano la noche sigue hasta la madrugada.</div></div></article>
-</div>
-
+</article>
 </main>
-<footer class="footer">
-  <div class="footer-logo">🔅 Hello Kos</div>
-  <p style="margin-top:8px"><a href="https://hellokos.com">hellokos.com</a></p>
-</footer>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
 <script>
-(function(){
-  var lang=localStorage.getItem('hk-lang')||'nl';
-  var supported=['nl','de','en','it','tr','es'];
-  function setLang(l){
-    if(supported.indexOf(l)<0)l='en';
-    lang=l;localStorage.setItem('hk-lang',l);
-    document.querySelectorAll('[data-lang-block]').forEach(function(el){
-      el.style.display=(el.getAttribute('data-lang-block')===l)?'block':'none';
-    });
-    var opt=document.querySelector('.lang-option[data-lang="'+l+'"]');
-    if(opt){document.getElementById('flag').textContent=opt.getAttribute('data-flag');document.getElementById('code').textContent=l.toUpperCase()}
-    document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===l)});
-    document.documentElement.lang=l;closeMenu();
+window.HK_DICT = {
+  "nl": {
+    "back": "← Clubnights & hotspots",
+    "title": "Bar Street",
+    "loc": "Kos - Rand Centrum",
+    "hNight": "'s Nachts open",
+    "hHop": "Barhoppen",
+    "hVibe": "Uitbundige vibe",
+    "hEarly": "Bars in Kos om 02:00 al dicht?",
+    "hMorning": "Tot diep in de ochtend",
+    "hoursH": "Openingstijden",
+    "d0": "Ma.", "d1": "Di.", "d2": "Woe.", "d3": "Don.", "d4": "Vrij.", "d5": "Zat.", "d6": "Zon.",
+    "gmaps": "Google Maps", "iphone": "iPhone",
+    "p0": "Barstreet is dé legendarische uitgaansstrip in het hart van Kos-stad, vlakbij de haven en de oude stad. Een kleine, bruisende straat die 's avonds verandert in een kloppend feestgebied.",
+    "p1": "Vanaf zonsondergang barst het los met bars, pubs en clubs die tot diep in de nacht openblijven vaak tot 04:00–06:00 uur,",
+    "p2": "vol met DJ's die mainstream hits, EDM of Griekse remixes draaien, shots, cocktails. Het publiek is vooral jong en met veel mensen die er als toerist zijn, vooral jongeren, met een energieke, feestelijke sfeer.",
+    "p3": "Barhoppen is makkelijk, omdat alles op loopafstand ligt. Alle plekken hebben terrasjes. In het hoogseizoen is het het wildst en het drukst; het is betaalbaar en toegankelijk.",
+    "p4": "Verwacht een levendige, uitbundige vibe. Perfect voor wie zin heeft in shots, dansen en een nacht die doorgaat tot de ochtend!",
+    "p5": "Wat je vaak hoort of zelfs leest op internet, is dat de bars in Barstreet geopend zijn tot 02.00 uur 's nachts. Dit geldt zeker niet voor de Barstreet van Kos-stad. Sommige bars / clubs zijn in het hoogseizoen wel tot 08:00 uur in de ochtend geopend en af en toe in het weekend zelfs nog langer."
+  },
+  "de": {
+    "back": "← Clubnächte & Hotspots",
+    "title": "Bar Street",
+    "loc": "Kos - Rand vom Zentrum",
+    "hNight": "Nachts geöffnet",
+    "hHop": "Barhopping",
+    "hVibe": "Ausgelassene Stimmung",
+    "hEarly": "Bars in Kos schon um 02:00 zu?",
+    "hMorning": "Bis tief in den Morgen",
+    "hoursH": "Öffnungszeiten",
+    "d0": "Mo.", "d1": "Di.", "d2": "Mi.", "d3": "Do.", "d4": "Fr.", "d5": "Sa.", "d6": "So.",
+    "gmaps": "Google Maps", "iphone": "iPhone",
+    "p0": "Barstreet ist die legendäre Ausgehmeile im Herzen von Kos-Stadt, nah am Hafen und an der Altstadt. Eine kleine, lebhafte Straße, die abends zu einem pulsierenden Feiergebiet wird.",
+    "p1": "Ab Sonnenuntergang geht es los mit Bars, Pubs und Clubs, die bis tief in die Nacht offen bleiben, oft bis 04:00–06:00 Uhr,",
+    "p2": "voll mit DJs, die Mainstream-Hits, EDM oder griechische Remixe spielen, Shots, Cocktails. Das Publikum ist vor allem jung und mit vielen Menschen, die als Tourist da sind, vor allem junge Leute, mit einer energiegeladenen, festlichen Stimmung.",
+    "p3": "Barhopping ist leicht, weil alles zu Fuß erreichbar ist. Alle Plätze haben Terrassen. In der Hochsaison ist es am wildesten und am vollsten; es ist bezahlbar und zugänglich.",
+    "p4": "Erwarte eine lebhafte, ausgelassene Stimmung. Perfekt für alle, die Lust auf Shots, Tanzen und eine Nacht haben, die bis zum Morgen weitergeht!",
+    "p5": "Was man oft hört oder sogar im Internet liest, ist, dass die Bars in der Barstreet bis 02.00 Uhr nachts geöffnet sind. Das gilt ganz sicher nicht für die Barstreet von Kos-Stadt. Manche Bars / Clubs sind in der Hochsaison bis 08:00 Uhr morgens geöffnet und ab und zu am Wochenende sogar noch länger."
+  },
+  "en": {
+    "back": "← Club nights & hotspots",
+    "title": "Bar Street",
+    "loc": "Kos - edge of the centre",
+    "hNight": "Open at night",
+    "hHop": "Bar-hopping",
+    "hVibe": "Lively vibe",
+    "hEarly": "Bars in Kos already closed at 02:00?",
+    "hMorning": "Late into the morning",
+    "hoursH": "Opening hours",
+    "d0": "Mon.", "d1": "Tue.", "d2": "Wed.", "d3": "Thu.", "d4": "Fri.", "d5": "Sat.", "d6": "Sun.",
+    "gmaps": "Google Maps", "iphone": "iPhone",
+    "p0": "Barstreet is the legendary going-out strip in the heart of Kos town, close to the harbour and the old town. A small, lively street that turns into a buzzing party area in the evening.",
+    "p1": "From sunset it takes off with bars, pubs and clubs that stay open deep into the night, often until 04:00–06:00,",
+    "p2": "full of DJs playing mainstream hits, EDM or Greek remixes, shots, cocktails. The crowd is mostly young and with many people who are there as a tourist, mostly young people, with an energetic, festive mood.",
+    "p3": "Bar-hopping is easy, because everything is within walking distance. Every place has a terrace. In high season it is at its wildest and busiest; it is affordable and easy to join.",
+    "p4": "Expect a lively, exuberant vibe. Perfect if you feel like shots, dancing and a night that goes on until morning!",
+    "p5": "What you often hear, or even read on the internet, is that the bars on Barstreet are open until 02.00 at night. That certainly does not apply to Barstreet in Kos town. Some bars / clubs stay open until 08:00 in the morning in high season, and now and then even longer at the weekend."
+  },
+  "it": {
+    "back": "← Serate in club e posti caldi",
+    "title": "Bar Street",
+    "loc": "Kos - bordo del centro",
+    "hNight": "Aperto di notte",
+    "hHop": "Girare i bar",
+    "hVibe": "Atmosfera scatenata",
+    "hEarly": "I bar a Kos chiudono già alle 02:00?",
+    "hMorning": "Fino a mattina inoltrata",
+    "hoursH": "Orari di apertura",
+    "d0": "Lun.", "d1": "Mar.", "d2": "Mer.", "d3": "Gio.", "d4": "Ven.", "d5": "Sab.", "d6": "Dom.",
+    "gmaps": "Google Maps", "iphone": "iPhone",
+    "p0": "Barstreet è la leggendaria via della movida nel cuore di Kos città, vicino al porto e alla città vecchia. Una strada piccola e vivace che la sera diventa una zona di festa pulsante.",
+    "p1": "Dal tramonto si accende con bar, pub e club che restano aperti fino a notte fonda, spesso fino alle 04:00–06:00,",
+    "p2": "piena di DJ che mettono hit mainstream, EDM o remix greci, shot, cocktail. Il pubblico è soprattutto giovane e con molte persone che sono lì come turista, soprattutto giovani, con un'atmosfera energica e festosa.",
+    "p3": "Passare da un bar all'altro è facile, perché tutto è a piedi. Tutti i posti hanno terrazze. In alta stagione è al massimo di movimento e di folla; è accessibile e alla portata.",
+    "p4": "Aspettati un'atmosfera vivace e scatenata. Perfetta se hai voglia di shot, di ballare e di una notte che va avanti fino al mattino!",
+    "p5": "Quello che si sente spesso, o che si legge addirittura su internet, è che i bar di Barstreet sono aperti fino alle 02.00 di notte. Questo non vale assolutamente per la Barstreet di Kos città. Alcuni bar / club in alta stagione sono aperti fino alle 08:00 del mattino e ogni tanto nel weekend anche più a lungo."
+  },
+  "tr": {
+    "back": "← Kulüp geceleri ve hareketli yerler",
+    "title": "Bar Street",
+    "loc": "Kos - merkezin kenarı",
+    "hNight": "Gece açık",
+    "hHop": "Bar bar dolaşmak",
+    "hVibe": "Coşkulu hava",
+    "hEarly": "Kos'ta barlar 02:00'de kapanır mı?",
+    "hMorning": "Sabahın geç saatlerine kadar",
+    "hoursH": "Açılış saatleri",
+    "d0": "Pzt.", "d1": "Sal.", "d2": "Çar.", "d3": "Per.", "d4": "Cum.", "d5": "Cmt.", "d6": "Paz.",
+    "gmaps": "Google Maps", "iphone": "iPhone",
+    "p0": "Barstreet, Kos şehrin kalbinde, limana ve eski şehre yakın efsane bir eğlence sokağıdır. Akşamları canlı bir parti bölgesine dönüşen küçük, hareketli bir sokak.",
+    "p1": "Gün batımından itibaren barlar, publar ve kulüplerle coşar; gece geç saatlere, çoğu zaman 04:00–06:00'ya kadar açık kalırlar,",
+    "p2": "mainstream hitler, EDM ya da Yunan remixleri çalan DJ'ler, shotlar, kokteyllerle dolu. Kalabalık çoğunlukla gençtir ve turist olarak orada olan çok insan vardır, özellikle gençler, enerjik ve şenlikli bir havayla.",
+    "p3": "Bar bar dolaşmak kolaydır, çünkü her şey yürüme mesafesindedir. Her yerin terası vardır. Yoğun sezonda en hareketli ve en kalabalık halindedir; ulaşılabilir ve uygundur.",
+    "p4": "Canlı, coşkulu bir hava bekle. Shot, dans ve sabaha kadar süren bir gece istiyorsan birebir!",
+    "p5": "Sık duyulan ya da internette okunan şey, Barstreet'teki barların gece 02.00'ye kadar açık olduğudur. Bu, Kos şehrin Barstreet'i için kesinlikle geçerli değildir. Bazı barlar / kulüpler yoğun sezonda sabah 08:00'e kadar, ara sıra hafta sonunda daha da uzun açık kalır."
+  },
+  "es": {
+    "back": "← Noches de club y sitios de marcha",
+    "title": "Bar Street",
+    "loc": "Kos - borde del centro",
+    "hNight": "Abierto de noche",
+    "hHop": "Ir de bar en bar",
+    "hVibe": "Ambiente desbordante",
+    "hEarly": "¿Los bares en Kos ya cierran a las 02:00?",
+    "hMorning": "Hasta bien entrada la mañana",
+    "hoursH": "Horario",
+    "d0": "Lun.", "d1": "Mar.", "d2": "Mié.", "d3": "Jue.", "d4": "Vie.", "d5": "Sáb.", "d6": "Dom.",
+    "gmaps": "Google Maps", "iphone": "iPhone",
+    "p0": "Barstreet es la legendaria calle de marcha en el corazón de Kos ciudad, cerca del puerto y del casco antiguo. Una calle pequeña y animada que por la noche se convierte en una zona de fiesta que late.",
+    "p1": "Desde la puesta de sol arranca con bares, pubs y clubes que siguen abiertos hasta muy entrada la noche, a menudo hasta las 04:00–06:00,",
+    "p2": "llena de DJ que ponen éxitos mainstream, EDM o remezclas griegas, chupitos, cócteles. El público es sobre todo joven y con mucha gente que está allí como turista, sobre todo gente joven, con un ambiente enérgico y festivo.",
+    "p3": "Ir de bar en bar es fácil, porque todo está a pie. Todos los sitios tienen terraza. En temporada alta está en su momento más animado y más lleno; es asequible y accesible.",
+    "p4": "Espera un ambiente animado y desbordante. Perfecto si te apetece chupitos, bailar y una noche que sigue hasta la mañana.",
+    "p5": "Lo que se oye a menudo, o incluso se lee en internet, es que los bares de Barstreet están abiertos hasta las 02.00 de la noche. Eso no vale en absoluto para la Barstreet de Kos ciudad. Algunos bares / clubes en temporada alta están abiertos hasta las 08:00 de la mañana y de vez en cuando el fin de semana incluso más."
   }
-  var langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu'),overlay=document.getElementById('overlay');
-  function openMenu(){langMenu.classList.add('open');overlay.classList.add('open')}
-  function closeMenu(){langMenu.classList.remove('open');overlay.classList.remove('open')}
-  langBtn.addEventListener('click',function(e){e.stopPropagation();langMenu.classList.contains('open')?closeMenu():openMenu()});
-  overlay.addEventListener('click',closeMenu);
-  document.querySelectorAll('.lang-option').forEach(function(btn){btn.addEventListener('click',function(){setLang(btn.getAttribute('data-lang'))})});
-  setLang(lang);
-})();
+};
 </script>
 <script src="hello-kos-i18n.js?v=20261123r"></script>
 </body>
