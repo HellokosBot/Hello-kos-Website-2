@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Clubnights & hotspots – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+<style>
+body.hk-page .shop-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0;padding:10px}
+body.hk-page .shop-card{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;position:relative;border-radius:16px;overflow:hidden;aspect-ratio:1;background:#1a2525;border:1px solid var(--border);padding:0;margin:0;color:#fff;text-decoration:none}
+body.hk-page .shop-card .pic{flex:1 1 auto;min-height:0;overflow:hidden;background:#1a2525}
+body.hk-page .shop-card .pic img{width:100%;height:100%;object-fit:cover;display:block}
+body.hk-page .shop-card .card-bar{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-start;box-sizing:border-box;width:100%;padding:7px 10px;background:#fff}
+body.hk-page .shop-card .card-title{color:#0d1a1a;font-size:.88rem;font-weight:700;line-height:1.25}
+body.hk-page .shop-card .card-sub{color:#3d4f4f;font-size:.72rem;font-weight:600;line-height:1.3}
+body.hk-page .hero-wrap.shops-hero{aspect-ratio:auto;min-height:280px;display:flex;align-items:flex-end;overflow:hidden;margin:-16px -14px 12px}
+body.hk-page .hero-wrap.shops-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%}
+body.hk-page .shops-hero-copy{position:relative;z-index:1;width:100%;box-sizing:border-box;padding:48px 16px 14px;background:linear-gradient(to top,rgba(13,26,26,.94) 0%,rgba(13,26,26,.78) 42%,rgba(13,26,26,.35) 72%,rgba(13,26,26,0) 100%)}
+body.hk-page .shops-hero h1{color:#fff;margin:0 0 6px;text-shadow:0 1px 6px rgba(0,0,0,.55)}
+body.hk-page .shops-hero .lead{color:#fff;margin:0;text-shadow:0 1px 6px rgba(0,0,0,.5);text-align:left;font-size:.92rem}
+.club-fold{margin:0 0 10px;border:1px solid var(--border);border-radius:16px;overflow:hidden;background:#101c1c}
+.club-fold summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:14px 14px;background:#1c2e2e;color:#fff}
+.club-fold summary::-webkit-details-marker{display:none}
+.club-fold summary::marker{content:""}
+.fold-name{font-weight:800;font-size:1.05rem}
+.fold-hint{margin-left:auto;font-weight:700;font-size:.78rem;color:var(--gold);text-align:right}
+.club-fold .hint-close{display:none}
+.club-fold[open] .hint-open{display:none}
+.club-fold[open] .hint-close{display:inline}
+.plus{flex:0 0 18px;width:18px;height:18px;position:relative}
+.plus:before,.plus:after{content:"";position:absolute;background:#fff;border-radius:1px}
+.plus:before{left:0;top:8px;width:18px;height:2px}
+.plus:after{left:8px;top:0;width:2px;height:18px}
+.club-fold[open] .plus:after{display:none}
+</style>
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+<p class="parent-link"><a href="bars-nightlife.html" data-i18n="back">← Bars & nachtleven</a></p>
+<div class="hero-wrap shops-hero">
+<img src="img/hk/clubs-hero.jpg" alt="">
+<div class="shops-hero-copy">
+<h1 data-i18n="title">Clubnights & hotspots</h1>
+<p class="lead" data-i18n="lead">Het nachtleven in Kos speelt zich vooral af rond Bar Street, de haven en de oude stad. Clubs en night bars gaan hier door tot laat in de nacht met DJ's, cocktails en volle dansvloeren. De sfeer is levendig, met locals en mensen die er als toerist zijn, maar je kunt ook makkelijk van drukke clubs naar rustigere bars lopen.</p>
+</div>
+</div>
+<details class="club-fold">
+<summary>
+<span class="plus" aria-hidden="true"></span>
+<span class="fold-name" data-i18n="secKos">Kos-stad</span>
+<span class="fold-hint hint-open" data-i18n="tap">tik om te openen</span>
+<span class="fold-hint hint-close" data-i18n="tapClose">tik om te sluiten</span>
+</summary>
+<div class="shop-grid">
+<a class="shop-card" href="bar-street-dicht.html"><span class="pic"><img src="img/hk/clubs-bar-street.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="tBar">Bar street</span><span class="card-sub" data-i18n="aBar">Bar & club 16+</span></span></a>
+<div class="shop-card"><span class="pic"><img src="img/hk/clubs-mattatoio.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="tMat">Mattatoio</span><span class="card-sub" data-i18n="aMat">Club 20+</span></span></div>
+<a class="shop-card" href="cocktail-sitar.html"><span class="pic"><img src="img/hk/clubs-sitar.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="tSitar">Sitar</span><span class="card-sub" data-i18n="aSitar">Bar & cocktail 25+</span></span></a>
+<a class="shop-card" href="cocktail-mylos-beach-bar.html"><span class="pic"><img src="img/hk/clubs-mylos.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="tMylos">Mylos Beach Bar</span><span class="card-sub" data-i18n="aMylos">Bar & cocktail 25+</span></span></a>
+<div class="shop-card"><span class="pic"><img src="img/hk/clubs-camel.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="tCamel">Camel bar</span><span class="card-sub" data-i18n="aCamel">Bar 16+</span></span></div>
+</div>
+</details>
+<details class="club-fold">
+<summary>
+<span class="plus" aria-hidden="true"></span>
+<span class="fold-name" data-i18n="secKar">Kardamena</span>
+<span class="fold-hint hint-open" data-i18n="tap">tik om te openen</span>
+<span class="fold-hint hint-close" data-i18n="tapClose">tik om te sluiten</span>
+</summary>
+<div class="shop-grid">
+<div class="shop-card"><span class="pic"><img src="img/hk/clubs-downtown.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="tDown">Downtown Club</span><span class="card-sub" data-i18n="aDown">Club 16+</span></span></div>
+<div class="shop-card"><span class="pic"><img src="img/hk/clubs-caramela.jpg" alt=""></span><span class="card-bar"><span class="card-title" data-i18n="tCara">Caramela Night Club</span><span class="card-sub" data-i18n="aCara">Club 16+</span></span></div>
+</div>
+</details>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>
+window.HK_DICT = {
+  "nl": {
+    "back": "← Bars & nachtleven",
+    "title": "Clubnights & hotspots",
+    "lead": "Het nachtleven in Kos speelt zich vooral af rond Bar Street, de haven en de oude stad. Clubs en night bars gaan hier door tot laat in de nacht met DJ's, cocktails en volle dansvloeren. De sfeer is levendig, met locals en mensen die er als toerist zijn, maar je kunt ook makkelijk van drukke clubs naar rustigere bars lopen.",
+    "secKos": "Kos-stad",
+    "secKar": "Kardamena",
+    "tap": "tik om te openen",
+    "tapClose": "tik om te sluiten",
+    "tBar": "Bar street", "aBar": "Bar & club 16+",
+    "tMat": "Mattatoio", "aMat": "Club 20+",
+    "tSitar": "Sitar", "aSitar": "Bar & cocktail 25+",
+    "tMylos": "Mylos Beach Bar", "aMylos": "Bar & cocktail 25+",
+    "tCamel": "Camel bar", "aCamel": "Bar 16+",
+    "tDown": "Downtown Club", "aDown": "Club 16+",
+    "tCara": "Caramela Night Club", "aCara": "Club 16+"
+  },
+  "de": {
+    "back": "← Bars & Nachtleben",
+    "title": "Clubnächte & Hotspots",
+    "lead": "Das Nachtleben auf Kos spielt sich vor allem rund um die Bar Street, den Hafen und die Altstadt ab. Clubs und Nightbars gehen hier bis spät in die Nacht, mit DJs, Cocktails und vollen Tanzflächen. Die Stimmung ist lebendig, mit Locals und Menschen, die als Tourist da sind, aber du kannst auch leicht von lauten Clubs zu ruhigeren Bars laufen.",
+    "secKos": "Kos-Stadt",
+    "secKar": "Kardamena",
+    "tap": "tippen zum Öffnen",
+    "tapClose": "tippen zum Schließen",
+    "tBar": "Bar street", "aBar": "Bar & Club 16+",
+    "tMat": "Mattatoio", "aMat": "Club 20+",
+    "tSitar": "Sitar", "aSitar": "Bar & Cocktail 25+",
+    "tMylos": "Mylos Beach Bar", "aMylos": "Bar & Cocktail 25+",
+    "tCamel": "Camel bar", "aCamel": "Bar 16+",
+    "tDown": "Downtown Club", "aDown": "Club 16+",
+    "tCara": "Caramela Night Club", "aCara": "Club 16+"
+  },
+  "en": {
+    "back": "← Bars & nightlife",
+    "title": "Club nights & hotspots",
+    "lead": "Nightlife in Kos is mostly around Bar Street, the harbour and the old town. Clubs and night bars keep going late, with DJs, cocktails and full dance floors. The mood is lively, with locals and people who are there as a tourist, but you can also easily walk from busy clubs to quieter bars.",
+    "secKos": "Kos town",
+    "secKar": "Kardamena",
+    "tap": "tap to open",
+    "tapClose": "tap to close",
+    "tBar": "Bar street", "aBar": "Bar & club 16+",
+    "tMat": "Mattatoio", "aMat": "Club 20+",
+    "tSitar": "Sitar", "aSitar": "Bar & cocktail 25+",
+    "tMylos": "Mylos Beach Bar", "aMylos": "Bar & cocktail 25+",
+    "tCamel": "Camel bar", "aCamel": "Bar 16+",
+    "tDown": "Downtown Club", "aDown": "Club 16+",
+    "tCara": "Caramela Night Club", "aCara": "Club 16+"
+  },
+  "it": {
+    "back": "← Bar e nightlife",
+    "title": "Serate in club e posti caldi",
+    "lead": "La vita notturna a Kos si svolge soprattutto intorno a Bar Street, al porto e alla città vecchia. Club e night bar vanno avanti fino a tardi, con DJ, cocktail e piste piene. L’atmosfera è vivace, con gente del posto e persone che sono lì come turista, ma puoi anche passare facilmente dai club affollati a bar più tranquilli.",
+    "secKos": "Kos città",
+    "secKar": "Kardamena",
+    "tap": "tocca per aprire",
+    "tapClose": "tocca per chiudere",
+    "tBar": "Bar street", "aBar": "Bar e club 16+",
+    "tMat": "Mattatoio", "aMat": "Club 20+",
+    "tSitar": "Sitar", "aSitar": "Bar e cocktail 25+",
+    "tMylos": "Mylos Beach Bar", "aMylos": "Bar e cocktail 25+",
+    "tCamel": "Camel bar", "aCamel": "Bar 16+",
+    "tDown": "Downtown Club", "aDown": "Club 16+",
+    "tCara": "Caramela Night Club", "aCara": "Club 16+"
+  },
+  "tr": {
+    "back": "← Barlar ve gece hayatı",
+    "title": "Kulüp geceleri ve hareketli yerler",
+    "lead": "Kos’ta gece hayatı çoğunlukla Bar Street, liman ve eski şehir çevresinde geçer. Kulüpler ve gece barları geç saatlere kadar sürer; DJ, kokteyl ve dolu dans pistleri vardır. Hava canlıdır, yerliler ve turist olarak orada olan insanlarla, ama kalabalık kulüplerden daha sakin barlara da kolayca yürüyebilirsin.",
+    "secKos": "Kos şehir",
+    "secKar": "Kardamena",
+    "tap": "açmak için dokun",
+    "tapClose": "kapatmak için dokun",
+    "tBar": "Bar street", "aBar": "Bar ve kulüp 16+",
+    "tMat": "Mattatoio", "aMat": "Kulüp 20+",
+    "tSitar": "Sitar", "aSitar": "Bar ve kokteyl 25+",
+    "tMylos": "Mylos Beach Bar", "aMylos": "Bar ve kokteyl 25+",
+    "tCamel": "Camel bar", "aCamel": "Bar 16+",
+    "tDown": "Downtown Club", "aDown": "Kulüp 16+",
+    "tCara": "Caramela Night Club", "aCara": "Kulüp 16+"
+  },
+  "es": {
+    "back": "← Bares y nightlife",
+    "title": "Noches de club y sitios de marcha",
+    "lead": "La noche en Kos se concentra sobre todo en Bar Street, el puerto y el casco antiguo. Los clubes y los bares de noche siguen hasta tarde, con DJ, cócteles y pistas llenas. El ambiente es animado, con gente local y personas que están allí como turista, pero también puedes pasar fácilmente de los clubes llenos a bares más tranquilos.",
+    "secKos": "Kos ciudad",
+    "secKar": "Kardamena",
+    "tap": "toca para abrir",
+    "tapClose": "toca para cerrar",
+    "tBar": "Bar street", "aBar": "Bar y club 16+",
+    "tMat": "Mattatoio", "aMat": "Club 20+",
+    "tSitar": "Sitar", "aSitar": "Bar y cóctel 25+",
+    "tMylos": "Mylos Beach Bar", "aMylos": "Bar y cóctel 25+",
+    "tCamel": "Camel bar", "aCamel": "Bar 16+",
+    "tDown": "Downtown Club", "aDown": "Club 16+",
+    "tCara": "Caramela Night Club", "aCara": "Club 16+"
+  }
+};
+</script>
+<script src="hello-kos-i18n.js?v=20261123r"></script>
+</body>
+</html>
