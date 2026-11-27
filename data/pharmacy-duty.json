@@ -1,21 +1,25 @@
 {
-  "fetchedAt": "2026-11-27T17:21:47.721387+02:00",
+  "fetchedAt": "2026-11-27T21:18:22.258537+02:00",
   "timezone": "Europe/Athens",
   "sourceName": "Φαρμακευτικός Σύλλογος Δωδεκανήσου",
+  "sourceNameEn": "Pharmaceutical Association of the Dodecanese",
   "sourceUrl": "https://www.fs12.gr/index.php/efimeries-ko/",
   "sources": [
     {
       "area": "Κως",
+      "areaEn": "Kos",
       "url": "https://www.fs12.gr/index.php/efimeries-ko/eventsbyweek/2026/11/23/-",
       "count": 7
     },
     {
       "area": "Δημ. Εν. Ηρακλειδών Κω",
+      "areaEn": "Municipal Unit of Irakleidon, Kos",
       "url": "https://www.fs12.gr/index.php/efimeries-dim-en-irakleidon-ko/eventsbyweek/2026/11/23/-",
       "count": 7
     },
     {
       "area": "Δημ. Εν. Δικαίου Κω",
+      "areaEn": "Municipal Unit of Dikaiou, Kos",
       "url": "https://www.fs12.gr/index.php/efimeries-dim-en-dikaiou-ko/eventsbyweek/2026/11/23/-",
       "count": 7
     }
@@ -31,7 +35,11 @@
       "duty": "both",
       "dutyLabel": "Διημέρευση & Διανυκτέρευση",
       "area": "Κως",
-      "id": "/index.php/efimeries-ko/eventdetail/80737/-/kampani-anna-maria"
+      "id": "/index.php/efimeries-ko/eventdetail/80737/-/kampani-anna-maria",
+      "nameEn": "Kampani Anna Maria",
+      "addressEn": "Vas. Georgiou and Charmylou, Kos",
+      "areaEn": "Kos",
+      "dutyLabelEn": "Daytime duty & overnight duty"
     },
     {
       "date": "2026-11-23",
@@ -44,7 +52,11 @@
       "duty": "both",
       "dutyLabel": "Διημέρευση & Διανυκτέρευση",
       "area": "Δημ. Εν. Ηρακλειδών Κω",
-      "id": "/index.php/efimeries-dim-en-irakleidon-ko/eventdetail/80633/-/kotoulas-xristos-sia-o-e"
+      "id": "/index.php/efimeries-dim-en-irakleidon-ko/eventdetail/80633/-/kotoulas-xristos-sia-o-e",
+      "nameEn": "Kotoulas Christos & Sia G.P.",
+      "addressEn": "Kamari 1, Kefalos",
+      "areaEn": "Municipal Unit of Irakleidon, Kos",
+      "dutyLabelEn": "Daytime duty & overnight duty"
     },
     {
       "date": "2026-11-23",
@@ -57,7 +69,11 @@
       "duty": "both",
       "dutyLabel": "Διημέρευση & Διανυκτέρευση",
       "area": "Δημ. Εν. Δικαίου Κω",
-      "id": "/index.php/efimeries-dim-en-dikaiou-ko/eventdetail/80541/-/lamprinos-k-georgios"
+      "id": "/index.php/efimeries-dim-en-dikaiou-ko/eventdetail/80541/-/lamprinos-k-georgios",
+      "nameEn": "Lamprinos K. Georgios",
+      "addressEn": "Zipari Asfendiou",
+      "areaEn": "Municipal Unit of Dikaiou, Kos",
+      "dutyLabelEn": "Daytime duty & overnight duty"
     },
     {
       "date": "2026-11-24",
@@ -69,7 +85,11 @@
       "duty": "both",
       "dutyLabel": "Διημέρευση & Διανυκτέρευση",
       "area": "Κως",
-      "id": "/index.php/efimeries-ko/eventdetail/80735/-/karkalis-vasileios"
+      "id": "/index.php/efimeries-ko/eventdetail/80735/-/karkalis-vasileios",
+      "nameEn": "Karkalis Vasileios",
+      "addressEn": "Mitropoleos 3",
+      "areaEn": "Kos",
+      "dutyLabelEn": "Daytime duty & overnight duty"
     },
     {
       "date": "2026-11-24",
@@ -82,7 +102,11 @@
       "duty": "both",
       "dutyLabel": "Διημέρευση & Διανυκτέρευση",
       "area": "Δημ. Εν. Ηρακλειδών Κω",
-      "id": "/index.php/efimeries-dim-en-irakleidon-ko/eventdetail/80566/-/s-f-mouzourakis-evagg-mouzouraki-kall-oe"
+      "id": "/index.php/efimeries-dim-en-irakleidon-ko/eventdetail/80566/-/s-f-mouzourakis-evagg-mouzouraki-kall-oe",
+      "nameEn": "S.F. Mouzourakis Evang. - Mouzouraki Kall. G.P.",
+      "addressEn": "Kardamena",
+      "areaEn": "Municipal Unit of Irakleidon, Kos",
+      "dutyLabelEn": "Daytime duty & overnight duty"
     },
     {
       "date": "2026-11-24",
@@ -95,7 +119,11 @@
       "duty": "both",
       "dutyLabel": "Διημέρευση & Διανυκτέρευση",
       "area": "Δημ. Εν. Δικαίου Κω",
-      "id": "/index.php/efimeries-dim-en-dikaiou-ko/eventdetail/80465/-/xatzipantsou-a-eleni"
+      "id": "/index.php/efimeries-dim-en-dikaiou-ko/eventdetail/80465/-/xatzipantsou-a-eleni",
+      "nameEn": "Chatzipantsou A. Eleni",
+      "addressEn": "Pyli",
+      "areaEn": "Municipal Unit of Dikaiou, Kos",
+      "dutyLabelEn": "Daytime duty & overnight duty"
     },
     {
       "date": "2026-11-25",
@@ -107,7 +135,11 @@
       "duty": "both",
       "dutyLabel": "Διημέρευση & Διανυκτέρευση",
       "area": "Κως",
-      "id": "/index.php/efimeries-ko/eventdetail/70549/-/markoglou-ioannis"
+      "id": "/index.php/efimeries-ko/eventdetail/70549/-/markoglou-ioannis",
+      "nameEn": "Markoglou Ioannis",
+      "addressEn": "Vasileos Pavlou 21, Kos",
+      "areaEn": "Kos",
+      "dutyLabelEn": "Daytime duty & overnight duty"
     },
     {
       "date": "2026-11-25",
@@ -120,7 +152,11 @@
       "duty": "both",
       "dutyLabel": "Διημέρευση & Διανυκτέρευση",
       "area": "Δημ. Εν. Ηρακλειδών Κω",
-      "id": "/index.php/efimeries-dim-en-irakleidon-ko/eventdetail/80588/-/karathomas-konstantinos"
+      "id": "/index.php/efimeries-dim-en-irakleidon-ko/eventdetail/80588/-/karathomas-konstantinos",
+      "nameEn": "Karathomas Konstantinos",
+      "addressEn": "25th March Antimachia, Kos",
+      "areaEn": "Municipal Unit of Irakleidon, Kos",
+      "dutyLabelEn": "Daytime duty & overnight duty"
     },
     {
       "date": "2026-11-25",
@@ -133,7 +169,11 @@
       "duty": "both",
       "dutyLabel": "Διημέρευση & Διανυκτέρευση",
       "area": "Δημ. Εν. Δικαίου Κω",
-      "id": "/index.php/efimeries-dim-en-dikaiou-ko/eventdetail/80481/-/varelis-pharmacy-e-e"
+      "id": "/index.php/efimeries-dim-en-dikaiou-ko/eventdetail/80481/-/varelis-pharmacy-e-e",
+      "nameEn": "VARELIS PHARMACY E.E.",
+      "addressEn": "Tigaki Asfendiou, Dikaio",
+      "areaEn": "Municipal Unit of Dikaiou, Kos",
+      "dutyLabelEn": "Daytime duty & overnight duty"
     },
     {
       "date": "2026-11-26",
@@ -145,7 +185,11 @@
       "duty": "both",
       "dutyLabel": "Διημέρευση & Διανυκτέρευση",
       "area": "Κως",
-      "id": "/index.php/efimeries-ko/eventdetail/80742/-/pastrikou-varvara-aggelina"
+      "id": "/index.php/efimeries-ko/eventdetail/80742/-/pastrikou-varvara-aggelina",
+      "nameEn": "Pastrikou Varvara-Angelina",
+      "addressEn": "Vasileos Georgiou 7, Kos",
+      "areaEn": "Kos",
+      "dutyLabelEn": "Daytime duty & overnight duty"
     },
     {
       "date": "2026-11-26",
@@ -158,7 +202,11 @@
       "duty": "both",
       "dutyLabel": "Διημέρευση & Διανυκτέρευση",
       "area": "Δημ. Εν. Ηρακλειδών Κω",
-      "id": "/index.php/efimeries-dim-en-irakleidon-ko/eventdetail/80604/-/palantzidou-anastasia"
+      "id": "/index.php/efimeries-dim-en-irakleidon-ko/eventdetail/80604/-/palantzidou-anastasia",
+      "nameEn": "Palantzidou Anastasia",
+      "addressEn": "Airport roundabout Antimachia, Kos",
+      "areaEn": "Municipal Unit of Irakleidon, Kos",
+      "dutyLabelEn": "Daytime duty & overnight duty"
     },
     {
       "date": "2026-11-26",
@@ -171,7 +219,11 @@
       "duty": "both",
       "dutyLabel": "Διημέρευση & Διανυκτέρευση",
       "area": "Δημ. Εν. Δικαίου Κω",
-      "id": "/index.php/efimeries-dim-en-dikaiou-ko/eventdetail/80497/-/vogli-marianna"
+      "id": "/index.php/efimeries-dim-en-dikaiou-ko/eventdetail/80497/-/vogli-marianna",
+      "nameEn": "Vogli Marianna",
+      "addressEn": "Pyli",
+      "areaEn": "Municipal Unit of Dikaiou, Kos",
+      "dutyLabelEn": "Daytime duty & overnight duty"
     },
     {
       "date": "2026-11-27",
@@ -183,7 +235,11 @@
       "duty": "both",
       "dutyLabel": "Διημέρευση & Διανυκτέρευση",
       "area": "Κως",
-      "id": "/index.php/efimeries-ko/eventdetail/80740/-/papaxristou-zoi-tou-xristou"
+      "id": "/index.php/efimeries-ko/eventdetail/80740/-/papaxristou-zoi-tou-xristou",
+      "nameEn": "Papachristou Zoi of Christou",
+      "addressEn": "Vas. Pavlou 9",
+      "areaEn": "Kos",
+      "dutyLabelEn": "Daytime duty & overnight duty"
     },
     {
       "date": "2026-11-27",
@@ -196,7 +252,11 @@
       "duty": "both",
       "dutyLabel": "Διημέρευση & Διανυκτέρευση",
       "area": "Δημ. Εν. Ηρακλειδών Κω",
-      "id": "/index.php/efimeries-dim-en-irakleidon-ko/eventdetail/80567/-/s-f-mouzourakis-evagg-mouzouraki-kall-oe"
+      "id": "/index.php/efimeries-dim-en-irakleidon-ko/eventdetail/80567/-/s-f-mouzourakis-evagg-mouzouraki-kall-oe",
+      "nameEn": "S.F. Mouzourakis Evang. - Mouzouraki Kall. G.P.",
+      "addressEn": "Kardamena",
+      "areaEn": "Municipal Unit of Irakleidon, Kos",
+      "dutyLabelEn": "Daytime duty & overnight duty"
     },
     {
       "date": "2026-11-27",
@@ -209,7 +269,11 @@
       "duty": "both",
       "dutyLabel": "Διημέρευση & Διανυκτέρευση",
       "area": "Δημ. Εν. Δικαίου Κω",
-      "id": "/index.php/efimeries-dim-en-dikaiou-ko/eventdetail/80512/-/kosti-iliana-paraskevi"
+      "id": "/index.php/efimeries-dim-en-dikaiou-ko/eventdetail/80512/-/kosti-iliana-paraskevi",
+      "nameEn": "Kosti Iliana-Friday",
+      "addressEn": "Marmari-Pyli",
+      "areaEn": "Municipal Unit of Dikaiou, Kos",
+      "dutyLabelEn": "Daytime duty & overnight duty"
     },
     {
       "date": "2026-11-28",
@@ -221,7 +285,11 @@
       "duty": "both",
       "dutyLabel": "Διημέρευση & Διανυκτέρευση",
       "area": "Κως",
-      "id": "/index.php/efimeries-ko/eventdetail/19503/-/puzzle-pharmacy-ntousikos-zaxarias"
+      "id": "/index.php/efimeries-ko/eventdetail/19503/-/puzzle-pharmacy-ntousikos-zaxarias",
+      "nameEn": "PUZZLE PHARMACY(Ntousikos Zacharias)",
+      "addressEn": "Filinou 12 (end of Averof), Kos",
+      "areaEn": "Kos",
+      "dutyLabelEn": "Daytime duty & overnight duty"
     },
     {
       "date": "2026-11-28",
@@ -234,7 +302,11 @@
       "duty": "both",
       "dutyLabel": "Διημέρευση & Διανυκτέρευση",
       "area": "Δημ. Εν. Ηρακλειδών Κω",
-      "id": "/index.php/efimeries-dim-en-irakleidon-ko/eventdetail/80619/-/panagiotou-kon-nikolaos"
+      "id": "/index.php/efimeries-dim-en-irakleidon-ko/eventdetail/80619/-/panagiotou-kon-nikolaos",
+      "nameEn": "Panagiotou Kon. Nikolaos",
+      "addressEn": "Kefalos, Kos",
+      "areaEn": "Municipal Unit of Irakleidon, Kos",
+      "dutyLabelEn": "Daytime duty & overnight duty"
     },
     {
       "date": "2026-11-28",
@@ -247,7 +319,11 @@
       "duty": "both",
       "dutyLabel": "Διημέρευση & Διανυκτέρευση",
       "area": "Δημ. Εν. Δικαίου Κω",
-      "id": "/index.php/efimeries-dim-en-dikaiou-ko/eventdetail/80527/-/papathomas-i-zaxarias"
+      "id": "/index.php/efimeries-dim-en-dikaiou-ko/eventdetail/80527/-/papathomas-i-zaxarias",
+      "nameEn": "Papathomas I. Zacharias",
+      "addressEn": "Zipari (Municipal District Asfendiou)",
+      "areaEn": "Municipal Unit of Dikaiou, Kos",
+      "dutyLabelEn": "Daytime duty & overnight duty"
     },
     {
       "date": "2026-11-29",
@@ -259,7 +335,11 @@
       "duty": "both",
       "dutyLabel": "Διημέρευση & Διανυκτέρευση",
       "area": "Κως",
-      "id": "/index.php/efimeries-ko/eventdetail/6996/-/aksarlis-stavros"
+      "id": "/index.php/efimeries-ko/eventdetail/6996/-/aksarlis-stavros",
+      "nameEn": "Axarlis Stavros",
+      "addressEn": "Eleftheriou Venizelou 4, Kos",
+      "areaEn": "Kos",
+      "dutyLabelEn": "Daytime duty & overnight duty"
     },
     {
       "date": "2026-11-29",
@@ -272,7 +352,11 @@
       "duty": "both",
       "dutyLabel": "Διημέρευση & Διανυκτέρευση",
       "area": "Δημ. Εν. Ηρακλειδών Κω",
-      "id": "/index.php/efimeries-dim-en-irakleidon-ko/eventdetail/80634/-/kotoulas-xristos-sia-o-e"
+      "id": "/index.php/efimeries-dim-en-irakleidon-ko/eventdetail/80634/-/kotoulas-xristos-sia-o-e",
+      "nameEn": "Kotoulas Christos & Sia G.P.",
+      "addressEn": "Kamari 1, Kefalos",
+      "areaEn": "Municipal Unit of Irakleidon, Kos",
+      "dutyLabelEn": "Daytime duty & overnight duty"
     },
     {
       "date": "2026-11-29",
@@ -285,7 +369,11 @@
       "duty": "both",
       "dutyLabel": "Διημέρευση & Διανυκτέρευση",
       "area": "Δημ. Εν. Δικαίου Κω",
-      "id": "/index.php/efimeries-dim-en-dikaiou-ko/eventdetail/80542/-/lamprinos-k-georgios"
+      "id": "/index.php/efimeries-dim-en-dikaiou-ko/eventdetail/80542/-/lamprinos-k-georgios",
+      "nameEn": "Lamprinos K. Georgios",
+      "addressEn": "Zipari Asfendiou",
+      "areaEn": "Municipal Unit of Dikaiou, Kos",
+      "dutyLabelEn": "Daytime duty & overnight duty"
     }
   ]
 }
