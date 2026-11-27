@@ -91,6 +91,12 @@
     return '<a href="' + esc(href) + '">' + esc(number) + "</a>";
   }
 
+  function field(row, key) {
+    var english = row[key + "En"];
+    if (english != null && String(english).trim()) return english;
+    return row[key] || "";
+  }
+
   function mapQuery(row) {
     var parts = [];
     function add(value) {
@@ -120,13 +126,16 @@
   }
 
   function itemHtml(row) {
-    var meta = esc(row.dutyLabel || "");
-    if (row.area) meta += (meta ? " · " : "") + esc(row.area);
+    var duty = field(row, "dutyLabel");
+    var area = field(row, "area");
+    var address = field(row, "address");
+    var meta = esc(duty);
+    if (area) meta += (meta ? " · " : "") + esc(area);
     var phones = (row.phones || []).map(phoneHtml).join(" · ");
     return '<article class="duty-item">' +
-      "<strong>" + esc(row.name) + "</strong>" +
+      "<strong>" + esc(field(row, "name")) + "</strong>" +
       (meta ? '<p class="duty-meta">' + meta + "</p>" : "") +
-      (row.address ? "<p>" + esc(row.address) + "</p>" : "") +
+      (address ? "<p>" + esc(address) + "</p>" : "") +
       (phones ? "<p>" + phones + "</p>" : "") +
       mapHtml(row) +
       "</article>";

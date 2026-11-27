@@ -17,6 +17,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      # Retries inside the script. If fs12.gr stays down, the script keeps the
+      # current JSON, prints a warning and exits 0 so this job does not fail.
       - name: Download the public Kos pharmacy duty list
         run: python3 tools/update-pharmacy-duty.py
       - name: Commit the list when it changed
