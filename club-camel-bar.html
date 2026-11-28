@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Camel Bar | Kos-stad – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+<style>
+.call-list{display:flex;flex-direction:column;gap:10px;margin:12px 0 0}
+a.call-btn{display:flex;align-items:center;gap:12px;text-decoration:none;background:linear-gradient(180deg,#3eaeae 0%,#2b7e7e 100%);color:#fff;border:0;border-radius:16px;padding:14px 16px;box-shadow:0 6px 16px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.25);cursor:pointer;box-sizing:border-box;max-width:100%}
+a.call-btn:active{transform:translateY(1px)}
+a.call-btn .ico{flex:0 0 44px;width:44px;height:44px;border-radius:14px;background:var(--gold);color:#1c1404;display:flex;align-items:center;justify-content:center}
+a.call-btn .call-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
+a.call-btn .call-main{font-weight:800;font-size:1.05rem;line-height:1.25}
+a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba(255,255,255,.9)}
+.card h3{font-size:.95rem;margin:12px 0 8px;color:var(--text)}
+.hours{margin:4px 0 8px}
+.h-row{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:.86rem;color:var(--text-soft)}
+.h-row span:last-child{font-weight:700;color:var(--text);text-align:right}
+.note{margin:8px 0 0;font-size:.86rem;color:var(--text-soft)}
+.photo{display:block;width:100%;height:auto;border-radius:14px;margin:0 0 12px}
+body.hk-page .hero-wrap.shops-hero{aspect-ratio:auto;min-height:210px;display:flex;align-items:flex-end;overflow:hidden;margin:-16px -14px 12px}
+body.hk-page .hero-wrap.shops-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%}
+body.hk-page .shops-hero-copy{position:relative;z-index:1;width:100%;box-sizing:border-box;padding:36px 16px 14px;background:linear-gradient(to top,rgba(13,26,26,.94) 0%,rgba(13,26,26,.78) 46%,rgba(13,26,26,.28) 78%,rgba(13,26,26,0) 100%)}
+body.hk-page .shops-hero h1{color:#fff;margin:0;text-shadow:0 1px 6px rgba(0,0,0,.55)}
+body.hk-page .map-row{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:stretch;gap:8px;width:100%;max-width:100%;margin:12px 0 0;box-sizing:border-box}
+body.hk-page .map-row .btn{flex:1 1 0;width:0;max-width:none;min-width:0;padding:12px 8px;font-size:.82rem}
+body.hk-page .map-row .pin{flex:0 0 16px;width:16px;height:16px}
+</style>
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+<p class="parent-link"><a href="clubs-hotspots.html" data-i18n="back">← Clubnights & hotspots</a></p>
+<div class="hero-wrap shops-hero">
+<img src="img/hk/clubs-camel.jpg" alt="">
+<div class="shops-hero-copy">
+<h1 data-i18n="heroTitle">Camel Bar</h1>
+</div>
+</div>
+<article class="card">
+<h3 data-i18n="loc">Kos-stad, centrum</h3>
+<p data-i18n="p0">Check Camel Bar, een iconische feestbar voor wie er als toerist is, in het hart van Kos-stad, pal aan de haven.</p>
+<img class="photo" src="img/hk/camel-haven.jpg" alt="">
+<p data-i18n="p1">Deze Hollandse feestcafé-stijl bar bestaat al sinds 1997 en is een vaste plek voor wie zin heeft in een levendige avond met cocktails, shots, muziek met gezellige Nederlands personeel.</p>
+<img class="photo" src="img/hk/camel-binnen.jpg" alt="">
+<p data-i18n="p2">Het is vooral populair bij mensen die er als toerist zijn en houden van een uitbundige sfeer met DJ's, themafeesten en late uurtjes – perfect voor barhoppen of een wilde start van de nacht.</p>
+<img class="photo" src="img/hk/camel-ingang.jpg" alt="">
+<p data-i18n="p3">De locatie aan de drukke havenstraat maakt het makkelijk te vinden en ideaal om mensen te kijken of door te gaan naar andere spots. Een klassieker voor feestgangers op Kos!</p>
+<h3 data-i18n="addrL">Adres</h3>
+<p data-i18n="addr">Akti Kountouriotou 15, Kos-stad</p>
+<h3 data-i18n="phoneH">Telefoon</h3>
+<div class="call-list">
+<a class="call-btn" href="tel:+302242026898"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="call-copy"><span class="call-main"><span data-i18n="call">Bel</span> +30 22420 26898</span><span class="call-sub" data-i18n="phoneL">Telefoon</span></span></a>
+</div>
+<h3 data-i18n="hoursH">Openingstijden</h3>
+<div class="hours">
+<div class="h-row"><span data-i18n="daily">Dagelijks</span><span>19:00–04:00</span></div>
+</div>
+<p class="note" data-i18n="hoursNote">Openingstijden kunnen seizoensgebonden wijzigen.</p>
+<div class="map-row">
+<a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&amp;query=36.8943117,27.2879575" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+<a class="btn btn-map" href="https://maps.apple.com/?ll=36.8943117,27.2879575&amp;q=Camel%20Bar%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+</div>
+</article>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>
+window.HK_DICT = {
+  "nl": {
+    "back": "← Clubnights & hotspots",
+    "title": "Camel Bar | Kos-stad",
+    "heroTitle": "Camel Bar",
+    "loc": "Kos-stad, centrum",
+    "addrL": "Adres",
+    "addr": "Akti Kountouriotou 15, Kos-stad",
+    "phoneH": "Telefoon",
+    "phoneL": "Telefoon",
+    "call": "Bel",
+    "hoursH": "Openingstijden",
+    "daily": "Dagelijks",
+    "hoursNote": "Openingstijden kunnen seizoensgebonden wijzigen.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Check Camel Bar, een iconische feestbar voor wie er als toerist is, in het hart van Kos-stad, pal aan de haven.",
+    "p1": "Deze Hollandse feestcafé-stijl bar bestaat al sinds 1997 en is een vaste plek voor wie zin heeft in een levendige avond met cocktails, shots, muziek met gezellige Nederlands personeel.",
+    "p2": "Het is vooral populair bij mensen die er als toerist zijn en houden van een uitbundige sfeer met DJ's, themafeesten en late uurtjes – perfect voor barhoppen of een wilde start van de nacht.",
+    "p3": "De locatie aan de drukke havenstraat maakt het makkelijk te vinden en ideaal om mensen te kijken of door te gaan naar andere spots. Een klassieker voor feestgangers op Kos!"
+  },
+  "de": {
+    "back": "← Clubnächte & Hotspots",
+    "title": "Camel Bar | Kos-Stadt",
+    "heroTitle": "Camel Bar",
+    "loc": "Kos-Stadt, Zentrum",
+    "addrL": "Adresse",
+    "addr": "Akti Kountouriotou 15, Kos-Stadt",
+    "phoneH": "Telefon",
+    "phoneL": "Telefon",
+    "call": "Anrufen",
+    "hoursH": "Öffnungszeiten",
+    "daily": "Täglich",
+    "hoursNote": "Die Öffnungszeiten können sich je nach Saison ändern.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Check Camel Bar, eine ikonische Partybar für alle, die als Tourist da sind, im Herzen von Kos-Stadt, direkt am Hafen.",
+    "p1": "Diese Bar im Stil eines holländischen Feestcafés gibt es schon seit 1997 und ist ein fester Treffpunkt für alle, die Lust auf einen lebendigen Abend mit Cocktails, Shots, Musik mit gemütlichem niederländischem Personal haben.",
+    "p2": "Sie ist vor allem beliebt bei Menschen, die als Tourist da sind und eine ausgelassene Stimmung mit DJs, Themenpartys und späten Stunden mögen – perfekt zum Barhopping oder für einen wilden Start in die Nacht.",
+    "p3": "Die Lage an der belebten Hafenstraße macht sie leicht zu finden und ideal zum Leutebeobachten oder um weiter zu anderen Spots zu gehen. Ein Klassiker für Nachtschwärmer auf Kos!"
+  },
+  "en": {
+    "back": "← Club nights & hotspots",
+    "title": "Camel Bar | Kos town",
+    "heroTitle": "Camel Bar",
+    "loc": "Kos town, centre",
+    "addrL": "Address",
+    "addr": "Akti Kountouriotou 15, Kos town",
+    "phoneH": "Phone",
+    "phoneL": "Phone",
+    "call": "Call",
+    "hoursH": "Opening hours",
+    "daily": "Daily",
+    "hoursNote": "Opening hours can change with the season.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Check Camel Bar, an iconic party bar for people who are there as a tourist, in the heart of Kos town, right on the harbour.",
+    "p1": "This bar in the style of a Dutch feestcafé has been around since 1997 and is a regular spot if you feel like a lively evening with cocktails, shots and music, with friendly Dutch staff.",
+    "p2": "It is especially popular with people who are there as a tourist and like a lively atmosphere with DJs, theme parties and late hours – perfect for bar-hopping or a wild start to the night.",
+    "p3": "The spot on the busy harbour street makes it easy to find and ideal for people-watching or moving on to other places. A classic for people out on Kos!"
+  },
+  "it": {
+    "back": "← Serate in club e posti caldi",
+    "title": "Camel Bar | Kos città",
+    "heroTitle": "Camel Bar",
+    "loc": "Kos città, centro",
+    "addrL": "Indirizzo",
+    "addr": "Akti Kountouriotou 15, Kos città",
+    "phoneH": "Telefono",
+    "phoneL": "Telefono",
+    "call": "Chiama",
+    "hoursH": "Orari di apertura",
+    "daily": "Ogni giorno",
+    "hoursNote": "Gli orari possono cambiare a seconda della stagione.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Check Camel Bar, un party bar iconico per chi c'è da turista, nel cuore di Kos città, proprio sul porto.",
+    "p1": "Questo bar in stile feestcafé olandese esiste dal 1997 ed è un posto fisso per chi ha voglia di una serata vivace con cocktail, shot e musica, con personale olandese accogliente.",
+    "p2": "È soprattutto popolare tra le persone che ci sono da turista e amano un'atmosfera esuberante con DJ, feste a tema e ore piccole – perfetto per fare il giro dei bar o per un inizio selvaggio della notte.",
+    "p3": "La posizione sulla strada animata del porto lo rende facile da trovare e ideale per guardare la gente o andare avanti verso altri posti. Un classico per chi esce la sera a Kos!"
+  },
+  "tr": {
+    "back": "← Kulüp geceleri ve hareketli yerler",
+    "title": "Camel Bar | Kos şehir",
+    "heroTitle": "Camel Bar",
+    "loc": "Kos şehir, merkez",
+    "addrL": "Adres",
+    "addr": "Akti Kountouriotou 15, Kos şehir",
+    "phoneH": "Telefon",
+    "phoneL": "Telefon",
+    "call": "Ara",
+    "hoursH": "Açılış saatleri",
+    "daily": "Her gün",
+    "hoursNote": "Açılış saatleri mevsime göre değişebilir.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Check Camel Bar: Kos şehrin kalbinde, limanın hemen yanında, orada turist olarak bulunanlar için ikonik bir parti barı.",
+    "p1": "Bu Hollanda feestcafé tarzı bar 1997'den beri var ve kokteyl, shot ve müzikle canlı bir akşam isteyenler için sabit bir yer; samimi Hollandalı personeli var.",
+    "p2": "Özellikle orada turist olarak bulunan ve DJ'ler, tema partileri ve geç saatlerle coşkulu bir havayı sevenler arasında popülerdir – bar bar gezmek ya da gecenin vahşi bir başlangıcı için birebir.",
+    "p3": "Hareketli liman caddesindeki yeri sayesinde bulması kolaydır; insan izlemek ya da başka yerlere devam etmek için idealdir. Kos'ta geceye çıkanlar için bir klasik!"
+  },
+  "es": {
+    "back": "← Noches de club y sitios de marcha",
+    "title": "Camel Bar | Kos ciudad",
+    "heroTitle": "Camel Bar",
+    "loc": "Kos ciudad, centro",
+    "addrL": "Dirección",
+    "addr": "Akti Kountouriotou 15, Kos ciudad",
+    "phoneH": "Teléfono",
+    "phoneL": "Teléfono",
+    "call": "Llamar",
+    "hoursH": "Horario",
+    "daily": "Todos los días",
+    "hoursNote": "El horario puede cambiar según la temporada.",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Check Camel Bar, un bar de fiesta icónico para quien está allí como turista, en el corazón de Kos ciudad, justo en el puerto.",
+    "p1": "Este bar al estilo de un feestcafé holandés existe desde 1997 y es un sitio fijo para quien tiene ganas de una noche animada con cócteles, chupitos y música, con personal holandés cercano.",
+    "p2": "Es sobre todo popular entre la gente que está allí como turista y le gusta un ambiente desbordante con DJs, fiestas temáticas y horas tardías: perfecto para ir de bar en bar o para un inicio salvaje de la noche.",
+    "p3": "El sitio en la calle animada del puerto lo hace fácil de encontrar e ideal para mirar a la gente o seguir hacia otros sitios. Un clásico para quien sale de fiesta en Kos!"
+  }
+};
+</script>
+<script src="hello-kos-i18n.js?v=20261123r"></script>
+</body>
+</html>
