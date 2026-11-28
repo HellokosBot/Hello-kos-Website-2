@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D1A1A">
+<title>Mattatoio | Kos-stad – Hello Kos</title>
+<link rel="stylesheet" href="hello-kos.css">
+<style>
+.call-list{display:flex;flex-direction:column;gap:10px;margin:12px 0 0}
+a.call-btn{display:flex;align-items:center;gap:12px;text-decoration:none;background:linear-gradient(180deg,#3eaeae 0%,#2b7e7e 100%);color:#fff;border:0;border-radius:16px;padding:14px 16px;box-shadow:0 6px 16px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.25);cursor:pointer;box-sizing:border-box;max-width:100%}
+a.call-btn:active{transform:translateY(1px)}
+a.call-btn .ico{flex:0 0 44px;width:44px;height:44px;border-radius:14px;background:var(--gold);color:#1c1404;display:flex;align-items:center;justify-content:center}
+a.call-btn .call-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
+a.call-btn .call-main{font-weight:800;font-size:1.05rem;line-height:1.25}
+a.call-btn .call-sub{font-weight:600;font-size:.8rem;line-height:1.35;color:rgba(255,255,255,.9)}
+.card h3{font-size:.95rem;margin:12px 0 8px;color:var(--text)}
+.photo{display:block;width:100%;height:auto;border-radius:14px;margin:0 0 12px}
+body.hk-page .hero-wrap.shops-hero{aspect-ratio:auto;min-height:210px;display:flex;align-items:flex-end;overflow:hidden;margin:-16px -14px 12px}
+body.hk-page .hero-wrap.shops-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%}
+body.hk-page .shops-hero-copy{position:relative;z-index:1;width:100%;box-sizing:border-box;padding:36px 16px 14px;background:linear-gradient(to top,rgba(13,26,26,.94) 0%,rgba(13,26,26,.78) 46%,rgba(13,26,26,.28) 78%,rgba(13,26,26,0) 100%)}
+body.hk-page .shops-hero h1{color:#fff;margin:0;text-shadow:0 1px 6px rgba(0,0,0,.55)}
+body.hk-page .map-row{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:stretch;gap:8px;width:100%;max-width:100%;margin:12px 0 0;box-sizing:border-box}
+body.hk-page .map-row .btn{flex:1 1 0;width:0;max-width:none;min-width:0;padding:12px 8px;font-size:.82rem}
+body.hk-page .map-row .pin{flex:0 0 16px;width:16px;height:16px}
+</style>
+</head>
+<body class="hk-page">
+<header class="app-header">
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html" title="Home">🏠</a>
+    <a class="nav-btn" href="javascript:history.back()" title="Terug">←</a>
+  </div>
+  <a class="logo" href="index.html"><span class="logo-icon">🔅</span><span class="logo-text">Hello <span>Kos</span></span></a>
+  <div class="lang-wrap">
+    <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false"><span id="flag">🇳🇱</span> <span id="code">NL</span></button>
+    <div class="lang-menu" id="langMenu">
+      <button class="lang-option" data-lang="nl" data-flag="🇳🇱" type="button">🇳🇱 Nederlands</button>
+      <button class="lang-option" data-lang="de" data-flag="🇩🇪" type="button">🇩🇪 Deutsch</button>
+      <button class="lang-option" data-lang="en" data-flag="🇬🇧" type="button">🇬🇧 English</button>
+      <button class="lang-option" data-lang="it" data-flag="🇮🇹" type="button">🇮🇹 Italiano</button>
+      <button class="lang-option" data-lang="tr" data-flag="🇹🇷" type="button">🇹🇷 Türkçe</button>
+      <button class="lang-option" data-lang="es" data-flag="🇪🇸" type="button">🇪🇸 Español</button>
+    </div>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<main class="main">
+<p class="parent-link"><a href="clubs-hotspots.html" data-i18n="back">← Clubnights & hotspots</a></p>
+<div class="hero-wrap shops-hero">
+<img src="img/hk/clubs-mattatoio.jpg" alt="">
+<div class="shops-hero-copy">
+<h1 data-i18n="heroTitle">Mattatoio</h1>
+</div>
+</div>
+<article class="card">
+<h3 data-i18n="loc">Kos-stad, rand centrum</h3>
+<p data-i18n="p0">Mattatoio is een van de grootste en populairste nachtclubs in Kos-stad, gelegen in het centrum. Ze staat bekend om zijn hoge-energie nachtleven met een mix van traditionele Griekse charme en moderne feestvibes.</p>
+<img class="photo" src="img/hk/mattatoio-binnen.jpg" alt="">
+<p data-i18n="p1">Het opent vaak rond middernacht en draait door tot diep in de nacht met DJ-sets huis, RnB, commercial en themafeesten zoals, live optredens van bekende artiesten op speciale avonden.</p>
+<img class="photo" src="img/hk/mattatoio-terras.jpg" alt="">
+<p data-i18n="p2">De sfeer is bruisend en gemixt met voornamelijk locals, mensen die er als toerist zijn, en locals van omliggende eilanden, dus de sfeer is een stuk gereserveerder en eleganter.</p>
+<img class="photo" src="img/hk/mattatoio-live.jpg" alt="">
+<p data-i18n="p3">Je ziet hier geen wild onder de bar dansen, schreeuwend of lallend gedrag; Grieken zijn over het algemeen behouden als het om uiterlijk vertoon gaat. Het draait meer om zien en gezien worden: goed gekleed, stijlvol chillen, genieten van de muziek en de cocktails, met een subtiele 'look at me'-vibe zonder overdreven te worden.</p>
+<p data-i18n="p4">Ideaal voor wie zin heeft in een echte clubnacht met goede muziek.</p>
+<h3 data-i18n="addrL">Adres</h3>
+<p data-i18n="addr">Antigonis, Kos-stad</p>
+<h3 data-i18n="phoneH">Telefoon</h3>
+<div class="call-list">
+<a class="call-btn" href="tel:+302242023463"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="call-copy"><span class="call-main"><span data-i18n="call">Bel</span> +30 22420 23463</span><span class="call-sub" data-i18n="phoneL">Telefoon</span></span></a>
+</div>
+<div class="map-row">
+<a class="btn btn-map" href="https://www.google.com/maps/search/?api=1&amp;query=36.9059477,27.2843023" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="gmaps">Google Maps</span></a>
+<a class="btn btn-map" href="https://maps.apple.com/?ll=36.9059477,27.2843023&amp;q=Mattatoio%20Kos" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span data-i18n="iphone">iPhone</span></a>
+</div>
+</article>
+</main>
+<footer class="hk-footer"><div>Hello Kos</div><p><a href="mailto:info@hellokos.com">info@hellokos.com</a></p></footer>
+<script>
+window.HK_DICT = {
+  "nl": {
+    "back": "← Clubnights & hotspots",
+    "title": "Mattatoio | Kos-stad",
+    "heroTitle": "Mattatoio",
+    "loc": "Kos-stad, rand centrum",
+    "addrL": "Adres",
+    "addr": "Antigonis, Kos-stad",
+    "phoneH": "Telefoon",
+    "phoneL": "Telefoon",
+    "call": "Bel",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Mattatoio is een van de grootste en populairste nachtclubs in Kos-stad, gelegen in het centrum. Ze staat bekend om zijn hoge-energie nachtleven met een mix van traditionele Griekse charme en moderne feestvibes.",
+    "p1": "Het opent vaak rond middernacht en draait door tot diep in de nacht met DJ-sets huis, RnB, commercial en themafeesten zoals, live optredens van bekende artiesten op speciale avonden.",
+    "p2": "De sfeer is bruisend en gemixt met voornamelijk locals, mensen die er als toerist zijn, en locals van omliggende eilanden, dus de sfeer is een stuk gereserveerder en eleganter.",
+    "p3": "Je ziet hier geen wild onder de bar dansen, schreeuwend of lallend gedrag; Grieken zijn over het algemeen behouden als het om uiterlijk vertoon gaat. Het draait meer om zien en gezien worden: goed gekleed, stijlvol chillen, genieten van de muziek en de cocktails, met een subtiele 'look at me'-vibe zonder overdreven te worden.",
+    "p4": "Ideaal voor wie zin heeft in een echte clubnacht met goede muziek."
+  },
+  "de": {
+    "back": "← Clubnächte & Hotspots",
+    "title": "Mattatoio | Kos-Stadt",
+    "heroTitle": "Mattatoio",
+    "loc": "Kos-Stadt, Rand vom Zentrum",
+    "addrL": "Adresse",
+    "addr": "Antigonis, Kos-Stadt",
+    "phoneH": "Telefon",
+    "phoneL": "Telefon",
+    "call": "Anrufen",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Mattatoio ist einer der größten und beliebtesten Nachtclubs in Kos-Stadt, im Zentrum gelegen. Er ist bekannt für sein energiegeladenes Nachtleben mit einer Mischung aus traditionellem griechischem Charme und modernen Partyvibes.",
+    "p1": "Er öffnet oft gegen Mitternacht und geht bis tief in die Nacht, mit DJ-Sets House, RnB, Commercial und Themenpartys wie Live-Auftritte bekannter Künstler an besonderen Abenden.",
+    "p2": "Die Stimmung ist sprudelnd und gemischt, vor allem mit Locals, Menschen, die als Tourist da sind, und Locals von den umliegenden Inseln, und dadurch ist die Stimmung deutlich zurückhaltender und eleganter.",
+    "p3": "Du siehst hier kein wildes Tanzen unter der Bar, kein schreiendes oder lallendes Verhalten; Griechen sind im Allgemeinen zurückhaltend, wenn es um äußere Zurschaustellung geht. Es geht mehr um sehen und gesehen werden: gut angezogen, stilvoll abhängen, die Musik und die Cocktails genießen, mit einer dezenten 'look at me'-Stimmung, ohne übertrieben zu werden.",
+    "p4": "Ideal für alle, die Lust auf eine echte Clubnacht mit guter Musik haben."
+  },
+  "en": {
+    "back": "← Club nights & hotspots",
+    "title": "Mattatoio | Kos town",
+    "heroTitle": "Mattatoio",
+    "loc": "Kos town, edge of the centre",
+    "addrL": "Address",
+    "addr": "Antigonis, Kos town",
+    "phoneH": "Phone",
+    "phoneL": "Phone",
+    "call": "Call",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Mattatoio is one of the biggest and most popular nightclubs in Kos town, in the centre. It is known for its high-energy nightlife, with a mix of traditional Greek charm and modern party vibes.",
+    "p1": "It often opens around midnight and keeps going deep into the night, with DJ sets of house, RnB, commercial and theme parties such as live performances by well-known artists on special evenings.",
+    "p2": "The atmosphere is lively and mixed, mainly with locals, people who are there as a tourist, and locals from the surrounding islands, so the atmosphere is a good deal more reserved and elegant.",
+    "p3": "You will not see wild dancing under the bar here, or shouting or slurred behaviour; Greeks are generally reserved when it comes to showing off. It is more about seeing and being seen: well dressed, stylish hanging out, enjoying the music and the cocktails, with a subtle 'look at me' vibe without going over the top.",
+    "p4": "Ideal if you feel like a real club night with good music."
+  },
+  "it": {
+    "back": "← Serate in club e posti caldi",
+    "title": "Mattatoio | Kos città",
+    "heroTitle": "Mattatoio",
+    "loc": "Kos città, bordo del centro",
+    "addrL": "Indirizzo",
+    "addr": "Antigonis, Kos città",
+    "phoneH": "Telefono",
+    "phoneL": "Telefono",
+    "call": "Chiama",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Mattatoio è uno dei locali notturni più grandi e più popolari di Kos città, nel centro. È conosciuto per la sua vita notturna ad alta energia, con un mix di fascino greco tradizionale e vibe da festa moderne.",
+    "p1": "Spesso apre intorno a mezzanotte e va avanti fino a notte fonda, con DJ set house, RnB, commercial e feste a tema come esibizioni dal vivo di artisti conosciuti nelle serate speciali.",
+    "p2": "L'atmosfera è vivace e mista, soprattutto con locali, persone che ci sono da turista e locali delle isole vicine, e così l'atmosfera è molto più riservata ed elegante.",
+    "p3": "Qui non vedi ballare selvaggiamente sotto il bancone, né urla o comportamenti da ubriachi; i greci in genere sono riservati quando si tratta di mettersi in mostra. Conta di più vedere ed essere visti: vestiti bene, stare in modo elegante, godersi la musica e i cocktail, con una sottile vibe 'look at me' senza esagerare.",
+    "p4": "Ideale per chi ha voglia di una vera serata in club con buona musica."
+  },
+  "tr": {
+    "back": "← Kulüp geceleri ve hareketli yerler",
+    "title": "Mattatoio | Kos şehir",
+    "heroTitle": "Mattatoio",
+    "loc": "Kos şehir, merkezin kenarı",
+    "addrL": "Adres",
+    "addr": "Antigonis, Kos şehir",
+    "phoneH": "Telefon",
+    "phoneL": "Telefon",
+    "call": "Ara",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Mattatoio, Kos şehrin merkezinde, en büyük ve en popüler gece kulüplerinden biridir. Geleneksel Yunan cazibesi ile modern parti havasını karıştıran yüksek enerjili gece hayatıyla bilinir.",
+    "p1": "Çoğu zaman gece yarısı civarında açılır ve gece geç saatlere kadar sürer; house, RnB, commercial DJ setleri ve özel akşamlarda tanınmış sanatçıların canlı performansları gibi tema partileri vardır.",
+    "p2": "Hava canlı ve karışıktır: çoğunlukla yerliler, orada turist olarak bulunan insanlar ve çevre adalardan gelen yerliler. Bu yüzden hava çok daha ölçülü ve zariftir.",
+    "p3": "Burada barın altında çılgınca dans, bağırış ya da peltek davranış görmezsin. Yunanlar dışa vurum konusunda genellikle çekingendir. Daha çok görmek ve görünmek vardır: iyi giyinmek, şık bir şekilde takılmak, müziğin ve kokteyllerin tadını çıkarmak, abartısız ince bir 'look at me' havası.",
+    "p4": "İyi müzikli gerçek bir kulüp gecesi isteyenler için ideal."
+  },
+  "es": {
+    "back": "← Noches de club y sitios de marcha",
+    "title": "Mattatoio | Kos ciudad",
+    "heroTitle": "Mattatoio",
+    "loc": "Kos ciudad, borde del centro",
+    "addrL": "Dirección",
+    "addr": "Antigonis, Kos ciudad",
+    "phoneH": "Teléfono",
+    "phoneL": "Teléfono",
+    "call": "Llamar",
+    "gmaps": "Google Maps",
+    "iphone": "iPhone",
+    "p0": "Mattatoio es uno de los clubes nocturnos más grandes y populares de Kos ciudad, en el centro. Es conocido por su vida nocturna de alta energía, con una mezcla de encanto griego tradicional y ambiente de fiesta moderno.",
+    "p1": "Suele abrir alrededor de medianoche y sigue hasta bien entrada la noche, con sets de DJ de house, RnB, commercial y fiestas temáticas como actuaciones en directo de artistas conocidos en noches especiales.",
+    "p2": "El ambiente es animado y mixto, sobre todo con locales, gente que está allí como turista y locales de las islas de alrededor, así que el ambiente es bastante más reservado y elegante.",
+    "p3": "Aquí no ves bailar de forma salvaje debajo de la barra, ni gritos ni comportamiento de borrachera; los griegos suelen ser reservados cuando se trata de exhibirse. Se trata más de ver y ser visto: ir bien vestido, estar con estilo, disfrutar de la música y los cócteles, con un sutil aire 'look at me' sin pasarse.",
+    "p4": "Ideal para quien tiene ganas de una verdadera noche de club con buena música."
+  }
+};
+</script>
+<script src="hello-kos-i18n.js?v=20261123r"></script>
+</body>
+</html>
